@@ -28,7 +28,7 @@ Upstream released version 0.16.0 as a research artifact (not maintained, Apache 
 ## What we reproduced
 
 - **CPU verification of the stored proofs.** We built the verifier from upstream's pinned source and checked its stored synthetic-weight proofs. Both were accepted, and every altered copy in upstream's two ten-case tables was rejected. An independent review in a separate clone added 19 more negative cases. ([research/reproduction/](../../research/reproduction/README.md))
-- **A small proof on a real GPU.** We rented one H100 and ran upstream's small quickstart example (made-up weights, one request). The proof was accepted by a verifier built separately on a different, CPU-only machine, and one-bit changes to the proof, answer, request or ID were rejected. ([research/gpu/](../../research/gpu/README.md))
+- **A small proof on a real GPU.** We rented one H100 and ran upstream's small quickstart example (made-up weights, one request). The proof was accepted by a verifier built separately on a different, CPU-only machine, and small changes to the proof, answer, request or ID were rejected. ([research/gpu/](../../research/gpu/README.md))
 - **That GPU run, again, by someone else.** A second lane that did not do the first run repeated it on a new rental from the written instructions alone. It agreed: same answer token, same accepted verdicts, proving in about 2.35 s per request. Committing took longer on that machine (about 18.8 s against about 13 s), with the same dominant phase. ([research/gpu/replication-1/](../../research/gpu/replication-1/README.md))
 
 This is upstream's **small example**, not its headline result. We have not run the full-size model.
