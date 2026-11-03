@@ -1,0 +1,39 @@
+{
+  "inputs": [
+    -3,
+    3,
+    -3,
+    2,
+    3,
+    3
+  ],
+  "expected": [
+    -3,
+    -3,
+    {
+      "decay": -3,
+      "memory": 2,
+      "difference": 0,
+      "delta": 0,
+      "update": 0,
+      "state": -3,
+      "output": -3
+    }
+  ],
+  "float32_postgate": [
+    -0.6064453125,
+    -0.454833984375
+  ],
+  "float32_implementation": "stdlib struct IEEE binary32 rounding after each scalar op; NOT torch or fused kernel execution",
+  "boundary_products": 256,
+  "random_seed": 19,
+  "comparison_cases": 4097,
+  "accepted": 1940,
+  "overflow_rejected": 2157,
+  "max_absolute_state_or_output_divergence": 1.734375,
+  "gates": 56,
+  "coordinates": 22,
+  "wires": 42,
+  "affine_rows": 57,
+  "hostile_proofs": 50
+}

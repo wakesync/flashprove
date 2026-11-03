@@ -1,0 +1,59 @@
+{
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "base": "8fca2c4b9ffb5d5180df51095d5f52a33df4a207",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "research/operators/glm_kda_fixedpoint/reference.py"
+      ],
+      "exit": 0,
+      "seconds": 0.091,
+      "stdout": "reference: PASS; 256 signed products; 4097 bounded/overflow cases; explicit FP32 divergence recorded\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/glm_kda_fixedpoint/test.cpp",
+        "-o",
+        "research/operators/glm_kda_fixedpoint/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 25.67,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "research/operators/glm_kda_fixedpoint/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 0.358,
+      "stdout": "PASS: 11840 proof bytes; 56 product gates; signed staged-floor scalar KDA; 50 complete hostile proofs rejected; 22 public mutations; 105 flips; 30 cuts; domain and trailing-byte rejection\n",
+      "stderr": ""
+    }
+  ],
+  "sha256": {
+    "research/operators/glm_kda_fixedpoint/reference.py": "b6075b156f6d1355c3024c9ecb768e1d108e7208deffe1ffbb1d91515cee96ab",
+    "research/operators/glm_kda_fixedpoint/record.py": "a322d2928f9f13f22b5cc30258f01e0acc92133cd91ce4eac60175d055b72330",
+    "research/operators/glm_kda_fixedpoint/provenance.py": "e9d71a1dee8be88fe0bdf46f28909caf36144b81a95ad5ea63ce67494415f094",
+    "research/operators/glm_kda_fixedpoint/test.cpp": "b84c8e32d45fad3c2766db4c0630b7e7c7269478843bce52731f69c5f915aabe",
+    "research/operators/glm_kda_fixedpoint/fixture.h": "1d15a8808525a3511a1fae5ea92f67ef35cbcfa07b6fc71802a36b14c696bb02",
+    "research/operators/glm_kda_fixedpoint/provenance.json": "2b511c628bd4134fbb128536c96a5c0f93fb6279e17076bb2abeaa461b865186",
+    "research/operators/glm_kda_fixedpoint/reference.json": "c8c01c07962943de23f55edab4862fb156d62b0bc67a75671369d8d5c6be8d45",
+    "research/operators/affine_rows/product.h": "fa361d28f1e123a0b1242b4371f7f4ead32193b8585497e8296400e4a43b40e9",
+    "research/operators/shared_wires/product.h": "dbcb145bf69c28c6fef4d2100c8b8d329382dc54255ececb22f62bf63d18b6b0",
+    "research/operators/public_binding/product.h": "253b56dd7dba492dff1761772c8d27f27017619f2e806119eeacce588c7686a9"
+  }
+}
