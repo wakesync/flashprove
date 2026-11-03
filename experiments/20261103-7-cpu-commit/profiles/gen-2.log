@@ -1,0 +1,9 @@
+configure 0.213726932
+tables 0.041814213
+make_key 0.517353552
+make_entry 0.153094905
+prove_batch 0.955614593
+total_generate 1.88161843
+cpu_generate 1.881288
+verify_and_save 0.385350418
+ok
