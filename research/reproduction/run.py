@@ -2,6 +2,7 @@
 """CPU-only reproduction. Run from repository root; writes a new evidence folder.
 SPDX-License-Identifier: Apache-2.0
 """
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -56,9 +57,14 @@ run('compiler', ['g++', '--version'])
 run('python', ['python3', '--version'])
 run('make', ['make', '--version'])
 run('upstream-pin', ['git', 'rev-parse', PIN])
+# Resolving an object alone does not show that its sources are being built.
+run('upstream-source-match', ['git', 'diff', '--exit-code', PIN, '--', '.', ':(exclude)research'])
+run('checkout-head', ['git', 'rev-parse', 'HEAD'])
+run('checkout-status', ['git', 'status', '--short'])
 for example in ('accepted-proof', 'accepted-proof-clipped-gap'):
     run('hashes-' + example, ['sha256sum', '-c', 'SHA256SUMS'], cwd=ROOT / 'examples' / example)
 run('build', ['bash', 'verifier/build.sh'])
+run('verifier-binary-hash', ['sha256sum', 'bin/cp_verify'])
 for example, policy in [('accepted-proof', []), ('accepted-proof-clipped-gap', ['-policy', 'clipped-gap,9244130,323343,1,16,8'])]:
     base = 'examples/' + example
     commitment = (ROOT / base / 'ID.txt').read_text().strip()
@@ -67,4 +73,13 @@ for example, policy in [('accepted-proof', []), ('accepted-proof-clipped-gap', [
 run('toy', ['bash', 'blocks/first_look.sh', str(WORK / 'look')])
 for name in ('make.log', 'honest.log', 'honest.status', 'honest.txt', 'bent.log', 'bent.status', 'bent.txt'):
     (OUT / ('toy-' + name)).write_text(scrub((WORK / 'look' / name).read_text()))
+# Preserve every toy rejection description, not just its aggregate count.
+for table in ('on-the-first-table', 'on-the-copy'):
+    (OUT / ('toy-' + table + '-altered.tsv')).write_text((WORK / 'look/proofs' / table / 'altered.tsv').read_text())
+artifacts = {}
+for path in sorted((WORK / 'look').rglob('*')):
+    if path.is_file():
+        artifacts[str(path.relative_to(WORK))] = hashlib.sha256(path.read_bytes()).hexdigest()
+artifacts['research/reproduction/run.py'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+(OUT / 'artifact-sha256.json').write_text(json.dumps(artifacts, indent=2) + '\n')
 print('All selected CPU checks completed; work files retained outside checkout.')

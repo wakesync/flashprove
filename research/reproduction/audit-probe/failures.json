@@ -1,0 +1,104 @@
+[
+  [
+    "accepted-proof",
+    "request range end changed",
+    1,
+    "NO: statement-range",
+    [
+      1,
+      "NO: proof-refused"
+    ]
+  ],
+  [
+    "accepted-proof",
+    "empty proof",
+    1,
+    "NO: cp-proof-length",
+    [
+      1,
+      "NO: proof-refused"
+    ]
+  ],
+  [
+    "accepted-proof",
+    "proof header bit",
+    1,
+    "NO: cp-proof-head",
+    [
+      1,
+      "NO: proof-refused"
+    ]
+  ],
+  [
+    "accepted-proof",
+    "empty key",
+    1,
+    "NO: cp-key-length",
+    [
+      1,
+      "NO: key-refused"
+    ]
+  ],
+  [
+    "accepted-proof",
+    "noncanonical token at vocabulary bound",
+    1,
+    "NO: token-range",
+    [
+      1,
+      "NO: statement-range"
+    ]
+  ],
+  [
+    "accepted-proof",
+    "wrong trusted policy",
+    1,
+    "NO: policy"
+  ],
+  [
+    "accepted-proof-clipped-gap",
+    "empty proof",
+    1,
+    "NO: cp-proof-length",
+    [
+      1,
+      "NO: proof-refused"
+    ]
+  ],
+  [
+    "accepted-proof-clipped-gap",
+    "proof header bit",
+    1,
+    "NO: cp-proof-head",
+    [
+      1,
+      "NO: proof-refused"
+    ]
+  ],
+  [
+    "accepted-proof-clipped-gap",
+    "empty key",
+    1,
+    "NO: cp-key-length",
+    [
+      1,
+      "NO: key-refused"
+    ]
+  ],
+  [
+    "accepted-proof-clipped-gap",
+    "noncanonical token at vocabulary bound",
+    1,
+    "NO: token-range",
+    [
+      1,
+      "NO: statement-range"
+    ]
+  ],
+  [
+    "accepted-proof-clipped-gap",
+    "wrong trusted policy",
+    1,
+    "NO: policy"
+  ]
+]

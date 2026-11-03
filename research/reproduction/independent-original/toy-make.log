@@ -1,0 +1,3 @@
+make: Entering directory '<REPO>/blocks'
+g++ -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . frame/handover_proof.cpp -o <WORK>/look/build/f2h1/frame/handover_proof.bin
+make: Leaving directory '<REPO>/blocks'
