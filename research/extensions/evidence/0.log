@@ -1,4 +1,4 @@
-build.sh: note: another account may be able to change <HOME>/.moltbot (its group or others can write in it, and it has no sticky bit), under which this checkout lies, and so could change what is built, and this script itself; for a build that no other account can touch, keep the checkout below directories that only you can write in; if <HOME>/.moltbot is yours, close it with chmod go-w
+build.sh: note: another account may be able to change <WORKSPACE> (its group or others can write in it, and it has no sticky bit), under which this checkout lies, and so could change what is built, and this script itself; for a build that no other account can touch, keep the checkout below directories that only you can write in; if <WORKSPACE> is yours, close it with chmod go-w
 build=93afdaf592393a54ebd17b681d1c03295eb883f0161ff0e6ab872a3b39939595 dw=8
 compiling cp_verify.cpp: one compiler call of one to two minutes, which prints nothing while it runs
 build.sh: overwrote the cp_verify that was already in <REPO>/bin. To keep a cp_verify from elsewhere, build into another directory: end the call with "- DIRECTORY"

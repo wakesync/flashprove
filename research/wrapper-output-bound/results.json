@@ -191,7 +191,7 @@
         },
         "diagnostics": [
           "lean: timeout: the monitored command dumped core",
-          "/shad0w/.moltbot/projects/flashprove-planning/wrapper-baseline-work/tmp/tmp.RG82kLLcsu/lean.err and <PLANNING>/wrapper-baseline-work/tmp/tmp.RG82kLLcsu/lean.out"
+          "<PLANNING>/wrapper-baseline-work/tmp/tmp.RG82kLLcsu/lean.err and <PLANNING>/wrapper-baseline-work/tmp/tmp.RG82kLLcsu/lean.out"
         ]
       },
       "aborted-after-accept": {
@@ -216,7 +216,7 @@
         },
         "diagnostics": [
           "lean: timeout: the monitored command dumped core",
-          "/shad0w/.moltbot/projects/flashprove-planning/wrapper-baseline-work/tmp/tmp.Io1RWSjORD/lean.err and <PLANNING>/wrapper-baseline-work/tmp/tmp.Io1RWSjORD/lean.out"
+          "<PLANNING>/wrapper-baseline-work/tmp/tmp.Io1RWSjORD/lean.err and <PLANNING>/wrapper-baseline-work/tmp/tmp.Io1RWSjORD/lean.out"
         ]
       },
       "time-limit": {
