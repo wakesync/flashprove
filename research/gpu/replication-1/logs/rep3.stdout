@@ -1,0 +1,20 @@
+   $ cd <TOP-rep3>/example
+1. The public configuration: the parameter file, the scales, the layout of a proof's arrays
+   $ cp <REPO>/prover/examples/target_small_f2_roomy/policy.txt <REPO>/prover/examples/target_small_f2_roomy/KL.bin <REPO>/prover/examples/target_small_f2_roomy/layout.txt config/
+2. cp_commit draws a seed and commits to the weights: ivk/ is for the clients, isk/ stays with the provider
+   $ /usr/bin/time -a -o <ART>/rep3.time -f %e\|%M\|%x\|%C <REPO>/prover/build/hc/cp_commit -weights made-up-blocks -config config -M 1 -ivk ivk -isk isk > cp_commit.log 2>&1
+   the commitment's ID, to be published: 205b94ff849fda8c8ebbdd2d3d37305e51cd203c359387f01966826a3209f3ef
+3. The request: a made-up prompt, the model's own first choices after it, and the question whether each of them is that, and which token comes next
+   $ cp <REPO>/prover/examples/target_small_f2_roomy/own_choices.req in/example.req
+4. cp_prove runs the model on the request and writes the answer and its proof
+   $ /usr/bin/time -a -o <ART>/rep3.time -f %e\|%M\|%x\|%C env HOME=<TOP-rep3>/example/home TMPDIR=<TOP-rep3>/example/tmp <REPO>/prover/build/hc/cp_prove -isk <TOP-rep3>/example/isk -in <TOP-rep3>/example/in -out <TOP-rep3>/example/out > cp_prove.log 2>&1
+5. cp_verify: the client's one call, on public files alone, under the commitment ID; printed below: if cp_verify accepts, the answer and the files' lengths; then its line on what the proof covers, its accounting as one number (where proof of work is counted: with it and, in brackets, without it) with its caution on such figures, its line on the commitment, its exit status, its line on proof of work, and its last line, the verdict
+   $ <REPO>/prover/build/hc/cp_verify config ivk in/example.req out/example.y out/example.proof -id 205b94ff849fda8c8ebbdd2d3d37305e51cd203c359387f01966826a3209f3ef > cp_verify.log
+   the answer: token 284; key 1094808, entry 539040, proof 4161860 bytes
+covered: r=15 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=15..63 tokens=16..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)
+accounting: as one number, by the compiled bound: 126.21 bits, proof of work counted (without it: 96.23 bits)
+accounting:   that the programs compute the protocol is not proved; no figure here is a security level
+commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given
+   status 0
+proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits
+YES

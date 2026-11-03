@@ -92,6 +92,10 @@ The originals matched `SHA256SUMS` before and after. As above, this checks that 
 - The host was an unverified marketplace listing. Nothing here says anything about the host's integrity or about erasure of the rental's storage; the data was synthetic and the secret side is retired.
 - The commitment's secret side (`isk/`) stayed on the rental and was destroyed with it. It is not published. The commitment is retired and must not be reused.
 
+## Independent GPU replication
+
+`replication-1/` is a second, independent GPU run of this same example: a new rental (verified listing, 1-GPU machine, driver 595.91.07), a new key, no shared remote state, and n = 3 timed repeats. Verdict: agree. Answer token, coverage and accounting are identical. Peak GPU memory was 74,123 MiB, `cp_prove` took 2.35 s on average (SD 0.13), proofs were 4.149 to 4.162 MB, and the host verifier said YES on 4 of 4 proofs. `cp_commit` was slower there (mean 18.8 s against about 13 s). Proof bytes differ because each `cp_commit` draws a fresh seed. See `replication-1/README.md`.
+
 ## Files
 
 - `bundle/`: the public files a client needs, enough to rerun `cp_verify config ivk in/example.req out/example.y out/example.proof -id <ID>`.
