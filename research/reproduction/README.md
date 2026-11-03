@@ -37,7 +37,7 @@ IDs were taken from stored fixtures, the explicitly permitted exception for exam
 
 ### Negative cases
 
-Both upstream ten-case tables passed with every modified set exiting **1**, not a parser error or no-verdict exit: proof bit flip, truncation, trailing byte, key bit flip, leaf bit flip, prompt token, checked reply token, after-request token, quantization scale and commitment ID. Exact per-case final lines are retained in `evidence/negative-*.log`. The clipped-gap after-request mutation gives `NO: statement-range`, where exact-match gives `NO: reply-differs`. These are mutations of honest fixtures, not malicious proof synthesis or a soundness audit. The toy also runs its upstream altered-proof checks.
+Both upstream ten-case tables passed with every modified set exiting **1**, a rejection rather than a no-verdict exit: proof bit flip, truncation, trailing byte, key bit flip, leaf bit flip, prompt token, checked reply token, `.y` word, quantization scale and commitment ID. Some rejections are early format or statement checks, not cryptographic proof rejection. Exact per-case final lines are retained in `evidence/negative-*.log`. In the clipped-gap example e<T, so `.y` is a mandatory zero sentinel, NOT an after-request generated token; its mutation gives `NO: statement-range`. Only the exact-match example reaches T and checks the after-request token, giving `NO: reply-differs`. These are mutations of honest fixtures, not malicious proof synthesis or a soundness audit. The toy also runs its upstream altered-proof checks.
 
 ## Build warning
 
