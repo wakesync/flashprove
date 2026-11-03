@@ -15,16 +15,18 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Check out (full history for the base ref)
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check out the PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 (node24)
         with:
-          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
           persist-credentials: false
       - name: Run main's guard against the PR head (or the pushed commit)
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
+          # public repo: anonymous fetch, no token on disk
           git fetch --no-tags --depth=1 origin "+refs/heads/main:refs/remotes/origin/main"
           git show origin/main:scripts/check-no-host-paths.sh > "$RUNNER_TEMP/check-no-host-paths.sh"
           bash "$RUNNER_TEMP/check-no-host-paths.sh" "$HEAD_SHA"
