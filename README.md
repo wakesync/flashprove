@@ -1,4 +1,28 @@
-# FlashProve
+# FlashProve: practical verifiable inference research
+
+**This is the active [wakesync/flashprove](https://github.com/wakesync/flashprove) research fork of [Anthropic's FlashProve](https://github.com/anthropics/FlashProve).** We are investigating reproducible, useful verifiable inference: explicit proof coverage, lower measured overhead, characterized numerical fidelity and safe client/request integration.
+
+The original v0.16.0 artifact is preserved below with its attribution, instructions, license and theorem boundaries. Its "not maintained, not accepting contributions" notice describes upstream, not this fork. Research contributions here should target a [tracked evidence gate](docs/research-roadmap.md#priorities-workstreams-and-decision-gates), not assume arbitrary model or production support.
+
+## Fork goals and progress
+
+- **Reproduced, narrow scope:** independent CPU verification of stored synthetic proofs, a 41-call mutation audit and toy proof-library checks in [PR #3](https://github.com/wakesync/flashprove/pull/3), building on [PR #1](https://github.com/wakesync/flashprove/pull/1). This is not GPU inference or checkpoint fidelity validation.
+- **Provisional:** fail-closed extension admission in [PR #2](https://github.com/wakesync/flashprove/pull/2), focused integration repairs in [PR #4](https://github.com/wakesync/flashprove/pull/4), and narrowly independently reviewed public-coordinate/shared-wire experiments. Open PRs are not merged functionality; full CPU closure and public operator reproduction remain gated.
+- **Planned or unvalidated:** fresh GPU replication, measured proving/serving cost, integer-versus-floating-point fidelity, request-bound receipts, longer contexts and conditional architecture ports. No completed GPU validation, real TEE attestation, GLM/DeepSeek support or production readiness is claimed.
+
+**Priority order:** P0 reproducibility and soundness/coverage; then measured overhead and cost, with fidelity and request integration in parallel; long-context scaling after profiling; model ports only after operator feasibility. Signatures authenticate messages, TEE evidence authenticates measured execution under hardware trust, and cryptographic proofs establish a specified relation. They are not interchangeable.
+
+The upstream full-size relation uses a **1,024-token context** and an **integer approximation** of Maverick. Its reported roughly 70-100x prefill overhead compares specific workloads and hardware/precision configurations, not universal end-to-end overhead. Integer greedy proofs do not establish BF16/FP8 equivalence or correct random sampling. Full versus selective coverage and clipped-gap policy must stay explicit.
+
+**Read next:** [Research roadmap and issue index](docs/research-roadmap.md) | [Evidence ledger and exact source caveats](docs/research-evidence.md) | [Upstream known limits](guide/known-limits.md).
+
+Goals are practical, measurable guarantees and honest negative results. Non-goals at this stage are universal Transformer support, floating-point bit equivalence, unqualified privacy/ZK, immediate long-context ports or promised speedups. The original formal results do not automatically cover new operators, dimensions, wrappers or batches.
+
+---
+
+## Original upstream artifact (v0.16.0)
+
+The following introduction and operating instructions describe the upstream artifact, not newly reproduced fork results. Performance and model statements retain the qualifications in the linked upstream documentation.
 
 Version 0.16.0 · A research artifact: not maintained, not accepting contributions. · Apache 2.0
 
