@@ -1,0 +1,29 @@
+{
+  "base_commit": "604b259df77f85bb07f13739336e536e717e7157",
+  "source_head_at_execution": "604b259df77f85bb07f13739336e536e717e7157",
+  "command": "python3 research/operators/test_topk.py",
+  "python": "3.12.3",
+  "platform": "Linux x86_64",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "seed": 530042,
+  "exit_code": 0,
+  "last_line": "OK",
+  "elapsed_seconds": 3.546123955398798,
+  "example": {
+    "wires": 273,
+    "constraints": 290,
+    "public_wires": 14
+  },
+  "cryptographic_proof_coverage": "NONE; disclosed witness constraint satisfaction only",
+  "hashes": {
+    "research/operators/topk.py": "efb39007c1599375e6557192542f0954dfecc06c1758932d25b6bda1ce8967ba",
+    "research/operators/check.cpp": "2696f0646d35373ec4aaad041e62f57781c0706b8d95f5c032056ec84b8f7d5d",
+    "research/operators/test_topk.py": "7131ba8c7b3868bbc8a5c5629d7a341b484f7c9dc2486b1c036bad11c671cd84",
+    "research/operators/record.py": "5041089c2989201df7dc8548758aa7f7b33ba48331cfc79dc2539753ef46d27b",
+    "research/operators/README.md": "e8cfda8f7041d1270709e3865228370025fe625084024b011e8be853d86ee662",
+    "blocks/field/field.h": "c7bb8540cf7f11b1b5f26f335c71a00897c78957dc0d66f73c78d1fdfa15037f",
+    "blocks/field/gl64.h": "9a525d2068af287875631cd0868b5122ffea12475d1d10ca13a6d5ee323a4862",
+    "research/operators/evidence/tests.log": "e856bfa79f013d88a6209ae10fbce68ed6fddae578cb54898aad4db042901b7f",
+    "research/operators/evidence/honest.constraints": "510c12efcd427ad5e79bda114e5dc2cec7b20d8f6079e7f02bfdc5438c703d19"
+  }
+}
