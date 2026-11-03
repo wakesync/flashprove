@@ -1,0 +1,122 @@
+{
+  "head": "d76da729a064d32bcf8048d40ad3bafaf6e4c4e7",
+  "environment": {
+    "kernel": "6.8.0-100-generic",
+    "python": "3.12.3",
+    "arch": "x86_64",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+  },
+  "seed": "deterministic stored fixtures and mutations; no new model proof",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+        "--",
+        ".",
+        ":(exclude)research"
+      ],
+      "exit": 0,
+      "seconds": 0.032128553837537766,
+      "last_line": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "research/extensions/test_harness.py"
+      ],
+      "exit": 0,
+      "seconds": 5.441310882568359,
+      "last_line": "OK"
+    },
+    {
+      "argv": [
+        "python3",
+        "research/extensions/harness.py",
+        "research/extensions/baseline-v1.json",
+        "--baseline"
+      ],
+      "exit": 0,
+      "seconds": 2.141329225152731,
+      "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+    },
+    {
+      "argv": [
+        "python3",
+        "research/reproduction/audit_cases.py",
+        "research/integration/audit"
+      ],
+      "exit": 0,
+      "seconds": 32.875295244157314,
+      "last_line": "}"
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "-c",
+        "research/reproduction/REVIEW-SHA256SUMS"
+      ],
+      "exit": 0,
+      "seconds": 0.010005459189414978,
+      "last_line": "research/reproduction/run.py: OK"
+    }
+  ],
+  "sha256": {
+    "bin/cp_verify": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394",
+    "research/extensions/harness.py": "da390abb01165215831bfdd2d6b42e6f0590ada6572269c418226fc1928cbc66",
+    "research/extensions/test_harness.py": "dfc039a6b5be199ff4cfea8dceb09a12f3737fa4908fd6716a40f12f178d21a3",
+    "research/extensions/baseline-v1.json": "4d48098faa48fa565651cad0151cec07cc715c242f463522dca4a7b882edd6b6",
+    "research/reproduction/audit_cases.py": "409c0b44880dd5c179beaa6e03b747dfb2c37c9486a64eddf4a3b144d2e2f90b",
+    "research/integration/record.py": "d16689441b23f2a2b8d1d80fd1777c379f509ee63547c07d45bdc5bc53206f8b",
+    "research/integration/evidence/3.log": "0aa710c53ef365bdda2ab6c6dae84489396c7dae2fbccf639c22d4512ee2fdf0",
+    "research/integration/evidence/2.log": "a66c8a39fdf1a641b971848b84b021f1c0ff27fe6b548a801ec6edab6e8b06ae",
+    "research/integration/evidence/0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/integration/evidence/1.log": "a42d4ce734d4df2296aab073ffc5af1105ce71c68f6ee0b0aa35d5fe1ff68761",
+    "research/integration/evidence/4.log": "7be5470c8e6c9a10545810c62a19f57fc53e8d7a52d98f2135812a7feb48144d",
+    "research/integration/audit/032.log": "4d47ef317b987adb641d4f6e3239df7e2fe1aad8fa375897607df9074a56c0b4",
+    "research/integration/audit/012.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/001.log": "f3d02858e9d519edc60e746c6fe06dba7e13b1bb160912f5a81ae80ef75f2091",
+    "research/integration/audit/003.log": "f550784be82e355c7b839086b7c99083abb2542a07a21cd476e3906dffb5b528",
+    "research/integration/audit/failures.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "research/integration/audit/021.log": "34f3a0699b2b4ceadbe68e386a3bc3c90eb1cedd30a4317bdf0fbf763982cb9b",
+    "research/integration/audit/036.log": "9919d18bd2f71245c0228ab5c2b1b9052f287cc0127dcf80b9aca2304c39ee03",
+    "research/integration/audit/002.log": "41f86b19693caa0a91ad560edf660edb2eff4897c359501bbbd5b68876cbfbf5",
+    "research/integration/audit/039.log": "5c68826842b5fe3f54ee0dba2ab0f86878076c2c89f116cef888674d988268f3",
+    "research/integration/audit/010.log": "4d47ef317b987adb641d4f6e3239df7e2fe1aad8fa375897607df9074a56c0b4",
+    "research/integration/audit/029.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/019.log": "6c336b4d139a49cf5f94d0614ba7e7bb454413bd2a13ba311216388809fea913",
+    "research/integration/audit/013.log": "6c336b4d139a49cf5f94d0614ba7e7bb454413bd2a13ba311216388809fea913",
+    "research/integration/audit/027.log": "1a501b7386f9e0e0fb227ccadef38a93a369caa7f386a9304cdcbb767ef1efd6",
+    "research/integration/audit/022.log": "4be27ef2b33aa1471703b9130639cf4f93a0ee80c6eca444dae6b48137899873",
+    "research/integration/audit/028.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/016.log": "a7bf8fde909c706fb72706fec8a933a52dda8a487f0eb4307a9dd01a4d9dfbb8",
+    "research/integration/audit/035.log": "0ce98561980090e664734119071b6831134080c080c8c8b19abd63dc00126e23",
+    "research/integration/audit/025.log": "d7b54656fd974d8db12f92161a32e700f35b8b13295a587f1a4d5eab5cf811fb",
+    "research/integration/audit/009.log": "581e4cd753b950a9a311cfbf192dc347c370f904594de513637e0a9ec742e509",
+    "research/integration/audit/030.log": "6c336b4d139a49cf5f94d0614ba7e7bb454413bd2a13ba311216388809fea913",
+    "research/integration/audit/033.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/037.log": "a7bf8fde909c706fb72706fec8a933a52dda8a487f0eb4307a9dd01a4d9dfbb8",
+    "research/integration/audit/007.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/038.log": "1e2ee73d41ae832523dc282f1609b26eb016b95fba3820fab0cd20b6dc780885",
+    "research/integration/audit/006.log": "1a501b7386f9e0e0fb227ccadef38a93a369caa7f386a9304cdcbb767ef1efd6",
+    "research/integration/audit/040.log": "6c336b4d139a49cf5f94d0614ba7e7bb454413bd2a13ba311216388809fea913",
+    "research/integration/audit/011.log": "4d47ef317b987adb641d4f6e3239df7e2fe1aad8fa375897607df9074a56c0b4",
+    "research/integration/audit/018.log": "5c68826842b5fe3f54ee0dba2ab0f86878076c2c89f116cef888674d988268f3",
+    "research/integration/audit/004.log": "d7b54656fd974d8db12f92161a32e700f35b8b13295a587f1a4d5eab5cf811fb",
+    "research/integration/audit/results.json": "799b46bba57643abfc93a05e6d826ea9f76c0aa7c254f4e047eb52dd16ec772f",
+    "research/integration/audit/015.log": "9919d18bd2f71245c0228ab5c2b1b9052f287cc0127dcf80b9aca2304c39ee03",
+    "research/integration/audit/020.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/008.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/034.log": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+    "research/integration/audit/017.log": "1e2ee73d41ae832523dc282f1609b26eb016b95fba3820fab0cd20b6dc780885",
+    "research/integration/audit/031.log": "4d47ef317b987adb641d4f6e3239df7e2fe1aad8fa375897607df9074a56c0b4",
+    "research/integration/audit/041.log": "34f3a0699b2b4ceadbe68e386a3bc3c90eb1cedd30a4317bdf0fbf763982cb9b",
+    "research/integration/audit/023.log": "41f86b19693caa0a91ad560edf660edb2eff4897c359501bbbd5b68876cbfbf5",
+    "research/integration/audit/014.log": "0ce98561980090e664734119071b6831134080c080c8c8b19abd63dc00126e23",
+    "research/integration/audit/026.log": "4b2fc0cf81823ce27fc42785507b9943c07a4fcf000594ace50b0173357e2a0b",
+    "research/integration/audit/005.log": "4b2fc0cf81823ce27fc42785507b9943c07a4fcf000594ace50b0173357e2a0b",
+    "research/integration/audit/024.log": "f550784be82e355c7b839086b7c99083abb2542a07a21cd476e3906dffb5b528"
+  }
+}
