@@ -10,8 +10,12 @@
    global operator new, or a second thread, can run code during the call. If a planner read a field
    once for a round's error bound and again for what the plan states about the round, that code
    could make the two differ. This
-   file replaces operator new but defines no test macro of the library, which it uses as any program
-   does. Not tested: the functions that run a proof, planners that `main` does not call (such as
+   file replaces operator new. It defines one test macro of the library,
+   BLK_BIG_ON_THE_HEAP_FOR_A_TEST, which keeps the limbs of the exact numbers (blocks/numbers/real.h)
+   on the heap: production builds keep short numbers inside the object, and without their
+   allocations this test has far fewer places to interrupt a planner (about 4600 plans instead of
+   about 119000) and misses second reads that it finds with them. Nothing else of the library
+   changes under that macro; the test otherwise uses the library as any program does. Not tested: the functions that run a proof, planners that `main` does not call (such as
    `plan_iopp`), fields that no case changes, groups with mask rows (`GroupSize::mask`), scopes
    other than `Scope::ONCE`; each field is changed in one direction only. With one of the planners'
    22 copies of an argument (blocks/numbers/blocks.h) replaced by a reference, the test must fail
@@ -22,6 +26,7 @@
 #include <functional>
 #include <new>
 
+#define BLK_BIG_ON_THE_HEAP_FOR_A_TEST  // read by blocks/numbers/real.h, before blocks/fence.h's list is read
 #include "numbers/plan.h"
 
 // The replaced operator new calls a hook (`turn`) at a chosen allocation (see `play`, `whole`). The

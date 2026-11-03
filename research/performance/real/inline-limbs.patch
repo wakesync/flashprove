@@ -1,0 +1,201 @@
+diff --git a/blocks/fence.h b/blocks/fence.h
+index af6e1835..8b3daaff 100644
+--- a/blocks/fence.h
++++ b/blocks/fence.h
+@@ -28,7 +28,7 @@
+     defined(BLK_FOLD_PRINT) || \
+     defined(BLK_KEY_UNDER_FOR_A_TEST) || defined(BLK_ENTRY_UNDER_FOR_A_TEST) || defined(BLK_LISTED_COINS_FOR_A_TEST) || defined(BLK_REPEATABLE_COINS_HIDE_NOTHING) || \
+     defined(BLK_WF_ROWS_FOR_A_TEST) || defined(BLK_LEFT_BEHIND_LOOK_FOR_A_TEST) || defined(BLK_PLANS_BY_HAND_FOR_A_TEST) || \
+-    defined(BLK_TESTED_TABLE_FOR_A_TEST)
++    defined(BLK_TESTED_TABLE_FOR_A_TEST) || defined(BLK_BIG_ON_THE_HEAP_FOR_A_TEST)
+ #define BLK_NOT_FOR_SERVING 1
+ #endif
+ 
+diff --git a/blocks/numbers/real.h b/blocks/numbers/real.h
+index 340901b3..b447b033 100644
+--- a/blocks/numbers/real.h
++++ b/blocks/numbers/real.h
+@@ -31,9 +31,119 @@
+ 
+ namespace blk {
+ 
++/* The limbs of a Big: the subset of std::vector<u32> that Big uses, with room for INLINE limbs in the
++   object itself, so that the many short-lived numbers of planning and accounting (a Real is cut to
++   REAL_BITS = 192 bits, 6 limbs; a product of two has 12) need no allocation. Longer numbers go to
++   the heap, as before. Every index is checked, as -D_GLIBCXX_ASSERTIONS checks a vector's: an index
++   past the end ends the process (BLK_REQUIRE). The arithmetic of Big is unchanged: only where the
++   limbs live. A new limb is 0 or the value given, as in std::vector.
++   BLK_BIG_ON_THE_HEAP_FOR_A_TEST (blocks/fence.h) keeps every limb on the heap, as std::vector did:
++   blocks/numbers/tests/planners_read_once_test.cpp interrupts a planner at each heap allocation,
++   and without Big's allocations it would have fewer places to do so and find fewer second reads. */
++class Limbs {
++ public:
++  static constexpr size_t INLINE = 24;
++#ifdef BLK_BIG_ON_THE_HEAP_FOR_A_TEST
++  static constexpr size_t INLINE_USED = 0;
++#else
++  static constexpr size_t INLINE_USED = INLINE;
++#endif
++  Limbs() {}
++  Limbs(const Limbs &o) { copy_from(o); }
++  Limbs(Limbs &&o) noexcept { take(o); }
++  Limbs &operator=(const Limbs &o) {
++    if (this != &o) copy_from(o);
++    return *this;
++  }
++  Limbs &operator=(Limbs &&o) noexcept {
++    if (this != &o) {
++      release();
++      take(o);
++    }
++    return *this;
++  }
++  ~Limbs() { release(); }
++  size_t size() const { return n_; }
++  bool empty() const { return n_ == 0; }
++  u32 &operator[](size_t i) {
++    BLK_REQUIRE(i < n_, "Big: a limb past the end");
++    return data()[i];
++  }
++  const u32 &operator[](size_t i) const {
++    BLK_REQUIRE(i < n_, "Big: a limb past the end");
++    return data()[i];
++  }
++  u32 &back() { return (*this)[n_ - 1]; }
++  const u32 &back() const { return (*this)[n_ - 1]; }
++  void pop_back() {
++    BLK_REQUIRE(n_ > 0, "Big: pop_back of no limb");
++    --n_;
++  }
++  void push_back(u32 x) {
++    grow(n_ + 1);
++    data()[n_++] = x;
++  }
++  void assign(size_t count, u32 x) {
++    n_ = 0;
++    grow(count);
++    u32 *d = data();
++    for (size_t i = 0; i < count; ++i) d[i] = x;
++    n_ = count;
++  }
++  void resize(size_t count, u32 x) {
++    if (count > n_) {
++      grow(count);
++      u32 *d = data();
++      for (size_t i = n_; i < count; ++i) d[i] = x;
++    }
++    n_ = count;
++  }
++
++ private:
++  u32 inl_[INLINE];
++  u32 *heap_ = nullptr;  // null: the limbs are in inl_
++  size_t n_ = 0, cap_ = INLINE_USED;
++  u32 *data() { return heap_ ? heap_ : inl_; }
++  const u32 *data() const { return heap_ ? heap_ : inl_; }
++  // Room for at least `need` limbs, keeping the first n_.
++  void grow(size_t need) {
++    if (need <= cap_) return;
++    BLK_REQUIRE(need < (size_t(1) << 40), "Big: too many limbs");
++    size_t c = cap_ * 2;
++    if (c < need) c = need;
++    u32 *h = new u32[c];
++    const u32 *d = data();
++    for (size_t i = 0; i < n_; ++i) h[i] = d[i];
++    delete[] heap_;
++    heap_ = h, cap_ = c;
++  }
++  void copy_from(const Limbs &o) {
++    n_ = 0;
++    grow(o.n_);
++    u32 *d = data();
++    const u32 *s = o.data();
++    for (size_t i = 0; i < o.n_; ++i) d[i] = s[i];
++    n_ = o.n_;
++  }
++  void take(Limbs &o) {
++    if (o.heap_) {
++      heap_ = o.heap_, cap_ = o.cap_, n_ = o.n_;
++      o.heap_ = nullptr, o.cap_ = INLINE_USED, o.n_ = 0;
++    } else {
++      heap_ = nullptr, cap_ = INLINE_USED, n_ = o.n_;
++      for (size_t i = 0; i < n_; ++i) inl_[i] = o.inl_[i];
++      o.n_ = 0;
++    }
++  }
++  void release() {
++    delete[] heap_;
++    heap_ = nullptr, cap_ = INLINE_USED, n_ = 0;
++  }
++};
++
+ class Big {
+  public:
+-  std::vector<u32> w;  // little endian; the top limb is not 0
++  Limbs w;  // little endian; the top limb is not 0
+   Big() {}
+   Big(u64 x) {
+     for (; x; x >>= 32) w.push_back((u32)x);
+@@ -151,7 +261,7 @@ class Big {
+       r = a;
+       return;
+     }
+-    if (b.w.size() == 1) {
++    if (b.w.size() == 1) {  // (the results below are moved, not copied: the same values)
+       Big t;
+       t.w.assign(a.w.size(), 0);
+       u64 c = 0;
+@@ -161,7 +271,7 @@ class Big {
+         c %= b.w[0];
+       }
+       t.trim();
+-      q = t;
++      q = std::move(t);
+       r = Big(c);
+       return;
+     }
+@@ -208,7 +318,7 @@ class Big {
+     }
+     t.trim();
+     u.trim();
+-    q = t;
++    q = std::move(t);
+     r = u.shr(s);
+   }
+   // floor of the square root, by Newton's iteration from above.
+@@ -220,7 +330,7 @@ class Big {
+       divmod(a, x, q, r);
+       Big y = (x + q).shr(1);
+       if (cmp(y, x) >= 0) return x;
+-      x = y;
++      x = std::move(y);
+     }
+   }
+   static Big pow(Big a, u64 n) {
+diff --git a/blocks/numbers/tests/planners_read_once_test.cpp b/blocks/numbers/tests/planners_read_once_test.cpp
+index 5dc2997c..2cbec811 100644
+--- a/blocks/numbers/tests/planners_read_once_test.cpp
++++ b/blocks/numbers/tests/planners_read_once_test.cpp
+@@ -10,8 +10,12 @@
+    global operator new, or a second thread, can run code during the call. If a planner read a field
+    once for a round's error bound and again for what the plan states about the round, that code
+    could make the two differ. This
+-   file replaces operator new but defines no test macro of the library, which it uses as any program
+-   does. Not tested: the functions that run a proof, planners that `main` does not call (such as
++   file replaces operator new. It defines one test macro of the library,
++   BLK_BIG_ON_THE_HEAP_FOR_A_TEST, which keeps the limbs of the exact numbers (blocks/numbers/real.h)
++   on the heap: production builds keep short numbers inside the object, and without their
++   allocations this test has far fewer places to interrupt a planner (about 4600 plans instead of
++   about 119000) and misses second reads that it finds with them. Nothing else of the library
++   changes under that macro; the test otherwise uses the library as any program does. Not tested: the functions that run a proof, planners that `main` does not call (such as
+    `plan_iopp`), fields that no case changes, groups with mask rows (`GroupSize::mask`), scopes
+    other than `Scope::ONCE`; each field is changed in one direction only. With one of the planners'
+    22 copies of an argument (blocks/numbers/blocks.h) replaced by a reference, the test must fail
+@@ -22,6 +26,7 @@
+ #include <functional>
+ #include <new>
+ 
++#define BLK_BIG_ON_THE_HEAP_FOR_A_TEST  // read by blocks/numbers/real.h, before blocks/fence.h's list is read
+ #include "numbers/plan.h"
+ 
+ // The replaced operator new calls a hook (`turn`) at a chosen allocation (see `play`, `whole`). The

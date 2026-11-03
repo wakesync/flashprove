@@ -1,0 +1,100 @@
+== <REPO>/prof/limbs/samples.860738.txt: 399 samples (~0.40 s CPU)
+-- stacks matching 'blk::(Big|Real|Bound)\\b': 244 (61.2%)
+-- stacks matching 'blk::configure\\(': 190 (47.6%)
+-- stacks matching 'blk::sized\\(': 147 (36.8%)
+-- stacks matching 'blk::check_proof\\(': 0 (0.0%)
+-- stacks matching 'Tensor::': 46 (11.5%)
+-- stacks matching 'Blake2bF': 8 (2.0%)
+-- self
+ 17.79%     71  blk::Big::divmod(blk::Big const&, blk::Big const&, blk::Big&, blk::Big&)
+ 12.28%     49  <lib>
+ 10.03%     40  blk::Limbs::copy_from(blk::Limbs const&)
+  9.27%     37  blk::Tensor::add_to(blk::E*, std::vector<blk::E, std::allocator<blk::E> >&) const
+  6.02%     24  blk::operator*(blk::Big const&, blk::Big const&)
+  4.76%     19  blk::Real::cut(blk::Dir) const
+  3.51%     14  blk::operator+(blk::Big const&, blk::Big const&)
+  3.26%     13  blk::Big::shl(unsigned long) const
+  3.01%     12  blk::Big::shr(unsigned long) const
+  3.01%     12  blk::GL64::reduce128(unsigned long, unsigned long)
+  1.50%      6  blk::Big::isqrt(blk::Big const&)
+  1.25%      5  blk::Limbs::release()
+  1.25%      5  blk::Planned::Data::whole_error(blk::PlanRound const&, blk::Real const&) const
+  1.25%      5  blk::Blake2bF::F(unsigned long*, unsigned long const*, unsigned long, unsigned long, bool)
+  1.00%      4  blk::Real::div(blk::Real const&, blk::Real const&, blk::Dir)
+  1.00%      4  blk::Real::cmp(blk::Real const&, blk::Real const&)
+  1.00%      4  blk::E blk::product_dot<blk::E>(blk::E const*, unsigned long, blk::F const*, unsigned int)
+  0.75%      3  blk::Plan::close(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, blk::RoundKind, blk::ErrorKind, blk::Bound const&, blk::Priced, blk::PlanRo
+  0.75%      3  void std::vector<blk::PlanRound, std::allocator<blk::PlanRound> >::_M_realloc_insert<blk::PlanRound>(__gnu_cxx::__normal_iterator<blk::PlanRound*, std::vector<blk::PlanRound, std::
+  0.75%      3  blk::Plan::finish() const
+  0.75%      3  blk::account(blk::Planned const&, int)
+  0.75%      3  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&
+  0.75%      3  blk::operator+(blk::E const&, blk::E const&)
+  0.50%      2  gateTableEntry(int)
+  0.50%      2  earlier_hash_h_state_with_length(unsigned int*, unsigned int, unsigned int, unsigned int const*, unsigned long, unsigned long, unsigned int) [clone .constprop.0]
+  0.50%      2  blk::Real::sqrt(blk::Real const&, blk::Dir)
+  0.50%      2  blk::Big::Big(unsigned long)
+  0.50%      2  blk::Bound::Bound(blk::Big const&)
+  0.50%      2  blk::operator-(blk::Big const&, blk::Big const&)
+  0.50%      2  void std::vector<blk::PlanRound, std::allocator<blk::PlanRound> >::_M_realloc_insert<blk::PlanRound const&>(__gnu_cxx::__normal_iterator<blk::PlanRound*, std::vector<blk::PlanRound
+-- self, library time charged to the calling function
+ 17.79%     71  blk::Big::divmod(blk::Big const&, blk::Big const&, blk::Big&, blk::Big&)
+ 10.03%     40  blk::Limbs::copy_from(blk::Limbs const&)
+  9.27%     37  blk::Tensor::add_to(blk::E*, std::vector<blk::E, std::allocator<blk::E> >&) const
+  6.02%     24  blk::operator*(blk::Big const&, blk::Big const&)
+  4.76%     19  blk::Real::cut(blk::Dir) const
+  3.51%     14  blk::operator+(blk::Big const&, blk::Big const&)
+  3.26%     13  blk::Big::shl(unsigned long) const
+  3.01%     12  blk::Big::shr(unsigned long) const
+  3.01%     12  blk::GL64::reduce128(unsigned long, unsigned long)
+  2.51%     10  blk::Big::isqrt(blk::Big const&)
+  2.01%      8  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&
+  1.25%      5  blk::Real::div(blk::Real const&, blk::Real const&, blk::Dir)
+  1.25%      5  blk::Limbs::release()
+  1.25%      5  blk::Plan::close(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, blk::RoundKind, blk::ErrorKind, blk::Bound const&, blk::Priced, blk::PlanRo
+  1.25%      5  blk::Plan::finish() const
+  1.25%      5  blk::Planned::Data::whole_error(blk::PlanRound const&, blk::Real const&) const
+  1.25%      5  blk::Blake2bF::F(unsigned long*, unsigned long const*, unsigned long, unsigned long, bool)
+  1.00%      4  blk::Real::cmp(blk::Real const&, blk::Real const&)
+  1.00%      4  void std::vector<blk::PlanRound, std::allocator<blk::PlanRound> >::_M_realloc_insert<blk::PlanRound>(__gnu_cxx::__normal_iterator<blk::PlanRound*, std::vector<blk::PlanRound, std::
+  1.00%      4  <lib>
+  1.00%      4  blk::Planned::end(blk::Planned::Data const*)
+  1.00%      4  blk::E blk::product_dot<blk::E>(blk::E const*, unsigned long, blk::F const*, unsigned int)
+  0.75%      3  gateTableEntry(int)
+  0.75%      3  blk::account(blk::Planned const&, int)
+  0.75%      3  blk::operator+(blk::E const&, blk::E const&)
+  0.75%      3  blk::Tensor::set_pair(unsigned int, blk::E const&, blk::E const&)
+  0.50%      2  earlier_hash_h_state_with_length(unsigned int*, unsigned int, unsigned int, unsigned int const*, unsigned long, unsigned long, unsigned int) [clone .constprop.0]
+  0.50%      2  AFork::shape()
+  0.50%      2  runStage(StageInputs const&)::{lambda()#3}::operator()() const
+  0.50%      2  blk::Real::sqrt(blk::Real const&, blk::Dir)
+-- inclusive
+ 98.50%    393  <lib>
+ 97.49%    389  main
+ 97.49%    389  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+ 97.49%    389  cpMain(int, char**)::{lambda(char const*, int, int)#1}::operator()(char const*, int, int) const::{lambda()#1}::operator()() const
+ 97.24%    388  runStage(StageInputs const&)
+ 96.49%    385  _start
+ 67.42%    269  runStage(StageInputs const&)::{lambda()#3}::operator()() const
+ 47.62%    190  blk::configure(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, 
+ 36.84%    147  blk::sized(blk::Parameters const&, blk::Subproofs const&)
+ 35.34%    141  blk::analysis_of_m(blk::Setting const&, blk::GroupSize const&)
+ 35.34%    141  blk::analysis(blk::Setting const&, blk::GroupSize const&)
+ 34.84%    139  blk::group_holds(blk::Setting const&, blk::Scope, blk::GroupSize const&, blk::GroupLoad const&)
+ 33.33%    133  unsigned long blk::largest_m<blk::size_group(blk::Setting const&, blk::Scope, blk::GroupSize const&, blk::GroupLoad const&)::{lambda(unsigned long)#1}>(blk::size_group(blk::Setting
+ 26.07%    104  blk::solve_test(blk::Setting const&, blk::Scope, blk::GroupLine const&, blk::TestSizes&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+ 26.07%    104  blk::solve_stages(blk::Plan&, blk::GroupSize const&, unsigned long, std::vector<blk::StageChoice, std::allocator<blk::StageChoice> > const&)
+ 24.56%     98  blk::check_key(blk::Configured const&, blk::Reader&, blk::TestedTable&, char const*&, std::vector<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<
+ 24.56%     98  blk::check_key_under(blk::KeyUnder const&, blk::Reader&, blk::TestedTable&, char const*&, std::vector<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::alloca
+ 24.31%     97  blk::lin_sized(blk::Setting const&, blk::LinLines const&, blk::TableSize const&, blk::Codes&)
+ 20.55%     82  blk::Big::divmod(blk::Big const&, blk::Big const&, blk::Big&, blk::Big&)
+ 20.05%     80  blk::johnson_count(blk::Word const&, blk::Bound const&, blk::Bound const&, unsigned long)
+ 18.55%     74  blk::at_distance(blk::Word const&, blk::Bound const&)
+ 18.30%     73  blk::iopp_verify(blk::VerifierContext&, unsigned int, std::vector<blk::IoppStage, std::allocator<blk::IoppStage> > const&, blk::IoppChoice const&, blk::FoldMask)
+ 16.79%     67  blk::Real::sqrt(blk::Real const&, blk::Dir)
+ 16.79%     67  blk::Bound::sqrt(blk::Bound const&)
+ 16.29%     65  blk::Real::div(blk::Real const&, blk::Real const&, blk::Dir)
+ 16.29%     65  blk::johnson(blk::Word const&, unsigned long)
+ 16.04%     64  blk::analysis_at(blk::Setting const&, blk::GroupSize const&, blk::Proximity const&)
+ 15.04%     60  blk::Big::isqrt(blk::Big const&)
+ 13.28%     53  blk::base_verify(blk::VerifierContext&, blk::SingleRows const&, blk::BaseMask, unsigned int)
+ 12.78%     51  blk::operator/(blk::Bound const&, blk::Bound const&)

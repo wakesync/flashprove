@@ -1,0 +1,100 @@
+== <REPO>/prof/stock3/samples.850449.txt: 1626 samples (~1.63 s CPU)
+-- stacks matching 'blk::(Big|Real|Bound)\\b': 479 (29.5%)
+-- stacks matching 'blk::configure\\(': 321 (19.7%)
+-- stacks matching 'blk::sized\\(': 236 (14.5%)
+-- stacks matching 'blk::check_proof\\(': 1036 (63.7%)
+-- stacks matching 'Tensor::': 301 (18.5%)
+-- stacks matching 'Blake2bF': 19 (1.2%)
+-- self
+ 20.11%    327  <lib>
+ 12.36%    201  blk::Tensor::folded_slice(blk::E const*, unsigned int, std::vector<blk::E, std::allocator<blk::E> >&) const
+  5.17%     84  blk::Tensor::add_to(blk::E*, std::vector<blk::E, std::allocator<blk::E> >&) const
+  4.31%     70  blk::Big::divmod(blk::Big const&, blk::Big const&, blk::Big&, blk::Big&)
+  3.94%     64  eqTab(Ex const*, int)::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  3.44%     56  affAdd(Aff&, Aff const&, Ex)
+  2.89%     47  t2Lin(HFork&, Aff const&, std::vector<Run2, std::allocator<Run2> > const&)::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  2.71%     44  blk::GL64::dot3(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)
+  2.40%     39  HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#9}::operator()(unsigned long) const
+  1.60%     26  blk::operator*(blk::Big const&, blk::Big const&)
+  1.60%     26  std::vector<unsigned int, std::allocator<unsigned int> >::_M_fill_assign(unsigned long, unsigned int const&)
+  1.54%     25  ePow(Ex, unsigned long)
+  1.35%     22  void std::vector<Ent, std::allocator<Ent> >::_M_realloc_insert<Ent const&>(__gnu_cxx::__normal_iterator<Ent*, std::vector<Ent, std::allocator<Ent> > >, Ent const&)
+  1.29%     21  blk::operator+(blk::Big const&, blk::Big const&)
+  1.29%     21  forestPad(HFork&, Tr&, std::vector<Call*, std::allocator<Call*> > const&, std::vector<unsigned long, std::allocator<unsigned long> > const&, unsigned int&, int)
+  1.23%     20  HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  1.05%     17  blk::Real::cut(blk::Dir) const
+  0.98%     16  blk::Run::add_scaled(blk::Run const&, blk::E const&)
+  0.98%     16  blk::GL64::reduce128(unsigned long, unsigned long)
+  0.98%     16  blk::operator+(blk::E const&, blk::E const&)
+  0.92%     15  std::vector<unsigned int, std::allocator<unsigned int> >::vector(std::vector<unsigned int, std::allocator<unsigned int> > const&)
+  0.92%     15  EqRun::next()
+  0.86%     14  HFork::push(Ex, Aff const&)
+  0.86%     14  HTailF2::foldSums(unsigned long, std::vector<Ex, std::allocator<Ex> >&, std::vector<Ex, std::allocator<Ex> >&) const::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  0.86%     14  HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#7}::operator()(unsigned long) const
+  0.86%     14  doorH(HFork&, Tail2&, Tr&, unsigned long)
+  0.80%     13  blk::Big::shr(unsigned long) const
+  0.80%     13  std::vector<unsigned int, std::allocator<unsigned int> >::~vector()
+  0.80%     13  blk::Blake2bF::F(unsigned long*, unsigned long const*, unsigned long, unsigned long, bool)
+  0.80%     13  HTailF2::objectsF(HFork&, std::vector<HFun, std::allocator<HFun> > const&)
+-- self, library time charged to the calling function
+ 12.42%    202  blk::Tensor::folded_slice(blk::E const*, unsigned int, std::vector<blk::E, std::allocator<blk::E> >&) const
+  5.23%     85  blk::Big::divmod(blk::Big const&, blk::Big const&, blk::Big&, blk::Big&)
+  5.17%     84  blk::Tensor::add_to(blk::E*, std::vector<blk::E, std::allocator<blk::E> >&) const
+  3.94%     64  std::vector<unsigned int, std::allocator<unsigned int> >::vector(std::vector<unsigned int, std::allocator<unsigned int> > const&)
+  3.94%     64  eqTab(Ex const*, int)::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  3.51%     57  std::vector<unsigned int, std::allocator<unsigned int> >::_M_fill_assign(unsigned long, unsigned int const&)
+  3.44%     56  affAdd(Aff&, Aff const&, Ex)
+  2.89%     47  t2Lin(HFork&, Aff const&, std::vector<Run2, std::allocator<Run2> > const&)::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  2.71%     44  blk::GL64::dot3(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long)
+  2.40%     39  HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#9}::operator()(unsigned long) const
+  2.28%     37  blk::Real::cut(blk::Dir) const
+  1.78%     29  void std::vector<Ent, std::allocator<Ent> >::_M_realloc_insert<Ent const&>(__gnu_cxx::__normal_iterator<Ent*, std::vector<Ent, std::allocator<Ent> > >, Ent const&)
+  1.60%     26  blk::operator*(blk::Big const&, blk::Big const&)
+  1.54%     25  ePow(Ex, unsigned long)
+  1.35%     22  unsigned int& std::vector<unsigned int, std::allocator<unsigned int> >::emplace_back<unsigned int>(unsigned int&&) [clone .isra.0]
+  1.29%     21  blk::operator+(blk::Big const&, blk::Big const&)
+  1.29%     21  forestPad(HFork&, Tr&, std::vector<Call*, std::allocator<Call*> > const&, std::vector<unsigned long, std::allocator<unsigned long> > const&, unsigned int&, int)
+  1.23%     20  HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  1.05%     17  HTailF2::objectsF(HFork&, std::vector<HFun, std::allocator<HFun> > const&)
+  0.98%     16  blk::Real::add(blk::Real const&, blk::Real const&, blk::Dir)
+  0.98%     16  blk::Run::add_scaled(blk::Run const&, blk::E const&)
+  0.98%     16  blk::GL64::reduce128(unsigned long, unsigned long)
+  0.98%     16  blk::operator+(blk::E const&, blk::E const&)
+  0.92%     15  EqRun::next()
+  0.86%     14  HFork::push(Ex, Aff const&)
+  0.86%     14  HTailF2::foldSums(unsigned long, std::vector<Ex, std::allocator<Ex> >&, std::vector<Ex, std::allocator<Ex> >&) const::{lambda(unsigned long)#1}::operator()(unsigned long) const
+  0.86%     14  HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#7}::operator()(unsigned long) const
+  0.86%     14  doorH(HFork&, Tail2&, Tr&, unsigned long)
+  0.80%     13  blk::Big::shr(unsigned long) const
+  0.80%     13  std::vector<unsigned int, std::allocator<unsigned int> >::~vector()
+-- inclusive
+ 99.82%   1623  <lib>
+ 99.38%   1616  cpMain(int, char**)::{lambda(char const*, int, int)#1}::operator()(char const*, int, int) const::{lambda()#1}::operator()() const
+ 99.38%   1616  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+ 99.32%   1615  main
+ 99.32%   1615  runStage(StageInputs const&)
+ 97.23%   1581  _start
+ 63.71%   1036  blk::check_proof(blk::Configured const&, blk::TestedTable const&, unsigned int, std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::a
+ 63.71%   1036  blk::check_proof_if_tested(blk::Configured const&, blk::UnprovedTable const&, unsigned int, std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned 
+ 58.06%    944  runStage(StageInputs const&)::{lambda(blk::VerifierContext&, blk::RequestPublic const&, blk::LinksResult&)#1}::operator()(blk::VerifierContext&, blk::RequestPublic const&, blk::Lin
+ 29.58%    481  runStage(StageInputs const&)::{lambda(unsigned long)#4}::operator()(unsigned long) const
+ 27.18%    442  runStage(StageInputs const&)::{lambda()#3}::operator()() const
+ 19.74%    321  blk::configure(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, 
+ 15.44%    251  blk::fold_rounds_verify(blk::VerifierContext&, blk::FoldShape const&, blk::GroupRow, blk::FoldStart, blk::SingleRows&)
+ 15.44%    251  blk::fold_verify(blk::VerifierContext&, blk::FoldShape const&, blk::GroupRow, blk::FoldMask, blk::SingleRows&)
+ 15.31%    249  blk::fold_output(blk::Statement const&, blk::FoldShape const&, blk::GroupRow, unsigned int, blk::E const&, std::vector<blk::E, std::allocator<blk::E> > const&, blk::E const&, unsig
+ 14.82%    241  blk::Form::fix_low(blk::E const*, unsigned int, blk::E const&)
+ 14.51%    236  blk::sized(blk::Parameters const&, blk::Subproofs const&)
+ 14.39%    234  blk::iopp_verify(blk::VerifierContext&, unsigned int, std::vector<blk::IoppStage, std::allocator<blk::IoppStage> > const&, blk::IoppChoice const&, blk::FoldMask)
+ 13.47%    219  blk::group_holds(blk::Setting const&, blk::Scope, blk::GroupSize const&, blk::GroupLoad const&)
+ 13.16%    214  doorH(HFork&, Tail2&, Tr&, unsigned long)
+ 13.04%    212  blk::analysis(blk::Setting const&, blk::GroupSize const&)
+ 13.04%    212  blk::analysis_of_m(blk::Setting const&, blk::GroupSize const&)
+ 12.48%    203  blk::Tensor::folded_slice(blk::E const*, unsigned int, std::vector<blk::E, std::allocator<blk::E> >&) const
+ 12.42%    202  unsigned long blk::largest_m<blk::size_group(blk::Setting const&, blk::Scope, blk::GroupSize const&, blk::GroupLoad const&)::{lambda(unsigned long)#1}>(blk::size_group(blk::Setting
+ 11.56%    188  blk::ReqVerifier::close()
+ 10.46%    170  blk::solve_test(blk::Setting const&, blk::Scope, blk::GroupLine const&, blk::TestSizes&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+ 10.46%    170  blk::solve_stages(blk::Plan&, blk::GroupSize const&, unsigned long, std::vector<blk::StageChoice, std::allocator<blk::StageChoice> > const&)
+ 10.27%    167  blk::ReqVerifier::finish()
+  9.41%    153  AttentionSubProof::run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  9.23%    150  blk::lin_sized(blk::Setting const&, blk::LinLines const&, blk::TableSize const&, blk::Codes&)

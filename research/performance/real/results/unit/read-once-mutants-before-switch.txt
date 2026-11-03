@@ -1,0 +1,30 @@
+base 1061 NOT-MUTATED
+cand 1061 NOT-MUTATED
+base 1111 NOT-MUTATED
+cand 1111 NOT-MUTATED
+base 1142 NOT-MUTATED
+cand 1142 NOT-MUTATED
+base 427 exit=1 DETECTED | FAILED: 1 checks (119126 plans) | const TreeSize &tr = callers_tr;  // READ ONCE (plan.h)
+cand 427 exit=1 DETECTED | FAILED: 1 checks (4588 plans) | const TreeSize &tr = callers_tr;  // READ ONCE (plan.h)
+base 465 exit=1 DETECTED | FAILED: 1 checks (119156 plans) | const Planned &chain = callers_chain;  // READ ONCE (plan.h): a handle
+cand 465 exit=1 DETECTED | FAILED: 1 checks (4618 plans) | const Planned &chain = callers_chain;  // READ ONCE (plan.h): a handle
+base 532 exit=1 DETECTED | FAILED: 1 checks (119123 plans) | const std::vector<SampleSize> &o = callers_o;  // READ ONCE (plan.h)
+cand 532 exit=0 missed | ok: 4585 plans, each laid with a hook at one allocation: with a field turned there, one of | const std::vector<SampleSize> &o = callers_o;  // READ ONCE (plan.h)
+base 547 exit=1 DETECTED | FAILED: 1 checks (119154 plans) | const TestedIn &groups = callers_groups;  // READ ONCE (plan.h)
+cand 547 exit=0 missed | ok: 4616 plans, each laid with a hook at one allocation: with a field turned there, one of | const TestedIn &groups = callers_groups;  // READ ONCE (plan.h)
+base 577 exit=1 DETECTED | FAILED: 2 checks (119097 plans) | const PscSize &x = callers_x;  // READ ONCE (plan.h)
+cand 577 exit=1 DETECTED | FAILED: 2 checks (4559 plans) | const PscSize &x = callers_x;  // READ ONCE (plan.h)
+base 667 exit=1 DETECTED | FAILED: 1 checks (119156 plans) | const LookupSize &x = callers_x;  // READ ONCE (plan.h)
+cand 667 exit=1 DETECTED | FAILED: 1 checks (4618 plans) | const LookupSize &x = callers_x;  // READ ONCE (plan.h)
+base 727 exit=1 DETECTED | FAILED: 2 checks (119156 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+cand 727 exit=1 DETECTED | FAILED: 2 checks (4618 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+base 737 exit=1 DETECTED | FAILED: 1 checks (119156 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+cand 737 exit=1 DETECTED | FAILED: 1 checks (4618 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+base 755 exit=1 DETECTED | FAILED: 2 checks (119156 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+cand 755 exit=0 missed | ok: 4618 plans, each laid with a hook at one allocation: with a field turned there, one of | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+base 774 exit=1 DETECTED | FAILED: 2 checks (119156 plans) | const GroupSize &from = callers_from, &to = callers_to;  // READ ONCE 
+cand 774 exit=1 DETECTED | FAILED: 1 checks (4618 plans) | const GroupSize &from = callers_from, &to = callers_to;  // READ ONCE 
+base 802 exit=1 DETECTED | FAILED: 2 checks (119156 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+cand 802 exit=1 DETECTED | FAILED: 2 checks (4618 plans) | const GroupSize &g = callers_g;  // READ ONCE (plan.h)
+base none exit=0 missed | ok: 119156 plans, each laid with a hook at one allocation: with a field turned there, one  | 
+cand none exit=0 missed | ok: 4618 plans, each laid with a hook at one allocation: with a field turned there, one of | 

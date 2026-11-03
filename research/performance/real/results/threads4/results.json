@@ -1,0 +1,605 @@
+{
+  "scope": "stored synthetic proof, complete key+leaf+request CPU verification",
+  "cpu": "12-15",
+  "threads": 4,
+  "reps": 12,
+  "arms": {
+    "stock-j4": {
+      "path": "<REPO>/build-variants/stock/cp_verify",
+      "sha256": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394"
+    },
+    "cand-j4": {
+      "path": "<REPO>/build-variants/cand/cp_verify",
+      "sha256": "781dda18ab2bbf0401a10ee701897d9cfe697cda5ed912a10ae06e1884cd13a1"
+    }
+  },
+  "fixture_sha256": {
+    "ID.txt": "ad3a4c1abecbae4d9f4f8640851f64796b9b1c595b40ea566d797f25ef2e7ff1",
+    "README.md": "1d61a46f28e8b22ab2730eb255440b42925e60e20b810d23dbdd833aee5b0de7",
+    "SHA256SUMS": "da8f5562eaa27e177b3b8aa39366d913befdfdc3114786907750ed5c0c18ecea",
+    "config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+    "example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+    "example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+    "ivk/key.bin": "123dc39e8947fd3ba838d7a1a35d587c2f0e1707d1bca9b6ed551b52bf0c2e09",
+    "ivk/leaf/0.bin": "c9484f50fedfaf4e28ec9d1b5d19c3cd5e97bf4582511da49f9eb5693f10e1e0"
+  },
+  "hardware": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           40 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC-Rome Processor\nCPU family:                              23\nModel:                                   49\nThread(s) per core:                      1\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nBogoMIPS:                                4890.80\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 clzero xsaveerptr wbnoinvd arat umip rdpid\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               512 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                8 MiB (16 instances)\nL3 cache:                                16 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; untrained return thunk; SMT disabled\nVulnerability Spec rstack overflow:      Mitigation; SMT disabled\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+  "kernel": "Linux 6.8.0-100-generic x86_64 GNU/Linux",
+  "load_before": {
+    "loadavg": "4.07 3.09 2.88 2/1738 894384",
+    "cpu_pressure": "some avg10=20.67 avg60=23.32 avg300=12.87 total=85149075346"
+  },
+  "rows": [
+    {
+      "label": "stock-j4",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.51,
+      "user_s": 2.54,
+      "sys_s": 0.13,
+      "max_rss_kib": 158384,
+      "load_before": {
+        "loadavg": "4.07 3.09 2.88 1/1738 894384",
+        "cpu_pressure": "some avg10=20.67 avg60=23.32 avg300=12.87 total=85149075346"
+      },
+      "load_after": {
+        "loadavg": "4.06 3.10 2.89 2/1738 894865",
+        "cpu_pressure": "some avg10=16.93 avg60=22.55 avg300=12.78 total=85149080185"
+      },
+      "t": 1793743079.3630826
+    },
+    {
+      "label": "cand-j4",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.43,
+      "user_s": 2.15,
+      "sys_s": 0.15,
+      "max_rss_kib": 158548,
+      "load_before": {
+        "loadavg": "4.06 3.10 2.89 4/1738 894865",
+        "cpu_pressure": "some avg10=16.93 avg60=22.55 avg300=12.78 total=85149080185"
+      },
+      "load_after": {
+        "loadavg": "4.06 3.10 2.89 2/1745 895317",
+        "cpu_pressure": "some avg10=16.93 avg60=22.55 avg300=12.78 total=85149085467"
+      },
+      "t": 1793743080.8326936
+    },
+    {
+      "label": "stock-j4",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.57,
+      "user_s": 2.65,
+      "sys_s": 0.13,
+      "max_rss_kib": 158256,
+      "load_before": {
+        "loadavg": "4.06 3.10 2.89 2/1745 895317",
+        "cpu_pressure": "some avg10=16.93 avg60=22.55 avg300=12.78 total=85149085467"
+      },
+      "load_after": {
+        "loadavg": "4.06 3.10 2.89 1/1812 896087",
+        "cpu_pressure": "some avg10=13.86 avg60=21.82 avg300=12.69 total=85149091901"
+      },
+      "t": 1793743082.4527974
+    },
+    {
+      "label": "cand-j4",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.37,
+      "user_s": 2.06,
+      "sys_s": 0.13,
+      "max_rss_kib": 159828,
+      "load_before": {
+        "loadavg": "4.06 3.10 2.89 2/1812 896087",
+        "cpu_pressure": "some avg10=13.86 avg60=21.82 avg300=12.69 total=85149091901"
+      },
+      "load_after": {
+        "loadavg": "3.82 3.07 2.88 2/1782 896556",
+        "cpu_pressure": "some avg10=11.35 avg60=21.10 avg300=12.61 total=85149097397"
+      },
+      "t": 1793743083.87275
+    },
+    {
+      "label": "cand-j4",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.37,
+      "user_s": 2.07,
+      "sys_s": 0.15,
+      "max_rss_kib": 159952,
+      "load_before": {
+        "loadavg": "3.82 3.07 2.88 1/1782 896556",
+        "cpu_pressure": "some avg10=11.35 avg60=21.10 avg300=12.61 total=85149097397"
+      },
+      "load_after": {
+        "loadavg": "3.82 3.07 2.88 8/1780 897053",
+        "cpu_pressure": "some avg10=11.35 avg60=21.10 avg300=12.61 total=85149104007"
+      },
+      "t": 1793743085.2919912
+    },
+    {
+      "label": "stock-j4",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.54,
+      "user_s": 2.55,
+      "sys_s": 0.13,
+      "max_rss_kib": 158384,
+      "load_before": {
+        "loadavg": "3.82 3.07 2.88 7/1780 897053",
+        "cpu_pressure": "some avg10=11.35 avg60=21.10 avg300=12.61 total=85149104007"
+      },
+      "load_after": {
+        "loadavg": "3.82 3.07 2.88 1/1789 897654",
+        "cpu_pressure": "some avg10=9.29 avg60=20.41 avg300=12.52 total=85149109045"
+      },
+      "t": 1793743086.8626409
+    },
+    {
+      "label": "stock-j4",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.53,
+      "user_s": 2.6,
+      "sys_s": 0.13,
+      "max_rss_kib": 158048,
+      "load_before": {
+        "loadavg": "3.82 3.07 2.88 1/1789 897654",
+        "cpu_pressure": "some avg10=9.29 avg60=20.41 avg300=12.52 total=85149109045"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.13 2.90 1/1789 898106",
+        "cpu_pressure": "some avg10=7.61 avg60=19.74 avg300=12.43 total=85149113799"
+      },
+      "t": 1793743088.4339194
+    },
+    {
+      "label": "cand-j4",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.39,
+      "user_s": 2.11,
+      "sys_s": 0.15,
+      "max_rss_kib": 158676,
+      "load_before": {
+        "loadavg": "4.07 3.13 2.90 1/1789 898106",
+        "cpu_pressure": "some avg10=7.61 avg60=19.74 avg300=12.43 total=85149113799"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.13 2.90 1/1789 898565",
+        "cpu_pressure": "some avg10=6.23 avg60=19.10 avg300=12.35 total=85149117043"
+      },
+      "t": 1793743089.8541105
+    },
+    {
+      "label": "cand-j4",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.33,
+      "user_s": 2.02,
+      "sys_s": 0.15,
+      "max_rss_kib": 158640,
+      "load_before": {
+        "loadavg": "4.07 3.13 2.90 1/1789 898565",
+        "cpu_pressure": "some avg10=6.23 avg60=19.10 avg300=12.35 total=85149117043"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.13 2.90 2/1789 898997",
+        "cpu_pressure": "some avg10=6.23 avg60=19.10 avg300=12.35 total=85149120850"
+      },
+      "t": 1793743091.2241232
+    },
+    {
+      "label": "stock-j4",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.61,
+      "user_s": 2.62,
+      "sys_s": 0.14,
+      "max_rss_kib": 158256,
+      "load_before": {
+        "loadavg": "4.07 3.13 2.90 3/1789 898997",
+        "cpu_pressure": "some avg10=6.23 avg60=19.10 avg300=12.35 total=85149120850"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.13 2.90 1/1796 899441",
+        "cpu_pressure": "some avg10=5.10 avg60=18.47 avg300=12.26 total=85149125742"
+      },
+      "t": 1793743092.89538
+    },
+    {
+      "label": "stock-j4",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.49,
+      "user_s": 2.55,
+      "sys_s": 0.12,
+      "max_rss_kib": 158432,
+      "load_before": {
+        "loadavg": "4.07 3.13 2.90 1/1796 899441",
+        "cpu_pressure": "some avg10=5.10 avg60=18.47 avg300=12.26 total=85149125742"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.15 2.91 1/1786 899903",
+        "cpu_pressure": "some avg10=4.17 avg60=17.87 avg300=12.18 total=85149131228"
+      },
+      "t": 1793743094.415864
+    },
+    {
+      "label": "cand-j4",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.41,
+      "user_s": 2.1,
+      "sys_s": 0.16,
+      "max_rss_kib": 158676,
+      "load_before": {
+        "loadavg": "4.07 3.15 2.91 1/1786 899903",
+        "cpu_pressure": "some avg10=4.17 avg60=17.87 avg300=12.18 total=85149131228"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.15 2.91 1/1786 900360",
+        "cpu_pressure": "some avg10=3.42 avg60=17.28 avg300=12.10 total=85149135043"
+      },
+      "t": 1793743095.836269
+    },
+    {
+      "label": "cand-j4",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.41,
+      "user_s": 2.1,
+      "sys_s": 0.14,
+      "max_rss_kib": 159792,
+      "load_before": {
+        "loadavg": "4.07 3.15 2.91 1/1786 900360",
+        "cpu_pressure": "some avg10=3.42 avg60=17.28 avg300=12.10 total=85149135043"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.15 2.91 2/1786 900791",
+        "cpu_pressure": "some avg10=2.80 avg60=16.72 avg300=12.01 total=85149139379"
+      },
+      "t": 1793743097.3061335
+    },
+    {
+      "label": "stock-j4",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.53,
+      "user_s": 2.59,
+      "sys_s": 0.11,
+      "max_rss_kib": 158432,
+      "load_before": {
+        "loadavg": "4.07 3.15 2.91 2/1786 900791",
+        "cpu_pressure": "some avg10=2.80 avg60=16.72 avg300=12.01 total=85149139379"
+      },
+      "load_after": {
+        "loadavg": "3.82 3.11 2.90 1/1786 901262",
+        "cpu_pressure": "some avg10=2.80 avg60=16.72 avg300=12.01 total=85149144854"
+      },
+      "t": 1793743098.877144
+    },
+    {
+      "label": "stock-j4",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.56,
+      "user_s": 2.65,
+      "sys_s": 0.15,
+      "max_rss_kib": 158048,
+      "load_before": {
+        "loadavg": "3.82 3.11 2.90 1/1786 901262",
+        "cpu_pressure": "some avg10=2.80 avg60=16.72 avg300=12.01 total=85149144854"
+      },
+      "load_after": {
+        "loadavg": "3.82 3.11 2.90 1/1786 901709",
+        "cpu_pressure": "some avg10=2.29 avg60=16.17 avg300=11.93 total=85149152670"
+      },
+      "t": 1793743100.4977195
+    },
+    {
+      "label": "cand-j4",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.36,
+      "user_s": 2.1,
+      "sys_s": 0.13,
+      "max_rss_kib": 159828,
+      "load_before": {
+        "loadavg": "3.82 3.11 2.90 1/1786 901709",
+        "cpu_pressure": "some avg10=2.29 avg60=16.17 avg300=11.93 total=85149152670"
+      },
+      "load_after": {
+        "loadavg": "3.82 3.11 2.90 2/1781 902154",
+        "cpu_pressure": "some avg10=1.87 avg60=15.64 avg300=11.85 total=85149156196"
+      },
+      "t": 1793743101.8677793
+    },
+    {
+      "label": "cand-j4",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.33,
+      "user_s": 2.13,
+      "sys_s": 0.13,
+      "max_rss_kib": 159956,
+      "load_before": {
+        "loadavg": "3.82 3.11 2.90 2/1781 902154",
+        "cpu_pressure": "some avg10=1.87 avg60=15.64 avg300=11.85 total=85149156196"
+      },
+      "load_after": {
+        "loadavg": "3.67 3.09 2.89 2/1781 902661",
+        "cpu_pressure": "some avg10=1.87 avg60=15.64 avg300=11.85 total=85149163838"
+      },
+      "t": 1793743103.2392058
+    },
+    {
+      "label": "stock-j4",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.58,
+      "user_s": 2.62,
+      "sys_s": 0.15,
+      "max_rss_kib": 157536,
+      "load_before": {
+        "loadavg": "3.67 3.09 2.89 2/1781 902661",
+        "cpu_pressure": "some avg10=1.87 avg60=15.64 avg300=11.85 total=85149163838"
+      },
+      "load_after": {
+        "loadavg": "3.67 3.09 2.89 2/1781 903107",
+        "cpu_pressure": "some avg10=1.53 avg60=15.13 avg300=11.77 total=85149171757"
+      },
+      "t": 1793743104.859659
+    },
+    {
+      "label": "stock-j4",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.52,
+      "user_s": 2.5,
+      "sys_s": 0.12,
+      "max_rss_kib": 157740,
+      "load_before": {
+        "loadavg": "3.67 3.09 2.89 2/1781 903107",
+        "cpu_pressure": "some avg10=1.53 avg60=15.13 avg300=11.77 total=85149171757"
+      },
+      "load_after": {
+        "loadavg": "3.67 3.09 2.89 6/1781 903548",
+        "cpu_pressure": "some avg10=1.25 avg60=14.63 avg300=11.69 total=85149177145"
+      },
+      "t": 1793743106.4300041
+    },
+    {
+      "label": "cand-j4",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.4,
+      "user_s": 2.15,
+      "sys_s": 0.14,
+      "max_rss_kib": 158548,
+      "load_before": {
+        "loadavg": "3.67 3.09 2.89 7/1781 903548",
+        "cpu_pressure": "some avg10=1.25 avg60=14.63 avg300=11.69 total=85149177145"
+      },
+      "load_after": {
+        "loadavg": "3.67 3.09 2.89 2/1781 903979",
+        "cpu_pressure": "some avg10=1.03 avg60=14.15 avg300=11.61 total=85149182488"
+      },
+      "t": 1793743107.8502169
+    },
+    {
+      "label": "cand-j4",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.34,
+      "user_s": 2.02,
+      "sys_s": 0.16,
+      "max_rss_kib": 158544,
+      "load_before": {
+        "loadavg": "3.67 3.09 2.89 2/1781 903979",
+        "cpu_pressure": "some avg10=1.03 avg60=14.15 avg300=11.61 total=85149182488"
+      },
+      "load_after": {
+        "loadavg": "3.70 3.11 2.90 4/1780 904443",
+        "cpu_pressure": "some avg10=1.03 avg60=14.15 avg300=11.61 total=85149185590"
+      },
+      "t": 1793743109.2196424
+    },
+    {
+      "label": "stock-j4",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.53,
+      "user_s": 2.56,
+      "sys_s": 0.14,
+      "max_rss_kib": 158380,
+      "load_before": {
+        "loadavg": "3.70 3.11 2.90 4/1780 904443",
+        "cpu_pressure": "some avg10=1.03 avg60=14.15 avg300=11.61 total=85149185590"
+      },
+      "load_after": {
+        "loadavg": "3.70 3.11 2.90 2/1780 904892",
+        "cpu_pressure": "some avg10=0.84 avg60=13.69 avg300=11.53 total=85149191533"
+      },
+      "t": 1793743110.7906775
+    },
+    {
+      "label": "stock-j4",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.6,
+      "user_s": 2.59,
+      "sys_s": 0.13,
+      "max_rss_kib": 158176,
+      "load_before": {
+        "loadavg": "3.70 3.11 2.90 2/1780 904892",
+        "cpu_pressure": "some avg10=0.84 avg60=13.69 avg300=11.53 total=85149191533"
+      },
+      "load_after": {
+        "loadavg": "3.70 3.11 2.90 1/1779 905336",
+        "cpu_pressure": "some avg10=0.69 avg60=13.24 avg300=11.45 total=85149198218"
+      },
+      "t": 1793743112.4115682
+    },
+    {
+      "label": "cand-j4",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.4,
+      "user_s": 2.09,
+      "sys_s": 0.13,
+      "max_rss_kib": 159664,
+      "load_before": {
+        "loadavg": "3.70 3.11 2.90 1/1779 905336",
+        "cpu_pressure": "some avg10=0.69 avg60=13.24 avg300=11.45 total=85149198218"
+      },
+      "load_after": {
+        "loadavg": "3.48 3.07 2.89 1/1779 905780",
+        "cpu_pressure": "some avg10=0.56 avg60=12.81 avg300=11.37 total=85149201806"
+      },
+      "t": 1793743113.8321543
+    },
+    {
+      "label": "cand-j4",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.4,
+      "user_s": 2.16,
+      "sys_s": 0.15,
+      "max_rss_kib": 159952,
+      "load_before": {
+        "loadavg": "3.48 3.07 2.89 1/1779 905780",
+        "cpu_pressure": "some avg10=0.56 avg60=12.81 avg300=11.37 total=85149201806"
+      },
+      "load_after": {
+        "loadavg": "3.48 3.07 2.89 2/1780 906224",
+        "cpu_pressure": "some avg10=0.56 avg60=12.81 avg300=11.37 total=85149206926"
+      },
+      "t": 1793743115.2515461
+    },
+    {
+      "label": "stock-j4",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 1.51,
+      "user_s": 2.56,
+      "sys_s": 0.12,
+      "max_rss_kib": 158176,
+      "load_before": {
+        "loadavg": "3.48 3.07 2.89 2/1780 906224",
+        "cpu_pressure": "some avg10=0.56 avg60=12.81 avg300=11.37 total=85149206926"
+      },
+      "load_after": {
+        "loadavg": "3.48 3.07 2.89 1/1779 906662",
+        "cpu_pressure": "some avg10=0.46 avg60=12.39 avg300=11.29 total=85149213179"
+      },
+      "t": 1793743116.7716963
+    }
+  ],
+  "summary": {
+    "stock-j4": {
+      "wall": {
+        "n": 12,
+        "median": 1.5350000000000001,
+        "mean": 1.5475,
+        "sd": 0.036711405213193285,
+        "min": 1.49,
+        "max": 1.61
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.71,
+        "mean": 2.7175,
+        "sd": 0.0527644853011086,
+        "min": 2.62,
+        "max": 2.8
+      },
+      "max_rss_kib": [
+        158256,
+        158384,
+        158048,
+        158256,
+        158432,
+        158432,
+        158048,
+        157536,
+        157740,
+        158380,
+        158176,
+        158176
+      ]
+    },
+    "cand-j4": {
+      "wall": {
+        "n": 12,
+        "median": 1.38,
+        "mean": 1.3758333333333332,
+        "sd": 0.030289011909011457,
+        "min": 1.33,
+        "max": 1.41
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.2350000000000003,
+        "mean": 2.2358333333333333,
+        "sd": 0.042949935619241285,
+        "min": 2.17,
+        "max": 2.31
+      },
+      "max_rss_kib": [
+        159828,
+        159952,
+        158676,
+        158640,
+        158676,
+        159792,
+        159828,
+        159956,
+        158548,
+        158544,
+        159664,
+        159952
+      ],
+      "vs_stock-j4": {
+        "median_change_pct": -10.097719869706856,
+        "ranges_overlap": false
+      }
+    }
+  },
+  "load_after": {
+    "loadavg": "3.48 3.07 2.89 2/1779 906662",
+    "cpu_pressure": "some avg10=0.46 avg60=12.39 avg300=11.29 total=85149213179"
+  }
+}

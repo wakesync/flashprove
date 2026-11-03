@@ -31,9 +31,119 @@
 
 namespace blk {
 
+/* The limbs of a Big: the subset of std::vector<u32> that Big uses, with room for INLINE limbs in the
+   object itself, so that the many short-lived numbers of planning and accounting (a Real is cut to
+   REAL_BITS = 192 bits, 6 limbs; a product of two has 12) need no allocation. Longer numbers go to
+   the heap, as before. Every index is checked, as -D_GLIBCXX_ASSERTIONS checks a vector's: an index
+   past the end ends the process (BLK_REQUIRE). The arithmetic of Big is unchanged: only where the
+   limbs live. A new limb is 0 or the value given, as in std::vector.
+   BLK_BIG_ON_THE_HEAP_FOR_A_TEST (blocks/fence.h) keeps every limb on the heap, as std::vector did:
+   blocks/numbers/tests/planners_read_once_test.cpp interrupts a planner at each heap allocation,
+   and without Big's allocations it would have fewer places to do so and find fewer second reads. */
+class Limbs {
+ public:
+  static constexpr size_t INLINE = 24;
+#ifdef BLK_BIG_ON_THE_HEAP_FOR_A_TEST
+  static constexpr size_t INLINE_USED = 0;
+#else
+  static constexpr size_t INLINE_USED = INLINE;
+#endif
+  Limbs() {}
+  Limbs(const Limbs &o) { copy_from(o); }
+  Limbs(Limbs &&o) noexcept { take(o); }
+  Limbs &operator=(const Limbs &o) {
+    if (this != &o) copy_from(o);
+    return *this;
+  }
+  Limbs &operator=(Limbs &&o) noexcept {
+    if (this != &o) {
+      release();
+      take(o);
+    }
+    return *this;
+  }
+  ~Limbs() { release(); }
+  size_t size() const { return n_; }
+  bool empty() const { return n_ == 0; }
+  u32 &operator[](size_t i) {
+    BLK_REQUIRE(i < n_, "Big: a limb past the end");
+    return data()[i];
+  }
+  const u32 &operator[](size_t i) const {
+    BLK_REQUIRE(i < n_, "Big: a limb past the end");
+    return data()[i];
+  }
+  u32 &back() { return (*this)[n_ - 1]; }
+  const u32 &back() const { return (*this)[n_ - 1]; }
+  void pop_back() {
+    BLK_REQUIRE(n_ > 0, "Big: pop_back of no limb");
+    --n_;
+  }
+  void push_back(u32 x) {
+    grow(n_ + 1);
+    data()[n_++] = x;
+  }
+  void assign(size_t count, u32 x) {
+    n_ = 0;
+    grow(count);
+    u32 *d = data();
+    for (size_t i = 0; i < count; ++i) d[i] = x;
+    n_ = count;
+  }
+  void resize(size_t count, u32 x) {
+    if (count > n_) {
+      grow(count);
+      u32 *d = data();
+      for (size_t i = n_; i < count; ++i) d[i] = x;
+    }
+    n_ = count;
+  }
+
+ private:
+  u32 inl_[INLINE];
+  u32 *heap_ = nullptr;  // null: the limbs are in inl_
+  size_t n_ = 0, cap_ = INLINE_USED;
+  u32 *data() { return heap_ ? heap_ : inl_; }
+  const u32 *data() const { return heap_ ? heap_ : inl_; }
+  // Room for at least `need` limbs, keeping the first n_.
+  void grow(size_t need) {
+    if (need <= cap_) return;
+    BLK_REQUIRE(need < (size_t(1) << 40), "Big: too many limbs");
+    size_t c = cap_ * 2;
+    if (c < need) c = need;
+    u32 *h = new u32[c];
+    const u32 *d = data();
+    for (size_t i = 0; i < n_; ++i) h[i] = d[i];
+    delete[] heap_;
+    heap_ = h, cap_ = c;
+  }
+  void copy_from(const Limbs &o) {
+    n_ = 0;
+    grow(o.n_);
+    u32 *d = data();
+    const u32 *s = o.data();
+    for (size_t i = 0; i < o.n_; ++i) d[i] = s[i];
+    n_ = o.n_;
+  }
+  void take(Limbs &o) {
+    if (o.heap_) {
+      heap_ = o.heap_, cap_ = o.cap_, n_ = o.n_;
+      o.heap_ = nullptr, o.cap_ = INLINE_USED, o.n_ = 0;
+    } else {
+      heap_ = nullptr, cap_ = INLINE_USED, n_ = o.n_;
+      for (size_t i = 0; i < n_; ++i) inl_[i] = o.inl_[i];
+      o.n_ = 0;
+    }
+  }
+  void release() {
+    delete[] heap_;
+    heap_ = nullptr, cap_ = INLINE_USED, n_ = 0;
+  }
+};
+
 class Big {
  public:
-  std::vector<u32> w;  // little endian; the top limb is not 0
+  Limbs w;  // little endian; the top limb is not 0
   Big() {}
   Big(u64 x) {
     for (; x; x >>= 32) w.push_back((u32)x);
@@ -151,7 +261,7 @@ class Big {
       r = a;
       return;
     }
-    if (b.w.size() == 1) {
+    if (b.w.size() == 1) {  // (the results below are moved, not copied: the same values)
       Big t;
       t.w.assign(a.w.size(), 0);
       u64 c = 0;
@@ -161,7 +271,7 @@ class Big {
         c %= b.w[0];
       }
       t.trim();
-      q = t;
+      q = std::move(t);
       r = Big(c);
       return;
     }
@@ -208,7 +318,7 @@ class Big {
     }
     t.trim();
     u.trim();
-    q = t;
+    q = std::move(t);
     r = u.shr(s);
   }
   // floor of the square root, by Newton's iteration from above.
@@ -220,7 +330,7 @@ class Big {
       divmod(a, x, q, r);
       Big y = (x + q).shr(1);
       if (cmp(y, x) >= 0) return x;
-      x = y;
+      x = std::move(y);
     }
   }
   static Big pow(Big a, u64 n) {

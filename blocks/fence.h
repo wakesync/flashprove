@@ -28,7 +28,7 @@
     defined(BLK_FOLD_PRINT) || \
     defined(BLK_KEY_UNDER_FOR_A_TEST) || defined(BLK_ENTRY_UNDER_FOR_A_TEST) || defined(BLK_LISTED_COINS_FOR_A_TEST) || defined(BLK_REPEATABLE_COINS_HIDE_NOTHING) || \
     defined(BLK_WF_ROWS_FOR_A_TEST) || defined(BLK_LEFT_BEHIND_LOOK_FOR_A_TEST) || defined(BLK_PLANS_BY_HAND_FOR_A_TEST) || \
-    defined(BLK_TESTED_TABLE_FOR_A_TEST)
+    defined(BLK_TESTED_TABLE_FOR_A_TEST) || defined(BLK_BIG_ON_THE_HEAP_FOR_A_TEST)
 #define BLK_NOT_FOR_SERVING 1
 #endif
 

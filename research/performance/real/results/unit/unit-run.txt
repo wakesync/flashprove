@@ -1,0 +1,4 @@
+== cand: 127 result lines; 89 .ran files; make exit 0
+== base: 127 result lines; 89 .ran files; make exit 0
+asan build exit 0
+asan numbers_test exit 0: ok, 58510 checks

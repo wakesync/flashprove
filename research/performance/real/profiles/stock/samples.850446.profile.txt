@@ -1,0 +1,22 @@
+== <REPO>/prof/stock3/samples.850446.txt: 8 samples (~0.01 s CPU)
+-- stacks matching 'blk::(Big|Real|Bound)\\b': 0 (0.0%)
+-- stacks matching 'blk::configure\\(': 0 (0.0%)
+-- stacks matching 'blk::sized\\(': 0 (0.0%)
+-- stacks matching 'blk::check_proof\\(': 0 (0.0%)
+-- stacks matching 'Tensor::': 0 (0.0%)
+-- stacks matching 'Blake2bF': 0 (0.0%)
+-- self
+100.00%      8  <lib>
+-- self, library time charged to the calling function
+ 50.00%      4  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)
+ 25.00%      2  readWholeFile(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+ 12.50%      1  main
+ 12.50%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+-- inclusive
+100.00%      8  <lib>
+100.00%      8  _start
+100.00%      8  main
+ 75.00%      6  readWholeFile(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+ 62.50%      5  needBytes(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char const*)
+ 50.00%      4  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)
+ 12.50%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
