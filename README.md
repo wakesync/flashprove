@@ -1,5 +1,27 @@
 # FlashProve: practical verifiable inference research
 
+## Fork status & results
+
+Research on zero-knowledge proofs of LLM inference, building on FlashProve.
+
+Every number below comes from a file on `main`; follow the evidence link for its conditions and caveats. Plain-language overview: [docs/fork/EXPLAINER.md](docs/fork/EXPLAINER.md).
+
+| Result | Status | Key number | n + conditions | Evidence |
+|---|---|---|---|---|
+| CPU verification of upstream's stored synthetic proofs | reproduced | stored exact-match and clipped-gap proofs: `YES` / `WITHIN LIMITS`, about 1.57 s each; 10 of 10 altered sets rejected in each table | one clean build at upstream `9e2bdd8f`, synthetic weights, CPU only; plus an independent review in a separate clone that added 19 negative cases | [research/reproduction/](research/reproduction/README.md) |
+| Full confined CPU suite on the repaired integration (PR #4) | measured | aggregate exit 77: 89 rows passed, 2 in part, 0 failed, 1 not run (13 GPU rows left out by design) | n = 1, 4,371 s, shared 16-CPU VM | [docs/research-evidence.md](docs/research-evidence.md) |
+| Matched upstream/fork CPU verifier baseline (PR #18) | negative | median 2.67 s upstream vs 2.68 s fork, identical binaries: no speedup | 5 alternating runs per arm, `-j 1`, one pinned CPU, shared VM | [research/performance/](research/performance/README.md) |
+| Accounting-reuse candidate, with a stage profile (PR #18 follow-up) | negative | 0.04 s median difference, inside run-to-run spread: no speedup claimed | alternating pairs, same setup as the baseline | [research/performance/followup/](research/performance/followup/README.md) |
+| One H100, upstream small synthetic example, proof checked on a separate CPU machine (PR #23) | reproduced | proof accepted (`YES`), 5 of 5 one-bit mutations rejected; proof 4,149,564 bytes; $1.19 all in | n = 1 cold run, synthetic weights, `-M 1`, one request; timings from file timestamps (±1 s) | [research/gpu/](research/gpu/README.md) |
+| Independent replication of that run (PR #26) | reproduced (agree) | `cp_prove` mean 2.35 s (SD 0.13); `cp_commit` mean 18.8 s (SD 2.2); 4 of 4 proofs accepted, 20 of 20 mutations rejected; same answer token on every run | separate rental and lane; 1 cold + 3 warm runs, n = 3 timed under `/usr/bin/time`; one machine | [research/gpu/replication-1/](research/gpu/replication-1/README.md) |
+| Verifier speedup: inline limbs for exact planning arithmetic (PR #27) | measured | complete stored-proof verification 15 to 18% faster across two independent measurements (author 2.610 to 2.145 s median, -17.8%, confirmed -18.0% on the final source; reviewer -15.4%); verdicts and output byte-identical on 9 cases | single thread (`-j 1`), one pinned CPU, 12 and 10 alternating rounds, non-overlapping ranges; at `-j 4` the gain is -10.1% wall | [research/performance/real/](research/performance/real/README.md); reviewer figure in the commit message of `29907e5f` |
+| KDA micro-slice: signed staged-floor fixed-point recurrence (PR #19) | measured | 11,840-byte proof, 56 product gates; 50 hostile proofs rejected; fixed point differs from scalar FP32 by up to 1.73 (numerical equivalence fails, as expected) | one token, one head, dimension 1, synthetic inputs, no weights, CPU | [research/operators/glm_kda_fixedpoint/](research/operators/glm_kda_fixedpoint/README.md) |
+| Adoption of top-k and operator PRs #14 to #16 onto the repaired integration (PR #20) | in progress (held) | targeted gaps closed: clang build exit 0, weight_sums 0 skipped, integrations unit 1961 passed / 3 skipped; not approved for adoption | CPU only, confined runner | [research/integration-adoption/](research/integration-adoption/README.md) |
+| Host-path redaction of published evidence (PR #21) | done (hygiene) | no result number; adds `scripts/check-no-host-paths.sh` | applies to all evidence trees | [scripts/check-no-host-paths.sh](scripts/check-no-host-paths.sh) |
+| Real-model port feasibility, numerical fidelity, clipped-gap and Fiat-Shamir studies | in progress | none yet | open PRs and lanes, not merged | [docs/research-roadmap.md](docs/research-roadmap.md) |
+
+What this table does not show: no full-size (Maverick) run, no real model weights on GPU, no serving, no TEE, no production use, and no comparison with other verifiable-inference systems. The GPU rows are upstream's small example on made-up weights.
+
 **This is the active [wakesync/flashprove](https://github.com/wakesync/flashprove) research fork of [Anthropic's FlashProve](https://github.com/anthropics/FlashProve).** We are investigating reproducible, useful verifiable inference: explicit proof coverage, lower measured overhead, characterized numerical fidelity and safe client/request integration.
 
 The original v0.16.0 artifact is preserved below with its attribution, instructions, license and theorem boundaries. Its "not maintained, not accepting contributions" notice describes upstream, not this fork. Research contributions here should target a [tracked evidence gate](docs/research-roadmap.md#priorities-workstreams-and-decision-gates), not assume arbitrary model or production support.
@@ -8,7 +30,7 @@ The original v0.16.0 artifact is preserved below with its attribution, instructi
 
 - **Reproduced, narrow scope:** independent CPU verification of stored synthetic proofs, a 41-call mutation audit and toy proof-library checks in [PR #3](https://github.com/wakesync/flashprove/pull/3), building on [PR #1](https://github.com/wakesync/flashprove/pull/1). This is not GPU inference or checkpoint fidelity validation.
 - **Provisional:** fail-closed extension admission in [PR #2](https://github.com/wakesync/flashprove/pull/2), focused integration repairs in [PR #4](https://github.com/wakesync/flashprove/pull/4), and narrowly independently reviewed public-coordinate/shared-wire experiments. Open PRs are not merged functionality; full CPU closure and public operator reproduction remain gated.
-- **Planned or unvalidated:** fresh GPU replication, measured proving/serving cost, integer-versus-floating-point fidelity, request-bound receipts, longer contexts and conditional architecture ports. No completed GPU validation, real TEE attestation, GLM/DeepSeek support or production readiness is claimed.
+- **Planned or unvalidated:** full-size GPU replication (only upstream's small synthetic example has been run on a GPU, see the table above), measured proving/serving cost at full size, integer-versus-floating-point fidelity, request-bound receipts, longer contexts and conditional architecture ports. No full-size GPU validation, real TEE attestation, GLM/DeepSeek support or production readiness is claimed.
 
 **Priority order:** P0 reproducibility and soundness/coverage; then measured overhead and cost, with fidelity and request integration in parallel; long-context scaling after profiling; model ports only after operator feasibility. Signatures authenticate messages, TEE evidence authenticates measured execution under hardware trust, and cryptographic proofs establish a specified relation. They are not interchangeable.
 
