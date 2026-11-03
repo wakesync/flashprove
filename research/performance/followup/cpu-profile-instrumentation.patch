@@ -1,0 +1,261 @@
+diff --git a/blocks/frame/configure.h b/blocks/frame/configure.h
+index f25e4f26..18a34889 100644
+--- a/blocks/frame/configure.h
++++ b/blocks/frame/configure.h
+@@ -164,6 +164,7 @@ class Configured {
+ // text for a log; every number in it follows from the files if the caller's function keeps to them
+ // (`Shapes`: not checked).
+ inline Configured configure(const std::vector<std::string> &files, ShapesOf shapes) {
++  ResearchCpuLap rp("configure");
+   Configured c;
+   Parameters par;
+   if (files.empty()) return c.refused_ = "no parameter file", c;
+@@ -171,9 +172,12 @@ inline Configured configure(const std::vector<std::string> &files, ShapesOf shap
+   Shapes s = shapes(files, par);
+   if (!(c.refused_ = s.refused).empty()) return c;
+   const Subproofs &sub = s.sub;  // its functions are called here and stored nowhere
++  rp.lap("parse_shapes");
+   c.sized_ = sized(par, sub);
+   if (!(c.refused_ = c.sized_.refused).empty()) return c;
++  rp.lap("sized");
+   c.proof_ = file_proof(c.sized_, sub, false), c.key_ = file_key(c.sized_, false), c.entry_ = file_entry(c.sized_, false);
++  rp.lap("file_plans");
+   int file = 0;
+   for (const FilePlan *f : {&c.proof_, &c.key_, &c.entry_}) {
+     for (const ChainPlan &chain : f->chains) {
+@@ -186,6 +190,7 @@ inline Configured configure(const std::vector<std::string> &files, ShapesOf shap
+     const Accounting a = account(whole);
+     c.work_[file++] = Configured::Work{a.needs_work, a.lists.bits, a.lists.work};
+   }
++  rp.lap("accounting");
+   /* Committer, prover and verifier alike reject files that miss a condition for hiding, before a
+      table is made. A verifier cannot see a missed condition in a proof; but here anyone who relies
+      on a key file learns that its committer's files are outside the conditions under which hiding
+@@ -196,6 +201,7 @@ inline Configured configure(const std::vector<std::string> &files, ShapesOf shap
+     if (!missed.empty()) return c.refused_ = "hiding: " + missed, c;
+     c.range_checks_ = s.range_checks;
+   }
++  rp.lap("hiding");
+   RequestFixed &f = c.fixed_;
+   f.configuration = configuration_digest(files);
+   if (const char *fault = key_fault(key_fixed(c.sized_, f.configuration))) return c.refused_ = std::string("key: ") + fault, c;  // rejected here, before a table is committed, with the reason from `key_fault`
+@@ -209,6 +215,7 @@ inline Configured configure(const std::vector<std::string> &files, ShapesOf shap
+   for (size_t l = 0; l < f.shape.link.size(); ++l)
+     if (f.shape.link[l].plain != (l + 1 == f.shape.link.size() ? 1u : 0u)) return c.refused_ = "the reply is one plain scalar of the last link, and no other link has one", c;
+   if (const char *fault = req_layout_fault(f.codes, f.shape, f.layout)) return c.refused_ = fault, c;
++  rp.lap("fixed");
+   return c;
+ }
+ 
+diff --git a/blocks/frame/files.h b/blocks/frame/files.h
+index adb741cf..82fbdad9 100644
+--- a/blocks/frame/files.h
++++ b/blocks/frame/files.h
+@@ -179,11 +179,21 @@ struct Sized {
+   LinkSized link;
+   std::string refused;
+ };
++#include <time.h>
++#include <cstdio>
++struct ResearchCpuLap {
++  const char *scope; double last;
++  static double now() { timespec t{}; if(clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t)) std::abort(); return t.tv_sec+t.tv_nsec*1e-9; }
++  explicit ResearchCpuLap(const char *s): scope(s), last(now()) {}
++  void lap(const char *name) { double t=now(); fprintf(stderr,"cpu-detail scope=%s region=%s seconds=%.9f\n",scope,name,t-last); last=now(); }
++};
+ inline Sized sized(const Parameters &par, const Subproofs &sub) {
++  ResearchCpuLap rp("sized");
+   Sized z;
+   z.par = par;
+   const FrameShape shape = frame_shape_of(par, sub);
+   z.d = derive(par, shape);
++  rp.lap("derive");
+   if (!(z.refused = z.d.refused).empty()) return z;
+   const Setting &s = z.d.set;
+   z.request = sub.request;
+@@ -199,6 +209,7 @@ inline Sized sized(const Parameters &par, const Subproofs &sub) {
+     if (!lines.input_mask_rows) return z.refused = "own: no number of mask rows holds the entries that a request's rows on the table take", z;
+     z.batch = lin_sized(s, lines, z.d.table, z.proof_codes);
+   }
++  rp.lap("batch");
+   if (!(z.refused = z.batch.refused).empty()) return z;
+   /* The index-mask message is sent in the request's first prover message. It is opened at the
+      positions of the second chain's proximity test (`iopp` in identifiers) and of no segment's, so
+@@ -223,7 +234,9 @@ inline Sized sized(const Parameters &par, const Subproofs &sub) {
+     z.ranges = wf_sized(s, of_the_ranges, z.key_codes);
+     if (!(z.refused = z.ranges.refused).empty()) return z;
+   }
++  rp.lap("once_ranges");
+   z.link = link_sized(s, link_lines(par), z.d.table, z.entry_codes);
++  rp.lap("link");
+   z.refused = z.link.refused;
+   return z;
+ }
+diff --git a/verifier/src/cp_verify.cpp b/verifier/src/cp_verify.cpp
+index 18de720d..1a15560d 100644
+--- a/verifier/src/cp_verify.cpp
++++ b/verifier/src/cp_verify.cpp
+@@ -33,6 +33,7 @@
+ // request's proof is about), `entry` a leaf file, `refuse` reject, `covered` a position t with
+ // r <= t < e. "result:" has no plain function of the request or y (see statedW); r and e are on
+ // "covered:" and "result-v1". No environment variable is read.
++#include <time.h>
+ #ifndef VF_SOURCE_DIGEST
+ #error "VF_SOURCE_DIGEST, the source digest, is not defined: the build script computes it"
+ #endif
+@@ -1280,6 +1281,10 @@ static int runStage(const StageInputs &in) {
+   const double minBits = in.asked;
+   // A run that requests fewer bits than BAR makes every test and ends NOT-A-VERIFICATION at best.
+   const bool belowBar = askedBelowBar(minBits);
++  // Research-only process CPU laps, excluding competing children.
++  auto cpuSeconds = []() { struct timespec t{}; if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t)) abort(); return t.tv_sec + t.tv_nsec * 1e-9; };
++  double profileLast = cpuSeconds();
++  auto profileLap = [&](const char *name) { double t = cpuSeconds(); fprintf(stderr, "cpu-profile stage=%d region=%s seconds=%.9f\n", in.oneTime, name, t-profileLast); profileLast = cpuSeconds(); };
+   double t00 = now(), tl = t00;
+   auto lap = [&]() {
+     double n = now(), r = n - tl;
+@@ -1317,6 +1322,7 @@ static int runStage(const StageInputs &in) {
+     const size_t i = (size_t)(at - st.data());
+     for (size_t j = 0; j < k; j++) layW(i + j, 0);
+   };
++  profileLap("startup");
+   polPrescan(PS, polB);
+   {
+     if (!so.hl) refuse("policy-name-lt");
+@@ -1356,6 +1362,7 @@ static int runStage(const StageInputs &in) {
+   const u64 Pf = y.Pf;
+   const int lt = (int)h.lt, ll = (int)h.ll, lPf = y.lPf, lfe = y.lfe, lPd = y.lPd, ls = y.ls, la = (int)h.la,
+             ldh = y.ldh;
++  profileLap("policy_scan_layout");
+   // KL: the words of KL.bin, the scale file. Format: docs/format/FORMAT.md,
+   // "13.4 What every stage does first: the public files", step 2.
+   const u64 KW_ = 13; // words per layer record
+@@ -1585,6 +1592,7 @@ static int runStage(const StageInputs &in) {
+     // layout has no unit of kind 12 or 13, the test has nothing to check.
+     tokenFactorUnits(wsLay);
+   }
++  profileLap("shape_bounds_weights_layout");
+   // A theta0 of zero is rejected as "shape-theta0" before any RoPE table
+   // entry is computed: pow(0, -x) is infinite, 0 times infinity is not a
+   // number, and the cast of that value to an integer is undefined.
+@@ -1608,6 +1616,7 @@ static int runStage(const StageInputs &in) {
+     ownW(h.hRope, hh);
+     tblHeld(2, hh, "table-digest-rope");
+   }
++  profileLap("rope_table");
+   // tails[g]: the matrices in layer sub-proof g's range check, in the order that the format fixes.
+   vector<Tail> tails(NGr);
+   for (u64 g = 0; g < NGr; g++) {
+@@ -1892,6 +1901,7 @@ static int runStage(const StageInputs &in) {
+       if (c.c.kappa != 5) refuse("hid-planes-" + c.c.name);
+   }
+ 
++  profileLap("layer_head_tables");
+   // The attention sub-proofs A_g.
+   vector<AFork> AF(NGr);
+   vector<AttentionSubProof> AH2(NGr);
+@@ -2010,6 +2020,7 @@ static int runStage(const StageInputs &in) {
+       tblHeld(3, hh, "table-digest-exp");
+     }
+   }
++  profileLap("attention_plans");
+   // The evaluation tables a layer sub-proof commits to (its vector U3: vf_smallness_test_members.inc), in order: for
+   // each matrix, the points where it is read. readsZ(), readsR(): a lookup segment's reads at z, r.
+   // Letters: f = af, d = ad, r = ar, q = qa, Q = a short table of qa_g, i = xb_g, o = xb_(g+1).
+@@ -2091,8 +2102,11 @@ static int runStage(const StageInputs &in) {
+       WPE * (rdAF.size() * GSaf + rdQA.size() * GSqa + (rdXI.size() + rdXO.size()) * GSxb + rdAD.size() * y.filled[1] +
+              rdAR.size() * y.filled[2] + rdQS.size() * y.filled[3] + 3 * y.kbm);
+ 
++  profileLap("evaluation_reads");
+ #include "vf_layers_plan.inc"
++  profileLap("layer_plans");
+ #include "vf_output_head_plan.inc"
++  profileLap("head_plans");
+   // Layer sub-proof G_g commits to an array PX_i (a "tree") for each border matrix, one that
+   // another sub-proof reads. Each has one reader, whose placement record (plFor) is compared once
+   // with the owner's (plOwn): the three counts must be 2 NGr, also under -plan.
+@@ -2187,10 +2201,12 @@ static int runStage(const StageInputs &in) {
+   // buildLinksH() (vf_segments.inc) builds the request's segments, one per sub-proof. It returns
+   // false if the call only asked for the list of arrays.
+   std::function<int()> planEndH; // the last output of a -plan call and its exit status
++  profileLap("plan_validation");
+   if (!buildLinksH()) {
+     printf("PLAN ONLY: no proof was checked\n");
+     return 4;
+   }
++  profileLap("build_links_tail");
+   const blk::Parameters &parH = confH->parameters(); // as parsed for the plans (not PS.frame)
+   // acctOfH(), below, compares one file plan's accounting with the requested bits. oneTime: a key
+   // or leaf file.
+@@ -2228,6 +2244,7 @@ static int runStage(const StageInputs &in) {
+   }
+   /* ---- The envelope (`SealedCallInputs`) is opened: key and leaf file, request, y, proof. So far only
+      the configuration files and the options outside it were read, and all plans are made. ---- */
++  profileLap("accounting_setup");
+   const CallInputs &ask = in.sealed->open(*confH);
+   // The anchor and the leaf table, each read from its file's first bytes without the proofs that
+   // follow. The stages leaf and request work on such tables, so their checkers say at best "yes if
+@@ -2271,6 +2288,7 @@ static int runStage(const StageInputs &in) {
+     if (!planOnly || !ask.keyB || (isKey ? ask.entryB != nullptr : !ask.entryB)) refuse("internal-cp-cut");
+     acctOfH(isKey ? confH->key() : confH->entry(), isKey ? "a key" : "an entry", isKey ? "key" : "leaf", true);
+     const char *why = nullptr, *place = nullptr; // place: which chain (reasons recur); only printed
++  profileLap("one_time_form_accounting");
+     bool passed = false, withWork = false;
+     if (isKey) {
+       blk::Reader file((const blk::u8 *)ask.keyB->data(), ask.keyB->size());
+@@ -2283,6 +2301,7 @@ static int runStage(const StageInputs &in) {
+       const blk::IfTested verdict = blk::check_entry_if_tested(*confH, first, file, why, nullptr, &place);
+       passed = verdict != blk::IfTested::NO, withWork = verdict == blk::IfTested::YES_WITH_WORK_IF_THE_TABLE_IS_TESTED;
+     }
++  profileLap("one_time_verification");
+     if (!passed) {
+       printf("%s: %s%s%s%s\n", isKey ? "key" : "entry", why ? why : "refused", place ? " (" : "", place ? place : "", place ? ")" : "");
+       refuse(isKey ? "key-refused" : "entry-refused");
+@@ -2362,6 +2381,7 @@ static int runStage(const StageInputs &in) {
+   // their own.
+   acctNote = blk::account(blk::merged(confH->sized().d.set, {confH->key(), confH->entry(), confH->proof()}));
+ 
++  profileLap("request_form_accounting");
+   // The conditions of the standard parameter form; `Served` (vf_common.h) explains each. Three
+   // cannot fail here, since such inputs are rejected earlier; they stay to keep the list complete:
+   // toksrc not 1 ("statement-required"), no layout file ("plan-layout"), S >= 32 ("af-policy-wd").
+@@ -2477,6 +2497,7 @@ static int runStage(const StageInputs &in) {
+     const blk::E givenH = blk::E::from(blk::from_u64(so.y));
+     const blk::LinksCheck linksH = runLinksH;
+     const double tProof = now();
++  profileLap("request_metadata");
+     if (!quiet) printf("seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) %.3f\n", tProof - t00);
+     const blk::IfTested verdict = blk::check_proof_if_tested(*confH, tableH, ask.entry, std::vector<blk::u8>(requestH.begin(), requestH.end()), std::vector<blk::u8>(fileWordsH.begin(), fileWordsH.end()), givenH, fileH, linksH, nullptr, why, &factsH);
+     if (verdict == blk::IfTested::NO) {
+@@ -2484,6 +2505,7 @@ static int runStage(const StageInputs &in) {
+       refuse(why && !strcmp(why, "the proof is about another reply") ? "reply-differs" : "proof-refused");
+     }
+     workHeldH(verdict == blk::IfTested::YES_WITH_WORK_IF_THE_TABLE_IS_TESTED);
++  profileLap("request_verification");
+     if (!quiet)
+       printf("seconds: the links with their last test %.3f | behind them (the rows on the table, the place, the shared chain, the second chain) %.3f\n", linksEndH - tProof, now() - linksEndH);
+   }
+diff --git a/verifier/src/vf_segments.inc b/verifier/src/vf_segments.inc
+index 172caac8..739ce49f 100644
+--- a/verifier/src/vf_segments.inc
++++ b/verifier/src/vf_segments.inc
+@@ -194,6 +194,7 @@ auto buildLinksH = [&]() -> bool {
+   static_assert(WEIGHT_WIDTH_BITS == blk::WF_WEIGHT_BITS && WEIGHT_BOUND == 1u << (blk::WF_WEIGHT_BITS - 1) && WS_SECOND_DIGIT == blk::WF_SECOND_DIGIT && blk::WF_BYTE_BITS == 8,
+                 "a weight's width in the request's conditions is not the width that a key proves");
+   subH.pending_rows = onTable;
++  profileLap("links_layout");
+   sizedH = blk::sized(PS.frame, subH);
+   if (!sizedH.refused.empty()) refuseWhyH("parameters-not-admitted", sizedH.refused);
+   if (const char *fault = blk::req_layout_fault(sizedH.proof_codes, sizedH.request, layoutH)) {
+@@ -245,9 +246,11 @@ auto buildLinksH = [&]() -> bool {
+     }
+   if (stageShapesMade) refuse("internal-shapes-order");
+   stageShapesMade = &made;
++  profileLap("links_sizing_validation");
+   confH.reset(new blk::Configured(blk::configure({polB, *layoutP, klBytesH}, stageShapesOf)));
+   stageShapesMade = nullptr;
+   if (!confH->refused().empty()) refuseWhyH("parameters-not-admitted", confH->refused());
++  profileLap("configure");
+   sizedH = confH->sized(); // so later code and `blk::check_proof` use one computation of the sizes
+   return true;
+ };

@@ -1,0 +1,509 @@
+{
+  "scope": "stored synthetic proof, full key+leaf+request CPU verification only",
+  "cpu": 15,
+  "threads_per_stage": 1,
+  "cache": "one warmup per binary, OS cache not flushed; no amortization",
+  "repetitions": 5,
+  "hardware": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           40 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC-Rome Processor\nCPU family:                              23\nModel:                                   49\nThread(s) per core:                      1\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nBogoMIPS:                                4890.80\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 clzero xsaveerptr wbnoinvd arat umip rdpid\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               512 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                8 MiB (16 instances)\nL3 cache:                                16 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; untrained return thunk; SMT disabled\nVulnerability Spec rstack overflow:      Mitigation; SMT disabled\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "kernel": "Linux 6.8.0-100-generic x86_64 GNU/Linux",
+  "pressure_before": {
+    "cpu": "some avg10=0.08 avg60=0.23 avg300=0.07 total=85011092646\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+    "memory": "some avg10=2.72 avg60=0.89 avg300=0.20 total=20419116829\nfull avg10=2.72 avg60=0.89 avg300=0.20 total=19051158091\n",
+    "io": "some avg10=0.00 avg60=0.21 avg300=0.28 total=197680295792\nfull avg10=0.00 avg60=0.20 avg300=0.26 total=189299515526\n"
+  },
+  "proof_bytes": 4145300,
+  "fixtures": {
+    "ID.txt": "ad3a4c1abecbae4d9f4f8640851f64796b9b1c595b40ea566d797f25ef2e7ff1",
+    "README.md": "1d61a46f28e8b22ab2730eb255440b42925e60e20b810d23dbdd833aee5b0de7",
+    "SHA256SUMS": "da8f5562eaa27e177b3b8aa39366d913befdfdc3114786907750ed5c0c18ecea",
+    "config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+    "example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+    "example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+    "ivk/key.bin": "123dc39e8947fd3ba838d7a1a35d587c2f0e1707d1bca9b6ed551b52bf0c2e09",
+    "ivk/leaf/0.bin": "c9484f50fedfaf4e28ec9d1b5d19c3cd5e97bf4582511da49f9eb5693f10e1e0"
+  },
+  "sources": {
+    "upstream": {
+      "sha": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+      "dirty": "",
+      "binary_sha256": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394"
+    },
+    "fork": {
+      "sha": "6851f4221fd29f3184853f9a160c837552b4b2df",
+      "dirty": "M verifier/src/cp_verify.cpp\n M verifier/src/vf_segments.inc",
+      "binary_sha256": "111b740c3b19902756b03f3e57774df1ebb150d2bbe753119998435d445d72d9"
+    }
+  },
+  "rows": [
+    {
+      "wall_s": 2.65,
+      "user_s": 2.54,
+      "system_s": 0.11,
+      "max_process_rss_kib": 157616.0,
+      "major_faults": 0.0,
+      "minor_faults": 65311.0,
+      "involuntary_switches": 553.0,
+      "voluntary_switches": 14.0,
+      "label": "upstream",
+      "repetition": "warmup",
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.619 s",
+        "---- stage leaf ---- 1 thread(s), 1.561 s",
+        "---- stage request ---- 1 thread(s), 2.646 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.610",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.160 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.059",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.056 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.024",
+        "   seconds: the frame's first() 0.012 | the sub-proof's own checks 0.157 | the frame's later() 0.000 | the equation's terms made 0.010 | the frame's close() 0.063",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.055 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.064 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.033",
+        "seconds: the links' last proximity test (the frame's finish()) 0.171",
+        "seconds: the links with their last test 0.932 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.085"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=2.06 avg60=0.58 avg300=0.15 total=85011369041\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=2.22 avg60=0.86 avg300=0.20 total=20419116829\nfull avg10=2.22 avg60=0.86 avg300=0.20 total=19051158091\n",
+        "io": "some avg10=0.00 avg60=0.20 avg300=0.28 total=197680314860\nfull avg10=0.00 avg60=0.19 avg300=0.26 total=189299533734\n"
+      }
+    },
+    {
+      "wall_s": 2.6,
+      "user_s": 2.5,
+      "system_s": 0.09,
+      "max_process_rss_kib": 157908.0,
+      "major_faults": 0.0,
+      "minor_faults": 65316.0,
+      "involuntary_switches": 534.0,
+      "voluntary_switches": 15.0,
+      "label": "fork",
+      "repetition": "warmup",
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.569 s",
+        "---- stage leaf ---- 1 thread(s), 1.513 s",
+        "---- stage request ---- 1 thread(s), 2.596 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.557",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.163 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.065",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.158 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.067",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.063 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.034",
+        "seconds: the links' last proximity test (the frame's finish()) 0.173",
+        "seconds: the links with their last test 0.931 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.090"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=3.32 avg60=0.85 avg300=0.21 total=85011684878\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=1.82 avg60=0.83 avg300=0.20 total=20419116829\nfull avg10=1.82 avg60=0.83 avg300=0.20 total=19051158091\n",
+        "io": "some avg10=0.00 avg60=0.20 avg300=0.27 total=197680316751\nfull avg10=0.00 avg60=0.18 avg300=0.25 total=189299535528\n"
+      }
+    },
+    {
+      "wall_s": 2.7,
+      "user_s": 2.58,
+      "system_s": 0.12,
+      "max_process_rss_kib": 157872.0,
+      "major_faults": 0.0,
+      "minor_faults": 65316.0,
+      "involuntary_switches": 558.0,
+      "voluntary_switches": 13.0,
+      "label": "upstream",
+      "repetition": 0,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.646 s",
+        "---- stage leaf ---- 1 thread(s), 1.574 s",
+        "---- stage request ---- 1 thread(s), 2.692 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.646",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.165 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.059",
+        "   seconds: the frame's first() 0.012 | the sub-proof's own checks 0.057 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.021",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.157 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.064",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.070 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.034",
+        "seconds: the links' last proximity test (the frame's finish()) 0.174",
+        "seconds: the links with their last test 0.941 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.088"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=6.24 avg60=1.57 avg300=0.37 total=85011991064\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=1.22 avg60=0.78 avg300=0.19 total=20419116829\nfull avg10=1.22 avg60=0.78 avg300=0.19 total=19051158091\n",
+        "io": "some avg10=0.00 avg60=0.18 avg300=0.27 total=197680329882\nfull avg10=0.00 avg60=0.17 avg300=0.25 total=189299547368\n"
+      }
+    },
+    {
+      "wall_s": 2.59,
+      "user_s": 2.47,
+      "system_s": 0.11,
+      "max_process_rss_kib": 157908.0,
+      "major_faults": 0.0,
+      "minor_faults": 65325.0,
+      "involuntary_switches": 529.0,
+      "voluntary_switches": 20.0,
+      "label": "fork",
+      "repetition": 0,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.552 s",
+        "---- stage leaf ---- 1 thread(s), 1.474 s",
+        "---- stage request ---- 1 thread(s), 2.584 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.509",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.189 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.060",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.053 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.159 | the frame's later() 0.000 | the equation's terms made 0.010 | the frame's close() 0.065",
+        "   seconds: the frame's first() 0.012 | the sub-proof's own checks 0.053 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.070 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.034",
+        "seconds: the links' last proximity test (the frame's finish()) 0.177",
+        "seconds: the links with their last test 0.967 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.088"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=7.28 avg60=1.91 avg300=0.45 total=85012280824\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=1.00 avg60=0.75 avg300=0.19 total=20419116949\nfull avg10=1.00 avg60=0.75 avg300=0.19 total=19051158211\n",
+        "io": "some avg10=0.00 avg60=0.18 avg300=0.27 total=197680339330\nfull avg10=0.00 avg60=0.16 avg300=0.25 total=189299556221\n"
+      }
+    },
+    {
+      "wall_s": 2.65,
+      "user_s": 2.55,
+      "system_s": 0.1,
+      "max_process_rss_kib": 157872.0,
+      "major_faults": 0.0,
+      "minor_faults": 65328.0,
+      "involuntary_switches": 550.0,
+      "voluntary_switches": 20.0,
+      "label": "fork",
+      "repetition": 1,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.616 s",
+        "---- stage leaf ---- 1 thread(s), 1.541 s",
+        "---- stage request ---- 1 thread(s), 2.648 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.603",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.159 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.058",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.061 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.154 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.064",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.063 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.033",
+        "seconds: the links' last proximity test (the frame's finish()) 0.179",
+        "seconds: the links with their last test 0.929 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.096"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=7.41 avg60=2.11 avg300=0.50 total=85012560164\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.81 avg60=0.73 avg300=0.19 total=20419116949\nfull avg10=0.81 avg60=0.73 avg300=0.19 total=19051158211\n",
+        "io": "some avg10=0.00 avg60=0.17 avg300=0.27 total=197680348433\nfull avg10=0.00 avg60=0.16 avg300=0.25 total=189299564669\n"
+      }
+    },
+    {
+      "wall_s": 2.64,
+      "user_s": 2.54,
+      "system_s": 0.1,
+      "max_process_rss_kib": 157872.0,
+      "major_faults": 0.0,
+      "minor_faults": 65317.0,
+      "involuntary_switches": 546.0,
+      "voluntary_switches": 14.0,
+      "label": "upstream",
+      "repetition": 1,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.605 s",
+        "---- stage leaf ---- 1 thread(s), 1.547 s",
+        "---- stage request ---- 1 thread(s), 2.638 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.609",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.169 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.061",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.053 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.158 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.063",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.017",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.061 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.032",
+        "seconds: the links' last proximity test (the frame's finish()) 0.172",
+        "seconds: the links with their last test 0.921 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.092"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=8.51 avg60=2.66 avg300=0.64 total=85012831741\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.54 avg60=0.68 avg300=0.19 total=20419116949\nfull avg10=0.54 avg60=0.68 avg300=0.19 total=19051158211\n",
+        "io": "some avg10=0.00 avg60=0.16 avg300=0.26 total=197680360705\nfull avg10=0.00 avg60=0.15 avg300=0.24 total=189299576082\n"
+      }
+    },
+    {
+      "wall_s": 2.61,
+      "user_s": 2.51,
+      "system_s": 0.1,
+      "max_process_rss_kib": 157740.0,
+      "major_faults": 0.0,
+      "minor_faults": 65323.0,
+      "involuntary_switches": 536.0,
+      "voluntary_switches": 15.0,
+      "label": "upstream",
+      "repetition": 2,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.570 s",
+        "---- stage leaf ---- 1 thread(s), 1.514 s",
+        "---- stage request ---- 1 thread(s), 2.606 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.564",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.161 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.058",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.158 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.062",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.054 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.021",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.063 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.034",
+        "seconds: the links' last proximity test (the frame's finish()) 0.173",
+        "seconds: the links with their last test 0.918 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.105"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=9.32 avg60=3.00 avg300=0.72 total=85013147229\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.44 avg60=0.66 avg300=0.19 total=20419117003\nfull avg10=0.44 avg60=0.66 avg300=0.19 total=19051158264\n",
+        "io": "some avg10=0.00 avg60=0.15 avg300=0.26 total=197680371175\nfull avg10=0.00 avg60=0.14 avg300=0.24 total=189299585904\n"
+      }
+    },
+    {
+      "wall_s": 2.65,
+      "user_s": 2.52,
+      "system_s": 0.11,
+      "max_process_rss_kib": 157868.0,
+      "major_faults": 0.0,
+      "minor_faults": 65318.0,
+      "involuntary_switches": 539.0,
+      "voluntary_switches": 14.0,
+      "label": "fork",
+      "repetition": 2,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.577 s",
+        "---- stage leaf ---- 1 thread(s), 1.515 s",
+        "---- stage request ---- 1 thread(s), 2.640 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.576",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.170 | the frame's later() 0.000 | the equation's terms made 0.010 | the frame's close() 0.063",
+        "   seconds: the frame's first() 0.012 | the sub-proof's own checks 0.056 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.162 | the frame's later() 0.000 | the equation's terms made 0.012 | the frame's close() 0.073",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.060 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.020",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.065 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.032",
+        "seconds: the links' last proximity test (the frame's finish()) 0.169",
+        "seconds: the links with their last test 0.962 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.085"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=9.08 avg60=3.16 avg300=0.77 total=85013395198\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.36 avg60=0.63 avg300=0.19 total=20419117003\nfull avg10=0.36 avg60=0.63 avg300=0.19 total=19051158264\n",
+        "io": "some avg10=0.00 avg60=0.15 avg300=0.26 total=197680372946\nfull avg10=0.00 avg60=0.14 avg300=0.24 total=189299587613\n"
+      }
+    },
+    {
+      "wall_s": 2.71,
+      "user_s": 2.59,
+      "system_s": 0.11,
+      "max_process_rss_kib": 157652.0,
+      "major_faults": 0.0,
+      "minor_faults": 65308.0,
+      "involuntary_switches": 556.0,
+      "voluntary_switches": 15.0,
+      "label": "fork",
+      "repetition": 3,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.646 s",
+        "---- stage leaf ---- 1 thread(s), 1.592 s",
+        "---- stage request ---- 1 thread(s), 2.704 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.635",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.175 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.056",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.052 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.157 | the frame's later() 0.000 | the equation's terms made 0.011 | the frame's close() 0.071",
+        "   seconds: the frame's first() 0.013 | the sub-proof's own checks 0.053 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.067 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.033",
+        "seconds: the links' last proximity test (the frame's finish()) 0.185",
+        "seconds: the links with their last test 0.959 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.090"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=8.97 avg60=3.51 avg300=0.88 total=85013665544\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.24 avg60=0.59 avg300=0.18 total=20419117003\nfull avg10=0.24 avg60=0.59 avg300=0.18 total=19051158264\n",
+        "io": "some avg10=0.00 avg60=0.14 avg300=0.25 total=197680391271\nfull avg10=0.00 avg60=0.13 avg300=0.23 total=189299604586\n"
+      }
+    },
+    {
+      "wall_s": 2.62,
+      "user_s": 2.51,
+      "system_s": 0.11,
+      "max_process_rss_kib": 157872.0,
+      "major_faults": 0.0,
+      "minor_faults": 65315.0,
+      "involuntary_switches": 537.0,
+      "voluntary_switches": 15.0,
+      "label": "upstream",
+      "repetition": 3,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.572 s",
+        "---- stage leaf ---- 1 thread(s), 1.511 s",
+        "---- stage request ---- 1 thread(s), 2.612 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.561",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.175 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.056",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.055 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.022",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.157 | the frame's later() 0.000 | the equation's terms made 0.008 | the frame's close() 0.066",
+        "   seconds: the frame's first() 0.012 | the sub-proof's own checks 0.061 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.017",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.061 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.032",
+        "seconds: the links' last proximity test (the frame's finish()) 0.176",
+        "seconds: the links with their last test 0.944 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.086"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=9.34 avg60=3.75 avg300=0.95 total=85013920743\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.20 avg60=0.57 avg300=0.18 total=20419117003\nfull avg10=0.20 avg60=0.57 avg300=0.18 total=19051158264\n",
+        "io": "some avg10=0.00 avg60=0.13 avg300=0.25 total=197680391467\nfull avg10=0.00 avg60=0.12 avg300=0.23 total=189299604776\n"
+      }
+    },
+    {
+      "wall_s": 2.54,
+      "user_s": 2.44,
+      "system_s": 0.1,
+      "max_process_rss_kib": 157740.0,
+      "major_faults": 0.0,
+      "minor_faults": 65315.0,
+      "involuntary_switches": 521.0,
+      "voluntary_switches": 15.0,
+      "label": "upstream",
+      "repetition": 4,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.524 s",
+        "---- stage leaf ---- 1 thread(s), 1.469 s",
+        "---- stage request ---- 1 thread(s), 2.537 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.519",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.161 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.059",
+        "   seconds: the frame's first() 0.010 | the sub-proof's own checks 0.053 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.020",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.155 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.064",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.053 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.019",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.062 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.032",
+        "seconds: the links' last proximity test (the frame's finish()) 0.171",
+        "seconds: the links with their last test 0.913 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.088"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=8.91 avg60=3.86 avg300=0.99 total=85014169647\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.16 avg60=0.55 avg300=0.18 total=20419117670\nfull avg10=0.16 avg60=0.55 avg300=0.18 total=19051158925\n",
+        "io": "some avg10=0.00 avg60=0.13 avg300=0.25 total=197680408275\nfull avg10=0.00 avg60=0.12 avg300=0.23 total=189299619372\n"
+      }
+    },
+    {
+      "wall_s": 2.58,
+      "user_s": 2.47,
+      "system_s": 0.1,
+      "max_process_rss_kib": 157872.0,
+      "major_faults": 0.0,
+      "minor_faults": 65321.0,
+      "involuntary_switches": 519.0,
+      "voluntary_switches": 15.0,
+      "label": "fork",
+      "repetition": 4,
+      "exit": 0,
+      "last_line": "YES",
+      "phase_lines": [
+        "---- stage key ---- 1 thread(s), 1.533 s",
+        "---- stage leaf ---- 1 thread(s), 1.482 s",
+        "---- stage request ---- 1 thread(s), 2.574 s",
+        "seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) 1.527",
+        "   seconds: the frame's first() 0.000 | the sub-proof's own checks 0.162 | the frame's later() 0.000 | the equation's terms made 0.013 | the frame's close() 0.062",
+        "   seconds: the frame's first() 0.011 | the sub-proof's own checks 0.057 | the frame's later() 0.000 | the equation's terms made 0.003 | the frame's close() 0.022",
+        "   seconds: the frame's first() 0.008 | the sub-proof's own checks 0.153 | the frame's later() 0.000 | the equation's terms made 0.009 | the frame's close() 0.065",
+        "   seconds: the frame's first() 0.012 | the sub-proof's own checks 0.054 | the frame's later() 0.000 | the equation's terms made 0.002 | the frame's close() 0.018",
+        "   seconds: the frame's first() 0.009 | the sub-proof's own checks 0.062 | the frame's later() 0.000 | the equation's terms made 0.004 | the frame's close() 0.035",
+        "seconds: the links' last proximity test (the frame's finish()) 0.179",
+        "seconds: the links with their last test 0.942 | behind them (the rows on the table, the place, the shared chain, the second chain) 0.087"
+      ],
+      "pressure_after": {
+        "cpu": "some avg10=9.01 avg60=4.19 avg300=1.10 total=85014416511\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.11 avg60=0.52 avg300=0.18 total=20419117670\nfull avg10=0.11 avg60=0.52 avg300=0.18 total=19051158925\n",
+        "io": "some avg10=0.00 avg60=0.12 avg300=0.25 total=197680411527\nfull avg10=0.00 avg60=0.11 avg300=0.23 total=189299622414\n"
+      }
+    },
+    {
+      "wall_s": 2.25,
+      "user_s": 2.15,
+      "system_s": 0.1,
+      "max_process_rss_kib": 139476.0,
+      "major_faults": 0.0,
+      "minor_faults": 60726.0,
+      "involuntary_switches": 539.0,
+      "voluntary_switches": 14.0,
+      "label": "upstream",
+      "repetition": "negative",
+      "exit": 1,
+      "last_line": "NO: proof-refused",
+      "phase_lines": [],
+      "pressure_after": {
+        "cpu": "some avg10=9.37 avg60=4.41 avg300=1.17 total=85014664298\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.09 avg60=0.50 avg300=0.18 total=20419117670\nfull avg10=0.09 avg60=0.50 avg300=0.18 total=19051158925\n",
+        "io": "some avg10=0.00 avg60=0.11 avg300=0.25 total=197680422003\nfull avg10=0.00 avg60=0.11 avg300=0.22 total=189299632054\n"
+      }
+    },
+    {
+      "wall_s": 2.38,
+      "user_s": 2.27,
+      "system_s": 0.11,
+      "max_process_rss_kib": 139440.0,
+      "major_faults": 0.0,
+      "minor_faults": 60726.0,
+      "involuntary_switches": 554.0,
+      "voluntary_switches": 15.0,
+      "label": "fork",
+      "repetition": "negative",
+      "exit": 1,
+      "last_line": "NO: proof-refused",
+      "phase_lines": [],
+      "pressure_after": {
+        "cpu": "some avg10=9.30 avg60=4.56 avg300=1.22 total=85014904430\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+        "memory": "some avg10=0.07 avg60=0.48 avg300=0.17 total=20419117670\nfull avg10=0.07 avg60=0.48 avg300=0.17 total=19051158925\n",
+        "io": "some avg10=0.00 avg60=0.11 avg300=0.24 total=197680428623\nfull avg10=0.00 avg60=0.10 avg300=0.22 total=189299638143\n"
+      }
+    }
+  ],
+  "limits": [
+    "Shared KVM host, no exclusive-core reservation.",
+    "GNU time maximum RSS is maximum per process, NOT simultaneous process-tree peak.",
+    "No GPU, inference, proving, queue, or network timings.",
+    "Phase timings overlap across forked children; do not add their wall times."
+  ],
+  "summary": {
+    "upstream": {
+      "wall_median_s": 2.62,
+      "wall_min_s": 2.54,
+      "wall_max_s": 2.7,
+      "wall_sample_stdev_s": 0.0576194411635518,
+      "range_over_median": 0.06106870229007639,
+      "max_process_rss_kib": [
+        157872.0,
+        157872.0,
+        157740.0,
+        157872.0,
+        157740.0
+      ]
+    },
+    "fork": {
+      "wall_median_s": 2.65,
+      "wall_min_s": 2.58,
+      "wall_max_s": 2.71,
+      "wall_sample_stdev_s": 0.052725705305856255,
+      "range_over_median": 0.04905660377358487,
+      "max_process_rss_kib": [
+        157908.0,
+        157872.0,
+        157868.0,
+        157652.0,
+        157872.0
+      ]
+    }
+  },
+  "timing_stability_screen": "PASS",
+  "pressure_after": {
+    "cpu": "some avg10=9.30 avg60=4.56 avg300=1.22 total=85014904430\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n",
+    "memory": "some avg10=0.07 avg60=0.48 avg300=0.17 total=20419117670\nfull avg10=0.07 avg60=0.48 avg300=0.17 total=19051158925\n",
+    "io": "some avg10=0.00 avg60=0.11 avg300=0.24 total=197680428623\nfull avg10=0.00 avg60=0.10 avg300=0.22 total=189299638143\n"
+  }
+}

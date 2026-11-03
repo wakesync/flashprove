@@ -1,0 +1,28 @@
+diff --git a/blocks/numbers/accounting.h b/blocks/numbers/accounting.h
+index b3f11376..6dc2d329 100644
+--- a/blocks/numbers/accounting.h
++++ b/blocks/numbers/accounting.h
+@@ -162,9 +162,12 @@ inline Accounting account(const Planned &p, int part = -1) {
+     a.planned_calls += r.count * ((r.message_bytes + p->set.chain_extra_bytes + block - 1) / block + (words > free ? (words - free + 7) / 8 : 0));
+     const Real error = p->whole_error(r, unit);
+     if (error.zero()) continue;
+-    if (!p->holds(r, unit)) a.holds = false;
++    // Data::holds(r, unit) compares this same whole_error with the target.
++    // Reuse the already computed value; retain the exact directed arithmetic.
++    const bool holds = error <= Real::two_to((long)r.work_bits - (long)p->set.target);
++    if (!holds) a.holds = false;
+     if (!(error <= Real::two_to(-(long)p->set.target))) a.needs_work = true, a.by_work += r.count;
+-    if (p->holds(r, unit) && bits_of(error) + r.work_bits < p->set.target + 0.01) {
++    if (holds && bits_of(error) + r.work_bits < p->set.target + 0.01) {
+       a.near += r.count;
+       if (r.why == ErrorKind::SMALL) a.near_small += r.count;
+       if (r.why == ErrorKind::CLOSENESS) a.near_closeness[(int)r.rests] += r.count;
+@@ -190,7 +193,7 @@ inline Accounting account(const Planned &p, int part = -1) {
+     sum_lists = Real::add(sum_lists, all, Dir::UP);
+     sum = Real::add(sum, Real::mul(all, Real::two_to(-(long)r.work_bits), Dir::UP), Dir::UP);
+     AccountGroup g;
+-    g.bits = bits_of(error), g.work = r.work_bits, g.rounds = r.count, g.holds = p->holds(r, unit), g.list = r.why == ErrorKind::QUERY;
++    g.bits = bits_of(error), g.work = r.work_bits, g.rounds = r.count, g.holds = holds, g.list = r.why == ErrorKind::QUERY;
+     g.name = digits_as_hash(r.where.empty() ? r.name : r.name + " (" + r.where + ")");
+     a.groups.push_back(g);
+   }
