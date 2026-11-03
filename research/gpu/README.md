@@ -19,7 +19,7 @@
 | host memory | container memory limit ≈ 684 GiB |
 | disk | 40 GB container overlay |
 | host | one GPU of an 8-GPU marketplace host; the host was **unverified** in the provider's listing (no provider attestation of the machine was relied on) |
-| cost | $1.026 all-in from the provider's invoice: 0.426 GPU-hours at $2.40/h plus $0.003 storage, $0 transfer (instance lifetime about 25.5 min, including the build) |
+| cost | $1.186 all-in from the provider's final invoice (instance lifetime about 25.5 min, including the build). Correction: this row first said $1.026 (0.426 GPU-hours at $2.40/h plus $0.003 storage), read before billing had caught up; the final invoice is $1.186. |
 
 ## Results
 
