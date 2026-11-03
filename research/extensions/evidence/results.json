@@ -1,0 +1,67 @@
+{
+  "base_commit": "848815f4cdb0b6dda2b25e9cd6ec4ffb2f03777b",
+  "upstream_commit": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+  "environment": {
+    "os": "Linux",
+    "release": "6.8.0-100-generic",
+    "arch": "x86_64",
+    "python": "3.12.3",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+  },
+  "dependencies": "Python stdlib; upstream verifier build prerequisites; no installs",
+  "seed": "none: deterministic metadata/mutations and stored upstream proof; verifier randomness unchanged",
+  "commands": [
+    {
+      "argv": [
+        "bash",
+        "verifier/build.sh"
+      ],
+      "cwd": "<REPO>",
+      "exit": 0,
+      "seconds": 83.89865175634623,
+      "last_line": "THE VERIFIER IS BUILT: <REPO>/bin/cp_verify"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "research/extensions/test_harness.py"
+      ],
+      "cwd": "<REPO>",
+      "exit": 0,
+      "seconds": 5.544396121054888,
+      "last_line": "OK"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "research/extensions/harness.py",
+        "research/extensions/baseline-v1.json",
+        "--baseline"
+      ],
+      "cwd": "<REPO>",
+      "exit": 0,
+      "seconds": 2.2857250533998013,
+      "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+    }
+  ],
+  "sha256": {
+    "bin/cp_verify": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394",
+    "research/extensions/harness.py": "3a04566652504136e3d687fd02509c4fc68e029278c60a5b7cc507546d3e387e",
+    "research/extensions/test_harness.py": "250f9b1403d55c5c88c5b8ea373f2c9afb8dfd4fa5d0b19d3558c5abf10d0811",
+    "research/extensions/baseline-v1.json": "4d48098faa48fa565651cad0151cec07cc715c242f463522dca4a7b882edd6b6",
+    "research/extensions/record.py": "cbe53fd1903daa3234c7aa80044f283a2d466718cfa6f7fb7eec3fd49b5933e1",
+    "integrations/check_proof.py": "a38cc98d5bb59e53df96af30406027cca670a2ee72bc7688852e31fd93ca6350",
+    "docs/model.md": "31f1d0616db69fbd59a589f8a6717921da3edcf437329e7d9f67a2dc0f97941f",
+    "lean/IntegerModel/Model.lean": "200e5c0a24e4207ef77de0c2294030553a98a732fec32416e4ad58bdba8a4144",
+    "lean/THEOREM.md": "acc8e37453fb786769a1bd15664263b30df8ff175980a2d2fbb03553060577ea",
+    "examples/accepted-proof/example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+    "examples/accepted-proof/example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+    "examples/accepted-proof/example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+    "examples/accepted-proof/config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "examples/accepted-proof/config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "examples/accepted-proof/config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "research/extensions/evidence/2.log": "a66c8a39fdf1a641b971848b84b021f1c0ff27fe6b548a801ec6edab6e8b06ae",
+    "research/extensions/evidence/0.log": "c4a81d7511e942d67af4c16d6e7e392fff71bf6ed210470a475096a265e4346f",
+    "research/extensions/evidence/1.log": "679c311f2d6a7de14f33ec214944521b2cf8600dcf507a3fb5214bf09debfabc"
+  }
+}
