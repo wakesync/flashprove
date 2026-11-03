@@ -1,0 +1,2 @@
+hc_forest_attention_test: 8 sets, 89 trees, 5 refusals: all tests passed
+hc_parts_test.sh: hc_forest_attention_test: all as expected; the output is in <WORK>/verifier.forest_attention/w/play/hc_forest_attention_test.txt

@@ -1,0 +1,36 @@
+the record: 256 stored answers of 24 bytes: bytes 40 to 6183 of key.bin (1096408 bytes) and of leaf/0.bin (536952 bytes); the proof: 4145300 bytes
+as expected     the two records: 0 answers are the same in both files, 0 are zero; the two roots differ
+as expected     the honest set, the whole call: status 0: YES
+as expected     its line result-v1 (1 such line(s)): the ID is the call's; status=0 bits=128 work=32 work-rounds=38 record=1
+as expected     the honest set, the whole call with -no-proof-of-work: status 14: NOT-A-VERIFICATION
+as expected     the unaltered copy has the honest set's bytes
+as expected     the unaltered copy, the whole call: status 0: YES
+as expected     the honest set, the part-call -key: status 3: PART PASSED: key
+as expected     the honest set, the part-call -leaf: status 3: PART PASSED: leaf
+as expected     the unaltered copy, the part-call -key: status 3: PART PASSED: key
+as expected     the unaltered copy, the part-call -leaf: status 3: PART PASSED: leaf
+as expected     whole.key-first-answer (key.bin: bit 0 of byte 40): status 1: NO: model-statement
+as expected     whole.key-last-answer (key.bin: bit 0 of byte 6183): status 1: NO: model-statement
+as expected     whole.leaf-first-answer (leaf/0.bin: bit 0 of byte 40): status 1: NO: entry-refused
+as expected     whole.leaf-last-answer (leaf/0.bin: bit 0 of byte 6183): status 1: NO: entry-refused
+as expected     whole.records-exchanged (key.bin: the other file's record; leaf/0.bin: the other file's record): status 1: NO: model-statement
+as expected     key.key-first-answer (key.bin: bit 0 of byte 40): status 1: NO: key-refused
+as expected     key.key-last-answer (key.bin: bit 0 of byte 6183): status 1: NO: key-refused
+as expected     key.records-exchanged (key.bin: the other file's record): status 1: NO: key-refused
+as expected     leaf.leaf-first-answer (leaf/0.bin: bit 0 of byte 40): status 1: NO: entry-refused
+as expected     leaf.leaf-last-answer (leaf/0.bin: bit 0 of byte 6183): status 1: NO: entry-refused
+as expected     leaf.records-exchanged (leaf/0.bin: the other file's record): status 1: NO: entry-refused
+as expected     whole.leaf-with-the-key-files-record (leaf/0.bin: the other file's record): status 1: NO: entry-refused
+as expected     whole.key-root (key.bin: bit 0 of byte 8): status 1: NO: model-statement
+as expected     whole.key-after-the-record (key.bin: bit 0 of byte 6184): status 1: NO: key-refused
+as expected     whole.key-middle (key.bin: bit 0 of byte 551296): status 1: NO: key-refused
+as expected     whole.key-last-byte (key.bin: bit 0 of byte 1096407): status 1: NO: key-refused
+as expected     whole.leaf-root (leaf/0.bin: bit 0 of byte 8): status 1: NO: entry-refused
+as expected     whole.leaf-after-the-record (leaf/0.bin: bit 0 of byte 6184): status 1: NO: entry-refused
+as expected     whole.leaf-middle (leaf/0.bin: bit 0 of byte 271568): status 1: NO: entry-refused
+as expected     whole.leaf-last-byte (leaf/0.bin: bit 0 of byte 536951): status 1: NO: entry-refused
+as expected     whole.proof-middle (proof: bit 0 of byte 2072650): status 1: NO: proof-refused
+as expected     whole.proof-cut (proof: one byte shorter): status 1: NO: proof-refused
+as expected     whole.proof-longer (proof: one byte longer): status 1: NO: proof-refused
+as expected     the honest set's files have the same digests after all calls as before
+record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all as expected

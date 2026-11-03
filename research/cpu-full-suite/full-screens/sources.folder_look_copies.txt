@@ -1,0 +1,36 @@
+run_suite.py: the agreed text
+blocks/first_look.sh: the agreed text
+driver/spool.py: the agreed text
+examples/quickstart-gpu.sh: the agreed text
+examples/quickstart-gpu.sh: available_memory(): the agreed text
+examples/maverick/run.sh: the agreed text
+examples/maverick/run.sh: available_memory(): the agreed text
+examples/rejected-proofs/try_altered_copies.py: the agreed text
+integrations/check_proof.py: the agreed text
+integrations/spool.py: the agreed text
+integrations/vllm/integer_model/examples/try_limits.py: the agreed text
+integrations/vllm/integer_model/integer_model_vllm/example.py: the agreed text
+integrations/vllm/integer_model/tests/conftest.py: the agreed text
+prover/build.sh: the agreed text
+prover/examples/run_target_example.sh: the agreed text
+prover/examples/run_target_example.sh: available_memory(): the agreed text
+prover/tests/unit.sh: the agreed text
+scales/calibrate.py: the agreed text
+tests/new/run_new.py: the agreed text
+tests/new/second/run_honest.sh: the agreed text
+tools/accepts/accepts.sh: the agreed text
+tools/audit/audit.py: the agreed text
+tools/audit/audit_batch.sh: the agreed text
+tools/audit/audit_commitment.sh: the agreed text
+tools/audit/play.sh: the agreed text
+tools/parser/parse_files.py: the agreed text
+tools/parser/parse_files.sh: the agreed text
+toy/quick_start_test.py: the agreed text
+verifier/build.sh: the agreed text
+verifier/tests/clang_build_test.sh: the agreed text
+verifier/tests/compiler_pass_control.sh: the agreed text
+weight_sums/build.sh: the agreed text
+weight_sums/tests/run_tests.sh: the agreed text
+integrations/ask_and_check.py: imports its copy from integrations/check_proof.py
+integrations/proof_middleware.py: imports its copy from integrations/spool.py
+folder_look_copies_test.py: 33 copies of open_above(), others_can_change() and available_memory(), all unchanged

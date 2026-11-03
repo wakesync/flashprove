@@ -1,0 +1,18 @@
+ivk/key.bin: 1096408 bytes, 19 openings, 5 of them not the first of their round
+ivk/leaf/0.bin: 536952 bytes, 5 openings, 1 of them not the first of their round
+example.proof: 4145300 bytes, 35 openings, 15 of them not the first of their round
+   2 x refused by the stage key: a vertex of a tree gets two values under one root (second chain: a proximity test)
+   2 x refused by the stage key: a vertex of a tree gets two values under one root (shared chain: a proximity test)
+   8 x refused by the stage key: an opening does not lead to its root (one-time chain: the ranges)
+   6 x refused by the stage key: an opening does not lead to its root (second chain: a proximity test)
+  17 x refused by the stage key: an opening does not lead to its root (shared chain: a proximity test)
+   1 x refused by the stage key: an opening is cut short or holds a symbol that is not in canonical form (second chain: a proximity test)
+   2 x refused by the stage key: the opened columns of the table do not lead to its root (shared chain)
+   4 x refused by the stage leaf: an opening does not lead to its root (the proximity test)
+   1 x refused by the stage leaf: an opening is cut short or holds a symbol that is not in canonical form (the proximity test)
+   4 x refused by the stage leaf: the opened columns of the table do not lead to its root (before the test)
+   4 x refused by the stage request: a vertex of a tree gets two values under one root
+  63 x refused by the stage request: an opening does not lead to its root
+   1 x refused by the stage request: an opening is cut short or holds a symbol that is not in canonical form
+   2 x refused by the stage request: the opened columns of the table do not lead to its root
+openings_left_out_test.py: 117 changed sets, 117 calls: 117 refused, 0 NOT REFUSED, 0 otherwise; the unchanged set passes

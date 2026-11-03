@@ -1,0 +1,1 @@
+coins_known_host_test: passes

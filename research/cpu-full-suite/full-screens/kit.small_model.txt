@@ -1,0 +1,1 @@
+wrote 47 tensors, 38 of them committed, to <WORK>/shared/small_model

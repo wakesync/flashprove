@@ -1,0 +1,13 @@
+as expected     the thread may use CPUs 0 to 4: result 4; sched_getaffinity() called 1 time(s), sched_setaffinity() 1; 4 CPU(s) in the mask passed; lines printed: 1; files opened: 2, 0 of them by an unexpected path
+as expected     the thread may use CPUs 1, 6 and 9: result 2; sched_getaffinity() called 1 time(s), sched_setaffinity() 1; 2 CPU(s) in the mask passed; lines printed: 1; files opened: 2, 0 of them by an unexpected path
+as expected     the thread may use none of the node's CPUs: result 0; sched_getaffinity() called 1 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+as expected     sched_getaffinity() fails: result 0; sched_getaffinity() called 1 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+as expected     sched_setaffinity() fails: result 0; sched_getaffinity() called 1 time(s), sched_setaffinity() 1; 4 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+as expected     the GPU has no PCI bus ID: result 0; sched_getaffinity() called 0 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 0, 0 of them by an unexpected path
+as expected     numa_node cannot be opened: result 0; sched_getaffinity() called 0 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 1, 0 of them by an unexpected path
+as expected     numa_node says -1: result 0; sched_getaffinity() called 0 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 1, 0 of them by an unexpected path
+as expected     cpulist cannot be opened: result 0; sched_getaffinity() called 0 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+as expected     cpulist is an empty line: result 0; sched_getaffinity() called 1 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+as expected     cpulist is a letter: result 0; sched_getaffinity() called 1 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+as expected     cpulist has a letter after a range: result 0; sched_getaffinity() called 1 time(s), sched_setaffinity() 0; 0 CPU(s) in the mask passed; lines printed: 0; files opened: 2, 0 of them by an unexpected path
+numa_pin_test: 12 cases: passes

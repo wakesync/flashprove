@@ -1,0 +1,67 @@
+parsed: as expected
+by text: as expected
+the programs' list: as expected
+alarms: as expected
+dropped: as expected
+said: as expected
+in the command: as expected
+some line: as expected
+empty only: as expected
+empty share: as expected
+empty kind: as expected
+no expression: as expected
+empty list: as expected
+all left out: as expected
+no row with 3: as expected
+an accept: as expected
+not run, said why: as expected
+an accept, then a signal: as expected
+a lost status: as expected
+taken: as expected
+side by side: as expected
+the card's lock: as expected
+as root, a card's lock in /dev/shm: as expected
+a backtick lost (passes): as expected
+a backtick lost (command): as expected
+what a row leaves: as expected
+the time limit: as expected
+confined: as expected
+a work folder on shared memory: not checked here (no folder can be made in /dev/shm, or no confinement)
+a work folder on shared memory: as expected
+shared memory as a plain folder: as expected
+a HOME of its own: as expected
+a tree that cannot be written: as expected
+confined, no Landlock: as expected
+the build folder: as expected
+the GPU's places: as expected
+closed folders: as expected
+a work folder that exists: as expected
+a swapped work folder: as expected
+shared from, as copied: as expected
+shared from, its cure: as expected
+the note: as expected
+a link as the card's lock: as expected
+BUILD refused: as expected
+temporary files: as expected
+the last line says how: as expected
+a row on the GPU's work: as expected
+odd work folder names: as expected
+under a set-group-ID folder: as expected
+a loose umask: as expected
+a long row: as expected
+printed as escapes: as expected
+a folder above that does not exist: as expected
+a GPU row taken in mode cpu: as expected
+shared from, open: as expected
+shared from: as expected
+a stubborn row is killed: as expected
+a GPU row at a stop: as expected
+no GPU row after one left running: as expected
+a link laid during the look: as expected
+a failed look: as expected
+the card's lock: as expected
+the lock's folder: as expected
+two tables: as expected
+an accept, and no standard output: as expected
+bin under sudo: as expected
+run_suite_test.py: 65 checks as expected, 0 otherwise
