@@ -1,0 +1,4 @@
+work directory: <PLANNING>/wrapper-fixed-work
+the two holds on core files were made
+Program.lean was looked at
+lean_verify_test.sh: 346 calls: all as expected
