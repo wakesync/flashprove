@@ -2,6 +2,10 @@
 
 Upstream: [anthropics/FlashProve](https://github.com/anthropics/FlashProve), pinned at `9e2bdd8ff5bf9c62f18263d7dac189b0400b260c` (initial public release, 0.16.0-rc.26 commit title). This is an independent fork's reproduction, not an upstream endorsement. Upstream sources, LICENSE, NOTICE and third-party notices are unchanged.
 
+## Independent review
+
+[The independent review](REVIEW.md) reproduces this PR in a separate clone, audits the meaning of every original negative case, adds 19 negative cases, and retains full per-call logs, source/binary/proof hashes and exact commands. The original evidence below is unchanged. Fresh receipts are in `independent-original/`, `independent-hardened/`, `audit-final/` and `RECEIPTS.json`; `audit-probe/` retains exploratory expected-reason mismatches. Verify the new evidence with `sha256sum -c research/reproduction/REVIEW-SHA256SUMS` from the repository root.
+
 ## Results
 
 All selected checks completed. These are **synthetic examples**, not real model inference or a reproduction of the H100 throughput claim.
