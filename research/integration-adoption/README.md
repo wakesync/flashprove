@@ -12,7 +12,7 @@ This isolated branch starts at PR4 `133da749937115883c95edfc4b6e372c16209449` an
 4. PR16 `8fca2c4b9ffb5d5180df51095d5f52a33df4a207`.
 
 Resulting implementation head: `baa774321db94e4afc957e33a78af31ee07f69a0`.
-`research/operators` is byte-identical to PR16. SUITE.md, integrations, tools, verifier and blocks are byte-identical to PR4. Original owners' branches and PR bases were not rewritten or retargeted. This is an alternative consolidated adoption candidate, not permission to merge twice. The coordinator should choose this route or an explicitly reviewed restacking route, then reconcile original PR14/15/16. Current PR targets repaired PR4, not main. After PR4 is approved and lands, reconcile main's separately merged documentation and review the final exact head again. Keep synthetic top-k constraint satisfaction distinct from the shared product-oracle and KDA algebra milestones.
+`research/operators` is byte-identical to PR16. SUITE.md, integrations, tools, verifier and blocks are byte-identical to PR4. Original owners' branches and PR bases were not rewritten or retargeted. This is an alternative consolidated adoption candidate, not permission to merge twice. The coordinator should choose this route or an explicitly reviewed restacking route, then reconcile original PR14/15/16. Current PR targets repaired PR4, not main. Current main at `4c0ea496` is now reconciled by local integration commit `732fa9a1`, with no operator or repair-source changes. After PR4 is approved and lands, retarget this PR to main and check its resulting diff; review the final exact head before landing. Keep synthetic top-k constraint satisfaction distinct from the shared product-oracle and KDA algebra milestones.
 
 ## Targeted PR4 gap closure
 
@@ -46,7 +46,13 @@ Independent review must cover the new integrated exact head, top-k prerequisite 
 
 At implementation head `baa774321db94e4afc957e33a78af31ee07f69a0`, the confined follow-up completed all 17 commands with their expected status: five Python top-k tests, four C++ builds and four honest/adversarial test binaries, plus eight invalid-affine-constructor calls with expected SIGABRT (-6), with core files disabled. Public binding: 7776-byte proof and three hostile proofs rejected. Shared wires: 7936-byte proof and two hostile edge proofs rejected. Affine rows: 7744-byte proof and two affine-only hostile proofs rejected. KDA algebra: 8144-byte proof and three hostile proofs rejected. Detailed mutation/domain/truncation counts are retained in each log. This is execution evidence, not independent review or broader soundness approval.
 
-During this work PR17's ledger correction landed on main (`4c0ea496`), and the separate real-model owner opened PR19 at `aeebf5ffeea8fbf0b048a156aad3c298ad2b02e1` on PR16. Neither is silently included in this bounded adoption candidate; PR19 needs its own review/adoption decision. Main documentation reconciliation remains a coordinator step after PR4's HOLD is resolved.
+During this work PR17's ledger correction landed on main (`4c0ea496`), and the separate real-model owner opened PR19 at `aeebf5ffeea8fbf0b048a156aad3c298ad2b02e1` on PR16. Neither is silently included in this bounded adoption candidate; PR19 needs its own review/adoption decision. Main documentation was subsequently reconciled in `732fa9a1`; no new suite is needed for that documentation-only integration.
+
+## Merge decisions separated by scope
+
+The kernel/root and model-package gaps are baseline environment coverage limitations, not demonstrated defects in these isolated research operators. `blocks/`, the shared C++ dependency, is byte-identical to current main. Operator acceptance is its exact source review plus the executed focused adversarial gates above; it does not require GPU, real Lean or a fictitious full-suite exit0.
+
+This particular consolidated branch also carries the four PR4 repair files, so landing it before a scoped PR4 disposition would still land held changes. The immediate serialized route is: independent reviewer explicitly accepts or rejects PR4's now-enumerated environment exclusions for the four-file repair scope; coordinator lands PR4 normally at its exact head; independent reviewer approves this final integrated research head (existing narrow PR14/15/16 reviews plus top-k and composition review); retarget this existing PR to main and land normally. No new implementation PR or full CPU rerun is required. PR18 has its own existing evidence-only approval and can follow PR4 without inheriting unrelated operator gates. PR19 needs its own exact-head review, not an inherited approval from PR16.
 
 ## Evidence format
 
