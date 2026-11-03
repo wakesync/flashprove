@@ -1,0 +1,19 @@
+honest-1	exit=0	1.620s	YES
+honest-2	exit=0	1.549s	YES
+honest-3	exit=0	1.580s	YES
+honest-4	exit=0	1.617s	YES
+honest-5	exit=0	1.574s	YES
+honest-6	exit=0	1.598s	YES
+honest-7	exit=0	1.570s	YES
+proof-bit3-at-1000003	exit=1	0.853s	NO: proof-refused
+proof-bit0-at-size-minus-17	exit=1	1.630s	NO: proof-refused
+proof-bit7-at-9-header	exit=1	0.010s	NO: cp-entry-missing
+proof-append-zero-byte	exit=1	1.598s	NO: proof-refused
+request-append-byte	exit=1	0.006s	NO: statement-required
+swap-request-and-y	exit=1	0.006s	NO: statement-range
+proof-zero-header-32B	exit=1	0.010s	NO: cp-proof-head
+proof-zero-magic-8B	exit=1	0.010s	NO: cp-proof-head
+key-bit4-at-500000	exit=1	1.626s	NO: key-refused
+leaf-bit1-at-1234	exit=1	0.794s	NO: entry-refused
+y-token-285-not-284	exit=1	1.483s	NO: reply-differs
+originals unchanged (SHA256SUMS ok)

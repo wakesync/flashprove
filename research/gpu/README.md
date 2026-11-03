@@ -1,6 +1,6 @@
 # One H100 small synthetic proof run, upstream quickstart, independent CPU verification
 
-**Status: evidence only, draft. Not a merge request for any source change.** Nothing outside `research/gpu/` is modified. Upstream source was the pinned commit `9e2bdd8ff5bf9c62f18263d7dac189b0400b260c`, unchanged (`logs/git-status-before.txt` and `logs/git-status-after.txt` are empty).
+**Status: evidence only. One cold run of the upstream small example; no source change.** Nothing outside `research/gpu/` is modified. Upstream source was the pinned commit `9e2bdd8ff5bf9c62f18263d7dac189b0400b260c`, unchanged (`logs/git-status-before.txt` and `logs/git-status-after.txt` are empty).
 
 ## What was run
 
@@ -18,6 +18,8 @@
 | CPU | Xeon Platinum 8480+, SHA-NI present; container cgroup cpu.max ≈ 26.9 cores |
 | host memory | container memory limit ≈ 684 GiB |
 | disk | 40 GB container overlay |
+| host | one GPU of an 8-GPU marketplace host; the host was **unverified** in the provider's listing (no provider attestation of the machine was relied on) |
+| cost | $1.026 all-in from the provider's invoice: 0.426 GPU-hours at $2.40/h plus $0.003 storage, $0 transfer (instance lifetime about 25.5 min, including the build) |
 
 ## Results
 
@@ -58,12 +60,36 @@ The public bundle (`config/`, `ivk/`, `in/example.req`, `out/example.y`, `out/ex
 
 The originals were never modified; each negative case ran on its own copy. Five rejections of single, crafted mutations are a check that the verifier is wired up, not soundness testing.
 
+## Independent review replication
+
+A reviewer who did not run the GPU job rebuilt `cp_verify` from a fresh clone at the pinned commit (`verifier/build.sh`, gcc 13.3.0, 16-vCPU AMD EPYC-Rome VM, no GPU). Its sha256 is again `7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394`, byte-identical to both binaries above. `review/replicate.sh <cp_verify> <scratch dir>` reruns everything below; its output is `review/result.txt`.
+
+- Honest bundle, correct ID: exit 0, `YES` on 7 of 7 runs. Wall time per run, including process start: median 1.580 s, mean 1.587 s, SD 0.026 s, range 1.549 to 1.620 s (n = 7). A second batch of 7 earlier the same hour gave median 1.545 s, SD 0.039 s.
+- Eleven corruptions, none of them one of the five above, each on its own copy: all exit 1 with `NO`.
+
+| case | last line |
+|---|---|
+| proof, bit 3 of byte 1,000,003 flipped | NO: proof-refused |
+| proof, bit 0 of the byte 17 before the end flipped | NO: proof-refused |
+| proof header, bit 7 of byte 9 flipped | NO: cp-entry-missing |
+| proof with one zero byte appended | NO: proof-refused |
+| request with one byte appended | NO: statement-required |
+| request and answer files swapped | NO: statement-range |
+| proof's first 32 bytes zeroed | NO: cp-proof-head |
+| proof's 8-byte magic zeroed | NO: cp-proof-head |
+| key, bit 4 of byte 500,000 flipped | NO: key-refused |
+| leaf entry, bit 1 of byte 1,234 flipped | NO: entry-refused |
+| answer replaced by token 285 (honest answer 284) | NO: reply-differs |
+
+The originals matched `SHA256SUMS` before and after. As above, this checks that a verifier built independently accepts this one proof and rejects simple tampering. It is not soundness testing.
+
 ## What this does not show
 
 - Not the upstream headline numbers. This is a new run of the same small example, not a reproduction of full-size results.
 - Not the full-size config, real weights, batching, or serving.
 - The driver (615.71.09) is newer than the one upstream tested. The run passed, but that says nothing about driver compatibility in general.
 - One run, so there is no variance estimate.
+- The host was an unverified marketplace listing. Nothing here says anything about the host's integrity or about erasure of the rental's storage; the data was synthetic and the secret side is retired.
 - The commitment's secret side (`isk/`) stayed on the rental and was destroyed with it. It is not published. The commitment is retired and must not be reused.
 
 ## Files
@@ -71,4 +97,5 @@ The originals were never modified; each negative case ran on its own copy. Five 
 - `bundle/`: the public files a client needs, enough to rerun `cp_verify config ivk in/example.req out/example.y out/example.proof -id <ID>`.
 - `logs/`: quickstart transcript, build logs and records, program logs, GPU samples, timing. Host-specific paths, the GPU UUID and the PCI bus id have been replaced with placeholders (`<REPO>`, `<TOP>`, `<CUDA>`, `<HOME>`, `<pci-bus>`).
 - `local-verify/`: the independent verifier's log for each case, plus `result.json`.
+- `review/`: the review replication script and its output.
 - `SHA256SUMS`: covers every file here except itself.
