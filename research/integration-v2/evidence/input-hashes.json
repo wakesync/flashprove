@@ -1,0 +1,7 @@
+{
+  "bin/cp_verify": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394",
+  "SUITE.md": "dffc5cb171486a9a80faf6e6292217372ccf929d5198fe4ba19f44bf0596b2cd",
+  "integrations/tests/test_with_cp_verify.py": "80697eeae7db6161bb75b2fd150f7bb5e806b1936c5788f3973f618bd76cc380",
+  "tools/lean-verify/lean_verify.sh": "431bc9f8bfd9592bd124cf8bc2d02f91797b1483b907c4d9ab23c2dc97cf93aa",
+  "tools/lean-verify/lean_verify_test.sh": "745004339eefc8412fac222d28e4d7fb36765e930e18afed6a559381f5fa1a70"
+}
