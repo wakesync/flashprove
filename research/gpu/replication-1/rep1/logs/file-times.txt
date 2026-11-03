@@ -1,0 +1,23 @@
+config:
+total 36
+-rw-r--r-- 1 runner runner   464 2026-11-03T22:39:04.471958679 KL.bin
+-rw-r--r-- 1 runner runner 27038 2026-11-03T22:39:04.471958679 layout.txt
+-rw-r--r-- 1 runner runner  2479 2026-11-03T22:39:04.471958679 policy.txt
+
+in:
+total 4
+-rw-r--r-- 1 runner runner 264 2026-11-03T22:39:22.520911103 example.req
+
+ivk:
+total 1068
+-rw------- 1 runner runner 1093008 1970-01-01T00:00:00.000000000 key.bin
+drwx------ 2 runner runner      19 2026-11-03T22:39:22.346911570 leaf
+
+ivk/leaf:
+total 528
+-rw------- 1 runner runner 537504 1970-01-01T00:00:00.000000000 0.bin
+
+out:
+total 4068
+-rw------- 1 runner runner 4160516 2026-11-03T22:39:24.706000000 example.proof
+-rw------- 1 runner runner       4 2026-11-03T22:39:24.706000000 example.y

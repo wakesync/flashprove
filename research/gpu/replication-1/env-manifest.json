@@ -1,0 +1,29 @@
+{
+  "purpose": "independent replication of research/gpu (PR #23) from the merged README and runbook only",
+  "upstream_commit": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+  "upstream_tree_clean_before_and_after": true,
+  "example": "examples/quickstart-gpu.sh (unmodified) -> prover/examples/run_target_example.sh target_small_f2_roomy, then 3 more runs of run_target_example.sh target_small_f2_roomy in fresh work directories",
+  "weights": "made-up (synthetic), none downloaded",
+  "provider": "Vast.ai marketplace, on-demand, new account-scoped run key, not the first run's instance/key/remote state",
+  "host_listing": "verified (the first run's host was unverified)",
+  "gpu_assignment": "whole-machine single GPU listing (the first run was 1 GPU of an 8-GPU host)",
+  "image": "vastai/base-image:cuda-13.2-mini-py312-2026-10-23 (same tag as first run; digest not resolved)",
+  "gpu": {"name": "NVIDIA H100 80GB HBM3", "compute_cap": "9.0", "mig": "Disabled", "memory_total_mib": 81559, "memory_used_before_mib": 0, "driver": "595.91.07", "driver_cuda": "13.2", "power_limit_w_current": 500, "power_limit_w_default": 700, "persistence_mode": "Enabled"},
+  "cpu": {"sha_ni": true, "nproc": 24, "cgroup_cpu_max_cores": 23.04},
+  "host_memory": {"cgroup_memory_max_bytes": 126550540288},
+  "disk": "40 GB container overlay",
+  "os": {"distro": "Ubuntu 24.04.5 LTS", "kernel": "6.8.0-147-generic"},
+  "compiler": {"gcc": "13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1)", "nvcc": "V13.2.86 (pip recipe from prover/docs/build.md)", "compiled_by_lines_naming_V13.2.86": 3},
+  "toolkit_wheels": ["cuda_toolkit-13.2.2", "nvidia_cublas-13.4.1.3", "nvidia_cuda_cccl-13.2.86", "nvidia_cuda_crt-13.2.86", "nvidia_cuda_nvcc-13.2.86", "nvidia_cuda_nvrtc-13.2.86", "nvidia_cuda_runtime-13.2.86", "nvidia_nvvm-13.2.86"],
+  "toolkit_wheels_identical_to_first_run": true,
+  "python": "3.12.3",
+  "account": "unprivileged runner via setpriv, clean env",
+  "remote_binaries_sha256": {
+    "cp_commit": "013653939719399241f8399f253ea8b372f0d6b9e055804bdf575d025ca55d0b",
+    "cp_prove": "b968cefa04c4553a7a99f74dd73438f4bd0eb9241f742010879d2feef60ebd71",
+    "cp_verify": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394"
+  },
+  "build_record_sources_digest": "b57a72d342e9a5c528288d00dfd50072e3a79c525be95d3642d98fbfc8015f2e",
+  "verifier_source_digest": "93afdaf592393a54ebd17b681d1c03295eb883f0161ff0e6ab872a3b39939595",
+  "host_verifier": {"built_from": "separate clean worktree at the pinned commit, CPU-only machine, gcc 13.3.0", "cp_verify_sha256": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394"}
+}

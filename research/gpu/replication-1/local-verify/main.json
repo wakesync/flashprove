@@ -1,0 +1,63 @@
+{
+  "cp_verify_sha256": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394",
+  "inputs": {
+    "config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "in/example.req": "55655047a089095c99fac8cd13c30481c011c13c1816f27874705098220fbbe5",
+    "ivk/key.bin": "1c2c4314553fe7faad8de177474d46d5582188bdd4ce863942f03dde15789635",
+    "ivk/leaf/0.bin": "485b1d285b60915c94bb30ffcaae36360eb0a602aaa64dd818c8146c34926455",
+    "out/example.proof": "87f5ac4cee31afeec3b0cbed82f459f92b17e5c06ca835f3f59ca050eb7dbb95",
+    "out/example.y": "871cd8edd0dbd8de891216d6409fba14bb5f0f72b880c5fcc512218b282298fb"
+  },
+  "honest": {
+    "exit": 0,
+    "last_line": "YES",
+    "seconds": 1.525,
+    "covered": "covered: r=15 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=15..63 tokens=16..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)"
+  },
+  "negatives": [
+    {
+      "exit": 1,
+      "last_line": "NO: proof-refused",
+      "seconds": 1.227,
+      "covered": null,
+      "case": "one bit of out/example.proof flipped (byte 2074542)",
+      "rejected": true
+    },
+    {
+      "exit": 1,
+      "last_line": "NO: reply-differs",
+      "seconds": 1.456,
+      "covered": null,
+      "case": "one bit of out/example.y flipped (byte 0)",
+      "rejected": true
+    },
+    {
+      "exit": 1,
+      "last_line": "NO: statement-range",
+      "seconds": 0.582,
+      "covered": null,
+      "case": "one bit of in/example.req flipped (last byte 263)",
+      "rejected": true
+    },
+    {
+      "exit": 1,
+      "last_line": "NO: proof-refused",
+      "seconds": 1.568,
+      "covered": null,
+      "case": "last byte of proof cut off",
+      "rejected": true
+    },
+    {
+      "exit": 1,
+      "last_line": "NO: model-statement",
+      "seconds": 0.454,
+      "covered": null,
+      "case": "wrong commitment ID (last bit flipped)",
+      "rejected": true
+    }
+  ],
+  "all_negatives_rejected": true,
+  "honest_accepted": true
+}

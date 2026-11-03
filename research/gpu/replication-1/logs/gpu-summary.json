@@ -1,0 +1,8 @@
+{
+  "name": "NVIDIA H100 80GB HBM3",
+  "driver_version": "595.91.07",
+  "memory.used [MiB]": "0 MiB",
+  "memory.total [MiB]": "81559 MiB",
+  "mig.mode.current": "Disabled",
+  "compute_cap": "9.0"
+}

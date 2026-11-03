@@ -1,0 +1,2 @@
+18.04|854724|0|<REPO>/prover/build/hc/cp_commit -weights made-up-blocks -config config -M 1 -ivk ivk -isk isk
+2.37|882816|0|env HOME=<TOP-rep1>/example/home TMPDIR=<TOP-rep1>/example/tmp <REPO>/prover/build/hc/cp_prove -isk <TOP-rep1>/example/isk -in <TOP-rep1>/example/in -out <TOP-rep1>/example/out

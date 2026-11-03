@@ -1,0 +1,173 @@
+{
+  "stages": {
+    "clone-start": "2026-11-03T22:20:08Z",
+    "clone-done": "2026-11-03T22:20:22Z",
+    "toolkit-start": "2026-11-03T22:20:22Z",
+    "toolkit-done": "2026-11-03T22:20:38Z",
+    "quickstart-start": "2026-11-03T22:20:39Z",
+    "quickstart-exit 0": "2026-11-03T22:39:04Z",
+    "rep1-start": "2026-11-03T22:39:04Z",
+    "rep1-exit 0": "2026-11-03T22:39:26Z",
+    "rep2-start": "2026-11-03T22:39:26Z",
+    "rep2-exit 0": "2026-11-03T22:39:51Z",
+    "rep3-start": "2026-11-03T22:39:51Z",
+    "rep3-exit 0": "2026-11-03T22:40:11Z"
+  },
+  "whole_quickstart_wall": "18:25.31",
+  "whole_quickstart_user_s": 1478.08,
+  "whole_quickstart_max_rss_kb": 4615596,
+  "cgroup_memory_peak_bytes": 7644094464,
+  "gpu_peak_whole_run": {
+    "mib": 74123,
+    "watts": 519.4,
+    "n_samples": 2345
+  },
+  "compiled_by_lines": 3,
+  "runs": [
+    {
+      "run": "quickstart",
+      "commit_window_s_filetimes": 14.45,
+      "prove_window_s_filetimes": 2.04,
+      "proof_bytes": 4149084,
+      "proof_sha256": "87f5ac4cee31afeec3b0cbed82f459f92b17e5c06ca835f3f59ca050eb7dbb95",
+      "key_bytes": 1094744,
+      "leaf_bytes": 536440,
+      "answer_token": 284,
+      "request_sha256": "55655047a089095c99fac8cd13c30481c011c13c1816f27874705098220fbbe5",
+      "commitment_id": "b797f937404e1cd49f1cb6f2f1ac5bceb14fa969ff28db361ee9ad016a7bde76",
+      "gpu_peak_commit_window": {
+        "mib": 74123,
+        "watts": 519.4,
+        "n_samples": 29
+      },
+      "gpu_peak_prove_window": {
+        "mib": 5227,
+        "watts": 317.25,
+        "n_samples": 6
+      }
+    },
+    {
+      "run": "rep1",
+      "commit_window_s_filetimes": 17.87,
+      "prove_window_s_filetimes": 2.19,
+      "proof_bytes": 4160516,
+      "proof_sha256": "de129ebb2dda95c14edb6d78216d757385ef0fcd18b36d9349365bc91a4c82ed",
+      "key_bytes": 1093008,
+      "leaf_bytes": 537504,
+      "answer_token": 284,
+      "request_sha256": "55655047a089095c99fac8cd13c30481c011c13c1816f27874705098220fbbe5",
+      "commitment_id": "a5a833665cb5ecff781dff4fea5229c3eaf168f912ed459e9dab92a5005589fe",
+      "gpu_peak_commit_window": {
+        "mib": 74123,
+        "watts": 510.15,
+        "n_samples": 36
+      },
+      "gpu_peak_prove_window": {
+        "mib": 5291,
+        "watts": 369.93,
+        "n_samples": 6
+      },
+      "gnu_time": [
+        {
+          "prog": "cp_commit",
+          "wall_s": 18.04,
+          "max_rss_kb": 854724,
+          "exit": 0
+        },
+        {
+          "prog": "cp_prove",
+          "wall_s": 2.37,
+          "max_rss_kb": 882816,
+          "exit": 0
+        }
+      ],
+      "commit_wall_s": 18.04,
+      "prove_wall_s": 2.37,
+      "commit_max_rss_kb": 854724,
+      "prove_max_rss_kb": 882816,
+      "script_wall_s": 22.0
+    },
+    {
+      "run": "rep2",
+      "commit_window_s_filetimes": 21.12,
+      "prove_window_s_filetimes": 2.28,
+      "proof_bytes": 4153388,
+      "proof_sha256": "fdd0997a4c24c334e2afd84e84231b89a858673dfd476eef65095852dfdceeba",
+      "key_bytes": 1095544,
+      "leaf_bytes": 536920,
+      "answer_token": 284,
+      "request_sha256": "55655047a089095c99fac8cd13c30481c011c13c1816f27874705098220fbbe5",
+      "commitment_id": "5dca2533ec42e7a17b685621e928ebe02c283667b6b2da371d947589c8af55f5",
+      "gpu_peak_commit_window": {
+        "mib": 74123,
+        "watts": 503.39,
+        "n_samples": 43
+      },
+      "gpu_peak_prove_window": {
+        "mib": 5291,
+        "watts": 393.84,
+        "n_samples": 6
+      },
+      "gnu_time": [
+        {
+          "prog": "cp_commit",
+          "wall_s": 21.29,
+          "max_rss_kb": 854664,
+          "exit": 0
+        },
+        {
+          "prog": "cp_prove",
+          "wall_s": 2.46,
+          "max_rss_kb": 881624,
+          "exit": 0
+        }
+      ],
+      "commit_wall_s": 21.29,
+      "prove_wall_s": 2.46,
+      "commit_max_rss_kb": 854664,
+      "prove_max_rss_kb": 881624,
+      "script_wall_s": 25.0
+    },
+    {
+      "run": "rep3",
+      "commit_window_s_filetimes": 16.99,
+      "prove_window_s_filetimes": 2.03,
+      "proof_bytes": 4161860,
+      "proof_sha256": "05de80ec450b3420ad1f00230653c46d960759db36b96bc21371e526033c0d92",
+      "key_bytes": 1094808,
+      "leaf_bytes": 539040,
+      "answer_token": 284,
+      "request_sha256": "55655047a089095c99fac8cd13c30481c011c13c1816f27874705098220fbbe5",
+      "commitment_id": "205b94ff849fda8c8ebbdd2d3d37305e51cd203c359387f01966826a3209f3ef",
+      "gpu_peak_commit_window": {
+        "mib": 74123,
+        "watts": 500.75,
+        "n_samples": 35
+      },
+      "gpu_peak_prove_window": {
+        "mib": 5291,
+        "watts": 317.13,
+        "n_samples": 6
+      },
+      "gnu_time": [
+        {
+          "prog": "cp_commit",
+          "wall_s": 17.15,
+          "max_rss_kb": 854576,
+          "exit": 0
+        },
+        {
+          "prog": "cp_prove",
+          "wall_s": 2.21,
+          "max_rss_kb": 876808,
+          "exit": 0
+        }
+      ],
+      "commit_wall_s": 17.15,
+      "prove_wall_s": 2.21,
+      "commit_max_rss_kb": 854576,
+      "prove_max_rss_kb": 876808,
+      "script_wall_s": 20.0
+    }
+  ]
+}
