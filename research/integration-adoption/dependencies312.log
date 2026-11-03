@@ -1,0 +1,15 @@
+Using Python 3.12.3 environment at: projects/flashprove-planning/integration-next-env312
+Resolved 9 packages in 86ms
+Downloading numpy (15.8MiB)
+ Downloaded numpy
+Prepared 3 packages in 382ms
+Installed 9 packages in 16ms
+ + certifi==2026.10.23
+ + charset-normalizer==3.5.2
+ + gguf==0.19.0
+ + idna==3.20
+ + numpy==2.3.5
+ + pyyaml==6.0.3
+ + requests==2.34.2
+ + tqdm==4.70.1
+ + urllib3==2.8.0

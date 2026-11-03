@@ -1,0 +1,27 @@
+passed: build
+passed: unit
+passed: oracle.1.cpp
+passed: oracle.1.py
+passed: oracle.2.cpp
+passed: oracle.2.py
+passed: oracle.3.cpp
+passed: oracle.3.py
+passed: oracle.4.cpp
+passed: oracle.4.py
+passed: oracle.100.cpp
+passed: oracle.100.py
+passed: oracle.101.cpp
+passed: oracle.101.py
+passed: oracle.102.cpp
+passed: oracle.102.py
+passed: oracle.2.py.decode-twice
+passed: oracle.1.eres10.cpp
+passed: oracle.1.eres10.py
+passed: edge.cpp
+passed: edge.py
+passed: refusals.cpp
+passed: refusals.py
+passed: fork-failure.py
+passed: model.cpp
+passed: model.py
+run_tests: every step that ran passed; 0 skipped

@@ -1,0 +1,58 @@
+{
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "base": "0af3dde7bace5b5e583434cb64ec38670fd57641",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "research/operators/glm_kda_slice/reference.py"
+      ],
+      "exit": 0,
+      "seconds": 0.042,
+      "stdout": "reference: PASS; two tokens, key dimension 2, value dimension 1; rational and dyadic binary64 agree\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/glm_kda_slice/test.cpp",
+        "-o",
+        "research/operators/glm_kda_slice/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 25.608,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "research/operators/glm_kda_slice/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 0.148,
+      "stdout": "PASS: 8144 proof bytes; 30 product gates; two linked KDA algebra steps; 3 complete hostile proofs rejected; 38 public mutations; 73 flips; 30 cuts; domain and trailing-byte rejection\n",
+      "stderr": ""
+    }
+  ],
+  "sha256": {
+    "research/operators/glm_kda_slice/reference.py": "abeb0ff1104dccfe8fc00421a11ce17e337befa4eea5e4d723356e4ddd4f35d0",
+    "research/operators/glm_kda_slice/record.py": "4f0912ff6f07e314d1319043ac22048eec0db185a5b731bbfb895aea83e9f490",
+    "research/operators/glm_kda_slice/test.cpp": "688654d06ab656fbfcdaf6de326aff3fcfe0c701e3ef59fb0f8bd22de8d1cd14",
+    "research/operators/glm_kda_slice/fixture.h": "dd5daeb3f42c4405461000e8a7383971aa21858676e5363218ef403099b6e952",
+    "research/operators/glm_kda_slice/provenance.json": "11852ea854319158e1f5b31bc793d3e5a2bc09292bcf453c384a448c7bbfe66e",
+    "research/operators/glm_kda_slice/reference.json": "e150f42d1bfea1397ff73527bfccddeac691b49aa24564c7a121b265e4643dde",
+    "research/operators/affine_rows/product.h": "fa361d28f1e123a0b1242b4371f7f4ead32193b8585497e8296400e4a43b40e9",
+    "research/operators/shared_wires/product.h": "dbcb145bf69c28c6fef4d2100c8b8d329382dc54255ececb22f62bf63d18b6b0",
+    "research/operators/public_binding/product.h": "253b56dd7dba492dff1761772c8d27f27017619f2e806119eeacce588c7686a9"
+  }
+}

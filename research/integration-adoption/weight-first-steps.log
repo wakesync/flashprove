@@ -1,0 +1,31 @@
+passed: build
+passed: unit
+passed: oracle.1.cpp
+passed: oracle.1.py
+passed: oracle.2.cpp
+passed: oracle.2.py
+passed: oracle.3.cpp
+passed: oracle.3.py
+passed: oracle.4.cpp
+passed: oracle.4.py
+passed: oracle.100.cpp
+passed: oracle.100.py
+passed: oracle.101.cpp
+passed: oracle.101.py
+passed: oracle.102.cpp
+passed: oracle.102.py
+passed: oracle.2.py.decode-twice
+passed: oracle.1.eres10.cpp
+passed: oracle.1.eres10.py
+edge.py: this system has no os.pidfd_open, which needs Python 3.9 and Linux 5.3 or later
+failed: edge.cpp
+edge.py: this system has no os.pidfd_open, which needs Python 3.9 and Linux 5.3 or later
+failed: edge.py
+refusals.py: this system has no os.pidfd_open, which needs Python 3.9 and Linux 5.3 or later
+failed: refusals.cpp
+refusals.py: this system has no os.pidfd_open, which needs Python 3.9 and Linux 5.3 or later
+failed: refusals.py
+passed: fork-failure.py
+passed: model.cpp
+passed: model.py
+run_tests: 4 failed; 0 skipped

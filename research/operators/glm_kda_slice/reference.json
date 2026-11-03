@@ -1,0 +1,15 @@
+{
+  "arithmetic": "exact rational mapped into Goldilocks; NOT fixed point",
+  "state": [
+    "5859/32768",
+    "-4323/16384"
+  ],
+  "outputs": [
+    "75/512",
+    "23151/131072"
+  ],
+  "gates": 30,
+  "coordinates": 38,
+  "wires": 16,
+  "affine_rows": 10
+}

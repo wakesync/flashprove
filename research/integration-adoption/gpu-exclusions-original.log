@@ -1,0 +1,13 @@
+left out verifier.entries_and_parts: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.entries_and_parts.work: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds.work); mode all runs it
+left out verifier.extreme_proof_files: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.other_parameters: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.proof_fields_sweep: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.proof_fields_sweep.work: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds.work); mode all runs it
+left out verifier.record_altered_sets.world: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds.work); mode all runs it
+left out verifier.sanitized_files: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.served.form.world.kit: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.walker_on_a_world: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.walker_on_a_world.work: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds.work); mode all runs it
+left out verifier.what_a_yes_covers: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+left out verifier.what_a_yes_covers.work: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds.work); mode all runs it

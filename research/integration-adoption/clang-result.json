@@ -1,0 +1,16 @@
+{
+  "head": "133da749937115883c95edfc4b6e372c16209449",
+  "argv": [
+    "python3",
+    "tools/confine.py",
+    "<WORK_CLANG>",
+    "bash",
+    "verifier/tests/clang_build_test.sh",
+    "--field",
+    "2",
+    "<ORIGINAL_FULL>/shared/bin-target-f2/cp_verify",
+    "<WORK_CLANG>/test"
+  ],
+  "exit": 0,
+  "baseline": "existing full-run GCC target build"
+}

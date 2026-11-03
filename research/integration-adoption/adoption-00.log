@@ -1,0 +1,10 @@
+test_dishonest_and_boundaries (__main__.Tests.test_dishonest_and_boundaries) ... ok
+test_every_wire_mutation (__main__.Tests.test_every_wire_mutation) ... ok
+test_fixed_constraints_and_small_domain (__main__.Tests.test_fixed_constraints_and_small_domain) ... ok
+test_random_and_exhaustive_orders (__main__.Tests.test_random_and_exhaustive_orders) ... ok
+test_upstream_field_crosscheck (__main__.Tests.test_upstream_field_crosscheck) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 3.675s
+
+OK

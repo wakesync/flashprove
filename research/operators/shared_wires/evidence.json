@@ -1,0 +1,45 @@
+{
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+  "commands": [
+    {
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/shared_wires/test.cpp",
+        "-o",
+        "research/operators/shared_wires/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 28.908,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "research/operators/shared_wires/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 0.174,
+      "stdout": "PASS: 7936 proof bytes; 2 malicious one-edge proofs rejected; 8 topology mutations; public mutation; redundant/reverse/self edges; 82 flips; 40 cuts plus last byte; bidirectional domains; independent row checks\n",
+      "stderr": ""
+    }
+  ],
+  "sha256": {
+    "research/operators/shared_wires/product.h": "dbcb145bf69c28c6fef4d2100c8b8d329382dc54255ececb22f62bf63d18b6b0",
+    "research/operators/shared_wires/test.cpp": "b0bac088deacddca38bd981b84eaa61c2418ddaa643c74d1c740a564858dfe4a",
+    "research/operators/shared_wires/record.py": "ccd3f24a5b248848e7da176dc8288d348afe2f639be81674a77199906b3ce1e0",
+    "research/operators/public_binding/product.h": "253b56dd7dba492dff1761772c8d27f27017619f2e806119eeacce588c7686a9",
+    "blocks/toy/product.h": "192ac4e841b00d2e2c685805de58fd5aef704c63597b74dfad512e3e1118e510",
+    "blocks/iop/relation.h": "b3c84ee1d90f4a31594b6ad9c57fea1ac6734f5cc6dc495152c9122a02d49bda",
+    "blocks/iop/iopp.h": "5729e8b21e43bf0177411993380235e74aa55d638d225b9e7a68bca495cae142",
+    "blocks/numbers/blocks.h": "490a95f150ea8f49fe11fde970272f1fded95048bfd6c772280edec734ff7c43"
+  }
+}

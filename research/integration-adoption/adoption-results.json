@@ -1,0 +1,250 @@
+{
+  "head": "baa774321db94e4afc957e33a78af31ee07f69a0",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "python3",
+        "-B",
+        "research/operators/test_topk.py"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 3.827107261866331
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/public_binding/test.cpp",
+        "-o",
+        "<WORK_ADOPTION>/public_binding"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 25.698800787329674
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/public_binding"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.16488810628652573
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/shared_wires/test.cpp",
+        "-o",
+        "<WORK_ADOPTION>/shared_wires"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 25.494414448738098
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/shared_wires"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.21503780782222748
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/affine_rows/test.cpp",
+        "-o",
+        "<WORK_ADOPTION>/affine_rows"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 26.951689172536135
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.31520475074648857
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "0"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2182700149714947
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "1"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2184811867773533
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "2"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2180908508598804
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "3"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2186100222170353
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "4"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2185237668454647
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "5"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2184775732457638
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "6"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2185234166681767
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/affine_rows",
+        "7"
+      ],
+      "exit": -6,
+      "expected": -6,
+      "seconds": 1.2179257087409496
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/glm_kda_slice/test.cpp",
+        "-o",
+        "<WORK_ADOPTION>/glm_kda_slice"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 25.846412152051926
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/confine.py",
+        "<WORK_ADOPTION>",
+        "<WORK_ADOPTION>/glm_kda_slice"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.16506148874759674
+    }
+  ]
+}

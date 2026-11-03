@@ -1,0 +1,30 @@
+levels: as expected
+a wrong call: as expected
+no Landlock: as expected
+its TMPDIR: as expected
+a removal: as expected
+an overwriting: as expected
+a renaming: as expected
+an emptying: as expected
+a making: as expected
+an empty folder's removal: as expected
+a home: as expected
+its own /proc: as expected
+what is ignored: as expected
+the signals' filter: as expected
+the signals' filter, laid by the second level itself (the kernel's answer made 1): as expected
+the signals' filter, laid by the second level itself (the kernel's answer made 2): as expected
+the signals' filter, laid by the second level itself (the kernel's answer made 3): as expected
+the option --also: as expected
+the rule for /dev/shm: as expected
+a device node: as expected
+the mount namespace only for root: as expected
+multiprocessing: as expected
+as root, the order of the calls (a stand-in): as expected
+as root, a failed or unexpected step (stand-ins: nothing is run): as expected
+as root, nothing to mount, or the namespace refused without --gpu (stand-ins: the command runs): as expected
+as root, mount_setattr refused (a stand-in: each place remounted read-only): as expected
+as root, the level (stand-ins): as expected
+as root, pseudo-terminals (a stand-in): as expected
+a set-up that fails half way: as expected
+confine_test: 29 checks as expected, 0 otherwise; not run: a signal; the second level with the kernel's answer made 5; for root alone, so not applicable here: as root, /proc's system places and pseudo-terminals; as root, another account's file in /dev/shm (this kernel: files; of signals only those to -1 are refused (this kernel cannot confine signals))
