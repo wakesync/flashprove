@@ -1,0 +1,110 @@
+[
+  {
+    "name": "compiler",
+    "command": "g++ --version",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 0.002,
+    "last_line": "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  {
+    "name": "python",
+    "command": "python3 --version",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 0.002,
+    "last_line": "Python 3.12.3"
+  },
+  {
+    "name": "make",
+    "command": "make --version",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 0.003,
+    "last_line": "There is NO WARRANTY, to the extent permitted by law."
+  },
+  {
+    "name": "upstream-pin",
+    "command": "git rev-parse 9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 0.002,
+    "last_line": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c"
+  },
+  {
+    "name": "hashes-accepted-proof",
+    "command": "sha256sum -c SHA256SUMS",
+    "cwd": "<REPO>/examples/accepted-proof",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 0.008,
+    "last_line": "ivk/leaf/0.bin: OK"
+  },
+  {
+    "name": "hashes-accepted-proof-clipped-gap",
+    "command": "sha256sum -c SHA256SUMS",
+    "cwd": "<REPO>/examples/accepted-proof-clipped-gap",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 0.007,
+    "last_line": "ivk/leaf/0.bin: OK"
+  },
+  {
+    "name": "build",
+    "command": "bash verifier/build.sh",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 80.786,
+    "last_line": "THE VERIFIER IS BUILT: <REPO>/bin/cp_verify"
+  },
+  {
+    "name": "verify-accepted-proof",
+    "command": "bin/cp_verify examples/accepted-proof/config examples/accepted-proof/ivk examples/accepted-proof/example.req examples/accepted-proof/example.y examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 1.572,
+    "last_line": "YES"
+  },
+  {
+    "name": "negative-accepted-proof",
+    "command": "python3 examples/rejected-proofs/try_altered_copies.py bin/cp_verify <WORK>/altered-accepted-proof --example accepted-proof",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 13.185,
+    "last_line": "10 altered sets: all rejected"
+  },
+  {
+    "name": "verify-accepted-proof-clipped-gap",
+    "command": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 1.571,
+    "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+  },
+  {
+    "name": "negative-accepted-proof-clipped-gap",
+    "command": "python3 examples/rejected-proofs/try_altered_copies.py bin/cp_verify <WORK>/altered-accepted-proof-clipped-gap --example accepted-proof-clipped-gap",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 12.14,
+    "last_line": "10 altered sets: all rejected"
+  },
+  {
+    "name": "toy",
+    "command": "bash blocks/first_look.sh <WORK>/look",
+    "cwd": "<REPO>",
+    "exit": 0,
+    "expected_exit": 0,
+    "elapsed_seconds": 50.547,
+    "last_line": "<WORK>/look/bent.proof: 577340 bytes: an opening does not lead to its root"
+  }
+]
