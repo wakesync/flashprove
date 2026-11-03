@@ -1,0 +1,6 @@
+{
+ "requested": ["python3", "run_suite.py", "cpu", "/tmp/flashprove-integration-v2-full", "--jobs", "8"],
+ "launched": false,
+ "exit": null,
+ "reason": "Disk capacity preflight: 64 MiB available after focused suite and audit; earlier full CPU evidence occupies 1.7 GiB. Concurrent unrelated writes caused available space to fluctuate from 952 MiB to 64 MiB. No safe full run feasible. /dev/shm is explicitly refused for confined suite work. No confinement bypass, old evidence deletion, or redundant full run attempted."
+}

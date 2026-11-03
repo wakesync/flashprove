@@ -1,0 +1,34 @@
+{
+  "upstream": "https://github.com/anthropics/FlashProve",
+  "upstream_sha": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+  "kernel": "6.8.0-100-generic",
+  "architecture": "x86_64",
+  "non_root": true,
+  "build_jobs_max": 4,
+  "runtime_cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "environment_overrides": {
+    "MAKEFLAGS": "-j4",
+    "OMP_NUM_THREADS": "4",
+    "LC_ALL": "C"
+  },
+  "scope": "Synthetic stored proofs and toy library only; no real inference, no GPU",
+  "cpu_model": "AMD EPYC-Rome Processor",
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.4 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.4 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n"
+}

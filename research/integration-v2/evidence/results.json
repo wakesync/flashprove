@@ -1,0 +1,57 @@
+[
+  {
+    "name": "focused",
+    "argv": [
+      "python3",
+      "run_suite.py",
+      "cpu",
+      "/tmp/flashprove-integration-v2-focused",
+      "--jobs",
+      "4",
+      "--only",
+      "^(integrations.cp_verify|tools.lean_verify.script)$"
+    ],
+    "exit": 0,
+    "seconds": 287.3009922504425
+  },
+  {
+    "name": "adapter",
+    "argv": [
+      "python3",
+      "research/extensions/test_harness.py"
+    ],
+    "exit": 0,
+    "seconds": 5.550383806228638
+  },
+  {
+    "name": "baseline",
+    "argv": [
+      "python3",
+      "research/extensions/harness.py",
+      "research/extensions/baseline-v1.json",
+      "--baseline"
+    ],
+    "exit": 0,
+    "seconds": 2.2590317726135254
+  },
+  {
+    "name": "audit",
+    "argv": [
+      "python3",
+      "research/reproduction/audit_cases.py",
+      "research/integration-v2/audit"
+    ],
+    "exit": 0,
+    "seconds": 33.64944338798523
+  },
+  {
+    "name": "integrity",
+    "argv": [
+      "sha256sum",
+      "-c",
+      "research/reproduction/REVIEW-SHA256SUMS"
+    ],
+    "exit": 0,
+    "seconds": 0.003947257995605469
+  }
+]

@@ -1,0 +1,4 @@
+build.sh: note: another account may be able to change /home/shad0w/.moltbot (its group or others can write in it, and it has no sticky bit), under which this checkout lies, and so could change what is built, and this script itself; for a build that no other account can touch, keep the checkout below directories that only you can write in; if /home/shad0w/.moltbot is yours, close it with chmod go-w
+build=93afdaf592393a54ebd17b681d1c03295eb883f0161ff0e6ab872a3b39939595 dw=8
+compiling cp_verify.cpp: one compiler call of one to two minutes, which prints nothing while it runs
+THE VERIFIER IS BUILT: <REPO>/bin/cp_verify

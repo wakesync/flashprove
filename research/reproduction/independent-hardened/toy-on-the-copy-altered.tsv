@@ -1,0 +1,28 @@
+copy	what was changed	at byte	the reader's words
+01	the head's tag	0	file-of-another-kind
+02	the head's version	4	version-unknown
+03	the head's third word: the stored copy's number	8	the proof was made on another stored copy of the table
+04	the first chain's random bytes	12	a nonce does not give the proof of work that its round asks for
+05	a byte at the middle of the first chain	82224	an opening does not lead to its root
+06	the first chain's last byte	164435	a nonce does not give the proof of work that its round asks for
+07	the place's word	164436	a nonce does not give the proof of work that its round asks for
+08	the place's salt	164444	a nonce does not give the proof of work that its round asks for
+09	the place's first sibling	164484	a nonce does not give the proof of work that its round asks for
+10	the place's last sibling	164547	a nonce does not give the proof of work that its round asks for
+11	the shared chain's first byte	164548	a nonce does not give the proof of work that its round asks for
+12	a byte at the middle of the shared chain	308904	an opening does not lead to its root
+13	the second chain's random bytes	453260	an opening does not lead to its root
+14	a byte at the middle of the second chain	515300	an opening does not lead to its root
+15	the last byte	577339	an opening does not lead to its root
+16	the head's third word, and the call asks for that number	8	a nonce does not give the proof of work that its round asks for
+17	the place's word + 2^depth: no such place	164436	the request's place in its batch
+18	the reply's second coordinate, 0, spelled p	22548	a value that the prover sends is missing or not in canonical form
+19	the last byte is cut off	-	an opening is cut short or holds a symbol that is not in canonical form
+20	a byte is added	-	bytes are left over at the end of the proof
+21	request 1's first chain in request 0's file	-	a nonce does not give the proof of work that its round asks for
+22	request 1's place in request 0's file	-	the opened columns of the table do not lead to its root
+23	request 1's second chain in request 0's file	-	a nonce does not give the proof of work that its round asks for
+-	the honest file, asked about request 1's bytes	-	a nonce does not give the proof of work that its round asks for
+-	the honest file, asked about another reply	-	the proof is about another reply
+-	the honest file, asked about another stored copy's number	-	the proof was made on another stored copy of the table
+-	the honest file, checked on the other table	-	a nonce does not give the proof of work that its round asks for

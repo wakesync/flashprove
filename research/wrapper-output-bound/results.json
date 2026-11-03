@@ -1,0 +1,635 @@
+{
+  "baseline": {
+    "exit": 1,
+    "cases": {
+      "floods": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1177275,
+          "sha256": "4d5151ddc8dfef5fce7aeeff007a54a33ff26f7bc935fe5f5286e752388b87cd"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048619,
+            "sha256": "03c864c2e10918f27f30db0094438a6812f9d98a8d9e98d4a4e1030e3083e138"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean:  BK IS READ: a stringtimeout: the monitored command dumped core",
+          "o <PLANNING>/wrapper-baseline-work/tmp/tmp.CG2iCVZXK6/lean.err, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "floods-and-goes-on": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1176705,
+          "sha256": "70abf23e89dd2bd89de72c50a5614853e3e19e65cb4c372c15f92ef14bf00a31"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "fbd85d23548a8504274f2dd6ef228a1c62fa482715507235f13f22d92f63df80"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": []
+      },
+      "floods-standard-output": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2944,
+          "sha256": "e1c4d7b2027e02ed6377464411ad21a20976b7a7a5292ef7d84fe859e6fd912b"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 575,
+            "sha256": "5bb77564c50bb5f5fdbaec42d34f0cc8a5e0a3627cb6ffd3e9d7cf960ed3ce9c"
+          },
+          "lean.out": {
+            "bytes": 1048576,
+            "sha256": "7584e650e174be7ab1196429b25efa7d4c9c05714d7327503eeccafa0fe7bbc9"
+          }
+        },
+        "diagnostics": [
+          "o <PLANNING>/wrapper-baseline-work/tmp/tmp.vKhpHoqpmj/lean.out, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "accept-at-the-bound-then-more": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1050945,
+          "sha256": "1c02b1eae38bc44e5c7870314b150a30f4d66e0d656b91729dbe4c77dd751248"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "589d3c462be9a531365b4858b4ee57ef4bfa6a5db27e52d89a6ec0e74b3e3ec0"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "o <PLANNING>/wrapper-baseline-work/tmp/tmp.REqH43JM6l/lean.err, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "bound-then-abort": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1051461,
+          "sha256": "c4ee6a601d0161a994a9d88af3c431c26c69433dd4f071f3857f4b5fa65e07de"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048619,
+            "sha256": "8333b5d7c5d0672325e00bf4de16782f7c6487e0ebb2f55dbcae6bfa2a5deaf5"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxtimeout: the monitored command dumped core",
+          "o <PLANNING>/wrapper-baseline-work/tmp/tmp.dD8u5bkqeS/lean.err, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "both-bounds-then-abort": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1051461,
+          "sha256": "bcbe8382967c6cbe8f2eb852b3f6c0504e4efe0650e7da9f9b79a92ee020e2b5"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048619,
+            "sha256": "8333b5d7c5d0672325e00bf4de16782f7c6487e0ebb2f55dbcae6bfa2a5deaf5"
+          },
+          "lean.out": {
+            "bytes": 1048576,
+            "sha256": "8f990ba0b577b51cf009ea049368c16bbda1b21e1b93be07a824758bb253c39b"
+          }
+        },
+        "diagnostics": [
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxtimeout: the monitored command dumped core",
+          "o <PLANNING>/wrapper-baseline-work/tmp/tmp.btKYSzlapY/lean.err, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "much-under-the-bound": {
+        "stdout": "VERDICT: ACCEPT (exact match)\n",
+        "stdout_file": {
+          "bytes": 30,
+          "sha256": "2486fe264d2a0ac8b00119afc1ff527be8c71875fc17bb049c8ff05df272d132"
+        },
+        "stderr_file": {
+          "bytes": 954749,
+          "sha256": "f536eac6c481394730e662ebf6878fa450be05b30585f9feb5885bfbae4a6982"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 850521,
+            "sha256": "a961607a42e481e42ea945693dd311841dd82796355baaa97476032c1710eeff"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": []
+      },
+      "aborted": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 3623,
+          "sha256": "38dcac97ca433853cefd98c69eeb33bd6612f5600b62055f1bf7b12f7ac2be89"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 560,
+            "sha256": "d781ae46532ef07e82bb53f272c10a5d462896e8ce3608bcf8f864d3f0648cd8"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean: timeout: the monitored command dumped core",
+          "/shad0w/.moltbot/projects/flashprove-planning/wrapper-baseline-work/tmp/tmp.RG82kLLcsu/lean.err and <PLANNING>/wrapper-baseline-work/tmp/tmp.RG82kLLcsu/lean.out"
+        ]
+      },
+      "aborted-after-accept": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 3627,
+          "sha256": "1abbb132bc06d048ab62cf60bb66ebcef545aeddbb0d9ecbbe4bc74156deaa7c"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 564,
+            "sha256": "e1ef4ced5b7f442745b460e3bd66947ffb5f30dbaaa5760d421c2e04c3cc8dba"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean: timeout: the monitored command dumped core",
+          "/shad0w/.moltbot/projects/flashprove-planning/wrapper-baseline-work/tmp/tmp.Io1RWSjORD/lean.err and <PLANNING>/wrapper-baseline-work/tmp/tmp.Io1RWSjORD/lean.out"
+        ]
+      },
+      "time-limit": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2103,
+          "sha256": "35b7a9fd09aae0a60fc2f28ea4dffcefa4c488da94c9570c92c8686c52eb85fc"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      },
+      "signal-TERM": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2103,
+          "sha256": "3a3ed63de04972d5612814507fdd9eab30f78aea37eaa879b001e19b2c1a3f48"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      },
+      "signal-HUP": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2103,
+          "sha256": "47e3c6991e87505cc6d8b35ee5844cdfbd95b7ff70896adaa19d40cf0cdcedc0"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      },
+      "signal-INT": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2103,
+          "sha256": "d2a955dcf834dd7bc6325947eb1c227ac0399dae21a036a72195dc63c4270856"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      }
+    }
+  },
+  "fixed": {
+    "exit": 0,
+    "cases": {
+      "floods": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1177308,
+          "sha256": "fe2c69c112b012057599b64ca019ba518a782f12af13b85badf41ca82ff82022"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "fbd85d23548a8504274f2dd6ef228a1c62fa482715507235f13f22d92f63df80"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "timeout: the monitored command dumped core"
+        ]
+      },
+      "floods-and-goes-on": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1176687,
+          "sha256": "de147db83014e9bf6343e960e48a74a83bd79354cb8495aff4fdac4dbe5f6735"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "fbd85d23548a8504274f2dd6ef228a1c62fa482715507235f13f22d92f63df80"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": []
+      },
+      "floods-standard-output": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2926,
+          "sha256": "16307170975127815993ef4603360837d003c7ed7cdb2311cbc4fcfb7f3cea50"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 575,
+            "sha256": "5bb77564c50bb5f5fdbaec42d34f0cc8a5e0a3627cb6ffd3e9d7cf960ed3ce9c"
+          },
+          "lean.out": {
+            "bytes": 1048576,
+            "sha256": "7584e650e174be7ab1196429b25efa7d4c9c05714d7327503eeccafa0fe7bbc9"
+          }
+        },
+        "diagnostics": [
+          "into <PLANNING>/wrapper-fixed-work/tmp/tmp.UapArqsV9z/lean.out, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "accept-at-the-bound-then-more": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1050927,
+          "sha256": "4f9888b3fb2e092c687470be4c759b3fb178b63cf6c33f916d6ecea8bc73f7fb"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "589d3c462be9a531365b4858b4ee57ef4bfa6a5db27e52d89a6ec0e74b3e3ec0"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "into <PLANNING>/wrapper-fixed-work/tmp/tmp.ZgZF8afRYU/lean.err, the most that this script lets it write (a usual run writes some 10,000), and counts for nothing"
+        ]
+      },
+      "bound-then-abort": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1051494,
+          "sha256": "5dc5b1e9f7cfb50efa8c739be117b63ab7a23576c052144faa49af229b999bf2"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "8f990ba0b577b51cf009ea049368c16bbda1b21e1b93be07a824758bb253c39b"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "timeout: the monitored command dumped core"
+        ]
+      },
+      "both-bounds-then-abort": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 1051494,
+          "sha256": "62f802b622ccbbfc125f23068c463fcb02d8c34d116b788b08176799e468796b"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 1048576,
+            "sha256": "8f990ba0b577b51cf009ea049368c16bbda1b21e1b93be07a824758bb253c39b"
+          },
+          "lean.out": {
+            "bytes": 1048576,
+            "sha256": "8f990ba0b577b51cf009ea049368c16bbda1b21e1b93be07a824758bb253c39b"
+          }
+        },
+        "diagnostics": [
+          "timeout: the monitored command dumped core"
+        ]
+      },
+      "much-under-the-bound": {
+        "stdout": "VERDICT: ACCEPT (exact match)\n",
+        "stdout_file": {
+          "bytes": 30,
+          "sha256": "2486fe264d2a0ac8b00119afc1ff527be8c71875fc17bb049c8ff05df272d132"
+        },
+        "stderr_file": {
+          "bytes": 954734,
+          "sha256": "2a4dd589cd878361ab61b0277425496e747a2a7812629ed91c211148010cf251"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 850521,
+            "sha256": "a961607a42e481e42ea945693dd311841dd82796355baaa97476032c1710eeff"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": []
+      },
+      "aborted": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 3647,
+          "sha256": "3aba269fe084361c52dce424a9fb639ac59d9e374065169200984993dbe0d8dc"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 517,
+            "sha256": "156647c3bace66265dcf8f5c08f84444817571e89c58262091a0daa006e80d87"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "timeout: the monitored command dumped core",
+          " <PLANNING>/wrapper-fixed-work/tmp/tmp.yTvlhqoGb0/lean.err and <PLANNING>/wrapper-fixed-work/tmp/tmp.yTvlhqoGb0/lean.out"
+        ]
+      },
+      "aborted-after-accept": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 3651,
+          "sha256": "11261e47cfe9d02a4d2fcdfe2dca1ca35f5f420b66906ef949e12dfd10c39631"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 521,
+            "sha256": "77dd1634d1649ef50919931caa883d2ef91aec8ea4088d9af4506ac6243a7a9c"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "timeout: the monitored command dumped core",
+          " <PLANNING>/wrapper-fixed-work/tmp/tmp.IaVXH2TZ2Z/lean.err and <PLANNING>/wrapper-fixed-work/tmp/tmp.IaVXH2TZ2Z/lean.out"
+        ]
+      },
+      "time-limit": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2088,
+          "sha256": "1667f46a357a8e7616b9e8143d44ab734930719dce99287fd3b95fa97e120282"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      },
+      "signal-TERM": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2088,
+          "sha256": "506bd8de135016edfbb714322abe0ced89cc5df97e10160b4b3b4773746ccd27"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      },
+      "signal-HUP": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2088,
+          "sha256": "a8fede4f8a9c12621b8016e3bf97bbc5558cbf3ed841c9353998c86888b65fe5"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      },
+      "signal-INT": {
+        "stdout": "NO VERDICT\n",
+        "stdout_file": {
+          "bytes": 11,
+          "sha256": "13df9c2ec3d7e15620d3d16bac6ab3429bf41f2f5d33d170d7218622eb120175"
+        },
+        "stderr_file": {
+          "bytes": 2088,
+          "sha256": "146b249cc84474a4a3ddd6ebe00f39f415e22049d3754dd33d5e26cbfa0f2356"
+        },
+        "lean_files": {
+          "lean.err": {
+            "bytes": 505,
+            "sha256": "75a2af652bb1ac35eb4eef9eacff24c8948623c9e4107ec991cc3f9be31cd949"
+          },
+          "lean.out": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "diagnostics": [
+          "lean_verify.sh: no verdict: a signal stopped this script"
+        ]
+      }
+    }
+  }
+}

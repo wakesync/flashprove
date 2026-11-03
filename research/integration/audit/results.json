@@ -1,0 +1,561 @@
+[
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 0,
+    "elapsed_seconds": 1.685,
+    "last_line": "YES",
+    "example": "accepted-proof",
+    "case": "honest control",
+    "expected_exit": 0,
+    "expected_last": "YES",
+    "changed_sha256": {},
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <WORK>/accepted-proof-01/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.189,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "one bit of the proof changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.proof": "5e769da7ab8574d0f88c9f731510f93f0469fda39ab3e8f682ce51ebade2ad82"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <WORK>/accepted-proof-02/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.532,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "the proof's last byte cut off",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.proof": "5030e534ce912a7a80c7458404b220326fc352bb386bd6fbc8bb303695c57ff6"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <WORK>/accepted-proof-03/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.578,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "one byte added to the proof",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.proof": "c34eb7aaad03e2962892d81d9bab46d0462e626931b8e71743fcc7b15fe813bb"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <WORK>/accepted-proof-04/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.631,
+    "last_line": "NO: key-refused",
+    "example": "accepted-proof",
+    "case": "one bit of ivk/key.bin changed",
+    "expected_exit": 1,
+    "expected_last": "NO: key-refused",
+    "changed_sha256": {
+      "ivk/key.bin": "a59a8769bc4ac13e4250f1937a28a7035b3a85b78aaa39ecb80c2ad7e307ba43"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <WORK>/accepted-proof-05/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.574,
+    "last_line": "NO: entry-refused",
+    "example": "accepted-proof",
+    "case": "one bit of ivk/leaf/0.bin changed",
+    "expected_exit": 1,
+    "expected_last": "NO: entry-refused",
+    "changed_sha256": {
+      "ivk/leaf/0.bin": "c9c79983d75fed094c0de1a3beb65a00fee2b157ba0429e32f552b72ee50c7e9"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-06/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.771,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "a prompt token changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "d3a7eecb37d9f439695e8d933d820b6f52934f59b517761ce970d03532cf7577"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-07/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.804,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "a checked reply token changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "7b202e690010e994c22db5dd7a28f805638f39fd8de0e2b7e518864a4fd56c85"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <WORK>/accepted-proof-08/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.485,
+    "last_line": "NO: reply-differs",
+    "example": "accepted-proof",
+    "case": "another token after the request",
+    "expected_exit": 1,
+    "expected_last": "NO: reply-differs",
+    "changed_sha256": {
+      "example.y": "51525844d3da2a4a742a91b5c0bf89d3e6026487a83a3bfe8abd1e677a3938f9"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <WORK>/accepted-proof-09/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.459,
+    "last_line": "NO: model-statement",
+    "example": "accepted-proof",
+    "case": "another scale in KL.bin",
+    "expected_exit": 1,
+    "expected_last": "NO: model-statement",
+    "changed_sha256": {
+      "config/KL.bin": "708bf385dd26c1a74b349414adf14b19f44c690c504cd29aba19c1559cf022b8"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22180 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.48,
+    "last_line": "NO: model-statement",
+    "example": "accepted-proof",
+    "case": "another commitment ID",
+    "expected_exit": 1,
+    "expected_last": "NO: model-statement",
+    "changed_sha256": {},
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22180"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-11/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.789,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "request range start changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "e493d4413b17e2ba983122445ff16d2ec13d270e491966efa58bee4129320d82"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-12/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.571,
+    "last_line": "NO: statement-range",
+    "example": "accepted-proof",
+    "case": "request range end changed",
+    "expected_exit": 1,
+    "expected_last": "NO: statement-range",
+    "changed_sha256": {
+      "example.req": "3ee37e193542fce981e63832af0799939c713d5c000c1ac8749ab48570f25028"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <WORK>/accepted-proof-13/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.004,
+    "last_line": "NO: cp-proof-length",
+    "example": "accepted-proof",
+    "case": "empty proof",
+    "expected_exit": 1,
+    "expected_last": "NO: cp-proof-length",
+    "changed_sha256": {
+      "example.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <WORK>/accepted-proof-14/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.009,
+    "last_line": "NO: cp-proof-head",
+    "example": "accepted-proof",
+    "case": "proof header bit",
+    "expected_exit": 1,
+    "expected_last": "NO: cp-proof-head",
+    "changed_sha256": {
+      "example.proof": "fd07636968241c2d782701330e61d04e12ad7882a352f5b533f3e7bf826c14cf"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <WORK>/accepted-proof-15/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.003,
+    "last_line": "NO: cp-key-length",
+    "example": "accepted-proof",
+    "case": "empty key",
+    "expected_exit": 1,
+    "expected_last": "NO: cp-key-length",
+    "changed_sha256": {
+      "ivk/key.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <WORK>/accepted-proof-16/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.564,
+    "last_line": "NO: entry-refused",
+    "example": "accepted-proof",
+    "case": "empty leaf",
+    "expected_exit": 1,
+    "expected_last": "NO: entry-refused",
+    "changed_sha256": {
+      "ivk/leaf/0.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-17/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.559,
+    "last_line": "NO: token-range",
+    "example": "accepted-proof",
+    "case": "token outside vocabulary",
+    "expected_exit": 1,
+    "expected_last": "NO: token-range",
+    "changed_sha256": {
+      "example.req": "33608f76dd8bfe57aff9cdb710054cde7b4754749701c8ef4eb3c640c7f30a23"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-18/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.567,
+    "last_line": "NO: statement-range",
+    "example": "accepted-proof",
+    "case": "request range inverted",
+    "expected_exit": 1,
+    "expected_last": "NO: statement-range",
+    "changed_sha256": {
+      "example.req": "9af7b55c871771f4be0fdbade8c123ac7683b64b1ec4af7a896b6262acf5a538"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <WORK>/accepted-proof-19/example.req <WORK>/accepted-proof-19/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.765,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof",
+    "case": "range end changed with valid zero sentinel",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "3ee37e193542fce981e63832af0799939c713d5c000c1ac8749ab48570f25028",
+      "example.y": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "commitment_id": "79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof/config <REPO>/examples/accepted-proof/ivk <REPO>/examples/accepted-proof/example.req <REPO>/examples/accepted-proof/example.y <REPO>/examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -q -policy clipped-gap,9244130,323343,1,16,8",
+    "exit": 1,
+    "elapsed_seconds": 0.004,
+    "last_line": "NO: policy",
+    "example": "accepted-proof",
+    "case": "wrong trusted policy",
+    "expected_exit": 1,
+    "expected_last": "NO: policy"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 0,
+    "elapsed_seconds": 1.571,
+    "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+    "example": "accepted-proof-clipped-gap",
+    "case": "honest control",
+    "expected_exit": 0,
+    "expected_last": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+    "changed_sha256": {},
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <WORK>/accepted-proof-clipped-gap-01/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.196,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "one bit of the proof changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.proof": "87864ee08dbed2bdb6628f2b92ef5fddf2a4f35ab2ea0fa0b049f484671ffcf6"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <WORK>/accepted-proof-clipped-gap-02/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.625,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "the proof's last byte cut off",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.proof": "f4bc8194386347e8f14be3717c0e0374540f2563b62a3760cb48b907facdc9b8"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <WORK>/accepted-proof-clipped-gap-03/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.679,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "one byte added to the proof",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.proof": "b9986701ba3b91f39f80c06ee2a89092698c214d9239e7e4c5fb8a1e1357d770"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <WORK>/accepted-proof-clipped-gap-04/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.565,
+    "last_line": "NO: key-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "one bit of ivk/key.bin changed",
+    "expected_exit": 1,
+    "expected_last": "NO: key-refused",
+    "changed_sha256": {
+      "ivk/key.bin": "3a90cbeb04310921f841e3f67a5bd38ce5379add064fc094deb77a5a6ea74b38"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <WORK>/accepted-proof-clipped-gap-05/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 1.549,
+    "last_line": "NO: entry-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "one bit of ivk/leaf/0.bin changed",
+    "expected_exit": 1,
+    "expected_last": "NO: entry-refused",
+    "changed_sha256": {
+      "ivk/leaf/0.bin": "8cbc312f59dc68aa1ade309febd1127c535061f734ece07f91f3888e39d70209"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <WORK>/accepted-proof-clipped-gap-06/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.798,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "a prompt token changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "c12191b0239378a656d92754f7a9749095eacd1ddf94dcae4a447874758af607"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <WORK>/accepted-proof-clipped-gap-07/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.8,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "a checked reply token changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "a5e5256f3c8e4beb7213b4d4228897d1a1532541ed4345286dd0a704d3642a01"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <WORK>/accepted-proof-clipped-gap-08/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.593,
+    "last_line": "NO: statement-range",
+    "example": "accepted-proof-clipped-gap",
+    "case": "example.y is 1 where it must be 0",
+    "expected_exit": 1,
+    "expected_last": "NO: statement-range",
+    "changed_sha256": {
+      "example.y": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <WORK>/accepted-proof-clipped-gap-09/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.457,
+    "last_line": "NO: model-statement",
+    "example": "accepted-proof-clipped-gap",
+    "case": "another scale in KL.bin",
+    "expected_exit": 1,
+    "expected_last": "NO: model-statement",
+    "changed_sha256": {
+      "config/KL.bin": "992a0b94c252aa58cf230b2334d4df9eb74cf286f9ebd84bc123336c49c135a2"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae0 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.467,
+    "last_line": "NO: model-statement",
+    "example": "accepted-proof-clipped-gap",
+    "case": "another commitment ID",
+    "expected_exit": 1,
+    "expected_last": "NO: model-statement",
+    "changed_sha256": {},
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae0"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <WORK>/accepted-proof-clipped-gap-11/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.792,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "request range start changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "4df93094c96413281dbced1484ddb7e25fabbf366dd15b2f9009ff3711047f48"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <WORK>/accepted-proof-clipped-gap-12/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.833,
+    "last_line": "NO: proof-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "request range end changed",
+    "expected_exit": 1,
+    "expected_last": "NO: proof-refused",
+    "changed_sha256": {
+      "example.req": "0ffb66872e3106c6d89bd96211194e1630ca61255303a788082ebeccde95004b"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <WORK>/accepted-proof-clipped-gap-13/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.004,
+    "last_line": "NO: cp-proof-length",
+    "example": "accepted-proof-clipped-gap",
+    "case": "empty proof",
+    "expected_exit": 1,
+    "expected_last": "NO: cp-proof-length",
+    "changed_sha256": {
+      "example.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <WORK>/accepted-proof-clipped-gap-14/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.008,
+    "last_line": "NO: cp-proof-head",
+    "example": "accepted-proof-clipped-gap",
+    "case": "proof header bit",
+    "expected_exit": 1,
+    "expected_last": "NO: cp-proof-head",
+    "changed_sha256": {
+      "example.proof": "d9cb152a9e03fce90d30f8147265b5f4368f0fbac69e73de1512d35ed98670eb"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <WORK>/accepted-proof-clipped-gap-15/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.003,
+    "last_line": "NO: cp-key-length",
+    "example": "accepted-proof-clipped-gap",
+    "case": "empty key",
+    "expected_exit": 1,
+    "expected_last": "NO: cp-key-length",
+    "changed_sha256": {
+      "ivk/key.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <WORK>/accepted-proof-clipped-gap-16/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.561,
+    "last_line": "NO: entry-refused",
+    "example": "accepted-proof-clipped-gap",
+    "case": "empty leaf",
+    "expected_exit": 1,
+    "expected_last": "NO: entry-refused",
+    "changed_sha256": {
+      "ivk/leaf/0.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <WORK>/accepted-proof-clipped-gap-17/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.563,
+    "last_line": "NO: token-range",
+    "example": "accepted-proof-clipped-gap",
+    "case": "token outside vocabulary",
+    "expected_exit": 1,
+    "expected_last": "NO: token-range",
+    "changed_sha256": {
+      "example.req": "e7dda77cff7653f3fa9f89ae55063671bca1f7989a465f4ec052e3be53d1ce70"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <WORK>/accepted-proof-clipped-gap-18/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -policy clipped-gap,9244130,323343,1,16,8 -q",
+    "exit": 1,
+    "elapsed_seconds": 0.58,
+    "last_line": "NO: statement-range",
+    "example": "accepted-proof-clipped-gap",
+    "case": "request range inverted",
+    "expected_exit": 1,
+    "expected_last": "NO: statement-range",
+    "changed_sha256": {
+      "example.req": "a068a99c08327e365f48a0fe08333de35852a6ec08759a7c3afe3f12c058e13f"
+    },
+    "commitment_id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6"
+  },
+  {
+    "command": "<REPO>/bin/cp_verify <REPO>/examples/accepted-proof-clipped-gap/config <REPO>/examples/accepted-proof-clipped-gap/ivk <REPO>/examples/accepted-proof-clipped-gap/example.req <REPO>/examples/accepted-proof-clipped-gap/example.y <REPO>/examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -q -policy clipped-gap,9244130,323342,1,16,8",
+    "exit": 1,
+    "elapsed_seconds": 0.004,
+    "last_line": "NO: policy",
+    "example": "accepted-proof-clipped-gap",
+    "case": "wrong trusted policy",
+    "expected_exit": 1,
+    "expected_last": "NO: policy"
+  }
+]

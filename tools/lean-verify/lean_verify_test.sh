@@ -208,6 +208,10 @@ case "$1 ${2:-}" in
       sleeps) head >&2; sleeps ;;
       # Three million bytes, then an accept's end. As with real Lean, the system ends whoever passes the bound.
       floods) { head; flood 60000; echo "$accept"; } >&2; exit 10 ;;
+      # Deterministically fill stderr before an abort: the supervisor's diagnostic must
+      # not become byte 1048577, even on systems that do not report SIGXFSZ as a core dump.
+      bound-then-abort) exec python3 -c 'import os; os.write(2, b"x" * 1048576); os.abort()' ;;
+      both-bounds-then-abort) exec python3 -c 'import os; os.write(1, b"x" * 1048576); os.write(2, b"x" * 1048576); os.abort()' ;;
       # .. a stand-in that passes over the system's signal and goes on to its end.
       floods-and-goes-on) trap '' XFSZ; { head; flood 60000; echo "$accept"; } >&2; exit 10 ;;
       floods-standard-output) trap '' XFSZ; flood 60000; { head; echo "$accept"; } >&2; exit 10 ;;
@@ -756,12 +760,13 @@ grep -a -q -F 'a signal stopped this script' -- "$W/calls/adopted.err" || wrong 
 # that meets the bound counts for nothing, whatever its status and last line, and what is shown of it is
 # bounded with it (each line gains six bytes: with these lines of 50 bytes, well under twice the bound).
 bound=1048576
-for p in floods floods-and-goes-on floods-standard-output accept-at-the-bound-then-more; do
+for p in floods floods-and-goes-on floods-standard-output accept-at-the-bound-then-more bound-then-abort both-bounds-then-abort; do
   PLAY=$p call "$p" 2 "$N" "$S" "${six[@]}"; tells "$p" "Lean's run wrote $bound bytes into"
   d=$(sed -n 's/^work directory: //p' -- "$W/calls/$p.err")
   for f in lean.err lean.out; do
     [ "$(stat -c %s -- "$d/$f")" -le "$bound" ] || wrong "$p: $f has more bytes than the bound"
   done
+  if grep -a -q '^timeout:' -- "$d/lean.err"; then wrong "$p: supervisor output mixed with Lean's"; fi
   [ "$(stat -c %s -- "$W/calls/$p.err")" -le $((2 * bound)) ] || wrong "$p: more is shown than the bound allows"
 done
 PLAY=much call much-under-the-bound 0 "$A" "$S" "${six[@]}"
@@ -936,7 +941,7 @@ tolerant policy-number-of-20-digits 18446744073709551615 256 0 8 4 'C 1844674407
 if grep -a -q -F 100000000000000000000 -- "$W"/calls/policy-*-of-21-digits.err; then wrong "a number of 21 digits is shown"; fi
 
 # The number of calls is fixed, so that none can drop out in silence.
-due=344
+due=346
 [ "$calls" = "$due" ] || wrong "$calls calls were made where $due were due"
 echo "$cores"
 echo "$looked"

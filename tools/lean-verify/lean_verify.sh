@@ -268,11 +268,16 @@ echo "running the verifier's executable form inside Lean ($long); its lines are 
 # The proof may be made to provoke output, and the work directory may lie in memory: so Lean's job may
 # write no more than "bound" bytes into any one file ("prlimit" sets that and becomes Lake; the system
 # ends whichever process of the job would write more). A usual run writes some 10,000 bytes.
+# Only the limited child opens these files. timeout must keep its own error stream: its
+# diagnostics (for example after SIGXFSZ or an abort) are not subject to the child's limit.
+# The small privileged-mode shell execs prlimit, which execs Lake: timeout still supervises
+# the same child and process group, with no extra waiter or pipeline to change its status.
 bound=1048576
 LEAN_VERIFY_ARGS=$(printf '%s\n' "$work/claim/config" "$work/claim/ID.txt" "$work/claim/example.req" \
   "$work/claim/example.y" "$work/parser/parsed/key.parsed.bin" "${leaves[0]}" "$work/parser/parsed/proof.parsed.bin") \
-  timeout 0 prlimit --fsize="$bound" lake env lean -j1 --tstack=4000000 ${flags[@]+"${flags[@]}"} "$ask" \
-  < /dev/null > "$work/lean.out" 2> "$work/lean.err" &
+  timeout 0 bash -p -c 'exec prlimit --fsize="$1" "${@:4}" > "$2" 2> "$3"' lean-output \
+  "$bound" "$work/lean.out" "$work/lean.err" \
+  lake env lean -j1 --tstack=4000000 ${flags[@]+"${flags[@]}"} "$ask" < /dev/null &
 wait "$!"
 status=$?
 # Lean's lines, each behind "lean: ": so that a line of Lean's, which can be "VERDICT: ACCEPT" in a call

@@ -1,0 +1,84 @@
+{
+  "reviewed_pr_head": "848815f4cdb0b6dda2b25e9cd6ec4ffb2f03777b",
+  "upstream": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c",
+  "execution_date": "2026-11-03",
+  "audit_environment": {
+    "kernel": "6.8.0-100-generic",
+    "architecture": "x86_64",
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "LC_ALL": null,
+    "OMP_NUM_THREADS": null
+  },
+  "commands": [
+    {
+      "command": "python3 research/reproduction/run.py research/reproduction/independent-original",
+      "exit": 0,
+      "runner_version": "reviewed_pr_head"
+    },
+    {
+      "command": "python3 research/reproduction/run.py research/reproduction/independent-hardened",
+      "exit": 0,
+      "runner_version": "run.py in this commit"
+    },
+    {
+      "command": "python3 research/reproduction/audit_cases.py research/reproduction/audit-probe",
+      "exit": 1,
+      "note": "exploratory expected-reason mismatches; all negative calls rejected"
+    },
+    {
+      "command": "python3 research/reproduction/audit_cases.py research/reproduction/audit-final",
+      "exit": 0,
+      "runner_version": "audit_cases.py in this commit"
+    }
+  ],
+  "sha256": {
+    "research/reproduction/run.py": "39cbc628bb939b93ee44622877baf3d19d7f8dfb30917ae8dc44656a658b9b42",
+    "research/reproduction/audit_cases.py": "409c0b44880dd5c179beaa6e03b747dfb2c37c9486a64eddf4a3b144d2e2f90b",
+    "bin/cp_verify": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394",
+    "examples/accepted-proof/example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+    "examples/accepted-proof/README.md": "1d61a46f28e8b22ab2730eb255440b42925e60e20b810d23dbdd833aee5b0de7",
+    "examples/accepted-proof/example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+    "examples/accepted-proof/SHA256SUMS": "da8f5562eaa27e177b3b8aa39366d913befdfdc3114786907750ed5c0c18ecea",
+    "examples/accepted-proof/ID.txt": "ad3a4c1abecbae4d9f4f8640851f64796b9b1c595b40ea566d797f25ef2e7ff1",
+    "examples/accepted-proof/example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+    "examples/accepted-proof/ivk/key.bin": "123dc39e8947fd3ba838d7a1a35d587c2f0e1707d1bca9b6ed551b52bf0c2e09",
+    "examples/accepted-proof/config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "examples/accepted-proof/config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "examples/accepted-proof/config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "examples/accepted-proof/ivk/leaf/0.bin": "c9484f50fedfaf4e28ec9d1b5d19c3cd5e97bf4582511da49f9eb5693f10e1e0",
+    "examples/accepted-proof-clipped-gap/example.req": "f6d35d5c30a7c5cbe1e328884e42310cba5e9065edf9974a7c9fd806ab3a6c16",
+    "examples/accepted-proof-clipped-gap/README.md": "862782a98d9e327e84bd6e0da89fdf5cf109365ee15fbdc77210ce2ce0a1e1fb",
+    "examples/accepted-proof-clipped-gap/example.proof": "368bab49989777a0aebbc9853805ebec7c5b7ef9a8af777439284f211d27530c",
+    "examples/accepted-proof-clipped-gap/SHA256SUMS": "db1d6449464ae8bdd7540a448d3005c4a3245cf88ea99b9a26981e1667468db0",
+    "examples/accepted-proof-clipped-gap/ID.txt": "42671e0e7bd95ac365d71d43f9856dd627d54ef0dca0145ddc7cad7f97a7df0b",
+    "examples/accepted-proof-clipped-gap/example.y": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "examples/accepted-proof-clipped-gap/ivk/key.bin": "b66421c9f80b2ea387010a405cbe070717b14b34b99a869448e17928d40e0953",
+    "examples/accepted-proof-clipped-gap/config/KL.bin": "eba3bc773c63d9dd69d3373170778db9643d835d99de84cd542139bee1b8ea3c",
+    "examples/accepted-proof-clipped-gap/config/policy.txt": "735077ff031e0d679f430c85fc92b3d82177044b045e68574a7f7c0d23f3b2ae",
+    "examples/accepted-proof-clipped-gap/config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "examples/accepted-proof-clipped-gap/ivk/leaf/0.bin": "da0bba9ae7d60b60895ccc63de770967668c0cff055f7c268e7681c1bb01b39c"
+  },
+  "summed_child_wall_seconds": {
+    "independent-original": 167.196,
+    "independent-hardened": 168.561,
+    "audit-probe": 32.919,
+    "audit-final": 33.458
+  }
+}

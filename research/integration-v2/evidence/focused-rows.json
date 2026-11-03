@@ -1,0 +1,23 @@
+[
+  {
+    "name": "build.verifier",
+    "classification": "passed",
+    "seconds": 82.9,
+    "exit": 0,
+    "last": "THE VERIFIER IS BUILT: <REPO>/bin/cp_verify"
+  },
+  {
+    "name": "tools.lean_verify.script",
+    "classification": "passed",
+    "seconds": 145.1,
+    "exit": 0,
+    "last": "lean_verify_test.sh: 346 calls: all as expected"
+  },
+  {
+    "name": "integrations.cp_verify",
+    "classification": "passed",
+    "seconds": 142.1,
+    "exit": 0,
+    "last": "68 passed in 141.39s (0:02:21)"
+  }
+]
