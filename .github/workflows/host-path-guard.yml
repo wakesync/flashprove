@@ -1,0 +1,30 @@
+# Fails a pull request whose tree publishes local host paths or agent-workspace names.
+# Runs main's copy of the guard against the PR head, so a PR can't weaken the check it is judged by.
+name: host-path-guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out (full history for the base ref)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Run main's guard against the PR head (or the pushed commit)
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "+refs/heads/main:refs/remotes/origin/main"
+          git show origin/main:scripts/check-no-host-paths.sh > "$RUNNER_TEMP/check-no-host-paths.sh"
+          bash "$RUNNER_TEMP/check-no-host-paths.sh" "$HEAD_SHA"
