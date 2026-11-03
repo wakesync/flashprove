@@ -1,0 +1,136 @@
+{
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "commands": [
+    {
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-fno-ipa-modref",
+        "-DBLK_FIELD=2",
+        "-DBLK_HASH=1",
+        "-I",
+        "blocks",
+        "research/operators/affine_rows/test.cpp",
+        "-o",
+        "research/operators/affine_rows/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 26.749,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin"
+      ],
+      "exit": 0,
+      "seconds": 0.379,
+      "stdout": "PASS: 7744 proof bytes; 2 complete affine-only malicious proofs rejected; 4 statement mutations; max 64/64/64 counts and 8 terms; 80 flips; 40 cuts plus last byte; bidirectional domains; independent coefficients\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "0"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.131,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:26: affine count out of range\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "1"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.185,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:26: affine count out of range\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "2"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.146,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:29: invalid affine relation\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "3"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.149,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:29: invalid affine relation\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "4"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.147,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:29: invalid affine relation\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "5"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.144,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:29: invalid affine relation\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "6"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.151,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:29: invalid affine relation\n"
+    },
+    {
+      "argv": [
+        "research/operators/affine_rows/test.bin",
+        "7"
+      ],
+      "exit": -6,
+      "expected_exit": -6,
+      "seconds": 1.145,
+      "stdout": "",
+      "stderr": "research/operators/affine_rows/product.h:30: affine column out of range\n"
+    }
+  ],
+  "sha256": {
+    "research/operators/affine_rows/product.h": "fa361d28f1e123a0b1242b4371f7f4ead32193b8585497e8296400e4a43b40e9",
+    "research/operators/affine_rows/test.cpp": "bed8b44e5c05c1cfc9c18ccf3ac91864e664ac1d5932505abbf1c42943aab500",
+    "research/operators/affine_rows/record.py": "f82483906704c39d27853a093f767e93a6e637ec7a37cd33e78da43214f638c1",
+    "research/operators/shared_wires/product.h": "dbcb145bf69c28c6fef4d2100c8b8d329382dc54255ececb22f62bf63d18b6b0",
+    "research/operators/public_binding/product.h": "253b56dd7dba492dff1761772c8d27f27017619f2e806119eeacce588c7686a9",
+    "blocks/toy/product.h": "192ac4e841b00d2e2c685805de58fd5aef704c63597b74dfad512e3e1118e510",
+    "blocks/iop/relation.h": "b3c84ee1d90f4a31594b6ad9c57fea1ac6734f5cc6dc495152c9122a02d49bda",
+    "blocks/iop/iopp.h": "5729e8b21e43bf0177411993380235e74aa55d638d225b9e7a68bca495cae142",
+    "blocks/numbers/blocks.h": "490a95f150ea8f49fe11fde970272f1fded95048bfd6c772280edec734ff7c43",
+    "research/operators/affine_rows/test.bin": "45d7490b5422a6a741b7eb3e7e57aed0a4816d244aca7559c791f4fd4db3d8c8"
+  }
+}
