@@ -1,5 +1,7 @@
 # Matched CPU verification baseline: no measured improvement
 
+Follow-up: [unprivileged process-CPU instrumentation and bounded accounting experiment](followup/README.md) identifies sizing/configuration costs and tests one candidate. It still establishes no meaningful end-to-end speedup. The baseline below is retained unchanged as historical evidence.
+
 Issue #7. This is an executed measurement of **complete CPU verification of a stored synthetic-model proof**, including key, leaf and request checks. It is not a matrix microbenchmark, but neither is it inference, proof generation, real-model validation or verified-response serving latency. No implementation optimization is claimed or shipped by this change.
 
 ## Pinned inputs and environment

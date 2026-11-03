@@ -1,0 +1,5 @@
+build.sh: note: another account may be able to change <workspace> (its group or others can write in it, and it has no sticky bit), under which this checkout lies, and so could change what is built, and this script itself; for a build that no other account can touch, keep the checkout below directories that only you can write in; if <workspace> is yours, close it with chmod go-w
+build=fd1173aef3cfa6a9005d9c1851d77a7d1452aff7093ba6d224c8785d1f2fc0fe dw=8
+compiling cp_verify.cpp: one compiler call of one to two minutes, which prints nothing while it runs
+build.sh: overwrote the cp_verify that was already in <workspace>/projects/flashprove-cpu-profile/bin. To keep a cp_verify from elsewhere, build into another directory: end the call with "- DIRECTORY"
+THE VERIFIER IS BUILT: <workspace>/projects/flashprove-cpu-profile/bin/cp_verify
