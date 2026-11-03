@@ -1,0 +1,1753 @@
+{
+  "scope": "stored synthetic proof, complete key+leaf+request CPU verification",
+  "cpu": "15",
+  "threads": 1,
+  "reps": 12,
+  "arms": {
+    "stock": {
+      "path": "<REPO>/build-variants/stock/cp_verify",
+      "sha256": "7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394"
+    },
+    "stock-o3": {
+      "path": "<REPO>/build-variants/o3/cp_verify",
+      "sha256": "a96813d913f51e2c43a933f14037fcc434a7e5cd67d5d25e72a41d768833f7c4"
+    },
+    "stock-v3": {
+      "path": "<REPO>/build-variants/v3/cp_verify",
+      "sha256": "f5334fd57c3fd345494385862d2d935549ec7548d67f51dfdb456d3cd0e91f59"
+    },
+    "stock-pgo": {
+      "path": "<REPO>/build-variants/stock-pgo/use/cp_verify",
+      "sha256": "8633ff4527474327c90fb979ae3c02c978662a553daf658bbd246c5f8fefd7a2"
+    },
+    "cand": {
+      "path": "<REPO>/build-variants/cand/cp_verify",
+      "sha256": "781dda18ab2bbf0401a10ee701897d9cfe697cda5ed912a10ae06e1884cd13a1"
+    },
+    "cand-pgo": {
+      "path": "<REPO>/build-variants/cand-pgouse/cp_verify",
+      "sha256": "64bc6574441b6ba60711984d6d87d8229d411b7490fb38de0df57ab601f4acf2"
+    }
+  },
+  "fixture_sha256": {
+    "ID.txt": "ad3a4c1abecbae4d9f4f8640851f64796b9b1c595b40ea566d797f25ef2e7ff1",
+    "README.md": "1d61a46f28e8b22ab2730eb255440b42925e60e20b810d23dbdd833aee5b0de7",
+    "SHA256SUMS": "da8f5562eaa27e177b3b8aa39366d913befdfdc3114786907750ed5c0c18ecea",
+    "config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+    "example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+    "example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+    "ivk/key.bin": "123dc39e8947fd3ba838d7a1a35d587c2f0e1707d1bca9b6ed551b52bf0c2e09",
+    "ivk/leaf/0.bin": "c9484f50fedfaf4e28ec9d1b5d19c3cd5e97bf4582511da49f9eb5693f10e1e0"
+  },
+  "hardware": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           40 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC-Rome Processor\nCPU family:                              23\nModel:                                   49\nThread(s) per core:                      1\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nBogoMIPS:                                4890.80\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 clzero xsaveerptr wbnoinvd arat umip rdpid\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               512 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                8 MiB (16 instances)\nL3 cache:                                16 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; untrained return thunk; SMT disabled\nVulnerability Spec rstack overflow:      Mitigation; SMT disabled\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+  "kernel": "Linux 6.8.0-100-generic x86_64 GNU/Linux",
+  "load_before": {
+    "loadavg": "1.92 2.59 2.73 6/1750 887580",
+    "cpu_pressure": "some avg10=1.18 avg60=0.35 avg300=1.31 total=85099418630"
+  },
+  "rows": [
+    {
+      "label": "stock",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.59,
+      "user_s": 2.49,
+      "sys_s": 0.1,
+      "max_rss_kib": 157740,
+      "load_before": {
+        "loadavg": "1.92 2.59 2.73 6/1750 887580",
+        "cpu_pressure": "some avg10=1.18 avg60=0.35 avg300=1.31 total=85099418630"
+      },
+      "load_after": {
+        "loadavg": "1.92 2.59 2.73 4/1752 887627",
+        "cpu_pressure": "some avg10=3.14 avg60=0.73 avg300=1.38 total=85099688428"
+      },
+      "t": 1793742886.0202947
+    },
+    {
+      "label": "stock-o3",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.51,
+      "user_s": 2.42,
+      "sys_s": 0.08,
+      "max_rss_kib": 158032,
+      "load_before": {
+        "loadavg": "1.92 2.59 2.73 3/1752 887627",
+        "cpu_pressure": "some avg10=3.14 avg60=0.73 avg300=1.38 total=85099688428"
+      },
+      "load_after": {
+        "loadavg": "1.93 2.58 2.73 2/1751 887708",
+        "cpu_pressure": "some avg10=6.19 avg60=1.36 avg300=1.51 total=85100214780"
+      },
+      "t": 1793742888.5429134
+    },
+    {
+      "label": "stock-v3",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.75,
+      "user_s": 2.65,
+      "sys_s": 0.1,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "1.93 2.58 2.73 2/1751 887708",
+        "cpu_pressure": "some avg10=6.19 avg60=1.36 avg300=1.51 total=85100214780"
+      },
+      "load_after": {
+        "loadavg": "1.93 2.58 2.73 4/1744 887752",
+        "cpu_pressure": "some avg10=10.53 avg60=2.53 avg300=1.76 total=85100888297"
+      },
+      "t": 1793742891.3174086
+    },
+    {
+      "label": "stock-pgo",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.72,
+      "user_s": 2.62,
+      "sys_s": 0.1,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "1.93 2.58 2.73 2/1744 887752",
+        "cpu_pressure": "some avg10=10.53 avg60=2.53 avg300=1.76 total=85100888297"
+      },
+      "load_after": {
+        "loadavg": "1.93 2.57 2.72 3/1744 887789",
+        "cpu_pressure": "some avg10=14.05 avg60=3.43 avg300=1.95 total=85101535868"
+      },
+      "t": 1793742894.091386
+    },
+    {
+      "label": "cand",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.14,
+      "user_s": 2.03,
+      "sys_s": 0.1,
+      "max_rss_kib": 158164,
+      "load_before": {
+        "loadavg": "1.93 2.57 2.72 2/1744 887789",
+        "cpu_pressure": "some avg10=14.05 avg60=3.43 avg300=1.95 total=85101535868"
+      },
+      "load_after": {
+        "loadavg": "1.93 2.57 2.72 2/1742 887827",
+        "cpu_pressure": "some avg10=15.86 avg60=4.10 avg300=2.10 total=85101998461"
+      },
+      "t": 1793742896.264405
+    },
+    {
+      "label": "cand-pgo",
+      "rep": "warmup",
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.04,
+      "user_s": 1.92,
+      "sys_s": 0.11,
+      "max_rss_kib": 158116,
+      "load_before": {
+        "loadavg": "1.93 2.57 2.72 3/1742 887827",
+        "cpu_pressure": "some avg10=15.86 avg60=4.10 avg300=2.10 total=85101998461"
+      },
+      "load_after": {
+        "loadavg": "1.94 2.56 2.72 3/1741 887896",
+        "cpu_pressure": "some avg10=16.42 avg60=4.59 avg300=2.22 total=85102379681"
+      },
+      "t": 1793742898.3357322
+    },
+    {
+      "label": "stock",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.94,
+      "user_s": 2.82,
+      "sys_s": 0.11,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "1.94 2.56 2.72 2/1741 887896",
+        "cpu_pressure": "some avg10=16.42 avg60=4.59 avg300=2.22 total=85102379681"
+      },
+      "load_after": {
+        "loadavg": "1.94 2.56 2.72 2/1738 887945",
+        "cpu_pressure": "some avg10=16.40 avg60=5.35 avg300=2.41 total=85103052500"
+      },
+      "t": 1793742901.3108456
+    },
+    {
+      "label": "stock-o3",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.68,
+      "user_s": 2.58,
+      "sys_s": 0.1,
+      "max_rss_kib": 157996,
+      "load_before": {
+        "loadavg": "1.94 2.56 2.72 2/1738 887945",
+        "cpu_pressure": "some avg10=16.40 avg60=5.35 avg300=2.41 total=85103052500"
+      },
+      "load_after": {
+        "loadavg": "2.18 2.61 2.73 3/1762 888065",
+        "cpu_pressure": "some avg10=20.67 avg60=6.49 avg300=2.67 total=85103883488"
+      },
+      "t": 1793742904.0343897
+    },
+    {
+      "label": "stock-v3",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.68,
+      "user_s": 2.58,
+      "sys_s": 0.1,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "2.18 2.61 2.73 4/1762 888065",
+        "cpu_pressure": "some avg10=20.67 avg60=6.49 avg300=2.67 total=85103883488"
+      },
+      "load_after": {
+        "loadavg": "2.18 2.61 2.73 2/1751 889008",
+        "cpu_pressure": "some avg10=19.28 avg60=6.70 avg300=2.74 total=85104255024"
+      },
+      "t": 1793742906.758641
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.65,
+      "user_s": 2.54,
+      "sys_s": 0.1,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "2.18 2.61 2.73 3/1750 889009",
+        "cpu_pressure": "some avg10=19.28 avg60=6.70 avg300=2.74 total=85104255024"
+      },
+      "load_after": {
+        "loadavg": "2.33 2.63 2.74 5/1751 889566",
+        "cpu_pressure": "some avg10=17.09 avg60=7.08 avg300=2.87 total=85104680572"
+      },
+      "t": 1793742909.431519
+    },
+    {
+      "label": "cand",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.11,
+      "user_s": 2.0,
+      "sys_s": 0.1,
+      "max_rss_kib": 158160,
+      "load_before": {
+        "loadavg": "2.33 2.63 2.74 5/1751 889566",
+        "cpu_pressure": "some avg10=17.09 avg60=7.08 avg300=2.87 total=85104680572"
+      },
+      "load_after": {
+        "loadavg": "2.33 2.63 2.74 5/1754 889630",
+        "cpu_pressure": "some avg10=16.35 avg60=7.27 avg300=2.94 total=85104951574"
+      },
+      "t": 1793742911.55364
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 0,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.08,
+      "user_s": 1.97,
+      "sys_s": 0.1,
+      "max_rss_kib": 158164,
+      "load_before": {
+        "loadavg": "2.33 2.63 2.74 3/1754 889630",
+        "cpu_pressure": "some avg10=16.35 avg60=7.27 avg300=2.94 total=85104951574"
+      },
+      "load_after": {
+        "loadavg": "2.30 2.62 2.74 3/1755 889679",
+        "cpu_pressure": "some avg10=15.92 avg60=7.49 avg300=3.02 total=85105240549"
+      },
+      "t": 1793742913.675683
+    },
+    {
+      "label": "stock-o3",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.54,
+      "user_s": 2.44,
+      "sys_s": 0.1,
+      "max_rss_kib": 157904,
+      "load_before": {
+        "loadavg": "2.30 2.62 2.74 3/1755 889679",
+        "cpu_pressure": "some avg10=15.92 avg60=7.49 avg300=3.02 total=85105240549"
+      },
+      "load_after": {
+        "loadavg": "2.30 2.62 2.74 3/1752 889784",
+        "cpu_pressure": "some avg10=17.02 avg60=7.96 avg300=3.15 total=85105696003"
+      },
+      "t": 1793742916.2493703
+    },
+    {
+      "label": "stock-v3",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.72,
+      "user_s": 2.59,
+      "sys_s": 0.12,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "2.30 2.62 2.74 3/1752 889784",
+        "cpu_pressure": "some avg10=17.02 avg60=7.96 avg300=3.15 total=85105696003"
+      },
+      "load_after": {
+        "loadavg": "2.44 2.64 2.74 2/1755 889910",
+        "cpu_pressure": "some avg10=16.11 avg60=8.10 avg300=3.21 total=85106147550"
+      },
+      "t": 1793742918.9737835
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.68,
+      "user_s": 2.57,
+      "sys_s": 0.11,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "2.44 2.64 2.74 2/1755 889910",
+        "cpu_pressure": "some avg10=16.11 avg60=8.10 avg300=3.21 total=85106147550"
+      },
+      "load_after": {
+        "loadavg": "2.44 2.64 2.74 4/1752 890034",
+        "cpu_pressure": "some avg10=16.47 avg60=8.67 avg300=3.40 total=85106634986"
+      },
+      "t": 1793742921.6992338
+    },
+    {
+      "label": "cand",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.11,
+      "user_s": 2.0,
+      "sys_s": 0.1,
+      "max_rss_kib": 158164,
+      "load_before": {
+        "loadavg": "2.44 2.64 2.74 4/1752 890034",
+        "cpu_pressure": "some avg10=16.47 avg60=8.67 avg300=3.40 total=85106634989"
+      },
+      "load_after": {
+        "loadavg": "2.40 2.63 2.74 6/1744 890114",
+        "cpu_pressure": "some avg10=16.20 avg60=8.88 avg300=3.48 total=85106936955"
+      },
+      "t": 1793742923.8224294
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.13,
+      "user_s": 2.02,
+      "sys_s": 0.11,
+      "max_rss_kib": 158160,
+      "load_before": {
+        "loadavg": "2.40 2.63 2.74 6/1744 890114",
+        "cpu_pressure": "some avg10=16.20 avg60=8.88 avg300=3.48 total=85106936955"
+      },
+      "load_after": {
+        "loadavg": "2.40 2.63 2.74 6/1743 890135",
+        "cpu_pressure": "some avg10=17.07 avg60=9.28 avg300=3.60 total=85107358614"
+      },
+      "t": 1793742925.9953299
+    },
+    {
+      "label": "stock",
+      "rep": 1,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.58,
+      "user_s": 2.48,
+      "sys_s": 0.1,
+      "max_rss_kib": 157868,
+      "load_before": {
+        "loadavg": "2.40 2.63 2.74 6/1743 890135",
+        "cpu_pressure": "some avg10=17.07 avg60=9.28 avg300=3.60 total=85107358614"
+      },
+      "load_after": {
+        "loadavg": "2.37 2.62 2.73 1/1743 890224",
+        "cpu_pressure": "some avg10=16.51 avg60=9.43 avg300=3.67 total=85107724823"
+      },
+      "t": 1793742928.6190786
+    },
+    {
+      "label": "stock-v3",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.56,
+      "user_s": 2.46,
+      "sys_s": 0.09,
+      "max_rss_kib": 157904,
+      "load_before": {
+        "loadavg": "2.37 2.62 2.73 1/1743 890224",
+        "cpu_pressure": "some avg10=16.51 avg60=9.43 avg300=3.67 total=85107724823"
+      },
+      "load_after": {
+        "loadavg": "2.37 2.62 2.73 3/1759 890266",
+        "cpu_pressure": "some avg10=18.23 avg60=9.97 avg300=3.82 total=85108754594"
+      },
+      "t": 1793742931.193863
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.57,
+      "user_s": 2.46,
+      "sys_s": 0.1,
+      "max_rss_kib": 157904,
+      "load_before": {
+        "loadavg": "2.37 2.62 2.73 2/1759 890266",
+        "cpu_pressure": "some avg10=18.23 avg60=9.97 avg300=3.82 total=85108754594"
+      },
+      "load_after": {
+        "loadavg": "2.26 2.59 2.72 1/1739 890311",
+        "cpu_pressure": "some avg10=24.50 avg60=11.69 avg300=4.27 total=85109677131"
+      },
+      "t": 1793742933.8178015
+    },
+    {
+      "label": "cand",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.28,
+      "user_s": 2.15,
+      "sys_s": 0.12,
+      "max_rss_kib": 157984,
+      "load_before": {
+        "loadavg": "2.26 2.59 2.72 2/1739 890311",
+        "cpu_pressure": "some avg10=24.50 avg60=11.69 avg300=4.27 total=85109677131"
+      },
+      "load_after": {
+        "loadavg": "2.26 2.59 2.72 7/1739 890330",
+        "cpu_pressure": "some avg10=27.30 avg60=12.61 avg300=4.51 total=85110481841"
+      },
+      "t": 1793742936.1408732
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.1,
+      "user_s": 1.98,
+      "sys_s": 0.12,
+      "max_rss_kib": 158116,
+      "load_before": {
+        "loadavg": "2.26 2.59 2.72 7/1739 890330",
+        "cpu_pressure": "some avg10=27.30 avg60=12.61 avg300=4.51 total=85110481841"
+      },
+      "load_after": {
+        "loadavg": "2.16 2.57 2.72 2/1738 890418",
+        "cpu_pressure": "some avg10=24.17 avg60=12.53 avg300=4.55 total=85110691760"
+      },
+      "t": 1793742938.2672837
+    },
+    {
+      "label": "stock",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.69,
+      "user_s": 2.57,
+      "sys_s": 0.11,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "2.16 2.57 2.72 2/1738 890418",
+        "cpu_pressure": "some avg10=24.17 avg60=12.53 avg300=4.55 total=85110691760"
+      },
+      "load_after": {
+        "loadavg": "2.16 2.57 2.72 1/1738 890444",
+        "cpu_pressure": "some avg10=24.68 avg60=13.00 avg300=4.70 total=85111670801"
+      },
+      "t": 1793742940.9914002
+    },
+    {
+      "label": "stock-o3",
+      "rep": 2,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.49,
+      "user_s": 2.39,
+      "sys_s": 0.09,
+      "max_rss_kib": 158000,
+      "load_before": {
+        "loadavg": "2.16 2.57 2.72 1/1738 890444",
+        "cpu_pressure": "some avg10=24.68 avg60=13.00 avg300=4.70 total=85111670801"
+      },
+      "load_after": {
+        "loadavg": "2.07 2.54 2.71 2/1745 890503",
+        "cpu_pressure": "some avg10=27.01 avg60=14.20 avg300=5.07 total=85112541743"
+      },
+      "t": 1793742943.5156713
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.64,
+      "user_s": 2.53,
+      "sys_s": 0.1,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "2.07 2.54 2.71 2/1745 890503",
+        "cpu_pressure": "some avg10=27.01 avg60=14.20 avg300=5.07 total=85112541743"
+      },
+      "load_after": {
+        "loadavg": "2.07 2.54 2.71 2/1745 890532",
+        "cpu_pressure": "some avg10=31.72 avg60=15.46 avg300=5.40 total=85113563881"
+      },
+      "t": 1793742946.1906397
+    },
+    {
+      "label": "cand",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.18,
+      "user_s": 2.06,
+      "sys_s": 0.12,
+      "max_rss_kib": 157988,
+      "load_before": {
+        "loadavg": "2.07 2.54 2.71 2/1745 890532",
+        "cpu_pressure": "some avg10=31.72 avg60=15.46 avg300=5.40 total=85113563881"
+      },
+      "load_after": {
+        "loadavg": "1.98 2.51 2.70 3/1746 890625",
+        "cpu_pressure": "some avg10=31.04 avg60=15.87 avg300=5.55 total=85114183892"
+      },
+      "t": 1793742948.4128134
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.1,
+      "user_s": 1.98,
+      "sys_s": 0.12,
+      "max_rss_kib": 158244,
+      "load_before": {
+        "loadavg": "1.98 2.51 2.70 2/1746 890625",
+        "cpu_pressure": "some avg10=31.04 avg60=15.87 avg300=5.55 total=85114183892"
+      },
+      "load_after": {
+        "loadavg": "1.98 2.51 2.70 3/1745 890645",
+        "cpu_pressure": "some avg10=30.85 avg60=16.34 avg300=5.72 total=85114863930"
+      },
+      "t": 1793742950.5358844
+    },
+    {
+      "label": "stock",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.55,
+      "user_s": 2.45,
+      "sys_s": 0.09,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "1.98 2.51 2.70 3/1745 890645",
+        "cpu_pressure": "some avg10=30.85 avg60=16.34 avg300=5.72 total=85114863930"
+      },
+      "load_after": {
+        "loadavg": "1.98 2.50 2.69 1/1738 890701",
+        "cpu_pressure": "some avg10=30.15 avg60=16.69 avg300=5.86 total=85115694862"
+      },
+      "t": 1793742953.1106772
+    },
+    {
+      "label": "stock-o3",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.47,
+      "user_s": 2.37,
+      "sys_s": 0.09,
+      "max_rss_kib": 158032,
+      "load_before": {
+        "loadavg": "1.98 2.50 2.69 1/1738 890701",
+        "cpu_pressure": "some avg10=30.15 avg60=16.69 avg300=5.86 total=85115694862"
+      },
+      "load_after": {
+        "loadavg": "1.98 2.50 2.69 1/1738 890728",
+        "cpu_pressure": "some avg10=31.24 avg60=17.71 avg300=6.23 total=85116617261"
+      },
+      "t": 1793742955.6343472
+    },
+    {
+      "label": "stock-v3",
+      "rep": 3,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.7,
+      "user_s": 2.58,
+      "sys_s": 0.11,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "1.98 2.50 2.69 1/1738 890728",
+        "cpu_pressure": "some avg10=31.24 avg60=17.71 avg300=6.23 total=85116617261"
+      },
+      "load_after": {
+        "loadavg": "1.90 2.48 2.68 2/1738 890814",
+        "cpu_pressure": "some avg10=35.18 avg60=18.87 avg300=6.55 total=85117712269"
+      },
+      "t": 1793742958.3590631
+    },
+    {
+      "label": "cand",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.16,
+      "user_s": 2.03,
+      "sys_s": 0.13,
+      "max_rss_kib": 157904,
+      "load_before": {
+        "loadavg": "1.90 2.48 2.68 4/1738 890814",
+        "cpu_pressure": "some avg10=35.18 avg60=18.87 avg300=6.55 total=85117712269"
+      },
+      "load_after": {
+        "loadavg": "1.90 2.48 2.68 6/1738 890839",
+        "cpu_pressure": "some avg10=34.24 avg60=19.23 avg300=6.71 total=85118455745"
+      },
+      "t": 1793742960.532317
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.19,
+      "user_s": 2.05,
+      "sys_s": 0.13,
+      "max_rss_kib": 158164,
+      "load_before": {
+        "loadavg": "1.90 2.48 2.68 4/1738 890839",
+        "cpu_pressure": "some avg10=34.24 avg60=19.23 avg300=6.71 total=85118455750"
+      },
+      "load_after": {
+        "loadavg": "1.90 2.48 2.68 1/1743 890979",
+        "cpu_pressure": "some avg10=32.56 avg60=19.42 avg300=6.83 total=85119012923"
+      },
+      "t": 1793742962.7560205
+    },
+    {
+      "label": "stock",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.58,
+      "user_s": 2.46,
+      "sys_s": 0.11,
+      "max_rss_kib": 157904,
+      "load_before": {
+        "loadavg": "1.90 2.48 2.68 1/1743 890979",
+        "cpu_pressure": "some avg10=32.56 avg60=19.42 avg300=6.83 total=85119012923"
+      },
+      "load_after": {
+        "loadavg": "1.99 2.49 2.69 2/1738 891003",
+        "cpu_pressure": "some avg10=31.09 avg60=19.97 avg300=7.12 total=85119984334"
+      },
+      "t": 1793742965.3804832
+    },
+    {
+      "label": "stock-o3",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.62,
+      "user_s": 2.52,
+      "sys_s": 0.09,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "1.99 2.49 2.69 3/1738 891003",
+        "cpu_pressure": "some avg10=31.09 avg60=19.97 avg300=7.12 total=85119984334"
+      },
+      "load_after": {
+        "loadavg": "3.27 2.75 2.77 17/1757 891132",
+        "cpu_pressure": "some avg10=33.25 avg60=20.73 avg300=7.37 total=85120913246"
+      },
+      "t": 1793742968.0098603
+    },
+    {
+      "label": "stock-v3",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.83,
+      "user_s": 2.7,
+      "sys_s": 0.12,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "3.27 2.75 2.77 17/1757 891132",
+        "cpu_pressure": "some avg10=33.25 avg60=20.73 avg300=7.37 total=85120913367"
+      },
+      "load_after": {
+        "loadavg": "3.27 2.75 2.77 1/1736 891192",
+        "cpu_pressure": "some avg10=33.20 avg60=21.13 avg300=7.54 total=85121798956"
+      },
+      "t": 1793742970.8887177
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 4,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.68,
+      "user_s": 2.57,
+      "sys_s": 0.11,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.27 2.75 2.77 1/1736 891192",
+        "cpu_pressure": "some avg10=33.20 avg60=21.13 avg300=7.54 total=85121798956"
+      },
+      "load_after": {
+        "loadavg": "3.09 2.72 2.76 1/1743 891285",
+        "cpu_pressure": "some avg10=29.95 avg60=21.28 avg300=7.76 total=85122444244"
+      },
+      "t": 1793742973.6135898
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.03,
+      "user_s": 1.9,
+      "sys_s": 0.12,
+      "max_rss_kib": 158036,
+      "load_before": {
+        "loadavg": "3.09 2.72 2.76 1/1743 891285",
+        "cpu_pressure": "some avg10=29.95 avg60=21.28 avg300=7.76 total=85122444244"
+      },
+      "load_after": {
+        "loadavg": "3.09 2.72 2.76 1/1743 891330",
+        "cpu_pressure": "some avg10=29.78 avg60=21.53 avg300=7.91 total=85123048940"
+      },
+      "t": 1793742975.6874459
+    },
+    {
+      "label": "stock",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.63,
+      "user_s": 2.53,
+      "sys_s": 0.09,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.09 2.72 2.76 1/1743 891330",
+        "cpu_pressure": "some avg10=29.78 avg60=21.53 avg300=7.91 total=85123048940"
+      },
+      "load_after": {
+        "loadavg": "3.24 2.75 2.77 2/1743 891414",
+        "cpu_pressure": "some avg10=32.90 avg60=22.37 avg300=8.17 total=85123973429"
+      },
+      "t": 1793742978.362845
+    },
+    {
+      "label": "stock-o3",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.59,
+      "user_s": 2.49,
+      "sys_s": 0.1,
+      "max_rss_kib": 158000,
+      "load_before": {
+        "loadavg": "3.24 2.75 2.77 3/1743 891415",
+        "cpu_pressure": "some avg10=32.90 avg60=22.37 avg300=8.17 total=85123973429"
+      },
+      "load_after": {
+        "loadavg": "3.24 2.75 2.77 2/1743 891537",
+        "cpu_pressure": "some avg10=30.38 avg60=22.26 avg300=8.25 total=85124712193"
+      },
+      "t": 1793742980.989501
+    },
+    {
+      "label": "stock-v3",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.62,
+      "user_s": 2.5,
+      "sys_s": 0.11,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.24 2.75 2.77 1/1743 891537",
+        "cpu_pressure": "some avg10=30.38 avg60=22.26 avg300=8.25 total=85124712193"
+      },
+      "load_after": {
+        "loadavg": "3.14 2.74 2.77 21/1755 891636",
+        "cpu_pressure": "some avg10=30.86 avg60=22.85 avg300=8.57 total=85125618143"
+      },
+      "t": 1793742983.6649911
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.66,
+      "user_s": 2.55,
+      "sys_s": 0.1,
+      "max_rss_kib": 157868,
+      "load_before": {
+        "loadavg": "3.14 2.74 2.77 20/1755 891636",
+        "cpu_pressure": "some avg10=30.86 avg60=22.85 avg300=8.57 total=85125618369"
+      },
+      "load_after": {
+        "loadavg": "3.14 2.74 2.77 3/1743 891725",
+        "cpu_pressure": "some avg10=28.89 avg60=22.76 avg300=8.64 total=85126031896"
+      },
+      "t": 1793742986.3477764
+    },
+    {
+      "label": "cand",
+      "rep": 5,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.2,
+      "user_s": 2.07,
+      "sys_s": 0.12,
+      "max_rss_kib": 158164,
+      "load_before": {
+        "loadavg": "3.14 2.74 2.77 3/1743 891725",
+        "cpu_pressure": "some avg10=28.89 avg60=22.76 avg300=8.64 total=85126031896"
+      },
+      "load_after": {
+        "loadavg": "3.29 2.78 2.78 2/1737 891802",
+        "cpu_pressure": "some avg10=26.38 avg60=22.51 avg300=8.69 total=85126416384"
+      },
+      "t": 1793742988.5720103
+    },
+    {
+      "label": "stock",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.72,
+      "user_s": 2.62,
+      "sys_s": 0.1,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "3.29 2.78 2.78 3/1737 891802",
+        "cpu_pressure": "some avg10=26.38 avg60=22.51 avg300=8.69 total=85126416384"
+      },
+      "load_after": {
+        "loadavg": "3.29 2.78 2.78 2/1739 891843",
+        "cpu_pressure": "some avg10=25.11 avg60=22.51 avg300=8.88 total=85127271049"
+      },
+      "t": 1793742991.3478692
+    },
+    {
+      "label": "stock-o3",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.57,
+      "user_s": 2.48,
+      "sys_s": 0.09,
+      "max_rss_kib": 157996,
+      "load_before": {
+        "loadavg": "3.29 2.78 2.78 2/1739 891843",
+        "cpu_pressure": "some avg10=25.11 avg60=22.51 avg300=8.88 total=85127271049"
+      },
+      "load_after": {
+        "loadavg": "3.19 2.77 2.77 1/1739 891898",
+        "cpu_pressure": "some avg10=27.99 avg60=23.11 avg300=9.10 total=85128119441"
+      },
+      "t": 1793742993.9721677
+    },
+    {
+      "label": "stock-v3",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.55,
+      "user_s": 2.46,
+      "sys_s": 0.09,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "3.19 2.77 2.77 1/1739 891898",
+        "cpu_pressure": "some avg10=27.99 avg60=23.11 avg300=9.10 total=85128119441"
+      },
+      "load_after": {
+        "loadavg": "3.19 2.77 2.77 2/1738 891923",
+        "cpu_pressure": "some avg10=30.53 avg60=23.73 avg300=9.32 total=85129112906"
+      },
+      "t": 1793742996.5458124
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.56,
+      "user_s": 2.45,
+      "sys_s": 0.11,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "3.19 2.77 2.77 2/1738 891923",
+        "cpu_pressure": "some avg10=30.53 avg60=23.73 avg300=9.32 total=85129112906"
+      },
+      "load_after": {
+        "loadavg": "3.09 2.75 2.77 1/1738 892003",
+        "cpu_pressure": "some avg10=30.43 avg60=23.93 avg300=9.46 total=85129963692"
+      },
+      "t": 1793742999.1195388
+    },
+    {
+      "label": "cand",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.1,
+      "user_s": 1.98,
+      "sys_s": 0.12,
+      "max_rss_kib": 158116,
+      "load_before": {
+        "loadavg": "3.09 2.75 2.77 1/1738 892003",
+        "cpu_pressure": "some avg10=30.43 avg60=23.93 avg300=9.46 total=85129963692"
+      },
+      "load_after": {
+        "loadavg": "3.09 2.75 2.77 3/1745 892041",
+        "cpu_pressure": "some avg10=29.45 avg60=23.97 avg300=9.57 total=85130594769"
+      },
+      "t": 1793743001.2422032
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 6,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.12,
+      "user_s": 1.99,
+      "sys_s": 0.13,
+      "max_rss_kib": 158160,
+      "load_before": {
+        "loadavg": "3.09 2.75 2.77 3/1745 892041",
+        "cpu_pressure": "some avg10=29.45 avg60=23.97 avg300=9.57 total=85130594769"
+      },
+      "load_after": {
+        "loadavg": "2.93 2.72 2.76 6/1745 892094",
+        "cpu_pressure": "some avg10=28.13 avg60=24.07 avg300=9.79 total=85131129204"
+      },
+      "t": 1793743003.4152734
+    },
+    {
+      "label": "stock-o3",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.58,
+      "user_s": 2.46,
+      "sys_s": 0.11,
+      "max_rss_kib": 158032,
+      "load_before": {
+        "loadavg": "2.93 2.72 2.76 6/1745 892094",
+        "cpu_pressure": "some avg10=28.13 avg60=24.07 avg300=9.79 total=85131129215"
+      },
+      "load_after": {
+        "loadavg": "2.93 2.72 2.76 2/1746 892124",
+        "cpu_pressure": "some avg10=31.18 avg60=24.75 avg300=10.03 total=85132037741"
+      },
+      "t": 1793743006.041124
+    },
+    {
+      "label": "stock-v3",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.61,
+      "user_s": 2.51,
+      "sys_s": 0.09,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "2.93 2.72 2.76 3/1746 892124",
+        "cpu_pressure": "some avg10=31.18 avg60=24.75 avg300=10.03 total=85132037741"
+      },
+      "load_after": {
+        "loadavg": "2.77 2.69 2.75 4/1744 892214",
+        "cpu_pressure": "some avg10=31.87 avg60=25.09 avg300=10.20 total=85132876738"
+      },
+      "t": 1793743008.6658044
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.58,
+      "user_s": 2.48,
+      "sys_s": 0.1,
+      "max_rss_kib": 157904,
+      "load_before": {
+        "loadavg": "2.77 2.69 2.75 2/1744 892214",
+        "cpu_pressure": "some avg10=31.87 avg60=25.09 avg300=10.20 total=85132876743"
+      },
+      "load_after": {
+        "loadavg": "2.77 2.69 2.75 2/1750 892262",
+        "cpu_pressure": "some avg10=29.94 avg60=25.15 avg300=10.41 total=85133818130"
+      },
+      "t": 1793743011.290509
+    },
+    {
+      "label": "cand",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.13,
+      "user_s": 2.01,
+      "sys_s": 0.11,
+      "max_rss_kib": 158032,
+      "load_before": {
+        "loadavg": "2.77 2.69 2.75 2/1750 892262",
+        "cpu_pressure": "some avg10=29.94 avg60=25.15 avg300=10.41 total=85133818130"
+      },
+      "load_after": {
+        "loadavg": "3.19 2.78 2.78 2/1735 892331",
+        "cpu_pressure": "some avg10=28.86 avg60=25.11 avg300=10.51 total=85134309010"
+      },
+      "t": 1793743013.4640863
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.09,
+      "user_s": 1.97,
+      "sys_s": 0.12,
+      "max_rss_kib": 158292,
+      "load_before": {
+        "loadavg": "3.19 2.78 2.78 2/1735 892331",
+        "cpu_pressure": "some avg10=28.86 avg60=25.11 avg300=10.51 total=85134309010"
+      },
+      "load_after": {
+        "loadavg": "3.19 2.78 2.78 2/1735 892353",
+        "cpu_pressure": "some avg10=27.98 avg60=25.07 avg300=10.60 total=85134803362"
+      },
+      "t": 1793743015.5891275
+    },
+    {
+      "label": "stock",
+      "rep": 7,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.58,
+      "user_s": 2.47,
+      "sys_s": 0.11,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "3.19 2.78 2.78 2/1735 892353",
+        "cpu_pressure": "some avg10=27.98 avg60=25.07 avg300=10.60 total=85134803362"
+      },
+      "load_after": {
+        "loadavg": "3.01 2.75 2.77 3/1767 892433",
+        "cpu_pressure": "some avg10=27.98 avg60=25.17 avg300=10.72 total=85135395807"
+      },
+      "t": 1793743018.2150123
+    },
+    {
+      "label": "stock-v3",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.69,
+      "user_s": 2.58,
+      "sys_s": 0.1,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "3.01 2.75 2.77 1/1767 892433",
+        "cpu_pressure": "some avg10=27.98 avg60=25.17 avg300=10.72 total=85135395809"
+      },
+      "load_after": {
+        "loadavg": "3.01 2.75 2.77 1/1737 892486",
+        "cpu_pressure": "some avg10=26.72 avg60=25.03 avg300=10.79 total=85136086137"
+      },
+      "t": 1793743020.9415631
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.7,
+      "user_s": 2.59,
+      "sys_s": 0.11,
+      "max_rss_kib": 158000,
+      "load_before": {
+        "loadavg": "3.01 2.75 2.77 2/1737 892486",
+        "cpu_pressure": "some avg10=26.72 avg60=25.03 avg300=10.79 total=85136086145"
+      },
+      "load_after": {
+        "loadavg": "2.93 2.74 2.76 4/1750 892583",
+        "cpu_pressure": "some avg10=26.12 avg60=25.03 avg300=10.98 total=85136834601"
+      },
+      "t": 1793743023.6682677
+    },
+    {
+      "label": "cand",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.2,
+      "user_s": 2.08,
+      "sys_s": 0.12,
+      "max_rss_kib": 157988,
+      "load_before": {
+        "loadavg": "2.93 2.74 2.76 5/1750 892583",
+        "cpu_pressure": "some avg10=26.12 avg60=25.03 avg300=10.98 total=85136834602"
+      },
+      "load_after": {
+        "loadavg": "2.93 2.74 2.76 3/1744 892641",
+        "cpu_pressure": "some avg10=25.01 avg60=24.86 avg300=11.05 total=85137262944"
+      },
+      "t": 1793743025.8917122
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.13,
+      "user_s": 2.01,
+      "sys_s": 0.12,
+      "max_rss_kib": 158160,
+      "load_before": {
+        "loadavg": "2.93 2.74 2.76 3/1744 892641",
+        "cpu_pressure": "some avg10=25.01 avg60=24.86 avg300=11.05 total=85137262965"
+      },
+      "load_after": {
+        "loadavg": "3.10 2.78 2.78 3/1759 892896",
+        "cpu_pressure": "some avg10=22.65 avg60=24.44 avg300=11.05 total=85137517778"
+      },
+      "t": 1793743028.0639122
+    },
+    {
+      "label": "stock",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.68,
+      "user_s": 2.58,
+      "sys_s": 0.1,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.10 2.78 2.78 3/1759 892896",
+        "cpu_pressure": "some avg10=22.65 avg60=24.44 avg300=11.05 total=85137517878"
+      },
+      "load_after": {
+        "loadavg": "3.10 2.78 2.78 3/1761 893140",
+        "cpu_pressure": "some avg10=21.26 avg60=24.13 avg300=11.08 total=85137931309"
+      },
+      "t": 1793743030.7883568
+    },
+    {
+      "label": "stock-o3",
+      "rep": 8,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.5,
+      "user_s": 2.39,
+      "sys_s": 0.11,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.10 2.78 2.78 3/1761 893140",
+        "cpu_pressure": "some avg10=21.26 avg60=24.13 avg300=11.08 total=85137931309"
+      },
+      "load_after": {
+        "loadavg": "3.09 2.78 2.78 2/1745 893335",
+        "cpu_pressure": "some avg10=19.59 avg60=23.61 avg300=11.15 total=85138480583"
+      },
+      "t": 1793743033.3124197
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.56,
+      "user_s": 2.46,
+      "sys_s": 0.1,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.09 2.78 2.78 1/1745 893335",
+        "cpu_pressure": "some avg10=19.59 avg60=23.61 avg300=11.15 total=85138480583"
+      },
+      "load_after": {
+        "loadavg": "3.09 2.78 2.78 3/1744 893408",
+        "cpu_pressure": "some avg10=24.01 avg60=24.28 avg300=11.37 total=85139398827"
+      },
+      "t": 1793743035.8869991
+    },
+    {
+      "label": "cand",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.21,
+      "user_s": 2.09,
+      "sys_s": 0.12,
+      "max_rss_kib": 158112,
+      "load_before": {
+        "loadavg": "3.09 2.78 2.78 3/1744 893408",
+        "cpu_pressure": "some avg10=24.01 avg60=24.28 avg300=11.37 total=85139398827"
+      },
+      "load_after": {
+        "loadavg": "3.96 2.97 2.84 6/1768 893508",
+        "cpu_pressure": "some avg10=23.10 avg60=24.10 avg300=11.42 total=85139943541"
+      },
+      "t": 1793743038.1197598
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.18,
+      "user_s": 2.04,
+      "sys_s": 0.13,
+      "max_rss_kib": 158116,
+      "load_before": {
+        "loadavg": "3.96 2.97 2.84 8/1768 893508",
+        "cpu_pressure": "some avg10=23.10 avg60=24.10 avg300=11.42 total=85139943542"
+      },
+      "load_after": {
+        "loadavg": "3.96 2.97 2.84 1/1746 893582",
+        "cpu_pressure": "some avg10=22.36 avg60=23.94 avg300=11.48 total=85140165828"
+      },
+      "t": 1793743040.342434
+    },
+    {
+      "label": "stock",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.64,
+      "user_s": 2.53,
+      "sys_s": 0.1,
+      "max_rss_kib": 157776,
+      "load_before": {
+        "loadavg": "3.96 2.97 2.84 2/1746 893582",
+        "cpu_pressure": "some avg10=22.36 avg60=23.94 avg300=11.48 total=85140165842"
+      },
+      "load_after": {
+        "loadavg": "3.73 2.94 2.83 1/1738 893642",
+        "cpu_pressure": "some avg10=22.66 avg60=23.94 avg300=11.56 total=85140884593"
+      },
+      "t": 1793743043.0198069
+    },
+    {
+      "label": "stock-o3",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.61,
+      "user_s": 2.5,
+      "sys_s": 0.11,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.73 2.94 2.83 1/1738 893642",
+        "cpu_pressure": "some avg10=22.66 avg60=23.94 avg300=11.56 total=85140884593"
+      },
+      "load_after": {
+        "loadavg": "3.73 2.94 2.83 2/1738 893694",
+        "cpu_pressure": "some avg10=22.44 avg60=23.81 avg300=11.70 total=85141543992"
+      },
+      "t": 1793743045.6452649
+    },
+    {
+      "label": "stock-v3",
+      "rep": 9,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.62,
+      "user_s": 2.52,
+      "sys_s": 0.09,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "3.73 2.94 2.83 3/1738 893694",
+        "cpu_pressure": "some avg10=22.44 avg60=23.81 avg300=11.70 total=85141544002"
+      },
+      "load_after": {
+        "loadavg": "3.67 2.94 2.83 2/1738 893737",
+        "cpu_pressure": "some avg10=22.18 avg60=23.72 avg300=11.77 total=85141988609"
+      },
+      "t": 1793743048.269985
+    },
+    {
+      "label": "cand",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.12,
+      "user_s": 2.01,
+      "sys_s": 0.11,
+      "max_rss_kib": 157988,
+      "load_before": {
+        "loadavg": "3.67 2.94 2.83 2/1738 893737",
+        "cpu_pressure": "some avg10=22.18 avg60=23.72 avg300=11.77 total=85141988609"
+      },
+      "load_after": {
+        "loadavg": "3.67 2.94 2.83 1/1738 893802",
+        "cpu_pressure": "some avg10=22.51 avg60=23.73 avg300=11.85 total=85142521334"
+      },
+      "t": 1793743050.4433603
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.07,
+      "user_s": 1.95,
+      "sys_s": 0.12,
+      "max_rss_kib": 158112,
+      "load_before": {
+        "loadavg": "3.67 2.94 2.83 1/1738 893802",
+        "cpu_pressure": "some avg10=22.51 avg60=23.73 avg300=11.85 total=85142521334"
+      },
+      "load_after": {
+        "loadavg": "3.67 2.94 2.83 1/1739 893883",
+        "cpu_pressure": "some avg10=22.59 avg60=23.71 avg300=11.93 total=85143067267"
+      },
+      "t": 1793743052.5658512
+    },
+    {
+      "label": "stock",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.59,
+      "user_s": 2.48,
+      "sys_s": 0.1,
+      "max_rss_kib": 157744,
+      "load_before": {
+        "loadavg": "3.67 2.94 2.83 1/1739 893883",
+        "cpu_pressure": "some avg10=22.59 avg60=23.71 avg300=11.93 total=85143067267"
+      },
+      "load_after": {
+        "loadavg": "3.77 2.97 2.84 3/1739 893946",
+        "cpu_pressure": "some avg10=21.76 avg60=23.52 avg300=11.97 total=85143635655"
+      },
+      "t": 1793743055.1904871
+    },
+    {
+      "label": "stock-o3",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.46,
+      "user_s": 2.36,
+      "sys_s": 0.09,
+      "max_rss_kib": 158000,
+      "load_before": {
+        "loadavg": "3.77 2.97 2.84 3/1739 893946",
+        "cpu_pressure": "some avg10=21.76 avg60=23.52 avg300=11.97 total=85143635655"
+      },
+      "load_after": {
+        "loadavg": "3.77 2.97 2.84 2/1755 893994",
+        "cpu_pressure": "some avg10=23.62 avg60=23.75 avg300=12.18 total=85144403989"
+      },
+      "t": 1793743057.6653442
+    },
+    {
+      "label": "stock-v3",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.55,
+      "user_s": 2.45,
+      "sys_s": 0.09,
+      "max_rss_kib": 157872,
+      "load_before": {
+        "loadavg": "3.77 2.97 2.84 2/1755 893994",
+        "cpu_pressure": "some avg10=23.62 avg60=23.75 avg300=12.18 total=85144403989"
+      },
+      "load_after": {
+        "loadavg": "3.79 2.99 2.85 3/1739 894053",
+        "cpu_pressure": "some avg10=26.95 avg60=24.34 avg300=12.38 total=85145245767"
+      },
+      "t": 1793743060.2403076
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 10,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.7,
+      "user_s": 2.59,
+      "sys_s": 0.11,
+      "max_rss_kib": 157652,
+      "load_before": {
+        "loadavg": "3.79 2.99 2.85 3/1739 894053",
+        "cpu_pressure": "some avg10=26.95 avg60=24.34 avg300=12.38 total=85145245767"
+      },
+      "load_after": {
+        "loadavg": "3.79 2.99 2.85 3/1747 894109",
+        "cpu_pressure": "some avg10=26.41 avg60=24.33 avg300=12.46 total=85146002283"
+      },
+      "t": 1793743062.9650104
+    },
+    {
+      "label": "cand-pgo",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.08,
+      "user_s": 1.97,
+      "sys_s": 0.11,
+      "max_rss_kib": 158160,
+      "load_before": {
+        "loadavg": "3.79 2.99 2.85 3/1747 894109",
+        "cpu_pressure": "some avg10=26.41 avg60=24.33 avg300=12.46 total=85146002290"
+      },
+      "load_after": {
+        "loadavg": "3.81 3.01 2.85 7/1747 894149",
+        "cpu_pressure": "some avg10=25.25 avg60=24.19 avg300=12.51 total=85146280977"
+      },
+      "t": 1793743065.0883486
+    },
+    {
+      "label": "stock",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.57,
+      "user_s": 2.47,
+      "sys_s": 0.1,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.81 3.01 2.85 7/1747 894149",
+        "cpu_pressure": "some avg10=25.25 avg60=24.19 avg300=12.51 total=85146280977"
+      },
+      "load_after": {
+        "loadavg": "3.81 3.01 2.85 2/1747 894176",
+        "cpu_pressure": "some avg10=24.45 avg60=24.03 avg300=12.63 total=85147052220"
+      },
+      "t": 1793743067.7130308
+    },
+    {
+      "label": "stock-o3",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.47,
+      "user_s": 2.36,
+      "sys_s": 0.1,
+      "max_rss_kib": 158036,
+      "load_before": {
+        "loadavg": "3.81 3.01 2.85 3/1747 894176",
+        "cpu_pressure": "some avg10=24.45 avg60=24.03 avg300=12.63 total=85147052220"
+      },
+      "load_after": {
+        "loadavg": "3.99 3.06 2.87 4/1747 894266",
+        "cpu_pressure": "some avg10=26.18 avg60=24.36 avg300=12.78 total=85147736323"
+      },
+      "t": 1793743070.2368438
+    },
+    {
+      "label": "stock-v3",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.61,
+      "user_s": 2.49,
+      "sys_s": 0.11,
+      "max_rss_kib": 157908,
+      "load_before": {
+        "loadavg": "3.99 3.06 2.87 4/1747 894266",
+        "cpu_pressure": "some avg10=26.18 avg60=24.36 avg300=12.78 total=85147736323"
+      },
+      "load_after": {
+        "loadavg": "3.99 3.06 2.87 6/1742 894315",
+        "cpu_pressure": "some avg10=24.88 avg60=24.18 avg300=12.82 total=85148295963"
+      },
+      "t": 1793743072.8610551
+    },
+    {
+      "label": "stock-pgo",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.67,
+      "user_s": 2.55,
+      "sys_s": 0.11,
+      "max_rss_kib": 157780,
+      "load_before": {
+        "loadavg": "3.99 3.06 2.87 4/1741 894315",
+        "cpu_pressure": "some avg10=24.88 avg60=24.18 avg300=12.82 total=85148296663"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.09 2.88 2/1738 894359",
+        "cpu_pressure": "some avg10=20.60 avg60=23.40 avg300=12.81 total=85148625314"
+      },
+      "t": 1793743075.5861676
+    },
+    {
+      "label": "cand",
+      "rep": 11,
+      "exit": 0,
+      "last": "YES",
+      "wall_s": 2.09,
+      "user_s": 1.97,
+      "sys_s": 0.12,
+      "max_rss_kib": 158164,
+      "load_before": {
+        "loadavg": "4.07 3.09 2.88 2/1738 894359",
+        "cpu_pressure": "some avg10=20.60 avg60=23.40 avg300=12.81 total=85148625314"
+      },
+      "load_after": {
+        "loadavg": "4.07 3.09 2.88 1/1738 894380",
+        "cpu_pressure": "some avg10=20.67 avg60=23.32 avg300=12.87 total=85149075232"
+      },
+      "t": 1793743077.7097723
+    }
+  ],
+  "summary": {
+    "stock": {
+      "wall": {
+        "n": 12,
+        "median": 2.61,
+        "mean": 2.6458333333333335,
+        "sd": 0.10723452067427927,
+        "min": 2.55,
+        "max": 2.94
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.5999999999999996,
+        "mean": 2.64,
+        "sd": 0.10651504375183127,
+        "min": 2.54,
+        "max": 2.9299999999999997
+      },
+      "max_rss_kib": [
+        157908,
+        157868,
+        157872,
+        157744,
+        157904,
+        157908,
+        157872,
+        157872,
+        157908,
+        157776,
+        157744,
+        157908
+      ]
+    },
+    "stock-o3": {
+      "wall": {
+        "n": 12,
+        "median": 2.5549999999999997,
+        "mean": 2.5483333333333333,
+        "sd": 0.07094598884597585,
+        "min": 2.46,
+        "max": 2.68
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.5549999999999997,
+        "mean": 2.5433333333333334,
+        "sd": 0.07364945637438496,
+        "min": 2.4499999999999997,
+        "max": 2.68
+      },
+      "max_rss_kib": [
+        157996,
+        157904,
+        158000,
+        158032,
+        157872,
+        158000,
+        157996,
+        158032,
+        157908,
+        157908,
+        158000,
+        158036
+      ],
+      "vs_stock": {
+        "median_change_pct": -2.1072796934865963,
+        "ranges_overlap": true
+      }
+    },
+    "stock-v3": {
+      "wall": {
+        "n": 12,
+        "median": 2.62,
+        "mean": 2.645,
+        "sd": 0.08262731223556011,
+        "min": 2.55,
+        "max": 2.83
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.61,
+        "mean": 2.6366666666666667,
+        "sd": 0.08205689083394126,
+        "min": 2.54,
+        "max": 2.8200000000000003
+      },
+      "max_rss_kib": [
+        157744,
+        157744,
+        157904,
+        157744,
+        157744,
+        157908,
+        157872,
+        157744,
+        157872,
+        157744,
+        157872,
+        157908
+      ],
+      "vs_stock": {
+        "median_change_pct": 0.3831417624521161,
+        "ranges_overlap": true
+      }
+    },
+    "stock-pgo": {
+      "wall": {
+        "n": 12,
+        "median": 2.6550000000000002,
+        "mean": 2.6375,
+        "sd": 0.054792998889207856,
+        "min": 2.56,
+        "max": 2.7
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.645,
+        "mean": 2.6333333333333333,
+        "sd": 0.05499311251640889,
+        "min": 2.56,
+        "max": 2.6999999999999997
+      },
+      "max_rss_kib": [
+        157872,
+        157872,
+        157904,
+        157908,
+        157908,
+        157868,
+        157744,
+        157904,
+        158000,
+        157908,
+        157652,
+        157780
+      ],
+      "vs_stock": {
+        "median_change_pct": 1.724137931034497,
+        "ranges_overlap": true
+      }
+    },
+    "cand": {
+      "wall": {
+        "n": 12,
+        "median": 2.145,
+        "mean": 2.1575,
+        "sd": 0.05754444922287151,
+        "min": 2.09,
+        "max": 2.28
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.1399999999999997,
+        "mean": 2.1533333333333333,
+        "sd": 0.05710171679210762,
+        "min": 2.09,
+        "max": 2.27
+      },
+      "max_rss_kib": [
+        158160,
+        158164,
+        157984,
+        157988,
+        157904,
+        158164,
+        158116,
+        158032,
+        157988,
+        158112,
+        157988,
+        158164
+      ],
+      "vs_stock": {
+        "median_change_pct": -17.816091954022983,
+        "ranges_overlap": false
+      }
+    },
+    "cand-pgo": {
+      "wall": {
+        "n": 12,
+        "median": 2.1,
+        "mean": 2.1083333333333334,
+        "sd": 0.04529365464957708,
+        "min": 2.03,
+        "max": 2.19
+      },
+      "cpu_user_plus_sys": {
+        "n": 12,
+        "median": 2.1,
+        "mean": 2.105,
+        "sd": 0.044619604333847325,
+        "min": 2.02,
+        "max": 2.1799999999999997
+      },
+      "max_rss_kib": [
+        158164,
+        158160,
+        158116,
+        158244,
+        158164,
+        158036,
+        158160,
+        158292,
+        158160,
+        158116,
+        158112,
+        158160
+      ],
+      "vs_stock": {
+        "median_change_pct": -19.540229885057464,
+        "ranges_overlap": false
+      }
+    }
+  },
+  "load_after": {
+    "loadavg": "4.07 3.09 2.88 1/1738 894380",
+    "cpu_pressure": "some avg10=20.67 avg60=23.32 avg300=12.87 total=85149075232"
+  }
+}

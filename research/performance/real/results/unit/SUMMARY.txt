@@ -1,0 +1,21 @@
+Unit / library tests, inline-limb candidate vs unchanged base (origin/main 4c0ea496, verifier+blocks sources unchanged up to dcfcc076).
+
+numbers_test (g++ -O2 -fno-ipa-modref -std=c++17 -DBLK_FIELD=2 -D_GLIBCXX_ASSERTIONS -Iblocks blocks/numbers/tests/numbers_test.cpp)
+  first candidate:        ok, 58510 checks, exit 0
+  final source:           ok, 58510 checks, exit 0   (round4-switch-fence-mutants.txt)
+  base (PR18 receipt):    ok, 58510 checks
+  ASan+UBSan (-O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all, first candidate): ok, 58510 checks, exit 0, no report (numbers_test_asan_ubsan.log)
+
+blocks/tests/TESTS (89 sources, SUITE.md row blocks.tests), blocks/Makefile test, SETTINGS=f2h1:
+  base:             make exit 0, 89/89 .ran   (blocks-tests-base.txt)
+  first candidate:  make exit 0, 89/89 .ran   (blocks-tests-cand-first-round.txt)
+  final source:     make exit 0, 89/89 .ran   (blocks-tests-final.txt)
+  All 89 result lines identical to base, timing figures masked, except planners_read_once_test's
+  probe count: base 119156 plans; first candidate 4618; final (with BLK_BIG_ON_THE_HEAP_FOR_A_TEST) 114705.
+
+planners_read_once_test mutation check (read_once_mutants.sh): each READ ONCE copy in blocks.h made a reference
+  before the switch (read-once-mutants-before-switch.txt): base detects 11/11 mutable sites; candidate 8/11 (misses 532, 547, 755)
+  after the switch (round4-switch-fence-mutants.txt):      base 11/11; candidate 11/11, same set
+  3 sites (1061, 1111, 1142) not rewritten by the mutation sed on either side.
+
+fence: -DBLK_BIG_ON_THE_HEAP_FOR_A_TEST with -DSERVING_BUILD=1 fails with fence.h's #error; a test build carries the BLK-NOT-FOR-SERVING marker.

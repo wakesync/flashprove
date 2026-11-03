@@ -1,0 +1,89 @@
+f2h1 chain/tests/border_test: border_test: all passed
+f2h1 chain/tests/format_vectors_test: format_vectors_test, field 2: 82 lines compared, 0 FAILURES; of the file's 201 lines 41 are the other field's and 78 were not asked for by this test
+f2h1 chain/tests/public_test: public inputs: ok
+f2h1 chain/tests/rounds_test: rounds_test: all passed (a proof of 1560 bytes, 5760 flips, each shown to three styles of verifier)
+f2h1 code/tests/code_test: code_test (BLK_FIELD=2): 510 shapes: ok
+f2h1 code/tests/cosets_test: cosets_test (BLK_FIELD=2): 729 shapes: ok
+f2h1 code/tests/numbers_test: numbers_test (BLK_FIELD=2): 18550 shapes: ok
+f2h1 coins/tests/coins_test: the prover's coins, field 2, 140 checks: all passed
+f2h1 coins/tests/listed_coins_test: listed coins, 5 checks: all passed
+f2h1 coins/tests/run_coins_test: the coins of a run, 9 checks: all passed
+f2h1 engine/tests/engine_test: engine: ok
+f2h1 engine/tests/hand_over_test: hand_over_test: ok (a hand-over, three loans, ten breaches stopped)
+f2h1 field/tests/field_test: field_test (BLK_FIELD=2): ok
+f2h1 frame/tests/check_entry_test: an entry of 143416 bytes (planned: at most 152184): head 8, root 32, answers 192, the link 143184
+f2h1 frame/tests/check_test: a file: 528228 bytes (planned: at most 560820, expected 529372); refused: 400 with one bit flipped (1 of 8 bits of every 1321-th byte), 400 with a word at or above p (0 of them w + p), 401 cut short, 4 with bytes behind the end; 78 joinings of honest files' parts
+f2h1 frame/tests/false_keys_test: ok: the control: an honest key of 503744 bytes under the public files
+f2h1 frame/tests/frame_test: ok, 140089 checks
+f2h1 frame/tests/hiding_conditions_test: ok, 116 checks
+f2h1 frame/tests/lin_frame_test: one code 0, like the full size 0: 107 columns, 8 batches a table; positions 64 / 51 / 52; shared part 260008 bytes (planned: at most 274352, expected 258721), first 168, second 114736
+f2h1 frame/tests/link_frame_test: columns 107 of the first table, 107 of the further one; positions 51; a link 143120 bytes (planned: at most 151952, expected 143094) 
+f2h1 frame/tests/req_frame_test: req_frame_test: ok
+f2h1 frame/tests/scope_test: ok (0 of 80 rounds apart)
+f2h1 frame/tests/seam_test: a file: 530732 bytes (planned: at most 565716)
+f2h1 frame/tests/small_key_test: ok: a making draws 10963 elements of F and 1321096 plain bytes, and writes 63872 bytes (others: 63872, 63872, 63872)
+f2h1 frame/tests/tested_table_test: ok
+f2h1 frame/tests/wf_frame_test: ok: 2^17: 48 parts, 1877328 bytes, 35178 rounds; 2^18: 24 parts, 1143624 bytes, 18846 rounds; 2^19: 12 parts, 745992 bytes, 10229 rounds; 2^20: 6 parts, 536496 bytes, 5689 rounds;
+f2h1 frame/tests/wf_units_test: wf_units_test: ok
+f2h1 hash/tests/calls_test: the compressions of the hash's calls, 181 checks: all as README.md says
+f2h1 hash/tests/functions_test: 14 known values of BLAKE2b: all met
+f2h1 hash/tests/mode_test: the hash of hash.h (BLAKE2b), 2968 checks: all passed
+f2h1 hash/tests/older_test: the hash modes of older.h, 149 checks: all passed
+f2h1 iop/tests/batt_hiding_test: ok: 5 cases: as many independent scalars as coins: the scalars are uniform whatever the matrix; 3 of 3 controls noticed: the verifier accepts, the rank is short and two matrices are told apart (one value at two segments' entries c: 4 cases of 5; no linear term in Y: 5 cases of 5; a segment proved again under its entry c: 5 cases of 5)
+f2h1 iop/tests/batt_shown_test: ok: 5 cases
+f2h1 iop/tests/batt_test: ok: 5 cases
+f2h1 iop/tests/context_test: one altered value: 16 runs on the mask rows and random tails of 4 messages end by own-test-mask-rows, 8 runs on other draws go through
+f2h1 iop/tests/cs_test: the second text: 885 rows of switches held entry by entry (175488 entries; 17469 free places among them), 567 batches held against the plain sum; differences: 0
+f2h1 iop/tests/fold_base_test: BASE alone, 0 mask rows: of 3 draws of elements 1 end by own-test-base-mask when they lose a value
+f2h1 iop/tests/fold_rounds_test: fold_rounds_test: ok
+f2h1 iop/tests/hp_test: hp_test: ok (2113597 tuples enumerated, all distinct for each choice of challenges)
+f2h1 iop/tests/iopp_test: iopp_test: ok (14024 of 14024 refused)
+f2h1 iop/tests/laid_test: laid_test: ok
+f2h1 iop/tests/link_test: ok: 7 cases, last link 22128 bytes
+f2h1 iop/tests/lin_test: ok: 11 cases, last view 29792 bytes
+f2h1 iop/tests/lkp_test:   small: eight keys, two of padding, four rows: 1984 bytes, 79 mask entries
+f2h1 iop/tests/member_rows_test: ok: 2928 stretches, and one of 1044255 rows in 20 Tensors
+f2h1 iop/tests/member_test: ok: 4 cases, last first part 440 bytes
+f2h1 iop/tests/psc_chain_test: psc_chain_test: ok (proof of 536 bytes accepted; 1072 copies with one bit flipped, a shorter and a longer one refused)
+f2h1 iop/tests/psc_hiding_test: psc_hiding_test: ok (8 shapes: the sent scalars are uniform for every witness taken, under all verifier's coins, the chain under 1 list(s) of coins; all 50 runs with spoilt masks told witnesses apart, as they must; 7628699 runs of the prover)
+f2h1 iop/tests/psc_stops_test: psc_stops_test: ok (32 stops, each ended its child with its own words, and each control ran to its end)
+f2h1 iop/tests/psc_test: psc_test: ok (honest provers, all accepted; 80 runs)
+f2h1 iop/tests/req_arrays_test: req_arrays_test: ok
+f2h1 iop/tests/req_lives_test: req_lives_test: ok
+f2h1 iop/tests/req_rows_test: req_rows_test: ok
+f2h1 iop/tests/req_test: two links: 358528 bytes, 9 trees
+f2h1 iop/tests/rng_test:   small: 2 combinations, 3152 bytes, 122 mask entries for the look-up
+f2h1 iop/tests/send_bat_split_test: ok: accepted with 1 answer(s) to a sample; proof of 12208 bytes
+f2h1 iop/tests/send_form_test: ok: the sample's form, entry by entry, on 288 shapes
+f2h1 iop/tests/send_orders_test: ok: calls out of order are stopped, each by its own check
+f2h1 iop/tests/send_pad_test: ok: 8 lists of shapes, 21 pads' places
+f2h1 iop/tests/tensor_test: tensor_test: ok
+f2h1 iop/tests/wf_small_test: ok: a run draws 694 elements of F and 30752 plain bytes, and sends 3648 bytes
+f2h1 iop/tests/wf_test: ok: 2 cases, 80 flipped bits, last first part 122952 bytes
+f2h1 numbers/tests/holds_test: ok
+f2h1 numbers/tests/numbers_test: ok, 58510 checks
+f2h1 numbers/tests/planners_read_once_test: ok: 119156 plans, each laid with a hook at one allocation: with a field turned there, one of the two honest plans; looked at there, a beginning of the finished plan
+f2h1 numbers/tests/plan_types_by_hand_test: ok
+f2h1 numbers/tests/plan_types_test: ok
+f2h1 tests/every_byte_test: every byte: ok: 2 honest proofs accepted; refused: 7746 with one bit flipped (1 of 8 bits of every 13-th byte), 7746 with a word at or above p (4 of them w + p), 7748 cut short, 8 with bytes behind the end
+f2h1 tests/format_types_test: format_types_test, field 2: 29 lines compared, 0 FAILURES; of the file's 201 lines 41 are the other field's and 131 were not asked for by this test
+f2h1 tests/hiding/exact_self_test: exact_self_test: ok (12 small provers with known laws: 3 equal, 7 different, 1 equal but outside the shape that the test can vouch for, 1 that tests nothing: each judged as it must be)
+f2h1 tests/hiding/guards_test: guards_test: ok (the lawful twins of 6 planted layouts: no guard stops them, the verifier says yes, two witnesses have the same law)
+f2h1 tests/hiding/hull: hull: ok (its own test: 4 small provers, 40 + 40 runs each)
+f2h1 tests/hiding/key_exact_test: key_exact_test: ok (a whole key file, 10971 coins, 7008 entries of the view, rank 6972, 99 coins curved: two random matrices within the range have the same law; one pair, one list of challenges; mask rows: 1 in the index-mask message, 3 in the message on the ranges)
+f2h1 tests/hiding/lin_exact_test: lin_exact_test: ok (two random matrices have the same law in all that the requests of a table's batches see together; the view is affine in coins and matrix, so the pair speaks for all matrices; the table's random tails serve all the batches that they were sized for and are needed; one list of challenges; the cases that ran: two requests (8163 coins); a record of two answers (5442 coins); the control, pads that are zeros: told apart: entry 0 of the view, in the element at byte 0 (behind the mark: the table's record))
+f2h1 tests/hiding/link_exact_test: link_exact_test: ok (tails for one link: the same law (1459 coins, 1052 entries of the view); tails for two links: the same law (1499 coins, 1052 entries of the view); rows high, masks ahead: the same law (1499 coins, 1052 entries of the view); tails for one link, the copy made with the first table's random tails: told apart (1459 coins, 1052 entries of the view); tails for one link, the copy's random tails are zeros: told apart (1459 coins, 1052 entries of the view); tails for one link, both tables' pads are zeros: told apart (1459 coins, 1052 entries of the view))
+f2h1 tests/hiding/lkp_exact_test: lkp_exact_test: ok (5 pairs of witnesses compared, random and special ones, at one list of challenges; the first of each run: the run that ends behind the block: the same law, 405 coins, 240 entries of the view, rank 240, 51 coins curved)
+f2h1 tests/hiding/member_exact_test: member_exact_test: ok (3 pending rows a request; two random matrices have the same law in all that the requests of a batch see together; the view is affine in coins and matrix, so the pair speaks for all matrices; the table's random tails were sized for the one batch that is run and are needed; one list of challenges; the cases that ran: two requests (8163 coins); the control: the rows' pads are zeros: told apart: entry 0 of the view, in the element at byte 0 (behind the mark: the table's record); the control: Omega's random tail covers one request's list alone: told apart: entry 4635 of the view, in the element at byte 58720 (behind the mark: second chain of request 1: opening of tree 3 at 2 positions))
+f2h1 tests/hiding/psc_exact_test: psc_exact_test: ok (3 shapes: full rank, the same law for three random witnesses, every mask entry needed but the one that is foretold; all 22 controls told witnesses apart; 3070 runs of the prover)
+f2h1 tests/hiding/rng_exact_test: rng_exact_test: ok (4 pairs of witnesses compared, random and special ones, at one list of challenges; the first of each shape: small: the same law, 1586 coins, 378 entries of the view, rank 378, 69 coins curved; small, the reference shape: the same law, 806 coins, 378 entries of the view, rank 378, 69 coins curved)
+f2h1 tests/hiding/salts_test: salts_test: ok (2 trees of 64 leaves, 4 leaves over each short position: every leaf shows its own bytes of the coins; no two alike, none zero)
+f2h1 tests/hiding/table_exact_test: table_exact_test: ok (a table serves its whole budget: the same law; made again with fresh random entries and pads, each making serves its budget: the same law; two tables with fresh random entries and pads, opened at the same lists: the same law; the keeper says no to one batch more; control: one batch more than the random entries cover: told apart; control: made again with the same random entries, each making serves its budget: told apart; control: two tables with the same random entries, one batch each: told apart; control: two records on one table's pads: told apart; control: two tables with the same pads: told apart; 5 of 5 controls noticed)
+f2h1 tests/hiding/toy_exact_test: toy_exact_test: ok (2 pairs of witnesses compared, random ones, at one list of challenges; the first: product: the same law, 858 coins, 654 entries of the view, rank 621, 6 coins curved; links: the same law, 1188 coins, 972 entries of the view, rank 951, 18 coins curved)
+f2h1 tests/hiding/wf_exact_test: wf_exact_test: ok (3 pairs of random matrices within the range compared, at one list of challenges; the first: the same law, 694 coins, 444 entries of the view, rank 444, 99 coins curved)
+f2h1 tests/other_parameters_test: other parameters: ok: 110 crossings refused, 4 of them between public files from which the same run follows; 2 times a way of counting moved no number of the protocol (two requests share a session)
+f2h1 tests/proof_file: proof file: ok: field 2, hash 1: 102448 bytes in 2 proofs accepted
+f2h1 toy/tests/preamble_test: preamble: ok, 400 bytes
+f2h1 toy/tests/run_test: run_verifier: the parameters are not admitted: round CS: more work bits than the target or the nonce has room for
+f2h1 toy/tests/segments_test: three links: ok: 61824 bytes accepted; 1014 flips, 149 cuts and one added byte refused
+f2h1 tree/tests/tree_test: tree_test: all passed

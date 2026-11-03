@@ -1,0 +1,25 @@
+== <REPO>/prof/limbs/samples.860737.txt: 9 samples (~0.01 s CPU)
+-- stacks matching 'blk::(Big|Real|Bound)\\b': 0 (0.0%)
+-- stacks matching 'blk::configure\\(': 0 (0.0%)
+-- stacks matching 'blk::sized\\(': 0 (0.0%)
+-- stacks matching 'blk::check_proof\\(': 0 (0.0%)
+-- stacks matching 'Tensor::': 0 (0.0%)
+-- stacks matching 'Blake2bF': 0 (0.0%)
+-- self
+ 88.89%      8  <lib>
+ 11.11%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+-- self, library time charged to the calling function
+ 44.44%      4  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)
+ 22.22%      2  readWholeFile(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+ 11.11%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+ 11.11%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+ 11.11%      1  main
+-- inclusive
+100.00%      9  <lib>
+ 88.89%      8  _start
+ 88.89%      8  main
+ 66.67%      6  readWholeFile(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+ 55.56%      5  needBytes(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char const*)
+ 44.44%      4  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)
+ 11.11%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
+ 11.11%      1  cpStagesRun(std::vector<CpStage, std::allocator<CpStage> > const&, char const*, int, bool, double, CpId const&, std::function<Covered (std::__cxx11::basic_string<char, std::char_tr
