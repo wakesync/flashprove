@@ -124,6 +124,39 @@ def test_full_size_clipped_gap_example_passes_within_its_own_limits(tmp_path):
 # ---- The middleware's check of a batch, with the real cp_verify ----
 
 
+def copy_trusted_fixture(source, destination):
+    """Copy test data into a private test root, without trusting checkout modes.
+
+    copytree preserves directory modes even with copyfile, so normalize those too.
+    Only the new copy is changed; production permission checks remain in force.
+    """
+    shutil.copytree(source, destination, copy_function=shutil.copyfile)
+    destination.chmod(0o700)
+    for path in destination.rglob("*"):
+        path.chmod(0o700 if path.is_dir() else 0o600)
+
+
+@pytest.mark.parametrize("file_mode, directory_mode", [(0o664, 0o775), (0o666, 0o777), (0o444, 0o555)])
+def test_trusted_fixture_copy_normalizes_only_the_copy(tmp_path, file_mode, directory_mode):
+    source = tmp_path / "source"
+    nested = source / "nested"
+    nested.mkdir(parents=True)
+    for path in (source / "policy.txt", nested / "key.bin"):
+        path.write_bytes(b"fixture bytes")
+        path.chmod(file_mode)
+    nested.chmod(directory_mode)
+    source.chmod(directory_mode)
+    destination = tmp_path / "copy"
+    copy_trusted_fixture(source, destination)
+    for relative in (pathlib.Path("."), pathlib.Path("nested")):
+        assert (destination / relative).stat().st_mode & 0o777 == 0o700
+        assert (source / relative).stat().st_mode & 0o777 == directory_mode
+    for relative in (pathlib.Path("policy.txt"), pathlib.Path("nested/key.bin")):
+        assert (destination / relative).read_bytes() == b"fixture bytes"
+        assert (destination / relative).stat().st_mode & 0o777 == 0o600
+        assert (source / relative).stat().st_mode & 0o777 == file_mode
+
+
 def spool_with_the_example(example, tmp_path, proof):
     """Lay the example's files, and one job whose response in out/ has this proof.
 
@@ -131,12 +164,10 @@ def spool_with_the_example(example, tmp_path, proof):
     if not (example / "example.proof").is_file():
         pytest.skip("%s has no files" % example)
     tmp_path.chmod(0o700)
-    shutil.copytree(example / "config", tmp_path / "config")
-    shutil.copytree(example / "ivk", tmp_path / "ivk")
+    copy_trusted_fixture(example / "config", tmp_path / "config")
+    copy_trusted_fixture(example / "ivk", tmp_path / "ivk")
     shutil.copyfile(VERIFIER, tmp_path / "cp_verify")
     (tmp_path / "cp_verify").chmod(0o755)
-    for path in (tmp_path / "config", tmp_path / "ivk"):
-        path.chmod(0o755)
     entry = {
         "served_model": "example",
         "commitment_id": (example / "ID.txt").read_text().strip(),
