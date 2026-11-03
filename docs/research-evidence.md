@@ -21,7 +21,19 @@ This is independent rerunning on the same host class, not independent hardware o
 
 [PR #2](https://github.com/wakesync/flashprove/pull/2), `ffc55fa00839a3758433f93fd6c4aef7f4db92bc`: [extension documentation](https://github.com/wakesync/flashprove/tree/ffc55fa00839a3758433f93fd6c4aef7f4db92bc/research/extensions) and [recorded checks](https://github.com/wakesync/flashprove/blob/ffc55fa00839a3758433f93fd6c4aef7f4db92bc/research/extensions/evidence/results.json). Eight harness tests and the admitted synthetic fixture passed in that lane. Unsupported architectures, policies, shapes, state and metadata fail closed. The manifest digest is application metadata, not a new Fiat-Shamir binding or checkpoint provenance proof.
 
-[PR #4](https://github.com/wakesync/flashprove/pull/4), `133da749937115883c95edfc4b6e372c16209449`, integrates reviewed fixture/output-bound fixes. Latest reviewed receipt at this snapshot reports focused aggregate exit 0: three selected rows passed, 68 integration checks, 346 fake-Lean launcher calls, nine adapter tests and a 41-call mutation audit. The complete fresh CPU aggregate was not yet established in that receipt. An earlier full run lacked recoverable aggregate exit and had definite failing outputs. Dependency, kernel-confinement and writable-ancestor limitations remain disclosed. **Merge remains held; do not report a full CPU pass or real Lean validation.**
+[PR #4](https://github.com/wakesync/flashprove/pull/4), `133da749937115883c95edfc4b6e372c16209449`, integrates reviewed fixture/output-bound fixes. The single confined full CPU run has now completed with durable **aggregate exit 77**, not exit 0: **89 passed, 2 partial, 0 failed, 1 not run**, across 92 selected rows. Zero status-3 rows or alarm lines were reported. Duration was 4370.89 seconds. The runner table contains 173 rows; CPU mode explicitly excluded 13 GPU-dependent rows. These counts do not claim coverage of every table row.
+
+The [CPU owner's public closeout](https://github.com/wakesync/flashprove/pull/4#issuecomment-6613832649) and [issue evidence anchor](https://github.com/wakesync/flashprove/issues/5#issuecomment-6613833083) summarize the retained aggregate, row exits and 92 original screens. The newly completed raw full-run receipts are not committed at the tested SHA; those public summaries are not a complete independently reproducible artifact bundle. Independent source/receipt review found no blocking defect in the scoped repairs, but explicitly retained HOLD.
+
+Remaining coverage gaps:
+
+- Clang build not run (exit 77).
+- Weight sums partial: 13 Python substeps skipped because the required numpy / gguf-py 0.19.0 combination was unavailable.
+- Confinement partial: 29 checks as expected, but actual signal confinement, second-level kernel-answer-5 and root-only mount/proc/account-file cases were not established. Stand-ins do not establish real root coverage.
+- Integration units: 1961 passed, three unidentified pytest skips and 20 root-only deselections. Those omissions are not passes.
+- Kernel ordinary-signal confinement and a group-writable source ancestor remain disclosed limitations. CPU mode establishes no GPU/long-mode, real Lean, TEE or production-model end-to-end coverage.
+
+The completed full run includes 68 middleware tests and 346 expected fake-Lean launcher calls. Prior focused aggregate exit 0, nine adapter tests and the 41-call mutation audit remain prior evidence, not new coordinator executions. An earlier pre-V2 full run lacked a recoverable aggregate and had failing outputs; it has not been relabeled. **PR #4 remains held under the full-pass gate.** Missing aggregate is no longer the blocker; actual scoped coverage closure or an explicit authorized bounded-scope gate decision is required. Do not rerun the full suite merely to recover evidence, merge stacked PRs #1-3 separately to evade this gate, or report real Lean validation.
 
 ## Operator experiments: narrow review, publication still a gate
 
