@@ -1,0 +1,7 @@
+work directory: <PLANNING>/wrapper-baseline-work
+NOT AS EXPECTED: floods: lean.err has more bytes than the bound
+NOT AS EXPECTED: bound-then-abort: lean.err has more bytes than the bound
+NOT AS EXPECTED: both-bounds-then-abort: lean.err has more bytes than the bound
+the two holds on core files were made
+Program.lean was looked at
+lean_verify_test.sh: 346 calls: NOT AS EXPECTED: 3
