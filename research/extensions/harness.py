@@ -86,10 +86,17 @@ def verify(manifest, config, public_key, response, request, start, end, next_tok
            verifier=None):
     """Inputs are client-owned. Returns raw upstream result; never invents a verdict."""
     validate(manifest)
-    if any(type(v) is not int for v in (start, end, next_token)):
-        raise Unsupported('coverage and next token must be integers')
-    if not 0 <= start < end <= 64 or not 0 <= next_token < 512:
-        raise Unsupported('coverage or next token outside baseline bounds')
+    if any(type(v) is not int for v in (start, end)):
+        raise Unsupported('coverage must be integers')
+    if not 0 <= start < end <= 64:
+        raise Unsupported('coverage outside baseline bounds')
+    # An interior range has no after-request token. Never silently discard a
+    # caller's expectation: upstream requires None, and verifies a zero sentinel.
+    if end < 64:
+        if next_token is not None:
+            raise Unsupported('next token must be None when coverage ends before T')
+    elif type(next_token) is not int or not 0 <= next_token < 512:
+        raise Unsupported('next token must be a vocabulary integer when coverage reaches T')
     # Snapshot precisely the bytes that were hashed. Upstream checker makes its own
     # private snapshots of these plus request/response. Keys remain upstream's duty.
     with tempfile.TemporaryDirectory(prefix='fp-extension-') as tmp:

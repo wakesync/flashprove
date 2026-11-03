@@ -38,6 +38,10 @@ existing integration. Requests/responses are local files. No network fetch, dyna
 import, shell command or manifest-selected executable. The optional Python API verifier
 argument is for trusted callers only. API callers must apply the upstream documented
 exit AND machine-outcome conditions, not merely inspect subprocess.returncode.
+For coverage ending before T=64, API `next_token` must be `None`: the `.y` file
+contains a mandatory zero sentinel, not a generated after-request token. Passing a
+numeric expectation here is rejected rather than silently ignored. Coverage reaching
+T requires an integer vocabulary token, which is compared against the response.
 
 Manifest identifier: SHA256(domain || canonical JSON), sorted keys, compact separators.
 Domain: `flashprove-extension-manifest/v1` followed by NUL. This is an **application
