@@ -1,0 +1,15 @@
+{
+  "head": "133da749937115883c95edfc4b6e372c16209449",
+  "argv": [
+    "python3",
+    "-u",
+    "run_suite.py",
+    "cpu",
+    "<WORK_WEIGHT>",
+    "--jobs",
+    "1",
+    "--only",
+    "^weight_sums$"
+  ],
+  "exit": 1
+}
