@@ -6,9 +6,9 @@ external README) or **inferred** (reasoned here, not run).
 
 **About PR #50 and PR #51.** #50 is **merged** (main `a6c5a8e6`, evidence
 `experiments/20261104-36-steering-real-proofs/` on main) and still **measured, unreplicated**
-(`research/results.yaml`, `replication: unreplicated`). #51 is **open, approved at `0c93d0ea`,
-unmerged** and **unreplicated** (a merge of main is pushed on top and is under re-review). Merged
-does not mean replicated. Checked here against #50 at `b645f670` (the merged parent) and #51 at `0c93d0ea`. They are **honest-prover outcomes
+(`research/results.yaml`, `replication: unreplicated`). #51 is **merged** too (main `c46d21ee`, evidence
+`experiments/20261104-38-swap-at-verifier/` on main) and also **unreplicated**. Merged
+does not mean replicated. Checked here against #50 at `b645f670` (the merged parent) and #51 at `0c93d0ea` (its evidence directory is unchanged at the merged head `b9246e8e`). They are **honest-prover outcomes
 only**: every reply outside the limits was refused by the honest `cp_prove`, so `cp_verify` never
 judged an out-of-limits proof. A count like "0 of 57 accepted under exact match" describes the
 honest prover's refusals, not a verifier stopping a cheating prover. That exact match closes a
@@ -67,8 +67,8 @@ public README, cited, `github.com/lambdaclass/CommitLLM`, fetched 2026-11-04) / 
   provider picks verifies `WITHIN LIMITS`;
   (b) choosing the system prompt and template tokens, which the proof then faithfully binds;
   (c) under clipped gap, steering within the allowance: 5 of 54 changed steered replies proved and
-  accepted `WITHIN LIMITS` (merged PR #50, honest prover, unreplicated), one-swap-then-continue 15/16 and 13/16 (open PR #51, approved,
-  unmerged, honest prover, unreplicated);
+  accepted `WITHIN LIMITS` (merged PR #50, honest prover, unreplicated), one-swap-then-continue 15/16 and 13/16 (merged PR #51, honest prover,
+  unreplicated);
   (d) truncation, which verifies as a shorter reply (`docs/protocol.md:66`); (e) giving different
   clients different IDs, unless the ID is published in one shared place (`docs/limits.md:183-186`);
   (f) a client that takes the ID from the server.

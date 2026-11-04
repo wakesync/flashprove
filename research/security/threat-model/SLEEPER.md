@@ -1,7 +1,7 @@
 # Sleeper agents and backdoors versus a proof of execution
 
 Part of #6, tracking #53. Labels: **measured** / **cited** / **inferred** as in THREAT-MODEL.md.
-Figures from PR #50 (merged, main `a6c5a8e6`, unreplicated) and PR #51 (open, approved, unmerged,
+Figures from PR #50 (merged, main `a6c5a8e6`, unreplicated) and PR #51 (merged, main `c46d21ee`,
 unreplicated) are honest-prover outcomes only (THREAT-MODEL.md, "About PR #50 and PR #51").
 
 ## The core argument, stated carefully
@@ -39,7 +39,7 @@ checkpoint*; the commitment never detects anything about weights by itself.
 | Weight-editing backdoors (direct edit of a few layers, no retraining) | Li et al. "BadEdit", ICLR 2024, arXiv 2403.13355 | Yes **if** the client's ID is of the pre-edit checkpoint and the provenance chain is authenticated: any edit changes the table and the ID | No | Pin ID to a signed upstream hash (M1). This is the class a commitment handles best, because the attacker is downstream of the vetted artifact |
 | Cryptographically undetectable backdoors | Goldwasser, Kim, Vaikuntanathan, Zamir 2022, arXiv 2204.06974 | Only via provenance; no scanner can find them by construction (cited claim of the paper, for their constructions) | No | Provenance only. This bounds what "backdoor scanning" can ever promise |
 | Steganographic / syntactic triggers (invisible to a reader: a syntax template, Unicode, whitespace) | Qi et al. "Hidden Killer", ACL 2021, arXiv 2105.12400 | as data-poisoning | No | Input canonicalization at the client (normalize Unicode, strip zero-width), but a syntactic trigger survives that |
-| LoRA / adapter swaps and malicious shared adapters | Liu et al. "LoRA-as-an-Attack", arXiv 2403.00108 | Yes against a swap: a merged adapter changes W and so the ID (inferred; FlashProve has one integer table and no adapter slot). No against an adapter that was in the vetted checkpoint | No | Signed lineage including the merge step |
+| LoRA / adapter swaps and malicious shared adapters | Liu et al. "LoRA-as-an-Attack!" (v1 title; the current arXiv title is "LoRATK: LoRA Once, Backdoor Everywhere in the Share-and-Play Ecosystem"), arXiv 2403.00108 | Yes against a swap: a merged adapter changes W and so the ID (inferred; FlashProve has one integer table and no adapter slot). No against an adapter that was in the vetted checkpoint | No | Signed lineage including the merge step |
 | **Quantization-activated backdoors**: full-precision model clean, quantized model malicious | Egashira et al. "Exploiting LLM Quantization", NeurIPS 2024, arXiv 2405.18137 (LLM.int8, NF4, FP4); Egashira et al. "Mind the Gap", ICML 2025, arXiv 2505.23786 (GGUF k-quants) | **No, structurally**, if the vetting was done on the fp16 model and the ID is of the integer model. The ID is a perfect pin of the malicious artifact | No | Vet the exact integer artifact that is committed, not its fp16 parent; authenticated, reproducible conversion (M3); differential fp-vs-integer canaries (M4) |
 
 ## Why quantization-triggered backdoors matter specifically for us
@@ -77,7 +77,7 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
 - A strong backdoor needs no allowance: it makes h the top choice and passes exact match.
 - A **weak** or partially-removed backdoor (for example after safety fine-tuning shaved it) may
   leave the harmful first token as a close second, not the top choice. Under exact match that reply
-  fails. Under the shipped clipped-gap limits, open PR #51 (approved, unmerged, unreplicated, H100, small
+  fails. Under the shipped clipped-gap limits, merged PR #51 (main `c46d21ee`, unreplicated, H100, small
   synthetic model) reports that "one swap then greedy continuation" was proved by the honest
   `cp_prove` and accepted `WITHIN LIMITS` by `cp_verify` in 15/16 (float second choice) and 13/16
   (random token) cases. Out-of-limits replies were refused by the honest prover, so `cp_verify`
