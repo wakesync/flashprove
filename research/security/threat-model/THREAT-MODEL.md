@@ -62,6 +62,9 @@ public README, cited, `github.com/lambdaclass/CommitLLM`, fetched 2026-11-04) / 
   reject a forged one is by design, not measured.
 - **Does not stop:** (a) committing to a bad model in the first place, the "worst case: the
   provider commits to a small model that gives the answer it wants" (`docs/limits.md:190-191`);
+  (a') under clipped gap, committing to a flat-score model, "whose scores are close together, and
+  then every token passes" (`docs/limits.md:298`, read; not measured here), so any reply the
+  provider picks verifies `WITHIN LIMITS`;
   (b) choosing the system prompt and template tokens, which the proof then faithfully binds;
   (c) under clipped gap, steering within the allowance: 5 of 54 changed steered replies proved and
   accepted `WITHIN LIMITS` (merged PR #50, honest prover, unreplicated), one-swap-then-continue 15/16 and 13/16 (open PR #51, approved,
@@ -149,8 +152,9 @@ public README, cited, `github.com/lambdaclass/CommitLLM`, fetched 2026-11-04) / 
 ### A7. Compromised prover host
 
 - **Wants:** exfiltrate weights or co-batched prompts; serve outputs from another model.
-- **FlashProve stops:** serving another model's outputs under the honest ID (the proofs would fail
-  against the published ID; `docs/limits.md:2637-2640` notes wrong-directory proofs fail at the
+- **FlashProve stops:** serving another model's outputs under the honest ID **under exact match**
+  (the proofs would fail against the published ID; under clipped gap, outputs that happen to fall
+  within the allowance can pass, as in A1 (c); `docs/limits.md:2637-2640` notes wrong-directory proofs fail at the
   first `cp_verify` with the right ID).
 - **Does not stop:** confidentiality. The secret key directory unmasks weights
   (`docs/architecture.md:238-240`); an attacker with the host has the weights and prompts.

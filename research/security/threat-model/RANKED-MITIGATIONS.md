@@ -11,7 +11,9 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
   conversion tool + version (GGUF quantizer, `weight_sums`, `scales/` commit), `policy.txt`/`KL.bin`/
   `layout.txt` digests, the `-public-weights` 32-byte file if public, and the resulting ID. For public
   weights, anyone can recompute the ID from the manifest (`prover/common/public_weights.h:6-13`), so a
-  signature on the manifest becomes a signature on the ID. Binding the manifest digest into the
+  signature on the manifest becomes a signature on the ID. That recomputation applies only to
+  `-public-weights` commitments (which hide nothing) and needs an H100 to run `cp_commit`
+  (`prover/build.sh:14`); for hiding commitments only the signer's word links ID and checkpoint. Binding the manifest digest into the
   configuration itself is **not available today and untested**: the configuration files are hashed
   byte for byte, but the parameter-file syntax says the frame lines take "No blank line, comment or carriage return"
   (`verifier/docs/parameter-file.md:39`), and PR #41's comment control (appended to `layout.txt`)
