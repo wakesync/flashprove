@@ -25,7 +25,7 @@ def med(xs):
 
 print(f'points: {len(rows)} total, {len(proved)} proved, {len(other)} not proved ({", ".join(sorted(set(r["status"] for r in other))) or "none"})')
 print()
-print('| log_len | n | columns (min..max) | prove s median (min..max) | verify s median (min..max) | proof bytes median (min..max) | max RSS MiB median (min..max) |')
+print('| log_len | n | columns (min..max) | prove s across configs median (min..max) | verify s across configs median (min..max) | proof bytes across configs median (min..max) | max RSS MiB across configs median (min..max) |')
 print('|---|---|---|---|---|---|---|')
 table = []
 for L in sorted(by_L):
@@ -43,15 +43,20 @@ for L in sorted(by_L):
           f"{t['rss_med']:.0f} ({t['rss_min']:.0f}..{t['rss_max']:.0f}) |")
 
 # least-squares fit of log2(metric) vs log2(columns) over points with log_len >= 14 (fixed overheads dominate below)
-def fit(key, minL=14):
-    pts = [(math.log2(r['columns']), math.log2(r[key])) for r in proved if r['log_len'] >= minL and r[key] > 0]
+def fit(key, minL=14, padded=False):
+    # x = log2(real columns), or (padded=True) x = log_len, i.e. log2 of the 2^L table the prover actually allocates
+    pts = [(r['log_len'] if padded else math.log2(r['columns']), math.log2(r[key])) for r in proved if r['log_len'] >= minL and r[key] > 0]
     n = len(pts); mx = sum(p[0] for p in pts) / n; my = sum(p[1] for p in pts) / n
     b = sum((x - mx) * (y - my) for x, y in pts) / sum((x - mx) ** 2 for x, _ in pts)
     return dict(slope=b, intercept=my - b * mx, n=n)
 fits = {k: fit(k) for k in ('prove_s', 'verify_s', 'max_rss_kb', 'proof_bytes')}
+fits_padded = {k: fit(k, padded=True) for k in ('prove_s', 'verify_s', 'max_rss_kb', 'proof_bytes')}
 print()
 for k, v in fits.items():
     print(f'fit log2({k}) = {v["slope"]:.3f} * log2(columns) + {v["intercept"]:.3f}  (n={v["n"]}, log_len>=14)')
+for k, v in fits_padded.items():
+    print(f'fit log2({k}) = {v["slope"]:.3f} * log_len (padded 2^L) + {v["intercept"]:.3f}  (n={v["n"]}, log_len>=14)')
+print('NOTE: prove_s / verify_s in the sweep are single runs on a contended VM; see results/repeat-t10-summary.json for n=10 repeats.')
 
 print()
 print('| d | tokens | bits | log_len | columns | prove s | verify s | proof bytes | RSS MiB | max abs err | static rejected | hostile provers rejected |')
@@ -73,8 +78,10 @@ for bits in (8, 12, 16):
         cols = K.columns_formula(128, 128, T, 64, bits)
         L = math.ceil(math.log2(cols))
         e = {k: 2 ** (v['slope'] * math.log2(cols) + v['intercept']) for k, v in fits.items()}
-        ext[f'b{bits}_T{T}'] = dict(bits=bits, tokens=T, heads=64, columns=cols, log_len=L, prove_s_fit=e['prove_s'], verify_s_fit=e['verify_s'],
-                                   rss_gib_fit=e['max_rss_kb'] / 2**20, rss_gib_linear_from_L21=None, proof_bytes_fit=e['proof_bytes'])
+        ep = {k: 2 ** (v['slope'] * L + v['intercept']) for k, v in fits_padded.items()}
+        ext[f'b{bits}_T{T}'] = dict(bits=bits, tokens=T, heads=64, columns=cols, log_len=L, padded_columns=2 ** L,
+                                   prove_s_fit=e['prove_s'], verify_s_fit=e['verify_s'], rss_gib_fit=e['max_rss_kb'] / 2**20, proof_bytes_fit=e['proof_bytes'],
+                                   prove_s_fit_padded=ep['prove_s'], verify_s_fit_padded=ep['verify_s'], rss_gib_fit_padded=ep['max_rss_kb'] / 2**20)
 L21 = [r for r in proved if r['log_len'] == max(by_L)]
 if L21:
     ref = max(L21, key=lambda r: r['columns'])
@@ -82,12 +89,21 @@ if L21:
         f = v['columns'] / ref['columns']
         v['prove_s_linear_from_largest'] = ref['prove_s'] * f
         v['rss_gib_linear_from_largest'] = ref['max_rss_kb'] * f / 2**20
+        fp = 2 ** (v['log_len'] - ref['log_len'])  # the prover allocates the padded 2^L table
+        v['prove_s_linear_padded_from_largest'] = ref['prove_s'] * fp
+        v['rss_gib_linear_padded_from_largest'] = ref['max_rss_kb'] * fp / 2**20
         v['largest_measured'] = dict(d=ref['d_k'], tokens=ref['tokens'], bits=ref['bits'], columns=ref['columns'], prove_s=ref['prove_s'], max_rss_kb=ref['max_rss_kb'])
 print('\nCALCULATED extrapolation, one KDA layer recurrence (64 heads, d_k=d_v=128), target 10, single thread:\n')
-print('| bits | tokens | columns | log2 | prove h (fit) | prove h (linear from largest) | RSS GiB (fit) | RSS GiB (linear) | verify min (fit) | proof KB (fit) |')
+print('| bits | tokens | columns | log2 | padded L | RSS GiB (linear, padded 2^L) | RSS GiB (fit, padded) | RSS GiB (linear, real cols; superseded) | RSS GiB (fit, real cols; superseded) | proof KB (fit) |')
 print('|---|---|---|---|---|---|---|---|---|---|')
 for k, v in ext.items():
-    print(f"| {v['bits']} | {v['tokens']} | {v['columns']} | {math.log2(v['columns']):.2f} | {v['prove_s_fit'] / 3600:.2f} | {v.get('prove_s_linear_from_largest', 0) / 3600:.2f} | "
-          f"{v['rss_gib_fit']:.0f} | {v.get('rss_gib_linear_from_largest', 0):.0f} | {v['verify_s_fit'] / 60:.1f} | {v['proof_bytes_fit'] / 1000:.1f} |")
-(here / 'results' / 'summary.json').write_text(json.dumps(dict(points=len(rows), proved=len(proved), by_log_len=table, fits=fits,
+    print(f"| {v['bits']} | {v['tokens']} | {v['columns']:,} | {math.log2(v['columns']):.2f} | {v['log_len']} | {v.get('rss_gib_linear_padded_from_largest', 0):,.0f} | {v['rss_gib_fit_padded']:,.0f} | "
+          f"{v.get('rss_gib_linear_from_largest', 0):,.0f} | {v['rss_gib_fit']:,.0f} | {v['proof_bytes_fit'] / 1000:.1f} |")
+print('\nTime estimators (from contended single-run sweep timings; order of magnitude only):\n')
+print('| bits | tokens | padded L | prove h (linear, padded) | prove h (fit, padded) | prove h (linear, real cols; superseded) | prove h (fit, real cols; superseded) | verify min (fit, padded) |')
+print('|---|---|---|---|---|---|---|---|')
+for k, v in ext.items():
+    print(f"| {v['bits']} | {v['tokens']} | {v['log_len']} | {v.get('prove_s_linear_padded_from_largest', 0) / 3600:.2f} | {v['prove_s_fit_padded'] / 3600:.2f} | "
+          f"{v.get('prove_s_linear_from_largest', 0) / 3600:.2f} | {v['prove_s_fit'] / 3600:.2f} | {v['verify_s_fit_padded'] / 60:.1f} |")
+(here / 'results' / 'summary.json').write_text(json.dumps(dict(points=len(rows), proved=len(proved), by_log_len=table, by_log_len_note='spread is across different configurations at that log_len, NOT repeat variance', fits=fits, fits_padded=fits_padded,
     hostile_rejected=hostile_total, static_rejected=static_total, extrapolation_calculated=ext), indent=2) + '\n')

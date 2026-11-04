@@ -1,6 +1,6 @@
 points: 84 total, 77 proved, 7 not proved (plan-only)
 
-| log_len | n | columns (min..max) | prove s median (min..max) | verify s median (min..max) | proof bytes median (min..max) | max RSS MiB median (min..max) |
+| log_len | n | columns (min..max) | prove s across configs median (min..max) | verify s across configs median (min..max) | proof bytes across configs median (min..max) | max RSS MiB across configs median (min..max) |
 |---|---|---|---|---|---|---|
 | 8 | 1 | 160..160 | 0.00 (0.00..0.00) | 0.001 (0.001..0.001) | 8688 (8688..8688) | 30 (30..30) |
 | 9 | 3 | 316..466 | 0.01 (0.01..0.01) | 0.001 (0.001..0.001) | 9104 (9104..9168) | 30 (30..30) |
@@ -21,6 +21,11 @@ fit log2(prove_s) = 1.105 * log2(columns) + -16.864  (n=47, log_len>=14)
 fit log2(verify_s) = 1.149 * log2(columns) + -20.688  (n=47, log_len>=14)
 fit log2(max_rss_kb) = 0.974 * log2(columns) + 2.381  (n=47, log_len>=14)
 fit log2(proof_bytes) = 0.092 * log2(columns) + 12.549  (n=47, log_len>=14)
+fit log2(prove_s) = 1.084 * log_len (padded 2^L) + -17.007  (n=47, log_len>=14)
+fit log2(verify_s) = 1.120 * log_len (padded 2^L) + -20.707  (n=47, log_len>=14)
+fit log2(max_rss_kb) = 0.950 * log_len (padded 2^L) + 2.341  (n=47, log_len>=14)
+fit log2(proof_bytes) = 0.091 * log_len (padded 2^L) + 12.536  (n=47, log_len>=14)
+NOTE: prove_s / verify_s in the sweep are single runs on a contended VM; see results/repeat-t10-summary.json for n=10 repeats.
 
 | d | tokens | bits | log_len | columns | prove s | verify s | proof bytes | RSS MiB | max abs err | static rejected | hostile provers rejected |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -65,14 +70,28 @@ hostile complete proofs rejected: 231 / 231; static mutations rejected: 1848 / 1
 
 CALCULATED extrapolation, one KDA layer recurrence (64 heads, d_k=d_v=128), target 10, single thread:
 
-| bits | tokens | columns | log2 | prove h (fit) | prove h (linear from largest) | RSS GiB (fit) | RSS GiB (linear) | verify min (fit) | proof KB (fit) |
+| bits | tokens | columns | log2 | padded L | RSS GiB (linear, padded 2^L) | RSS GiB (fit, padded) | RSS GiB (linear, real cols; superseded) | RSS GiB (fit, real cols; superseded) | proof KB (fit) |
 |---|---|---|---|---|---|---|---|---|---|
-| 8 | 1 | 51183616 | 25.61 | 0.76 | 0.39 | 159 | 168 | 7.1 | 30.9 |
-| 8 | 8 | 409468928 | 28.61 | 7.58 | 3.09 | 1205 | 1345 | 77.5 | 37.5 |
-| 8 | 128 | 6551502848 | 32.61 | 162.15 | 49.39 | 17917 | 21518 | 1873.2 | 48.5 |
-| 12 | 1 | 74506240 | 26.15 | 1.15 | 0.56 | 229 | 245 | 10.9 | 32.0 |
-| 12 | 8 | 596049920 | 29.15 | 11.48 | 4.49 | 1737 | 1958 | 119.3 | 38.8 |
-| 12 | 128 | 9536798720 | 33.15 | 245.49 | 71.90 | 25824 | 31322 | 2883.7 | 50.2 |
-| 16 | 1 | 101007360 | 26.59 | 1.62 | 0.76 | 308 | 332 | 15.5 | 33.0 |
-| 16 | 8 | 808058880 | 29.59 | 16.07 | 6.09 | 2336 | 2654 | 169.2 | 39.9 |
-| 16 | 128 | 12928942080 | 33.59 | 343.57 | 97.48 | 34729 | 42463 | 4090.6 | 51.6 |
+| 8 | 1 | 51,183,616 | 25.61 | 26 | 176 | 133 | 168 | 159 | 30.9 |
+| 8 | 8 | 409,468,928 | 28.61 | 29 | 1,409 | 957 | 1,345 | 1,205 | 37.5 |
+| 8 | 128 | 6,551,502,848 | 32.61 | 33 | 22,537 | 13,351 | 21,518 | 17,917 | 48.5 |
+| 12 | 1 | 74,506,240 | 26.15 | 27 | 352 | 256 | 245 | 229 | 32.0 |
+| 12 | 8 | 596,049,920 | 29.15 | 30 | 2,817 | 1,850 | 1,958 | 1,737 | 38.8 |
+| 12 | 128 | 9,536,798,720 | 33.15 | 34 | 45,074 | 25,800 | 31,322 | 25,824 | 50.2 |
+| 16 | 1 | 101,007,360 | 26.59 | 27 | 352 | 256 | 332 | 308 | 33.0 |
+| 16 | 8 | 808,058,880 | 29.59 | 30 | 2,817 | 1,850 | 2,654 | 2,336 | 39.9 |
+| 16 | 128 | 12,928,942,080 | 33.59 | 34 | 45,074 | 25,800 | 42,463 | 34,729 | 51.6 |
+
+Time estimators (from contended single-run sweep timings; order of magnitude only):
+
+| bits | tokens | padded L | prove h (linear, padded) | prove h (fit, padded) | prove h (linear, real cols; superseded) | prove h (fit, real cols; superseded) | verify min (fit, padded) |
+|---|---|---|---|---|---|---|---|
+| 8 | 1 | 26 | 0.40 | 0.64 | 0.39 | 0.76 | 5.7 |
+| 8 | 8 | 29 | 3.23 | 6.11 | 3.09 | 7.58 | 58.3 |
+| 8 | 128 | 33 | 51.73 | 123.29 | 49.39 | 162.15 | 1300.2 |
+| 12 | 1 | 27 | 0.81 | 1.36 | 0.56 | 1.15 | 12.3 |
+| 12 | 8 | 30 | 6.47 | 12.95 | 4.49 | 11.48 | 126.6 |
+| 12 | 128 | 34 | 103.47 | 261.34 | 71.90 | 245.49 | 2825.9 |
+| 16 | 1 | 27 | 0.81 | 1.36 | 0.76 | 1.62 | 12.3 |
+| 16 | 8 | 30 | 6.47 | 12.95 | 6.09 | 16.07 | 126.6 |
+| 16 | 128 | 34 | 103.47 | 261.34 | 97.48 | 343.57 | 2825.9 |
