@@ -110,3 +110,6 @@ See `experiments/20261104-43-h200-memory-lever/PREREG.md` (written before any GP
 ## 5. Results
 
 (pending)
+
+### Run log
+- 2026-11-04 01:22 UTC: two instances created (control: 1 GPU of a 2x H100 SXM 80 GB box, $1.219/h; treatment: 1x H200 SXM 141 GB, $5.54/h). Teardown timers armed before create. Both boxes started the pinned build at ~01:31 UTC.
