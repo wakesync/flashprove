@@ -6,7 +6,7 @@
 
 The preregistered success threshold required 15 fresh variant commitments with reproduced IDs and fresh proof decisions. Actual counts: **0 fresh commitments, 0 fresh proofs, 0 steered-reply `cp_verify` checks**. No measured smallest *verifier-detected* dose exists in this result. The output below is a partial CPU experiment, not a substitute proof result.
 
-There is also a substantive negative CPU result: **the default lenient score accepted none of the changed runtime-steered replies in this fixed grid**. It agreed with strict scoring on all 65 cases. We did not tune thresholds, increase the reply length, or select another neuron to obtain a more interesting curve.
+There is also a narrowly scoped negative CPU observation: **in this fixed grid, the default lenient score accepted none of the changed runtime-steered replies**. It agreed with strict scoring on all 65 cases. This holds only for the tested grid (smallest nonzero dose 0.05), four-token replies, and the exact fixture's scales (see the scale caveat below). Doses below 0.05 and replies longer than four tokens were not tested. Short replies leave the clipped-gap budget the least room, so this is **not** evidence that clipped-gap rejects small steering in general. We did not tune thresholds, increase the reply length, or select another neuron to obtain a more interesting curve.
 
 ## What was measured
 
@@ -14,7 +14,7 @@ There is also a substantive negative CPU result: **the default lenient score acc
 - Five independent **prompt** seeds: 1103, 1104, 1105, 1106, 1107. These are not five models or cryptographic trials.
 - Eight prompt tokens and four generated reply tokens per case. One neuron, shared/dense down column 0 at layer 0. At every prompt and generated-token position, add `round(dose * median_stock_residual_norm * Wd[:,0] / ||Wd[:,0]||)` after that layer's MLP residual update. Norm is measured across the eight stock prompt positions, separately per prompt.
 - Doses: 0 and both signs of 0.05, 0.1, 0.2, 0.5, 0.8, 1.0. A fresh stock reference evaluation scores the generated reply on its own autoregressive prefix, with padding through the full 64-token window for range checks.
-- Strict `(C, theta, cap)=(256,256,0)`; lenient `(9244130,323343,1)`, with `s=16`, `sh=8`, `sT=4`, `F=24`. These are repository defaults, also the shipped point in the parallel clipped-gap lane. Both score policies here use the **exact fixture's model and scales**. The separate stored lenient proof has its own scales, ID and request; it is not a proof of these scores.
+- Strict `(C, theta, cap)=(256,256,0)`; lenient `(9244130,323343,1)`, with `s=16`, `sh=8`, `sT=4`, `F=24`. These are repository defaults, also the shipped point in the parallel clipped-gap lane. Both score policies here use the **exact fixture's model and scales**. The separate stored lenient proof has its own scales, ID and request; it is not a proof of these scores. The lenient limits were fitted under the clipped-gap fixture's different `config/KL.bin`, so the lenient column here is "fitted limits applied under other scales", not "the shipped lenient configuration".
 - No range failures: 65/65 runtime cases and 15/15 weight-variant cases scored. Full per-token gaps and decisions are in `numbers.json`; `raw-scores.json` preserves the scoring data before verifier controls.
 
 The relative-dose algebra matches [neuron-explorer's `--dose-unit rel` implementation](https://github.com/lyramakesmusic/neuron-explorer/blob/7ec363d2d9686802a1b4aa7c6d8a2627b1759159/sweep/steer_sweep.py#L180-L195): coefficient `dose * resid_p50 / down_norm`. Its normalization comes from a calibration corpus; ours is explicitly the eight stock prompt positions, with integer rounding. No Qwen code, weights or named persona neurons are used. The fixed default thresholds align with [clipped-gap lane PR #45](https://github.com/wakesync/flashprove/pull/45), not its fitted alternatives.
@@ -38,7 +38,7 @@ Each signed dose has n=5. Rejection columns are counts out of five, not independ
 | +0.2 | 5/5 | 5/5 | 4 [2,4] (0.894) |
 | -0.5, +0.5, -0.8, +0.8, -1.0, +1.0, each | 5/5 | 5/5 | 4 [4,4] (0) |
 
-Across the 60 nonzero-dose cases, 56 replies changed and four did not. Strict and lenient scores both rejected all 56 changed replies and accepted all four unchanged replies. Zero-dose controls were accepted 5/5. This does not establish that every smaller dose or another prompt, neuron or length behaves the same way.
+Across the 60 nonzero-dose cases, 56 replies changed and four did not. Strict and lenient scores both rejected all 56 changed replies and accepted all four unchanged replies. Zero-dose controls were accepted 5/5. This does not establish that every smaller dose or another prompt, neuron or length behaves the same way. Not tested below 0.05 or beyond four tokens.
 
 Smallest **tested score-rejected magnitude**, per prompt:
 
@@ -53,6 +53,7 @@ Smallest **tested score-rejected magnitude**, per prompt:
 - Negative: n=5, median 0.05, SD 0.02739, min 0.05, max 0.10.
 - Positive: n=5, median 0.05, SD 0.06708, min 0.05, max 0.20.
 - These are coarse grid observations, not continuous detection limits. A rejection at 0.05 does not say the true transition is exactly 0.05.
+- **Floor-censored.** Most seeds were already score-rejected at the smallest tested dose, 0.05: 3/5 negative (1104, 1106, 1107) and 4/5 positive (1104 to 1107), matching the -0.05 and +0.05 rows above. So both medians of 0.05 sit on the lower boundary of the grid. They are lower-boundary observations (the true smallest rejected magnitude for those seeds is at most 0.05 and was not resolved), not estimates of where the transition happens. Doses below 0.05 were not tested.
 - For Bernoulli rejection indicators, per-dose n, median, sample SD and min/max are retained under `dose_summary` in `numbers.json`. Neither error bars nor five samples constitute a soundness/security bound.
 
 ## Three weight artifacts, not three commitments
@@ -115,11 +116,13 @@ Needed to complete Stage 1: an authorized GPU run or a separately implemented/te
 
 ## The answer to "which model produced this reply?"
 
-FlashProve checks a relation to a selected committed reference model. It does not classify a reply as stock, abliterated or steered, nor attest the physical origin of a generation. A changed execution can produce the same stock-greedy tokens and satisfy exact match. Clipped-gap intentionally allows some non-greedy outputs when its full budget permits them; this specific short-reply grid found no changed outputs within the default budget.
+FlashProve checks a relation to a selected committed reference model. It does not classify a reply as stock, abliterated or steered, nor attest the physical origin of a generation. A changed execution can produce the same stock-greedy tokens and satisfy exact match. Clipped-gap intentionally allows some non-greedy outputs when its full budget permits them; this specific short-reply grid (doses from 0.05, four tokens, exact-fixture scales) found no changed outputs within the default budget, which says nothing about smaller doses or longer replies.
 
 The desired proof-based comparison is still open. No real-model, Qwen persona, refusal, "first", security, or general steering-detection claim follows. Qwen3.5-4B's 24 DeltaNet and 8 full-attention layers remain Stage 2 architecture work.
 
 ## Reproduce
+
+**Environment provenance.** `run.py` writes `ENV.json` without `commits.experiment_code`, `commits.neuron_explorer_reference` and `toolchain.plot_environment`. Those three fields were added to the committed `ENV.json` by hand after generation, so rerunning `run.py` produces an `ENV.json` that lacks them (and records the local torch build string); `numbers.json`, `raw-scores.json` and `artifact-fingerprints.json` are unaffected. **Torch pin mismatch:** this run used torch 2.9.1 (`+cu128` wheel, CPU only), while `integrations/vllm/integer_model/pyproject.toml` pins `torch==2.13.0`. The independent review on PR #46 reran the same code at the same SHA with torch 2.9.1+cpu and with torch 2.13.0+cpu and reported byte-identical `numbers.json`, `raw-scores.json` and `artifact-fingerprints.json` in both cases (same-code reproduction, not independent replication).
 
 From the repository root, using Python 3.13.12 with torch 2.9.1+cu128 and numpy 2.3.5 (all computation stays on CPU):
 
@@ -135,5 +138,7 @@ For the chart, a separate Python environment with matplotlib 3.11.2 and numpy 2.
 python experiments/20261103-model-identity/plot.py
 (cd experiments/20261103-model-identity && sha256sum -c SHA256SUMS)
 ```
+
+The stage-timing lines in `verifier-logs/*-unaltered-None.log` record wall-clock times and are not reproducible. Rerunning `run.py` rewrites those two logs (and `ENV.json`), so `sha256sum -c` passes against the committed tree only when those files are not regenerated.
 
 All five experiment tests passed: stored-fixture greedy equivalence, exact projection/no stock mutation, one-column surrogate scope, runtime injection boundary, and independent recount of saved integer policy decisions. Source and environment pins are in `ENV.json`; artifacts are covered by `SHA256SUMS`. This is an unreplicated research receipt pending independent review, not a public headline.
