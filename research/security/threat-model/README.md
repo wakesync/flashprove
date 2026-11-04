@@ -1,7 +1,8 @@
 # Security threat model: threat actors and sleeper LLMs
 
-Part of #6, tracking #53. Research only: no experiment code, no GPU, nothing added to
-`research/results.yaml`. Base commit `ce4ceef0`.
+Part of #6, tracking #53. Desk review, not an experiment: no experiment code, no GPU, nothing
+added to `research/results.yaml`, and so no PREREG.md or ENV.json. It lives under
+`research/security/` next to `fiat-shamir-attacks.md` for that reason. Base commit `ce4ceef0`.
 
 Core point: FlashProve proves "the committed integer weights ran on this window and gave these
 checked tokens." A proof of correct execution of a backdoored model is a perfect proof of a
