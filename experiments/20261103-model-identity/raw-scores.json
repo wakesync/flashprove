@@ -1,0 +1,5121 @@
+{
+  "dose_rows": [
+    {
+      "seed": 1103,
+      "dose": 0.0,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.0,
+      "intervention_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": -0.05,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.049999999482024125,
+      "intervention_sha256": "9440cb50c9ddbf14f1ab24427ba48e2c10e870ef1910e8afcee20fbe0a829be3",
+      "reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": 0.05,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.049999999482024125,
+      "intervention_sha256": "971d32b187a0c7368078a44f02d964ca26b75581a127d72bf88cff517923b191",
+      "reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": -0.1,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.10000000053472548,
+      "intervention_sha256": "3aad6d125085cb829dc52deeeda4ab2ee9e0fbc0c3de747a18e23e668d9955ff",
+      "reply": [
+        175,
+        151,
+        92,
+        348
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          4584815,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          4585071,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          348
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 1146459.75,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": 0.1,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.10000000053472548,
+      "intervention_sha256": "ee3bae8177fa2d79abf6e803ff655b30e16e61124c049eff2a985f266c4093fa",
+      "reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": -0.2,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.20000000096623274,
+      "intervention_sha256": "b6cc52b2360b5c7cd380f6010c9ab08b6781ac6c621dc61ca358ff1ce8a3d4f6",
+      "reply": [
+        370,
+        365,
+        294,
+        425
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          14174241,
+          1838110,
+          56632059,
+          805930
+        ],
+        "costs": [
+          14174497,
+          1838366,
+          56632315,
+          806186
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          59,
+          23,
+          99
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 5283203.0,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": 0.2,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.20000000096623274,
+      "intervention_sha256": "74b82c28a5ed53e8efd1109da34d2d2ddcfb51d4c3f8fc50ff82d4d8230fc29a",
+      "reply": [
+        175,
+        151,
+        267,
+        303
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          10287655,
+          19438731
+        ],
+        "costs": [
+          256,
+          256,
+          10287911,
+          19438987
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          180
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4622193.0,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": -0.5,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.49999999952672164,
+      "intervention_sha256": "6dabd1f92407b89b87934a45b92e4c989100367e0117fedee95209ee24b87eb2",
+      "reply": [
+        145,
+        266,
+        447,
+        303
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          41670268,
+          19675391,
+          41685987,
+          33730258
+        ],
+        "costs": [
+          41670524,
+          19675647,
+          41686243,
+          33730514
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          431,
+          319,
+          265
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": 0.5,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.49999999952672164,
+      "intervention_sha256": "22dbec52fef9966b110a717a37a4956a0d4dcf303fc5892fdbcfa2213d431040",
+      "reply": [
+        47,
+        114,
+        171,
+        82
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          40846810,
+          0,
+          15663289,
+          22956994
+        ],
+        "costs": [
+          40847066,
+          256,
+          15663545,
+          22957250
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          114,
+          417,
+          190
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6933161.5,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": -0.8,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.8000000009612142,
+      "intervention_sha256": "c1629680226dd3f62d0bf5d53eae0a9a2ddae3a8edfd7e9139ab5ce8ada1a15e",
+      "reply": [
+        145,
+        266,
+        447,
+        453
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          41670268,
+          19675391,
+          41685987,
+          32349212
+        ],
+        "costs": [
+          41670524,
+          19675647,
+          41686243,
+          32349468
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          431,
+          319,
+          265
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": 0.8,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 0.8000000009612142,
+      "intervention_sha256": "5b0a7115bcd8fc713c56a0369868f26881c208caf3eb181f874d42debd069b6f",
+      "reply": [
+        495,
+        109,
+        82,
+        431
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          38436765,
+          35140376,
+          42623153,
+          56368459
+        ],
+        "costs": [
+          38437021,
+          35140632,
+          42623409,
+          56368715
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          372,
+          3,
+          58
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": -1.0,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 1.0000000008764498,
+      "intervention_sha256": "fb10f25b26cba008e24bfa866c9f3416efbcdd5bc710b43385c4925b49a771d9",
+      "reply": [
+        278,
+        271,
+        441,
+        389
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          57934359,
+          14556753,
+          13056202,
+          17857064
+        ],
+        "costs": [
+          57934615,
+          14557009,
+          13056458,
+          17857320
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          169,
+          373,
+          171
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "dose": 1.0,
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "stock_reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "residual_norm_median": 287238627.26420987,
+      "realized_dose": 1.0000000008764498,
+      "intervention_sha256": "7c9c9bfa457c0ec6f23b5fa4f132857c9f477adf8b0434c4a023edc88efa5de2",
+      "reply": [
+        495,
+        273,
+        241,
+        17
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          38436765,
+          44741076,
+          49267494,
+          25651308
+        ],
+        "costs": [
+          38437021,
+          44741332,
+          49267750,
+          25651564
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          372,
+          414,
+          305
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 0.0,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.0,
+      "intervention_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          471,
+          59,
+          501
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": -0.05,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.050000000084861086,
+      "intervention_sha256": "8b9254ce4844f67693ef09df1d5c87b6e5b80001d7bab33eaa1cc2970c5df90d",
+      "reply": [
+        321,
+        50,
+        29,
+        265
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          7186321,
+          0,
+          5163231,
+          4526635
+        ],
+        "costs": [
+          7186577,
+          256,
+          5163487,
+          4526891
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          50,
+          97,
+          258
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4219302.75,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 0.05,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.050000000084861086,
+      "intervention_sha256": "950b77d90c7611c24a28c8f7a3f47b7e24db29a05d04c5dd58fd22672c99acf9",
+      "reply": [
+        504,
+        272,
+        83,
+        362
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          18666467,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          18666723,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          272,
+          83,
+          362
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 2311224.5,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": -0.1,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.09999999915473883,
+      "intervention_sha256": "b483a508e6a8f6faadaba0da3670374932955c94a3ef60d9766bfa8951fe6269",
+      "reply": [
+        321,
+        50,
+        29,
+        265
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          7186321,
+          0,
+          5163231,
+          4526635
+        ],
+        "costs": [
+          7186577,
+          256,
+          5163487,
+          4526891
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          50,
+          97,
+          258
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4219302.75,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 0.1,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.09999999915473883,
+      "intervention_sha256": "7b132fe0f66c91f3b28edea0dad42e54ec6a232c7f6fbcc3a9f646a2119c1217",
+      "reply": [
+        504,
+        272,
+        83,
+        362
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          18666467,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          18666723,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          272,
+          83,
+          362
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 2311224.5,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": -0.2,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.19999999923565873,
+      "intervention_sha256": "d7a3d087a21dafdb44878f3032b87e7abcf1516453a8f6e515507b111e23fb6e",
+      "reply": [
+        194,
+        188,
+        232,
+        418
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          6153478,
+          24329146,
+          14917749,
+          11829465
+        ],
+        "costs": [
+          6153734,
+          24329402,
+          14918005,
+          11829721
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          194,
+          195,
+          277
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 8471531.0,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 0.2,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.19999999923565873,
+      "intervention_sha256": "63615e8ca7e139eba4c27ab513ec49a730326d1edd466e1604178f1a9b6df23a",
+      "reply": [
+        195,
+        355,
+        166,
+        54
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          34523720,
+          20757313,
+          6953395,
+          0
+        ],
+        "costs": [
+          34523976,
+          20757569,
+          6953651,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          122,
+          482,
+          54
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6360541.75,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": -0.5,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.49999999879569385,
+      "intervention_sha256": "c6bddb97f3925c1845cc3d568d26ea2ffae366b41d7928092b27242e70956761",
+      "reply": [
+        421,
+        388,
+        167,
+        319
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          45013357,
+          29314955,
+          17338291,
+          17611622
+        ],
+        "costs": [
+          45013613,
+          29315211,
+          17338547,
+          17611878
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          22,
+          341,
+          199
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 0.5,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.49999999879569385,
+      "intervention_sha256": "8a7b517834d3a2f735c92fcf640b925e8645478dde3846ab8ec273db5cbb15dd",
+      "reply": [
+        435,
+        332,
+        8,
+        46
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          40200812,
+          26052244,
+          0,
+          68372953
+        ],
+        "costs": [
+          40201068,
+          26052500,
+          256,
+          68373209
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          113,
+          8,
+          105
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6933161.5,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": -0.8,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.8000000008550912,
+      "intervention_sha256": "fe76b6f4540cddee1866189af33665dbd138a85de89874134bade2c98a0fcfc6",
+      "reply": [
+        402,
+        409,
+        175,
+        336
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          32502913,
+          40910061,
+          26314011,
+          44962267
+        ],
+        "costs": [
+          32503169,
+          40910317,
+          26314267,
+          44962523
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          302,
+          155,
+          151
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 0.8,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 0.8000000008550912,
+      "intervention_sha256": "e20645a8fef8bd04fc2d064b9f8eba640cdf0fd19c4824b35afa45a285fab795",
+      "reply": [
+        422,
+        348,
+        495,
+        273
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          26612395,
+          26503175,
+          56405658,
+          45415483
+        ],
+        "costs": [
+          26612651,
+          26503431,
+          56405914,
+          45415739
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          70,
+          112,
+          372
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": -1.0,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 1.0000000008499959,
+      "intervention_sha256": "abb5b6b10a36e4fac3e80656d03d04bb7bbf8bdb1cb7b90b406c38039c4f91bd",
+      "reply": [
+        237,
+        159,
+        457,
+        477
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          46611630,
+          14136958,
+          39803111,
+          5435330
+        ],
+        "costs": [
+          46611886,
+          14137214,
+          39803367,
+          5435586
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          359,
+          81,
+          314
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 8291994.0,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "dose": 1.0,
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "stock_reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "residual_norm_median": 303090670.5457134,
+      "realized_dose": 1.0000000008499959,
+      "intervention_sha256": "6a3175418f1fa773f933c68074ca7c2881fb0b96488883d675b9094c5361c684",
+      "reply": [
+        369,
+        241,
+        17,
+        401
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          51291656,
+          53924808,
+          24942126,
+          21655963
+        ],
+        "costs": [
+          51291912,
+          53925064,
+          24942382,
+          21656219
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          369,
+          305,
+          112
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 0.0,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.0,
+      "intervention_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          427
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": -0.05,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.04999999995656019,
+      "intervention_sha256": "0ecbbf763c945a96f48f1f2014e2bd8df285adbd7d2e9bba9e77b4162faa28e9",
+      "reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          427
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 0.05,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.04999999995656019,
+      "intervention_sha256": "1d3f799cf8961b6386198b4edb0f39d4c6abc36e1706cd5495a37444d4f1345e",
+      "reply": [
+        363,
+        188,
+        232,
+        54
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          1146286,
+          1379933,
+          14228249,
+          8322772
+        ],
+        "costs": [
+          1146542,
+          1380189,
+          14228505,
+          8323028
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          377,
+          195,
+          277
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 5023472.25,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": -0.1,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.10000000064253049,
+      "intervention_sha256": "8c5dbe2a65d34cad2eb37c9780cfeb5b7836d3f966ac53dc439c0f05cdea628b",
+      "reply": [
+        243,
+        452,
+        310,
+        268
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          57743249,
+          2699854
+        ],
+        "costs": [
+          256,
+          256,
+          57743505,
+          2700110
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          79
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 2986188.0,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 0.1,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.10000000064253049,
+      "intervention_sha256": "047b43f1ebc720020c707da29d6844e6cd34725ef7a27872b75b71f566980c84",
+      "reply": [
+        202,
+        198,
+        272,
+        83
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          22781122,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          22781378,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          198,
+          272,
+          83
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 2311224.5,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": -0.2,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.19999999994425444,
+      "intervention_sha256": "c67f0602edc73df30d21e5ea376f5253c7979c5578b5501a8538f178047eb75b",
+      "reply": [
+        317,
+        313,
+        414,
+        71
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          1364639,
+          29324309,
+          0,
+          40592756
+        ],
+        "costs": [
+          1364895,
+          29324565,
+          256,
+          40593012
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          341,
+          414,
+          285
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4963352.75,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 0.2,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.19999999994425444,
+      "intervention_sha256": "bf68220b2373529759773c4a11e6fc3731def84d4ebc3e977d8aba2e4904b3b7",
+      "reply": [
+        243,
+        109,
+        41,
+        50
+      ],
+      "changed_tokens": 3,
+      "score": {
+        "gaps": [
+          0,
+          10986871,
+          306059,
+          12219374
+        ],
+        "costs": [
+          256,
+          10987127,
+          306315,
+          12219630
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          3,
+          287
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4698707.75,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": -0.5,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.5000000016429057,
+      "intervention_sha256": "b382262c64aba5452fcf9c64a73ce3562a572013fefa912827f27be7b1d984bd",
+      "reply": [
+        415,
+        283,
+        64,
+        430
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          38448500,
+          31486683,
+          5800838,
+          14423221
+        ],
+        "costs": [
+          38448756,
+          31486939,
+          5801094,
+          14423477
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          320,
+          437,
+          110
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 8383371.0,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 0.5,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.5000000016429057,
+      "intervention_sha256": "34a70f7f29498850de2210dc5cccbb46f621087a927ff33b5a8908479c1996ea",
+      "reply": [
+        389,
+        406,
+        463,
+        341
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          41302891,
+          36126379,
+          41171857,
+          23118651
+        ],
+        "costs": [
+          41303147,
+          36126635,
+          41172113,
+          23118907
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          306,
+          233,
+          372
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": -0.8,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.7999999993120129,
+      "intervention_sha256": "f976227a1d5d9a86b85e6599f4e3b760d16e45eb846ec62f9731c50a1e19c602",
+      "reply": [
+        10,
+        89,
+        249,
+        93
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          44103177,
+          33090126,
+          32745028,
+          41896927
+        ],
+        "costs": [
+          44103433,
+          33090382,
+          32745284,
+          41897183
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          426,
+          159,
+          40
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 0.8,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.7999999993120129,
+      "intervention_sha256": "86db6d5cfaa4488dbb1151ee9a5643707e520bd5ae1b890de194c9df182652bc",
+      "reply": [
+        96,
+        312,
+        473,
+        332
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          35530804,
+          34994354,
+          42639748,
+          62592662
+        ],
+        "costs": [
+          35531060,
+          34994610,
+          42640004,
+          62592918
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          399,
+          317,
+          346
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": -1.0,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.9999999992238642,
+      "intervention_sha256": "f4fc27d6380b9ab9840439e1a54747db8f06deb4002e376bec747789d3ca79fa",
+      "reply": [
+        10,
+        89,
+        136,
+        93
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          44103177,
+          33090126,
+          47895958,
+          42452371
+        ],
+        "costs": [
+          44103433,
+          33090382,
+          47896214,
+          42452627
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          426,
+          159,
+          156
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "dose": 1.0,
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "stock_reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "residual_norm_median": 283614412.75468874,
+      "realized_dose": 0.9999999992238642,
+      "intervention_sha256": "8f463580315a9eaa4a9045c7b40264436001a61d0dd3675551721e40fe3156a6",
+      "reply": [
+        489,
+        199,
+        22,
+        497
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          31131204,
+          154913,
+          29036104,
+          72342584
+        ],
+        "costs": [
+          31131460,
+          155169,
+          29036360,
+          72342840
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          34,
+          288,
+          504
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6971889.75,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 0.0,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.0,
+      "intervention_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          122,
+          251
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": -0.05,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.049999998859094195,
+      "intervention_sha256": "ee35ce7fd21747f82cc87a20cedbbf8f1acd17bc2623d0144bdf55d42b8a73e0",
+      "reply": [
+        197,
+        69,
+        55,
+        148
+      ],
+      "changed_tokens": 3,
+      "score": {
+        "gaps": [
+          0,
+          230922,
+          9119921,
+          0
+        ],
+        "costs": [
+          256,
+          231178,
+          9120177,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          254,
+          148
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 2337966.75,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 0.05,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.049999998859094195,
+      "intervention_sha256": "c600c018e591a2db3bd39a275828e8dc85c16026fc0ebeb815f9db6a653efc02",
+      "reply": [
+        197,
+        401,
+        300,
+        108
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          3228945,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          3229201,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          122,
+          108
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 807492.25,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": -0.1,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.09999999977533064,
+      "intervention_sha256": "5f1b24d639c3eb199bd7d29f627605cb8f4312d743b7d1fa4de3b0b703eb75fe",
+      "reply": [
+        197,
+        39,
+        15,
+        39
+      ],
+      "changed_tokens": 3,
+      "score": {
+        "gaps": [
+          0,
+          2140262,
+          1894179,
+          0
+        ],
+        "costs": [
+          256,
+          2140518,
+          1894435,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          349,
+          39
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 1008866.25,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 0.1,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.09999999977533064,
+      "intervention_sha256": "e4cdecd1343835688a91fdc9800d24b94169e13c3ff561c4943dfc1e25de346a",
+      "reply": [
+        197,
+        401,
+        300,
+        108
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          3228945,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          3229201,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          122,
+          108
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 807492.25,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": -0.2,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.20000000152235525,
+      "intervention_sha256": "afdfdd318f507660359712b902d0e1c3ac05a35cd284d33e47006daf39246594",
+      "reply": [
+        298,
+        66,
+        337,
+        97
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          24648333,
+          4822396,
+          23713449,
+          6589230
+        ],
+        "costs": [
+          24648589,
+          4822652,
+          23713705,
+          6589486
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          12,
+          62,
+          95
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 7475099.5,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 0.2,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.20000000152235525,
+      "intervention_sha256": "4c28d5cab331a529cce9f83108a22d9ce6fa4fd09da0b4cd9093b37acc4eb84c",
+      "reply": [
+        379,
+        45,
+        119,
+        151
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          25794681,
+          38157444,
+          0,
+          7094314
+        ],
+        "costs": [
+          25794937,
+          38157700,
+          256,
+          7094570
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          275,
+          119,
+          359
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6395771.5,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": -0.5,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.49999999864778405,
+      "intervention_sha256": "225263a532f777972c6f57816298f631e927ecf5782772e4703e5746a71666cd",
+      "reply": [
+        225,
+        238,
+        370,
+        365
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          45387146,
+          58106688,
+          21519616,
+          1902772
+        ],
+        "costs": [
+          45387402,
+          58106944,
+          21519872,
+          1903028
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          52,
+          511,
+          59
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 7408854.5,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 0.5,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.49999999864778405,
+      "intervention_sha256": "9387c0535adcb39d02e3d3d244bdca264dffaa08a599615bae52f480e09b1b94",
+      "reply": [
+        285,
+        373,
+        292,
+        97
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          22533684,
+          17008173,
+          14381461,
+          40696385
+        ],
+        "costs": [
+          22533940,
+          17008429,
+          14381717,
+          40696641
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          282,
+          501,
+          82
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": -0.8,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.800000001498543,
+      "intervention_sha256": "9de14c9b2507d44f72081e70e5cdc961af601c87215e5c35b01a0f22671b54a6",
+      "reply": [
+        20,
+        397,
+        184,
+        451
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          34375707,
+          23398719,
+          13160691,
+          17615521
+        ],
+        "costs": [
+          34375963,
+          23398975,
+          13160947,
+          17615777
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          449,
+          273,
+          3
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 0.8,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 0.800000001498543,
+      "intervention_sha256": "a4eedcfcf5cead62d264c3e2c76f9743f8972b4a6b82979d218b5340256deae7",
+      "reply": [
+        285,
+        205,
+        83,
+        335
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          22533684,
+          14169381,
+          0,
+          57364472
+        ],
+        "costs": [
+          22533940,
+          14169637,
+          256,
+          57364728
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          282,
+          83,
+          362
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6933161.5,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": -1.0,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 1.0000000002736418,
+      "intervention_sha256": "91286d7fcd4fd9200e3d5a1da402b69541f78872acc45c6577b0531ff487265b",
+      "reply": [
+        20,
+        397,
+        184,
+        451
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          34375707,
+          23398719,
+          13160691,
+          17615521
+        ],
+        "costs": [
+          34375963,
+          23398975,
+          13160947,
+          17615777
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          449,
+          273,
+          3
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "dose": 1.0,
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "stock_reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "residual_norm_median": 278449787.26341194,
+      "realized_dose": 1.0000000002736418,
+      "intervention_sha256": "bbd80c76bbcd796242a4ac75f3774307a566648f58c7b465b0da80b8e4f9bced",
+      "reply": [
+        186,
+        203,
+        202,
+        401
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          35764499,
+          39438522,
+          32507734,
+          29362828
+        ],
+        "costs": [
+          35764755,
+          39438778,
+          32507990,
+          29363084
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          32,
+          317,
+          198
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 0.0,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.0,
+      "intervention_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "changed_tokens": 0,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          385
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": -0.05,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.049999999591567965,
+      "intervention_sha256": "f65324080ffe16e084880d6f892ca3d463e4dc56c078254532b08b3e8447ea50",
+      "reply": [
+        255,
+        232,
+        260,
+        85
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          12248047,
+          8691266
+        ],
+        "costs": [
+          256,
+          256,
+          12248303,
+          8691522
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          368
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4484041.0,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 0.05,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.049999999591567965,
+      "intervention_sha256": "ec36eab642f8183caf0ea70c53546458608af8b5f1470609009416b3f3b92ddd",
+      "reply": [
+        255,
+        320,
+        370,
+        59
+      ],
+      "changed_tokens": 3,
+      "score": {
+        "gaps": [
+          0,
+          1683438,
+          362682,
+          0
+        ],
+        "costs": [
+          256,
+          1683694,
+          362938,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          45,
+          59
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 511786.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": -0.1,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.10000000068313163,
+      "intervention_sha256": "c7621dbc022efe864b28a5c9b048ef9c4f7fe2c66d64f63ebfa3e5969fc2d0a5",
+      "reply": [
+        255,
+        232,
+        418,
+        328
+      ],
+      "changed_tokens": 2,
+      "score": {
+        "gaps": [
+          0,
+          0,
+          11877412,
+          5643352
+        ],
+        "costs": [
+          256,
+          256,
+          11877668,
+          5643608
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          406
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 3722062.5,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 0.1,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.10000000068313163,
+      "intervention_sha256": "42fd74c95de8d0b144c966045e046b5ec5a747e230bf77db6c15777c9202f7ed",
+      "reply": [
+        105,
+        122,
+        251,
+        488
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          21532460,
+          8105887,
+          0,
+          12773435
+        ],
+        "costs": [
+          21532716,
+          8106143,
+          256,
+          12773691
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          234,
+          251,
+          441
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6648664.75,
+          "above_clip": 2
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": -0.2,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.20000000197064569,
+      "intervention_sha256": "7a1cf1d2364c27bf865cd8a4879e227b5edd55d8f86c06ccc28a30a7caa93b59",
+      "reply": [
+        255,
+        404,
+        7,
+        20
+      ],
+      "changed_tokens": 3,
+      "score": {
+        "gaps": [
+          0,
+          8676542,
+          303361,
+          0
+        ],
+        "costs": [
+          256,
+          8676798,
+          303617,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          80,
+          20
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 2245231.75,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 0.2,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.20000000197064569,
+      "intervention_sha256": "b7a1efd91ec378d448de2a3d88dc3dfd2f0a5e936266ffbef9eb664b9d29da56",
+      "reply": [
+        105,
+        275,
+        75,
+        181
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          21532460,
+          12322153,
+          76077297,
+          0
+        ],
+        "costs": [
+          21532716,
+          12322409,
+          76077553,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          234,
+          276,
+          181
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6933161.5,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": -0.5,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.49999999994801614,
+      "intervention_sha256": "5af52f4659b1bcbfd1630b5915923d7dde27473e11b15a09076e20f6c7cfe8a6",
+      "reply": [
+        211,
+        347,
+        170,
+        71
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          29837661,
+          24022897,
+          0,
+          22622551
+        ],
+        "costs": [
+          29837917,
+          24023153,
+          256,
+          22622807
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          64,
+          170,
+          161
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 6933161.5,
+          "above_clip": 3
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 0.5,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.49999999994801614,
+      "intervention_sha256": "86accb58d471f50f235d07897d459fe6dee12d396c953b05e291916aa5196055",
+      "reply": [
+        362,
+        146,
+        19,
+        393
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          55740966,
+          17470191,
+          17784519,
+          15286728
+        ],
+        "costs": [
+          55741222,
+          17470447,
+          17784775,
+          15286984
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          445,
+          169,
+          365
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": -0.8,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.8000000009863368,
+      "intervention_sha256": "5871e21f4f3aec9e97a7d516a51f0831a97f5c4ccf46518cbe56569d4a4fb899",
+      "reply": [
+        23,
+        141,
+        397,
+        184
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          16872709,
+          30362170,
+          29811592,
+          13140156
+        ],
+        "costs": [
+          16872965,
+          30362426,
+          29811848,
+          13140412
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          234,
+          340,
+          273
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 0.8,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 0.8000000009863368,
+      "intervention_sha256": "852854296b6d31fa861412778c17d25946e86b6f1091c031812f1627339695a2",
+      "reply": [
+        463,
+        335,
+        314,
+        36
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          19334106,
+          54635220,
+          58733215,
+          12946134
+        ],
+        "costs": [
+          19334362,
+          54635476,
+          58733471,
+          12946390
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          372,
+          159,
+          462
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": -1.0,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 1.0000000025655877,
+      "intervention_sha256": "baa22e9b35c00e29d70cb920aef5d9ea013da1787d6fb9b4154e1040f981b666",
+      "reply": [
+        472,
+        298,
+        232,
+        272
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          22061312,
+          70223784,
+          30314483,
+          51068425
+        ],
+        "costs": [
+          22061568,
+          70224040,
+          30314739,
+          51068681
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          181,
+          12,
+          277
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "dose": 1.0,
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "stock_reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "residual_norm_median": 271965123.2723297,
+      "realized_dose": 1.0000000025655877,
+      "intervention_sha256": "bc4bd03240d3f8d3d0a5f26b7d1c49d69e76621d86f443626101e22186e60972",
+      "reply": [
+        492,
+        312,
+        394,
+        212
+      ],
+      "changed_tokens": 4,
+      "score": {
+        "gaps": [
+          57054857,
+          45856493,
+          47413006,
+          40275810
+        ],
+        "costs": [
+          57055113,
+          45856749,
+          47413262,
+          40276066
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          406,
+          317,
+          430
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 4
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 9244130.0,
+          "above_clip": 4
+        }
+      }
+    }
+  ],
+  "variant_rows": [
+    {
+      "seed": 1103,
+      "variant": "stock",
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "variant": "direction_projected",
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "reply": [
+        429,
+        314,
+        352,
+        62
+      ],
+      "changed_tokens": 4,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          429,
+          314,
+          352,
+          62
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          4434648,
+          0,
+          12899313,
+          0
+        ],
+        "costs": [
+          4434904,
+          256,
+          12899569,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          314,
+          462,
+          62
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 3419886.5,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1103,
+      "variant": "column_doubled_surrogate",
+      "prompt": [
+        216,
+        117,
+        66,
+        381,
+        289,
+        298,
+        15,
+        90
+      ],
+      "reply": [
+        175,
+        151,
+        409,
+        155
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          175,
+          151,
+          409,
+          155
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "variant": "stock",
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          471,
+          59,
+          501
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          471,
+          59,
+          501
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "variant": "direction_projected",
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "reply": [
+        194,
+        194,
+        194,
+        194
+      ],
+      "changed_tokens": 4,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          194,
+          194,
+          194,
+          194
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          6153478,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          6153734,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          194,
+          194,
+          194
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 1538625.5,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1104,
+      "variant": "column_doubled_surrogate",
+      "prompt": [
+        462,
+        37,
+        2,
+        6,
+        259,
+        335,
+        92,
+        380
+      ],
+      "reply": [
+        381,
+        471,
+        59,
+        501
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          471,
+          59,
+          501
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          381,
+          471,
+          59,
+          501
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "variant": "stock",
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          427
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          427
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "variant": "direction_projected",
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "reply": [
+        317,
+        341,
+        45,
+        184
+      ],
+      "changed_tokens": 4,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          317,
+          341,
+          45,
+          184
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          1364639,
+          0,
+          16619721,
+          8432564
+        ],
+        "costs": [
+          1364895,
+          256,
+          16619977,
+          8432820
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          341,
+          329,
+          119
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4760525.25,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1105,
+      "variant": "column_doubled_surrogate",
+      "prompt": [
+        492,
+        334,
+        477,
+        270,
+        192,
+        244,
+        31,
+        210
+      ],
+      "reply": [
+        243,
+        452,
+        250,
+        427
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          427
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          243,
+          452,
+          250,
+          427
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "variant": "stock",
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "reply": [
+        197,
+        401,
+        122,
+        251
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          122,
+          251
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          122,
+          251
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "variant": "direction_projected",
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "reply": [
+        197,
+        69,
+        254,
+        307
+      ],
+      "changed_tokens": 3,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          69,
+          254,
+          307
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          230922,
+          0,
+          3598280
+        ],
+        "costs": [
+          256,
+          231178,
+          256,
+          3598536
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          254,
+          219
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 2
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 957556.5,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1106,
+      "variant": "column_doubled_surrogate",
+      "prompt": [
+        151,
+        401,
+        471,
+        462,
+        396,
+        92,
+        235,
+        201
+      ],
+      "reply": [
+        197,
+        401,
+        300,
+        108
+      ],
+      "changed_tokens": 2,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          300,
+          108
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          3228945,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          3229201,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          197,
+          401,
+          122,
+          108
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 1
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 807492.25,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "variant": "stock",
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          385
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          385
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "variant": "direction_projected",
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "reply": [
+        255,
+        224,
+        276,
+        250
+      ],
+      "changed_tokens": 3,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          224,
+          276,
+          250
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          3474823,
+          13365415,
+          5013093
+        ],
+        "costs": [
+          256,
+          3475079,
+          13365671,
+          5013349
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          104,
+          301
+        ],
+        "strict": {
+          "accept": false,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 3
+        },
+        "lenient": {
+          "accept": false,
+          "mean_clipped_cost": 4433203.5,
+          "above_clip": 1
+        }
+      }
+    },
+    {
+      "seed": 1107,
+      "variant": "column_doubled_surrogate",
+      "prompt": [
+        393,
+        375,
+        246,
+        259,
+        207,
+        86,
+        81,
+        319
+      ],
+      "reply": [
+        255,
+        232,
+        277,
+        385
+      ],
+      "changed_tokens": 0,
+      "own_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          385
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      },
+      "stock_model_score": {
+        "gaps": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "costs": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "stock_choices_on_reply_prefix": [
+          255,
+          232,
+          277,
+          385
+        ],
+        "strict": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        },
+        "lenient": {
+          "accept": true,
+          "mean_clipped_cost": 256.0,
+          "above_clip": 0
+        }
+      }
+    }
+  ]
+}

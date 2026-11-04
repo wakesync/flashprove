@@ -1,0 +1,4 @@
+build.sh: note: another account may be able to change <WORKSPACE> (its group or others can write in it, and it has no sticky bit), under which this checkout lies, and so could change what is built, and this script itself; for a build that no other account can touch, keep the checkout below directories that only you can write in; if <WORKSPACE> is yours, close it with chmod go-w
+build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66 dw=8
+compiling cp_verify.cpp: one compiler call of one to two minutes, which prints nothing while it runs
+THE VERIFIER IS BUILT: <WORKSPACE>/projects/flashprove-model-identity/bin/cp_verify
