@@ -42,7 +42,7 @@ The range script is deterministic: rerunning it gives byte-identical output apar
 | F10 single | R3 | 18,887 (17,632..31,376), SD 5,856 | 11,684 (3,702..19,638), SD 5,996 | 74,658 (71,231..105,511), SD 14,240 | 123,553 (88,603..138,182), SD 24,030 | 0.0533 (0.0347..0.0914), SD 0.0216 |
 | F10 single | R4 | 3,015 (2,135..4,732), SD 1,165 | 1,984 (916..3,494), SD 1,015 | 7,589 (6,421..8,071), SD 609 | 8,988 (7,885..10,391), SD 940 | 0.0112 (0.0065..0.0824), SD 0.0322 |
 
-High limbs at F = 12 over all 20 runs: delta_hi is 1 in every run (SD 0); v_hi is 1 in 18 runs and 2 in 2 (R3 seeds 3 and 5), median 1, SD 0.31. The results-ledger metric `f12_max_abs_v_hi` (value 2) is a max over 20 runs; its `spread` field is null because the ledger schema has no field for this discrete count split, and the split is given in its `note` instead.
+High limbs at F = 12 over all 20 runs: delta_hi is 1 in every run (SD 0); v_hi is 1 in 18 runs and 2 in 2 (R3 seeds 3 and 5), median 1, SD 0.31. The results-ledger metric `f12_max_abs_v_hi` (value 2) is a max over 20 runs; its `spread` was null at a4ee964f and now carries SD 0.3078, min 1, max 2 across the per-run maxima, with the 18/2 split in its `note`.
 
 ## H1, H2: not run
 

@@ -345,12 +345,12 @@ results:
     status_note: "(KILLED: lookup smallness test not integrated; no proof)"
     replication: unreplicated
     pr: 52
-    summary: "KILLED before any proof. The range study alone (integer reference) fits 20 of 20 realistic runs at F = 12 with two-limb delta and v, including the 5 heavy-tailed R3 seeds that failed M1 (high limb at most 2)"
+    summary: "KILLED before any proof. The range study alone (integer reference) fits 20 of 20 realistic runs at F = 12 with two-limb delta and v, including the 5 heavy-tailed R3 seeds that failed M1 (high limb at most 2). This re-derives M1 ranges by construction (240 of 240 cells identical to M1 ranges.json), so it adds no evidence beyond M1"
     conditions: "integer reference only, no proof; M1 realistic suite R1..R4 x seeds 1..5 x 1,024 steps; one head 128 x 128; synthetic; CPU"
     evidence: [experiments/20261104-32-qwen-deltanet-m1b-twolimb/RESULTS.md]
     metrics:
       - {name: f12_twolimb_runs_fit, stat: count, value: 20, total: 20, unit: count, n: 20, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/runs/ranges-twolimb.json, note: "reference only, no proof"}
-      - {name: f12_max_abs_v_hi, stat: max, value: 2, unit: int, n: 20, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/runs/ranges-twolimb.json}
+      - {name: f12_max_abs_v_hi, stat: max, value: 2, unit: int, n: 20, spread: {sd: 0.3078, min: 1, max: 2}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/runs/ranges-twolimb.json, note: "max over 20 per-run maxima; spread is across seeds of those per-run maxima (18 runs 1, 2 runs 2: R3 seeds 3 and 5; sample SD; runs/ranges-twolimb-summary.json F12_all20). Was null at a4ee964f; the script is deterministic, so there is no run-to-run spread"}
       - {name: honest_proofs_run, stat: count, value: 0, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/RESULTS.md, note: "registered H1 needed 10 of 10"}
 
   - id: open-studies
