@@ -1,0 +1,27 @@
+passed: build
+passed: unit
+passed: oracle.1.cpp
+skipped: oracle.1.py: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.2.cpp
+skipped: oracle.2.py: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.3.cpp
+skipped: oracle.3.py: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.4.cpp
+skipped: oracle.4.py: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.100.cpp
+skipped: oracle.100.py: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.101.cpp
+skipped: oracle.101.py: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.102.cpp
+skipped: oracle.102.py: python3 does not have numpy and gguf-py 0.19.0
+skipped: oracle.2.py.decode-twice: python3 does not have numpy and gguf-py 0.19.0
+passed: oracle.1.eres10.cpp
+skipped: oracle.1.eres10.py: python3 does not have numpy and gguf-py 0.19.0
+passed: edge.cpp
+skipped: edge.py: python3 does not have numpy and gguf-py 0.19.0
+passed: refusals.cpp
+skipped: refusals.py: python3 does not have numpy and gguf-py 0.19.0
+skipped: fork-failure.py: python3 does not have numpy and gguf-py 0.19.0
+passed: model.cpp
+skipped: model.py: python3 does not have numpy and gguf-py 0.19.0
+run_tests: every step that ran passed; 13 skipped

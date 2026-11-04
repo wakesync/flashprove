@@ -1,0 +1,1 @@
+psc_rows.sh: 2 of 2 checkers built

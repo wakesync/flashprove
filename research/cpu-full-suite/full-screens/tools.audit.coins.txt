@@ -1,0 +1,9 @@
+first_table          as the known answer
+copy_table           as the known answer
+key_file             as the known answer
+entry                as the known answer
+entry_with_answers   as the known answer
+batch_first          as the known answer
+batch_process        as the known answer
+the generator        3 contexts' keys, 18 coins at both fields, 4 of them behind a refused word: as the known answers
+draw                 as the known answer

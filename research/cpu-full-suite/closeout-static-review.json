@@ -1,0 +1,50 @@
+[
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check",
+      "604b259",
+      "HEAD"
+    ],
+    "exit": 2,
+    "output": "research/integration-v2/evidence/adapter.log:6: trailing whitespace.\n+test_corrupt_proof (__main__.VerifierTests.test_corrupt_proof) ... \nresearch/integration-v2/evidence/adapter.log:15: trailing whitespace.\n+test_honest (__main__.VerifierTests.test_honest) ... \nresearch/integration-v2/evidence/adapter.log:71: trailing whitespace.\n+test_wrong_coverage (__main__.VerifierTests.test_wrong_coverage) ... \nresearch/integration-v2/evidence/adapter.log:77: trailing whitespace.\n+test_wrong_next_token (__main__.VerifierTests.test_wrong_next_token) ... \n"
+  },
+  {
+    "argv": [
+      "bash",
+      "-n",
+      "tools/lean-verify/lean_verify.sh",
+      "tools/lean-verify/lean_verify_test.sh"
+    ],
+    "exit": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit": 0,
+    "output": "133da749937115883c95edfc4b6e372c16209449\n"
+  },
+  {
+    "argv": [
+      "git",
+      "status",
+      "--porcelain"
+    ],
+    "exit": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "sha256sum",
+      "-c",
+      "research/integration-v2/SHA256SUMS"
+    ],
+    "exit": 0,
+    "output": "research/integration-v2/README.md: OK\nresearch/integration-v2/audit/001.log: OK\nresearch/integration-v2/audit/002.log: OK\nresearch/integration-v2/audit/003.log: OK\nresearch/integration-v2/audit/004.log: OK\nresearch/integration-v2/audit/005.log: OK\nresearch/integration-v2/audit/006.log: OK\nresearch/integration-v2/audit/007.log: OK\nresearch/integration-v2/audit/008.log: OK\nresearch/integration-v2/audit/009.log: OK\nresearch/integration-v2/audit/010.log: OK\nresearch/integration-v2/audit/011.log: OK\nresearch/integration-v2/audit/012.log: OK\nresearch/integration-v2/audit/013.log: OK\nresearch/integration-v2/audit/014.log: OK\nresearch/integration-v2/audit/015.log: OK\nresearch/integration-v2/audit/016.log: OK\nresearch/integration-v2/audit/017.log: OK\nresearch/integration-v2/audit/018.log: OK\nresearch/integration-v2/audit/019.log: OK\nresearch/integration-v2/audit/020.log: OK\nresearch/integration-v2/audit/021.log: OK\nresearch/integration-v2/audit/022.log: OK\nresearch/integration-v2/audit/023.log: OK\nresearch/integration-v2/audit/024.log: OK\nresearch/integration-v2/audit/025.log: OK\nresearch/integration-v2/audit/026.log: OK\nresearch/integration-v2/audit/027.log: OK\nresearch/integration-v2/audit/028.log: OK\nresearch/integration-v2/audit/029.log: OK\nresearch/integration-v2/audit/030.log: OK\nresearch/integration-v2/audit/031.log: OK\nresearch/integration-v2/audit/032.log: OK\nresearch/integration-v2/audit/033.log: OK\nresearch/integration-v2/audit/034.log: OK\nresearch/integration-v2/audit/035.log: OK\nresearch/integration-v2/audit/036.log: OK\nresearch/integration-v2/audit/037.log: OK\nresearch/integration-v2/audit/038.log: OK\nresearch/integration-v2/audit/039.log: OK\nresearch/integration-v2/audit/040.log: OK\nresearch/integration-v2/audit/041.log: OK\nresearch/integration-v2/audit/failures.json: OK\nresearch/integration-v2/audit/results.json: OK\nresearch/integration-v2/evidence/adapter.exit: OK\nresearch/integration-v2/evidence/adapter.log: OK\nresearch/integration-v2/evidence/audit.exit: OK\nresearch/integration-v2/evidence/audit.log: OK\nresearch/integration-v2/evidence/baseline.exit: OK\nresearch/integration-v2/evidence/baseline.log: OK\nresearch/integration-v2/evidence/build.verifier.txt: OK\nresearch/integration-v2/evidence/driver.log: OK\nresearch/integration-v2/evidence/focused-rows.json: OK\nresearch/integration-v2/evidence/focused.exit: OK\nresearch/integration-v2/evidence/focused.log: OK\nresearch/integration-v2/evidence/full-suite-blocked.json: OK\nresearch/integration-v2/evidence/input-hashes.json: OK\nresearch/integration-v2/evidence/integrations.cp_verify.txt: OK\nresearch/integration-v2/evidence/integrity.exit: OK\nresearch/integration-v2/evidence/integrity.log: OK\nresearch/integration-v2/evidence/results.json: OK\nresearch/integration-v2/evidence/tools.lean_verify.script.txt: OK\n"
+  }
+]

@@ -1,0 +1,1 @@
+field_setting_test, setting 2: all passed
