@@ -1,0 +1,2 @@
+reproduction build and seven-artifact byte comparison: PASS
+Both rebuilt arms also match the original baseline artifacts byte-for-byte. Correctness-only run, not a second performance experiment.

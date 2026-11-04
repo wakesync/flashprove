@@ -1,0 +1,42 @@
+{"mode":"honest","accept":true,"D":128,"T":4,"F":12,"columns_used":2338816,"log_length":22,"relations":4761088,"relation_terms":11430400,"proof_bytes":50365584,"build_s":1.155,"prove_s":51.034,"verify_s":11.445,"peak_rss_kb":6728344}
+{"mode":"hostile","class":"c1-state","attack":"S_1[0,0] += 1","violated_relations":5,"rejected":true}
+{"mode":"hostile","class":"c1-state","attack":"S_3[0,0] += 1","violated_relations":5,"rejected":true}
+{"mode":"hostile","class":"c2-state-floor-preserving","attack":"S_2[0,0] += 1, remainder -= 2^F, range bits consistent","violated_relations":4,"rejected":true}
+{"mode":"hostile","class":"c3-decay","attack":"token-1 decay gate operand a += 1","violated_relations":2,"rejected":true}
+{"mode":"hostile","class":"c4-beta","attack":"token-1 beta gate operand += 1","violated_relations":2,"rejected":true}
+{"mode":"hostile","class":"c5-memory-floor","attack":"M[0] += 1 (v-M operand -= 1), remainder -= 2^2F","violated_relations":3,"rejected":true}
+{"mode":"hostile","class":"c5-delta-floor","attack":"delta[0] += 1, remainder -= 2^F","violated_relations":130,"rejected":true}
+{"mode":"hostile","class":"c6-range-bit","attack":"S_1[0,0] range bit 3 flipped","violated_relations":1,"rejected":true}
+{"mode":"hostile","class":"c6-range-bit","attack":"S_1[0,0] remainder bit 0 flipped","violated_relations":1,"rejected":true}
+{"mode":"hostile","class":"c3-decay","attack":"public a_1 += 1 (every binding)","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c4-beta","attack":"public beta_1 += 1 (every binding)","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c7-public","attack":"public S0[0,0] += 1","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c7-public","attack":"public k_1[0] += 1 (every binding)","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c7-public","attack":"public v_1[0] += 1","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c7-public","attack":"public q_1[0] += 1 (every binding)","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c7-public","attack":"public o_4[0] += 1","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c7-public","attack":"public S_4[0,0] += 1","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"flip one bit","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"truncate","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"trailing byte","violated_relations":0,"rejected":true}
+{"mode":"hostile","class":"c8-bytes","attack":"verify under the affine_rows transcript label","violated_relations":0,"rejected":true}
+{"mode":"hostile-summary","rejected":40,"total":40,"peak_rss_kb":6974824}
