@@ -1,0 +1,2660 @@
+{
+  "stock": {
+    "artifact_sha256": "5ef0dd3d329b198bf398cbda36771bfb31e3685ef0144676269813c751dcce11",
+    "commitment_id": null,
+    "tensors": [
+      {
+        "name": "Emb",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "3909021d0db1bbd82c5f56449b7cf2613af00c074b4840d37e5e35e939c98c97"
+      },
+      {
+        "name": "[\"Wd\",0,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "93bbd079c6736bc4488bca4c33c7ca454daac746d0ee8296f4e7c27feb27fa45"
+      },
+      {
+        "name": "[\"Wd\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "798e6913d00d962bbe6dba53001be253f638fda53d2e6c85a5173d84f30a7df8"
+      },
+      {
+        "name": "[\"Wd\",2,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "e3b3eaa945ad749e241088e3a2d52b91a5b0fb817cbd5f911c389f80b284a114"
+      },
+      {
+        "name": "[\"Wd\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7e8f5e5e1232fa39a1d98c0222c008f02e01288172b16d930c9dcd1af5a2e13a"
+      },
+      {
+        "name": "[\"Wd\",4,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "64a94bd19c0baa498f1554dc65679d88979f5f6ea644ea84e6c0852b17544f73"
+      },
+      {
+        "name": "[\"Wd\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "801fe36a3f7171fb4723b0a38a7268ab7fcb542171b80d0152799f498c56b956"
+      },
+      {
+        "name": "[\"Wd\",6,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "ba2cb9fbef8dd648fb3961060d929be7eb98c9147b99ba140d30018a4af535c0"
+      },
+      {
+        "name": "[\"Wd\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fb86a30ec5b40cbaaa1dc22d5a57bf806f54b064b9737e5865f9f5b7fb06ce0d"
+      },
+      {
+        "name": "[\"Wdr\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d4d84afcad8c26b9bc3797ef41ea42829735a19650cf0750b8aee5bd9b0377a8"
+      },
+      {
+        "name": "[\"Wdr\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "48335d117b470b1ad0fee39defd77fb129befc5a68942b0a7856f974ab01d7fd"
+      },
+      {
+        "name": "[\"Wdr\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "b65e6afea1cc6858a1f9ef85c240914c57fe2669c09bf02e69ffad256e3e6e31"
+      },
+      {
+        "name": "[\"Wdr\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "e7c3af7a156dd2bae85f2699ea624742e27aa83ee99eba79edb4ef6bfa721356"
+      },
+      {
+        "name": "[\"Wdr\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d31714e131d14603390b4a936b22881f58b8a46fcbf447bf548f2e64a99ba5f8"
+      },
+      {
+        "name": "[\"Wdr\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9cf14617497218cba784b102a3218bcb9da39aac37c089f55dafd7215b0a795d"
+      },
+      {
+        "name": "[\"Wdr\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "203a9ab0590ca9e93ec6b1c16c4e3ff1353d1929dbae9f132187e4ff93a9c5dd"
+      },
+      {
+        "name": "[\"Wdr\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d4ac15ec98823d6fc5daa871bc4305f163de8bc31ed85ac466b7180b2f6cf481"
+      },
+      {
+        "name": "[\"Wdr\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "264a112419e092e55e9d6acb8cc77206dccb0f90f76d697e987669d6d197cf4b"
+      },
+      {
+        "name": "[\"Wdr\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "60a182dedd5c7bf1564592a055ee1132977dc6565f6e30bfb7d2533a60e4fba8"
+      },
+      {
+        "name": "[\"Wdr\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6dea53f960cbc06cb06f31c8a5388a1dd2df88d9dbeb6da987cc127609f956db"
+      },
+      {
+        "name": "[\"Wdr\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ad2f7dad271a833f3247581797a18bbb507fb83f90e5f3e3c2603839aab4faa9"
+      },
+      {
+        "name": "[\"Wdr\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ccea148ca7794c3f9d84d44726d8704ba4397c44c5c3b5709ec4b963d4ce92b3"
+      },
+      {
+        "name": "[\"Wdr\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "3e3044f2ea929b43488ab24ba64a30244a474f5d34f903aac4533bccef8fe13f"
+      },
+      {
+        "name": "[\"Wdr\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "68d06822095f8b1fbf0d226fd5c36d8e36909e871767a4956f614a61d1984a67"
+      },
+      {
+        "name": "[\"Wdr\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7901a554f92e3c8cf16a2fcf72ee676ba32aba9b1775688adf0f9a74d8543a41"
+      },
+      {
+        "name": "[\"Wg\",0,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "ea864d0207c8fcbc31476771719cc2857d42c5762e3415b4dc649f7e5d4f213e"
+      },
+      {
+        "name": "[\"Wg\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bcfeb8387c20393d2d12c0e82bfb49406dc7d3e62cdb4467dc90fff202a17a44"
+      },
+      {
+        "name": "[\"Wg\",2,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "b08888c20d4e55084f620ed914f08b57ad9256d735314782f574c891a824f5ed"
+      },
+      {
+        "name": "[\"Wg\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "83291a0deca78f552bf3d0910b5c22d3ad7a6e82c0b6696ed3ff10f408be8132"
+      },
+      {
+        "name": "[\"Wg\",4,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "2ab8bcae02825042640f8abd5b0878cdac646548e3acbcfdf9a49f06d7cc4416"
+      },
+      {
+        "name": "[\"Wg\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7fda9136bcf170c9c55df3757af9ec431296e6a66663755a04ebfeda52f4f780"
+      },
+      {
+        "name": "[\"Wg\",6,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "38756d630fa7f8f37c92c2f7a22702dae59594998d74cd1b87d5b5c58a6ef0fb"
+      },
+      {
+        "name": "[\"Wg\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fd2e09ed6b141de2856038ab8a269f81f8cffa9e5a5d921b66eaf98d14564400"
+      },
+      {
+        "name": "[\"Wgr\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "1369b41f7b1dc05b89929d6191cbee7cc6b1a26a9db9fc96e9e564dfc146c168"
+      },
+      {
+        "name": "[\"Wgr\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2268c957380c56d555843cf7f199aa2cc6461f97c9f6dbb9166d87172032808d"
+      },
+      {
+        "name": "[\"Wgr\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "17ec22b55c8c973c9eaa039cadf0a22fb012813da72b3e9decf6c9e322e754ce"
+      },
+      {
+        "name": "[\"Wgr\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "355d040fa8caa2fb432417e6e4f8156239773823de32a102405308298080f35b"
+      },
+      {
+        "name": "[\"Wgr\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "768cf633d6a6f82c4372ef7836dfa2e570a831b29bf223a8fb9cce9565ea1231"
+      },
+      {
+        "name": "[\"Wgr\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "c851f8034e22d53b1e0a2f43bd0e31898dc8d9bf9e84e30b44918fcabbbb2e58"
+      },
+      {
+        "name": "[\"Wgr\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "dd87f67ef0890cd1614637968a831c6070b95aa2300ec9dad1d9e5d534fd9b8f"
+      },
+      {
+        "name": "[\"Wgr\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2db39761978cd2cc062266bff443d04c5b8f53fa1a307fe458319d0823391a94"
+      },
+      {
+        "name": "[\"Wgr\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "401bf09549e307de999d4a20ebc0a8261cf9ba9a009376a9a6d79ba5b5c8118e"
+      },
+      {
+        "name": "[\"Wgr\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6f5308c7557bed94b22f014d9b17f40dda9f8af6bffbb2ef5547b9a5a9c13e94"
+      },
+      {
+        "name": "[\"Wgr\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d9f924d35b8c2b8704541a3f2ac02f29739984d399eeb4f691a467f07191e901"
+      },
+      {
+        "name": "[\"Wgr\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "4ad52cb752fbf5136df24e5af13fea1cb9086cf000f454e6ce7851b1f05df8ce"
+      },
+      {
+        "name": "[\"Wgr\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8d83f08ff5f7224b9dbb41d1537eb575ffcf23306ef60c8297e2f1ff0a3f10eb"
+      },
+      {
+        "name": "[\"Wgr\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "273cf85f80fe496b5f69912592b360c5821f0c1533cafae6844f9d476c419879"
+      },
+      {
+        "name": "[\"Wgr\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "b087f51cb1373bffa64ada100469643f95186ae34627cc9789597bbbaf1e4bf2"
+      },
+      {
+        "name": "[\"Wgr\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "38c4a41872b3c26f56fa782eb86c5966ef4488fb3de2ecd97785c6c7b0969e1a"
+      },
+      {
+        "name": "[\"Wh\",null,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bed45da6c2d4712d25dfd19adc19959d70475bb4344e2ce6fb6e93525bcb4a03"
+      },
+      {
+        "name": "[\"Wk\",0,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "273ae9dc99df7a75a56cea4a2f191605811f30c2277b936519cb8f238dc8e0d3"
+      },
+      {
+        "name": "[\"Wk\",1,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "1a63a824c6c07f275c0283e358378b182197c75e055e4027d68a233513d06b83"
+      },
+      {
+        "name": "[\"Wk\",2,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "35f14698968aed3bbcd2cea64ec178250c5edd3fd190333eecf19fd942d52368"
+      },
+      {
+        "name": "[\"Wk\",3,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "77feb2f141fd06dc0dd4f41d7c593f4bc86a1818931fb0a2bbccb3f9dc06132c"
+      },
+      {
+        "name": "[\"Wk\",4,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "3ff8faf8ea842ee427516af13ba0e64ac2874c244919aed8b8c653895cbf80d7"
+      },
+      {
+        "name": "[\"Wk\",5,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "0387d521ea4be0e4627791e725f940644ed5c88c692e75245f3ec83bd9d5d93c"
+      },
+      {
+        "name": "[\"Wk\",6,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "72fddbe0e1939a875af59729547770a8a8ef4e73e321b445b45f33f728279f3b"
+      },
+      {
+        "name": "[\"Wk\",7,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "104afeccf0c6ad93be7b85b8d6cbb5743fe01436eb0afff768627511476725a0"
+      },
+      {
+        "name": "[\"Wo\",0,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d67710ecb99fece80487e29f9ac3571152fbedb95aa227a1107a5656ad59c4b2"
+      },
+      {
+        "name": "[\"Wo\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ff64756c53521fac5395da13d7a962bdf0d7ad10304fa6647adc066223fc0fc9"
+      },
+      {
+        "name": "[\"Wo\",2,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "5fe28ca9c9b632a3c0afb82529e2fc00fc765fe38e4b9644ed8ef13d32add159"
+      },
+      {
+        "name": "[\"Wo\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ae189af08c7dd3365db6a6873777302c202bf8a4abf990dfad5f0d8f46ec2043"
+      },
+      {
+        "name": "[\"Wo\",4,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "dff1068427b276028473149f0575ce8afe5c105ab9564812144876dc309aec81"
+      },
+      {
+        "name": "[\"Wo\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2024cfb8a64bf17d5476ba530bd79da9e4dfaf5bb3d04a018b18f4f4fcdca1f1"
+      },
+      {
+        "name": "[\"Wo\",6,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9e943a90fcf4b82980bcab8662d3ffa0c2ef60ad1eaf95928e030a25de37c5ca"
+      },
+      {
+        "name": "[\"Wo\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "72f439f7c843fcd027915fc9c9968e24ea128db2963c44c8afd9e7faeecf5df9"
+      },
+      {
+        "name": "[\"Wq\",0,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "c5c25f297d035b84d5c44a72391287a6d1a33594687af6cf59788597bf692214"
+      },
+      {
+        "name": "[\"Wq\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "03158ccd207557dda94137a73d23641f06b0699435f928aa116efe5431922d8a"
+      },
+      {
+        "name": "[\"Wq\",2,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d68d61f56a67756862ca0a70750d527a07dd40122c2f8b8e1a75e0af6649a0fe"
+      },
+      {
+        "name": "[\"Wq\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "64fc907af3877a3380b4d3e13e43ae01944614b0ccf2bc1d416c62f90c16ab4c"
+      },
+      {
+        "name": "[\"Wq\",4,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9453b67f7a261bd29a7c2a150c358a67987b1dfc7249a9a5ef04568778de74ae"
+      },
+      {
+        "name": "[\"Wq\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "0920bf7a8572ea4b74e953c6c1f0a015ca536f327db5fe4e5e4d27b706353286"
+      },
+      {
+        "name": "[\"Wq\",6,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d6b7bb4b2146b2489b3d31eb5a596c3ff2c47589a15927b9f82f131df460f197"
+      },
+      {
+        "name": "[\"Wq\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9fa50b183fe7f97481fdc5ddb56fb832a2bb6f1118d986cd634a5345bebf64e7"
+      },
+      {
+        "name": "[\"Wr\",1,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "802b4402f8684eec8ebf034a58e43498a972979576a10cf5ea404775ea58992d"
+      },
+      {
+        "name": "[\"Wr\",3,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "fef269ebfa66c360fae0adf84eb4184fbb11e0e6f18e981f9f11f38d52f6cb72"
+      },
+      {
+        "name": "[\"Wr\",5,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "bce2c375e90e75aba66bdcd785a660829dc6a39581cb608b890f216478bec1b4"
+      },
+      {
+        "name": "[\"Wr\",7,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "e18701926501bd5e2ada3a8021fb29d5ef490394822a44cccd75791853b50a64"
+      },
+      {
+        "name": "[\"Wu\",0,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "65b849b3d4fcf540e13bfde541153cd0d22a07a3501332e775d787b03078dfdc"
+      },
+      {
+        "name": "[\"Wu\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8cfb18a2fdec2b6edb82fc59688812102a41a203adc5f7fd8fbc2147aaa14ed5"
+      },
+      {
+        "name": "[\"Wu\",2,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "9a8a37911f4dd9c0e391d3d3a74e75652ab8a89b153ca09f71c72d26525645f1"
+      },
+      {
+        "name": "[\"Wu\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a5dee696a5b663109e3b028d6fe138993bb57f4174f575da2f2f18e92481d7de"
+      },
+      {
+        "name": "[\"Wu\",4,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "83ba82f2c0d5678268aabc7052f45152b3b59b1ee6525210ad1699942d7975f8"
+      },
+      {
+        "name": "[\"Wu\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "75dbba00933e58dfcb5852737cd9a146bcc5849e72ed40693b8aad66402834a7"
+      },
+      {
+        "name": "[\"Wu\",6,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "20bdf439201b1fab37e77e4520b2f5994443b8242ccf103206a182ef47f3c3e8"
+      },
+      {
+        "name": "[\"Wu\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "44b6883c01a776bd6c601ab4cea918ff49699ac12951523650f8b8ec94889354"
+      },
+      {
+        "name": "[\"Wur\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d18e40652f9abb415b0dcf2e8cb2a9eac94790e675ff963f200f17efcee3e1f0"
+      },
+      {
+        "name": "[\"Wur\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "da1e797cf1ca1c42cf09976b3d84addeee0b3ba31e7f12e2d35ccf0ef365371c"
+      },
+      {
+        "name": "[\"Wur\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ad96a6365b0e267f200399227b078f86ffa1d0ff8906047d9414fd032742a5c2"
+      },
+      {
+        "name": "[\"Wur\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fbfb0ad802b5bc22ade6bf455a556f0d32f287e9e2bf265182d0b8648eade983"
+      },
+      {
+        "name": "[\"Wur\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "cf12f8167cd7eb4ced3e97c08a52dd579e6aa641a3122c5a5e088bbd21c3d854"
+      },
+      {
+        "name": "[\"Wur\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a08d3da37ac2c4de60a44cf14a9ef9c33c7cd8eedd8e1ec6d947273545aaac71"
+      },
+      {
+        "name": "[\"Wur\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6ad6e99e5d7b144582b837e69c98b76bb45e2abf32e07b43060861544ee756e3"
+      },
+      {
+        "name": "[\"Wur\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "1badcf0c9068010f51824924feba2dc73da0fb06b27b9d5526e60cabebc4b8c2"
+      },
+      {
+        "name": "[\"Wur\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2d2320587374d7d085058242c466c1fcfc8f4d7d84d71cfed50d6415c630f7df"
+      },
+      {
+        "name": "[\"Wur\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "f55b1af873767137f158ce0e77d9ea12c941b63a566de2d8118ff689afa60dd8"
+      },
+      {
+        "name": "[\"Wur\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9325c3f07bd54f491abdad5df493e995ef5901ec96fb8a07c0f04a990cae771a"
+      },
+      {
+        "name": "[\"Wur\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bd74d7b2890f7b7b9752f6a3d3b7f29d4ba4a95c0588a49a505a3a5726126d7c"
+      },
+      {
+        "name": "[\"Wur\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "94185e52447018d360ef2af3f4359997a3aec4c61ceb18d98d1f935426a11657"
+      },
+      {
+        "name": "[\"Wur\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "071c645295ed07c543ead8d472d0f0b95c9be27e64170c23a8e6f55dff99546f"
+      },
+      {
+        "name": "[\"Wur\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "24776fa1de03165aa66743fac71f68c4061ed9e9fca99d91d6c96a6c0b12ed1e"
+      },
+      {
+        "name": "[\"Wur\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "84b99ab9462a3662f76fe06311ea8dcadcb444f2c2798963c8a566fb4e061eab"
+      },
+      {
+        "name": "[\"Wv\",0,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "95ea445f25b55fc25917a2af00e7f1504dac4fa1bcdaafdc875ba3d930cd55af"
+      },
+      {
+        "name": "[\"Wv\",1,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "e00474aae83c2925b5f531dc65f89b5b20ef6b8a8bfc900aad16723704d738bd"
+      },
+      {
+        "name": "[\"Wv\",2,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "d1a0497849a76bde4d6ab8bc2a47b835236a81d5ce1c92c1278cdcbf79312fb8"
+      },
+      {
+        "name": "[\"Wv\",3,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "d163e62d13ed9b9934824c33e0a9bc9c360e62f2ff905fb061cba20eea6962ad"
+      },
+      {
+        "name": "[\"Wv\",4,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "1ca464189e039fcca8181ff4abf107fccec7566e579626a2298829663a1765fe"
+      },
+      {
+        "name": "[\"Wv\",5,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "e6181b4c38d52235d8f31c0153ee7808b2580737513b618955066e964559a279"
+      },
+      {
+        "name": "[\"Wv\",6,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "167cae7dd7d1d0c58ba06ea86e34f4b77188ef1579418409bdac2bbd0290f25a"
+      },
+      {
+        "name": "[\"Wv\",7,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "dfcefa4ffc500261367f87ee28c7258aca80f783db805a4ec85c51fbb2bc2e40"
+      }
+    ]
+  },
+  "direction_projected": {
+    "artifact_sha256": "14e158fa162a6fcff8a840b066bc169e2e03c1f8fa340cc27cda4c32ce7c9fb9",
+    "commitment_id": null,
+    "tensors": [
+      {
+        "name": "Emb",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9433875a11a671f28154d729d304b070d51a2b13f3e4ef41449cdee2726cdee5"
+      },
+      {
+        "name": "[\"Wd\",0,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "73cb79c1ae5ac006a87c7cfe2c07438d3da03775163f661bae3575eef3a43d1c"
+      },
+      {
+        "name": "[\"Wd\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "5e90d602ec4d5efa12fb507ff7df43b85b24f46069a8fe51c85a8ff367e5de07"
+      },
+      {
+        "name": "[\"Wd\",2,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "a8e5b77c202e3636210906410ef52162b84eaf4c25bdab2c116a115ca5636d04"
+      },
+      {
+        "name": "[\"Wd\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "28deeaabb8fbd03788bace65fe50b0fd6dfb429317dcb788f0ca1d0658f7c0dc"
+      },
+      {
+        "name": "[\"Wd\",4,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "a422f5dcf2bb7ba67ce6228aa0ee3063329b187280737303e37cf25630b44d7b"
+      },
+      {
+        "name": "[\"Wd\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "eda2ac55db8dcc558aead67c263ed78354856ee167924baee22d39482524f2cc"
+      },
+      {
+        "name": "[\"Wd\",6,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "685eec585ccbc7309e8fc3078c24313506f24d19855e19d7cc5015ca97c28bb6"
+      },
+      {
+        "name": "[\"Wd\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ac2e8d65b96a310235f6b03bcdbd49b7e2bfae92394261445461c99d675efb75"
+      },
+      {
+        "name": "[\"Wdr\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "5295af3eb1d7f691c13b53daaab3a6130fe37fd655bb887da9d12c46f1b46196"
+      },
+      {
+        "name": "[\"Wdr\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "77b50c2226694066e447c198a49d03d11b58d2e382a051713dd6cf652bd3a34d"
+      },
+      {
+        "name": "[\"Wdr\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "db715215520ecffc4f7e32a1dafc3c44c7710fde5629f3fb6490816f1ca61bfa"
+      },
+      {
+        "name": "[\"Wdr\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "65915f31c9d0b6414e0a84146ee345b7c0fc641786a566f6681968117b54ec8c"
+      },
+      {
+        "name": "[\"Wdr\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ac2284f2c05000e71502f6b534e93e0aacf219fbae2131d4fdec89b7b3f9b1be"
+      },
+      {
+        "name": "[\"Wdr\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "b832288380b628e8d9216f995462a975e897b965fe226f17c429843c5e3018b4"
+      },
+      {
+        "name": "[\"Wdr\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6232ee70be88a223ec679b2708bd4f56b1283a4b669c0a50758c7292afd0e7ca"
+      },
+      {
+        "name": "[\"Wdr\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "5bd766d4c28532d1d7b35c0adca2efb0ad42e8986cc93f09fbe2148d0f612ccd"
+      },
+      {
+        "name": "[\"Wdr\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a8056c887bb36cc385d4e92d5c5d9fefaafa6104bc7752768a835d9b71465260"
+      },
+      {
+        "name": "[\"Wdr\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ee4692a1c545e1f0ec780b1b359d5568f00a8b70549a7d4f02d6cefb3cc82a22"
+      },
+      {
+        "name": "[\"Wdr\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "832f0d68a57014d71298f60f4527284deff061fcbd028df8bde4b102ccd2984a"
+      },
+      {
+        "name": "[\"Wdr\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2229335dced374cd669ceea7f177eb84b23219f782d0177cec4313d6fa23affd"
+      },
+      {
+        "name": "[\"Wdr\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8ead2665fb1f097aea3c5603b53d0d31cee2645fc0ecd46a3c0d2f9e5ed7ca38"
+      },
+      {
+        "name": "[\"Wdr\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "dc4b896c4666fa60851fae515b6b38fff68312247d2be76955717601a4a44e0d"
+      },
+      {
+        "name": "[\"Wdr\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a0d5a0047fd0c241608e945d5750150495667a646d2c740cc0a9c5f8b2827f25"
+      },
+      {
+        "name": "[\"Wdr\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "3e6124bdef5be1825828221e1b73dd16efc5e54329535d9583897a23df5aa738"
+      },
+      {
+        "name": "[\"Wg\",0,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "ea864d0207c8fcbc31476771719cc2857d42c5762e3415b4dc649f7e5d4f213e"
+      },
+      {
+        "name": "[\"Wg\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bcfeb8387c20393d2d12c0e82bfb49406dc7d3e62cdb4467dc90fff202a17a44"
+      },
+      {
+        "name": "[\"Wg\",2,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "b08888c20d4e55084f620ed914f08b57ad9256d735314782f574c891a824f5ed"
+      },
+      {
+        "name": "[\"Wg\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "83291a0deca78f552bf3d0910b5c22d3ad7a6e82c0b6696ed3ff10f408be8132"
+      },
+      {
+        "name": "[\"Wg\",4,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "2ab8bcae02825042640f8abd5b0878cdac646548e3acbcfdf9a49f06d7cc4416"
+      },
+      {
+        "name": "[\"Wg\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7fda9136bcf170c9c55df3757af9ec431296e6a66663755a04ebfeda52f4f780"
+      },
+      {
+        "name": "[\"Wg\",6,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "38756d630fa7f8f37c92c2f7a22702dae59594998d74cd1b87d5b5c58a6ef0fb"
+      },
+      {
+        "name": "[\"Wg\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fd2e09ed6b141de2856038ab8a269f81f8cffa9e5a5d921b66eaf98d14564400"
+      },
+      {
+        "name": "[\"Wgr\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "1369b41f7b1dc05b89929d6191cbee7cc6b1a26a9db9fc96e9e564dfc146c168"
+      },
+      {
+        "name": "[\"Wgr\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2268c957380c56d555843cf7f199aa2cc6461f97c9f6dbb9166d87172032808d"
+      },
+      {
+        "name": "[\"Wgr\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "17ec22b55c8c973c9eaa039cadf0a22fb012813da72b3e9decf6c9e322e754ce"
+      },
+      {
+        "name": "[\"Wgr\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "355d040fa8caa2fb432417e6e4f8156239773823de32a102405308298080f35b"
+      },
+      {
+        "name": "[\"Wgr\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "768cf633d6a6f82c4372ef7836dfa2e570a831b29bf223a8fb9cce9565ea1231"
+      },
+      {
+        "name": "[\"Wgr\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "c851f8034e22d53b1e0a2f43bd0e31898dc8d9bf9e84e30b44918fcabbbb2e58"
+      },
+      {
+        "name": "[\"Wgr\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "dd87f67ef0890cd1614637968a831c6070b95aa2300ec9dad1d9e5d534fd9b8f"
+      },
+      {
+        "name": "[\"Wgr\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2db39761978cd2cc062266bff443d04c5b8f53fa1a307fe458319d0823391a94"
+      },
+      {
+        "name": "[\"Wgr\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "401bf09549e307de999d4a20ebc0a8261cf9ba9a009376a9a6d79ba5b5c8118e"
+      },
+      {
+        "name": "[\"Wgr\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6f5308c7557bed94b22f014d9b17f40dda9f8af6bffbb2ef5547b9a5a9c13e94"
+      },
+      {
+        "name": "[\"Wgr\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d9f924d35b8c2b8704541a3f2ac02f29739984d399eeb4f691a467f07191e901"
+      },
+      {
+        "name": "[\"Wgr\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "4ad52cb752fbf5136df24e5af13fea1cb9086cf000f454e6ce7851b1f05df8ce"
+      },
+      {
+        "name": "[\"Wgr\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8d83f08ff5f7224b9dbb41d1537eb575ffcf23306ef60c8297e2f1ff0a3f10eb"
+      },
+      {
+        "name": "[\"Wgr\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "273cf85f80fe496b5f69912592b360c5821f0c1533cafae6844f9d476c419879"
+      },
+      {
+        "name": "[\"Wgr\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "b087f51cb1373bffa64ada100469643f95186ae34627cc9789597bbbaf1e4bf2"
+      },
+      {
+        "name": "[\"Wgr\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "38c4a41872b3c26f56fa782eb86c5966ef4488fb3de2ecd97785c6c7b0969e1a"
+      },
+      {
+        "name": "[\"Wh\",null,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bed45da6c2d4712d25dfd19adc19959d70475bb4344e2ce6fb6e93525bcb4a03"
+      },
+      {
+        "name": "[\"Wk\",0,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "273ae9dc99df7a75a56cea4a2f191605811f30c2277b936519cb8f238dc8e0d3"
+      },
+      {
+        "name": "[\"Wk\",1,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "1a63a824c6c07f275c0283e358378b182197c75e055e4027d68a233513d06b83"
+      },
+      {
+        "name": "[\"Wk\",2,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "35f14698968aed3bbcd2cea64ec178250c5edd3fd190333eecf19fd942d52368"
+      },
+      {
+        "name": "[\"Wk\",3,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "77feb2f141fd06dc0dd4f41d7c593f4bc86a1818931fb0a2bbccb3f9dc06132c"
+      },
+      {
+        "name": "[\"Wk\",4,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "3ff8faf8ea842ee427516af13ba0e64ac2874c244919aed8b8c653895cbf80d7"
+      },
+      {
+        "name": "[\"Wk\",5,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "0387d521ea4be0e4627791e725f940644ed5c88c692e75245f3ec83bd9d5d93c"
+      },
+      {
+        "name": "[\"Wk\",6,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "72fddbe0e1939a875af59729547770a8a8ef4e73e321b445b45f33f728279f3b"
+      },
+      {
+        "name": "[\"Wk\",7,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "104afeccf0c6ad93be7b85b8d6cbb5743fe01436eb0afff768627511476725a0"
+      },
+      {
+        "name": "[\"Wo\",0,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "5ddc9e387a8fb288ab661ee26956751f86048c7dde64a187ce78e6a97a04cc1d"
+      },
+      {
+        "name": "[\"Wo\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "18aa274bb56f02e5c3103c76cded120428076caf31a7dfacf5a49f8f6e96c92f"
+      },
+      {
+        "name": "[\"Wo\",2,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7a75f35daa633187fd77b1133809e05a1ebba37338c94cd547d1a4f5e3aa3f28"
+      },
+      {
+        "name": "[\"Wo\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "3a59af4594ac7b4669cec8dcd9e126b94ffa35e50b2b51ebe5e35b0910c3b8ce"
+      },
+      {
+        "name": "[\"Wo\",4,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a30c873d754dabbb7e0d992c4072ee161c9696b3d3a33da48ee58a3b04553c20"
+      },
+      {
+        "name": "[\"Wo\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "832f2a922ed9a924c5bf3f594fb20597058c29e818c6562cb75c07eaf49b7b1f"
+      },
+      {
+        "name": "[\"Wo\",6,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6f9299c8f975c4b190a2572a0825cd572da6a056fa584521999a761ec60fe983"
+      },
+      {
+        "name": "[\"Wo\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "317351a62840b60ace51711f512048833f1a3b60f65da2ea651eeff499b64975"
+      },
+      {
+        "name": "[\"Wq\",0,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "c5c25f297d035b84d5c44a72391287a6d1a33594687af6cf59788597bf692214"
+      },
+      {
+        "name": "[\"Wq\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "03158ccd207557dda94137a73d23641f06b0699435f928aa116efe5431922d8a"
+      },
+      {
+        "name": "[\"Wq\",2,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d68d61f56a67756862ca0a70750d527a07dd40122c2f8b8e1a75e0af6649a0fe"
+      },
+      {
+        "name": "[\"Wq\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "64fc907af3877a3380b4d3e13e43ae01944614b0ccf2bc1d416c62f90c16ab4c"
+      },
+      {
+        "name": "[\"Wq\",4,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9453b67f7a261bd29a7c2a150c358a67987b1dfc7249a9a5ef04568778de74ae"
+      },
+      {
+        "name": "[\"Wq\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "0920bf7a8572ea4b74e953c6c1f0a015ca536f327db5fe4e5e4d27b706353286"
+      },
+      {
+        "name": "[\"Wq\",6,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d6b7bb4b2146b2489b3d31eb5a596c3ff2c47589a15927b9f82f131df460f197"
+      },
+      {
+        "name": "[\"Wq\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9fa50b183fe7f97481fdc5ddb56fb832a2bb6f1118d986cd634a5345bebf64e7"
+      },
+      {
+        "name": "[\"Wr\",1,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "802b4402f8684eec8ebf034a58e43498a972979576a10cf5ea404775ea58992d"
+      },
+      {
+        "name": "[\"Wr\",3,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "fef269ebfa66c360fae0adf84eb4184fbb11e0e6f18e981f9f11f38d52f6cb72"
+      },
+      {
+        "name": "[\"Wr\",5,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "bce2c375e90e75aba66bdcd785a660829dc6a39581cb608b890f216478bec1b4"
+      },
+      {
+        "name": "[\"Wr\",7,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "e18701926501bd5e2ada3a8021fb29d5ef490394822a44cccd75791853b50a64"
+      },
+      {
+        "name": "[\"Wu\",0,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "65b849b3d4fcf540e13bfde541153cd0d22a07a3501332e775d787b03078dfdc"
+      },
+      {
+        "name": "[\"Wu\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8cfb18a2fdec2b6edb82fc59688812102a41a203adc5f7fd8fbc2147aaa14ed5"
+      },
+      {
+        "name": "[\"Wu\",2,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "9a8a37911f4dd9c0e391d3d3a74e75652ab8a89b153ca09f71c72d26525645f1"
+      },
+      {
+        "name": "[\"Wu\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a5dee696a5b663109e3b028d6fe138993bb57f4174f575da2f2f18e92481d7de"
+      },
+      {
+        "name": "[\"Wu\",4,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "83ba82f2c0d5678268aabc7052f45152b3b59b1ee6525210ad1699942d7975f8"
+      },
+      {
+        "name": "[\"Wu\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "75dbba00933e58dfcb5852737cd9a146bcc5849e72ed40693b8aad66402834a7"
+      },
+      {
+        "name": "[\"Wu\",6,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "20bdf439201b1fab37e77e4520b2f5994443b8242ccf103206a182ef47f3c3e8"
+      },
+      {
+        "name": "[\"Wu\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "44b6883c01a776bd6c601ab4cea918ff49699ac12951523650f8b8ec94889354"
+      },
+      {
+        "name": "[\"Wur\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d18e40652f9abb415b0dcf2e8cb2a9eac94790e675ff963f200f17efcee3e1f0"
+      },
+      {
+        "name": "[\"Wur\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "da1e797cf1ca1c42cf09976b3d84addeee0b3ba31e7f12e2d35ccf0ef365371c"
+      },
+      {
+        "name": "[\"Wur\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ad96a6365b0e267f200399227b078f86ffa1d0ff8906047d9414fd032742a5c2"
+      },
+      {
+        "name": "[\"Wur\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fbfb0ad802b5bc22ade6bf455a556f0d32f287e9e2bf265182d0b8648eade983"
+      },
+      {
+        "name": "[\"Wur\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "cf12f8167cd7eb4ced3e97c08a52dd579e6aa641a3122c5a5e088bbd21c3d854"
+      },
+      {
+        "name": "[\"Wur\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a08d3da37ac2c4de60a44cf14a9ef9c33c7cd8eedd8e1ec6d947273545aaac71"
+      },
+      {
+        "name": "[\"Wur\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6ad6e99e5d7b144582b837e69c98b76bb45e2abf32e07b43060861544ee756e3"
+      },
+      {
+        "name": "[\"Wur\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "1badcf0c9068010f51824924feba2dc73da0fb06b27b9d5526e60cabebc4b8c2"
+      },
+      {
+        "name": "[\"Wur\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2d2320587374d7d085058242c466c1fcfc8f4d7d84d71cfed50d6415c630f7df"
+      },
+      {
+        "name": "[\"Wur\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "f55b1af873767137f158ce0e77d9ea12c941b63a566de2d8118ff689afa60dd8"
+      },
+      {
+        "name": "[\"Wur\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9325c3f07bd54f491abdad5df493e995ef5901ec96fb8a07c0f04a990cae771a"
+      },
+      {
+        "name": "[\"Wur\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bd74d7b2890f7b7b9752f6a3d3b7f29d4ba4a95c0588a49a505a3a5726126d7c"
+      },
+      {
+        "name": "[\"Wur\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "94185e52447018d360ef2af3f4359997a3aec4c61ceb18d98d1f935426a11657"
+      },
+      {
+        "name": "[\"Wur\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "071c645295ed07c543ead8d472d0f0b95c9be27e64170c23a8e6f55dff99546f"
+      },
+      {
+        "name": "[\"Wur\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "24776fa1de03165aa66743fac71f68c4061ed9e9fca99d91d6c96a6c0b12ed1e"
+      },
+      {
+        "name": "[\"Wur\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "84b99ab9462a3662f76fe06311ea8dcadcb444f2c2798963c8a566fb4e061eab"
+      },
+      {
+        "name": "[\"Wv\",0,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "95ea445f25b55fc25917a2af00e7f1504dac4fa1bcdaafdc875ba3d930cd55af"
+      },
+      {
+        "name": "[\"Wv\",1,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "e00474aae83c2925b5f531dc65f89b5b20ef6b8a8bfc900aad16723704d738bd"
+      },
+      {
+        "name": "[\"Wv\",2,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "d1a0497849a76bde4d6ab8bc2a47b835236a81d5ce1c92c1278cdcbf79312fb8"
+      },
+      {
+        "name": "[\"Wv\",3,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "d163e62d13ed9b9934824c33e0a9bc9c360e62f2ff905fb061cba20eea6962ad"
+      },
+      {
+        "name": "[\"Wv\",4,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "1ca464189e039fcca8181ff4abf107fccec7566e579626a2298829663a1765fe"
+      },
+      {
+        "name": "[\"Wv\",5,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "e6181b4c38d52235d8f31c0153ee7808b2580737513b618955066e964559a279"
+      },
+      {
+        "name": "[\"Wv\",6,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "167cae7dd7d1d0c58ba06ea86e34f4b77188ef1579418409bdac2bbd0290f25a"
+      },
+      {
+        "name": "[\"Wv\",7,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "dfcefa4ffc500261367f87ee28c7258aca80f783db805a4ec85c51fbb2bc2e40"
+      }
+    ]
+  },
+  "column_doubled_surrogate": {
+    "artifact_sha256": "67b4a84f3ed9b6724f142d11999d254a54c45f849aadc7e58d65e47fbe11a0f7",
+    "commitment_id": null,
+    "tensors": [
+      {
+        "name": "Emb",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "3909021d0db1bbd82c5f56449b7cf2613af00c074b4840d37e5e35e939c98c97"
+      },
+      {
+        "name": "[\"Wd\",0,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "3c9ba41f570dcc1d6c36fcd05ba46a592e505787f7ede302b5b6542488f046b1"
+      },
+      {
+        "name": "[\"Wd\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "798e6913d00d962bbe6dba53001be253f638fda53d2e6c85a5173d84f30a7df8"
+      },
+      {
+        "name": "[\"Wd\",2,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "e3b3eaa945ad749e241088e3a2d52b91a5b0fb817cbd5f911c389f80b284a114"
+      },
+      {
+        "name": "[\"Wd\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7e8f5e5e1232fa39a1d98c0222c008f02e01288172b16d930c9dcd1af5a2e13a"
+      },
+      {
+        "name": "[\"Wd\",4,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "64a94bd19c0baa498f1554dc65679d88979f5f6ea644ea84e6c0852b17544f73"
+      },
+      {
+        "name": "[\"Wd\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "801fe36a3f7171fb4723b0a38a7268ab7fcb542171b80d0152799f498c56b956"
+      },
+      {
+        "name": "[\"Wd\",6,null]",
+        "shape": [
+          512,
+          1024
+        ],
+        "sha256_i64le": "ba2cb9fbef8dd648fb3961060d929be7eb98c9147b99ba140d30018a4af535c0"
+      },
+      {
+        "name": "[\"Wd\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fb86a30ec5b40cbaaa1dc22d5a57bf806f54b064b9737e5865f9f5b7fb06ce0d"
+      },
+      {
+        "name": "[\"Wdr\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d4d84afcad8c26b9bc3797ef41ea42829735a19650cf0750b8aee5bd9b0377a8"
+      },
+      {
+        "name": "[\"Wdr\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "48335d117b470b1ad0fee39defd77fb129befc5a68942b0a7856f974ab01d7fd"
+      },
+      {
+        "name": "[\"Wdr\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "b65e6afea1cc6858a1f9ef85c240914c57fe2669c09bf02e69ffad256e3e6e31"
+      },
+      {
+        "name": "[\"Wdr\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "e7c3af7a156dd2bae85f2699ea624742e27aa83ee99eba79edb4ef6bfa721356"
+      },
+      {
+        "name": "[\"Wdr\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d31714e131d14603390b4a936b22881f58b8a46fcbf447bf548f2e64a99ba5f8"
+      },
+      {
+        "name": "[\"Wdr\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9cf14617497218cba784b102a3218bcb9da39aac37c089f55dafd7215b0a795d"
+      },
+      {
+        "name": "[\"Wdr\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "203a9ab0590ca9e93ec6b1c16c4e3ff1353d1929dbae9f132187e4ff93a9c5dd"
+      },
+      {
+        "name": "[\"Wdr\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d4ac15ec98823d6fc5daa871bc4305f163de8bc31ed85ac466b7180b2f6cf481"
+      },
+      {
+        "name": "[\"Wdr\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "264a112419e092e55e9d6acb8cc77206dccb0f90f76d697e987669d6d197cf4b"
+      },
+      {
+        "name": "[\"Wdr\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "60a182dedd5c7bf1564592a055ee1132977dc6565f6e30bfb7d2533a60e4fba8"
+      },
+      {
+        "name": "[\"Wdr\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6dea53f960cbc06cb06f31c8a5388a1dd2df88d9dbeb6da987cc127609f956db"
+      },
+      {
+        "name": "[\"Wdr\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ad2f7dad271a833f3247581797a18bbb507fb83f90e5f3e3c2603839aab4faa9"
+      },
+      {
+        "name": "[\"Wdr\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ccea148ca7794c3f9d84d44726d8704ba4397c44c5c3b5709ec4b963d4ce92b3"
+      },
+      {
+        "name": "[\"Wdr\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "3e3044f2ea929b43488ab24ba64a30244a474f5d34f903aac4533bccef8fe13f"
+      },
+      {
+        "name": "[\"Wdr\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "68d06822095f8b1fbf0d226fd5c36d8e36909e871767a4956f614a61d1984a67"
+      },
+      {
+        "name": "[\"Wdr\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7901a554f92e3c8cf16a2fcf72ee676ba32aba9b1775688adf0f9a74d8543a41"
+      },
+      {
+        "name": "[\"Wg\",0,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "ea864d0207c8fcbc31476771719cc2857d42c5762e3415b4dc649f7e5d4f213e"
+      },
+      {
+        "name": "[\"Wg\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bcfeb8387c20393d2d12c0e82bfb49406dc7d3e62cdb4467dc90fff202a17a44"
+      },
+      {
+        "name": "[\"Wg\",2,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "b08888c20d4e55084f620ed914f08b57ad9256d735314782f574c891a824f5ed"
+      },
+      {
+        "name": "[\"Wg\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "83291a0deca78f552bf3d0910b5c22d3ad7a6e82c0b6696ed3ff10f408be8132"
+      },
+      {
+        "name": "[\"Wg\",4,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "2ab8bcae02825042640f8abd5b0878cdac646548e3acbcfdf9a49f06d7cc4416"
+      },
+      {
+        "name": "[\"Wg\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "7fda9136bcf170c9c55df3757af9ec431296e6a66663755a04ebfeda52f4f780"
+      },
+      {
+        "name": "[\"Wg\",6,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "38756d630fa7f8f37c92c2f7a22702dae59594998d74cd1b87d5b5c58a6ef0fb"
+      },
+      {
+        "name": "[\"Wg\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fd2e09ed6b141de2856038ab8a269f81f8cffa9e5a5d921b66eaf98d14564400"
+      },
+      {
+        "name": "[\"Wgr\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "1369b41f7b1dc05b89929d6191cbee7cc6b1a26a9db9fc96e9e564dfc146c168"
+      },
+      {
+        "name": "[\"Wgr\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2268c957380c56d555843cf7f199aa2cc6461f97c9f6dbb9166d87172032808d"
+      },
+      {
+        "name": "[\"Wgr\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "17ec22b55c8c973c9eaa039cadf0a22fb012813da72b3e9decf6c9e322e754ce"
+      },
+      {
+        "name": "[\"Wgr\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "355d040fa8caa2fb432417e6e4f8156239773823de32a102405308298080f35b"
+      },
+      {
+        "name": "[\"Wgr\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "768cf633d6a6f82c4372ef7836dfa2e570a831b29bf223a8fb9cce9565ea1231"
+      },
+      {
+        "name": "[\"Wgr\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "c851f8034e22d53b1e0a2f43bd0e31898dc8d9bf9e84e30b44918fcabbbb2e58"
+      },
+      {
+        "name": "[\"Wgr\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "dd87f67ef0890cd1614637968a831c6070b95aa2300ec9dad1d9e5d534fd9b8f"
+      },
+      {
+        "name": "[\"Wgr\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2db39761978cd2cc062266bff443d04c5b8f53fa1a307fe458319d0823391a94"
+      },
+      {
+        "name": "[\"Wgr\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "401bf09549e307de999d4a20ebc0a8261cf9ba9a009376a9a6d79ba5b5c8118e"
+      },
+      {
+        "name": "[\"Wgr\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6f5308c7557bed94b22f014d9b17f40dda9f8af6bffbb2ef5547b9a5a9c13e94"
+      },
+      {
+        "name": "[\"Wgr\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d9f924d35b8c2b8704541a3f2ac02f29739984d399eeb4f691a467f07191e901"
+      },
+      {
+        "name": "[\"Wgr\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "4ad52cb752fbf5136df24e5af13fea1cb9086cf000f454e6ce7851b1f05df8ce"
+      },
+      {
+        "name": "[\"Wgr\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8d83f08ff5f7224b9dbb41d1537eb575ffcf23306ef60c8297e2f1ff0a3f10eb"
+      },
+      {
+        "name": "[\"Wgr\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "273cf85f80fe496b5f69912592b360c5821f0c1533cafae6844f9d476c419879"
+      },
+      {
+        "name": "[\"Wgr\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "b087f51cb1373bffa64ada100469643f95186ae34627cc9789597bbbaf1e4bf2"
+      },
+      {
+        "name": "[\"Wgr\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "38c4a41872b3c26f56fa782eb86c5966ef4488fb3de2ecd97785c6c7b0969e1a"
+      },
+      {
+        "name": "[\"Wh\",null,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bed45da6c2d4712d25dfd19adc19959d70475bb4344e2ce6fb6e93525bcb4a03"
+      },
+      {
+        "name": "[\"Wk\",0,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "273ae9dc99df7a75a56cea4a2f191605811f30c2277b936519cb8f238dc8e0d3"
+      },
+      {
+        "name": "[\"Wk\",1,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "1a63a824c6c07f275c0283e358378b182197c75e055e4027d68a233513d06b83"
+      },
+      {
+        "name": "[\"Wk\",2,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "35f14698968aed3bbcd2cea64ec178250c5edd3fd190333eecf19fd942d52368"
+      },
+      {
+        "name": "[\"Wk\",3,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "77feb2f141fd06dc0dd4f41d7c593f4bc86a1818931fb0a2bbccb3f9dc06132c"
+      },
+      {
+        "name": "[\"Wk\",4,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "3ff8faf8ea842ee427516af13ba0e64ac2874c244919aed8b8c653895cbf80d7"
+      },
+      {
+        "name": "[\"Wk\",5,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "0387d521ea4be0e4627791e725f940644ed5c88c692e75245f3ec83bd9d5d93c"
+      },
+      {
+        "name": "[\"Wk\",6,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "72fddbe0e1939a875af59729547770a8a8ef4e73e321b445b45f33f728279f3b"
+      },
+      {
+        "name": "[\"Wk\",7,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "104afeccf0c6ad93be7b85b8d6cbb5743fe01436eb0afff768627511476725a0"
+      },
+      {
+        "name": "[\"Wo\",0,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d67710ecb99fece80487e29f9ac3571152fbedb95aa227a1107a5656ad59c4b2"
+      },
+      {
+        "name": "[\"Wo\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ff64756c53521fac5395da13d7a962bdf0d7ad10304fa6647adc066223fc0fc9"
+      },
+      {
+        "name": "[\"Wo\",2,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "5fe28ca9c9b632a3c0afb82529e2fc00fc765fe38e4b9644ed8ef13d32add159"
+      },
+      {
+        "name": "[\"Wo\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ae189af08c7dd3365db6a6873777302c202bf8a4abf990dfad5f0d8f46ec2043"
+      },
+      {
+        "name": "[\"Wo\",4,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "dff1068427b276028473149f0575ce8afe5c105ab9564812144876dc309aec81"
+      },
+      {
+        "name": "[\"Wo\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2024cfb8a64bf17d5476ba530bd79da9e4dfaf5bb3d04a018b18f4f4fcdca1f1"
+      },
+      {
+        "name": "[\"Wo\",6,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9e943a90fcf4b82980bcab8662d3ffa0c2ef60ad1eaf95928e030a25de37c5ca"
+      },
+      {
+        "name": "[\"Wo\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "72f439f7c843fcd027915fc9c9968e24ea128db2963c44c8afd9e7faeecf5df9"
+      },
+      {
+        "name": "[\"Wq\",0,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "c5c25f297d035b84d5c44a72391287a6d1a33594687af6cf59788597bf692214"
+      },
+      {
+        "name": "[\"Wq\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "03158ccd207557dda94137a73d23641f06b0699435f928aa116efe5431922d8a"
+      },
+      {
+        "name": "[\"Wq\",2,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d68d61f56a67756862ca0a70750d527a07dd40122c2f8b8e1a75e0af6649a0fe"
+      },
+      {
+        "name": "[\"Wq\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "64fc907af3877a3380b4d3e13e43ae01944614b0ccf2bc1d416c62f90c16ab4c"
+      },
+      {
+        "name": "[\"Wq\",4,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9453b67f7a261bd29a7c2a150c358a67987b1dfc7249a9a5ef04568778de74ae"
+      },
+      {
+        "name": "[\"Wq\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "0920bf7a8572ea4b74e953c6c1f0a015ca536f327db5fe4e5e4d27b706353286"
+      },
+      {
+        "name": "[\"Wq\",6,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d6b7bb4b2146b2489b3d31eb5a596c3ff2c47589a15927b9f82f131df460f197"
+      },
+      {
+        "name": "[\"Wq\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9fa50b183fe7f97481fdc5ddb56fb832a2bb6f1118d986cd634a5345bebf64e7"
+      },
+      {
+        "name": "[\"Wr\",1,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "802b4402f8684eec8ebf034a58e43498a972979576a10cf5ea404775ea58992d"
+      },
+      {
+        "name": "[\"Wr\",3,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "fef269ebfa66c360fae0adf84eb4184fbb11e0e6f18e981f9f11f38d52f6cb72"
+      },
+      {
+        "name": "[\"Wr\",5,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "bce2c375e90e75aba66bdcd785a660829dc6a39581cb608b890f216478bec1b4"
+      },
+      {
+        "name": "[\"Wr\",7,null]",
+        "shape": [
+          4,
+          512
+        ],
+        "sha256_i64le": "e18701926501bd5e2ada3a8021fb29d5ef490394822a44cccd75791853b50a64"
+      },
+      {
+        "name": "[\"Wu\",0,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "65b849b3d4fcf540e13bfde541153cd0d22a07a3501332e775d787b03078dfdc"
+      },
+      {
+        "name": "[\"Wu\",1,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "8cfb18a2fdec2b6edb82fc59688812102a41a203adc5f7fd8fbc2147aaa14ed5"
+      },
+      {
+        "name": "[\"Wu\",2,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "9a8a37911f4dd9c0e391d3d3a74e75652ab8a89b153ca09f71c72d26525645f1"
+      },
+      {
+        "name": "[\"Wu\",3,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a5dee696a5b663109e3b028d6fe138993bb57f4174f575da2f2f18e92481d7de"
+      },
+      {
+        "name": "[\"Wu\",4,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "83ba82f2c0d5678268aabc7052f45152b3b59b1ee6525210ad1699942d7975f8"
+      },
+      {
+        "name": "[\"Wu\",5,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "75dbba00933e58dfcb5852737cd9a146bcc5849e72ed40693b8aad66402834a7"
+      },
+      {
+        "name": "[\"Wu\",6,null]",
+        "shape": [
+          1024,
+          512
+        ],
+        "sha256_i64le": "20bdf439201b1fab37e77e4520b2f5994443b8242ccf103206a182ef47f3c3e8"
+      },
+      {
+        "name": "[\"Wu\",7,null]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "44b6883c01a776bd6c601ab4cea918ff49699ac12951523650f8b8ec94889354"
+      },
+      {
+        "name": "[\"Wur\",1,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "d18e40652f9abb415b0dcf2e8cb2a9eac94790e675ff963f200f17efcee3e1f0"
+      },
+      {
+        "name": "[\"Wur\",1,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "da1e797cf1ca1c42cf09976b3d84addeee0b3ba31e7f12e2d35ccf0ef365371c"
+      },
+      {
+        "name": "[\"Wur\",1,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "ad96a6365b0e267f200399227b078f86ffa1d0ff8906047d9414fd032742a5c2"
+      },
+      {
+        "name": "[\"Wur\",1,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "fbfb0ad802b5bc22ade6bf455a556f0d32f287e9e2bf265182d0b8648eade983"
+      },
+      {
+        "name": "[\"Wur\",3,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "cf12f8167cd7eb4ced3e97c08a52dd579e6aa641a3122c5a5e088bbd21c3d854"
+      },
+      {
+        "name": "[\"Wur\",3,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "a08d3da37ac2c4de60a44cf14a9ef9c33c7cd8eedd8e1ec6d947273545aaac71"
+      },
+      {
+        "name": "[\"Wur\",3,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "6ad6e99e5d7b144582b837e69c98b76bb45e2abf32e07b43060861544ee756e3"
+      },
+      {
+        "name": "[\"Wur\",3,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "1badcf0c9068010f51824924feba2dc73da0fb06b27b9d5526e60cabebc4b8c2"
+      },
+      {
+        "name": "[\"Wur\",5,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "2d2320587374d7d085058242c466c1fcfc8f4d7d84d71cfed50d6415c630f7df"
+      },
+      {
+        "name": "[\"Wur\",5,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "f55b1af873767137f158ce0e77d9ea12c941b63a566de2d8118ff689afa60dd8"
+      },
+      {
+        "name": "[\"Wur\",5,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "9325c3f07bd54f491abdad5df493e995ef5901ec96fb8a07c0f04a990cae771a"
+      },
+      {
+        "name": "[\"Wur\",5,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "bd74d7b2890f7b7b9752f6a3d3b7f29d4ba4a95c0588a49a505a3a5726126d7c"
+      },
+      {
+        "name": "[\"Wur\",7,0]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "94185e52447018d360ef2af3f4359997a3aec4c61ceb18d98d1f935426a11657"
+      },
+      {
+        "name": "[\"Wur\",7,1]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "071c645295ed07c543ead8d472d0f0b95c9be27e64170c23a8e6f55dff99546f"
+      },
+      {
+        "name": "[\"Wur\",7,2]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "24776fa1de03165aa66743fac71f68c4061ed9e9fca99d91d6c96a6c0b12ed1e"
+      },
+      {
+        "name": "[\"Wur\",7,3]",
+        "shape": [
+          512,
+          512
+        ],
+        "sha256_i64le": "84b99ab9462a3662f76fe06311ea8dcadcb444f2c2798963c8a566fb4e061eab"
+      },
+      {
+        "name": "[\"Wv\",0,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "95ea445f25b55fc25917a2af00e7f1504dac4fa1bcdaafdc875ba3d930cd55af"
+      },
+      {
+        "name": "[\"Wv\",1,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "e00474aae83c2925b5f531dc65f89b5b20ef6b8a8bfc900aad16723704d738bd"
+      },
+      {
+        "name": "[\"Wv\",2,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "d1a0497849a76bde4d6ab8bc2a47b835236a81d5ce1c92c1278cdcbf79312fb8"
+      },
+      {
+        "name": "[\"Wv\",3,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "d163e62d13ed9b9934824c33e0a9bc9c360e62f2ff905fb061cba20eea6962ad"
+      },
+      {
+        "name": "[\"Wv\",4,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "1ca464189e039fcca8181ff4abf107fccec7566e579626a2298829663a1765fe"
+      },
+      {
+        "name": "[\"Wv\",5,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "e6181b4c38d52235d8f31c0153ee7808b2580737513b618955066e964559a279"
+      },
+      {
+        "name": "[\"Wv\",6,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "167cae7dd7d1d0c58ba06ea86e34f4b77188ef1579418409bdac2bbd0290f25a"
+      },
+      {
+        "name": "[\"Wv\",7,null]",
+        "shape": [
+          256,
+          512
+        ],
+        "sha256_i64le": "dfcefa4ffc500261367f87ee28c7258aca80f783db805a4ec85c51fbb2bc2e40"
+      }
+    ]
+  }
+}

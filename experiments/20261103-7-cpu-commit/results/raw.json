@@ -1,0 +1,1226 @@
+[
+  {
+    "pair": -2,
+    "arm": "A",
+    "warmup": true,
+    "load": [
+      14.28662109375,
+      11.36572265625,
+      8.94091796875
+    ],
+    "seconds": {
+      "configure": 0.132904518,
+      "tables": 0.036666052,
+      "make_key": 0.405914013,
+      "make_entry": 0.118303699,
+      "prove_batch": 0.819301584,
+      "total_generate": 1.51310664,
+      "cpu_generate": 1.513086,
+      "verify_and_save": 0.304733539,
+      "commit": 0.693788282
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": -2,
+    "arm": "B",
+    "warmup": true,
+    "load": [
+      14.28662109375,
+      11.36572265625,
+      8.94091796875
+    ],
+    "seconds": {
+      "configure": 0.116413857,
+      "tables": 0.034075459,
+      "make_key": 0.36326536,
+      "make_entry": 0.102351773,
+      "prove_batch": 0.730256303,
+      "total_generate": 1.34637442,
+      "cpu_generate": 1.346126,
+      "verify_and_save": 0.263305226,
+      "commit": 0.616106449
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": -1,
+    "arm": "B",
+    "warmup": true,
+    "load": [
+      13.62255859375,
+      11.2763671875,
+      8.9248046875
+    ],
+    "seconds": {
+      "configure": 0.114115641,
+      "tables": 0.045246649,
+      "make_key": 0.390584481,
+      "make_entry": 0.107576198,
+      "prove_batch": 0.756822978,
+      "total_generate": 1.41435847,
+      "cpu_generate": 1.414262,
+      "verify_and_save": 0.28386281,
+      "commit": 0.657522969
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": -1,
+    "arm": "A",
+    "warmup": true,
+    "load": [
+      13.62255859375,
+      11.2763671875,
+      8.9248046875
+    ],
+    "seconds": {
+      "configure": 0.117809544,
+      "tables": 0.03687323,
+      "make_key": 0.431576537,
+      "make_entry": 0.105819585,
+      "prove_batch": 0.777645307,
+      "total_generate": 1.46973842,
+      "cpu_generate": 1.469685,
+      "verify_and_save": 0.27231166,
+      "commit": 0.6920788959999999
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 0,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.62255859375,
+      11.2763671875,
+      8.9248046875
+    ],
+    "seconds": {
+      "configure": 0.119697955,
+      "tables": 0.036735551,
+      "make_key": 0.418007687,
+      "make_entry": 0.113621026,
+      "prove_batch": 0.796533069,
+      "total_generate": 1.48461119,
+      "cpu_generate": 1.484419,
+      "verify_and_save": 0.26988304,
+      "commit": 0.688062219
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 0,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      13.01171875,
+      11.1884765625,
+      8.90869140625
+    ],
+    "seconds": {
+      "configure": 0.129432189,
+      "tables": 0.034112438,
+      "make_key": 0.387985783,
+      "make_entry": 0.111353538,
+      "prove_batch": 0.72618283,
+      "total_generate": 1.38909647,
+      "cpu_generate": 1.389055,
+      "verify_and_save": 0.245932806,
+      "commit": 0.662883948
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 1,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      13.01171875,
+      11.1884765625,
+      8.90869140625
+    ],
+    "seconds": {
+      "configure": 0.121818919,
+      "tables": 0.038320874,
+      "make_key": 0.38519607,
+      "make_entry": 0.110988066,
+      "prove_batch": 0.721649004,
+      "total_generate": 1.37798843,
+      "cpu_generate": 1.377957,
+      "verify_and_save": 0.282678908,
+      "commit": 0.656323929
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 1,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.01171875,
+      11.1884765625,
+      8.90869140625
+    ],
+    "seconds": {
+      "configure": 0.117054795,
+      "tables": 0.03601258,
+      "make_key": 0.395198605,
+      "make_entry": 0.110001209,
+      "prove_batch": 0.794056942,
+      "total_generate": 1.45233704,
+      "cpu_generate": 1.452313,
+      "verify_and_save": 0.248555518,
+      "commit": 0.658267189
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 2,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      12.4501953125,
+      11.10205078125,
+      8.89306640625
+    ],
+    "seconds": {
+      "configure": 0.134979936,
+      "tables": 0.038916949,
+      "make_key": 0.408505628,
+      "make_entry": 0.100988615,
+      "prove_batch": 0.772285518,
+      "total_generate": 1.4556942,
+      "cpu_generate": 1.45561,
+      "verify_and_save": 0.289172043,
+      "commit": 0.683391128
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 2,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      12.4501953125,
+      11.10205078125,
+      8.89306640625
+    ],
+    "seconds": {
+      "configure": 0.119329376,
+      "tables": 0.03584687,
+      "make_key": 0.383881893,
+      "make_entry": 0.108696762,
+      "prove_batch": 0.724811747,
+      "total_generate": 1.37258251,
+      "cpu_generate": 1.372465,
+      "verify_and_save": 0.253256384,
+      "commit": 0.647754901
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 3,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      12.4501953125,
+      11.10205078125,
+      8.89306640625
+    ],
+    "seconds": {
+      "configure": 0.122167981,
+      "tables": 0.044377524,
+      "make_key": 0.399598179,
+      "make_entry": 0.116404118,
+      "prove_batch": 1.26853565,
+      "total_generate": 1.95109742,
+      "cpu_generate": 1.43071,
+      "verify_and_save": 0.289413896,
+      "commit": 0.682547802
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 3,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.85595703125,
+      11.416015625,
+      9.0068359375
+    ],
+    "seconds": {
+      "configure": 0.121508358,
+      "tables": 0.040323287,
+      "make_key": 0.452173796,
+      "make_entry": 0.108195986,
+      "prove_batch": 1.22010417,
+      "total_generate": 1.9423208,
+      "cpu_generate": 1.494901,
+      "verify_and_save": 0.293940316,
+      "commit": 0.722201427
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 4,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.85595703125,
+      11.416015625,
+      9.0068359375
+    ],
+    "seconds": {
+      "configure": 0.128396703,
+      "tables": 0.035605138,
+      "make_key": 0.466170918,
+      "make_entry": 0.21720381,
+      "prove_batch": 1.05208514,
+      "total_generate": 1.89947604,
+      "cpu_generate": 1.487682,
+      "verify_and_save": 0.252564141,
+      "commit": 0.847376569
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 4,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      14.58837890625,
+      11.6083984375,
+      9.08203125
+    ],
+    "seconds": {
+      "configure": 0.161805457,
+      "tables": 0.06934975,
+      "make_key": 0.368186517,
+      "make_entry": 0.105328557,
+      "prove_batch": 0.754371746,
+      "total_generate": 1.45905577,
+      "cpu_generate": 1.324587,
+      "verify_and_save": 0.260764127,
+      "commit": 0.7046702810000001
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 5,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      14.58837890625,
+      11.6083984375,
+      9.08203125
+    ],
+    "seconds": {
+      "configure": 0.114886922,
+      "tables": 0.036977202,
+      "make_key": 0.369677635,
+      "make_entry": 0.099349561,
+      "prove_batch": 0.72632224,
+      "total_generate": 1.3472286,
+      "cpu_generate": 1.347181,
+      "verify_and_save": 0.255110059,
+      "commit": 0.62089132
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 5,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      14.58837890625,
+      11.6083984375,
+      9.08203125
+    ],
+    "seconds": {
+      "configure": 0.114883926,
+      "tables": 0.036202206,
+      "make_key": 0.405242547,
+      "make_entry": 0.11820298,
+      "prove_batch": 0.833736414,
+      "total_generate": 1.50827882,
+      "cpu_generate": 1.508202,
+      "verify_and_save": 0.287331784,
+      "commit": 0.674531659
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 6,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      14.30078125,
+      11.59814453125,
+      9.0927734375
+    ],
+    "seconds": {
+      "configure": 0.114604986,
+      "tables": 0.035313683,
+      "make_key": 0.398046859,
+      "make_entry": 0.151937953,
+      "prove_batch": 0.901423547,
+      "total_generate": 1.60134174,
+      "cpu_generate": 1.601287,
+      "verify_and_save": 0.272749769,
+      "commit": 0.699903481
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 6,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      14.30078125,
+      11.59814453125,
+      9.0927734375
+    ],
+    "seconds": {
+      "configure": 0.127781513,
+      "tables": 0.035185965,
+      "make_key": 0.392850096,
+      "make_entry": 0.107583782,
+      "prove_batch": 0.773959767,
+      "total_generate": 1.43737698,
+      "cpu_generate": 1.43714,
+      "verify_and_save": 0.307331806,
+      "commit": 0.663401356
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 7,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      14.30078125,
+      11.59814453125,
+      9.0927734375
+    ],
+    "seconds": {
+      "configure": 0.134342897,
+      "tables": 0.03660576,
+      "make_key": 0.397265398,
+      "make_entry": 0.102924132,
+      "prove_batch": 0.745268071,
+      "total_generate": 1.41641987,
+      "cpu_generate": 1.416345,
+      "verify_and_save": 0.258554687,
+      "commit": 0.6711381869999999
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 7,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.7958984375,
+      11.5380859375,
+      9.08642578125
+    ],
+    "seconds": {
+      "configure": 0.118375963,
+      "tables": 0.040337664,
+      "make_key": 0.412700889,
+      "make_entry": 0.112280119,
+      "prove_batch": 0.800874524,
+      "total_generate": 1.48458538,
+      "cpu_generate": 1.484572,
+      "verify_and_save": 0.265839923,
+      "commit": 0.683694635
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 8,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.7958984375,
+      11.5380859375,
+      9.08642578125
+    ],
+    "seconds": {
+      "configure": 0.117812219,
+      "tables": 0.0384839,
+      "make_key": 0.435670179,
+      "make_entry": 0.118475509,
+      "prove_batch": 0.783765695,
+      "total_generate": 1.49422407,
+      "cpu_generate": 1.494172,
+      "verify_and_save": 0.290210686,
+      "commit": 0.710441807
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 8,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      13.7958984375,
+      11.5380859375,
+      9.08642578125
+    ],
+    "seconds": {
+      "configure": 0.130800466,
+      "tables": 0.035756611,
+      "make_key": 0.377280425,
+      "make_entry": 0.105216467,
+      "prove_batch": 0.746718542,
+      "total_generate": 1.39578887,
+      "cpu_generate": 1.395551,
+      "verify_and_save": 0.264854182,
+      "commit": 0.649053969
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 9,
+    "arm": "B",
+    "warmup": false,
+    "load": [
+      13.41162109375,
+      11.49560546875,
+      9.0859375
+    ],
+    "seconds": {
+      "configure": 0.120131675,
+      "tables": 0.034943793,
+      "make_key": 0.382329331,
+      "make_entry": 0.105721271,
+      "prove_batch": 0.732166543,
+      "total_generate": 1.37531221,
+      "cpu_generate": 1.375104,
+      "verify_and_save": 0.269466513,
+      "commit": 0.64312607
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  },
+  {
+    "pair": 9,
+    "arm": "A",
+    "warmup": false,
+    "load": [
+      13.41162109375,
+      11.49560546875,
+      9.0859375
+    ],
+    "seconds": {
+      "configure": 0.120627341,
+      "tables": 0.036886544,
+      "make_key": 0.410004699,
+      "make_entry": 0.109775238,
+      "prove_batch": 0.799109364,
+      "total_generate": 1.47641773,
+      "cpu_generate": 1.476353,
+      "verify_and_save": 0.267015612,
+      "commit": 0.677293822
+    },
+    "artifacts": {
+      "entry.bin": {
+        "bytes": 131848,
+        "sha256": "4ece3cc9253ea5a26716c867dd3eaaa3e9fd811124cb6827f4e2c57ec642ac23"
+      },
+      "proof0.bin": {
+        "bytes": 577340,
+        "sha256": "2cbc0d1ceb9d9de928e6661b27af749e70af8b26bcb218f530360be1fc410ff5"
+      },
+      "proof2.bin": {
+        "bytes": 577388,
+        "sha256": "373ad052246c0cc83adcdf5da59ba144e96f04bdb84bded6ae67b3835302eee1"
+      },
+      "leaf.root": {
+        "bytes": 32,
+        "sha256": "ef3ba5636e40e5c94ea92333fb6778894947c3e026f281d4249f0d6946d6a01e"
+      },
+      "key.bin": {
+        "bytes": 501984,
+        "sha256": "23259689257229aadaa3145de2d0f3eb6fd202f2dd76d1c0f7870de5c2b3563a"
+      },
+      "anchor.root": {
+        "bytes": 32,
+        "sha256": "167600d501043e54b851165bbfff3ba460d45d3282597b5ef354972476bab9e9"
+      },
+      "proof1.bin": {
+        "bytes": 577764,
+        "sha256": "cd5823c9577dd94f8b3c5064fcead3a738b0dbca62db8951ee3eeaf29b4a63c3"
+      }
+    }
+  }
+]

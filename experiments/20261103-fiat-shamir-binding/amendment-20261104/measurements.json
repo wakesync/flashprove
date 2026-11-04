@@ -1,0 +1,1275 @@
+{
+  "runs": 5,
+  "records": [
+    {
+      "case": "range-end-legal-y0",
+      "repeat": 1,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "dfdc84f992ead899d17395b4e2056c7217c11793b181898be50a84d306a330e7",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "c06108f81aa7f72aa3d7529735c19898cfc867bd9add39c66af0121d580b6a0a",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [],
+          "stdout_sha256": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=98b80362a2decaa0fee9e1a54c9d1185e64cd9290aeda18887f315d650d6b687",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=b1195318e78af004ef388f3d2cf46d2cf3e83198f84d011df93772b713a8ea49",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=11490017694005886836,18155355601849826805,2175448728951805407",
+            "proof: a nonce does not give the proof of work that its round asks for"
+          ],
+          "stdout_sha256": "c6e7cc6505c403cb68b9c33475b7930bfeada7d752bd3867651be8839259fbad",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": true,
+      "expected_last": "NO: proof-refused",
+      "as_expected": true
+    },
+    {
+      "case": "range-end-legal-y0",
+      "repeat": 2,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "d204e73a4d0c2a374aceaf3dedca5a4b8b724e6728085ee4419fa3f911baf00c",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "f9dee396a3daf95a4f9f135121224d51cea0217b93579ab8883462c60e8b94e5",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [],
+          "stdout_sha256": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=98b80362a2decaa0fee9e1a54c9d1185e64cd9290aeda18887f315d650d6b687",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=b1195318e78af004ef388f3d2cf46d2cf3e83198f84d011df93772b713a8ea49",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=11490017694005886836,18155355601849826805,2175448728951805407",
+            "proof: a nonce does not give the proof of work that its round asks for"
+          ],
+          "stdout_sha256": "40324d5f087aede45d471dd0004cae8170d58ad14256d7188eba819a01a1b2b9",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": true,
+      "expected_last": "NO: proof-refused",
+      "as_expected": true
+    },
+    {
+      "case": "range-end-legal-y0",
+      "repeat": 3,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "55b2e4ad578a56ec40cb1d97f4ee5c7bf24ea562261657c7c1e5e46a58e7829d",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "d529a1487b8fa785d332216af32aee77a1b32e14951c362593d1dda8cc963010",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [],
+          "stdout_sha256": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=98b80362a2decaa0fee9e1a54c9d1185e64cd9290aeda18887f315d650d6b687",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=b1195318e78af004ef388f3d2cf46d2cf3e83198f84d011df93772b713a8ea49",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=11490017694005886836,18155355601849826805,2175448728951805407",
+            "proof: a nonce does not give the proof of work that its round asks for"
+          ],
+          "stdout_sha256": "807ccd656343b4c1587d74b00d7c266437a8ea2dfbf976e06bf343011ba9881c",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": true,
+      "expected_last": "NO: proof-refused",
+      "as_expected": true
+    },
+    {
+      "case": "range-end-legal-y0",
+      "repeat": 4,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "4e1b29e5d9d3abc9e6b3fd7003a6554d73a64c3dd35065c8e368f1511d3b50d4",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "280023e918cce8b04978dcd3d9ad642086504441553345d36255961a44c5ca35",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [],
+          "stdout_sha256": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=98b80362a2decaa0fee9e1a54c9d1185e64cd9290aeda18887f315d650d6b687",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=b1195318e78af004ef388f3d2cf46d2cf3e83198f84d011df93772b713a8ea49",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=11490017694005886836,18155355601849826805,2175448728951805407",
+            "proof: a nonce does not give the proof of work that its round asks for"
+          ],
+          "stdout_sha256": "aea72eda0906c671756521d201da57a5891789c7aee98fe0d162d6939a1d1bec",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": true,
+      "expected_last": "NO: proof-refused",
+      "as_expected": true
+    },
+    {
+      "case": "range-end-legal-y0",
+      "repeat": 5,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "afbb4c8430f981ba57f66b94b7ca740d351fabb32063c90d41c9fbcc03d5d58b",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "510b0426c0f31fd07cbf56b7b0b973353dda9a6eaaa6079f66004f4af82bcc67",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [],
+          "stdout_sha256": "d74d1f3874677db4d9323cce076466292e6123cb97bbe06d7f307a56f032a397",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: proof-refused",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=98b80362a2decaa0fee9e1a54c9d1185e64cd9290aeda18887f315d650d6b687",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=b1195318e78af004ef388f3d2cf46d2cf3e83198f84d011df93772b713a8ea49",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=11490017694005886836,18155355601849826805,2175448728951805407",
+            "proof: a nonce does not give the proof of work that its round asks for"
+          ],
+          "stdout_sha256": "96d095689508a21fe2121b3dda0955f9458346fc46864b11188fd7994911c051",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": true,
+      "expected_last": "NO: proof-refused",
+      "as_expected": true
+    },
+    {
+      "case": "layout-missing",
+      "repeat": 1,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "94866520f9d7c83bce6caaf71d13fb23514635506964f20c771a335c70126dd2",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "6edd3492cb593d4b5a6dff00633eddb0ea3c835d5f7a28d219217098036bda94",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "1b01f52a27ade9f6dc22a1447747d78f0a3d974bfea8e68b4cf3d56147527521",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-missing",
+      "repeat": 2,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "dd8f6c56fbd066125d3ab81eba8f413a32848a3f128b48040fff4b16c4e49883",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "23515cfca574179476f2053374ac8156707b033d27632d8244bbd666f68a34b8",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "35f3aea1444e66b5ab3491e9b95197c57461ec516b8a184ec4282437f2b89248",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-missing",
+      "repeat": 3,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "671c2e5d131d76bde51820fbc7af3697b81264999a2fb4d08e8c3bffd40a5b9f",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "b0ab7ccbd7c60df3e0d37fe981eb9a28f7768f3352fda0604eee9d2e5440c5c7",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "ad7af30484c12901b8ce74b79887ccf0d27e52209a25455fa7f4e1cc7728c194",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-missing",
+      "repeat": 4,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "4510d259b1685041b4a756501e69a7602643f43ec588098343e50ff3dbb9490f",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "578d6fea3f443b41e107e845165102410b6acc2c3003dd2ef7bf332f329b2f23",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "d7851a94c026a7aae9545516807ec061629b0f649fd16338e0586e58bd7083a5",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-missing",
+      "repeat": 5,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "2bdac56483d54034c0b3029433b95028689e5fa6705b22a028a121ecc14b9ac7",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "d67f3150009c97c4b311e670d3381409a0c65572c7ba467450b86385266e4ee3",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "a4a94eeb3712b93fade2ecc1b4f6c03dfb1b48a2d31e986ec649106061cfc877",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-empty",
+      "repeat": 1,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "1a31b8ab4fb6a74e5c62ad6665639906b73b8464509265fe23a36fabf940a0f0",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "8facef1355a0515c5cecdf4a088f894a927e9cbdb00599265f196401ad08a2ff",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "29a57144514d37798bfc8c9742a115ba22140deb15b9d3cf2804519220cc2cd5",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-empty",
+      "repeat": 2,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "856b0e804cd922e084a83b9a9f6c94cfe7be10b19fc73a564686d88b1692eff4",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "eb854dd2ab87899a06cc436a5b060cad9f4ba4dc76cb98be6d0415b821e51ef1",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "db077baedc5b02a48d2fa31f425a8bad49da63eb78b9d08d4285d56656bc73d0",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-empty",
+      "repeat": 3,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "251320ddea3ac7911b2ad8817970ef7b3d270bbc29963c91d7654a0ce6546713",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "aa96ba5a3d02147341f57da48d85aca5272fe459bd148d5e0e3910db02580bbb",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "84f23de807f9dd2493120553d78d2b0e38325173abd79361d0c9fc75eef67f80",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-empty",
+      "repeat": 4,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "7da0efba32f2f282117d8c19d4e4fb7307fcc79e02608bd3d5a1c0af3b119a1a",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "0901b7b7d84ed1d2ca77974f9f830c866dbe7f3b978a61e32623ccad24f3a284",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "e6d6eb922297259463c2e0e0ae74fece764f6c0e622cecb7df790288c9e0afd1",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    },
+    {
+      "case": "layout-empty",
+      "repeat": 5,
+      "semantic": true,
+      "baseline": {
+        "production": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+          ],
+          "stdout_sha256": "257cc530e0a931ba1741486b55327d70a4229073f19fff12555e296a43e2333e",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 0,
+          "last": "YES",
+          "lines": [
+            "FS_TRACE start label=1179798786 round=start digest=42aece6d180bb7e10b6bb8d344c2932477ae211d7ee581b0f394a1c9691ef55d",
+            "FS_TRACE first label=1179798786 round=SEND seed digest=9197462f27120a5f1a5628363f4b607fb6a07cdfc0dfc68bc24626c2115e604d",
+            "FS_TRACE challenge label=1179798786 round=SEND seed e=1683759904267574074,3718710268737848200,4758690692332275233",
+            "FS_TRACE start label=1279872513 round=start digest=9d9d8e9dfd47f176ff21187f00f09d8e8aa867dc24bec01a7f3c969daeb3baa3",
+            "FS_TRACE first label=1279872513 round=LIN point digest=16534fb628e5543c3460e296ad427e3edf7edd2d51ab1fad099d7605c87282bd",
+            "FS_TRACE challenge label=1279872513 round=LIN point e=13716272443838949900,4450442381252630438,5356106043850820409",
+            "FS_TRACE start label=1279872514 round=start digest=60e2594e58aed3335253a2ece6c0d4ca32e64bcc1f8218d6004044043c1a0d62",
+            "FS_TRACE first label=1279872514 round=BAT digest=321076b4802b825db04d2741066e2321e460ea07864543b6222100e6ab7387b4",
+            "FS_TRACE challenge label=1279872514 round=BAT e=14882354049437741664,15279217198154406723,16391650619193968429",
+            "FS_TRACE start label=1280199425 round=start digest=df33726b2f68c483aa03de095223767d844818c0bf5365331ed87d66617d6e0a",
+            "FS_TRACE first label=1280199425 round=LINK point digest=b9ac9e69a4e2c977bf9b6afc1c2ee3cb47bbd47d33be3575266ce9ff8c886d71",
+            "FS_TRACE challenge label=1280199425 round=LINK point e=7967042865898047575,8104465340221139776,1925842972074439199",
+            "FS_TRACE start label=1179798785 round=start digest=38570743196a5304859a7ef3a12be12e12abd6c2612326047f91280141f1eb03",
+            "FS_TRACE first label=1179798785 round=SEND seed digest=3e0974fd4d7781d7043fe6b94ddcf207baca8e98b2bc1cd67846d0ccd54fc7a0",
+            "FS_TRACE challenge label=1179798785 round=SEND seed e=17722655034745274236,2406985461951296193,3447379083992671321",
+            "FS_TRACE reply label=1179798785 round=REPLY digest=c636172735f4b1390be509943c77ddb72a4920950c856d29543ab4f1d26f2d99",
+            "FS_TRACE start label=1179798787 round=start digest=48b4a3a4c215794a3d58704bfb51eebf37288ba50ed5816c69b36daed7dd015b",
+            "FS_TRACE first label=1179798787 round=LIN point digest=18633e4d322f740151f5941953c8a1094f59f30ac2f4b707afd9aacb48e9402f",
+            "FS_TRACE challenge label=1179798787 round=LIN point e=9931888280151177405,2384218080582397774,7867352404161179555",
+            "FS_TRACE start label=1179798788 round=start digest=7d9b41a99fb9da6165a9e759dd75e299b8949c0c3a6d764d8e5816ff772682ba",
+            "FS_TRACE first label=1179798788 round=BAT digest=e5d7b5340e8b158e2c124ab1a7d95ddb61611877b7efd110ad8327d1e3ed13c9",
+            "FS_TRACE challenge label=1179798788 round=BAT e=4304648190323568846,12977571478417282080,696696247123787664",
+            "commitment ID: 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183",
+            "h_par=0adb76eef05acef273d2b9a9adc0aa985a2cfcfa64b52f4cbca9b63b565a53b2",
+            "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+            "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+            "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+            "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=17fdde5cfe999544cc1ca26efe93c55bbbeb19387be5b7c9febbd478cc40e404"
+          ],
+          "stdout_sha256": "707b1267cb6e86623f1f18b9ad2e3544e8c3fac9d067766f0f67c401501103a6",
+          "stderr": ""
+        }
+      },
+      "mutated": {
+        "production": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "2f10bb812754433b46ea4fa43cf9b5cd87b64785625fbe158d384b41552a1a49",
+          "stderr": ""
+        },
+        "trace": {
+          "exit": 1,
+          "last": "NO: plan-layout",
+          "lines": [],
+          "stdout_sha256": "669af8189ebd2229534bf1b208b56cbf448863acd59cefd3473da6aee8eabc12",
+          "stderr": ""
+        }
+      },
+      "baseline_accept": true,
+      "mutation_accept": false,
+      "build_verdict_agreement": true,
+      "first_challenge_changed": null,
+      "expected_last": "NO: plan-layout",
+      "as_expected": true
+    }
+  ]
+}

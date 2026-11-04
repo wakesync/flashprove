@@ -1,0 +1,8 @@
+{
+  "byte_identical_to_baseline_seed_0": true,
+  "artifacts": 7,
+  "reference_exit": 0,
+  "word_feed_exit": 0,
+  "asan": "no diagnostic",
+  "ubsan": "no diagnostic"
+}

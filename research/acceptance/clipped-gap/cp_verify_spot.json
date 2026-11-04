@@ -1,0 +1,193 @@
+{
+ "cp_verify_build": "build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+ "id": "8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6",
+ "rows": [
+  {
+   "kind": "control",
+   "cls": "honest (stored files)",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "exit": 0,
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "rand-1",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "rand-4",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "rand-16",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "rand-reply",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "other-prompt (stored other_prompt.json)",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "trunc-half",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "trunc-1",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": null,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "fp2nd-1",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "int2nd-1",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "fp2nd-2",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "int2nd-2",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "fp2nd-4",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "int2nd-4",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "fp2nd-8",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "int2nd-8",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "fp2nd-16",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "int2nd-16",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": false,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "fp2nd-1-redecode (exploratory)",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": true,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "binding-spot-check",
+   "cls": "rand-1-redecode (exploratory)",
+   "policy": "clipped-gap,9244130,323343,1,16,8",
+   "score_meets_shipped": true,
+   "exit": 1,
+   "last_line": "NO: proof-refused"
+  },
+  {
+   "kind": "policy-named",
+   "cls": "honest (stored files)",
+   "policy": "clipped-gap,9244130,100000,1,16,8",
+   "exit": 1,
+   "last_line": "NO: policy"
+  },
+  {
+   "kind": "policy-named",
+   "cls": "honest (stored files)",
+   "policy": "clipped-gap,9244130,323343,0,16,8",
+   "exit": 1,
+   "last_line": "NO: policy"
+  },
+  {
+   "kind": "policy-named",
+   "cls": "honest (stored files)",
+   "policy": "clipped-gap,500000,50000,0,16,8",
+   "exit": 1,
+   "last_line": "NO: policy"
+  },
+  {
+   "kind": "policy-named",
+   "cls": "honest (stored files)",
+   "policy": "exact-match,256,256,0,16,8",
+   "exit": 1,
+   "last_line": "NO: policy"
+  }
+ ]
+}
