@@ -58,7 +58,7 @@ controls:
    gap between fp and a **known** quantizer. Whether a provider can plant a behavior gap through the
    choice of `KL.bin` scales alone, on clean weights, is **not known** and not tested here
    (inferred as a plausible but unshown channel). It is narrower than the GGUF attack because the
-   scales are a few words per layer, not per-weight choices.
+   scales are a few words per layer, not per-weight choices. Tracked as #55.
 3. **The noise floor hides it.** The docs report the integer model's top token differing from the
    16-bit weights at 6.81 % of 84,893 positions, and 3.11 % between the integer model and the 4-bit
    files it was made from (`docs/limits.md:2760-2770`; reported there, measured on three machines
