@@ -10,19 +10,26 @@ STEPS = 1024
 def run(seed, dist, F):
     toks = R.gen_tokens(seed, dist, STEPS, F)
     S = np.zeros((R.D, R.D), dtype=np.int64); Sf = np.zeros((R.D, R.D))
-    mx = dict(S=0, M=0, delta=0, aP=0, o=0); first_over = None; div_max = 0.0; div_rms = 0.0
+    mx = dict(S=0, M=0, delta=0, aP=0, o=0, v=0); first_over = None; div_max = 0.0; div_rms = 0.0
+    # Amendment A3 (2026-11-04): also track the public input v, which admissible() in test.cpp requires |v| < 2^18.
+    # first_step_over_2_18 / fits_2_18 keep the registered H3 metric (S, M, delta only).
+    first_each = dict(S=None, M=None, delta=None, v=None)
     for t, tok in enumerate(toks):
+        mx['v'] = max(mx['v'], int(np.abs(tok['v']).max()))
         P = tok['k'] @ S
         mx['aP'] = max(mx['aP'], int(np.abs(tok['a'] * P).max()))
         M, delta, S, o = R.step(S, tok, F, check=False)
         Sf, _ = R.float_step(Sf, tok)
         for n, x in (('S', S), ('M', M), ('delta', delta), ('o', o)): mx[n] = max(mx[n], int(np.abs(x).max()))
         if first_over is None and max(mx['S'], mx['M'], mx['delta']) >= R.BOUND: first_over = t
+        for n in first_each:
+            if first_each[n] is None and mx[n] >= R.BOUND: first_each[n] = t
         d = S / (1 << F) - Sf
         div_max = max(div_max, float(np.abs(d).max())); div_rms = float(np.sqrt(np.mean(d * d)))
     bits = {n: int(math.ceil(math.log2(v + 1))) + 1 for n, v in mx.items()}
     return dict(seed=seed, dist=dist, F=F, max_abs=mx, bits_signed=bits, first_step_over_2_18=first_over,
-                fits_2_18=first_over is None, state_float_max=float(np.abs(Sf).max()),
+                fits_2_18=first_over is None, first_step_over_2_18_each=first_each,
+                v_admissible=first_each['v'] is None, state_float_max=float(np.abs(Sf).max()),
                 divergence_vs_float64=dict(max_abs=div_max, rms_final=div_rms))
 
 def summ(rows):
@@ -33,7 +40,8 @@ def summ(rows):
         S = [r['max_abs']['S'] for r in rs]; Mx = [max(r['max_abs']['M'], r['max_abs']['delta']) for r in rs]
         lines.append(f"{d} F={F}: n={len(rs)} max|S| median {int(np.median(S))} min {min(S)} max {max(S)} "
                      f"(signed bits {max(r['bits_signed']['S'] for r in rs)}); max|M|,|delta| {max(Mx)}; "
-                     f"max|a*P| {max(r['max_abs']['aP'] for r in rs)}; fits 2^18 {sum(r['fits_2_18'] for r in rs)}/{len(rs)}; "
+                     f"max|a*P| {max(r['max_abs']['aP'] for r in rs)}; max|v| {max(r['max_abs']['v'] for r in rs)} "
+                     f"(v admissible {sum(r['v_admissible'] for r in rs)}/{len(rs)}); fits 2^18 {sum(r['fits_2_18'] for r in rs)}/{len(rs)}; "
                      f"state div vs float64 max {max(r['divergence_vs_float64']['max_abs'] for r in rs):.4g}")
     return lines
 

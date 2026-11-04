@@ -11,17 +11,26 @@
     "M": 1399,
     "delta": 12016,
     "aP": 23470138400,
-    "o": 206
+    "o": 206,
+    "v": 20513
    },
    "bits_signed": {
     "S": 13,
     "M": 12,
     "delta": 15,
     "aP": 36,
-    "o": 9
+    "o": 9,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.32004804445587903,
    "divergence_vs_float64": {
     "max_abs": 0.0011405784614452186,
@@ -37,17 +46,26 @@
     "M": 3493,
     "delta": 13024,
     "aP": 58597362774,
-    "o": 304
+    "o": 304,
+    "v": 18884
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 15,
     "aP": 37,
-    "o": 10
+    "o": 10,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.6645081004979856,
    "divergence_vs_float64": {
     "max_abs": 0.007880023452378648,
@@ -63,17 +81,26 @@
     "M": 3767,
     "delta": 12704,
     "aP": 63191483408,
-    "o": 369
+    "o": 369,
+    "v": 16888
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 15,
     "aP": 37,
-    "o": 10
+    "o": 10,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7156163334765483,
    "divergence_vs_float64": {
     "max_abs": 0.020434500152773344,
@@ -89,17 +116,26 @@
     "M": 2136,
     "delta": 14591,
     "aP": 35838755151,
-    "o": 203
+    "o": 203,
+    "v": 17155
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 15,
     "aP": 37,
-    "o": 9
+    "o": 9,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5412064085153666,
    "divergence_vs_float64": {
     "max_abs": 0.00203239943367145,
@@ -115,17 +151,26 @@
     "M": 2058,
     "delta": 13184,
     "aP": 34518963556,
-    "o": 167
+    "o": 167,
+    "v": 17684
    },
    "bits_signed": {
     "S": 13,
     "M": 13,
     "delta": 15,
     "aP": 37,
-    "o": 9
+    "o": 9,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.22447104812820592,
    "divergence_vs_float64": {
     "max_abs": 0.0010796029414363861,
@@ -141,17 +186,26 @@
     "M": 3043,
     "delta": 24571,
     "aP": 51041651120,
-    "o": 427
+    "o": 427,
+    "v": 41290
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 16,
     "aP": 37,
-    "o": 10
+    "o": 10,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.688873805309489,
    "divergence_vs_float64": {
     "max_abs": 0.0013508782807461484,
@@ -167,17 +221,26 @@
     "M": 7521,
     "delta": 26407,
     "aP": 126168137244,
-    "o": 639
+    "o": 639,
+    "v": 38124
    },
    "bits_signed": {
     "S": 15,
     "M": 14,
     "delta": 16,
     "aP": 38,
-    "o": 11
+    "o": 11,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.4082621468068361,
    "divergence_vs_float64": {
     "max_abs": 0.008168247552208019,
@@ -193,17 +256,26 @@
     "M": 8409,
     "delta": 26603,
     "aP": 141065554396,
-    "o": 809
+    "o": 809,
+    "v": 34282
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 11
+    "o": 11,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.581929691246236,
    "divergence_vs_float64": {
     "max_abs": 0.02031342636938316,
@@ -219,17 +291,26 @@
     "M": 4619,
     "delta": 29618,
     "aP": 77500759452,
-    "o": 412
+    "o": 412,
+    "v": 34794
    },
    "bits_signed": {
     "S": 15,
     "M": 14,
     "delta": 16,
     "aP": 38,
-    "o": 10
+    "o": 10,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1138084171692288,
    "divergence_vs_float64": {
     "max_abs": 0.002229849382988758,
@@ -245,17 +326,26 @@
     "M": 4274,
     "delta": 27207,
     "aP": 71698624436,
-    "o": 361
+    "o": 361,
+    "v": 35808
    },
    "bits_signed": {
     "S": 14,
     "M": 14,
     "delta": 16,
     "aP": 38,
-    "o": 10
+    "o": 10,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.48142637001929534,
    "divergence_vs_float64": {
     "max_abs": 0.0013972548752214375,
@@ -271,17 +361,26 @@
     "M": 14864,
     "delta": 291511,
     "aP": 249360644184,
-    "o": 3619
+    "o": 3619,
+    "v": 371763
    },
    "bits_signed": {
     "S": 18,
     "M": 15,
     "delta": 20,
     "aP": 39,
-    "o": 13
+    "o": 13,
+    "v": 20
    },
    "first_step_over_2_18": 302,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 302,
+    "v": 302
+   },
+   "v_admissible": false,
    "state_float_max": 1.1566522155058578,
    "divergence_vs_float64": {
     "max_abs": 0.009287102323495944,
@@ -297,17 +396,26 @@
     "M": 46607,
     "delta": 298632,
     "aP": 781949780302,
-    "o": 5101
+    "o": 5101,
+    "v": 354411
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 20,
     "aP": 41,
-    "o": 14
+    "o": 14,
+    "v": 20
    },
    "first_step_over_2_18": 159,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 159,
+    "v": 80
+   },
+   "v_admissible": false,
    "state_float_max": 4.709752725218623,
    "divergence_vs_float64": {
     "max_abs": 0.013965679258653552,
@@ -323,17 +431,26 @@
     "M": 78657,
     "delta": 337617,
     "aP": 1319652009052,
-    "o": 7810
+    "o": 7810,
+    "v": 552727
    },
    "bits_signed": {
     "S": 18,
     "M": 18,
     "delta": 20,
     "aP": 42,
-    "o": 14
+    "o": 14,
+    "v": 21
    },
    "first_step_over_2_18": 145,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 145,
+    "v": 145
+   },
+   "v_admissible": false,
    "state_float_max": 3.949497208430683,
    "divergence_vs_float64": {
     "max_abs": 0.032116089467873365,
@@ -349,17 +466,26 @@
     "M": 49678,
     "delta": 422167,
     "aP": 833473306314,
-    "o": 3388
+    "o": 3388,
+    "v": 494213
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 20,
     "aP": 41,
-    "o": 13
+    "o": 13,
+    "v": 20
    },
    "first_step_over_2_18": 120,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 120,
+    "v": 120
+   },
+   "v_admissible": false,
    "state_float_max": 1.1661737167574429,
    "divergence_vs_float64": {
     "max_abs": 0.012595516794857264,
@@ -375,17 +501,26 @@
     "M": 29264,
     "delta": 285196,
     "aP": 490958179530,
-    "o": 4141
+    "o": 4141,
+    "v": 551506
    },
    "bits_signed": {
     "S": 18,
     "M": 16,
     "delta": 20,
     "aP": 40,
-    "o": 14
+    "o": 14,
+    "v": 21
    },
    "first_step_over_2_18": 35,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 35,
+    "v": 35
+   },
+   "v_admissible": false,
    "state_float_max": 0.8394966570819121,
    "divergence_vs_float64": {
     "max_abs": 0.00912358171731853,
@@ -401,17 +536,26 @@
     "M": 3656,
     "delta": 29791,
     "aP": 61330561760,
-    "o": 526
+    "o": 526,
+    "v": 35951
    },
    "bits_signed": {
     "S": 15,
     "M": 13,
     "delta": 16,
     "aP": 37,
-    "o": 11
+    "o": 11,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7832247736834261,
    "divergence_vs_float64": {
     "max_abs": 0.001759307070811289,
@@ -427,17 +571,26 @@
     "M": 9603,
     "delta": 32332,
     "aP": 161106455152,
-    "o": 1000
+    "o": 1000,
+    "v": 41565
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 11
+    "o": 11,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.9366871968699948,
    "divergence_vs_float64": {
     "max_abs": 0.008311489036700537,
@@ -453,17 +606,26 @@
     "M": 13937,
     "delta": 30294,
     "aP": 233817424524,
-    "o": 1305
+    "o": 1305,
+    "v": 31540
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 12
+    "o": 12,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 3.3771368990871817,
    "divergence_vs_float64": {
     "max_abs": 0.0208838029511772,
@@ -479,17 +641,26 @@
     "M": 7895,
     "delta": 25668,
     "aP": 132453496525,
-    "o": 573
+    "o": 573,
+    "v": 35049
    },
    "bits_signed": {
     "S": 15,
     "M": 14,
     "delta": 16,
     "aP": 38,
-    "o": 11
+    "o": 11,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.5762289695210117,
    "divergence_vs_float64": {
     "max_abs": 0.002762975954542224,
@@ -505,17 +676,26 @@
     "M": 5021,
     "delta": 30359,
     "aP": 84254874240,
-    "o": 437
+    "o": 437,
+    "v": 38470
    },
    "bits_signed": {
     "S": 15,
     "M": 14,
     "delta": 16,
     "aP": 38,
-    "o": 10
+    "o": 10,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5859924149529485,
    "divergence_vs_float64": {
     "max_abs": 0.0017381179921545087,
@@ -533,17 +713,26 @@
     "M": 10807,
     "delta": 20042,
     "aP": 181311213568,
-    "o": 1020
+    "o": 1020,
+    "v": 17831
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 11
+    "o": 11,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 2.510391933717202,
    "divergence_vs_float64": {
     "max_abs": 0.07128711199545784,
@@ -559,17 +748,26 @@
     "M": 11956,
     "delta": 20487,
     "aP": 200589217792,
-    "o": 1182
+    "o": 1182,
+    "v": 18230
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 12
+    "o": 12,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 2.4777004812445518,
    "divergence_vs_float64": {
     "max_abs": 0.07903649785873113,
@@ -585,17 +783,26 @@
     "M": 11977,
     "delta": 20500,
     "aP": 200925286400,
-    "o": 949
+    "o": 949,
+    "v": 17815
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 11
+    "o": 11,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 2.4751175040552438,
    "divergence_vs_float64": {
     "max_abs": 0.08629213786165518,
@@ -611,17 +818,26 @@
     "M": 11448,
     "delta": 19688,
     "aP": 192059547648,
-    "o": 1045
+    "o": 1045,
+    "v": 18167
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 12
+    "o": 12,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 2.4124511838207505,
    "divergence_vs_float64": {
     "max_abs": 0.07536909193542551,
@@ -637,17 +853,26 @@
     "M": 12381,
     "delta": 18248,
     "aP": 207709249536,
-    "o": 976
+    "o": 976,
+    "v": 17627
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 16,
     "aP": 39,
-    "o": 11
+    "o": 11,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 2.250174583992632,
    "divergence_vs_float64": {
     "max_abs": 0.08203472586322125,
@@ -663,17 +888,26 @@
     "M": 23890,
     "delta": 42894,
     "aP": 400804319232,
-    "o": 2249
+    "o": 2249,
+    "v": 36091
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 17,
     "aP": 40,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 5.536738818054224,
    "divergence_vs_float64": {
     "max_abs": 0.07570776637858856,
@@ -689,17 +923,26 @@
     "M": 25007,
     "delta": 43380,
     "aP": 419552284672,
-    "o": 2662
+    "o": 2662,
+    "v": 36861
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 17,
     "aP": 40,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 5.47764823817081,
    "divergence_vs_float64": {
     "max_abs": 0.08080054579647089,
@@ -715,17 +958,26 @@
     "M": 24713,
     "delta": 44424,
     "aP": 414608637952,
-    "o": 2211
+    "o": 2211,
+    "v": 36062
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 17,
     "aP": 40,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 5.567765125335293,
    "divergence_vs_float64": {
     "max_abs": 0.08810139324231936,
@@ -741,17 +993,26 @@
     "M": 25003,
     "delta": 41401,
     "aP": 419469529088,
-    "o": 2199
+    "o": 2199,
+    "v": 36739
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 17,
     "aP": 40,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 5.459466416281981,
    "divergence_vs_float64": {
     "max_abs": 0.07477465951026696,
@@ -767,17 +1028,26 @@
     "M": 26605,
     "delta": 39398,
     "aP": 446349934592,
-    "o": 2173
+    "o": 2173,
+    "v": 35700
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 17,
     "aP": 40,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 5.48295383928967,
    "divergence_vs_float64": {
     "max_abs": 0.08264731053772278,
@@ -793,17 +1063,26 @@
     "M": 90360,
     "delta": 389512,
     "aP": 1515998535680,
-    "o": 6218
+    "o": 6218,
+    "v": 371763
    },
    "bits_signed": {
     "S": 18,
     "M": 18,
     "delta": 20,
     "aP": 42,
-    "o": 14
+    "o": 14,
+    "v": 20
    },
    "first_step_over_2_18": 303,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 303,
+    "v": 303
+   },
+   "v_admissible": false,
    "state_float_max": 12.478620464389486,
    "divergence_vs_float64": {
     "max_abs": 0.08777892799429932,
@@ -819,17 +1098,26 @@
     "M": 71563,
     "delta": 354181,
     "aP": 1200613109760,
-    "o": 7518
+    "o": 7518,
+    "v": 354805
    },
    "bits_signed": {
     "S": 18,
     "M": 18,
     "delta": 20,
     "aP": 42,
-    "o": 14
+    "o": 14,
+    "v": 20
    },
    "first_step_over_2_18": 160,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 160,
+    "v": 160
+   },
+   "v_admissible": false,
    "state_float_max": 10.593921628857535,
    "divergence_vs_float64": {
     "max_abs": 0.08086974035198358,
@@ -845,17 +1133,26 @@
     "M": 101565,
     "delta": 570494,
     "aP": 1703970824192,
-    "o": 10413
+    "o": 10413,
+    "v": 569210
    },
    "bits_signed": {
     "S": 19,
     "M": 18,
     "delta": 21,
     "aP": 42,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 476,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 476,
+    "v": 476
+   },
+   "v_admissible": false,
    "state_float_max": 13.104531878958799,
    "divergence_vs_float64": {
     "max_abs": 0.08316852933676522,
@@ -871,17 +1168,26 @@
     "M": 373149,
     "delta": 1587413,
     "aP": 6260407595008,
-    "o": 42885
+    "o": 42885,
+    "v": 1588999
    },
    "bits_signed": {
     "S": 20,
     "M": 20,
     "delta": 22,
     "aP": 44,
-    "o": 17
+    "o": 17,
+    "v": 22
    },
    "first_step_over_2_18": 120,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 943,
+    "M": 944,
+    "delta": 120,
+    "v": 120
+   },
+   "v_admissible": false,
    "state_float_max": 61.54569927009625,
    "divergence_vs_float64": {
     "max_abs": 0.12557311849690578,
@@ -897,17 +1203,26 @@
     "M": 95551,
     "delta": 548425,
     "aP": 1603076919296,
-    "o": 10126
+    "o": 10126,
+    "v": 551506
    },
    "bits_signed": {
     "S": 19,
     "M": 18,
     "delta": 21,
     "aP": 42,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 35,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 35,
+    "v": 35
+   },
+   "v_admissible": false,
    "state_float_max": 16.240545175732255,
    "divergence_vs_float64": {
     "max_abs": 0.07208312284885943,
@@ -923,17 +1238,26 @@
     "M": 37160,
     "delta": 51273,
     "aP": 623430160384,
-    "o": 3732
+    "o": 3732,
+    "v": 32909
    },
    "bits_signed": {
     "S": 17,
     "M": 17,
     "delta": 17,
     "aP": 41,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 7.061291766307324,
    "divergence_vs_float64": {
     "max_abs": 0.07354920501738649,
@@ -949,17 +1273,26 @@
     "M": 33984,
     "delta": 56646,
     "aP": 570168008704,
-    "o": 3332
+    "o": 3332,
+    "v": 34902
    },
    "bits_signed": {
     "S": 17,
     "M": 17,
     "delta": 17,
     "aP": 41,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 6.715283286475608,
    "divergence_vs_float64": {
     "max_abs": 0.0834606669386797,
@@ -975,17 +1308,26 @@
     "M": 37180,
     "delta": 47982,
     "aP": 623793627136,
-    "o": 2950
+    "o": 2950,
+    "v": 33498
    },
    "bits_signed": {
     "S": 17,
     "M": 17,
     "delta": 17,
     "aP": 41,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 7.055612433714902,
    "divergence_vs_float64": {
     "max_abs": 0.08985690926454049,
@@ -1001,17 +1343,26 @@
     "M": 34267,
     "delta": 52654,
     "aP": 574912937984,
-    "o": 3053
+    "o": 3053,
+    "v": 34400
    },
    "bits_signed": {
     "S": 17,
     "M": 17,
     "delta": 17,
     "aP": 41,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 6.923420447733191,
    "divergence_vs_float64": {
     "max_abs": 0.07693648305996703,
@@ -1027,17 +1378,26 @@
     "M": 30245,
     "delta": 44654,
     "aP": 507419664384,
-    "o": 3290
+    "o": 3290,
+    "v": 33213
    },
    "bits_signed": {
     "S": 17,
     "M": 16,
     "delta": 17,
     "aP": 40,
-    "o": 13
+    "o": 13,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 7.286171806510718,
    "divergence_vs_float64": {
     "max_abs": 0.08344899522491067,
@@ -1055,17 +1415,26 @@
     "M": 86,
     "delta": 751,
     "aP": 5585840,
-    "o": 14
+    "o": 14,
+    "v": 1282
    },
    "bits_signed": {
     "S": 9,
     "M": 8,
     "delta": 11,
     "aP": 24,
-    "o": 5
+    "o": 5,
+    "v": 12
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.32004804445587903,
    "divergence_vs_float64": {
     "max_abs": 0.01950885122182245,
@@ -1081,17 +1450,26 @@
     "M": 208,
     "delta": 812,
     "aP": 13603740,
-    "o": 19
+    "o": 19,
+    "v": 1180
    },
    "bits_signed": {
     "S": 10,
     "M": 9,
     "delta": 11,
     "aP": 25,
-    "o": 6
+    "o": 6,
+    "v": 12
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.6645081004979856,
    "divergence_vs_float64": {
     "max_abs": 0.12474259711388136,
@@ -1107,17 +1485,26 @@
     "M": 290,
     "delta": 829,
     "aP": 19003620,
-    "o": 25
+    "o": 25,
+    "v": 1056
    },
    "bits_signed": {
     "S": 10,
     "M": 10,
     "delta": 11,
     "aP": 26,
-    "o": 6
+    "o": 6,
+    "v": 12
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7156163334765483,
    "divergence_vs_float64": {
     "max_abs": 0.3248924628747037,
@@ -1133,17 +1520,26 @@
     "M": 133,
     "delta": 907,
     "aP": 8718050,
-    "o": 13
+    "o": 13,
+    "v": 1072
    },
    "bits_signed": {
     "S": 10,
     "M": 9,
     "delta": 11,
     "aP": 25,
-    "o": 5
+    "o": 5,
+    "v": 12
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5412064085153666,
    "divergence_vs_float64": {
     "max_abs": 0.031358686209100095,
@@ -1159,17 +1555,26 @@
     "M": 127,
     "delta": 822,
     "aP": 8318240,
-    "o": 11
+    "o": 11,
+    "v": 1105
    },
    "bits_signed": {
     "S": 9,
     "M": 8,
     "delta": 11,
     "aP": 24,
-    "o": 5
+    "o": 5,
+    "v": 12
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.22447104812820592,
    "divergence_vs_float64": {
     "max_abs": 0.017710341602454487,
@@ -1185,17 +1590,26 @@
     "M": 187,
     "delta": 1535,
     "aP": 12253055,
-    "o": 28
+    "o": 28,
+    "v": 2581
    },
    "bits_signed": {
     "S": 10,
     "M": 9,
     "delta": 12,
     "aP": 25,
-    "o": 6
+    "o": 6,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.688873805309489,
    "divergence_vs_float64": {
     "max_abs": 0.022062601062456166,
@@ -1211,17 +1625,26 @@
     "M": 459,
     "delta": 1648,
     "aP": 30049455,
-    "o": 40
+    "o": 40,
+    "v": 2383
    },
    "bits_signed": {
     "S": 11,
     "M": 10,
     "delta": 12,
     "aP": 26,
-    "o": 7
+    "o": 7,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.4082621468068361,
    "divergence_vs_float64": {
     "max_abs": 0.12629122154597922,
@@ -1237,17 +1660,26 @@
     "M": 561,
     "delta": 1662,
     "aP": 36770818,
-    "o": 52
+    "o": 52,
+    "v": 2143
    },
    "bits_signed": {
     "S": 11,
     "M": 11,
     "delta": 12,
     "aP": 27,
-    "o": 7
+    "o": 7,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.581929691246236,
    "divergence_vs_float64": {
     "max_abs": 0.3286506605481543,
@@ -1263,17 +1695,26 @@
     "M": 289,
     "delta": 1845,
     "aP": 18957554,
-    "o": 25
+    "o": 25,
+    "v": 2175
    },
    "bits_signed": {
     "S": 11,
     "M": 10,
     "delta": 12,
     "aP": 26,
-    "o": 6
+    "o": 6,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1138084171692288,
    "divergence_vs_float64": {
     "max_abs": 0.035055185133055056,
@@ -1289,17 +1730,26 @@
     "M": 265,
     "delta": 1697,
     "aP": 17337824,
-    "o": 23
+    "o": 23,
+    "v": 2238
    },
    "bits_signed": {
     "S": 10,
     "M": 10,
     "delta": 12,
     "aP": 26,
-    "o": 6
+    "o": 6,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.48142637001929534,
    "divergence_vs_float64": {
     "max_abs": 0.025455267755793348,
@@ -1315,17 +1765,26 @@
     "M": 941,
     "delta": 18247,
     "aP": 61663195,
-    "o": 227
+    "o": 227,
+    "v": 23235
    },
    "bits_signed": {
     "S": 14,
     "M": 11,
     "delta": 16,
     "aP": 27,
-    "o": 9
+    "o": 9,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1566522155058578,
    "divergence_vs_float64": {
     "max_abs": 0.14292843505008168,
@@ -1341,17 +1800,26 @@
     "M": 2899,
     "delta": 18688,
     "aP": 190049499,
-    "o": 363
+    "o": 363,
+    "v": 22151
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 16,
     "aP": 29,
-    "o": 10
+    "o": 10,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 4.709752725218623,
    "divergence_vs_float64": {
     "max_abs": 0.2123977899949896,
@@ -1367,17 +1835,26 @@
     "M": 4862,
     "delta": 21046,
     "aP": 318691260,
-    "o": 488
+    "o": 488,
+    "v": 34545
    },
    "bits_signed": {
     "S": 14,
     "M": 14,
     "delta": 16,
     "aP": 30,
-    "o": 10
+    "o": 10,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 3.949497208430683,
    "divergence_vs_float64": {
     "max_abs": 0.41806042982285696,
@@ -1393,17 +1870,26 @@
     "M": 3070,
     "delta": 26439,
     "aP": 201250530,
-    "o": 210
+    "o": 210,
+    "v": 30888
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 16,
     "aP": 29,
-    "o": 9
+    "o": 9,
+    "v": 16
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1661737167574429,
    "divergence_vs_float64": {
     "max_abs": 0.22933285850983331,
@@ -1419,17 +1905,26 @@
     "M": 1873,
     "delta": 17835,
     "aP": 122744153,
-    "o": 281
+    "o": 281,
+    "v": 34469
    },
    "bits_signed": {
     "S": 14,
     "M": 12,
     "delta": 16,
     "aP": 28,
-    "o": 10
+    "o": 10,
+    "v": 17
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.8394966570819121,
    "divergence_vs_float64": {
     "max_abs": 0.15850155501692953,
@@ -1445,17 +1940,26 @@
     "M": 227,
     "delta": 1865,
     "aP": 14811455,
-    "o": 32
+    "o": 32,
+    "v": 2247
    },
    "bits_signed": {
     "S": 11,
     "M": 9,
     "delta": 12,
     "aP": 25,
-    "o": 7
+    "o": 7,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7832247736834261,
    "divergence_vs_float64": {
     "max_abs": 0.024578610725544237,
@@ -1471,17 +1975,26 @@
     "M": 596,
     "delta": 2013,
     "aP": 39030310,
-    "o": 67
+    "o": 67,
+    "v": 2598
    },
    "bits_signed": {
     "S": 12,
     "M": 11,
     "delta": 12,
     "aP": 27,
-    "o": 8
+    "o": 8,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.9366871968699948,
    "divergence_vs_float64": {
     "max_abs": 0.1295342480250784,
@@ -1497,17 +2010,26 @@
     "M": 877,
     "delta": 1902,
     "aP": 57449212,
-    "o": 72
+    "o": 72,
+    "v": 1971
    },
    "bits_signed": {
     "S": 12,
     "M": 11,
     "delta": 12,
     "aP": 27,
-    "o": 8
+    "o": 8,
+    "v": 12
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 3.3771368990871817,
    "divergence_vs_float64": {
     "max_abs": 0.3341294503603991,
@@ -1523,17 +2045,26 @@
     "M": 503,
     "delta": 1607,
     "aP": 32942700,
-    "o": 33
+    "o": 33,
+    "v": 2191
    },
    "bits_signed": {
     "S": 11,
     "M": 10,
     "delta": 12,
     "aP": 26,
-    "o": 7
+    "o": 7,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.5762289695210117,
    "divergence_vs_float64": {
     "max_abs": 0.0444502171430633,
@@ -1549,17 +2080,26 @@
     "M": 315,
     "delta": 1894,
     "aP": 20662575,
-    "o": 26
+    "o": 26,
+    "v": 2404
    },
    "bits_signed": {
     "S": 11,
     "M": 10,
     "delta": 12,
     "aP": 26,
-    "o": 6
+    "o": 6,
+    "v": 13
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5859924149529485,
    "divergence_vs_float64": {
     "max_abs": 0.02837678387887499,
@@ -1575,17 +2115,26 @@
     "M": 351,
     "delta": 3005,
     "aP": 367509240,
-    "o": 53
+    "o": 53,
+    "v": 5128
    },
    "bits_signed": {
     "S": 11,
     "M": 10,
     "delta": 13,
     "aP": 30,
-    "o": 7
+    "o": 7,
+    "v": 14
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.32004804445587903,
    "divergence_vs_float64": {
     "max_abs": 0.004937822775405054,
@@ -1601,17 +2150,26 @@
     "M": 867,
     "delta": 3258,
     "aP": 908459888,
-    "o": 76
+    "o": 76,
+    "v": 4721
    },
    "bits_signed": {
     "S": 12,
     "M": 11,
     "delta": 13,
     "aP": 31,
-    "o": 8
+    "o": 8,
+    "v": 14
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.6645081004979856,
    "divergence_vs_float64": {
     "max_abs": 0.03155116907563644,
@@ -1627,17 +2185,26 @@
     "M": 943,
     "delta": 3173,
     "aP": 987980621,
-    "o": 93
+    "o": 93,
+    "v": 4222
    },
    "bits_signed": {
     "S": 12,
     "M": 11,
     "delta": 13,
     "aP": 31,
-    "o": 8
+    "o": 8,
+    "v": 14
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7156163334765483,
    "divergence_vs_float64": {
     "max_abs": 0.08068947007723473,
@@ -1653,17 +2220,26 @@
     "M": 530,
     "delta": 3648,
     "aP": 555978544,
-    "o": 50
+    "o": 50,
+    "v": 4289
    },
    "bits_signed": {
     "S": 12,
     "M": 11,
     "delta": 13,
     "aP": 31,
-    "o": 7
+    "o": 7,
+    "v": 14
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5412064085153666,
    "divergence_vs_float64": {
     "max_abs": 0.007834793812423052,
@@ -1679,17 +2255,26 @@
     "M": 517,
     "delta": 3296,
     "aP": 541902810,
-    "o": 41
+    "o": 41,
+    "v": 4421
    },
    "bits_signed": {
     "S": 11,
     "M": 11,
     "delta": 13,
     "aP": 31,
-    "o": 7
+    "o": 7,
+    "v": 14
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.22447104812820592,
    "divergence_vs_float64": {
     "max_abs": 0.004320886542790156,
@@ -1705,17 +2290,26 @@
     "M": 763,
     "delta": 6145,
     "aP": 799471300,
-    "o": 109
+    "o": 109,
+    "v": 10322
    },
    "bits_signed": {
     "S": 12,
     "M": 11,
     "delta": 14,
     "aP": 31,
-    "o": 8
+    "o": 8,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.688873805309489,
    "divergence_vs_float64": {
     "max_abs": 0.005320852250925934,
@@ -1731,17 +2325,26 @@
     "M": 1875,
     "delta": 6604,
     "aP": 1965786340,
-    "o": 160
+    "o": 160,
+    "v": 9531
    },
    "bits_signed": {
     "S": 13,
     "M": 12,
     "delta": 14,
     "aP": 32,
-    "o": 9
+    "o": 9,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.4082621468068361,
    "divergence_vs_float64": {
     "max_abs": 0.032402351412028185,
@@ -1757,17 +2360,26 @@
     "M": 2102,
     "delta": 6650,
     "aP": 2203729141,
-    "o": 203
+    "o": 203,
+    "v": 8570
    },
    "bits_signed": {
     "S": 13,
     "M": 13,
     "delta": 14,
     "aP": 33,
-    "o": 9
+    "o": 9,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.581929691246236,
    "divergence_vs_float64": {
     "max_abs": 0.08255015156564449,
@@ -1783,17 +2395,26 @@
     "M": 1150,
     "delta": 7405,
     "aP": 1205992480,
-    "o": 102
+    "o": 102,
+    "v": 8698
    },
    "bits_signed": {
     "S": 13,
     "M": 12,
     "delta": 14,
     "aP": 32,
-    "o": 8
+    "o": 8,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1138084171692288,
    "divergence_vs_float64": {
     "max_abs": 0.008925160147105093,
@@ -1809,17 +2430,26 @@
     "M": 1073,
     "delta": 6802,
     "aP": 1124333010,
-    "o": 89
+    "o": 89,
+    "v": 8952
    },
    "bits_signed": {
     "S": 12,
     "M": 12,
     "delta": 14,
     "aP": 32,
-    "o": 8
+    "o": 8,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.48142637001929534,
    "divergence_vs_float64": {
     "max_abs": 0.005488799614846052,
@@ -1835,17 +2465,26 @@
     "M": 3702,
     "delta": 72901,
     "aP": 3880782318,
-    "o": 913
+    "o": 913,
+    "v": 92941
    },
    "bits_signed": {
     "S": 16,
     "M": 13,
     "delta": 18,
     "aP": 33,
-    "o": 11
+    "o": 11,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1566522155058578,
    "divergence_vs_float64": {
     "max_abs": 0.034742946079370896,
@@ -1861,17 +2500,26 @@
     "M": 11684,
     "delta": 74658,
     "aP": 12251886741,
-    "o": 1263
+    "o": 1263,
+    "v": 88603
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 18,
     "aP": 35,
-    "o": 12
+    "o": 12,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 4.709752725218623,
    "divergence_vs_float64": {
     "max_abs": 0.05328720761452921,
@@ -1887,17 +2535,26 @@
     "M": 19638,
     "delta": 84444,
     "aP": 20591998362,
-    "o": 1941
+    "o": 1941,
+    "v": 138182
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 18,
     "aP": 36,
-    "o": 12
+    "o": 12,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 3.949497208430683,
    "divergence_vs_float64": {
     "max_abs": 0.09136580749300638,
@@ -1913,17 +2570,26 @@
     "M": 12441,
     "delta": 105511,
     "aP": 13045355402,
-    "o": 839
+    "o": 839,
+    "v": 123553
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 18,
     "aP": 35,
-    "o": 11
+    "o": 11,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1661737167574429,
    "divergence_vs_float64": {
     "max_abs": 0.056341292435110546,
@@ -1939,17 +2605,26 @@
     "M": 7338,
     "delta": 71231,
     "aP": 7694402562,
-    "o": 1036
+    "o": 1036,
+    "v": 137876
    },
    "bits_signed": {
     "S": 16,
     "M": 14,
     "delta": 18,
     "aP": 34,
-    "o": 12
+    "o": 12,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.8394966570819121,
    "divergence_vs_float64": {
     "max_abs": 0.04333176659500637,
@@ -1965,17 +2640,26 @@
     "M": 916,
     "delta": 7451,
     "aP": 960124060,
-    "o": 131
+    "o": 131,
+    "v": 8988
    },
    "bits_signed": {
     "S": 13,
     "M": 11,
     "delta": 14,
     "aP": 31,
-    "o": 9
+    "o": 9,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7832247736834261,
    "divergence_vs_float64": {
     "max_abs": 0.006547133326566701,
@@ -1991,17 +2675,26 @@
     "M": 2402,
     "delta": 8071,
     "aP": 2517777058,
-    "o": 250
+    "o": 250,
+    "v": 10391
    },
    "bits_signed": {
     "S": 13,
     "M": 13,
     "delta": 14,
     "aP": 33,
-    "o": 9
+    "o": 9,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.9366871968699948,
    "divergence_vs_float64": {
     "max_abs": 0.03485180408923538,
@@ -2017,17 +2710,26 @@
     "M": 3494,
     "delta": 7589,
     "aP": 3662971614,
-    "o": 317
+    "o": 317,
+    "v": 7885
    },
    "bits_signed": {
     "S": 14,
     "M": 13,
     "delta": 14,
     "aP": 33,
-    "o": 10
+    "o": 10,
+    "v": 14
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 3.3771368990871817,
    "divergence_vs_float64": {
     "max_abs": 0.08243056974624641,
@@ -2043,17 +2745,26 @@
     "M": 1984,
     "delta": 6421,
     "aP": 2079637404,
-    "o": 142
+    "o": 142,
+    "v": 8762
    },
    "bits_signed": {
     "S": 13,
     "M": 12,
     "delta": 14,
     "aP": 32,
-    "o": 9
+    "o": 9,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.5762289695210117,
    "divergence_vs_float64": {
     "max_abs": 0.011173446932118969,
@@ -2069,17 +2780,26 @@
     "M": 1256,
     "delta": 7593,
     "aP": 1318011920,
-    "o": 109
+    "o": 109,
+    "v": 9617
    },
    "bits_signed": {
     "S": 13,
     "M": 12,
     "delta": 14,
     "aP": 32,
-    "o": 8
+    "o": 8,
+    "v": 15
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5859924149529485,
    "divergence_vs_float64": {
     "max_abs": 0.007922671728819497,
@@ -2095,17 +2815,26 @@
     "M": 5600,
     "delta": 48067,
     "aP": 1503102797440,
-    "o": 824
+    "o": 824,
+    "v": 82052
    },
    "bits_signed": {
     "S": 15,
     "M": 14,
     "delta": 17,
     "aP": 42,
-    "o": 11
+    "o": 11,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.32004804445587903,
    "divergence_vs_float64": {
     "max_abs": 0.00029380338713570157,
@@ -2121,17 +2850,26 @@
     "M": 13997,
     "delta": 52110,
     "aP": 3757174113990,
-    "o": 1220
+    "o": 1220,
+    "v": 75536
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 17,
     "aP": 43,
-    "o": 12
+    "o": 12,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.6645081004979856,
    "divergence_vs_float64": {
     "max_abs": 0.001929873475031707,
@@ -2147,17 +2885,26 @@
     "M": 15063,
     "delta": 50840,
     "aP": 4043273013408,
-    "o": 1468
+    "o": 1468,
+    "v": 67552
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 17,
     "aP": 43,
-    "o": 12
+    "o": 12,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7156163334765483,
    "divergence_vs_float64": {
     "max_abs": 0.0051320736221253035,
@@ -2173,17 +2920,26 @@
     "M": 8551,
     "delta": 58375,
     "aP": 2295643591815,
-    "o": 806
+    "o": 806,
+    "v": 68621
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 17,
     "aP": 43,
-    "o": 11
+    "o": 11,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5412064085153666,
    "divergence_vs_float64": {
     "max_abs": 0.0004936935355680343,
@@ -2199,17 +2955,26 @@
     "M": 8237,
     "delta": 52737,
     "aP": 2210990602128,
-    "o": 669
+    "o": 669,
+    "v": 70734
    },
    "bits_signed": {
     "S": 15,
     "M": 15,
     "delta": 17,
     "aP": 43,
-    "o": 11
+    "o": 11,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.22447104812820592,
    "divergence_vs_float64": {
     "max_abs": 0.000273553587158637,
@@ -2225,17 +2990,26 @@
     "M": 12179,
     "delta": 98291,
     "aP": 3269135354240,
-    "o": 1710
+    "o": 1710,
+    "v": 165158
    },
    "bits_signed": {
     "S": 16,
     "M": 15,
     "delta": 18,
     "aP": 43,
-    "o": 12
+    "o": 12,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.688873805309489,
    "divergence_vs_float64": {
     "max_abs": 0.0003411922368930509,
@@ -2251,17 +3025,26 @@
     "M": 30112,
     "delta": 105647,
     "aP": 8082937103428,
-    "o": 2565
+    "o": 2565,
+    "v": 152496
    },
    "bits_signed": {
     "S": 17,
     "M": 16,
     "delta": 18,
     "aP": 44,
-    "o": 13
+    "o": 13,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.4082621468068361,
    "divergence_vs_float64": {
     "max_abs": 0.001974971315042498,
@@ -2277,17 +3060,26 @@
     "M": 33607,
     "delta": 106426,
     "aP": 9021298530656,
-    "o": 3223
+    "o": 3223,
+    "v": 137128
    },
    "bits_signed": {
     "S": 17,
     "M": 17,
     "delta": 18,
     "aP": 45,
-    "o": 13
+    "o": 13,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.581929691246236,
    "divergence_vs_float64": {
     "max_abs": 0.005160192051003265,
@@ -2303,17 +3095,26 @@
     "M": 18478,
     "delta": 118490,
     "aP": 4960345502826,
-    "o": 1635
+    "o": 1635,
+    "v": 139176
    },
    "bits_signed": {
     "S": 17,
     "M": 16,
     "delta": 18,
     "aP": 44,
-    "o": 12
+    "o": 12,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.1138084171692288,
    "divergence_vs_float64": {
     "max_abs": 0.0005731275016345183,
@@ -2329,17 +3130,26 @@
     "M": 17104,
     "delta": 108825,
     "aP": 4591299855450,
-    "o": 1443
+    "o": 1443,
+    "v": 143232
    },
    "bits_signed": {
     "S": 16,
     "M": 16,
     "delta": 18,
     "aP": 44,
-    "o": 12
+    "o": 12,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.48142637001929534,
    "divergence_vs_float64": {
     "max_abs": 0.00035696714307670296,
@@ -2355,17 +3165,26 @@
     "M": 59435,
     "delta": 1166134,
     "aP": 15954221609820,
-    "o": 14375
+    "o": 14375,
+    "v": 1487051
    },
    "bits_signed": {
     "S": 20,
     "M": 17,
     "delta": 22,
     "aP": 45,
-    "o": 15
+    "o": 15,
+    "v": 22
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 302,
+    "M": null,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.1566522155058578,
    "divergence_vs_float64": {
     "max_abs": 0.0023455759636652473,
@@ -2381,17 +3200,26 @@
     "M": 186482,
     "delta": 1194344,
     "aP": 50058419064848,
-    "o": 20324
+    "o": 20324,
+    "v": 1417646
    },
    "bits_signed": {
     "S": 20,
     "M": 19,
     "delta": 22,
     "aP": 47,
-    "o": 16
+    "o": 16,
+    "v": 22
    },
    "first_step_over_2_18": 80,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 159,
+    "M": null,
+    "delta": 80,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 4.709752725218623,
    "divergence_vs_float64": {
     "max_abs": 0.003263392092818229,
@@ -2407,17 +3235,26 @@
     "M": 314844,
     "delta": 1350619,
     "aP": 84515356889628,
-    "o": 31252
+    "o": 31252,
+    "v": 2210907
    },
    "bits_signed": {
     "S": 20,
     "M": 20,
     "delta": 22,
     "aP": 48,
-    "o": 16
+    "o": 16,
+    "v": 23
    },
    "first_step_over_2_18": 47,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 145,
+    "M": 153,
+    "delta": 47,
+    "v": 3
+   },
+   "v_admissible": false,
    "state_float_max": 3.949497208430683,
    "divergence_vs_float64": {
     "max_abs": 0.006072927199670897,
@@ -2433,17 +3270,26 @@
     "M": 198731,
     "delta": 1688792,
     "aP": 53346525001908,
-    "o": 13466
+    "o": 13466,
+    "v": 1976853
    },
    "bits_signed": {
     "S": 20,
     "M": 19,
     "delta": 22,
     "aP": 47,
-    "o": 15
+    "o": 15,
+    "v": 22
    },
    "first_step_over_2_18": 5,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 120,
+    "M": null,
+    "delta": 5,
+    "v": 1
+   },
+   "v_admissible": false,
    "state_float_max": 1.1661737167574429,
    "divergence_vs_float64": {
     "max_abs": 0.0032704039338806723,
@@ -2459,17 +3305,26 @@
     "M": 117053,
     "delta": 1140650,
     "aP": 31420982633377,
-    "o": 16528
+    "o": 16528,
+    "v": 2206023
    },
    "bits_signed": {
     "S": 20,
     "M": 18,
     "delta": 22,
     "aP": 46,
-    "o": 16
+    "o": 16,
+    "v": 23
    },
    "first_step_over_2_18": 6,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 35,
+    "M": null,
+    "delta": 6,
+    "v": 3
+   },
+   "v_admissible": false,
    "state_float_max": 0.8394966570819121,
    "divergence_vs_float64": {
     "max_abs": 0.002479851786400644,
@@ -2485,17 +3340,26 @@
     "M": 14629,
     "delta": 119158,
     "aP": 3926724973440,
-    "o": 2121
+    "o": 2121,
+    "v": 143804
    },
    "bits_signed": {
     "S": 17,
     "M": 15,
     "delta": 18,
     "aP": 43,
-    "o": 13
+    "o": 13,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.7832247736834261,
    "divergence_vs_float64": {
     "max_abs": 0.00040255525331645003,
@@ -2511,17 +3375,26 @@
     "M": 38392,
     "delta": 129360,
     "aP": 10305544865286,
-    "o": 3981
+    "o": 3981,
+    "v": 166260
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 18,
     "aP": 45,
-    "o": 13
+    "o": 13,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.9366871968699948,
    "divergence_vs_float64": {
     "max_abs": 0.001985867918206319,
@@ -2537,17 +3410,26 @@
     "M": 55725,
     "delta": 121161,
     "aP": 14958549503468,
-    "o": 5230
+    "o": 5230,
+    "v": 126160
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 18,
     "aP": 45,
-    "o": 14
+    "o": 14,
+    "v": 18
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 3.3771368990871817,
    "divergence_vs_float64": {
     "max_abs": 0.005274960810609075,
@@ -2563,17 +3445,26 @@
     "M": 31589,
     "delta": 102668,
     "aP": 8479576015929,
-    "o": 2295
+    "o": 2295,
+    "v": 140196
    },
    "bits_signed": {
     "S": 17,
     "M": 16,
     "delta": 18,
     "aP": 44,
-    "o": 13
+    "o": 13,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 1.5762289695210117,
    "divergence_vs_float64": {
     "max_abs": 0.0007368684325448349,
@@ -2589,17 +3480,26 @@
     "M": 20078,
     "delta": 121450,
     "aP": 5389879430529,
-    "o": 1759
+    "o": 1759,
+    "v": 153879
    },
    "bits_signed": {
     "S": 17,
     "M": 16,
     "delta": 18,
     "aP": 44,
-    "o": 12
+    "o": 12,
+    "v": 19
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": null
+   },
+   "v_admissible": true,
    "state_float_max": 0.5859924149529485,
    "divergence_vs_float64": {
     "max_abs": 0.0004447516188024747,
@@ -2615,17 +3515,26 @@
     "M": 22397,
     "delta": 192265,
     "aP": 96190141766576,
-    "o": 3300
+    "o": 3300,
+    "v": 328206
    },
    "bits_signed": {
     "S": 17,
     "M": 16,
     "delta": 19,
     "aP": 48,
-    "o": 13
+    "o": 13,
+    "v": 20
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": 261
+   },
+   "v_admissible": false,
    "state_float_max": 0.32004804445587903,
    "divergence_vs_float64": {
     "max_abs": 7.04660178183214e-05,
@@ -2641,17 +3550,26 @@
     "M": 56028,
     "delta": 208451,
     "aP": 240634789316015,
-    "o": 4877
+    "o": 4877,
+    "v": 302142
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 19,
     "aP": 49,
-    "o": 14
+    "o": 14,
+    "v": 20
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": 419
+   },
+   "v_admissible": false,
    "state_float_max": 0.6645081004979856,
    "divergence_vs_float64": {
     "max_abs": 0.0004919013949597484,
@@ -2667,17 +3585,26 @@
     "M": 60236,
     "delta": 203398,
     "aP": 258708785878332,
-    "o": 5865
+    "o": 5865,
+    "v": 270209
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 19,
     "aP": 49,
-    "o": 14
+    "o": 14,
+    "v": 20
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": 323
+   },
+   "v_admissible": false,
    "state_float_max": 0.7156163334765483,
    "divergence_vs_float64": {
     "max_abs": 0.0012860151230768106,
@@ -2693,17 +3620,26 @@
     "M": 34211,
     "delta": 233516,
     "aP": 146939159354442,
-    "o": 3228
+    "o": 3228,
+    "v": 274486
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 19,
     "aP": 49,
-    "o": 13
+    "o": 13,
+    "v": 20
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": 498
+   },
+   "v_admissible": false,
    "state_float_max": 0.5412064085153666,
    "divergence_vs_float64": {
     "max_abs": 0.0001249760101309609,
@@ -2719,17 +3655,26 @@
     "M": 32950,
     "delta": 210953,
     "aP": 141517201771390,
-    "o": 2676
+    "o": 2676,
+    "v": 282937
    },
    "bits_signed": {
     "S": 17,
     "M": 17,
     "delta": 19,
     "aP": 49,
-    "o": 13
+    "o": 13,
+    "v": 20
    },
    "first_step_over_2_18": null,
    "fits_2_18": true,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": null,
+    "v": 66
+   },
+   "v_admissible": false,
    "state_float_max": 0.22447104812820592,
    "divergence_vs_float64": {
     "max_abs": 6.989518411570916e-05,
@@ -2745,17 +3690,26 @@
     "M": 48708,
     "delta": 393154,
     "aP": 209196875692519,
-    "o": 6848
+    "o": 6848,
+    "v": 660632
    },
    "bits_signed": {
     "S": 18,
     "M": 17,
     "delta": 20,
     "aP": 49,
-    "o": 14
+    "o": 14,
+    "v": 21
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 0.688873805309489,
    "divergence_vs_float64": {
     "max_abs": 8.58907582395041e-05,
@@ -2771,17 +3725,26 @@
     "M": 120500,
     "delta": 422595,
     "aP": 517542974416717,
-    "o": 10252
+    "o": 10252,
+    "v": 609983
    },
    "bits_signed": {
     "S": 19,
     "M": 18,
     "delta": 20,
     "aP": 50,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 20,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 20,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.4082621468068361,
    "divergence_vs_float64": {
     "max_abs": 0.0005006893269346724,
@@ -2797,17 +3760,26 @@
     "M": 134448,
     "delta": 425750,
     "aP": 577449231035004,
-    "o": 12887
+    "o": 12887,
+    "v": 548511
    },
    "bits_signed": {
     "S": 19,
     "M": 19,
     "delta": 20,
     "aP": 51,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.581929691246236,
    "divergence_vs_float64": {
     "max_abs": 0.0013086391503115413,
@@ -2823,17 +3795,26 @@
     "M": 73918,
     "delta": 473973,
     "aP": 317478608713812,
-    "o": 6547
+    "o": 6547,
+    "v": 556703
    },
    "bits_signed": {
     "S": 19,
     "M": 18,
     "delta": 20,
     "aP": 50,
-    "o": 14
+    "o": 14,
+    "v": 21
    },
    "first_step_over_2_18": 9,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 9,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.1138084171692288,
    "divergence_vs_float64": {
     "max_abs": 0.00013727883450953549,
@@ -2849,17 +3830,26 @@
     "M": 68418,
     "delta": 435308,
     "aP": 293850982010150,
-    "o": 5766
+    "o": 5766,
+    "v": 572929
    },
    "bits_signed": {
     "S": 18,
     "M": 18,
     "delta": 20,
     "aP": 50,
-    "o": 14
+    "o": 14,
+    "v": 21
    },
    "first_step_over_2_18": 9,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 9,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 0.48142637001929534,
    "divergence_vs_float64": {
     "max_abs": 8.573359581637297e-05,
@@ -2875,17 +3865,26 @@
     "M": 237682,
     "delta": 4664627,
     "aP": 1020835026323892,
-    "o": 57577
+    "o": 57577,
+    "v": 5948204
    },
    "bits_signed": {
     "S": 22,
     "M": 19,
     "delta": 24,
     "aP": 51,
-    "o": 17
+    "o": 17,
+    "v": 24
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 0,
+    "M": null,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.1566522155058578,
    "divergence_vs_float64": {
     "max_abs": 0.0005927583452987051,
@@ -2901,17 +3900,26 @@
     "M": 746061,
     "delta": 4777543,
     "aP": 3204307637287697,
-    "o": 81428
+    "o": 81428,
+    "v": 5670584
    },
    "bits_signed": {
     "S": 22,
     "M": 21,
     "delta": 24,
     "aP": 53,
-    "o": 18
+    "o": 18,
+    "v": 24
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 16,
+    "M": 83,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 4.709752725218623,
    "divergence_vs_float64": {
     "max_abs": 0.0007683391935628947,
@@ -2927,17 +3935,26 @@
     "M": 1259442,
     "delta": 5402653,
     "aP": 5409266096025370,
-    "o": 125064
+    "o": 125064,
+    "v": 8843628
    },
    "bits_signed": {
     "S": 22,
     "M": 22,
     "delta": 24,
     "aP": 54,
-    "o": 18
+    "o": 18,
+    "v": 25
    },
    "first_step_over_2_18": 1,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 7,
+    "M": 50,
+    "delta": 1,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 3.949497208430683,
    "divergence_vs_float64": {
     "max_abs": 0.001629529882612335,
@@ -2953,17 +3970,26 @@
     "M": 794856,
     "delta": 6755171,
     "aP": 3413882132783955,
-    "o": 53935
+    "o": 53935,
+    "v": 7907412
    },
    "bits_signed": {
     "S": 22,
     "M": 21,
     "delta": 24,
     "aP": 53,
-    "o": 17
+    "o": 17,
+    "v": 24
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 5,
+    "M": 121,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.1661737167574429,
    "divergence_vs_float64": {
     "max_abs": 0.000948362556773219,
@@ -2979,17 +4005,26 @@
     "M": 468332,
     "delta": 4562873,
     "aP": 2011469226084032,
-    "o": 66149
+    "o": 66149,
+    "v": 8824094
    },
    "bits_signed": {
     "S": 22,
     "M": 20,
     "delta": 24,
     "aP": 52,
-    "o": 18
+    "o": 18,
+    "v": 25
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 6,
+    "M": 204,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 0.8394966570819121,
    "divergence_vs_float64": {
     "max_abs": 0.0005356957907758364,
@@ -3005,17 +4040,26 @@
     "M": 58511,
     "delta": 476650,
     "aP": 251302015517696,
-    "o": 8487
+    "o": 8487,
+    "v": 575215
    },
    "bits_signed": {
     "S": 19,
     "M": 17,
     "delta": 20,
     "aP": 49,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 0.7832247736834261,
    "divergence_vs_float64": {
     "max_abs": 0.00010974841831334903,
@@ -3031,17 +4075,26 @@
     "M": 153605,
     "delta": 517482,
     "aP": 659726129956677,
-    "o": 15919
+    "o": 15919,
+    "v": 665039
    },
    "bits_signed": {
     "S": 20,
     "M": 19,
     "delta": 20,
     "aP": 51,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 9,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 663,
+    "M": null,
+    "delta": 9,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.9366871968699948,
    "divergence_vs_float64": {
     "max_abs": 0.0005209979326987746,
@@ -3057,17 +4110,26 @@
     "M": 222884,
     "delta": 484622,
     "aP": 957279260032090,
-    "o": 20923
+    "o": 20923,
+    "v": 504642
    },
    "bits_signed": {
     "S": 20,
     "M": 19,
     "delta": 20,
     "aP": 51,
-    "o": 16
+    "o": 16,
+    "v": 20
    },
    "first_step_over_2_18": 0,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": 164,
+    "M": null,
+    "delta": 0,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 3.3771368990871817,
    "divergence_vs_float64": {
     "max_abs": 0.001280735248934628,
@@ -3083,17 +4145,26 @@
     "M": 126334,
     "delta": 410673,
     "aP": 542597028178466,
-    "o": 9171
+    "o": 9171,
+    "v": 560785
    },
    "bits_signed": {
     "S": 19,
     "M": 18,
     "delta": 20,
     "aP": 50,
-    "o": 15
+    "o": 15,
+    "v": 21
    },
    "first_step_over_2_18": 3,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 3,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 1.5762289695210117,
    "divergence_vs_float64": {
     "max_abs": 0.00016361270958378804,
@@ -3109,17 +4180,26 @@
     "M": 80318,
     "delta": 485816,
     "aP": 344966593415586,
-    "o": 7035
+    "o": 7035,
+    "v": 615517
    },
    "bits_signed": {
     "S": 19,
     "M": 18,
     "delta": 20,
     "aP": 50,
-    "o": 14
+    "o": 14,
+    "v": 21
    },
    "first_step_over_2_18": 10,
    "fits_2_18": false,
+   "first_step_over_2_18_each": {
+    "S": null,
+    "M": null,
+    "delta": 10,
+    "v": 0
+   },
+   "v_admissible": false,
    "state_float_max": 0.5859924149529485,
    "divergence_vs_float64": {
     "max_abs": 0.00011756065444362696,
@@ -3127,32 +4207,32 @@
    }
   }
  ],
- "seconds": 38.3,
+ "seconds": 39.4,
  "H3_pass": false,
  "summary": [
-  "R1 F=12: n=5 max|S| median 4229 min 3615 max 4730 (signed bits 14); max|M|,|delta| 14591; max|a*P| 63191483408; fits 2^18 5/5; state div vs float64 max 0.02043",
-  "R2 F=12: n=5 max|S| median 8600 min 7398 max 10350 (signed bits 15); max|M|,|delta| 29618; max|a*P| 141065554396; fits 2^18 5/5; state div vs float64 max 0.02031",
-  "R3 F=12: n=5 max|S| median 75605 min 70488 max 125548 (signed bits 18); max|M|,|delta| 422167; max|a*P| 1319652009052; fits 2^18 0/5; state div vs float64 max 0.03212",
-  "R4 F=12: n=5 max|S| median 12062 min 8547 max 19015 (signed bits 16); max|M|,|delta| 32332; max|a*P| 233817424524; fits 2^18 5/5; state div vs float64 max 0.02088",
-  "S1 F=12: n=5 max|S| median 12550 min 12126 max 14696 (signed bits 15); max|M|,|delta| 20500; max|a*P| 207709249536; fits 2^18 5/5; state div vs float64 max 0.08629",
-  "S2 F=12: n=5 max|S| median 27707 min 27154 max 31625 (signed bits 16); max|M|,|delta| 44424; max|a*P| 446349934592; fits 2^18 5/5; state div vs float64 max 0.0881",
-  "S3 F=12: n=5 max|S| median 131985 min 98728 max 459648 (signed bits 20); max|M|,|delta| 1587413; max|a*P| 6260407595008; fits 2^18 0/5; state div vs float64 max 0.1256",
-  "S4 F=12: n=5 max|S| median 39472 min 38465 max 44491 (signed bits 17); max|M|,|delta| 56646; max|a*P| 623793627136; fits 2^18 5/5; state div vs float64 max 0.08986",
-  "R1 F=8: n=5 max|S| median 266 min 226 max 304 (signed bits 10); max|M|,|delta| 907; max|a*P| 19003620; fits 2^18 5/5; state div vs float64 max 0.3249",
-  "R2 F=8: n=5 max|S| median 541 min 463 max 658 (signed bits 11); max|M|,|delta| 1845; max|a*P| 36770818; fits 2^18 5/5; state div vs float64 max 0.3287",
-  "R3 F=8: n=5 max|S| median 4687 min 4408 max 7861 (signed bits 14); max|M|,|delta| 26439; max|a*P| 318691260; fits 2^18 5/5; state div vs float64 max 0.4181",
-  "R4 F=8: n=5 max|S| median 760 min 532 max 1175 (signed bits 12); max|M|,|delta| 2013; max|a*P| 57449212; fits 2^18 5/5; state div vs float64 max 0.3341",
-  "R1 F=10: n=5 max|S| median 1060 min 903 max 1146 (signed bits 12); max|M|,|delta| 3648; max|a*P| 987980621; fits 2^18 5/5; state div vs float64 max 0.08069",
-  "R2 F=10: n=5 max|S| median 2152 min 1848 max 2566 (signed bits 13); max|M|,|delta| 7405; max|a*P| 2203729141; fits 2^18 5/5; state div vs float64 max 0.08255",
-  "R3 F=10: n=5 max|S| median 18887 min 17632 max 31376 (signed bits 16); max|M|,|delta| 105511; max|a*P| 20591998362; fits 2^18 5/5; state div vs float64 max 0.09137",
-  "R4 F=10: n=5 max|S| median 3015 min 2135 max 4732 (signed bits 14); max|M|,|delta| 8071; max|a*P| 3662971614; fits 2^18 5/5; state div vs float64 max 0.08243",
-  "R1 F=14: n=5 max|S| median 16903 min 14462 max 19078 (signed bits 16); max|M|,|delta| 58375; max|a*P| 4043273013408; fits 2^18 5/5; state div vs float64 max 0.005132",
-  "R2 F=14: n=5 max|S| median 34381 min 29588 max 41575 (signed bits 17); max|M|,|delta| 118490; max|a*P| 9021298530656; fits 2^18 5/5; state div vs float64 max 0.00516",
-  "R3 F=14: n=5 max|S| median 302537 min 281790 max 502337 (signed bits 20); max|M|,|delta| 1688792; max|a*P| 84515356889628; fits 2^18 0/5; state div vs float64 max 0.006073",
-  "R4 F=14: n=5 max|S| median 48237 min 34206 max 76137 (signed bits 18); max|M|,|delta| 129360; max|a*P| 14958549503468; fits 2^18 5/5; state div vs float64 max 0.005275",
-  "R1 F=16: n=5 max|S| median 67604 min 57855 max 76446 (signed bits 18); max|M|,|delta| 233516; max|a*P| 258708785878332; fits 2^18 5/5; state div vs float64 max 0.001286",
-  "R2 F=16: n=5 max|S| median 137514 min 118363 max 166426 (signed bits 19); max|M|,|delta| 473973; max|a*P| 577449231035004; fits 2^18 0/5; state div vs float64 max 0.001309",
-  "R3 F=16: n=5 max|S| median 1210173 min 1127020 max 2009356 (signed bits 22); max|M|,|delta| 6755171; max|a*P| 5409266096025370; fits 2^18 0/5; state div vs float64 max 0.00163",
-  "R4 F=16: n=5 max|S| median 192923 min 136828 max 304624 (signed bits 20); max|M|,|delta| 517482; max|a*P| 957279260032090; fits 2^18 0/5; state div vs float64 max 0.001281"
+  "R1 F=12: n=5 max|S| median 4229 min 3615 max 4730 (signed bits 14); max|M|,|delta| 14591; max|a*P| 63191483408; max|v| 20513 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.02043",
+  "R2 F=12: n=5 max|S| median 8600 min 7398 max 10350 (signed bits 15); max|M|,|delta| 29618; max|a*P| 141065554396; max|v| 41290 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.02031",
+  "R3 F=12: n=5 max|S| median 75605 min 70488 max 125548 (signed bits 18); max|M|,|delta| 422167; max|a*P| 1319652009052; max|v| 552727 (v admissible 0/5); fits 2^18 0/5; state div vs float64 max 0.03212",
+  "R4 F=12: n=5 max|S| median 12062 min 8547 max 19015 (signed bits 16); max|M|,|delta| 32332; max|a*P| 233817424524; max|v| 41565 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.02088",
+  "S1 F=12: n=5 max|S| median 12550 min 12126 max 14696 (signed bits 15); max|M|,|delta| 20500; max|a*P| 207709249536; max|v| 18230 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.08629",
+  "S2 F=12: n=5 max|S| median 27707 min 27154 max 31625 (signed bits 16); max|M|,|delta| 44424; max|a*P| 446349934592; max|v| 36861 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.0881",
+  "S3 F=12: n=5 max|S| median 131985 min 98728 max 459648 (signed bits 20); max|M|,|delta| 1587413; max|a*P| 6260407595008; max|v| 1588999 (v admissible 0/5); fits 2^18 0/5; state div vs float64 max 0.1256",
+  "S4 F=12: n=5 max|S| median 39472 min 38465 max 44491 (signed bits 17); max|M|,|delta| 56646; max|a*P| 623793627136; max|v| 34902 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.08986",
+  "R1 F=8: n=5 max|S| median 266 min 226 max 304 (signed bits 10); max|M|,|delta| 907; max|a*P| 19003620; max|v| 1282 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.3249",
+  "R2 F=8: n=5 max|S| median 541 min 463 max 658 (signed bits 11); max|M|,|delta| 1845; max|a*P| 36770818; max|v| 2581 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.3287",
+  "R3 F=8: n=5 max|S| median 4687 min 4408 max 7861 (signed bits 14); max|M|,|delta| 26439; max|a*P| 318691260; max|v| 34545 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.4181",
+  "R4 F=8: n=5 max|S| median 760 min 532 max 1175 (signed bits 12); max|M|,|delta| 2013; max|a*P| 57449212; max|v| 2598 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.3341",
+  "R1 F=10: n=5 max|S| median 1060 min 903 max 1146 (signed bits 12); max|M|,|delta| 3648; max|a*P| 987980621; max|v| 5128 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.08069",
+  "R2 F=10: n=5 max|S| median 2152 min 1848 max 2566 (signed bits 13); max|M|,|delta| 7405; max|a*P| 2203729141; max|v| 10322 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.08255",
+  "R3 F=10: n=5 max|S| median 18887 min 17632 max 31376 (signed bits 16); max|M|,|delta| 105511; max|a*P| 20591998362; max|v| 138182 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.09137",
+  "R4 F=10: n=5 max|S| median 3015 min 2135 max 4732 (signed bits 14); max|M|,|delta| 8071; max|a*P| 3662971614; max|v| 10391 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.08243",
+  "R1 F=14: n=5 max|S| median 16903 min 14462 max 19078 (signed bits 16); max|M|,|delta| 58375; max|a*P| 4043273013408; max|v| 82052 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.005132",
+  "R2 F=14: n=5 max|S| median 34381 min 29588 max 41575 (signed bits 17); max|M|,|delta| 118490; max|a*P| 9021298530656; max|v| 165158 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.00516",
+  "R3 F=14: n=5 max|S| median 302537 min 281790 max 502337 (signed bits 20); max|M|,|delta| 1688792; max|a*P| 84515356889628; max|v| 2210907 (v admissible 0/5); fits 2^18 0/5; state div vs float64 max 0.006073",
+  "R4 F=14: n=5 max|S| median 48237 min 34206 max 76137 (signed bits 18); max|M|,|delta| 129360; max|a*P| 14958549503468; max|v| 166260 (v admissible 5/5); fits 2^18 5/5; state div vs float64 max 0.005275",
+  "R1 F=16: n=5 max|S| median 67604 min 57855 max 76446 (signed bits 18); max|M|,|delta| 233516; max|a*P| 258708785878332; max|v| 328206 (v admissible 0/5); fits 2^18 5/5; state div vs float64 max 0.001286",
+  "R2 F=16: n=5 max|S| median 137514 min 118363 max 166426 (signed bits 19); max|M|,|delta| 473973; max|a*P| 577449231035004; max|v| 660632 (v admissible 0/5); fits 2^18 0/5; state div vs float64 max 0.001309",
+  "R3 F=16: n=5 max|S| median 1210173 min 1127020 max 2009356 (signed bits 22); max|M|,|delta| 6755171; max|a*P| 5409266096025370; max|v| 8843628 (v admissible 0/5); fits 2^18 0/5; state div vs float64 max 0.00163",
+  "R4 F=16: n=5 max|S| median 192923 min 136828 max 304624 (signed bits 20); max|M|,|delta| 517482; max|a*P| 957279260032090; max|v| 665039 (v admissible 0/5); fits 2^18 0/5; state div vs float64 max 0.001281"
  ]
 }
