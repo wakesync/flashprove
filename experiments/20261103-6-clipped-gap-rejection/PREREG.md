@@ -78,3 +78,11 @@ integer-model-second-choice adversary, k = 2/8, truncation and whole-random clas
 record of what cp_verify can and cannot check on CPU.
 
 ## Amendments
+- 2026-11-04T00:52Z. Decode dtype bfloat16 -> float32 (the `--dtype float32` option that try_limits.py
+  also offers). Reason: this host's CPU (AMD EPYC-Rome) has no bfloat16 hardware; one batched forward of
+  128 x 17 tokens took 86.5 s in bfloat16 against 4.9 s in float32 (3 threads), and the five bf16 runs
+  had not finished decoding after 68 minutes, which would breach the 3 h kill criterion. Consequence:
+  the honest replies are float32 greedy replies, so limits fitted here are not expected to equal the
+  shipped bf16-fitted ones (prover/examples/target_small_f2_gap/README.md reports float32 fits as
+  machine-stable). The shipped point stays in the grid unchanged. No result had been seen when this was
+  changed (no seed file had been written).
