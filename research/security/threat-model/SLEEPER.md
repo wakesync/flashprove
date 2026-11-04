@@ -1,8 +1,8 @@
 # Sleeper agents and backdoors versus a proof of execution
 
 Part of #6, tracking #53. Labels: **measured** / **cited** / **inferred** as in THREAT-MODEL.md.
-Figures from PR #50 and PR #51 are from open, unmerged, unreplicated PRs and are honest-prover
-outcomes only (THREAT-MODEL.md, "About PR #50 and PR #51").
+Figures from PR #50 (merged, main `a6c5a8e6`, unreplicated) and PR #51 (open, approved, unmerged,
+unreplicated) are honest-prover outcomes only (THREAT-MODEL.md, "About PR #50 and PR #51").
 
 ## The core argument, stated carefully
 
@@ -77,7 +77,7 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
 - A strong backdoor needs no allowance: it makes h the top choice and passes exact match.
 - A **weak** or partially-removed backdoor (for example after safety fine-tuning shaved it) may
   leave the harmful first token as a close second, not the top choice. Under exact match that reply
-  fails. Under the shipped clipped-gap limits, open PR #51 (unmerged, unreplicated, H100, small
+  fails. Under the shipped clipped-gap limits, open PR #51 (approved, unmerged, unreplicated, H100, small
   synthetic model) reports that "one swap then greedy continuation" was proved by the honest
   `cp_prove` and accepted `WITHIN LIMITS` by `cp_verify` in 15/16 (float second choice) and 13/16
   (random token) cases. Out-of-limits replies were refused by the honest prover, so `cp_verify`
@@ -105,8 +105,9 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
 The brief's suggested experiment (synthetic weight-delta backdoor on `target_small`, show a valid
 proof with a different commitment) needs fresh `cp_commit` and `cp_prove`, which require an H100
 (`prover/build.sh:14`). #46 hit the same wall (`experiments/20261103-model-identity/RESULTS.md`,
-"KILLED for the requested proof experiment"). Open PR #50 shows a GPU version for steering
-(unmerged, unreplicated, honest-prover path). A
+"KILLED for the requested proof experiment"). Merged PR #50 shows a GPU version for steering
+(main `a6c5a8e6`, `experiments/20261104-36-steering-real-proofs/`, measured, unreplicated,
+honest-prover path). A
 CPU-only version could only compute SHA-256 fingerprints and Python scores, which #46 already did
 (three distinct artifact fingerprints, a projected variant scored 5/5 against itself and 0/5
 against stock; measured there). It would not be decisive, so no PREREG was registered and nothing

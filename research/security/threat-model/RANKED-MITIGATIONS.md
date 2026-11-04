@@ -59,9 +59,9 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
   serving so served replies are the integer model's greedy choices (`docs/architecture.md:141-146`).
   Treat `WITHIN LIMITS` as "close to the model", never "the model's answer".
 - **Closes (by design, not measured):** the clipped-gap steering channel and the sleeper stack
-  (CODE-CHECKS C5). The evidence for the channel is from open, unmerged, unreplicated PRs on the
-  honest-prover path: one-swap acceptance 15/16 and 13/16 under shipped limits (PR #51) and 5/54
-  steered (PR #50). Under exact match the honest prover refused all 57 changed steered replies in
+  (CODE-CHECKS C5). The evidence for the channel is unreplicated and on the honest-prover path:
+  one-swap acceptance 15/16 and 13/16 under shipped limits (PR #51, open, approved, unmerged) and
+  5/54 steered (PR #50, merged, main `a6c5a8e6`). Under exact match the honest prover refused all 57 changed steered replies in
   #50, so `cp_verify` never judged an out-of-limits proof; that exact match also stops a cheating
   prover is the design and the premise of the Lean soundness theorem, which covers exact match only
   (`docs/protocol.md:53`).
@@ -110,6 +110,6 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
 1. (read) "The commitment ID binds the integer weights and configuration, not any upstream
    checkpoint; a valid proof of a backdoored model verifies." Evidence: `blocks/frame/heads.h:78-99`,
    this directory.
-2. (from open, unmerged, unreplicated PRs #50/#51, honest-prover outcomes) "Under the shipped
+2. (from merged PR #50 and open, approved, unmerged PR #51, both unreplicated, honest-prover outcomes) "Under the shipped
    clipped-gap limits, a rank-2 harmful branch can be proved with one swap." Second half (by design /
    inferred, not measured): "under exact match it cannot."

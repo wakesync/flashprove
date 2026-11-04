@@ -93,8 +93,8 @@ chat template's tokens and whatever your front end added" (`docs/operators-dutie
 
 ## C5. Clipped-gap weakness as a steering channel, stacked with a sleeper trigger
 
-Inputs from **open, unmerged PRs** #50 (head `b645f670`) and #51 (head `0c93d0ea`), both
-unreplicated, synthetic small model, H100. **Honest-prover path only**: every out-of-limits reply was
+Inputs from PR #50 (**merged**, main `a6c5a8e6`, checked at its merged parent `b645f670`) and PR #51
+(**open, approved at `0c93d0ea`, unmerged**), both unreplicated, synthetic small model, H100. **Honest-prover path only**: every out-of-limits reply was
 refused by the honest `cp_prove`, so `cp_verify` never judged an out-of-limits proof.
 - PR #51: one swap then greedy continuation proved and accepted `WITHIN LIMITS` 15/16 (float second
   choice) and 13/16 (random token) under shipped limits `C=9244130 theta=323343 cap=1`.
