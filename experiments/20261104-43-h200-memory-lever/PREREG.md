@@ -69,3 +69,4 @@ No published H200 measurement of this prover is known. B200 is excluded: binarie
 
 ## Amendments
 - 2026-11-04 02:40 UTC. C-B (H100, batch 24, in-step 12) ended at start-up with `p258 end 1 cuda-call`, 0 of 120 proofs, before any batch. Per the fallback fixed at registration, the H100 gets one more B-arm session at in-step 8 (CB4, seed 4) after CA3. No other change.
+- 2026-11-04 03:00 UTC. Exploratory, added after seeing data, labelled exploratory everywhere, enters no pass/fail: the boxes' CPU quotas differ (H100 cgroup 30.7 cores, H200 23.0 cores; upstream bound 24 CPUs of the GPU's NUMA node). After CB4 the H100 runs one session (CX5, seed 5, 24/6) bound with taskset to 23 CPUs of the GPU's NUMA node, to match the H200's quota. It tests whether the CPU budget, not the GPU, sets the rate.
