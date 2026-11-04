@@ -3,14 +3,18 @@
 Status: **desk feasibility only**. No build, no proof, no GPU, no weights downloaded (config, index,
 model card and the JSON headers of the 18 shards only). Pre-registration, runs and env manifest:
 [experiments/20261103-11-qwen38-27b-feasibility/](../../../experiments/20261103-11-qwen38-27b-feasibility/)
-(PREREG committed before any script). Issue #11. Base: `ae70e447b57f0f466c5012c88c9e41bf5a9d5712`.
+(PREREG committed before any script). Issue #11. Registration base: `ae70e447b57f0f466c5012c88c9e41bf5a9d5712`;
+the branch was later rebased onto `29907e5f` and merged with main `1879c8fe`. Every repository doc cited
+below is byte-identical across the three (empty `git diff`); main only added
+`research/operators/qwen_deltanet/`, which this write-up does not cite.
 
 **Verdict.** Qwen3.8-27B is the best *first* real-model port of the three candidates (Qwen3.8-27B,
 GLM-5.3-Flash, DeepSeek-V4.1-Flash): it is dense (no routing), its committed integer weights are 6.7 %
-of the Maverick shape FlashProve already proves, and it needs 7 new operator families against 11 for
+of the Maverick shape FlashProve already proves, and by the family count in section 4 (a judgement;
+the GLM and DeepSeek lists come from unmerged notes) it needs 7 new operator families against 11 for
 GLM and 12 for DeepSeek. It is **not** a loader patch. Three quarters of its layers are Gated DeltaNet
 linear attention, a recurrent state that FlashProve has no relation for; that one family is the
-whole risk, and it is the same core risk as GLM's Kimi Delta Attention (Qwen's is the simpler,
+main research risk (the other new constraints in section 2 are real work too), and it is the same core risk as GLM's Kimi Delta Attention (Qwen's is the simpler,
 scalar-decay case). Pre-registered threshold: **PASS**
 ([RESULTS.md](../../../experiments/20261103-11-qwen38-27b-feasibility/RESULTS.md)).
 
@@ -48,7 +52,7 @@ Sources, all pinned:
 | DeltaNet gates | `beta = sigmoid(in_proj_b x)`; `g = -exp(A_log) * softplus(in_proj_a x + dt_bias)`, scalar per head per token; state decays by `exp(g)` | L605-607 |
 | DeltaNet q/k | L2-normalised per head (`use_qk_l2norm_in_kernel=True`), q scaled by 1/sqrt(128) | L280-283, L329-334, L449-455 |
 | DeltaNet recurrence | `S <- S * exp(g_t)`; `delta = beta_t (v_t - S^T k_t)`; `S <- S + k_t delta^T`; `o_t = S^T q_t` (FP32 state) | L466-478 (recurrent), L287-421 (chunked, chunk 64, triangular solve) |
-| DeltaNet output | gated RMSNorm per head (dim 128): `RMSNorm(o) * w * SiLU(z)`, `z = in_proj_z x` (6,144), then out_proj 6,144 -> 5,120 | L204-220, L641-645 |
+| DeltaNet output | gated RMSNorm per head (dim 128): `RMSNorm(o) * w * SiLU(z)`, `z = in_proj_z x` (6,144), then out_proj 6,144 -> 5,120 | L204-220 (norm), L557 (`z`), L644-646 (gated norm call) |
 | MLP | SwiGLU, intermediate 17,408, SiLU | `intermediate_size`, `hidden_act`; L811-825 |
 | norm | pre-norm RMSNorm, eps 1e-6, zero-centred gain `x * (1 + w)` | L828-845, L848-900 |
 | extras outside a text port | 1 MTP layer (424.7M params); 27-layer ViT (460.7M params) | config; tensor names |
@@ -85,7 +89,8 @@ standard parameter form in [verifier/docs/parameter-file.md](../../../verifier/d
   integer values exactly, which with per-step rounding it will not; so the prover is constrained to
   the sequential form or to a relation designed around chunks from the start.
 - **Witness size.** If every per-token state is committed: 48 layers x 48 heads x 128 x 128 =
-  37.7M cells per token, 38.7B per 1,024-token window. That is larger than Qwen's own committed
+  37.7M cells per token, 38.7B per 1,024-token window (per request; a batch of B requests has B
+  times as many). That is larger than Qwen's own committed
   weights (26.9B) and roughly 10x a Maverick window's intermediate values (**estimate**: about 70K
   values per layer per token from the section 6-7 shapes, so ~3.4B per window; not counted from the
   prover's actual layout). Committing only chunk-boundary states (chunk 64) cuts this to 0.60B cells, but then
@@ -110,7 +115,7 @@ Counted from the shard headers (5 identical runs, `runs/SHA256SUMS`):
 | total parameters | 27.78B (incl. 0.46B vision, 0.42B MTP) | ~400.7B committed set |
 | committed set (decoder + embedding + head) | **26.90B** | 400.71B |
 | ratio | **0.067** | 1 |
-| per-token matrix MACs (decoder + head) | 25.6B (all dense) | 16.1B (top-1 routed + shared) |
+| per-token matrix MACs (2-D decoder matrices + head) | 25.6B (all dense) | 16.1B (top-1 routed + shared) |
 | ratio | **1.59** | 1 |
 
 Integer footprint under FlashProve's format: every committed entry outside Emb is in
@@ -123,21 +128,37 @@ Does commit + prove fit one H100 80 GB + host RAM? **Estimate, not measured:**
 
 - *Host RAM.* Maverick committing peaked at 299.6 GB, serving at 269.7 GB. Scaling the
   weight-proportional part by 0.067 suggests committing well under 64 GB and serving under 64 GB of
-  host memory for the weights, *before* the DeltaNet state witness. With per-token state committed
-  (38.7B cells per window, at least 2 B each), one request adds ~80 GB of witness: still a
-  single-host job (the GPU run in research/gpu had a ~684 GiB container), but the state, not the
+  host memory for the weights, *before* the DeltaNet state witness. With per-token state committed,
+  each of the 38.7B cells per window must pass the 2^18 smallness test, i.e. lie in (-2^18, 2^18),
+  which needs at least 19 bits: ~2.4 B packed, 4 B in any aligned layout. One request then adds
+  **~92 GB (packed) to ~155 GB (4 B cells)** of witness (**estimate**). That fits one host (the GPU
+  run in research/gpu had a ~684 GiB container) **only at batch 1**. At the 24-per-batch setting
+  used for the prove-cost estimate below it is 24 x 92..155 GB = **~2.2..3.7 TB**, which does not
+  fit that host. A single-host claim at batch 24 therefore assumes chunk-boundary commitment
+  (0.60B cells per request, ~1.4..2.4 GB; ~34..58 GB at batch 24) or a streamed commitment that does
+  not hold the whole per-token witness at once; neither exists yet. Either way the state, not the
   weights, decides the host size.
 - *GPU.* 56 GB of integer weights alone would fit in 80 GB, but the Maverick prover does not keep
   weights resident (it cannot at 800 GB), so the existing streaming design applies; the GPU peak in
   the small synthetic run was reached during commit (74 GB sampled, research/gpu). No reason to
   expect Qwen not to fit one H100; not shown.
 - *Prove cost (estimate, scaled from the timed runs: 111.23 ± 0.92 tok/s steady at 24 per batch on
-  one H100).* If cost scales with per-token matrix work, Qwen is 1.59 times the work: about **70
-  tok/s** at 24 per batch. That is a lower bound on time. The DeltaNet witness is the unknown: if
-  per-token state cells are committed and cost scales with committed cells, the witness per window
-  is ~10x Maverick's intermediate values (estimate above) and the rate could fall to **single-digit tok/s**. Chunk-boundary
-  commitment plus intra-chunk recomputation would sit in between. The range spans an order of
-  magnitude; the first milestones exist to narrow it.
+  one H100).* This is a **single-assumption point estimate, not a bound**. Assumption: prove cost
+  scales with per-token matrix MACs (Maverick counted with top-1 routed + shared experts). Under it
+  Qwen is 1.59 times the work: 111.23 / 1.587 ≈ **70 tok/s** at 24 per batch. Alternative
+  assumptions, not modelled, move it in different directions:
+  - if cost tracks committed or opened weights instead (26.9B vs 400.7B), Qwen is *faster*, not
+    slower;
+  - full-attention cost is not modelled: by config numbers Qwen has 16 layers x 24 heads x dh 256 =
+    98,304 score MACs per query/key pair against 48 x 40 x 128 = 245,760 for Maverick, but dh 256 is
+    outside the current `dh <= 128` standard form and rotary table, and the cost of a dh-256
+    attention sub-proof has not been measured;
+  - the DeltaNet witness. If per-token state cells are committed and cost scales with committed
+    cells, the per-window work is about (3.4B + 38.7B) / 3.4B ≈ 12x Maverick's intermediate values,
+    so 111 / 12 ≈ **9 tok/s** (single digit). This is itself an estimate built on the unsourced
+    ~70K values per layer per token above. Chunk-boundary commitment plus intra-chunk recomputation
+    would sit in between.
+  The range spans an order of magnitude; the first milestones exist to narrow it.
 - *Verify.* Proof size and `cp_verify` time scale with the number of sub-proofs and lookups, not
   weights; extra layer types and a recurrence sub-proof add to both. No estimate given.
 
@@ -145,9 +166,14 @@ Does commit + prove fit one H100 80 GB + host RAM? **Estimate, not measured:**
 
 GLM and DeepSeek facts are from the prior port-feasibility research (pinned revisions
 `46a050bec13002ad29ee795c16e61cf4fa3c4a9c` and `314113f8a7dadb388215396ba5fbee2c610a04d6`) and their
-configs (SHA-256 in ENV.json), not re-derived. Counting rule, fixed before tallying: one family = one
-new kind of constraint or table in the integer relation; a new size of an existing gadget is not a
-family. GLM and DeepSeek counts are lower bounds.
+configs (copies in `experiments/…/sources/`, SHA-256 in ENV.json), not re-derived. The two configs
+back the architecture rows of the table (layers, width, vocab, experts, top-k). The GLM and DeepSeek
+family *lists* (11, 12) come from the prior feasibility notes, which are not on main; the counts are
+therefore a **judgement against unmerged notes**, not traceable to merged evidence. Counting rule:
+one family = one new kind of constraint or table in the integer relation; a new size of an existing
+gadget is not a family. This rule was written in this section, after registration and after the
+counting script, in the same commit as RESULTS; PREREG.md Amendment A1 records that. GLM and
+DeepSeek counts are lower bounds.
 
 | | Qwen3.8-27B | GLM-5.3-Flash | DeepSeek-V4.1-Flash |
 |---|---|---|---|

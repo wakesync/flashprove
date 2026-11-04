@@ -56,3 +56,29 @@ No performance measurement is made in this lane, so the >=10-run perf rule does 
 
 ## Amendments
 (empty at registration)
+
+Amendments are recorded after the fact, in response to the independent review of PR #28. Nothing
+above this section has been edited; the registered text stands as committed in `d0dab1d8`.
+
+- **A1 (2026-11-04T08:55Z). Family-counting rule for threshold (a) was written after registration.** The
+  registered Metric 3 says only "distinct operator families ... that have no counterpart". The
+  operational rule used for the tally ("one family = one new kind of constraint or table in the
+  integer relation; a new size of an existing gadget is not a family") first appears in
+  `research/ports/qwen3.8-27b/FEASIBILITY.md` section 4, in the results commit `b02890af`
+  (2026-11-03T23:31Z), after the counting script `a6a6b811`. The earlier wording "fixed before
+  tallying" in FEASIBILITY.md and RESULTS.md was therefore not a pre-registration claim and has been
+  corrected. Consequence: threshold (a) was judged under a rule chosen after registration, by the
+  same author who did the tally. That weakens (a); it is reported as **(a): holds, judged under a
+  post-registration counting rule (not a pre-registered test)**. Threshold (b) is unaffected: its
+  metric (Metric 2) is fully specified above and was computed as registered.
+- **A2 (2026-11-04T08:55Z). Evidence path for the GLM / DeepSeek counts.** Metric 3 says the GLM-5.3-Flash and
+  DeepSeek-V4.1-Flash counts are "taken from the prior feasibility notes and their pinned sources".
+  The two pinned configs are now committed in `sources/` (SHA-256 identical to ENV.json, re-fetched
+  at the pinned revisions). The prior feasibility notes themselves are not on main, so the family
+  lists (11, 12) remain a judgement against unmerged notes; (a) is labelled accordingly and is not a
+  claim for `claims.json` until that evidence is merged.
+- **A3 (2026-11-04T08:55Z). Per-token MAC figure renamed, not part of either threshold.** `count_params.py` now
+  reports `per_token_matrix_macs_text` as 2-D text matrices + head only (25,621,954,560); the earlier
+  figure, which also counted norm gains, A_log/dt_bias and conv1d taps (25,624,600,064), is kept as
+  `per_token_macs_text_incl_gains_and_conv_taps`. The 5 runs were re-run (byte-identical, new output
+  SHA-256 in ENV.json). Parameter counts and the (b) ratio are unchanged.

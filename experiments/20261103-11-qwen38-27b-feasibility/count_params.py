@@ -73,8 +73,13 @@ def main():
         shapes.setdefault(re.sub(r"\.\d+\.", ".N.", k), [dt, s])
     text = sum(v for g, v in groups.items() if g.startswith("text."))
     committed = text + groups["embedding"] + groups["head"]
-    # per-token matrix multiply-accumulates of the text path (every text matrix once + head once)
-    per_token = text + groups["head"]
+    # per-token multiply-accumulates of the text path. Matrix MACs count only 2-D text tensors
+    # (every decoder matrix once) plus the head; 1-D norm gains, A_log/dt_bias and the 3-D conv1d
+    # taps are excluded. The older figure (all text elements + head) is kept under an explicit name.
+    text_matrix = sum(math.prod(s) for k, (dt, s) in tensors.items()
+                      if group(k).startswith("text.") and len(s) == 2)
+    per_token = text_matrix + groups["head"]
+    per_token_incl = text + groups["head"]
     mav_total, mav_tok = maverick_committed()
     out = {
         "repo": REPO,
@@ -88,6 +93,7 @@ def main():
         "params_text_decoder": text,
         "params_committed_text": committed,
         "per_token_matrix_macs_text": per_token,
+        "per_token_macs_text_incl_gains_and_conv_taps": per_token_incl,
         "maverick_committed_from_docs_model_md": mav_total,
         "maverick_per_token_matrix_macs": mav_tok,
         "ratio_committed_qwen_over_maverick": round(committed / mav_total, 6),
