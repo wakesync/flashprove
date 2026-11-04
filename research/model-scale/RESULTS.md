@@ -114,6 +114,39 @@ The log_len 21 spread (41.6 to 78.1 s) and the jump between log_len 18 and 19 in
 contention (load average about 33 on 16 vCPUs at sweep end; other lanes ran concurrently). Treat
 the per-size numbers as indicative to within about 2x.
 
+### Repeat timings, n=10 [measured, unreplicated]
+
+`repeat.py`: 8 points (the 6 proved d=128 points plus one each at log_len 17 and 18), 10 runs each,
+same seed-7 fixture (sha256 per row) and the same `run.bin` (sha256 in ENV.json). Runs are
+interleaved round-robin, 3 at a time on pinned cores 8..10, at most 2 log_len-21 points at once.
+The 1-min load average is sampled before and after every run (2.2 to 6.9 on 16 vCPUs, against
+about 33 for the original sweep). Hostile provers are skipped (`--skip-hostile-provers`) because
+they were exercised in the sweep and in the review rerun. The 24 static mutations ran and were
+rejected in all 80 runs. 80/80 ok. Raw rows: `results/repeat-t10.jsonl`; summary:
+`results/repeat-t10-summary.json`; table: `repeat_table.py`.
+
+| d | T | bits | log_len | n ok | prove s median | SD | min | max | sweep single run | verify s median | SD | min | max | sweep single run | proof bytes | RSS MiB median (min..max) | load1 min..max |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 32 | 1 | 12 | 17 | 10/10 | 2.38 | 0.09 | 2.22 | 2.48 | 2.92 | 0.240 | 0.019 | 0.203 | 0.269 | 0.229 | 16896 | 295 (295..295) | 2.7..5.5 |
+| 64 | 1 | 8 | 18 | 10/10 | 4.96 | 0.28 | 4.63 | 5.53 | 4.82 | 0.732 | 0.064 | 0.673 | 0.906 | 0.716 | 18224 | 672 (672..672) | 2.8..5.5 |
+| 128 | 1 | 4 | 19 | 10/10 | 10.57 | 0.48 | 9.83 | 11.29 | 16.12 | 1.752 | 0.086 | 1.631 | 1.845 | 1.686 | 20160 | 1374 (1374..1374) | 2.8..6.9 |
+| 128 | 2 | 4 | 20 | 10/10 | 21.46 | 0.62 | 20.61 | 22.41 | 21.60 | 3.655 | 0.170 | 3.429 | 4.038 | 3.311 | 21192 | 2696 (2696..2696) | 3.0..5.9 |
+| 128 | 1 | 8 | 20 | 10/10 | 20.84 | 0.86 | 20.09 | 22.79 | 29.95 | 3.434 | 0.179 | 3.219 | 3.772 | 3.613 | 21264 | 2603 (2603..2603) | 3.3..6.9 |
+| 128 | 4 | 4 | 21 | 10/10 | 43.06 | 1.53 | 42.34 | 46.28 | 45.47 | 7.177 | 0.527 | 6.637 | 8.516 | 7.193 | 21648 | 5331 (5331..5331) | 2.7..5.9 |
+| 128 | 2 | 8 | 21 | 10/10 | 43.35 | 2.05 | 41.90 | 48.09 | 44.11 | 7.119 | 0.515 | 6.677 | 8.214 | 6.705 | 22000 | 5144 (5144..5144) | 3.0..5.6 |
+| 128 | 1 | 12 | 21 | 10/10 | 41.12 | 1.65 | 39.37 | 44.13 | 63.22 | 5.207 | 0.275 | 4.857 | 5.709 | 10.372 | 21968 | 4335 (4335..4335) | 2.2..5.6 |
+
+- Repeat spread is tight: prove SD is 2 to 5% of the median. For **3 of the 8 points the
+  original single-run prove value lies far outside the n=10 range**: d=128 T=1 4-bit 16.12 s vs
+  9.83..11.29, T=1 8-bit 29.95 vs 20.09..22.79, and T=1 12-bit 63.22 vs 39.37..44.13. The 12-bit
+  verify is 10.37 vs 4.86..5.71. Those single-run values were contention, and these medians
+  replace them. The repeat medians agree with the review rerun (12-bit T=1: 38.1 to 40.5 s).
+- Proof bytes are identical across all repeats and match the sweep.
+- RSS is identical within a point. It is 5 to 6% below the sweep, which is consistent with the sweep's max RSS also
+  including the hostile-prover passes (not separately measured).
+- Same host class as the original, lower load. This is still not an exclusive machine, and the
+  numbers have not been independently replicated.
+
 Least-squares fit on points with log_len >= 14 [calculated from measured; time slopes are
 inflated by contention: the review's lower-load rerun at log_len <= 19 gave prove 1.042 and
 verify 1.113]:
@@ -243,7 +276,9 @@ layer-token at 12 bits (fit). That changes the deployment story at least as much
 Reading: even the recurrence alone for one layer, one token, at 12 bits is a 2^26.15 column table
 that the prover pads to **2^27** (log_len 27). Scaling linearly by padded length from the largest
 measured point gives about **352 GiB RSS** and about **0.8 h** single-thread prove at the toy
-target (the fit against padded length gives 256 GiB / 1.4 h). That is more than 8x this VM's
+target (the fit against padded length gives 256 GiB / 1.4 h). From the n=10 repeat median
+(43.06 s at the same 2^21 point) the linear-padded prove is 0.77 h. From honest-only RSS (5,331 MiB,
+without hostile passes) the linear-padded memory is 333 GiB. That is more than 8x this VM's
 30 GiB. RSS follows the padded length and is deterministic, so the memory bracket is the robust
 part; the hour figures come from contended single-run timings and are order-of-magnitude only.
 The earlier "~230 to 245 GiB / 0.6 to 1.2 h" scaled by real columns and ignored padding; it was
@@ -276,7 +311,8 @@ All of this is pre-standards / exploratory, measured, unreplicated.
 ## Limits
 
 Pre-standards: no PREREG, no pre-registered threshold. One seed. The sweep is one run per
-point; repeat variance (n=10) exists only for the 8 points in the repeat table. Shared VM with other lanes running;
+point. Repeat variance (n=10) exists only for the 8 points in the repeat table; the other 69
+points' seconds are single contended runs. Shared VM with other lanes running;
 toy soundness target; synthetic inputs; public prepared inputs; numpy reference, not kernel
 equivalence; projections/conv/norms not lowered; state continuity across separately proved
 chunks not covered.
@@ -295,6 +331,21 @@ python3 research/model-scale/repeat_table.py
 Raw rows: `results/sweep_t10.jsonl`, `results/fidelity.csv`, `results/fidelity-relative.csv`,
 `results/degeneracy-d128.json`, `results/repeat-t10.jsonl` (one row per repeat run); derived:
 `results/summary.json`, `results/repeat-t10-summary.json`.
+
+## Revisions after review (2026-11-04, PR #42 must-fixes)
+
+1. Pre-standards / exploratory / measured, unreplicated banner (top).
+2. n=10 repeat timings for 8 points (table above). Single-run sweep seconds are demoted with a
+   caveat.
+3. Extrapolation against the padded `2^log_len`. 12-bit T=1 is L=27: about 352 GiB / 0.8 h,
+   replacing 245 GiB / 0.56 h.
+4. Relative fidelity and quantization degeneracy (`fidelity_rel.py`). 4-bit and 8-bit d=128
+   outputs are marked degenerate, and the Verdict is restricted to 12-bit T=1.
+5. Env manifest at `experiments/20261103-11-glm-kda-model-scale/ENV.json`. The original
+   `research/model-scale/ENV.json` is kept unchanged.
+6. Results ledger tooling is absent on main, so there is no `research/results.yaml` entry (see
+   the PR body).
+7. origin/main merged (merge commit).
 
 ## Totals [measured]
 
