@@ -62,3 +62,48 @@ The derived-ID runs are a diagnostic only: they never count as acceptance (the I
 - `measurements.json` (55 records, full stdout lines of interest, stderr, sha256 of stdout per run)
 - `summary.json` (per-case n, sum, median, population SD, min, max)
 - `ENV.json`
+
+## Follow-up regression and interpretation correction
+
+At test revision `7318acfb`, ran:
+
+```sh
+python3 verifier/tests/fiat_shamir_binding_test.py
+```
+
+Exit 0, entire last line:
+
+```text
+fiat_shamir_binding_test: expected outcomes, 55 pairs; 0/50 semantic mutations accepted; deferred y binding reproduced (5/5)
+```
+
+The fresh run uses the same production/diagnostic binaries and exactly the registered
+11 cases x 5 pairs. It is same-lane repeatability, not independent review or new attack
+coverage. Wall time 222.6 seconds is diagnostic only, not a speed comparison. The fresh
+raw records, per-case statistics, full binary hashes and command are in
+`regression/measurements.json`, `regression/summary.json`, `regression/ENV.json`.
+The prior raw results remain unchanged.
+
+Fresh-run results: 55/55 baselines accept; 0/50 semantic mutations and 0/5 controls
+accept. At the fixed published ID, the three semantic config cases reject 15/15;
+at the diagnostic changed IDs, the first challenge changes 5/5 for each of those
+cases and for the control. Four request-word cases change the challenge 5/5 each.
+Caller-y mutation leaves it unchanged 5/5, with later rejection. Production and
+trace outcomes agree for all 55 baseline/mutation pairs (110 arm comparisons).
+Each per-case Boolean indicator has n=5, population SD=0, median=min=max: acceptance
+0; measured challenge change 1 for config/request cases and 0 for y. Values not
+reached are null, not successes or zero-valued challenge observations.
+
+The regression test asserts those exact expected observations, including y's
+exception. Thus the **regression test passes**, while the registered universal
+**early-binding hypothesis fails**. The fixed-ID no-accept clause passes. The
+corrected paper analysis also does not infer Fenzi Proposition 5.5 from the plan
+hash and explicitly accounts for its prefix-based, rather than all-challenges-only,
+attack. These are corrections to interpretation, not new successful forgeries.
+
+Fixture acceptance receipt: ID
+`79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183`,
+exit 0, last line `YES`, covered `r=60 e=64 T=64`, policy exact-match. Full `covered:`,
+`commitment:`, `proof of work:` and `result-v1` lines are preserved in
+`regression/baseline-receipt.txt`. These are this synthetic fixture's outcomes only;
+the printed bits are not a claimed security level.
