@@ -1,0 +1,1 @@
+coin_keys_test: 238 checks as expected, 0 otherwise

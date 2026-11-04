@@ -1,0 +1,2 @@
+0 - 1 = 0xffffffff00000000 in the verifier's field, 0xffffffff00000000 in blocks/
+psc_twin_test: ok (trees of 2 to 32 leaves; 115 changed scalars and as many changed mask entries noticed)

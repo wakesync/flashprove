@@ -1,0 +1,1 @@
+a stage's record of its accounting: 163 checks, 0 failed: all as expected

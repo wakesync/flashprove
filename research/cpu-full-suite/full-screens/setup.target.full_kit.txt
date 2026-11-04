@@ -1,0 +1,1 @@
+pack_layout.py: 2565 rows over F, 25 rows over E, 5419 blocks

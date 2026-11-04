@@ -1,0 +1,29 @@
+# PREREG: 20261103-7-cpu-commit
+Issue: #7. Lane: cpu-commit-profile. Date (UTC): 2026-11-03. Base commit: 29907e5fbe648b9ec246cebf9d757511a751fca2.
+
+## Hypothesis
+An output-preserving change to the largest actionable CPU hotspot in commit/prover work reduces the median CPU-reachable workload time by at least 5%, with non-overlapping observed ranges.
+
+## Metric
+Elapsed wall seconds (steady clock) for a fixed CPU-reachable commit/prover workload, one pinned CPU thread. Also report process CPU seconds and stage times. First establish reachability by source inspection, profile unmodified code using gprof or unprivileged sampling and stage timers, then freeze exactly one candidate and the primary workload in a dated amendment before changing production code. Distinguish actual small-example host configuration from the library's smaller synthetic reference-prover fixture. No CPU reference timing will be called an end-to-end cp_commit or cp_prove measurement. Rank hotspots with counts/time and state unmeasured GPU regions explicitly.
+
+## Acceptance threshold
+PASS only if candidate maximum wall time is strictly less than baseline minimum AND median reduction is at least 5%, on at least 10 timed runs per arm. Every deterministic serialized proof/commitment artifact reached by the experiment must be byte-identical (SHA-256 plus byte comparison) across arms. Checks must still accept honest outputs and reject tested mutations. GPU output equivalence is not claimed without a GPU run. If only CPU-only code changes, state that and do not claim GPU benefit.
+
+## Kill criterion
+No GPU or paid API use. Stop after 90 minutes of CPU experiment work or if a useful reachable candidate cannot be isolated. Stop expensive reference fixtures if one call exceeds 120 seconds or 4 GiB RSS; report the reachability limit rather than reduce security parameters silently. A failed performance threshold is FAIL; inability to run a preregistered comparison or correctness failure is KILLED. No second candidate after looking at A/B outcomes.
+
+## Runs
+At least 10 measured runs per arm, two untimed warmups per arm. Pairs alternate AB, BA, AB, BA, continuing through ten pairs (20 measured calls). Fixed deterministic test fixture and seeds. No outlier removal; include all completed planned calls. Exclude warmups and profiling-instrumented binaries from primary measurements. Keep failed/incomplete calls separately and report any invalid comparison. No compilation concurrently with timings. Record affinity, flags, toolchain, hardware, load, source revisions and seeds in ENV.json and raw results. Report median, sample SD, min/max for each arm. Additional seeds and sanitizers are correctness-only.
+
+## Prior art
+This repository already provides a CPU reference engine and shared protocol routines in blocks/, while cp_commit/cp_prove are CUDA programs. Its frame tests generate and verify synthetic key, entry and request files. PR #27 optimized exact arithmetic shared by configuration; its profiling method and prior negative accounting-reuse trial motivate measurement rather than assuming hashing dominates. Existing GPU receipts in research/gpu identify approximately 18.8 s commitment and 2.35 s proving for one small synthetic run, not CPU attribution. Relevant implementation references are blocks/README.md, blocks/engine/engine_cpu.h, blocks/frame/check_key.h, prover/hash_commitment/hf_commit.cu and hf_commit_once.cuh. This experiment is implementation engineering, not a new proof system or cryptographic claim.
+
+## Amendments
+
+### 2026-11-03, candidate freeze after baseline discovery, before production edits
+The exact small GPU example's host setup is CPU-reachable through cp_with_configured. Its 256 x 8,388,608-symbol weight table alone requires 16 GiB in IndexCpu, exceeding the registered 4 GiB budget. Therefore the primary workload is the existing smaller reference fixture: seam_file(4), toy_model(3, {}), 100 matrix rows, seed offset 0; two table commitments, make_key, make_entry, then prove_batch for three requests. Its parameters and security target are unchanged from existing tests. Primary metric: reference.cpp total_generate, excluding validation and artifact writes. Secondary commit metric is configure + tables + make_key + make_entry. This is not the real model reply prover. Real small-example host setup is profiled separately, not an end-to-end comparison.
+
+Ten generation-only gprof runs rank self samples: BLAKE2b compression 31.90% (4.45 s), CPU encoding 25.73% (3.59 s), hash byte-feed 7.31% (1.02 s, 145,296,350 calls), two-digest construction 5.59% (0.78 s). These are instrumentation-relative samples, not uninstrumented wall attribution. Full baseline stage logs and top 75 symbols are in profiles/. Compression is already explicitly round-unrolled; rewriting it into ISA-specific intrinsics would be a larger, higher-risk experiment. Encoding uses a different GPU implementation. The selected single low-risk common-host candidate is a direct little-endian append for HasherT::push_u64 when eight bytes fit in its pending block, retaining finished-state and total-length checks. Cross-block appends use the existing generic path; CUDA device code remains unchanged. No other production optimization is allowed in this trial.
+
+Run both non-profiled binaries with identical O2, fno-ipa-modref, C++17, pthread, BLK_FIELD=2 and GLIBCXX_ASSERTIONS flags on CPU 13. Ten AB/BA pairs after two warmups per arm, seed 0. Additional seeds 1 through 5 are correctness-only. Compare roots, key, entry and all three proof files byte-for-byte and by SHA-256. Add direct word-vs-byte hash-feed tests across block boundaries and finished-state refusals, run existing hash/tree/code tests, and run sanitizer checks. The acceptance threshold and no-outlier/no-second-candidate rules are unchanged. No inference from this CPU result to GPU performance or GPU proof-byte identity is permitted.

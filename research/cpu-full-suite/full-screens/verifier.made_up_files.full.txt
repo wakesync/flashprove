@@ -1,0 +1,25 @@
+zero bytes, -key: status 1: 3 lines: NO: key-refused
+zero bytes, -key -show-stages: status 1: NO: key-refused
+zero bytes, -leaf: status 1: 3 lines: NO: entry-refused
+zero bytes, -leaf -show-stages: status 1: NO: entry-refused
+zero bytes, whole: status 1: 3 lines: NO: key-refused
+zero bytes, whole -show-stages: status 1: NO: key-refused
+zero bytes, whole: all three stages ran: 52 lines
+zero bytes, whole, no -id: no ID is shown: not-shown-without-id
+the planning call id: status 4: PLAN ONLY: no proof was checked
+the whole call with the files' own ID: each stage computes it: status 1: NO: key-refused
+one ID in all four calls: 64acb69a82e9a2c1f73a8ab3ea852413670a155f5942a8fd633855292145b1a7
+-key with the files' own ID: status 1: NO: key-refused
+-key with another ID: status 1: NO: model-statement
+-key -show-stages with another ID: status 1: NO: model-statement
+-leaf with another ID: status 1: NO: model-statement
+-leaf -show-stages with another ID: status 1: NO: model-statement
+whole with another ID: status 1: NO: model-statement
+whole -show-stages with another ID: status 1: NO: model-statement
+another root, another ID: status 4
+the planning call id on a key.bin that is a head alone: refused, and no digest is printed: status 1: NO: key-refused
+bytes ff, -key: status 1: NO: key-refused | key: the record's answers
+bytes ff, -leaf: status 1: NO: key-refused | key: the record's answers
+bytes ff, whole: status 1: NO: key-refused | key: the record's answers
+a key file of zero bytes, a leaf file of bytes ff, -leaf: status 1: NO: entry-refused | entry: the record's answers (head, root and answers)
+made_up_files_test: ok

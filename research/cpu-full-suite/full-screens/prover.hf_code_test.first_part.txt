@@ -1,0 +1,139 @@
+ln = 1: the points differ, none is 0, neighbours are z and -z: ok
+ln = 2: the points differ, none is 0, neighbours are z and -z: ok
+ln = 5: the points differ, none is 0, neighbours are z and -z: ok
+ln = 9: the points differ, none is 0, neighbours are z and -z: ok
+ln = 8, m = 0: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 1: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 2: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 3: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 4: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 5: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 6: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 7: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 8, m = 8: f_m, .. are equal exactly on the run: 0 positions otherwise: ok
+ln = 3: the table of the run 0 of height ln is the transform's table: 0 of 8 words differ; negative control: a changed word is counted: ok
+ln = 7: the table of the run 0 of height ln is the transform's table: 0 of 128 words differ; negative control: a changed word is counted: ok
+ln = 10: the table of the run 0 of height ln is the transform's table: 0 of 1024 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 0: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 0: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 1: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 1: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 4: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 4: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 7: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 7: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 9: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 1 coefficients, m = 9: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 0: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 0: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 1: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 1: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 4: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 4: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 7: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 7: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 9: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 3 coefficients, m = 9: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 0: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 0: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 1: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 1: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 4: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 4: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 7: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 7: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 9: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 77 coefficients, m = 9: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 0: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 0: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 1: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 1: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 4: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 4: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 7: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 7: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 9: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 255 coefficients, m = 9: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 0: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 0: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 1: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 1: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 4: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 4: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 7: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 7: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 9: fold and short sum give Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 9, 257 coefficients, m = 9: fold, then the layers with the runs' tables: Enc_F: 0 of 512 words differ; negative control: a changed word is counted: ok
+ln = 1: position_factors_host(): 0 of 40 words differ; negative control: a changed word is counted: ok
+ln = 1, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 1, m = 0: run_high(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 1, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 1, m = 1: run_high(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 2: position_factors_host(): 0 of 80 words differ; negative control: a changed word is counted: ok
+ln = 2, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 2, m = 0: run_high(): 0 of 4 words differ; negative control: a changed word is counted: ok
+ln = 2, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 2, m = 1: run_high(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 7: position_factors_host(): 0 of 280 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 0: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 1: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 5: run_table_entry(): 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 5: run_high(): 0 of 4 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 7: run_table_entry(): 0 of 128 words differ; negative control: a changed word is counted: ok
+ln = 7, m = 7: run_high(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 12: position_factors_host(): 0 of 480 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 0: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 1: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 5: run_table_entry(): 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 5: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 7: run_table_entry(): 0 of 128 words differ; negative control: a changed word is counted: ok
+ln = 12, m = 7: run_high(): 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 24: position_factors_host(): 0 of 960 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 0: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 1: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 5: run_table_entry(): 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 5: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 7: run_table_entry(): 0 of 128 words differ; negative control: a changed word is counted: ok
+ln = 24, m = 7: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 33: position_factors_host(): 0 of 1320 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 0: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 1: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 5: run_table_entry(): 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 5: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 7: run_table_entry(): 0 of 128 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 7: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 34: position_factors_host(): 0 of 1360 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 0: run_table_entry(): 0 of 1 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 0: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 1: run_table_entry(): 0 of 2 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 1: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 5: run_table_entry(): 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 5: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 7: run_table_entry(): 0 of 128 words differ; negative control: a changed word is counted: ok
+ln = 34, m = 7: run_high(): 0 of 64 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 20: run_table_entry() at three entries of every layer: 0 of 60 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 20: run_high(), all weights: 0 of 4096 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 27: run_table_entry() at three entries of every layer: 0 of 81 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 27: run_high(), all weights: 0 of 32 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 30: run_table_entry() at three entries of every layer: 0 of 90 words differ; negative control: a changed word is counted: ok
+ln = 33, m = 30: run_high(), all weights: 0 of 4 words differ; negative control: a changed word is counted: ok
+position_of(): (o0 + 2^32 o1) mod 2^ln at ln = 31, 32, 33: ok
+hf_f_values() at the length 2^33, I = 0: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^33, I = 1: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^33, I = 4294967295: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^33, I = 4294967296: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^33, I = 4294967297: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^33, I = 8589934591: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^32, I = 2147483647: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^32, I = 2147483648: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+hf_f_values() at the length 2^32, I = 2147483649: the known answer of code_test_values.py: 0 of 3 words differ; negative control: a changed word is counted: ok
+part 2 needs a build by nvcc and a GPU: not run
+0 of 137 checks failed

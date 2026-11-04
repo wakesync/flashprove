@@ -1,0 +1,6 @@
+the-document-prints-the-same-commands: 6 lines in the section's blocks (without 'unset'), 6 in the script's list; in only one of the two: none (if none and yet not as expected: the order differs, or a line is repeated): as expected
+the-document-states-the-expected-result: the script expects exit status 0 and 'YES'; words not found in the section: none: as expected
+the-three-files-name-the-same-compiler: nvcc in the script: 13.2.86; nvcc in the section: 13.2.86; nvcc in check_nvcc_version.sh: 13.2.86: as expected
+the-script-cites-the-section's-heading: the script cites '3. GPU: a small model'; the section begins ['## 3. GPU: a small model']: as expected
+the-build-prints-the-warning-that-the-script-quotes: the script looks in the build's output for a line that begins 'build.sh: warning: the programs get no rpath'; prover/build.sh should have an echo of a line that begins so: as expected
+quickstart_gpu_test.py: 5 as expected, 0 otherwise

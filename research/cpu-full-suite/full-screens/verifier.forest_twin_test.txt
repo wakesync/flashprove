@@ -1,0 +1,4 @@
+0 - 1 = 0xffffffff00000000 in the verifier's field, 0xffffffff00000000 in blocks/
+chain: the chain's salt is missing
+chain: the chain's salt is missing
+forest_twin_test: ok (13 worlds: 7600 slots, 717 claims; in each, a host that forgets one kind of claims is refused by name, another padding number and every changed mask entry are noticed; 3 worlds with a call of nothing but padding refused by both texts)

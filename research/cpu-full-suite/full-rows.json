@@ -1,0 +1,747 @@
+{
+  "rows": [
+    {
+      "classification": "passed",
+      "name": "verifier.sanitized_walk",
+      "seconds": 1437.0,
+      "exit": 0,
+      "detail": "sanitized_walk_test.sh: field 2: no report, 4 of 4 controls reported: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "build.make_model",
+      "seconds": 3.7,
+      "exit": 0,
+      "detail": ""
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.weights_twin_test",
+      "seconds": 5.2,
+      "exit": 0,
+      "detail": "weights_twin_test: ok (36 worlds, 588 units, 680940 cells, 4360560 places without a cell; 4152 check"
+    },
+    {
+      "classification": "passed",
+      "name": "kit.small_model",
+      "seconds": 13.1,
+      "exit": 0,
+      "detail": "wrote 47 tensors, 38 of them committed, to <WORK>/shared/small_mod"
+    },
+    {
+      "classification": "passed",
+      "name": "tools.pack_layout.refusals",
+      "seconds": 1.7,
+      "exit": 0,
+      "detail": "pack_layout_refusals_test.py: 45 cases: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "build.npsc_checks",
+      "seconds": 19.2,
+      "exit": 0,
+      "detail": "psc_rows.sh: 2 of 2 checkers built"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.field_setting_test",
+      "seconds": 2.7,
+      "exit": 0,
+      "detail": "field_setting_test, setting 2: all passed"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.forest_twin_test",
+      "seconds": 42.7,
+      "exit": 0,
+      "detail": "forest_twin_test: ok (13 worlds: 7600 slots, 717 claims; in each, a host that forgets one kind of cl"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.masking_cells_test",
+      "seconds": 1.0,
+      "exit": 0,
+      "detail": "masking_cells_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.gate_children",
+      "seconds": 41.6,
+      "exit": 0,
+      "detail": "ALL AS EXPECTED"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.psc_twin_test",
+      "seconds": 9.4,
+      "exit": 0,
+      "detail": "psc_twin_test: ok (trees of 2 to 32 leaves; 115 changed scalars and as many changed mask entries not"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.numa_pin_test",
+      "seconds": 0.3,
+      "exit": 0,
+      "detail": "numa_pin_test: 12 cases: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "sources.quickstart_gpu",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": "quickstart_gpu_test.py: 5 as expected, 0 otherwise"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.coins_known_test",
+      "seconds": 4.0,
+      "exit": 0,
+      "detail": "coins_known_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.hf_code_test.first_part",
+      "seconds": 1.7,
+      "exit": 0,
+      "detail": "0 of 137 checks failed"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.code_test_values",
+      "seconds": 0.3,
+      "exit": 0,
+      "detail": "code_test_values.py: 9 cases; 0 of them do not stand in prover/hash_commitment/tests/hf_code_test.cu"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.hiding_coins",
+      "seconds": 0.4,
+      "exit": 0,
+      "detail": "hiding_coins.py: 0 of its own known answers do not hold"
+    },
+    {
+      "classification": "passed",
+      "name": "build.verifier",
+      "seconds": 86.6,
+      "exit": 0,
+      "detail": "THE VERIFIER IS BUILT: <REPO>/bin/cp_verify"
+    },
+    {
+      "classification": "passed",
+      "name": "scales.table_ties",
+      "seconds": 63.0,
+      "exit": 0,
+      "detail": "OK: 26 checks"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.coins_known_host_test",
+      "seconds": 11.7,
+      "exit": 0,
+      "detail": "coins_known_host_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.parameter_file_one_bits_test",
+      "seconds": 4.0,
+      "exit": 0,
+      "detail": "parameter_file_one_bits_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.forest_values",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": "forest_values.py: 472 lines made again, 0 differ from the file"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.hf_params_test",
+      "seconds": 2.7,
+      "exit": 0,
+      "detail": "148 checks, 0 differ"
+    },
+    {
+      "classification": "passed",
+      "name": "commit.exchanged_directories",
+      "seconds": 6.1,
+      "exit": 0,
+      "detail": "exchanged_directories_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "sources.dangerous_calls",
+      "seconds": 18.7,
+      "exit": 0,
+      "detail": "dangerous_calls_test.py: 38 samples as expected, 0 finding(s)"
+    },
+    {
+      "classification": "passed",
+      "name": "sources.run_suite",
+      "seconds": 90.2,
+      "exit": 0,
+      "detail": "run_suite_test.py: 65 checks as expected, 0 otherwise"
+    },
+    {
+      "classification": "passed",
+      "name": "tools.lean_verify.claim",
+      "seconds": 0.3,
+      "exit": 0,
+      "detail": "read_claim_test.py: 4 stored examples: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.spool_clear_test",
+      "seconds": 21.5,
+      "exit": 0,
+      "detail": "spool_clear_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "toy.mask_rules",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": "mask_rules.py: field 2: 3 known answers at the full threshold take a second try"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.hc_chacha_test",
+      "seconds": 0.4,
+      "exit": 0,
+      "detail": "all 36 tests passed"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.coin_keys",
+      "seconds": 4.3,
+      "exit": 0,
+      "detail": "coin_keys_test: 238 checks as expected, 0 otherwise"
+    },
+    {
+      "classification": "passed",
+      "name": "scales.policy_tables",
+      "seconds": 55.4,
+      "exit": 0,
+      "detail": "OK"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.hmac_sha256_test",
+      "seconds": 1.6,
+      "exit": 0,
+      "detail": "hmac_sha256_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "build.verifier.target",
+      "seconds": 88.1,
+      "exit": 0,
+      "detail": "THE VERIFIER IS BUILT: <WORK>/shared/bin-target-f2/cp_verify"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.coins_rfc8439_test",
+      "seconds": 0.7,
+      "exit": 0,
+      "detail": "coins_rfc8439_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.not_checked_names",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": "ALL AS EXPECTED"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.pending_row",
+      "seconds": 8.9,
+      "exit": 0,
+      "detail": "pending_row_test: 6 records: ok"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.link_door",
+      "seconds": 34.0,
+      "exit": 0,
+      "detail": "link_door_test: 200 runs: ok"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.parameter_file_one_place_test",
+      "seconds": 4.3,
+      "exit": 0,
+      "detail": "parameter_file_one_place_test: passes"
+    },
+    {
+      "classification": "in part",
+      "name": "tools.confine",
+      "seconds": 3.7,
+      "exit": 77,
+      "detail": "confine_test: 29 checks as expected, 0 otherwise; not run: a signal; the second level with the kerne"
+    },
+    {
+      "classification": "passed",
+      "name": "commit.left_working_names",
+      "seconds": 7.5,
+      "exit": 0,
+      "detail": "left_working_names_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.coin_keys.values",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": ""
+    },
+    {
+      "classification": "passed",
+      "name": "tools.lean_verify.script",
+      "seconds": 145.5,
+      "exit": 0,
+      "detail": "lean_verify_test.sh: 346 calls: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "sources.folder_look_copies",
+      "seconds": 3.8,
+      "exit": 0,
+      "detail": "folder_look_copies_test.py: 33 copies of open_above(), others_can_change() and available_memory(), a"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.make_model_failures_test",
+      "seconds": 4.6,
+      "exit": 0,
+      "detail": "make_model_failures_test: 6 scenes: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "build.verifier.unit",
+      "seconds": 90.3,
+      "exit": 0,
+      "detail": ""
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.forest_attention",
+      "seconds": 86.6,
+      "exit": 0,
+      "detail": "hc_parts_test.sh: hc_forest_attention_test: all as expected; the output is in <WORK>"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.kit_rounds_second",
+      "seconds": 9.4,
+      "exit": 0,
+      "detail": "kit_rounds_second.py: 3 kits: 1219 stored lines, 403 computed: 397 the same, 6 known to claim less, "
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.la_equals_lt",
+      "seconds": 0.1,
+      "exit": 1,
+      "detail": "NO: shape-la"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.plan_tau",
+      "seconds": 3.5,
+      "exit": 0,
+      "detail": "plan_tau_test.py: 13 cases: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "setup.target.small_kit",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": "pack_layout.py: 670 rows over F, 7 rows over E, 720 blocks"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.commitment_id.examples",
+      "seconds": 8.2,
+      "exit": 0,
+      "detail": "commitment_id_test.py: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.served.form",
+      "seconds": 29.0,
+      "exit": 0,
+      "detail": "served_form_test.py: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.rejected_proofs",
+      "seconds": 28.3,
+      "exit": 0,
+      "detail": "10 altered sets: all rejected"
+    },
+    {
+      "classification": "passed",
+      "name": "commit.walked_parents",
+      "seconds": 3.0,
+      "exit": 0,
+      "detail": "walked_parents_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.format_hash",
+      "seconds": 7.1,
+      "exit": 0,
+      "detail": "all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.kit_rounds",
+      "seconds": 3.9,
+      "exit": 0,
+      "detail": "kit_rounds_test.py: 3 kits, 1219 kinds of rounds; 0 kits not as stored"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.one_chain_shell",
+      "seconds": 5.4,
+      "exit": 0,
+      "detail": "ok"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.record_altered_sets.example",
+      "seconds": 32.0,
+      "exit": 0,
+      "detail": "record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all "
+    },
+    {
+      "classification": "passed",
+      "name": "prover.batch_opening_test",
+      "seconds": 30.0,
+      "exit": 0,
+      "detail": "batch_opening_test: ok (9 views)"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.hf_record_test",
+      "seconds": 1.6,
+      "exit": 0,
+      "detail": "34 checks, 0 fail"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.plan_record",
+      "seconds": 2.2,
+      "exit": 0,
+      "detail": "a stage's record of its accounting: 163 checks, 0 failed: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.public_weights_test",
+      "seconds": 4.5,
+      "exit": 0,
+      "detail": "public_weights_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.ws_build_fuzz",
+      "seconds": 32.1,
+      "exit": 0,
+      "detail": "  refused w-shape-mW: 9059"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.hash_test",
+      "seconds": 1.0,
+      "exit": 0,
+      "detail": "hash_test: passes"
+    },
+    {
+      "classification": "passed",
+      "name": "tools.audit.coins",
+      "seconds": 0.3,
+      "exit": 0,
+      "detail": "draw                 as the known answer"
+    },
+    {
+      "classification": "passed",
+      "name": "setup.target.full_kit",
+      "seconds": 0.2,
+      "exit": 0,
+      "detail": "pack_layout.py: 2565 rows over F, 25 rows over E, 5419 blocks"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.example_kits",
+      "seconds": 37.4,
+      "exit": 0,
+      "detail": "example_kits_test.py: 7 parameter files (1 bare, 5 work, 1 yes), 12 plays with a line changed; 0 not"
+    },
+    {
+      "classification": "passed",
+      "name": "prover.guards_stand",
+      "seconds": 57.2,
+      "exit": 0,
+      "detail": "ALL AS EXPECTED"
+    },
+    {
+      "classification": "passed",
+      "name": "tools.parser.small",
+      "seconds": 64.6,
+      "exit": 0,
+      "detail": "parser_test.py: accepted-proof: 3 files, 24 damaged originals, 33 damaged parsed, order and seeds fi"
+    },
+    {
+      "classification": "passed",
+      "name": "sources.format_vectors",
+      "seconds": 0.3,
+      "exit": 0,
+      "detail": "format-vectors.txt: 227 lines, as format_rules.py prints them"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.req_chain_test",
+      "seconds": 30.1,
+      "exit": 0,
+      "detail": "req_chain_test: ok (36 runs had to be refused)"
+    },
+    {
+      "classification": "passed",
+      "name": "new.cp_plan_files",
+      "seconds": 10.5,
+      "exit": 0,
+      "detail": "cp_plan_files.py: 11 files: all as expected"
+    },
+    {
+      "classification": "passed",
+      "name": "examples.protocol_toy_false_files",
+      "seconds": 104.3,
+      "exit": 0,
+      "detail": "stored_false_test.py: all 12 false files refused and all 4 honest files accepted, each with the word"
+    },
+    {
+      "classification": "passed",
+      "name": "t-s8_model",
+      "seconds": 35.0,
+      "exit": 0,
+      "detail": "the model prints the stored file"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.call_accounting.examples",
+      "seconds": 31.2,
+      "exit": 0,
+      "detail": "call_accounting_test.py: 33 lines of the plan's accounting, 0 not as in the call"
+    },
+    {
+      "classification": "passed",
+      "name": "driver.measure_rate",
+      "seconds": 65.1,
+      "exit": 0,
+      "detail": "OK"
+    },
+    {
+      "classification": "passed",
+      "name": "integrations.unit",
+      "seconds": 218.6,
+      "exit": 0,
+      "detail": "1961 passed, 3 skipped, 20 deselected in 217.50s (0:03:37)"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.record_altered_sets.full",
+      "seconds": 331.2,
+      "exit": 0,
+      "detail": "record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all "
+    },
+    {
+      "classification": "passed",
+      "name": "new.first_look",
+      "seconds": 54.2,
+      "exit": 0,
+      "detail": "<WORK>/new.first_look/w/look/bent.proof: 577340 bytes: an opening "
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.extreme_files.full",
+      "seconds": 127.9,
+      "exit": 0,
+      "detail": "extreme_files_test.py: 1951 calls on 1883 files: planned 101, refused 1850, usage 0; fault 0, not-ch"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.hostile_leaf_files",
+      "seconds": 111.0,
+      "exit": 0,
+      "detail": "hostile_leaf_files_test.py: 186 changed sets, 372 calls: 186 refused, 0 NOT REFUSED, 0 otherwise; th"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.openings_left_out",
+      "seconds": 57.5,
+      "exit": 0,
+      "detail": "openings_left_out_test.py: 117 changed sets, 117 calls: 117 refused, 0 NOT REFUSED, 0 otherwise; the"
+    },
+    {
+      "classification": "passed",
+      "name": "second_writings.honest",
+      "seconds": 295.1,
+      "exit": 0,
+      "detail": "ALL AS EXPECTED: 32 honest files accepted; 255 altered copies and 2 bent entries refused; each judge"
+    },
+    {
+      "classification": "passed",
+      "name": "blocks.tests",
+      "seconds": 1035.3,
+      "exit": 0,
+      "detail": "run_new.py: passed: tests"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.made_up_files.small",
+      "seconds": 12.3,
+      "exit": 0,
+      "detail": "made_up_files_test: ok"
+    },
+    {
+      "classification": "not run",
+      "name": "verifier.clang_build",
+      "seconds": 0.1,
+      "exit": 77,
+      "detail": "not run: clang_build_test.sh: there is no clang++ on this machine, clang++ --version fails, or the p"
+    },
+    {
+      "classification": "passed",
+      "name": "integrations.cp_verify",
+      "seconds": 138.6,
+      "exit": 0,
+      "detail": "68 passed in 137.92s (0:02:17)"
+    },
+    {
+      "classification": "in part",
+      "name": "weight_sums",
+      "seconds": 87.0,
+      "exit": 77,
+      "detail": "run_tests: every step that ran passed; 13 skipped"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.extreme_files",
+      "seconds": 28.8,
+      "exit": 0,
+      "detail": "extreme_files_test.py: 2141 calls on 2073 files: planned 116, refused 2025, usage 0; fault 0, not-ch"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.made_up_files.full",
+      "seconds": 36.7,
+      "exit": 0,
+      "detail": "made_up_files_test: ok"
+    },
+    {
+      "classification": "passed",
+      "name": "verifier.made_up_files.work",
+      "seconds": 11.3,
+      "exit": 0,
+      "detail": "made_up_files_test: ok"
+    }
+  ],
+  "counts": {
+    "passed": 89,
+    "in part": 2,
+    "not run": 1
+  },
+  "copied_screens_match_original": {
+    "new.first_look.txt": true,
+    "blocks.tests.txt": true,
+    "tools.pack_layout.refusals.txt": true,
+    "verifier.sanitized_walk.txt": true,
+    "prover.hc_chacha_test.txt": true,
+    "prover.coins_known_host_test.txt": true,
+    "weight_sums.txt": true,
+    "verifier.made_up_files.work.txt": true,
+    "verifier.call_accounting.examples.txt": true,
+    "prover.coins_known_test.txt": true,
+    "verifier.clang_build.txt": true,
+    "prover.coin_keys.values.txt": true,
+    "build.verifier.target.txt": true,
+    "verifier.req_chain_test.txt": true,
+    "verifier.kit_rounds_second.txt": true,
+    "verifier.la_equals_lt.txt": true,
+    "verifier.openings_left_out.txt": true,
+    "verifier.served.form.txt": true,
+    "verifier.made_up_files.small.txt": true,
+    "verifier.made_up_files.full.txt": true,
+    "verifier.forest_twin_test.txt": true,
+    "build.npsc_checks.txt": true,
+    "prover.hf_code_test.first_part.txt": true,
+    "tools.parser.small.txt": true,
+    "driver.measure_rate.txt": true,
+    "sources.folder_look_copies.txt": true,
+    "tools.confine.txt": true,
+    "verifier.psc_twin_test.txt": true,
+    "prover.batch_opening_test.txt": true,
+    "kit.small_model.txt": true,
+    "build.verifier.txt": true,
+    "examples.protocol_toy_false_files.txt": true,
+    "verifier.commitment_id.examples.txt": true,
+    "setup.target.full_kit.txt": true,
+    "prover.spool_clear_test.txt": true,
+    "prover.gate_children.txt": true,
+    "tools.lean_verify.claim.txt": true,
+    "prover.hf_record_test.txt": true,
+    "verifier.forest_values.txt": true,
+    "sources.run_suite.txt": true,
+    "prover.public_weights_test.txt": true,
+    "verifier.pending_row.txt": true,
+    "commit.left_working_names.txt": true,
+    "prover.hmac_sha256_test.txt": true,
+    "verifier.format_hash.txt": true,
+    "verifier.link_door.txt": true,
+    "commit.walked_parents.txt": true,
+    "prover.coin_keys.txt": true,
+    "verifier.field_setting_test.txt": true,
+    "build.make_model.txt": true,
+    "verifier.extreme_files.txt": true,
+    "sources.format_vectors.txt": true,
+    "tools.lean_verify.script.txt": true,
+    "verifier.kit_rounds.txt": true,
+    "verifier.ws_build_fuzz.txt": true,
+    "verifier.hiding_coins.txt": true,
+    "commit.exchanged_directories.txt": true,
+    "verifier.weights_twin_test.txt": true,
+    "build.verifier.unit.txt": true,
+    "tools.audit.coins.txt": true,
+    "toy.mask_rules.txt": true,
+    "prover.masking_cells_test.txt": true,
+    "prover.hf_params_test.txt": true,
+    "verifier.rejected_proofs.txt": true,
+    "sources.quickstart_gpu.txt": true,
+    "verifier.one_chain_shell.txt": true,
+    "verifier.not_checked_names.txt": true,
+    "scales.policy_tables.txt": true,
+    "prover.numa_pin_test.txt": true,
+    "integrations.cp_verify.txt": true,
+    "prover.coins_rfc8439_test.txt": true,
+    "new.cp_plan_files.txt": true,
+    "scales.table_ties.txt": true,
+    "verifier.plan_tau.txt": true,
+    "verifier.record_altered_sets.example.txt": true,
+    "second_writings.honest.txt": true,
+    "t-s8_model.txt": true,
+    "setup.target.small_kit.txt": true,
+    "verifier.extreme_files.full.txt": true,
+    "verifier.plan_record.txt": true,
+    "prover.make_model_failures_test.txt": true,
+    "prover.hash_test.txt": true,
+    "prover.parameter_file_one_place_test.txt": true,
+    "verifier.forest_attention.txt": true,
+    "verifier.record_altered_sets.full.txt": true,
+    "integrations.unit.txt": true,
+    "prover.parameter_file_one_bits_test.txt": true,
+    "verifier.hostile_leaf_files.txt": true,
+    "verifier.example_kits.txt": true,
+    "prover.code_test_values.txt": true,
+    "sources.dangerous_calls.txt": true,
+    "prover.guards_stand.txt": true
+  }
+}

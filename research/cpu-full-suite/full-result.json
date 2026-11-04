@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "-u",
+    "run_suite.py",
+    "cpu",
+    "<WORK>",
+    "--jobs",
+    "4"
+  ],
+  "head": "133da749937115883c95edfc4b6e372c16209449",
+  "exit": 77,
+  "start": 1793730519.6723483,
+  "seconds": 4370.889450311661,
+  "work": "<WORK>",
+  "free_after": 6752911360
+}
