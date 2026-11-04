@@ -1,0 +1,1 @@
+read_claim_test.py: 4 stored examples: all as expected

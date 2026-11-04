@@ -1,0 +1,16 @@
+make: Entering directory '<repo>/blocks'
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . hash/tests/functions_test.cpp -o <repo>/scratch/tests/f2h1/hash/tests/functions_test.bin
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . hash/tests/calls_test.cpp -o <repo>/scratch/tests/f2h1/hash/tests/calls_test.bin
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . hash/tests/mode_test.cpp -o <repo>/scratch/tests/f2h1/hash/tests/mode_test.bin
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . hash/tests/older_test.cpp -o <repo>/scratch/tests/f2h1/hash/tests/older_test.bin
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . hash/tests/word_feed_test.cpp -o <repo>/scratch/tests/f2h1/hash/tests/word_feed_test.bin
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . code/tests/code_test.cpp -o <repo>/scratch/tests/f2h1/code/tests/code_test.bin
+g++-13 -std=c++17 -O2 -Wall -Wextra -fno-ipa-modref -DBLK_FIELD=2 -DBLK_HASH=1 -I . tree/tests/tree_test.cpp -o <repo>/scratch/tests/f2h1/tree/tests/tree_test.bin
+f2h1 hash/tests/calls_test: the compressions of the hash's calls, 181 checks: all as README.md says
+f2h1 hash/tests/functions_test: 14 known values of BLAKE2b: all met
+f2h1 hash/tests/older_test: the hash modes of older.h, 149 checks: all passed
+f2h1 hash/tests/word_feed_test: ok 811403 word-feed checks
+f2h1 code/tests/code_test: code_test (BLK_FIELD=2): 510 shapes: ok
+f2h1 tree/tests/tree_test: tree_test: all passed
+f2h1 hash/tests/mode_test: the hash of hash.h (BLAKE2b), 2968 checks: all passed
+make: Leaving directory '<repo>/blocks'

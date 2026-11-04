@@ -1,0 +1,1 @@
+not run: clang_build_test.sh: there is no clang++ on this machine, clang++ --version fails, or the program of that name is not clang (it does not define __clang__)

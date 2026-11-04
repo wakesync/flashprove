@@ -1,0 +1,2 @@
+toy layout: 34 units, m_0 = 4768 rows, 2^8 columns
+pending_row_test: 6 records: ok

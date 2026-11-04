@@ -1,0 +1,1 @@
+coins_known_test: passes

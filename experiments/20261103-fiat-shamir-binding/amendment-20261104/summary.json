@@ -1,0 +1,132 @@
+{
+  "range-end-legal-y0": {
+    "baseline_accept": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "mutation_accept": {
+      "n": 5,
+      "sum": 0,
+      "median": 0,
+      "sd_population": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "build_verdict_agreement": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "first_challenge_changed": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "as_expected": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "production_verdicts": [
+      [
+        1,
+        "NO: proof-refused"
+      ]
+    ]
+  },
+  "layout-missing": {
+    "baseline_accept": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "mutation_accept": {
+      "n": 5,
+      "sum": 0,
+      "median": 0,
+      "sd_population": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "build_verdict_agreement": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "first_challenge_changed": null,
+    "as_expected": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "production_verdicts": [
+      [
+        1,
+        "NO: plan-layout"
+      ]
+    ]
+  },
+  "layout-empty": {
+    "baseline_accept": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "mutation_accept": {
+      "n": 5,
+      "sum": 0,
+      "median": 0,
+      "sd_population": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "build_verdict_agreement": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "first_challenge_changed": null,
+    "as_expected": {
+      "n": 5,
+      "sum": 5,
+      "median": 1,
+      "sd_population": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "production_verdicts": [
+      [
+        1,
+        "NO: plan-layout"
+      ]
+    ]
+  }
+}

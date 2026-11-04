@@ -1,0 +1,48 @@
+none.kit: the kit unchanged: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+none.asked-above: the kit unchanged, in a call that requests 129 bits, one above its line sec: status 1, ['security-bits']; expected: the refusal security-bits: as expected
+profile.prof-19: prof 19 and nothing else: status 1, ['policy-profile']; expected: the refusal policy-profile: as expected
+routed-experts.NE-0: NE 0 and nothing else: status 1, ['header-absent-class']; expected: the refusal header-absent-class: as expected
+routed-experts.dense: NE 0 with all that follows from it: no router, no experts' weight kinds, no clamps, no digest lines; the layout file made again: status 4, not met: ('routed-experts', 'both-clamps', 'table-digests'), the one-time files: ('a record', 'a record'); expected: not met: routed-experts, both-clamps, table-digests: as expected
+routed-experts.dense-with-digests: the same with the kit's digest lines: status 1, ['policy-tables']; expected: the refusal policy-tables: as expected
+routed-experts.dense-with-gcl: the same with the line gcl 1: status 1, ['policy-gcl']; expected: the refusal policy-gcl: as expected
+routed-experts.dense-with-rcl: the same with the line rcl 1: status 1, ['policy-rcl']; expected: the refusal policy-rcl: as expected
+five-limbs.no-xl: no line xl; the layout file made again: status 4, not met: ('five-limbs',), the one-time files: ('a record', 'a record'); expected: not met: five-limbs: as expected
+both-clamps.no-gcl: no line gcl, its two segments removed from the call lines, the lines iota_q fitted, the table digest lines computed again; the layout file made again: status 4, not met: ('both-clamps',), the one-time files: ('a record', 'a record'); expected: not met: both-clamps: as expected
+both-clamps.no-rcl: no line rcl, its two segments removed from the call lines, the lines iota_q fitted, the table digest lines computed again; the layout file made again: status 4, not met: ('both-clamps',), the one-time files: ('a record', 'a record'); expected: not met: both-clamps: as expected
+prompt-source.toksrc-0: toksrc 0: status 1, ['statement-required']; expected: the refusal statement-required: as expected
+prompt-source.toksrc-2: toksrc 2: status 1, ['statement-required']; expected: the refusal statement-required: as expected
+placement-table.no-layout: no layout file: status 1, ['plan-layout']; expected: the refusal plan-layout: as expected
+table-digests.no-lines: none of the tables' digest lines: status 4, not met: ('table-digests',), the one-time files: ('a record', 'a record'); expected: not met: table-digests: as expected
+table-digests.silu-altered: one bit of the last word of the SiLU table's digest: status 1, ['table-digest-silu']; expected: the refusal table-digest-silu: as expected
+table-digests.sigmoid-altered: one bit of a word of the second table's digest: status 1, ['table-digest-sigmoid']; expected: the refusal table-digest-sigmoid: as expected
+table-digests.rope-altered: one bit of a word of the rotary tables' digest: status 1, ['table-digest-rope']; expected: the refusal table-digest-rope: as expected
+table-digests.exp-altered: one bit of the last word of the softmax table's digest: status 1, ['table-digest-exp']; expected: the refusal table-digest-exp: as expected
+table-digests.last-missing: the last of the digest lines missing: status 1, ['policy-tables']; expected: the refusal policy-tables: as expected
+table-digests.two-swapped: two of the digest lines in the other order: status 1, ['policy-tables']; expected: the refusal policy-tables: as expected
+table-digests.behind-a-call: the digest lines behind the first line call: status 1, ['policy-tables']; expected: the refusal policy-tables: as expected
+no-range-words.eg-7: a line eg 7, the table digest lines computed again: status 4, not met: ('no-range-words',), the one-time files: ('a record', 'a record'); expected: not met: no-range-words: as expected
+no-range-words.smax-2047: a line smax 2047, the table digest lines computed again: status 4, not met: ('no-range-words',), the one-time files: ('a record', 'a record'); expected: not met: no-range-words: as expected
+three-bytes.S-32: S 32: status 1, ['af-policy-wd']; expected: the refusal af-policy-wd: as expected
+three-bytes.S-44: S 44: status 1, ['af-policy-wd']; expected: the refusal af-policy-wd: as expected
+ring-degree.D-32: D 32: status 4, not met: ('ring-degree',), the one-time files: ('a record', 'a record'); expected: not met: ring-degree: as expected
+one-placement.stream: two blocks of the residual stream exchanged in the last layer link: status 4, not met: ('one-placement',), the one-time files: ('a record', 'a record'); expected: not met: one-placement: as expected
+one-placement.control: two blocks of the residual stream exchanged in every layer link: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+one-placement.stream-halves: the first block of the residual stream written as its two halves in the last layer link: status 4, not met: ('one-placement',), the one-time files: ('a record', 'a record'); expected: not met: one-placement: as expected
+one-placement.halves-control: the first block of the residual stream written as its two halves in every layer link: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+softmax-table.S-11: S 11, the table digest lines computed again: status 4, not met: ('softmax-table',), the one-time files: ('a record', 'a record'); expected: not met: softmax-table: as expected
+softmax-table.S-13: S 13, the table digest lines computed again: status 4, not met: ('softmax-table',), the one-time files: ('a record', 'a record'); expected: not met: softmax-table: as expected
+softmax-table.rx-7: rx 7, the table digest lines computed again: status 4, not met: ('softmax-table',), the one-time files: ('a record', 'a record'); expected: not met: softmax-table: as expected
+rotary-table.theta: theta_0 3,675,548,936, the table digest lines computed again: status 4, not met: ('rotary-table',), the one-time files: ('a record', 'a record'); expected: not met: rotary-table: as expected
+rotary-table.control: theta_0 500,000, the table digest lines computed again: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+norm-shifts.first-norm: M = K - 1 in the first norm of layer 1: status 4, not met: ('norm-shifts',), the one-time files: ('a record', 'a record'); expected: not met: norm-shifts: as expected
+norm-shifts.second-norm: M = K - 1 in the second norm of the last layer: status 4, not met: ('norm-shifts',), the one-time files: ('a record', 'a record'); expected: not met: norm-shifts: as expected
+norm-shifts.last-norm: MF = KF - 1, the norm before the head: status 4, not met: ('norm-shifts',), the one-time files: ('a record', 'a record'); expected: not met: norm-shifts: as expected
+norm-shifts.control: M = K in the first norm of layer 1: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+two-codes.batch: the lines group folded and stages folded have the values of omega's: a batch's test on the table has one code: status 4, not met: ('two-codes',), the one-time files: ('a record', 'a record'); expected: not met: two-codes: as expected
+two-codes.one-time: the lines group once-folded and stages once-folded have the values of once-omega's: the key's test on the table has one code: status 4, not met: ('two-codes',), the one-time files: ('a record', 'a record'); expected: not met: two-codes: as expected
+two-codes.both: both of these: status 4, not met: ('two-codes',), the one-time files: ('a record', 'a record'); expected: not met: two-codes: as expected
+two-codes.control: the group folded has omega's code length and its own message length: still two codes: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+one-shift.first-group: sh 11 in layer 1 only; the layout file made again: status 4, not met: ('one-shift',), the one-time files: ('a record', 'a record'); expected: not met: one-shift: as expected
+one-shift.last-group: sh 11 in layer 5 only; the layout file made again: status 4, not met: ('one-shift',), the one-time files: ('a record', 'a record'); expected: not met: one-shift: as expected
+one-shift.control: sh 11 in all layers of the last block of layers; the layout file made again: status 4, not met: (), the one-time files: ('a record', 'a record'); expected: met: as expected
+served_form_test.py: all as expected

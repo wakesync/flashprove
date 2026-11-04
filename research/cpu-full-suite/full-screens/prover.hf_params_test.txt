@@ -1,0 +1,20 @@
+(expected: w-shape-lk) the parameter file is not admitted: w-shape-lk: lkW must be from 4 to 18
+(expected: version-word-other-format) the parameter file is not admitted: version-word-other-format: the parameter file's line version has a word of another format; these programs cannot read any file of that format, and the commitment must be made again with these programs
+(expected: version-word-other-format) the parameter file is not admitted: version-word-other-format: the parameter file's line version has a word of another format; these programs cannot read any file of that format, and the commitment must be made again with these programs
+(expected: version-word-other-format) the parameter file is not admitted: version-word-other-format: the parameter file's line version has a word of another format; these programs cannot read any file of that format, and the commitment must be made again with these programs
+(expected: version-word-other-format) the parameter file is not admitted: version-word-other-format: the parameter file's line version has a word of another format; these programs cannot read any file of that format, and the commitment must be made again with these programs
+(expected: version-word-other-format) the parameter file is not admitted: version-word-other-format: the parameter file's line version has a word of another format; these programs cannot read any file of that format, and the commitment must be made again with these programs
+(expected: version-word) the parameter file is not admitted: version-word: the line version must be 825374792, the word of this build, whose digests have 8 words
+(expected: version-word) the parameter file is not admitted: version-word: the line version must be 825374792, the word of this build, whose digests have 8 words
+hf: lk=18 m0=3076096 ly=22 R=2048 lcl=7 l=393740288 i0=402653184 nm=44040191 KD=446693375 ld=29 lc=29 ln=33 hb=139 fhb=131 | leafd=6
+hf: lk=8 m0=4768 ly=13 R=8 lcl=5 l=152576 i0=196608 nm=32767 KD=229375 ld=18 lc=18 ln=20 hb=132 fhb=16 | leafd=2
+hf: lk=8 m0=4768 ly=13 R=128 lcl=1 l=9536 i0=10240 nm=2047 KD=12287 ld=14 lc=14 ln=15 hb=132 fhb=16 | leafd=2
+hf: lk=8 m0=4768 ly=13 R=8 lcl=5 l=152576 i0=152832 nm=255 KD=153087 ld=18 lc=18 ln=20 hb=132 fhb=16 | leafd=2
+hf: lk=8 m0=4768 ly=13 R=8 lcl=5 l=152576 i0=262144 nm=4095 KD=266239 ld=18 lc=19 ln=20 hb=132 fhb=16 | leafd=2
+hf: lk=8 m0=4768 ly=13 R=8 lcl=5 l=152576 i0=196608 nm=65535 KD=262143 ld=18 lc=18 ln=20 hb=132 fhb=16 | leafd=2
+hf: lk=8 m0=4768 ly=13 R=64 lcl=2 l=19072 i0=24576 nm=4095 KD=28671 ld=15 lc=15 ln=17 hb=132 fhb=16 | leafd=2
+hf: lk=8 m0=4768 ly=13 R=8 lcl=5 l=152576 i0=196608 nm=32767 KD=229375 ld=18 lc=18 ln=20 hb=132 fhb=16 | leafd=0
+hf: lk=11 m0=59392 ly=16 R=256 lcl=3 l=475136 i0=524288 nm=65535 KD=589823 ld=19 lc=20 ln=23 hb=139 fhb=16 | leafd=6
+hf: lk=11 m0=59392 ly=16 R=256 lcl=3 l=475136 i0=524288 nm=65535 KD=589823 ld=19 lc=20 ln=23 hb=139 fhb=131 | leafd=6
+hf: lk=11 m0=59392 ly=16 R=1024 lcl=1 l=118784 i0=131072 nm=32767 KD=163839 ld=17 lc=18 ln=21 hb=139 fhb=131 | leafd=6
+148 checks, 0 differ

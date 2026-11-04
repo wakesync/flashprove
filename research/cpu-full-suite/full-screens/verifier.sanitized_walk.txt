@@ -1,0 +1,24 @@
+control_read: reported, as expected
+control_copy: reported, as expected
+control_shift: reported, as expected
+control_index: reported, as expected
+pinned_no_proof_of_work: the kit's own file: planned by the call with -arrays: True, by all three calls: True; 894 MB, 14.5 s, least sum 120.78
+pinned_no_proof_of_work forms: 1163 files, 14 of them planned by the call with -arrays
+pinned_no_proof_of_work walk: 20 steps of 16 files, 72 planned by the call with -arrays, 55 by all three calls
+dear | 942 MB | 15.9 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001397.walk-14.txt | last change stages once-folded#2=5
+dear | 935 MB | 15.5 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001320.walk-9.txt | last change group once-folded#4=13
+dear | 935 MB | 14.1 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001346.walk-11.txt | last change stages once-own#5=14
+dear | 935 MB | 13.9 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001335.walk-10.txt | last change stages once-ranges#4=20
+dear | 934 MB | 15.3 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001482.walk-19.txt | last change stages folded#6=0,work smallness#4=1
+dear | 929 MB | 15.7 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001455.walk-18.txt | last change work sample#3=2
+dear | 924 MB | 15.9 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001454.walk-18.txt | last change work sample#4=1
+dear | 911 MB | 15.9 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001403.walk-14.txt | last change work closeness#2=16
+dear | 908 MB | 17.3 s | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001317.walk-9.txt | last change group once-own#6=4,ranges-part=12
+least sum | 120.76 bits at 128 asked | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001317.walk-9.txt | last change group once-own#6=4,ranges-part=12
+least sum | 120.78 bits at 128 asked | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001178.walk-0.txt | last change eps1_lo=16384,work sample#3=1
+least sum | 120.78 bits at 128 asked | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001186.walk-1.txt | last change work sample#3=2
+least sum | 120.78 bits at 128 asked | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001192.walk-1.txt | last change work field#2=0
+least sum | 120.78 bits at 128 asked | <WORK>/verifier.sanitized_walk/w/walk/pinned_no_proof_of_work/001208.walk-2.txt | last change table#4=262140
+parameter_walk.py: 1484 files; fault 0, unchecked 0, slow 0, large 0; 0 report files that are not on the bound on memory
+extreme_files_test.py: 2141 calls on 2073 files: planned 116, refused 2025, usage 0; fault 0, not-checked 0, slow 0, honest calls not as expected 0
+sanitized_walk_test.sh: field 2: no report, 4 of 4 controls reported: all as expected

@@ -1,0 +1,9 @@
+matches   with the high half of t forced to 0, H is BLAKE2b-512 on the list's bytes, L = 0 .. 300 (hashlib)
+matches   a different number, the plain routine, a list longer by a zero word, a shorter list: five distinct states
+matches   TH: 8, 9 and 128 words: one call of H under 10
+matches   TH: 129 words: two pieces under 10, the list of their digests under 11
+matches   TH: a list and the list of the digests of its pieces have different values
+57 lines checked, 0 with a different answer
+matches   the vector file of digests of 8 words has 44 lines of H and 13 of TH
+matches   its lines are those that --vectors prints, in their order
+all as expected

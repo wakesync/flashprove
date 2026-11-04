@@ -1,0 +1,6 @@
+ws_build_fuzz: 300000 shapes: 20545 built (719024 units; the most rows 4194304 = 2^22.00)
+  refused internal-shape-moe: 19415
+  refused shape-D: 58966
+  refused shape-words: 129953
+  refused w-shape-lk: 62062
+  refused w-shape-mW: 9059

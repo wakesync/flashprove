@@ -1,0 +1,80 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 23.00      0.49     0.49  4376840     0.00     0.00  blk::Big::divmod(blk::Big const&, blk::Big const&, blk::Big&, blk::Big&)
+ 11.74      0.74     0.25 56649440     0.00     0.00  blk::Limbs::copy_from(blk::Limbs const&)
+  9.39      0.94     0.20 14513790     0.00     0.00  blk::Big::shr(unsigned long) const
+  7.98      1.11     0.17  8104650     0.00     0.00  blk::operator*(blk::Big const&, blk::Big const&)
+  7.04      1.26     0.15 51349320     0.00     0.00  blk::Limbs::release()
+  5.63      1.38     0.12 19844490     0.00     0.00  blk::Big::shl(unsigned long) const
+  2.82      1.44     0.06 13954450     0.00     0.00  blk::Real::cut(blk::Dir) const
+  2.35      1.49     0.05     1600     0.03     0.03  void std::vector<blk::PlanRound, std::allocator<blk::PlanRound> >::_M_realloc_insert<blk::PlanRound>(__gnu_cxx::__normal_iterator<blk::PlanRound*, std::vector<blk::PlanRound, std::allocator<blk::PlanRound> > >, blk::PlanRound&&)
+  2.35      1.54     0.05      290     0.17     0.64  blk::Plan::finish() const
+  2.35      1.59     0.05      140     0.36     0.55  blk::Plan::append(blk::Planned const&)
+  1.88      1.63     0.04 13746520     0.00     0.00  blk::Big::Big(unsigned long)
+  1.88      1.67     0.04  9753960     0.00     0.00  blk::operator+(blk::Big const&, blk::Big const&)
+  1.88      1.71     0.04  2670170     0.00     0.00  blk::Real::add(blk::Real const&, blk::Real const&, blk::Dir)
+  1.88      1.75     0.04   289220     0.00     0.00  blk::Plan::close(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, blk::RoundKind, blk::ErrorKind, blk::Bound const&, blk::Priced, blk::PlanRound)
+  0.94      1.77     0.02  8024210     0.00     0.00  blk::Big::cmp(blk::Big const&, blk::Big const&)
+  0.94      1.79     0.02  4895120     0.00     0.00  std::_Function_handler<Aff (unsigned long, unsigned long), runStage(StageInputs const&)::{lambda(unsigned long)#4}::operator()(unsigned long) const::{lambda(unsigned long, bool, unsigned long, std::function<Aff (unsigned long, unsigned long)>, std::function<Aff (unsigned long, unsigned long)>, std::function<Ex (unsigned long)>)#1}::operator()(unsigned long, bool, unsigned long, std::function<Aff (unsigned long, unsigned long)>, std::function<Aff (unsigned long, unsigned long)>, std::function<Ex (unsigned long)>) const::{lambda(unsigned long, unsigned long)#2}>::_M_invoke(std::_Any_data const&, unsigned long&&, unsigned long&&)
+  0.94      1.81     0.02  4862100     0.00     0.00  blk::Real::cmp(blk::Real const&, blk::Real const&)
+  0.94      1.83     0.02  3805530     0.00     0.00  parseHeader(std::vector<unsigned int, std::allocator<unsigned int> > const&)
+  0.94      1.85     0.02  1551200     0.00     0.00  blk::Bound::Bound(blk::Big const&)
+  0.94      1.87     0.02   556810     0.00     0.00  blk::operator-(blk::Big const&, blk::Big const&)
+  0.94      1.89     0.02   432860     0.00     0.00  blk::Real::log2() const
+  0.94      1.91     0.02   298880     0.00     0.00  blk::Big::isqrt(blk::Big const&)
+  0.94      1.93     0.02     2860     0.01     0.01  void std::vector<blk::PlanMessage, std::allocator<blk::PlanMessage> >::_M_realloc_insert<blk::PlanMessage const&>(__gnu_cxx::__normal_iterator<blk::PlanMessage*, std::vector<blk::PlanMessage, std::allocator<blk::PlanMessage> > >, blk::PlanMessage const&)
+  0.94      1.95     0.02     1040     0.02     0.02  void std::vector<blk::PlanRound, std::allocator<blk::PlanRound> >::_M_realloc_insert<blk::PlanRound const&>(__gnu_cxx::__normal_iterator<blk::PlanRound*, std::vector<blk::PlanRound, std::allocator<blk::PlanRound> > >, blk::PlanRound const&)
+  0.94      1.97     0.02       60     0.33     6.26  blk::account(blk::Planned const&, int)
+  0.94      1.99     0.02                             _init
+  0.47      2.00     0.01  3541660     0.00     0.00  blk::Limbs::grow(unsigned long)
+  0.47      2.01     0.01  2093740     0.00     0.00  blk::Real::div(blk::Real const&, blk::Real const&, blk::Dir)
+  0.47      2.02     0.01   528120     0.00     0.00  blk::Real::sub(blk::Real const&, blk::Real const&, blk::Dir)
+  0.47      2.03     0.01   503900     0.00     0.00  blk::Real::pow(blk::Real, unsigned long, blk::Dir)
+  0.47      2.04     0.01   264060     0.00     0.00  blk::operator-(blk::Bound const&, blk::Bound const&)
+  0.47      2.05     0.01   231430     0.00     0.00  blk::Bound::pow(blk::Bound const&, unsigned long)
+  0.47      2.06     0.01    85160     0.00     0.00  blk::MayLay::scalars(blk::Plan&, char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
+  0.47      2.07     0.01    34900     0.00     0.01  blk::johnson(blk::Word const&, unsigned long)
+  0.47      2.08     0.01    10480     0.00     0.00  __gnu_cxx::__normal_iterator<blk::AccountGroup*, std::vector<blk::AccountGroup, std::allocator<blk::AccountGroup> > > std::__move_merge<blk::AccountGroup*, __gnu_cxx::__normal_iterator<blk::AccountGroup*, std::vector<blk::AccountGroup, std::allocator<blk::AccountGroup> > >, __gnu_cxx::__ops::_Iter_comp_iter<blk::account(blk::Planned const&, int)::{lambda(blk::AccountGroup const&, blk::AccountGroup const&)#1}> >(blk::AccountGroup*, blk::AccountGroup*, blk::AccountGroup*, blk::AccountGroup*, __gnu_cxx::__normal_iterator<blk::AccountGroup*, std::vector<blk::AccountGroup, std::allocator<blk::AccountGroup> > >, __gnu_cxx::__ops::_Iter_comp_iter<blk::account(blk::Planned const&, int)::{lambda(blk::AccountGroup const&, blk::AccountGroup const&)#1}>)
+  0.47      2.09     0.01     1690     0.01     0.01  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  0.47      2.10     0.01      470     0.02     0.02  blk::Plan::~Plan()
+  0.47      2.11     0.01      290     0.03     0.03  blk::Planned::end(blk::Planned::Data const*)
+  0.47      2.12     0.01      110     0.09     0.09  void std::vector<blk::LayoutBlock, std::allocator<blk::LayoutBlock> >::_M_realloc_insert<blk::LayoutBlock const&>(__gnu_cxx::__normal_iterator<blk::LayoutBlock*, std::vector<blk::LayoutBlock, std::allocator<blk::LayoutBlock> > >, blk::LayoutBlock const&)
+  0.47      2.13     0.01       20     0.50     0.50  AFork::shape()
+  0.00      2.13     0.00  4103570     0.00     0.00  blk::Real::mul(blk::Real const&, blk::Real const&, blk::Dir)
+  0.00      2.13     0.00  2213350     0.00     0.00  std::_Function_handler<void (blk::Plan&, unsigned int), runStage(StageInputs const&)::{lambda(blk::Plan&, unsigned int)#1}>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+  0.00      2.13     0.00  1656920     0.00     0.00  blk::Planned::Data::whole_error(blk::PlanRound const&, blk::Real const&) const
+  0.00      2.13     0.00  1311310     0.00     0.00  sigmoidClampTableEntry(int)
+  0.00      2.13     0.00  1310720     0.00     0.00  gateTableEntry(int)
+  0.00      2.13     0.00  1081570     0.00     0.00  blk::Bound::Bound(blk::Real const&, blk::Real const&)
+  0.00      2.13     0.00   823830     0.00     0.00  blk::operator*(blk::Bound const&, blk::Bound const&)
+  0.00      2.13     0.00   816430     0.00     0.00  blk::operator/(blk::Bound const&, blk::Bound const&)
+  0.00      2.13     0.00   648960     0.00     0.00  blk::Planned::Data::holds(blk::PlanRound const&, blk::Real const&) const
+  0.00      2.13     0.00   627500     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&) [clone .constprop.0]
+  0.00      2.13     0.00   624920     0.00     0.00  blk::PlanRound::~PlanRound()
+  0.00      2.13     0.00   567210     0.00     0.00  blk::Setting::card_E() const
+  0.00      2.13     0.00   511470     0.00     0.00  blk::Bound::Bound(unsigned long)
+  0.00      2.13     0.00   461280     0.00     0.00  eqOne(Ex const*, int, unsigned long)
+  0.00      2.13     0.00   302920     0.00     0.00  blk::operator+(blk::Bound const&, blk::Bound const&)
+  0.00      2.13     0.00   298880     0.00     0.00  blk::Real::sqrt(blk::Real const&, blk::Dir)
+  0.00      2.13     0.00   297860     0.00     0.00  blk::Plan::chain_message(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, blk::MessageKind, unsigned long)
+  0.00      2.13     0.00   289220     0.00     0.00  blk::MayLay::close(blk::Plan&, char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, blk::RoundKind, blk::ErrorKind, blk::Bound, blk::Priced, blk::PlanRound)
+  0.00      2.13     0.00   239690     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<parFor<tieRight(ShP const&, std::vector<Ex, std::allocator<Ex> > const&, std::vector<Ex, std::allocator<Ex> > const&)::{lambda(unsigned long)#1}>(unsigned long, tieRight(ShP const&, std::vector<Ex, std::allocator<Ex> > const&, std::vector<Ex, std::allocator<Ex> > const&)::{lambda(unsigned long)#1})::{lambda()#1}> > >::_M_run()
+  0.00      2.13     0.00   216680     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<parFor<tieLeft(ShP const&, std::vector<Ex, std::allocator<Ex> > const&, std::vector<Ex, std::allocator<Ex> > const&)::{lambda(unsigned long)#1}>(unsigned long, tieLeft(ShP const&, std::vector<Ex, std::allocator<Ex> > const&, std::vector<Ex, std::allocator<Ex> > const&)::{lambda(unsigned long)#1})::{lambda()#1}> > >::_M_run()
+  0.00      2.13     0.00   216260     0.00     0.00  bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      2.13     0.00   201180     0.00     0.00  blk::Bound::ratio(blk::Big const&, blk::Big const&)
+  0.00      2.13     0.00   197940     0.00     0.00  blk::Proximity::~Proximity()
+  0.00      2.13     0.00   149440     0.00     0.00  blk::Bound::sqrt(blk::Bound const&)
+  0.00      2.13     0.00   145040     0.00     0.00  blk::Proximity::Proximity()
+  0.00      2.13     0.00   141410     0.00     0.00  std::_Function_handler<void (blk::Plan&, unsigned long, unsigned int), runStage(StageInputs const&)::{lambda()#3}::operator()() const::{lambda(blk::Plan&, unsigned long, unsigned int)#1}>::_M_invoke(std::_Any_data const&, blk::Plan&, unsigned long&&, unsigned int&&)
+  0.00      2.13     0.00   105010     0.00     0.00  blk::field_error(blk::Setting const&, unsigned long)
+  0.00      2.13     0.00    95410     0.00     0.00  std::thread::_State_impl<std::thread::_Invoker<std::tuple<parFor<HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#4}>(unsigned long, HTailF2::tileSelfTestF(HFork const&) const::{lambda(unsigned long)#4})::{lambda()#1}> > >::~_State_impl()
+  0.00      2.13     0.00    79640     0.00     0.00  blk::Real::ceil() const
+  0.00      2.13     0.00    74720     0.00     0.01  blk::johnson_count(blk::Word const&, blk::Bound const&, blk::Bound const&, unsigned long)
+  0.00      2.13     0.00    73870     0.00     0.00  t2Plan(HFork&, Tail2&)
+  0.00      2.13     0.00    73800     0.00     0.00  blk::johnson_list(blk::Bound const&, blk::Bound const&, bool&)
+  0.00      2.13     0.00    65760     0.00     0.00  blk::goal_of(blk::Setting const&, blk::ErrorKind, blk::Scope)
+  0.00      2.13     0.00    65050     0.00     0.00  std::vector<unsigned int, std::allocator<unsigned int> >::~vector()
+  0.00      2.13     0.00    64860     0.00     0.00  blk::PlanRound::PlanRound()

@@ -1,0 +1,118 @@
+# PREREG: 20261103-6-clipped-gap-rejection
+Issue: #6. Lane: clipped-gap rejection study (CPU only, no GPU). Date (UTC): 2026-11-03T23:45Z. Base commit: 29907e5f.
+
+Weak point attacked: guide/known-limits.md says no run shows the clipped-gap policy's own limits
+rejecting anything at a verifier, and the project recommends no limits.
+
+## Hypothesis
+On the small synthetic clipped-gap example (prover/examples/target_small_f2_gap, `small_float_pair`),
+scored by the integer-model package (not proved), some point of the pre-registered (C, theta, cap) grid
+accepts 0 % of the replies in each "gross" attack class (k >= 4 tokens swapped, random tokens,
+whole random reply, reply after another prompt) while falsely rejecting at most 5 % of held-out honest
+replies; and no grid point accepts 0 % of 1-token second-choice swaps at a false-reject rate of at most
+5 %.
+
+## Metric
+Per (seed, grid point, class): acceptance rate = replies that meet the limits / replies in the class
+whose window passes the integer model's range conditions (a window that fails them gets no proof from
+the honest prover and is counted separately as `no_proof`, never as accepted or rejected). False-reject
+rate (FRR) = 1 - acceptance rate on held-out honest replies. "Meets" is the rule of
+integrations/vllm/integer_model/examples/try_limits.py `meets()`: window = prompt + reply + zeros to T;
+costs = logit gap + 2^sh at the reply's positions; sum(min(cost, C)) <= theta * n and #(cost > C) <= cap.
+Tool: integer_model package at this commit, CPU, PyTorch 2.9.1 (CPU wheel), transformers 4.57.6.
+
+Honest replies: greedy decode, 32 tokens, of the float32 checkpoint written by `small_float_pair`, run in
+bfloat16 on the CPU (as try_limits.py), to 16 random prompt ids; 128 prompts per seed, first 64 = fit
+half, last 64 = held-out half. Attack classes, each built from every held-out honest reply:
+- `fp2nd-k`: k positions (k = 1, 2, 4, 8, 16) replaced by the float model's second choice at that
+  position (no re-decode after the swap; as try_limits.py).
+- `int2nd-k`: k positions replaced by the integer model's second choice (the cheapest single-token
+  deviation an adversary that knows the weights can make).
+- `rand-k`: k positions replaced by a uniformly random other id (end token excluded).
+- `rand-reply`: whole reply replaced by uniformly random ids (same length).
+- `other-prompt`: the reply after the next held-out reply's prompt.
+- `trunc-half`, `trunc-1`: the honest reply cut to its first half / with its last token dropped
+  (expected to pass: the policy cannot see truncation; reported as a control, not an attack the policy
+  is meant to stop).
+Positions and random ids from random.Random(seed * 1000 + class index).
+
+Grid (fixed now): C in {256 (exact), p99, p99.5, p99.9, max} of all fit-half costs, plus 9244130 (shipped);
+theta in {256, and the 50/75/90/95/99/100th percentile of fit-half clipped means at that C}, plus 323343;
+cap in {0, 1, 2, 4}. Points with theta > C are dropped; theta == C with cap > 0 kept but flagged (the
+verifier treats it as no bound on the mean). The shipped point (9244130, 323343, 1) and exact match
+(256, 256, 0) always included.
+
+cp_verify (released sources at base commit, built by verifier/build.sh): no GPU, so no new proof can be
+made. For each class, one attacked request is built from the stored example's reply.json and checked
+with the stored proof of examples/accepted-proof-clipped-gap (label: "binding spot check", which tests
+that the proof is bound to its reply, not the policy), and the stored honest set is checked with
+`-policy` set to each of three tighter grid points (label: "policy-named", the verifier refuses a policy
+that the commitment did not fix). These are recorded as what cp_verify can and cannot say on CPU, not as
+policy rejections.
+
+## Acceptance threshold
+PASS for the first clause if some grid point has median (over seeds) acceptance 0 % in every gross class
+and median FRR <= 5 %. The second clause holds if no grid point has median `fp2nd-1` acceptance 0 % at
+median FRR <= 5 %. Both are reported as they come, each with min/max over seeds.
+
+## Kill criterion
+Stop and publish the negative if: (a) the float pair cannot be built or the stored reply's four costs
+differ from prover/examples/target_small_f2_gap/README.md (446,700, 438,154, 56,748, 470,490), or (b) the
+seed-2026 fit (same prompts as try_limits.py) gives limits far from the shipped ones without an
+explanation, or (c) wall time exceeds 3 h on this CPU host. No GPU spend under any outcome.
+
+## Runs
+5 prompt seeds: 2026 (try_limits.py's own draw), 2027, 2028, 2029, 2030; n = 128 prompts per seed.
+Scoring is deterministic given replies, so the spread is over prompt draws. Report median, SD, min, max
+over the 5 seeds per (grid point, class). Grid percentiles are refit per seed on that seed's fit half.
+Exclusions: replies too short for k swaps are skipped for that k (counted); windows failing range
+conditions counted as `no_proof`. No warmup (no timing claim).
+
+## Prior art
+Token-DiFR (Karvonen et al., arXiv:2511.20621), which this policy follows: thresholds from an honest
+calibration split, reported detection of model/quantization substitution. TOPLOC (arXiv:2501.16007):
+locality-sensitive hashes of activations, tolerances set on honest runs. zkML systems (EZKL, zkLLM,
+DeepProve, zkAgent) prove exact computation, no tolerance policy. The repository's own try_limits.py
+counts (one seed, one fit, 1/4/16 swaps). New here: a (C, theta, cap) sweep with FRR, an
+integer-model-second-choice adversary, k = 2/8, truncation and whole-random classes, 5 seeds, and a
+record of what cp_verify can and cannot check on CPU.
+
+## Amendments
+- 2026-11-04T00:52Z. Decode dtype bfloat16 -> float32 (the `--dtype float32` option that try_limits.py
+  also offers). Reason: this host's CPU (AMD EPYC-Rome) has no bfloat16 hardware; one batched forward of
+  128 x 17 tokens took 86.5 s in bfloat16 against 4.9 s in float32 (3 threads), and the five bf16 runs
+  had not finished decoding after 68 minutes, which would breach the 3 h kill criterion. Consequence:
+  the honest replies are float32 greedy replies, so limits fitted here are not expected to equal the
+  shipped bf16-fitted ones (prover/examples/target_small_f2_gap/README.md reports float32 fits as
+  machine-stable). The shipped point stays in the grid unchanged. No result had been seen when this was
+  changed (no seed file had been written).
+- 2026-11-04T01:30Z. Exploratory class added after the pre-registered results were seen (so it is NOT
+  pre-registered and is reported separately): `fp2nd-1-redecode` and `rand-1-redecode`: one position j
+  (random) replaced by the float model's second choice / a random id, then the float model decodes the rest
+  of the reply greedily from the new prefix (same total length cap). Reason: the pre-registered k-swap
+  classes do not re-decode, so the tokens after a swap are scored in a context they were not chosen for;
+  cp_verify's own `above-clip` bound says one token can be anything if the others are first choices, and
+  this class tests that adaptive adversary. Same 5 seeds, same grid, same scorer (score_redecode.py).
+- 2026-11-04T07:55Z. Corrections and disclosures after the independent review of PR #45 (no new run, no
+  threshold, grid, class or verdict changed; nothing above is rewritten).
+  (a) Issue linkage. The header's "Issue: #6" names the P0 threat-model issue that the `-6-` in the
+  experiment id points at; the id is kept so that the prereg-first commit stays valid. The tracking
+  issue for this study is #38 ("P1: clipped-gap rejection study"). #38 asks for acceptance per class via
+  a real `cp_verify`; this CPU study cannot give that (no proof for an attacked reply), so that
+  deliverable of #38 stays open. The PR refers to #38 and does not close it.
+  (b) Wording of `int2nd-k`. "the cheapest single-token deviation an adversary that knows the weights
+  can make" is wrong as written: the positions of every `fp2nd-k` / `int2nd-k` / `rand-k` reply are drawn
+  at random (random.Random(seed * 1000 + class index)), so `int2nd-1` is the integer model's second
+  choice at a random position, not the cheapest deviation. A provider that picks the position does at
+  least as well, so these classes' acceptance rates are lower bounds for an adaptive provider.
+  Best-position was not tested in this study.
+  (c) cp_verify spot set. The section above says one attacked request is built "for each class". The
+  committed spot set (cp_verify_spot.py, run before this amendment) has 19 of the 21 classes: its
+  random-token list is rand-1, rand-4, rand-16 and rand-reply, and `rand-2` and `rand-8` are not in it.
+  No reason was recorded when the list was written; this is a deviation from the plan above. Every
+  binding spot check answers `NO: proof-refused` because the stored proof is for another reply, whatever
+  that reply is, so the two missing calls could not change what the spot set shows. They are not added
+  now (no new runs in the review fix).
+  (d) Clause 1 analysis choice. analyze.py leaves grid points flagged `theta == C with cap > 0` out of
+  the clause-1 candidates (they are "kept but flagged" in numbers.json). No verdict depends on it: every
+  PASS point has cap = 0.
