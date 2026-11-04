@@ -1050,61 +1050,247 @@
    "i": 0,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.4514925815165043
+   "wall_s": 1.3852572813630104
   },
   {
    "i": 1,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.472631748765707
+   "wall_s": 1.451579537242651
   },
   {
    "i": 2,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.4811270497739315
+   "wall_s": 1.4440598413348198
   },
   {
    "i": 3,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.4288384728133678
+   "wall_s": 1.42983827739954
   },
   {
    "i": 4,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.746917575597763
+   "wall_s": 1.3830635249614716
   },
   {
    "i": 5,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.472553450614214
+   "wall_s": 1.409959513694048
   },
   {
    "i": 6,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.4135536700487137
+   "wall_s": 1.3925894498825073
   },
   {
    "i": 7,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.419287234544754
+   "wall_s": 1.4475439377129078
   },
   {
    "i": 8,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.39988424628973
+   "wall_s": 1.4045466259121895
   },
   {
    "i": 9,
    "exit": 0,
    "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
-   "wall_s": 1.410835389047861
+   "wall_s": 1.417960662394762
+  }
+ ],
+ "coordinated": [
+  {
+   "alternate": "kind hiding->public-weights + made-up seed digest",
+   "covers": [
+    "commitment.kind",
+    "conversion.public_weights_seed_sha256"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "kind hiding->public-weights + made-up seed digest",
+   "covers": [
+    "commitment.kind",
+    "conversion.public_weights_seed_sha256"
+   ],
+   "flag": [
+    "--public-weights-seed"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.public_weights_seed_sha256: seed file digest differs"
+  },
+  {
+   "alternate": "upstream synthetic->full fake huggingface + made-up committed_files",
+   "covers": [
+    "upstream.kind",
+    "conversion.committed_files"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "upstream synthetic->full fake huggingface + made-up committed_files",
+   "covers": [
+    "upstream.kind",
+    "conversion.committed_files"
+   ],
+   "flag": [
+    "--committed-dir",
+    "--upstream-dir"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.committed_files: weights.bin missing"
+  },
+  {
+   "alternate": "same, caller passes --upstream-dir only",
+   "covers": [
+    "upstream.kind"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "same, caller passes --upstream-dir only",
+   "covers": [
+    "upstream.kind"
+   ],
+   "flag": [
+    "--upstream-dir"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: upstream.files: config.json digest differs"
+  },
+  {
+   "alternate": "committed_files []->one made-up entry (synthetic upstream)",
+   "covers": [
+    "conversion.committed_files"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "committed_files []->one made-up entry (synthetic upstream)",
+   "covers": [
+    "conversion.committed_files"
+   ],
+   "flag": [
+    "--committed-dir"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.committed_files: weights.bin missing"
+  },
+  {
+   "alternate": "decode_policy.C+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.C"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.C: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.theta+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.theta"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.theta: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.cap+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.cap"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.cap: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.sT+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.sT"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.sT: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.kind exact->clipped-gap with cap 1",
+   "covers": [
+    "decode_policy.kind"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.cap: differs from policy.txt"
+  },
+  {
+   "alternate": "serving.chat_template digest->none",
+   "covers": [
+    "serving.chat_template"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.chat_template: manifest says none; pass --no-chat-template and no file"
+  },
+  {
+   "alternate": "serving.system_prompt digest->none",
+   "covers": [
+    "serving.system_prompt"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.system_prompt: manifest says none; pass --no-system-prompt and no file"
+  },
+  {
+   "alternate": "serving.tokenizer files->none",
+   "covers": [
+    "serving.tokenizer"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer: manifest says none; pass --no-tokenizer to accept"
+  }
+ ],
+ "omission": [
+  {
+   "case": "--end-tokens left out",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.end_tokens: pass --end-tokens (comma list, or none for the empty list)"
+  },
+  {
+   "case": "--recipe left out, no --no-recipe",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.script_sha256: pass exactly one of --recipe FILE or --no-recipe (--no-recipe leaves the recipe digest the signer's word)"
+  },
+  {
+   "case": "both --recipe and --no-recipe",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.script_sha256: pass exactly one of --recipe FILE or --no-recipe (--no-recipe leaves the recipe digest the signer's word)"
+  },
+  {
+   "case": "--no-recipe, honest manifest",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "case": "--no-recipe, script_sha256 changed + trusted re-sign",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
   }
  ],
  "rfc8032": {
@@ -1116,14 +1302,20 @@
   "total": 64,
   "cryptography": "41.0.7"
  },
+ "small_order": {
+  "identity_key_forgery_refused": true,
+  "small_order_keys_all_forgeries_refused": 8,
+  "small_order_r_refused": 8,
+  "total": 8
+ },
  "summary": {
   "untampered_accepted": 10,
   "untampered_n": 10,
   "verify_wall_s": {
-   "median": 1.440165527164936,
-   "sd": 0.10167006071503702,
-   "min": 1.39988424628973,
-   "max": 1.746917575597763,
+   "median": 1.413960088044405,
+   "sd": 0.02578796718355745,
+   "min": 1.3830635249614716,
+   "max": 1.451579537242651,
    "n": 10,
    "note": "whole verify call: manifest checks plus one cp_verify process on the stored small example"
   },
@@ -1142,7 +1334,65 @@
    "upstream.generator",
    "upstream.seed",
    "verifier.source_commit"
-  ]
+  ],
+  "trusted_resign_refused_schema_only": [
+   "commitment.kind",
+   "conversion.committed_files",
+   "conversion.public_weights_seed_sha256",
+   "decode_policy.C",
+   "decode_policy.cap",
+   "decode_policy.kind",
+   "decode_policy.sT",
+   "decode_policy.theta",
+   "format",
+   "upstream.kind"
+  ],
+  "trusted_resign_refused_bound": [
+   "commitment.id",
+   "configuration.KL.bin",
+   "configuration.layout.txt",
+   "configuration.policy.txt",
+   "conversion.script_sha256",
+   "decode_policy.F",
+   "decode_policy.s",
+   "decode_policy.sh",
+   "serving.chat_template.sha256",
+   "serving.end_tokens",
+   "serving.system_prompt.sha256",
+   "serving.tokenizer.files.0.path",
+   "serving.tokenizer.files.0.sha256",
+   "serving.tokenizer.files.1.path",
+   "serving.tokenizer.files.1.sha256",
+   "signer.public_key",
+   "verifier.build_digest"
+  ],
+  "coordinated_alternates": 12,
+  "coordinated_accepted_without_flag": [
+   "committed_files []->one made-up entry (synthetic upstream)",
+   "kind hiding->public-weights + made-up seed digest",
+   "same, caller passes --upstream-dir only",
+   "upstream synthetic->full fake huggingface + made-up committed_files"
+  ],
+  "coordinated_refused_with_flag": [
+   "committed_files []->one made-up entry (synthetic upstream)",
+   "kind hiding->public-weights + made-up seed digest",
+   "same, caller passes --upstream-dir only",
+   "upstream synthetic->full fake huggingface + made-up committed_files"
+  ],
+  "coordinated_accepted_with_flag": [],
+  "signers_word_unless_flag_fields": [
+   "commitment.kind",
+   "conversion.committed_files",
+   "conversion.public_weights_seed_sha256",
+   "upstream.kind"
+  ],
+  "omission": {
+   "--end-tokens left out": 1,
+   "--recipe left out, no --no-recipe": 1,
+   "both --recipe and --no-recipe": 1,
+   "--no-recipe, honest manifest": 0,
+   "--no-recipe, script_sha256 changed + trusted re-sign": 0
+  }
  },
  "host": {
   "python": "3.12.3",
