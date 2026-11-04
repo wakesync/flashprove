@@ -86,3 +86,10 @@ record of what cp_verify can and cannot check on CPU.
   shipped bf16-fitted ones (prover/examples/target_small_f2_gap/README.md reports float32 fits as
   machine-stable). The shipped point stays in the grid unchanged. No result had been seen when this was
   changed (no seed file had been written).
+- 2026-11-04T01:30Z. Exploratory class added after the pre-registered results were seen (so it is NOT
+  pre-registered and is reported separately): `fp2nd-1-redecode` and `rand-1-redecode`: one position j
+  (random) replaced by the float model's second choice / a random id, then the float model decodes the rest
+  of the reply greedily from the new prefix (same total length cap). Reason: the pre-registered k-swap
+  classes do not re-decode, so the tokens after a swap are scored in a context they were not chosen for;
+  cp_verify's own `above-clip` bound says one token can be anything if the others are first choices, and
+  this class tests that adaptive adversary. Same 5 seeds, same grid, same scorer (score_redecode.py).
