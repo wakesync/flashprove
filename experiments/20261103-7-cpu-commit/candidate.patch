@@ -1,0 +1,23 @@
+diff --git a/blocks/hash/hash.h b/blocks/hash/hash.h
+index e3db83d6..9cff247e 100644
+--- a/blocks/hash/hash.h
++++ b/blocks/hash/hash.h
+@@ -270,6 +270,18 @@ public:
+   }
+   // Appends x's eight bytes, the lowest first.
+   BLK_FN void push_u64(u64 x) {
++#ifndef __CUDA_ARCH__
++    // A whole word usually fits in the pending block. Store its little-endian bytes
++    // directly, keeping push()'s checks and its rule that a full last block waits.
++    // The generic path below still handles a word that crosses a block boundary.
++    if (buflen <= BLOCK_BYTES - 8) {
++      BLK_HASH_REQUIRE(f == 0, "a hash that was finished takes no more input");
++      BLK_HASH_REQUIRE(8 <= MOST_BYTES - (t + buflen), "a hash takes at most 2^32 bytes less one block");
++      store64(buf + buflen, x);
++      buflen += 8;
++      return;
++    }
++#endif
+     u8 in[8];
+     store64(in, x);
+     push(in, sizeof(in));
