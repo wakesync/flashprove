@@ -1,0 +1,12 @@
+as expected | full | status 0
+as expected | no-work | status 0
+as expected | no-round | status 0
+as expected | no-line-field | status 0
+as expected | another-field | status 2
+as expected | two-distances | status 3
+as expected | a-product-that-wraps | status 3
+as expected | a-target-that-is-missed | status 3
+as expected | a-hiding-budget-that-is-missed | status 3
+as expected | an-unknown-word | status 2
+as expected | a-table-without-answers | status 2
+cp_plan_files.py: 11 files: all as expected

@@ -1,0 +1,105 @@
+gate_children_parent: built
+as expected   control: a parent that starts the script directly, killed while the children run: 4 processes still run two seconds later (cp_verify sleep sleep sleep)
+as expected   parent killed before the script has its three children: no process is left
+              (4 processes at the signal: gate_children_p exe cp_verify sleep; the parent was gone 0.001 s after the signal, all 0.021 s after it)
+as expected   parent killed while the children run: no process is left
+              (6 processes at the signal: gate_children_p exe cp_verify sleep sleep sleep; the parent was gone 0.001 s after the signal, all 0.023 s after it)
+as expected   parent killed while the children run: judge_says() gives the supervisor the expected arguments
+as expected   parent killed after the three children have exited: no process is left
+              (4 processes at the signal: gate_children_p exe cp_verify sleep; the parent was gone 0.000 s after the signal, all 0.023 s after it)
+as expected   parent killed while the children run, SIGTERM and SIGALRM blocked: no process is left
+              (6 processes at the signal: gate_children_p exe cp_verify sleep sleep sleep; the parent was gone 0.000 s after the signal, all 0.017 s after it)
+as expected   parent killed 0 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.020 s after it)
+as expected   parent killed 0.001 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.019 s after it)
+as expected   parent killed 0.002 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.024 s after it)
+as expected   parent killed 0.005 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.020 s after it)
+as expected   parent killed 0.01 s after it printed "calls": no process is left
+              (the parent was gone 0.001 s after the signal, all 0.021 s after it)
+as expected   parent killed 0.02 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.024 s after it)
+as expected   parent killed 0.05 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.022 s after it)
+as expected   parent killed 0.1 s after it printed "calls": no process is left
+              (the parent was gone 0.001 s after the signal, all 0.024 s after it)
+as expected   parent killed 0.2 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.028 s after it)
+as expected   a parent that is not killed: exit code 0: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 1: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 2: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 3: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 4: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 5: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 10: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 14: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 15: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 77: the expected output, supervised and direct
+as expected   a parent that is not killed: exit code 255: the expected output, supervised and direct
+as expected   a parent that is not killed: a script that exceeds the time limit: the expected output, supervised and direct
+as expected   a parent that is not killed: a script that a signal kills: the expected output, supervised and direct
+as expected   a parent that is not killed: what the script inherits: the expected output, supervised and direct
+as expected   a parent that is not killed: what the script inherits, SIGTERM and SIGALRM blocked: the expected output, supervised and direct
+as expected   a parent that is told to run another program, supervised: it is not started, and judge_says() returns 2
+              (printed: 'calls\nstatus 2\n')
+as expected   the supervisor started by the test: a caller that stays alive and does nothing: the group is killed at the supervisor's limit of one second
+              (exit code -9 after 1.0 s; children started: True; still running: none)
+as expected   the supervisor started by the test: control: without a limit all five processes run after three seconds, and the script's exit code arrives
+              (after three seconds: gate_children_p cp_verify sleep sleep sleep; exit code 0; children exited: True)
+as expected   the supervisor started by the test: the caller's process ID is not its parent's: nothing is started, and only it dies, by SIGKILL, at once
+              (exit code -9; script started: False; still running: sleep)
+as expected   the supervisor started by the test: not the leader of its process group: nothing is started, no signal is sent, exit code 2
+              (exit code 2; script started: False; still running: none)
+as expected   the supervisor started by the test: another program's path: nothing is started, no signal is sent, exit code 2
+              (exit code 2; script started: False; still running: sleep)
+as expected   the supervisor started by the test: cp_verify's path in another spelling: nothing is started, no signal is sent, exit code 2
+              (exit code 2; script started: False; still running: sleep)
+as expected   as cp_commit: control: a parent that starts the script directly, killed while the children run: 4 processes still run two seconds later (cp_verify sleep sleep sleep)
+as expected   as cp_commit: parent killed before the script has its three children: no process is left
+              (4 processes at the signal: gate_children_p exe cp_verify sleep; the parent was gone 0.000 s after the signal, all 0.021 s after it)
+as expected   as cp_commit: parent killed while the children run: no process is left
+              (6 processes at the signal: gate_children_p exe cp_verify sleep sleep sleep; the parent was gone 0.000 s after the signal, all 0.019 s after it)
+as expected   as cp_commit: parent killed while the children run: judge_says() gives the supervisor the expected arguments
+as expected   as cp_commit: parent killed after the three children have exited: no process is left
+              (4 processes at the signal: gate_children_p exe cp_verify sleep; the parent was gone 0.000 s after the signal, all 0.030 s after it)
+as expected   as cp_commit: parent killed while the children run, SIGTERM and SIGALRM blocked: no process is left
+              (6 processes at the signal: gate_children_p exe cp_verify sleep sleep sleep; the parent was gone 0.000 s after the signal, all 0.015 s after it)
+as expected   as cp_commit: parent killed 0 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.014 s after it)
+as expected   as cp_commit: parent killed 0.001 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.014 s after it)
+as expected   as cp_commit: parent killed 0.002 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.021 s after it)
+as expected   as cp_commit: parent killed 0.005 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.020 s after it)
+as expected   as cp_commit: parent killed 0.01 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.020 s after it)
+as expected   as cp_commit: parent killed 0.02 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.017 s after it)
+as expected   as cp_commit: parent killed 0.05 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.020 s after it)
+as expected   as cp_commit: parent killed 0.1 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.022 s after it)
+as expected   as cp_commit: parent killed 0.2 s after it printed "calls": no process is left
+              (the parent was gone 0.000 s after the signal, all 0.021 s after it)
+as expected   as cp_commit: a parent that is not killed: exit code 0: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 1: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 2: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 3: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 4: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 5: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 10: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 14: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 15: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 77: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: exit code 255: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: a script that a signal kills: the expected output, supervised and direct
+as expected   as cp_commit: a parent that is not killed: what the script inherits: the expected output, supervised and direct
+as expected   as cp_commit: a script that exceeds the time limit is killed with its children, and judge_says() returns -3
+              (printed: 'calls\nstatus -3\n')
+as expected   as cp_commit: a parent that is told to run another program: it is not started, and judge_says() returns -1
+              (printed: 'calls\nstatus -1\n')
+cases as expected: 67; not: 0
+ALL AS EXPECTED

@@ -1,0 +1,6 @@
+chain: a value that the prover sends is missing or not in canonical form
+chain: a value that the prover sends is missing or not in canonical form
+chain: a nonce does not give the proof of work that its round asks for
+chain: a value that the prover sends is missing or not in canonical form
+chain: a nonce is missing
+ok

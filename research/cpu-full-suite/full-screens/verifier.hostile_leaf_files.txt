@@ -1,0 +1,12 @@
+ivk/leaf/0.bin: 536952 bytes, 10 kinds of message (the stored answers among them), 5 openings
+  12 x refused by the stage leaf: BASE: the masked message in the proof does not satisfy the linear claim (the proximity test)
+   8 x refused by the stage leaf: a nonce does not give the proof of work that its round asks for (before the test)
+  20 x refused by the stage leaf: a nonce does not give the proof of work that its round asks for (the proximity test)
+  16 x refused by the stage leaf: a value that the prover sends is missing or not in canonical form (before the test)
+ 150 x refused by the stage leaf: a value that the prover sends is missing or not in canonical form (the proximity test)
+  36 x refused by the stage leaf: an opening does not lead to its root (the proximity test)
+  54 x refused by the stage leaf: an opening is cut short or holds a symbol that is not in canonical form (the proximity test)
+  32 x refused by the stage leaf: an opening, or another answer to the verifier's queries, is cut short or not in canonical form (before the test)
+  28 x refused by the stage leaf: the opened columns of the table do not lead to its root (before the test)
+  16 x refused by the stage leaf: the record's answers (head, root and answers)
+hostile_leaf_files_test.py: 186 changed sets, 372 calls: 186 refused, 0 NOT REFUSED, 0 otherwise; the unchanged set passes

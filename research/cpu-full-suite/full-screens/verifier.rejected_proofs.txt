@@ -1,0 +1,30 @@
+The altered copies are written to <WORK>/verifier.rejected_proofs/w/accepted-proof
+the files as they are                  exit code 0   YES
+    proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits
+    by the verifier's own count, the weakest round has 128.00 bits with proof of work counted and the weakest without it has 96.23; no figure here is a security level
+one bit of the proof changed           exit code 1   NO: proof-refused
+the proof's last byte cut off          exit code 1   NO: proof-refused
+one byte added to the proof            exit code 1   NO: proof-refused
+one bit of ivk/key.bin changed         exit code 1   NO: key-refused
+one bit of ivk/leaf/0.bin changed      exit code 1   NO: entry-refused
+a prompt token changed                 exit code 1   NO: proof-refused
+a checked reply token changed          exit code 1   NO: proof-refused
+another token after the request        exit code 1   NO: reply-differs
+another scale in KL.bin                exit code 1   NO: model-statement
+another commitment ID                  exit code 1   NO: model-statement
+10 altered sets: all rejected
+The altered copies are written to <WORK>/verifier.rejected_proofs/w/accepted-proof-clipped-gap
+the files as they are                  exit code 0   WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+    proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits
+    by the verifier's own count, the weakest round has 128.00 bits with proof of work counted and the weakest without it has 96.23; no figure here is a security level
+one bit of the proof changed           exit code 1   NO: proof-refused
+the proof's last byte cut off          exit code 1   NO: proof-refused
+one byte added to the proof            exit code 1   NO: proof-refused
+one bit of ivk/key.bin changed         exit code 1   NO: key-refused
+one bit of ivk/leaf/0.bin changed      exit code 1   NO: entry-refused
+a prompt token changed                 exit code 1   NO: proof-refused
+a checked reply token changed          exit code 1   NO: proof-refused
+example.y is 1 where it must be 0      exit code 1   NO: statement-range
+another scale in KL.bin                exit code 1   NO: model-statement
+another commitment ID                  exit code 1   NO: model-statement
+10 altered sets: all rejected

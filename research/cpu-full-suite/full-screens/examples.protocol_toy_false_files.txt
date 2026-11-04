@@ -1,0 +1,17 @@
+false/proofs/0.cheat-SEAM_OTHER_MATRIX.proof: refused: the opened columns of the table do not lead to its root
+false/proofs/0.cheat-SEAM_FALSE_ROW.proof: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/proofs/0.cheat-SEAM_V_FITTED.proof: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/key-and-entry/key.cheat-WF_KEY_OUTSIDE.file: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/key-and-entry/key.cheat-LKP_WRONG_ROOT.file: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/key-and-entry/key.cheat-MEMBER_OTHER_SUM.file: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/key-and-entry/key.cheat-FOLDEQ_OTHER_ROW.file: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/key-and-entry/key.cheat-KEY_ROOT_OF_ANOTHER_TABLE.file: refused: a nonce does not give the proof of work that its round asks for
+false/key-and-entry/entry.cheat-LINK_ONE_CELL.file: refused: BASE: the masked message in the proof does not satisfy the linear claim
+false/key-and-entry/entry.cheat-BENT_SWAP.file: refused: the opened columns of the table do not lead to its root
+false/product/tiny.cheat-PSC_FALSE_TARGET.proof: refused: D4 (BASE: the linear check fails)
+false/links/tiny-links.cheat-SEGMENTS_OTHER_CHAIN-0.proof: refused: D4 (BASE: the linear check fails)
+honest/proofs/1.honest-neighbour-of-SEAM_FALSE_ROW.proof: accepted: ACCEPTED
+honest/proofs/1.honest-neighbour-of-SEAM_V_FITTED.proof: accepted: ACCEPTED
+honest/key-and-entry/key.file: accepted: ACCEPTED
+honest/key-and-entry/entry.file: accepted: ACCEPTED
+stored_false_test.py: all 12 false files refused and all 4 honest files accepted, each with the words in LIST.tsv
