@@ -1,0 +1,201 @@
+# Single source of truth for the README "Fork status & results" table.
+#
+#   python3 scripts/update-results.py          # validate, then rewrite the README block
+#   python3 scripts/update-results.py --check  # validate; exit 1 if the README is stale
+#
+# Every result PR adds or edits an entry here and reruns the script. The reviewer
+# checks each metric against its `source` file at its `commit`.
+#
+# Schema (version 1). Prose fields render the README row. `metrics` is the
+# machine-readable part, meant for plotting later; nothing renders it today.
+#
+#   results[]:
+#     id          stable slug
+#     title       README "Result" cell
+#     status      reproduced | measured | negative | in progress | done
+#     status_note optional text appended in the Status cell, e.g. "(held)"
+#     pr          PR number that put the evidence on main, or null
+#     summary     README "Key number" cell (prose)
+#     conditions  README "n + conditions" cell (prose)
+#     evidence    list of repo paths; the first is the README link
+#     evidence_note optional text after the link
+#     metrics[]:
+#       name      stable slug, unique within the result
+#       series    optional: groups metrics that belong on one chart
+#       arm       optional: which side of a comparison (e.g. stock, candidate)
+#       stat      single | median | mean | max | count
+#       value     number
+#       unit      s | B | MiB | USD | count | exit_code | abs_diff
+#       total     optional: denominator for count metrics (e.g. 10 of 10)
+#       n         number of independent observations behind `value`
+#       spread    null, or {sd, min, max} (any may be null), or {resolution}
+#       hardware  key into `hardware` below
+#       date      YYYY-MM-DD (UTC) of the evidence commit
+#       commit    full SHA of the commit that added the source on main's history
+#       source    repo path holding the raw number (or "commit-message")
+#       note      optional caveat that a chart caption must carry
+
+schema_version: 1
+
+hardware:
+  cpu-epyc-rome-kvm-16:
+    kind: cpu
+    description: AMD EPYC-Rome KVM VM, 16 vCPUs (1 thread per core), about 30 GiB RAM, Ubuntu 24.04, g++ 13.3.0; shared host, no exclusive core
+  gpu-h100-rental-a:
+    kind: gpu
+    description: one NVIDIA H100 80GB HBM3 of an 8-GPU marketplace host (unverified listing), driver 615.71.09, Xeon Platinum 8480+, cgroup about 26.9 cores
+  gpu-h100-rental-b:
+    kind: gpu
+    description: one NVIDIA H100 80GB HBM3, whole-machine 1-GPU marketplace host (provider-verified listing), driver 595.91.07, 500 W power limit, cgroup about 23.0 cores
+
+results:
+  - id: cpu-reproduction
+    title: CPU verification of upstream's stored synthetic proofs
+    status: reproduced
+    pr: null
+    summary: "stored exact-match and clipped-gap proofs: `YES` / `WITHIN LIMITS`, about 1.57 s each; 10 of 10 altered sets rejected in each table"
+    conditions: one clean build at upstream `9e2bdd8f`, synthetic weights, CPU only; plus an independent review in a separate clone that added 19 negative cases
+    evidence: [research/reproduction/README.md]
+    metrics:
+      - {name: verify_exact_match_wall, series: stored-proof-verify, arm: exact-match, stat: single, value: 1.572, unit: s, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 848815f4cdb0b6dda2b25e9cd6ec4ffb2f03777b, source: research/reproduction/evidence/results.json}
+      - {name: verify_clipped_gap_wall, series: stored-proof-verify, arm: clipped-gap, stat: single, value: 1.571, unit: s, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 848815f4cdb0b6dda2b25e9cd6ec4ffb2f03777b, source: research/reproduction/evidence/results.json}
+      - {name: exact_match_altered_sets_rejected, series: negatives, arm: exact-match, stat: count, value: 10, total: 10, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 848815f4cdb0b6dda2b25e9cd6ec4ffb2f03777b, source: research/reproduction/evidence/results.json}
+      - {name: clipped_gap_altered_sets_rejected, series: negatives, arm: clipped-gap, stat: count, value: 10, total: 10, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 848815f4cdb0b6dda2b25e9cd6ec4ffb2f03777b, source: research/reproduction/evidence/results.json}
+      - {name: review_added_negative_cases, stat: count, value: 19, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: bf66eecdac3f5329d2f8e53867c867318720d1dd, source: research/reproduction/REVIEW.md}
+
+  - id: cpu-full-suite
+    title: "Full confined CPU suite on the repaired integration (PR #4)"
+    status: measured
+    pr: 4
+    summary: "aggregate exit 77: 89 rows passed, 2 in part, 0 failed, 1 not run (13 GPU rows left out by design)"
+    conditions: n = 1, 4,371 s, shared 16-CPU VM
+    evidence: [docs/research-evidence.md]
+    metrics:
+      - {name: aggregate_exit, stat: single, value: 77, unit: exit_code, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+      - {name: rows_passed, series: suite-rows, arm: passed, stat: count, value: 89, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+      - {name: rows_partial, series: suite-rows, arm: partial, stat: count, value: 2, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+      - {name: rows_failed, series: suite-rows, arm: failed, stat: count, value: 0, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+      - {name: rows_not_run, series: suite-rows, arm: not-run, stat: count, value: 1, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+      - {name: suite_wall, stat: single, value: 4370.89, unit: s, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+
+  - id: cpu-verifier-baseline
+    title: "Matched upstream/fork CPU verifier baseline (PR #18)"
+    status: negative
+    pr: 18
+    summary: "median 2.67 s upstream vs 2.68 s fork, identical binaries: no speedup"
+    conditions: 5 alternating runs per arm, `-j 1`, one pinned CPU, shared VM
+    evidence: [research/performance/README.md]
+    metrics:
+      - {name: verify_wall_upstream, series: verifier-wall-j1-pr18, arm: upstream, stat: median, value: 2.67, unit: s, n: 5, spread: {sd: 0.0497, min: 2.59, max: 2.72}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 6851f4221fd29f3184853f9a160c837552b4b2df, source: research/performance/evidence/results.json}
+      - {name: verify_wall_fork, series: verifier-wall-j1-pr18, arm: fork, stat: median, value: 2.68, unit: s, n: 5, spread: {sd: 0.0991, min: 2.62, max: 2.87}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 6851f4221fd29f3184853f9a160c837552b4b2df, source: research/performance/evidence/results.json, note: "binary byte-identical to upstream; the difference is noise"}
+
+  - id: cpu-accounting-reuse
+    title: "Accounting-reuse candidate, with a stage profile (PR #18 follow-up)"
+    status: negative
+    pr: 18
+    summary: "0.04 s median difference, inside run-to-run spread: no speedup claimed"
+    conditions: alternating pairs, same setup as the baseline
+    evidence: [research/performance/followup/README.md]
+    metrics:
+      - {name: verify_wall_upstream, series: verifier-wall-j1-accounting, arm: upstream, stat: median, value: 2.63, unit: s, n: 5, spread: {sd: 0.0404, min: 2.56, max: 2.66}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 63bdfc469204578ed8ec629dc830de017c4642ba, source: research/performance/followup/cpu-account-reuse-evidence/results.json}
+      - {name: verify_wall_candidate, series: verifier-wall-j1-accounting, arm: candidate, stat: median, value: 2.59, unit: s, n: 5, spread: {sd: 0.0924, min: 2.46, max: 2.71}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 63bdfc469204578ed8ec629dc830de017c4642ba, source: research/performance/followup/cpu-account-reuse-evidence/results.json, note: "ranges overlap; not an improvement"}
+
+  - id: gpu-small-proof
+    title: "One H100, upstream small synthetic example, proof checked on a separate CPU machine (PR #23)"
+    status: reproduced
+    pr: 23
+    summary: "proof accepted (`YES`), 5 of 5 altered inputs rejected; proof 4,149,564 bytes; $1.19 all in"
+    conditions: "n = 1 cold run, synthetic weights, `-M 1`, one request; timings from file timestamps (±1 s)"
+    evidence: [research/gpu/README.md]
+    metrics:
+      - {name: proof_bytes, series: gpu-proof-bytes, arm: original, stat: single, value: 4149564, unit: B, n: 1, spread: null, hardware: gpu-h100-rental-a, date: 2026-11-03, commit: 6a46883f0a52b07fe74af36b49a4690d0fd8fcbf, source: research/gpu/bundle/out/example.proof}
+      - {name: cp_commit_wall, series: gpu-commit-wall, arm: original, stat: single, value: 13, unit: s, n: 1, spread: {resolution: 1}, hardware: gpu-h100-rental-a, date: 2026-11-03, commit: 6a46883f0a52b07fe74af36b49a4690d0fd8fcbf, source: research/gpu/README.md, note: "from file timestamps, not a timer"}
+      - {name: cp_prove_wall, series: gpu-prove-wall, arm: original, stat: single, value: 3, unit: s, n: 1, spread: {resolution: 1}, hardware: gpu-h100-rental-a, date: 2026-11-03, commit: 6a46883f0a52b07fe74af36b49a4690d0fd8fcbf, source: research/gpu/README.md, note: "from file timestamps, not a timer"}
+      - {name: gpu_mem_peak_sampled, series: gpu-mem-peak, arm: original, stat: max, value: 74165, unit: MiB, n: 1, spread: null, hardware: gpu-h100-rental-a, date: 2026-11-03, commit: 6a46883f0a52b07fe74af36b49a4690d0fd8fcbf, source: research/gpu/logs/gpu-samples.csv, note: "max of 500 ms samples, reached during cp_commit"}
+      - {name: cost_all_in, series: gpu-cost, arm: original, stat: single, value: 1.186, unit: USD, n: 1, spread: null, hardware: gpu-h100-rental-a, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/README.md, note: "final invoice, includes the about 18.6 min prover build"}
+      - {name: mutations_rejected, series: gpu-mutations, arm: original, stat: count, value: 5, total: 5, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 6a46883f0a52b07fe74af36b49a4690d0fd8fcbf, source: research/gpu/local-verify/result.json}
+      - {name: review_extra_corruptions_rejected, stat: count, value: 11, total: 11, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 4c16ffaae87904d48e180c56f5b7c30049cd17c8, source: research/gpu/review/result.txt}
+      - {name: review_cpu_verify_wall, stat: median, value: 1.580, unit: s, n: 7, spread: {sd: 0.026, min: 1.549, max: 1.620}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 4c16ffaae87904d48e180c56f5b7c30049cd17c8, source: research/gpu/review/result.txt, note: "includes process start"}
+
+  - id: gpu-replication-1
+    title: "Independent replication of that run (PR #26)"
+    status: reproduced
+    status_note: (agree)
+    pr: 26
+    summary: "`cp_prove` mean 2.35 s (SD 0.13); `cp_commit` mean 18.8 s (SD 2.2); 4 of 4 proofs accepted, 20 of 20 mutations rejected; same answer token on every run"
+    conditions: "separate rental and lane; 1 cold + 3 warm runs, n = 3 timed under `/usr/bin/time`; one machine"
+    evidence: [research/gpu/replication-1/README.md]
+    metrics:
+      - {name: cp_prove_wall, series: gpu-prove-wall, arm: replication-1, stat: mean, value: 2.347, unit: s, n: 3, spread: {sd: 0.127, min: 2.21, max: 2.46}, hardware: gpu-h100-rental-b, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/numbers.json, note: "warm runs under /usr/bin/time"}
+      - {name: cp_commit_wall, series: gpu-commit-wall, arm: replication-1, stat: mean, value: 18.83, unit: s, n: 3, spread: {sd: 2.18, min: 17.15, max: 21.29}, hardware: gpu-h100-rental-b, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/numbers.json, note: "warm runs under /usr/bin/time; slower than rental-a in the key-file phase"}
+      - {name: proof_bytes, series: gpu-proof-bytes, arm: replication-1, stat: mean, value: 4156212, unit: B, n: 4, spread: {sd: 6033, min: 4149084, max: 4161860}, hardware: gpu-h100-rental-b, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/numbers.json, note: "size varies by commitment seed"}
+      - {name: gpu_mem_peak_sampled, series: gpu-mem-peak, arm: replication-1, stat: max, value: 74123, unit: MiB, n: 4, spread: null, hardware: gpu-h100-rental-b, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/numbers.json, note: "same value on all 4 runs; max of 500 ms samples during cp_commit"}
+      - {name: cost_all_in, series: gpu-cost, arm: replication-1, stat: single, value: 0.92, unit: USD, n: 1, spread: null, hardware: gpu-h100-rental-b, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/README.md, note: "includes build, 3 repeats and export"}
+      - {name: proofs_accepted, stat: count, value: 4, total: 4, unit: count, n: 4, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/local-verify}
+      - {name: mutations_rejected, series: gpu-mutations, arm: replication-1, stat: count, value: 20, total: 20, unit: count, n: 4, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: ae70e447b57f0f466c5012c88c9e41bf5a9d5712, source: research/gpu/replication-1/local-verify}
+
+  - id: cpu-verifier-inline-limbs
+    title: "Verifier speedup: inline limbs for exact planning arithmetic (PR #27)"
+    status: measured
+    pr: 27
+    summary: "complete stored-proof verification 15 to 18% faster across two independent measurements (author 2.610 to 2.145 s median, -17.8%, confirmed -18.0% on the final source; reviewer -15.4%); verdicts and output byte-identical on 9 cases"
+    conditions: "single thread (`-j 1`), one pinned CPU, 12 and 10 alternating rounds, non-overlapping ranges; at `-j 4` the gain is -10.1% wall"
+    evidence: [research/performance/real/README.md]
+    evidence_note: "; reviewer figure in the commit message of `29907e5f`"
+    metrics:
+      - {name: verify_wall_stock_j1, series: verifier-wall-j1-limbs, arm: stock, stat: median, value: 2.610, unit: s, n: 12, spread: {sd: 0.107, min: 2.55, max: 2.94}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/single/results.json}
+      - {name: verify_wall_candidate_j1, series: verifier-wall-j1-limbs, arm: candidate, stat: median, value: 2.145, unit: s, n: 12, spread: {sd: 0.058, min: 2.09, max: 2.28}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/single/results.json}
+      - {name: verify_wall_stock_j1_confirm, series: verifier-wall-j1-limbs-confirm, arm: stock, stat: median, value: 2.70, unit: s, n: 10, spread: {sd: 0.089, min: 2.59, max: 2.89}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/single-final/results.json}
+      - {name: verify_wall_candidate_j1_confirm, series: verifier-wall-j1-limbs-confirm, arm: candidate, stat: median, value: 2.215, unit: s, n: 10, spread: {sd: 0.080, min: 2.12, max: 2.38}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/single-final/results.json, note: "final source with the test-only switch"}
+      - {name: verify_wall_stock_j1_reviewer, series: verifier-wall-j1-limbs-reviewer, arm: stock, stat: median, value: 2.592, unit: s, n: 12, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: commit-message, note: "reviewer run; only the median and \"ranges non-overlapping\" are recorded"}
+      - {name: verify_wall_candidate_j1_reviewer, series: verifier-wall-j1-limbs-reviewer, arm: candidate, stat: median, value: 2.194, unit: s, n: 12, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: commit-message, note: "reviewer run; only the median and \"ranges non-overlapping\" are recorded"}
+      - {name: verify_wall_stock_j4, series: verifier-wall-j4-limbs, arm: stock, stat: median, value: 1.535, unit: s, n: 12, spread: {sd: 0.037, min: 1.49, max: 1.61}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/threads4/results.json}
+      - {name: verify_wall_candidate_j4, series: verifier-wall-j4-limbs, arm: candidate, stat: median, value: 1.380, unit: s, n: 12, spread: {sd: 0.030, min: 1.33, max: 1.41}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/threads4/results.json}
+      - {name: differential_cases_identical, stat: count, value: 9, total: 9, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 29907e5fbe648b9ec246cebf9d757511a751fca2, source: research/performance/real/results/differential-final/results.json}
+
+  - id: kda-fixedpoint-slice
+    title: "KDA micro-slice: signed staged-floor fixed-point recurrence (PR #19)"
+    status: measured
+    pr: 19
+    summary: "11,840-byte proof, 56 product gates; 50 hostile proofs rejected; fixed point differs from scalar FP32 by up to 1.73 (numerical equivalence fails, as expected)"
+    conditions: one token, one head, dimension 1, synthetic inputs, no weights, CPU
+    evidence: [research/operators/glm_kda_fixedpoint/README.md]
+    metrics:
+      - {name: proof_bytes, series: operator-proof-bytes, arm: kda-fixedpoint, stat: single, value: 11840, unit: B, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: aeebf5ffeea8fbf0b048a156aad3c298ad2b02e1, source: research/operators/glm_kda_fixedpoint/evidence.json}
+      - {name: product_gates, stat: count, value: 56, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: aeebf5ffeea8fbf0b048a156aad3c298ad2b02e1, source: research/operators/glm_kda_fixedpoint/reference.json}
+      - {name: hostile_proofs_rejected, stat: count, value: 50, total: 50, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: aeebf5ffeea8fbf0b048a156aad3c298ad2b02e1, source: research/operators/glm_kda_fixedpoint/evidence.json}
+      - {name: max_divergence_vs_fp32, stat: max, value: 1.734375, unit: abs_diff, n: 1940, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: aeebf5ffeea8fbf0b048a156aad3c298ad2b02e1, source: research/operators/glm_kda_fixedpoint/reference.json, note: "over 1,940 in-range reference cases; reference-only, not proved statements"}
+
+  - id: operator-adoption
+    title: "Adoption of top-k and operator PRs #14 to #16 onto the repaired integration (PR #20)"
+    status: in progress
+    status_note: (held)
+    pr: 20
+    summary: "targeted gaps closed: clang build exit 0, weight_sums 0 skipped, integrations unit 1961 passed / 3 skipped; not approved for adoption"
+    conditions: CPU only, confined runner
+    evidence: [research/integration-adoption/README.md]
+    metrics:
+      - {name: clang_build_exit, stat: single, value: 0, unit: exit_code, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: abbca36492369298f46ec31a9c829f238aac8825, source: research/integration-adoption/clang-result.json}
+      - {name: weight_sums_skipped, stat: count, value: 0, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: abbca36492369298f46ec31a9c829f238aac8825, source: research/integration-adoption/README.md}
+      - {name: unit_passed, series: unit-tests, arm: passed, stat: count, value: 1961, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: abbca36492369298f46ec31a9c829f238aac8825, source: research/integration-adoption/README.md}
+      - {name: unit_skipped, series: unit-tests, arm: skipped, stat: count, value: 3, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: abbca36492369298f46ec31a9c829f238aac8825, source: research/integration-adoption/README.md}
+      - {name: unit_deselected, series: unit-tests, arm: deselected, stat: count, value: 20, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: abbca36492369298f46ec31a9c829f238aac8825, source: research/integration-adoption/README.md, note: "root-only cases, not executed"}
+
+  - id: host-path-redaction
+    title: "Host-path redaction of published evidence (PR #21)"
+    status: done
+    status_note: (hygiene)
+    pr: 21
+    summary: "no result number; adds `scripts/check-no-host-paths.sh`"
+    conditions: applies to all evidence trees
+    evidence: [scripts/check-no-host-paths.sh]
+    metrics: []
+
+  - id: open-studies
+    title: Real-model port feasibility, numerical fidelity, clipped-gap and Fiat-Shamir studies
+    status: in progress
+    pr: null
+    summary: none yet
+    conditions: open PRs and lanes, not merged
+    evidence: [docs/research-roadmap.md]
+    metrics: []
