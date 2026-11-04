@@ -1,0 +1,500 @@
+{
+ "method": "Clopper-Pearson exact two-sided 95% interval of accepted/n, per policy and class",
+ "cells": {
+  "shipped": {
+   "honest": {
+    "accepted": 16,
+    "n": 16,
+    "rate": 1.0,
+    "ci95": [
+     0.7941,
+     1.0
+    ]
+   },
+   "fp2nd-1-redecode": {
+    "accepted": 15,
+    "n": 16,
+    "rate": 0.9375,
+    "ci95": [
+     0.6977,
+     0.9984
+    ]
+   },
+   "rand-1-redecode": {
+    "accepted": 13,
+    "n": 16,
+    "rate": 0.8125,
+    "ci95": [
+     0.5435,
+     0.9595
+    ]
+   },
+   "fp2nd-4": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   },
+   "rand-4": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   },
+   "int2nd-4": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   },
+   "rand-1": {
+    "accepted": 1,
+    "n": 16,
+    "rate": 0.0625,
+    "ci95": [
+     0.0016,
+     0.3023
+    ]
+   },
+   "rand-reply": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   }
+  },
+  "fit": {
+   "honest": {
+    "accepted": 15,
+    "n": 16,
+    "rate": 0.9375,
+    "ci95": [
+     0.6977,
+     0.9984
+    ]
+   },
+   "fp2nd-1-redecode": {
+    "accepted": 15,
+    "n": 16,
+    "rate": 0.9375,
+    "ci95": [
+     0.6977,
+     0.9984
+    ]
+   },
+   "rand-1-redecode": {
+    "accepted": 13,
+    "n": 16,
+    "rate": 0.8125,
+    "ci95": [
+     0.5435,
+     0.9595
+    ]
+   },
+   "fp2nd-4": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   },
+   "rand-4": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   },
+   "int2nd-4": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   },
+   "rand-1": {
+    "accepted": 1,
+    "n": 16,
+    "rate": 0.0625,
+    "ci95": [
+     0.0016,
+     0.3023
+    ]
+   },
+   "rand-reply": {
+    "accepted": 0,
+    "n": 16,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.2059
+    ]
+   }
+  }
+ },
+ "decomposition": {
+  "shipped": {
+   "n": 128,
+   "accepted": 45,
+   "refused": 83,
+   "rejected": 0,
+   "missing": 0
+  },
+  "fit": {
+   "n": 128,
+   "accepted": 44,
+   "refused": 84,
+   "rejected": 0,
+   "missing": 0
+  },
+  "total": {
+   "n": 256,
+   "accepted": 89,
+   "refused": 167,
+   "rejected": 0,
+   "missing": 0,
+   "score_fails_refused": 167,
+   "score_fails_total": 167,
+   "score_fails_reaching_cp_verify": 0
+  }
+ },
+ "margins": {
+  "shipped": {
+   "honest_75": {
+    "under_theta_frac": 0.0504,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_67": {
+    "under_theta_frac": 0.9402,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_69": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_74": {
+    "under_theta_frac": 0.3667,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_80": {
+    "under_theta_frac": 0.8141,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_81": {
+    "under_theta_frac": 0.5873,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_84": {
+    "under_theta_frac": 0.7541,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_90": {
+    "under_theta_frac": 0.8783,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_95": {
+    "under_theta_frac": 0.7998,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_96": {
+    "under_theta_frac": 0.9992,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_97": {
+    "under_theta_frac": 0.7081,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_109": {
+    "under_theta_frac": 0.5906,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_113": {
+    "under_theta_frac": 0.9402,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_119": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_125": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_127": {
+    "under_theta_frac": 0.2632,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_66": {
+    "under_theta_frac": 0.1056,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_73": {
+    "under_theta_frac": 0.0984,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_74": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_77": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_81": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_86": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_91": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_95": {
+    "under_theta_frac": 0.1035,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_105": {
+    "under_theta_frac": 0.0992,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_109": {
+    "under_theta_frac": 0.0938,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_112": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_117": {
+    "under_theta_frac": 0.1058,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_124": {
+    "under_theta_frac": 0.0756,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   }
+  },
+  "fit": {
+   "honest_75": {
+    "under_theta_frac": -0.4324,
+    "positions_over_C": 1,
+    "decision": "refused"
+   },
+   "fp2nd_1_redecode_67": {
+    "under_theta_frac": 0.9047,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_69": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_74": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_80": {
+    "under_theta_frac": 0.7041,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_81": {
+    "under_theta_frac": 0.343,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_84": {
+    "under_theta_frac": 0.6086,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_90": {
+    "under_theta_frac": 0.8063,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_95": {
+    "under_theta_frac": 0.6813,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_96": {
+    "under_theta_frac": 0.9987,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_97": {
+    "under_theta_frac": 0.5354,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_109": {
+    "under_theta_frac": 0.3483,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_113": {
+    "under_theta_frac": 0.9048,
+    "positions_over_C": 0,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_119": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_125": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "fp2nd_1_redecode_127": {
+    "under_theta_frac": 0.1158,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_66": {
+    "under_theta_frac": 0.2017,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_73": {
+    "under_theta_frac": 0.1902,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_74": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_77": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_81": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_86": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_91": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_95": {
+    "under_theta_frac": 0.1983,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_105": {
+    "under_theta_frac": 0.1916,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_109": {
+    "under_theta_frac": 0.183,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_112": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_117": {
+    "under_theta_frac": 0.2021,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   },
+   "rand_1_redecode_124": {
+    "under_theta_frac": 0.1539,
+    "positions_over_C": 1,
+    "decision": "accepted"
+   }
+  }
+ },
+ "policy_differences": [
+  "honest_75"
+ ],
+ "accepted_using_cap": {
+  "shipped": {
+   "honest": 0,
+   "fp2nd-1-redecode": 3,
+   "rand-1-redecode": 13,
+   "fp2nd-4": 0,
+   "rand-4": 0,
+   "int2nd-4": 0,
+   "rand-1": 1,
+   "rand-reply": 0
+  },
+  "fit": {
+   "honest": 0,
+   "fp2nd-1-redecode": 5,
+   "rand-1-redecode": 13,
+   "fp2nd-4": 0,
+   "rand-4": 0,
+   "int2nd-4": 0,
+   "rand-1": 1,
+   "rand-reply": 0
+  }
+ }
+}
