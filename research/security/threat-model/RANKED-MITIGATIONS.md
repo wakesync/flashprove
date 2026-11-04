@@ -66,8 +66,13 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
   greedy only).
 - **Cost:** medium. No protocol change (policy already exists). Cost is operational: integer
   serving is slower than fp serving and diverges from fp16 at about 6.81 % of positions
-  (`docs/limits.md:2760-2765`, measured there). A cheaper middle ground is `cap=0` with a tighter
-  theta, which keeps a mean bound but removes the free branch; not tested.
+  (`docs/limits.md:2760-2765`, measured there). A middle ground short of exact match has to tighten
+  **both** limits, because they carry different acceptances (CODE-CHECKS C5): `cap=0` would remove
+  #51's cap-carried swaps (all 13 accepted random-token swaps, 3 of 15 float-second-choice), but not
+  #50's 5 steered acceptances, which have `above-clip=0` and pass on the theta mean bound alone, nor
+  the 12 of 15 #51 swaps that stay under C. Those need a lower theta (and a lower C, since theta's room
+  grows with reply length). Not tested; where such a point sits between "no free branch" and false
+  rejections of honest replies is unknown.
 - **Type:** policy choice (client side) + documentation. Holds up: yes, the evidence supports it.
 
 ## M5. Reproducible verifier build and a client-held manifest of what to accept

@@ -105,12 +105,24 @@ refused by the honest `cp_prove`, so `cp_verify` never judged an out-of-limits p
   tokens, at any positions" (`docs/protocol.md:47`), and the hidden costs are a prover-chosen
   witness (`docs/limits.md:302-306`).
 
-Stack (inferred): the clipped-gap `cap` gives the provider one free branch choice; a sleeper's
-harmful branch only needs to be *reachable* (rank 2 at one position), not dominant. After the swap
-the model's own greedy continuation follows the harmful branch at near-zero cost. So a partially
-suppressed backdoor (safety tuning pushed it to rank 2) becomes provable under clipped gap and not
-under exact match. Exact match is the fix for this stack, at the cost of requiring integer serving
-(`docs/architecture.md:141-146`). **Mitigation M4.**
+Two mechanisms carry these acceptances, and they are different limits:
+- **cap (one position over C), #51.** `cp_verify` prints `above-clip=1` on #51's accepted lines (the
+  policy bound). From #51's cost vectors (`intervals.json` there, `accepted_using_cap`, shipped): all
+  13 accepted random-token swaps use the one allowed position over C, and 3 of the 15 accepted
+  float-second-choice swaps do. The other 12 of those 15 are under C everywhere and pass on theta.
+- **theta (the mean bound), #50.** `above-clip=0` on all 21 clipped-gap proofs in #50, so cap = 1
+  was never used. Each of the 5 accepted steered replies has one or two costs above 256 but under C,
+  and passes on mean(min(cost, C)) <= theta = 323,343 alone (#50 RESULTS, "the limit that lets these
+  through is the theta mean bound, not cap").
+
+Stack (inferred): the clipped-gap limits give the provider a branch choice, either as the one
+position over C that cap allows or as one or two costly tokens absorbed by the theta mean over the
+reply (room grows with reply length, about theta x len). A sleeper's harmful branch only needs to be
+*reachable* (rank 2 at one position), not dominant. After the swap the model's own greedy
+continuation follows the harmful branch at near-zero cost. So a partially suppressed backdoor (safety
+tuning pushed it to rank 2) becomes provable under clipped gap. That exact match closes this stack is
+by design, not measured (see above); it costs integer serving (`docs/architecture.md:141-146`).
+**Mitigation M4.**
 
 ## C6. Fiat-Shamir (#41) status
 

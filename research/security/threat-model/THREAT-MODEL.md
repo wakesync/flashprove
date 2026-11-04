@@ -61,8 +61,7 @@ public README, cited, `github.com/lambdaclass/CommitLLM`, fetched 2026-11-04) / 
   provider commits to a small model that gives the answer it wants" (`docs/limits.md:190-191`);
   (b) choosing the system prompt and template tokens, which the proof then faithfully binds;
   (c) under clipped gap, steering within the allowance: 5 of 54 changed steered replies proved and
-  accepted `WITHIN LIMITS` (open PR #50, honest prover, unreplicated; these pass on the theta mean
-  bound, `above-clip=0`, cap never used), one-swap-then-continue 15/16 and 13/16 (open PR #51, honest
+  accepted `WITHIN LIMITS` (open PR #50, honest prover, unreplicated), one-swap-then-continue 15/16 and 13/16 (open PR #51, honest
   prover, unreplicated);
   (d) truncation, which verifies as a shorter reply (`docs/protocol.md:66`); (e) giving different
   clients different IDs, unless the ID is published in one shared place (`docs/limits.md:183-186`);
