@@ -302,6 +302,16 @@ examination**, not be replaced with a claim that these attacks are excluded. Kee
 cross-configuration theorem caveat and SO-50/SO-63 caveats intact. No public vulnerability
 issue was created by this study.
 
+## A short question for an expert reviewer
+
+Fenzi's Proposition 5.5 needs challenges derived from `id(val(x))`. FlashProve's first
+query holds the raw bytes of the three configuration files plus serialized plan fields,
+shapes and layout, while the per-segment equations and some constants are fixed in the
+verifier source. Is hashing the raw generator inputs (rather than a canonical encoding
+of every generated equation) enough for the Proposition 5.5 reduction, provided the map
+from those files to the relation is a fixed, non-programmable function of the trusted
+verifier build? Or does the reduction need the generated relation itself hashed?
+
 ## References and version receipts
 
 Full PDFs were available in the lane's paper cache and read including the technical
