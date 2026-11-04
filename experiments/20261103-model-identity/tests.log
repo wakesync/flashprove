@@ -1,0 +1,10 @@
+test_projection_is_exact_and_not_stock_mutation (__main__.ExperimentTests.test_projection_is_exact_and_not_stock_mutation) ... ok
+test_runtime_injection_at_layer_boundary (__main__.ExperimentTests.test_runtime_injection_at_layer_boundary) ... ok
+test_same_model_as_stored_exact_fixture (__main__.ExperimentTests.test_same_model_as_stored_exact_fixture) ... ok
+test_saved_scores_independent_integer_recount (__main__.ExperimentTests.test_saved_scores_independent_integer_recount) ... ok
+test_weight_surrogate_changes_only_one_column (__main__.ExperimentTests.test_weight_surrogate_changes_only_one_column) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.001s
+
+OK
