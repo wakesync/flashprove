@@ -1,0 +1,420 @@
+{
+ "dtypes": {
+  "BF16": 1199
+ },
+ "index_total_size_bytes": 55562855904.0,
+ "maverick_committed_from_docs_model_md": 400711352320,
+ "maverick_per_token_matrix_macs": 16149708800,
+ "params_by_group": {
+  "embedding": 1271398400,
+  "head": 1271398400,
+  "mtp": 424699392,
+  "text.full_attn": 1677729792,
+  "text.linear_attn": 5562051072,
+  "text.mlp": 17112760320,
+  "text.norm": 660480,
+  "vision": 460730096
+ },
+ "params_committed_text": 26895998464,
+ "params_text_decoder": 24353201664,
+ "params_total": 27781427952,
+ "per_token_macs_text_incl_gains_and_conv_taps": 25624600064,
+ "per_token_matrix_macs_text": 25621954560,
+ "ratio_committed_qwen_over_maverick": 0.067121,
+ "ratio_per_token_macs_qwen_over_maverick": 1.586527,
+ "repo": "Qwen/Qwen3.8-27B",
+ "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+ "shards": 18,
+ "tensor_shapes": {
+  "lm_head.weight": [
+   "BF16",
+   [
+    248320,
+    5120
+   ]
+  ],
+  "model.language_model.embed_tokens.weight": [
+   "BF16",
+   [
+    248320,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.input_layernorm.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.A_log": [
+   "BF16",
+   [
+    48
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.conv1d.weight": [
+   "BF16",
+   [
+    10240,
+    1,
+    4
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.dt_bias": [
+   "BF16",
+   [
+    48
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.in_proj_a.weight": [
+   "BF16",
+   [
+    48,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.in_proj_b.weight": [
+   "BF16",
+   [
+    48,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.in_proj_qkv.weight": [
+   "BF16",
+   [
+    10240,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.in_proj_z.weight": [
+   "BF16",
+   [
+    6144,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.norm.weight": [
+   "BF16",
+   [
+    128
+   ]
+  ],
+  "model.language_model.layers.N.linear_attn.out_proj.weight": [
+   "BF16",
+   [
+    5120,
+    6144
+   ]
+  ],
+  "model.language_model.layers.N.mlp.down_proj.weight": [
+   "BF16",
+   [
+    5120,
+    17408
+   ]
+  ],
+  "model.language_model.layers.N.mlp.gate_proj.weight": [
+   "BF16",
+   [
+    17408,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.mlp.up_proj.weight": [
+   "BF16",
+   [
+    17408,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.post_attention_layernorm.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.self_attn.k_norm.weight": [
+   "BF16",
+   [
+    256
+   ]
+  ],
+  "model.language_model.layers.N.self_attn.k_proj.weight": [
+   "BF16",
+   [
+    1024,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.self_attn.o_proj.weight": [
+   "BF16",
+   [
+    5120,
+    6144
+   ]
+  ],
+  "model.language_model.layers.N.self_attn.q_norm.weight": [
+   "BF16",
+   [
+    256
+   ]
+  ],
+  "model.language_model.layers.N.self_attn.q_proj.weight": [
+   "BF16",
+   [
+    12288,
+    5120
+   ]
+  ],
+  "model.language_model.layers.N.self_attn.v_proj.weight": [
+   "BF16",
+   [
+    1024,
+    5120
+   ]
+  ],
+  "model.language_model.norm.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "model.visual.blocks.N.attn.proj.bias": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.attn.proj.weight": [
+   "BF16",
+   [
+    1152,
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.attn.qkv.bias": [
+   "BF16",
+   [
+    3456
+   ]
+  ],
+  "model.visual.blocks.N.attn.qkv.weight": [
+   "BF16",
+   [
+    3456,
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.mlp.linear_fc1.bias": [
+   "BF16",
+   [
+    4304
+   ]
+  ],
+  "model.visual.blocks.N.mlp.linear_fc1.weight": [
+   "BF16",
+   [
+    4304,
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.mlp.linear_fc2.bias": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.mlp.linear_fc2.weight": [
+   "BF16",
+   [
+    1152,
+    4304
+   ]
+  ],
+  "model.visual.blocks.N.norm1.bias": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.norm1.weight": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.norm2.bias": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.blocks.N.norm2.weight": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.merger.linear_fc1.bias": [
+   "BF16",
+   [
+    4608
+   ]
+  ],
+  "model.visual.merger.linear_fc1.weight": [
+   "BF16",
+   [
+    4608,
+    4608
+   ]
+  ],
+  "model.visual.merger.linear_fc2.bias": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "model.visual.merger.linear_fc2.weight": [
+   "BF16",
+   [
+    5120,
+    4608
+   ]
+  ],
+  "model.visual.merger.norm.bias": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.merger.norm.weight": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.patch_embed.proj.bias": [
+   "BF16",
+   [
+    1152
+   ]
+  ],
+  "model.visual.patch_embed.proj.weight": [
+   "BF16",
+   [
+    1152,
+    3,
+    2,
+    16,
+    16
+   ]
+  ],
+  "model.visual.pos_embed.weight": [
+   "BF16",
+   [
+    2304,
+    1152
+   ]
+  ],
+  "mtp.fc.weight": [
+   "BF16",
+   [
+    5120,
+    10240
+   ]
+  ],
+  "mtp.layers.N.input_layernorm.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "mtp.layers.N.mlp.down_proj.weight": [
+   "BF16",
+   [
+    5120,
+    17408
+   ]
+  ],
+  "mtp.layers.N.mlp.gate_proj.weight": [
+   "BF16",
+   [
+    17408,
+    5120
+   ]
+  ],
+  "mtp.layers.N.mlp.up_proj.weight": [
+   "BF16",
+   [
+    17408,
+    5120
+   ]
+  ],
+  "mtp.layers.N.post_attention_layernorm.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "mtp.layers.N.self_attn.k_norm.weight": [
+   "BF16",
+   [
+    256
+   ]
+  ],
+  "mtp.layers.N.self_attn.k_proj.weight": [
+   "BF16",
+   [
+    1024,
+    5120
+   ]
+  ],
+  "mtp.layers.N.self_attn.o_proj.weight": [
+   "BF16",
+   [
+    5120,
+    6144
+   ]
+  ],
+  "mtp.layers.N.self_attn.q_norm.weight": [
+   "BF16",
+   [
+    256
+   ]
+  ],
+  "mtp.layers.N.self_attn.q_proj.weight": [
+   "BF16",
+   [
+    12288,
+    5120
+   ]
+  ],
+  "mtp.layers.N.self_attn.v_proj.weight": [
+   "BF16",
+   [
+    1024,
+    5120
+   ]
+  ],
+  "mtp.norm.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "mtp.pre_fc_norm_embedding.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ],
+  "mtp.pre_fc_norm_hidden.weight": [
+   "BF16",
+   [
+    5120
+   ]
+  ]
+ },
+ "tensors": 1199
+}
