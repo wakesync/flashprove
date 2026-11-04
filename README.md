@@ -27,7 +27,7 @@ Every number below comes from a file on `main` (the one exception, a reviewer fi
 | Qwen Gated DeltaNet head at real shape, M1 (PR #47) | negative, unreplicated | FAIL (NO-GO for M2 as registered): 10 of 10 honest proofs accepted (prove median 51.4 s, verify 11.6 s, 50.4 MB) and 40 of 40 hostile proofs rejected, but under heavy-tailed values delta reaches 422,167 > 2^18 at F = 12 (0 of 5 seeds fit) | one head, 128 x 128 state, T = 4, F = 12, synthetic inputs, research test security settings (target 10 bits), CPU, shared loaded VM; range study 1,024 steps x 4 distributions x 5 seeds, integer reference only | [research/operators/qwen_deltanet/](research/operators/qwen_deltanet/README.md) |
 | Still open: integer-vs-BF16/FP8 fidelity (#8), KDA model-scale sweep (PR #42), cost teardown and larger-memory GPU test (PR #44) | in progress | none yet | open PRs, issues and lanes, not merged | [docs/research-roadmap.md](docs/research-roadmap.md) |
 
-_Last regenerated from `research/results.yaml` on 2026-11-04 (UTC), against main `ff68a98b`._
+_Last regenerated from `research/results.yaml` on 2026-11-04 (UTC), against main `bfb78402`._
 <!-- results:end -->
 
 What this table does not show: no full-size (Maverick) run, no real model weights on GPU, no serving, no TEE, no production use, and no comparison with other verifiable-inference systems. The GPU rows are upstream's small example on made-up weights.
