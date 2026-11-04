@@ -11,15 +11,18 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
   conversion tool + version (GGUF quantizer, `weight_sums`, `scales/` commit), `policy.txt`/`KL.bin`/
   `layout.txt` digests, the `-public-weights` 32-byte file if public, and the resulting ID. For public
   weights, anyone can recompute the ID from the manifest (`prover/common/public_weights.h:6-13`), so a
-  signature on the manifest becomes a signature on the ID. Optionally bind the manifest digest into
-  the configuration (for example a comment line in `policy.txt`, which is already hashed byte for
-  byte: PR #41's comment-control case shows any byte changes the ID).
+  signature on the manifest becomes a signature on the ID. Binding the manifest digest into the
+  configuration itself is **not available today and untested**: the configuration files are hashed
+  byte for byte, but the parameter-file syntax says the frame lines take "No blank line, comment or carriage return"
+  (`verifier/docs/parameter-file.md:39`), and PR #41's comment control (appended to `layout.txt`)
+  ended `NO: model-statement`. That shows the bytes are bound, not that a comment-bearing file is
+  usable. Binding it in would need a parser or format change.
 - **Closes:** A2 (supply chain swap after vetting), A3 (adapter swap), A6 (MITM on the ID) as far as
   the signature key is trusted; gives sleeper defenses (vetting, scanning) a fixed object to vet.
 - **Does not close:** a backdoor in the vetted checkpoint itself; a malicious signer.
 - **Cost:** low. Manifest format + a `tools/` script to recompute and compare; signing with an
-  existing scheme (Sigstore / minisign / SSH signatures). About 1-2 days. The `policy.txt` comment
-  trick needs no prover change.
+  existing scheme (Sigstore / minisign / SSH signatures). About 1-2 days for the detached manifest.
+  An in-configuration binding would be extra and is not costed.
 - **Type:** protocol (manifest) + small code (tool). Fits under #9's envelope work.
 
 ## M2. Bind tokenizer, chat template, system prompt and end tokens into the manifest and the client check
