@@ -37,6 +37,7 @@ exploit the gap deliberately.
 | Next token `y` | Yes, but only at the output-head segment (deferred) | same RESULTS.md, next-token row: first challenge unchanged 5/5, rejected later (measured) |
 | Tokenizer, chat template, end-token ids | **No** | `docs/architecture.md:223`; `docs/operators-duties.md:682-685` (row R33) |
 | System prompt / any server-added tokens | **Only as tokens.** The proof binds whatever IDs are in the window; it does not say who chose them | `docs/operators-duties.md:681-683`; `integrations/ask_and_check.py:10-12` (with `--chat` the server chooses prompt IDs, best exit 24, never 0) |
+| Prompt tokens under clipped gap (incl. a server-added suffix carrying a trigger) | **Bound, but not scored.** "prompt tokens are not scored" under clipped gap, so a trigger in server-chosen prompt tokens costs nothing against C, theta or cap; the reply it elicits is then scored as usual. This is the C4 channel (who chose the prompt) plus C5 (clipped gap) | `docs/limits.md:295`; CODE-CHECKS.md C4, C5 (inferred) |
 | Sampling (temperature, seed, top-p) | **No.** "Sampling is not checked under any policy, because a request carries no random seed" | `docs/protocol.md:43` |
 | Client identity, time, freshness | **No** | `docs/limits.md:351-367` |
 | The verifier binary and built-in constants | **No**; a manual format version stands in | `research/security/fiat-shamir-attacks.md:20-21,53` |

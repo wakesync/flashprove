@@ -69,7 +69,7 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
   greedy only).
 - **Cost:** medium. No protocol change (policy already exists). Cost is operational: integer
   serving is slower than fp serving and diverges from fp16 at about 6.81 % of positions
-  (`docs/limits.md:2760-2765`, measured there). A middle ground short of exact match has to tighten
+  (`docs/limits.md:2760-2765`, reported there from an outside Python implementation of the integer model, `docs/limits.md:2783-2789`). A middle ground short of exact match has to tighten
   **both** limits, because they carry different acceptances (CODE-CHECKS C5): `cap=0` would remove
   #51's cap-carried swaps (all 13 accepted random-token swaps, 3 of 15 float-second-choice), but not
   #50's 5 steered acceptances, which have `above-clip=0` and pass on the theta mean bound alone, nor

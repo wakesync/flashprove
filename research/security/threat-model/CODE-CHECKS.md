@@ -46,7 +46,7 @@ by the ID (`verifier/src/cp_verify.cpp:2239-2254`), so a proof over other weight
 defeat the binding of the weight tables, which is the soundness question (row LIM-2, below).
 
 Caveat, from the repo's own limits: binding of the weights to the ID "has not been shown" for the
-released programs (`docs/limits.md:172-174`). Row LIM-2 reports lying key files with an anchor
+released programs (`docs/limits.md:169-174`). Row LIM-2 reports lying key files with an anchor
 altered at up to 65,536 of 8,388,608 positions per row accepted by an unedited `cp_verify`, argued on
 paper to still decode to the same weights (cited from `docs/limits-all-rows.tsv`, row LIM-2,
 measured there, not on the released programs). So "no weight swap" rests on the Reed-Solomon

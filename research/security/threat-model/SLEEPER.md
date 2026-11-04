@@ -59,10 +59,11 @@ controls:
    choice of `KL.bin` scales alone, on clean weights, is **not known** and not tested here
    (inferred as a plausible but unshown channel). It is narrower than the GGUF attack because the
    scales are a few words per layer, not per-weight choices.
-3. **The noise floor hides it.** The docs measured the integer model's top token differing from the
+3. **The noise floor hides it.** The docs report the integer model's top token differing from the
    16-bit weights at 6.81 % of 84,893 positions, and 3.11 % between the integer model and the 4-bit
-   files it was made from (`docs/limits.md:2760-2770`; measured in this repo, three machines, not on
-   the released programs). So "the integer model behaves like the fp model" can only be checked
+   files it was made from (`docs/limits.md:2760-2770`; reported there, measured on three machines
+   with "a Python implementation of the integer model that is not this repository's",
+   `docs/limits.md:2783-2789`; not on the released programs). So "the integer model behaves like the fp model" can only be checked
    statistically, and a quantization-triggered backdoor that only fires on a trigger is far below
    that floor on random text (inferred).
 
@@ -86,7 +87,8 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
   compromised front end) supplies the one swap; the weights supply the rest. That exact match
   closes this specific stack is by design, not measured; it does not close a strong backdoor.
 - Also from `docs/limits.md:295`: under clipped gap "prompt tokens are not scored" and the mean and
-  count "run over one output that the prover picks".
+  count "run over one output that the prover picks". So a trigger carried in
+  server-added prompt tokens costs nothing against the limits (THREAT-MODEL.md, row "Prompt tokens under clipped gap").
 
 ## What the proof is good for against sleepers (the positive side)
 
