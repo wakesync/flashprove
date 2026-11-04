@@ -9,9 +9,15 @@ Checks, reading the rendered markdown (not re-rendering it):
   - every evidence path in CLAIMS.md (and the README link) exists in the checkout;
   - the replication label in CLAIMS.md matches results.yaml, and a row that is
     unreplicated says "unreplicated" in its README and CLAIMS.md status cell;
-  - a "replicated" row names where the receipt is (replicated_by);
-  - no public text outside the generated block (README.md, docs/fork/EXPLAINER.md)
-    calls an unreplicated result "independent(ly) replicated" or "independent measurements".
+  - a "replicated" row's replicated_by resolves: another result id in results.yaml, or a
+    tracked repo path that exists (free text is refused). It checks the receipt exists,
+    not what it says;
+  - no public text outside the generated block (README.md, and every .md under docs/
+    and guide/) says "independent measurements" / "two independent", or
+    "independent(ly) replicated" on a line that does not name a file-backed replication.
+Limits (see the PR #29 body): values are not matched to their sources (a wrong number
+that fits its spread passes); the phrase guard is a fixed regex list, so a paraphrase
+passes, and a line carrying an allowlist token (REPLICATED_OK) is exempt.
 Run python3 scripts/update-results.py first if CLAIMS.md or the README block is stale.
 """
 import os
@@ -25,7 +31,7 @@ ROOT = subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=Tr
 SRC = os.path.join(ROOT, "research", "results.yaml")
 README = os.path.join(ROOT, "README.md")
 CLAIMS = os.path.join(ROOT, "CLAIMS.md")
-PUBLIC_TEXT = ["README.md", "docs/fork/EXPLAINER.md"]
+PUBLIC_DIRS = ["docs", "guide"]  # every tracked .md under these, plus README.md outside the block
 BEGIN_RE = re.compile(r"<!-- results:begin\b[^>]*-->")
 END = "<!-- results:end -->"
 LINK_RE = re.compile(r"\]\(([^)]+)\)")
@@ -34,6 +40,17 @@ LINK_RE = re.compile(r"\]\(([^)]+)\)")
 MEASUREMENTS_RE = re.compile(r"independent(ly)? measure\w*|two independent", re.I)
 REPLICATION_RE = re.compile(r"independent(ly)? replicat\w*", re.I)
 REPLICATED_OK = ("replication-1", "PR #26", "PR #3", "separate clone")
+
+
+def tracked(rel):
+    return os.path.exists(os.path.join(ROOT, rel)) and subprocess.run(
+        ["git", "-C", ROOT, "ls-files", "--error-unmatch", "--", rel], capture_output=True).returncode == 0
+
+
+def public_text():
+    out = subprocess.run(["git", "-C", ROOT, "ls-files", "--", *(f"{d}/*.md" for d in PUBLIC_DIRS)],
+                         capture_output=True, text=True, check=True).stdout.split()
+    return ["README.md", *sorted(p for p in out if os.path.exists(os.path.join(ROOT, p)))]
 
 
 def split_row(line):
@@ -77,8 +94,12 @@ def main():
             errs.append(f"CLAIMS.md: {cid} replication {rep!r} != results.yaml {r.get('replication')!r}")
         if r.get("replication") == "unreplicated" and "unreplicated" not in status:
             errs.append(f"CLAIMS.md: {cid} is unreplicated but its status cell does not say so")
-        if r.get("replication") == "replicated" and not r.get("replicated_by"):
-            errs.append(f"{cid}: replicated without replicated_by")
+        if r.get("replication") == "replicated":
+            by = r.get("replicated_by")
+            if not by:
+                errs.append(f"{cid}: replicated without replicated_by")
+            elif by == cid or not (by in by_id or tracked(by)):
+                errs.append(f"{cid}: replicated_by {by!r} is not another result id or a tracked repo path")
         paths = LINK_RE.findall(ev)
         if not paths:
             errs.append(f"CLAIMS.md: {cid} has no evidence link")
@@ -112,7 +133,8 @@ def main():
             if not os.path.exists(os.path.join(ROOT, p)):
                 errs.append(f"README block: {r['id']} evidence path missing: {p}")
 
-    for rel in PUBLIC_TEXT:
+    scanned = public_text()
+    for rel in scanned:
         path = os.path.join(ROOT, rel)
         if not os.path.exists(path):
             continue
@@ -127,7 +149,8 @@ def main():
         print("check-claims: FAIL", *errs, sep="\n  ", file=sys.stderr)
         return 1
     n_unrep = sum(r.get("replication") == "unreplicated" for r in results)
-    print(f"check-claims: ok ({len(results)} claims, {n_unrep} unreplicated, README block and CLAIMS.md agree, evidence paths exist)")
+    print(f"check-claims: ok ({len(results)} claims, {n_unrep} unreplicated, README block and CLAIMS.md agree, evidence paths exist, "
+          f"replicated_by resolves, {len(scanned)} public .md files scanned)")
     return 0
 
 

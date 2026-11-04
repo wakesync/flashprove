@@ -47,8 +47,25 @@ def num(x):
     return isinstance(x, (int, float)) and not isinstance(x, bool)
 
 
+def tracked(path):
+    # a repo path that exists in the checkout and is tracked by git (not a stray local file)
+    return isinstance(path, str) and os.path.exists(os.path.join(ROOT, path)) and git_ok("ls-files", "--error-unmatch", "--", path)
+
+
+def resolve_replicated_by(rid, ref, ids):
+    # replicated_by must point at a receipt: another result id in this file, or a tracked path
+    if not isinstance(ref, str) or not ref:
+        return f"{rid}: replicated needs replicated_by (another result id or a tracked repo path)"
+    if ref == rid:
+        return f"{rid}: replicated_by points at itself"
+    if ref in ids or tracked(ref):
+        return None
+    return f"{rid}: replicated_by {ref!r} is neither a result id in results.yaml nor a tracked repo path"
+
+
 def validate(doc):
     errs = []
+    all_ids = {r.get("id") for r in doc.get("results") or []}
     if doc.get("schema_version") != 1:
         errs.append("schema_version must be 1")
     hw = doc.get("hardware") or {}
@@ -66,8 +83,8 @@ def validate(doc):
         rep = r.get("replication")
         if rep not in REPLICATION:
             errs.append(f"{rid}: replication {rep!r} not in {sorted(REPLICATION)}")
-        elif rep == "replicated" and not r.get("replicated_by"):
-            errs.append(f"{rid}: replication: replicated needs replicated_by (where the replication receipt is)")
+        elif rep == "replicated" and (e := resolve_replicated_by(rid, r.get("replicated_by"), all_ids)):
+            errs.append(e)
         elif rep == "n/a" and r.get("status") not in ("done", "in progress"):
             errs.append(f"{rid}: replication n/a is only for done / in progress rows")
         for p in r.get("evidence") or []:
@@ -145,7 +162,8 @@ labels agree).
 
 Every public statement about this fork's results must map to a row here, and every row to evidence on `main`.
 `unreplicated` means one lane measured it and no separate lane has reproduced it with a receipt in a file
-(research standard 5); such a number is not a headline. `replicated` names where the replication receipt is.
+(research standard 5); such a number is not a headline. `replicated` names the receipt: another row id or a
+tracked file, which both scripts resolve (they check that it exists, not what it says).
 
 | id | Claim | Status | Replication | Evidence | PR |
 |---|---|---|---|---|---|
@@ -154,10 +172,16 @@ Every public statement about this fork's results must map to a row here, and eve
 
 def render_claims(doc):
     rows = []
+    ids = {r["id"] for r in doc["results"]}
     for r in doc["results"]:
-        rep = r["replication"] + (f" ({r['replicated_by']})" if r.get("replicated_by") else "")
+        by = r.get("replicated_by")
+        if by:
+            by = f"`{by}`" if by in ids else f"[{by}]({by})"
+            by += f"; {r['replication_note']}" if r.get("replication_note") else ""
+        rep = r["replication"] + (f" ({by})" if by else "")
         ev = ", ".join(f"[{p}]({p})" for p in r["evidence"])
         pr = f"#{r['pr']}" if r.get("pr") else "-"
+        pr += f" ({r['pr_note']})" if r.get("pr_note") else ""
         rows.append("| " + " | ".join(cell(x) for x in (
             f"`{r['id']}`", f"{r['title']}: {r['summary']}", status_cell(r), rep, ev, pr)) + " |")
     return CLAIMS_HEAD + "\n".join(rows) + "\n"

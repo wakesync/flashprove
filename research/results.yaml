@@ -18,8 +18,13 @@
 #                 separate lane reproduced the result with a receipt in a file
 #                 (STANDARDS #5); it then needs replicated_by. Rendered into the
 #                 Status cell ("measured, unreplicated"). n/a only for done/in progress.
-#     replicated_by optional: result id or PR that holds the replication receipt
+#     replicated_by required when replicated: another result id in this file, or a
+#                 tracked repo path holding the replication receipt. Both scripts
+#                 resolve it; free text is refused.
+#     replication_note optional prose shown next to replicated_by in CLAIMS.md
 #     pr          PR number that put the evidence on main, or null
+#     pr_note     optional: why pr is null or unusual (e.g. a closed PR integrated by a
+#                 merge commit); shown in the CLAIMS.md PR cell
 #     summary     README "Key number" cell (prose)
 #     conditions  README "n + conditions" cell (prose)
 #     evidence    list of repo paths; the first is the README link
@@ -64,8 +69,10 @@ results:
     title: CPU verification of upstream's stored synthetic proofs
     status: reproduced
     replication: replicated
-    replicated_by: "PR #3 (independent review in a separate clone)"
-    pr: 3
+    replicated_by: research/reproduction/REVIEW.md
+    replication_note: "independent review in a separate clone (closed PR #3)"
+    pr: null
+    pr_note: "evidence from closed PR #3, integrated into main by merge commit `1e5cddc8`"
     summary: "stored exact-match and clipped-gap proofs: `YES` / `WITHIN LIMITS`, about 1.57 s each; 10 of 10 altered sets rejected in each table"
     conditions: one clean build at upstream `9e2bdd8f`, synthetic weights, CPU only; plus an independent review in a separate clone that added 19 negative cases
     evidence: [research/reproduction/README.md]
@@ -79,18 +86,19 @@ results:
   - id: cpu-full-suite
     title: "Full confined CPU suite on the repaired integration (PR #4)"
     status: measured
+    status_note: (grandfathered, not a headline)
     replication: unreplicated
-    pr: 4
+    pr: 31
     summary: "aggregate exit 77: 89 rows passed, 2 in part, 0 failed, 1 not run (13 GPU rows left out by design)"
-    conditions: n = 1, 4,371 s, shared 16-CPU VM
-    evidence: [docs/research-evidence.md]
+    conditions: "n = 1, not pre-registered (predates the research standards), one run on a shared 16-CPU VM at PR #4 head `133da749`; its 4,371 s is wall time, not a performance number"
+    evidence: [research/cpu-full-suite/README.md, docs/research-evidence.md]
     metrics:
-      - {name: aggregate_exit, stat: single, value: 77, unit: exit_code, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
-      - {name: rows_passed, series: suite-rows, arm: passed, stat: count, value: 89, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
-      - {name: rows_partial, series: suite-rows, arm: partial, stat: count, value: 2, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
-      - {name: rows_failed, series: suite-rows, arm: failed, stat: count, value: 0, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
-      - {name: rows_not_run, series: suite-rows, arm: not-run, stat: count, value: 1, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
-      - {name: suite_wall, stat: single, value: 4370.89, unit: s, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 7b32fb5177347a6a6b45099c6c2f6ba30f6a0162, source: docs/research-evidence.md}
+      - {name: aggregate_exit, stat: single, value: 77, unit: exit_code, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 594f5c2e3b9d788a2363da68aea6f7c70d8d5956, source: research/cpu-full-suite/full.exit}
+      - {name: rows_passed, series: suite-rows, arm: passed, stat: count, value: 89, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 594f5c2e3b9d788a2363da68aea6f7c70d8d5956, source: research/cpu-full-suite/full-rows.json}
+      - {name: rows_partial, series: suite-rows, arm: partial, stat: count, value: 2, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 594f5c2e3b9d788a2363da68aea6f7c70d8d5956, source: research/cpu-full-suite/full-rows.json}
+      - {name: rows_failed, series: suite-rows, arm: failed, stat: count, value: 0, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 594f5c2e3b9d788a2363da68aea6f7c70d8d5956, source: research/cpu-full-suite/full.log, note: "from the last line of full.log; full-rows.json has no failed class"}
+      - {name: rows_not_run, series: suite-rows, arm: not-run, stat: count, value: 1, total: 92, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 594f5c2e3b9d788a2363da68aea6f7c70d8d5956, source: research/cpu-full-suite/full-rows.json}
+      - {name: suite_wall, stat: single, value: 4370.89, unit: s, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-03, commit: 594f5c2e3b9d788a2363da68aea6f7c70d8d5956, source: research/cpu-full-suite/full-result.json, note: "wall time of one run on a shared host; not a performance number, do not chart as one"}
 
   - id: cpu-verifier-baseline
     title: "Matched upstream/fork CPU verifier baseline (PR #18)"
@@ -140,7 +148,8 @@ results:
     status: reproduced
     status_note: (agree)
     replication: replicated
-    replicated_by: "PR #26 (this row is the replication of gpu-small-proof)"
+    replicated_by: research/gpu/replication-1/README.md
+    replication_note: this row is the replication of gpu-small-proof
     pr: 26
     summary: "`cp_prove` mean 2.35 s (SD 0.13); `cp_commit` mean 18.8 s (SD 2.2); 4 of 4 proofs accepted, 20 of 20 mutations rejected; same answer token on every run"
     conditions: "separate rental and lane; 1 cold + 3 warm runs, n = 3 timed under `/usr/bin/time`; one machine"
@@ -309,7 +318,7 @@ results:
       - {name: r3_seeds_fit, stat: count, value: 0, total: 5, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 98fc7ffb566f6737878ae7668a60a1c95a32da55, source: experiments/20261104-11-qwen-deltanet-m1/runs/ranges.json}
 
   - id: open-studies
-    title: "Still open: integer-vs-BF16/FP8 fidelity (#8), KDA model-scale sweep (PR #42), cost teardown and larger-memory GPU test (PR #44), full CPU-suite receipts (PR #31)"
+    title: "Still open: integer-vs-BF16/FP8 fidelity (#8), KDA model-scale sweep (PR #42), cost teardown and larger-memory GPU test (PR #44)"
     status: in progress
     replication: n/a
     pr: null
