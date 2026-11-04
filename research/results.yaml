@@ -317,6 +317,20 @@ results:
       - {name: r3_max_abs_delta, stat: max, value: 422167, unit: int, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 98fc7ffb566f6737878ae7668a60a1c95a32da55, source: experiments/20261104-11-qwen-deltanet-m1/runs/ranges.json, note: "bound 2^18 = 262,144; R3 inputs also exceed the 19-bit input contract"}
       - {name: r3_seeds_fit, stat: count, value: 0, total: 5, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 98fc7ffb566f6737878ae7668a60a1c95a32da55, source: experiments/20261104-11-qwen-deltanet-m1/runs/ranges.json}
 
+  - id: qwen-deltanet-m1b-twolimb
+    title: "Qwen Gated DeltaNet M1b, two-limb delta/v at F = 12 (PR #52)"
+    status: negative
+    status_note: "(KILLED: lookup smallness test not integrated; no proof)"
+    replication: unreplicated
+    pr: 52
+    summary: "KILLED before any proof. The range study alone (integer reference) fits 20 of 20 realistic runs at F = 12 with two-limb delta and v, including the 5 heavy-tailed R3 seeds that failed M1 (high limb at most 2)"
+    conditions: "integer reference only, no proof; M1 realistic suite R1..R4 x seeds 1..5 x 1,024 steps; one head 128 x 128; synthetic; CPU"
+    evidence: [experiments/20261104-32-qwen-deltanet-m1b-twolimb/RESULTS.md]
+    metrics:
+      - {name: f12_twolimb_runs_fit, stat: count, value: 20, total: 20, unit: count, n: 20, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/runs/ranges-twolimb.json, note: "reference only, no proof"}
+      - {name: f12_max_abs_v_hi, stat: max, value: 2, unit: int, n: 20, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/runs/ranges-twolimb.json}
+      - {name: honest_proofs_run, stat: count, value: 0, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 0447df0310558f6de328bd01b7ccdf565b6cd885, source: experiments/20261104-32-qwen-deltanet-m1b-twolimb/RESULTS.md, note: "registered H1 needed 10 of 10"}
+
   - id: open-studies
     title: "Still open: integer-vs-BF16/FP8 fidelity (#8), KDA model-scale sweep (PR #42), cost teardown and larger-memory GPU test (PR #44)"
     status: in progress
