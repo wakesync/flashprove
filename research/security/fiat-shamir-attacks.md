@@ -275,7 +275,9 @@ semantic mutation types and one layout-comment control, not 55 independent attac
 For each per-case Boolean indicator, n = 5, population SD = 0 and min = max = median:
 0 for mutation acceptance; 1 for observed challenge changes in the config/request cases;
 0 for challenge change under caller-`y` mutation. Repeating fixed inputs demonstrates
-repeatability only. See RESULTS.md and raw JSON for full verdict/receipt details.
+repeatability only. Status of these numbers: **measured, unreplicated** (a separate-lane
+re-execution on the same inputs and source reproduced them; that is not an independent
+replication). See RESULTS.md and raw JSON for full verdict/receipt details.
 
 **Against prereg:** fixed-ID rejection passes. The universal early-binding clause fails
 literally because `y` neither changes the first challenge nor rejects before it. Reporting
@@ -286,7 +288,12 @@ corrected without changing the pre-registered threshold.
 ## 6. Open work
 
 1. Trace the unsent lookup keys, product-tree nodes and attention vector through every
-   consuming verifier equation; bound their ability to host a KRS correlation.
+   consuming verifier equation; bound their ability to host a KRS correlation. Start
+   from caller duty (2) in the header comment of `verifier/src/vf_lookup_argument.h`:
+   the lookup argument enters none of the call list, table, `pub[]`, mask-row and plan
+   values into the transcript itself, and `forestPlan` binds only v, d, the plane count and
+   the shift flag, so each caller must fix the rest before the first challenge. That is the
+   online path the CPU probe never exercised.
 2. Define the exact semantic statement for the supported model family, including tables
    and constants. Determine whether the initial transcript canonically binds it and
    whether a Proposition 5.5 reduction can actually be written.

@@ -2,6 +2,8 @@
 
 Issue #37. Verdict against the pre-registered threshold: **FAIL for the universal early-binding clause; PASS for fixed-ID rejection.** Zero semantic mutations accepted at the original ID. The separate next-token `y` is a counterexample to the literal early-binding clause: its mutation leaves the first request challenge unchanged and is rejected only later. Reporting the exception does not make that clause pass. This corrects the initial PASS-only interpretation without changing the registered threshold; it is not a demonstrated forgery.
 
+Status of every number below: **measured, unreplicated.** An independent reviewer's separate-lane re-execution at `1bad8ce4` reproduced every verdict and trace on the same inputs and source; that is a re-execution, not an independent replication with new fixtures.
+
 This is a binding probe on one shipped fixture. It is not a soundness proof, not an audit, and says nothing about mutations that were not tried. The companion analysis of the two published attacks is `research/security/fiat-shamir-attacks.md`.
 
 ## What was run
@@ -48,7 +50,7 @@ The derived-ID runs are a diagnostic only: they never count as acceptance (the I
 1. **Configuration is bound byte for byte, before any challenge.** `configuration_digest()` (blocks/frame/heads.h:71) hashes the full text of policy.txt, layout.txt and KL.bin, length-prefixed. It enters the commitment ID (heads.h:91, checked at cp_verify.cpp:2252 before the file's proof chains start; offline record seeds are already derived while forming the ID) and the first query of every chain (`Binder::configuration`, blocks/chain/public.h:243, called first in `bind_request_parameters`, blocks/frame/check.h:63). The whitespace/comment **control** therefore also changes the ID and the first challenge. This is the expected consequence of verbatim binding; it was pre-registered as a control and is reported as such, not as a semantic finding. Consequence for operators: a cosmetic edit to a config file is a new commitment.
 2. **The request (tokens, range) is in the first query.** `bind_request_statement` (check.h:73) puts `stored copy`, `request` and `the request file's words` into the statement list before `VerifierRounds` starts the chain (check.h:168, 170). All four request-word mutations changed the first-query digest and the first SEND challenge, 5/5 each.
 3. **Deferred binding of the next token y (the one exception).** The statement word for y is zeroed before it enters the first query (cp_verify.cpp:2431-2432, `stNoReplyH`). The prover sends y as a plain scalar later on the same chain (`ReqVerifier::first`, blocks/iop/req.h:661-671, round `R_REPLY`), and the verifier compares it with the caller's y only after the links (check.h:176). Measured: changing y leaves the first-query digest, the first SEND challenge and the REPLY-round digest **identical** to baseline (5/5), and the proof is rejected at `reply-differs`. This matches the project's own documentation (docs/limits-further.md SO-50; PUBLISHED-WORKS.md, the Dao et al. row). It is not an accept of a changed statement, but it is exactly the "deferred binding" the prereg asked to report. Whether it opens a 2026/1838-style delayed-statement attack is examined in `research/security/fiat-shamir-attacks.md`.
-4. **Range-end is rejected by a form check, not by the hash chain.** `e - 1 < T` with `y != 0` violates the rule at cp_verify.cpp:324. That is correct behaviour, but a mutation that keeps the form legal (for example `e - 1` together with `y = 0`) was not tried.
+4. **Range-end is rejected by a form check, not by the hash chain.** `e - 1 < T` with `y != 0` violates the rule at cp_verify.cpp:324. That is correct behaviour, but a mutation that keeps the form legal (for example `e - 1` together with `y = 0`) was not tried. It was tried afterwards as an extra row outside the registered set; see "Amendment 2026-11-04 rows" below.
 
 ## Not measured / limits
 
@@ -78,8 +80,8 @@ fiat_shamir_binding_test: expected outcomes, 55 pairs; 0/50 semantic mutations a
 ```
 
 The fresh run uses the same production/diagnostic binaries and exactly the registered
-11 cases x 5 pairs. It is same-lane repeatability, not independent review or new attack
-coverage. Wall time 222.6 seconds is diagnostic only, not a speed comparison. The fresh
+11 cases x 5 pairs. It is same-lane repeatability (measured, unreplicated), not independent review or new
+attack coverage. Wall time 222.6 seconds is diagnostic only, not a speed comparison. The fresh
 raw records, per-case statistics, full binary hashes and command are in
 `regression/measurements.json`, `regression/summary.json`, `regression/ENV.json`.
 The prior raw results remain unchanged.
@@ -107,3 +109,25 @@ exit 0, last line `YES`, covered `r=60 e=64 T=64`, policy exact-match. Full `cov
 `commitment:`, `proof of work:` and `result-v1` lines are preserved in
 `regression/baseline-receipt.txt`. These are this synthetic fixture's outcomes only;
 the printed bits are not a claimed security level.
+
+## Amendment 2026-11-04 rows (outside the registered set)
+
+Added after the independent review of PR #41, under the PREREG amendment dated
+2026-11-04T05:20Z. These rows are **not** part of the registered 11 x 5 set, do not
+enter `measurements.json`, `summary.json` or the regression test, and do not change the
+verdict above. Status: measured, unreplicated. Command:
+`python3 experiments/20261103-fiat-shamir-binding/amendment_cases.py`; raw records,
+per-case statistics and ENV in `amendment-20261104/`.
+
+| case | production verdict | mutation accepted | first-chain first challenge changed |
+|---|---|---|---|
+| range-end-legal-y0 (`e - 1` with `y = 0`, range form stays legal) | `NO: proof-refused`, exit 1 | 0/5 | changed 5/5 |
+| layout-missing (`config/layout.txt` removed) | `NO: plan-layout`, exit 1 | 0/5 | not reached |
+| layout-empty (`config/layout.txt` zero bytes) | `NO: plan-layout`, exit 1 | 0/5 | not reached |
+
+Baselines 15/15 `YES`; production and diagnostic builds agree on all 15 pairs. Each
+Boolean indicator has n = 5, population SD 0. The form-legal range change is bound in
+the first query, like the other request words. Missing and empty layout files both
+hash as the empty string in the configuration digest, but neither reaches the hash:
+both stop at plan building. These are deterministic repeats on one fixture, not
+independent trials.
