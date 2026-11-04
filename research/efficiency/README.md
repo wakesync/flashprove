@@ -116,3 +116,9 @@ See `experiments/20261104-43-h200-memory-lever/PREREG.md` (written before any GP
 - 01:42-01:43 UTC: pinned build + `examples/quickstart-gpu.sh` passed on both boxes (cp_verify YES on the small proof). ~17 min each.
 - Early commit observation (n = 1 per box, the commitment's anchor table, from cp_commit's own timing lines): H200 splits the table's tree into 16 parts of 2^28 positions, 452.7 s; H100 into 32 parts of 2^27, 576.3 s (-21%). The committer sizes its parts to free GPU memory: a first direct sign of the memory lever, on commit, not prove.
 - Full-size synthetic commitment (`cp_commit -weights made-up-blocks`, target_full_f2, -M 1), n = 1 per box, wall from stage log: H200 1,698 s (01:43:26 to 02:11:44), H100 1,871 s (01:42:32 to 02:13:43): H200 9% faster. Upstream `commit-time-synthetic` 2,312.68 s (other hosts/CPUs). Phase anchor-table 461.4 vs 585.1 s; key-file 240.6 vs 242.6 s. Sessions started 02:11 (H200) and 02:13 (H100).
+- 02:33 UTC, first sessions (n = 1 each, 4 intervals each, every proof checked by cp_verify):
+  - H100 CA1 (24/6): STEADY 146.67 tok/s, intervals 168.18 / 167.53 / 167.24 / 167.27 s, GPU peak 74,641 MiB, cp_prove RSS 265.5 GB.
+  - H200 TA1 (24/6): STEADY 142.97 tok/s, intervals 171.13 / 172.28 / 172.16 / 172.01 s, GPU peak 74,673 MiB.
+  - Same config on H200 is not faster (-2.5%), and uses the same ~74.7 GB: the prover does not use the extra memory by itself.
+  - Both are ~34% above upstream's 109.09 synthetic (24 CPUs bound). These boxes run unbound with a 30.7-core (H100) / 23-core (H200) cgroup quota on 128/144-thread hosts. Host CPU is a confound larger than the GPU difference.
+  - H100 CB2 (24/12): `p258 end 1 cuda-call` at start-up, no proof. in-step 12 does not fit on 80 GB.

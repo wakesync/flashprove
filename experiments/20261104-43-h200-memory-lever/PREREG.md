@@ -68,3 +68,4 @@ H200/B200 data. Weight streaming as in ZeRO-Inference and FlexGen (cited in prov
 No published H200 measurement of this prover is known. B200 is excluded: binaries target sm_90a only.
 
 ## Amendments
+- 2026-11-04 02:40 UTC. C-B (H100, batch 24, in-step 12) ended at start-up with `p258 end 1 cuda-call`, 0 of 120 proofs, before any batch. Per the fallback fixed at registration, the H100 gets one more B-arm session at in-step 8 (CB4, seed 4) after CA3. No other change.
