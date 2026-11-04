@@ -1,0 +1,10 @@
+cp_commit: phase weights: 27.1 s
+cp_commit: phase check: 674.2 s
+cp_commit: phase anchor-table: 1191.6 s
+cp_commit: phase key-file: 417.0 s
+cp_commit: phase anchor-judge: 1.5 s
+cp_commit: phase anchor-files: 0.8 s
+cp_commit: phase leaf-0-table: 1202.1 s
+cp_commit: phase leaf-0-entry: 82.2 s
+cp_commit: phase leaf-0-judge: 1.0 s
+cp_commit: phase leaf-0-files: 0.7 s

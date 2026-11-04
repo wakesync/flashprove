@@ -1,0 +1,2 @@
+name, uuid, driver_version, memory.used [MiB], memory.total [MiB], mig.mode.current, compute_cap, pcie.link.gen.max, pcie.link.width.max
+NVIDIA H200, GPU-bea13734-c9af-8a16-30c2-5c5b27fb4173, 580.178.04, 0 MiB, 143771 MiB, Disabled, 9.0, 5, 16
