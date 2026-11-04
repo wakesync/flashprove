@@ -1,0 +1,67 @@
+as expected     the honest files: status 0: PARSED: 3 files; 10 files written
+as expected     key read back: status 0: READ: FPKEYC01, 1527808 bytes; rounds 3678 | 42 | 16; 16 roots sent; 16 trees opened at 938 leaves; weight tables opened at 51 leaves; seeds 1; 989 whole paths lead to their roots; with its order file it gives the original again, 1096408 bytes
+as expected     leaf-0 read back: status 0: READ: FPENTC01, 649600 bytes; rounds 24; 3 roots sent; 3 trees opened at 228 leaves; weight tables opened at 51 | 51 leaves; seeds 1 | 1; 330 whole paths lead to their roots; with its order file it gives the original again, 536952 bytes
+as expected     proof read back: status 0: READ: FPPRFC01, 5947032 bytes; rounds 8037 | 42 | 16; 32 roots sent; 32 trees opened at 4662 leaves; weight tables opened at 53 leaves; seeds 1; 4715 whole paths lead to their roots; with its order file it gives the original again, 4145300 bytes
+as expected     the leaf file's root0 and answers0 are the key file's root and answers; the proof's root and answers are the leaf file's
+as expected     with --lines: status 0: PARSED: 3 files; the ten files again, and three files of lines
+as expected     key.lines.jsonl: 35047 lines; the first has the original's length and SHA-256, and the joined hex is the original
+as expected     leaf-0.lines.jsonl: 7236 lines; the first has the original's length and SHA-256, and the joined hex is the original
+as expected     proof.lines.jsonl: 101554 lines; the first has the original's length and SHA-256, and the joined hex is the original
+as expected     ivk/key.bin, bit at byte 0: status 1: REFUSED: key.bin at byte 8: the head
+as expected     ivk/key.bin, bit at byte 274102: status 1: REFUSED: key.bin at byte 256424: round 3660 CS: nothing was opened
+as expected     ivk/key.bin, bit at byte 548204: status 1: REFUSED: key.bin at byte 511160: round 17 CS: nothing was opened
+as expected     ivk/key.bin, bit at byte 822306: status 1: REFUSED: key.bin at byte 821688: round 39 CS: nothing was opened
+as expected     ivk/key.bin, bit at byte 1096407: status 1: REFUSED: key.bin at byte 1080032: round 16 BASE: nothing was opened
+as expected     ivk/key.bin, last byte cut off: status 1: REFUSED: key.bin at byte 1080032: round 16 BASE: nothing was opened
+as expected     ivk/key.bin, a byte added: status 1: REFUSED: key.bin at byte 1096408: 1 bytes are left
+as expected     ivk/key.bin, empty: status 1: REFUSED: key.bin at byte 0: key.bin ends early at byte 0 (head)
+as expected     ivk/leaf/0.bin, bit at byte 0: status 1: REFUSED: leaf/0.bin at byte 8: the head
+as expected     ivk/leaf/0.bin, bit at byte 134238: status 1: REFUSED: leaf/0.bin at byte 6304: a stored table
+as expected     ivk/leaf/0.bin, bit at byte 268476: status 1: REFUSED: leaf/0.bin at byte 139736: a stored table
+as expected     ivk/leaf/0.bin, bit at byte 402714: status 1: REFUSED: leaf/0.bin at byte 392160: round 22 CS: nothing was opened
+as expected     ivk/leaf/0.bin, bit at byte 536951: status 1: REFUSED: leaf/0.bin at byte 512688: round 24 BASE: nothing was opened
+as expected     ivk/leaf/0.bin, last byte cut off: status 1: REFUSED: leaf/0.bin at byte 512688: round 24 BASE: nothing was opened
+as expected     ivk/leaf/0.bin, a byte added: status 1: REFUSED: leaf/0.bin at byte 536952: 1 bytes are left
+as expected     ivk/leaf/0.bin, empty: status 1: REFUSED: leaf/0.bin at byte 0: leaf/0.bin ends early at byte 0 (head)
+as expected     example.proof, bit at byte 0: status 1: REFUSED: the proof file at byte 8: the head
+as expected     example.proof, bit at byte 1036325: status 1: REFUSED: the proof file at byte 1030492: first: work in round 4868 LOC
+as expected     example.proof, bit at byte 2072650: status 1: REFUSED: the proof file at byte 2089500: first: work in round 7995 LOC
+as expected     example.proof, bit at byte 3108975: status 1: REFUSED: the proof file at byte 3131164: first: work in round 8021 BASE
+as expected     example.proof, bit at byte 4145299: status 1: REFUSED: the proof file at byte 4116780: round 16 BASE: nothing was opened
+as expected     example.proof, last byte cut off: status 1: REFUSED: the proof file at byte 4116780: round 16 BASE: nothing was opened
+as expected     example.proof, a byte added: status 1: REFUSED: the proof file at byte 4145300: 1 bytes are left
+as expected     example.proof, empty: status 1: REFUSED: the proof file ends inside its head
+as expected     key.parsed.bin, bit in the first byte: status 1: REFUSED: the parsed file begins with none of FPKEYC01, FPENTC01, FPPRFC01
+as expected     key.parsed.bin, bit in the last byte: status 1: REFUSED: the parsed file: the list at byte 1527800 says that it has 72057594037927936 items, more than the file can hold
+as expected     key.parsed.bin, last byte cut off: status 1: REFUSED: the parsed file ends early, at byte 1527800
+as expected     key.parsed.bin, a byte added: status 1: REFUSED: the parsed file has bytes after its last field (1)
+as expected     key.parsed.bin.order, bit in the first byte: status 1: REFUSED: the order file does not begin with FPORDER1
+as expected     key.parsed.bin.order, last byte cut off: status 1: REFUSED: the order file ends early, at byte 100880
+as expected     key.parsed.bin.order, a byte added: status 1: REFUSED: the order file has bytes after its last field (1)
+as expected     key.parsed.bin.seeds, bit in the first byte: status 1: REFUSED: the seeds file .seeds has bytes after its last field (488)
+as expected     key.parsed.bin.seeds, last byte cut off: status 1: REFUSED: the seeds file .seeds ends early, at byte 488
+as expected     key.parsed.bin.seeds, a byte added: status 1: REFUSED: the seeds file .seeds has bytes after its last field (1)
+as expected     leaf-0.parsed.bin, bit in the first byte: status 1: REFUSED: the parsed file begins with none of FPKEYC01, FPENTC01, FPPRFC01
+as expected     leaf-0.parsed.bin, bit in the last byte: status 1: REFUSED: weight table 1, leaf 8290636: the path does not lead to the root
+as expected     leaf-0.parsed.bin, last byte cut off: status 1: REFUSED: the parsed file ends early, at byte 649568
+as expected     leaf-0.parsed.bin, a byte added: status 1: REFUSED: the parsed file has bytes after its last field (1)
+as expected     leaf-0.parsed.bin.order, bit in the first byte: status 1: REFUSED: the order file does not begin with FPORDER1
+as expected     leaf-0.parsed.bin.order, last byte cut off: status 1: REFUSED: the order file ends early, at byte 3534
+as expected     leaf-0.parsed.bin.order, a byte added: status 1: REFUSED: the order file has bytes after its last field (1)
+as expected     leaf-0.parsed.bin.seeds0, bit in the first byte: status 1: REFUSED: the seeds file .seeds0 has bytes after its last field (488)
+as expected     leaf-0.parsed.bin.seeds0, last byte cut off: status 1: REFUSED: the seeds file .seeds0 ends early, at byte 488
+as expected     leaf-0.parsed.bin.seeds0, a byte added: status 1: REFUSED: the seeds file .seeds0 has bytes after its last field (1)
+as expected     leaf-0.parsed.bin.seeds, bit in the first byte: status 1: REFUSED: the seeds file .seeds has bytes after its last field (488)
+as expected     leaf-0.parsed.bin.seeds, last byte cut off: status 1: REFUSED: the seeds file .seeds ends early, at byte 488
+as expected     leaf-0.parsed.bin.seeds, a byte added: status 1: REFUSED: the seeds file .seeds has bytes after its last field (1)
+as expected     proof.parsed.bin, bit in the first byte: status 1: REFUSED: the parsed file begins with none of FPKEYC01, FPENTC01, FPPRFC01
+as expected     proof.parsed.bin, bit in the last byte: status 1: REFUSED: the parsed file and its order file do not give the original file again
+as expected     proof.parsed.bin, last byte cut off: status 1: REFUSED: the parsed file ends early, at byte 5947000
+as expected     proof.parsed.bin, a byte added: status 1: REFUSED: the parsed file has bytes after its last field (1)
+as expected     proof.parsed.bin.order, bit in the first byte: status 1: REFUSED: the order file does not begin with FPORDER1
+as expected     proof.parsed.bin.order, last byte cut off: status 1: REFUSED: the order file ends early, at byte 238799
+as expected     proof.parsed.bin.order, a byte added: status 1: REFUSED: the order file has bytes after its last field (1)
+as expected     proof.parsed.bin.seeds, bit in the first byte: status 1: REFUSED: the seeds file .seeds has bytes after its last field (488)
+as expected     proof.parsed.bin.seeds, last byte cut off: status 1: REFUSED: the seeds file .seeds ends early, at byte 488
+as expected     proof.parsed.bin.seeds, a byte added: status 1: REFUSED: the seeds file .seeds has bytes after its last field (1)
+parser_test.py: accepted-proof: 3 files, 24 damaged originals, 33 damaged parsed, order and seeds files: all as expected

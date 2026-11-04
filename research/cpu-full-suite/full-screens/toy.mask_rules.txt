@@ -1,0 +1,4 @@
+mask_rules.py: the block of RFC 8439, 2.3.2, comes out
+mask_rules.py: field 1: of the 28 known answers 0 do not come out
+mask_rules.py: field 2: of the 31 known answers 0 do not come out
+mask_rules.py: field 2: 3 known answers at the full threshold take a second try

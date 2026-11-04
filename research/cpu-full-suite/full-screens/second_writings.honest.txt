@@ -1,0 +1,31 @@
+C++: product: 160520 bytes accepted, 463 fields, 30 rounds; 13 altered copies, 0 accepted
+C++: tiny: 7648 bytes accepted, 45 fields, 22 rounds; 13 altered copies, 0 accepted
+C++: links: 249456 bytes accepted, 927 fields, 76 rounds; 13 altered copies, 0 accepted
+C++: tiny-links: 12800 bytes accepted, 85 fields, 58 rounds; 13 altered copies, 0 accepted
+C++: tiny: 7400 bytes accepted, 43 fields, 22 rounds; 13 altered copies, 0 accepted
+C++: tiny-links: 12320 bytes accepted, 83 fields, 58 rounds; 13 altered copies, 0 accepted
+C++: key: 503744 bytes: YES; proof of work counted
+C++: entry: 131432 bytes: YES; proof of work counted
+C++: 24 altered copies, 0 accepted
+C++: proofs: 6 files accepted; 54 altered copies and calls, 0 accepted; 0 honest files refused
+C++: proofs-one-link: 6 files accepted; 54 altered copies and calls, 0 accepted; 0 honest files refused
+C++: proofs-further: 6 files accepted; 54 altered copies and calls, 0 accepted; 0 honest files refused
+Python: product: ALL AGREES
+Python: tiny: ALL AGREES
+Python: tiny: ALL AGREES
+Python: links: ALL AGREES
+Python: tiny-links: ALL AGREES
+Python: tiny-links: ALL AGREES
+Python: ALL AGREES
+Python: 27 altered copies made from the recipe, 24 of them held against the C++ tool's own copies (three of the key's are this program's own; the C++ reader has judged those as files); ALL REFUSED
+Python: THE RECORD OF VALUES AT VERTICES IS KEPT AND READ
+Python: THE RECORD OF VALUES AT VERTICES IS KEPT AND READ
+Python: ALL AGREES
+Python: proofs: 6 honest files, 58 altered copies and calls: ALL AGREES
+Python: ALL AGREES
+Python: proofs: 6 honest files, 58 altered copies and calls: ALL AGREES
+Python: ALL AGREES
+Python: proofs: 6 honest files, 58 altered copies and calls: ALL AGREES
+Python: bent entries: 2 false files, ALL REFUSED AS EXPECTED
+bytes: all 409 proofs, files, parameters and public files have the sha256 that expected/sha256.txt gives them
+ALL AS EXPECTED: 32 honest files accepted; 255 altered copies and 2 bent entries refused; each judged by two verifiers

@@ -1,0 +1,93 @@
+passed   verifier.sanitized_walk                       1437.0 s  status 0; sanitized_walk_test.sh: field 2: no report, 4 of 4 controls reported: all as expected
+passed   build.make_model                                 3.7 s  status 0; 
+passed   verifier.weights_twin_test                       5.2 s  status 0; weights_twin_test: ok (36 worlds, 588 units, 680940 cells, 4360560 places without a cell; 4152 check
+passed   kit.small_model                                 13.1 s  status 0; wrote 47 tensors, 38 of them committed, to <WORK>/shared/small_mod
+passed   tools.pack_layout.refusals                       1.7 s  status 0; pack_layout_refusals_test.py: 45 cases: all as expected
+passed   build.npsc_checks                               19.2 s  status 0; psc_rows.sh: 2 of 2 checkers built
+passed   verifier.field_setting_test                      2.7 s  status 0; field_setting_test, setting 2: all passed
+passed   verifier.forest_twin_test                       42.7 s  status 0; forest_twin_test: ok (13 worlds: 7600 slots, 717 claims; in each, a host that forgets one kind of cl
+passed   prover.masking_cells_test                        1.0 s  status 0; masking_cells_test: passes
+passed   prover.gate_children                            41.6 s  status 0; ALL AS EXPECTED
+passed   verifier.psc_twin_test                           9.4 s  status 0; psc_twin_test: ok (trees of 2 to 32 leaves; 115 changed scalars and as many changed mask entries not
+passed   prover.numa_pin_test                             0.3 s  status 0; numa_pin_test: 12 cases: passes
+passed   sources.quickstart_gpu                           0.2 s  status 0; quickstart_gpu_test.py: 5 as expected, 0 otherwise
+passed   prover.coins_known_test                          4.0 s  status 0; coins_known_test: passes
+passed   prover.hf_code_test.first_part                   1.7 s  status 0; 0 of 137 checks failed
+passed   prover.code_test_values                          0.3 s  status 0; code_test_values.py: 9 cases; 0 of them do not stand in prover/hash_commitment/tests/hf_code_test.cu
+passed   verifier.hiding_coins                            0.4 s  status 0; hiding_coins.py: 0 of its own known answers do not hold
+passed   build.verifier                                  86.6 s  status 0; THE VERIFIER IS BUILT: <REPO>/bin/cp_verify
+passed   scales.table_ties                               63.0 s  status 0; OK: 26 checks
+passed   prover.coins_known_host_test                    11.7 s  status 0; coins_known_host_test: passes
+passed   prover.parameter_file_one_bits_test              4.0 s  status 0; parameter_file_one_bits_test: passes
+passed   verifier.forest_values                           0.2 s  status 0; forest_values.py: 472 lines made again, 0 differ from the file
+passed   prover.hf_params_test                            2.7 s  status 0; 148 checks, 0 differ
+passed   commit.exchanged_directories                     6.1 s  status 0; exchanged_directories_test: passes
+passed   sources.dangerous_calls                         18.7 s  status 0; dangerous_calls_test.py: 38 samples as expected, 0 finding(s)
+passed   sources.run_suite                               90.2 s  status 0; run_suite_test.py: 65 checks as expected, 0 otherwise
+passed   tools.lean_verify.claim                          0.3 s  status 0; read_claim_test.py: 4 stored examples: all as expected
+passed   prover.spool_clear_test                         21.5 s  status 0; spool_clear_test: passes
+passed   toy.mask_rules                                   0.2 s  status 0; mask_rules.py: field 2: 3 known answers at the full threshold take a second try
+passed   prover.hc_chacha_test                            0.4 s  status 0; all 36 tests passed
+passed   prover.coin_keys                                 4.3 s  status 0; coin_keys_test: 238 checks as expected, 0 otherwise
+passed   scales.policy_tables                            55.4 s  status 0; OK
+passed   prover.hmac_sha256_test                          1.6 s  status 0; hmac_sha256_test: passes
+passed   build.verifier.target                           88.1 s  status 0; THE VERIFIER IS BUILT: <WORK>/shared/bin-target-f2/cp_verify
+passed   prover.coins_rfc8439_test                        0.7 s  status 0; coins_rfc8439_test: passes
+passed   verifier.not_checked_names                       0.2 s  status 0; ALL AS EXPECTED
+passed   verifier.pending_row                             8.9 s  status 0; pending_row_test: 6 records: ok
+passed   verifier.link_door                              34.0 s  status 0; link_door_test: 200 runs: ok
+passed   prover.parameter_file_one_place_test             4.3 s  status 0; parameter_file_one_place_test: passes
+in part  tools.confine                                    3.7 s  status 77; confine_test: 29 checks as expected, 0 otherwise; not run: a signal; the second level with the kerne
+passed   commit.left_working_names                        7.5 s  status 0; left_working_names_test: passes
+passed   prover.coin_keys.values                          0.2 s  status 0; 
+passed   tools.lean_verify.script                       145.5 s  status 0; lean_verify_test.sh: 346 calls: all as expected
+passed   sources.folder_look_copies                       3.8 s  status 0; folder_look_copies_test.py: 33 copies of open_above(), others_can_change() and available_memory(), a
+passed   prover.make_model_failures_test                  4.6 s  status 0; make_model_failures_test: 6 scenes: passes
+passed   build.verifier.unit                             90.3 s  status 0; 
+passed   verifier.forest_attention                       86.6 s  status 0; hc_parts_test.sh: hc_forest_attention_test: all as expected; the output is in <WORK>
+passed   verifier.kit_rounds_second                       9.4 s  status 0; kit_rounds_second.py: 3 kits: 1219 stored lines, 403 computed: 397 the same, 6 known to claim less, 
+passed   verifier.la_equals_lt                            0.1 s  status 1; NO: shape-la
+passed   verifier.plan_tau                                3.5 s  status 0; plan_tau_test.py: 13 cases: all as expected
+passed   setup.target.small_kit                           0.2 s  status 0; pack_layout.py: 670 rows over F, 7 rows over E, 720 blocks
+passed   verifier.commitment_id.examples                  8.2 s  status 0; commitment_id_test.py: all as expected
+passed   verifier.served.form                            29.0 s  status 0; served_form_test.py: all as expected
+passed   verifier.rejected_proofs                        28.3 s  status 0; 10 altered sets: all rejected
+passed   commit.walked_parents                            3.0 s  status 0; walked_parents_test: passes
+passed   verifier.format_hash                             7.1 s  status 0; all as expected
+passed   verifier.kit_rounds                              3.9 s  status 0; kit_rounds_test.py: 3 kits, 1219 kinds of rounds; 0 kits not as stored
+passed   verifier.one_chain_shell                         5.4 s  status 0; ok
+passed   verifier.record_altered_sets.example            32.0 s  status 0; record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all 
+passed   prover.batch_opening_test                       30.0 s  status 0; batch_opening_test: ok (9 views)
+passed   prover.hf_record_test                            1.6 s  status 0; 34 checks, 0 fail
+passed   verifier.plan_record                             2.2 s  status 0; a stage's record of its accounting: 163 checks, 0 failed: all as expected
+passed   prover.public_weights_test                       4.5 s  status 0; public_weights_test: passes
+passed   verifier.ws_build_fuzz                          32.1 s  status 0;   refused w-shape-mW: 9059
+passed   prover.hash_test                                 1.0 s  status 0; hash_test: passes
+passed   tools.audit.coins                                0.3 s  status 0; draw                 as the known answer
+passed   setup.target.full_kit                            0.2 s  status 0; pack_layout.py: 2565 rows over F, 25 rows over E, 5419 blocks
+passed   verifier.example_kits                           37.4 s  status 0; example_kits_test.py: 7 parameter files (1 bare, 5 work, 1 yes), 12 plays with a line changed; 0 not
+passed   prover.guards_stand                             57.2 s  status 0; ALL AS EXPECTED
+passed   tools.parser.small                              64.6 s  status 0; parser_test.py: accepted-proof: 3 files, 24 damaged originals, 33 damaged parsed, order and seeds fi
+passed   sources.format_vectors                           0.3 s  status 0; format-vectors.txt: 227 lines, as format_rules.py prints them
+passed   verifier.req_chain_test                         30.1 s  status 0; req_chain_test: ok (36 runs had to be refused)
+passed   new.cp_plan_files                               10.5 s  status 0; cp_plan_files.py: 11 files: all as expected
+passed   examples.protocol_toy_false_files              104.3 s  status 0; stored_false_test.py: all 12 false files refused and all 4 honest files accepted, each with the word
+passed   t-s8_model                                      35.0 s  status 0; the model prints the stored file
+passed   verifier.call_accounting.examples               31.2 s  status 0; call_accounting_test.py: 33 lines of the plan's accounting, 0 not as in the call
+passed   driver.measure_rate                             65.1 s  status 0; OK
+passed   integrations.unit                              218.6 s  status 0; 1961 passed, 3 skipped, 20 deselected in 217.50s (0:03:37)
+passed   verifier.record_altered_sets.full              331.2 s  status 0; record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all 
+passed   new.first_look                                  54.2 s  status 0; <WORK>/new.first_look/w/look/bent.proof: 577340 bytes: an opening 
+passed   verifier.extreme_files.full                    127.9 s  status 0; extreme_files_test.py: 1951 calls on 1883 files: planned 101, refused 1850, usage 0; fault 0, not-ch
+passed   verifier.hostile_leaf_files                    111.0 s  status 0; hostile_leaf_files_test.py: 186 changed sets, 372 calls: 186 refused, 0 NOT REFUSED, 0 otherwise; th
+passed   verifier.openings_left_out                      57.5 s  status 0; openings_left_out_test.py: 117 changed sets, 117 calls: 117 refused, 0 NOT REFUSED, 0 otherwise; the
+passed   second_writings.honest                         295.1 s  status 0; ALL AS EXPECTED: 32 honest files accepted; 255 altered copies and 2 bent entries refused; each judge
+passed   blocks.tests                                  1035.3 s  status 0; run_new.py: passed: tests
+passed   verifier.made_up_files.small                    12.3 s  status 0; made_up_files_test: ok
+not run  verifier.clang_build                             0.1 s  status 77; not run: clang_build_test.sh: there is no clang++ on this machine, clang++ --version fails, or the p
+passed   integrations.cp_verify                         138.6 s  status 0; 68 passed in 137.92s (0:02:17)
+in part  weight_sums                                     87.0 s  status 77; run_tests: every step that ran passed; 13 skipped
+passed   verifier.extreme_files                          28.8 s  status 0; extreme_files_test.py: 2141 calls on 2073 files: planned 116, refused 2025, usage 0; fault 0, not-ch
+passed   verifier.made_up_files.full                     36.7 s  status 0; made_up_files_test: ok
+passed   verifier.made_up_files.work                     11.3 s  status 0; made_up_files_test: ok
+run_suite.py: 89 rows passed, 2 passed in part (status 77: their last lines say what was not run), 0 failed, 1 not run (1 of them only because a test said it could not run here), 0 left out under version word H821, 13 left out in mode cpu because they need nvcc or a GPU, 0 taken and not run (--taken) and 0 that only these need; 0 ended with status 3; 0 lines to look at; 4371 s; the screens are in <WORK>/screens; the rows ran confined: files; of signals only those to -1 are refused (this kernel cannot confine signals); rows that build may also write in <WORK>/build; the call chose 92 of the table's 173 rows
