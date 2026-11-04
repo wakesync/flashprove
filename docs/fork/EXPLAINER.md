@@ -10,16 +10,18 @@ An AI provider says "this reply came from model X." Normally you have to trust t
 flowchart LR
     W[secret weights] --> C[cp_commit<br/>GPU, once per model]
     C --> ID[commitment ID<br/>public]
+    C --> K[public key files + config<br/>public]
     R[request] --> P[cp_prove<br/>GPU, per reply]
     W --> P
     P --> A[reply + proof]
     ID --> V[cp_verify<br/>any CPU, no weights]
+    K --> V
     A --> V
     R --> V
     V --> Y{YES / NO}
 ```
 
-Some limits of the idea itself, from upstream's own documentation: what is proved is an **integer version** of the model, not the 16-bit or FP8 model a normal server runs. The proved context is 1,024 tokens. A `YES` says the reply matches the committed integer model under the stated policy; it does not say the provider runs that model for everyone, or that the model is good. See [guide/what-is-proved.md](../../guide/what-is-proved.md) and [guide/known-limits.md](../../guide/known-limits.md).
+Some limits of the idea itself, from upstream's own documentation: what is proved is an **integer version** of the model, not the 16-bit or FP8 model a normal server runs. The proved context is 1,024 tokens at full size. A `YES` says the reply matches the committed integer model under the stated policy; it does not say the provider runs that model for everyone, or that the model is good. See [guide/what-is-proved.md](../../guide/what-is-proved.md) and [guide/known-limits.md](../../guide/known-limits.md).
 
 ## What upstream had
 
@@ -35,16 +37,17 @@ This is upstream's **small example**, not its headline result. We have not run t
 
 ## What we extended
 
-- **A faster verifier, with nothing it checks changed.** A profile showed that much of the verifier's planning time went to allocating memory for big-number arithmetic. Keeping short numbers inline made complete verification of a stored proof 15 to 18% faster on one thread, across two independent measurements. Verdicts and output were byte-identical on the honest case and eight altered ones. ([research/performance/real/](../../research/performance/real/README.md))
+- **A faster verifier, with nothing it checks changed.** A profile showed that much of the verifier's planning time went to allocating memory for big-number arithmetic. Keeping short numbers inline made complete verification of a stored proof about 18% faster on one thread (measured, unreplicated: one lane's timing files; a reviewer re-run is recorded only in a commit message, at -15.4%, so it does not count as a replication). Verdicts and output were byte-identical on the honest case and eight altered ones. ([research/performance/real/](../../research/performance/real/README.md))
 - **Honest negative results.** Our first CPU baseline and a first optimization attempt found **no** speedup, and say so. They stay on `main` as evidence. ([research/performance/](../../research/performance/README.md))
 - **A first step toward new model operators.** A tiny proof of one step of a KDA-style linear-attention recurrence, in fixed point: one token, one head, dimension 1. It proves and verifies, and 50 hostile proofs are rejected. It also shows that this coarse fixed point does **not** match floating point, which is the point of measuring it. ([research/operators/glm_kda_fixedpoint/](../../research/operators/glm_kda_fixedpoint/README.md))
+- **Measured studies, mostly negative or bounded, all unreplicated.** Clipped-gap limits against attacked replies (scored, not proved), a Fiat-Shamir binding probe on the stored proof (no accepted mutation, but the next token is bound late, as upstream documents), a paper feasibility study for a Qwen3.8-27B port, a CPU reference commit profile (no adopted speedup), a model-identity steering study that was killed for lack of a GPU, and a real-shape Gated DeltaNet head proof that fails its range threshold. Each is a row in the README table with its verdict.
 - **Evidence hygiene.** Full CPU-suite counts, held integration work with its open gates written down, and a script that keeps local machine paths out of published evidence ([scripts/check-no-host-paths.sh](../../scripts/check-no-host-paths.sh)).
 
 ## What is not done
 
 - No run on the full-size model, or on any real model's weights, on a GPU.
 - No serving, batching or long-context results of our own.
-- No support for new model families. The operator work is a toy-sized slice, not a port.
+- No support for new model families. The operator work is a single head or a toy-sized slice, not a port.
 - No measurement of how often a normal (16-bit or FP8) server's replies would pass the integer model's check, beyond what upstream reports.
 - No TEE or hardware attestation, and no production use.
 - The held integration work (PR #20) is not approved for adoption.
