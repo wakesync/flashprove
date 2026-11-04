@@ -70,3 +70,18 @@ No published H200 measurement of this prover is known. B200 is excluded: binarie
 ## Amendments
 - 2026-11-04 02:40 UTC. C-B (H100, batch 24, in-step 12) ended at start-up with `p258 end 1 cuda-call`, 0 of 120 proofs, before any batch. Per the fallback fixed at registration, the H100 gets one more B-arm session at in-step 8 (CB4, seed 4) after CA3. No other change.
 - 2026-11-04 03:00 UTC. Exploratory, added after seeing data, labelled exploratory everywhere, enters no pass/fail: the boxes' CPU quotas differ (H100 cgroup 30.7 cores, H200 23.0 cores; upstream bound 24 CPUs of the GPU's NUMA node). After CB4 the H100 runs one session (CX5, seed 5, 24/6) bound with taskset to 23 CPUs of the GPU's NUMA node, to match the H200's quota. It tests whether the CPU budget, not the GPU, sets the rate.
+- 2026-11-04 15:02 UTC. Rental 2 (before any rental-2 instance exists; Shadow GO 07:07 EST, caps $60 all-in
+  and 6 GPU-hours for the whole rental, shared with two other workloads). Rental 1's data after 02:33 UTC
+  was not pulled before its boxes were destroyed and is declared lost (CA3, CB4, CX5, TA2, TB, TC never
+  reported); rental 1 enters RESULTS.md as CA1, TA1 and CB2 only. Rental 2 re-runs the arms with the same
+  configuration, metric and pass bar, with these changes, fixed now:
+  - CPU confound: every rental-2 session on both boxes is bound with taskset to the same count of CPUs of the
+    GPU's NUMA node, N = min(23, CPUs of that node allowed by the box's cgroup) on both boxes (remote/bound.sh
+    rule), and N is recorded. Rental 1's unbound CA1/TA1 stay reported but enter no pass/fail.
+  - Order and seeds. H100: CA seeds 1, 2 (24/6), then CB8 seed 3 (24/8, the registered fallback, since CB2
+    failed at in-step 12). H200: TB seeds 1, 2 (24/12), then TA seed 3 (24/6). T-C dropped.
+  - n per primary arm: 2 sessions x 4 intervals (C-A, T-B), as registered; below the standards' n, stated.
+  - Pass bar unchanged: median T-B >= 1.15 x median C-A, min T-B interval rate > max C-A interval rate, and
+    T-B $/Mtok < C-A $/Mtok at each box's rented $/h.
+  - Kill: a box's sessions stop when the rental's 6-hour or $60 cap, or 17:18 UTC, is near; artifacts are
+    pulled and pushed after every session, before the next.
