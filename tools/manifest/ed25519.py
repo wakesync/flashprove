@@ -111,19 +111,28 @@ def sign(secret, message):
     return big_r + int.to_bytes(s, 32, "little")
 
 
+def is_small_order(p):
+    """True iff [8]p is the identity, i.e. p is one of the 8 points of order 1, 2, 4 or 8."""
+    q = _mul(8, p)
+    return q[0] % P == 0 and (q[1] - q[2]) % P == 0
+
+
 def verify(public, message, signature):
     """Return True iff `signature` is a valid Ed25519 signature of `message` under `public`.
 
     Strict on encodings: 32-byte key, 64-byte signature, S below L, both points decodable.
-    Uses the cofactorless check [S]B = R + [k]A, as the RFC's reference code does.
+    Refuses a public key A or a commitment point R of small order ([8]A or [8]R the identity):
+    with the identity as A, R = [r]B, S = r verifies for any message under the bare equation.
+    Uses the cofactorless check [S]B = R + [k]A, as the RFC's reference code does; a cofactored
+    verifier ([8][S]B = [8]R + [8][k]A) can disagree with this one on edge-case signatures.
     """
     if len(public) != 32 or len(signature) != 64:
         return False
     big_a = _decompress(public)
-    if big_a is None:
+    if big_a is None or is_small_order(big_a):
         return False
     big_r = _decompress(signature[:32])
-    if big_r is None:
+    if big_r is None or is_small_order(big_r):
         return False
     s = int.from_bytes(signature[32:], "little")
     if s >= L:

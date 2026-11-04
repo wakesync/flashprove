@@ -7,11 +7,12 @@ check that runs next to `cp_verify`. The prover is unchanged. Standard library o
 
 | field | what | checked by `verify` against |
 |---|---|---|
-| `commitment.id`, `.kind` | the FlashProve commitment ID; `public-weights` or `hiding` | `cp_verify -id` (and its `id=`) |
-| `upstream` | `huggingface`: repo, 40-hex revision, sha256 of every file; or `synthetic`: generator + seed | `--upstream-dir` (rehash, refuse unlisted files), else signer's word |
-| `conversion` | script path + sha256, repo commit, version, params, sha256 of committed files, public-weights seed digest | `--recipe`, `--committed-dir`, `--public-weights-seed`; params/version/commit: signer's word, checkable by rederivation |
+| `commitment.id` | the FlashProve commitment ID | `cp_verify -id` (and its `id=`) |
+| `commitment.kind` | `public-weights` or `hiding` | signer's word; `--public-weights-seed` checks the seed digest a `public-weights` kind needs, nothing checks a claimed `hiding` |
+| `upstream` | `huggingface`: repo, 40-hex revision, sha256 of every file; or `synthetic`: generator + seed | `--upstream-dir` (rehash, refuse unlisted files), else signer's word (kind, repo, revision, files) |
+| `conversion` | script path + sha256, repo commit, version, params, sha256 of committed files, public-weights seed digest | `--recipe` (or explicit `--no-recipe`: digest is then the signer's word), `--committed-dir`, `--public-weights-seed`, else signer's word; params/version/commit: signer's word, checkable by rederivation |
 | `configuration` | sha256 of `policy.txt`, `KL.bin`, `layout.txt` | the `--config` files |
-| `serving` | tokenizer files, chat template, system prompt (each a digest or `{"none": true}`), end tokens | `--tokenizer-dir`, `--chat-template`, `--system-prompt`, `--no-*`, `--end-tokens` |
+| `serving` | tokenizer files, chat template, system prompt (each a digest or `{"none": true}`), end tokens | `--tokenizer-dir`, `--chat-template`, `--system-prompt`, `--no-*`, `--end-tokens` (all required) |
 | `decode_policy` | `exact` or `clipped-gap` + C, theta, cap, s, sh, sT, F | `policy.txt` and `cp_verify`'s `result-v1` |
 | `verifier.build_digest` | the `build=` that `cp_verify` prints | `cp_verify`'s `result-v1` |
 | `signer` | name, public key | the key the CALLER passes with `--signer-key` (never the manifest's own) |
@@ -19,7 +20,17 @@ check that runs next to `cp_verify`. The prover is unchanged. Standard library o
 Canonical form: `json.dumps(sort_keys=True, separators=(",", ":"), ensure_ascii=True)` plus a
 newline. Signature: ed25519 over `b"flashprove-manifest-v1 signature\n" + manifest bytes`, 64 raw
 bytes in `<manifest>.sig`. Unknown or missing keys are refused. A field declared `none` must be
-acknowledged with `--no-<field>`, so a client cannot skip a check by omission.
+acknowledged with `--no-<field>`, `--end-tokens` is required, and the recipe needs `--recipe FILE`
+or an explicit `--no-recipe`, so leaving a serving or recipe flag out refuses instead of skipping
+the check. The rehash flags `--upstream-dir`, `--committed-dir` and `--public-weights-seed` stay
+optional (the caller may not hold a 232 GB checkpoint): without them `commitment.kind`,
+`upstream.*`, `conversion.committed_files` and `conversion.public_weights_seed_sha256` are the
+signer's word, and a trusted signer can change them to other schema-valid values undetected
+(measured, see Tests).
+
+Verification refuses a public key or an R of small order ([8]P the identity) and otherwise uses the
+cofactorless equation [S]B = R + [k]A. A cofactored verifier (some libsodium modes) can disagree
+with it on edge-case signatures; honest RFC 8032 signatures verify under both.
 
 ## Use
 
@@ -30,7 +41,7 @@ python3 tools/manifest/manifest.py verify manifest.json manifest.json.sig \
   --signer-key signer.pub --cp-verify bin/cp_verify \
   --config CONFIG --ivk IVK --request REQ --y Y --proof PROOF \
   --tokenizer-dir TOK --chat-template TEMPLATE --system-prompt PROMPT --end-tokens 2 \
-  [--recipe SCRIPT] [--committed-dir DIR] [--upstream-dir DIR] [--public-weights-seed FILE]
+  (--recipe SCRIPT | --no-recipe) [--committed-dir DIR] [--upstream-dir DIR] [--public-weights-seed FILE]
 ```
 
 Exit 0 and `manifest: ACCEPTED` only if every check passes and `cp_verify` says `YES`; else exit 1
@@ -43,8 +54,11 @@ The signer key must come from a source you trust (a registry, a pinned file), no
 ## Tests
 
 `python3 -m pytest -q tools/manifest` (needs `bin/cp_verify`, from `verifier/build.sh`). Every
-manifest field is tampered three ways; `SIGNERS_WORD` in the test lists exactly which fields a
-trusted signer can change undetected. Results: `experiments/20261104-58-signed-manifest/RESULTS.md`.
+manifest field is tampered three ways. In the test, `SIGNERS_WORD_SINGLE` lists exactly which
+one-field changes a trusted signer can make undetected, `SCHEMA_ONLY` which one-field refusals
+came from the schema alone, and `SIGNERS_WORD_UNLESS_FLAG` which fields a schema-valid coordinated
+change (`tamper.coordinated`) gets past unless the matching rehash flag is passed. Small-order keys
+and R, and leaving out a required flag, are tested too. Results: `experiments/20261104-58-signed-manifest/RESULTS.md`.
 
 ## Limits
 

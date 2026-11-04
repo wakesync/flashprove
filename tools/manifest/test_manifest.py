@@ -6,8 +6,10 @@ Three kinds of tamper, for every field of the manifest (enumerated mechanically 
   2. field changed, re-signed by an attacker key        -> must refuse (signer key is the caller's)
   3. field changed, re-signed by the TRUSTED key        -> must refuse iff the field is bound to
      something the caller holds (a file, cp_verify's output); otherwise the field is the signer's
-     word, and the test asserts exactly which fields those are (SIGNERS_WORD), so a new unbound
-     field cannot slip in unnoticed.
+     word, and the test asserts exactly which fields those are (SIGNERS_WORD_SINGLE), so a new
+     unbound field cannot slip in unnoticed. It also asserts which refusals were the schema's
+     alone (SCHEMA_ONLY), and test_coordinated_trusted_resign re-signs schema-valid alternates of
+     those (SIGNERS_WORD_UNLESS_FLAG: signer's word unless the matching flag is passed).
 Plus: every bound file swapped for a one-byte-changed copy, non-canonical JSON, signature bit flip,
 wrong trusted key, RFC 8032 vectors, cross-check against `cryptography` if installed.
 """
@@ -27,10 +29,12 @@ import tamper as t
 needs_verifier = pytest.mark.skipif(not t.CP_VERIFY.is_file(),
                                     reason="bin/cp_verify is not built (run verifier/build.sh)")
 
-# Fields that no caller-side file or cp_verify output pins, in the fixture's configuration. With
-# --upstream-dir / --committed-dir / --public-weights-seed on a real model, upstream.files,
-# conversion.committed_files and the seed digest move out of this set (tested below).
-SIGNERS_WORD = {
+# What the trusted signer can change undetected, in the fixture's configuration (synthetic upstream,
+# hiding commitment, no committed files), when the caller passes the required flags
+# (--end-tokens, --recipe) but none of --upstream-dir / --committed-dir / --public-weights-seed.
+#
+# SIGNERS_WORD_SINGLE: a one-field mutation re-signed by the trusted key is accepted.
+SIGNERS_WORD_SINGLE = {
     "signer.name",
     "upstream.generator",
     "upstream.seed",
@@ -41,6 +45,24 @@ SIGNERS_WORD = {
     "conversion.params.config",
     "conversion.params.weights",
     "verifier.source_commit",
+}
+# SIGNERS_WORD_UNLESS_FLAG: the one-field mutation is refused only by the schema (a nonsense value),
+# but a coordinated, schema-valid alternate re-signed by the trusted key is accepted unless the
+# caller passes the matching flag (tamper.coordinated): commitment.kind and the seed digest
+# (--public-weights-seed), upstream.* (--upstream-dir), conversion.committed_files
+# (--committed-dir). conversion.script_sha256 joins this set when the caller passes --no-recipe.
+SIGNERS_WORD_UNLESS_FLAG = {
+    "commitment.kind",
+    "conversion.public_weights_seed_sha256",
+    "upstream.kind",
+    "conversion.committed_files",
+}
+SIGNERS_WORD = SIGNERS_WORD_SINGLE | SIGNERS_WORD_UNLESS_FLAG
+# One-field mutations that check_schema alone refuses (no file or cp_verify output involved).
+SCHEMA_ONLY = {
+    "format", "commitment.kind", "upstream.kind", "conversion.committed_files",
+    "conversion.public_weights_seed_sha256", "decode_policy.kind", "decode_policy.C",
+    "decode_policy.theta", "decode_policy.cap", "decode_policy.sT",
 }
 
 
@@ -108,6 +130,82 @@ def test_signature_s_not_reduced_is_refused():
     assert not ed25519.verify(ed25519.public_key(sk), b"m", sig[:32] + s.to_bytes(32, "little"))
 
 
+# The 8 points of small order (orders 1, 2, 4, 8), canonical encodings. [8]P is the identity.
+SMALL_ORDER = [
+    "0100000000000000000000000000000000000000000000000000000000000000",  # identity, order 1
+    "ecffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f",  # (0, -1), order 2
+    "0000000000000000000000000000000000000000000000000000000000000000",  # order 4
+    "0000000000000000000000000000000000000000000000000000000000000080",  # order 4
+    "26e8958fc2b227b045c3f489f2ef98f0d5dfac05d3c63339b13802886d53fc05",  # order 8
+    "26e8958fc2b227b045c3f489f2ef98f0d5dfac05d3c63339b13802886d53fc85",  # order 8
+    "c7176a703d4dd84fba3c0b760d10670f2a2053fa2c39ccc64ec7fd7792ac037a",  # order 8
+    "c7176a703d4dd84fba3c0b760d10670f2a2053fa2c39ccc64ec7fd7792ac03fa",  # order 8
+]
+
+
+def test_small_order_points_are_small_order():
+    for enc in SMALL_ORDER:
+        pt = ed25519._decompress(bytes.fromhex(enc))
+        assert pt is not None and ed25519.is_small_order(pt), enc
+    assert not ed25519.is_small_order(ed25519.G)
+
+
+def test_identity_key_forgery_refused():
+    # Under the bare cofactorless equation, A = identity, R = [r]B, S = r verifies for ANY message.
+    identity = bytes.fromhex(SMALL_ORDER[0])
+    r = 123456789
+    forged = ed25519._compress(ed25519._mul(r, ed25519.G)) + r.to_bytes(32, "little")
+    for msg in (b"any message at all", b"", mf.signed_bytes(b"{}\n")):
+        assert not ed25519.verify(identity, msg, forged)
+
+
+@pytest.mark.parametrize("enc", SMALL_ORDER)
+def test_small_order_public_key_refused(enc):
+    # For a small-order A, [k]A cycles through at most 8 points: with R = [r]B - [k]A and S = r the
+    # equation holds whenever we pick that R. Build such a forgery and check it is refused.
+    a_enc = bytes.fromhex(enc)
+    a_pt = ed25519._decompress(a_enc)
+    msg = b"forged under a small-order key"
+    r = 987654321
+    # find R = [r]B + T for torsion T such that k(R) makes [k]A = T; try all 8 candidates
+    refused = 0
+    for t_enc in SMALL_ORDER:
+        t_pt = ed25519._decompress(bytes.fromhex(t_enc))
+        big_r = ed25519._compress(ed25519._add(ed25519._mul(r, ed25519.G), t_pt))
+        sig = big_r + r.to_bytes(32, "little")
+        refused += not ed25519.verify(a_enc, msg, sig)
+    assert refused == len(SMALL_ORDER)
+    assert ed25519.is_small_order(a_pt)
+
+
+@pytest.mark.parametrize("enc", SMALL_ORDER)
+def test_small_order_r_refused(enc):
+    # A real key, a signature whose R is a small-order point and S = 0: [0]B = identity and
+    # R + [k]A is not, unless A's multiple cancels, so also check a hand-made equation-satisfying
+    # case: with A = [a]B, R = T (small order), [S]B = T + [k][a]B has no solution for T != 0,
+    # but R = identity, S = k*a mod L does. Both must be refused.
+    sk = bytes(range(32))
+    pub = ed25519.public_key(sk)
+    a, _ = ed25519._secret_expand(sk)
+    msg = b"small-order R"
+    r_enc = bytes.fromhex(enc)
+    k = int.from_bytes(ed25519._sha512(r_enc + pub + msg), "little") % ed25519.L
+    sig = r_enc + ((k * a) % ed25519.L).to_bytes(32, "little")
+    if enc == SMALL_ORDER[0]:  # identity R: the bare equation holds; must still refuse
+        assert ed25519._equal(ed25519._mul((k * a) % ed25519.L, ed25519.G),
+                              ed25519._add(ed25519._decompress(r_enc),
+                                           ed25519._mul(k, ed25519._decompress(pub))))
+    assert not ed25519.verify(pub, msg, sig)
+
+
+def test_small_order_key_refused_by_manifest_load(tmp_path):
+    identity = bytes.fromhex(SMALL_ORDER[0])
+    r = 42
+    forged = ed25519._compress(ed25519._mul(r, ed25519.G)) + r.to_bytes(32, "little")
+    with pytest.raises(mf.Refusal, match="signature"):
+        mf.load(b"{}\n", forged, identity)
+
+
 # ---- the honest path ----
 
 
@@ -142,6 +240,7 @@ def test_every_field_tamper(tmp_path, build):
     paths = list(t.leaves(m))
     assert len(paths) >= 25
     accepted_by_trusted = set()
+    schema_only = set()
     for path in paths:
         name = t.path_name(path)
         bad = t.mutated(m, path)
@@ -157,7 +256,43 @@ def test_every_field_tamper(tmp_path, build):
         # 3. the trusted signer itself signs the changed field
         if run(tmp_path, bad, recipe) == 0:
             accepted_by_trusted.add(name)
-    assert accepted_by_trusted == SIGNERS_WORD
+        else:
+            try:
+                mf.check_schema(bad)
+            except mf.Refusal:
+                schema_only.add(name)
+    assert accepted_by_trusted == SIGNERS_WORD_SINGLE
+    assert schema_only == SCHEMA_ONLY
+
+
+@needs_verifier
+def test_coordinated_trusted_resign(fx):
+    """Schema-valid alternates re-signed by the trusted key: accepted without the matching flag
+    (signer's word), refused with it. Fields with no such flag must refuse without one."""
+    tmp, m, recipe = fx
+    unless_flag = set()
+    for name, covers, bad, flags in t.coordinated(m, tmp):
+        mf.check_schema(bad)  # really schema-valid
+        code = run(tmp, bad, recipe)
+        if flags is None:
+            assert code == 1, name
+        else:
+            assert code == 0, name  # nothing the caller holds pins it
+            assert run(tmp, bad, recipe, overrides=flags) == 1, name
+            unless_flag.update(covers)
+    assert unless_flag == SIGNERS_WORD_UNLESS_FLAG
+
+
+@needs_verifier
+def test_omitting_end_tokens_or_recipe_refused(fx):
+    tmp, m, recipe = fx
+    assert run(tmp, m, recipe, overrides={"--end-tokens": None}) == 1
+    assert run(tmp, m, recipe, overrides={"--recipe": None}) == 1
+    assert run(tmp, m, recipe, overrides={"--no-recipe": True}) == 1  # both given
+    assert run(tmp, m, recipe, overrides={"--recipe": None, "--no-recipe": True}) == 0
+    m["conversion"]["script_sha256"] = "ab" * 32
+    assert run(tmp, m, recipe, overrides={"--recipe": None, "--no-recipe": True}) == 0  # disclosed
+    assert run(tmp, m, recipe) == 1
 
 
 @needs_verifier

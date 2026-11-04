@@ -33,3 +33,29 @@ What is new: nothing cryptographically; it is the missing glue between a FlashPr
 ## Amendments
 
 - 2026-11-04 23:20 UTC, after code. Added a third tamper arm not named at registration: each field changed and **re-signed by the trusted signer key itself**. It has no threshold. It sorts fields into those the client can check against its own files or cp_verify's output ("bound") and those that are only the signer's word; the test suite asserts that set exactly, so a new unbound field fails a test. The registered PASS rule (100% of tampers refused) applies to the registered arms only: original signature kept, attacker key, attacker key written into `signer.public_key`, file substitutions, signature bit flips, non-canonical JSON. Reason: a signed manifest cannot stop its own signer from lying about fields nobody can rehash; saying which fields those are is the useful output.
+
+- 2026-11-05 (UTC), after results and after the independent review of PR #59 (head 078d7429),
+  correction of times only. The registration line says "2026-11-04 22:25"; the registration commit
+  `7930e5b0` is dated 2026-11-04 22:16:43Z. The amendment above says "2026-11-04 23:20 UTC"; the
+  commit that contains it, `078d7429`, is dated 2026-11-04 22:31:55Z. Both written times were
+  wrong; the commit times are the record. The registration line is left as written.
+
+- 2026-11-05 (UTC), amendment 2, after results and after the independent review of PR #59 (head
+  078d7429). The review found three gaps. Code and tests changed, so every number is re-measured
+  at the new code commit and the old `numbers.json` stays in git history at `078d7429`.
+  1. `ed25519.verify` accepted a small-order public key: with the identity as key, R = [r]B, S = r
+     verified for any message. It now refuses any public key A or commitment R with [8]A or [8]R
+     the identity (the 8 small-order points). Verification stays cofactorless.
+  2. The trusted re-sign arm counted schema refusals of nonsense values as "bound". The runner
+     now reports which of its refusals the schema alone causes, and adds a coordinated arm:
+     schema-valid alternates (commitment.kind hiding to public-weights with a made-up seed digest;
+     a full made-up huggingface upstream with made-up committed files; committed files under the
+     synthetic upstream; decode policy and serving alternates), each re-signed by the trusted key,
+     without and with the flag that checks it. No threshold, like the first amendment arm.
+  3. `--end-tokens` and `--recipe` were opt-in: leaving either out skipped its check.
+     `--end-tokens` is now required, and the caller must pass `--recipe FILE` or an explicit
+     `--no-recipe` (which leaves the recipe digest the signer's word). The runner adds omission
+     rows (no threshold).
+  The registered threshold, the 137 registered tampers and n = 10 are unchanged. Two registered
+  file substitutions ("end tokens differ", "recipe") used to refuse only because the harness
+  passed those flags; they now run with flags the tool requires.

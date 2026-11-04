@@ -55,7 +55,8 @@ Sources: [README](https://github.com/amiller/dsmack),
   client builds, the checked tokens are those that the *committed integer model* ranks first
   (exact match) or that pass the clipped-gap limits, under the commitment ID that the client
   names. It needs no hardware trust: an untrusted GPU host produces the proof, any CPU checks it
-  (about 1.4 s for the small example, **measured** below; about 21 s single-thread at full size,
+  (about 1.4 s for the small example, **measured** in
+  `experiments/20261104-58-signed-manifest/RESULTS.md`; about 21 s single-thread at full size,
   **cited** `guide/performance.md`). The binding rests on stated assumptions (BLAKE2b as a random
   oracle, the codes theorem taken as given, a not-public paper argument), listed in
   `examples/accepted-proof/README.md`.
@@ -128,8 +129,12 @@ base checkpoint (HF repo @ 40-hex revision, file sha256s)          <- manifest.u
 
 Every arrow is a pinned program on pinned inputs. A manifest (this PR's `tools/manifest/`) records
 each input digest and the recipe; the signer signs it; anyone who reruns the chain and gets the same
-ID has checked the signer's claim rather than trusted it. Today that rerun is possible only for
-`-public-weights` commitments (hiding ones mix in a secret seed, `prover/common/public_weights.h`),
+ID has checked the signer's claim rather than trusted it. Without that rerun, the client can
+only rehash what it holds: `commitment.kind`, `upstream.*`, `conversion.committed_files` and the
+public-weights seed digest are the signer's word unless it passes `--public-weights-seed`,
+`--upstream-dir` and `--committed-dir` (measured in the manifest experiment's amendment arm).
+Today that rerun is possible only for `-public-weights` commitments (hiding ones mix in a secret
+seed, `prover/common/public_weights.h`),
 and the last step needs an H100 and about 330 GB of host memory for Maverick (**cited**,
 `examples/maverick/figures.txt`: commit 43 minutes, peak 310 GB). The Maverick example already
 does the last three arrows for the unmodified base (`examples/maverick/run.sh`, ID

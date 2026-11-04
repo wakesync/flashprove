@@ -168,3 +168,72 @@ def flip_byte(path, offset=None):
 
 def dump(obj):
     return json.dumps(obj, indent=1, sort_keys=True)
+
+
+# ---- coordinated, schema-valid alternates re-signed by the trusted key (amendment 2) ----
+
+# Single-field mutations of these fields are refused by the schema (a nonsense value), which said
+# nothing about whether a VALID alternate is caught. coordinated() gives each one a schema-valid
+# alternate. Fields listed under "covers" are what each alternate tests.
+FAKE_HF_FILES = ("config.json", "model-00001-of-00001.safetensors")
+
+
+def coordinated(m, tmp):
+    """Yield (name, covers, manifest, flag_overrides) for schema-valid trusted re-signs.
+
+    flag_overrides is what a caller passes to check the changed field against its own files
+    (None when no flag can check it on CPU). Every alternate passes check_schema.
+    """
+    tmp = pathlib.Path(tmp)
+    seed = tmp / "client-public-weights-seed.bin"  # stand-in: the seed file a caller holds
+    seed.write_bytes(b"client seed file stand-in\n")
+    up = tmp / "client-upstream"  # stand-in: what a caller downloaded from the named repo
+    up.mkdir(exist_ok=True)
+    for n in FAKE_HF_FILES:
+        (up / n).write_bytes(b"caller's download of " + n.encode() + b"\n")
+    committed = tmp / "client-committed"  # the honest committed set of this fixture is empty
+    committed.mkdir(exist_ok=True)
+
+    a = copy.deepcopy(m)
+    a["commitment"]["kind"] = "public-weights"
+    a["conversion"]["public_weights_seed_sha256"] = "5e" * 32
+    yield ("kind hiding->public-weights + made-up seed digest",
+           ["commitment.kind", "conversion.public_weights_seed_sha256"], a,
+           {"--public-weights-seed": str(seed)})
+
+    b = copy.deepcopy(m)
+    b["upstream"] = {"kind": "huggingface", "repo": "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+                     "revision": "0" * 40,
+                     "files": [{"path": n, "sha256": "%02x" % i * 32}
+                               for i, n in enumerate(FAKE_HF_FILES, 1)]}
+    b["conversion"]["committed_files"] = [{"path": "weights.bin", "sha256": "c0" * 32}]
+    yield ("upstream synthetic->full fake huggingface + made-up committed_files",
+           ["upstream.kind", "conversion.committed_files"], b,
+           {"--upstream-dir": str(up), "--committed-dir": str(committed)})
+
+    b2 = copy.deepcopy(b)
+    yield ("same, caller passes --upstream-dir only", ["upstream.kind"], b2,
+           {"--upstream-dir": str(up)})
+
+    c = copy.deepcopy(m)
+    c["conversion"]["committed_files"] = [{"path": "weights.bin", "sha256": "c0" * 32}]
+    yield ("committed_files []->one made-up entry (synthetic upstream)",
+           ["conversion.committed_files"], c, {"--committed-dir": str(committed)})
+
+    for field in ("C", "theta", "cap", "sT"):
+        d = copy.deepcopy(m)
+        d["decode_policy"][field] += 1
+        d["decode_policy"]["kind"] = "clipped-gap"
+        yield ("decode_policy.%s+1 with kind clipped-gap" % field,
+               ["decode_policy.%s" % field], d, None)
+    e = copy.deepcopy(m)
+    e["decode_policy"].update({"kind": "clipped-gap", "cap": 1})
+    yield ("decode_policy.kind exact->clipped-gap with cap 1", ["decode_policy.kind"], e, None)
+
+    for field in ("chat_template", "system_prompt"):
+        f = copy.deepcopy(m)
+        f["serving"][field] = {"none": True}
+        yield ("serving.%s digest->none" % field, ["serving.%s" % field], f, None)
+    g = copy.deepcopy(m)
+    g["serving"]["tokenizer"] = {"none": True}
+    yield ("serving.tokenizer files->none", ["serving.tokenizer"], g, None)

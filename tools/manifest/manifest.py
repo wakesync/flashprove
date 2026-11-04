@@ -19,9 +19,11 @@ commitment ID to:
 names (never one taken from the manifest), the files the caller holds and what cp_verify prints.
 It does not change and does not replace cp_verify: it runs it, with the manifest's ID.
 
-What it cannot check: whether the signer told the truth about fields the caller has no files for
-(upstream files, conversion inputs). Those are the signer's word unless the caller passes
---upstream-dir / --committed-dir / --recipe so they are rehashed. See README.md.
+What it cannot check: whether the signer told the truth about fields the caller has no files for.
+commitment.kind, upstream.* (kind, repo, revision, files, or generator and seed),
+conversion.committed_files and conversion.public_weights_seed_sha256 are the signer's word unless
+the caller passes --upstream-dir / --committed-dir / --public-weights-seed so they are rehashed;
+conversion.script_sha256 is the signer's word under --no-recipe. See README.md.
 
 Standard library only (ed25519.py next to this file).
 """
@@ -286,12 +288,17 @@ def check_serving(m, args):
                 raise Refusal("serving.%s: pass the file you used" % field)
             if sha256_file(path_arg) != want["sha256"]:
                 raise Refusal("serving.%s: file digest differs" % field)
-    if args.end_tokens is not None and args.end_tokens != s["end_tokens"]:
+    if args.end_tokens is None:
+        raise Refusal("serving.end_tokens: pass --end-tokens (comma list, or none for the empty list)")
+    if args.end_tokens != s["end_tokens"]:
         raise Refusal("serving.end_tokens: differ from --end-tokens")
 
 
 def check_recipe(m, args):
     v = m["conversion"]
+    if bool(args.recipe) == bool(args.no_recipe):
+        raise Refusal("conversion.script_sha256: pass exactly one of --recipe FILE or --no-recipe "
+                      "(--no-recipe leaves the recipe digest the signer's word)")
     if args.recipe and sha256_file(args.recipe) != v["script_sha256"]:
         raise Refusal("conversion.script_sha256: recipe file digest differs")
     if args.committed_dir:
@@ -382,8 +389,10 @@ def add_verify_args(p):
     p.add_argument("--no-chat-template", action="store_true")
     p.add_argument("--system-prompt")
     p.add_argument("--no-system-prompt", action="store_true")
-    p.add_argument("--end-tokens", type=lambda t: [int(x) for x in t.split(",") if x] if t != "none" else [])
-    p.add_argument("--recipe")
+    p.add_argument("--end-tokens", help="required: comma list of end token ids, or none", type=lambda t: [int(x) for x in t.split(",") if x] if t != "none" else [])
+    p.add_argument("--recipe", help="the conversion script; required unless --no-recipe")
+    p.add_argument("--no-recipe", action="store_true",
+                   help="do not rehash the recipe; conversion.script_sha256 is then the signer's word")
     p.add_argument("--committed-dir")
     p.add_argument("--upstream-dir")
     p.add_argument("--public-weights-seed")
