@@ -31,4 +31,5 @@ Untampered verify: n=10, same inputs, deterministic (repeat counts a determinism
 What is new: nothing cryptographically; it is the missing glue between a FlashProve commitment ID and an upstream checkpoint + serving template, with tamper tests.
 
 ## Amendments
-(empty at registration)
+
+- 2026-11-04 23:20 UTC, after code. Added a third tamper arm not named at registration: each field changed and **re-signed by the trusted signer key itself**. It has no threshold. It sorts fields into those the client can check against its own files or cp_verify's output ("bound") and those that are only the signer's word; the test suite asserts that set exactly, so a new unbound field fails a test. The registered PASS rule (100% of tampers refused) applies to the registered arms only: original signature kept, attacker key, attacker key written into `signer.public_key`, file substitutions, signature bit flips, non-canonical JSON. Reason: a signed manifest cannot stop its own signer from lying about fields nobody can rehash; saying which fields those are is the useful output.

@@ -150,7 +150,7 @@ def main():
         "untampered_n": len(out["untampered"]),
         "verify_wall_s": {"median": statistics.median(walls), "sd": statistics.stdev(walls),
                           "min": min(walls), "max": max(walls), "n": len(walls),
-                          "note": "includes one cp_verify process (about 1.5 s of it)"},
+                          "note": "whole verify call: manifest checks plus one cp_verify process on the stored small example"},
         "fields": len(trusted),
         "must_refuse_total": len(must_refuse),
         "must_refuse_refused": sum(r["exit"] == 1 for r in must_refuse),
