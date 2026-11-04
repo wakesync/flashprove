@@ -116,6 +116,8 @@ def arguments(c, identity=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--runs', type=int, default=5)
+    parser.add_argument('--output-dir', type=Path, default=HERE,
+                        help='record directory (default: this experiment)')
     args = parser.parse_args()
     if args.runs < 1:
         parser.error('--runs must be positive')
@@ -123,7 +125,8 @@ def main():
     base = {'config': FIX / 'config', 'request': FIX / 'example.req',
             'reply': FIX / 'example.y', 'id': (ROOT / FIX / 'ID.txt').read_text().strip()}
     records = []
-    out = HERE / 'measurements.json'
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    out = args.output_dir / 'measurements.json'
     t_start = time.time()
     for name, case in cases.items():
         plan = None
@@ -169,7 +172,7 @@ def main():
         entry['production_verdicts'] = sorted({(r['mutated']['production']['exit'], r['mutated']['production']['last']) for r in rows})
         summary[name] = entry
     summary['_wall_seconds'] = round(time.time() - t_start, 1)
-    (HERE / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+    (args.output_dir / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     assert all(r['baseline_accept'] and r['build_verdict_agreement'] and not r['mutation_accept'] for r in records)
     print('Mutation rejections and build outcome agreement hold. Read summary for early-binding exceptions.')
 

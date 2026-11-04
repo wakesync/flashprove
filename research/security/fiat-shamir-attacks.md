@@ -1,78 +1,319 @@
 # Two published Fiat-Shamir attacks, mapped onto FlashProve
 
-Issue #37. Lane: fiat-shamir. Base commit 29907e5f. Companion experiment: `experiments/20261103-fiat-shamir-binding/` (RESULTS.md has the measurements).
+Issue #37. Scope: **these two attacks**, ePrint 2025/118 and 2026/1838. This is a
+source-level desk study and a deterministic CPU transcript-binding probe, not an audit,
+a proof of soundness, or a claim about other attacks. Code citations below are at
+`29907e5fbe648b9ec246cebf9d757511a751fca2`; the research commits do not change that code.
 
-**Scope.** This note answers one question for each of two papers: do the paper's stated preconditions hold for the FlashProve protocol as the C++ verifier implements it? It cites the lines where public inputs enter a hash chain and where the first challenge is drawn. It is a reading of code and papers plus a small binding probe. It is not an audit, not a soundness proof, and it says nothing about attacks other than these two or adaptations of them beyond what is written here. Any verdict below is "this paper's attack, as stated", never "secure". Row SO-57 of docs/limits-all-rows.tsv records that neither paper had been examined before; this note is the first examination and should be read as a partial one.
+## Executive finding
 
-Both papers use diagonalization: the prover builds a statement (a circuit, or a program that generates a statement) that computes its own Fiat-Shamir challenge and then uses that knowledge to satisfy the verifier on a false claim. Neither paper breaks a hash function. Both need the prover to control the statement in a way that lets it embed a hash computation, and both need the first challenge to be derivable before the relevant part of the statement is fixed.
+**No omitted configuration input was found in the tested path.** The three configuration
+files are hashed byte for byte into both the commitment ID and each proof chain's
+parameters. With one fixed commitment ID and the original proof, changing the model
+parameter, quantization scale, or layout rejected in 5/5 repetitions per mutation. When
+using each changed configuration's *new* ID only to observe the transcript, its first
+request-chain challenge changed in 5/5 repetitions, but verification still rejected.
 
-## 0. Where FlashProve binds its public inputs (the facts the two verdicts rest on)
+**Not all public inputs are present before the first request challenge.** The separate
+next-token value `y` is deliberately absent until the output-head segment. The caller's
+`y` mutation left the first challenge unchanged in 5/5 repetitions and was rejected later.
+The verifier binary and all its built-in constants are not cryptographically identified
+by the transcript either; a manually assigned format version stands in for them.
 
-FlashProve's proof consists of hash chains (strong Fiat-Shamir with a per-chain salt). The facts used below, with file:line at base commit 29907e5f:
+**Paper-level verdicts: unclear for complete applicability to this protocol.** The
+published GKR construction is not a direct match for FlashProve's segment commitments,
+and no sufficiently expressive statement generator of Fenzi's kind was identified.
+However, the uncommitted subcomputations and the full semantic statement coverage were
+not exhaustively established. In particular, hashing a plan and observing challenge
+changes does **not** establish the hypotheses of Fenzi's Proposition 5.5. No concrete
+false-claim acceptance or new exploit was found. These conclusions are narrower than a
+verdict that either paper has been ruled out.
 
-| what | where | note |
-|---|---|---|
-| A chain's first value is `H(label, parameters digest, statement bytes, record, salt flag, run value)`. | blocks/chain/chain.h:158-168 (`ChainT` constructor) | The label and the whole parameter and statement lists are hashed before any prover message. |
-| `Binder` builds the parameter list and the statement list. Parameters are written starting with the format version word and the full plan (round names, counts, work bits, draw counts). | blocks/chain/public.h:200-202 (constructor), :279-291 (`write_plan`) | The plan is a function of the configuration. |
-| The configuration digest is the first item after the plan, mandatory, once per chain. | blocks/chain/public.h:243-248 (`Binder::configuration`) | |
-| The configuration digest is a length-prefixed hash of the full bytes of policy.txt, layout.txt and KL.bin. | blocks/frame/heads.h:71-76 (`configuration_digest`); computed in verifier/src/cp_verify.cpp:849 | Verbatim bytes, so comments and whitespace are bound too (measured: the layout-comment control changes the ID and the first challenge). |
-| The commitment ID hashes the configuration digest, the anchor table's name, the record seeds and the record answers. It is recomputed from the key file and compared with `-id` before any chain starts. | blocks/frame/heads.h:91-104 (`published_id`); verifier/src/cp_verify.cpp:2244-2253 | A changed configuration cannot be verified at the published ID (`NO: model-statement`). |
-| The request chain's parameters: configuration, codes, test shape, request shape, layout, link identifiers, pending rows, binding tree. | blocks/frame/check.h:60-71 (`bind_request_parameters`) | |
-| The request chain's statement: the committed table's name (root + record), the stored copy, the request (statement words with y zeroed), and the request file's words. The first statement item closes the parameter list. | blocks/frame/check.h:73-78 (`bind_request_statement`); blocks/iop/lin.h:187 | Request tokens and range enter before the first challenge (measured: 5/5 changes for four request-word mutations). |
-| The chain starts (first query hashed, salt read from the proof) right after binding, before any prover message is read. | blocks/frame/check.h:165-170; blocks/chain/rounds.h:839-845 (`VerifierRounds` constructor), :392-400 (`start`) | |
-| The next token y is zeroed in the statement word and sent later by the prover as a plain scalar on the same chain (round `R_REPLY`), then compared with the caller's y after the links. | verifier/src/cp_verify.cpp:2427-2432 (`stNoReplyH`); blocks/iop/req.h:661-671 (`ReqVerifier::first`); verifier/src/vf_segments.inc:301-302; blocks/frame/check.h:173-176 | **Deferred binding of y.** Documented in docs/limits-further.md SO-50 and in PUBLISHED-WORKS.md (the Dao et al. row). Measured: changing y leaves the first-query digest, first challenge and REPLY-round digest identical (5/5). |
-| The first prover message after the first query is the SEND round: Merkle roots of the segment's oracle messages (encoded rows plus mask rows). The verifier's reply is the seed of an out-of-domain sample. | blocks/iop/req.h:415-432 (order of calls), blocks/iop/send.h:6-13 | The prover commits to witness rows before the first challenge. |
-| Hash: BLAKE2b, the only option. | blocks/base.h:36-37, blocks/hash/hash.h:6-16 | |
-| The shared and second chains follow the first through seals (the first chain's digest is a statement item of later chains), and all three share one configuration digest. | blocks/chain/public.h:219-224 (`follows`), :249-255 (`configuration_digest`); blocks/frame/check.h:192-204 | |
+The earlier draft's stronger conclusions were corrected after checking the full papers:
+Fenzi's formal attack can choose a statement after a **prefix** of challenges, not only
+after all of them; a generated plan is not automatically a canonical encoding of the
+full relation; and SO-50 explicitly says there is **no** vocabulary-size factor in the
+stated hash-query bound.
 
-## 1. Khovratovich, Rothblum, Soukhanov, ePrint 2025/118 (CRYPTO 2025)
+## 1. What is actually bound, and when
 
-**The attack, as stated.** Against FS-compiled GKR with a multilinear PCS (their Pi_comm,d; Theorem 1 and Theorem 2). The prover supplies a circuit C* of depth d >= d_comm + d_h + O(1) that internally evaluates the FS hash h and the commitment comm. Because GKR commits only to the input and witness, not to the internal wires, the circuit can compute the first challenge r = h(<C>, comm(w), x, y) on the fly and arrange a false output that the sumcheck nevertheless accepts. The extended attack (Theorem 2) backdoors any admissible circuit C into a functionally equivalent C*. Their own mitigations (Section 5): make the circuit family unable to compute h (depth or degree bound), or commit to intermediate values.
+There is no single global "first challenge" shared by commitment creation, leaf linking,
+and online proofs. An offline commitment cannot include a future prompt. Below, "first
+challenge" means the request chain's first SEND/OOD challenge unless explicitly qualified.
 
-**Preconditions.**
+| Public input | Before first request challenge? | Source and limitation |
+| --- | --- | --- |
+| `policy.txt`, including model dimensions, equation parameters, lookup-call descriptions and acceptance policy | Yes, full bytes via configuration digest | `verifier/src/cp_verify.cpp:843-849` passes the three files in a fixed order to `blocks/frame/heads.h:66-76`, which hashes file count, each length and each byte. `blocks/frame/check.h:60-70` binds the digest before the chain starts. |
+| `layout.txt`, the array placement/program-layout description | Yes, full bytes via that digest, plus the derived layout | `blocks/frame/check.h:65-68` binds shape, layout, link identifiers and pending rows. Layout comment changes therefore also change the ID; this is byte binding, not a semantic difference. |
+| `KL.bin`, the quantization/scaling parameters | Yes, all words via the same digest | `verifier/src/cp_verify.cpp:849`; supported verifier reads the words and passes all `4 * KL.size()` bytes. The CPU probe changes its first word from 29 to 28. |
+| Generated proof plan and parameter objects | Selected serialized fields, yes; not an independent encoding of every equation | `blocks/chain/public.h:200-202,279-289` writes the format word, field/hash settings and round descriptors. Its comment at `:193-199` explicitly lists fields not serialized. `blocks/frame/check.h:60-70` adds codes, shapes and layout. Source-fixed equations and constants remain outside this serialization. |
+| Prompt, reply tokens that lie inside the T-token request, padding, and checked range | Yes | `verifier/src/cp_verify.cpp:2470-2471` and `blocks/frame/check.h:73-78` bind both the request item and the raw request-file words. There is no separate prompt/reply split in the transcript; the tokens and range define the claim. |
+| Caller-supplied commitment ID | Not literally inserted as an item of the request chain; checked separately | `verifier/src/cp_verify.cpp:2237-2254` recomputes the ID from the configuration and anchor header, then compares it to `-id`. `blocks/frame/heads.h:78-105` includes configuration, anchor name, OOD seeds and answers. The request chain names the **leaf** table root/record and copy number (`blocks/frame/check.h:160,168`, `:73-78`); the leaf proof ties it to the anchor. Flipping only `-id` rejects, rather than producing a new challenge. |
+| Separate next token `y` after the T-token request | **No** | `verifier/src/cp_verify.cpp:2428-2432` writes zero in its initial statement slot. The prover's token is received and absorbed at `R_REPLY` by `blocks/iop/req.h:661-671`, before the output head's first message/challenges. It is compared with the caller's value in `blocks/frame/check.h:173-176`; `verifier/src/vf_segments.inc:301-302` also checks it. |
+| Verifier source/binary, built-in operation semantics and constants | **No complete source or circuit digest** | The format version is written at `blocks/chain/public.h:200-202`. `docs/limits-further.md:146-150` (SO-63) explicitly warns that equal IDs do not identify equal built-in constants across builds. Fix the trusted verifier build as well as the ID/configuration. This is not evidence that the provider can change the client's trusted binary. |
 
-| # | precondition | FlashProve | basis |
-|---|---|---|---|
-| P1 | The proof system is GKR-style: the verifier's claim about the output is reduced layer by layer to a claim about committed inputs/witness, and the internal wires are **not** committed. | **Not met as stated.** FlashProve is a constrained-interleaved-code argument (ePrint 2026/391 lineage, see PUBLISHED-WORKS.md). The model's activations are committed as oracle messages (Merkle roots in the SEND round) before any challenge (blocks/iop/req.h:415-432; blocks/iop/send.h:6-13). Sub-proofs are masked sumchecks over committed rows (blocks/iop/psc.h:4-10), and every claim they return is reduced to a linear claim on the committed arrays (blocks/iop/req_rows.h `ReqEquation`; verifier/src/vf_request_chain.h:34-37). The GKR lookup paper is cited only for the lookup identity, not for a layered reduction over uncommitted wires (PUBLISHED-WORKS.md:207). | read |
-| P1a | **However:** the project itself notes that not every value a proof uses is committed: lookup keys, inner nodes of product trees, and one vector of the attention sub-proof (docs/limits-all-rows.tsv SO-57; blocks/iop/lkp.h:17 "K is never sent"). | **Unclear.** These are the places where a GKR-style "uncommitted intermediate" exists. Whether a prover who controls the circuit could place a hash evaluation there is not examined here. The lkp.h contract says the caller must turn every claim on K into a claim on what it has sent (lkp.h:17-20), which is the kind of commitment the attack must avoid; but this was not verified line by line for the attention vector. | read, not verified |
-| P2 | The prover (or someone colluding) chooses the circuit C that the verifier will accept proofs for, after knowing h and comm. | **Partly met.** The circuit is the integer model, fixed by the configuration files and the built-in constants of the verifier (docs/model.md; docs/limits-further.md SO-63). The provider chooses the configuration (docs/limits.md:167-180 "The provider chooses the committed model and its settings"), so the threat model already includes a malicious provider who chooses the statement. But the shape of the circuit is constrained to the model family the verifier implements (attention, feed-forward, norm, lookups); the provider cannot write an arbitrary circuit, only pick shapes, scales, tables and weights within accepted ranges. | read |
-| P3 | The circuit family must be deep or expressive enough to evaluate h (BLAKE2b, ~12 rounds of 64-bit ARX per block) and comm (BLAKE2b Merkle trees) inside the proved computation, with the result feeding the output claim. | **Not examined.** A transformer of L layers with lookup tables is an expressive circuit; the paper's extended attack (Theorem 2) needs only that the witness is at least as long as the circuit digest. Whether the fixed FlashProve operator set, the range conditions (docs/model.md section 9) and the committed activations together prevent embedding a BLAKE2b evaluation whose output reaches the sumcheck target without being committed is an open question that this note does not settle. | not examined |
-| P4 | The attacker needs the parametrisation of comm and h (salt, keys) before building C*. | **Met in part, with a complication.** The chain's salt is drawn by the prover and written to the proof (blocks/chain/chain.h:58-67), so the prover knows it. But the salt enters the chain's run value, and every tree leaf hash starts from the run value (blocks/chain/public.h:186-190, 249-255), so comm depends on the salt the prover picks; the circuit would have to be fixed before the salt is chosen or absorb the salt as a witness. The configuration digest also enters every leaf hash. | read |
+Here "configuration" means those **three verifier input files**, not arbitrary Hugging
+Face metadata, a tokenizer, stop-token settings, or an external generation program.
+`docs/protocol.md:63-71` distinguishes the integer-model claim from those surrounding
+choices. Prompt/reply text is represented by caller-supplied token IDs, not hashed as
+raw UTF-8 text. Those distinctions matter when asking whether *all* application-level
+public inputs are bound.
 
-**Verdict: does not apply as stated.** The paper's attack is against GKR's uncommitted internal wires. FlashProve commits activations before the first challenge and runs sumchecks on committed rows, which is the paper's own second mitigation ("committing to some of the intermediate values", Section 5). The residue is P1a: the three uncommitted value classes the project lists under SO-57. Whether any of them can host a hash evaluation that reaches an output claim is **unclear** and would be the next thing to examine. No experiment in this lane tested P1a or P3.
+The hash chaining itself is explicit: `blocks/chain/chain.h:158-168` hashes the
+parameter digest, length-prefixed statement and record, and salt/run marker into the
+initial state. `blocks/frame/check.h:165-170` completes binding before constructing
+`VerifierRounds`. Subsequent queries include the previous state and the prover's latest
+message (`blocks/chain/chain.h:171-180`). Later chains bind the batch root and/or earlier
+seals (`blocks/frame/check.h:81-87,190-205`).
 
-## 2. Fenzi, ePrint 2026/1838
+### Offline challenges and the ID caveat
 
-**The attack, as stated.** Against proof systems for **generated** relations: the instance x contains a program s, both parties run s to obtain the actual statement phi (for example R1CS matrices), and the verifier is *semantic* (its decision depends on x only through phi, Definition 2). If the verifier is also *fooled by delayed statement choice* (the prover can pick messages m_1..m_k against challenges rho_1..rho_k and only afterwards choose an unsatisfiable phi that accepts the transcript), then FS with challenges derived from x = (program) is not adaptively sound for any sufficiently efficient hash (Theorem 2). Spartan and Aurora variants over generated R1CS are shown to be in this class (Sections 6, 7). Stated mitigation (Section 1.2, Theorem 5.5): derive the challenges from the **generated** statement phi (the matrices), not from the program.
+The anchor's OOD challenges are computed from its name, including configuration and
+table shape/root, before the final ID exists. See `blocks/iop/foldeq.h:241-243,303-315`
+and `lean/OnBytes/Key/Table.lean:64-98`. Thus an ID mismatch is checked before the file's
+proof chains, **not before every hash-derived value**, and prompt/reply are not inputs
+to offline challenges. This is the intended separation of offline and online claims.
+The probe observes the online first chain, not every offline seed.
 
-**Preconditions.**
+`docs/protocol.md:79` says the Lean theorem is at **given public files** and does not
+itself establish binding across different public-file sets. That is a theorem-scope gap,
+not a reported example of one ID verifying under two configurations. The implementation
+hashes the files; the tests below find no such example. Collision resistance, correct
+serialization and a fixed trusted verifier are still assumptions, not consequences of
+five repeated calls.
 
-| # | precondition | FlashProve | basis |
-|---|---|---|---|
-| Q1 | The relation is generated: the instance is a program (or a digest of one) and the statement the verifier checks is computed from it at verification time. | **Partly analogous.** The configuration files (policy.txt, layout.txt, KL.bin) plus the verifier's built-in constants generate the plan: round list, shapes, codes, table shapes (blocks/chain/public.h:279-291 `write_plan`; verifier/src/cp_verify.cpp:2230-2260). In the paper's terms the configuration is the program and the plan plus the integer model is the generated statement. | read |
-| Q2 | The FS challenges are derived from the program, **not** from the generated statement. | **Not met.** Both are hashed before the first challenge. The configuration bytes enter via the configuration digest (heads.h:71-76 into public.h:243-248), and the generated plan is written out in full into the parameter list (public.h:279-291: version word, field, hash, salt/nonce/position bytes, sample count, every round's name, count, work bits, message bytes, roots, answers, draws, log_n, trits, rows). The request shape and layout, which fix the sizes of every committed array, are parameters too (check.h:65-66). This is the paper's own mitigation: hash the generated statement into the first challenge. | read, measured (RESULTS.md: config mutations change the first-chain first challenge 5/5 at the mutated config's own ID, and are refused at the original ID) |
-| Q3 | The verifier is semantic (decision depends only on phi). | **Mostly not, and it does not matter given Q2.** The verifier also checks the commitment ID (cp_verify.cpp:2252), the configuration digest agreement across the three chains (public.h:249-255), and the key/leaf files. Since the challenges already depend on phi, the semantic property is not the gating condition. | read |
-| Q4 | The verifier is fooled by delayed statement choice: a part of the statement is chosen after challenges and yet enters the accept decision. | **One deferred item exists: the next token y.** y is zeroed in the statement word before the first query (cp_verify.cpp:2431-2432), sent by the prover as a plain scalar in the output head's segment (req.h:661-671, round R_REPLY), and compared with the caller's y only after the links (check.h:176; vf_segments.inc:302). Measured: changing y leaves the first chain's first query, first challenge and REPLY-round digest byte-identical (5/5). So a prover can reuse everything before the output head's segment for each y it tries (SO-50 says exactly this). **But** the delayed item enters the chain before the segments that depend on it (the R_REPLY close is absorbed into rho before the output head's challenges), and the verifier compares it with a value the client already holds. The paper's Definition 2 needs the delayed choice to come **after all** challenges and still be accepted; here y is bound before the challenges of the segment that checks it. What SO-50 costs is a factor in the forgery bound (vocabulary-many tries sharing a prefix), not a diagonalization. | read, measured |
-| Q5 | The adversary controls the program (so it can embed a self-referential computation that outputs its own FS challenge). | **Partly.** The provider controls the configuration, and the paper explicitly warns about "AI-generated circuits" and third-party-controlled computations. But the "program" here is a fixed-shape model description, not a general program that the verifier interprets: the verifier's accepted shapes and ranges are checked (cp_verify.cpp:2310-2330 and the plan checks around it), and the generated plan is hashed (Q2). The self-referential step of Claim 1 (a program that computes an arbitrary function of its own code) has no obvious host when the generation is a table of integers rather than an interpreted program. | read |
+### Lean transcript cross-check, by reading rather than a new Lean build
 
-**Verdict: does not apply as stated.** The gating precondition Q2 fails: FlashProve hashes the generated statement (the full plan and shapes) and the configuration bytes into the first query, which is the paper's Theorem 5.5 mitigation. The deferred binding of y (Q4) is real and measured, but it is a late *input* bound before the challenges that test it, not a statement chosen after all challenges. It is already recorded as SO-50 with a cost in the bound, and this note does not change that assessment. **Unclear** residue: whether the uncommitted values of SO-57 (lookup keys, product-tree inner nodes, one attention vector) could serve as the generated, unhashed part of a statement; and whether a prover who also controls the *client's* y (a colluding client) gains anything from the reusable prefix beyond the SO-50 factor. Neither was tested.
+- `lean/Fmt/Rules4.lean:240-276` defines `firstValueW`, `startChainW`, `configDigestW`
+  and `publishedIDW` with the same separation of inputs.
+- `lean/OnBytes/Params/Given.lean:31-51,81-88` retains the parameter bytes, configuration
+  digest and plan in the chain specification.
+- `lean/OnBytes/Params/Chains.lean:198-227` reads the first-chain parameters and builds
+  its four statement items. Its comment at `:213-218` explicitly excludes the reply.
+- `lean/OnBytes/Proof/RequestItem.lean:132-135` likewise specifies a zero reply word.
+- `lean/OnBytes/Chain/Step.lean:67-80` starts the chain from parameter digest and statement
+  before reading its rounds.
+- `lean/OnBytes/Key/Table.lean:67-98` derives the offline table name, seeds and ID.
 
-## 3. What the experiment adds and does not add
+These definitions support the input-order reading. This lane did not recheck Lean proofs
+or prove equivalence of the C++ execution to those definitions.
 
-- It confirms, on the shipped fixture, that the inputs the two papers care about (the program/configuration, the generated plan, the request) are in the first query and move the first challenge or cause rejection before it. 10/10 semantic mutations rejected, 0 accepted, n = 5 each, deterministic.
-- It confirms one deferred binding (y) that the project already documents, and shows the exact rounds it leaves unchanged.
-- It does **not** test P1a/P3 (uncommitted values as a hash host), does not generate any proofs, does not touch a real model, and does not probe the key or leaf files beyond their refusal under a changed configuration.
-- A changed first challenge is a hash output being different; it is evidence of binding, not of soundness.
+## 2. The concrete hash versus an ideal oracle
 
-## 4. Suggested follow-ups (not claims)
+`blocks/hash/hash.h:6-16,35-39` selects BLAKE2b with domain labels and digest-valued
+salt/personalization; transcript round calls output 64 bytes, split into state and
+challenge material. `blocks/hash/blake2b_f.h:43-49` identifies the concrete 12-round,
+64-bit ARX compression function. `blocks/hash/MODE.md:20-30` states the random-oracle
+assumption and separately describes the verifier's older second hash mode for public
+lists/tables. Raw request words and the three config files also enter the primary
+BLAKE2b transcript, so the observed binding does not depend solely on those older digests.
+The older mode and its concrete interactions were not cryptanalyzed here.
 
-1. Read blocks/iop/lkp.h, the product-tree code and the attention sub-proof for the three uncommitted value classes of SO-57, and decide whether any of them can hold a value that depends on a chain challenge of the same proof and reaches an output claim without being committed. That is the one place P1 of 2025/118 could re-enter.
-2. Update docs/limits-all-rows.tsv SO-57 / SO-57.1 from "not examined" to "examined for the two papers' stated preconditions; see research/security/fiat-shamir-attacks.md; uncommitted values not examined". That is a docs change for a separate PR after review.
-3. If the y deferral is ever changed (binding y in the first query), SO-50 and the Dao et al. row of PUBLISHED-WORKS.md would both need rewriting; the current note does not recommend the change, it only records the trade-off.
+Both papers attack **concrete instantiations despite random-oracle analyses**. Neither
+requires a collision, preimage break, or a weak hash. KRS explicitly attacks strong
+Fiat-Shamir with the circuit digest, public input and claimed output already hashed.
+Fenzi likewise hashes the generating program; the issue is the distinction between that
+program and its generated semantics. Therefore "BLAKE2b is cryptographic", "the Lean
+ROM theorem holds", and "every config mutation changes a challenge" cannot dismiss
+these attacks.
 
-## References
+BLAKE2b and a commitment algorithm are expressible by general Boolean/arithmetic
+circuits. The open question is whether the **admitted FlashProve computation or an
+uncommitted subcomputation** can implement the needed self-reference and challenge
+correlation within its operator, range, shape and resource constraints. Calling BLAKE2b
+from the verifier is not itself such a circuit embedding. Conversely, absence of a named
+hash operator is not a proof that the model family cannot express one. No such embedding
+or impossibility proof was produced in this lane.
 
-- Khovratovich, Rothblum, Soukhanov, "How to Prove False Statements: Practical Attacks on Fiat-Shamir", ePrint 2025/118, version of 11 Dec 2025. Theorems 1 and 2; Section 5 (mitigations).
-- Fenzi, "How to prove more false statements: Fiat-Shamir limitations on (generated) R1CS", ePrint 2026/1838, version of 9 Sep 2026. Definition 2, Theorem 2, Remark 2, Section 1.2 mitigations, Theorem 5.5.
-- Dao, Miller, Wright, Grubbs, "Weak Fiat-Shamir Attacks on Modern Proof Systems", ePrint 2023/691 (the source the repository cites for binding statement and parameters into every challenge).
-- FlashProve docs: docs/limits-further.md SO-50; docs/limits-all-rows.tsv SO-57, SO-57.1; PUBLISHED-WORKS.md "Hashing, trees and Fiat-Shamir".
+## 3. ePrint 2025/118: Khovratovich, Rothblum and Soukhanov
+
+Full paper read: 11 December 2025 version, 23 pages. Theorems 1/2, Section 3,
+Section 4's universal-computation variants, and Section 5 are the relevant parts.
+
+### Mechanism and preconditions
+
+1. **GKR plus an input/witness commitment, with the relevant internal computation not
+   committed.** The basic theorem assumes `Pi_comm,d`, not every sumcheck-based system.
+   The attacker builds `C*(w)` that interprets `w` as its own circuit digest, computes
+   `comm(w)` and the FS challenge `gamma`, and outputs `(gamma, gamma-1)`. The claimed
+   output `(0,0)` is impossible, but its multilinear extension agrees with the real
+   output at challenge `r = gamma`. After that transition, the rest of the proof can
+   be generated honestly (Construction 1, pp. 9-10).
+2. **Adversarial circuit choice with enough depth/expressivity.** Theorem 1 requires
+   depth at least `d_comm + d_hash + O(1)`. Theorem 2 backdoors an arbitrary admissible
+   circuit without changing its functionality. Hashing the circuit description does
+   not prevent either construction: its digest can be supplied as witness data.
+3. **Known concrete hash/commitment parameters.** They must be available to construct
+   the correlation, or handled through the universal-computation variants.
+4. **For the fixed-circuit variants:** Section 4.1 needs a suitable universal evaluator,
+   enough execution budget, and a commitment implementation whose code fits the witness
+   size requirement. Section 4.2 uses universal GKR with decomposable commitments,
+   including additive commitments or suitable batching. A syntactic search for hash
+   gates does not rule these out.
+
+### Mapping
+
+- **Different commitment structure, partially blocking the direct construction.**
+  `blocks/iop/req.h:413-433` commits oracle messages segment by segment, with additional
+  commit points inside subproofs, then draws seeds. It does **not** commit the entire
+  model trace before the first challenge. The first segment's message precedes its
+  challenge; later segments' commitments come later. This is relevant to the
+  intermediate-commitment mitigation in Section 5, but does not by itself certify all
+  subcomputations against the extended attack.
+- **Uncommitted values remain.** SO-57 (`docs/limits-all-rows.tsv:696`) names lookup
+  keys, product-tree inner nodes and an attention vector. `blocks/iop/lkp.h:17-21`
+  requires claims on unsent keys to be reduced to sent values; it does not enforce the
+  caller's full reduction. Moreover `:8-10` says online request lookups use the separate
+  `verifier/src/vf_lookup_argument.h`, so inspecting `lkp.h` alone is insufficient.
+  KRS Remark 3 says canonical simple product/lookup circuits do not *seem* susceptible;
+  it is useful context, not a theorem covering these implementations.
+- **Provider control is real but restricted.** The provider chooses files/weights, not
+  an arbitrary GKR circuit or the client's binary. The transcript binds these files
+  (`blocks/frame/heads.h:66-76`), but that is not a KRS defense by itself. Whether a
+  malicious model can realize the attack through the remaining uncommitted computations
+  is unestablished.
+- **Hash knowledge is available.** BLAKE2b and format labels are public. Prover-chosen
+  transcript salts are not verifier-secret challenges and do not supply a defense.
+  Root/configuration-dependent commitment inputs would have to be handled by an actual
+  embedding; this study does not establish or exclude it.
+
+**Verdict: unclear.** The exact `Pi_comm,d` construction is not directly instantiated by
+this segmented protocol, and no attack was demonstrated. Full non-applicability would
+need a bound on the relevant uncommitted computation or a structural proof excluding the
+KRS correlation, including its extended/universal variants. The mutation probe provides
+neither.
+
+## 4. ePrint 2026/1838: Fenzi
+
+Full paper read: 9 September 2026 version, 34 pages, including the attack-generator
+appendix. Relevant formal results: Definitions 3.2-3.4 and 5.2; Theorems 3.7/3.10;
+Corollary 3.11; Construction 5.4 and **Proposition** 5.5; Lemmas 6.5 and 7.5.
+
+### Mechanism and preconditions
+
+1. **A self-referential semantic scheme.** An instance describes a program that produces
+   the effective statement, with enough expressivity and budget to produce a function
+   of its own code and of the concrete FS challenge (Definitions 3.2, 4.2; Lemma 4.4).
+   The hash is computed in the **statement generator**, not necessarily in the proved
+   circuit. Preventing hash computation in witness constraints alone is insufficient.
+2. **Programmability after a challenge prefix.** The attacker can send initial messages,
+   then choose false semantics as a function of the first `i` challenges, and complete
+   an accepting transcript for every later challenge (Definition 3.3). It need not wait
+   until the entire transcript is complete. The concrete attacks have **i = 1**.
+3. **The transcript does not already canonically bind those generated semantics.**
+   Hashing the generator's code alone permits the quine construction. In the multilinear
+   attack, a fixed witness codeword precedes `r`, and generated rows with
+   `A = B = 0`, `C_b = (r_1 - b_1)e_0` make an impossible relation's zerocheck vanish.
+   In the univariate attack, `C_0 = -rho e_0`, `C_1 = e_0` cancel under the batching
+   challenge while the relation remains unsatisfiable (Lemmas 6.5, 7.5).
+4. **Efficiency and completion conditions.** The generator must have sufficient time
+   for diagonalization relative to hash/prover cost. The concrete continuations require
+   the relevant efficient, perfectly complete lincheck/evaluation prover. Merkle
+   commitments to the witness alone do not prevent these attacks (Theorem 3.10).
+
+### Mapping
+
+- **Ordinary config-file substitution is blocked in the measured path.** Configuration
+  bytes, request words and generated descriptors precede the online first challenge,
+  as Section 1 traces. The CPU probe finds distinct IDs and challenges, not a same-ID
+  config substitution. This excludes the tested missing-input failure, not the full
+  concrete-hash diagonalization.
+- **The required programmable generator was not identified.** FlashProve parses numeric
+  parameters and layout/call lists and constructs fixed model subproofs, rather than
+  executing arbitrary provider-supplied code to output R1CS matrices.
+  `verifier/src/cp_verify.cpp:1012-1025` exemplifies the fixed parameter scanner;
+  `verifier/src/vf_segments.inc:283-302` dispatches the built-in segment checks.
+  This is a material difference from the paper's generated-R1CS constructions. It is
+  not a proof that every possible configuration-induced semantic map lacks the required
+  self-reference.
+- **Do not assert Proposition 5.5 from the plan hash.** That reduction uses challenges
+  from `id(val(x))`, a canonical encoding of the generated statement, and requires the
+  lifted and base verifiers to have exactly matching challenges and decisions. The
+  current binder serializes plan fields and shapes plus a config digest, not an audited
+  canonical encoding of every equation, coefficient, table and constant of the relation.
+  `blocks/chain/public.h:193-199` lists omitted plan fields; SO-63 lists unbound built-in
+  constants. Some omissions may be fixed/derived and harmless, but that must be shown.
+  No such reduction was established. An ID equality check does not itself disprove the
+  paper's semantic-verifier property either.
+- **Deferred `y` is a real prefix-binding exception, not a demonstrated attack.** It
+  enters before the output-head checks (`blocks/iop/req.h:661-676`), and changing the
+  caller's expectation alone leaves the old proof's embedded `y` untouched. The unchanged
+  `R_REPLY` digest in that test therefore does **not** show that the prover's token is
+  unbound at `R_REPLY`. To claim an attack one would need to construct false semantics
+  and a successful continuation after earlier challenges, not just a reusable prefix.
+  To rule the attack out, "bound before its own segment" is not sufficient without
+  checking dependencies from earlier segments. No such full construction or exclusion
+  was produced. SO-50 (`docs/limits-further.md:137-141`) records prefix reuse and says
+  the bound counts hash queries with **no vocabulary-size factor**.
+
+**Verdict: unclear.** The paper's executable-generator precondition and false-statement
+programmability have not been demonstrated for FlashProve. Conversely, complete semantic
+binding sufficient to invoke Proposition 5.5 has not been demonstrated either. The
+measured config binding is favorable evidence against a simple omission, not a resolution
+of those formal preconditions.
+
+## 5. CPU evidence and interpretation
+
+Companion: `experiments/20261103-fiat-shamir-binding/`, PREREG committed before code.
+The production verifier supplies the verdict; a separate read-only trace build supplies
+the first-query digest and a challenge drawn on a copy of the chain. Its exit code and
+last line agree with production for every recorded baseline/mutation pair.
+
+Eleven cases, five deterministic paired repetitions each: 55 pairs. There are ten
+semantic mutation types and one layout-comment control, not 55 independent attacks.
+
+- Baseline: 55/55 `YES`, exit 0.
+- Semantic mutations: 0/50 accepted. Three config mutations at the original ID:
+  0/15 accepted, all `NO: model-statement`, exit 1. Comment control: 0/5 accepted.
+- At diagnostic changed IDs, four config cases change the first challenge 5/5 each;
+  all still reject. These IDs are not the client's original ID.
+- Four request-word cases: first challenge changes 5/5 each, all reject.
+- `y`: first challenge unchanged 5/5, all reject later at `NO: reply-differs`.
+- Invalid shortened range: rejects before the request chain; not a binding measurement.
+- Wrong caller ID: rejects at the ID comparison; not a challenge mutation measurement.
+
+For each per-case Boolean indicator, n = 5, population SD = 0 and min = max = median:
+0 for mutation acceptance; 1 for observed challenge changes in the config/request cases;
+0 for challenge change under caller-`y` mutation. Repeating fixed inputs demonstrates
+repeatability only. See RESULTS.md and raw JSON for full verdict/receipt details.
+
+**Against prereg:** fixed-ID rejection passes. The universal early-binding clause fails
+literally because `y` neither changes the first challenge nor rejects before it. Reporting
+that exception does not turn it into an early-binding pass. This is a negative result for
+that clause, not evidence of a false-claim accept. The original PASS-only summary was
+corrected without changing the pre-registered threshold.
+
+## 6. Open work
+
+1. Trace the unsent lookup keys, product-tree nodes and attention vector through every
+   consuming verifier equation; bound their ability to host a KRS correlation.
+2. Define the exact semantic statement for the supported model family, including tables
+   and constants. Determine whether the initial transcript canonically binds it and
+   whether a Proposition 5.5 reduction can actually be written.
+3. Analyze `y`'s dependency on earlier segments under Fenzi's prefix-programmability
+   definition. A prover-side changed-token proof is different from the caller-only
+   mutation here.
+4. Broaden regression inputs to valid combined range/token changes, other configurations,
+   and offline challenges. The present study covers one synthetic fixture, no newly
+   generated proofs, no GPU and no real-model weights.
+
+The public guide's "not examined" sentence should eventually link to this **partial
+examination**, not be replaced with a claim that these attacks are excluded. Keep the
+cross-configuration theorem caveat and SO-50/SO-63 caveats intact. No public vulnerability
+issue was created by this study.
+
+## References and version receipts
+
+Full PDFs were available in the lane's paper cache and read including the technical
+sections and appendices. The landing pages were also retrieved; direct PDF retrieval on
+the follow-up read returned HTTP 403, so the versioned cached PDF bytes, not the abstracts
+or failed downloads, are the basis of the analysis.
+
+- Khovratovich, Rothblum, Soukhanov, [ePrint 2025/118](https://eprint.iacr.org/2025/118),
+  *How to Prove False Statements: Practical Attacks on Fiat-Shamir*, 11 December 2025.
+  PDF SHA-256: `deac65104cd4f2c143a0b75cfb9a0ff99e4f042a891e9bb0b87969260b882035`.
+- Fenzi, [ePrint 2026/1838](https://eprint.iacr.org/2026/1838), *How to prove more false
+  statements: Fiat-Shamir limitations on (generated) R1CS*, 9 September 2026.
+  PDF SHA-256: `c27d486433a2af467848b7058d7e95e7fbff32f8b50cf6c881ed606800023310`.
+- Existing implementation/design context: `docs/protocol.md`, `blocks/hash/MODE.md`,
+  `docs/limits-further.md` SO-50/SO-63, `docs/limits-all-rows.tsv` SO-57/SO-57.1.
