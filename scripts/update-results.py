@@ -115,8 +115,11 @@ def cell(s):
 
 
 def render(doc):
-    head = git_out("rev-parse", "--short=8", "HEAD")
-    date = git_out("log", "-1", "--format=%cs", "HEAD")
+    # Stamp with the main commit the evidence is read against, not the branch
+    # head (which changes again when the regenerated README is committed).
+    base = "origin/main" if git_ok("rev-parse", "--verify", "-q", "origin/main") else "HEAD"
+    head = git_out("rev-parse", "--short=8", git_out("merge-base", "HEAD", base))
+    date = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
     rows = ["| Result | Status | Key number | n + conditions | Evidence |", "|---|---|---|---|---|"]
     for r in doc["results"]:
         status = r["status"] + (f" {r['status_note']}" if r.get("status_note") else "")
@@ -124,7 +127,7 @@ def render(doc):
         label = ev[: -len("README.md")] if ev.endswith("/README.md") else ev
         link = f"[{label}]({ev})" + (r.get("evidence_note") or "")
         rows.append("| " + " | ".join(cell(x) for x in (r["title"], status, r["summary"], r["conditions"], link)) + " |")
-    stamp = f"_Last regenerated from `research/results.yaml` at branch commit `{head}` ({date})._"
+    stamp = f"_Last regenerated from `research/results.yaml` on {date} (UTC), against main `{head}`._"
     return "\n".join([BEGIN, *rows, "", stamp, END])
 
 

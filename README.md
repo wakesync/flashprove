@@ -21,7 +21,7 @@ Every number below comes from a file on `main`; follow the evidence link for its
 | Host-path redaction of published evidence (PR #21) | done (hygiene) | no result number; adds `scripts/check-no-host-paths.sh` | applies to all evidence trees | [scripts/check-no-host-paths.sh](scripts/check-no-host-paths.sh) |
 | Real-model port feasibility, numerical fidelity, clipped-gap and Fiat-Shamir studies | in progress | none yet | open PRs and lanes, not merged | [docs/research-roadmap.md](docs/research-roadmap.md) |
 
-_Last regenerated from `research/results.yaml` at branch commit `3022b38f` (2026-11-04)._
+_Last regenerated from `research/results.yaml` on 2026-11-04 (UTC), against main `e578fb21`._
 <!-- results:end -->
 
 What this table does not show: no full-size (Maverick) run, no real model weights on GPU, no serving, no TEE, no production use, and no comparison with other verifiable-inference systems. The GPU rows are upstream's small example on made-up weights.
