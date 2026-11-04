@@ -16,7 +16,7 @@ labels = sys.argv[2:] or [
 ]
 cols = ["honest", "fp2nd-1", "int2nd-1", "fp2nd-2", "int2nd-2", "fp2nd-4", "int2nd-4", "fp2nd-8", "int2nd-8",
         "fp2nd-16", "int2nd-16", "rand-1", "rand-2", "rand-4", "rand-8", "rand-16", "rand-reply", "other-prompt",
-        "trunc-half", "trunc-1"]
+        "trunc-half", "trunc-1"] + [c for c in d.get("exploratory_classes", []) if c in d["classes"]]
 
 
 def cell(s):
@@ -29,7 +29,7 @@ def cell(s):
 print("| class | " + " | ".join("`%s`" % l for l in labels) + " |")
 print("|---|" + "---|" * len(labels))
 for c in cols:
-    print("| %s | " % c + " | ".join(cell(agg[l]["acceptance"][c]) for l in labels) + " |")
+    print("| %s | " % (c + (" (exploratory)" if c in d.get("exploratory_classes", []) else "")) + " | ".join(cell(agg[l]["acceptance"][c]) for l in labels) + " |")
 print("| **FRR** | " + " | ".join(cell(agg[l]["frr"]) for l in labels) + " |")
 print()
 print("| point | " + " | ".join("seed %s" % s for s in d["seeds"]) + " |")

@@ -9,7 +9,9 @@
 #       by the limits either.
 # Plus the control: the stored files as they are, with the shipped policy (must be WITHIN LIMITS).
 #
-# usage: cp_verify_spot.py REPO OUT.json
+# usage: cp_verify_spot.py REPO OUT.json [SPOT_REPLIES.json]
+#   SPOT_REPLIES.json (spot_replies.py): model-built attacked replies (fp2nd-k, int2nd-k, *-redecode) of
+#   the stored reply, each with its score under the shipped policy; one binding spot check each.
 import json
 import random
 import struct
@@ -71,8 +73,15 @@ attacked = {
     "trunc-half": (p0, r0[: len(r0) // 2]),
     "trunc-1": (p0, r0[:-1]),
 }
+scores = {}
+if len(sys.argv) > 3:
+    sr = json.loads(Path(sys.argv[3]).read_text())
+    for name, v in sr["attacked"].items():
+        attacked[name] = (v["prompt"], v["reply"])
+        scores[name] = v["meets_shipped_policy_score"]
 for name, (p, r) in attacked.items():
-    rows.append(dict(kind="binding-spot-check", cls=name, policy=SHIPPED, **call(request_bytes(p, r), SHIPPED)))
+    rows.append(dict(kind="binding-spot-check", cls=name, policy=SHIPPED, score_meets_shipped=scores.get(name),
+                     **call(request_bytes(p, r), SHIPPED)))
 for pol in ("clipped-gap,9244130,100000,1,16,8", "clipped-gap,9244130,323343,0,16,8", "clipped-gap,500000,50000,0,16,8",
             "exact-match,256,256,0,16,8"):
     rows.append(dict(kind="policy-named", cls="honest (stored files)", policy=pol, **call(request_bytes(p0, r0), pol)))

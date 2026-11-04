@@ -14,8 +14,23 @@ if "--spot" in args:
     i = args.index("--spot")
     spot = json.load(open(args[i + 1]))
     del args[i: i + 2]
+explore = []
+if "--explore" in args:
+    i = args.index("--explore")
+    explore = args[i + 1:]
+    del args[i:]
 out_path, files = args[0], args[1:]
 seeds = [json.load(open(f)) for f in files]
+# Exploratory classes (PREREG amendment 2026-11-04T01:30Z, not pre-registered): merged per seed, marked.
+EXPLORATORY = []
+for f in explore:
+    e = json.load(open(f))
+    for s in seeds:
+        if s["seed"] == e["seed"]:
+            for name, v in e["classes"].items():
+                s["classes"][name] = v
+                if name not in EXPLORATORY:
+                    EXPLORATORY.append(name)
 
 GROSS = ["fp2nd-4", "fp2nd-8", "fp2nd-16", "int2nd-4", "int2nd-8", "int2nd-16", "rand-1", "rand-2", "rand-4",
          "rand-8", "rand-16", "rand-reply", "other-prompt"]
@@ -79,7 +94,15 @@ for s in seeds:
                       "rate": acc / len(scored) if scored else None}
         res[p["label"]] = {"C": p["C"], "theta": p["theta"], "cap": p["cap"], "flag_theta_eq_C": p["theta_eq_C_with_cap"],
                            "classes": row}
-    per_seed.append({"seed": s["seed"], "fit_costs": ncost, "grid": res, "sizes": s["sizes"],
+    fitc = [c for c in s["fit"].values() if c is not None]
+    allc = sorted(c for r in fitc for c in r)
+    fC = pct(allc, .999)
+    if fC == s["own_choice"]:
+        above = [c for c in allc if c > fC]
+        fC = above[0] if above else fC
+    fit_rule = {"C": fC, "theta": max(clipped_mean_up(r, fC) for r in fitc), "cap": max(sum(c > fC for c in r) for r in fitc),
+                "non_first_choice_tokens": sum(c > s["own_choice"] for c in allc), "fit_tokens": len(allc)}
+    per_seed.append({"seed": s["seed"], "fit_costs": ncost, "fit_limits_rule": fit_rule, "grid": res, "sizes": s["sizes"],
                      "fit_no_proof": sum(v is None for v in s["fit"].values()), "timing_s": s.get("timing_s"),
                      "versions": s.get("versions")})
 
@@ -119,8 +142,11 @@ verdict["clause2_holds_no_point_stops_fp2nd1"] = not fp1
 verdict["points_stopping_fp2nd1_at_frr_le_5pct"] = fp1
 verdict["points_stopping_int2nd1_at_frr_le_5pct"] = int1
 
-# best trade-off: lowest median FRR among points with median acceptance 0 in every strict-gross class
+# per-seed counts are kept for every grid point but as compact [accepted, n, no_proof] triples
+for ps in per_seed:
+    for l, g in ps["grid"].items():
+        g["classes"] = {c: [v["accepted"], v["n"], v["no_proof"]] for c, v in g["classes"].items()}
 json.dump({"experiment": "20261103-6-clipped-gap-rejection", "kind": "score (integer-model package, CPU), not proved",
-           "seeds": [ps["seed"] for ps in per_seed], "classes": classes, "gross": GROSS, "per_seed": per_seed,
-           "aggregate": agg, "verdict": verdict, "cp_verify_spot": spot}, open(out_path, "w"), indent=1)
+           "seeds": [ps["seed"] for ps in per_seed], "classes": classes, "exploratory_classes": EXPLORATORY, "gross": GROSS, "per_seed": per_seed,
+           "aggregate": agg, "verdict": verdict, "cp_verify_spot": spot}, open(out_path, "w"), separators=(",", ":"), sort_keys=True)
 print(json.dumps(verdict, indent=1))
