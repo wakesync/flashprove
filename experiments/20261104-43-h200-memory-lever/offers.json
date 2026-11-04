@@ -1,0 +1,55 @@
+{
+  "rental1_h100": {
+    "id": 59015640,
+    "gpu_name": "H100 SXM",
+    "num_gpus": 2,
+    "cpu_name": "Xeon® Platinum 8462Y+",
+    "cpu_cores_effective": 32.0,
+    "cpu_ram": 515830,
+    "driver_version": "580.159.03",
+    "dph_total": 1.2185185185185186,
+    "verification": "unverified",
+    "geolocation": "Illinois, US",
+    "reliability2": 0.9708044
+  },
+  "rental1_h200": {
+    "id": 55289464,
+    "gpu_name": "H200",
+    "num_gpus": 1,
+    "cpu_name": "XEON® PLATINUM 8568Y+",
+    "cpu_cores_effective": 24.0,
+    "cpu_ram": 349525,
+    "driver_version": "580.178.04",
+    "dph_total": 5.540204678362573,
+    "verification": "verified",
+    "geolocation": "Georgia, US",
+    "reliability2": 0.9947423
+  },
+  "rental2_h100": {
+    "id": 59111889,
+    "gpu_name": "H100 SXM",
+    "num_gpus": 2,
+    "cpu_name": "Xeon® Platinum 8480+",
+    "cpu_cores_effective": 56.0,
+    "cpu_ram": 515926,
+    "driver_version": "615.71.09",
+    "dph_total": 4.818518518518518,
+    "verification": "unverified",
+    "geolocation": "Japan, JP",
+    "reliability2": 0.9897058
+  },
+  "rental2_h200": {
+    "id": 55289464,
+    "gpu_name": "H200",
+    "num_gpus": 1,
+    "cpu_name": "XEON® PLATINUM 8568Y+",
+    "cpu_cores_effective": 24.0,
+    "cpu_ram": 349525,
+    "driver_version": "580.178.04",
+    "dph_total": 5.540204678362573,
+    "verification": "verified",
+    "geolocation": "Georgia, US",
+    "reliability2": 0.9948406
+  },
+  "source": "Vast.ai offer records saved at create time (quote observed UTC: rental 1 2026-11-04T01:14, rental 2 2026-11-04T14:59-15:00); dph_total includes 100 GB storage"
+}

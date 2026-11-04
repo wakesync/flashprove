@@ -85,3 +85,9 @@ No published H200 measurement of this prover is known. B200 is excluded: binarie
     T-B $/Mtok < C-A $/Mtok at each box's rented $/h.
   - Kill: a box's sessions stop when the rental's 6-hour or $60 cap, or 17:18 UTC, is near; artifacts are
     pulled and pushed after every session, before the next.
+- 2026-11-04 17:15 UTC (after rental-2 data). Deviations from the 15:02 plan, as run: the H100 box's full-size commit took
+  60 min (about 30 expected), so with the 6 GPU-hour cap (the H100 box bills 2 GPUs) only one session per primary arm
+  ran: TB1 (H200, 24/12, seed 1) and CA1 (H100, 24/6, seed 1). CA2, CB8, TB2 and TA3 were not run. The H200 was destroyed
+  after TB1 was pulled (16:28 UTC), the H100 after CA1 was pulled (17:07 UTC). The hard-stop timer moved four times
+  (16:48, 16:53, 16:58, 17:06, finally 17:13 UTC), each time within the 6 GPU-hour cap and logged before the move. The pass
+  bar, the metric and the cost rule (one H100 GPU = half of the 2-GPU box price) are unchanged.

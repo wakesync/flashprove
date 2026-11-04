@@ -1,4 +1,4 @@
-# Efficiency levers (research lane, work in progress)
+# Efficiency levers (research lane)
 
 Tracking issue #43. Related: #7 (cost), #39 (prover speedup). Base: main 29907e5f (VERSION 0.16.0).
 Nothing here is a claim until merged and reviewed. Upstream figures are quoted from
@@ -8,12 +8,12 @@ marked synthetic, n = 3 runs.
 
 ## 1. Fact-check of the public cost teardown
 
-Source: 0xOsprey, "FlashProve economics, raw vs proven inference" (GitHub gist 52fd0803...).
+Source: 0xOsprey, "FlashProve economics, raw vs proven inference", a GitHub gist whose id begins 52fd0803. The full id and revision were not recorded when this section was written. The gist is not in the author's public gist listing as of 2026-11-04, so the full URL cannot be given here.
 Headline: ~$0.017 per proven 1,024-token request, ~$15/Mtok proven vs ~$0.11 raw, ~165x all-in.
 
 Legend. UP = upstream-measured, matches the repo. CONV = the author's own conversion or assumption
 (arithmetic checked). WRONG = does not match the repo or the arithmetic. NUANCE = number right,
-framing loses a caveat the repo states.
+framing loses a caveat the repo states. HALF RIGHT / MOSTLY RIGHT = part of the claim matches the repo, the rest does not (the row says which). NOT FOUND = the cited source does not contain it. OUT OF SCOPE = not checkable from this repository.
 
 | Teardown number | Verdict | Evidence / correction |
 |---|---|---|
@@ -92,7 +92,7 @@ throughput.
 
 | # | Lever | Expected gain on tok/s (batch 24 basis) | Evidence | Cost / risk |
 |---|---|---|---|---|
-| 1 | Bigger GPU memory used for fewer waves: H200 141 GB with `-in-step 12..16` and batch 48 | +15 to +35% predicted (fit: B = 48, in-step 16 -> 3 waves instead of 8 -> ~147 tok/s vs 121 at in-step 6) | fit above; `rate-48-steady` 120.94 †; in-step cap 16 in arguments.h | needs H200 (~1.6x H100 $/h on Vast) so $/Mtok gain is the real test; latency rises with B |
+| 1 | Bigger GPU memory used for fewer waves: H200 141 GB with `-in-step 12..16` and batch 48 | +15 to +35% predicted (fit: B = 48, in-step 16 -> 3 waves instead of 8 -> ~147 tok/s vs 121 at in-step 6) | fit above; `rate-48-steady` 120.94 †; in-step cap 16 in arguments.h | needs H200; at the Vast quotes used here one H200 cost $5.54/h against $0.61 to $2.41 per H100 GPU (one GPU of a 2-GPU box at $1.22/h or $4.82/h; rental 1 and 2 offers, `experiments/20261104-43-h200-memory-lever/offers.json`), 2.3x to 9x per GPU, so $/Mtok is the real test; latency rises with B |
 | 2 | Batch size alone (24 -> 48/64) on 80 GB | +8.7% (48), +10.9% (64) measured | `rate-48-steady` †, `rate-64` | 64 unreliable on 80 GB; latency 2.4x |
 | 3 | Same config on H200 (HBM 4.8 vs 3.35 TB/s, same SM count, same PCIe Gen5 host link) | 0 to +10% predicted | no prover code adapts room count to free memory automatically; compute dominates | pure hardware price question |
 | 4 | `-overlap` / `-overlap-two` | up to the 38 s fixed term (~17%) if walks hide fully | arguments.h; synthetic-only (refused on a model's files) | more GPU memory; not usable on real weights today |
@@ -109,12 +109,26 @@ See `experiments/20261104-43-h200-memory-lever/PREREG.md` (written before any GP
 
 ## 5. Results
 
-(pending)
+Full numbers, verdict and files: `experiments/20261104-43-h200-memory-lever/RESULTS.md`. Measured, unreplicated, synthetic
+weights, n = 1 session (4 batch intervals) per arm.
+
+- **Verdict: not supported.** Rental 2 computes H200 in-step 12 (TB1) at 146.09 tok/s against H100 in-step 6 (CA1) at
+  93.91 tok/s (median interval rates), which is 1.556x with disjoint ranges. That clears the 1.15x bar on paper. But the H100
+  control box was slow: 14% below upstream's 109.09, with a full-size commit 2.1x as long as the H200 box's. Rental 1's
+  H100 (another host) did 146.67 at in-step 6, and rental 1's H200 at in-step 6 did 142.97. TB1 sits within that host
+  spread, so there is no evidence that the extra memory raises throughput. Neither direction is established.
+- **Cost: FAIL.** At the rented prices T-B is $10.53/Mtok against C-A $7.13/Mtok.
+- **Mechanism (measured):** in-step 12 needs 87,237 MiB of GPU memory (TB1 peak) and runs on the H200. That is more than the
+  H100's 81,559 MiB, consistent with rental 1's CB2 start-up failure on the H100. The memory buys a configuration, not a rate.
+- **Rental 1 data after 02:33 UTC is lost** (never pulled before the 04:45 UTC backstop destroyed the boxes). Only CA1, TA1 and CB2
+  are reported from it.
+- **Next test that could separate the effects:** both in-step settings on one H200 host (in-step 6 vs 12, AB/BA, >= 5 sessions
+  each), which removes the host confound entirely.
 
 ### Run log
 - 2026-11-04 01:22 UTC: two instances created (control: 1 GPU of a 2x H100 SXM 80 GB box, $1.219/h; treatment: 1x H200 SXM 141 GB, $5.54/h). Teardown timers armed before create. Both boxes started the pinned build at ~01:31 UTC.
 - 01:42-01:43 UTC: pinned build + `examples/quickstart-gpu.sh` passed on both boxes (cp_verify YES on the small proof). ~17 min each.
-- Early commit observation (n = 1 per box, the commitment's anchor table, from cp_commit's own timing lines): H200 splits the table's tree into 16 parts of 2^28 positions, 452.7 s; H100 into 32 parts of 2^27, 576.3 s (-21%). The committer sizes its parts to free GPU memory: a first direct sign of the memory lever, on commit, not prove.
+- Early commit observation (n = 1 per box, the commitment's anchor table, from cp_commit's own timing lines): H200 splits the table's tree into 16 parts of 2^28 positions, 452.7 s; H100 into 32 parts of 2^27, 576.3 s (-21%). Inference, not checked in code: the committer appears to size its parts to free GPU memory (16 x 2^28 vs 32 x 2^27). It concerns commit, not prove.
 - Full-size synthetic commitment (`cp_commit -weights made-up-blocks`, target_full_f2, -M 1), n = 1 per box, wall from stage log: H200 1,698 s (01:43:26 to 02:11:44), H100 1,871 s (01:42:32 to 02:13:43): H200 9% faster. Upstream `commit-time-synthetic` 2,312.68 s (other hosts/CPUs). Phase anchor-table 461.4 vs 585.1 s; key-file 240.6 vs 242.6 s. Sessions started 02:11 (H200) and 02:13 (H100).
 - 02:33 UTC, first sessions (n = 1 each, 4 intervals each, every proof checked by cp_verify):
   - H100 CA1 (24/6): STEADY 146.67 tok/s, intervals 168.18 / 167.53 / 167.24 / 167.27 s, GPU peak 74,641 MiB, cp_prove RSS 265.5 GB.
