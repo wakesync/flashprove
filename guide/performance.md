@@ -36,6 +36,22 @@ These are steady prefill rates: each request's 1,024 prompt tokens count, nothin
 
 The runs' records are not in this repository, so a reader cannot check the figures on this page against them.
 
+## This fork's measured results
+
+The figures above are upstream's, and their records are not in this repository. The figures in this section are this fork's own runs, and each one links to its records on `main`. None of them is the full-size model: the GPU rows are the small synthetic example (`target_small_f2_roomy`, made-up weights, one leaf table, one request), so they say nothing about the Maverick rates above.
+
+| Figure | Conditions | Records |
+|---|---|---|
+| `cp_prove`: 2.35 s mean (SD 0.13, 2.21 to 2.46 s) | small synthetic example, one H100 80 GB, n = 3 warm runs timed with `/usr/bin/time`, one machine | [research/gpu/replication-1](../research/gpu/replication-1/README.md) |
+| `cp_commit`: 18.8 s mean (SD 2.2, 17.2 to 21.3 s); about 13 s in the first run (file timestamps, n = 1) | as above; the first run was a separate rental and machine | [replication-1](../research/gpu/replication-1/README.md), [research/gpu](../research/gpu/README.md) |
+| Proof: 4,149,084 to 4,161,860 bytes (5 proofs over two rentals, one per commitment) | small synthetic example; size varies with each commitment's random seed | [research/gpu](../research/gpu/README.md), [replication-1](../research/gpu/replication-1/README.md) |
+| GPU memory: 74,165 and 74,123 MiB, reached while committing; 5,227 to 5,293 MiB while proving | 500 ms samples, so not true peaks | as above |
+| `cp_verify` of each GPU proof on a separate CPU-only machine: `YES` on 5 of 5; all of the 25 standard mutations rejected | verifier built from the same pinned source, byte-identical binary | as above |
+| `cp_verify` of the stored synthetic example proof (`examples/accepted-proof`, 4,145,300-byte request proof), one thread: 2.67 s median, upstream build | 5 runs, `-j 1`, pinned to one CPU of a shared 16-CPU VM | [research/performance](../research/performance/README.md) |
+| Same call with this fork's verifier change (inline limbs), measured, unreplicated (no second lane has repeated it): 17.8 % faster (12 rounds, 2.610 to 2.145 s median) and 18.0 % (10-round confirmation), same lane; a reviewer reported -15.4 % in a merge commit message (`29907e5f`), no committed data | `-j 1`, one pinned CPU, ranges do not overlap; verdicts and output identical apart from timings and the build digest (9 cases). At `-j 4`: 1.535 to 1.380 s (-10.1 %). The 2.610 s stock median here and the 2.67 s above come from different sessions on the same VM class, so the gap between them is not a fork effect | [research/performance/real](../research/performance/real/README.md) |
+
+Upstream's checked figure for a full-size proof, about 21 seconds on one thread, has not been repeated here. These rows are copied by hand; once PR #29 merges, `research/results.yaml` and `CLAIMS.md` are the canonical record of the fork's numbers.
+
 ## Reproduce the numbers
 
 For the leading figures on this page and in README.md: what made each, and what this repository lets you run. No row lets you repeat the runs themselves: at best you get a figure of the same kind, on your own machine and prompts. A "yes" says what a script or a page is written to give, not that the route has been run on the released programs.
