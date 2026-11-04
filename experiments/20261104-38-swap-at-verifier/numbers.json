@@ -1,0 +1,2722 @@
+{
+ "kind": "real cp_prove + cp_verify on one H100, synthetic weights",
+ "verdict": {
+  "agreement_PASS": true,
+  "disagreements": [],
+  "verifier_accepted_but_score_fails": [],
+  "honest_shipped_accepted": 16,
+  "honest_control_PASS": true
+ },
+ "table": {
+  "shipped": {
+   "honest": {
+    "n": 16,
+    "accepted": 16,
+    "refused": 0,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 16,
+    "agree": 16
+   },
+   "fp2nd-1-redecode": {
+    "n": 16,
+    "accepted": 15,
+    "refused": 1,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 15,
+    "agree": 16
+   },
+   "rand-1-redecode": {
+    "n": 16,
+    "accepted": 13,
+    "refused": 3,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 13,
+    "agree": 16
+   },
+   "fp2nd-4": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   },
+   "rand-4": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   },
+   "int2nd-4": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   },
+   "rand-1": {
+    "n": 16,
+    "accepted": 1,
+    "refused": 15,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 1,
+    "agree": 16
+   },
+   "rand-reply": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   }
+  },
+  "fit": {
+   "honest": {
+    "n": 16,
+    "accepted": 15,
+    "refused": 1,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 15,
+    "agree": 16
+   },
+   "fp2nd-1-redecode": {
+    "n": 16,
+    "accepted": 15,
+    "refused": 1,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 15,
+    "agree": 16
+   },
+   "rand-1-redecode": {
+    "n": 16,
+    "accepted": 13,
+    "refused": 3,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 13,
+    "agree": 16
+   },
+   "fp2nd-4": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   },
+   "rand-4": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   },
+   "int2nd-4": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   },
+   "rand-1": {
+    "n": 16,
+    "accepted": 1,
+    "refused": 15,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 1,
+    "agree": 16
+   },
+   "rand-reply": {
+    "n": 16,
+    "accepted": 0,
+    "refused": 16,
+    "rejected": 0,
+    "missing": 0,
+    "score_meets": 0,
+    "agree": 16
+   }
+  }
+ },
+ "rows": [
+  {
+   "cls": "honest",
+   "index": 65,
+   "name": "honest_65",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 65,
+   "name": "honest_65",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 67,
+   "name": "honest_67",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 67,
+   "name": "honest_67",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 71,
+   "name": "honest_71",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 71,
+   "name": "honest_71",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 73,
+   "name": "honest_73",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 73,
+   "name": "honest_73",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 75,
+   "name": "honest_75",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 75,
+   "name": "honest_75",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 76,
+   "name": "honest_76",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 76,
+   "name": "honest_76",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 77,
+   "name": "honest_77",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 77,
+   "name": "honest_77",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 94,
+   "name": "honest_94",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 94,
+   "name": "honest_94",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 101,
+   "name": "honest_101",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 101,
+   "name": "honest_101",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 104,
+   "name": "honest_104",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 104,
+   "name": "honest_104",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 109,
+   "name": "honest_109",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 109,
+   "name": "honest_109",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 112,
+   "name": "honest_112",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 112,
+   "name": "honest_112",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 113,
+   "name": "honest_113",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 113,
+   "name": "honest_113",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 123,
+   "name": "honest_123",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 123,
+   "name": "honest_123",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 124,
+   "name": "honest_124",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 124,
+   "name": "honest_124",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 127,
+   "name": "honest_127",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "honest",
+   "index": 127,
+   "name": "honest_127",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 67,
+   "name": "fp2nd_1_redecode_67",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 67,
+   "name": "fp2nd_1_redecode_67",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 69,
+   "name": "fp2nd_1_redecode_69",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 69,
+   "name": "fp2nd_1_redecode_69",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 74,
+   "name": "fp2nd_1_redecode_74",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 74,
+   "name": "fp2nd_1_redecode_74",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 80,
+   "name": "fp2nd_1_redecode_80",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 80,
+   "name": "fp2nd_1_redecode_80",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 81,
+   "name": "fp2nd_1_redecode_81",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 81,
+   "name": "fp2nd_1_redecode_81",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 84,
+   "name": "fp2nd_1_redecode_84",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 84,
+   "name": "fp2nd_1_redecode_84",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 90,
+   "name": "fp2nd_1_redecode_90",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 90,
+   "name": "fp2nd_1_redecode_90",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 95,
+   "name": "fp2nd_1_redecode_95",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 95,
+   "name": "fp2nd_1_redecode_95",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 96,
+   "name": "fp2nd_1_redecode_96",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 96,
+   "name": "fp2nd_1_redecode_96",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 97,
+   "name": "fp2nd_1_redecode_97",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 97,
+   "name": "fp2nd_1_redecode_97",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 100,
+   "name": "fp2nd_1_redecode_100",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 100,
+   "name": "fp2nd_1_redecode_100",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 109,
+   "name": "fp2nd_1_redecode_109",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 109,
+   "name": "fp2nd_1_redecode_109",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 113,
+   "name": "fp2nd_1_redecode_113",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 113,
+   "name": "fp2nd_1_redecode_113",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 119,
+   "name": "fp2nd_1_redecode_119",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 119,
+   "name": "fp2nd_1_redecode_119",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 125,
+   "name": "fp2nd_1_redecode_125",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 125,
+   "name": "fp2nd_1_redecode_125",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 127,
+   "name": "fp2nd_1_redecode_127",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-1-redecode",
+   "index": 127,
+   "name": "fp2nd_1_redecode_127",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 66,
+   "name": "rand_1_redecode_66",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 66,
+   "name": "rand_1_redecode_66",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 73,
+   "name": "rand_1_redecode_73",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 73,
+   "name": "rand_1_redecode_73",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 74,
+   "name": "rand_1_redecode_74",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 74,
+   "name": "rand_1_redecode_74",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 77,
+   "name": "rand_1_redecode_77",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 77,
+   "name": "rand_1_redecode_77",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 81,
+   "name": "rand_1_redecode_81",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 81,
+   "name": "rand_1_redecode_81",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 86,
+   "name": "rand_1_redecode_86",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 86,
+   "name": "rand_1_redecode_86",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 89,
+   "name": "rand_1_redecode_89",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 89,
+   "name": "rand_1_redecode_89",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 91,
+   "name": "rand_1_redecode_91",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 91,
+   "name": "rand_1_redecode_91",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 95,
+   "name": "rand_1_redecode_95",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 95,
+   "name": "rand_1_redecode_95",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 105,
+   "name": "rand_1_redecode_105",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 105,
+   "name": "rand_1_redecode_105",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 107,
+   "name": "rand_1_redecode_107",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 107,
+   "name": "rand_1_redecode_107",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 109,
+   "name": "rand_1_redecode_109",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 109,
+   "name": "rand_1_redecode_109",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 112,
+   "name": "rand_1_redecode_112",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 112,
+   "name": "rand_1_redecode_112",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 117,
+   "name": "rand_1_redecode_117",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 117,
+   "name": "rand_1_redecode_117",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 119,
+   "name": "rand_1_redecode_119",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 119,
+   "name": "rand_1_redecode_119",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 124,
+   "name": "rand_1_redecode_124",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1-redecode",
+   "index": 124,
+   "name": "rand_1_redecode_124",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 65,
+   "name": "fp2nd_4_65",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 65,
+   "name": "fp2nd_4_65",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 67,
+   "name": "fp2nd_4_67",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 67,
+   "name": "fp2nd_4_67",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 73,
+   "name": "fp2nd_4_73",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 73,
+   "name": "fp2nd_4_73",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 74,
+   "name": "fp2nd_4_74",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 74,
+   "name": "fp2nd_4_74",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 83,
+   "name": "fp2nd_4_83",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 83,
+   "name": "fp2nd_4_83",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 86,
+   "name": "fp2nd_4_86",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 86,
+   "name": "fp2nd_4_86",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 96,
+   "name": "fp2nd_4_96",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 96,
+   "name": "fp2nd_4_96",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 102,
+   "name": "fp2nd_4_102",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 102,
+   "name": "fp2nd_4_102",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 104,
+   "name": "fp2nd_4_104",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 104,
+   "name": "fp2nd_4_104",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 111,
+   "name": "fp2nd_4_111",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 111,
+   "name": "fp2nd_4_111",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 112,
+   "name": "fp2nd_4_112",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 112,
+   "name": "fp2nd_4_112",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 119,
+   "name": "fp2nd_4_119",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 119,
+   "name": "fp2nd_4_119",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 121,
+   "name": "fp2nd_4_121",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 121,
+   "name": "fp2nd_4_121",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 123,
+   "name": "fp2nd_4_123",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 123,
+   "name": "fp2nd_4_123",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 125,
+   "name": "fp2nd_4_125",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 125,
+   "name": "fp2nd_4_125",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 126,
+   "name": "fp2nd_4_126",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "fp2nd-4",
+   "index": 126,
+   "name": "fp2nd_4_126",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 66,
+   "name": "rand_4_66",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 66,
+   "name": "rand_4_66",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 72,
+   "name": "rand_4_72",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 72,
+   "name": "rand_4_72",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 75,
+   "name": "rand_4_75",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 75,
+   "name": "rand_4_75",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 81,
+   "name": "rand_4_81",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 81,
+   "name": "rand_4_81",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 82,
+   "name": "rand_4_82",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 82,
+   "name": "rand_4_82",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 86,
+   "name": "rand_4_86",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 86,
+   "name": "rand_4_86",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 89,
+   "name": "rand_4_89",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 89,
+   "name": "rand_4_89",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 96,
+   "name": "rand_4_96",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 96,
+   "name": "rand_4_96",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 98,
+   "name": "rand_4_98",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 98,
+   "name": "rand_4_98",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 104,
+   "name": "rand_4_104",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 104,
+   "name": "rand_4_104",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 108,
+   "name": "rand_4_108",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 108,
+   "name": "rand_4_108",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 111,
+   "name": "rand_4_111",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 111,
+   "name": "rand_4_111",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 114,
+   "name": "rand_4_114",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 114,
+   "name": "rand_4_114",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 117,
+   "name": "rand_4_117",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 117,
+   "name": "rand_4_117",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 121,
+   "name": "rand_4_121",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 121,
+   "name": "rand_4_121",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 124,
+   "name": "rand_4_124",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-4",
+   "index": 124,
+   "name": "rand_4_124",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 64,
+   "name": "int2nd_4_64",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 64,
+   "name": "int2nd_4_64",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 65,
+   "name": "int2nd_4_65",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 65,
+   "name": "int2nd_4_65",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 69,
+   "name": "int2nd_4_69",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 69,
+   "name": "int2nd_4_69",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 70,
+   "name": "int2nd_4_70",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 70,
+   "name": "int2nd_4_70",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 74,
+   "name": "int2nd_4_74",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 74,
+   "name": "int2nd_4_74",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 79,
+   "name": "int2nd_4_79",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 79,
+   "name": "int2nd_4_79",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 82,
+   "name": "int2nd_4_82",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 82,
+   "name": "int2nd_4_82",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 84,
+   "name": "int2nd_4_84",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 84,
+   "name": "int2nd_4_84",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 88,
+   "name": "int2nd_4_88",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 88,
+   "name": "int2nd_4_88",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 89,
+   "name": "int2nd_4_89",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 89,
+   "name": "int2nd_4_89",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 90,
+   "name": "int2nd_4_90",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 90,
+   "name": "int2nd_4_90",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 91,
+   "name": "int2nd_4_91",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 91,
+   "name": "int2nd_4_91",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 116,
+   "name": "int2nd_4_116",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 116,
+   "name": "int2nd_4_116",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 119,
+   "name": "int2nd_4_119",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 119,
+   "name": "int2nd_4_119",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 121,
+   "name": "int2nd_4_121",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 121,
+   "name": "int2nd_4_121",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 124,
+   "name": "int2nd_4_124",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "int2nd-4",
+   "index": 124,
+   "name": "int2nd_4_124",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 66,
+   "name": "rand_1_66",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 66,
+   "name": "rand_1_66",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 71,
+   "name": "rand_1_71",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 71,
+   "name": "rand_1_71",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 73,
+   "name": "rand_1_73",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 73,
+   "name": "rand_1_73",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 75,
+   "name": "rand_1_75",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 75,
+   "name": "rand_1_75",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 79,
+   "name": "rand_1_79",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 79,
+   "name": "rand_1_79",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 84,
+   "name": "rand_1_84",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 84,
+   "name": "rand_1_84",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 85,
+   "name": "rand_1_85",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 85,
+   "name": "rand_1_85",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 89,
+   "name": "rand_1_89",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 89,
+   "name": "rand_1_89",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 94,
+   "name": "rand_1_94",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 94,
+   "name": "rand_1_94",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 99,
+   "name": "rand_1_99",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 99,
+   "name": "rand_1_99",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 104,
+   "name": "rand_1_104",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 104,
+   "name": "rand_1_104",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 106,
+   "name": "rand_1_106",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 106,
+   "name": "rand_1_106",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 116,
+   "name": "rand_1_116",
+   "policy": "shipped",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 116,
+   "name": "rand_1_116",
+   "policy": "fit",
+   "decision": "accepted",
+   "last_line": "WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8",
+   "score_meets": true,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 117,
+   "name": "rand_1_117",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 117,
+   "name": "rand_1_117",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 124,
+   "name": "rand_1_124",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 124,
+   "name": "rand_1_124",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 125,
+   "name": "rand_1_125",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-1",
+   "index": 125,
+   "name": "rand_1_125",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 67,
+   "name": "rand_reply_67",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 67,
+   "name": "rand_reply_67",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 68,
+   "name": "rand_reply_68",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 68,
+   "name": "rand_reply_68",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 76,
+   "name": "rand_reply_76",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 76,
+   "name": "rand_reply_76",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 83,
+   "name": "rand_reply_83",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 83,
+   "name": "rand_reply_83",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 84,
+   "name": "rand_reply_84",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 84,
+   "name": "rand_reply_84",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 86,
+   "name": "rand_reply_86",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 86,
+   "name": "rand_reply_86",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 95,
+   "name": "rand_reply_95",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 95,
+   "name": "rand_reply_95",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 99,
+   "name": "rand_reply_99",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 99,
+   "name": "rand_reply_99",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 105,
+   "name": "rand_reply_105",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 105,
+   "name": "rand_reply_105",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 112,
+   "name": "rand_reply_112",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 112,
+   "name": "rand_reply_112",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 113,
+   "name": "rand_reply_113",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 113,
+   "name": "rand_reply_113",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 116,
+   "name": "rand_reply_116",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 116,
+   "name": "rand_reply_116",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 117,
+   "name": "rand_reply_117",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 117,
+   "name": "rand_reply_117",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 122,
+   "name": "rand_reply_122",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 122,
+   "name": "rand_reply_122",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 124,
+   "name": "rand_reply_124",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 124,
+   "name": "rand_reply_124",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 125,
+   "name": "rand_reply_125",
+   "policy": "shipped",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  },
+  {
+   "cls": "rand-reply",
+   "index": 125,
+   "name": "rand_reply_125",
+   "policy": "fit",
+   "decision": "refused",
+   "last_line": "-",
+   "score_meets": false,
+   "agree": true
+  }
+ ]
+}
