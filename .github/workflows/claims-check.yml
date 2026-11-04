@@ -1,0 +1,32 @@
+# Runs the claim-ledger checkers on every pull request and on pushes to main:
+#   scripts/update-results.py --check  (results.yaml valid, README block + CLAIMS.md in sync)
+#   scripts/check-claims.py            (README block, CLAIMS.md and results.yaml agree)
+# Unlike host-path-guard, this runs the PR's own copy of the scripts (they change with the ledger).
+# Read-only token, no secrets, full history (metric commits are checked for ancestry).
+name: claims-check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  claims:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out the PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 (node24)
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: PyYAML (use the image's copy if present)
+        run: python3 -c 'import yaml' 2>/dev/null || python3 -m pip install --user --break-system-packages --quiet "PyYAML==6.0.2"
+      - name: update-results --check
+        run: python3 scripts/update-results.py --check
+      - name: check-claims
+        run: python3 scripts/check-claims.py
