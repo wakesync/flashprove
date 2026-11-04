@@ -83,9 +83,11 @@ if L21:
         v['prove_s_linear_from_largest'] = ref['prove_s'] * f
         v['rss_gib_linear_from_largest'] = ref['max_rss_kb'] * f / 2**20
         v['largest_measured'] = dict(d=ref['d_k'], tokens=ref['tokens'], bits=ref['bits'], columns=ref['columns'], prove_s=ref['prove_s'], max_rss_kb=ref['max_rss_kb'])
-print('\nCALCULATED extrapolation, one KDA layer (64 heads, d_k=d_v=128):')
+print('\nCALCULATED extrapolation, one KDA layer recurrence (64 heads, d_k=d_v=128), target 10, single thread:\n')
+print('| bits | tokens | columns | log2 | prove h (fit) | prove h (linear from largest) | RSS GiB (fit) | RSS GiB (linear) | verify min (fit) | proof KB (fit) |')
+print('|---|---|---|---|---|---|---|---|---|---|')
 for k, v in ext.items():
-    print(f"  {k}: columns {v['columns']} (2^{math.log2(v['columns']):.2f}), prove fit {v['prove_s_fit']:.0f} s, linear-from-largest {v.get('prove_s_linear_from_largest', 0):.0f} s, "
-          f"RSS fit {v['rss_gib_fit']:.1f} GiB, linear {v.get('rss_gib_linear_from_largest', 0):.1f} GiB, verify fit {v['verify_s_fit']:.1f} s, proof bytes fit {v['proof_bytes_fit']:.0f}")
+    print(f"| {v['bits']} | {v['tokens']} | {v['columns']} | {math.log2(v['columns']):.2f} | {v['prove_s_fit'] / 3600:.2f} | {v.get('prove_s_linear_from_largest', 0) / 3600:.2f} | "
+          f"{v['rss_gib_fit']:.0f} | {v.get('rss_gib_linear_from_largest', 0):.0f} | {v['verify_s_fit'] / 60:.1f} | {v['proof_bytes_fit'] / 1000:.1f} |")
 (here / 'results' / 'summary.json').write_text(json.dumps(dict(points=len(rows), proved=len(proved), by_log_len=table, fits=fits,
     hostile_rejected=hostile_total, static_rejected=static_total, extrapolation_calculated=ext), indent=2) + '\n')
