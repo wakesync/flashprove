@@ -4,7 +4,7 @@ Issue #58. **Verdict: PASS** against the registered threshold. Measured, unrepli
 synthetic stored example. Raw data: `numbers.json` (every row with exit code and the refusal
 line). Runner: `run.py`. Tests: `tools/manifest/test_manifest.py` (52 passed).
 
-**Re-measured after PREREG amendment 2** (2026-11-05, after the independent review of PR #59): the
+**Re-measured after PREREG amendment 2** (2026-11-04 UTC, after the independent review of PR #59): the
 code now refuses small-order ed25519 keys and R, requires `--end-tokens` and `--recipe` or
 `--no-recipe`, and the runner adds a coordinated trusted re-sign arm and omission rows. All numbers
 below are from the re-run at code commit `3bfec225`. The first measurement (`numbers.json` at
