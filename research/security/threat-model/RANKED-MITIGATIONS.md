@@ -55,10 +55,13 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
 - **What:** for high-assurance use, accept only exact match (`C=theta=256`, `cap=0`). Use integer
   serving so served replies are the integer model's greedy choices (`docs/architecture.md:141-146`).
   Treat `WITHIN LIMITS` as "close to the model", never "the model's answer".
-- **Closes:** the clipped-gap steering channel and the sleeper stack (CODE-CHECKS C5): one-swap
-  acceptance 15/16 and 13/16 under shipped limits (PR #51, measured) and 5/54 steered (PR #50,
-  measured) drop to 0 under exact match in those runs (PR #50: 0 of 57, measured). The Lean
-  soundness theorem covers exact match only (`docs/protocol.md:53`).
+- **Closes (by design, not measured):** the clipped-gap steering channel and the sleeper stack
+  (CODE-CHECKS C5). The evidence for the channel is from open, unmerged, unreplicated PRs on the
+  honest-prover path: one-swap acceptance 15/16 and 13/16 under shipped limits (PR #51) and 5/54
+  steered (PR #50). Under exact match the honest prover refused all 57 changed steered replies in
+  #50, so `cp_verify` never judged an out-of-limits proof; that exact match also stops a cheating
+  prover is the design and the premise of the Lean soundness theorem, which covers exact match only
+  (`docs/protocol.md:53`).
 - **Does not close:** a strong backdoor, which is the top choice anyway; sampling (exact match is
   greedy only).
 - **Cost:** medium. No protocol change (policy already exists). Cost is operational: integer
@@ -99,5 +102,6 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
 1. (read) "The commitment ID binds the integer weights and configuration, not any upstream
    checkpoint; a valid proof of a backdoored model verifies." Evidence: `blocks/frame/heads.h:78-99`,
    this directory.
-2. (inferred from measured PR #50/#51) "Under the shipped clipped-gap limits, a rank-2 harmful branch
-   is provable with one swap; under exact match it is not."
+2. (from open, unmerged, unreplicated PRs #50/#51, honest-prover outcomes) "Under the shipped
+   clipped-gap limits, a rank-2 harmful branch can be proved with one swap." Second half (by design /
+   inferred, not measured): "under exact match it cannot."

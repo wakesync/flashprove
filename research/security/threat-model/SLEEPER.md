@@ -1,6 +1,8 @@
 # Sleeper agents and backdoors versus a proof of execution
 
 Part of #6, tracking #53. Labels: **measured** / **cited** / **inferred** as in THREAT-MODEL.md.
+Figures from PR #50 and PR #51 are from open, unmerged, unreplicated PRs and are honest-prover
+outcomes only (THREAT-MODEL.md, "About PR #50 and PR #51").
 
 ## The core argument, stated carefully
 
@@ -74,13 +76,15 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
 - A strong backdoor needs no allowance: it makes h the top choice and passes exact match.
 - A **weak** or partially-removed backdoor (for example after safety fine-tuning shaved it) may
   leave the harmful first token as a close second, not the top choice. Under exact match that reply
-  fails. Under clipped gap with `cap >= 1`, PR #51 measured that "one swap then greedy continuation"
-  is accepted `WITHIN LIMITS` in 15/16 (float second choice) and 13/16 (random token) cases on the
-  small synthetic model at the real verifier (measured, H100, unreplicated). The swap picks the
-  branch; the model's own greedy continuation completes it at zero cost after that.
+  fails. Under the shipped clipped-gap limits, open PR #51 (unmerged, unreplicated, H100, small
+  synthetic model) reports that "one swap then greedy continuation" was proved by the honest
+  `cp_prove` and accepted `WITHIN LIMITS` by `cp_verify` in 15/16 (float second choice) and 13/16
+  (random token) cases. Out-of-limits replies were refused by the honest prover, so `cp_verify`
+  never judged an out-of-limits proof. The swap picks the branch; the model's own greedy
+  continuation completes it at near-zero cost after that.
 - So clipped gap turns "residual backdoor at rank 2" into "provable reply". The provider (or a
-  compromised front end) supplies the one swap; the weights supply the rest. Exact match closes
-  this specific stack; it does not close a strong backdoor.
+  compromised front end) supplies the one swap; the weights supply the rest. That exact match
+  closes this specific stack is by design, not measured; it does not close a strong backdoor.
 - Also from `docs/limits.md:295`: under clipped gap "prompt tokens are not scored" and the mean and
   count "run over one output that the prover picks".
 
@@ -99,7 +103,8 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
 The brief's suggested experiment (synthetic weight-delta backdoor on `target_small`, show a valid
 proof with a different commitment) needs fresh `cp_commit` and `cp_prove`, which require an H100
 (`prover/build.sh:14`). #46 hit the same wall (`experiments/20261103-model-identity/RESULTS.md`,
-"KILLED for the requested proof experiment"). PR #50 already shows the GPU version for steering. A
+"KILLED for the requested proof experiment"). Open PR #50 shows a GPU version for steering
+(unmerged, unreplicated, honest-prover path). A
 CPU-only version could only compute SHA-256 fingerprints and Python scores, which #46 already did
 (three distinct artifact fingerprints, a projected variant scored 5/5 against itself and 0/5
 against stock; measured there). It would not be decisive, so no PREREG was registered and nothing

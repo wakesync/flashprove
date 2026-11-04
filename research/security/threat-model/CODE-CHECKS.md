@@ -93,11 +93,14 @@ chat template's tokens and whatever your front end added" (`docs/operators-dutie
 
 ## C5. Clipped-gap weakness as a steering channel, stacked with a sleeper trigger
 
-Measured inputs (unreplicated, synthetic small model, real H100 prover and verifier):
-- PR #51: one swap then greedy continuation accepted `WITHIN LIMITS` 15/16 (float second choice) and
-  13/16 (random token) under shipped limits `C=9244130 theta=323343 cap=1`.
-- PR #50: runtime steering at |dose| 0.05, 5 of 54 changed replies accepted under clipped gap, 0 of
-  57 under exact match.
+Inputs from **open, unmerged PRs** #50 (head `b645f670`) and #51 (head `0c93d0ea`), both
+unreplicated, synthetic small model, H100. **Honest-prover path only**: every out-of-limits reply was
+refused by the honest `cp_prove`, so `cp_verify` never judged an out-of-limits proof.
+- PR #51: one swap then greedy continuation proved and accepted `WITHIN LIMITS` 15/16 (float second
+  choice) and 13/16 (random token) under shipped limits `C=9244130 theta=323343 cap=1`.
+- PR #50: runtime steering at |dose| 0.05, 5 of 54 changed replies proved and accepted under clipped
+  gap. Under exact match the honest prover refused all 57 changed replies; no proof of them was
+  made, so this is not a measurement of `cp_verify` rejecting one.
 - Docs: "As many tokens as the second bound allows may cost more than C, and these can be any
   tokens, at any positions" (`docs/protocol.md:47`), and the hidden costs are a prover-chosen
   witness (`docs/limits.md:302-306`).

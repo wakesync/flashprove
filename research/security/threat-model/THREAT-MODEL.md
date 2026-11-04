@@ -4,6 +4,14 @@ Part of #6, tracking #53. Base commit `ce4ceef0`. Research only. Every number is
 **measured** (run in this repo, with the PR or file that holds it), **cited** (from a paper or an
 external README) or **inferred** (reasoned here, not run).
 
+**About PR #50 and PR #51.** Figures quoted from them are from **open, unmerged PRs** (each had a
+CHANGES REQUESTED review; fixes were pushed and are not yet re-reviewed) and are **unreplicated**.
+Checked here against #50 at `b645f670` and #51 at `0c93d0ea`. They are **honest-prover outcomes
+only**: every reply outside the limits was refused by the honest `cp_prove`, so `cp_verify` never
+judged an out-of-limits proof. A count like "0 of 57 accepted under exact match" describes the
+honest prover's refusals, not a verifier stopping a cheating prover. That exact match closes a
+channel is **by design** (and the premise of the Lean theorem, `docs/protocol.md:53`), not measured.
+
 ## The one sentence
 
 FlashProve proves a relation: "the committed integer weights, under the committed configuration,
@@ -45,13 +53,17 @@ public README, cited, `github.com/lambdaclass/CommitLLM`, fetched 2026-11-04) / 
   advertised one.
 - **FlashProve stops:** under exact match and a commitment ID the client got out of band, a reply
   that is not the committed integer model's top choice at a checked position (by design; no theorem
-  about `cp_verify` itself, `docs/limits.md:162-164`). Measured: runtime-steered replies under real
-  proofs, exact match accepted 0 of 57 changed replies (PR #50, H100, synthetic, unreplicated).
+  about `cp_verify` itself, `docs/limits.md:162-164`). From open, unmerged PR #50 (H100, synthetic,
+  unreplicated, honest-prover path): under exact match the honest prover refused all 57 changed
+  steered replies, so none got a proof. That is the policy at the prover; that `cp_verify` would also
+  reject a forged one is by design, not measured.
 - **Does not stop:** (a) committing to a bad model in the first place, the "worst case: the
   provider commits to a small model that gives the answer it wants" (`docs/limits.md:190-191`);
   (b) choosing the system prompt and template tokens, which the proof then faithfully binds;
-  (c) under clipped gap, steering within the allowance: 5 of 54 changed steered replies accepted
-  `WITHIN LIMITS` (PR #50, measured), one-swap-then-continue 15/16 and 13/16 (PR #51, measured);
+  (c) under clipped gap, steering within the allowance: 5 of 54 changed steered replies proved and
+  accepted `WITHIN LIMITS` (open PR #50, honest prover, unreplicated; these pass on the theta mean
+  bound, `above-clip=0`, cap never used), one-swap-then-continue 15/16 and 13/16 (open PR #51, honest
+  prover, unreplicated);
   (d) truncation, which verifies as a shorter reply (`docs/protocol.md:66`); (e) giving different
   clients different IDs, unless the ID is published in one shared place (`docs/limits.md:183-186`);
   (f) a client that takes the ID from the server.
