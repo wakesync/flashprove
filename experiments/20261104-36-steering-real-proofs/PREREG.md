@@ -65,3 +65,17 @@ decisions on steered replies of this fork's synthetic model. No first-in-literat
 
 ## Amendments
 (empty at registration)
+
+### 2026-11-04 (after data, review of PR #50 must-fix 2)
+Two deviations from the registered Runs section. The registered text above is unchanged.
+- Batch size. Registered: batches of at most 64 (`slots 64`). Run: `gen_requests.py` sets `PER_BATCH = 60`, so each
+  configuration went to `cp_prove` as one folder of 60 requests and one of 10 (`stages.log`: `prove-start in-0 60`,
+  `in-1 10`; the prover prints `p258 at most 60 requests share one opening`). 60 is within the kit's `slots 64`
+  limit. The producer lane did not record why it chose 60 rather than 64. Each request still gets its own proof file
+  and its own cp_verify call, and the accept/refuse rule is per request, so no decision depends on the batch split.
+- Controls. Registered: "140 requests, plus dose-0 repeats as the controls". Run: no separate dose-0 repeats were
+  generated or proved. The dose-0 controls are the 10 dose-0 grid cells per policy (5 seeds x 2 lengths), which are
+  already in the 140. Reason: the steering and the integer model are deterministic, so a repeat of a dose-0 request
+  is byte-identical to the grid request (the review's CPU regeneration gave an identical `requests.json`), and it
+  would only re-run the same deterministic prover and verifier calls. The "stock false rejections" threshold was
+  evaluated on those 10 per policy (S 10/10, G 10/10).
