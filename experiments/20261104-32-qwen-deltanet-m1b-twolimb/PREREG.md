@@ -29,4 +29,4 @@ Proof: 10 honest runs, seeds 1..10, sequential, one process each; timings n, med
 - Literature on the recurrence: Gated DeltaNet (Yang, Kautz, Hatamizadeh, ICLR 2025); Mamba2 decay parameterisation (Dao, Gu 2024).
 
 ## Amendments
-(empty at registration)
+- A1 (2026-11-04T17:20Z, after code): the lane deadline had passed when PREREG was registered. Scope was cut to the H3 range study, run on the integer reference with no proof (`ranges_twolimb.py`). The RNG/LKP integration, H1 and H2 were not attempted, so the kill criterion is triggered and the verdict is KILLED. H3 numbers are reported as an observation only. Thresholds were not changed.
