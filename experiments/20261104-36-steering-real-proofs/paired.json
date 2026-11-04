@@ -1,0 +1,95 @@
+{
+ "g_changed_replies": 54,
+ "g_changed_that_exact_match_would_accept": 0,
+ "g_changed_exact_match_names": [],
+ "stock_pairs": 10,
+ "stock_pairs_where_S_and_G_stock_reply_differ": 10,
+ "stock_pairs_differ_names": [
+  "s1103_n4",
+  "s1103_n16",
+  "s1104_n4",
+  "s1104_n16",
+  "s1105_n4",
+  "s1105_n16",
+  "s1106_n4",
+  "s1106_n16",
+  "s1107_n4",
+  "s1107_n16"
+ ],
+ "g_result_v1_lines": 21,
+ "g_result_v1_above_clip_values": [
+  0
+ ],
+ "g_policy": {
+  "C": 9244130,
+  "theta": 323343,
+  "cap": 1
+ },
+ "g_max_cost_any_request": 104913960,
+ "g_max_cost_any_proved_request": 3580207,
+ "g_changed_accepted": [
+  {
+   "name": "G_s1103_n16_dp005",
+   "tokens_changed": 14,
+   "len": 16,
+   "costs_above_256": [
+    1295539,
+    618549
+   ],
+   "max_cost": 1295539,
+   "above_C": 0,
+   "mean_clipped_cost": 119854.5,
+   "mean_le_theta": true
+  },
+  {
+   "name": "G_s1105_n4_dm005",
+   "tokens_changed": 2,
+   "len": 4,
+   "costs_above_256": [
+    781059
+   ],
+   "max_cost": 781059,
+   "above_C": 0,
+   "mean_clipped_cost": 195456.75,
+   "mean_le_theta": true
+  },
+  {
+   "name": "G_s1105_n16_dm005",
+   "tokens_changed": 13,
+   "len": 16,
+   "costs_above_256": [
+    781059,
+    1068754
+   ],
+   "max_cost": 1068754,
+   "above_C": 0,
+   "mean_clipped_cost": 115837.3125,
+   "mean_le_theta": true
+  },
+  {
+   "name": "G_s1106_n16_dm005",
+   "tokens_changed": 12,
+   "len": 16,
+   "costs_above_256": [
+    3580207
+   ],
+   "max_cost": 3580207,
+   "above_C": 0,
+   "mean_clipped_cost": 224002.9375,
+   "mean_le_theta": true
+  },
+  {
+   "name": "G_s1106_n16_dp005",
+   "tokens_changed": 12,
+   "len": 16,
+   "costs_above_256": [
+    786843,
+    958038
+   ],
+   "max_cost": 958038,
+   "above_C": 0,
+   "mean_clipped_cost": 109279.0625,
+   "mean_le_theta": true
+  }
+ ]
+}

@@ -65,7 +65,7 @@ hardware:
     description: one NVIDIA H100 80GB HBM3, whole-machine 1-GPU marketplace host (provider-verified listing), driver 595.91.07, 500 W power limit, cgroup about 23.0 cores
   gpu-h100-rental-c:
     kind: gpu
-    description: one NVIDIA H100 80GB HBM3 SXM (GPU index 1) of a 2-GPU marketplace host (unverified listing), driver 615.71.09, Xeon Platinum 8480+, cgroup about 53.8 cores
+    description: one NVIDIA H100 80GB HBM3 SXM (GPU index 1) of a 2-GPU marketplace host (unverified listing, appeared CPU-throttled), driver 615.71.09, Xeon Platinum 8480+, cgroup about 53.8 cores; the other GPU ran a separate workload at the same time
 
 results:
   - id: cpu-reproduction
@@ -301,6 +301,25 @@ results:
     metrics:
       - {name: fresh_proofs, stat: count, value: 0, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: bcc32c2ae1cda9751022b9c6975a3239ff9c0b73, source: experiments/20261103-model-identity/numbers.json, note: "registered threshold needed 15 fresh commitments + proofs"}
       - {name: changed_replies_score_rejected_lenient, stat: count, value: 56, total: 56, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: bcc32c2ae1cda9751022b9c6975a3239ff9c0b73, source: experiments/20261103-model-identity/numbers.json, note: "60 nonzero-dose cases, 56 changed; scored, not verified"}
+
+  - id: steering-real-proofs
+    title: "Runtime steering under real cp_prove / cp_verify, small synthetic model (PR #50)"
+    status: measured
+    status_note: "(strict PASS, lenient half holds)"
+    replication: unreplicated
+    pr: 50
+    summary: "exact match: 0 of 57 changed steered replies accepted (all refused by the prover), 13 of 13 unchanged accepted; shipped clipped-gap: 5 of 54 changed replies accepted `WITHIN LIMITS`, all at dose 0.05, passing on the theta mean bound (above-clip 0); Python score agreed with the real decision on 140 of 140"
+    conditions: "one neuron, synthetic 8-layer model, 5 prompt seeds x 7 doses x 2 reply lengths x 2 policies, one H100 of an unverified host; honest prover only, no cheating prover tested; S and G replies are not paired (different scales)"
+    evidence: [experiments/20261104-36-steering-real-proofs/RESULTS.md]
+    metrics:
+      - {name: strict_changed_accepted, series: steering-real-proofs, arm: strict, stat: count, value: 0, total: 57, unit: count, n: 5, spread: null, hardware: gpu-h100-rental-c, date: 2026-11-04, commit: 05870430a9d9209993dded5a3ef33572cc12f77a, source: experiments/20261104-36-steering-real-proofs/numbers.json, note: "n = 5 prompt seeds per cell; each decision is deterministic, not an independent trial"}
+      - {name: strict_unchanged_accepted, series: steering-real-proofs, arm: strict, stat: count, value: 13, total: 13, unit: count, n: 5, spread: null, hardware: gpu-h100-rental-c, date: 2026-11-04, commit: 05870430a9d9209993dded5a3ef33572cc12f77a, source: experiments/20261104-36-steering-real-proofs/numbers.json, note: "n = 5 prompt seeds per cell; each decision is deterministic, not an independent trial"}
+      - {name: lenient_changed_accepted, series: steering-real-proofs, arm: lenient, stat: count, value: 5, total: 54, unit: count, n: 5, spread: null, hardware: gpu-h100-rental-c, date: 2026-11-04, commit: 05870430a9d9209993dded5a3ef33572cc12f77a, source: experiments/20261104-36-steering-real-proofs/numbers.json, note: "n = 5 prompt seeds per cell; each decision is deterministic, not an independent trial; all 5 at |dose| 0.05"}
+      - {name: score_agreement, series: steering-real-proofs, arm: both, stat: count, value: 140, total: 140, unit: count, n: 5, spread: null, hardware: gpu-h100-rental-c, date: 2026-11-04, commit: 05870430a9d9209993dded5a3ef33572cc12f77a, source: experiments/20261104-36-steering-real-proofs/numbers.json, note: "Python integer-model score vs real prover+verifier decision; n = 5 prompt seeds per cell; each decision is deterministic, not an independent trial"}
+      - {name: dose0_accepted_strict, series: steering-real-proofs, arm: strict, stat: count, value: 10, total: 10, unit: count, n: 5, spread: null, hardware: gpu-h100-rental-c, date: 2026-11-04, commit: 05870430a9d9209993dded5a3ef33572cc12f77a, source: experiments/20261104-36-steering-real-proofs/numbers.json, note: "n = 5 prompt seeds per cell; each decision is deterministic, not an independent trial"}
+      - {name: dose0_accepted_lenient, series: steering-real-proofs, arm: lenient, stat: count, value: 10, total: 10, unit: count, n: 5, spread: null, hardware: gpu-h100-rental-c, date: 2026-11-04, commit: 05870430a9d9209993dded5a3ef33572cc12f77a, source: experiments/20261104-36-steering-real-proofs/numbers.json, note: "n = 5 prompt seeds per cell; each decision is deterministic, not an independent trial"}
+      - {name: lenient_changed_exact_match_would_accept, series: steering-real-proofs-paired, arm: lenient, stat: count, value: 0, total: 54, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 8fd222919c80e703b08a3b8723fc4e076451afc7, source: experiments/20261104-36-steering-real-proofs/paired.json, note: "Python score of G's changed replies under exact match (all costs 256), not a prover run; recomputed from committed files"}
+      - {name: stock_pairs_differ, series: steering-real-proofs-paired, arm: both, stat: count, value: 10, total: 10, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 8fd222919c80e703b08a3b8723fc4e076451afc7, source: experiments/20261104-36-steering-real-proofs/paired.json, note: "(seed, length) pairs whose S and G stock replies differ; why S vs G is not a paired comparison"}
 
   - id: qwen-deltanet-m1
     title: "Qwen Gated DeltaNet head at real shape, M1 (PR #47)"
