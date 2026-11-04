@@ -113,3 +113,5 @@ See `experiments/20261104-43-h200-memory-lever/PREREG.md` (written before any GP
 
 ### Run log
 - 2026-11-04 01:22 UTC: two instances created (control: 1 GPU of a 2x H100 SXM 80 GB box, $1.219/h; treatment: 1x H200 SXM 141 GB, $5.54/h). Teardown timers armed before create. Both boxes started the pinned build at ~01:31 UTC.
+- 01:42-01:43 UTC: pinned build + `examples/quickstart-gpu.sh` passed on both boxes (cp_verify YES on the small proof). ~17 min each.
+- Early commit observation (n = 1 per box, the commitment's anchor table, from cp_commit's own timing lines): H200 splits the table's tree into 16 parts of 2^28 positions, 452.7 s; H100 into 32 parts of 2^27, 576.3 s (-21%). The committer sizes its parts to free GPU memory: a first direct sign of the memory lever, on commit, not prove.
