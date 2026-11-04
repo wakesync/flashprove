@@ -93,3 +93,26 @@ record of what cp_verify can and cannot check on CPU.
   classes do not re-decode, so the tokens after a swap are scored in a context they were not chosen for;
   cp_verify's own `above-clip` bound says one token can be anything if the others are first choices, and
   this class tests that adaptive adversary. Same 5 seeds, same grid, same scorer (score_redecode.py).
+- 2026-11-04T07:55Z. Corrections and disclosures after the independent review of PR #45 (no new run, no
+  threshold, grid, class or verdict changed; nothing above is rewritten).
+  (a) Issue linkage. The header's "Issue: #6" names the P0 threat-model issue that the `-6-` in the
+  experiment id points at; the id is kept so that the prereg-first commit stays valid. The tracking
+  issue for this study is #38 ("P1: clipped-gap rejection study"). #38 asks for acceptance per class via
+  a real `cp_verify`; this CPU study cannot give that (no proof for an attacked reply), so that
+  deliverable of #38 stays open. The PR refers to #38 and does not close it.
+  (b) Wording of `int2nd-k`. "the cheapest single-token deviation an adversary that knows the weights
+  can make" is wrong as written: the positions of every `fp2nd-k` / `int2nd-k` / `rand-k` reply are drawn
+  at random (random.Random(seed * 1000 + class index)), so `int2nd-1` is the integer model's second
+  choice at a random position, not the cheapest deviation. A provider that picks the position does at
+  least as well, so these classes' acceptance rates are lower bounds for an adaptive provider.
+  Best-position was not tested in this study.
+  (c) cp_verify spot set. The section above says one attacked request is built "for each class". The
+  committed spot set (cp_verify_spot.py, run before this amendment) has 19 of the 21 classes: its
+  random-token list is rand-1, rand-4, rand-16 and rand-reply, and `rand-2` and `rand-8` are not in it.
+  No reason was recorded when the list was written; this is a deviation from the plan above. Every
+  binding spot check answers `NO: proof-refused` because the stored proof is for another reply, whatever
+  that reply is, so the two missing calls could not change what the spot set shows. They are not added
+  now (no new runs in the review fix).
+  (d) Clause 1 analysis choice. analyze.py leaves grid points flagged `theta == C with cap > 0` out of
+  the clause-1 candidates (they are "kept but flagged" in numbers.json). No verdict depends on it: every
+  PASS point has cap = 0.

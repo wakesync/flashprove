@@ -20,10 +20,11 @@ cols = ["honest", "fp2nd-1", "int2nd-1", "fp2nd-2", "int2nd-2", "fp2nd-4", "int2
 
 
 def cell(s):
+    # median, SD (sample SD over the 5 seeds, analyze.py), min-max; all in %
     if s is None:
         return "-"
-    m, lo, hi = 100 * s["median"], 100 * s["min"], 100 * s["max"]
-    return "%.0f (%.0f-%.0f)" % (m, lo, hi) if lo != hi else "%.0f" % m
+    m, sd, lo, hi = 100 * s["median"], 100 * s["sd"], 100 * s["min"], 100 * s["max"]
+    return "%.0f, SD %.1f (%.0f-%.0f)" % (m, sd, lo, hi) if lo != hi else "%.0f, SD 0" % m
 
 
 print("| class | " + " | ".join("`%s`" % l for l in labels) + " |")
