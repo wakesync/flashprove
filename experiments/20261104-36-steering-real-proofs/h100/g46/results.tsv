@@ -1,0 +1,71 @@
+name	prover	exit	last_line
+G_s1103_n16_dm005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1103_n16_dm020	failed	-	-
+G_s1103_n16_dm100	failed	-	-
+G_s1103_n16_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1103_n16_dp005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1103_n16_dp020	failed	-	-
+G_s1103_n16_dp100	failed	-	-
+G_s1103_n4_dm005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1103_n4_dm020	failed	-	-
+G_s1103_n4_dm100	failed	-	-
+G_s1103_n4_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1103_n4_dp005	failed	-	-
+G_s1103_n4_dp020	failed	-	-
+G_s1103_n4_dp100	failed	-	-
+G_s1104_n16_dm005	failed	-	-
+G_s1104_n16_dm020	failed	-	-
+G_s1104_n16_dm100	failed	-	-
+G_s1104_n16_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1104_n16_dp005	failed	-	-
+G_s1104_n16_dp020	failed	-	-
+G_s1104_n16_dp100	failed	-	-
+G_s1104_n4_dm005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1104_n4_dm020	failed	-	-
+G_s1104_n4_dm100	failed	-	-
+G_s1104_n4_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1104_n4_dp005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1104_n4_dp020	failed	-	-
+G_s1104_n4_dp100	failed	-	-
+G_s1105_n16_dm005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1105_n16_dm020	failed	-	-
+G_s1105_n16_dm100	failed	-	-
+G_s1105_n16_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1105_n16_dp005	failed	-	-
+G_s1105_n16_dp020	failed	-	-
+G_s1105_n16_dp100	failed	-	-
+G_s1105_n4_dm005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1105_n4_dm020	failed	-	-
+G_s1105_n4_dm100	failed	-	-
+G_s1105_n4_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1105_n4_dp005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1105_n4_dp020	failed	-	-
+G_s1105_n4_dp100	failed	-	-
+G_s1106_n16_dm005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1106_n16_dm020	failed	-	-
+G_s1106_n16_dm100	failed	-	-
+G_s1106_n16_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1106_n16_dp005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1106_n16_dp020	failed	-	-
+G_s1106_n16_dp100	failed	-	-
+G_s1106_n4_dm005	failed	-	-
+G_s1106_n4_dm020	failed	-	-
+G_s1106_n4_dm100	failed	-	-
+G_s1106_n4_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1106_n4_dp005	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1106_n4_dp020	failed	-	-
+G_s1106_n4_dp100	failed	-	-
+G_s1107_n4_dm005	failed	-	-
+G_s1107_n4_dm020	failed	-	-
+G_s1107_n4_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1107_n4_dp005	failed	-	-
+G_s1107_n16_dm005	failed	-	-
+G_s1107_n16_dm020	failed	-	-
+G_s1107_n16_dm100	failed	-	-
+G_s1107_n16_dp000	proof	0	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+G_s1107_n16_dp005	failed	-	-
+G_s1107_n16_dp020	failed	-	-
+G_s1107_n16_dp100	failed	-	-
+G_s1107_n4_dm100	failed	-	-
+G_s1107_n4_dp020	failed	-	-
+G_s1107_n4_dp100	failed	-	-
