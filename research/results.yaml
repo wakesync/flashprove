@@ -355,6 +355,22 @@ results:
       - {name: hostile_rejected, stat: count, value: 44, total: 44, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: b6186e6ccb687348e3be66fec51bb3756879b8dc, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/hostile-seed1.jsonl, note: "seed 1, 10 sampled classes; not exhaustive"}
       - {name: r3_windows_proved, stat: count, value: 5, total: 5, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: b6186e6ccb687348e3be66fec51bb3756879b8dc, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/h3b-r3.jsonl, note: "T = 4 window ending at the first |delta| >= 2^18 step"}
 
+  - id: qwen-deltanet-m2-design
+    title: "Qwen DeltaNet M2 design: verifier-side admission, lookup-exact remainders, whole-head ranges (PR #66)"
+    status: measured
+    replication: unreplicated
+    pr: 66
+    summary: "PASS vs prereg (GO for an M2 build, arm B): a verifier entry that admits its own integer public inputs accepted 10 of 10 honest M1b proofs (+0.18 s on a 7.6 s verify) and rejected 34 of 34 hostile encodings, including the #63 review's R9 that the caller path accepts; counted, not built: lookup-exact remainders cut product columns per state cell per token 17.4 to 6.1 and relations 3.7x, so the M2 head at T = 16 fits 2^21; whole-head ranges fit 20 of 20"
+    conditions: "design lane, no M2 proof; admission prototype on the M1b statement (one head, T = 4); counts from a model that reproduces M1/M1b exactly; ranges from an integer reference with synthetic init; research security (target 10 bits), CPU 6 cores, shared loaded VM"
+    evidence: [experiments/20261105-32-qwen-deltanet-m2-design/RESULTS.md]
+    metrics:
+      - {name: admission_honest_accepted, stat: count, value: 10, total: 10, unit: count, n: 10, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/h5-honest.jsonl}
+      - {name: admission_derive_wall, stat: median, value: 0.182, unit: s, n: 10, spread: {sd: 0.007, min: 0.170, max: 0.196}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/h5-honest.jsonl, note: "decode + relation derivation + sizing, before the proof verifier"}
+      - {name: verify_wall, stat: median, value: 7.613, unit: s, n: 10, spread: {sd: 0.114, min: 7.527, max: 7.861}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/h5-honest.jsonl, note: "indicative only, shared loaded VM"}
+      - {name: admission_hostile_as_expected, stat: count, value: 34, total: 34, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/h5-hostile-seed1.jsonl, note: "seed 1; includes R9 control accepted by the caller path and R9 rejected at decode"}
+      - {name: columns_per_state_cell_armB_over_armA, stat: single, value: 0.349, unit: ratio, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/model.json, note: "counted by a model, not built"}
+      - {name: head_range_runs_fit, stat: count, value: 20, total: 20, unit: count, n: 20, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/ranges-head.json}
+
   - id: swap-at-verifier
     title: "#45 attack classes through the honest cp_prove + cp_verify, small synthetic model, one H100 (PR #51)"
     status: measured
