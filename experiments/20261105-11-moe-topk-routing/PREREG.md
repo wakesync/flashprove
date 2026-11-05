@@ -37,3 +37,10 @@ KILLED if no honest proof at the GLM shape is accepted by 2026-11-05T05:52Z (hou
 
 ## Amendments
 (empty at registration)
+
+### A1 (2026-11-05T03:40Z, after results; no threshold, seed or run change)
+Reason: record the deviations between the registered relation text and the code, so they sit here and not only in RESULTS.md.
+- Key ordering and threshold differences are range-checked in **26** bits, not the registered 27. Keys are below E * 2^17 <= 384 * 2^17 < 2^26, so 26 bits suffice; a negative difference reduces near p and cannot fit either width. Tighter, not looser.
+- The threshold cell is the product (G_k - K_i - 1) * (1 - sel_i) range-checked directly, algebraically the registered (1 - sel_i)(K_last - K_i) - (1 - sel_i).
+- `research/operators/moe_topk/product.h` is a copy of `qwen_deltanet/product.h` with 512 terms per relation (not 256) and its own transcript label 0x46504d4b. Decided after registration. Same product oracle, same affine-row lowering, every relation bound in the first query.
+- H2 a2 "swapped tie order inside the selected set": swapping two selected experts with equal corrected score and the same slot pairing leaves the public output unchanged, so that attack forges the routing witness under a TRUE output claim, not a false one as the H2 preamble says. It is still a complete hostile proof against the unchanged verifier and is reported as such (rejected). Every other forged class states a false output.

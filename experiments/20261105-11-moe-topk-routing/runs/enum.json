@@ -1,0 +1,28 @@
+{
+ "k2": {
+  "exit": 0,
+  "seconds": 0.076,
+  "mode": "enum",
+  "E": 16,
+  "k": 2,
+  "tuples": 256,
+  "distinct_tuples": 240,
+  "satisfying": 1,
+  "satisfying_distinct": 1,
+  "unique_equals_reference": true,
+  "adjacent_ties_in_top_k_plus_1": 2
+ },
+ "k3": {
+  "exit": 0,
+  "seconds": 1.139,
+  "mode": "enum",
+  "E": 16,
+  "k": 3,
+  "tuples": 4096,
+  "distinct_tuples": 3360,
+  "satisfying": 1,
+  "satisfying_distinct": 1,
+  "unique_equals_reference": true,
+  "adjacent_ties_in_top_k_plus_1": 2
+ }
+}
