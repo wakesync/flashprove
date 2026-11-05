@@ -110,7 +110,10 @@ static bool size_preconditions(const Built &b) {
 // verifier. Every failure is a returned verdict; nothing here exits the process.
 // Class bounds (the M1b admit, now inside the verifier): |S0|, |S_T| < 2^18; a, beta in [0, 2^F];
 // |k|, |q| <= 2^F; |v|, |o| < 2^31; conv history |H| < 2^31.
-static Verdict verify_from_words(const Shape &sh, const std::vector<u64> &w, const u8 *proof, size_t bytes, VerifyTiming *tm = nullptr) {
+// witness_path: derive with the first prototype's witness path (honest checks off), now with checked
+// arithmetic. A control for the second review's UB finding only; the entry's derivation is
+// witness-free. Either way an overflow is a "derive" reject, never UB.
+static Verdict verify_from_words(const Shape &sh, const std::vector<u64> &w, const u8 *proof, size_t bytes, VerifyTiming *tm = nullptr, bool witness_path = false) {
   auto t0 = std::chrono::steady_clock::now();
   const size_t DD = size_t(sh.D) * sh.D, want = 3 + DD + hist_words(sh) + size_t(sh.T) * (2 + 4 * sh.D) + DD;
   if (w.size() != want) { if (tm) tm->why = "statement length"; return Verdict::DECODE; }
@@ -134,7 +137,8 @@ static Verdict verify_from_words(const Shape &sh, const std::vector<u64> &w, con
   // are not read by the relation list. Shapes only.
   z.S.assign(sh.T, std::vector<i64>(DD, 0)); z.S[sh.T - 1] = ST;
   auto t1 = std::chrono::steady_clock::now();
-  Built b = build(z, true);
+  Built b = witness_path ? build(z, false, true) : build(z, true);
+  if (b.overflow) { if (tm) tm->why = "checked arithmetic overflowed while deriving the statement"; return Verdict::DERIVE; }
   if (!size_preconditions(b)) { if (tm) tm->why = "derived statement outside the sizing guards"; return Verdict::DERIVE; }
   Sized s = size_run(b);
   if (!s.ok) { if (tm) tm->why = "no plan holds for the derived statement"; return Verdict::DERIVE; }
@@ -195,6 +199,7 @@ int main(int argc, char **argv) {
   check(z.T == sh.T && z.D == sh.D && z.F == sh.F, "fixture shape");
   // Prover side, unchanged from M1b: witness from the fixture, cell by cell against reference.py.
   Built b = build(z);
+  check(!b.overflow, "honest witness arithmetic fits i64");
   for (int t = 0; t < z.T; t++) check(b.M[t] == z.M[t] && b.delta[t] == z.delta[t] && b.S[t] == z.S[t] && b.o[t] == z.o[t], "C++ lowering equals reference.py");
   Sized s = size_run(b);
   check(s.ok, "plan holds (M1b schedule)");
@@ -263,6 +268,21 @@ int main(int argc, char **argv) {
     }
     std::printf("{\"mode\":\"derive-overflow-detail\",\"old_path_first_overflow_token\":%d}\n", old_path_overflow_token(fixture_of_words(sh, w)));
     report("derive-overflow", "every class at its extreme (old witness path: i64 overflow)", verify_from_words(sh, w, pb.data(), pb.size()), Verdict::PROOF);
+    report("derive-overflow", "same statement, witness-path derivation with checked arithmetic: reject at derive", verify_from_words(sh, w, pb.data(), pb.size(), nullptr, true), Verdict::DERIVE);
+  }
+  // The second review's statement (#66, UBSan at m1b_builder.h aP = Pj * a): S0 = 2^18 - 1, k = a =
+  // 2^12, v = o = 2^31 - 1, all of one sign. Witness-free entry: no overflow, proof stage rejects.
+  // Witness path with checked arithmetic: the overflow is caught and the statement rejected at derive.
+  {
+    auto w = words;
+    for (size_t c = 0; c < size_t(sh.D) * sh.D; c++) w[w_S0(sh, c)] = enc(BOUND - 1);
+    for (int t = 0; t < sh.T; t++) {
+      w[w_a(sh, t)] = enc(one); w[w_beta(sh, t)] = enc(one);
+      for (int i = 0; i < sh.D; i++) { w[w_k(sh, t, i)] = enc(one); w[w_q(sh, t, i)] = enc(one); w[w_v(sh, t, i)] = enc(VBOUND - 1); w[w_o(sh, t, i)] = enc(VBOUND - 1); }
+    }
+    std::printf("{\"mode\":\"derive-review2-detail\",\"old_path_first_overflow_token\":%d}\n", old_path_overflow_token(fixture_of_words(sh, w)));
+    report("derive-overflow", "review-2 all-extremes statement, witness-free entry", verify_from_words(sh, w, pb.data(), pb.size()), Verdict::PROOF);
+    report("derive-overflow", "review-2 all-extremes statement, witness path with checked arithmetic: reject at derive", verify_from_words(sh, w, pb.data(), pb.size(), nullptr, true), Verdict::DERIVE);
   }
   {
     auto w = words; u64 st = 0x9e3779b97f4a7c15ULL;

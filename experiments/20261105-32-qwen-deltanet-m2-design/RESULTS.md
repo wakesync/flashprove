@@ -170,25 +170,29 @@ The row bounds the table length but does not bind at any shape here. Counts afte
 **Derive step (should-fix 3).** The verifier's derivation is now witness-free (`build(z, true)` in m1b_builder.h). It reads only decoded public integers, so no in-class statement can make it overflow. Every failure, including sizing, is a returned verdict ("derive"), not exit(1). In honest mode the prototype checks that the witness-free derivation gives the prover's relation list exactly (columns, terms, coefficients, targets). New hostile cases:
 - **derive-overflow**: every class at its extreme (|S0| = 2^18 - 1 alternating, k = q = a = beta = 2^F, |v| = 2^31 - 1 alternating, o = 2^31 - 1). A checked replay of the OLD witness path on this statement overflows i64 first at token 2. New path: returns a verdict, rejected by the proof verifier.
 - **derive-random**: every word uniform in its class (fixed seed). Old path: no overflow on this draw. New path: rejected by the proof verifier.
-- The whole hostile suite was also run under `-fsanitize=undefined -fno-sanitize-recover`: 41/41 as expected, 0 UBSan reports, exit 0 (`runs/h5-hostile-seed1-ubsan.jsonl`).
+- **Checked arithmetic (second review).** A second independent review ran UBSan on the first prototype. It found signed i64 overflow at `aP = Pj * a` (m1b_builder.h) on an in-class statement with every value at its extreme, all one sign: S0 = 2^18 - 1, k = a = 2^12, v = o = 2^31 - 1. Every i64 product, sum and difference in `build()` now goes through checked helpers. An overflow sets a flag, and the verifier rejects at "derive" instead of wrapping. The review's statement is now in the suite twice:
+  - through the witness-free entry: no overflow, rejected by the proof verifier;
+  - through the old witness path, kept as a checked control: the overflow is caught (first at token 2) and the statement is rejected at derive.
+  The alternating-sign extremes statement above was also added through the checked witness path, and is rejected at derive.
+- The whole hostile suite was also run under `-fsanitize=undefined -fno-sanitize-recover`: **44/44** as expected, **0 UBSan reports**, exit 0 (`runs/h5-hostile-seed1-ubsan.jsonl`, `record.py ubsan`).
 
 **H5 rerun on the new code** (seeds 1..10, pinned to 6 cores, same loaded VM):
 
 | metric | n | median | SD | min | max |
 |---|---|---|---|---|---|
 | accepted | 10 | **10/10** | | | |
-| derive relations + size (s) | 10 | 0.227 | 0.009 | 0.212 | 0.236 |
-| proof verify (s) | 10 | 7.79 | 0.23 | 7.51 | 8.30 |
-| prove (s) | 10 | 40.42 | 0.88 | 39.38 | 42.16 |
+| derive relations + size (s) | 10 | 0.222 | 0.013 | 0.207 | 0.249 |
+| proof verify (s) | 10 | 7.75 | 0.13 | 7.51 | 7.85 |
+| prove (s) | 10 | 40.74 | 0.42 | 39.95 | 41.48 |
 | proof bytes | 10 | 25,411,392 | 313 | 25,410,848 | 25,411,968 |
-| peak RSS (KB) | 10 | 4,435,606 | 25 | 4,435,528 | 4,435,608 |
+| peak RSS (KB) | 10 | 4,435,608 | 46 | 4,435,480 | 4,435,608 |
 
-Proof bytes are identical to the first run, seed by seed. The derivation is about 0.05 s slower than the first prototype's (0.182 s). The review expected witness-free to be faster. It is not, because the cost is relation and column allocation, which is unchanged, and the box was more loaded (verify and prove medians also rose about 2%). This is indicative only.
+These are the numbers with checked arithmetic. The intermediate pass, before checked arithmetic, gave derive 0.227 s, verify 7.79 s and prove 40.42 s. Proof bytes are identical to the first run, seed by seed. The derivation is about 0.04 s slower than the first prototype's (0.182 s). The review expected witness-free to be faster. It is not, because the cost is relation and column allocation, which is unchanged, and the box was more loaded (verify and prove medians also rose about 2%). This is indicative only.
 
-Hostile, seed 1: **41/41 at the expected stage** (was 34/34):
+Hostile, seed 1: **44/44 at the expected stage** (was 34/34):
 - the original 34, unchanged verdicts;
 - conv history: a huge element, the first value outside the class on both sides, and a non-canonical word (4 cases), all rejected at decode;
-- derive-overflow and derive-random (2), rejected by the proof verifier, no exit, no UB;
+- derive-overflow (4) and derive-random (1): the witness-free entry rejects at the proof verifier; the checked witness-path control rejects at derive; no exit, no UB;
 - history control (1): H changed in class is ACCEPTED here, as expected, because the M1b relations read no history. That is a control, not a defence. In M2 the conv recompute reads H. The "H changed in class must fail at the proof verifier" case is in the build's suite.
 
 ## Kill criterion
@@ -200,15 +204,20 @@ Not triggered. The lane started at 14:33Z. H5 honest accept came at about 15:10Z
 - **H1.** The registered comparison quantity for M1b "columns used" was 1,141,248 in the PREREG text, which is non-region plus range cells. The model matches both the measured laid-out length 1,310,720 and the non-region count 1,074,176; 1,141,248 = 1,074,176 + 67,072 also holds. No threshold moves.
 - **H5.** The class-bound test was registered as "bound + 1 for one-sided". It ran both sides for every class (16 cases instead of 8), which is stricter.
 - **H4.** The PREREG listed the float divergence of y as a metric without a threshold. It is reported, and it is large (see H4). The q-unscaled and delta-kernel runs are secondary and unregistered.
+- **D5, 24-bit remainders in arm B (second review).** PREREG D5 registered a 24-bit (2F) remainder as two 12-bit key limbs **plus one recombination relation**. DESIGN.md 4.3 and count_model.py instead put both limbs directly into the floor relation, with coefficients 1 and 2^12, and have no recombination relation. The two are equivalent: the floor relation reads lo + 2^12 hi either way. The direct form saves one relation per 24-bit remainder. This was not disclosed in the first version of this file. Cost of the registered form:
+  - M1b shape (T = 4): one M floor per value column per token, so +512 relations (609,792 to 610,304). Relations B / A stay **0.273** (0.2735), and columns are unchanged (0.349).
+  - M2 head (T = 16): the M floor and the norm's w floor per j per token (+4,096), plus the norm's 24-bit scalars if recombined too. That is under 0.3% of 2.40M relations, the ratio stays 0.266, and the table stays 2^21.
+  - No threshold or verdict moves. The build may use either form, and should state which.
 - **H3 (post-review).** The largest-T loop in count_model.py also required relations <= 2^23. That is lookup_size()'s own guard, but it was not in the PREREG's metric text ("the largest T that fits log-length 22"). It does not bind: without it the largest T is still 14 (A) and 41 (B), now also reported in model.json.
 - **H3 (post-review).** The count model first omitted the multiplicity row of the second (remainder) lookup. It now sizes it. No count, log-length or verdict changes (see "Post-review corrections").
-- **H5 (post-review).** The prototype was changed after the registered runs (conv history words, witness-free derivation, verdicts instead of exits, 7 more hostile cases). H5 was rerun on it and passes the same registered thresholds. The registered results.yaml metrics still point at e08e5ce2, the commit of the original receipts.
+- **H5 (post-review).** The prototype was changed after the registered runs (conv history words, witness-free derivation, verdicts instead of exits, checked i64 arithmetic, 10 more hostile cases). H5 was rerun on it and passes the same registered thresholds. The registered results.yaml metrics still point at e08e5ce2, the commit of the original receipts.
 - No amendments to PREREG.md.
 
 ## Open risks
 
 - **M2 is redundant as a standalone proof** (DESIGN.md section 0). All its inputs are public. Its value is as a rehearsal for M3, and it de-risks none of conv1d, the gate tables or the q/k norm.
 - **No M2 proof exists.** Arm B needs a second LKP instance whose keys are product-oracle cells. LKP supports parts and range tables, and RNG already composes a lookup whose key claim is a laid form on a sent message. But a lookup keyed directly on message-0 cells has not been built in this repo, and the two instances' transcript separation (DESIGN.md section 4.3) is a requirement on that build, untested here. That is the build lane's main risk.
+- **Unchecked arithmetic on public inputs (second review).** The first prototype's verifier derivation overflowed signed i64 (UB) at `aP = Pj * a` on an in-class all-extremes statement. No soundness break was seen. It is now fixed in the prototype: the derivation is witness-free, every i64 operation in `build()` is checked and rejects at "derive" on overflow, and the hostile suite is clean under UBSan. For the M2 build this is a requirement (DESIGN.md 4.5): no unchecked arithmetic on public inputs, and a UBSan run of the hostile suite. It stays an open risk until the build's verifier passes that run.
 - **Verifier-recomputed nonlinearities must be bit-exact** across prover and verifier. The prototype uses float64 numpy at table points. The build needs pinned public tables (DESIGN.md section 3).
 - **y fidelity is poor at F = 12** (worst 1.2 absolute) because o is small in integer units. This is a fidelity issue for M0/#8, not soundness, but it argues for a finer o scale before any fidelity claim.
 - **The layer extrapolation is 48x one head.** Per-token cost for 48 layers (231M product cells, arm B) means M3 needs chunked state commitment. M2 does not address that.

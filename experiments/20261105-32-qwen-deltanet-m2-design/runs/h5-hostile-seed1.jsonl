@@ -1,4 +1,4 @@
-{"mode":"honest","accept":true,"stage":"accept","statement_words":35979,"proof_bytes":25411968,"prove_s":40.219,"decode_s":0.0001,"derive_s":0.211,"verify_s":7.779,"peak_rss_kb":4435608}
+{"mode":"honest","accept":true,"stage":"accept","statement_words":35979,"proof_bytes":25411968,"prove_s":40.732,"decode_s":0.0001,"derive_s":0.215,"verify_s":7.596,"peak_rss_kb":4435608}
 {"mode":"hostile","class":"huge-element","attack":"S0 = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
 {"mode":"hostile","class":"class-bound","attack":"S0 = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
 {"mode":"hostile","class":"class-bound","attack":"S0 = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
@@ -31,6 +31,10 @@
 {"mode":"hostile","class":"non-canonical","attack":"H word = H + p (conv history)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
 {"mode":"derive-overflow-detail","old_path_first_overflow_token":2}
 {"mode":"hostile","class":"derive-overflow","attack":"every class at its extreme (old witness path: i64 overflow)","rejected":true,"stage":"proof","expected_stage":"proof","as_expected":true}
+{"mode":"hostile","class":"derive-overflow","attack":"same statement, witness-path derivation with checked arithmetic: reject at derive","rejected":true,"stage":"derive","expected_stage":"derive","as_expected":true}
+{"mode":"derive-review2-detail","old_path_first_overflow_token":2}
+{"mode":"hostile","class":"derive-overflow","attack":"review-2 all-extremes statement, witness-free entry","rejected":true,"stage":"proof","expected_stage":"proof","as_expected":true}
+{"mode":"hostile","class":"derive-overflow","attack":"review-2 all-extremes statement, witness path with checked arithmetic: reject at derive","rejected":true,"stage":"derive","expected_stage":"derive","as_expected":true}
 {"mode":"derive-random-detail","old_path_first_overflow_token":-1}
 {"mode":"hostile","class":"derive-random","attack":"every word uniform in its class (fixed xorshift seed)","rejected":true,"stage":"proof","expected_stage":"proof","as_expected":true}
 {"mode":"hostile","class":"history-control","attack":"H[0] += 1 in class (M1b reads no history: accept expected here)","rejected":false,"stage":"accept","expected_stage":"accept","as_expected":true}
@@ -43,4 +47,4 @@
 {"mode":"r9-detail","j":0,"o":-1,"o_prime_word":"4503599626321919","violated_relations":0}
 {"mode":"hostile","class":"r9-control","attack":"current path: lookup_verify with caller-built relations, admissible() skipped","rejected":false,"stage":"accept","expected_stage":"accept","as_expected":true}
 {"mode":"hostile","class":"r9","attack":"verify_from_words on the R9 statement and R9 proof","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
-{"mode":"hostile-summary","as_expected":41,"total":41,"peak_rss_kb":5032972}
+{"mode":"hostile-summary","as_expected":44,"total":44,"peak_rss_kb":5032912}

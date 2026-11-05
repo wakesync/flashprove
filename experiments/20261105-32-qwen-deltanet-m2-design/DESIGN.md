@@ -141,7 +141,7 @@ The M1b result showed remainder bits are 12 of the 17.4 product columns per stat
 
 **Arm B: lookup-exact remainders.**
 - Each 12-bit remainder (F = 12) is ONE product cell [r, 0, 0] in a key region of row a. It is a direct key of a second LKP instance into the public range table {0, .., 2^12 - 1}: LkpTablePart with empty rows, one function, unshifted.
-- A 24-bit remainder (the M floor, 2^2F) is two such cells, r = lo + 2^12 hi. Both terms go directly into the floor relation, so no extra relation is needed.
+- A 24-bit remainder (the M floor, 2^2F) is two such cells, r = lo + 2^12 hi. Both terms go directly into the floor relation, so no extra relation is needed. (This departs from PREREG D5, which registered two limbs plus one recombination relation. The deviation is disclosed in RESULTS.md and is worth 512 relations at the M1b shape. No ratio or verdict moves.)
 - An exact interval [0, 2^12) on each limb gives r in [0, 2^24) exactly, so floor uniqueness is unchanged from M1b.
 
 This is an exact range proof, not RNG's approximate one, so the floor-uniqueness argument of M1b goes through as is. The keys come in parts (LkpPublic::parts, allowed for one unshifted function). The key region is laid like RNG's cells, and LKP's key claim becomes a laid_form on message 0, as `rng_key_row` does for the digits.
@@ -211,6 +211,13 @@ The H4 range suite found no exact limb outside its interval and no negative exac
 
 Every failure is a returned verdict (decode, derive or proof). Nothing on the verifier path calls exit() or a BLK_REQUIRE that a statement can reach: the entry checks lookup_size()'s guards on the derived statement first and returns "derive" if one would fire. (Post-review, #66 should-fix 3: the first prototype ran the full witness path with its checks off, so in-class but inconsistent inputs could reach i64 overflow, and a failed sizing called exit(1). The prototype now uses a witness-free derivation and checks that it gives the prover's relation list exactly.)
 
+**Build requirement: no unchecked arithmetic on public inputs, plus a sanitizer run.** A second review of #66 ran UBSan on the first prototype. On an in-class statement with every public value at its class extreme (S0 = 2^18 - 1, k = a = 2^12, v = o = 2^31 - 1), the verifier's derivation overflowed signed i64 at `aP = Pj * a` in m1b_builder.h. No soundness break was seen: the relation targets do not read the overflowed witness, and at -O2 the statement was rejected at the proof stage. But it was undefined behaviour on attacker-chosen input, inside the verifier. The M2 verifier must therefore:
+- compute no witness value from public inputs (the derivation is witness-free);
+- do every integer operation that touches a public input with checked arithmetic (`__builtin_*_overflow` or a 128-bit type with an explicit bound), and turn an overflow into a reject, never a wrap or an exit;
+- run the full hostile suite, including the all-extremes statements, under `-fsanitize=undefined -fno-sanitize-recover` in CI, with 0 reports as the pass condition.
+
+The prototype now does all three. `build()` routes every i64 product, sum and difference through checked helpers that set an overflow flag, the entry rejects at "derive" when the flag is set, and `record.py ubsan` runs the suite under UBSan. The review's statement is in the hostile suite twice. Through the witness-free entry it passes derive and is rejected at the proof stage. Through the old witness path, kept as a checked control, it is rejected at derive.
+
 There is no `admissible()` that a caller runs separately, and no entry point that accepts caller-built relations or a caller-built `LookupRun`. The low-level `lookup_verify(run, ...)` stays a library internal. **The M2 build must not export it as a verifier.**
 
 The prototype measured this on the M1b statement (RESULTS.md H5):
@@ -255,6 +262,6 @@ The build lane must keep these, and register numbers in its own PREREG before co
   - one remainder key off-table (arm B: key 2^12, which only a hostile LKP prover can send)
   - the limb re-split
 - **H3 range:** H4 of this lane re-run on the build's reference, 20/20.
-- **H4 admission:** this lane's H5 suite on the M2 statement words, plus a huge element in xq, ar, z and the conv history H, and the R9 analogue on y. All rejected by `verify_m2` alone. Also: H changed in class (must fail at the proof verifier, since the conv recompute reads it), and the derive-overflow cases (every class at its extreme; every word random in class), which must return a verdict and never exit or overflow (run under UBSan).
+- **H4 admission:** this lane's H5 suite on the M2 statement words, plus a huge element in xq, ar, z and the conv history H, and the R9 analogue on y. All rejected by `verify_m2` alone. Also: H changed in class (must fail at the proof verifier, since the conv recompute reads it), and the derive-overflow cases (every class at its extreme; every word random in class), which must return a verdict and never exit or overflow. The whole suite runs under `-fsanitize=undefined -fno-sanitize-recover` with 0 reports (section 4.5: no unchecked arithmetic on public inputs).
 - **H2 hostile, two lookups:** the challenge-replay case of section 4.3 (the digit lookup's alpha and sumcheck challenges reused in the remainder lookup; the two instances swapped), rejected.
 - **Kill:** no honest T = 16 arm B proof in 6 h, then fall back to arm A at T = 8 and report.

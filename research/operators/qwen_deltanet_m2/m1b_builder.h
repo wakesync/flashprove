@@ -9,6 +9,12 @@
 // end the process. The column allocation and the relation list (terms, coefficients, targets) do
 // not depend on witness values, so they are identical to the prover's. Targets read only public
 // integers: S0, a, beta, k, v, q, o, S_T. The largest is 2^24 |v| < 2^55 for in-class v.
+// Checked arithmetic (second review of #66): every i64 product, sum and difference in build() goes
+// through mul/add/sub, which set Built::overflow instead of overflowing (signed overflow is UB). The
+// verifier rejects a statement whose derivation set it (verdict "derive"); the prover stops. The
+// first prototype's verifier derivation ran the witness path and overflowed at aP = Pj * a on an
+// in-class all-extremes statement (UBSan); build(z, false, true) keeps that path as a checked
+// control. fi() negates through u64, so it has no INT64_MIN case either.
 #pragma once
 #include <chrono>
 #include <cstdio>
@@ -24,7 +30,7 @@
 using namespace blk;
 
 static void check(bool ok, const char *s) { if (!ok) { std::fprintf(stderr, "FAIL: %s\n", s); std::exit(1); } }
-static F fi(i64 x) { return x >= 0 ? F{u64(x)} : F{P - u64(-x)}; }
+static F fi(i64 x) { return x >= 0 ? F{u64(x) % P} : F{(P - (u64(0) - u64(x)) % P) % P}; }
 static i64 fdiv(i64 a, i64 b) { i64 q = a / b; if ((a % b) != 0 && ((a < 0) != (b < 0))) --q; return q; }
 constexpr i64 BOUND = i64(1) << 18;   // honest contract for S', M, delta limbs
 constexpr u64 RTAG = u64(1) << 40;
@@ -77,14 +83,21 @@ struct Built {
   u64 rel_S00 = 0, rel_S4_00 = 0;
   std::vector<u64> o_rbit0_last, o_rel_last; std::vector<std::vector<u64>> o_rbits_last; std::vector<i64> o_rem_last;  // last token: o remainder bit-0 column and remainder, per j
   std::vector<std::vector<i64>> M, delta, S, o;
+  bool overflow = false;                        // a checked i64 operation would have overflowed
   std::vector<u64> rc;                          // columns of the range cells, in range-cell order
   std::vector<i64> rcv;                         // their honest values
   u64 rc_base = 0, rc_rows = 0;                 // region: product columns [rc_base, rc_base + 16 rc_rows)
   std::vector<u64> rcell_state, rcell_M, rcell_dlo, rcell_dhi; // [t] -> range-cell index of S_{t+1}[0,0], M[0], delta_lo[0], delta_hi[0]
 };
-static Built build(const Fixture &z, const bool relonly = false) {
+// relonly: the verifier's witness-free derivation. nocheck: the witness path with the honest-value
+// checks off (the first prototype's verifier derivation; kept only as a checked control).
+static Built build(const Fixture &z, const bool relonly = false, const bool nocheck = false) {
   Built b; const int D = z.D, FB = z.F; const i64 one = i64(1) << FB;
-  const bool g_relonly = relonly;  // witness checks off and witness values zero (see the header)
+  const bool g_relonly = relonly || nocheck;  // honest-value checks off
+  // Checked i64 arithmetic: on overflow, flag it and return 0 (the flagged build is never used).
+  auto mul = [&](i64 x, i64 y) { i64 r; if (__builtin_mul_overflow(x, y, &r)) { b.overflow = true; return i64(0); } return r; };
+  auto add = [&](i64 x, i64 y) { i64 r; if (__builtin_add_overflow(x, y, &r)) { b.overflow = true; return i64(0); } return r; };
+  auto sub = [&](i64 x, i64 y) { i64 r; if (__builtin_sub_overflow(x, y, &r)) { b.overflow = true; return i64(0); } return r; };
   auto col = [&](i64 x, i64 y) { b.cols.push_back({fi(x), fi(y), fi(x) * fi(y)}); return u64(b.cols.size() - 1); };
   auto rel = [&](std::vector<AffineTerm> t, i64 target) { b.rel.push_back({std::move(t), fi(target)}); return u64(b.rel.size() - 1); };
   // Unsigned width-bit decomposition of n (honest n must fit; builder asserts). Returns the
@@ -95,7 +108,7 @@ static Built build(const Fixture &z, const bool relonly = false) {
     for (unsigned i = 0; i < width; i++) {
       i64 x = (n >> i) & 1; u64 c = col(x, x);
       rel({{0, c, F{1}}, {1, c, fi(-1)}}, 0); rel({{2, c, F{1}}, {0, c, fi(-1)}}, 0);
-      terms.push_back({0, c, fi(coef * (i64(1) << i))}); out.push_back(c);
+      terms.push_back({0, c, fi(mul(coef, i64(1) << i))}); out.push_back(c);
     }
     return out;
   };
@@ -125,24 +138,24 @@ static Built build(const Fixture &z, const bool relonly = false) {
     std::vector<i64> M(D), delta(D); std::vector<u64> dcell(D);
     for (int j = 0; j < D; j++) {
       i64 Pj = 0; std::vector<AffineTerm> pt;
-      for (int i = 0; i < D; i++) { if (!relonly) Pj += S[i * D + j] * z.k[t][i]; pt.push_back({2, g2[i * D + j], fi(-1)}); }
+      for (int i = 0; i < D; i++) { if (!relonly) Pj = add(Pj, mul(S[i * D + j], z.k[t][i])); pt.push_back({2, g2[i * D + j], fi(-1)}); }
       u64 g5 = col(Pj, a); pt.insert(pt.begin(), AffineTerm{0, g5, F{1}}); rel(pt, 0);
       b.rel_a[t].push_back(rel({{1, g5, F{1}}}, a));
-      const i64 aP = Pj * a; M[j] = fdiv(aP, i64(1) << (2 * FB)); const i64 rM = aP - M[j] * (i64(1) << (2 * FB));
+      const i64 aP = mul(Pj, a); M[j] = fdiv(aP, i64(1) << (2 * FB)); const i64 rM = sub(aP, mul(M[j], i64(1) << (2 * FB)));
       check(g_relonly || (M[j] > -BOUND && M[j] < BOUND), "honest M out of range (statement rejected)");
-      u64 g6 = col(z.v[t][j] - M[j], beta); if (j == 0) b.g6_first.push_back(g6);
+      u64 g6 = col(sub(z.v[t][j], M[j]), beta); if (j == 0) b.g6_first.push_back(g6);
       // 2^2F * (v - g6.a) + r - g5.c = 0
       std::vector<AffineTerm> ft = {{0, g6, fi(-(i64(1) << (2 * FB)))}, {2, g5, fi(-1)}};
       auto mb = bits(rM, 2 * FB, ft, 1); if (j == 0) b.m_rbit0.push_back(mb[0]);
-      u64 rf = rel(ft, -(i64(1) << (2 * FB)) * z.v[t][j]);
+      u64 rf = rel(ft, mul(-(i64(1) << (2 * FB)), z.v[t][j]));
       // M + 2^18 = bits, M = v - g6.a
       // M (range cell) + g6.a = v
       const u64 mc = rcell(M[j]); if (j == 0) b.rcell_M[t] = mc;
       u64 rr = rel({{0, b.rc[mc], F{1}}, {0, g6, F{1}}}, z.v[t][j]);
       if (j == 0) { b.rel_v0_floor.push_back(rf); b.rel_v0_range.push_back(rr); }
       b.rel_beta[t].push_back(rel({{1, g6, F{1}}}, beta));
-      const i64 num = relonly ? 0 : (z.v[t][j] - M[j]) * beta; delta[j] = fdiv(num, one); const i64 rd = num - delta[j] * one;
-      const i64 dhi = fdiv(delta[j], BOUND), dlo = delta[j] - dhi * BOUND;  // two limbs, dlo in [0, 2^18)
+      const i64 num = relonly ? 0 : mul(sub(z.v[t][j], M[j]), beta); delta[j] = fdiv(num, one); const i64 rd = sub(num, mul(delta[j], one));
+      const i64 dhi = fdiv(delta[j], BOUND), dlo = sub(delta[j], mul(dhi, BOUND));  // two limbs, dlo in [0, 2^18)
       // delta lives in g3[0][j].b; created below, so reserve now
       dcell[j] = col(z.k[t][0], delta[j]);
       u64 r0 = rel({{0, dcell[j], F{1}}}, z.k[t][0]); b.rel_k0[t].push_back(r0);
@@ -163,7 +176,7 @@ static Built build(const Fixture &z, const bool relonly = false) {
         rel({{0, g3, F{1}}}, z.k[t][i]);
         rel({{1, g3, F{1}}, {1, dcell[j], fi(-1)}}, 0);
       }
-      const i64 num = relonly ? 0 : a * S[c] + z.k[t][i] * delta[j]; Sn[c] = fdiv(num, one); const i64 r = num - Sn[c] * one;
+      const i64 num = relonly ? 0 : add(mul(a, S[c]), mul(z.k[t][i], delta[j])); Sn[c] = fdiv(num, one); const i64 r = sub(num, mul(Sn[c], one));
 
       g4[c] = col(Sn[c], z.q[t][i]);
       u64 rq = rel({{1, g4[c], F{1}}}, z.q[t][i]); if (i == 0) b.rel_q0[t].push_back(rq);
@@ -175,10 +188,10 @@ static Built build(const Fixture &z, const bool relonly = false) {
     std::vector<i64> o(D);
     for (int j = 0; j < D; j++) {
       i64 sum = 0; std::vector<AffineTerm> ot;
-      for (int i = 0; i < D; i++) { if (!relonly) sum += Sn[i * D + j] * z.q[t][i]; ot.push_back({2, g4[i * D + j], fi(-1)}); }
-      o[j] = fdiv(sum, one); auto ob = bits(sum - o[j] * one, FB, ot, 1);
-      if (t == z.T - 1) { b.o_rbits_last.push_back(ob); b.o_rbit0_last.push_back(ob[0]); b.o_rem_last.push_back(sum - o[j] * one); }
-      u64 r = rel(ot, -one * z.o[t][j]); if (j == 0) b.rel_o0.push_back(r);
+      for (int i = 0; i < D; i++) { if (!relonly) sum = add(sum, mul(Sn[i * D + j], z.q[t][i])); ot.push_back({2, g4[i * D + j], fi(-1)}); }
+      o[j] = fdiv(sum, one); const i64 ro = sub(sum, mul(o[j], one)); auto ob = bits(ro, FB, ot, 1);
+      if (t == z.T - 1) { b.o_rbits_last.push_back(ob); b.o_rbit0_last.push_back(ob[0]); b.o_rem_last.push_back(ro); }
+      u64 r = rel(ot, mul(-one, z.o[t][j])); if (j == 0) b.rel_o0.push_back(r);
       if (t == z.T - 1) b.o_rel_last.push_back(r);
     }
     if (t == z.T - 1) for (int c = 0; c < D * D; c++) { u64 r = rel({{0, g4[c], F{1}}}, z.S[t][c]); if (c == 0) b.rel_S4_00 = r; }

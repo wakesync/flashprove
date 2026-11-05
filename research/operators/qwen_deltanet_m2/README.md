@@ -18,6 +18,6 @@ python3 research/operators/qwen_deltanet_m2/record.py build honest hostile model
 python3 research/operators/qwen_deltanet_m2/record.py ubsan   # hostile suite under UBSan, about 4 min
 ```
 
-Post-review (#66): the statement words now include the conv history (3 x 384, class |H| < 2^31). The verifier's derivation is witness-free (`build(z, true)`), and every failure is a returned verdict, never exit(1). The hostile suite has 41 cases.
+Post-review (#66): the statement words now include the conv history (3 x 384, class |H| < 2^31). The verifier's derivation is witness-free (`build(z, true)`), and every failure is a returned verdict, never exit(1). The hostile suite has 44 cases. Every i64 operation in `build()` is checked (overflow is a "derive" reject), and `record.py ubsan` runs the suite under UBSan.
 
 Research security settings only (target 10 bits).
