@@ -1,0 +1,37 @@
+{"mode":"honest","accept":true,"stage":"accept","statement_words":34827,"proof_bytes":25411968,"prove_s":38.929,"decode_s":0.0001,"derive_s":0.191,"verify_s":7.656,"peak_rss_kb":4433912}
+{"mode":"hostile","class":"huge-element","attack":"S0 = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"S0 = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"S0 = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"a = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"a = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"a = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"beta = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"beta = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"beta = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"k = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"k = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"k = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"v = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"v = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"v = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"q = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"q = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"q = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"o = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"o = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"o = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"huge-element","attack":"S_T = (p+1)/2","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"S_T = first value outside class (+)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"class-bound","attack":"S_T = first value outside class (-)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"non-canonical","attack":"a_0 word = a_0 + p (second encoding of the same element)","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"non-canonical","attack":"o_0[0] word = o_0[0] + p","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"header","attack":"T word = 5","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"header","attack":"F word = 10","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"length","attack":"one trailing word","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"length","attack":"one word short","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile","class":"in-class","attack":"o_T[0] += 1 (valid integer, wrong)","rejected":true,"stage":"proof","expected_stage":"proof","as_expected":true}
+{"mode":"hostile","class":"in-class","attack":"S0[0] += 1 (valid integer, wrong)","rejected":true,"stage":"proof","expected_stage":"proof","as_expected":true}
+{"mode":"r9-detail","j":0,"o":-1,"o_prime_word":"4503599626321919","violated_relations":0}
+{"mode":"hostile","class":"r9-control","attack":"current path: lookup_verify with caller-built relations, admissible() skipped","rejected":false,"stage":"accept","expected_stage":"accept","as_expected":true}
+{"mode":"hostile","class":"r9","attack":"verify_from_words on the R9 statement and R9 proof","rejected":true,"stage":"decode","expected_stage":"decode","as_expected":true}
+{"mode":"hostile-summary","as_expected":34,"total":34,"peak_rss_kb":5032968}
