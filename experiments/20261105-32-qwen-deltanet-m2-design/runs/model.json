@@ -66,7 +66,7 @@
    "arm": "m1",
    "D": 128,
    "T": 4,
-   "o_private": false,
+   "o_witness": false,
    "norm": false,
    "gate_columns": 2338816,
    "range_cells": 0,
@@ -83,7 +83,7 @@
    "arm": "m1b",
    "D": 128,
    "T": 4,
-   "o_private": false,
+   "o_witness": false,
    "norm": false,
    "gate_columns": 1074176,
    "range_cells": 67072,
@@ -103,7 +103,7 @@
    "arm": "A",
    "D": 128,
    "T": 4,
-   "o_private": false,
+   "o_witness": false,
    "norm": false,
    "gate_columns": 1074176,
    "range_cells": 67072,
@@ -120,13 +120,16 @@
    ],
    "key_parts": [],
    "digit_entries": 102400,
+   "rng_multiplicity_places": 155648,
+   "remainder_multiplicity_places": 0,
+   "multiplicity_row_places": 155648,
    "log_length": 21
   },
   "armB_m1b_shape": {
    "arm": "B",
    "D": 128,
    "T": 4,
-   "o_private": false,
+   "o_witness": false,
    "norm": false,
    "gate_columns": 263168,
    "range_cells": 67072,
@@ -146,6 +149,9 @@
     16384
    ],
    "digit_entries": 102400,
+   "rng_multiplicity_places": 155648,
+   "remainder_multiplicity_places": 69632,
+   "multiplicity_row_places": 225280,
    "log_length": 19
   },
   "ratio_columns_per_cell": 0.349,
@@ -159,7 +165,7 @@
    "arm": "A",
    "D": 128,
    "T": 16,
-   "o_private": true,
+   "o_witness": true,
    "norm": true,
    "gate_columns": 4377056,
    "range_cells": 272384,
@@ -176,6 +182,9 @@
    ],
    "key_parts": [],
    "digit_entries": 348160,
+   "rng_multiplicity_places": 172032,
+   "remainder_multiplicity_places": 0,
+   "multiplicity_row_places": 172032,
    "log_length": 23,
    "prove_s_estimate": null
   },
@@ -183,7 +192,7 @@
    "arm": "B",
    "D": 128,
    "T": 16,
-   "o_private": true,
+   "o_witness": true,
    "norm": true,
    "gate_columns": 1056800,
    "range_cells": 272384,
@@ -203,10 +212,22 @@
     16384
    ],
    "digit_entries": 348160,
+   "rng_multiplicity_places": 172032,
+   "remainder_multiplicity_places": 77824,
+   "multiplicity_row_places": 249856,
    "log_length": 21,
-   "prove_s_estimate": 39.2
+   "prove_s_estimate": 39.2,
+   "single_part_layout": {
+    "key_part": 524288,
+    "columns_used": 1859616,
+    "log_length": 21
+   }
   },
   "max_T_log22": {
+   "A": 14,
+   "B": 41
+  },
+  "max_T_log22_without_relation_cap": {
    "A": 14,
    "B": 41
   },
@@ -222,6 +243,7 @@
     "columns_per_token_48_deltanet_layers": 231245568
    }
   },
+  "fits_2_21_armB_T16": true,
   "pass_": true,
   "note": "prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls)."
  },

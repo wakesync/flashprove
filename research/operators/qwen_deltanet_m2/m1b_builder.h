@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
 // Research-only. The M1b statement builder and prover (research/operators/qwen_deltanet_lookup/
 // test.cpp, PR #63), split out as a header for the M2 design prototype admit_proto.cpp. Unchanged
-// except: a relation-only switch (g_relonly) that turns off the honest-witness assertions when the
-// verifier builds the relations (the column allocation and the relation list do not depend on it),
-// and indices of the last token's output floors for the R9 attack.
+// except: a relation-only mode for the verifier (build(z, true)), and indices of the last token's
+// output floors for the R9 attack.
+// Relation-only mode (post-review, #66 should-fix 3): the verifier's build computes NO witness.
+// Every witness value (S, P_j, a P, M, delta, S', the o sums and all remainders) is replaced by 0,
+// so no signed product of in-class but inconsistent public values can overflow, and no check() can
+// end the process. The column allocation and the relation list (terms, coefficients, targets) do
+// not depend on witness values, so they are identical to the prover's. Targets read only public
+// integers: S0, a, beta, k, v, q, o, S_T. The largest is 2^24 |v| < 2^55 for in-class v.
 #pragma once
 #include <chrono>
 #include <cstdio>
@@ -77,9 +82,9 @@ struct Built {
   u64 rc_base = 0, rc_rows = 0;                 // region: product columns [rc_base, rc_base + 16 rc_rows)
   std::vector<u64> rcell_state, rcell_M, rcell_dlo, rcell_dhi; // [t] -> range-cell index of S_{t+1}[0,0], M[0], delta_lo[0], delta_hi[0]
 };
-static bool g_relonly = false;  // relation-only build (verifier side): witness checks off, columns allocated identically
-static Built build(const Fixture &z) {
+static Built build(const Fixture &z, const bool relonly = false) {
   Built b; const int D = z.D, FB = z.F; const i64 one = i64(1) << FB;
+  const bool g_relonly = relonly;  // witness checks off and witness values zero (see the header)
   auto col = [&](i64 x, i64 y) { b.cols.push_back({fi(x), fi(y), fi(x) * fi(y)}); return u64(b.cols.size() - 1); };
   auto rel = [&](std::vector<AffineTerm> t, i64 target) { b.rel.push_back({std::move(t), fi(target)}); return u64(b.rel.size() - 1); };
   // Unsigned width-bit decomposition of n (honest n must fit; builder asserts). Returns the
@@ -99,7 +104,7 @@ static Built build(const Fixture &z) {
   // range cell k is product column base + k, laid for RNG as cell (k mod rows, k div rows) of a
   // rows x 16 matrix. Until then a term names it by RTAG + k.
   auto rcell = [&](i64 x) { check(g_relonly || (x > -BOUND && x < BOUND), "honest range cell outside its contract"); b.rcv.push_back(x); b.rc.push_back(RTAG + b.rcv.size() - 1); return u64(b.rcv.size() - 1); };
-  std::vector<i64> S = z.S0; std::vector<u64> canon(D * D);
+  std::vector<i64> S = relonly ? std::vector<i64>(size_t(D) * D, 0) : z.S0; std::vector<u64> canon(D * D);
   b.state_col.resize(z.T); b.state_rbits.resize(z.T); b.state_qbits.resize(z.T); b.rcell_state.resize(z.T); b.rcell_M.resize(z.T); b.rcell_dlo.resize(z.T); b.rcell_dhi.resize(z.T);
   b.rel_a.resize(z.T); b.rel_beta.resize(z.T); b.rel_k0.resize(z.T); b.rel_q0.resize(z.T);
   for (int t = 0; t < z.T; t++) {
@@ -109,7 +114,7 @@ static Built build(const Fixture &z) {
     for (int i = 0; i < D; i++) for (int j = 0; j < D; j++) {
       const int c = i * D + j;
       g1[c] = col(S[c], a);
-      if (t == 0) { canon[c] = g1[c]; u64 r = rel({{0, g1[c], F{1}}}, S[c]); if (c == 0) b.rel_S00 = r; }
+      if (t == 0) { canon[c] = g1[c]; u64 r = rel({{0, g1[c], F{1}}}, z.S0[c]); if (c == 0) b.rel_S00 = r; }
       else rel({{0, g1[c], F{1}}, {0, canon[c], fi(-1)}}, 0);
       b.rel_a[t].push_back(rel({{1, g1[c], F{1}}}, a));
       g2[c] = col(S[c], z.k[t][i]);
@@ -120,7 +125,7 @@ static Built build(const Fixture &z) {
     std::vector<i64> M(D), delta(D); std::vector<u64> dcell(D);
     for (int j = 0; j < D; j++) {
       i64 Pj = 0; std::vector<AffineTerm> pt;
-      for (int i = 0; i < D; i++) { Pj += S[i * D + j] * z.k[t][i]; pt.push_back({2, g2[i * D + j], fi(-1)}); }
+      for (int i = 0; i < D; i++) { if (!relonly) Pj += S[i * D + j] * z.k[t][i]; pt.push_back({2, g2[i * D + j], fi(-1)}); }
       u64 g5 = col(Pj, a); pt.insert(pt.begin(), AffineTerm{0, g5, F{1}}); rel(pt, 0);
       b.rel_a[t].push_back(rel({{1, g5, F{1}}}, a));
       const i64 aP = Pj * a; M[j] = fdiv(aP, i64(1) << (2 * FB)); const i64 rM = aP - M[j] * (i64(1) << (2 * FB));
@@ -136,7 +141,7 @@ static Built build(const Fixture &z) {
       u64 rr = rel({{0, b.rc[mc], F{1}}, {0, g6, F{1}}}, z.v[t][j]);
       if (j == 0) { b.rel_v0_floor.push_back(rf); b.rel_v0_range.push_back(rr); }
       b.rel_beta[t].push_back(rel({{1, g6, F{1}}}, beta));
-      const i64 num = (z.v[t][j] - M[j]) * beta; delta[j] = fdiv(num, one); const i64 rd = num - delta[j] * one;
+      const i64 num = relonly ? 0 : (z.v[t][j] - M[j]) * beta; delta[j] = fdiv(num, one); const i64 rd = num - delta[j] * one;
       const i64 dhi = fdiv(delta[j], BOUND), dlo = delta[j] - dhi * BOUND;  // two limbs, dlo in [0, 2^18)
       // delta lives in g3[0][j].b; created below, so reserve now
       dcell[j] = col(z.k[t][0], delta[j]);
@@ -158,7 +163,7 @@ static Built build(const Fixture &z) {
         rel({{0, g3, F{1}}}, z.k[t][i]);
         rel({{1, g3, F{1}}, {1, dcell[j], fi(-1)}}, 0);
       }
-      const i64 num = a * S[c] + z.k[t][i] * delta[j]; Sn[c] = fdiv(num, one); const i64 r = num - Sn[c] * one;
+      const i64 num = relonly ? 0 : a * S[c] + z.k[t][i] * delta[j]; Sn[c] = fdiv(num, one); const i64 r = num - Sn[c] * one;
 
       g4[c] = col(Sn[c], z.q[t][i]);
       u64 rq = rel({{1, g4[c], F{1}}}, z.q[t][i]); if (i == 0) b.rel_q0[t].push_back(rq);
@@ -170,7 +175,7 @@ static Built build(const Fixture &z) {
     std::vector<i64> o(D);
     for (int j = 0; j < D; j++) {
       i64 sum = 0; std::vector<AffineTerm> ot;
-      for (int i = 0; i < D; i++) { sum += Sn[i * D + j] * z.q[t][i]; ot.push_back({2, g4[i * D + j], fi(-1)}); }
+      for (int i = 0; i < D; i++) { if (!relonly) sum += Sn[i * D + j] * z.q[t][i]; ot.push_back({2, g4[i * D + j], fi(-1)}); }
       o[j] = fdiv(sum, one); auto ob = bits(sum - o[j] * one, FB, ot, 1);
       if (t == z.T - 1) { b.o_rbits_last.push_back(ob); b.o_rbit0_last.push_back(ob[0]); b.o_rem_last.push_back(sum - o[j] * one); }
       u64 r = rel(ot, -one * z.o[t][j]); if (j == 0) b.rel_o0.push_back(r);

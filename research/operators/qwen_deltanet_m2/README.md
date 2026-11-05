@@ -15,6 +15,9 @@ Reproduce (CPU, about 12 min on 6 cores, about 4.5 GB RAM):
 
 ```
 python3 research/operators/qwen_deltanet_m2/record.py build honest hostile model ranges
+python3 research/operators/qwen_deltanet_m2/record.py ubsan   # hostile suite under UBSan, about 4 min
 ```
+
+Post-review (#66): the statement words now include the conv history (3 x 384, class |H| < 2^31). The verifier's derivation is witness-free (`build(z, true)`), and every failure is a returned verdict, never exit(1). The hostile suite has 41 cases.
 
 Research security settings only (target 10 bits).

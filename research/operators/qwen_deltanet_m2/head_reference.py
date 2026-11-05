@@ -3,7 +3,7 @@
 outputs to the gated-norm output (the M2 statement of DESIGN.md), plus a float64 twin.
 
 Chosen research contract, not the publisher's numerics. The public-only stage (conv1d, SiLU, q/k L2
-norm, q scale, decay and beta) is what the M2 verifier RECOMPUTES from public integers; the private
+norm, q scale, decay and beta) is what the M2 verifier RECOMPUTES from public integers; the witness
 stage (recurrence, o, gated RMSNorm) is what the M2 relation proves. This file measures the ranges
 the DESIGN's cell classes must hold (PREREG H4).
 

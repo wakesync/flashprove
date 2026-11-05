@@ -1,15 +1,15 @@
 {
  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
  "python": "3.12.3",
- "cores": "0-5",
+ "cores": "10-15",
  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
- "base": "b6186e6ccb687348e3be66fec51bb3756879b8dc",
+ "base": "4f7a876151c309f0159e88b18c8e286d4e1909c9",
  "sources": {
-  "research/operators/qwen_deltanet_m2/count_model.py": "9136d5ab4a6ebbc8999c1829f1be2ef39469d019abf16a9699411f3002271499",
-  "research/operators/qwen_deltanet_m2/head_reference.py": "97f0586c1878969035c0bbd00f1cc684522b003c49db35bdb9acf35b576f5626",
-  "research/operators/qwen_deltanet_m2/record.py": "25fe5d53ceba293114a1c1bf2c018db08c910784efde3761247e112a3f8ddf2a",
-  "research/operators/qwen_deltanet_m2/admit_proto.cpp": "8c6a780efc965e87be6433e466e5326e38d37223e9f716269267fb40ace0611d",
-  "research/operators/qwen_deltanet_m2/m1b_builder.h": "a66d4b372400a20af89869fffb2db8c9c118b99644740699cd9939f6154c47f0",
+  "research/operators/qwen_deltanet_m2/count_model.py": "0a1349252df326109cf619825c22239a48a04a4ab59e3d0617510022c883fcf7",
+  "research/operators/qwen_deltanet_m2/head_reference.py": "1999ef56efd4752dfe493ea29cd8930b0c8e7bc3c9ee267a5c7f4ccbce3f6ff7",
+  "research/operators/qwen_deltanet_m2/record.py": "17ca9221213f9c1f33c489a2c6ec3788f652f5bab767a0403588e526a44ba69e",
+  "research/operators/qwen_deltanet_m2/admit_proto.cpp": "9c12e1b18ed50c68741d9c9a49a3c2a49584585aaeafbf66cedfd7826932a3cc",
+  "research/operators/qwen_deltanet_m2/m1b_builder.h": "434e3534097c3bd89ca3f140072e5c3ead9a7fc9d12a05108dfa7bc59625669c",
   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770",
   "research/operators/qwen_deltanet/reference.py": "f6fbd580bf834afd2d6280036ddf52d410be094824299e89c61eb2a1b80edaf0"
  },
@@ -232,19 +232,19 @@
    "research/operators/qwen_deltanet_m2/work/admit_proto.bin"
   ],
   "exit": 0,
-  "seconds": 32.701,
+  "seconds": 33.782,
   "stdout": "",
-  "stderr": "In file included from research/operators/qwen_deltanet_m2/admit_proto.cpp:10:\nresearch/operators/qwen_deltanet_m2/m1b_builder.h:48:13: warning: \u2018bool admissible(const Fixture&)\u2019 defined but not used [-Wunused-function]\n   48 | static bool admissible(const Fixture &z) {\n      |             ^~~~~~~~~~\n"
+  "stderr": "In file included from research/operators/qwen_deltanet_m2/admit_proto.cpp:14:\nresearch/operators/qwen_deltanet_m2/m1b_builder.h:53:13: warning: \u2018bool admissible(const Fixture&)\u2019 defined but not used [-Wunused-function]\n   53 | static bool admissible(const Fixture &z) {\n      |             ^~~~~~~~~~\n"
  },
  "honest": {
   "accepted": 10,
   "of": 10,
   "prove_s": {
    "n": 10,
-   "median": 39.912,
-   "sd": 0.2351061462403741,
-   "min": 39.636,
-   "max": 40.478
+   "median": 40.416,
+   "sd": 0.8835618823828911,
+   "min": 39.38,
+   "max": 42.162
   },
   "decode_s": {
    "n": 10,
@@ -255,17 +255,17 @@
   },
   "derive_s": {
    "n": 10,
-   "median": 0.182,
-   "sd": 0.006961002482082273,
-   "min": 0.17,
-   "max": 0.196
+   "median": 0.2265,
+   "sd": 0.008504247304860215,
+   "min": 0.212,
+   "max": 0.236
   },
   "verify_s": {
    "n": 10,
-   "median": 7.6129999999999995,
-   "sd": 0.11390912557336605,
-   "min": 7.527,
-   "max": 7.861
+   "median": 7.793,
+   "sd": 0.23127926841807492,
+   "min": 7.506,
+   "max": 8.295
   },
   "proof_bytes": {
    "n": 10,
@@ -276,29 +276,41 @@
   },
   "peak_rss_kb": {
    "n": 10,
-   "median": 4433912.0,
-   "sd": 53.57279574975012,
-   "min": 4433784,
-   "max": 4433912
+   "median": 4435606.0,
+   "sd": 24.81576559814793,
+   "min": 4435528,
+   "max": 4435608
   }
  },
  "hostile": {
   "exit": 0,
-  "seconds": 106.764,
-  "as_expected": 34,
-  "total": 34,
+  "seconds": 129.884,
+  "as_expected": 41,
+  "total": 41,
   "by_class": {
    "huge-element": [
-    8,
-    8
+    9,
+    9
    ],
    "class-bound": [
-    16,
-    16
+    18,
+    18
    ],
    "non-canonical": [
-    2,
-    2
+    3,
+    3
+   ],
+   "derive-overflow": [
+    1,
+    1
+   ],
+   "derive-random": [
+    1,
+    1
+   ],
+   "history-control": [
+    1,
+    1
    ],
    "header": [
     2,
@@ -325,8 +337,8 @@
  },
  "model": {
   "exit": 0,
-  "seconds": 0.884,
-  "stdout": "{\n \"H1\": {\n  \"checks\": {\n   \"m1\": {\n    \"columns_used\": [\n     2338816,\n     2338816,\n     true\n    ],\n    \"log_length\": [\n     22,\n     22,\n     true\n    ],\n    \"relations\": [\n     4761088,\n     4761088,\n     true\n    ],\n    \"terms\": [\n     11430400,\n     11430400,\n     true\n    ],\n    \"range_cells\": [\n     0,\n     0,\n     true\n    ]\n   },\n   \"m1b\": {\n    \"columns_used\": [\n     1310720,\n     1310720,\n     true\n    ],\n    \"columns_nonregion\": [\n     1074176,\n     1074176,\n     true\n    ],\n    \"log_length\": [\n     21,\n     21,\n     true\n    ],\n    \"relations\": [\n     2231808,\n     2231808,\n     true\n    ],\n    \"terms\": [\n     5174272,\n     5174272,\n     true\n    ],\n    \"range_cells\": [\n     67072,\n     67072,\n     true\n    ]\n   }\n  },\n  \"pass_\": true,\n  \"model_m1\": {\n   \"arm\": \"m1\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_private\": false,\n   \"norm\": false,\n   \"gate_columns\": 2338816,\n   \"range_cells\": 0,\n   \"lkp_keys\": 0,\n   \"relations\": 4761088,\n   \"terms\": 11430400,\n   \"product_columns_per_state_cell_per_token\": 35.688,\n   \"relations_per_state_cell_per_token\": 72.648,\n   \"columns_used\": 2338816,\n   \"layout\": 2338816,\n   \"log_length\": 22\n  },\n  \"model_m1b\": {\n   \"arm\": \"m1b\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_private\": false,\n   \"norm\": false,\n   \"gate_columns\": 1074176,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 0,\n   \"relations\": 2231808,\n   \"terms\": 5174272,\n   \"product_columns_per_state_cell_per_token\": 17.414,\n   \"relations_per_state_cell_per_token\": 34.055,\n   \"columns_used\": 1310720,\n   \"columns_nonregion\": 1074176,\n   \"rng_rows\": 8192,\n   \"log_length\": 21\n  }\n },\n \"H2\": {\n  \"armA_m1b_shape\": {\n   \"arm\": \"A\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_private\": false,\n   \"norm\": false,\n   \"gate_columns\": 1074176,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 0,\n   \"relations\": 2231808,\n   \"terms\": 5174272,\n   \"product_columns_per_state_cell_per_token\": 17.414,\n   \"relations_per_state_cell_per_token\": 34.055,\n   \"columns_used\": 1156096,\n   \"columns_nonregion\": 1074176,\n   \"rng_rows\": [\n    4096,\n    1024\n   ],\n   \"key_parts\": [],\n   \"digit_entries\": 102400,\n   \"log_length\": 21\n  },\n  \"armB_m1b_shape\": {\n   \"arm\": \"B\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_private\": false,\n   \"norm\": false,\n   \"gate_columns\": 263168,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 67584,\n   \"relations\": 609792,\n   \"terms\": 1186816,\n   \"product_columns_per_state_cell_per_token\": 6.07,\n   \"relations_per_state_cell_per_token\": 9.305,\n   \"columns_used\": 427008,\n   \"columns_nonregion\": 263168,\n   \"rng_rows\": [\n    4096,\n    1024\n   ],\n   \"key_parts\": [\n    65536,\n    16384\n   ],\n   \"digit_entries\": 102400,\n   \"log_length\": 19\n  },\n  \"ratio_columns_per_cell\": 0.349,\n  \"ratio_relations\": 0.273,\n  \"ratio_terms\": 0.229,\n  \"pass_\": true,\n  \"note\": \"arm A at the M1b shape equals M1b (same lowering); arm B swaps exact bits for direct LKP keys\"\n },\n \"H3\": {\n  \"armA_T16\": {\n   \"arm\": \"A\",\n   \"D\": 128,\n   \"T\": 16,\n   \"o_private\": true,\n   \"norm\": true,\n   \"gate_columns\": 4377056,\n   \"range_cells\": 272384,\n   \"lkp_keys\": 0,\n   \"relations\": 9042944,\n   \"terms\": 21110960,\n   \"product_columns_per_state_cell_per_token\": 17.736,\n   \"relations_per_state_cell_per_token\": 34.496,\n   \"columns_used\": 4655584,\n   \"columns_nonregion\": 4377056,\n   \"rng_rows\": [\n    16384,\n    1024\n   ],\n   \"key_parts\": [],\n   \"digit_entries\": 348160,\n   \"log_length\": 23,\n   \"prove_s_estimate\": null\n  },\n  \"armB_T16\": {\n   \"arm\": \"B\",\n   \"D\": 128,\n   \"T\": 16,\n   \"o_private\": true,\n   \"norm\": true,\n   \"gate_columns\": 1056800,\n   \"range_cells\": 272384,\n   \"lkp_keys\": 276688,\n   \"relations\": 2402432,\n   \"terms\": 4786704,\n   \"product_columns_per_state_cell_per_token\": 6.126,\n   \"relations_per_state_cell_per_token\": 9.165,\n   \"columns_used\": 1613856,\n   \"columns_nonregion\": 1056800,\n   \"rng_rows\": [\n    16384,\n    1024\n   ],\n   \"key_parts\": [\n    262144,\n    16384\n   ],\n   \"digit_entries\": 348160,\n   \"log_length\": 21,\n   \"prove_s_estimate\": 39.2\n  },\n  \"max_T_log22\": {\n   \"A\": 14,\n   \"B\": 41\n  },\n  \"layer_extrapolation\": {\n   \"A\": {\n    \"relations_per_token_per_layer\": 27128832,\n    \"columns_per_token_per_layer\": 13948320,\n    \"columns_per_token_48_deltanet_layers\": 669519360\n   },\n   \"B\": {\n    \"relations_per_token_per_layer\": 7207296,\n    \"columns_per_token_per_layer\": 4817616,\n    \"columns_per_token_48_deltanet_layers\": 231245568\n   }\n  },\n  \"pass_\": true,\n  \"note\": \"prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls).\"\n },\n \"remainder_savings\": {\n  \"armA_T16_columns\": 4649440,\n  \"armB_T16_columns\": 1605872,\n  \"relations_A\": 9042944,\n  \"relations_B\": 2402432,\n  \"terms_A\": 21110960,\n  \"terms_B\": 4786704\n }\n}\n"
+  "seconds": 1.292,
+  "stdout": "{\n \"H1\": {\n  \"checks\": {\n   \"m1\": {\n    \"columns_used\": [\n     2338816,\n     2338816,\n     true\n    ],\n    \"log_length\": [\n     22,\n     22,\n     true\n    ],\n    \"relations\": [\n     4761088,\n     4761088,\n     true\n    ],\n    \"terms\": [\n     11430400,\n     11430400,\n     true\n    ],\n    \"range_cells\": [\n     0,\n     0,\n     true\n    ]\n   },\n   \"m1b\": {\n    \"columns_used\": [\n     1310720,\n     1310720,\n     true\n    ],\n    \"columns_nonregion\": [\n     1074176,\n     1074176,\n     true\n    ],\n    \"log_length\": [\n     21,\n     21,\n     true\n    ],\n    \"relations\": [\n     2231808,\n     2231808,\n     true\n    ],\n    \"terms\": [\n     5174272,\n     5174272,\n     true\n    ],\n    \"range_cells\": [\n     67072,\n     67072,\n     true\n    ]\n   }\n  },\n  \"pass_\": true,\n  \"model_m1\": {\n   \"arm\": \"m1\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 2338816,\n   \"range_cells\": 0,\n   \"lkp_keys\": 0,\n   \"relations\": 4761088,\n   \"terms\": 11430400,\n   \"product_columns_per_state_cell_per_token\": 35.688,\n   \"relations_per_state_cell_per_token\": 72.648,\n   \"columns_used\": 2338816,\n   \"layout\": 2338816,\n   \"log_length\": 22\n  },\n  \"model_m1b\": {\n   \"arm\": \"m1b\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 1074176,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 0,\n   \"relations\": 2231808,\n   \"terms\": 5174272,\n   \"product_columns_per_state_cell_per_token\": 17.414,\n   \"relations_per_state_cell_per_token\": 34.055,\n   \"columns_used\": 1310720,\n   \"columns_nonregion\": 1074176,\n   \"rng_rows\": 8192,\n   \"log_length\": 21\n  }\n },\n \"H2\": {\n  \"armA_m1b_shape\": {\n   \"arm\": \"A\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 1074176,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 0,\n   \"relations\": 2231808,\n   \"terms\": 5174272,\n   \"product_columns_per_state_cell_per_token\": 17.414,\n   \"relations_per_state_cell_per_token\": 34.055,\n   \"columns_used\": 1156096,\n   \"columns_nonregion\": 1074176,\n   \"rng_rows\": [\n    4096,\n    1024\n   ],\n   \"key_parts\": [],\n   \"digit_entries\": 102400,\n   \"rng_multiplicity_places\": 155648,\n   \"remainder_multiplicity_places\": 0,\n   \"multiplicity_row_places\": 155648,\n   \"log_length\": 21\n  },\n  \"armB_m1b_shape\": {\n   \"arm\": \"B\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 263168,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 67584,\n   \"relations\": 609792,\n   \"terms\": 1186816,\n   \"product_columns_per_state_cell_per_token\": 6.07,\n   \"relations_per_state_cell_per_token\": 9.305,\n   \"columns_used\": 427008,\n   \"columns_nonregion\": 263168,\n   \"rng_rows\": [\n    4096,\n    1024\n   ],\n   \"key_parts\": [\n    65536,\n    16384\n   ],\n   \"digit_entries\": 102400,\n   \"rng_multiplicity_places\": 155648,\n   \"remainder_multiplicity_places\": 69632,\n   \"multiplicity_row_places\": 225280,\n   \"log_length\": 19\n  },\n  \"ratio_columns_per_cell\": 0.349,\n  \"ratio_relations\": 0.273,\n  \"ratio_terms\": 0.229,\n  \"pass_\": true,\n  \"note\": \"arm A at the M1b shape equals M1b (same lowering); arm B swaps exact bits for direct LKP keys\"\n },\n \"H3\": {\n  \"armA_T16\": {\n   \"arm\": \"A\",\n   \"D\": 128,\n   \"T\": 16,\n   \"o_witness\": true,\n   \"norm\": true,\n   \"gate_columns\": 4377056,\n   \"range_cells\": 272384,\n   \"lkp_keys\": 0,\n   \"relations\": 9042944,\n   \"terms\": 21110960,\n   \"product_columns_per_state_cell_per_token\": 17.736,\n   \"relations_per_state_cell_per_token\": 34.496,\n   \"columns_used\": 4655584,\n   \"columns_nonregion\": 4377056,\n   \"rng_rows\": [\n    16384,\n    1024\n   ],\n   \"key_parts\": [],\n   \"digit_entries\": 348160,\n   \"rng_multiplicity_places\": 172032,\n   \"remainder_multiplicity_places\": 0,\n   \"multiplicity_row_places\": 172032,\n   \"log_length\": 23,\n   \"prove_s_estimate\": null\n  },\n  \"armB_T16\": {\n   \"arm\": \"B\",\n   \"D\": 128,\n   \"T\": 16,\n   \"o_witness\": true,\n   \"norm\": true,\n   \"gate_columns\": 1056800,\n   \"range_cells\": 272384,\n   \"lkp_keys\": 276688,\n   \"relations\": 2402432,\n   \"terms\": 4786704,\n   \"product_columns_per_state_cell_per_token\": 6.126,\n   \"relations_per_state_cell_per_token\": 9.165,\n   \"columns_used\": 1613856,\n   \"columns_nonregion\": 1056800,\n   \"rng_rows\": [\n    16384,\n    1024\n   ],\n   \"key_parts\": [\n    262144,\n    16384\n   ],\n   \"digit_entries\": 348160,\n   \"rng_multiplicity_places\": 172032,\n   \"remainder_multiplicity_places\": 77824,\n   \"multiplicity_row_places\": 249856,\n   \"log_length\": 21,\n   \"prove_s_estimate\": 39.2,\n   \"single_part_layout\": {\n    \"key_part\": 524288,\n    \"columns_used\": 1859616,\n    \"log_length\": 21\n   }\n  },\n  \"max_T_log22\": {\n   \"A\": 14,\n   \"B\": 41\n  },\n  \"max_T_log22_without_relation_cap\": {\n   \"A\": 14,\n   \"B\": 41\n  },\n  \"layer_extrapolation\": {\n   \"A\": {\n    \"relations_per_token_per_layer\": 27128832,\n    \"columns_per_token_per_layer\": 13948320,\n    \"columns_per_token_48_deltanet_layers\": 669519360\n   },\n   \"B\": {\n    \"relations_per_token_per_layer\": 7207296,\n    \"columns_per_token_per_layer\": 4817616,\n    \"columns_per_token_48_deltanet_layers\": 231245568\n   }\n  },\n  \"fits_2_21_armB_T16\": true,\n  \"pass_\": true,\n  \"note\": \"prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls).\"\n },\n \"remainder_savings\": {\n  \"armA_T16_columns\": 4649440,\n  \"armB_T16_columns\": 1605872,\n  \"relations_A\": 9042944,\n  \"relations_B\": 2402432,\n  \"terms_A\": 21110960,\n  \"terms_B\": 4786704\n }\n}\n"
  },
  "ranges": {
   "exit": 0,
@@ -342,5 +354,13 @@
   "exit": 0,
   "seconds": 14.606,
   "stdout": "}\n{\"dist\": \"R1\", \"seed\": 5, \"all_fit\": true, \"S\": 5098, \"delta\": 13253, \"o\": 349, \"w\": 2233, \"sigma\": 788, \"Rc\": 1145324612, \"div_S\": 0.002, \"div_y\": 0.5294}\n{\"dist\": \"R2\", \"seed\": 1, \"all_fit\": true, \"S\": 11188, \"delta\": 25142, \"o\": 928, \"w\": 1571, \"sigma\": 3624, \"Rc\": 313787565, \"div_S\": 0.0081, \"div_y\": 0.1251}\n{\"dist\": \"R2\", \"seed\": 2, \"all_fit\": true, \"S\": 11758, \"delta\": 28507, \"o\": 825, \"w\": 1689, \"sigma\": 2790, \"Rc\": 255462738, \"div_S\": 0.0048, \"div_y\": 0.1207}\n{\"dist\": \"R2\", \"seed\": 3, \"all_fit\": true, \"S\": 12287, \"delta\": 25702, \"o\": 888, \"w\": 1589, \"sigma\": 3527, \"Rc\": 432197966, \"div_S\": 0.0074, \"div_y\": 0.1141}\n{\"dist\": \"R2\", \"seed\": 4, \"all_fit\": true, \"S\": 14726, \"delta\": 24582, \"o\": 1195, \"w\": 1434, \"sigma\": 4659, \"Rc\": 173534032, \"div_S\": 0.0168, \"div_y\": 0.1266}\n{\"dist\": \"R2\", \"seed\": 5, \"all_fit\": true, \"S\": 10419, \"delta\": 26959, \"o\": 746, \"w\": 1993, \"sigma\": 1925, \"Rc\": 648296950, \"div_S\": 0.002, \"div_y\": 0.2653}\n{\"dist\": \"R3\", \"seed\": 1, \"all_fit\": true, \"S\": 74704, \"delta\": 237244, \"o\": 4257, \"w\": 3007, \"sigma\": 6232, \"Rc\": 98876944, \"div_S\": 0.0116, \"div_y\": 0.1067}\n{\"dist\": \"R3\", \"seed\": 2, \"all_fit\": true, \"S\": 200463, \"delta\": 582625, \"o\": 8271, \"w\": 3928, \"sigma\": 8875, \"Rc\": 1347440720, \"div_S\": 0.026, \"div_y\": 0.5988}\n{\"dist\": \"R3\", \"seed\": 3, \"all_fit\": true, \"S\": 104250, \"delta\": 273909, \"o\": 7204, \"w\": 3602, \"sigma\": 8191, \"Rc\": 160185260, \"div_S\": 0.014, \"div_y\": 0.1117}\n{\"dist\": \"R3\", \"seed\": 4, \"all_fit\": true, \"S\": 77280, \"delta\": 187351, \"o\": 4159, \"w\": 2626, \"sigma\": 7425, \"Rc\": 100614167, \"div_S\": 0.0223, \"div_y\": 0.1019}\n{\"dist\": \"R3\", \"seed\": 5, \"all_fit\": true, \"S\": 100699, \"delta\": 253724, \"o\": 4045, \"w\": 3879, \"sigma\": 4536, \"Rc\": 512831915, \"div_S\": 0.0092, \"div_y\": 0.3549}\n{\"dist\": \"R4\", \"seed\": 1, \"all_fit\": true, \"S\": 15048, \"delta\": 23158, \"o\": 2407, \"w\": 1914, \"sigma\": 5415, \"Rc\": 313787565, \"div_S\": 0.0086, \"div_y\": 0.0935}\n{\"dist\": \"R4\", \"seed\": 2, \"all_fit\": true, \"S\": 13066, \"delta\": 19867, \"o\": 1544, \"w\": 1994, \"sigma\": 4195, \"Rc\": 255462738, \"div_S\": 0.0045, \"div_y\": 0.1556}\n{\"dist\": \"R4\", \"seed\": 3, \"all_fit\": true, \"S\": 17887, \"delta\": 21502, \"o\": 1987, \"w\": 2276, \"sigma\": 4684, \"Rc\": 432197966, \"div_S\": 0.0081, \"div_y\": 0.1039}\n{\"dist\": \"R4\", \"seed\": 4, \"all_fit\": true, \"S\": 15666, \"delta\": 20861, \"o\": 2171, \"w\": 1959, \"sigma\": 6339, \"Rc\": 139958201, \"div_S\": 0.0167, \"div_y\": 0.1008}\n{\"dist\": \"R4\", \"seed\": 5, \"all_fit\": true, \"S\": 11611, \"delta\": 27684, \"o\": 1208, \"w\": 2375, \"sigma\": 3031, \"Rc\": 487372175, \"div_S\": 0.0023, \"div_y\": 0.25}\n{\"kernel\": \"delta\", \"q_unscaled\": false, \"steps\": 1024, \"n\": 20, \"fit\": 20, \"max\": {\"S\": 200463, \"M\": 137315, \"delta\": 582625, \"delta_lo\": 262143, \"delta_hi\": 2, \"o\": 8271, \"w\": 3928, \"v\": 1022655, \"k_hat\": 2743, \"q_hat\": 260, \"xin\": 1022655, \"y\": 98012, \"cg\": 227005, \"sigma\": 8875, \"e1\": 13545, \"e2\": 16637, \"Rc\": 1347440720, \"rr\": 6759, \"gap\": 7166, \"Vx\": 78764591}, \"worst_div_S\": 0.02597577748053581, \"worst_div_y\": 0.5987994346756061, \"seconds\": 14.5}\n"
+ },
+ "hostile_ubsan": {
+  "exit": 0,
+  "seconds": 222.579,
+  "as_expected": 41,
+  "total": 41,
+  "ubsan_reports": 0,
+  "stderr": ""
  }
 }

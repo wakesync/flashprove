@@ -9,9 +9,29 @@ The numbers are counts from `research/operators/qwen_deltanet_m2/count_model.py`
 
 Timings marked "estimate" are linear interpolations, not measurements.
 
+## 0 What M2 is for (post-review, #66 must-fix 1)
+
+**M2 is a rehearsal of the proving machinery for M3. As a standalone statement it is redundant.** At the M2 boundary every input is public (section 2) and every step is a deterministic integer function of those inputs. So a verifier can compute every state S_t, every M and delta, the head output o and the output y itself, in about O(T D^2) integer operations: milliseconds, against a verify of seconds. The argument that moves conv, SiLU, the q/k norm and the gates to verifier recompute (section 3: "proving them would add cost and no soundness") applies to the whole M2 statement. A verifier that only wants to know y for these public inputs should recompute it, not check a proof.
+
+In this document, S_t, M, delta, o and the norm intermediates are **witness values: not in the statement, and computable from public inputs at the M2 boundary**. Nothing in M2 hides them, and M2 makes no hiding or zero-knowledge claim about them. Earlier drafts called them "private". That word was wrong and is gone.
+
+What M2 is worth, as a rehearsal:
+- the measured cost of the recurrence and the gated-norm lowering at the real head shape (columns, relations, prove and verify time), which M3 inherits unchanged;
+- the arm-B composition (a second LKP instance for remainders, keyed on product-oracle cells, next to RNG's), which has not been built in this repo;
+- the verifier entry that admits its own integer inputs (section 4.5), which M3 needs in any case.
+
+What M2 does **not** de-risk: none of the operator families that are new in FEASIBILITY.md. Causal conv1d, the decay and beta tables and the per-head q/k L2 norm all moved to verifier recompute (section 3), so M2 builds no gadget for them. Their in-relation form is first built at M3 (or in the optional rehearsal arm M2-R, section 3).
+
+**What M3 must add so that proving is not redundant.** The proof has a point only when the verifier cannot recompute the result from what it holds. At least one of these must hold for each proved step:
+1. **Committed inputs.** The in_proj outputs (xq, xk, xv, ar, br, z) are not public words but committed cells, outputs of a matmul sub-proof on the layer input and the committed weights (docs/model.md), tied to the M2 relation by shared wires or the same oracle (research/operators/shared_wires). Then conv, SiLU, the q/k norm and the gates must be in-relation gadgets (section 3, "What changes at M3"), and the conv history (section 2) is a committed value carried from the previous chunk.
+2. **Committed state.** S0 and S_T are commitments carried between chunks (issue #34), not 2 x 16,384 public words. Then the recurrence proves a transition between commitments, which no verifier can recompute without the state.
+3. **A statement the verifier does not hold in full.** The verifier receives a commitment to the model and the final output, not every layer's in_proj outputs.
+
+M2 has none of these by design. Every M2 number is reported as rehearsal cost, not as the cost of a useful proof.
+
 ## 1 What M2 proves
 
-**One V head of one Qwen3.8 Gated DeltaNet layer, end to end, T = 16, F = 12**, on synthetic inputs of the published shapes. The statement runs from that head's in_proj outputs to its gated-norm output. All 48 V heads of a layer have the same statement with different public inputs, so the layer cost is 48 times the head cost (section 6, an extrapolation).
+**One V head of one Qwen3.8 Gated DeltaNet layer, T = 16, F = 12**, on synthetic inputs of the published shapes. The statement runs from that head's in_proj outputs to its gated-norm output. "End to end" means end to end within the head, with all inputs public: by section 0 the whole statement is verifier-computable, and M2 is a rehearsal for M3. All 48 V heads of a layer have the same statement with different public inputs, so the layer cost is 48 times the head cost (section 6, an extrapolation).
 
 The old M2 line in FEASIBILITY.md ("one full layer at exact shape, d 5,120, SwiGLU 17,408") is out of reach of the research harness. That layer is about 3.8e8 multiply-adds per token in its matrices:
 - in_proj_qkv 5,120 x 10,240
@@ -38,31 +58,39 @@ Per head, public and fixed by the shape, not per token:
 - A_log and dt_bias (folded into the decay table, section 3)
 - the gated-norm gain (128)
 - S0 (128 x 128, \|S0\| < 2^18)
+- **H, the conv history (3 x 384): the last 3 pre-conv inputs of each of the head's 384 conv channels (128 q, 128 k, 128 v) before token 0, \|H\| < 2^31, the class of xq, xk, xv**
 - S_T (128 x 128, \|S_T\| < 2^18)
 
-Private, and committed in the product oracle:
+Witness, laid in the product oracle (not in the statement; computable from the public inputs at this boundary, section 0; no hiding claim):
 - every state S_t
 - M, delta (two limbs)
 - the head output o
 - the norm's scalars and w
 
-In M1/M1b, o was public. In M2 it is private, because the result is now y.
+In M1/M1b, o was a statement value. In M2 it is a witness value, because the statement's result is now y. That is a change of statement boundary, not a privacy property.
+
+**Conv history (post-review, #66 must-fix 2).** The causal conv at token t reads the inputs at t, t - 1, t - 2 and t - 3. At t = 0 the model pads with zeros only when token 0 starts the sequence. The statement allows any S0, and a window with S0 != 0 is a window that does not start the sequence, so its conv needs the 3 inputs before it. Two options were on the table: (a) make H a public, class-bounded input, or (b) restrict the statement to S0 = 0 at sequence start. **M2 takes (a).** Reasons:
+- It is cheap. H is 1,152 words against the statement's 16,384 for S0 and 16,384 for S_T, plus 16 x 642 per-token words (xq, xk, xv, ar, br, z, y). Decoding it is a range check per word. The verifier's conv recompute reads it in place of the zero padding, so the conv rule is one rule for every window, with no special first window.
+- (b) would make M2 a statement about sequence starts only, and M3's chunking (state committed between chunks, #34) needs exactly the non-zero case. Under (a), M3 changes H from public words to a committed value carried from the previous chunk, like S0. Under (b), M3 would have to add the history then.
+- S0 = 0 with H = 0 is the sequence-start case of (a), so (a) loses nothing.
+
+The admission prototype now has H in its wire format and decodes it with its class bound: a huge element, the first value outside the class on both sides and a non-canonical word are rejected at decode (RESULTS.md, post-review rerun). The M1b relations the prototype proves do not read H (M1b has no conv), so a changed but in-class H is accepted there. That is recorded as a control, not a defence. In M2 the verifier's conv recompute reads H, so a changed H changes k, q and v and must fail at the proof verifier. That case is in the build's H4 suite (section 7).
 
 ## 3 Gate, conv and norm: which are proved
 
 | step | in M2 | why |
 |---|---|---|
-| causal conv1d, kernel 4, zero padding (on xq, xk, xv) | **verifier recomputes** | a function of public integers only |
+| causal conv1d, kernel 4, on xq, xk, xv, with the public history H in place of the padding before token 0 (H = 0 at sequence start) | **verifier recomputes** | a function of public integers only |
 | SiLU on the conv outputs | **verifier recomputes** | a function of public integers only |
 | q/k L2 norm, q scale 1/sqrt(128) | **verifier recomputes** | a function of public integers only |
 | decay a = exp(-A softplus(ar + dt_bias)), beta = sigmoid(br) | **verifier recomputes** | a function of public integers only |
-| recurrence (M, delta, S', o) | **proved** | private state |
-| gated RMSNorm of o, times SiLU(z) and gain | **proved** (norm), **verifier recomputes** cg = round(2^F gain SiLU(z) sqrt(128)) | the norm reads private o; cg is public-only |
+| recurrence (M, delta, S', o) | **proved** (rehearsal, section 0) | witness values; at this boundary also verifier-computable |
+| gated RMSNorm of o, times SiLU(z) and gain | **proved** (norm, rehearsal), **verifier recomputes** cg = round(2^F gain SiLU(z) sqrt(128)) | the norm reads the witness o; cg is public-only |
 | in_proj, out_proj, pre-norm RMSNorm, residual, MLP | **not proved in M2** | dense family, proved elsewhere; inputs to M2 are public |
 
-**Why recomputation is enough at this boundary.** At this statement boundary every input to conv, SiLU, L2 norm and the gates is public. A relation over them would prove that the verifier's own computation is right, and the verifier can just do that computation. The cost is O(T x 128 x 4) integer operations, about 0.2 ms at T = 16. The results enter the proof only as relation coefficients and targets (k, q, a, beta), as public values did in M1b.
+**Why recomputation is enough at this boundary.** At this statement boundary every input to conv, SiLU, L2 norm and the gates is public. A relation over them would prove that the verifier's own computation is right, and the verifier can just do that computation. The same holds for the recurrence and the norm (section 0); M2 proves those anyway, as the rehearsal for M3, and does not prove conv, SiLU, L2 norm or the gates. The cost is O(T x 128 x 4) integer operations, about 0.2 ms at T = 16. The results enter the proof only as relation coefficients and targets (k, q, a, beta), as public values did in M1b.
 
-**What changes at M3.** When the in_proj outputs become private (committed by the matmul sub-proof), these steps must become in-relation gadgets:
+**What changes at M3.** When the in_proj outputs become committed values (outputs of the matmul sub-proof, not public words), these steps must become in-relation gadgets:
 - conv: 4 product gates per channel per token
 - SiLU: a Ts-style table lookup, as docs/model.md section 7
 - L2 norm: isqrt and reciprocal, as in section 4.4 below
@@ -71,7 +99,7 @@ In M1/M1b, o was public. In M2 it is private, because the result is now y.
 By the same counting rules, that is under 10 columns per channel per token, about 4,000 per head per token. That is under 1% of the head's state work (sections 5 and 6). An optional build arm M2-R may prove them in-relation as a rehearsal. It is not needed for the M2 claim.
 
 **Determinism of recomputation.** The prover and verifier must derive identical integers. The design pins:
-- **conv**: integer taps at 2^12; acc = sum of w_tau x_(t - tau); c = floor(acc / 2^12)
+- **conv**: integer taps at 2^12; acc = sum of w_tau x_(t - tau); c = floor(acc / 2^12); x_(-1 - tau) = H[tau] for tau = 0, 1, 2
 - **SiLU**: a public table on clamped keys (docs/model.md Ts form), not libm at verify time
 - **L2 norm**: integer isqrt with round half up, eps = 17 at 2^2F. For q the divisor is multiplied by round(sqrt(128) x 2^12) and the numerator by 2^12.
 - **a and beta**: two public tables keyed by clamp(ar) and clamp(br), built once with correctly rounded exp, as the docs/model.md tables are
@@ -97,7 +125,7 @@ Every RNG cell class has an honest contract |x| < 2^18. Each class sits in a 16-
 | S' | \|S'\| < 2^18 | builder rejects otherwise (statement refused, never saturated) | 150,189 |
 | M | \|M\| < 2^18 | as M1b | 53,294 |
 | delta_lo, delta_hi | delta = 2^18 hi + lo, lo in [0, 2^18), \|hi\| < 2^18 | split (registered, D4) | lo 262,143 (its bound), hi 1 |
-| o (new, private) | \|o\| < 2^18 | builder rejects otherwise. Nearly provable: \|o\| <= \|S'\|max x \|\|q\|\|_1 / 2^F, and \|\|q\|\|_1 <= sqrt(128) \|\|q\|\|_2 <= 2^F + 64 after rounding, so \|o\| < 2^18 (1 + 2^-6). In practice it is 40x below. | 6,379 |
+| o (new, witness) | \|o\| < 2^18 | builder rejects otherwise. Nearly provable: \|o\| <= \|S'\|max x \|\|q\|\|_1 / 2^F, and \|\|q\|\|_1 <= sqrt(128) \|\|q\|\|_2 <= 2^F + 64 after rounding, so \|o\| < 2^18 (1 + 2^-6). In practice it is 40x below. | 6,379 |
 | w (new) | \|w\| <= 2^12 | provable: \|w\| <= \|o\| Rc / 2^24 <= \|o\| 2^12 / sigma <= 2^12, since \|o\| <= sigma | 4,048 |
 
 No other class needs a split. The registered split rule (H4) did not have to fire. The M2 head has 272,384 RNG cells at T = 16: 17,024 cell rows, laid as two matrices of 16,384 and 1,024 rows. That gives 348,160 digit entries at N = 10.
@@ -116,7 +144,16 @@ The M1b result showed remainder bits are 12 of the 17.4 product columns per stat
 - A 24-bit remainder (the M floor, 2^2F) is two such cells, r = lo + 2^12 hi. Both terms go directly into the floor relation, so no extra relation is needed.
 - An exact interval [0, 2^12) on each limb gives r in [0, 2^24) exactly, so floor uniqueness is unchanged from M1b.
 
-This is an exact range proof, not RNG's approximate one, so the floor-uniqueness argument of M1b goes through as is. The keys come in parts (LkpPublic::parts, allowed for one unshifted function). The key region is laid like RNG's cells, and LKP's key claim becomes a laid_form on message 0, as `rng_key_row` does for the digits. The multiplicities are one extra message with about 20 planes x 2^12 entries.
+This is an exact range proof, not RNG's approximate one, so the floor-uniqueness argument of M1b goes through as is. The keys come in parts (LkpPublic::parts, allowed for one unshifted function). The key region is laid like RNG's cells, and LKP's key claim becomes a laid_form on message 0, as `rng_key_row` does for the digits.
+
+**Multiplicities (post-review, #66 should-fix 1).** The remainder lookup sends its multiplicities as planes x 2^12 places, like RNG's (`rng_planes_places`). At T = 16 it has 278,528 keys (parts 2^18 + 2^14), so 19 planes, 77,824 places. RNG's digit lookup needs 21 planes x 2^13 = 172,032 places. The design puts both in RNG's multiplicity row (message 3), which then holds 249,856 places, well under 2^21. The count model now sizes this row and lets it bound the table length. Neither H2 nor H3 moves (RESULTS.md, post-review correction).
+
+**Transcript separation between the two lookup instances (build requirement).** The arm-B run has two LKP instances in one chain: RNG's digit lookup (shifted, g = 1, d = 13) and the remainder lookup (unshifted, one function, parts, d = 12). The build must give them distinct challenges that are bound to distinct labels:
+- each instance's public parameters (LkpPublic: parts, d, mu, live, tables, shifted, read_from) are bound into the transcript under its own Binder label ("range check: digit lookup", "remainder lookup") before any of its challenges are drawn;
+- each instance draws its own alpha (and RNG its own theta) after both instances' key and multiplicity messages are fixed, so no challenge of one instance is available while the other's keys can still change;
+- the remainder lookup's multiplicities are in a fixed, public place range of message 3, disjoint from RNG's, and each instance's `read_from` names only its own messages.
+
+The build's hostile suite must include a **challenge-replay case**: a prover that reuses the digit lookup's alpha (or its sumcheck challenges) as the remainder lookup's, or swaps the two instances' order, must be rejected by the verifier, and the case must show that an honest proof whose two instances are relabelled does not verify (section 7).
 
 **Savings (count model, H2 and H3):**
 
@@ -126,7 +163,7 @@ This is an exact range proof, not RNG's approximate one, so the floor-uniqueness
 | same: relations | 2,231,808 | 609,792 | **0.273** |
 | same: terms | 5,174,272 | 1,186,816 | 0.229 |
 | same: table log-length | 21 | 19 | |
-| M2 head (T = 16, private o, norm): gate columns + range cells + keys | 4,649,440 | 1,605,872 | 0.345 |
+| M2 head (T = 16, witness o, norm): gate columns + range cells + keys | 4,649,440 | 1,605,872 | 0.345 |
 | same: relations | 9,042,944 | 2,402,432 | 0.266 |
 | same: table log-length | **23 (does not fit 2^22)** | **21** | |
 | largest T at log-length <= 22 | 14 | 41 | |
@@ -169,14 +206,17 @@ The H4 range suite found no exact limb outside its interval and no negative exac
 1. Fix the shape from the verifier's own constants. The header words must equal them, and the word count must be exact.
 2. Decode every public word as a canonical Goldilocks element (< p), read it as a signed integer (a word above p/2 is negative), and check it against its class bound (section 2). A non-canonical word, a huge element, or an integer outside its class is rejected **here**.
 3. Recompute the public-only stage (section 3) from the decoded integers.
-4. Derive every relation target and coefficient from those integers with the relation-only builder.
+4. Derive every relation target and coefficient from those integers with the relation-only builder. The relation-only builder computes **no witness**: it reads only the decoded public integers, so no in-class statement can make it overflow, and it never ends the process.
 5. Size the run (a pure function of the shape) and run the unchanged proof verifier.
+
+Every failure is a returned verdict (decode, derive or proof). Nothing on the verifier path calls exit() or a BLK_REQUIRE that a statement can reach: the entry checks lookup_size()'s guards on the derived statement first and returns "derive" if one would fire. (Post-review, #66 should-fix 3: the first prototype ran the full witness path with its checks off, so in-class but inconsistent inputs could reach i64 overflow, and a failed sizing called exit(1). The prototype now uses a witness-free derivation and checks that it gives the prover's relation list exactly.)
 
 There is no `admissible()` that a caller runs separately, and no entry point that accepts caller-built relations or a caller-built `LookupRun`. The low-level `lookup_verify(run, ...)` stays a library internal. **The M2 build must not export it as a verifier.**
 
 The prototype measured this on the M1b statement (RESULTS.md H5):
 - 10/10 honest seeds accepted.
 - 34/34 hostile encodings rejected at the expected stage, including a huge field element in each of the 8 public classes and the #63 review's R9.
+- Post-review rerun with the conv history and the witness-free derivation: see RESULTS.md, "Post-review rerun".
 - For R9, an honest proof of the statement with o' = o - 2^-F mod p is **accepted** by the current path, `lookup_verify` with caller-built relations and `admissible()` skipped. The new entry **rejects** it at decode.
 
 ## 5 What stays unproved in M2
@@ -215,5 +255,6 @@ The build lane must keep these, and register numbers in its own PREREG before co
   - one remainder key off-table (arm B: key 2^12, which only a hostile LKP prover can send)
   - the limb re-split
 - **H3 range:** H4 of this lane re-run on the build's reference, 20/20.
-- **H4 admission:** this lane's H5 suite on the M2 statement words, plus a huge element in xq, ar and z, and the R9 analogue on y. All rejected by `verify_m2` alone.
+- **H4 admission:** this lane's H5 suite on the M2 statement words, plus a huge element in xq, ar, z and the conv history H, and the R9 analogue on y. All rejected by `verify_m2` alone. Also: H changed in class (must fail at the proof verifier, since the conv recompute reads it), and the derive-overflow cases (every class at its extreme; every word random in class), which must return a verdict and never exit or overflow (run under UBSan).
+- **H2 hostile, two lookups:** the challenge-replay case of section 4.3 (the digit lookup's alpha and sumcheck challenges reused in the remainder lookup; the two instances swapped), rejected.
 - **Kill:** no honest T = 16 arm B proof in 6 h, then fall back to arm A at T = 8 and report.

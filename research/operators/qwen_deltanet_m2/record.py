@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """CPU receipt for the Qwen DeltaNet M2 design prototypes (experiments/20261105-32-qwen-deltanet-m2-design).
 
-Usage: record.py [build] [honest] [hostile] [model] [ranges]
+Usage: record.py [build] [honest] [hostile] [ubsan] [model] [ranges]
   build    fixtures (M1 reference.py, seeds 1..10) + compile admit_proto.cpp
   honest   H5a: one honest proof per seed through verify_from_words (pinned to 6 cores)
   hostile  H5b/c: hostile public encodings + R9 on seed 1
+  ubsan    post-review: the hostile suite again, built with -fsanitize=undefined (no recover)
   model    H1-H3: count_model.py
   ranges   H4: head_reference.py range suite
 Writes evidence.json here and raw lines to the experiment's runs/.
@@ -74,6 +75,19 @@ if not only or 'hostile' in only:
     for l in hs: by.setdefault(l['class'], [0, 0]); by[l['class']][0] += l['as_expected']; by[l['class']][1] += 1
     ev['hostile'] = dict(exit=c['exit'], seconds=c['seconds'], as_expected=sum(l['as_expected'] for l in hs), total=len(hs), by_class=by, stderr=c['stderr'])
     print(json.dumps(ev['hostile']), flush=True); save()
+
+if 'ubsan' in only:
+    ub = work / 'admit_proto_ubsan.bin'
+    c = sh(['g++', '-std=c++17', '-O2', '-fno-ipa-modref', '-fsanitize=undefined', '-fno-sanitize-recover=undefined', '-DBLK_FIELD=2', '-DBLK_HASH=1',
+            '-I', 'blocks', f'{rel}/admit_proto.cpp', '-o', str(ub.relative_to(root))])
+    assert c['exit'] == 0, c['stderr']
+    c = sh(['taskset', '-c', CORES, str(ub.relative_to(root)), str((work / 'seed1.bin').relative_to(root)), 'hostile'])
+    (exp / 'h5-hostile-seed1-ubsan.jsonl').write_text(c['stdout'])
+    lines = [json.loads(l) for l in c['stdout'].splitlines() if l.startswith('{')]
+    hs = [l for l in lines if l.get('mode') == 'hostile']
+    ev['hostile_ubsan'] = dict(exit=c['exit'], seconds=c['seconds'], as_expected=sum(l['as_expected'] for l in hs), total=len(hs),
+                               ubsan_reports=c['stderr'].count('runtime error'), stderr=c['stderr'])
+    print(json.dumps({k: v for k, v in ev['hostile_ubsan'].items() if k != 'stderr'}), flush=True); save()
 
 if not only or 'model' in only:
     c = sh([sys.executable, f'{rel}/count_model.py', '--json', str((exp / 'model.json').relative_to(root))])

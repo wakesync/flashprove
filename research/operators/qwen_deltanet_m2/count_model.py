@@ -9,7 +9,7 @@ counts against the measured #47 / #63 statements. Arms 'A' and 'B' are the M2 lo
   B  remainders lookup-exact: each 12-bit remainder limb is ONE product cell that is a direct LKP key
      into the 2^12 range table; a 24-bit remainder is two such limbs (coefficients 1 and 2^12) in the
      floor relation itself, so no recomposition relation is needed.
-M2 adds (DESIGN.md section 4): private head output o (RNG cell), the proved gated RMSNorm of o
+M2 adds (DESIGN.md section 4): head output o as a witness RNG cell (not in the statement; computable from public inputs at M2), the proved gated RMSNorm of o
 (o*o and o*Rc gates, isqrt and reciprocal scalars with exact limbs, w RNG cell, y floor), T = 16.
 Usage: count_model.py [--json out.json]
 """
@@ -42,7 +42,7 @@ class C:
         s.key(width // 12 * n)
         return width // 12
 
-def head(arm, D=128, T=4, F=12, o_private=False, norm=False):
+def head(arm, D=128, T=4, F=12, o_witness=False, norm=False):
     c = C(arm)
     q19 = arm == 'm1'  # M1: 19-bit range decomposition of S', M, delta (no RNG)
     for t in range(T):
@@ -80,7 +80,7 @@ def head(arm, D=128, T=4, F=12, o_private=False, norm=False):
         # output o[j] = floor(sum_i g4.c / 2^F)
         for _ in range(D):
             r = c.rem(F)
-            if o_private:
+            if o_witness:
                 c.rcell(); c.rel(D + r + 1)            # -2^F o (cell) + sum g4.c - r = 0
             else:
                 c.rel(D + r)                           # target -2^F o
@@ -91,7 +91,7 @@ def head(arm, D=128, T=4, F=12, o_private=False, norm=False):
     return c
 
 def gated_norm(c, D, F):
-    """Proved gated RMSNorm of the private o (DESIGN.md section 4.4). Per token:
+    """Proved gated RMSNorm of the witness o (DESIGN.md section 4.4). Per token:
     Vx = sum o^2; sigma = isqrt(Vx + eps); Rc = floor(2^36 / sigma); w = floor(o Rc / 2^24);
     y = floor(cg w / 2^F) with cg public (verifier-derived from gain, SiLU(z), sqrt(D)); y public."""
     # scalars: sigma (2 exact 12-bit limbs), e1 = Vx + eps - sigma^2 (2 limbs), e2 = sigma^2 + 2 sigma - Vx - eps (2),
@@ -145,14 +145,48 @@ def layout(c, arm, T):
     # RNG digits must fit one row: digit_columns (pow2 of cell rows) x Np (16 at N = 10)
     dc = P2(sum(rng_rows)) if rng_rows else 0
     L = max(L, math.ceil(math.log2(dc * 16)) if dc else 0)
-    return dict(columns_used=total, columns_nonregion=c.cols, rng_rows=rng_rows, key_parts=key_parts, digit_entries=2 * sum(rng_rows) * 10, log_length=L)
+    # Multiplicity planes (post-review, #66 should-fix 1). Each LKP instance sends its multiplicities
+    # as planes x 2^d places in row 0 of a message (rng_planes_places in blocks/iop/rng.h). RNG's
+    # digit lookup (rng_lookup): one part of 2^(1 + log dc + log Np) keys, d = max(b0, b1) + 1 = 13,
+    # planes = part + 1. The remainder lookup (arm B): parts as above, one function, d = 12, planes =
+    # the least with all keys < 2^planes (lkp_fault). The design puts both planes vectors in ONE
+    # multiplicity row (RNG's message 3, the remainder planes after RNG's), so that row must hold
+    # their sum; a separate message would need only the larger of the two. Either way it bounds L.
+    rng_mult = rem_mult = 0
+    if dc:
+        v = 1 + int(math.log2(dc)) + 4
+        rng_mult = (v + 1) << 13
+    if key_parts:
+        nkeys = sum(key_parts); planes = nkeys.bit_length()  # least planes with nkeys < 2^planes
+        assert all(int(math.log2(p)) < planes for p in key_parts)
+        rem_mult = planes << 12
+    mult_row = rng_mult + rem_mult
+    L = max(L, math.ceil(math.log2(mult_row)) if mult_row else 0)
+    return dict(columns_used=total, columns_nonregion=c.cols, rng_rows=rng_rows, key_parts=key_parts, digit_entries=2 * sum(rng_rows) * 10,
+                rng_multiplicity_places=rng_mult, remainder_multiplicity_places=rem_mult, multiplicity_row_places=mult_row, log_length=L)
+
+def single_part_layout(c):
+    """Review cross-check (#66): arm B with the keys as ONE power-of-two part (no LkpPublic::parts),
+    padded up. Returns the laid length and log-length, with the same block placement as layout()."""
+    def pieces(n, quantum):
+        n = math.ceil(n / quantum) * quantum; out = []; b = 1 << n.bit_length()
+        while n:
+            b >>= 1
+            if n & b: out.append(b); n -= b
+        return out
+    rng_rows = pieces(math.ceil(c.rcells / 16), 1024)
+    blocks = sorted([r * 16 for r in rng_rows] + [P2(c.keys)], reverse=True)
+    pos = 0
+    for b in blocks: pos = math.ceil(pos / b) * b + b
+    total = pos + c.cols
+    return dict(key_part=P2(c.keys), columns_used=total, log_length=math.ceil(math.log2(total)))
 
 def summary(arm, **kw):
     c = head(arm, **kw); D, T = kw.get('D', 128), kw.get('T', 4)
     lay = layout(c, arm, T)
     cells = D * D * T
     per_cell = (c.cols + c.rcells + c.keys) / cells
-    return dict(arm=arm, D=D, T=T, o_private=kw.get('o_private', False), norm=kw.get('norm', False),
+    return dict(arm=arm, D=D, T=T, o_witness=kw.get('o_witness', False), norm=kw.get('norm', False),
                 gate_columns=c.cols, range_cells=c.rcells, lkp_keys=c.keys, relations=c.rels, terms=c.terms,
                 product_columns_per_state_cell_per_token=round(per_cell, 3), relations_per_state_cell_per_token=round(c.rels / cells, 3), **lay)
 
@@ -180,19 +214,26 @@ def main():
     res['H2'] = dict(armA_m1b_shape=A4, armB_m1b_shape=B4, ratio_columns_per_cell=round(ratio_cols, 3), ratio_relations=round(ratio_rels, 3),
                      ratio_terms=round(B4['terms'] / A4['terms'], 3), pass_=ratio_cols <= 0.5 and ratio_rels <= 0.5,
                      note='arm A at the M1b shape equals M1b (same lowering); arm B swaps exact bits for direct LKP keys')
-    m2 = dict(D=128, o_private=True, norm=True)
+    m2 = dict(D=128, o_witness=True, norm=True)
     A16 = summary('A', T=16, **m2); B16 = summary('B', T=16, **m2)
-    maxT = {}
+    maxT = {}; maxT_nocap = {}
     for arm in ('A', 'B'):
+        # The relations <= 2^23 condition is lookup_size()'s own guard; it was not in the PREREG's
+        # metric text (a deviation, listed in RESULTS.md). maxT_nocap drops it to show it does not bind.
         T = 1
         while summary(arm, T=T + 1, **m2)['log_length'] <= 22 and summary(arm, T=T + 1, **m2)['relations'] <= 2 ** 23: T += 1
         maxT[arm] = T
+        T = 1
+        while summary(arm, T=T + 1, **m2)['log_length'] <= 22: T += 1
+        maxT_nocap[arm] = T
     layer = {arm: dict(relations_per_token_per_layer=48 * s['relations'] // 16) for arm, s in (('A', A16), ('B', B16))}
     for arm, s in (('A', A16), ('B', B16)):
         layer[arm]['columns_per_token_per_layer'] = 48 * (s['gate_columns'] + s['range_cells'] + s['lkp_keys']) // 16
         layer[arm]['columns_per_token_48_deltanet_layers'] = 48 * layer[arm]['columns_per_token_per_layer']
         s['prove_s_estimate'] = estimate_prove_s(s['log_length'], s['relations']) if s['log_length'] <= 22 else None
-    res['H3'] = dict(armA_T16=A16, armB_T16=B16, max_T_log22=maxT, layer_extrapolation=layer, pass_=B16['log_length'] <= 22,
+    B16['single_part_layout'] = single_part_layout(head('B', T=16, **m2))
+    res['H3'] = dict(armA_T16=A16, armB_T16=B16, max_T_log22=maxT, max_T_log22_without_relation_cap=maxT_nocap, layer_extrapolation=layer,
+                     fits_2_21_armB_T16=B16['log_length'] <= 21, pass_=B16['log_length'] <= 22,
                      note='prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls).')
     # remainder savings (hard rule c), at the M2 shape
     res['remainder_savings'] = dict(
