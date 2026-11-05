@@ -339,6 +339,22 @@ results:
       - {name: r3_max_abs_delta, stat: max, value: 422167, unit: int, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 98fc7ffb566f6737878ae7668a60a1c95a32da55, source: experiments/20261104-11-qwen-deltanet-m1/runs/ranges.json, note: "bound 2^18 = 262,144; R3 inputs also exceed the 19-bit input contract"}
       - {name: r3_seeds_fit, stat: count, value: 0, total: 5, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-04, commit: 98fc7ffb566f6737878ae7668a60a1c95a32da55, source: experiments/20261104-11-qwen-deltanet-m1/runs/ranges.json}
 
+  - id: qwen-deltanet-m1b-lookup
+    title: "Qwen Gated DeltaNet head with the RNG/LKP range check, M1b (PR #63)"
+    status: measured
+    replication: unreplicated
+    pr: 63
+    summary: "PASS vs prereg (GO for M2 design): RNG/LKP composed with the wide product oracle in one group; 10 of 10 honest proofs (prove median 39.2 s, verify 7.1 s, 25.4 MB, table 2^21), 44 of 44 hostile rejected incl. limb-recombination and out-of-range state, and 5 of 5 R3 windows where M1 overflowed proved"
+    conditions: "one head, 128 x 128 state, T = 4, F = 12, two-limb delta, exact remainder bits, synthetic inputs, research security (target 10 bits, N = 10 combinations), CPU 6 cores, shared loaded VM"
+    evidence: [experiments/20261105-32-qwen-deltanet-m1b-lookup/RESULTS.md]
+    metrics:
+      - {name: honest_accepted, stat: count, value: 10, total: 10, unit: count, n: 10, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: cc573ae99d359971caf5d96c4934ab28ebbc2175, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/honest.jsonl}
+      - {name: prove_wall, stat: median, value: 39.1845, unit: s, n: 10, spread: {sd: 0.441, min: 38.793, max: 40.085}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: cc573ae99d359971caf5d96c4934ab28ebbc2175, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/honest.jsonl, note: "indicative only, shared loaded VM, 6 cores"}
+      - {name: verify_wall, stat: median, value: 7.148, unit: s, n: 10, spread: {sd: 0.088, min: 7.055, max: 7.315}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: cc573ae99d359971caf5d96c4934ab28ebbc2175, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/honest.jsonl}
+      - {name: proof_bytes, stat: median, value: 25411392, unit: B, n: 10, spread: {sd: 313, min: 25410848, max: 25411968}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: cc573ae99d359971caf5d96c4934ab28ebbc2175, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/honest.jsonl}
+      - {name: hostile_rejected, stat: count, value: 44, total: 44, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: cc573ae99d359971caf5d96c4934ab28ebbc2175, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/hostile-seed1.jsonl, note: "seed 1, 10 sampled classes; not exhaustive"}
+      - {name: r3_windows_proved, stat: count, value: 5, total: 5, unit: count, n: 5, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: cc573ae99d359971caf5d96c4934ab28ebbc2175, source: experiments/20261105-32-qwen-deltanet-m1b-lookup/runs/h3b-r3.jsonl, note: "T = 4 window ending at the first |delta| >= 2^18 step"}
+
   - id: swap-at-verifier
     title: "#45 attack classes through the honest cp_prove + cp_verify, small synthetic model, one H100 (PR #51)"
     status: measured
