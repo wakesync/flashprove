@@ -29,7 +29,7 @@ Every number below comes from a file on `main` (the one exception, a reviewer fi
 | #45 attack classes through the honest cp_prove + cp_verify, small synthetic model, one H100 (PR #51) | measured, unreplicated | honest-prover path: Python score matched all 256 decisions (89 cp_verify accepts, 167 honest-prover refusals, 0 cp_verify rejections); one swap then greedy continuation proved and accepted 15/16 (fp2nd, 95% CI 0.70-1.00) and 13/16 (rand, 0.54-0.96) under the shipped limits; 4 swaps and random replies 0/16; cp_verify's limit check was not exercised on a forged proof | target_small_f2_gap, shipped limits and #45's fit point (both cap 1), one fresh commitment each; #45's seed 2026 held-out replies, 16 per class, one draw; synthetic weights; soundness flag vacuous for a cheating prover | [experiments/20261104-38-swap-at-verifier/RESULTS.md](experiments/20261104-38-swap-at-verifier/RESULTS.md) |
 | Still open: integer-vs-BF16/FP8 fidelity (#8), KDA model-scale sweep (PR #42), cost teardown and larger-memory GPU test (PR #44) | in progress | none yet | open PRs, issues and lanes, not merged | [docs/research-roadmap.md](docs/research-roadmap.md) |
 
-_Last regenerated from `research/results.yaml` on 2026-11-04 (UTC), against main `c46d21ee`._
+_Last regenerated from `research/results.yaml` on 2026-11-05 (UTC), against main `672de049`._
 <!-- results:end -->
 
 What this table does not show: no full-size (Maverick) run, no real model weights on GPU, no serving, no TEE, no production use, and no comparison with other verifiable-inference systems. The GPU rows are upstream's small example on made-up weights.
