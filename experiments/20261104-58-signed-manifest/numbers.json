@@ -1,0 +1,1478 @@
+{
+ "rows": [
+  {
+   "field": "commitment.id",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "commitment.id",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "commitment.id",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: cp_verify: exit 1, last line ['NO: model-statement']"
+  },
+  {
+   "field": "commitment.id",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "commitment.kind",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "commitment.kind",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "commitment.kind",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: commitment.kind: not public-weights or hiding"
+  },
+  {
+   "field": "commitment.kind",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.KL.bin",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.KL.bin",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.KL.bin",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: configuration.KL.bin: file digest differs"
+  },
+  {
+   "field": "configuration.KL.bin",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.layout.txt",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.layout.txt",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.layout.txt",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: configuration.layout.txt: file digest differs"
+  },
+  {
+   "field": "configuration.layout.txt",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.policy.txt",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.policy.txt",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "configuration.policy.txt",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: configuration.policy.txt: file digest differs"
+  },
+  {
+   "field": "configuration.policy.txt",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.committed_files",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.committed_files",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.committed_files",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.committed_files[0]: not an object"
+  },
+  {
+   "field": "conversion.committed_files",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.M",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.M",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.M",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "conversion.params.M",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.config",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.config",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.config",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "conversion.params.config",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.weights",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.weights",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.params.weights",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "conversion.params.weights",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.public_weights_seed_sha256",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.public_weights_seed_sha256",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.public_weights_seed_sha256",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.public_weights_seed_sha256: must be null for a hiding commitment"
+  },
+  {
+   "field": "conversion.public_weights_seed_sha256",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.repo_commit",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.repo_commit",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.repo_commit",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "conversion.repo_commit",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.script",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.script",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.script",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "conversion.script",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.script_sha256",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.script_sha256",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.script_sha256",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.script_sha256: recipe file digest differs"
+  },
+  {
+   "field": "conversion.script_sha256",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.version",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.version",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "conversion.version",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "conversion.version",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.C",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.C",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.C",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.kind: does not match its limits"
+  },
+  {
+   "field": "decode_policy.C",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.F",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.F",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.F",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.F: differs from policy.txt"
+  },
+  {
+   "field": "decode_policy.F",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.cap",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.cap",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.cap",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.kind: does not match its limits"
+  },
+  {
+   "field": "decode_policy.cap",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.kind",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.kind",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.kind",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.kind: does not match its limits"
+  },
+  {
+   "field": "decode_policy.kind",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.s",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.s",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.s",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.s: differs from policy.txt"
+  },
+  {
+   "field": "decode_policy.s",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.sT",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.sT",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.sT",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.kind: does not match its limits"
+  },
+  {
+   "field": "decode_policy.sT",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.sh",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.sh",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.sh",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.sh: differs from policy.txt"
+  },
+  {
+   "field": "decode_policy.sh",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.theta",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.theta",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "decode_policy.theta",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.kind: does not match its limits"
+  },
+  {
+   "field": "decode_policy.theta",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "format",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "format",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "format",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: format: not flashprove-manifest-v1"
+  },
+  {
+   "field": "format",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.chat_template.sha256",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.chat_template.sha256",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.chat_template.sha256",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.chat_template: file digest differs"
+  },
+  {
+   "field": "serving.chat_template.sha256",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.end_tokens",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.end_tokens",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.end_tokens",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.end_tokens: differ from --end-tokens"
+  },
+  {
+   "field": "serving.end_tokens",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.system_prompt.sha256",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.system_prompt.sha256",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.system_prompt.sha256",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.system_prompt: file digest differs"
+  },
+  {
+   "field": "serving.system_prompt.sha256",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.0.path",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.0.path",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.0.path",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: tokenizer.jsonx missing"
+  },
+  {
+   "field": "serving.tokenizer.files.0.path",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.0.sha256",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.0.sha256",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.0.sha256",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: tokenizer.json digest differs"
+  },
+  {
+   "field": "serving.tokenizer.files.0.sha256",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.1.path",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.1.path",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.1.path",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: tokenizer_config.jsonx missing"
+  },
+  {
+   "field": "serving.tokenizer.files.1.path",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.1.sha256",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.1.sha256",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "serving.tokenizer.files.1.sha256",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: tokenizer_config.json digest differs"
+  },
+  {
+   "field": "serving.tokenizer.files.1.sha256",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signer.name",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signer.name",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signer.name",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)x"
+  },
+  {
+   "field": "signer.name",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signer.public_key",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signer.public_key",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signer.public_key",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signer.public_key: not the trusted signer key"
+  },
+  {
+   "field": "signer.public_key",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.generator",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.generator",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.generator",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "upstream.generator",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.kind",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.kind",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.kind",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: upstream.kind: not huggingface or synthetic"
+  },
+  {
+   "field": "upstream.kind",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.seed",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.seed",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "upstream.seed",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "upstream.seed",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "verifier.build_digest",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "verifier.build_digest",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "verifier.build_digest",
+   "kind": "trusted-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: verifier.build_digest: differs from cp_verify's build="
+  },
+  {
+   "field": "verifier.build_digest",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "verifier.source_commit",
+   "kind": "orig-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "verifier.source_commit",
+   "kind": "attacker-sig",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "verifier.source_commit",
+   "kind": "trusted-sig",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "field": "verifier.source_commit",
+   "kind": "attacker-sig+key",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "config/policy.txt",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: configuration.policy.txt: file digest differs"
+  },
+  {
+   "field": "config/KL.bin",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: configuration.KL.bin: file digest differs"
+  },
+  {
+   "field": "config/layout.txt",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: configuration.layout.txt: file digest differs"
+  },
+  {
+   "field": "example.proof",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: cp_verify: exit 1, last line ['NO: proof-refused']"
+  },
+  {
+   "field": "example.req",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: cp_verify: exit 1, last line ['NO: proof-refused']"
+  },
+  {
+   "field": "example.y",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: cp_verify: exit 1, last line ['NO: token-range']"
+  },
+  {
+   "field": "ivk/key.bin",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: cp_verify: exit 1, last line ['NO: key-refused']"
+  },
+  {
+   "field": "ivk/leaf/0.bin",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: cp_verify: exit 1, last line ['NO: entry-refused']"
+  },
+  {
+   "field": "tokenizer.json",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: tokenizer.json digest differs"
+  },
+  {
+   "field": "chat_template",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.chat_template: file digest differs"
+  },
+  {
+   "field": "system_prompt",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.system_prompt: file digest differs"
+  },
+  {
+   "field": "recipe",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.script_sha256: recipe file digest differs"
+  },
+  {
+   "field": "tokenizer extra file",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: added_tokens.json is present but not listed"
+  },
+  {
+   "field": "wrong trusted key",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "end tokens differ",
+   "kind": "file-substitution",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.end_tokens: differ from --end-tokens"
+  },
+  {
+   "field": "signature byte 0",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 7",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 14",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 21",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 28",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 35",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 42",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 49",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 56",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "signature byte 63",
+   "kind": "sig-bitflip",
+   "exit": 1,
+   "last": "manifest: REFUSED: signature: does not verify under the trusted signer key"
+  },
+  {
+   "field": "non-canonical JSON",
+   "kind": "encoding",
+   "exit": 1,
+   "last": "manifest: REFUSED: manifest: not in canonical form"
+  }
+ ],
+ "untampered": [
+  {
+   "i": 0,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.4708434715867043
+  },
+  {
+   "i": 1,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.4079530201852322
+  },
+  {
+   "i": 2,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.3795696422457695
+  },
+  {
+   "i": 3,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.41568049415946
+  },
+  {
+   "i": 4,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.4066016040742397
+  },
+  {
+   "i": 5,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.3835452757775784
+  },
+  {
+   "i": 6,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.4110643826425076
+  },
+  {
+   "i": 7,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.400022517889738
+  },
+  {
+   "i": 8,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.382567085325718
+  },
+  {
+   "i": 9,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "wall_s": 1.4216599352657795
+  }
+ ],
+ "coordinated": [
+  {
+   "alternate": "kind hiding->public-weights + made-up seed digest",
+   "covers": [
+    "conversion.public_weights_seed_sha256"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "kind hiding->public-weights + made-up seed digest",
+   "covers": [
+    "conversion.public_weights_seed_sha256"
+   ],
+   "flag": [
+    "--public-weights-seed"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.public_weights_seed_sha256: seed file digest differs",
+   "expected_exit": 1
+  },
+  {
+   "alternate": "kind hiding->public-weights + digest of a seed file the signer ships",
+   "covers": [
+    "commitment.kind"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "kind hiding->public-weights + digest of a seed file the signer ships",
+   "covers": [
+    "commitment.kind"
+   ],
+   "flag": [
+    "--public-weights-seed"
+   ],
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)",
+   "expected_exit": 0
+  },
+  {
+   "alternate": "upstream synthetic->full fake huggingface + made-up committed_files",
+   "covers": [
+    "upstream.kind",
+    "conversion.committed_files"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "upstream synthetic->full fake huggingface + made-up committed_files",
+   "covers": [
+    "upstream.kind",
+    "conversion.committed_files"
+   ],
+   "flag": [
+    "--committed-dir",
+    "--upstream-dir"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.committed_files: weights.bin missing",
+   "expected_exit": 1
+  },
+  {
+   "alternate": "same, caller passes --upstream-dir only",
+   "covers": [
+    "upstream.kind"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "same, caller passes --upstream-dir only",
+   "covers": [
+    "upstream.kind"
+   ],
+   "flag": [
+    "--upstream-dir"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: upstream.files: config.json digest differs",
+   "expected_exit": 1
+  },
+  {
+   "alternate": "committed_files []->one made-up entry (synthetic upstream)",
+   "covers": [
+    "conversion.committed_files"
+   ],
+   "flag": null,
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "alternate": "committed_files []->one made-up entry (synthetic upstream)",
+   "covers": [
+    "conversion.committed_files"
+   ],
+   "flag": [
+    "--committed-dir"
+   ],
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.committed_files: weights.bin missing",
+   "expected_exit": 1
+  },
+  {
+   "alternate": "decode_policy.C+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.C"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.C: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.theta+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.theta"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.theta: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.cap+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.cap"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.cap: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.sT+1 with kind clipped-gap",
+   "covers": [
+    "decode_policy.sT"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.sT: differs from policy.txt"
+  },
+  {
+   "alternate": "decode_policy.kind exact->clipped-gap with cap 1",
+   "covers": [
+    "decode_policy.kind"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: decode_policy.cap: differs from policy.txt"
+  },
+  {
+   "alternate": "serving.chat_template digest->none",
+   "covers": [
+    "serving.chat_template"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.chat_template: manifest says none; pass --no-chat-template and no file"
+  },
+  {
+   "alternate": "serving.system_prompt digest->none",
+   "covers": [
+    "serving.system_prompt"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.system_prompt: manifest says none; pass --no-system-prompt and no file"
+  },
+  {
+   "alternate": "serving.tokenizer files->none",
+   "covers": [
+    "serving.tokenizer"
+   ],
+   "flag": null,
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer: manifest says none; pass --no-tokenizer to accept"
+  }
+ ],
+ "omission": [
+  {
+   "case": "--end-tokens left out",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.end_tokens: pass --end-tokens (comma list, or none for the empty list)"
+  },
+  {
+   "case": "--recipe left out, no --no-recipe",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.script_sha256: pass exactly one of --recipe FILE or --no-recipe (--no-recipe leaves the recipe digest the signer's word)"
+  },
+  {
+   "case": "both --recipe and --no-recipe",
+   "exit": 1,
+   "last": "manifest: REFUSED: conversion.script_sha256: pass exactly one of --recipe FILE or --no-recipe (--no-recipe leaves the recipe digest the signer's word)"
+  },
+  {
+   "case": "--no-recipe, honest manifest",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  },
+  {
+   "case": "--no-recipe, script_sha256 changed + trusted re-sign",
+   "exit": 0,
+   "last": "manifest: ACCEPTED id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 signer=test signer (fixture key)"
+  }
+ ],
+ "rfc8032": {
+  "matched": 3,
+  "total": 3
+ },
+ "cross_check": {
+  "agree": 64,
+  "total": 64,
+  "cryptography": "41.0.7"
+ },
+ "small_order": {
+  "identity_key_forgery_refused": true,
+  "small_order_keys_all_forgeries_refused": 8,
+  "small_order_r_refused": 8,
+  "total": 8
+ },
+ "hardening": {
+  "extra tokenizer file in a symlinked subdir": 1,
+  "trusted-signed manifest nested 100000 deep": 1,
+  "serving.system_prompt {\"none\": 1} trusted re-sign": 1,
+  "serving.chat_template {\"none\": 1} trusted re-sign": 1,
+  "serving.system_prompt {\"none\": 1.0} trusted re-sign": 1,
+  "serving.chat_template {\"none\": 1.0} trusted re-sign": 1
+ },
+ "hardening_rows": [
+  {
+   "case": "extra tokenizer file in a symlinked subdir",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.tokenizer.files: sub is a symlink"
+  },
+  {
+   "case": "trusted-signed manifest nested 100000 deep",
+   "exit": 1,
+   "last": "manifest: REFUSED: manifest: nested too deeply to parse"
+  },
+  {
+   "case": "serving.system_prompt {\"none\": 1} trusted re-sign",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.system_prompt: missing key sha256"
+  },
+  {
+   "case": "serving.chat_template {\"none\": 1} trusted re-sign",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.chat_template: missing key sha256"
+  },
+  {
+   "case": "serving.system_prompt {\"none\": 1.0} trusted re-sign",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.system_prompt: missing key sha256"
+  },
+  {
+   "case": "serving.chat_template {\"none\": 1.0} trusted re-sign",
+   "exit": 1,
+   "last": "manifest: REFUSED: serving.chat_template: missing key sha256"
+  }
+ ],
+ "summary": {
+  "untampered_accepted": 10,
+  "untampered_n": 10,
+  "verify_wall_s": {
+   "median": 1.407277312129736,
+   "sd": 0.026505768320182484,
+   "min": 1.3795696422457695,
+   "max": 1.4708434715867043,
+   "n": 10,
+   "note": "whole verify call: manifest checks plus one cp_verify process on the stored small example"
+  },
+  "fields": 37,
+  "must_refuse_total": 137,
+  "must_refuse_refused": 137,
+  "trusted_resign_refused": 27,
+  "trusted_resign_accepted_fields": [
+   "conversion.params.M",
+   "conversion.params.config",
+   "conversion.params.weights",
+   "conversion.repo_commit",
+   "conversion.script",
+   "conversion.version",
+   "signer.name",
+   "upstream.generator",
+   "upstream.seed",
+   "verifier.source_commit"
+  ],
+  "trusted_resign_refused_schema_only": [
+   "commitment.kind",
+   "conversion.committed_files",
+   "conversion.public_weights_seed_sha256",
+   "decode_policy.C",
+   "decode_policy.cap",
+   "decode_policy.kind",
+   "decode_policy.sT",
+   "decode_policy.theta",
+   "format",
+   "upstream.kind"
+  ],
+  "trusted_resign_refused_bound": [
+   "commitment.id",
+   "configuration.KL.bin",
+   "configuration.layout.txt",
+   "configuration.policy.txt",
+   "conversion.script_sha256",
+   "decode_policy.F",
+   "decode_policy.s",
+   "decode_policy.sh",
+   "serving.chat_template.sha256",
+   "serving.end_tokens",
+   "serving.system_prompt.sha256",
+   "serving.tokenizer.files.0.path",
+   "serving.tokenizer.files.0.sha256",
+   "serving.tokenizer.files.1.path",
+   "serving.tokenizer.files.1.sha256",
+   "signer.public_key",
+   "verifier.build_digest"
+  ],
+  "coordinated_alternates": 13,
+  "coordinated_accepted_without_flag": [
+   "committed_files []->one made-up entry (synthetic upstream)",
+   "kind hiding->public-weights + digest of a seed file the signer ships",
+   "kind hiding->public-weights + made-up seed digest",
+   "same, caller passes --upstream-dir only",
+   "upstream synthetic->full fake huggingface + made-up committed_files"
+  ],
+  "coordinated_refused_with_flag": [
+   "committed_files []->one made-up entry (synthetic upstream)",
+   "kind hiding->public-weights + made-up seed digest",
+   "same, caller passes --upstream-dir only",
+   "upstream synthetic->full fake huggingface + made-up committed_files"
+  ],
+  "coordinated_accepted_with_flag": [
+   "kind hiding->public-weights + digest of a seed file the signer ships"
+  ],
+  "signers_word_unless_flag_fields": [
+   "conversion.committed_files",
+   "conversion.public_weights_seed_sha256",
+   "upstream.kind"
+  ],
+  "signers_word_even_with_flag_fields": [
+   "commitment.kind"
+  ],
+  "coordinated_with_flag_unexpected": [],
+  "omission": {
+   "--end-tokens left out": 1,
+   "--recipe left out, no --no-recipe": 1,
+   "both --recipe and --no-recipe": 1,
+   "--no-recipe, honest manifest": 0,
+   "--no-recipe, script_sha256 changed + trusted re-sign": 0
+  },
+  "hardening": {
+   "extra tokenizer file in a symlinked subdir": 1,
+   "trusted-signed manifest nested 100000 deep": 1,
+   "serving.system_prompt {\"none\": 1} trusted re-sign": 1,
+   "serving.chat_template {\"none\": 1} trusted re-sign": 1,
+   "serving.system_prompt {\"none\": 1.0} trusted re-sign": 1,
+   "serving.chat_template {\"none\": 1.0} trusted re-sign": 1
+  }
+ },
+ "host": {
+  "python": "3.12.3",
+  "machine": "x86_64"
+ }
+}
