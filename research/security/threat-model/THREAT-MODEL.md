@@ -71,7 +71,29 @@ public README, cited, `github.com/lambdaclass/CommitLLM`, fetched 2026-11-04) / 
   unreplicated);
   (d) truncation, which verifies as a shorter reply (`docs/protocol.md:66`); (e) giving different
   clients different IDs, unless the ID is published in one shared place (`docs/limits.md:183-186`);
-  (f) a client that takes the ID from the server.
+  (f) a client that takes the ID from the server;
+  (g) choosing which range of the reply is checked (analysis, not tested). The range r:e is bound
+  in the transcript, but the proof "does not cover tokens 0 to r" (`docs/limits.md:213-220`), and
+  the range is whatever the request file says. A provider that builds the request file can set r:e
+  over a harmless stretch of the reply and leave the harmful tokens outside it; the proof is then
+  valid and says nothing about them. The defence is the client's own: build the request file from
+  the tokens it sent and received and compare the `covered:` line with its own range
+  (`docs/limits.md:227-228`, `docs/limits.md:239-241`);
+  (h) planting fake earlier assistant turns (analysis, not tested). Tokens before r are prompt
+  tokens. Under clipped gap "prompt tokens are not scored" (`docs/limits.md:295`), and under exact
+  match they are not checked at all. So a provider that controls the window can insert earlier
+  "assistant" turns the model never produced, and they cost nothing against C, theta or cap. The
+  proof then covers a reply conditioned on a made-up history, which can carry a trigger or a
+  jailbreak. This is the C4 channel (who chose the prompt) applied to the conversation history,
+  not only to the system prompt. A client that keeps its own transcript and builds the window
+  itself closes it; one that takes the window from the server does not.
+- **Open question (analysis, not tested):** under `-public-weights` the committer chooses the
+  32-byte file, and `cp_commit` "accepts any 32-byte file" (`prover/common/public_weights.h:34`).
+  Whether a committer could search over 32-byte files for one whose derived seed is favourable to
+  it (for example, to a later challenge or a mask) has not been analysed. Each try needs a full
+  `cp_commit` on an H100, so a search is costly but not ruled out. A cheap guard would be to fix
+  the file by a public rule (for example, the hash of the signed manifest in M1) so that it cannot
+  be chosen freely. Status: open.
 - **CommitLLM:** binds a deployment manifest, prompt hash and sampling manifest (temperature, top-k,
   top-p, seed) into the receipt and checks decode exactly, including sampled decode via captured
   logits (cited). It does not verify arbitrary-position attention, and its README reports a

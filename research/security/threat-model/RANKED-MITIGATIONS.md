@@ -100,7 +100,7 @@ Type: **code** (this repo's programs), **protocol** (what the ID / proof / envel
   including date-shifted and trigger-style variants), proved under exact match, results published
   with the ID. Weak against sleepers by design: Hubinger et al. 2024 show the behavior survives safety
   evals (cited). Useful as a tripwire for M3, not a defense.
-- **Activation probes** (Anthropic 2024, "Simple probes can catch sleeper agents"): need hidden
+- **Activation probes** (Anthropic 2024, "Simple probes can catch sleeper agents", <https://www.anthropic.com/research/probes-catch-sleeper-agents>): need hidden
   states, which FlashProve hides on purpose (weight and activation hiding). Could be done by the
   provider on its own model as part of M3; not a client-side check.
 - **Training attestation** (proof or TEE attestation of the training run): closes data poisoning in

@@ -61,7 +61,7 @@ cryptographic binding claim is an argument, not a theorem about the programs.
 |---|---|---|---|
 | `policy.txt`, `KL.bin`, `layout.txt` | provider | Yes, byte-for-byte in the ID | `blocks/frame/heads.h:66-76`; PR #41 5/5 per mutation (measured) |
 | key file, leaf file | provider | Checked by `cp_verify` on every call; the ID covers the anchor's name and OOD answers, not the key file's proofs | `docs/architecture.md:226-227`; `docs/limits-all-rows.tsv` row SO-8.3 |
-| decode policy (exact vs clipped gap, C/theta/cap) | provider, inside `policy.txt` | Bound by the ID. But **chosen** by the provider; a client must pass `-policy` matching its own expectation, and without `-policy` a clipped-gap call ends `NO: policy` | `verifier/docs/parameter-file.md:19`; `verifier/src/cp_verify.cpp:2942` |
+| decode policy (exact vs clipped gap, C/theta/cap) | provider, inside `policy.txt` | Bound by the ID. But **chosen** by the provider; a client must pass `-policy` matching its own expectation, and without `-policy` a clipped-gap call ends `NO: policy` | `verifier/docs/parameter-file.md:19`; `verifier/src/cp_verify.cpp:2940-2942` |
 | tokenizer, chat template, end-token ids | model publisher | **No** | `docs/architecture.md:223` |
 | system prompt / template tokens | whoever builds the window | **Only as token IDs** | `docs/operators-duties.md:681-685` |
 | prompt token IDs | client, or server under `--chat` | Client-built windows are the client's own. With `--chat` the server chooses them; the example client caps the exit at 24, never 0 | `integrations/ask_and_check.py:10-12,167-168` |

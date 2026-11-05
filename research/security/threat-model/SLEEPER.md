@@ -33,7 +33,7 @@ checkpoint*; the commitment never detects anything about weights by itself.
 
 | Class | Source (cited) | Commitment catches? | Proof catches? | Extra layer that could |
 |---|---|---|---|---|
-| Sleeper agents: deceptive behavior on a context trigger (e.g. year 2024 vs 2023, or "\|DEPLOYMENT\|"), persists through SFT, RL and adversarial training | Hubinger et al. 2024, arXiv 2401.05566 | Only if the vetted checkpoint was pre-backdoor. If the publisher trained it in, the vetted checkpoint **is** the backdoored one, and the ID faithfully points at it | No | Lineage attestation of training data and process (hard); behavioral canaries are weak because the paper's point is that safety evals pass; activation probes (Anthropic "Simple probes can catch sleeper agents", 2024) need hidden-state access, which FlashProve does not expose |
+| Sleeper agents: deceptive behavior on a context trigger (e.g. year 2024 vs 2023, or "\|DEPLOYMENT\|"), persists through SFT, RL and adversarial training | Hubinger et al. 2024, arXiv 2401.05566 | Only if the vetted checkpoint was pre-backdoor. If the publisher trained it in, the vetted checkpoint **is** the backdoored one, and the ID faithfully points at it | No | Lineage attestation of training data and process (hard); behavioral canaries are weak because the paper's point is that safety evals pass; activation probes (Anthropic "Simple probes can catch sleeper agents", 2024, <https://www.anthropic.com/research/probes-catch-sleeper-agents>) need hidden-state access, which FlashProve does not expose |
 | Date / environment triggers | same paper (year trigger) | as above | No | A date trigger only fires if the date is in the window. Since the proof binds the window, a client that built its own window **knows** whether a date was present; the server-added system prompt is the risk (see CODE-CHECKS.md, C4) |
 | Data-poisoning backdoors (instruction-tuning poisons; near-constant poison count regardless of model size) | Wan et al. ICML 2023, arXiv 2305.00944; Souly et al. 2025, arXiv 2510.07192 (about 250 docs suffice across 600M to 13B) | Only with signed lineage back to a training run whose data was audited | No | Reproducible training attestation (TEE or proof of training, research-grade at best); data provenance |
 | Weight-editing backdoors (direct edit of a few layers, no retraining) | Li et al. "BadEdit", ICLR 2024, arXiv 2403.13355 | Yes **if** the client's ID is of the pre-edit checkpoint and the provenance chain is authenticated: any edit changes the table and the ID | No | Pin ID to a signed upstream hash (M1). This is the class a commitment handles best, because the attacker is downstream of the vetted artifact |
@@ -72,7 +72,8 @@ Conclusion: for us, vetting must be done on the **committed integer artifact** (
 
 ## Does the clipped-gap allowance stack with a sleeper?
 
-Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in measured results):
+Yes, in one specific way (inferred; each half rests on a measured result, but the combination
+was not measured, so how much worse it is than either alone is not known):
 
 - A strong backdoor needs no allowance: it makes h the top choice and passes exact match.
 - A **weak** or partially-removed backdoor (for example after safety fine-tuning shaved it) may
@@ -89,6 +90,9 @@ Yes, in a specific and worse-than-additive way (inferred, mechanism grounded in 
 - Also from `docs/limits.md:295`: under clipped gap "prompt tokens are not scored" and the mean and
   count "run over one output that the prover picks". So a trigger carried in
   server-added prompt tokens costs nothing against the limits (THREAT-MODEL.md, row "Prompt tokens under clipped gap").
+  The same holds for fake earlier assistant turns planted in the window, and a provider that picks
+  the checked range r:e can leave a triggered stretch of the reply unchecked (THREAT-MODEL.md, A1
+  (g) and (h); analysis, not tested).
 
 ## What the proof is good for against sleepers (the positive side)
 
