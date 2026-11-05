@@ -1,7 +1,7 @@
 # Design note: proven abliterated models on vast hosts, compared with amiller/dsmack
 
-Issue #58 (part of #6, #36, #9). Builds on the threat model of PR #54 (open, unmerged; cited by
-path `research/security/threat-model/` on its branch) and the signed manifest prototype in
+Issue #58 (part of #6, #36, #9). Builds on the threat model of PR #54 (merged after this note was written;
+`research/security/threat-model/`) and the signed manifest prototype in
 `tools/manifest/` (this PR). Design only. No GPU was rented and nothing in this note is a result;
 nothing goes into `research/results.yaml`.
 
@@ -43,9 +43,12 @@ Sources: [README](https://github.com/amiller/dsmack),
   responses remain encrypted between the browser and NEAR AI Cloud's model TEE; the broker
   forwards ciphertext and meters usage". The relay broker itself runs in a dstack CVM (Intel TDX),
   and email recovery checks a TDX quote. The prompt privacy in dsmack comes from a **TDX + GPU TEE at
-  NEAR**, not from App Attest.
+  NEAR**, not from App Attest. (NEAR's own description: TEE-hosted models run inside Intel TDX
+  confidential VMs with NVIDIA H200 GPUs in confidential-computing mode,
+  <https://near.ai/blog/assume-were-lying-how-to-verify-private-ai>,
+  <https://docs.near.ai/cloud/private-inference>; dsmack itself only says "NEAR AI Cloud's model TEE".)
 - **Marketplace pieces (cited).** Node enrollment (`enroll.py`, App Attest chain), signed
-  hb_signals with ownership links (EIP-712 `MacLink`), Ed25519 byte/time grants, a metering and
+  heartbeats with ownership links (EIP-712 `MacLink`), Ed25519 byte/time grants, a metering and
   settlement loop on Base Sepolia (`applications/payments`), bounty escrow (`work-escrow/`), and a
   forgery canary contract that pays out on a forged assertion.
 
@@ -130,9 +133,10 @@ base checkpoint (HF repo @ 40-hex revision, file sha256s)          <- manifest.u
 Every arrow is a pinned program on pinned inputs. A manifest (this PR's `tools/manifest/`) records
 each input digest and the recipe; the signer signs it; anyone who reruns the chain and gets the same
 ID has checked the signer's claim rather than trusted it. Without that rerun, the client can
-only rehash what it holds: `upstream.*`, `conversion.committed_files` and the public-weights seed
-digest are the signer's word unless it passes `--upstream-dir`, `--committed-dir` and
-`--public-weights-seed`, and `commitment.kind` is the signer's word even then, because the seed
+only rehash what it holds: `upstream.files`, `conversion.committed_files` and the public-weights
+seed digest are the signer's word unless it passes `--upstream-dir`, `--committed-dir` and
+`--public-weights-seed`; `upstream.repo` and `upstream.revision` (the rehash checks file contents,
+not where they came from) and `commitment.kind` are the signer's word even then, because the seed
 flag checks a file against the digest, not the kind against the commitment (measured in the
 manifest experiment's amendment arms).
 Today that rerun is possible only for `-public-weights` commitments (hiding ones mix in a secret
@@ -164,7 +168,7 @@ Does **not** prove:
   integer model (the CPU integer-model package can), and publish them as evals, not as proofs.
 - **that nothing else was inserted.** The direction r is a published tensor: a malicious publisher
   can choose an r that does more than ablate refusal, and the base checkpoint itself can carry a
-  sleeper (threat model `SLEEPER.md` on PR #54's branch). Rederivation shows the recipe was
+  sleeper (threat model `research/security/threat-model/SLEEPER.md`, #54). Rederivation shows the recipe was
   followed, not that the recipe is benign. Publishing how r was computed (prompt sets, layer,
   script) lets others recompute r too, which narrows this to "the base and the prompt sets".
 - **that quantization did not activate something.** #54 cites quantization-activated backdoors
@@ -172,7 +176,7 @@ Does **not** prove:
   be built to misbehave only after a given quantizer. Abliterating in full precision and then
   quantizing inherits exactly that risk. Mitigation: vet and eval the *integer* artifact (M3), and
   prefer exact match (M4) for anything safety-relevant, because clipped gap lets a provider pick a
-  second-ranked token (#50, #51: one swap proved and accepted 15/16 and 13/16 under the shipped
+  second-ranked token (#51: one swap proved and accepted 15/16 and 13/16 under the shipped
   limits, measured, unreplicated, honest-prover only).
 - that the base publisher's weights are what they claim to be about training data or provenance.
 
@@ -249,9 +253,15 @@ Untested at real scale.
 Caveats (inferred): these use upstream's best-case steady rates (start-up and commit excluded);
 the host must have about 330 GB of RAM for Maverick, which most single-H100 vast offers do not
 (our rentals were not checked for that); the 93x compares against an FP8 engine on other hardware,
-so "93x the price of unproved inference" is a rough ceiling, not a measured price ratio on vast.
+so "93x the price of unproved inference" is a rough figure, not a measured price ratio on vast,
+and if anything low: upstream says its vLLM baseline is not the most those machines can do, which
+flatters the prover (`guide/performance.md`, Cost).
 Client-side verification at about 21 CPU-seconds per proof is a real cost for a gateway and is
-not in the GPU figure.
+not in the GPU figure. The reply figure is proving only: generating the reply is not in it, and
+upstream's stored replies were chosen because scoring expected them to meet the clipped-gap limits
+(`guide/performance.md`, Whole replies). That rate is under clipped gap, which `tools/manifest`
+`verify` does not accept yet: it calls `cp_verify` without `-policy` and requires `YES`, so an
+honest clipped-gap manifest on `examples/accepted-proof-clipped-gap` is refused (`NO: policy`).
 
 ### 3.2 Which models are provable today
 

@@ -9,11 +9,11 @@ check that runs next to `cp_verify`. The prover is unchanged. Standard library o
 |---|---|---|
 | `commitment.id` | the FlashProve commitment ID | `cp_verify -id` (and its `id=`) |
 | `commitment.kind` | `public-weights` or `hiding` | signer's word, even with `--public-weights-seed`: that flag checks the seed file against the digest, not the kind against the commitment, so a false `public-weights` with a seed file the signer ships is accepted, and nothing checks a claimed `hiding`; only rederivation checks the kind |
-| `upstream` | `huggingface`: repo, 40-hex revision, sha256 of every file; or `synthetic`: generator + seed | `--upstream-dir` (rehash, refuse unlisted files), else signer's word (kind, repo, revision, files) |
+| `upstream` | `huggingface`: repo, 40-hex revision, sha256 of every file; or `synthetic`: generator + seed | `--upstream-dir` rehashes the files (refuses unlisted files), else signer's word (kind, files); `repo` and `revision` are the signer's word even with the flag (it checks contents, not origin); generator and seed: signer's word |
 | `conversion` | script path + sha256, repo commit, version, params, sha256 of committed files, public-weights seed digest | `--recipe` (or explicit `--no-recipe`: digest is then the signer's word), `--committed-dir`, `--public-weights-seed`, else signer's word; params/version/commit: signer's word, checkable by rederivation |
 | `configuration` | sha256 of `policy.txt`, `KL.bin`, `layout.txt` | the `--config` files |
 | `serving` | tokenizer files, chat template, system prompt (each a digest or `{"none": true}`), end tokens | `--tokenizer-dir`, `--chat-template`, `--system-prompt`, `--no-*`, `--end-tokens` (all required) |
-| `decode_policy` | `exact` or `clipped-gap` + C, theta, cap, s, sh, sT, F | `policy.txt` and `cp_verify`'s `result-v1` |
+| `decode_policy` | `exact` or `clipped-gap` + C, theta, cap, s, sh, sT, F | `policy.txt` and `cp_verify`'s `result-v1`; only `exact` verifies today: `verify` passes no `-policy` and requires `YES`, so a clipped-gap manifest is refused (fails closed) |
 | `verifier.build_digest` | the `build=` that `cp_verify` prints | `cp_verify`'s `result-v1` |
 | `signer` | name, public key | the key the CALLER passes with `--signer-key` (never the manifest's own) |
 
