@@ -20,10 +20,13 @@ names (never one taken from the manifest), the files the caller holds and what c
 It does not change and does not replace cp_verify: it runs it, with the manifest's ID.
 
 What it cannot check: whether the signer told the truth about fields the caller has no files for.
-commitment.kind, upstream.* (kind, repo, revision, files, or generator and seed),
-conversion.committed_files and conversion.public_weights_seed_sha256 are the signer's word unless
-the caller passes --upstream-dir / --committed-dir / --public-weights-seed so they are rehashed;
-conversion.script_sha256 is the signer's word under --no-recipe. See README.md.
+commitment.kind is always the signer's word: --public-weights-seed rehashes a seed file against
+conversion.public_weights_seed_sha256, but nothing compares that with what the commitment is, so a
+signer who claims public-weights and ships a matching seed file is accepted; only rederivation
+(rerun the recipe, get the same ID) checks the kind. upstream.* (kind, repo, revision, files, or
+generator and seed), conversion.committed_files and conversion.public_weights_seed_sha256 are the
+signer's word unless the caller passes --upstream-dir / --committed-dir / --public-weights-seed so
+they are rehashed; conversion.script_sha256 is the signer's word under --no-recipe. See README.md.
 
 Standard library only (ed25519.py next to this file).
 """
@@ -117,8 +120,13 @@ def _file_list(files, where, allow_empty=False):
         raise Refusal("%s: paths not sorted" % where)
 
 
+def is_none(obj):
+    """True only for {"none": true}: one encoding (1 and 1.0 compare equal to True, so no ==)."""
+    return isinstance(obj, dict) and list(obj) == ["none"] and obj["none"] is True
+
+
 def _digest_or_none(obj, where):
-    if obj == {"none": True}:
+    if is_none(obj):
         return
     _keys(obj, where, ("sha256",))
     _hex64(obj["sha256"], where + ".sha256")
@@ -177,7 +185,7 @@ def check_schema(m):
 
     s = m["serving"]
     _keys(s, "serving", ("tokenizer", "chat_template", "system_prompt", "end_tokens"))
-    if s["tokenizer"] != {"none": True}:
+    if not is_none(s["tokenizer"]):
         _keys(s["tokenizer"], "serving.tokenizer", ("files",))
         _file_list(s["tokenizer"]["files"], "serving.tokenizer.files")
     _digest_or_none(s["chat_template"], "serving.chat_template")
@@ -218,9 +226,12 @@ def load(manifest_bytes, signature, trusted_key):
         raise Refusal("signature: does not verify under the trusted signer key")
     try:
         m = json.loads(manifest_bytes.decode("ascii"))
+        same = canonical(m) == manifest_bytes
     except (UnicodeDecodeError, ValueError) as e:
         raise Refusal("manifest: not ASCII JSON (%s)" % e)
-    if canonical(m) != manifest_bytes:
+    except RecursionError:
+        raise Refusal("manifest: nested too deeply to parse")
+    if not same:
         raise Refusal("manifest: not in canonical form")
     check_schema(m)
     if bytes.fromhex(m["signer"]["public_key"]) != trusted_key:
@@ -253,15 +264,28 @@ def check_config(m, config_dir):
 
 
 def check_files(entries, root, where):
+    """Rehash a directory: every listed file matches, nothing else is there. Symlinks and anything
+    other than plain files and directories inside root are refused (a walk that does not follow a
+    symlinked directory would miss what is in it; one that follows it can loop or leave root)."""
     root = pathlib.Path(root)
     listed = {e["path"] for e in entries}
+    present = set()
+    for top, dirs, files in os.walk(root, followlinks=False):
+        for name in dirs + files:
+            p = pathlib.Path(top, name)
+            rel = p.relative_to(root).as_posix()
+            if p.is_symlink():
+                raise Refusal("%s: %s is a symlink" % (where, rel))
+            if name in files:
+                if not p.is_file():
+                    raise Refusal("%s: %s is not a plain file" % (where, rel))
+                present.add(rel)
     for e in entries:
         p = root / e["path"]
-        if not p.is_file():
+        if e["path"] not in present:
             raise Refusal("%s: %s missing" % (where, e["path"]))
         if sha256_file(p) != e["sha256"]:
             raise Refusal("%s: %s digest differs" % (where, e["path"]))
-    present = {str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
     extra = sorted(present - listed)
     if extra:
         raise Refusal("%s: %s is present but not listed" % (where, extra[0]))
@@ -269,7 +293,7 @@ def check_files(entries, root, where):
 
 def check_serving(m, args):
     s = m["serving"]
-    if s["tokenizer"] == {"none": True}:
+    if is_none(s["tokenizer"]):
         if not args.no_tokenizer:
             raise Refusal("serving.tokenizer: manifest says none; pass --no-tokenizer to accept")
     else:
@@ -279,7 +303,7 @@ def check_serving(m, args):
     for field, path_arg, none_arg in (("chat_template", args.chat_template, args.no_chat_template),
                                       ("system_prompt", args.system_prompt, args.no_system_prompt)):
         want = s[field]
-        if want == {"none": True}:
+        if is_none(want):
             if path_arg or not none_arg:
                 raise Refusal("serving.%s: manifest says none; pass --no-%s and no file"
                               % (field, field.replace("_", "-")))

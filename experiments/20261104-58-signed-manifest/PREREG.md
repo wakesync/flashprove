@@ -61,3 +61,26 @@ What is new: nothing cryptographically; it is the missing glue between a FlashPr
   The registered threshold, the 137 registered tampers and n = 10 are unchanged. Two registered
   file substitutions ("end tokens differ", "recipe") used to refuse only because the harness
   passed those flags; they now run with flags the tool requires.
+
+- 2026-11-05 00:23 UTC, amendment 3, before the re-run; after results and after the second
+  independent review of PR #59 (head 94966765). Wording, tests and three hardening fixes. The
+  registered threshold, the 137 registered tampers and n = 10 are unchanged.
+  1. `commitment.kind` was listed as the signer's word "unless --public-weights-seed is passed".
+     That was wrong: the flag rehashes a seed file against `conversion.public_weights_seed_sha256`
+     and nothing compares that with what the commitment is. The review re-signed the hiding example
+     as `public-weights` with the digest of a seed file the signer also ships, passed the flag with
+     that file, and got ACCEPTED (`cp_verify` YES). The amendment 2 alternate used a made-up digest
+     that did not match the caller's file, so it showed that a mismatched digest is refused, not
+     that the kind is checked. `commitment.kind` moves to the always-signer's-word set: 11 always
+     (the 10 one-field fields plus `commitment.kind`) and 3 unless a flag
+     (`conversion.public_weights_seed_sha256`, `upstream.*`, `conversion.committed_files`). The
+     total stays 14 of 37. The coordinated arm adds a matching-seed alternate whose expected result
+     with the flag is ACCEPTED, so the test pins the signer's-word status; only rederivation checks
+     the kind.
+  2. Hardening, each with a test and a runner row (no threshold): a value meaning "none" now has one
+     encoding (`{"none": true}`; `{"none": 1}` and `{"none": 1.0}` used to compare equal to it); a
+     rehashed directory with any symlink in it is refused (a symlinked subdirectory was not walked,
+     so an extra tokenizer file in it was accepted); a trusted-signed manifest nested too deeply to
+     parse is refused instead of raising an uncaught `RecursionError`.
+  Code and tests changed, so every number is re-measured at the new code commit; the previous
+  `numbers.json` stays in git history at `94966765`.

@@ -113,7 +113,8 @@ def main():
         # trusted key, each without and (where one exists) with the flag that checks it; and
         # leaving out each now-required flag
         (tmp / "coord").mkdir()
-        for name, covers, bad, flags in t.coordinated(m, tmp / "coord"):
+        # (amendment 3 adds a matching-seed alternate whose expected exit with the flag is 0)
+        for name, covers, bad, flags, with_flag in t.coordinated(m, tmp / "coord"):
             mf.check_schema(bad)
             code, last = run(tmp, bad, recipe)
             out["coordinated"].append({"alternate": name, "covers": covers, "flag": None,
@@ -121,7 +122,8 @@ def main():
             if flags is not None:
                 code, last = run(tmp, bad, recipe, overrides=flags)
                 out["coordinated"].append({"alternate": name, "covers": covers,
-                                           "flag": sorted(flags), "exit": code, "last": last})
+                                           "flag": sorted(flags), "exit": code, "last": last,
+                                           "expected_exit": with_flag})
         for name, over, bad in (
                 ("--end-tokens left out", {"--end-tokens": None}, m),
                 ("--recipe left out, no --no-recipe", {"--recipe": None}, m),
@@ -132,6 +134,40 @@ def main():
                  dict(m, conversion=dict(m["conversion"], script_sha256="ab" * 32)))):
             code, last = run(tmp, bad, recipe, overrides=over)
             out["omission"].append({"case": name, "exit": code, "last": last})
+
+        # amendment 3 hardening rows (no threshold): symlinked dir with an extra tokenizer file,
+        # deeply nested trusted-signed manifest, {"none": 1} / {"none": 1.0} re-signed by the
+        # trusted key
+        hard = []
+        hidden = tmp / "h-hidden"
+        hidden.mkdir()
+        (hidden / "added_tokens.json").write_text("{}\n")
+        symtok = tmp / "h-symtok"
+        shutil.copytree(tmp / "tokenizer", symtok)
+        (symtok / "sub").symlink_to(hidden, target_is_directory=True)
+        code, last = run(tmp, m, recipe, overrides={"--tokenizer-dir": str(symtok)})
+        hard.append({"case": "extra tokenizer file in a symlinked subdir", "exit": code,
+                     "last": last})
+        deep = b"[" * 100000 + b"]" * 100000 + b"\n"
+        code, last = run(tmp, m, recipe, raw=deep,
+                         sig=ed25519.sign(t.TRUSTED_SECRET, mf.signed_bytes(deep)))
+        hard.append({"case": "trusted-signed manifest nested 100000 deep", "exit": code,
+                     "last": last})
+        for v in (1, 1.0):
+            for field, over in (("system_prompt", {"--system-prompt": None,
+                                                   "--no-system-prompt": True}),
+                                ("chat_template", {"--chat-template": None,
+                                                   "--no-chat-template": True})):
+                nm = json.loads(json.dumps(m))
+                nm["serving"][field] = {"none": v}
+                data = json.dumps(nm, sort_keys=True, separators=(",", ":"),
+                                  ensure_ascii=True).encode() + b"\n"
+                code, last = run(tmp, m, recipe, overrides=over, raw=data,
+                                 sig=ed25519.sign(t.TRUSTED_SECRET, mf.signed_bytes(data)))
+                hard.append({"case": "serving.%s {\"none\": %r} trusted re-sign" % (field, v),
+                             "exit": code, "last": last})
+        out["hardening"] = {h["case"]: h["exit"] for h in hard}
+        out["hardening_rows"] = hard
 
         for i in range(0, 64, 7):
             sig = bytearray(good_sig)
@@ -222,9 +258,17 @@ def main():
         "coordinated_accepted_with_flag": sorted(c["alternate"] for c in out["coordinated"]
                                                  if c["flag"] is not None and c["exit"] == 0),
         "signers_word_unless_flag_fields": sorted({f for c in out["coordinated"]
-                                                   if c["flag"] is None and c["exit"] == 0
+                                                   if c["flag"] is not None and c["exit"] == 1
                                                    for f in c["covers"]}),
+        # amendment 3: accepted even with the rehash flag (the flag checks a digest, not the kind)
+        "signers_word_even_with_flag_fields": sorted({f for c in out["coordinated"]
+                                                      if c["flag"] is not None and c["exit"] == 0
+                                                      for f in c["covers"]}),
+        "coordinated_with_flag_unexpected": sorted(c["alternate"] for c in out["coordinated"]
+                                                   if c["flag"] is not None
+                                                   and c["exit"] != c["expected_exit"]),
         "omission": {c["case"]: c["exit"] for c in out["omission"]},
+        "hardening": out["hardening"],
     }
     out["host"] = {"python": platform.python_version(), "machine": platform.machine()}
     (HERE / "numbers.json").write_text(json.dumps(out, indent=1) + "\n")

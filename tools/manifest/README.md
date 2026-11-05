@@ -8,7 +8,7 @@ check that runs next to `cp_verify`. The prover is unchanged. Standard library o
 | field | what | checked by `verify` against |
 |---|---|---|
 | `commitment.id` | the FlashProve commitment ID | `cp_verify -id` (and its `id=`) |
-| `commitment.kind` | `public-weights` or `hiding` | signer's word; `--public-weights-seed` checks the seed digest a `public-weights` kind needs, nothing checks a claimed `hiding` |
+| `commitment.kind` | `public-weights` or `hiding` | signer's word, even with `--public-weights-seed`: that flag checks the seed file against the digest, not the kind against the commitment, so a false `public-weights` with a seed file the signer ships is accepted, and nothing checks a claimed `hiding`; only rederivation checks the kind |
 | `upstream` | `huggingface`: repo, 40-hex revision, sha256 of every file; or `synthetic`: generator + seed | `--upstream-dir` (rehash, refuse unlisted files), else signer's word (kind, repo, revision, files) |
 | `conversion` | script path + sha256, repo commit, version, params, sha256 of committed files, public-weights seed digest | `--recipe` (or explicit `--no-recipe`: digest is then the signer's word), `--committed-dir`, `--public-weights-seed`, else signer's word; params/version/commit: signer's word, checkable by rederivation |
 | `configuration` | sha256 of `policy.txt`, `KL.bin`, `layout.txt` | the `--config` files |
@@ -23,10 +23,14 @@ bytes in `<manifest>.sig`. Unknown or missing keys are refused. A field declared
 acknowledged with `--no-<field>`, `--end-tokens` is required, and the recipe needs `--recipe FILE`
 or an explicit `--no-recipe`, so leaving a serving or recipe flag out refuses instead of skipping
 the check. The rehash flags `--upstream-dir`, `--committed-dir` and `--public-weights-seed` stay
-optional (the caller may not hold a 232 GB checkpoint): without them `commitment.kind`,
-`upstream.*`, `conversion.committed_files` and `conversion.public_weights_seed_sha256` are the
-signer's word, and a trusted signer can change them to other schema-valid values undetected
-(measured, see Tests).
+optional (the caller may not hold a 232 GB checkpoint): without them `upstream.*`,
+`conversion.committed_files` and `conversion.public_weights_seed_sha256` are the signer's word, and
+a trusted signer can change them to other schema-valid values undetected. `commitment.kind` is the
+signer's word with or without the flags (measured, see Tests).
+
+A rehashed directory (`--tokenizer-dir`, `--upstream-dir`, `--committed-dir`) must hold only plain
+files and directories: any symlink in it is refused. A field meaning none has the one encoding
+`{"none": true}`. A manifest nested too deeply to parse is refused.
 
 Verification refuses a public key or an R of small order ([8]P the identity) and otherwise uses the
 cofactorless equation [S]B = R + [k]A. A cofactored verifier (some libsodium modes) can disagree
@@ -57,8 +61,11 @@ The signer key must come from a source you trust (a registry, a pinned file), no
 manifest field is tampered three ways. In the test, `SIGNERS_WORD_SINGLE` lists exactly which
 one-field changes a trusted signer can make undetected, `SCHEMA_ONLY` which one-field refusals
 came from the schema alone, and `SIGNERS_WORD_UNLESS_FLAG` which fields a schema-valid coordinated
-change (`tamper.coordinated`) gets past unless the matching rehash flag is passed. Small-order keys
-and R, and leaving out a required flag, are tested too. Results: `experiments/20261104-58-signed-manifest/RESULTS.md`.
+change (`tamper.coordinated`) gets past unless the matching rehash flag is passed (3 fields), and
+`SIGNERS_WORD_COORDINATED_ALWAYS` the one it gets past even with the flag (`commitment.kind`, with
+a seed file the signer ships): 11 fields always the signer's word plus 3 unless a flag, 14 of 37.
+Small-order keys and R, leaving out a required flag, symlinks in a rehashed directory, a deeply
+nested manifest and `{"none": 1}` are tested too. Results: `experiments/20261104-58-signed-manifest/RESULTS.md`.
 
 ## Limits
 

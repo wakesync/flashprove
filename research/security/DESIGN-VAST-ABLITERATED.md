@@ -78,7 +78,7 @@ hosts are experimenting with NVIDIA Confidential Computing. Complete support for
 not yet available"
 (<https://vast.ai/article/Absolute-Security-with-NVIDIA-Confidential-Computing>). The compliance page
 lists SOC 2, HIPAA on Secure Cloud and Docker isolation, and does not mention confidential
-computing or hardware attestation. A third-party comparison page says the same
+computing or hardware attestation. One comparison page from another GPU provider says the same
 (<https://voltagegpu.com/compare/voltagegpu-vs-vast-ai>, a competitor's page, weak source). We found
 no vast offer filter, API field or document for H100 CC mode, TDX or SEV-SNP. **Conclusion
 (inferred from those sources):** as of 2026-11-04 a vast renter cannot select an attested
@@ -130,9 +130,11 @@ base checkpoint (HF repo @ 40-hex revision, file sha256s)          <- manifest.u
 Every arrow is a pinned program on pinned inputs. A manifest (this PR's `tools/manifest/`) records
 each input digest and the recipe; the signer signs it; anyone who reruns the chain and gets the same
 ID has checked the signer's claim rather than trusted it. Without that rerun, the client can
-only rehash what it holds: `commitment.kind`, `upstream.*`, `conversion.committed_files` and the
-public-weights seed digest are the signer's word unless it passes `--public-weights-seed`,
-`--upstream-dir` and `--committed-dir` (measured in the manifest experiment's amendment arm).
+only rehash what it holds: `upstream.*`, `conversion.committed_files` and the public-weights seed
+digest are the signer's word unless it passes `--upstream-dir`, `--committed-dir` and
+`--public-weights-seed`, and `commitment.kind` is the signer's word even then, because the seed
+flag checks a file against the digest, not the kind against the commitment (measured in the
+manifest experiment's amendment arms).
 Today that rerun is possible only for `-public-weights` commitments (hiding ones mix in a secret
 seed, `prover/common/public_weights.h`),
 and the last step needs an H100 and about 330 GB of host memory for Maverick (**cited**,

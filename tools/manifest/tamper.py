@@ -179,10 +179,13 @@ FAKE_HF_FILES = ("config.json", "model-00001-of-00001.safetensors")
 
 
 def coordinated(m, tmp):
-    """Yield (name, covers, manifest, flag_overrides) for schema-valid trusted re-signs.
+    """Yield (name, covers, manifest, flag_overrides, with_flag_exit) for schema-valid trusted
+    re-signs.
 
     flag_overrides is what a caller passes to check the changed field against its own files
-    (None when no flag can check it on CPU). Every alternate passes check_schema.
+    (None when no flag can check it on CPU). with_flag_exit is the expected exit code with that
+    flag: 1 (the flag catches it) or 0 (the flag passes and the field stays the signer's word,
+    amendment 3). Every alternate passes check_schema.
     """
     tmp = pathlib.Path(tmp)
     seed = tmp / "client-public-weights-seed.bin"  # stand-in: the seed file a caller holds
@@ -198,8 +201,18 @@ def coordinated(m, tmp):
     a["commitment"]["kind"] = "public-weights"
     a["conversion"]["public_weights_seed_sha256"] = "5e" * 32
     yield ("kind hiding->public-weights + made-up seed digest",
-           ["commitment.kind", "conversion.public_weights_seed_sha256"], a,
-           {"--public-weights-seed": str(seed)})
+           ["conversion.public_weights_seed_sha256"], a,
+           {"--public-weights-seed": str(seed)}, 1)
+
+    # amendment 3: the signer ships a seed file and signs its digest. --public-weights-seed checks
+    # the file against the digest, not the kind against the commitment, so this is accepted.
+    shipped = tmp / "signer-shipped-public-weights-seed.bin"
+    shipped.write_bytes(b"seed file the signer ships with its false public-weights claim\n")
+    a2 = copy.deepcopy(m)
+    a2["commitment"]["kind"] = "public-weights"
+    a2["conversion"]["public_weights_seed_sha256"] = mf.sha256_file(shipped)
+    yield ("kind hiding->public-weights + digest of a seed file the signer ships",
+           ["commitment.kind"], a2, {"--public-weights-seed": str(shipped)}, 0)
 
     b = copy.deepcopy(m)
     b["upstream"] = {"kind": "huggingface", "repo": "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
@@ -209,31 +222,31 @@ def coordinated(m, tmp):
     b["conversion"]["committed_files"] = [{"path": "weights.bin", "sha256": "c0" * 32}]
     yield ("upstream synthetic->full fake huggingface + made-up committed_files",
            ["upstream.kind", "conversion.committed_files"], b,
-           {"--upstream-dir": str(up), "--committed-dir": str(committed)})
+           {"--upstream-dir": str(up), "--committed-dir": str(committed)}, 1)
 
     b2 = copy.deepcopy(b)
     yield ("same, caller passes --upstream-dir only", ["upstream.kind"], b2,
-           {"--upstream-dir": str(up)})
+           {"--upstream-dir": str(up)}, 1)
 
     c = copy.deepcopy(m)
     c["conversion"]["committed_files"] = [{"path": "weights.bin", "sha256": "c0" * 32}]
     yield ("committed_files []->one made-up entry (synthetic upstream)",
-           ["conversion.committed_files"], c, {"--committed-dir": str(committed)})
+           ["conversion.committed_files"], c, {"--committed-dir": str(committed)}, 1)
 
     for field in ("C", "theta", "cap", "sT"):
         d = copy.deepcopy(m)
         d["decode_policy"][field] += 1
         d["decode_policy"]["kind"] = "clipped-gap"
         yield ("decode_policy.%s+1 with kind clipped-gap" % field,
-               ["decode_policy.%s" % field], d, None)
+               ["decode_policy.%s" % field], d, None, None)
     e = copy.deepcopy(m)
     e["decode_policy"].update({"kind": "clipped-gap", "cap": 1})
-    yield ("decode_policy.kind exact->clipped-gap with cap 1", ["decode_policy.kind"], e, None)
+    yield ("decode_policy.kind exact->clipped-gap with cap 1", ["decode_policy.kind"], e, None, None)
 
     for field in ("chat_template", "system_prompt"):
         f = copy.deepcopy(m)
         f["serving"][field] = {"none": True}
-        yield ("serving.%s digest->none" % field, ["serving.%s" % field], f, None)
+        yield ("serving.%s digest->none" % field, ["serving.%s" % field], f, None, None)
     g = copy.deepcopy(m)
     g["serving"]["tokenizer"] = {"none": True}
-    yield ("serving.tokenizer files->none", ["serving.tokenizer"], g, None)
+    yield ("serving.tokenizer files->none", ["serving.tokenizer"], g, None, None)

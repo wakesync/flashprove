@@ -9,7 +9,8 @@ Three kinds of tamper, for every field of the manifest (enumerated mechanically 
      word, and the test asserts exactly which fields those are (SIGNERS_WORD_SINGLE), so a new
      unbound field cannot slip in unnoticed. It also asserts which refusals were the schema's
      alone (SCHEMA_ONLY), and test_coordinated_trusted_resign re-signs schema-valid alternates of
-     those (SIGNERS_WORD_UNLESS_FLAG: signer's word unless the matching flag is passed).
+     those (SIGNERS_WORD_UNLESS_FLAG: signer's word unless the matching flag is passed;
+     SIGNERS_WORD_COORDINATED_ALWAYS: accepted even with the flag, amendment 3).
 Plus: every bound file swapped for a one-byte-changed copy, non-canonical JSON, signature bit flip,
 wrong trusted key, RFC 8032 vectors, cross-check against `cryptography` if installed.
 """
@@ -46,18 +47,27 @@ SIGNERS_WORD_SINGLE = {
     "conversion.params.weights",
     "verifier.source_commit",
 }
+# SIGNERS_WORD_COORDINATED_ALWAYS: the one-field mutation is refused only by the schema, and a
+# coordinated, schema-valid alternate re-signed by the trusted key is accepted EVEN WITH the flag
+# (amendment 3): commitment.kind hiding->public-weights with the digest of a seed file the signer
+# ships passes --public-weights-seed, which checks the file against the digest, not the kind
+# against the commitment. Only rederivation checks the kind.
+SIGNERS_WORD_COORDINATED_ALWAYS = {
+    "commitment.kind",
+}
+# SIGNERS_WORD_ALWAYS: no flag the caller can pass on CPU catches a trusted re-sign. 11 fields.
+SIGNERS_WORD_ALWAYS = SIGNERS_WORD_SINGLE | SIGNERS_WORD_COORDINATED_ALWAYS
 # SIGNERS_WORD_UNLESS_FLAG: the one-field mutation is refused only by the schema (a nonsense value),
 # but a coordinated, schema-valid alternate re-signed by the trusted key is accepted unless the
-# caller passes the matching flag (tamper.coordinated): commitment.kind and the seed digest
-# (--public-weights-seed), upstream.* (--upstream-dir), conversion.committed_files
-# (--committed-dir). conversion.script_sha256 joins this set when the caller passes --no-recipe.
+# caller passes the matching flag (tamper.coordinated): the seed digest (--public-weights-seed),
+# upstream.* (--upstream-dir), conversion.committed_files (--committed-dir). 3 fields.
+# conversion.script_sha256 joins this set when the caller passes --no-recipe.
 SIGNERS_WORD_UNLESS_FLAG = {
-    "commitment.kind",
     "conversion.public_weights_seed_sha256",
     "upstream.kind",
     "conversion.committed_files",
 }
-SIGNERS_WORD = SIGNERS_WORD_SINGLE | SIGNERS_WORD_UNLESS_FLAG
+SIGNERS_WORD = SIGNERS_WORD_ALWAYS | SIGNERS_WORD_UNLESS_FLAG  # 14 of 37
 # One-field mutations that check_schema alone refuses (no file or cp_verify output involved).
 SCHEMA_ONLY = {
     "format", "commitment.kind", "upstream.kind", "conversion.committed_files",
@@ -268,19 +278,40 @@ def test_every_field_tamper(tmp_path, build):
 @needs_verifier
 def test_coordinated_trusted_resign(fx):
     """Schema-valid alternates re-signed by the trusted key: accepted without the matching flag
-    (signer's word), refused with it. Fields with no such flag must refuse without one."""
+    (signer's word), refused with it, or (amendment 3) accepted with it too. Fields with no such
+    flag must refuse without one."""
     tmp, m, recipe = fx
-    unless_flag = set()
-    for name, covers, bad, flags in t.coordinated(m, tmp):
+    unless_flag, always = set(), set()
+    for name, covers, bad, flags, with_flag in t.coordinated(m, tmp):
         mf.check_schema(bad)  # really schema-valid
         code = run(tmp, bad, recipe)
         if flags is None:
             assert code == 1, name
         else:
             assert code == 0, name  # nothing the caller holds pins it
-            assert run(tmp, bad, recipe, overrides=flags) == 1, name
-            unless_flag.update(covers)
+            assert run(tmp, bad, recipe, overrides=flags) == with_flag, name
+            (always if with_flag == 0 else unless_flag).update(covers)
     assert unless_flag == SIGNERS_WORD_UNLESS_FLAG
+    assert always == SIGNERS_WORD_COORDINATED_ALWAYS
+    assert len(SIGNERS_WORD_ALWAYS) == 11 and len(SIGNERS_WORD_UNLESS_FLAG) == 3
+    assert len(SIGNERS_WORD) == 14
+
+
+@needs_verifier
+def test_public_weights_kind_with_matching_seed_accepted(fx):
+    """Amendment 3: the flag checks the seed digest, not the kind. A trusted re-sign of
+    hiding->public-weights with the digest of a seed file the signer ships is ACCEPTED with
+    --public-weights-seed. Documented as the signer's word; pinned here so it cannot drift."""
+    tmp, m, recipe = fx
+    seed = tmp / "shipped-seed.bin"
+    seed.write_bytes(b"signer-shipped seed\n")
+    bad = json.loads(json.dumps(m))
+    bad["commitment"]["kind"] = "public-weights"
+    bad["conversion"]["public_weights_seed_sha256"] = mf.sha256_file(seed)
+    assert run(tmp, bad, recipe, overrides={"--public-weights-seed": str(seed)}) == 0
+    other = tmp / "other-seed.bin"
+    other.write_bytes(b"a different seed\n")
+    assert run(tmp, bad, recipe, overrides={"--public-weights-seed": str(other)}) == 1
 
 
 @needs_verifier
@@ -325,6 +356,66 @@ def test_extra_tokenizer_file_refused(fx):
     tmp, m, recipe = fx
     (tmp / "tokenizer" / "special_tokens_map.json").write_text("{}\n")
     assert run(tmp, m, recipe) == 1
+
+
+def test_symlinks_in_rehashed_dir_refused(tmp_path):
+    """rglob does not descend into a symlinked directory, so an extra file there was missed. Any
+    symlink inside a rehashed directory is now refused, file or directory."""
+    tok = tmp_path / "tok"
+    tok.mkdir()
+    (tok / "tokenizer.json").write_text("{}\n")
+    entries = [{"path": "tokenizer.json", "sha256": mf.sha256_file(tok / "tokenizer.json")}]
+    mf.check_files(entries, tok, "serving.tokenizer.files")
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (outside / "added_tokens.json").write_text("{}\n")
+    (tok / "sub").symlink_to(outside, target_is_directory=True)
+    with pytest.raises(mf.Refusal, match="sub is a symlink"):
+        mf.check_files(entries, tok, "serving.tokenizer.files")
+    (tok / "sub").unlink()
+    (tok / "link.json").symlink_to(tok / "tokenizer.json")
+    with pytest.raises(mf.Refusal, match="link.json is a symlink"):
+        mf.check_files(entries, tok, "serving.tokenizer.files")
+    (tok / "link.json").unlink()
+    (tok / "tokenizer.json").rename(tmp_path / "real.json")
+    (tok / "tokenizer.json").symlink_to(tmp_path / "real.json")  # a listed file as a symlink
+    with pytest.raises(mf.Refusal, match="tokenizer.json is a symlink"):
+        mf.check_files(entries, tok, "serving.tokenizer.files")
+
+
+@needs_verifier
+def test_extra_tokenizer_file_in_symlinked_dir_refused(fx):
+    tmp, m, recipe = fx
+    hidden = tmp / "hidden"
+    hidden.mkdir()
+    (hidden / "added_tokens.json").write_text("{}\n")
+    (tmp / "tokenizer" / "sub").symlink_to(hidden, target_is_directory=True)
+    assert run(tmp, m, recipe) == 1
+
+
+def test_deeply_nested_manifest_refused_cleanly(tmp_path):
+    """A trusted-signed manifest nested 100k deep raised an uncaught RecursionError."""
+    data = b"[" * 100000 + b"]" * 100000 + b"\n"
+    sig = ed25519.sign(t.TRUSTED_SECRET, mf.signed_bytes(data))
+    with pytest.raises(mf.Refusal, match="nested too deeply"):
+        mf.load(data, sig, ed25519.public_key(t.TRUSTED_SECRET))
+    deep = b'{"a":' * 100000 + b"1" + b"}" * 100000 + b"\n"
+    sig = ed25519.sign(t.TRUSTED_SECRET, mf.signed_bytes(deep))
+    with pytest.raises(mf.Refusal, match="nested too deeply"):
+        mf.load(deep, sig, ed25519.public_key(t.TRUSTED_SECRET))
+
+
+@pytest.mark.parametrize("value", [1, 1.0, False, "true", None])
+def test_none_has_one_encoding(tmp_path, build, value):
+    """{"none": 1} and {"none": 1.0} compared equal to {"none": True}. Only true means none."""
+    m, _ = t.make_fixture(tmp_path, build)
+    for field in ("chat_template", "system_prompt", "tokenizer"):
+        bad = json.loads(json.dumps(m))
+        bad["serving"][field] = {"none": value}
+        with pytest.raises(mf.Refusal):
+            mf.check_schema(bad)
+    assert mf.is_none({"none": True})
+    assert not mf.is_none({"none": value})
 
 
 @needs_verifier
