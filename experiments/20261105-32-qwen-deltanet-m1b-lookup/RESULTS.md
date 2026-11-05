@@ -83,7 +83,7 @@ Fixtures use the M1 recipe unchanged: seeds 1..10, R1, 64-token warm-up. Each se
 
 The 19 range bits of S' are gone. **The 12 remainder bits are now the dominant cost.** The digits are reported separately and are not added into the 17.4.
 
-M1 ran on 16 cores and M1b on 6, both on the same shared VM, so the timing gap is if anything understated. All timings are indicative only.
+M1 ran unpinned and M1b pinned to 6 cores, both on the same shared VM. The core count does not matter here: the CPU prover runs on one thread (independent review measured 99% CPU, i.e. one core, for an M1b honest run under taskset -c 0-5). Most of the gap follows from the halved table (2^21 vs 2^22) and relation count. All timings are indicative only.
 
 ## H2: hostile proofs (threshold 100% per class)
 
