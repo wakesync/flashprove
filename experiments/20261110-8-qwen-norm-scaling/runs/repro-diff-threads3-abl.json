@@ -1,0 +1,148 @@
+{
+ "ckpt": "abl",
+ "rows": 480,
+ "integer_fields_compared": 13920,
+ "integer_fields_all_equal": true,
+ "worst_rel_diff": {
+  "bf16_rel_o": {
+   "rel": 4.783338857986748e-13,
+   "at": [
+    "p03-repeat-word",
+    15
+   ]
+  },
+  "max_S": {
+   "rel": 4.2935331552863374e-13,
+   "at": [
+    "p06-digits",
+    2
+   ]
+  },
+  "bf16_rel_S": {
+   "rel": 2.90343220930341e-13,
+   "at": [
+    "p03-repeat-word",
+    13
+   ]
+  },
+  "max_o": {
+   "rel": 2.086818860574235e-13,
+   "at": [
+    "p03-repeat-word",
+    7
+   ]
+  },
+  "bf16_rel_y": {
+   "rel": 1.5488116665885087e-13,
+   "at": [
+    "p03-repeat-word",
+    5
+   ]
+  },
+  "rel_o": {
+   "rel": 6.358743397281987e-14,
+   "at": [
+    "p03-repeat-word",
+    44
+   ]
+  },
+  "rel_S": {
+   "rel": 5.437533205655706e-14,
+   "at": [
+    "p03-repeat-word",
+    20
+   ]
+  },
+  "layer.bf16_rel_y": {
+   "rel": 3.107513592321505e-14,
+   "at": [
+    "p03-repeat-word",
+    0
+   ]
+  },
+  "layer.norm_only_rel_y": {
+   "rel": 1.732629702314804e-14,
+   "at": [
+    "p03-repeat-word",
+    0
+   ]
+  },
+  "norm_only_rel_y": {
+   "rel": 1.3968523511461597e-14,
+   "at": [
+    "p03-repeat-word",
+    5
+   ]
+  },
+  "o_rms_int_min": {
+   "rel": 1.3138112498769385e-14,
+   "at": [
+    "p02-ordinary-paragraph",
+    47
+   ]
+  },
+  "layer.rel_o": {
+   "rel": 9.019004495934793e-15,
+   "at": [
+    "p10-long-mixed",
+    0
+   ]
+  },
+  "layer.rel_y": {
+   "rel": 6.815854389804557e-15,
+   "at": [
+    "p03-repeat-word",
+    0
+   ]
+  },
+  "rel_y": {
+   "rel": 5.798417616441303e-15,
+   "at": [
+    "p03-repeat-word",
+    36
+   ]
+  },
+  "max_y": {
+   "rel": 2.4875495780209756e-15,
+   "at": [
+    "p02-ordinary-paragraph",
+    11
+   ]
+  },
+  "S_f_absmax": {
+   "rel": 2.1707150949574863e-15,
+   "at": [
+    "p06-digits",
+    5
+   ]
+  },
+  "o_rms_int_median": {
+   "rel": 9.995375804156188e-16,
+   "at": [
+    "p03-repeat-word",
+    4
+   ]
+  },
+  "y_f_absmax": {
+   "rel": 8.484415408581077e-16,
+   "at": [
+    "p02-ordinary-paragraph",
+    0
+   ]
+  },
+  "ctx.z_absmax": {
+   "rel": 4.2110758452010055e-16,
+   "at": [
+    "p02-ordinary-paragraph",
+    0
+   ]
+  },
+  "ctx.a_absmax": {
+   "rel": 1.847521953668752e-16,
+   "at": [
+    "p08-chat-refusal",
+    0
+   ]
+  }
+ }
+}

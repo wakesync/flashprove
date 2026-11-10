@@ -1,0 +1,559 @@
+{
+ "C0": {
+  "cfg": {}
+ },
+ "all_exact": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-in_qkv": {
+  "cfg": {
+   "exact": [
+    "in_qkv"
+   ]
+  }
+ },
+ "round1-in_qkv": {
+  "cfg": {
+   "exact": [
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-in_ab": {
+  "cfg": {
+   "exact": [
+    "in_ab"
+   ]
+  }
+ },
+ "round1-in_ab": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-in_z": {
+  "cfg": {
+   "exact": [
+    "in_z"
+   ]
+  }
+ },
+ "round1-in_z": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-conv": {
+  "cfg": {
+   "exact": [
+    "conv"
+   ]
+  }
+ },
+ "round1-conv": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-silu": {
+  "cfg": {
+   "exact": [
+    "silu"
+   ]
+  }
+ },
+ "round1-silu": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-l2n": {
+  "cfg": {
+   "exact": [
+    "l2n"
+   ]
+  }
+ },
+ "round1-l2n": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-gates": {
+  "cfg": {
+   "exact": [
+    "gates"
+   ]
+  }
+ },
+ "round1-gates": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-mem": {
+  "cfg": {
+   "exact": [
+    "mem"
+   ]
+  }
+ },
+ "round1-mem": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-delta": {
+  "cfg": {
+   "exact": [
+    "delta"
+   ]
+  }
+ },
+ "round1-delta": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-state": {
+  "cfg": {
+   "exact": [
+    "state"
+   ]
+  }
+ },
+ "round1-state": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-o": {
+  "cfg": {
+   "exact": [
+    "o"
+   ]
+  }
+ },
+ "round1-o": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-sigma": {
+  "cfg": {
+   "exact": [
+    "sigma"
+   ]
+  }
+ },
+ "round1-sigma": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-rc": {
+  "cfg": {
+   "exact": [
+    "rc"
+   ]
+  }
+ },
+ "round1-rc": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-w": {
+  "cfg": {
+   "exact": [
+    "w"
+   ]
+  }
+ },
+ "round1-w": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-cg": {
+  "cfg": {
+   "exact": [
+    "cg"
+   ]
+  }
+ },
+ "round1-cg": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "y"
+   ]
+  }
+ },
+ "exact1-y": {
+  "cfg": {
+   "exact": [
+    "y"
+   ]
+  }
+ },
+ "round1-y": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg"
+   ]
+  }
+ },
+ "exactG-public": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates"
+   ]
+  }
+ },
+ "roundG-public": {
+  "cfg": {
+   "exact": [
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exactG-state": {
+  "cfg": {
+   "exact": [
+    "mem",
+    "delta",
+    "state"
+   ]
+  }
+ },
+ "roundG-state": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exactG-output": {
+  "cfg": {
+   "exact": [
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "roundG-output": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state"
+   ]
+  }
+ }
+}

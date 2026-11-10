@@ -1,0 +1,43 @@
+{
+ "reference": "unset (PR #68 setting), affinity 6",
+ "settings": [
+  {
+   "threads_env": "1",
+   "affinity": 6,
+   "prompts_differing_from_reference": [
+    "p01-ordinary-short",
+    "p02-ordinary-paragraph",
+    "p03-repeat-word",
+    "p04-repeat-punct",
+    "p06-digits",
+    "p07-chat-ordinary",
+    "p08-chat-refusal",
+    "p09-multilingual"
+   ]
+  },
+  {
+   "threads_env": "3",
+   "affinity": 6,
+   "prompts_differing_from_reference": [
+    "p01-ordinary-short",
+    "p02-ordinary-paragraph",
+    "p03-repeat-word",
+    "p04-repeat-punct",
+    "p06-digits",
+    "p07-chat-ordinary",
+    "p08-chat-refusal",
+    "p09-multilingual"
+   ]
+  },
+  {
+   "threads_env": "6",
+   "affinity": 6,
+   "prompts_differing_from_reference": []
+  },
+  {
+   "threads_env": null,
+   "affinity": 6,
+   "prompts_differing_from_reference": []
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "stock": {
+  "tensors_compared": 9,
+  "tensors_equal": 9,
+  "rows_compared": 209,
+  "rows_equal": 209,
+  "rows_sha256_equal": true,
+  "extra_tensors": {
+   "model.language_model.layers.0.linear_attn.out_proj.weight": "87b442961543b1d794219563100c9728529f75bc513f01cbbbaeab6ca89b33fe"
+  }
+ },
+ "abl": {
+  "tensors_compared": 9,
+  "tensors_equal": 9,
+  "rows_compared": 209,
+  "rows_equal": 209,
+  "rows_sha256_equal": true,
+  "extra_tensors": {
+   "model.language_model.layers.0.linear_attn.out_proj.weight": "87b442961543b1d794219563100c9728529f75bc513f01cbbbaeab6ca89b33fe"
+  }
+ },
+ "stock_vs_abl": {
+  "tensors": 10,
+  "identical": 10,
+  "rows_identical": true,
+  "differing": []
+ },
+ "mismatches_vs_pr68": 0
+}
