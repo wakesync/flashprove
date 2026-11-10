@@ -7,6 +7,7 @@ Experiment, registration and verdicts: `experiments/20261109-32-qwen-deltanet-lo
 - Research security settings only (target 10 bits, N = 10 combinations, toy coins), as M1b (#63). No production soundness claim.
 - As PR #66 section 0 says, every input of the M2 head statement is public, so a verifier could recompute the whole thing. Stage 2 is a rehearsal of the machinery for M3, not a useful proof.
 - Not a serving protocol. Unreplicated. Hostile cases are sampled, not exhaustive.
+- **Status of the two stages (see RESULTS.md).** Stage 1 ran to the end and passed its registered thresholds. **Stage 2 did not pass:** its run started after the registered stop time; after that, 10 of 10 honest proofs were accepted, but its hostile suite was stopped after 8 of 93 cases and it has no sanitizer run. No tampered witness of the M2 head has been tested, and the rejecting side of the `|cg| < 2^24` check has not been executed in a recorded run. Treat `m2.cpp` and `public_stage.h` as untested against an adversary.
 
 ## What is built
 
