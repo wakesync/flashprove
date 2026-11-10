@@ -9,6 +9,11 @@
 # One job per work directory: both modes first take an exclusive lock (flock) on $FP_WORK/.lock and
 # hold it for the whole job (in serve mode, for as long as the server runs). A second start on the
 # same work directory refuses with a message and exit status 2, before it writes anything.
+# Scope of that lock: flock is advisory. It excludes cooperating starts of this script on the same
+# lock file (the same inode), and nothing else. It assumes a private local work directory (in the
+# config, a mode-0700 tmpfs used by this one container) with working flock semantics, and writers
+# that take the lock; a process that writes there without the lock, or replaces .lock with a new
+# inode during a job, is not stopped by it. That is out of scope here, not a guarantee.
 #
 # The job follows the H100 receipts' protocol (research/gpu/README.md, research/gpu/replication-1/),
 # as registered in experiments/20261110-43-h200-bringup/PREREG.md:
@@ -79,6 +84,7 @@ fail() {
 
 # take_lock: the exclusive per-work-directory lock, held on fd 9 until this process and every child
 # that inherited fd 9 have exited. Refuses (exit 2) without writing anything if another job holds it.
+# Advisory only, for cooperating starts in a private work directory (see the header).
 take_lock() {
   mkdir -p "$FP_WORK" || {
     echo "run_job: cannot create $FP_WORK" >&2

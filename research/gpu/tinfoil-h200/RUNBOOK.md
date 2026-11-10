@@ -46,7 +46,7 @@ Copy this into the operator's own notes (not this repository) and fill every fie
 | approved outage window, start and end (UTC) | |
 | restore cut-off (UTC): the moment the job is abandoned and restore starts, whatever the state | at the latest: window end minus the restore reserve below |
 | restore reserve: prover stop deadline + live deploy deadline + one deploy retry + the end-to-end check | the sum of the deadlines below; never shortened to make room for fetching |
-| fetch start (UTC) and fetch budget (minutes) for the results archive | fetch start = restore cut-off minus the fetch budget, e.g. 10 min; the fetch is stopped at the cut-off |
+| fetch start (UTC) and fetch budget (minutes) for the results archive | fetch start = restore cut-off minus the fetch budget, e.g. 10 min; the fetch is over before the cut-off (step 5's helper takes its kill grace and launch margin out of this budget) |
 | if the fetch has not finished by the cut-off | owner's choice, one of: "restore now, results lost if no copy was fetched" or "restore now; keep any partial copy, do not refetch". There is no option to delay the restore |
 | deadline for the prover to reach Stopped (step 6), and what then | e.g. 5 min; then escalation (below) while the live deploy is attempted anyway |
 | deadline for the live stop to reach Stopped | e.g. 10 min after the stop |
@@ -65,7 +65,7 @@ Copy this into the operator's own notes (not this repository) and fill every fie
 |---|---|---|
 | live stop to Stopped | unmeasured | no stop of this instance has been observed |
 | prover image pull and enclave boot | unmeasured | no instance with this image has booted |
-| fetching the results | at most the fetch budget (enforced by `timeout`, step 5) | the window sheet |
+| fetching the results | at most the fetch budget (enforced by `fetch_bounded.sh`, step 5; its kill grace and launch margin are inside the budget) | the window sheet |
 | the job | about 25 min with `FP_ONBOX_BUILD=1` (quickstart about 20 min, 18 to 20 min on the H100, plus 10 repeats of about 25 s); about 5 min with `FP_ONBOX_BUILD=0` | H100 receipts, research/gpu/; not measured on the H200 or under CC-On |
 | prover stop | unmeasured; bounded by the prover stop deadline | |
 | live deploy to Running | unmeasured; its own healthchecks allow up to 30 and 60 min (`start_period`) for its two model engines, so plan for up to about 60 min | the live config's healthcheck limits only |
@@ -169,15 +169,17 @@ tf http get https://<DOMAIN>/status --enclave <DOMAIN> --repo <OWNER>/<REPO>@<TA
 
 `state` goes from `running` to `finalising` to `done` or `failed`; `stages` shows the last lines of the job's stage log. A failed job (for example the predicted CC-On refusal) is finalised and served like a successful one: fetch it the same way. Expected timing, from the H100 receipts (not measured here): with `FP_ONBOX_BUILD=1`, about 20 min for the quickstart (most of it the second build), then 10 repeats of about 25 s each, about 25 min in all after boot. With `FP_ONBOX_BUILD=0`, about 5 min. The job stops itself at `FP_JOB_TIMEOUT` and is then finalised as failed.
 
-**Fetching is bounded, and it never runs into the restore reserve.** Fetch as soon as the state is `done` or `failed`, and in any case start no later than the window sheet's fetch start (restore cut-off minus the fetch budget). Every fetch runs under `timeout` with the time left until the restore cut-off, so it is stopped at the cut-off whatever it is doing; the archive checks below are local and run after step 6, not inside the window. At the restore cut-off, go to step 6 **at once**, whatever the state of the job or the fetch, and do what the window sheet chose for an unfinished fetch (keep a partial copy, or accept the loss). Never delay the restore to finish or retry a fetch.
+**Fetching is bounded, and it never runs into the restore reserve.** Fetch as soon as the state is `done` or `failed`, and in any case start no later than the window sheet's fetch start (restore cut-off minus the fetch budget). Every fetch, on either path below, runs through one helper, `research/gpu/tinfoil-h200/fetch_bounded.sh` (run from a checkout of this repository), so that it is over before the restore cut-off whatever it is doing; the archive checks below are local and run after step 6, not inside the window. At the restore cut-off, go to step 6 **at once**, whatever the state of the job or the fetch, and do what the window sheet chose for an unfinished fetch (keep a partial copy, or accept the loss). Never delay the restore to finish or retry a fetch.
+
+What the helper does (`fetch_bounded.sh <cutoff> <grace> <margin> -- <command...>`): it reads the clock **once**, computes `budget = cutoff - now - grace - margin` in seconds, and only if that is strictly positive runs the command under `timeout -k <grace> <budget>`. A fetch that ignores TERM is killed after the grace, so the fetch is over by `cutoff - margin` at the latest: the kill grace and a launch margin are paid out of the fetch budget, never out of the restore reserve after the cut-off. If the budget is zero or negative the fetch is not started (exit 121): go straight to step 6. It never passes a zero duration to `timeout` (GNU `timeout 0` means no timeout at all, which an earlier version of this step could reach when the second changed between two clock reads). Do not replace it by a hand-written `timeout "$(...)"`.
 
 ```sh
 CUTOFF=<restore cut-off as UTC, e.g. 2026-12-01T14:30:00Z>
-left() { echo $(( $(date -u -d "$CUTOFF" +%s) - $(date -u +%s) )); }   # seconds until the cut-off
-[ "$(left)" -gt 0 ] && timeout -k 5 "$(left)" \
+FB=research/gpu/tinfoil-h200/fetch_bounded.sh   # kill grace 5 s, launch margin 5 s: over by cut-off - 5 s
+"$FB" "$CUTOFF" 5 5 -- \
   bash -c 'TINFOIL_ADMIN_KEY="$(cat "$1")" tinfoil http get https://<DOMAIN>/results.tar.gz --enclave <DOMAIN> --repo <OWNER>/<REPO>@<TAG>' _ "$KEYFILE" \
   > h200-results.tar.gz
-echo "fetch exit $? at $(date -u +%FT%TZ)"   # 124: stopped at the cut-off; the copy is partial
+echo "fetch exit $? at $(date -u +%FT%TZ)"   # 121: not started (no budget left); 124 or 137: stopped before the cut-off, the copy is partial
 ```
 
 (The `bash -c` form passes the key file's path, not the key, as an argument; the key is read inside, as in `tf`.) Then go to step 6. Only after the live service is restored (step 7), off the window:
@@ -187,11 +189,11 @@ tar -tzf h200-results.tar.gz | grep -c . ; tar -tzf h200-results.tar.gz | grep -
 tar -xzf h200-results.tar.gz && (cd results && sha256sum -c --quiet SHA256SUMS)          # only if the state was done or failed
 ```
 
-A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, under the same `timeout`: `tf container connect <PROVER> -p 3301` in one shell and `timeout -k 5 "$(left)" curl -s http://127.0.0.1:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). The server allows two archive downloads at a time and answers 503 to a third; retry only while time is left before the fetch budget ends.
+A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, through the same helper: `tf container connect <PROVER> -p 3301` in one shell and `"$FB" "$CUTOFF" 5 5 -- curl -s http://127.0.0.1:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). Stop the proxy (Ctrl-C in its shell) when the fetch has ended, and in any case at the cut-off. The server allows two archive downloads at a time and answers 503 to a third; a retry is another call of the helper, which refuses by itself once the budget is gone (exit 121).
 
 ## 6. Teardown and restore (ends the downtime; before any lengthy off-box work)
 
-Restore the live service first; verify the results off the box afterwards (step 8). Starts at the restore cut-off at the latest, or as soon as the fetch has ended, whichever is first. Any fetch still running is stopped first (its `timeout` ends it at the cut-off anyway).
+Restore the live service first; verify the results off the box afterwards (step 8). Starts at the restore cut-off at the latest, or as soon as the fetch has ended, whichever is first. Any fetch still running is stopped first (the helper's `timeout` has ended it before the cut-off anyway).
 
 ```sh
 date -u +%FT%TZ                                # restore starts

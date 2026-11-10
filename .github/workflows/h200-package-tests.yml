@@ -1,6 +1,7 @@
 # CPU-only tests of the undeployed H200 package (research/gpu/tinfoil-h200/): the results server's
 # routes and file boundary (serve_test.py), the job runner's control flow with mocked GPU programs
-# (run_job_test.py), bash -n and shellcheck. No GPU, no secrets, no network calls beyond checkout.
+# (run_job_test.py), the runbook's bounded result fetch (fetch_bounded_test.py), bash -n and
+# shellcheck. No GPU, no secrets, no network calls beyond checkout.
 name: h200-package-tests
 
 on:
@@ -12,6 +13,7 @@ on:
     branches: [main]
     paths:
       - "research/gpu/tinfoil-h200/**"
+      - ".github/workflows/h200-package-tests.yml"
 
 permissions:
   contents: read
@@ -28,10 +30,13 @@ jobs:
           persist-credentials: false
       - name: bash -n and shellcheck
         working-directory: research/gpu/tinfoil-h200
-        run: bash -n run_job.sh && shellcheck --version && shellcheck run_job.sh
+        run: bash -n run_job.sh && bash -n fetch_bounded.sh && shellcheck --version && shellcheck run_job.sh fetch_bounded.sh
       - name: serve_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 serve_test.py
       - name: run_job_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 run_job_test.py
+      - name: fetch_bounded_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 fetch_bounded_test.py
