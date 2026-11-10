@@ -1,0 +1,28 @@
+# PREREG: 20261109-35-qwen-operators
+Issue: #35. Lane: qwen-operators. Date (UTC): 2026-11-10. Base commit: 4f7a876151c309f0159e88b18c8e286d4e1909c9.
+
+## Hypothesis
+Bounded Qwen nonlinearities, causal four-tap convolution and per-head normalization can be lowered to shared committed product-oracle relations, accepting honest executions and rejecting the sampled false executions, with deterministic integer tables and the error budgets below.
+
+## Metric
+Per gadget: honest acceptance, sampled hostile rejection, product columns, relations, proof bytes, CPU prove/verify seconds (median, sample SD, min/max), and maximum/median/p95 absolute real-valued error against Python float reference at F=12,14,16. Separate integer-relation correctness, table regeneration and fidelity from cryptographic proof coverage. Research security target 10 bits, not production security. No privacy claim.
+
+## Acceptance threshold
+- Table generation: two byte-identical regenerations, no runtime floating-point evaluation in the integer reference or verifier. Canonical signed little-endian i64 rows, manifest with scale/domain/algorithm/SHA-256. The SHA-256 authenticates repository artifacts, not a new proof-system hash gadget.
+- Nonlinear: x in [-8,8), grid 1/256, key=floor(256*x); output nearest integer at scale 2^F, ties to even. SiLU, sigmoid, softplus and decay exp(-c softplus(x)), c in {1/2,1,2}. Deterministic Q256 integer exp/log approximations. Maximum error <=0.006 at each F on 4096 uniform-in-domain synthetic samples and grid edges. Out of domain rejected, not clamped. A general learned decay constant is NOT covered by these three examples.
+- Conv: four chronological taps w[0..3] times [x[t-3],...,x[t]], three history cells carried into a four-token chunk. x and taps in [-1,1), signed F-bit fraction, output floor(sum(w*x)/2^F). Absolute float error <=1/2^F comparing to dequantized inputs. History and reused inputs must be the same committed wires, not independently chosen copies. Cross-proof history commitment linkage is a separate obligation and must be reported as missing unless implemented.
+- Norm: DeltaNet L2, D=128; attention RMS, D=256, unit gain initially. Quantize mean square to grid 1/1024, admitted mean square in [1/4,17/4). Reciprocal-root tables on that interval; L2 tables include 1/sqrt(128). y=floor(x*table[key]/2^F). Maximum error <=0.01 on uniform [-1,1) vectors against dequantized float inputs. This bounded-domain approximation is NEW semantics, not M2's isqrt/epsilon rule or full BF16 fidelity. Zero/tiny-energy vectors outside this domain must reject. Gain and DeltaNet q's additional 1/sqrt(128) scaling are gaps unless separately implemented.
+- Each completed proof gadget: 10/10 honest seeds and all sampled applicable hostile classes rejected by unchanged verifier. Wrong table row, out-of-domain, quotient +1 with compensating invalid remainder, wrong history, sign flip, changed public output, malformed bytes. Generate complete malicious proofs preserving multiplication wherever feasible; no acceptance claim from witness-check rejection alone.
+- Partial rotary is optional: document 64/256 rotate-half semantics with theta=10^7, leave proof explicitly unimplemented if the timebox prevents completion.
+
+## Kill criterion
+Four-hour CPU-only timebox; stop heavy work if free disk <3 GB. Finish nonlinear gadget before starting conv, then norm. A missing proof, any sampled false acceptance, nondeterministic table, or exceeded error budget means FAIL/PARTIAL for that gadget, not hidden exclusion. Do not substitute constraint satisfaction for cryptographic proofs. All heavy work is serialized through the shared job gate with <=6 cores.
+
+## Runs
+Seeds 1..10, one honest proof per seed per completed gadget at F=12; no excluded seeds and no timing warmup exclusion. F=14,16 fidelity runs use the same seeded input distribution, with proof smoke checks if time permits. Hostile proof suite on seed 1. Float nonlinear error on 4096 uniform samples plus domain/grid boundaries, norm on 10 vectors per dimension per F, conv on 10 four-token samples per F. Report actual denominator for every metric. No speedup comparison or extrapolated headline. Shared loaded CPU host.
+
+## Prior art
+Existing FlashProve Ts/Sig tables, blocks/iop/lkp.h and rng.h, and merged M1b lookup/range research provide the reference style. The wide product oracle and shared-wire affine relations already prove linked arithmetic but do not automatically prove table membership or cross-proof commitment continuity. This lane adds explicit selector-based table relations first, not a claim of asymptotically efficient LKP composition. Jolt/zkLLM lookup arguments motivate a future batched backend; no comparison is measured. M2 design PR #66 explicitly leaves these operators at verifier recomputation on public inputs. This lane is a bounded committed-oracle experiment, not Qwen model support or a Lean theorem.
+
+## Amendments
+None at registration.
