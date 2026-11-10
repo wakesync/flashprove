@@ -345,10 +345,14 @@ def past(deadline):
     """deadline 'HHMM' UTC today (the lane runs 01:26Z to 04:26Z); '' = none."""
     return bool(deadline) and time.strftime("%H%M", time.gmtime()) >= deadline
 
-def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None, deadline=""):
+def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None, deadline="", skip_done=False):
     from multiprocessing import Pool
     arms = json.load(open(arms_file))
     names = [n for n in arms if (not only or n in only)]
+    if skip_done and Path(out).exists():  # arms that already have rows in the output file are not run again
+        have = {json.loads(l)["arm"] for l in open(out)}
+        names = [n for n in names if n not in have]
+    if not names: print("nothing to run", flush=True); return
     prompts = json.load(open(SRC / "prompts.json"))["prompts"]
     pids = [p["id"] for p in sorted(prompts, key=lambda p: -len(p["token_ids"])) if not only_prompts or p["id"] in only_prompts]
     with Pool(jobs) as pool:  # float references first (cached in scratch)
@@ -361,7 +365,7 @@ def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None, dea
             grp = names[g:g + jobs]
             if past(deadline):
                 print("CUT-OFF", deadline, "UTC: arms not started:", ",".join(names[g:]), flush=True)
-                Path(str(out) + ".notrun").write_text(json.dumps(names[g:]) + "\n")
+                with open(str(out) + ".notrun", "a") as nf: nf.write(json.dumps(names[g:]) + "\n")
                 break
             started += grp
             tasks = [(cache, ckpt, n, arms[n], pid, scratch) for pid in pids for n in grp]
@@ -373,7 +377,7 @@ def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None, dea
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("args", nargs="*")
-    ap.add_argument("--jobs", type=int, default=6); ap.add_argument("--arms", default=""); ap.add_argument("--prompts", default=""); ap.add_argument("--deadline", default="")
+    ap.add_argument("--jobs", type=int, default=6); ap.add_argument("--arms", default=""); ap.add_argument("--prompts", default=""); ap.add_argument("--deadline", default=""); ap.add_argument("--skip-done", action="store_true")
     ap.add_argument("--scratch", default=os.environ.get("NS_SCRATCH", "/tmp"))
     a = ap.parse_args()
     if a.cmd == "prep":
@@ -383,6 +387,6 @@ def main():
     if a.cmd == "run":
         cache, ckpt, arms, out = a.args
         run(cache, ckpt, arms, out, a.jobs, set(a.arms.split(",")) if a.arms else None, a.scratch,
-            set(a.prompts.split(",")) if a.prompts else None, a.deadline)
+            set(a.prompts.split(",")) if a.prompts else None, a.deadline, a.skip_done)
 
 if __name__ == "__main__": main()
