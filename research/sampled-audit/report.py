@@ -10,7 +10,9 @@ def render(data):
     out = ['# U2: sampling coverage tables', '',
            'Conditional on fixed, provably invalid committed units and perfect rejection. '
            'These are not measured model-substitution probabilities. Cost fraction is '
-           'variable equal-cost unit work only, excluding receipts, traces, setup and dependencies.', '',
+           'variable equal-cost unit work only, excluding receipts, traces, setup and dependencies. '
+           'Displayed values are rounded: 100.0000% can be slightly below one; raw probabilities '
+           'are retained in registered.json.', '',
            '## U2: plain request table (N=1000, exact calculation)', '',
            'Window detection probability in percent. "All" includes whole-model, ablated-layer '
            'and quantized-layer strategies ONLY if every request is invalid under the pinned relation. '
