@@ -7,9 +7,13 @@ its no-wraparound argument, while nothing made the verifier check the cg it reco
 verifier-fixed gain the y floor relation  cg w - 2^F y - r = 0  holds in the Goldilocks field for a
 y that is not the integer floor. The review listed 22 such cases. This script:
 
-  A  rebuilds those 22 cases from the design equations alone (plain Python integers, written from
-     DESIGN.md section 4.4, not from the review's code), checks every witness range, and shows that
-     the rule "reject at derive unless |cg| < 2^24" turns each one into a reject;
+  A  rebuilds those 22 cases from the design equations (plain Python integers implementing
+     DESIGN.md section 4.4; it imports nothing from the review), checks every witness range, and
+     shows that the rule "reject at derive unless |cg| < 2^24" turns each one into a reject.
+     This is a reimplementation, not a blind replication: its author read the review's script
+     first, and the case parameters (o_0, the cg range) and the compatible-statement construction
+     are the review's. That the rule rejects the 22 cases is true by construction (each has
+     cg >= 2^52); the content of part A is that they ARE aliases when the rule is absent;
   B  checks the boundary: |cg| = 2^24 - 1 is admitted and the floor is then unique, |cg| = 2^24 is
      rejected, on both signs;
   C  checks the no-wrap bound the rule gives, at the extremes and on a fixed random sample;
