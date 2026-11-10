@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 388, in <module>
+    if __name__ == "__main__": main()
+                               ^^^^^^
+  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 382, in main
+    cache, ckpt, out = a.args; sys.exit(0 if check(cache, ckpt, out, a.scratch) else 1)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 260, in check
+    for (Si, oi, yi), (Sn, on, yn, _) in zip(RH.run_int(ih, xq, xk, xv, ar, br, zz, Wc, A, dtb, gain, {}),
+  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 192, in run
+    if float(np.abs(cg).max()) * (2.0 ** c["Fw"] + 1) >= float(L63): raise OverflowError("guard cg w")
+                    ^^
+UnboundLocalError: cannot access local variable 'cg' where it is not associated with a value
+Command exited with non-zero status 1
+	Command being timed: "taskset -c 0 python3 scaled_head.py check /home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling-scratch/cache stock runs/engine-check.json --scratch /home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling-scratch/cache/../fref2"
+	User time (seconds): 0.19
+	System time (seconds): 0.03
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.22
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 97564
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 13977
+	Voluntary context switches: 1
+	Involuntary context switches: 3
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

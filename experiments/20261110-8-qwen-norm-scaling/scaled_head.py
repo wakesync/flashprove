@@ -189,13 +189,13 @@ class Head:
             Rc = twoRC / sig if "rc" in ex else fdiv_ld(twoRC, sig)
             oRc = oL * Rc[:, None]
             if float(np.abs(oRc).max()) >= float(L63): raise OverflowError("guard oRc")
-            if float(np.abs(cg).max()) * (2.0 ** c["Fw"] + 1) >= float(L63): raise OverflowError("guard cg w")
             wv = oRc * LD(2) ** (c["Fw"] - c["RC"])
             if "w" not in ex: wv = np.floor(wv)
             zi = self.q(z[t], c["Fz"], "in_z")
             zr = zi * math.ldexp(1.0, -c["Fz"])
             cg = math.ldexp(1.0, c["Fcg"]) * gain_ * math.sqrt(D) * zr / (1.0 + np.exp(-zr))
             if "cg" not in ex: cg = np.rint(cg)
+            if float(np.abs(cg).max()) * (2.0 ** c["Fw"] + 1) >= float(L63): raise OverflowError("guard cg w")
             cgw = cg.astype(LD) * wv
             yv = cgw * LD(2) ** (c["Fy"] - c["Fw"] - c["Fcg"])
             if "y" not in ex: yv = np.floor(yv)
