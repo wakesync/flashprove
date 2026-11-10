@@ -1,6 +1,6 @@
 # Integer lowering of the Qwen head output and norm on real layer-0 weights (CPU, no proof)
 
-Issue #8, part of #32. PREREG: [PREREG.md](PREREG.md) (first commit 694dcd2, amendments A-1 to A-4). Results: [RESULTS.md](RESULTS.md); the registered result is the baseline reproduction, every later number was obtained under protocol deviation A-3. Built on PR #68 (`experiments/20261109-8-qwen-real-weights/`, on main), whose fetch code, prompts, pins and float reference are reused unchanged.
+Issue #8, part of #32. PREREG: [PREREG.md](PREREG.md) (first commit 694dcd2, amendments A-1 to A-5). Results: [RESULTS.md](RESULTS.md); the registered result is the baseline reproduction, every later number was obtained under protocol deviation A-3. The experiment is exploratory on two standards points (A-5): the PREREG has no Hypothesis section, and the registration commit also adds `prelook.py`. Built on PR #68 (`experiments/20261109-8-qwen-real-weights/`, on main), whose fetch code, prompts, pins and float reference are reused unchanged.
 
 ## What this is, in plain language
 
