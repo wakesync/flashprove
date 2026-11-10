@@ -39,6 +39,13 @@ def sh(argv, timeout=14400):
     return dict(argv=[str(a) for a in argv], exit=p.returncode, seconds=round(time.monotonic() - t, 3), stdout=p.stdout, stderr=p.stderr[-4000:])
 def st(x):
     return dict(n=len(x), median=statistics.median(x), sd=statistics.stdev(x) if len(x) > 1 else 0, min=min(x), max=max(x))
+def sh_to_file(argv, out_path, err_path):
+    """Run with stdout written straight to out_path (the binaries flush every line), so that a run
+    that is killed leaves what it finished. Returns what sh() returns."""
+    t = time.monotonic()
+    with open(out_path, 'w') as fo, open(err_path, 'w') as fe:
+        p = subprocess.run([str(x) for x in argv], cwd=root, stdout=fo, stderr=fe)
+    return dict(argv=[str(x) for x in argv], exit=p.returncode, seconds=round(time.monotonic() - t, 3), stdout=out_path.read_text(), stderr=err_path.read_text()[-4000:])
 def lines_of(text):
     out = []
     for l in text.splitlines():
@@ -108,8 +115,8 @@ def do_honest(stage):
 
 def do_hostile(stage, ub=False):
     if ub: ev[f'stage{stage}_compile_ubsan'] = compile_('stage1.cpp' if stage == 1 else 'm2.cpp', binary(stage, True), UB)
-    c = run_bin(stage, 1, 'hostile', ub)
-    (exp / f'stage{stage}-hostile-seed1{"-ubsan" if ub else ""}.jsonl').write_text(c['stdout'])
+    name = f'stage{stage}-hostile-seed1{"-ubsan" if ub else ""}'
+    c = sh_to_file(['taskset', '-c', CORES, str(binary(stage, ub).relative_to(root)), str(fixture(stage, 1).relative_to(root)), 'hostile'], exp / f'{name}.jsonl', work / f'{name}.stderr')
     ls = lines_of(c['stdout']); hs = [l for l in ls if l.get('mode') == 'hostile']
     by = {}
     for l in hs: by.setdefault(l['class'], [0, 0]); by[l['class']][0] += l['as_expected']; by[l['class']][1] += 1
