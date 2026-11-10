@@ -23,7 +23,7 @@ The fixed circuit shape, public output bindings, exact bit-range relations and s
 - Public: operator, F, the four outputs. Nothing else.
 - Committed and chosen freely by the prover: the four taps (the kernel), the three history words, the four new inputs, all remainders and range bits.
 
-A proof therefore shows only: **there exist a kernel, a history and inputs in [-S,S) for which the four-tap floor relation gives these four outputs.** It says nothing about a particular model's weights or a particular earlier chunk. In practice almost any in-range output vector can be proved: for example taps (0,0,0,-S) with new inputs X[t]=-y[t] (any history) give y[t]=floor(-S*X[t]/S)=-X[t], so any outputs in (-S,S].
+A proof therefore shows only: **there exist a kernel, a history and inputs in [-S,S) for which the four-tap floor relation gives these four outputs.** It says nothing about a particular model's weights or a particular earlier chunk. The outputs are not tied to any model: for example taps (0,0,0,-S) with new inputs X[t]=-y[t] (any history) give y[t]=floor(-S*X[t]/S)=-X[t], so any four outputs in (-S,S] have a witness. How much of the wider admitted output interval is reachable with other kernels was not measured.
 
 ## What is not proved
 

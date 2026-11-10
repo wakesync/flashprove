@@ -22,7 +22,7 @@ A one-hot selector proves k in [0,4096) and R equals the pinned row. Every outpu
 - Public: operator, F, the 128 (L2) or 256 (RMS) outputs.
 - Committed and chosen freely by the prover: the whole input vector x, its energy E, the key k, the selected coefficient R, all remainders and range bits.
 
-A proof therefore shows only: **there exists an in-range input vector, with mean square in the admitted domain, whose bounded norm gives these outputs.** It says nothing about which projection, model weights or token produced x. The outputs are more constrained than for the convolution or rotary (they must be a scaled copy of some in-range vector at a table coefficient), but the input is equally unbound. Binding x to committed weights and earlier layers is the job of the M3 statement (PR #70, draft), not of this PR. See the shared README and https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440.
+A proof therefore shows only: **there exists an in-range input vector, with mean square in the admitted domain, whose bounded norm gives these outputs.** It says nothing about which projection, model weights or token produced x. The outputs are more constrained than for the convolution or rotary (they must be the floored scaled values of some in-range vector at a table coefficient), but the input is equally unbound. Binding x to committed weights and earlier layers is the job of the M3 statement (PR #70, draft), not of this PR. See the shared README and https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440.
 
 ## What the verifier recomputes
 

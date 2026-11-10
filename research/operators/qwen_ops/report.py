@@ -18,46 +18,70 @@ HARDWARE='cpu-epyc-rome-kvm-16'
 BASE='4f7a876151c309f0159e88b18c8e286d4e1909c9'
 OPUS_REVIEW='https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440'
 ASTRA_REVIEW='https://github.com/wakesync/flashprove/pull/67#issuecomment-6756145013'
+ASTRA_REREVIEW='https://github.com/wakesync/flashprove/pull/67#issuecomment-6757637207'
+OPUS_REREVIEW='https://github.com/wakesync/flashprove/pull/67#issuecomment-6757721363'
 
-# Text blocks added by the review fix of PR #67 (wording and provenance only; no number below is computed here).
+# Text blocks added by the two review fixes of PR #67 (wording and provenance only; no number below is computed here).
+ENV_NOTE='''Note on ENV.json: its 48 file hashes describe the tree at the receipt commit `6bb270a`. The entries for the five README files under research/operators/qwen_ops and for report.py are therefore the hashes from before the review fixes. Those six files were later edited for wording only, and ENV.json was intentionally not regenerated. The other 42 hashed files, including proof.cpp and every table, still match it. Running report.py as documented rewrites ENV.json with the current host data and current file hashes, so a reproducer will see those six hashes change, and the host fields too on another machine (see "Reproduction and evidence provenance" at the end).
+
+'''
 BINDING=f'''## What a proof binds (read before the numbers)
 
 The public statement of every proof is only: the operator, F, the rotary position (zero for the other operators) and the claimed output vector. Everything else is a committed witness cell that the prover chooses freely. Nothing outside the proof fixes those cells: they are not tied to any model's weights, to a matmul output, or to an earlier chunk.
 
 | Operator | Public | Committed, chosen freely by the prover | What an accepting proof shows |
 |---|---|---|---|
-| Nonlinear | operator, F, six outputs | the scalar X in [-8,8), its quotient/remainder, the one-hot selector | there exists an in-domain X whose six pinned table rows are these outputs |
+| Nonlinear | operator, F, six outputs | the integer scalar X in [-8S,8S), that is X/S in [-8,8) with S = 2^F, its quotient/remainder, the one-hot selector | there exists an in-domain X whose six pinned table rows are these outputs |
 | Convolution | operator, F, four outputs | the four taps (the kernel), the three history words, the four new inputs, remainders | there exist a kernel, a history and inputs in [-S,S) for which the four-tap floor relation gives these outputs |
 | L2 / RMS | operator, F, 128 / 256 outputs | the whole input vector, its energy, key, selected coefficient, remainders | there exists an in-range input vector, with mean square in the admitted domain, whose bounded norm gives these outputs |
 | Rotary | operator, F, position, 256 outputs | all 256 inputs, remainders (the coefficients are fixed by the public position) | there exist inputs in [-S,S) whose partial rotation at this position gives these outputs |
 
 In words: a proof shows "there exist inputs (and, for the convolution, a kernel and a history) in range for which this relation gives these outputs", and nothing about a particular model's weights or a particular earlier chunk.
 
-For the convolution and the rotary this means **almost any in-range output vector can be proved**. The nonlinear outputs must form one consistent table row and the norm outputs must be a scaled copy of some in-range vector at a table coefficient, so those two are more constrained, but their inputs are equally unbound. The evidence is the opus reviewer's three complete proofs, built with the unmodified prover and accepted by the unchanged verifier ({OPUS_REVIEW}). They are the reviewer's runs, not committed run files of this PR:
+For the convolution and the rotary the consequence is strongest. **The statements do not bind the inputs or the kernel, and the reviewer's constructions below show that outputs picked by the reviewer (chosen for the convolution; drawn at random and then adjusted in 3 of 256 words for the rotary), not computed from any model's weights or inputs, can be proved, and that the same public convolution outputs can be proved with a different kernel.** How much of the in-range output space can be reached was not measured, and the range checks alone do not describe it. What was demonstrated is three complete proofs by the opus reviewer, built with the unmodified prover and accepted by the unchanged verifier ({OPUS_REVIEW}). They are the reviewer's runs, not committed run files of this PR (S = 2^F):
 
-- convolution with outputs of the reviewer's choosing, (S, -S+1, 1234, -77), using taps (0,0,0,-S);
+- convolution with four outputs of the reviewer's choosing, (S, -S+1, 1234, -77), using taps (0,0,0,-S). By the same arithmetic (each output is minus one new input) any four outputs in (-S, S] have a witness; one such proof was run;
 - convolution reproducing the seed-3 public outputs with a different kernel (all taps -S) and freshly solved history and inputs;
-- rotary at position 517 for a random 256-word target, after moving 3 of the 256 target words by 1 (29 of 32 pairs were reachable exactly before that).
+- rotary at position 517 for one random 256-word target, after moving 3 of the 256 target words by 1. The target words were sampled in [-S/2, S/2) (the range as read from the reviewer's harness by the astra re-review, {ASTRA_REREVIEW}). Before that move, the reviewer's search hit 29 of the 32 rotated pairs exactly and no proof was attempted, so an exact arbitrary rotary target was not reached.
+
+The rotary relation does not reach every in-range output: in the astra reviewer's arithmetic example (same link), at F12, position 517, pair 0, the target pair (4095, 4095) would need an input below -4852, outside [-S, S). The nonlinear outputs must form one consistent table row and the norm outputs must be the floored scaled values of some in-range vector at a table coefficient, so those two are more constrained, but their inputs are equally unbound.
 
 The committed history-substitution control below is the narrowest case of the same fact. Binding the kernel and inputs to committed weights and to the previous chunk is the job of the M3 statement (PR #70, draft) and the state-commitment work (#34), not of this PR.
 
 '''
 SECURITY=f'''## Security setting (research only)
 
-"Research target 10 bits" is a **per-round** target that includes 6 bits of proof-of-work on the query rounds: `Plan::holds` accepts a round when its error, times 2^-work, is at most 2^-10. The weakest query rounds are about 4.3 to 4.5 bits before the work factor (astra reviewer, {ASTRA_REVIEW}: 4.30 to 4.49 bits across the five profiles). Added over all rounds of a whole proof, the union bound is about 2^-7.3, roughly 1 in 160 (opus reviewer's calculation, 2^-7.33 over 27 rounds, {OPUS_REVIEW}). The review-fix lane recomputed it from the same plan objects (sum over every plan round of the round's whole error, with draw accounting, times 2^-work, times its count, for the F12 fixture of each profile) and got 2^-7.33 for the convolution (27 rounds) and 2^-7.38 for the other four profiles (31 or 32 rounds), about 1 in 160 to 1 in 167. That computation is reported in the PR thread and is not a committed run file. This is a research setting. The rejection counts below do not show production security.
+"Research target 10 bits" is a **per-round** target that includes 6 bits of proof-of-work on the query rounds: `Plan::holds` accepts a round when its error, times 2^-work, is at most 2^-10. The weakest query rounds are about 4.3 to 4.5 bits before the work factor (astra reviewer, {ASTRA_REVIEW}: 4.30 to 4.49 bits across the five profiles).
+
+**No whole-proof soundness figure has been established for these profiles at this research setting.** The reviewers also added up the per-round errors as the plan charges them (each round's charged error, times 2^-work, times its count). That sum is a diagnostic only. The repository's own accounting code computes the same kind of sum (`blocks/numbers/accounting.h`: `account().sum`, which its printer labels "all rounds' errors added" under "FOR INFORMATION"; the opus re-review reports that its sum equals `account().sum`; the operator harness of this PR does not call that printer, so no committed run file contains the figure). That code says about such sums that they decide nothing and that in some rounds the charge is the largest of several events' chances and not their sum, "so none is a union bound over all events". The same code prints "no figure here is a security level". A whole-proof soundness figure would also depend on the attacker's hash-query budget (the compiled bound described at the top of that file), which this sum does not include, and the code labels the proof-of-work factor an assumption for these hash chains. The reviewers' diagnostic sums, each from the reviewer's own scratch calculation and not from a committed run file of this PR:
+
+- first opus review ({OPUS_REVIEW}): about 2^-7.3 over the 27 rounds of the convolution profile;
+- astra re-review ({ASTRA_REREVIEW}): 2^-7.326 for the convolution (27 rounds), 2^-7.382 for nonlinear and rotary (31 rounds), 2^-7.384 for L2 and RMS (32 rounds), at F12, seed 7;
+- opus re-review ({OPUS_REREVIEW}): the same three values.
+
+The two linked opus comments, and earlier text of this section that followed the first of them, describe this sum as a union bound and as a 1-in-N chance for one proof. That reading is not supported, for the reasons above, and is withdrawn here: the sum is a diagnostic, not a bound over all events and not a security level. This is a research setting. The rejection counts below do not show production security. Nobody attempted a grinding attack on the weakest query rounds. The hostile suite shows that each constraint exists and is wired to the right cell (see "Hostile scope" below).
 
 "Fixed test coins" (`ToyCoins(seed)`) are the prover's own randomness: the salt and the masks. Every verifier challenge is derived from the transcript by hashing (BLAKE2b Fiat-Shamir over the bound configuration, relation list, salt, roots, prior messages and nonces). Fixed coins make runs reproducible and remove hiding; they do not weaken soundness.
 
 '''
-PROVENANCE='''**Deviation, registration order (added by the review fix).** The original thresholds were registered before any code (first commit `0f0153f`, which contains only the PREREG). A1 was committed in `50d454f`, before the rotary code that arrives in `c8e2a42`. **A2 was not registered before its code:** A2 and the typed-profile implementation it covers first appear together in `c8e2a42`, before the final measurement commit `5e93627`. The raw run files carry no execution timestamps, so the order of the runs themselves cannot be shown from the repository; only commit order can. The final profiles are therefore "registered thresholds; A2 profile co-committed with its code", not "preregistered final profiles". A2 changed no threshold or input distribution. See the dated note appended to PREREG.md.\n\nA1 registered rotary before its code; A2 added typed transcript profiles, expanded malformed-statement tests, and a final unified rerun before measuring that profile. '''
+PROVENANCE='''**Deviation, registration order (added by the review fix).** The original thresholds were registered before any code (first commit `0f0153f`, which contains only the PREREG). A1 was committed in `50d454f`, before the rotary code that arrives in `c8e2a42`. **A2 was not registered before its code:** A2 and the typed-profile implementation it covers first appear together in `c8e2a42`, before the final measurement commit `5e93627`. The raw run files carry no execution timestamps, so the order of the runs themselves cannot be shown from the repository; only commit order can. The final profiles are therefore "registered thresholds; A2 profile co-committed with its code", not "preregistered final profiles". A2 changed no threshold or input distribution. See the dated note appended to PREREG.md.\n\nWhat the commits show about A2: its typed transcript profiles and expanded malformed-statement tests arrive in `c8e2a42` together with the A2 text, and the final unified n=10 run files for every profile are first committed in `5e93627`. '''
+FOLLOWUPS='''Follow-ups not done in this PR (each needs new runs or new code):
+
+- Put the table manifest hashes into the profile text and the configuration digest (this changes the transcript and every proof).
+- Commit the reviewer's accepted constructions (the two convolution proofs and the rotary proof in "What a proof binds") as controls in the suite.
+- Record start and end timestamps in the raw run files.
+- Run a grinding attack on the weakest query rounds.
+- Commit a receipt of the per-round accounting for each profile (the plan dump, the exact command and its output), so that the diagnostic sums in "Security setting" no longer rest on reviewers' scratch programs.
+
+'''
 
 
-STATUS_NOTE='research only; kernel/taps, history and all inputs are prover-chosen (no external identity), so almost any in-range conv or rotary output is provable'
+STATUS_NOTE='research only; kernel/taps, history and all inputs are prover-chosen (no external identity); a reviewer proved conv outputs of their own choosing and one random rotary target after moving 3 of its 256 words by 1; reachable output range not measured'
 SUMMARY=('Local tuple relations only. Public: operator, F, rotary position, outputs. The convolution kernel (taps), its history and every input '
          'are chosen freely by the prover, so a proof shows only that some in-range inputs give these outputs, not a particular model\'s weights '
          'or earlier chunk; binding is for the M3 statement (PR #70) and #34. No model support or production-security claim.')
-CONDITIONS=('CPU-only synthetic inputs; research target 10 bits is per round incl. 6 bits proof-of-work, a whole proof is weaker '
-            '(reviewer union bound in RESULTS), not production security; thresholds registered before code, A2 profile co-committed with its code '
+CONDITIONS=('CPU-only synthetic inputs; research target 10 bits is per round incl. 6 bits proof-of-work; no whole-proof soundness figure is established '
+            '(the reviewers\' sums of per-round errors in RESULTS are diagnostics, not a bound or a security level), not production security; thresholds registered before code, A2 profile co-committed with its code '
             '(no run timestamps); explicit negative history control')
 
 
@@ -101,8 +125,9 @@ def report(data):
     text+='Their nonlinear and rotary tables are deterministic integer artifacts, with no runtime float evaluation.\n'
     text+='All final honest batches and sampled local-relation attacks meet their registered criteria.\n'
     text+='Only the operator, F, the rotary position and the outputs are public. The prover chooses every input, and for the convolution also the kernel (taps) and the history.\n'
-    text+='So a proof says nothing about a particular model\'s weights or a particular earlier chunk, and for the convolution and the rotary almost any in-range output vector can be proved.\n'
+    text+='So a proof says nothing about a particular model\'s weights or a particular earlier chunk, and for the convolution and the rotary a reviewer proved outputs of their own choosing (for the rotary, one random target after moving 3 of its 256 words by 1); how much of the in-range output space is reachable was not measured.\n'
     text+='Issue #35 therefore remains PARTIAL: this is research operator machinery, not a Qwen model proof.\n\n'
+    text+=ENV_NOTE
     text+=BINDING
     text+=SECURITY
     text+='## Verdict and final proof measurements\n\n'
@@ -143,8 +168,9 @@ def report(data):
     text+=PROVENANCE
     text+='Development batches are preserved under runs/milestones, not pooled with final timings. The conservative O4096 selector backend, restricted norm domain and fixed decay examples were registered before code (`0f0153f`), not post hoc error-budget changes. No failed sample or warmup was removed.\n\n'
     text+='External commitment identity is the principal gap: no matmul provenance, checkpoint-bound taps/constants or prior-chunk history root. Binding the kernel and inputs to committed weights and to the previous chunk is the job of the M3 statement (PR #70, draft) and the state-commitment work (#34), not of this PR. Conv is only one channel/four tokens. Norm lacks learned gains, epsilon, nearzero support and DeltaNet q extra scaling. No sigmoid-times-mixer gate composition, learned A_log/dt_bias, hybrid layer planner, main-prover/CUDA integration, production security/hiding, Lean extension or real-weight fidelity. Upstream no-expert/dq!=d/head256 admission limits are untouched; exact locations and required work are in research/operators/qwen_ops/LIMITS-AND-ROTARY.md. Rotary beyond the public-position text-only1024 profile remains absent.\n\n'
+    text+=FOLLOWUPS
     text+='## Reproduction and evidence provenance\n\nSee research/operators/qwen_ops/README.md and each gadget README. Run record.py final and record.py ubsan-all through the host heavy-job gate with taskset-c0-5; run check_tables.py, check_rotary_tables.py, crosscheck.py and fidelity.py for each operator. Run report.py after all receipts exist. All commands require only g++, Python standard library and the repository; no weights, GPU or paid API.\n\n'
-    text+=f"Release proof implementation commit `{build['source_commit']}`, sanitizer commit `{san['source_commit']}`; identical proof.cpp SHA-256 `{build['proof_cpp_sha256']}`. ENV.json pins toolchain, source hashes and compiled artifacts as of the receipt; its hashes of README files and report.py describe the receipt commit and were intentionally not regenerated by the later wording-only review fix (proof.cpp, tables and runs are unchanged). Raw lines and distribution summaries are in runs/. research/results.yaml links to the receipt commit, not a future squash commit. Independent replication and review are still required.\n"
+    text+=f"Release proof implementation commit `{build['source_commit']}`, sanitizer commit `{san['source_commit']}`; identical proof.cpp SHA-256 `{build['proof_cpp_sha256']}`. ENV.json pins toolchain, source hashes and compiled artifacts as of the receipt; its hashes of README files and report.py describe the receipt commit and were intentionally not regenerated by the later wording-only review fixes (proof.cpp, tables and runs are unchanged). report.py itself rewrites ENV.json whenever it is run, with the current host data and current file hashes, so a reproducer will see those six hashes change. Raw lines and distribution summaries are in runs/. research/results.yaml links to the receipt commit, not a future squash commit. Independent replication and review are still required.\n"
     (EXP/'RESULTS.md').write_text(text)
     (RUNS/'aggregate.json').write_text(json.dumps(data,indent=2)+'\n')
 
