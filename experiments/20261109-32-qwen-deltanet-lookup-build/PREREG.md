@@ -64,3 +64,12 @@ The two-lookup composition is buildable on the merged M1b machinery and sound, a
 
 ## Amendments
 (empty at registration)
+
+**2026-11-10T02:31Z, before any D = 128 proof has run. No acceptance threshold is changed.**
+Facts: the stage 1 code was committed at 02:15Z (e3d3f81). The stage 1 batch (honest seeds 1..10, hostile suite, UBSan suite) was queued in the host's heavy-job gate at 02:14:58Z and is still waiting for a slot; other lanes hold both slots. No D = 128 proof of this experiment exists yet, honest or hostile.
+The kill criterion's clock times (02:50Z composition stop, 03:40Z stage 2 stop, 04:08Z hard stop) were written as if the lane could run when its code was ready. They did not allow for time spent waiting in the shared gate. I am not rewriting them. What I commit to instead, now, before seeing any result:
+- If 02:50Z passes with the stage 1 batch still queued or running, RESULTS.md records that the composition stop rule's clock condition was met, with the gate timestamps. I will NOT then report the composition as "not built or not sound" and will not build the arm A fallback, because the cause is queueing and that report would be untrue. The batch that is already queued runs to its end, once, unchanged. Every H1 and H2 number is then labelled as obtained after the registered stop time, and this is listed first under "Deviations from PREREG". A reader who applies the kill criterion strictly should read H1 and H2 as not established inside the registered box.
+- The same holds for the 04:08Z hard stop: the queued stage 1 batch may finish after it. No new experiment is started after 04:08Z.
+- The 03:40Z stage 2 rule stands as written: with no honest T = 16 accept by then, H4 is reported as not passed, with exactly what ran.
+- No case is added to or removed from a suite because of its outcome. One case was added after registration and before any D = 128 run: an acceptance control for the hostile prover's own code path (the research prover with no tamper must be accepted), so that a broken research prover cannot make rejections look like detections.
+Also recorded here: three smoke runs of a debug build (D = 16, not the registered shape) ran at 02:06Z to 02:13Z to find compile and logic errors. They are not results, are not in runs/, and no number in RESULTS.md comes from them. They ran outside the heavy-job gate, which the lane rules do not allow for proving runs; that is a process error of this lane and is reported as such.
