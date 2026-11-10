@@ -1,0 +1,186 @@
+{
+ "_label": "REVIEWER CONSTRUCTIONS reproduced on this experiment's own lowerings; not results, not a forged proof (none exists).",
+ "_links": {
+  "astra": "https://github.com/wakesync/flashprove/pull/74#issuecomment-6759241337",
+  "opus": "https://github.com/wakesync/flashprove/pull/74#issuecomment-6759761745"
+ },
+ "A_astra_all_ones_alias": {
+  "C4P-Fo24": {
+   "rng_class": {
+    "honest_ok": true,
+    "honest_failing": [],
+    "alias_all_hold": true,
+    "alias_failing": [],
+    "y_differs": true,
+    "max_abs_y_diff": 1408,
+    "max_abs_y_diff_real": 0.0013427734375,
+    "sigma": 189812,
+    "Rc_honest": 379626124996,
+    "Rc_alias": 97563914101597,
+    "max_abs_w_alias": 88,
+    "reciprocal_over_integers": 18446744069414584321
+   },
+   "tight_w_2_16": {
+    "honest_ok": true,
+    "honest_failing": [],
+    "alias_all_hold": true,
+    "alias_failing": [],
+    "y_differs": true,
+    "max_abs_y_diff": 1408,
+    "max_abs_y_diff_real": 0.0013427734375,
+    "sigma": 189812,
+    "Rc_honest": 379626124996,
+    "Rc_alias": 97563914101597,
+    "max_abs_w_alias": 88,
+    "reciprocal_over_integers": 18446744069414584321
+   }
+  },
+  "X3-Fo29": {
+   "rng_class": {
+    "honest_ok": true,
+    "honest_failing": [],
+    "alias_all_hold": true,
+    "alias_failing": [],
+    "y_differs": true,
+    "max_abs_y_diff": 45248,
+    "max_abs_y_diff_real": 0.04315185546875,
+    "sigma": 6074000,
+    "Rc_honest": 11585239,
+    "Rc_alias": 3037012584484,
+    "max_abs_w_alias": 2828,
+    "reciprocal_over_integers": 18446744069414584321
+   },
+   "tight_w_2_16": {
+    "honest_ok": true,
+    "honest_failing": [],
+    "alias_all_hold": true,
+    "alias_failing": [],
+    "y_differs": true,
+    "max_abs_y_diff": 45248,
+    "max_abs_y_diff_real": 0.04315185546875,
+    "sigma": 6074000,
+    "Rc_honest": 11585239,
+    "Rc_alias": 3037012584484,
+    "max_abs_w_alias": 2828,
+    "reciprocal_over_integers": 18446744069414584321
+   }
+  },
+  "X3-Fo30": {
+   "rng_class": {
+    "honest_ok": false,
+    "honest_failing": [
+     "e1 in counted keys"
+    ],
+    "alias_all_hold": false,
+    "alias_failing": [
+     "e1 in counted keys"
+    ],
+    "y_differs": true,
+    "max_abs_y_diff": 22624,
+    "max_abs_y_diff_real": 0.021575927734375,
+    "sigma": 12148001,
+    "Rc_honest": 5792619,
+    "Rc_alias": 1518506167241,
+    "max_abs_w_alias": 1414,
+    "reciprocal_over_integers": 18446744069414584321
+   },
+   "tight_w_2_16": {
+    "honest_ok": false,
+    "honest_failing": [
+     "e1 in counted keys"
+    ],
+    "alias_all_hold": false,
+    "alias_failing": [
+     "e1 in counted keys"
+    ],
+    "y_differs": true,
+    "max_abs_y_diff": 22624,
+    "max_abs_y_diff_real": 0.021575927734375,
+    "sigma": 12148001,
+    "Rc_honest": 5792619,
+    "Rc_alias": 1518506167241,
+    "max_abs_w_alias": 1414,
+    "reciprocal_over_integers": 18446744069414584321
+   }
+  },
+  "X3-recounted-Fo30": {
+   "rng_class": {
+    "honest_ok": true,
+    "honest_failing": [],
+    "alias_all_hold": true,
+    "alias_failing": [],
+    "y_differs": true,
+    "max_abs_y_diff": 22624,
+    "max_abs_y_diff_real": 0.021575927734375,
+    "sigma": 12148001,
+    "Rc_honest": 5792619,
+    "Rc_alias": 1518506167241,
+    "max_abs_w_alias": 1414,
+    "reciprocal_over_integers": 18446744069414584321
+   },
+   "tight_w_2_16": {
+    "honest_ok": true,
+    "honest_failing": [],
+    "alias_all_hold": true,
+    "alias_failing": [],
+    "y_differs": true,
+    "max_abs_y_diff": 22624,
+    "max_abs_y_diff_real": 0.021575927734375,
+    "sigma": 12148001,
+    "Rc_honest": 5792619,
+    "Rc_alias": 1518506167241,
+    "max_abs_w_alias": 1414,
+    "reciprocal_over_integers": 18446744069414584321
+   }
+  }
+ },
+ "B_opus_real_value_alias": {
+  "C4P": {
+   "prompt": "p01-ordinary-short",
+   "token": 12,
+   "heads": 48,
+   "honest_ok": 48,
+   "alias_passes_every_relation_and_counted_range_with_y_changed": 48,
+   "alias_failing_checks": {},
+   "max_abs_y_diff_real": 51.14636707305908
+  },
+  "X3": {
+   "prompt": "p01-ordinary-short",
+   "token": 12,
+   "heads": 48,
+   "honest_ok": 48,
+   "alias_passes_every_relation_and_counted_range_with_y_changed": 0,
+   "alias_failing_checks": {
+    "w in its class (|w| < 8388608)": 48,
+    "y in public class 2^31": 47
+   },
+   "max_abs_y_diff_real": null
+  }
+ },
+ "C_memory_read_interval": {
+  "C4P": {
+   "opus ||k||_1 <= sqrt(128) 2^12": {
+    "aP at honest class (log2)": 51.5,
+    "aP at proved bound (log2)": 56.5,
+    "wrap possible at proved bound (>= p/2)": false
+   },
+   "astra ||k||_1 <= 128 x 2^12": {
+    "aP at honest class (log2)": 55.0,
+    "aP at proved bound (log2)": 60.0,
+    "wrap possible at proved bound (>= p/2)": false
+   }
+  },
+  "X3": {
+   "opus ||k||_1 <= sqrt(128) 2^12": {
+    "aP at honest class (log2)": 58.5,
+    "aP at proved bound (log2)": 74.5,
+    "wrap possible at proved bound (>= p/2)": true
+   },
+   "astra ||k||_1 <= 128 x 2^12": {
+    "aP at honest class (log2)": 62.0,
+    "aP at proved bound (log2)": 78.0,
+    "wrap possible at proved bound (>= p/2)": true
+   }
+  }
+ }
+}

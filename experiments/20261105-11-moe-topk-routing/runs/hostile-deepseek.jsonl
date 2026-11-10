@@ -1,0 +1,38 @@
+{"mode": "honest", "accept": true, "E": 384, "k": 6, "h": 16, "T": 4, "columns_used": 247364, "selection_columns_per_token": 24689.0, "aggregation_columns_per_token": 37152.0, "log_length": 18, "relations": 499496, "relation_terms": 1106496, "proof_bytes": 3176176, "build_s": 0.116, "prove_s": 3.207, "verify_s": 0.874, "peak_rss_kb": 621592}
+{"mode": "hostile", "class": "a1-wrong-expert", "attack": "k-th selected replaced by best unselected", "violated_relations": 1, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a1-wrong-expert", "attack": "first selected replaced by best unselected, re-sorted by key", "violated_relations": 1, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a1-wrong-expert", "attack": "lowest-scored expert replaces the k-th selected", "violated_relations": 378, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a2-tie-order", "attack": "selected ranks 0 and 1 (exact corrected-score tie) swapped", "violated_relations": 1, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a2-tie-order", "attack": "boundary tie: higher-index tied expert selected instead of lower", "violated_relations": 1, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a3-bias-in-weights", "attack": "weights from s+b (gathered score wire carries s+b)", "violated_relations": 9216, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a4-unnormalized", "attack": "weights = 2^12*RS*s/2^16, claimed denominator 2^16", "violated_relations": 24, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a5-duplicate", "attack": "rank-0 expert also in slot 1", "violated_relations": 3, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a5-duplicate", "attack": "rank-0 expert also in the last slot", "violated_relations": 2, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a6-k-minus-1", "attack": "last slot empty (k-1 experts)", "violated_relations": 380, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a6-k-plus-1", "attack": "last slot holds two experts (k+1 experts)", "violated_relations": 2, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a7-public", "attack": "s[p0] += 1 (selected expert)", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a7-public", "attack": "s[best unselected] += 1", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a7-public", "attack": "b[p0] -= 1", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a7-public", "attack": "X[p0][0] += 1 (every binding)", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a7-public", "attack": "y_1[0] += 1", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a7-public", "attack": "y_T[h-1] -= 1", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "flip one bit", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "truncate", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "truncate", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "truncate", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "truncate", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "truncate", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-bytes", "attack": "trailing byte", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-label", "attack": "verify under the DeltaNet wide transcript label", "violated_relations": 0, "output_claim_differs": false, "rejected": true}
+{"mode": "hostile", "class": "a8-shape", "attack": "honest proof against the k-1 statement", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile", "class": "a8-shape", "attack": "honest proof against the k+1 statement", "violated_relations": 0, "output_claim_differs": true, "rejected": true}
+{"mode": "hostile-summary", "rejected": 36, "total": 36, "peak_rss_kb": 761864}

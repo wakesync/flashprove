@@ -1,0 +1,88 @@
+{
+ "bit_identical": {
+  "p01-ordinary-short": {
+   "tokens": 13,
+   "identical": true
+  },
+  "p02-ordinary-paragraph": {
+   "tokens": 107,
+   "identical": true
+  },
+  "p03-repeat-word": {
+   "tokens": 512,
+   "identical": true
+  },
+  "p04-repeat-punct": {
+   "tokens": 64,
+   "identical": true
+  },
+  "p05-code": {
+   "tokens": 144,
+   "identical": true
+  },
+  "p06-digits": {
+   "tokens": 465,
+   "identical": true
+  },
+  "p07-chat-ordinary": {
+   "tokens": 23,
+   "identical": true
+  },
+  "p08-chat-refusal": {
+   "tokens": 39,
+   "identical": true
+  },
+  "p09-multilingual": {
+   "tokens": 21,
+   "identical": true
+  },
+  "p10-long-mixed": {
+   "tokens": 1008,
+   "identical": true
+  }
+ },
+ "all_exact": {
+  "p01-ordinary-short": {
+   "max_rel_y": 1.0196314263364133e-15,
+   "max_rel_S": 7.661652428925623e-16
+  },
+  "p02-ordinary-paragraph": {
+   "max_rel_y": 8.751738716093469e-16,
+   "max_rel_S": 1.3628623121037416e-15
+  },
+  "p03-repeat-word": {
+   "max_rel_y": 2.424873888022097e-15,
+   "max_rel_S": 5.765467064137889e-15
+  },
+  "p04-repeat-punct": {
+   "max_rel_y": 5.005312022737979e-15,
+   "max_rel_S": 1.1641263314929657e-15
+  },
+  "p05-code": {
+   "max_rel_y": 1.0541409430268844e-15,
+   "max_rel_S": 1.683328960060837e-15
+  },
+  "p06-digits": {
+   "max_rel_y": 1.2025343981949885e-15,
+   "max_rel_S": 2.0650538201049094e-15
+  },
+  "p07-chat-ordinary": {
+   "max_rel_y": 1.148622519216665e-15,
+   "max_rel_S": 8.244223211862339e-16
+  },
+  "p08-chat-refusal": {
+   "max_rel_y": 1.0862507920850622e-15,
+   "max_rel_S": 8.697218846518439e-16
+  },
+  "p09-multilingual": {
+   "max_rel_y": 8.407957918850634e-16,
+   "max_rel_S": 4.3171127574829673e-16
+  },
+  "p10-long-mixed": {
+   "max_rel_y": 8.63757351096398e-16,
+   "max_rel_S": 1.8345218559657043e-15
+  }
+ },
+ "pass_a": true,
+ "pass_b": true
+}

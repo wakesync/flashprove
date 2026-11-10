@@ -1,0 +1,10 @@
+prep stock p01-ordinary-short
+prep stock p02-ordinary-paragraph
+prep stock p03-repeat-word
+prep stock p04-repeat-punct
+prep stock p05-code
+prep stock p06-digits
+prep stock p07-chat-ordinary
+prep stock p08-chat-refusal
+prep stock p09-multilingual
+prep stock p10-long-mixed

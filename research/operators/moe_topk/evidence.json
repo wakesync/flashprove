@@ -1,0 +1,2275 @@
+{
+ "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+ "python": "3.12.3",
+ "cpu_count": 16,
+ "pinned_cores": "0-5",
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "base": "0344ae53c77570d4520b51af779956e839ab397a",
+ "fixtures": {
+  "glm1": {
+   "meta": {
+    "arm": "glm",
+    "seed": 1,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       180,
+       250,
+       102,
+       206,
+       3,
+       140,
+       15,
+       1
+      ],
+      "w": [
+       1298,
+       1376,
+       1398,
+       1238,
+       1274,
+       1221,
+       1207,
+       1225
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       187,
+       270,
+       250,
+       133,
+       273,
+       225,
+       186,
+       3
+      ],
+      "w": [
+       1379,
+       1363,
+       1320,
+       1268,
+       1261,
+       1255,
+       1186,
+       1204
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       18,
+       171,
+       110,
+       126,
+       225,
+       196,
+       231,
+       144
+      ],
+      "w": [
+       1309,
+       1339,
+       1309,
+       1306,
+       1273,
+       1232,
+       1239,
+       1228
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       105,
+       180,
+       156,
+       197,
+       143,
+       231,
+       282,
+       7
+      ],
+      "w": [
+       1383,
+       1396,
+       1294,
+       1316,
+       1215,
+       1259,
+       1201,
+       1171
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "7364d980f4c5a4e6c9b37008145d3994cb7b06f5443430eee30d53b13287d4a2"
+  },
+  "glm2": {
+   "meta": {
+    "arm": "glm",
+    "seed": 2,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       88,
+       184,
+       204,
+       93,
+       145,
+       117,
+       178,
+       246
+      ],
+      "w": [
+       1323,
+       1309,
+       1318,
+       1239,
+       1300,
+       1263,
+       1252,
+       1233
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       50,
+       143,
+       33,
+       142,
+       112,
+       77,
+       14,
+       210
+      ],
+      "w": [
+       1392,
+       1360,
+       1290,
+       1242,
+       1277,
+       1190,
+       1266,
+       1220
+      ],
+      "bias_changes_selection": false
+     },
+     {
+      "idx": [
+       28,
+       119,
+       74,
+       73,
+       10,
+       180,
+       215,
+       151
+      ],
+      "w": [
+       1303,
+       1375,
+       1283,
+       1283,
+       1264,
+       1310,
+       1207,
+       1211
+      ],
+      "bias_changes_selection": false
+     },
+     {
+      "idx": [
+       149,
+       206,
+       211,
+       212,
+       15,
+       59,
+       224,
+       8
+      ],
+      "w": [
+       1341,
+       1341,
+       1326,
+       1313,
+       1288,
+       1211,
+       1186,
+       1230
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "1c0e3c9d7286915cd09baa86d4b38985dbdffd448c8980641390ee1f518dd482"
+  },
+  "glm3": {
+   "meta": {
+    "arm": "glm",
+    "seed": 3,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       28,
+       29,
+       54,
+       165,
+       159,
+       278,
+       55,
+       160
+      ],
+      "w": [
+       1305,
+       1363,
+       1259,
+       1360,
+       1278,
+       1220,
+       1218,
+       1233
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       42,
+       227,
+       19,
+       249,
+       51,
+       208,
+       120,
+       43
+      ],
+      "w": [
+       1340,
+       1364,
+       1266,
+       1284,
+       1264,
+       1222,
+       1235,
+       1260
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       72,
+       177,
+       30,
+       142,
+       62,
+       267,
+       17,
+       186
+      ],
+      "w": [
+       1350,
+       1330,
+       1289,
+       1318,
+       1277,
+       1250,
+       1199,
+       1224
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       4,
+       189,
+       273,
+       120,
+       143,
+       176,
+       18,
+       25
+      ],
+      "w": [
+       1325,
+       1360,
+       1312,
+       1298,
+       1273,
+       1196,
+       1256,
+       1216
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "5d21b867cbbc95e5e5e12ee1878842b161c4637e8c4a32e2ab64f270707fffde"
+  },
+  "glm4": {
+   "meta": {
+    "arm": "glm",
+    "seed": 4,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       19,
+       168,
+       210,
+       155,
+       178,
+       250,
+       244,
+       9
+      ],
+      "w": [
+       1312,
+       1351,
+       1313,
+       1294,
+       1218,
+       1279,
+       1222,
+       1246
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       41,
+       86,
+       45,
+       255,
+       224,
+       233,
+       260,
+       177
+      ],
+      "w": [
+       1370,
+       1339,
+       1216,
+       1291,
+       1246,
+       1257,
+       1252,
+       1265
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       25,
+       233,
+       241,
+       152,
+       41,
+       43,
+       35,
+       117
+      ],
+      "w": [
+       1334,
+       1342,
+       1329,
+       1287,
+       1268,
+       1212,
+       1256,
+       1209
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       62,
+       172,
+       50,
+       155,
+       38,
+       241,
+       60,
+       141
+      ],
+      "w": [
+       1333,
+       1322,
+       1253,
+       1268,
+       1277,
+       1246,
+       1235,
+       1303
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "ffd7ac5b2cfd258fd3d693deb652dbd8a1e8372d7fa97500f7700f3f412dcfc6"
+  },
+  "glm5": {
+   "meta": {
+    "arm": "glm",
+    "seed": 5,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       189,
+       285,
+       255,
+       263,
+       20,
+       228,
+       127,
+       118
+      ],
+      "w": [
+       1295,
+       1347,
+       1342,
+       1266,
+       1243,
+       1269,
+       1248,
+       1226
+      ],
+      "bias_changes_selection": false
+     },
+     {
+      "idx": [
+       11,
+       18,
+       113,
+       52,
+       20,
+       149,
+       34,
+       107
+      ],
+      "w": [
+       1345,
+       1372,
+       1363,
+       1245,
+       1336,
+       1183,
+       1186,
+       1207
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       209,
+       237,
+       19,
+       130,
+       215,
+       33,
+       161,
+       135
+      ],
+      "w": [
+       1400,
+       1395,
+       1254,
+       1294,
+       1208,
+       1266,
+       1230,
+       1189
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       173,
+       189,
+       153,
+       265,
+       282,
+       74,
+       73,
+       2
+      ],
+      "w": [
+       1316,
+       1377,
+       1299,
+       1258,
+       1260,
+       1248,
+       1260,
+       1219
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "579d704d5dea4b23279495ee1ecefbce9c1110fd60d212dd19ff04597661ff9a"
+  },
+  "glm6": {
+   "meta": {
+    "arm": "glm",
+    "seed": 6,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       125,
+       270,
+       13,
+       130,
+       244,
+       277,
+       216,
+       186
+      ],
+      "w": [
+       1367,
+       1363,
+       1313,
+       1217,
+       1251,
+       1299,
+       1226,
+       1199
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       264,
+       275,
+       183,
+       162,
+       221,
+       191,
+       141,
+       56
+      ],
+      "w": [
+       1352,
+       1341,
+       1319,
+       1294,
+       1243,
+       1271,
+       1174,
+       1242
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       13,
+       130,
+       39,
+       6,
+       60,
+       238,
+       247,
+       127
+      ],
+      "w": [
+       1282,
+       1350,
+       1313,
+       1270,
+       1264,
+       1322,
+       1217,
+       1216
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       25,
+       226,
+       77,
+       202,
+       139,
+       167,
+       163,
+       59
+      ],
+      "w": [
+       1340,
+       1353,
+       1294,
+       1264,
+       1265,
+       1250,
+       1220,
+       1250
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "34d662bf3e405d96d775199de923de4f3531e902c8adab0aaa7a0a7de0043cb1"
+  },
+  "glm7": {
+   "meta": {
+    "arm": "glm",
+    "seed": 7,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       50,
+       63,
+       9,
+       111,
+       120,
+       118,
+       104,
+       97
+      ],
+      "w": [
+       1287,
+       1347,
+       1275,
+       1277,
+       1247,
+       1290,
+       1256,
+       1258
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       68,
+       134,
+       2,
+       147,
+       281,
+       234,
+       155,
+       44
+      ],
+      "w": [
+       1391,
+       1383,
+       1350,
+       1308,
+       1305,
+       1165,
+       1152,
+       1183
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       41,
+       64,
+       263,
+       166,
+       1,
+       98,
+       8,
+       5
+      ],
+      "w": [
+       1296,
+       1314,
+       1307,
+       1276,
+       1316,
+       1272,
+       1249,
+       1206
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       138,
+       256,
+       134,
+       58,
+       116,
+       130,
+       191,
+       31
+      ],
+      "w": [
+       1331,
+       1384,
+       1347,
+       1270,
+       1247,
+       1189,
+       1208,
+       1259
+      ],
+      "bias_changes_selection": false
+     }
+    ]
+   },
+   "sha256": "bd22936d1eaa2956ab9db245e4b8cddd4f08e3023ea38d2cc74e46a3188a5a4a"
+  },
+  "glm8": {
+   "meta": {
+    "arm": "glm",
+    "seed": 8,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       216,
+       219,
+       64,
+       137,
+       246,
+       103,
+       142,
+       80
+      ],
+      "w": [
+       1385,
+       1357,
+       1269,
+       1265,
+       1285,
+       1279,
+       1204,
+       1191
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       87,
+       134,
+       44,
+       270,
+       109,
+       183,
+       248,
+       72
+      ],
+      "w": [
+       1341,
+       1302,
+       1252,
+       1308,
+       1262,
+       1277,
+       1219,
+       1274
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       104,
+       136,
+       225,
+       2,
+       206,
+       101,
+       147,
+       84
+      ],
+      "w": [
+       1363,
+       1324,
+       1227,
+       1335,
+       1254,
+       1235,
+       1254,
+       1244
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       7,
+       241,
+       5,
+       155,
+       174,
+       219,
+       227,
+       75
+      ],
+      "w": [
+       1345,
+       1384,
+       1348,
+       1326,
+       1222,
+       1177,
+       1222,
+       1212
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "985a432327e61d4da360940777d6d538162e7002ab73dd92d2e5b4c5c545c8df"
+  },
+  "glm9": {
+   "meta": {
+    "arm": "glm",
+    "seed": 9,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       147,
+       273,
+       110,
+       55,
+       173,
+       48,
+       86,
+       200
+      ],
+      "w": [
+       1393,
+       1346,
+       1313,
+       1310,
+       1201,
+       1236,
+       1261,
+       1177
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       84,
+       215,
+       168,
+       6,
+       53,
+       239,
+       19,
+       77
+      ],
+      "w": [
+       1318,
+       1278,
+       1262,
+       1249,
+       1295,
+       1292,
+       1299,
+       1243
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       198,
+       235,
+       201,
+       24,
+       114,
+       94,
+       196,
+       49
+      ],
+      "w": [
+       1360,
+       1327,
+       1302,
+       1350,
+       1252,
+       1201,
+       1222,
+       1222
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       51,
+       104,
+       167,
+       78,
+       244,
+       96,
+       105,
+       12
+      ],
+      "w": [
+       1324,
+       1310,
+       1344,
+       1315,
+       1249,
+       1244,
+       1212,
+       1239
+      ],
+      "bias_changes_selection": false
+     }
+    ]
+   },
+   "sha256": "1dcbe5476bea5e31a0bb1fb8ae9a7f9a76f122dc1ff4004504b0313c629ca554"
+  },
+  "glm10": {
+   "meta": {
+    "arm": "glm",
+    "seed": 10,
+    "E": 288,
+    "k": 8,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       181,
+       231,
+       61,
+       140,
+       102,
+       124,
+       243,
+       20
+      ],
+      "w": [
+       1327,
+       1355,
+       1351,
+       1270,
+       1296,
+       1263,
+       1197,
+       1177
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       53,
+       223,
+       175,
+       30,
+       164,
+       203,
+       45,
+       22
+      ],
+      "w": [
+       1334,
+       1336,
+       1262,
+       1271,
+       1274,
+       1284,
+       1282,
+       1193
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       202,
+       270,
+       67,
+       137,
+       116,
+       249,
+       277,
+       32
+      ],
+      "w": [
+       1384,
+       1331,
+       1298,
+       1316,
+       1290,
+       1241,
+       1211,
+       1165
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       166,
+       168,
+       270,
+       265,
+       176,
+       40,
+       190,
+       2
+      ],
+      "w": [
+       1317,
+       1320,
+       1338,
+       1344,
+       1239,
+       1253,
+       1239,
+       1187
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "0d1eb78a297c16b77abbdc6a3c7ff94fd6aff58448803f2d3c6203cc4fd2f790"
+  },
+  "deepseek1": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 1,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       290,
+       383,
+       222,
+       13,
+       38,
+       68
+      ],
+      "w": [
+       1078,
+       1049,
+       1043,
+       1016,
+       986,
+       970
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       273,
+       371,
+       107,
+       225,
+       173,
+       142
+      ],
+      "w": [
+       1063,
+       1049,
+       1049,
+       1018,
+       974,
+       988
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       49,
+       302,
+       140,
+       163,
+       310,
+       108
+      ],
+      "w": [
+       1057,
+       1039,
+       1026,
+       1010,
+       1005,
+       1004
+      ],
+      "bias_changes_selection": false
+     },
+     {
+      "idx": [
+       73,
+       175,
+       80,
+       337,
+       34,
+       170
+      ],
+      "w": [
+       1054,
+       1027,
+       1054,
+       1010,
+       1027,
+       968
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "52a9c77acf2f51b7e75b56a03ec9fbcff50d11f2da29dc188b02ec9443747077"
+  },
+  "deepseek2": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 2,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       239,
+       248,
+       73,
+       290,
+       81,
+       307
+      ],
+      "w": [
+       1013,
+       1042,
+       1021,
+       1034,
+       1031,
+       999
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       129,
+       258,
+       150,
+       85,
+       47,
+       4
+      ],
+      "w": [
+       1042,
+       1046,
+       1050,
+       1039,
+       996,
+       968
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       84,
+       217,
+       171,
+       380,
+       213,
+       43
+      ],
+      "w": [
+       1095,
+       1078,
+       1001,
+       1001,
+       1018,
+       948
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       14,
+       163,
+       119,
+       223,
+       292,
+       98
+      ],
+      "w": [
+       1020,
+       1070,
+       1031,
+       995,
+       1015,
+       1010
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "2a8b3c0264464ef3f945989507726cb24e6a153f34e0db8b60e597dfc0a72559"
+  },
+  "deepseek3": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 3,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       218,
+       250,
+       378,
+       283,
+       8,
+       60
+      ],
+      "w": [
+       1058,
+       1067,
+       1001,
+       1039,
+       1026,
+       950
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       19,
+       91,
+       326,
+       155,
+       127,
+       275
+      ],
+      "w": [
+       1004,
+       1052,
+       1029,
+       1008,
+       1028,
+       1020
+      ],
+      "bias_changes_selection": false
+     },
+     {
+      "idx": [
+       294,
+       332,
+       284,
+       260,
+       157,
+       126
+      ],
+      "w": [
+       1039,
+       1068,
+       1029,
+       991,
+       1002,
+       1012
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       10,
+       252,
+       289,
+       369,
+       176,
+       146
+      ],
+      "w": [
+       1035,
+       1047,
+       1011,
+       1037,
+       1004,
+       1007
+      ],
+      "bias_changes_selection": false
+     }
+    ]
+   },
+   "sha256": "1463675e47f72bf712777b322dc0610459de3453448589e252060a6d2916e6b1"
+  },
+  "deepseek4": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 4,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       103,
+       276,
+       4,
+       14,
+       364,
+       0
+      ],
+      "w": [
+       1064,
+       1008,
+       995,
+       1036,
+       1044,
+       993
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       263,
+       296,
+       186,
+       13,
+       337,
+       59
+      ],
+      "w": [
+       1031,
+       1082,
+       1006,
+       1032,
+       1022,
+       967
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       295,
+       325,
+       196,
+       195,
+       97,
+       132
+      ],
+      "w": [
+       1057,
+       1053,
+       1005,
+       999,
+       1006,
+       1020
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       3,
+       355,
+       131,
+       286,
+       74,
+       16
+      ],
+      "w": [
+       1071,
+       1034,
+       1025,
+       1023,
+       1002,
+       986
+      ],
+      "bias_changes_selection": false
+     }
+    ]
+   },
+   "sha256": "f0fc1a3811af64bb611223dfd14f51293ede48bbf701edc8ca4926a43ed9c723"
+  },
+  "deepseek5": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 5,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       0,
+       97,
+       306,
+       80,
+       155,
+       174
+      ],
+      "w": [
+       1060,
+       1031,
+       1027,
+       1009,
+       980,
+       1034
+      ],
+      "bias_changes_selection": false
+     },
+     {
+      "idx": [
+       282,
+       313,
+       71,
+       147,
+       218,
+       142
+      ],
+      "w": [
+       1023,
+       1032,
+       1007,
+       1044,
+       1016,
+       1019
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       163,
+       281,
+       238,
+       15,
+       109,
+       35
+      ],
+      "w": [
+       1009,
+       1051,
+       982,
+       1032,
+       1052,
+       1016
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       70,
+       123,
+       207,
+       109,
+       244,
+       141
+      ],
+      "w": [
+       1016,
+       1033,
+       1051,
+       1045,
+       963,
+       1031
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "3ee2658c8581d99a805e5c43b4fcd17f8026aea012ede99d79b07c531d9a3b01"
+  },
+  "deepseek6": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 6,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       38,
+       203,
+       365,
+       30,
+       49,
+       199
+      ],
+      "w": [
+       1040,
+       1039,
+       1025,
+       1008,
+       1026,
+       1002
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       205,
+       227,
+       186,
+       374,
+       111,
+       96
+      ],
+      "w": [
+       1047,
+       1013,
+       1041,
+       1041,
+       1016,
+       982
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       183,
+       264,
+       266,
+       190,
+       291,
+       69
+      ],
+      "w": [
+       1059,
+       1056,
+       1031,
+       998,
+       1020,
+       977
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       108,
+       336,
+       334,
+       49,
+       56,
+       68
+      ],
+      "w": [
+       1016,
+       1042,
+       1060,
+       1005,
+       997,
+       1021
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "f62b983294e28e0df14eb73bdeb8d23f7ebcf2bca6b2eccc23951c6e86fd4f8d"
+  },
+  "deepseek7": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 7,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       55,
+       123,
+       118,
+       120,
+       201,
+       199
+      ],
+      "w": [
+       987,
+       1024,
+       1019,
+       1020,
+       1046,
+       1045
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       95,
+       121,
+       154,
+       196,
+       84,
+       82
+      ],
+      "w": [
+       1111,
+       1082,
+       1055,
+       969,
+       922,
+       1001
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       160,
+       363,
+       69,
+       154,
+       87,
+       161
+      ],
+      "w": [
+       1050,
+       1054,
+       1046,
+       1017,
+       982,
+       992
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       194,
+       254,
+       109,
+       257,
+       97,
+       267
+      ],
+      "w": [
+       1091,
+       1063,
+       1001,
+       1032,
+       983,
+       970
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "8428f056af194a106d4c648a33b52592c4348e9978122f591c83c734c5b0f2ae"
+  },
+  "deepseek8": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 8,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       328,
+       341,
+       38,
+       27,
+       338,
+       142
+      ],
+      "w": [
+       1071,
+       1098,
+       1048,
+       974,
+       982,
+       968
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       92,
+       267,
+       32,
+       288,
+       65,
+       21
+      ],
+      "w": [
+       1076,
+       1104,
+       1010,
+       1008,
+       984,
+       958
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       254,
+       279,
+       346,
+       50,
+       195,
+       15
+      ],
+      "w": [
+       1063,
+       1055,
+       1025,
+       1013,
+       974,
+       1011
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       100,
+       290,
+       7,
+       88,
+       99,
+       95
+      ],
+      "w": [
+       1012,
+       1088,
+       1020,
+       1008,
+       995,
+       1018
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "df886e27205af417877edc4043c302ab2a081479f1c41d886d7ee0b3c2657c67"
+  },
+  "deepseek9": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 9,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       150,
+       359,
+       5,
+       149,
+       132,
+       241
+      ],
+      "w": [
+       1042,
+       1062,
+       1013,
+       1007,
+       1029,
+       988
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       199,
+       316,
+       3,
+       19,
+       56,
+       7
+      ],
+      "w": [
+       1072,
+       1037,
+       1056,
+       987,
+       1029,
+       961
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       19,
+       141,
+       269,
+       242,
+       197,
+       126
+      ],
+      "w": [
+       1043,
+       1053,
+       1035,
+       1005,
+       1024,
+       981
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       29,
+       64,
+       234,
+       361,
+       280,
+       315
+      ],
+      "w": [
+       1050,
+       1068,
+       1033,
+       1034,
+       958,
+       998
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "43b55ca5d8150fcb4140dc1b52f675cef8c0edbeeb9e57b6232d0492867b96ac"
+  },
+  "deepseek10": {
+   "meta": {
+    "arm": "deepseek",
+    "seed": 10,
+    "E": 384,
+    "k": 6,
+    "h": 16,
+    "T": 4,
+    "tokens": [
+     {
+      "idx": [
+       69,
+       252,
+       325,
+       222,
+       312,
+       229
+      ],
+      "w": [
+       1054,
+       1043,
+       1040,
+       997,
+       1009,
+       998
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       165,
+       284,
+       299,
+       184,
+       119,
+       269
+      ],
+      "w": [
+       1049,
+       1090,
+       1069,
+       1026,
+       948,
+       959
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       118,
+       267,
+       76,
+       128,
+       106,
+       168
+      ],
+      "w": [
+       1084,
+       1051,
+       1033,
+       1011,
+       995,
+       968
+      ],
+      "bias_changes_selection": true
+     },
+     {
+      "idx": [
+       216,
+       256,
+       267,
+       175,
+       275,
+       17
+      ],
+      "w": [
+       1066,
+       1059,
+       1061,
+       993,
+       956,
+       1007
+      ],
+      "bias_changes_selection": true
+     }
+    ]
+   },
+   "sha256": "4d01cac0de3b4007840806bd0034f70c3ee40ff5e23d4bda85ffd872b847b310"
+  },
+  "enum2": {
+   "meta": {
+    "arm": "enum",
+    "seed": 1,
+    "E": 16,
+    "k": 2,
+    "h": 2,
+    "T": 1,
+    "tokens": [
+     {
+      "idx": [
+       3,
+       8
+      ],
+      "w": [
+       5021,
+       5218
+      ],
+      "bias_changes_selection": false
+     }
+    ]
+   },
+   "sha256": "6bfa82949eb9025e88aa89eb1b3d447f95cef516ddc7aa29065834be343ca978"
+  },
+  "enum3": {
+   "meta": {
+    "arm": "enum",
+    "seed": 1,
+    "E": 16,
+    "k": 3,
+    "h": 2,
+    "T": 1,
+    "tokens": [
+     {
+      "idx": [
+       1,
+       9,
+       3
+      ],
+      "w": [
+       4041,
+       3804,
+       2394
+      ],
+      "bias_changes_selection": false
+     }
+    ]
+   },
+   "sha256": "fe416d0458d4d4ebe2dd2f8b9bbc58d2fa42a2ca492a87c8056f70708aa193d9"
+  }
+ },
+ "compile": {
+  "argv": [
+   "g++",
+   "-std=c++17",
+   "-O2",
+   "-Wall",
+   "-Wextra",
+   "-fno-ipa-modref",
+   "-DBLK_FIELD=2",
+   "-DBLK_HASH=1",
+   "-I",
+   "blocks",
+   "research/operators/moe_topk/test.cpp",
+   "-o",
+   "research/operators/moe_topk/work/test.bin"
+  ],
+  "exit": 0,
+  "seconds": 27.033,
+  "stdout": "",
+  "stderr": ""
+ },
+ "honest": {
+  "glm": {
+   "accepted": 10,
+   "of": 10,
+   "prove_s": {
+    "n": 10,
+    "median": 3.109,
+    "sd": 0.10597006914952709,
+    "min": 3.026,
+    "max": 3.34
+   },
+   "verify_s": {
+    "n": 10,
+    "median": 0.7735000000000001,
+    "sd": 0.01607482503792811,
+    "min": 0.748,
+    "max": 0.801
+   },
+   "proof_bytes": {
+    "n": 10,
+    "median": 3176192.0,
+    "sd": 216.11519561978463,
+    "min": 3175664,
+    "max": 3176368
+   },
+   "peak_rss_kb": {
+    "n": 10,
+    "median": 591684.0,
+    "sd": 1.2649110640673518,
+    "min": 591684,
+    "max": 591688
+   },
+   "prove_s_without_first": {
+    "n": 9,
+    "median": 3.118,
+    "sd": 0.10140279965453503,
+    "min": 3.074,
+    "max": 3.34
+   },
+   "columns": {
+    "columns_used": 230884,
+    "selection_columns_per_token": 20537.0,
+    "aggregation_columns_per_token": 37184.0,
+    "log_length": 18,
+    "relations": 465416,
+    "relation_terms": 1024624
+   }
+  },
+  "deepseek": {
+   "accepted": 10,
+   "of": 10,
+   "prove_s": {
+    "n": 10,
+    "median": 3.17,
+    "sd": 0.04741647627378305,
+    "min": 3.11,
+    "max": 3.265
+   },
+   "verify_s": {
+    "n": 10,
+    "median": 0.8654999999999999,
+    "sd": 0.0268046430472202,
+    "min": 0.832,
+    "max": 0.903
+   },
+   "proof_bytes": {
+    "n": 10,
+    "median": 3176240.0,
+    "sd": 255.64419718733214,
+    "min": 3175536,
+    "max": 3176464
+   },
+   "peak_rss_kb": {
+    "n": 10,
+    "median": 621592.0,
+    "sd": 40.637147756428206,
+    "min": 621464,
+    "max": 621596
+   },
+   "prove_s_without_first": {
+    "n": 9,
+    "median": 3.156,
+    "sd": 0.049025786865462835,
+    "min": 3.11,
+    "max": 3.265
+   },
+   "columns": {
+    "columns_used": 247364,
+    "selection_columns_per_token": 24689.0,
+    "aggregation_columns_per_token": 37152.0,
+    "log_length": 18,
+    "relations": 499496,
+    "relation_terms": 1106496
+   }
+  }
+ },
+ "hostile": {
+  "glm": {
+   "exit": 0,
+   "seconds": 64.701,
+   "rejected": 36,
+   "total": 36,
+   "by_class": {
+    "a1-wrong-expert": {
+     "rejected": 3,
+     "total": 3,
+     "min_violated": 1
+    },
+    "a2-tie-order": {
+     "rejected": 2,
+     "total": 2,
+     "min_violated": 1
+    },
+    "a3-bias-in-weights": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 9216
+    },
+    "a4-unnormalized": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 32
+    },
+    "a5-duplicate": {
+     "rejected": 2,
+     "total": 2,
+     "min_violated": 2
+    },
+    "a6-k-minus-1": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 282
+    },
+    "a6-k-plus-1": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 2
+    },
+    "a7-public": {
+     "rejected": 6,
+     "total": 6,
+     "min_violated": null
+    },
+    "a8-bytes": {
+     "rejected": 16,
+     "total": 16,
+     "min_violated": null
+    },
+    "a8-label": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": null
+    },
+    "a8-shape": {
+     "rejected": 2,
+     "total": 2,
+     "min_violated": null
+    }
+   },
+   "stderr": ""
+  },
+  "deepseek": {
+   "exit": 0,
+   "seconds": 66.573,
+   "rejected": 36,
+   "total": 36,
+   "by_class": {
+    "a1-wrong-expert": {
+     "rejected": 3,
+     "total": 3,
+     "min_violated": 1
+    },
+    "a2-tie-order": {
+     "rejected": 2,
+     "total": 2,
+     "min_violated": 1
+    },
+    "a3-bias-in-weights": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 9216
+    },
+    "a4-unnormalized": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 24
+    },
+    "a5-duplicate": {
+     "rejected": 2,
+     "total": 2,
+     "min_violated": 2
+    },
+    "a6-k-minus-1": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 380
+    },
+    "a6-k-plus-1": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": 2
+    },
+    "a7-public": {
+     "rejected": 6,
+     "total": 6,
+     "min_violated": null
+    },
+    "a8-bytes": {
+     "rejected": 16,
+     "total": 16,
+     "min_violated": null
+    },
+    "a8-label": {
+     "rejected": 1,
+     "total": 1,
+     "min_violated": null
+    },
+    "a8-shape": {
+     "rejected": 2,
+     "total": 2,
+     "min_violated": null
+    }
+   },
+   "stderr": ""
+  }
+ },
+ "enum": {
+  "k2": {
+   "exit": 0,
+   "seconds": 0.076,
+   "mode": "enum",
+   "E": 16,
+   "k": 2,
+   "tuples": 256,
+   "distinct_tuples": 240,
+   "satisfying": 1,
+   "satisfying_distinct": 1,
+   "unique_equals_reference": true,
+   "adjacent_ties_in_top_k_plus_1": 2
+  },
+  "k3": {
+   "exit": 0,
+   "seconds": 1.139,
+   "mode": "enum",
+   "E": 16,
+   "k": 3,
+   "tuples": 4096,
+   "distinct_tuples": 3360,
+   "satisfying": 1,
+   "satisfying_distinct": 1,
+   "unique_equals_reference": true,
+   "adjacent_ties_in_top_k_plus_1": 2
+  }
+ }
+}

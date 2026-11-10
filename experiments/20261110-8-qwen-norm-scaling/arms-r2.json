@@ -1,0 +1,354 @@
+{
+ "C3P-r2b": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C4P-r2b": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "X3-r2b": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "omode": "shift",
+   "RC": 46,
+   "FS": 18,
+   "Fk": 12,
+   "Fq": 20,
+   "smin": 8,
+   "Fcg": 16,
+   "ext_stats": true
+  }
+ },
+ "C1P-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 15,
+   "RC": 46,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C2P-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "RC": 46,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  },
+  "Fo_loo": {
+   "cap": 24
+  }
+ },
+ "C3P-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C4P-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C3P-S14-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "FS": 14,
+   "Fk": 14,
+   "Fq": 14,
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "X1-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "omode": "shift",
+   "RC": 46,
+   "FS": 12,
+   "Fk": 12,
+   "Fq": 20,
+   "smin": 2,
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "X2-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "omode": "shift",
+   "RC": 46,
+   "FS": 12,
+   "Fk": 12,
+   "Fq": 20,
+   "smin": 2,
+   "Fcg": 16,
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "X3-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "omode": "shift",
+   "RC": 46,
+   "FS": 18,
+   "Fk": 12,
+   "Fq": 20,
+   "smin": 8,
+   "Fcg": 16,
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C4+G-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fg": 18,
+   "ext_stats": true
+  }
+ },
+ "C4+R-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C4+U-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "vrnd": "floor",
+   "ext_stats": true
+  }
+ },
+ "C4P-noG-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 12,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C4P-noR-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 18,
+   "rnd": "floor",
+   "ornd": "floor",
+   "vrnd": "floor",
+   "shift_ornd": "floor",
+   "ext_stats": true
+  }
+ },
+ "C4P-noU-r2": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 12,
+   "TAP": 12,
+   "Fc": 12,
+   "Fab": 12,
+   "Fz": 12,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "round-o+state-r2": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ],
+   "ext_stats": true
+  }
+ },
+ "exact-o+state-r2": {
+  "cfg": {
+   "exact": [
+    "o",
+    "state"
+   ],
+   "ext_stats": true
+  }
+ }
+}

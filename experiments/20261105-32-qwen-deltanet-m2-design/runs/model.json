@@ -1,0 +1,258 @@
+{
+ "H1": {
+  "checks": {
+   "m1": {
+    "columns_used": [
+     2338816,
+     2338816,
+     true
+    ],
+    "log_length": [
+     22,
+     22,
+     true
+    ],
+    "relations": [
+     4761088,
+     4761088,
+     true
+    ],
+    "terms": [
+     11430400,
+     11430400,
+     true
+    ],
+    "range_cells": [
+     0,
+     0,
+     true
+    ]
+   },
+   "m1b": {
+    "columns_used": [
+     1310720,
+     1310720,
+     true
+    ],
+    "columns_nonregion": [
+     1074176,
+     1074176,
+     true
+    ],
+    "log_length": [
+     21,
+     21,
+     true
+    ],
+    "relations": [
+     2231808,
+     2231808,
+     true
+    ],
+    "terms": [
+     5174272,
+     5174272,
+     true
+    ],
+    "range_cells": [
+     67072,
+     67072,
+     true
+    ]
+   }
+  },
+  "pass_": true,
+  "model_m1": {
+   "arm": "m1",
+   "D": 128,
+   "T": 4,
+   "o_witness": false,
+   "norm": false,
+   "gate_columns": 2338816,
+   "range_cells": 0,
+   "lkp_keys": 0,
+   "relations": 4761088,
+   "terms": 11430400,
+   "product_columns_per_state_cell_per_token": 35.688,
+   "relations_per_state_cell_per_token": 72.648,
+   "columns_used": 2338816,
+   "layout": 2338816,
+   "log_length": 22
+  },
+  "model_m1b": {
+   "arm": "m1b",
+   "D": 128,
+   "T": 4,
+   "o_witness": false,
+   "norm": false,
+   "gate_columns": 1074176,
+   "range_cells": 67072,
+   "lkp_keys": 0,
+   "relations": 2231808,
+   "terms": 5174272,
+   "product_columns_per_state_cell_per_token": 17.414,
+   "relations_per_state_cell_per_token": 34.055,
+   "columns_used": 1310720,
+   "columns_nonregion": 1074176,
+   "rng_rows": 8192,
+   "log_length": 21
+  }
+ },
+ "H2": {
+  "armA_m1b_shape": {
+   "arm": "A",
+   "D": 128,
+   "T": 4,
+   "o_witness": false,
+   "norm": false,
+   "gate_columns": 1074176,
+   "range_cells": 67072,
+   "lkp_keys": 0,
+   "relations": 2231808,
+   "terms": 5174272,
+   "product_columns_per_state_cell_per_token": 17.414,
+   "relations_per_state_cell_per_token": 34.055,
+   "columns_used": 1156096,
+   "columns_nonregion": 1074176,
+   "rng_rows": [
+    4096,
+    1024
+   ],
+   "key_parts": [],
+   "digit_entries": 102400,
+   "rng_multiplicity_places": 155648,
+   "remainder_multiplicity_places": 0,
+   "multiplicity_row_places": 155648,
+   "log_length": 21
+  },
+  "armB_m1b_shape": {
+   "arm": "B",
+   "D": 128,
+   "T": 4,
+   "o_witness": false,
+   "norm": false,
+   "gate_columns": 263168,
+   "range_cells": 67072,
+   "lkp_keys": 67584,
+   "relations": 609792,
+   "terms": 1186816,
+   "product_columns_per_state_cell_per_token": 6.07,
+   "relations_per_state_cell_per_token": 9.305,
+   "columns_used": 427008,
+   "columns_nonregion": 263168,
+   "rng_rows": [
+    4096,
+    1024
+   ],
+   "key_parts": [
+    65536,
+    16384
+   ],
+   "digit_entries": 102400,
+   "rng_multiplicity_places": 155648,
+   "remainder_multiplicity_places": 69632,
+   "multiplicity_row_places": 225280,
+   "log_length": 19
+  },
+  "ratio_columns_per_cell": 0.349,
+  "ratio_relations": 0.273,
+  "ratio_terms": 0.229,
+  "pass_": true,
+  "note": "arm A at the M1b shape equals M1b (same lowering); arm B swaps exact bits for direct LKP keys"
+ },
+ "H3": {
+  "armA_T16": {
+   "arm": "A",
+   "D": 128,
+   "T": 16,
+   "o_witness": true,
+   "norm": true,
+   "gate_columns": 4377056,
+   "range_cells": 272384,
+   "lkp_keys": 0,
+   "relations": 9042944,
+   "terms": 21110960,
+   "product_columns_per_state_cell_per_token": 17.736,
+   "relations_per_state_cell_per_token": 34.496,
+   "columns_used": 4655584,
+   "columns_nonregion": 4377056,
+   "rng_rows": [
+    16384,
+    1024
+   ],
+   "key_parts": [],
+   "digit_entries": 348160,
+   "rng_multiplicity_places": 172032,
+   "remainder_multiplicity_places": 0,
+   "multiplicity_row_places": 172032,
+   "log_length": 23,
+   "prove_s_estimate": null
+  },
+  "armB_T16": {
+   "arm": "B",
+   "D": 128,
+   "T": 16,
+   "o_witness": true,
+   "norm": true,
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 276688,
+   "relations": 2402432,
+   "terms": 4786704,
+   "product_columns_per_state_cell_per_token": 6.126,
+   "relations_per_state_cell_per_token": 9.165,
+   "columns_used": 1613856,
+   "columns_nonregion": 1056800,
+   "rng_rows": [
+    16384,
+    1024
+   ],
+   "key_parts": [
+    262144,
+    16384
+   ],
+   "digit_entries": 348160,
+   "rng_multiplicity_places": 172032,
+   "remainder_multiplicity_places": 77824,
+   "multiplicity_row_places": 249856,
+   "log_length": 21,
+   "prove_s_estimate": 39.2,
+   "single_part_layout": {
+    "key_part": 524288,
+    "columns_used": 1859616,
+    "log_length": 21
+   }
+  },
+  "max_T_log22": {
+   "A": 14,
+   "B": 41
+  },
+  "max_T_log22_without_relation_cap": {
+   "A": 14,
+   "B": 41
+  },
+  "layer_extrapolation": {
+   "A": {
+    "relations_per_token_per_layer": 27128832,
+    "columns_per_token_per_layer": 13948320,
+    "columns_per_token_48_deltanet_layers": 669519360
+   },
+   "B": {
+    "relations_per_token_per_layer": 7207296,
+    "columns_per_token_per_layer": 4817616,
+    "columns_per_token_48_deltanet_layers": 231245568
+   }
+  },
+  "fits_2_21_armB_T16": true,
+  "pass_": true,
+  "note": "prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls)."
+ },
+ "remainder_savings": {
+  "armA_T16_columns": 4649440,
+  "armB_T16_columns": 1605872,
+  "relations_A": 9042944,
+  "relations_B": 2402432,
+  "terms_A": 21110960,
+  "terms_B": 4786704
+ }
+}

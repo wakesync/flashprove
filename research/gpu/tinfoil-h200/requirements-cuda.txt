@@ -1,0 +1,11 @@
+# The CUDA 13.2 Update 2 toolkit from NVIDIA's Python packages, exactly the wheels that both H100
+# runs resolved (research/gpu/logs/pip.log, research/gpu/replication-1/env-manifest.json), pinned
+# by sha256 (read from the package index on 2026-11-10). Installed with --no-deps --require-hashes.
+cuda-toolkit==13.2.2 --hash=sha256:d12edc1aad1356236a2ee10c0d794b1aff5d3e79bfeca54867c3bb8e5afd87b0
+nvidia-cublas==13.4.1.3 --hash=sha256:a5917cb642cfb07f4a0231ee16aec7e2e0357d8cb8b1b78a0c9c68dba3e6afc7
+nvidia-cuda-cccl==13.2.86 --hash=sha256:35da671cf0cecd3539da214a11bb8e7634366c9e950da9c5feecf6c490a65b20
+nvidia-cuda-crt==13.2.86 --hash=sha256:e3ab08801bf9b1e6dc979275d25e816bb5000521b648e19c324d5eef0c79f1da
+nvidia-cuda-nvcc==13.2.86 --hash=sha256:7d3f56c8d705bad35bbba69eb0470d90856fd5d4dc48c6a6173aaf1e9f887cf5
+nvidia-cuda-nvrtc==13.2.86 --hash=sha256:8111c5130e967b78222ea2124145f8efe9ce201b752b2579a2513100a53be1c5
+nvidia-cuda-runtime==13.2.86 --hash=sha256:3498247680dfddce31bad102af7e3e26fc795342a3cac64722bb0fa95e7f60f0
+nvidia-nvvm==13.2.86 --hash=sha256:a9244f3209922d655612c11ebb4117ea1f80983cb2b215c9cccded127282cebc

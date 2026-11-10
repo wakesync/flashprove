@@ -1,0 +1,128 @@
+{
+ "n": 20,
+ "identical": 20,
+ "tokens": 20480,
+ "seconds": 24.7,
+ "runs": [
+  {
+   "dist": "R1",
+   "seed": 1,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R1",
+   "seed": 2,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R1",
+   "seed": 3,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R1",
+   "seed": 4,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R1",
+   "seed": 5,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R2",
+   "seed": 1,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R2",
+   "seed": 2,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R2",
+   "seed": 3,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R2",
+   "seed": 4,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R2",
+   "seed": 5,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R3",
+   "seed": 1,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R3",
+   "seed": 2,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R3",
+   "seed": 3,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R3",
+   "seed": 4,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R3",
+   "seed": 5,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R4",
+   "seed": 1,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R4",
+   "seed": 2,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R4",
+   "seed": 3,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R4",
+   "seed": 4,
+   "steps": 1024,
+   "bit_identical": true
+  },
+  {
+   "dist": "R4",
+   "seed": 5,
+   "steps": 1024,
+   "bit_identical": true
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "note": "arithmetic only, no proof; the words of hostile case n1 (record.py), seed 1, D = 32",
+ "rows": [
+  {
+   "C": 1,
+   "T": 64,
+   "chunks": 64,
+   "chunk_at_F13": 1,
+   "tokens_after_that_chunk": 62,
+   "chunk_output_state_max_abs_diff": 1847,
+   "chunk_outputs_o_max_abs_diff": 82,
+   "final_state_max_abs_diff": 0
+  },
+  {
+   "C": 16,
+   "T": 64,
+   "chunks": 4,
+   "chunk_at_F13": 1,
+   "tokens_after_that_chunk": 32,
+   "chunk_output_state_max_abs_diff": 1788,
+   "chunk_outputs_o_max_abs_diff": 406,
+   "final_state_max_abs_diff": 0
+  },
+  {
+   "C": 64,
+   "T": 128,
+   "chunks": 2,
+   "chunk_at_F13": 1,
+   "tokens_after_that_chunk": 0,
+   "chunk_output_state_max_abs_diff": 1394,
+   "chunk_outputs_o_max_abs_diff": 377,
+   "final_state_max_abs_diff": 1394
+  }
+ ]
+}

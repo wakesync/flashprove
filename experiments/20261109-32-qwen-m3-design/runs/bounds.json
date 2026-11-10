@@ -1,0 +1,184 @@
+{
+ "rows": [
+  {
+   "relation": "in_proj: sum_k a_k W_kj = 2^s x_j + r_j",
+   "log2_worst_magnitude": 48,
+   "below_2_63": true,
+   "bounds_from": "a: admit (M3a) or table clamp 2,047 (full model); W: key; x: rng; r: two key12 limbs; shift s <= 24: format",
+   "then": "x_j is the rounded projection (integer)",
+   "control": false
+  },
+  {
+   "relation": "conv: acc = sum of 4 tap * x",
+   "log2_worst_magnitude": 37.0,
+   "below_2_63": true,
+   "bounds_from": "tap: key; x: rng",
+   "then": "acc is the integer filter sum",
+   "control": false
+  },
+  {
+   "relation": "conv: 2^12 c + r = acc",
+   "log2_worst_magnitude": 38.0,
+   "below_2_63": true,
+   "bounds_from": "c: rng; r: key12",
+   "then": "c = floor(acc / 2^12)",
+   "control": false
+  },
+  {
+   "relation": "SiLU key: c = step (idx - off) + r",
+   "log2_worst_magnitude": 24,
+   "below_2_63": true,
+   "bounds_from": "idx: table key (exact, 12 bits); r: key12",
+   "then": "|c| < 8 * 2^F: the lookup domain bounds c exactly",
+   "control": false
+  },
+  {
+   "relation": "q/k norm: sum x^2 + eps = sigma^2 + e1",
+   "log2_worst_magnitude": 38.0,
+   "below_2_63": true,
+   "bounds_from": "x: table (SiLU image)",
+   "then": "sigma = isqrt, with e2",
+   "control": false
+  },
+  {
+   "relation": "q/k norm: 2^36 = Rc sigma + rr",
+   "log2_worst_magnitude": 61,
+   "below_2_63": true,
+   "bounds_from": "Rc: three key12 limbs; sigma: two key12 limbs",
+   "then": "Rc = floor(2^36 / sigma)",
+   "control": false
+  },
+  {
+   "relation": "q/k norm: 2^24 k + r = x Rc",
+   "log2_worst_magnitude": 52,
+   "below_2_63": true,
+   "bounds_from": "k: rng; x: table; Rc: limbs",
+   "then": "k = floor(x Rc / 2^24), so |k| <= 2^12 (implied): k and q need no extra range check",
+   "control": false
+  },
+  {
+   "relation": "gate: 2^F g + r = cA * sp",
+   "log2_worst_magnitude": 36,
+   "below_2_63": true,
+   "bounds_from": "cA: key; sp: table (softplus image); g: rng",
+   "then": "g is the integer decay exponent",
+   "control": false
+  },
+  {
+   "relation": "recurrence: g1 = S * a",
+   "log2_worst_magnitude": 35,
+   "below_2_63": true,
+   "bounds_from": "S: rng; a: table (exp image, in [0, 2^F])",
+   "then": "",
+   "control": false
+  },
+  {
+   "relation": "recurrence: g2 = S * k, P_j = sum_i g2",
+   "log2_worst_magnitude": 42.0,
+   "below_2_63": true,
+   "bounds_from": "S: rng; k: implied 2^12",
+   "then": "",
+   "control": false
+  },
+  {
+   "relation": "recurrence: g5 = P_j * a",
+   "log2_worst_magnitude": 54.0,
+   "below_2_63": true,
+   "bounds_from": "P_j: sum above; a: table",
+   "then": "worst gate of the recurrence",
+   "control": false
+  },
+  {
+   "relation": "recurrence: 2^2F (v - M) + r = g5.c",
+   "log2_worst_magnitude": 55.0,
+   "below_2_63": true,
+   "bounds_from": "M: rng; v: table; r: two key12 limbs",
+   "then": "M = v - floor(.)",
+   "control": false
+  },
+  {
+   "relation": "recurrence: g6 = (v - M) * beta",
+   "log2_worst_magnitude": 36,
+   "below_2_63": true,
+   "bounds_from": "beta: table (sigmoid image)",
+   "then": "",
+   "control": false
+  },
+  {
+   "relation": "recurrence: g3 = k * delta",
+   "log2_worst_magnitude": 53,
+   "below_2_63": true,
+   "bounds_from": "k: implied; delta = 2^18 hi + lo, hi: rng, lo: rng",
+   "then": "",
+   "control": false
+  },
+  {
+   "relation": "recurrence: 2^F S' + r = g1.c + g3.c",
+   "log2_worst_magnitude": 55,
+   "below_2_63": true,
+   "bounds_from": "S': rng; r: key12",
+   "then": "S' = floor(.)",
+   "control": false
+  },
+  {
+   "relation": "output: 2^F o + r = sum_i S' * q",
+   "log2_worst_magnitude": 43.0,
+   "below_2_63": true,
+   "bounds_from": "S': rng; q: implied 2^12; o: rng",
+   "then": "o = floor(.)",
+   "control": false
+  },
+  {
+   "relation": "gated norm: sum o^2 + eps = sigma^2 + e1",
+   "log2_worst_magnitude": 54.0,
+   "below_2_63": true,
+   "bounds_from": "o: rng",
+   "then": "sigma = isqrt",
+   "control": false
+  },
+  {
+   "relation": "gated norm: 2^24 w + r = o Rc",
+   "log2_worst_magnitude": 60,
+   "below_2_63": true,
+   "bounds_from": "o: rng; Rc: limbs; w: rng",
+   "then": "|w| <= 2^12 (implied)",
+   "control": false
+  },
+  {
+   "relation": "gated norm: 2^F t + r = s * w",
+   "log2_worst_magnitude": 36,
+   "below_2_63": true,
+   "bounds_from": "s: table (SiLU image, |s| <= 4,095); w: rng (2^12 implied)",
+   "then": "t = floor(s w / 2^F), |t| <= 2^12",
+   "control": false
+  },
+  {
+   "relation": "gated norm: 2^sg y + r = gain * t",
+   "log2_worst_magnitude": 48,
+   "below_2_63": true,
+   "bounds_from": "gain: key (|gain| <= 4,096); t: rng (2^12 implied); y: rng",
+   "then": "y = floor(gain t / 2^sg): no derived coefficient",
+   "control": false
+  },
+  {
+   "relation": "out_proj: sum_j y_j Wo_jk = out_k",
+   "log2_worst_magnitude": 47.58,
+   "below_2_63": true,
+   "bounds_from": "y: rng; Wo: key; out: admit (M3a)",
+   "then": "the head contribution is the integer sum",
+   "control": false
+  },
+  {
+   "relation": "M2 design, for comparison: 2^F y + r = cg * w with cg = 2^62 (the #66 review alias)",
+   "log2_worst_magnitude": 74,
+   "below_2_63": false,
+   "bounds_from": "cg: NOT bounded in #66 at 8ec7c799",
+   "then": "wraps: this row must fail",
+   "control": true
+  }
+ ],
+ "worst_log2": 61,
+ "all_m3_relations_below_2_63": true,
+ "control_row_wraps": true,
+ "note": "magnitudes are upper bounds from the enforced class bounds; this is arithmetic on the design, not a proof and not a test of a verifier"
+}

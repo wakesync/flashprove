@@ -1,0 +1,11 @@
+stock model.language_model.layers.0.input_layernorm.weight 10240
+stock model.language_model.layers.0.linear_attn.A_log 96
+stock model.language_model.layers.0.linear_attn.conv1d.weight 81920
+stock model.language_model.layers.0.linear_attn.dt_bias 96
+stock model.language_model.layers.0.linear_attn.in_proj_a.weight 491520
+stock model.language_model.layers.0.linear_attn.in_proj_b.weight 491520
+stock model.language_model.layers.0.linear_attn.in_proj_qkv.weight 104857600
+stock model.language_model.layers.0.linear_attn.in_proj_z.weight 62914560
+stock model.language_model.layers.0.linear_attn.norm.weight 256
+stock model.language_model.layers.0.linear_attn.out_proj.weight 62914560
+stock done 233902528 10.4

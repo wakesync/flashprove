@@ -1,0 +1,20 @@
+{
+  "regenerations": [
+    {
+      "files": 25,
+      "rows": 98304,
+      "manifest_sha256": "13eacc50c87e53bbda5d9dcbb11761c399e430e56eba7ed7877e15d8362c79dd",
+      "regenerated_equal": true
+    },
+    {
+      "files": 25,
+      "rows": 98304,
+      "manifest_sha256": "13eacc50c87e53bbda5d9dcbb11761c399e430e56eba7ed7877e15d8362c79dd",
+      "regenerated_equal": true
+    }
+  ],
+  "tables_checked": 24,
+  "exact_rsqrt_entries_checked": 24576,
+  "manifest_sha256": "13eacc50c87e53bbda5d9dcbb11761c399e430e56eba7ed7877e15d8362c79dd",
+  "pass": true
+}
