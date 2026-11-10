@@ -60,6 +60,12 @@ def main():
     Pd = dict(keys=D * D * 1 + D * 1 + D * 1, cols=0, rcells=0, rels=0)
     for k in ("C1", "C2", "C3", "C4"):
         C[k + "P"] = {kk: (C[k][kk] + Pd[kk]) if kk in Pd else C[k][kk] for kk in C[k]}
+    # X arms (amendment A-2). X1, X2: C3P with a shift remainder of up to 24 bits (r and 2^s - 1 - r as two 12-bit limbs
+    # each: +2 keys per j over C3P). q_hat and cg are public coefficients, so their scales add no cell. X3: X1 plus S' and M
+    # as two limbs, counted the way count_model.py counts the delta split (one more RNG cell and one more relation each).
+    for k in ("X1", "X2"):
+        x = dict(C["C3P"]); x["keys"] = x["keys"] + D * 2; C[k] = x
+    x = dict(C["X1"]); x["rcells"] = x["rcells"] + D * D + D; x["rels"] = x["rels"] + D * D + D; C["X3"] = x
     out = {}
     for k, v in C.items():
         out[k] = dict(per_head_token=dict(keys=v["keys"], cols=v["cols"], rcells=v["rcells"], rels=v["rels"]),

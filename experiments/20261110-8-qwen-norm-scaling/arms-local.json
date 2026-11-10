@@ -555,5 +555,83 @@
     "state"
    ]
   }
+ },
+ "exactG-norm": {
+  "cfg": {
+   "exact": [
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "roundG-norm": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o"
+   ]
+  }
+ },
+ "exactG-upstream": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state"
+   ]
+  }
+ },
+ "roundG-upstream": {
+  "cfg": {
+   "exact": [
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "round1-o-rhu": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ],
+   "ornd": "rhu"
+  }
  }
 }

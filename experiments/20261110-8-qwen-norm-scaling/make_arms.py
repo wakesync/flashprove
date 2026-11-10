@@ -10,10 +10,16 @@ for s in SH.STAGES:
     loc[f"exact1-{s}"] = dict(cfg=dict(exact=[s]))
     loc[f"round1-{s}"] = dict(cfg=dict(exact=[x for x in SH.STAGES if x != s]))
 groups = dict(public=["in_qkv", "in_ab", "in_z", "conv", "silu", "l2n", "gates"], state=["mem", "delta", "state"],
-              output=["o", "sigma", "rc", "w", "cg", "y"])
+              output=["o", "sigma", "rc", "w", "cg", "y"],
+              # amendment A-2: the o floor and the norm proper as separate groups, and everything upstream of o as one group
+              norm=["sigma", "rc", "w", "cg", "y"],
+              upstream=["in_qkv", "in_ab", "in_z", "conv", "silu", "l2n", "gates", "mem", "delta", "state"])
 for g, st in groups.items():
     loc[f"exactG-{g}"] = dict(cfg=dict(exact=st))
     loc[f"roundG-{g}"] = dict(cfg=dict(exact=[x for x in SH.STAGES if x not in st]))
+
+# amendment A-2: o rounded to nearest (not floored) with everything else exact, the PR #68 reviewer's "o rounding plus an exact norm"
+loc["round1-o-rhu"] = dict(cfg=dict(exact=[x for x in SH.STAGES if x != "o"], ornd="rhu"))
 
 NORM = dict(Fw=16, Fy=20)
 P = dict(Fx=16, TAP=16, Fc=16, Fab=14, Fz=14, Fg=18, rnd="rhu", ornd="rhu")
@@ -31,6 +37,14 @@ for k in ("C1", "C2", "C3", "C4"):
     cand[k + "P"] = c
 c = json.loads(json.dumps(cand["C3P"])); c["cfg"]["FS"] = 14; c["cfg"]["Fk"] = 14; c["cfg"]["Fq"] = 14
 cand["C3P-S14"] = c
+# Post-registration arms, PREREG amendment A-2 (declared before any registered candidate run; after a 2-prompt smoke test).
+# Nested, so each step isolates one change on top of C3P: X1 finer q_hat only; X2 = X1 + finer cg; X3 = X2 + finer state.
+XB = dict(NORM, **P, omode="shift", RC=18 + 16 + 12)
+cand["X1"] = dict(cfg=dict(XB, FS=12, Fk=12, Fq=20, smin=2))             # q_hat at 2^20; Sigma at 2^32, Fo <= 30; S, M classes as M2
+cand["X2"] = dict(cfg=dict(XB, FS=12, Fk=12, Fq=20, smin=2, Fcg=16))     # + cg at 2^16 (class |cg| < 2^24 kept)
+cand["X3"] = dict(cfg=dict(XB, FS=18, Fk=12, Fq=20, smin=8, Fcg=16))     # + state at 2^18 (S', M two-limb); Sigma at 2^38
+# Descriptive replication of the PR #68 reviewer's split-scale arm: state at F = 12, o and the whole norm at 2^15.
+cand["D-R15"] = dict(cfg=dict(Fo=15, Fz=15, Fcg=15, Fw=15, Fy=15, RC=45))
 (HERE / "arms-local.json").write_text(json.dumps(loc, indent=1) + "\n")
 (HERE / "arms-cand.json").write_text(json.dumps(cand, indent=1) + "\n")
 print(len(loc), len(cand))

@@ -28,8 +28,8 @@ L63 = LD(2) ** 63
 STAGES = ("in_qkv", "in_ab", "in_z", "conv", "silu", "l2n", "gates", "mem", "delta", "state", "o",
           "sigma", "rc", "w", "cg", "y")
 
-M2 = dict(Fx=12, Fab=12, Fz=12, Fc=12, TAP=12, FS=12, Fk=12, Fq=12, Fg=12, Fw=12, Fy=12, RC=36,
-          rnd="floor", ornd="floor", omode="fixed", Fo=12, q_unscaled=False, exact=[])
+M2 = dict(Fx=12, Fab=12, Fz=12, Fc=12, TAP=12, FS=12, Fk=12, Fq=12, Fg=12, Fw=12, Fy=12, Fcg=12, RC=36,
+          rnd="floor", ornd="floor", omode="fixed", Fo=12, smin=0, q_unscaled=False, exact=[])
 
 def chk(x, what, lim=L53):
     m = float(np.max(np.abs(x))) if np.size(x) else 0.0
@@ -86,13 +86,16 @@ class Head:
 
     def l2n(self, u, Fin, Fout, is_q):
         c = self.c
-        n2 = chk((u * u).sum(axis=1), "l2 n2")
+        uL = u.astype(LD)
+        n2L = (uL * uL).sum(axis=1)                                   # long double: exact below 2^63
+        if float(n2L.max()) >= float(L63): raise OverflowError("guard l2 n2")
         if "l2n" in self.ex:
+            n2 = (u * u).sum(axis=1)
             s = np.sqrt(n2 + 1e-6 * 4.0 ** Fin)
             out = u / s[:, None] * math.ldexp(1.0, Fout)
             if is_q and not c["q_unscaled"]: out = out / math.sqrt(D)
             return out
-        s = isqrt_f(n2 + round(1e-6 * 4.0 ** Fin)).astype(LD)       # long double from here: exact below 2^63
+        s = isqrt_ld(n2L + LD(round(1e-6 * 4.0 ** Fin)))
         num = u.astype(LD) * LD(2) ** Fout
         if is_q and not c["q_unscaled"]:
             s = s * LD(round(math.sqrt(D) * 4096)); num = num * LD(4096)
@@ -158,15 +161,16 @@ class Head:
                 sh = Gs - Fo; assert (sh >= 0).all()
                 o = Sig * p2(sh)[:, None] if "o" in ex else R(Sig, sh[:, None], c["ornd"])
             else:  # per-token shift witness: smallest s >= 0 with every |floor(Sig / 2^s)| in [-2^17, 2^17)
+                smin = int(c["smin"])
                 m = np.abs(Sig).max(axis=1)
-                s = np.maximum(0, np.floor(np.log2(np.maximum(m, 1.0))).astype(np.int64) - 17)
+                s = np.maximum(smin, np.floor(np.log2(np.maximum(m, 1.0))).astype(np.int64) - 17)
                 for _ in range(4):
                     oo = np.floor(Sig * p2(s)[:, None])
                     too_big = ((oo < -2 ** 17) | (oo >= 2 ** 17)).any(axis=1)
                     s = np.where(too_big, s + 1, s)
                 for _ in range(4):
                     oo = np.floor(Sig * p2(np.maximum(s - 1, 0))[:, None])
-                    can = (s > 0) & ~((oo < -2 ** 17) | (oo >= 2 ** 17)).any(axis=1)
+                    can = (s > smin) & ~((oo < -2 ** 17) | (oo >= 2 ** 17)).any(axis=1)
                     s = np.where(can, s - 1, s)
                 Fo = Gs - s
                 o = Sig * p2(s)[:, None] if "o" in ex else np.floor(Sig * p2(s)[:, None])
@@ -185,14 +189,15 @@ class Head:
             Rc = twoRC / sig if "rc" in ex else fdiv_ld(twoRC, sig)
             oRc = oL * Rc[:, None]
             if float(np.abs(oRc).max()) >= float(L63): raise OverflowError("guard oRc")
+            if float(np.abs(cg).max()) * (2.0 ** c["Fw"] + 1) >= float(L63): raise OverflowError("guard cg w")
             wv = oRc * LD(2) ** (c["Fw"] - c["RC"])
             if "w" not in ex: wv = np.floor(wv)
             zi = self.q(z[t], c["Fz"], "in_z")
             zr = zi * math.ldexp(1.0, -c["Fz"])
-            cg = 4096.0 * gain_ * math.sqrt(D) * zr / (1.0 + np.exp(-zr))
+            cg = math.ldexp(1.0, c["Fcg"]) * gain_ * math.sqrt(D) * zr / (1.0 + np.exp(-zr))
             if "cg" not in ex: cg = np.rint(cg)
             cgw = cg.astype(LD) * wv
-            yv = cgw * LD(2) ** (c["Fy"] - c["Fw"] - 12)
+            yv = cgw * LD(2) ** (c["Fy"] - c["Fw"] - c["Fcg"])
             if "y" not in ex: yv = np.floor(yv)
             y = yv.astype(np.float64); w = wv.astype(np.float64)
             for k, arr in (("S", S), ("M", M), ("delta", delta), ("o", o), ("Sigma", Sig), ("w", w), ("v", v), ("k_hat", kh), ("q_hat", qh),

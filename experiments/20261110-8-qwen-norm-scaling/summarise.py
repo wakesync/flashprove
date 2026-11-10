@@ -12,9 +12,13 @@ B18 = 2 ** 18
 def bounds(arm):
     """Stated class bounds per candidate (PREREG): RNG cells < 2^18 (o, S, M, delta two-limb, w), public classes of DESIGN 2.
     xin < 2^31, ar/br/z < 2^20, cg < 2^24, y < 2^31. C3: o in [-2^17, 2^17) exact. C4: Sigma < 2^28 (proved, two limbs)."""
-    b = dict(S=B18, M=B18, o=B18, w=B18 + 1, xin=2 ** 31, ar=2 ** 20, br=2 ** 20, z=2 ** 20, cg=2 ** 24, y=2 ** 31,
+    b = dict(S=B18, M=B18, o=B18, w=B18 + 1, xin=2 ** 31, v=2 ** 31, ar=2 ** 20, br=2 ** 20, z=2 ** 20, cg=2 ** 24, y=2 ** 31,
              delta=2 ** 36)  # delta two-limb: lo in [0, 2^18), |hi| < 2^18
-    if arm.startswith("C3"): b["o"] = 2 ** 17 + 1
+    if arm.startswith("C3"): b["o"] = 2 ** 17 + 1; b["shift"] = 13      # remainder of the shift in one 12-bit limb pair
+    if arm in ("X1", "X2", "X3"):                                       # A-2: tight o class, shift remainder in two 12-bit limbs (s <= 24)
+        b["o"] = 2 ** 17 + 1; b["shift"] = 25
+    if arm == "X3": b["S"] = 2 ** 25; b["M"] = 2 ** 25                    # A-2: S', M two-limb (lo < 2^18, |hi| < 2^7)
+    if arm == "D-R15": b["z"] = 2 ** 23                                   # z at 2^15: the 2^20 class scaled by 2^3 (descriptive arm)
     if arm.startswith("C4"): b.pop("o"); b["Sigma"] = 2 ** 28
     if arm.startswith("C5"): b["o"] = B18
     return b
