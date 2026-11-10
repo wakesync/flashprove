@@ -1,0 +1,10 @@
+{"mode": "honest", "op": "conv", "F": 12, "seed": 1, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22080, "prove_s": 0.00599478, "verify_s": 0.0250385}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 2, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22040, "prove_s": 0.00563761, "verify_s": 0.023211}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 3, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22272, "prove_s": 0.00783964, "verify_s": 0.0298265}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 4, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22240, "prove_s": 0.00581608, "verify_s": 0.0218463}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 5, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22016, "prove_s": 0.00565656, "verify_s": 0.0220893}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 6, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22240, "prove_s": 0.00548054, "verify_s": 0.0223435}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 7, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 21920, "prove_s": 0.00571657, "verify_s": 0.0235861}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 8, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22016, "prove_s": 0.0178157, "verify_s": 0.0564424}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 9, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22400, "prove_s": 0.0125522, "verify_s": 0.0479042}
+{"mode": "honest", "op": "conv", "F": 12, "seed": 10, "accept": true, "columns": 294, "relations": 573, "proof_bytes": 22368, "prove_s": 0.0115521, "verify_s": 0.0428707}

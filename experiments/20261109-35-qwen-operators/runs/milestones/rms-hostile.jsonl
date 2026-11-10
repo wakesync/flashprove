@@ -1,0 +1,13 @@
+{"mode":"honest","op":"rms","F":12,"seed":1,"accept":true,"columns":15753,"relations":31137,"proof_bytes":223568,"prove_s":0.188729,"verify_s":0.0855432}
+{"mode":"hostile","op":"rms","class":"wrong-table-row","complete_proof":true,"violations":257,"rejected":true}
+{"mode":"hostile","op":"rms","class":"mean-square-out-of-domain","complete_proof":true,"violations":2,"rejected":true}
+{"mode":"hostile","op":"rms","class":"out-of-domain","complete_proof":true,"violations":4,"rejected":true}
+{"mode":"hostile","op":"rms","class":"rounding-plus-one-compensated","complete_proof":true,"violations":3,"rejected":true}
+{"mode":"hostile","op":"rms","class":"sign-flip","complete_proof":true,"violations":4,"rejected":true}
+{"mode":"hostile","op":"rms","class":"wrong-output","complete_proof":true,"violations":3,"rejected":true}
+{"mode":"hostile","op":"rms","class":"public-output","complete_proof":false,"violations":0,"rejected":true}
+{"mode":"hostile","op":"rms","class":"scale-replay","complete_proof":false,"violations":0,"rejected":true}
+{"mode":"hostile","op":"rms","class":"byte-flip","complete_proof":false,"violations":0,"rejected":true}
+{"mode":"hostile","op":"rms","class":"truncated","complete_proof":false,"violations":0,"rejected":true}
+{"mode":"hostile","op":"rms","class":"trailing","complete_proof":false,"violations":0,"rejected":true}
+{"mode":"summary","rejected":11,"total":11}

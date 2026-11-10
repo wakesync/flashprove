@@ -1,0 +1,24 @@
+{
+  "source_commit": "95438aba49383998fce3d2cc5106c7bb34368679",
+  "dirty_tracked": false,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "research/operators/qwen_ops/proof.cpp",
+    "-o",
+    "research/operators/qwen_ops/work/proof-ubsan.bin",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined"
+  ],
+  "proof_cpp_sha256": "31f1a723f1bb07015e16fa15337e31e7888f4256d608af8ed2b3ee6361e9aa95",
+  "binary_sha256": "84befd8210bf6cd2f7a63dd943865d00ca1426dcd0a4b037d6299fffe7822c73"
+}
