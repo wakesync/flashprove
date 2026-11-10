@@ -48,6 +48,26 @@ def main(op):
                     ref=sum((x[t+j]/S)*(w[j]/S) for j in range(4))
                     errors.append(abs(got-ref))
             out.append(dict(op=op,F=f,threshold=1/S,passed=max(errors)<=1/S,error=distribution(errors)))
+        elif op=='rotary':
+            from rotary_tables import load as rotary_load
+            tab=rotary_load(f); errors=[]; positions=[]; unchanged=0
+            for seed in range(1,11):
+                rng=random.Random(seed); pos=rng.randrange(1024);positions.append(pos)
+                xs=[rng.randrange(-S,S) for _ in range(256)]
+                ys=xs.copy()
+                for j in range(32):
+                    C,U=tab[64*pos+2*j:64*pos+2*j+2]
+                    ys[j]=(xs[j]*C-xs[j+32]*U)//S
+                    ys[j+32]=(xs[j+32]*C+xs[j]*U)//S
+                    angle=pos*math.pow(10000000,-j/32)
+                    c,s=math.cos(angle),math.sin(angle)
+                    ref=(xs[j]*c-xs[j+32]*s)/S
+                    ref2=(xs[j+32]*c+xs[j]*s)/S
+                    errors.extend((abs(ys[j]/S-ref),abs(ys[j+32]/S-ref2)))
+                unchanged+=sum(ys[j]==xs[j] for j in range(64,256))
+            assert unchanged==1920
+            out.append(dict(op=op,F=f,threshold=2/S,passed=max(errors)<=2/S,
+                            error=distribution(errors),positions=positions,unchanged=unchanged))
         else:
             D=128 if op=='l2' else 256
             tab=load('l2-128' if op=='l2' else 'rsqrt',f)

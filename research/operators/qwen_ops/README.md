@@ -4,7 +4,7 @@ This directory is an isolated CPU product-oracle experiment for issue #35, not Q
 
 ## Statement and verifier boundary
 
-The public statement is operator kind, F in {12,14,16}, and an exactly sized vector of claimed integer outputs. Inputs, selector bits, history and intermediates live in the same Merkle-committed product oracle. They are NOT public input words. The verifier rebuilds every affine relation from its own fixed operator definition, pinned table constants and the public outputs; it does not read a witness, evaluate float nonlinearities, or accept a prover-chosen constraint list. The test compares the witness builder's serialized relation list to the witness-free verifier's list.
+The public statement is operator kind, F in {12,14,16}, public position for rotary (zero for other operators), and an exactly sized vector of claimed integer outputs. Inputs, selector bits, history and intermediates live in the same Merkle-committed product oracle. They are NOT public input words. The verifier rebuilds every affine relation from its own fixed operator definition, pinned table constants and the public outputs; it does not read a witness, evaluate float nonlinearities, or accept a prover-chosen constraint list. The test compares the witness builder's serialized relation list to the witness-free verifier's list.
 
 **Important limitation:** the statement establishes a relation over an existential committed tuple. It does not authenticate that tuple as the output of a particular model matmul or a prior chunk. Replacing all inputs and recomputing all outputs consistently is another valid statement, not a detected attack. A production composition must put these wires in the existing model oracle or bind openings of the prior commitments. In particular, an internally committed history is not a carried cross-proof history commitment. This lane does not solve issue #34.
 
@@ -31,20 +31,31 @@ A 4096-way one-hot selector has Boolean entries b_i, sum b_i=1, key=sum i*b_i, y
 
 There are at most 4096 Boolean values, so sum=1 cannot wrap Goldilocks. Selected keys are at most 4095, table coefficients are below 2^20 in magnitude, and all sums are below 2^32 in magnitude even before the one-hot constraint reduces them. Intermediate equalities pin unique field elements. Once selectors are one-hot, reconstruction and remainder bounds pin the intended signed integer X. This is O(table size) per selector group, not the efficient batched LKP backend; table membership itself is proved, not recomputed from disclosed inputs.
 
+## Gadget boundaries
+
+- [Nonlinear](nonlinear/README.md): six functions on one shared committed scalar/key.
+- [Convolution](conv/README.md): four tokens, one channel, shared committed three-word history and four taps. External carried-history identity is missing.
+- [Norm](norm/README.md): one D128 L2 or D256 RMS head, bounded mean-square table, unit gain and no epsilon.
+- [Rotary](rotary/README.md): public position 0..1023, first 64 of 256 coordinates, theta 10^7, rotate-half pairs and exact copy of the rest. Separate manifest `tables/rotary-manifest.json`.
+
 ## Reproduce
 
 From the repository root, Python standard library and g++ with C++17, no downloads:
 
 ```
-python3 research/operators/qwen_ops/tables.py --check
+python3 research/operators/qwen_ops/check_tables.py
+python3 research/operators/qwen_ops/rotary_tables.py --check
 python3 research/operators/qwen_ops/fidelity.py nonlinear
-python3 research/operators/qwen_ops/record.py all nonlinear
-python3 research/operators/qwen_ops/record.py smoke nonlinear
-python3 research/operators/qwen_ops/record.py ubsan nonlinear
+python3 research/operators/qwen_ops/fidelity.py conv
+python3 research/operators/qwen_ops/fidelity.py l2
+python3 research/operators/qwen_ops/fidelity.py rms
+python3 research/operators/qwen_ops/fidelity.py rotary
+python3 research/operators/qwen_ops/record.py final
+python3 research/operators/qwen_ops/record.py ubsan-all
 ```
 
 On a shared lane host, prefix every prove/verify batch with the coordinator's `fp-heavy.sh taskset -c 0-5` wrapper. No absolute host path is part of a repository command. `record.py` writes raw JSONL under the experiment's `runs/`, summarized seconds/bytes with n, median, sample SD and min/max. Timing includes no excluded warmup; verifier time includes witness-free circuit derivation and sizing. Table generation, compiler time and shell scheduling are not included in prove/verify times. F=12 is the performance arm; F=14/16 smoke proofs are not ten-run timing estimates.
 
 ## What remains outside issue #35 coverage
 
-External commitment identity and prior-history authentication, matmul composition, learned decay constants, norm epsilon and learned gains, DeltaNet q scaling, arbitrary low-energy vectors, partial rotary proof, the hybrid layer planner, production hash/security accounting, upstream limits, and model fidelity all remain separate obligations. These tables are an experimental interface and must not silently replace M2 or production arithmetic.
+External commitment identity and prior-history authentication, matmul composition, learned decay constants, norm epsilon and learned gains, DeltaNet q scaling, arbitrary low-energy vectors, full-context/multimodal rotary, the hybrid layer planner, production hash/security accounting, upstream limits, and model fidelity all remain separate obligations. These tables are an experimental interface and must not silently replace M2 or production arithmetic.

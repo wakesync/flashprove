@@ -12,9 +12,9 @@ Issue #35. This PR does not modify any upstream limit, parameter admission rule 
 
 No limit is relaxed by this research harness; its own bounded synthetic profile is not an admitted model profile.
 
-## Partial rotary: semantics only, no proof or generated trig tables
+## Partial rotary: scoped semantics
 
-Optional gadget not implemented in this lane. Proposed text-only semantics for position t in [0,1024), vector X of dimension 256 at scale S=2^F, theta=10^7, rotary width R=64:
+The optional gadget was registered in Amendment A1 and implemented in `proof.cpp`, `rotary()`, with the integer generator in `rotary_tables.py`. See `rotary/README.md` for the exact approximation and proof boundary. Text-only semantics for position t in [0,1024), vector X of dimension 256 at scale S=2^F, theta=10^7, rotary width R=64:
 
 For j=0..31:
 
@@ -28,4 +28,4 @@ Y[j+32] = floor((X[j+32]*C[t,j] + X[j]*U[t,j])/S)
 
 For j=64..255, Y[j]=X[j] exactly. This is rotate-half on the first 64 coordinates, not adjacent-coordinate pairing across the 256-dimensional vector. Text-only equal M-RoPE position streams reduce to this 1-D position rule. Unequal image/video position streams, YaRN, contexts above 1024 and nontext tokens are excluded.
 
-A future implementation must specify a deterministic integer/exact interval generator for C/U, publish their hashes and rounding decisions, prove two signed products and an exact floor per output, bind the position and mask, and preserve the 192 untouched coordinates by shared-wire identity. Hostile tests must include wrong position, swapped sin/cos, sign, pair permutation, mutation outside the rotated prefix, and out-of-domain position. The formulas above are a proposed contract, not measured fidelity or an existing proof.
+The implemented C/U are nearest-even values of a deterministic Q256 approximation to these real formulas, not a correctly-rounded transcendental theorem. Their hashes and rounding procedure are published. The relation uses public-coefficient products and exact floors, binds position and operator profile, and preserves the 192 untouched coordinates by shared-wire identity. Sampled hostile proofs cover wrong pair input, sign, changed unrotated coordinate, out-of-domain operand, invalid remainder, public position replay and out-of-domain position; arbitrary sin/cos swaps and pair permutations are not an exhaustive tested family. Production integration and other position streams remain gaps.

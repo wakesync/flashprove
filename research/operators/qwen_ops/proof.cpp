@@ -3,6 +3,7 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <random>
 #include <string>
@@ -10,6 +11,7 @@
 #include "toy/toy_coins.h"
 #include "../qwen_deltanet/product.h"
 #include "tables/pinned.h"
+#include "tables/rotary-pinned.h"
 using namespace blk;
 static void need(bool b,const char* msg) { if(!b) throw std::runtime_error(msg); }
 static F fi(i64 x) { return x>=0 ? F{u64(x)} : F{P-u64(-x)}; }
@@ -17,6 +19,7 @@ static i64 floor2(i64 x,unsigned k) { i64 d=i64(1)<<k; return x/d - (x%d<0); }
 struct Wire { u64 c; unsigned r; i64 v; };
 struct Circuit {
   bool witness;
+  std::string profile;
   std::vector<std::array<F,3>> cols;
   std::vector<WideRelation> rel;
   std::map<std::string,Wire> attacks;
@@ -85,7 +88,10 @@ static const int64_t* table(int op,int f) {
   static const int64_t* all[3][8]={TABLESET(12),TABLESET(14),TABLESET(16)};
   return all[(f-12)/2][op];
 }
-struct Input {int f=12; std::string op; std::vector<i64> x,y;};
+struct Input {int f=12; int position=0; std::string op; std::vector<i64> x,y;};
+static const int64_t* rotary_table(int f) {
+  return f==12?qrotary::f12:f==14?qrotary::f14:qrotary::f16;
+}
 static Circuit nonlinear(const Input& in,bool witness) {
   Circuit c(witness); int f=in.f; i64 step=i64(1)<<(f-8);
   auto x=c.cell(witness?in.x.at(0):0); c.attacks["input"]=x;
@@ -139,23 +145,41 @@ static Circuit norm(const Input& in,bool witness) {
   }
   return c;
 }
+static Circuit rotary(const Input& in,bool witness) {
+  Circuit c(witness);const int f=in.f;const i64 S=i64(1)<<f;
+  std::vector<Wire> x;
+  for(int j=0;j<256;j++){auto v=c.cell(witness?in.x.at(j):0);c.range(v,f+1,S);x.push_back(v);}
+  const auto tab=rotary_table(f)+64*in.position;
+  c.attacks["input"]=x[0];c.attacks["pair-input"]=x[32];c.attacks["unrotated"]=x[64];
+  for(int j=0;j<32;j++) {
+    i64 C=tab[2*j],U=tab[2*j+1];
+    auto y=c.floor(c.sum({{x[j],C},{x[j+32],-U}}),f,j==0?"grid":"");
+    auto z=c.floor(c.sum({{x[j+32],C},{x[j],U}}),f,"");
+    c.range(y,f+3,4*S);c.range(z,f+3,4*S);
+    c.eq({c.term(y)},in.y.at(j));c.eq({c.term(z)},in.y.at(j+32));
+    if(j==0)c.attacks["output"]=y;
+  }
+  for(int j=64;j<256;j++)c.eq({c.term(x[j])},in.y.at(j));
+  return c;
+}
 // The public verifier dispatch is closed to a fixed operator set.
 static Circuit build(const Input& in,bool witness) {
   need(in.f==12||in.f==14||in.f==16,"F unsupported");
-  need(in.op=="nonlinear"||in.op=="conv"||in.op=="l2"||in.op=="rms","operator unsupported");
+  need(in.op=="nonlinear"||in.op=="conv"||in.op=="l2"||in.op=="rms"||in.op=="rotary","operator unsupported");
+  need(in.op=="rotary"?(in.position>=0&&in.position<1024):in.position==0,"position domain");
   size_t outputs=in.op=="nonlinear"?6:in.op=="conv"?4:in.op=="l2"?128:256;
   need(in.y.size()==outputs,"output count");
   for(auto y:in.y) need(y>=-(i64(8)<<in.f)&&y<(i64(9)<<in.f),"output class");
-  if(in.op=="nonlinear")return nonlinear(in,witness);
-  if(in.op=="conv")return conv(in,witness);
-  return norm(in,witness);
+  Circuit c=in.op=="nonlinear"?nonlinear(in,witness):in.op=="conv"?conv(in,witness):in.op=="rotary"?rotary(in,witness):norm(in,witness);
+  c.profile=in.op+" F="+std::to_string(in.f)+" position="+std::to_string(in.position);
+  return c;
 }
 static WideRun run_for(const Circuit& c) {
   unsigned L=1;while((u64(1)<<L)<c.cols.size())L++;
   Setting set=setting_goldilocks();set.hash_block_bytes=HASH_BLOCK_BYTES;set.target=10;set.set_work(ErrorKind::QUERY,Scope::REQUEST,6);
   auto run=wide_size(set,L,L+1,L+1,{{1,1,L,L},{0,0,L,L}},c.rel);
   // Different shape text changes the configuration digest, separating this harness from M1.
-  run.product.shape.text += "operator-family qwen-bounded-integer-v1\n";
+  run.product.shape.text += "operator-family qwen-bounded-integer-v1\nprofile "+c.profile+"\n";
   need(run.product.plan->holds(),"plan refused"); return run;
 }
 static Table table_for(const Circuit& c) {
@@ -179,6 +203,8 @@ static bool verify(const Input& statement,const u8* data,size_t n) {
 }
 static double elapsed(std::chrono::steady_clock::time_point a) {return std::chrono::duration<double>(std::chrono::steady_clock::now()-a).count();}
 static Input fixture(std::string op,int f,int seed) {
+  need(f==12||f==14||f==16,"fixture F");
+  need(op=="nonlinear"||op=="conv"||op=="l2"||op=="rms"||op=="rotary","fixture operator");
   Input in;in.op=op;in.f=f;std::mt19937 rng(seed);i64 S=i64(1)<<f;
   if(op=="nonlinear") {
     in.x={i64(rng()%(16*S))-8*S};int key=int(floor2(in.x[0],f-8)+2048);
@@ -193,6 +219,15 @@ static Input fixture(std::string op,int f,int seed) {
     i64 key=floor2(energy,2*f+logD-10)-256;need(key>=0&&key<4096,"fixture norm domain");
     i64 coefficient=table(op=="l2"?7:6,f)[key];
     for(auto v:in.x)in.y.push_back(floor2(v*coefficient,f));
+  } else if(op=="rotary") {
+    in.position=rng()%1024;
+    for(int j=0;j<256;j++)in.x.push_back(i64(rng()%(2*S))-S);
+    in.y=in.x;const auto tab=rotary_table(f)+64*in.position;
+    for(int j=0;j<32;j++) {
+      i64 C=tab[2*j],U=tab[2*j+1];
+      in.y[j]=floor2(in.x[j]*C-in.x[j+32]*U,f);
+      in.y[j+32]=floor2(in.x[j+32]*C+in.x[j]*U,f);
+    }
   }
   return in;
 }
@@ -202,8 +237,25 @@ static void setrow(Table&t,Wire w,E v) {
   else throw std::runtime_error("attack row must be operand");
 }
 int main(int argc,char**argv) {try {
-  need(argc==5,"usage: proof.bin nonlinear F seed honest|hostile");
+  need(argc==5,"usage: proof.bin nonlinear|conv|l2|rms|rotary F seed honest|hostile");
   std::string mode=argv[4];int seed=std::stoi(argv[3]);auto in=fixture(argv[1],std::stoi(argv[2]),seed);
+  if(mode=="history-control") {
+    need(in.op=="conv","history control is convolution only");
+    i64 S=i64(1)<<in.f;
+    for(int j=0;j<7;j++)in.x[j]/=2;
+    for(int j=7;j<11;j++)in.x[j]=S/2;
+    for(int t=0;t<4;t++){i64 num=0;for(int j=0;j<4;j++)num+=in.x[t+j]*in.x[j+7];in.y[t]=floor2(num,in.f);}
+    auto replacement=in;
+    replacement.x[0]++;replacement.x[1]--;replacement.x[4]++;replacement.x[5]--;
+    auto first=build(in,true),second=build(replacement,true);auto run=run_for(first);
+    auto ta=table_for(first),tb=table_for(second);
+    need(violated(first,ta)==0&&violated(second,tb)==0,"consistent history replacement");
+    auto pa=prove(run,ta,false,seed),pb=prove(run,tb,false,seed);
+    auto public_statement=in;public_statement.x.clear();
+    bool a=verify(public_statement,pa.data(),pa.size()),b=verify(public_statement,pb.data(),pb.size());
+    std::cout<<"{\"mode\":\"gap-control\",\"same_public_statement\":true,\"different_history\":true,\"original_accepted\":"<<(a?"true":"false")<<",\"replacement_accepted\":"<<(b?"true":"false")<<",\"external_history_identity_bound\":false}"<<std::endl;
+    need(a&&b,"history gap control");return 0;
+  }
   auto c=build(in,true);auto public_c=build(in,false);Writer a,b;public_bytes(a,c.rel);public_bytes(b,public_c.rel);need(a.bytes()==b.bytes(),"witness-dependent relation");
   auto t=table_for(c);need(violated(c,t)==0,"honest relation mismatch");auto run=run_for(c);
   auto start=std::chrono::steady_clock::now();auto proof=prove(run,t,false,seed);double ps=elapsed(start);
@@ -225,6 +277,14 @@ int main(int argc,char**argv) {try {
     attack("wrong-table-row",[&](Table&z){setrow(z,coeff,z.at(coeff.r,coeff.c)+E::one());});
     attack("mean-square-out-of-domain",[&](Table&z){setrow(z,e,E::from(fi(255)));});
   }
+  if(in.op=="rotary") {
+    auto partner=c.attacks.at("pair-input"), untouched=c.attacks.at("unrotated");
+    attack("wrong-pair-input",[&](Table&z){setrow(z,partner,z.at(x.r,x.c));});
+    attack("changed-unrotated-coordinate",[&](Table&z){setrow(z,untouched,z.at(untouched.r,untouched.c)+E::one());});
+    auto pos=statement;pos.position=(pos.position+1)%1024;
+    report("wrong-public-position",verify(pos,proof.data(),proof.size()),0,false);
+    pos.position=1024;report("position-out-of-domain",verify(pos,proof.data(),proof.size()),0,false);
+  }
   attack("out-of-domain",[&](Table&z){setrow(z,x,E::from(fi((in.op=="nonlinear"?i64(8):i64(1))<<in.f)));});
   const int remainder_bits=in.op=="nonlinear"?in.f-8:in.f;
   attack("rounding-plus-one-compensated",[&](Table&z){setrow(z,q,z.at(q.r,q.c)+E::one());setrow(z,r,z.at(r.r,r.c)-E::from(fi(i64(1)<<remainder_bits)));});
@@ -232,6 +292,13 @@ int main(int argc,char**argv) {try {
   attack("wrong-output",[&](Table&z){setrow(z,y,z.at(y.r,y.c)+E::one());});
   auto changed=statement;changed.y[0]++;report("public-output",verify(changed,proof.data(),proof.size()),0,false);
   changed=statement;changed.f=14;report("scale-replay",verify(changed,proof.data(),proof.size()),0,false);
+  changed=statement;changed.f=64;report("invalid-scale",verify(changed,proof.data(),proof.size()),0,false);
+  changed=statement;changed.y.pop_back();report("short-output",verify(changed,proof.data(),proof.size()),0,false);
+  changed=statement;changed.y.push_back(0);report("long-output",verify(changed,proof.data(),proof.size()),0,false);
+  changed=statement;changed.y[0]=std::numeric_limits<i64>::max();report("huge-positive-output",verify(changed,proof.data(),proof.size()),0,false);
+  changed=statement;changed.y[0]=std::numeric_limits<i64>::min();report("huge-negative-output",verify(changed,proof.data(),proof.size()),0,false);
+  changed=statement;changed.op=statement.op=="rotary"?"rms":"rotary";changed.position=0;
+  report("operator-replay",verify(changed,proof.data(),proof.size()),0,false);
   auto bytes=proof.bytes();bytes[bytes.size()/2]^=1;report("byte-flip",verify(statement,bytes.data(),bytes.size()),0,false);
   report("truncated",verify(statement,proof.data(),proof.size()-1),0,false);
   bytes=proof.bytes();bytes.push_back(0);report("trailing",verify(statement,bytes.data(),bytes.size()),0,false);

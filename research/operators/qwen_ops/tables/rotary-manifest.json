@@ -1,0 +1,35 @@
+{
+  "format": "flashprove-qwen-rotary-v1",
+  "generator": "Q256 Machin pi, floor32nd-root frequency, range-reduced 128-term sin/cos",
+  "head_dimension": 256,
+  "layout": "row-major [position][pair][cos,sin], signed little-endian int64, no header",
+  "pairs": 32,
+  "pairs_rule": "(j,j+32), j=0..31; coordinates64..255 unchanged",
+  "positions": 1024,
+  "rotary_dimension": 64,
+  "rounding": "nearest ties-to-even of Q256 integer approximation",
+  "tables": [
+    {
+      "F": 12,
+      "file": "rotary-f12.i64le",
+      "output_scale": 4096,
+      "sha256": "a82bd980ea903f4723bfc84a5fb96a008854cefe98a1c081a0c9818669204c9a",
+      "words": 65536
+    },
+    {
+      "F": 14,
+      "file": "rotary-f14.i64le",
+      "output_scale": 16384,
+      "sha256": "c3401fd3a60d412ecb13026716c7ff4d8706435190c2f3b2a9ec6036a55c2f84",
+      "words": 65536
+    },
+    {
+      "F": 16,
+      "file": "rotary-f16.i64le",
+      "output_scale": 65536,
+      "sha256": "f2e5684ac918104eac97bd9b2797ac4b69304267b6490127ff819d5ad9bbc04a",
+      "words": 65536
+    }
+  ],
+  "theta": 10000000
+}
