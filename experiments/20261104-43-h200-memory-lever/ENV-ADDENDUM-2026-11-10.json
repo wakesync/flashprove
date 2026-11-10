@@ -1,0 +1,12 @@
+{
+  "addendum_to": "ENV.json as committed at d6ef23ddab2f0e7d7a05e812f163be1eca198cfb (unchanged; this file adds to it, it observes nothing new)",
+  "date": "2026-11-10",
+  "written": "after the runs, while finishing PR #44; retrospective, not an observation made during either rental",
+  "commits": {
+    "upstream": "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c (ancestor of the build pin 29907e5f; git diff between the two over prover/ and driver/ is empty)"
+  },
+  "seeds": {
+    "measure_rate_rental1": "INFERRED, not observed: by the registered rule (PREREG Runs: seed = session index) CA1 1, TA1 1, CB2 2; no rental-1 log file survives to confirm the seeds actually used"
+  },
+  "clock": "both rental-2 session logs print measure_rate.py NOTE lines (TB1 3, CA1 10) where two clock readings at a release lie more than 2 s apart; see RESULTS-ADDENDUM-2026-11-10.md and clock_notes_r2.py"
+}
