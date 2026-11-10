@@ -29,7 +29,14 @@ STAGES = ("in_qkv", "in_ab", "in_z", "conv", "silu", "l2n", "gates", "mem", "del
           "sigma", "rc", "w", "cg", "y")
 
 M2 = dict(Fx=12, Fab=12, Fz=12, Fc=12, TAP=12, FS=12, Fk=12, Fq=12, Fg=12, Fw=12, Fy=12, Fcg=12, RC=36,
-          rnd="floor", ornd="floor", omode="fixed", Fo=12, smin=0, q_unscaled=False, exact=[])
+          rnd="floor", ornd="floor", omode="fixed", Fo=12, smin=0, q_unscaled=False, exact=[],
+          # PREREG amendment A-4 (r2): rounding of the v rescale and of o in the shift path. Defaults keep the
+          # behaviour of every committed run (v: round half even; shift-path o: floor). r2 arms set vrnd=rnd
+          # ("floor" or "rhu") and shift_ornd=ornd, the registered rounding.
+          vrnd="rint", shift_ornd="floor")
+
+def _ints(a):
+    return [int(x) for x in np.asarray(a).reshape(-1)]
 
 def chk(x, what, lim=L53):
     m = float(np.max(np.abs(x))) if np.size(x) else 0.0
@@ -70,6 +77,15 @@ def fdiv_ld(n, d):
     q = np.where(q * d > n, q - 1, q)
     q = np.where((q + 1) * d <= n, q + 1, q)
     return q
+
+class _NullDict:
+    """Wraps a stats dict; reads and writes of keys outside the wrapped dict are dropped (keeps committed row fields)."""
+    def __init__(s, d): s.d = d
+    def __contains__(s, k): return k in s.d
+    def __getitem__(s, k): return s.d[k] if k in s.d else np.full(1, np.inf)
+    def __setitem__(s, k, v):
+        if k in s.d: s.d[k] = v
+    def items(s): return s.d.items()
 
 class Head:
     def __init__(self, cfg, H=NV):
@@ -115,8 +131,16 @@ class Head:
         mx = {k: np.zeros(H) for k in ("S", "M", "delta", "o", "Sigma", "w", "v", "k_hat", "q_hat", "xin", "ar", "br", "z", "cg", "y",
                                      "sigma", "Rc", "Vx", "shift", "aP", "oRc", "cgw", "aS", "kd")}
         mn = {k: np.full(H, np.inf) for k in ("shift", "Fo")}
-        stats["max"], stats["min"] = mx, mn
-        def upd(k, arr): mx[k] = np.maximum(mx[k], np.abs(arr).reshape(H, -1).max(axis=1))
+        EXT = ("e1", "e2", "rr", "gap", "rem_M", "rem_delta", "rem_S", "rem_o", "rem_w", "rem_y")
+        if c.get("ext_stats"):  # A-4: every exact intermediate and remainder (only r2 arms; committed rows keep their fields)
+            for k in EXT: mx[k] = np.zeros(H); mn[k] = np.full(H, np.inf)
+        else:
+            _mx, _mn = mx, mn
+            mx = _NullDict(mx); mn = _NullDict(mn)
+        stats["max"], stats["min"] = (mx.d, mn.d) if isinstance(mx, _NullDict) else (mx, mn)
+        def upd(k, arr):
+            if k not in mx: return
+            mx[k] = np.maximum(mx[k], np.abs(arr).reshape(H, -1).max(axis=1))
         shC = c["TAP"] + c["Fx"] - c["Fc"]
         gain_ = gain[None, :]
         for t in range(T):
@@ -133,7 +157,10 @@ class Head:
             qh = self.l2n(cs[0], c["Fc"], c["Fq"], True)
             kh = self.l2n(cs[1], c["Fc"], c["Fk"], False)
             v = cs[2] * np.ldexp(1.0, (self.FS - c["Fc"]))[:, None]
-            if "silu" not in ex: v = np.rint(v)
+            if "silu" not in ex:
+                if c["vrnd"] == "rint": v = np.rint(v)
+                elif c["vrnd"] == "floor": v = np.floor(v)
+                else: v = np.floor(v + 0.5)              # rhu: floor(x / 2^m + 1/2), exact for the integer x / 2^m held here
             ari, bri = self.q(ar[t], c["Fab"], "in_ab"), self.q(br[t], c["Fab"], "in_ab")
             xa = ari * math.ldexp(1.0, -c["Fab"]) + dtb
             a = math.ldexp(1.0, c["Fg"]) * np.exp(-A * np.logaddexp(0.0, xa))
@@ -144,22 +171,32 @@ class Head:
             aPl = a.astype(LD)[:, None] * P.astype(LD)                    # long double: exact below 2^64
             if float(np.abs(aPl).max()) >= float(L63): raise OverflowError("guard aP")
             upd("aP", aPl.astype(np.float64))
+            off = lambda m: (LD(2) ** (m - 1) if (c["rnd"] != "floor" and m > 0) else LD(0))
             if "mem" in ex: M = (aPl * LD(2) ** (-(c["Fg"] + c["Fk"]))).astype(np.float64)
             else:
                 Ml = aPl * LD(2) ** (-(c["Fg"] + c["Fk"]))
                 M = np.floor(Ml if c["rnd"] == "floor" else Ml + LD(0.5)).astype(np.float64)
+                mF = c["Fg"] + c["Fk"]; rM = aPl + off(mF) - M.astype(LD) * LD(2) ** mF
+                upd("rem_M", rM.astype(np.float64)); mn["rem_M"] = np.minimum(mn["rem_M"], rM.astype(np.float64).min(axis=1))
             dn = chk((v - M) * beta[:, None], "delta num")
             delta = dn * p2(c["Fg"]) if "delta" in ex else R(dn, c["Fg"], c["rnd"])
+            if "delta" not in ex:
+                rD = dn + float(off(c["Fg"])) - delta * math.ldexp(1.0, c["Fg"])
+                upd("rem_delta", rD); mn["rem_delta"] = np.minimum(mn["rem_delta"], rD.min(axis=1))
             aS = chk(a[:, None, None] * S, "aS")
             kd = chk(kh[:, :, None] * delta[:, None, :] * math.ldexp(1.0, c["Fg"] - c["Fk"]), "k delta")
             Sn = aS + kd
             S = Sn * p2(c["Fg"]) if "state" in ex else R(Sn, c["Fg"], c["rnd"])
+            if "state" not in ex:
+                rS = Sn + float(off(c["Fg"])) - S * math.ldexp(1.0, c["Fg"])
+                upd("rem_S", rS); mn["rem_S"] = np.minimum(mn["rem_S"], rS.reshape(H, -1).min(axis=1))
             Sig = chk(np.matmul(qh[:, None, :], S)[:, 0, :], "Sigma")   # at 2^(Fq + FS), exact (< 2^53)
             Gs = c["Fq"] + self.FS                                # (H,)
             if c["omode"] == "fixed":
                 Fo = self.Fo
                 sh = Gs - Fo; assert (sh >= 0).all()
                 o = Sig * p2(sh)[:, None] if "o" in ex else R(Sig, sh[:, None], c["ornd"])
+                osh = sh
             else:  # per-token shift witness: smallest s >= 0 with every |floor(Sig / 2^s)| in [-2^17, 2^17)
                 smin = int(c["smin"])
                 m = np.abs(Sig).max(axis=1)
@@ -173,9 +210,17 @@ class Head:
                     can = (s > smin) & ~((oo < -2 ** 17) | (oo >= 2 ** 17)).any(axis=1)
                     s = np.where(can, s - 1, s)
                 Fo = Gs - s
-                o = Sig * p2(s)[:, None] if "o" in ex else np.floor(Sig * p2(s)[:, None])
+                # A-4: the shift s is chosen by the registered rule (on floor); o itself uses shift_ornd
+                # (default floor = committed runs; r2 arms set it to the registered ornd).
+                o = Sig * p2(s)[:, None] if "o" in ex else R(Sig, s[:, None], c["shift_ornd"])
+                osh = s
                 upd("shift", s[:, None]); mn["shift"] = np.minimum(mn["shift"], s)
             mn["Fo"] = np.minimum(mn["Fo"], Fo)
+            if "o" not in ex:
+                omode_rnd = c["ornd"] if c["omode"] == "fixed" else c["shift_ornd"]
+                oo = np.where((osh > 0) & (omode_rnd != "floor"), np.ldexp(1.0, np.maximum(osh, 1) - 1), 0.0)[:, None]
+                rO = Sig + oo - o * np.ldexp(1.0, osh)[:, None]
+                upd("rem_o", rO); mn["rem_o"] = np.minimum(mn["rem_o"], rO.min(axis=1))
             # gated norm (DESIGN 4.4 generalised), long double
             oL = o.astype(LD)
             Vx = (oL * oL).sum(axis=1)
@@ -187,10 +232,23 @@ class Head:
             else: sig = isqrt_ld(Vx + (np.rint(eps_r) * mul).astype(LD))
             twoRC = LD(2) ** c["RC"]
             Rc = twoRC / sig if "rc" in ex else fdiv_ld(twoRC, sig)
+            if "sigma" not in ex:
+                epsI = (np.rint(eps_r) * mul).astype(LD)
+                e1 = Vx + epsI - sig * sig; e2 = sig * sig + 2 * sig - Vx - epsI     # exact: every term < 2^63
+                upd("e1", e1.astype(np.float64)[:, None]); upd("e2", e2.astype(np.float64)[:, None])
+                mn["e1"] = np.minimum(mn["e1"], e1.astype(np.float64)); mn["e2"] = np.minimum(mn["e2"], e2.astype(np.float64))
+                if "rc" not in ex:  # Rc sigma can exceed 2^64 (C4P): exact in Python integers
+                    rr = np.array([(1 << int(c["RC"])) - r * s_ for r, s_ in zip(_ints(Rc), _ints(sig))], dtype=object)
+                    gap = np.array([s_ - 1 - int(r_) for s_, r_ in zip(_ints(sig), rr)], dtype=object)
+                    upd("rr", rr.astype(np.float64)[:, None]); upd("gap", gap.astype(np.float64)[:, None])
+                    mn["rr"] = np.minimum(mn["rr"], rr.astype(np.float64)); mn["gap"] = np.minimum(mn["gap"], gap.astype(np.float64))
             oRc = oL * Rc[:, None]
             if float(np.abs(oRc).max()) >= float(L63): raise OverflowError("guard oRc")
             wv = oRc * LD(2) ** (c["Fw"] - c["RC"])
-            if "w" not in ex: wv = np.floor(wv)
+            if "w" not in ex:
+                wv = np.floor(wv)
+                rW = oRc - wv * LD(2) ** (c["RC"] - c["Fw"])
+                upd("rem_w", rW.astype(np.float64)); mn["rem_w"] = np.minimum(mn["rem_w"], rW.astype(np.float64).min(axis=1))
             zi = self.q(z[t], c["Fz"], "in_z")
             zr = zi * math.ldexp(1.0, -c["Fz"])
             cg = math.ldexp(1.0, c["Fcg"]) * gain_ * math.sqrt(D) * zr / (1.0 + np.exp(-zr))
@@ -198,7 +256,10 @@ class Head:
             if float(np.abs(cg).max()) * (2.0 ** c["Fw"] + 1) >= float(L63): raise OverflowError("guard cg w")
             cgw = cg.astype(LD) * wv
             yv = cgw * LD(2) ** (c["Fy"] - c["Fw"] - c["Fcg"])
-            if "y" not in ex: yv = np.floor(yv)
+            if "y" not in ex:
+                yv = np.floor(yv)
+                rY = cgw - yv * LD(2) ** (c["Fw"] + c["Fcg"] - c["Fy"])
+                upd("rem_y", rY.astype(np.float64)); mn["rem_y"] = np.minimum(mn["rem_y"], rY.astype(np.float64).min(axis=1))
             y = yv.astype(np.float64); w = wv.astype(np.float64)
             for k, arr in (("S", S), ("M", M), ("delta", delta), ("o", o), ("Sigma", Sig), ("w", w), ("v", v), ("k_hat", kh), ("q_hat", qh),
                            ("ar", ari[:, None]), ("br", bri[:, None]), ("z", zi), ("cg", cg), ("y", y), ("aS", aS), ("kd", kd)):
@@ -328,6 +389,8 @@ def task(args):
                          bf16_rel_y=rel(yb[:, h], yf[:, h]), bf16_rel_S=rel(Sb[h], Sf[h]),
                          FS=int(hd.FS[h]), Fo_min=float(mn["Fo"][h]),
                          max={k: float(v[h]) for k, v in mx.items()}, shift_min=float(mn["shift"][h]) if np.isfinite(mn["shift"][h]) else None))
+        if c.get("ext_stats"):  # A-4: minima of the exact intermediates and remainders (non-negativity check)
+            rows[-1]["min_ext"] = {k: (float(mn[k][h]) if np.isfinite(mn[k][h]) else None) for k in mn if k not in ("shift", "Fo")}
     # layer level and residual stream (descriptive)
     X = x.astype(np.float32); nx = np.linalg.norm(X, axis=1)
     def resid(Y):
