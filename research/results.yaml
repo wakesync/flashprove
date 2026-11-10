@@ -581,6 +581,24 @@ results:
       - {name: local_exact_o_and_state, series: norm-scaling-localisation, arm: exact-o+state, stat: median, value: 0.1047, unit: ratio, n: 480, spread: {sd: null, min: 0.004476, max: 6.083}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 7206b1426992b30743a5981afe2db0b0b026aed6, source: experiments/20261110-8-qwen-norm-scaling/runs/r2/r2-stock.summary.json, note: "A-4 descriptive localisation row: o and S exact, everything else M2 integer; obtained under PREREG deviation A-3"}
       - {name: c4p_norm_alias_heads, arm: C4P, stat: count, value: 48, total: 48, unit: count, n: 48, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 7206b1426992b30743a5981afe2db0b0b026aed6, source: experiments/20261110-8-qwen-norm-scaling/runs/r2/reviewer-constructions.json, note: "reviewer construction (opus, PR 74 review) reproduced: at p01 token 12, a different y passes every gated-norm relation mod p inside the counted ranges in 48 of 48 heads; local norm relations only, no proof built; C4P was measured under PREREG deviation A-3; not a sound lowering"}
 
+  - id: qwen-weight-binding-q2
+    title: "Weight binding for U1: per-tensor manifest and integer-level stock vs abliterated Qwen3.8-27B (not a proof)"
+    status: measured
+    status_note: (H1 unchanged-tensor clause FAIL as registered)
+    replication: unreplicated
+    pr: null
+    pr_note: "draft PR of the q2-weight-binding lane; set on merge"
+    summary: "Hash level, not a proof: a per-tensor Merkle manifest per pin (1,199 leaves) refuses the other pin's manifest both ways and 70 of 70 changed-tensor openings; the registered expectation that the other tree's openings of the 1,129 unchanged tensors verify was wrong (0 of 1,129: an opening carries its own tree's path). Integer level, after the repository's conversion rule: 6 of 6 sampled changed tensors differ in 32.7% to 67.9% of integers (same exponents), the layer-16 control is identical; a toy multilinear fingerprint mod 2^31-1 separates 6 of 6 and matches the control"
+    conditions: "CPU, no proof; H1 from PR 68's streamed per-tensor hashes; H2/H3 on 7 registered tensors fetched by range request (bytes matched PR 68's hashes 14 of 14), matrix rule without norm folding; 64 of 70 changed tensors not converted; toy prime, not the protocol field; design and costs counted, not built"
+    evidence: [experiments/20261110-36-weight-binding/RESULTS.md, research/weight-binding/DESIGN.md]
+    metrics:
+      - {name: h1_changed_openings_refused, stat: count, value: 70, total: 70, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 274170b81651b2cc567c46cac82635c6753a387f, source: experiments/20261110-36-weight-binding/runs/h1-manifest-demo.json, note: "per direction (stock id and abliterated id), deterministic hash check, not a proof"}
+      - {name: h1_unchanged_openings_accepted, stat: count, value: 0, total: 1129, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 274170b81651b2cc567c46cac82635c6753a387f, source: experiments/20261110-36-weight-binding/runs/h1-manifest-demo.json, note: "registered expectation 1,129; FAIL as registered, the expectation was wrong (an opening carries its own tree's path)"}
+      - {name: h2_changed_tensors_int_differ, stat: count, value: 6, total: 6, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 274170b81651b2cc567c46cac82635c6753a387f, source: experiments/20261110-36-weight-binding/runs/h2h3-int.json, note: "fraction of integers differing at least 0.01 (threshold); deterministic"}
+      - {name: h2_int_fraction_differing_min, stat: single, value: 0.3274, unit: fraction, n: 6, spread: {sd: null, min: 0.3274, max: 0.6788}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 274170b81651b2cc567c46cac82635c6753a387f, source: experiments/20261110-36-weight-binding/runs/h2h3-int.json, note: "min over 6 sampled changed tensors (L51 o_proj); max L17 down_proj"}
+      - {name: h2_control_int_differing, stat: count, value: 0, total: 89128960, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 274170b81651b2cc567c46cac82635c6753a387f, source: experiments/20261110-36-weight-binding/runs/h2h3-int.json, note: "L16 down_proj, outside the abliterated range"}
+      - {name: h3_fingerprints_differ, stat: count, value: 6, total: 6, unit: count, n: 1, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-10, commit: 274170b81651b2cc567c46cac82635c6753a387f, source: experiments/20261110-36-weight-binding/runs/h2h3-int.json, note: "toy MLE mod 2^31-1 at a pin-independent point; equal on the control 1 of 1"}
+
   - id: glm-kda-model-scale
     title: "GLM KDA head slice at model scale, CPU sweep, synthetic inputs (PR #42)"
     status: measured
