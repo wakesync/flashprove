@@ -1,0 +1,507 @@
+{
+ "_base": {
+  "entries_T16": 1605872,
+  "terms_T16": 4782496,
+  "unit": "entries = gate columns + range cells + LKP keys"
+ },
+ "C1": {
+  "keys_counted_before": 17422,
+  "extra_limb_keys": 0,
+  "wayA_tight_keys": 388,
+  "wayB_extra_tables_residual_bits": [
+   6,
+   8,
+   9,
+   10,
+   11
+  ],
+  "non_multiple_quantities": [
+   [
+    "sigma",
+    23,
+    1
+   ],
+   [
+    "Rc",
+    46,
+    1
+   ],
+   [
+    "rr",
+    23,
+    1
+   ],
+   [
+    "gap",
+    23,
+    1
+   ],
+   [
+    "w remainder",
+    30,
+    128
+   ],
+   [
+    "y remainder",
+    8,
+    128
+   ],
+   [
+    "o remainder",
+    9,
+    128
+   ]
+  ],
+  "exceeded_quantities": [],
+  "entries_T16_cost_json": 1607936,
+  "entries_T16_wayA": 1614144,
+  "entries_T16_wayB": 1607936,
+  "delta_pct_cost_json": 0.129,
+  "delta_pct_wayA": 0.515,
+  "delta_pct_wayB": 0.129
+ },
+ "C3": {
+  "keys_counted_before": 17552,
+  "extra_limb_keys": 0,
+  "wayA_tight_keys": 389,
+  "wayB_extra_tables_residual_bits": [
+   5,
+   6,
+   8,
+   10,
+   11
+  ],
+  "non_multiple_quantities": [
+   [
+    "sigma",
+    23,
+    1
+   ],
+   [
+    "Rc",
+    46,
+    1
+   ],
+   [
+    "rr",
+    23,
+    1
+   ],
+   [
+    "gap",
+    23,
+    1
+   ],
+   [
+    "w remainder",
+    30,
+    128
+   ],
+   [
+    "y remainder",
+    8,
+    128
+   ],
+   [
+    "o + 2^17 (tight o class)",
+    18,
+    128
+   ],
+   [
+    "|o*| - 2^16 (outside check)",
+    17,
+    1
+   ]
+  ],
+  "exceeded_quantities": [],
+  "entries_T16_cost_json": 1618240,
+  "entries_T16_wayA": 1624464,
+  "entries_T16_wayB": 1618240,
+  "delta_pct_cost_json": 0.77,
+  "delta_pct_wayA": 1.158,
+  "delta_pct_wayB": 0.77
+ },
+ "C4": {
+  "keys_counted_before": 17812,
+  "extra_limb_keys": 0,
+  "wayA_tight_keys": 518,
+  "wayB_extra_tables_residual_bits": [
+   4,
+   6,
+   8,
+   9,
+   10
+  ],
+  "non_multiple_quantities": [
+   [
+    "sigma",
+    33,
+    1
+   ],
+   [
+    "e1",
+    34,
+    1
+   ],
+   [
+    "e2",
+    34,
+    1
+   ],
+   [
+    "Rc",
+    56,
+    1
+   ],
+   [
+    "rr",
+    33,
+    1
+   ],
+   [
+    "gap",
+    33,
+    1
+   ],
+   [
+    "w remainder",
+    40,
+    128
+   ],
+   [
+    "y remainder",
+    8,
+    128
+   ],
+   [
+    "Sigma lo limb",
+    18,
+    128
+   ],
+   [
+    "Sigma hi limb (signed 10 bits)",
+    10,
+    128
+   ]
+  ],
+  "exceeded_quantities": [],
+  "entries_T16_cost_json": 1612128,
+  "entries_T16_wayA": 1620416,
+  "entries_T16_wayB": 1612128,
+  "delta_pct_cost_json": 0.39,
+  "delta_pct_wayA": 0.906,
+  "delta_pct_wayB": 0.39
+ },
+ "C1P": {
+  "keys_counted_before": 34062,
+  "extra_limb_keys": 0,
+  "wayA_tight_keys": 17028,
+  "wayB_extra_tables_residual_bits": [
+   6,
+   8,
+   9,
+   10,
+   11
+  ],
+  "non_multiple_quantities": [
+   [
+    "sigma",
+    23,
+    1
+   ],
+   [
+    "Rc",
+    46,
+    1
+   ],
+   [
+    "rr",
+    23,
+    1
+   ],
+   [
+    "gap",
+    23,
+    1
+   ],
+   [
+    "w remainder",
+    30,
+    128
+   ],
+   [
+    "y remainder",
+    8,
+    128
+   ],
+   [
+    "o remainder",
+    9,
+    128
+   ],
+   [
+    "S' remainder",
+    18,
+    16384
+   ],
+   [
+    "M remainder",
+    30,
+    128
+   ],
+   [
+    "delta remainder",
+    18,
+    128
+   ]
+  ],
+  "exceeded_quantities": [],
+  "entries_T16_cost_json": 1874176,
+  "entries_T16_wayA": 2146624,
+  "entries_T16_wayB": 1874176,
+  "delta_pct_cost_json": 16.708,
+  "delta_pct_wayA": 33.673,
+  "delta_pct_wayB": 16.708
+ },
+ "C3P": {
+  "keys_counted_before": 34192,
+  "extra_limb_keys": 0,
+  "wayA_tight_keys": 17029,
+  "wayB_extra_tables_residual_bits": [
+   5,
+   6,
+   8,
+   10,
+   11
+  ],
+  "non_multiple_quantities": [
+   [
+    "sigma",
+    23,
+    1
+   ],
+   [
+    "Rc",
+    46,
+    1
+   ],
+   [
+    "rr",
+    23,
+    1
+   ],
+   [
+    "gap",
+    23,
+    1
+   ],
+   [
+    "w remainder",
+    30,
+    128
+   ],
+   [
+    "y remainder",
+    8,
+    128
+   ],
+   [
+    "o + 2^17 (tight o class)",
+    18,
+    128
+   ],
+   [
+    "|o*| - 2^16 (outside check)",
+    17,
+    1
+   ],
+   [
+    "S' remainder",
+    18,
+    16384
+   ],
+   [
+    "M remainder",
+    30,
+    128
+   ],
+   [
+    "delta remainder",
+    18,
+    128
+   ]
+  ],
+  "exceeded_quantities": [],
+  "entries_T16_cost_json": 1884480,
+  "entries_T16_wayA": 2156944,
+  "entries_T16_wayB": 1884480,
+  "delta_pct_cost_json": 17.349,
+  "delta_pct_wayA": 34.316,
+  "delta_pct_wayB": 17.349
+ },
+ "C4P": {
+  "keys_counted_before": 34452,
+  "extra_limb_keys": 0,
+  "wayA_tight_keys": 17158,
+  "wayB_extra_tables_residual_bits": [
+   4,
+   6,
+   8,
+   9,
+   10
+  ],
+  "non_multiple_quantities": [
+   [
+    "sigma",
+    33,
+    1
+   ],
+   [
+    "e1",
+    34,
+    1
+   ],
+   [
+    "e2",
+    34,
+    1
+   ],
+   [
+    "Rc",
+    56,
+    1
+   ],
+   [
+    "rr",
+    33,
+    1
+   ],
+   [
+    "gap",
+    33,
+    1
+   ],
+   [
+    "w remainder",
+    40,
+    128
+   ],
+   [
+    "y remainder",
+    8,
+    128
+   ],
+   [
+    "Sigma lo limb",
+    18,
+    128
+   ],
+   [
+    "Sigma hi limb (signed 10 bits)",
+    10,
+    128
+   ],
+   [
+    "S' remainder",
+    18,
+    16384
+   ],
+   [
+    "M remainder",
+    30,
+    128
+   ],
+   [
+    "delta remainder",
+    18,
+    128
+   ]
+  ],
+  "exceeded_quantities": [],
+  "entries_T16_cost_json": 1878368,
+  "entries_T16_wayA": 2152896,
+  "entries_T16_wayB": 1878368,
+  "delta_pct_cost_json": 16.969,
+  "delta_pct_wayA": 34.064,
+  "delta_pct_wayB": 16.969
+ },
+ "X3": {
+  "keys_counted_before": 34192,
+  "extra_limb_keys": 2,
+  "wayA_tight_keys": 16900,
+  "wayB_extra_tables_residual_bits": [
+   1,
+   5,
+   6,
+   10
+  ],
+  "non_multiple_quantities": [
+   [
+    "e1",
+    25,
+    1
+   ],
+   [
+    "e2",
+    25,
+    1
+   ],
+   [
+    "Rc",
+    46,
+    1
+   ],
+   [
+    "w remainder",
+    30,
+    128
+   ],
+   [
+    "o + 2^17 (tight o class)",
+    18,
+    128
+   ],
+   [
+    "|o*| - 2^16 (outside check)",
+    17,
+    1
+   ],
+   [
+    "S' remainder",
+    18,
+    16384
+   ],
+   [
+    "M remainder",
+    30,
+    128
+   ],
+   [
+    "delta remainder",
+    18,
+    128
+   ]
+  ],
+  "exceeded_quantities": [
+   [
+    "e1",
+    24,
+    25,
+    1
+   ],
+   [
+    "e2",
+    24,
+    25,
+    1
+   ]
+  ],
+  "entries_T16_cost_json": 2152768,
+  "entries_T16_wayA": 2423200,
+  "entries_T16_wayB": 2152800,
+  "delta_pct_cost_json": 34.056,
+  "delta_pct_wayA": 50.896,
+  "delta_pct_wayB": 34.058
+ },
+ "_note": "COUNTED, NOT BUILT. Recount of key-proved exact quantities only (A-4). Way A prices each non-multiple-of-12 width with one shifted key; way B with a second table (rows not counted). Neither makes the candidates sound: RNG-cell soundness bounds and the norm aliases are separate (reviewer_constructions.py)."
+}

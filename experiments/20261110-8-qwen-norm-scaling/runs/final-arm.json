@@ -1,0 +1,15 @@
+{
+ "arm": "C4P",
+ "rule": "none passes: lowest median rel_y among in-bounds arms",
+ "passing": [],
+ "in_bounds_by_rel_y": [
+  "C4P",
+  "C3P",
+  "C1P",
+  "C2P",
+  "C4",
+  "C3",
+  "C2",
+  "C1"
+ ]
+}
