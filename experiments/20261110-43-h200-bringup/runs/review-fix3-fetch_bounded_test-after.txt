@@ -1,0 +1,33 @@
+fetch_bounded_test.py of this fix, run against RUNBOOK.md and fetch_bounded.sh of this fix (commit 6bc0d046).
+CPU host, shared and loaded, no GPU, no network use, no provider command, inert local programs in place of the fetch; python3 3.12.3; GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu); timeout (GNU coreutils) 9.4; 2026-11-10T09:36Z UTC; 34 s.
+$ python3 fetch_bounded_test.py
+runbook: this package
+fetch command prefix (tinfoil path): "$FB" "$CUTOFF" 5 5 --
+fetch command prefix (proxy path):   "$FB" "$CUTOFF" 5 5 --
+PASS static: the tinfoil fetch goes through fetch_bounded.sh
+PASS static: the proxy fetch goes through fetch_bounded.sh
+PASS tinfoil path: one_to_zero (1 s then 0 s left): fetch not started: exit 121, started False, finished False
+PASS tinfoil path: at_cutoff (0 s left): fetch not started: exit 121, started False, finished False
+PASS tinfoil path: past_cutoff (30 s past, extra case): fetch not started: exit 121, started False, finished False
+PASS tinfoil path: insufficient_grace (4 s left, TERM ignored): over by the cut-off: exit 121, started False, finished False, ended -3.3 s from the cut-off
+PASS tinfoil path: term_ignoring (20 s left, TERM ignored, 40 s fetch): started and over by the cut-off: exit 137, started True, finished False, ended -4.3 s from the cut-off
+PASS tinfoil path: normal_fetch (60 s left, 1 s fetch): runs to the end, exit 0: exit 0, started True, finished True, ended -58.3 s from the cut-off
+PASS proxy path: one_to_zero (1 s then 0 s left): fetch not started: exit 121, started False, finished False
+PASS proxy path: at_cutoff (0 s left): fetch not started: exit 121, started False, finished False
+PASS proxy path: past_cutoff (30 s past, extra case): fetch not started: exit 121, started False, finished False
+PASS proxy path: insufficient_grace (4 s left, TERM ignored): over by the cut-off: exit 121, started False, finished False, ended -3.1 s from the cut-off
+PASS proxy path: term_ignoring (20 s left, TERM ignored, 40 s fetch): started and over by the cut-off: exit 137, started True, finished False, ended -4.1 s from the cut-off
+PASS proxy path: normal_fetch (60 s left, 1 s fetch): runs to the end, exit 0: exit 0, started True, finished True, ended -58.0 s from the cut-off
+PASS helper: bad arguments [] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T09:37:43Z', '5', '5', 'true'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T09:37:43Z', '0', '5', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T09:37:43Z', '5', '0', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T09:37:43Z', 'x', '5', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T09:37:43Z', '5', '-1', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['not a date', '5', '5', '--'] refused with exit 2: exit 2
+PASS helper: the command's own exit status is passed through: exit 7
+PASS helper: grace + margin + 1 s left runs under a 1 s budget (exit 124): exit 124, ['fetch_bounded: fetch budget 1 s (+ 5 s kill grace), ends by cut-off - 5 s']
+PASS helper: exactly grace + margin left is refused (exit 121, budget 0 never passed to timeout): exit 121
+PASS helper: reads the clock exactly once: 1 reads
+25 of 25 checks passed
+exit 0

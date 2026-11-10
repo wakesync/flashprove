@@ -1,0 +1,20 @@
+GET /results.tar.gz
+GET /results.tar.gz
+PASS server up
+PASS healthz 200
+PASS status running
+PASS files lists bundle, not isk
+PASS tarball has bundle, not isk
+PASS tarball content intact
+PASS unknown path 404
+PASS POST refused
+PASS status does not follow a stages.log link
+PASS no route serves a linked file or directory
+PASS a linked DONE marker is not a finished job
+PASS status shows the last 20 lines of a long log
+PASS marker without SHA256SUMS is finalising
+PASS status done
+PASS status failed
+PASS archive concurrency is capped (503 when full)
+PASS archive served again once a slot is free
+17 of 17 checks passed
