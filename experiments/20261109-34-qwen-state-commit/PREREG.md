@@ -46,3 +46,7 @@ SA: 5 windows (seeds 1..5, R1, 64-token warm-up at D = 32) per C; C = 1 gives 32
 
 ## Amendments
 (empty at registration)
+
+- A1 (2026-11-10 02:00 UTC, after code). The hostile window at C = 64 is 128 tokens (2 chunks), because a 64-token window has no chunk-to-chunk boundary to attack. C = 1 and 16 keep the 64-token window. Thresholds unchanged.
+- A2 (2026-11-10 01:50 UTC, after the registered SB arm failed H4(c)). Added unregistered SB arms with the decay table at 2^18 and 2^24 (`sb_ref.py --gb`). They are reported as unregistered and do not change the registered verdict or the recommendation rule.
+- A3 (2026-11-10 02:30 UTC). Coordinator note 2026-11-09 20:00 EST: the carried conv history (3 x 10,240 per layer) is included in the volume formulas and in the handle. It was already in the b5 class and the H3 carried formula (9D per head = 3 taps x 3D channels). No threshold changed.

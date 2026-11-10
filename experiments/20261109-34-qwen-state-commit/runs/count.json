@@ -1,0 +1,261 @@
+{
+ "note": "counted, not measured",
+ "shapes": {
+  "L": 48,
+  "H": 48,
+  "D": 128,
+  "conv_words_per_layer": 30720,
+  "T": 1024
+ },
+ "rows": [
+  {
+   "strategy": "S0",
+   "C": 1,
+   "w_cell": 17.41,
+   "carried_per_token": 39223296,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "S0",
+   "C": 1,
+   "w_cell": 6.1,
+   "carried_per_token": 39223296,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 1,
+   "w_cell": 17.41,
+   "carried_per_token": 39223296,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 1,
+   "w_cell": 6.1,
+   "carried_per_token": 39223296,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 16,
+   "w_cell": 17.41,
+   "carried_per_token": 2451456,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 16,
+   "w_cell": 6.1,
+   "carried_per_token": 2451456,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 64,
+   "w_cell": 17.41,
+   "carried_per_token": 612864,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 64,
+   "w_cell": 6.1,
+   "carried_per_token": 612864,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 128,
+   "w_cell": 17.41,
+   "carried_per_token": 306432,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SA",
+   "C": 128,
+   "w_cell": 6.1,
+   "carried_per_token": 306432,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB",
+   "C": 1,
+   "w_cell": null,
+   "carried_per_token": 39223296,
+   "committed_per_token": 117086976,
+   "committed_per_1024_window": 119897063424,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB",
+   "C": 16,
+   "w_cell": null,
+   "carried_per_token": 2451456,
+   "committed_per_token": 11005056,
+   "committed_per_1024_window": 11269177344,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB",
+   "C": 64,
+   "w_cell": null,
+   "carried_per_token": 612864,
+   "committed_per_token": 5973120,
+   "committed_per_1024_window": 6116474880,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB",
+   "C": 128,
+   "w_cell": null,
+   "carried_per_token": 306432,
+   "committed_per_token": 5457024,
+   "committed_per_1024_window": 5587992576,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB'",
+   "C": 1,
+   "w_cell": null,
+   "carried_per_token": 39223296,
+   "committed_per_token": 230628096,
+   "committed_per_1024_window": 236163170304,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB'",
+   "C": 16,
+   "w_cell": null,
+   "carried_per_token": 2451456,
+   "committed_per_token": 128969856,
+   "committed_per_1024_window": 132065132544,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB'",
+   "C": 64,
+   "w_cell": null,
+   "carried_per_token": 612864,
+   "committed_per_token": 138093696,
+   "committed_per_1024_window": 141407944704,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SB'",
+   "C": 128,
+   "w_cell": null,
+   "carried_per_token": 306432,
+   "committed_per_token": 156451968,
+   "committed_per_1024_window": 160206815232,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 1,
+   "w_cell": 17.41,
+   "carried_per_token": 39223296,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 1,
+   "w_cell": 6.1,
+   "carried_per_token": 39223296,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 16,
+   "w_cell": 17.41,
+   "carried_per_token": 2451456,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 16,
+   "w_cell": 6.1,
+   "carried_per_token": 2451456,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 64,
+   "w_cell": 17.41,
+   "carried_per_token": 612864,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 64,
+   "w_cell": 6.1,
+   "carried_per_token": 612864,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 128,
+   "w_cell": 17.41,
+   "carried_per_token": 306432,
+   "committed_per_token": 657205494,
+   "committed_per_1024_window": 672978425610,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SC",
+   "C": 128,
+   "w_cell": 6.1,
+   "carried_per_token": 306432,
+   "committed_per_token": 230267290,
+   "committed_per_1024_window": 235793704550,
+   "carried_per_boundary": 39223296
+  },
+  {
+   "strategy": "SD",
+   "C": 1024,
+   "w_cell": null,
+   "carried_per_token": 38304,
+   "committed_per_token": 9843840,
+   "committed_per_1024_window": 10080092160,
+   "carried_per_boundary": 39223296
+  }
+ ],
+ "conv_history": {
+  "per_layer_per_boundary": 30720,
+  "model_per_boundary": 1474560,
+  "state_model_per_boundary": 37748736,
+  "conv_fraction_of_state": 0.0390625
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "chains": [
+  {
+   "seed": 1,
+   "C": 64,
+   "chunks": 1,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 8.56
+  },
+  {
+   "seed": 2,
+   "C": 64,
+   "chunks": 1,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 8.51
+  },
+  {
+   "seed": 3,
+   "C": 64,
+   "chunks": 1,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 8.62
+  },
+  {
+   "seed": 4,
+   "C": 64,
+   "chunks": 1,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 8.47
+  },
+  {
+   "seed": 5,
+   "C": 64,
+   "chunks": 1,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 9.47
+  }
+ ],
+ "summary": {
+  "C": 64,
+  "T": 64,
+  "D": 32,
+  "chunk_proofs": 5,
+  "accepted": 5,
+  "chains_accepted": 5,
+  "chains": 5,
+  "per_chunk": {
+   "prove_s": {
+    "n": 5,
+    "median": 40.335,
+    "sd": 0.7487491569277392,
+    "min": 39.783,
+    "max": 41.694
+   },
+   "verify_s": {
+    "n": 5,
+    "median": 7.834,
+    "sd": 0.2164097964510846,
+    "min": 7.698,
+    "max": 8.235
+   },
+   "proof_bytes": {
+    "n": 5,
+    "median": 25411680,
+    "sd": 204.89997559785115,
+    "min": 25411456,
+    "max": 25412000
+   },
+   "peak_rss_kb_prove": {
+    "n": 5,
+    "median": 4546500,
+    "sd": 1.7888543819998317,
+    "min": 4546500,
+    "max": 4546504
+   },
+   "log_length": {
+    "n": 5,
+    "median": 21,
+    "sd": 0.0,
+    "min": 21,
+    "max": 21
+   },
+   "relations": {
+    "n": 5,
+    "median": 2374656,
+    "sd": 0.0,
+    "min": 2374656,
+    "max": 2374656
+   },
+   "core_columns": {
+    "n": 5,
+    "median": 1222656,
+    "sd": 0.0,
+    "min": 1222656,
+    "max": 1222656
+   }
+  },
+  "per_window": {
+   "prove_s": {
+    "n": 5,
+    "median": 40.335,
+    "sd": 0.7487491569277392,
+    "min": 39.783,
+    "max": 41.694
+   },
+   "verify_s": {
+    "n": 5,
+    "median": 7.834,
+    "sd": 0.2164097964510846,
+    "min": 7.698,
+    "max": 8.235
+   },
+   "proof_bytes": {
+    "n": 5,
+    "median": 25411680,
+    "sd": 204.89997559785115,
+    "min": 25411456,
+    "max": 25412000
+   }
+  },
+  "per_token": {
+   "core_columns": 19104.0,
+   "laid_columns": 20480.0,
+   "relations": 37104.0,
+   "range_cells": 1120.0,
+   "core_columns_per_state_cell": 18.65625,
+   "carried_handle_values": 20.5
+  }
+ }
+}
