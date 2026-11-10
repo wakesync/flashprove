@@ -33,7 +33,8 @@ def run(args):
 if __name__ == '__main__':
     mode = sys.argv[1] if len(sys.argv)>1 else 'all'
     op = sys.argv[2] if len(sys.argv)>2 else 'nonlinear'
-    exe = f'{REL}/work/proof.bin'
+    sanitized = mode in ('ubsan','ubsan-build','ubsan-hostile','ubsan-all')
+    exe = f'{REL}/work/proof{"-ubsan" if sanitized else ""}.bin'
     if mode in ('final','ubsan-all'):
         build_mode='build' if mode=='final' else 'ubsan-build'
         print(run([sys.executable,f'{REL}/record.py',build_mode]),end='',flush=True)
