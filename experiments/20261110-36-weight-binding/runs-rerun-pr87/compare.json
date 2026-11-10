@@ -1,0 +1,37 @@
+{
+ "h1-manifest-demo.json": {
+  "sha256_original": "bae8035dcc31870976746cc602353d2695f2bba1ebaf500c5c9f1818ff2a5ed6",
+  "sha256_rerun": "134e24834f470eceb573539b770d5142344760bd2a0354828332002f04fd1b9b",
+  "byte_identical": false,
+  "differing_keys": [
+   "seconds"
+  ],
+  "unexpected_differences": [],
+  "seconds": {
+   "original": 0.168,
+   "rerun": 0.43
+  }
+ },
+ "manifest-stock.json": {
+  "sha256_original": "bef43106f808d91a26731122bcbfdde0f43d353beb4354f6184c7c98176393ab",
+  "sha256_rerun": "bef43106f808d91a26731122bcbfdde0f43d353beb4354f6184c7c98176393ab",
+  "byte_identical": true,
+  "differing_keys": [],
+  "unexpected_differences": []
+ },
+ "manifest-abl.json": {
+  "sha256_original": "66269fc451c52b3a5a370cb789c037e7b126a6a09b5a1203b09cbaa357ea975f",
+  "sha256_rerun": "66269fc451c52b3a5a370cb789c037e7b126a6a09b5a1203b09cbaa357ea975f",
+  "byte_identical": true,
+  "differing_keys": [],
+  "unexpected_differences": []
+ },
+ "counted.json": {
+  "sha256_original": "ef56cf795f67f379252fbdc32199da416736428eaa4f51a98e57d968c953a78f",
+  "sha256_rerun": "ef56cf795f67f379252fbdc32199da416736428eaa4f51a98e57d968c953a78f",
+  "byte_identical": true,
+  "differing_keys": [],
+  "unexpected_differences": []
+ },
+ "verdict": "only allowed keys differ"
+}

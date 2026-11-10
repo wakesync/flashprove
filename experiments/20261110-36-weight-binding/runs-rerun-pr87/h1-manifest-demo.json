@@ -1,0 +1,86 @@
+{
+ "note": "HASH LEVEL ONLY. NOT A PROOF. Leaves are #68's per-tensor sha256 of the BF16 bytes.",
+ "inputs": {
+  "stock": "20261109-8-qwen-real-weights/runs/stream-stock.json",
+  "abl": "20261109-8-qwen-real-weights/runs/stream-abl.json"
+ },
+ "n_tensors": 1199,
+ "n_changed": 70,
+ "n_same": 1129,
+ "ids": {
+  "stock": "eb2cfd3003c4c8c8503456f860e8c08cb22cd52baa5b3b7101020e75e1fe801f",
+  "abl": "16834f8eea1ae4decd241f69719f729878dfc517e89f2df704141aba22e49e86"
+ },
+ "roots": {
+  "stock": "bbb139e186fbf25051a420a63b002de5fb457446acd267bc372226aff2c07506",
+  "abl": "3448d034eaec48afea3e699403c78cca2507009ee27b603ebafb241487e97a7d"
+ },
+ "revs": {
+  "stock": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+  "abl": "739e3c5b89849f6c238ce1e5b70008612ae42cdd"
+ },
+ "directions": {
+  "held_stock": {
+   "held_id": "eb2cfd3003c4c8c8503456f860e8c08cb22cd52baa5b3b7101020e75e1fe801f",
+   "own_manifest_accepted": true,
+   "other_manifest_accepted": false,
+   "own_openings_accepted": 1199,
+   "other_changed_openings_accepted": 0,
+   "other_unchanged_openings_accepted": 0,
+   "forged_digest_with_honest_path_accepted": false
+  },
+  "held_abl": {
+   "held_id": "16834f8eea1ae4decd241f69719f729878dfc517e89f2df704141aba22e49e86",
+   "own_manifest_accepted": true,
+   "other_manifest_accepted": false,
+   "own_openings_accepted": 1199,
+   "other_changed_openings_accepted": 0,
+   "other_unchanged_openings_accepted": 0,
+   "forged_digest_with_honest_path_accepted": false
+  }
+ },
+ "changed_by_family": {
+  "linear_attn.out_proj": 26,
+  "mlp.down_proj": 35,
+  "self_attn.o_proj": 9
+ },
+ "changed_layers": [
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51
+ ],
+ "opening_bytes_path_entries": 11,
+ "seconds": 0.43
+}
