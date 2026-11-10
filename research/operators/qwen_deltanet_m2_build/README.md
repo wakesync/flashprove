@@ -3,7 +3,7 @@
 Experiment, registration and verdicts: `experiments/20261109-32-qwen-deltanet-lookup-build/` (PREREG.md, RESULTS.md). Issue #32. This directory builds "arm B" of the M2 design (PR #66): floor remainders checked by a second lookup instead of by exact bits.
 
 **Read this first.**
-- Everything here runs on **synthetic inputs and synthetic head constants** with the **PR #66 lowering**. On real layer-0 weights that lowering did not meet the fidelity threshold (PR #68, unreviewed at the time of writing). Nothing here says the head matches the real model.
+- Everything here runs on **synthetic inputs and synthetic head constants** with the **PR #66 lowering**. On real layer-0 weights that lowering did not meet the fidelity threshold (PR #68; unreviewed when this was written, since merged to main). Nothing here says the head matches the real model.
 - Research security settings only (target 10 bits, N = 10 combinations, toy coins), as M1b (#63). No production soundness claim.
 - As PR #66 section 0 says, every input of the M2 head statement is public, so a verifier could recompute the whole thing. Stage 2 is a rehearsal of the machinery for M3, not a useful proof.
 - Not a serving protocol. Unreplicated. Hostile cases are sampled, not exhaustive.
