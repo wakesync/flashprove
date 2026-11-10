@@ -1,0 +1,8 @@
+PASS healthz 200
+PASS status running
+PASS files lists bundle, not isk
+PASS tarball has bundle, not isk
+PASS unknown path 404
+PASS POST refused
+PASS status done
+exit 0

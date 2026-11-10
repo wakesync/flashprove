@@ -1,0 +1,1348 @@
+{
+ "qwen_shapes": {
+  "d": 5120,
+  "layers": 64,
+  "deltanet_layers": 48,
+  "attention_layers": 16,
+  "f": 17408,
+  "V": 248320,
+  "D": 128,
+  "v_heads": 48,
+  "qk_heads": 16,
+  "conv_taps": 4,
+  "attn_q_heads": 24,
+  "attn_kv_heads": 4,
+  "attn_dh": 256,
+  "in_proj_qkv": 10240,
+  "in_proj_z": 6144,
+  "in_proj_ab": 96,
+  "in_proj_out": 16480
+ },
+ "weights": {
+  "deltanet_layer": {
+   "in_proj": 84377600,
+   "conv": 40960,
+   "out_proj": 31457280,
+   "head_scalars": 96,
+   "mlp": 267386880
+  },
+  "deltanet_layer_total": 383262816,
+  "attention_layer": {
+   "q_proj": 62914560,
+   "k_proj": 5242880,
+   "v_proj": 5242880,
+   "o_proj": 31457280,
+   "mlp": 267386880
+  },
+  "attention_layer_total": 372244480,
+  "embedding": 1271398400,
+  "output_head": 1271398400,
+  "total": 26895323648,
+  "bytes_int16_plus_emb32": 56333444096,
+  "m3a_one_v_head": 3288578,
+  "m3a_layer": 383262816,
+  "m3b_block": 1522032928,
+  "maverick_committed": 400710000000.0,
+  "ratio_to_maverick": 0.06711917258865514
+ },
+ "harness": {
+  "H1": {
+   "checks": [
+    {
+     "quantity": "m1.columns_used",
+     "model": 2338816,
+     "measured": 2338816,
+     "match": true
+    },
+    {
+     "quantity": "m1.log_length",
+     "model": 22,
+     "measured": 22,
+     "match": true
+    },
+    {
+     "quantity": "m1.relations",
+     "model": 4761088,
+     "measured": 4761088,
+     "match": true
+    },
+    {
+     "quantity": "m1.terms",
+     "model": 11430400,
+     "measured": 11430400,
+     "match": true
+    },
+    {
+     "quantity": "m1b.columns_used",
+     "model": 1310720,
+     "measured": 1310720,
+     "match": true
+    },
+    {
+     "quantity": "m1b.columns_nonregion",
+     "model": 1074176,
+     "measured": 1074176,
+     "match": true
+    },
+    {
+     "quantity": "m1b.log_length",
+     "model": 21,
+     "measured": 21,
+     "match": true
+    },
+    {
+     "quantity": "m1b.relations",
+     "model": 2231808,
+     "measured": 2231808,
+     "match": true
+    },
+    {
+     "quantity": "m1b.terms",
+     "model": 5174272,
+     "measured": 5174272,
+     "match": true
+    },
+    {
+     "quantity": "m1b.range_cells",
+     "model": 67072,
+     "measured": 67072,
+     "match": true
+    }
+   ],
+   "pass_": true,
+   "note": "the recurrence emission is imported from qwen_deltanet_m2/count_model.py, so this guards against drift; it is not an independent derivation. m1.terms and m1b.terms match the measured builders; the NORM term counts (not in M1/M1b) are provisional."
+  },
+  "H2": {
+   "model": {
+    "gate_columns": 1056800,
+    "range_cells": 272384,
+    "lkp_keys": 276688,
+    "relations": 2402432,
+    "log_length": 21
+   },
+   "expected": {
+    "gate_columns": 1056800,
+    "range_cells": 272384,
+    "lkp_keys": 276688,
+    "relations": 2402432,
+    "log_length": 21
+   },
+   "pass_": true,
+   "note": "expected values are the #66 counts that the second review reproduced with independent closed forms"
+  },
+  "H3": {
+   "m3a_head_armB_T16": {
+    "arm": "B",
+    "T": 16,
+    "gate_columns": 1109714,
+    "range_cells": 294064,
+    "lkp_keys": 324384,
+    "function_lookups": 8240,
+    "relations": 2499088,
+    "terms_PROVISIONAL": 5046208,
+    "laid_columns": 1732306,
+    "log_length": 21,
+    "fits_log22": true,
+    "added_over_m2_head": {
+     "gate_columns": 52914,
+     "range_cells": 21680,
+     "lkp_keys": 47696,
+     "relations": 96656,
+     "laid_columns": 118450
+    }
+   },
+   "m3a_head_armA_T16": {
+    "arm": "A",
+    "T": 16,
+    "gate_columns": 38572082,
+    "range_cells": 294064,
+    "lkp_keys": 0,
+    "function_lookups": 0,
+    "relations": 77473264,
+    "terms_PROVISIONAL": 259452688,
+    "laid_columns": 38866994,
+    "log_length": 26,
+    "fits_log22": false
+   },
+   "m3a_head_armA_T1": {
+    "arm": "A",
+    "T": 1,
+    "gate_columns": 2412197,
+    "range_cells": 19459,
+    "lkp_keys": 0,
+    "function_lookups": 0,
+    "relations": 4857439,
+    "terms_PROVISIONAL": 16215793,
+    "laid_columns": 2444965,
+    "log_length": 22,
+    "fits_log22": true
+   },
+   "max_T_armB": 38,
+   "max_T_armA": 1,
+   "pass_": true
+  },
+  "m3a_mlp": {
+   "armB_T16": {
+    "arm": "B",
+    "T": 16,
+    "gate_columns": 835584,
+    "range_cells": 557056,
+    "lkp_keys": 1835008,
+    "function_lookups": 278528,
+    "relations": 1114112,
+    "terms_PROVISIONAL": 2785280,
+    "laid_columns": 3227648,
+    "log_length": 22,
+    "fits_log22": true
+   },
+   "max_T_armB": 20,
+   "armA_T1": {
+    "arm": "A",
+    "T": 1,
+    "gate_columns": 72348672,
+    "range_cells": 34816,
+    "lkp_keys": 0,
+    "function_lookups": 0,
+    "relations": 144766976,
+    "terms_PROVISIONAL": 503478272,
+    "laid_columns": 72397824,
+    "log_length": 27,
+    "fits_log22": false
+   }
+  },
+  "one_layer_single_statement_armB_T1": {
+   "arm": "B",
+   "T": 1,
+   "gate_columns": 3450576,
+   "range_cells": 968848,
+   "lkp_keys": 1087840,
+   "function_lookups": 42128,
+   "relations": 8304176,
+   "terms_PROVISIONAL": 15312704,
+   "laid_columns": 5531344,
+   "log_length": 23,
+   "fits_log22": false
+  },
+  "one_layer_single_statement_armB_T16": {
+   "arm": "B",
+   "T": 16,
+   "gate_columns": 54101856,
+   "range_cells": 14672128,
+   "lkp_keys": 17405440,
+   "function_lookups": 674048,
+   "relations": 121070336,
+   "terms_PROVISIONAL": 245003264,
+   "laid_columns": 86198112,
+   "log_length": 27,
+   "fits_log22": false
+  },
+  "m3a_layer_as_separate_statements": {
+   "head_statements": 48,
+   "mlp_statements": 1,
+   "each_fits_log22": true,
+   "product_columns_total": 86378336,
+   "relations_total": 121070336,
+   "prove_s_estimate_each_head": 39.2,
+   "note": "48 head statements (each with its own Q/K path, duplicated 3x across the V heads that share it) plus one MLP statement; the verifier adds the public head contributions, rounds, and recomputes the two norms from public stream values. prove_s_estimate is #66's linear interpolation in table length, indicative only."
+  },
+  "wide_oracle_full_model": {
+   "product_columns_per_token_per_deltanet_layer": 5184486,
+   "product_columns_per_token_48_layers": 248855328,
+   "field_elements_per_1024_window": 764483567616,
+   "bytes_raw_per_1024_window": 6115868540928,
+   "note": "three oracle rows (a, b, c) per product column, 8 bytes an element, before encoding; DeltaNet mixers only"
+  }
+ },
+ "H4": {
+  "f8192": 462079637,
+  "f16384": 551555387,
+  "f17408": 562764437,
+  "predicted_f17408": 562739856,
+  "error": 4.3679465836609006e-05,
+  "pass_": true
+ },
+ "extrapolated_commit": {
+  "label": "EXTRAPOLATED, not measured",
+  "commit_minutes": 2.6176477309575508,
+  "assumption": "linear in committed weights from upstream's \"about 39 minutes\" for Maverick on one H100; ignores fixed costs (this fork measured 18.8 s for a tiny synthetic model)"
+ },
+ "packed": {
+  "per_token_ll2": {
+   "T128": {
+    "T": 128,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 12072338291.913458,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 749661778.3305286,
+    "m3b_block_entries": 749661778.3305286,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 12072338291.913458,
+     "vram_gb": {
+      "low_16B": 11.994588453288458,
+      "central": 17.22013374591559,
+      "high": 34.44026749183118
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 73.5535778419156,
+     "prove_s": {
+      "central": 8.603849221789098,
+      "high_all_in": 14.16736371516979,
+      "upper_bound_small_example": 325.00856427472553
+     },
+     "tokens_per_s_central": 14.87706219628329,
+     "gpu_s_per_window_token_central": 0.06721757204522733,
+     "usd_per_1000_window_tokens_central": 0.05601464337102278,
+     "proof_mb": 21.441166054933188,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T256": {
+    "T": 256,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 24144676583.826916,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 1499323556.6610572,
+    "m3b_block_entries": 1499323556.6610572,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 24144676583.826916,
+     "vram_gb": {
+      "low_16B": 23.989176906576915,
+      "central": 34.44026749183118,
+      "high": 68.88053498366236
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 90.77371158783117,
+     "prove_s": {
+      "central": 13.550844563430498,
+      "high_all_in": 24.677873550191883,
+      "upper_bound_small_example": 650.0171285494511
+     },
+     "tokens_per_s_central": 18.89181141453457,
+     "gpu_s_per_window_token_central": 0.052932986575900384,
+     "usd_per_1000_window_tokens_central": 0.04411082214658366,
+     "proof_mb": 42.882332109866375,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T512": {
+    "T": 512,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 48289353167.65383,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 2998647113.3221145,
+    "m3b_block_entries": 2998647113.3221145,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 48289353167.65383,
+     "vram_gb": {
+      "low_16B": 47.97835381315383,
+      "central": 68.88053498366236,
+      "high": 137.76106996732472
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 125.21397907966235,
+     "prove_s": {
+      "central": 23.444835246713296,
+      "high_all_in": 45.698893220236066,
+      "upper_bound_small_example": 1300.0342570989021
+     },
+     "tokens_per_s_central": 21.838498526952826,
+     "gpu_s_per_window_token_central": 0.04579069384123691,
+     "usd_per_1000_window_tokens_central": 0.03815891153436409,
+     "proof_mb": 85.76466421973275,
+     "verdict": "fits on the central assumption, not robust"
+    }
+   },
+   "T1024": {
+    "T": 1024,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 96578706335.30766,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 5997294226.644229,
+    "m3b_block_entries": 5997294226.644229,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 96578706335.30766,
+     "vram_gb": {
+      "low_16B": 95.95670762630766,
+      "central": 137.76106996732472,
+      "high": 275.52213993464943
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 194.0945140633247,
+     "prove_s": {
+      "central": 43.2328166132789,
+      "high_all_in": 87.74093256032442,
+      "upper_bound_small_example": 2600.0685141978042
+     },
+     "tokens_per_s_central": 23.68571099958081,
+     "gpu_s_per_window_token_central": 0.042219547473905175,
+     "usd_per_1000_window_tokens_central": 0.035182956228254306,
+     "proof_mb": 171.5293284394655,
+     "verdict": "does not fit"
+    }
+   }
+  },
+  "per_token_ll1": {
+   "T128": {
+    "T": 128,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 2,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 12072338291.913458,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 483221059.2828524,
+    "m3b_block_entries": 749661778.3305286,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 12072338291.913458,
+     "vram_gb": {
+      "low_16B": 7.731536948525639,
+      "central": 11.09984730477336,
+      "high": 22.19969460954672
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 67.43329140077336,
+     "prove_s": {
+      "central": 8.603849221789098,
+      "high_all_in": 14.16736371516979,
+      "upper_bound_small_example": 325.00856427472553
+     },
+     "tokens_per_s_central": 14.87706219628329,
+     "gpu_s_per_window_token_central": 0.06721757204522733,
+     "usd_per_1000_window_tokens_central": 0.05601464337102278,
+     "proof_mb": 21.441166054933188,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T256": {
+    "T": 256,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 2,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 24144676583.826916,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 966442118.5657048,
+    "m3b_block_entries": 1499323556.6610572,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 24144676583.826916,
+     "vram_gb": {
+      "low_16B": 15.463073897051277,
+      "central": 22.19969460954672,
+      "high": 44.39938921909344
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 78.53313870554672,
+     "prove_s": {
+      "central": 13.550844563430498,
+      "high_all_in": 24.677873550191883,
+      "upper_bound_small_example": 650.0171285494511
+     },
+     "tokens_per_s_central": 18.89181141453457,
+     "gpu_s_per_window_token_central": 0.052932986575900384,
+     "usd_per_1000_window_tokens_central": 0.04411082214658366,
+     "proof_mb": 42.882332109866375,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T512": {
+    "T": 512,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 2,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 48289353167.65383,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 1932884237.1314096,
+    "m3b_block_entries": 2998647113.3221145,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 48289353167.65383,
+     "vram_gb": {
+      "low_16B": 30.926147794102555,
+      "central": 44.39938921909344,
+      "high": 88.79877843818689
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 100.73283331509344,
+     "prove_s": {
+      "central": 23.444835246713296,
+      "high_all_in": 45.698893220236066,
+      "upper_bound_small_example": 1300.0342570989021
+     },
+     "tokens_per_s_central": 21.838498526952826,
+     "gpu_s_per_window_token_central": 0.04579069384123691,
+     "usd_per_1000_window_tokens_central": 0.03815891153436409,
+     "proof_mb": 85.76466421973275,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T1024": {
+    "T": 1024,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 2,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 81920,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 86160.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1750188.601446689,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 94315142.90557389
+    },
+    "entries_per_window": 96578706335.30766,
+    "deltanet_mixer_share": 0.8907270909142233,
+    "largest_segment_entries": 3865768474.2628193,
+    "m3b_block_entries": 5997294226.644229,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 96578706335.30766,
+     "vram_gb": {
+      "low_16B": 61.85229558820511,
+      "central": 88.79877843818689,
+      "high": 177.59755687637377
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 145.1322225341869,
+     "prove_s": {
+      "central": 43.2328166132789,
+      "high_all_in": 87.74093256032442,
+      "upper_bound_small_example": 2600.0685141978042
+     },
+     "tokens_per_s_central": 23.68571099958081,
+     "gpu_s_per_window_token_central": 0.042219547473905175,
+     "usd_per_1000_window_tokens_central": 0.035182956228254306,
+     "proof_mb": 171.5293284394655,
+     "verdict": "fits on the central assumption, not robust"
+    }
+   }
+  },
+  "per_token_ll2_remainder_as_key": {
+   "T128": {
+    "T": 128,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": false,
+    "limbs_per_v_head_per_token": {
+     "state": 49152,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 53392.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1084564.412818496,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 62365181.851420626
+    },
+    "entries_per_window": 7982743276.98184,
+    "deltanet_mixer_share": 0.834746091806705,
+    "largest_segment_entries": 494062089.8973025,
+    "m3b_block_entries": 494062089.8973025,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 7982743276.98184,
+     "vram_gb": {
+      "low_16B": 7.90499343835684,
+      "central": 11.348871601490389,
+      "high": 22.697743202980778
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 67.6823156974904,
+     "prove_s": {
+      "central": 6.928017498152072,
+      "high_all_in": 10.606849787682492,
+      "upper_bound_small_example": 214.9094789004927
+     },
+     "tokens_per_s_central": 18.47570391300856,
+     "gpu_s_per_window_token_central": 0.054125136704313064,
+     "usd_per_1000_window_tokens_central": 0.04510428058692755,
+     "proof_mb": 14.177810465294746,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T256": {
+    "T": 256,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": false,
+    "limbs_per_v_head_per_token": {
+     "state": 49152,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 53392.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1084564.412818496,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 62365181.851420626
+    },
+    "entries_per_window": 15965486553.96368,
+    "deltanet_mixer_share": 0.834746091806705,
+    "largest_segment_entries": 988124179.794605,
+    "m3b_block_entries": 988124179.794605,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 15965486553.96368,
+     "vram_gb": {
+      "low_16B": 15.80998687671368,
+      "central": 22.697743202980778,
+      "high": 45.395486405961556
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 79.03118729898078,
+     "prove_s": {
+      "central": 10.199181116156446,
+      "high_all_in": 17.556845695217284,
+      "upper_bound_small_example": 429.8189578009854
+     },
+     "tokens_per_s_central": 25.100054316563938,
+     "gpu_s_per_window_token_central": 0.039840551234986116,
+     "usd_per_1000_window_tokens_central": 0.03320045936248843,
+     "proof_mb": 28.35562093058949,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T512": {
+    "T": 512,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": false,
+    "limbs_per_v_head_per_token": {
+     "state": 49152,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 53392.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1084564.412818496,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 62365181.851420626
+    },
+    "entries_per_window": 31930973107.92736,
+    "deltanet_mixer_share": 0.834746091806705,
+    "largest_segment_entries": 1976248359.58921,
+    "m3b_block_entries": 1976248359.58921,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 31930973107.92736,
+     "vram_gb": {
+      "low_16B": 31.61997375342736,
+      "central": 45.395486405961556,
+      "high": 90.79097281192311
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 101.72893050196156,
+     "prove_s": {
+      "central": 16.74150835216519,
+      "high_all_in": 31.456837510286874,
+      "upper_bound_small_example": 859.6379156019708
+     },
+     "tokens_per_s_central": 30.58266849257837,
+     "gpu_s_per_window_token_central": 0.03269825850032264,
+     "usd_per_1000_window_tokens_central": 0.027248548750268865,
+     "proof_mb": 56.71124186117898,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T1024": {
+    "T": 1024,
+    "strategy": "per_token",
+    "chunk": null,
+    "layers_per_link": 4,
+    "remainder_committed": false,
+    "limbs_per_v_head_per_token": {
+     "state": 49152,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 0,
+     "scalars": 16,
+     "total": 53392.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 1084564.412818496,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 62365181.851420626
+    },
+    "entries_per_window": 63861946215.85472,
+    "deltanet_mixer_share": 0.834746091806705,
+    "largest_segment_entries": 3952496719.17842,
+    "m3b_block_entries": 3952496719.17842,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 63861946215.85472,
+     "vram_gb": {
+      "low_16B": 63.23994750685472,
+      "central": 90.79097281192311,
+      "high": 181.58194562384622
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 147.12441690792312,
+     "prove_s": {
+      "central": 29.82616282418269,
+      "high_all_in": 59.25682114042605,
+      "upper_bound_small_example": 1719.2758312039416
+     },
+     "tokens_per_s_central": 34.33227418613008,
+     "gpu_s_per_window_token_central": 0.029127112132990907,
+     "usd_per_1000_window_tokens_central": 0.02427259344415909,
+     "proof_mb": 113.42248372235797,
+     "verdict": "fits on the central assumption, not robust"
+    }
+   }
+  },
+  "low_rank_c64_ll2": {
+   "T128": {
+    "T": 128,
+    "strategy": "low_rank",
+    "chunk": 64,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 1280.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 64.0,
+     "scalars": 16,
+     "total": 5584.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 113429.12198790984,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 15750687.891552486
+    },
+    "entries_per_window": 2016088050.1187181,
+    "deltanet_mixer_share": 0.34567365520205345,
+    "largest_segment_entries": 121146138.21835738,
+    "m3b_block_entries": 121146138.21835738,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 2016088050.1187181,
+     "vram_gb": {
+      "low_16B": 1.9383382114937182,
+      "central": 2.7827918712450317,
+      "high": 5.565583742490063
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 59.11623596724503,
+     "prove_s": {
+      "central": 4.483005198236333,
+      "high_all_in": 5.412115600508641,
+      "upper_bound_small_example": 54.276633637696
+     },
+     "tokens_per_s_central": 28.552275614214484,
+     "gpu_s_per_window_token_central": 0.03502347811122135,
+     "usd_per_1000_window_tokens_central": 0.029186231759351127,
+     "proof_mb": 3.5806881499433527,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T256": {
+    "T": 256,
+    "strategy": "low_rank",
+    "chunk": 64,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 1280.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 64.0,
+     "scalars": 16,
+     "total": 5584.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 113429.12198790984,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 15750687.891552486
+    },
+    "entries_per_window": 4032176100.2374363,
+    "deltanet_mixer_share": 0.34567365520205345,
+    "largest_segment_entries": 242292276.43671477,
+    "m3b_block_entries": 242292276.43671477,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 4032176100.2374363,
+     "vram_gb": {
+      "low_16B": 3.8766764229874364,
+      "central": 5.565583742490063,
+      "high": 11.131167484980127
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 61.89902783849006,
+     "prove_s": {
+      "central": 5.3091565163249665,
+      "high_all_in": 7.1673773208695835,
+      "upper_bound_small_example": 108.553267275392
+     },
+     "tokens_per_s_central": 48.21858221976189,
+     "gpu_s_per_window_token_central": 0.0207388926418944,
+     "usd_per_1000_window_tokens_central": 0.017282410534912,
+     "proof_mb": 7.161376299886705,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T512": {
+    "T": 512,
+    "strategy": "low_rank",
+    "chunk": 64,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 1280.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 64.0,
+     "scalars": 16,
+     "total": 5584.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 113429.12198790984,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 15750687.891552486
+    },
+    "entries_per_window": 8064352200.474873,
+    "deltanet_mixer_share": 0.34567365520205345,
+    "largest_segment_entries": 484584552.87342954,
+    "m3b_block_entries": 484584552.87342954,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 8064352200.474873,
+     "vram_gb": {
+      "low_16B": 7.753352845974873,
+      "central": 11.131167484980127,
+      "high": 22.262334969960254
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 67.46461158098013,
+     "prove_s": {
+      "central": 6.9614591525022345,
+      "high_all_in": 10.677900761591468,
+      "upper_bound_small_example": 217.106534550784
+     },
+     "tokens_per_s_central": 73.54779921619826,
+     "gpu_s_per_window_token_central": 0.013596599907230927,
+     "usd_per_1000_window_tokens_central": 0.011330499922692439,
+     "proof_mb": 14.32275259977341,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T1024": {
+    "T": 1024,
+    "strategy": "low_rank",
+    "chunk": 64,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 1280.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 64.0,
+     "scalars": 16,
+     "total": 5584.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 113429.12198790984,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 15750687.891552486
+    },
+    "entries_per_window": 16128704400.949745,
+    "deltanet_mixer_share": 0.34567365520205345,
+    "largest_segment_entries": 969169105.7468591,
+    "m3b_block_entries": 969169105.7468591,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 16128704400.949745,
+     "vram_gb": {
+      "low_16B": 15.506705691949746,
+      "central": 22.262334969960254,
+      "high": 44.52466993992051
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 78.59577906596026,
+     "prove_s": {
+      "central": 10.266064424856772,
+      "high_all_in": 17.69894764303524,
+      "upper_bound_small_example": 434.213069101568
+     },
+     "tokens_per_s_central": 99.74611083879755,
+     "gpu_s_per_window_token_central": 0.010025453539899191,
+     "usd_per_1000_window_tokens_central": 0.00835454461658266,
+     "proof_mb": 28.64550519954682,
+     "verdict": "fits, also on the high estimate"
+    }
+   }
+  },
+  "low_rank_c16_ll2": {
+   "T128": {
+    "T": 128,
+    "strategy": "low_rank",
+    "chunk": 16,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 5120.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 16.0,
+     "scalars": 16,
+     "total": 9376.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 190456.92116021537,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 19448022.25182315
+    },
+    "entries_per_window": 2489346848.233363,
+    "deltanet_mixer_share": 0.470070020350441,
+    "largest_segment_entries": 150724813.1005227,
+    "m3b_block_entries": 150724813.1005227,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 2489346848.233363,
+     "vram_gb": {
+      "low_16B": 2.411597009608363,
+      "central": 3.4622299221379866,
+      "high": 6.924459844275973
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 59.79567401813799,
+     "prove_s": {
+      "central": 4.676936896723625,
+      "high_all_in": 5.824147729812591,
+      "upper_bound_small_example": 67.01759224789774
+     },
+     "tokens_per_s_central": 27.36834018215404,
+     "gpu_s_per_window_token_central": 0.03653856950565332,
+     "usd_per_1000_window_tokens_central": 0.030448807921377767,
+     "proof_mb": 4.421222952064597,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T256": {
+    "T": 256,
+    "strategy": "low_rank",
+    "chunk": 16,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 5120.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 16.0,
+     "scalars": 16,
+     "total": 9376.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 190456.92116021537,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 19448022.25182315
+    },
+    "entries_per_window": 4978693696.466726,
+    "deltanet_mixer_share": 0.470070020350441,
+    "largest_segment_entries": 301449626.2010454,
+    "m3b_block_entries": 301449626.2010454,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 4978693696.466726,
+     "vram_gb": {
+      "low_16B": 4.823194019216726,
+      "central": 6.924459844275973,
+      "high": 13.848919688551947
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 63.25790394027597,
+     "prove_s": {
+      "central": 5.697019913299552,
+      "high_all_in": 7.991441579477483,
+      "upper_bound_small_example": 134.03518449579548
+     },
+     "tokens_per_s_central": 44.93577412330512,
+     "gpu_s_per_window_token_central": 0.022253984036326373,
+     "usd_per_1000_window_tokens_central": 0.018544986696938645,
+     "proof_mb": 8.842445904129194,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T512": {
+    "T": 512,
+    "strategy": "low_rank",
+    "chunk": 16,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 5120.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 16.0,
+     "scalars": 16,
+     "total": 9376.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 190456.92116021537,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 19448022.25182315
+    },
+    "entries_per_window": 9957387392.933453,
+    "deltanet_mixer_share": 0.470070020350441,
+    "largest_segment_entries": 602899252.4020908,
+    "m3b_block_entries": 602899252.4020908,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 9957387392.933453,
+     "vram_gb": {
+      "low_16B": 9.646388038433452,
+      "central": 13.848919688551947,
+      "high": 27.697839377103893
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 70.18236378455195,
+     "prove_s": {
+      "central": 7.737185946451405,
+      "high_all_in": 12.326029278807267,
+      "upper_bound_small_example": 268.07036899159095
+     },
+     "tokens_per_s_central": 66.17392984264835,
+     "gpu_s_per_window_token_central": 0.0151116913016629,
+     "usd_per_1000_window_tokens_central": 0.012593076084719082,
+     "proof_mb": 17.68489180825839,
+     "verdict": "fits, also on the high estimate"
+    }
+   },
+   "T1024": {
+    "T": 1024,
+    "strategy": "low_rank",
+    "chunk": 16,
+    "layers_per_link": 4,
+    "remainder_committed": true,
+    "limbs_per_v_head_per_token": {
+     "state": 5120.0,
+     "vectors": 3456,
+     "qk_path": 768.0,
+     "gram": 16.0,
+     "scalars": 16,
+     "total": 9376.0
+    },
+    "overhead_factor": 1.2695773861469135,
+    "entries_per_token": {
+     "deltanet_mixer_one_layer": 190456.92116021537,
+     "dense_part_one_layer": 137393.66137695312,
+     "attention_one_layer": 56592.193359375,
+     "output_head": 607420.6142578125,
+     "all_layers": 19448022.25182315
+    },
+    "entries_per_window": 19914774785.866905,
+    "deltanet_mixer_share": 0.470070020350441,
+    "largest_segment_entries": 1205798504.8041816,
+    "m3b_block_entries": 1205798504.8041816,
+    "extrapolated": {
+     "label": "EXTRAPOLATED, not measured",
+     "committed_entries": 19914774785.866905,
+     "vram_gb": {
+      "low_16B": 19.292776076866904,
+      "central": 27.697839377103893,
+      "high": 55.395678754207786
+     },
+     "bytes_per_entry_central": 22.970537172462283,
+     "weights_resident_gb": 56.333444096,
+     "vram_with_resident_weights_gb_central": 84.0312834731039,
+     "prove_s": {
+      "central": 11.81751801275511,
+      "high_all_in": 20.995204677466837,
+      "upper_bound_small_example": 536.1407379831819
+     },
+     "tokens_per_s_central": 86.65102087382111,
+     "gpu_s_per_window_token_central": 0.011540544934331163,
+     "usd_per_1000_window_tokens_central": 0.0096171207786093,
+     "proof_mb": 35.36978361651678,
+     "verdict": "fits, also on the high estimate"
+    }
+   }
+  }
+ },
+ "m3b": {
+  "per_token_T64": {
+   "committed_entries": 374830889.1652643,
+   "rows_at_2e22": 90,
+   "vram_gb_EXTRAPOLATED": {
+    "low_16B": 5.997294226644229,
+    "central": 8.610066872957795,
+    "high": 17.22013374591559
+   },
+   "fits_h200_central": true,
+   "fits_h200_high": true,
+   "committed_weights": 1522032928
+  },
+  "per_token_T256": {
+   "committed_entries": 1499323556.6610572,
+   "rows_at_2e22": 358,
+   "vram_gb_EXTRAPOLATED": {
+    "low_16B": 23.989176906576915,
+    "central": 34.44026749183118,
+    "high": 68.88053498366236
+   },
+   "fits_h200_central": true,
+   "fits_h200_high": true,
+   "committed_weights": 1522032928
+  },
+  "per_token_T1024": {
+   "committed_entries": 5997294226.644229,
+   "rows_at_2e22": 1430,
+   "vram_gb_EXTRAPOLATED": {
+    "low_16B": 95.95670762630766,
+    "central": 137.76106996732472,
+    "high": 275.52213993464943
+   },
+   "fits_h200_central": false,
+   "fits_h200_high": false,
+   "committed_weights": 1522032928
+  },
+  "low_rank_c64_T64": {
+   "committed_entries": 60573069.10917869,
+   "rows_at_2e22": 15,
+   "vram_gb_EXTRAPOLATED": {
+    "low_16B": 0.9691691057468591,
+    "central": 1.3913959356225158,
+    "high": 2.7827918712450317
+   },
+   "fits_h200_central": true,
+   "fits_h200_high": true,
+   "committed_weights": 1522032928
+  },
+  "low_rank_c64_T256": {
+   "committed_entries": 242292276.43671477,
+   "rows_at_2e22": 58,
+   "vram_gb_EXTRAPOLATED": {
+    "low_16B": 3.8766764229874364,
+    "central": 5.565583742490063,
+    "high": 11.131167484980127
+   },
+   "fits_h200_central": true,
+   "fits_h200_high": true,
+   "committed_weights": 1522032928
+  },
+  "low_rank_c64_T1024": {
+   "committed_entries": 969169105.7468591,
+   "rows_at_2e22": 232,
+   "vram_gb_EXTRAPOLATED": {
+    "low_16B": 15.506705691949746,
+    "central": 22.262334969960254,
+    "high": 44.52466993992051
+   },
+   "fits_h200_central": true,
+   "fits_h200_high": true,
+   "committed_weights": 1522032928
+  }
+ },
+ "H5": {
+  "decision_rule": "central VRAM <= 127 GB at one request per pass, weights streamed, AND central prove time <= 3,600 s per 1,024-token window",
+  "wide_oracle_per_token_state": {
+   "raw_gb_before_encoding": 6115.868540928,
+   "verdict": "does not fit"
+  },
+  "packed_per_token_state_4_layer_links": "does not fit",
+  "packed_per_token_state_2_layer_links": "fits on the central assumption, not robust",
+  "packed_low_rank_chunk64": "fits, also on the high estimate",
+  "pass_": true,
+  "registered_expectation_held": true,
+  "binding_constraint": "GPU memory for the DeltaNet state trace of one segment (share of committed entries that is DeltaNet mixer: 89% at T = 1,024, per-token state)"
+ }
+}

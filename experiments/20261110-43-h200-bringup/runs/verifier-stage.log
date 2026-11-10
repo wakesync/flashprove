@@ -1,0 +1,6 @@
+#11 [verifier 1/1] RUN cd /opt/flashprove && verifier/build.sh && sha256sum bin/cp_verify | tee /opt/env/cp_verify.sha256
+#11 0.324 build=93afdaf592393a54ebd17b681d1c03295eb883f0161ff0e6ab872a3b39939595 dw=8
+#11 0.324 compiling cp_verify.cpp: one compiler call of one to two minutes, which prints nothing while it runs
+#11 78.88 THE VERIFIER IS BUILT: /opt/flashprove/bin/cp_verify
+#11 78.89 7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394  bin/cp_verify
+#11 DONE 79.0s

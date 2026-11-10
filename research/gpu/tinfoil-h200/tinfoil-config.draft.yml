@@ -1,0 +1,56 @@
+# DRAFT, NOT RELEASED, NOT DEPLOYED. Tinfoil Container config for the FlashProve H200 baseline job.
+# Tinfoil reads tinfoil-config.yml from the ROOT of a public repo that has the Tinfoil release
+# workflows (tinfoil-release.yml + tinfoil-release-publish.yml). This file is a draft for that
+# place; see README.md, "Where the config lives", and RUNBOOK.md, step 2. Field reference:
+# docs.tinfoil.sh/containers/configuration. The image may be public or private (private needs registry
+# credentials for the org); the config repo must be public.
+#
+# GPUs: this config requests one GPU for this instance (gpus: 1 below). It says nothing about how many
+# GPUs the host has or how many are free; that count is not established (README.md).
+#
+# What it runs: one container, the prover image (Dockerfile here), on the instance's one assigned GPU. On boot it starts
+# a read-only results server on :8080 and runs the job once (run_job.sh); the results are finalised
+# and stay served whether the job succeeds, fails or times out; a failed finalisation ends FAILED. No secrets, no egress, no
+# models block (synthetic weights only), no persistent volume (so updates stay blue/green-capable),
+# no SSH. Results leave only through the attested shim: GET /status, /files, /results.tar.gz.
+cvm-version: 0.14.7          # the version the live service on this host booted with; check the template for a newer one
+cpus: 16
+memory: 65536                # MB (64 GB). The H100 runs peaked at 7.6 GB (cgroup, builds included); 64 GB
+                             # leaves the tmpfs below room. Small example only: a full-size run needs
+                             # 524288 (262144 MB is under the script's 280 GB floor). Measured config:
+                             # changing it needs a new release.
+gpus: 1
+
+containers:
+  - name: "prover"
+    # PLACEHOLDER: replace with the digest that the image build prints, then commit, then release.
+    image: "ghcr.io/OWNER/flashprove-h200-prover@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    runtime: nvidia
+    gpus: all
+    env:
+      - FP_REPEATS: "10"
+      - FP_ONBOX_BUILD: "1"     # 1: rebuild with examples/quickstart-gpu.sh as on the H100 (about 20 min more,
+                                #    18 to 20 min on the H100); 0: use the image's prebuilt programs (shorter
+                                #    window, a registered deviation)
+      - FP_JOB_TIMEOUT: "3600"  # seconds; set from RUNBOOK.md's window sheet so the job ends before the
+                                # restore cut-off. Per-step limits: FP_TIMEOUT_{ENV,COMPILER,QUICKSTART,RUN}
+    cap_add: ["IPC_LOCK"]     # cp_commit mlock()s key material; without it, it warns and goes on
+    tmpfs:
+      /work: "size=24g,mode=0700,uid=10001,gid=10001,exec"   # checkout copy, builds, TMPDIR, results
+      /tmp: "size=2g,mode=1777,exec"
+    restart: "no"             # one job per boot; the server keeps running after DONE/FAILED
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 2m
+
+shim:
+  upstream-container: "prover"
+  upstream-port: 8080
+  paths:
+    - /healthz
+    - /status
+    - /files
+    - /results.tar.gz

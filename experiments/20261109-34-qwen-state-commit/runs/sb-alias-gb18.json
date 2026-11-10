@@ -1,0 +1,717 @@
+{
+ "note": "reference arithmetic, no proof; second solutions are of the field relation divisor * quotient + remainder = numerator under an M1b-style range check (quotient proved only |x| < 2^23, remainder exact), which is an assumption about a lowering that does not exist",
+ "field_p": 18446744069414584321,
+ "F": 12,
+ "D": 128,
+ "rng_proved_bound": 8388608,
+ "contract_bound": 262144,
+ "second_solutions": [
+  {
+   "dist": "R1",
+   "seed": 1,
+   "GB": 12,
+   "C": 64,
+   "tokens": 64,
+   "channels": 128,
+   "M_floor": {
+    "divisor_bits": 36,
+    "shifts": [],
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 780,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "o_floor": {
+    "divisor_bits": 36,
+    "note": "o taken as a range cell like M; if o is admitted up to 2^31 as in chunk.cpp the window is wider",
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 123,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "S_out_floor": {
+    "divisor_bits": 24,
+    "shifts": 0,
+    "floors": 16384,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 1378,
+    "second_quotient_max_abs": 0,
+    "example": null
+   }
+  },
+  {
+   "dist": "R1",
+   "seed": 1,
+   "GB": 15,
+   "C": 64,
+   "tokens": 64,
+   "channels": 128,
+   "M_floor": {
+    "divisor_bits": 39,
+    "shifts": [],
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 780,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "o_floor": {
+    "divisor_bits": 39,
+    "note": "o taken as a range cell like M; if o is admitted up to 2^31 as in chunk.cpp the window is wider",
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 123,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "S_out_floor": {
+    "divisor_bits": 27,
+    "shifts": 0,
+    "floors": 16384,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 1378,
+    "second_quotient_max_abs": 0,
+    "example": null
+   }
+  },
+  {
+   "dist": "R1",
+   "seed": 1,
+   "GB": 18,
+   "C": 64,
+   "tokens": 64,
+   "channels": 128,
+   "M_floor": {
+    "divisor_bits": 42,
+    "shifts": [
+     {
+      "quotient_shift": -16777215,
+      "remainder_shift": -4380866641924
+     },
+     {
+      "quotient_shift": -12582912,
+      "remainder_shift": 12884901885
+     },
+     {
+      "quotient_shift": -12582911,
+      "remainder_shift": -4385161609219
+     },
+     {
+      "quotient_shift": -8388608,
+      "remainder_shift": 8589934590
+     },
+     {
+      "quotient_shift": -8388607,
+      "remainder_shift": -4389456576514
+     },
+     {
+      "quotient_shift": -4194304,
+      "remainder_shift": 4294967295
+     },
+     {
+      "quotient_shift": -4194303,
+      "remainder_shift": -4393751543809
+     },
+     {
+      "quotient_shift": 4194303,
+      "remainder_shift": 4393751543809
+     },
+     {
+      "quotient_shift": 4194304,
+      "remainder_shift": -4294967295
+     },
+     {
+      "quotient_shift": 8388607,
+      "remainder_shift": 4389456576514
+     },
+     {
+      "quotient_shift": 8388608,
+      "remainder_shift": -8589934590
+     },
+     {
+      "quotient_shift": 12582911,
+      "remainder_shift": 4385161609219
+     },
+     {
+      "quotient_shift": 12582912,
+      "remainder_shift": -12884901885
+     },
+     {
+      "quotient_shift": 16777215,
+      "remainder_shift": 4380866641924
+     }
+    ],
+    "floors": 8192,
+    "with_second_solution": 8192,
+    "second_solutions": 24294,
+    "honest_quotient_max_abs": 780,
+    "second_quotient_max_abs": 8388607,
+    "example": {
+     "numerator": 676887328194560,
+     "honest_quotient": 153,
+     "honest_remainder": 3986211995648,
+     "second_quotient": -8388455,
+     "second_remainder": 3994801930238,
+     "quotient_shift": -8388608,
+     "remainder_shift": 8589934590,
+     "token": 0,
+     "channel": 0,
+     "v": -1089,
+     "beta": 1511,
+     "honest_delta": -459,
+     "second_delta": 3094069,
+     "second_delta_fits_two_limbs": true,
+     "second_delta_limbs_inside_rng_bound": true
+    }
+   },
+   "o_floor": {
+    "divisor_bits": 42,
+    "note": "o taken as a range cell like M; if o is admitted up to 2^31 as in chunk.cpp the window is wider",
+    "floors": 8192,
+    "with_second_solution": 8192,
+    "second_solutions": 23773,
+    "honest_quotient_max_abs": 123,
+    "second_quotient_max_abs": 8388607,
+    "example": {
+     "numerator": 13078925148160,
+     "honest_quotient": 2,
+     "honest_remainder": 4282832125952,
+     "second_quotient": -8388606,
+     "second_remainder": 4291422060542,
+     "quotient_shift": -8388608,
+     "remainder_shift": 8589934590
+    }
+   },
+   "S_out_floor": {
+    "divisor_bits": 30,
+    "shifts": 0,
+    "floors": 16384,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 1378,
+    "second_quotient_max_abs": 0,
+    "example": null
+   }
+  },
+  {
+   "dist": "R3",
+   "seed": 3,
+   "GB": 12,
+   "C": 64,
+   "tokens": 64,
+   "channels": 128,
+   "M_floor": {
+    "divisor_bits": 36,
+    "shifts": [],
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 23874,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "o_floor": {
+    "divisor_bits": 36,
+    "note": "o taken as a range cell like M; if o is admitted up to 2^31 as in chunk.cpp the window is wider",
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 1849,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "S_out_floor": {
+    "divisor_bits": 24,
+    "shifts": 0,
+    "floors": 16384,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 17149,
+    "second_quotient_max_abs": 0,
+    "example": null
+   }
+  },
+  {
+   "dist": "R3",
+   "seed": 3,
+   "GB": 15,
+   "C": 64,
+   "tokens": 64,
+   "channels": 128,
+   "M_floor": {
+    "divisor_bits": 39,
+    "shifts": [],
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 23882,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "o_floor": {
+    "divisor_bits": 39,
+    "note": "o taken as a range cell like M; if o is admitted up to 2^31 as in chunk.cpp the window is wider",
+    "floors": 8192,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 1850,
+    "second_quotient_max_abs": 0,
+    "example": null
+   },
+   "S_out_floor": {
+    "divisor_bits": 27,
+    "shifts": 0,
+    "floors": 16384,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 17292,
+    "second_quotient_max_abs": 0,
+    "example": null
+   }
+  },
+  {
+   "dist": "R3",
+   "seed": 3,
+   "GB": 18,
+   "C": 64,
+   "tokens": 64,
+   "channels": 128,
+   "M_floor": {
+    "divisor_bits": 42,
+    "shifts": [
+     {
+      "quotient_shift": -16777215,
+      "remainder_shift": -4380866641924
+     },
+     {
+      "quotient_shift": -12582912,
+      "remainder_shift": 12884901885
+     },
+     {
+      "quotient_shift": -12582911,
+      "remainder_shift": -4385161609219
+     },
+     {
+      "quotient_shift": -8388608,
+      "remainder_shift": 8589934590
+     },
+     {
+      "quotient_shift": -8388607,
+      "remainder_shift": -4389456576514
+     },
+     {
+      "quotient_shift": -4194304,
+      "remainder_shift": 4294967295
+     },
+     {
+      "quotient_shift": -4194303,
+      "remainder_shift": -4393751543809
+     },
+     {
+      "quotient_shift": 4194303,
+      "remainder_shift": 4393751543809
+     },
+     {
+      "quotient_shift": 4194304,
+      "remainder_shift": -4294967295
+     },
+     {
+      "quotient_shift": 8388607,
+      "remainder_shift": 4389456576514
+     },
+     {
+      "quotient_shift": 8388608,
+      "remainder_shift": -8589934590
+     },
+     {
+      "quotient_shift": 12582911,
+      "remainder_shift": 4385161609219
+     },
+     {
+      "quotient_shift": 12582912,
+      "remainder_shift": -12884901885
+     },
+     {
+      "quotient_shift": 16777215,
+      "remainder_shift": 4380866641924
+     }
+    ],
+    "floors": 8192,
+    "with_second_solution": 8192,
+    "second_solutions": 24576,
+    "honest_quotient_max_abs": 23883,
+    "second_quotient_max_abs": 8388607,
+    "example": {
+     "numerator": -3577143361536,
+     "honest_quotient": -1,
+     "honest_remainder": 820903149568,
+     "second_quotient": -4194305,
+     "second_remainder": 825198116863,
+     "quotient_shift": -4194304,
+     "remainder_shift": 4294967295,
+     "token": 0,
+     "channel": 0,
+     "v": -1001,
+     "beta": 3319,
+     "honest_delta": -811,
+     "second_delta": 3397845,
+     "second_delta_fits_two_limbs": true,
+     "second_delta_limbs_inside_rng_bound": true
+    }
+   },
+   "o_floor": {
+    "divisor_bits": 42,
+    "note": "o taken as a range cell like M; if o is admitted up to 2^31 as in chunk.cpp the window is wider",
+    "floors": 8192,
+    "with_second_solution": 8192,
+    "second_solutions": 24557,
+    "honest_quotient_max_abs": 1850,
+    "second_quotient_max_abs": 8388607,
+    "example": {
+     "numerator": -439209081176064,
+     "honest_quotient": -100,
+     "honest_remainder": 595569934336,
+     "second_quotient": -4194404,
+     "second_remainder": 599864901631,
+     "quotient_shift": -4194304,
+     "remainder_shift": 4294967295
+    }
+   },
+   "S_out_floor": {
+    "divisor_bits": 30,
+    "shifts": 0,
+    "floors": 16384,
+    "with_second_solution": 0,
+    "second_solutions": 0,
+    "honest_quotient_max_abs": 17310,
+    "second_quotient_max_abs": 0,
+    "example": null
+   }
+  }
+ ],
+ "edge_traces": [
+  {
+   "case": "S at the 2^18 edge, one-hot k, all-ones q",
+   "GB": 12,
+   "C": 1,
+   "S_in_max_abs": 262143,
+   "max_abs": {
+    "S_out": 262143,
+    "M": 262143,
+    "delta": 0,
+    "o": 33554304
+   },
+   "numerator_bits": {
+    "M": 54,
+    "o": 61,
+    "S": 42,
+    "Gram": 0
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": true,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 61,
+   "exceeds_62_bits": false
+  },
+  {
+   "case": "S = 2^16 - 1, all-ones k and q",
+   "GB": 12,
+   "C": 1,
+   "S_in_max_abs": 65535,
+   "max_abs": {
+    "S_out": 65535,
+    "M": 8388480,
+    "delta": 0,
+    "o": 8388480
+   },
+   "numerator_bits": {
+    "M": 59,
+    "o": 59,
+    "S": 40,
+    "Gram": 0
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": false,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 59,
+   "exceeds_62_bits": false
+  },
+  {
+   "case": "S at the 2^18 edge, one-hot k, all-ones q",
+   "GB": 12,
+   "C": 16,
+   "S_in_max_abs": 262143,
+   "max_abs": {
+    "S_out": 262143,
+    "M": 262143,
+    "delta": 0,
+    "o": 33554304
+   },
+   "numerator_bits": {
+    "M": 54,
+    "o": 61,
+    "S": 42,
+    "Gram": 25
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": true,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 61,
+   "exceeds_62_bits": false
+  },
+  {
+   "case": "S = 2^16 - 1, all-ones k and q",
+   "GB": 12,
+   "C": 16,
+   "S_in_max_abs": 65535,
+   "max_abs": {
+    "S_out": 65535,
+    "M": 8388480,
+    "delta": 0,
+    "o": 8388480
+   },
+   "numerator_bits": {
+    "M": 59,
+    "o": 59,
+    "S": 40,
+    "Gram": 32
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": false,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 59,
+   "exceeds_62_bits": false
+  },
+  {
+   "case": "S at the 2^18 edge, one-hot k, all-ones q",
+   "GB": 12,
+   "C": 64,
+   "S_in_max_abs": 262143,
+   "max_abs": {
+    "S_out": 262143,
+    "M": 262143,
+    "delta": 0,
+    "o": 33554304
+   },
+   "numerator_bits": {
+    "M": 54,
+    "o": 61,
+    "S": 42,
+    "Gram": 25
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": true,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 61,
+   "exceeds_62_bits": false
+  },
+  {
+   "case": "S = 2^16 - 1, all-ones k and q",
+   "GB": 12,
+   "C": 64,
+   "S_in_max_abs": 65535,
+   "max_abs": {
+    "S_out": 65535,
+    "M": 8388480,
+    "delta": 0,
+    "o": 8388480
+   },
+   "numerator_bits": {
+    "M": 59,
+    "o": 59,
+    "S": 40,
+    "Gram": 32
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": false,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 59,
+   "exceeds_62_bits": false
+  },
+  {
+   "case": "S at the 2^18 edge, one-hot k, all-ones q",
+   "GB": 18,
+   "C": 1,
+   "S_in_max_abs": 262143,
+   "max_abs": {
+    "S_out": 262143,
+    "M": 262143,
+    "delta": 0,
+    "o": 33554304
+   },
+   "numerator_bits": {
+    "M": 60,
+    "o": 67,
+    "S": 48,
+    "Gram": 0
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": true,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 67,
+   "exceeds_62_bits": true
+  },
+  {
+   "case": "S = 2^16 - 1, all-ones k and q",
+   "GB": 18,
+   "C": 1,
+   "S_in_max_abs": 65535,
+   "max_abs": {
+    "S_out": 65535,
+    "M": 8388480,
+    "delta": 0,
+    "o": 8388480
+   },
+   "numerator_bits": {
+    "M": 65,
+    "o": 65,
+    "S": 46,
+    "Gram": 0
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": false,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 65,
+   "exceeds_62_bits": true
+  },
+  {
+   "case": "S at the 2^18 edge, one-hot k, all-ones q",
+   "GB": 18,
+   "C": 16,
+   "S_in_max_abs": 262143,
+   "max_abs": {
+    "S_out": 262143,
+    "M": 262143,
+    "delta": 0,
+    "o": 33554304
+   },
+   "numerator_bits": {
+    "M": 60,
+    "o": 67,
+    "S": 48,
+    "Gram": 25
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": true,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 67,
+   "exceeds_62_bits": true
+  },
+  {
+   "case": "S = 2^16 - 1, all-ones k and q",
+   "GB": 18,
+   "C": 16,
+   "S_in_max_abs": 65535,
+   "max_abs": {
+    "S_out": 65535,
+    "M": 8388480,
+    "delta": 0,
+    "o": 8388480
+   },
+   "numerator_bits": {
+    "M": 65,
+    "o": 65,
+    "S": 46,
+    "Gram": 32
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": false,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 65,
+   "exceeds_62_bits": true
+  },
+  {
+   "case": "S at the 2^18 edge, one-hot k, all-ones q",
+   "GB": 18,
+   "C": 64,
+   "S_in_max_abs": 262143,
+   "max_abs": {
+    "S_out": 262143,
+    "M": 262143,
+    "delta": 0,
+    "o": 33554304
+   },
+   "numerator_bits": {
+    "M": 60,
+    "o": 67,
+    "S": 48,
+    "Gram": 25
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": true,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 67,
+   "exceeds_62_bits": true
+  },
+  {
+   "case": "S = 2^16 - 1, all-ones k and q",
+   "GB": 18,
+   "C": 64,
+   "S_in_max_abs": 65535,
+   "max_abs": {
+    "S_out": 65535,
+    "M": 8388480,
+    "delta": 0,
+    "o": 8388480
+   },
+   "numerator_bits": {
+    "M": 65,
+    "o": 65,
+    "S": 46,
+    "Gram": 32
+   },
+   "public_admission_passes": true,
+   "M_inside_contract_2_18": false,
+   "M_inside_rng_bound_2_23": true,
+   "max_numerator_bits": 65,
+   "exceeds_62_bits": true
+  }
+ ],
+ "interval_boxes": [
+  {
+   "GB": 12,
+   "C": 64,
+   "box": "contract: |S_in|, delta limbs < 2^18",
+   "M_numerator_bits": 85,
+   "o_numerator_bits": 86,
+   "S_out_numerator_bits": 67,
+   "note": "interval bound with every admitted value at the edge of its range at once; not a trace"
+  },
+  {
+   "GB": 12,
+   "C": 64,
+   "box": "RNG proved bound: |S_in|, delta limbs < 2^23",
+   "M_numerator_bits": 90,
+   "o_numerator_bits": 91,
+   "S_out_numerator_bits": 72,
+   "note": "interval bound with every admitted value at the edge of its range at once; not a trace"
+  },
+  {
+   "GB": 18,
+   "C": 64,
+   "box": "contract: |S_in|, delta limbs < 2^18",
+   "M_numerator_bits": 91,
+   "o_numerator_bits": 92,
+   "S_out_numerator_bits": 73,
+   "note": "interval bound with every admitted value at the edge of its range at once; not a trace"
+  },
+  {
+   "GB": 18,
+   "C": 64,
+   "box": "RNG proved bound: |S_in|, delta limbs < 2^23",
+   "M_numerator_bits": 96,
+   "o_numerator_bits": 97,
+   "S_out_numerator_bits": 78,
+   "note": "interval bound with every admitted value at the edge of its range at once; not a trace"
+  }
+ ],
+ "seconds": 10.3
+}

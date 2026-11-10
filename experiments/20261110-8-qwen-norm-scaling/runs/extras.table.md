@@ -1,0 +1,65 @@
+| arm | pairs rel_y <= 0.01 | pairs rel_y <= 0.05 | p90 rel_y | worst pair | mixer-output error / float mixer output, median (min / max), n = 10 |
+|---|---|---|---|---|---|
+| cand:C4 | 0 / 480 | 81 / 480 | 4.04 | p06-digits head 36 (172) | 0.0887 (0.0573 / 1.9) |
+| cand:C1 | 0 / 480 | 38 / 480 | 4.12 | p06-digits head 36 (164) | 0.109 (0.0524 / 1.88) |
+| cand:C0 | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| cand:C3 | 0 / 480 | 70 / 480 | 4.04 | p06-digits head 36 (172) | 0.0889 (0.058 / 1.9) |
+| cand:C5 | 0 / 480 | 14 / 480 | 4.18 | p06-digits head 36 (164) | 0.111 (0.0702 / 1.9) |
+| cand:C2 | 0 / 480 | 43 / 480 | 4.04 | p06-digits head 36 (172) | 0.0927 (0.0617 / 1.9) |
+| cand:C1P | 38 / 480 | 267 / 480 | 0.667 | p04-repeat-punct head 38 (2.37) | 0.0158 (0.0149 / 0.0344) |
+| cand:D-R15 | 0 / 480 | 37 / 480 | 4.13 | p06-digits head 36 (163) | 0.11 (0.0535 / 1.89) |
+| cand:C2P | 37 / 480 | 273 / 480 | 0.295 | p04-repeat-punct head 36 (3.65) | 0.00781 (0.00654 / 0.0264) |
+| cand:C3P | 47 / 480 | 290 / 480 | 0.296 | p04-repeat-punct head 36 (3.64) | 0.00733 (0.00679 / 0.027) |
+| cand:C3P-S14 | 156 / 480 | 396 / 480 | 0.102 | p04-repeat-punct head 36 (2.2) | 0.00298 (0.00261 / 0.00963) |
+| cand:C4P | 58 / 480 | 290 / 480 | 0.295 | p04-repeat-punct head 36 (3.64) | 0.00712 (0.00651 / 0.0263) |
+| cand:X2 | 48 / 480 | 292 / 480 | 0.28 | p04-repeat-punct head 36 (4.16) | 0.00713 (0.00652 / 0.0269) |
+| cand:X1 | 48 / 480 | 292 / 480 | 0.28 | p04-repeat-punct head 36 (4.16) | 0.00713 (0.00652 / 0.027) |
+| cand:X3 | 247 / 480 | 464 / 480 | 0.0253 | p03-repeat-word head 46 (0.253) | 0.00191 (0.00101 / 0.00341) |
+| local:exactG-upstream | 0 / 480 | 18 / 480 | 18.3 | p03-repeat-word head 36 (572) | 0.55 (0.374 / 0.634) |
+| local:roundG-norm | 25 / 480 | 99 / 480 | 0.208 | p03-repeat-word head 36 (6.1) | 0.0205 (0.0103 / 0.0268) |
+| local:round1-o | 2 / 480 | 30 / 480 | 18 | p03-repeat-word head 36 (566) | 0.543 (0.365 / 0.626) |
+| local:roundG-upstream | 1 / 480 | 86 / 480 | 4.03 | p06-digits head 36 (172) | 0.0884 (0.0564 / 1.9) |
+| local:exactG-norm | 0 / 480 | 5 / 480 | 17.1 | p04-repeat-punct head 36 (137) | 0.558 (0.227 / 1.75) |
+| local:round1-o-rhu | 10 / 480 | 91 / 480 | 0.992 | p04-repeat-punct head 37 (1) | 0.0372 (0.0244 / 0.0538) |
+| local:roundG-output | 0 / 480 | 18 / 480 | 18.3 | p03-repeat-word head 36 (572) | 0.55 (0.374 / 0.634) |
+| local:all_exact | 480 / 480 | 480 / 480 | 8.64e-16 | p04-repeat-punct head 38 (5.01e-15) | 0 (0 / 0) |
+| local:C0 | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| local:roundG-public | 324 / 480 | 411 / 480 | 0.0615 | p04-repeat-punct head 36 (0.577) | 0.00191 (0.00123 / 0.00239) |
+| local:exact1-o | 0 / 480 | 16 / 480 | 3.86 | p06-digits head 36 (173) | 0.097 (0.074 / 1.92) |
+| local:exactG-output | 1 / 480 | 86 / 480 | 4.03 | p06-digits head 36 (172) | 0.0884 (0.0564 / 1.9) |
+| local:exactG-public | 0 / 480 | 3 / 480 | 21.1 | p03-repeat-word head 37 (297) | 0.723 (0.456 / 1.74) |
+| local:roundG-state | 1 / 480 | 80 / 480 | 4.15 | p06-digits head 36 (157) | 0.0951 (0.0689 / 1.87) |
+| local:round1-in_qkv | 480 / 480 | 480 / 480 | 7.27e-05 | p04-repeat-punct head 38 (0.000689) | 2.43e-06 (1.92e-06 / 9.35e-06) |
+| local:exact1-in_qkv | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| local:exact1-in_ab | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| local:exactG-state | 0 / 480 | 19 / 480 | 18.4 | p03-repeat-word head 36 (582) | 0.548 (0.369 / 0.628) |
+| local:round1-conv | 417 / 480 | 479 / 480 | 0.0111 | p03-repeat-word head 36 (0.0506) | 0.00113 (0.000778 / 0.00156) |
+| local:round1-in_z | 480 / 480 | 480 / 480 | 4.7e-05 | p03-repeat-word head 26 (7.7e-05) | 4.85e-06 (2.35e-06 / 6.68e-06) |
+| local:round1-in_ab | 480 / 480 | 480 / 480 | 1.17e-05 | p04-repeat-punct head 0 (9.75e-05) | 9.13e-07 (4.88e-07 / 1.74e-06) |
+| local:exact1-conv | 0 / 480 | 5 / 480 | 17.3 | p04-repeat-punct head 36 (141) | 0.563 (0.231 / 1.75) |
+| local:exact1-silu | 0 / 480 | 5 / 480 | 17.5 | p04-repeat-punct head 36 (144) | 0.589 (0.21 / 1.78) |
+| local:exact1-in_z | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| local:round1-gates | 480 / 480 | 480 / 480 | 0.000508 | p06-digits head 26 (0.00384) | 1.59e-05 (7.82e-06 / 0.000172) |
+| local:round1-silu | 461 / 480 | 480 / 480 | 0.00721 | p04-repeat-punct head 36 (0.0358) | 0.000227 (0.000176 / 0.000333) |
+| local:round1-l2n | 349 / 480 | 410 / 480 | 0.0606 | p04-repeat-punct head 36 (0.595) | 0.0016 (0.00049 / 0.00186) |
+| local:exact1-l2n | 0 / 480 | 5 / 480 | 18 | p03-repeat-word head 36 (569) | 0.652 (0.272 / 1.77) |
+| local:exact1-gates | 0 / 480 | 4 / 480 | 17.5 | p04-repeat-punct head 36 (141) | 0.57 (0.227 / 1.74) |
+| local:exact1-mem | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.229 / 1.78) |
+| local:round1-mem | 455 / 480 | 480 / 480 | 0.0083 | p03-repeat-word head 30 (0.0353) | 0.000892 (0.000775 / 0.00124) |
+| local:exact1-sigma | 0 / 480 | 5 / 480 | 17.2 | p04-repeat-punct head 36 (138) | 0.561 (0.225 / 1.76) |
+| local:round1-delta | 364 / 480 | 468 / 480 | 0.0169 | p06-digits head 16 (0.341) | 0.00264 (0.00238 / 0.00719) |
+| local:exact1-delta | 0 / 480 | 3 / 480 | 17.4 | p04-repeat-punct head 36 (145) | 0.575 (0.236 / 1.88) |
+| local:round1-state | 1 / 480 | 81 / 480 | 4.44 | p06-digits head 36 (157) | 0.109 (0.0693 / 1.96) |
+| local:exact1-state | 0 / 480 | 19 / 480 | 18.3 | p03-repeat-word head 36 (582) | 0.548 (0.373 / 0.628) |
+| local:round1-rc | 480 / 480 | 480 / 480 | 7.15e-08 | p10-long-mixed head 14 (1.39e-07) | 1.98e-08 (6.16e-09 / 5.31e-08) |
+| local:round1-sigma | 423 / 480 | 480 / 480 | 0.0102 | p04-repeat-punct head 45 (0.0178) | 0.000913 (0.000372 / 0.00163) |
+| local:round1-w | 27 / 480 | 101 / 480 | 0.206 | p03-repeat-word head 36 (6.17) | 0.0178 (0.00998 / 0.0225) |
+| local:exact1-w | 0 / 480 | 5 / 480 | 17.3 | p04-repeat-punct head 36 (139) | 0.564 (0.229 / 1.75) |
+| local:exact1-cg | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| local:exact1-rc | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.568 (0.228 / 1.76) |
+| local:round1-cg | 480 / 480 | 480 / 480 | 0.000689 | p03-repeat-word head 18 (0.00441) | 2.59e-05 (6.89e-06 / 2.79e-05) |
+| local:round1-y | 248 / 480 | 461 / 480 | 0.0251 | p03-repeat-word head 36 (1.29) | 0.00444 (0.00167 / 0.00562) |
+| local:exact1-y | 0 / 480 | 5 / 480 | 17.4 | p04-repeat-punct head 36 (141) | 0.567 (0.229 / 1.76) |
+| BF16 emulation | | | | | 0.00134 (0.000921 / 0.00152) |
+cand:X3 heads with a pair over 0.05: [18, 19, 30, 31, 36, 37, 38, 45, 46, 47]
+cand:C4P heads with a pair over 0.05: [0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 26, 27, 29, 30, 31, 32, 34, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]

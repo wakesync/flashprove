@@ -1,0 +1,48 @@
+FAIL prebuilt-success: job exits 0
+FAIL prebuilt-success: DONE, no FAILED
+FAIL prebuilt-success: cold, rep1, rep2 classed YES
+PASS prebuilt-success: no 'did not end with YES' stage
+FAIL prebuilt-success: bundles exported
+FAIL prebuilt-success: SHA256SUMS verifies, stages.log included
+FAIL prebuilt-success: job-done is the last stage line
+PASS prebuilt-success: isk never exported
+FAIL prebuilt-success: work dirs removed
+FAIL prebuilt-success: cgroup memory.peak recorded
+FAIL prebuilt-success: steps.tsv has every step with status
+PASS quickstart-success: job exits 0 with DONE
+FAIL quickstart-success: rep1, rep2 classed YES
+PASS quickstart-success: quickstart bundle exported
+FAIL quickstart-success: SHA256SUMS verifies
+PASS quickstart-success: isk never exported
+PASS repeat-rejected: cold run NO -> job FAILED, exit 1
+FAIL repeat-rejected: cold classed NO
+PASS repeat-rejected: failed run's files exported
+FAIL repeat-rejected: SHA256SUMS verifies
+FAIL compiler-fail-serve: finalised (FAILED + SHA256SUMS)
+FAIL compiler-fail-serve: runner still running after the job failed
+FAIL compiler-fail-serve: /status says failed
+FAIL compiler-fail-serve: /files lists the failure's logs
+FAIL compiler-fail-serve: /results.tar.gz served
+FAIL compiler-fail-serve: SHA256SUMS verifies
+FAIL quickstart-fail-serve: finalised FAILED
+FAIL quickstart-fail-serve: runner still running
+FAIL quickstart-fail-serve: /status says failed
+FAIL quickstart-fail-serve: partial quickstart evidence exported and served
+FAIL quickstart-fail-serve: the failure's own log is served
+PASS quickstart-fail-serve: isk never exported
+FAIL quickstart-fail-serve: SHA256SUMS verifies
+FAIL step-timeout: cold run timed out -> FAILED
+FAIL step-timeout: steps.tsv marks the timeout
+FAIL step-timeout: SHA256SUMS verifies
+PASS step-timeout: isk never exported
+FAIL job-timeout: ended within the job timeout plus grace
+FAIL job-timeout: FAILED with the timeout reason
+FAIL job-timeout: the interrupted run was exported
+PASS job-timeout: isk never exported
+FAIL job-timeout: SHA256SUMS still verifies a second later
+PASS serve-sigterm: runner exited after SIGTERM
+FAIL serve-sigterm: FAILED + SHA256SUMS written
+PASS serve-sigterm: isk never exported
+PASS no-reuse: second run refused with exit 2
+FAIL no-reuse: first run's checksums intact
+13 of 47 checks passed

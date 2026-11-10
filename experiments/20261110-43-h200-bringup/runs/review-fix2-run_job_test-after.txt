@@ -1,0 +1,92 @@
+run_job_test.py of this fix's tests, run against run_job.sh of this fix (working tree on top of b6a02bc6).
+CPU host, shared and loaded, no GPU, mocked GPU programs; python3 3.12.3; 2026-11-10T06:06Z UTC; 26 s.
+$ python3 run_job_test.py
+PASS prebuilt-success: job exits 0
+PASS prebuilt-success: DONE, no FAILED
+PASS prebuilt-success: cold, rep1, rep2 classed YES
+PASS prebuilt-success: no 'did not end with YES' stage
+PASS prebuilt-success: bundles exported
+PASS prebuilt-success: SHA256SUMS verifies, stages.log included
+PASS prebuilt-success: job-done is the last stage line
+PASS prebuilt-success: isk never exported
+PASS prebuilt-success: work dirs removed
+PASS prebuilt-success: cgroup memory.peak recorded
+PASS prebuilt-success: steps.tsv has every step with status
+PASS quickstart-success: job exits 0 with DONE
+PASS quickstart-success: rep1, rep2 classed YES
+PASS quickstart-success: quickstart bundle exported
+PASS quickstart-success: SHA256SUMS verifies
+PASS quickstart-success: isk never exported
+PASS repeat-rejected: cold run NO -> job FAILED, exit 1
+PASS repeat-rejected: cold classed NO
+PASS repeat-rejected: failed run's public files and commit log exported
+PASS repeat-rejected: rejected run: out/ and cp_verify.log withheld, listed in withheld.txt
+PASS repeat-rejected: SHA256SUMS verifies
+PASS compiler-fail-serve: finalised (FAILED + SHA256SUMS)
+PASS compiler-fail-serve: runner still running after the job failed
+PASS compiler-fail-serve: /status says failed
+PASS compiler-fail-serve: /files lists the failure's logs
+PASS compiler-fail-serve: /results.tar.gz served
+PASS compiler-fail-serve: SHA256SUMS verifies
+PASS quickstart-fail-serve: finalised FAILED
+PASS quickstart-fail-serve: runner still running
+PASS quickstart-fail-serve: /status says failed
+PASS quickstart-fail-serve: partial quickstart evidence exported and served
+PASS quickstart-fail-serve: failed quickstart: out/ withheld (duty 6)
+PASS quickstart-fail-serve: the failure's own log is served
+PASS quickstart-fail-serve: isk never exported
+PASS quickstart-fail-serve: SHA256SUMS verifies
+PASS step-timeout: cold run timed out -> FAILED
+PASS step-timeout: steps.tsv marks the timeout
+PASS step-timeout: SHA256SUMS verifies
+PASS step-timeout: isk never exported
+PASS job-timeout: ended within the job timeout plus grace
+PASS job-timeout: FAILED with the timeout reason
+PASS job-timeout: the interrupted run was exported
+PASS job-timeout: the interrupted run's out/ withheld (never verified)
+PASS job-timeout: steps.tsv records the interrupted step
+PASS job-timeout: isk never exported
+PASS job-timeout: SHA256SUMS still verifies a second later
+PASS serve-sigterm: runner exited after SIGTERM
+PASS serve-sigterm: FAILED + SHA256SUMS written
+PASS serve-sigterm: isk never exported
+PASS quickstart-job-timeout: job stopped by the timeout, FAILED
+PASS quickstart-job-timeout: quickstart's partial evidence exported
+PASS quickstart-job-timeout: its unverified out/ withheld
+PASS quickstart-job-timeout: steps.tsv records the interrupted quickstart
+PASS quickstart-job-timeout: isk never exported
+PASS quickstart-job-timeout: SHA256SUMS verifies
+PASS seal-hash-fails: job exits nonzero
+PASS seal-hash-fails: no DONE; FAILED and SEAL-FAILED written
+PASS seal-hash-fails: a stage line names the failed step
+PASS seal-hash-fails: /status says failed, never done or finalising forever
+PASS seal-unreadable-file: job exits nonzero, no DONE, SEAL-FAILED
+PASS seal-unreadable-file: /status says failed
+PASS seal-write-fails: job exits nonzero, no DONE, SEAL-FAILED
+PASS seal-write-fails: a stage line names the failed step
+PASS seal-write-fails: /status says failed
+PASS marker-write-fails: job exits nonzero
+PASS marker-write-fails: FAILED and SEAL-FAILED written, stage line names the marker
+PASS marker-write-fails: /status says failed
+PASS export-fails: job exits nonzero (3), FAILED, no DONE
+PASS export-fails: FAILED and a stage line name the export
+PASS export-fails: source kept outside results/
+PASS export-fails: SHA256SUMS verifies; /status says failed
+PASS lock-second-job: second job refused, exit 2, clear message
+PASS lock-second-job: second serve refused, exit 2
+PASS lock-second-job: refusals touched nothing
+PASS lock-second-job: first job DONE, exit 0, no FAILED, one job row
+PASS lock-second-job: first job's SHA256SUMS verifies
+PASS warm-repeat-rejected: job DONE, exit 0 (a repeat's NO is reported, not fatal)
+PASS warm-repeat-rejected: cold and rep2 YES, rep1 NO
+PASS warm-repeat-rejected: rep1 stage says not YES
+PASS warm-repeat-rejected: rep1 out/ and cp_verify.log withheld, rep2's exported
+PASS warm-repeat-rejected: SHA256SUMS verifies
+PASS warm-repeat-timeout: job DONE, exit 0
+PASS warm-repeat-timeout: rep1 recorded 124 timed out, cold and rep2 exit 0
+PASS warm-repeat-timeout: rep1 out/ withheld, its commit log exported
+PASS warm-repeat-timeout: SHA256SUMS verifies, isk never exported
+PASS no-reuse: second run refused with exit 2
+PASS no-reuse: first run's checksums intact
+87 of 87 checks passed
+exit 0

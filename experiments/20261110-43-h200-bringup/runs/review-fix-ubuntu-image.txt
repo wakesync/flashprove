@@ -1,0 +1,11 @@
+Attempt to run serve_test.py and run_job_test.py inside the Dockerfile's pinned base image
+ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852 (2026-11-10, CPU host):
+apt-get update && apt-get install --no-install-recommends python3 git util-linux time
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/p/perl/perl-base_5.38.2-3.2ubuntu0.7_amd64.deb  404  Not Found
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/p/perl/perl-modules-5.38_5.38.2-3.2ubuntu0.7_all.deb  404  Not Found
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/p/perl/libperl5.38t64_5.38.2-3.2ubuntu0.7_amd64.deb  404  Not Found
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/p/perl/perl_5.38.2-3.2ubuntu0.7_amd64.deb  404  Not Found
+exit 100
+The tests were therefore not run in that image. This is an instance of the reproducibility gap stated in the
+Dockerfile header: the unpinned archive moves under a fixed base image. The tests ran on the CPU host
+(review-fix-*-after.txt) and run in CI on ubuntu-24.04 (.github/workflows/h200-package-tests.yml).

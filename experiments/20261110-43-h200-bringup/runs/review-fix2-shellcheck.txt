@@ -1,0 +1,6 @@
+run_job.sh of this fix, 2026-11-10T06:10Z UTC, CPU host; image pulled by digest, run with no network and a read-only mount, nothing built
+bash -n run_job.sh
+exit 0
+docker run --rm --network none -v <package dir>:/m:ro koalaman/shellcheck@sha256:bb596a0d169b85ddd81d8b6d3a2ff6d5baf5fca10b97f575ebc647c3dff62b3d /m/run_job.sh
+exit 0
+version: 0.11.0

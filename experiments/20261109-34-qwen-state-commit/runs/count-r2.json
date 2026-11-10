@@ -1,0 +1,217 @@
+{
+ "note": "counted, not measured; no SB proof and no SB backend exist in this repository; the GB = 12 column is the registered arm, which failed H4(c); the GB = 18 arm is unregistered and has no sound lowering here",
+ "shapes": {
+  "L": 48,
+  "H": 48,
+  "D": 128,
+  "F": 12,
+  "key_bits": 12
+ },
+ "rows": [
+  {
+   "GB": 12,
+   "C": 16,
+   "registered_arm": true,
+   "S_out_keys": 2,
+   "M_o_keys": 3,
+   "formula": "3 D^2 / C + 13 D + 2.5 C + 0.5",
+   "per_head_per_token": 4776.5,
+   "per_head_items": {
+    "S_out_cells": 1024.0,
+    "S_out_remainder_keys": 2048.0,
+    "decay_table_entries": 8.5,
+    "gram_KK_QK": 32,
+    "P0_Q0": 256,
+    "M_delta_lo_hi_o": 512,
+    "remainder_keys_M": 384,
+    "remainder_keys_delta": 128,
+    "remainder_keys_o": 384
+   },
+   "per_head_extras": {
+    "decay_table_floor_remainder_keys": 8.5,
+    "committed_operands_k_q_v_a_beta": 386
+   },
+   "sb_keys_widened_per_token": 11005056,
+   "sb_with_listed_extras_per_token": 11913984,
+   "sb_on_product_oracle_per_token": 128969856
+  },
+  {
+   "GB": 12,
+   "C": 64,
+   "registered_arm": true,
+   "S_out_keys": 2,
+   "M_o_keys": 3,
+   "formula": "3 D^2 / C + 13 D + 2.5 C + 0.5",
+   "per_head_per_token": 2592.5,
+   "per_head_items": {
+    "S_out_cells": 256.0,
+    "S_out_remainder_keys": 512.0,
+    "decay_table_entries": 32.5,
+    "gram_KK_QK": 128,
+    "P0_Q0": 256,
+    "M_delta_lo_hi_o": 512,
+    "remainder_keys_M": 384,
+    "remainder_keys_delta": 128,
+    "remainder_keys_o": 384
+   },
+   "per_head_extras": {
+    "decay_table_floor_remainder_keys": 32.5,
+    "committed_operands_k_q_v_a_beta": 386
+   },
+   "sb_keys_widened_per_token": 5973120,
+   "sb_with_listed_extras_per_token": 6937344,
+   "sb_on_product_oracle_per_token": 138093696
+  },
+  {
+   "GB": 12,
+   "C": 128,
+   "registered_arm": true,
+   "S_out_keys": 2,
+   "M_o_keys": 3,
+   "formula": "3 D^2 / C + 13 D + 2.5 C + 0.5",
+   "per_head_per_token": 2368.5,
+   "per_head_items": {
+    "S_out_cells": 128.0,
+    "S_out_remainder_keys": 256.0,
+    "decay_table_entries": 64.5,
+    "gram_KK_QK": 256,
+    "P0_Q0": 256,
+    "M_delta_lo_hi_o": 512,
+    "remainder_keys_M": 384,
+    "remainder_keys_delta": 128,
+    "remainder_keys_o": 384
+   },
+   "per_head_extras": {
+    "decay_table_floor_remainder_keys": 64.5,
+    "committed_operands_k_q_v_a_beta": 386
+   },
+   "sb_keys_widened_per_token": 5457024,
+   "sb_with_listed_extras_per_token": 6494976,
+   "sb_on_product_oracle_per_token": 156451968
+  },
+  {
+   "GB": 18,
+   "C": 16,
+   "registered_arm": false,
+   "S_out_keys": 3,
+   "M_o_keys": 4,
+   "formula": "4 D^2 / C + 15 D + 2.5 C + 0.5",
+   "per_head_per_token": 6056.5,
+   "per_head_items": {
+    "S_out_cells": 1024.0,
+    "S_out_remainder_keys": 3072.0,
+    "decay_table_entries": 8.5,
+    "gram_KK_QK": 32,
+    "P0_Q0": 256,
+    "M_delta_lo_hi_o": 512,
+    "remainder_keys_M": 512,
+    "remainder_keys_delta": 128,
+    "remainder_keys_o": 512
+   },
+   "per_head_extras": {
+    "decay_table_floor_remainder_keys": 8.5,
+    "committed_operands_k_q_v_a_beta": 386
+   },
+   "sb_keys_widened_per_token": 13954176,
+   "sb_with_listed_extras_per_token": 14863104,
+   "sb_on_product_oracle_per_token": 131918976
+  },
+  {
+   "GB": 18,
+   "C": 64,
+   "registered_arm": false,
+   "S_out_keys": 3,
+   "M_o_keys": 4,
+   "formula": "4 D^2 / C + 15 D + 2.5 C + 0.5",
+   "per_head_per_token": 3104.5,
+   "per_head_items": {
+    "S_out_cells": 256.0,
+    "S_out_remainder_keys": 768.0,
+    "decay_table_entries": 32.5,
+    "gram_KK_QK": 128,
+    "P0_Q0": 256,
+    "M_delta_lo_hi_o": 512,
+    "remainder_keys_M": 512,
+    "remainder_keys_delta": 128,
+    "remainder_keys_o": 512
+   },
+   "per_head_extras": {
+    "decay_table_floor_remainder_keys": 32.5,
+    "committed_operands_k_q_v_a_beta": 386
+   },
+   "sb_keys_widened_per_token": 7152768,
+   "sb_with_listed_extras_per_token": 8116992,
+   "sb_on_product_oracle_per_token": 139273344
+  },
+  {
+   "GB": 18,
+   "C": 128,
+   "registered_arm": false,
+   "S_out_keys": 3,
+   "M_o_keys": 4,
+   "formula": "4 D^2 / C + 15 D + 2.5 C + 0.5",
+   "per_head_per_token": 2752.5,
+   "per_head_items": {
+    "S_out_cells": 128.0,
+    "S_out_remainder_keys": 384.0,
+    "decay_table_entries": 64.5,
+    "gram_KK_QK": 256,
+    "P0_Q0": 256,
+    "M_delta_lo_hi_o": 512,
+    "remainder_keys_M": 512,
+    "remainder_keys_delta": 128,
+    "remainder_keys_o": 512
+   },
+   "per_head_extras": {
+    "decay_table_floor_remainder_keys": 64.5,
+    "committed_operands_k_q_v_a_beta": 386
+   },
+   "sb_keys_widened_per_token": 6341760,
+   "sb_with_listed_extras_per_token": 7379712,
+   "sb_on_product_oracle_per_token": 157336704
+  }
+ ],
+ "gb12_reproduces_count_json": {
+  "SB C=16": {
+   "count_r2": 11005056,
+   "count_json": 11005056
+  },
+  "SB' C=16": {
+   "count_r2": 128969856,
+   "count_json": 128969856
+  },
+  "SB C=64": {
+   "count_r2": 5973120,
+   "count_json": 5973120
+  },
+  "SB' C=64": {
+   "count_r2": 138093696,
+   "count_json": 138093696
+  },
+  "SB C=128": {
+   "count_r2": 5457024,
+   "count_json": 5457024
+  },
+  "SB' C=128": {
+   "count_r2": 156451968,
+   "count_json": 156451968
+  }
+ },
+ "per_token_baselines_from_count_json": {
+  "per_token_6p1": 230267290,
+  "per_token_17p41": 657205494
+ },
+ "product_oracle_vs_per_token_arm_B_at_C64": {
+  "what": "the same stated formula on the research product oracle (3 D^2 + D C + SB per head), divided by the 6.1-per-cell per-token count; both are counts for the backend this repository has, neither is a built SB proof",
+  "gb12": {
+   "sb_on_product_oracle": 138093696,
+   "per_token_arm_B": 230267290,
+   "fraction": 0.5997
+  },
+  "gb18": {
+   "sb_on_product_oracle": 139273344,
+   "per_token_arm_B": 230267290,
+   "fraction": 0.6048
+  }
+ }
+}

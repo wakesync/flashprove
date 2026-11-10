@@ -1,0 +1,206 @@
+{
+ "note": "r2: chain verifier with the statement pinned (window.chain_check). Every chunk proof was made again. Four single-threaded workers ran at the same time, one core each, on a shared loaded host, so the times in this file are not comparable to the registered run and are not reported as results.",
+ "chains": [
+  {
+   "seed": 1,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "check": "ok",
+   "chain_check_s": 7.94,
+   "statement_id": "b6bdca466ebcacf12c06eb1f9c2070c34942791db82952bab2576d94652081b8",
+   "statement": {
+    "version": "fp-qwen-chain-statement-v1",
+    "model_id": "placeholder: synthetic M1 head, no weights, relation of research/operators/qwen_deltanet_lookup",
+    "request": 1,
+    "layer": 0,
+    "T": 64,
+    "C": 16,
+    "D": 32,
+    "F": 12,
+    "initial_handle": "74b28eea9339ac2944016e00521badfde33744073524eb9968b336044a35272f",
+    "final_history_sha256": "7f61d91424e788527c9b5e459de92d984451827ef0e0d4e6aa8df88be87f24ff"
+   }
+  },
+  {
+   "seed": 2,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "check": "ok",
+   "chain_check_s": 7.62,
+   "statement_id": "45d39b0e32e824664b48bbf2fefa57932c0b5ef3d6c758d244f0b96ae84c511e",
+   "statement": {
+    "version": "fp-qwen-chain-statement-v1",
+    "model_id": "placeholder: synthetic M1 head, no weights, relation of research/operators/qwen_deltanet_lookup",
+    "request": 1,
+    "layer": 0,
+    "T": 64,
+    "C": 16,
+    "D": 32,
+    "F": 12,
+    "initial_handle": "3b9a9401e2bb6694393d6136133b72d763d9f8131d9e97359e5e0acf23882dcf",
+    "final_history_sha256": "7138c026363da7adceb1aef84d459866c0eb838a45dfa1683fb3158cd3710527"
+   }
+  },
+  {
+   "seed": 3,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "check": "ok",
+   "chain_check_s": 7.47,
+   "statement_id": "d3b3e8afec45a6e48b197ac375488062868733c53ed1ad3d46e6adea72531ae9",
+   "statement": {
+    "version": "fp-qwen-chain-statement-v1",
+    "model_id": "placeholder: synthetic M1 head, no weights, relation of research/operators/qwen_deltanet_lookup",
+    "request": 1,
+    "layer": 0,
+    "T": 64,
+    "C": 16,
+    "D": 32,
+    "F": 12,
+    "initial_handle": "2e01618d32f00784393ffd564a6da4dc6c89ad037957ed87d46ce08933df41ba",
+    "final_history_sha256": "b917546db459a358a97383e524125afd69510c2fb7bc715c5175979dbd746e18"
+   }
+  },
+  {
+   "seed": 4,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "check": "ok",
+   "chain_check_s": 7.3,
+   "statement_id": "cef31d2093bd7771ae2cb03f4294fe39f16c7b8d74d182414889f7ecec4db13c",
+   "statement": {
+    "version": "fp-qwen-chain-statement-v1",
+    "model_id": "placeholder: synthetic M1 head, no weights, relation of research/operators/qwen_deltanet_lookup",
+    "request": 1,
+    "layer": 0,
+    "T": 64,
+    "C": 16,
+    "D": 32,
+    "F": 12,
+    "initial_handle": "6f53b758e3871f90180d5a14a35e336b88139e94237f7d8f40e069792205115d",
+    "final_history_sha256": "2a1fcba964f254a447b5523bd17b5f76afb43e467e53e0c1b07c04c22434855e"
+   }
+  },
+  {
+   "seed": 5,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "check": "ok",
+   "chain_check_s": 7.56,
+   "statement_id": "e271941d2c1baf95932833b72cdce7de44a53111c617500251cc6714de29dae7",
+   "statement": {
+    "version": "fp-qwen-chain-statement-v1",
+    "model_id": "placeholder: synthetic M1 head, no weights, relation of research/operators/qwen_deltanet_lookup",
+    "request": 1,
+    "layer": 0,
+    "T": 64,
+    "C": 16,
+    "D": 32,
+    "F": 12,
+    "initial_handle": "ae981f3fb1bcf5c33611270a4ba0ea42ddda39675a63134a55590c52daf86e3a",
+    "final_history_sha256": "89e621c16e389f02e26ac025bed169c55b7130f42cb01584b12faf00d4f52ce1"
+   }
+  }
+ ],
+ "summary": {
+  "C": 16,
+  "T": 64,
+  "D": 32,
+  "chunk_proofs": 20,
+  "accepted": 20,
+  "chains_accepted": 5,
+  "chains": 5,
+  "per_chunk": {
+   "prove_s": {
+    "n": 20,
+    "median": 10.055,
+    "sd": 0.2119913789210357,
+    "min": 9.757,
+    "max": 10.525
+   },
+   "verify_s": {
+    "n": 20,
+    "median": 1.702,
+    "sd": 0.07245141747914144,
+    "min": 1.584,
+    "max": 1.855
+   },
+   "proof_bytes": {
+    "n": 20,
+    "median": 6532528.0,
+    "sd": 233.37379097874182,
+    "min": 6532000,
+    "max": 6532992
+   },
+   "peak_rss_kb_prove": {
+    "n": 20,
+    "median": 1176424.0,
+    "sd": 40.06048059201434,
+    "min": 1176420,
+    "max": 1176552
+   },
+   "log_length": {
+    "n": 20,
+    "median": 19.0,
+    "sd": 0.0,
+    "min": 19,
+    "max": 19
+   },
+   "relations": {
+    "n": 20,
+    "median": 594432.0,
+    "sd": 0.0,
+    "min": 594432,
+    "max": 594432
+   },
+   "core_columns": {
+    "n": 20,
+    "median": 305664.0,
+    "sd": 0.0,
+    "min": 305664,
+    "max": 305664
+   }
+  },
+  "per_window": {
+   "prove_s": {
+    "n": 5,
+    "median": 40.208,
+    "sd": 0.7477066938312138,
+    "min": 39.260999999999996,
+    "max": 41.231
+   },
+   "verify_s": {
+    "n": 5,
+    "median": 6.773,
+    "sd": 0.22880493875788618,
+    "min": 6.504,
+    "max": 7.146
+   },
+   "proof_bytes": {
+    "n": 5,
+    "median": 26129984,
+    "sd": 565.9568888175141,
+    "min": 26129280,
+    "max": 26130720
+   }
+  },
+  "per_token": {
+   "core_columns": 19104.0,
+   "laid_columns": 20480.0,
+   "relations": 37152.0,
+   "range_cells": 1120.0,
+   "core_columns_per_state_cell": 18.65625,
+   "carried_handle_values": 82.0
+  }
+ }
+}

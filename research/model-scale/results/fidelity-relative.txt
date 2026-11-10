@@ -1,0 +1,42 @@
+bits | worst pooled out rel L2 (all) | worst per-token out rel L2 (all) | worst out rel L2 d=128 | worst state rel d=128 | q zero d=128 | k zero d=128 | out zero d=128 | max|o| d=128
+4 | 15.23 | 227.4 | 1 | 5.724 | 1.000 | 0.843 | 1.000 | 0.02343
+5 | 16.56 | 114 | 1 | 6.82 | 1.000 | 0.520 | 1.000 | 0.02343
+6 | 12.32 | 373 | 1 | 6.575 | 1.000 | 0.272 | 1.000 | 0.02343
+7 | 10.44 | 805.5 | 805.5 | 3.858 | 0.953 | 0.136 | 0.568 | 0.02343
+8 | 5.92 | 449.8 | 449.8 | 1.987 | 0.685 | 0.067 | 0.494 | 0.02343
+9 | 2.333 | 209.5 | 209.5 | 0.9662 | 0.380 | 0.035 | 0.455 | 0.02343
+10 | 1.174 | 118.7 | 118.7 | 0.4809 | 0.197 | 0.018 | 0.356 | 0.02343
+11 | 0.5642 | 59.47 | 59.47 | 0.2382 | 0.095 | 0.009 | 0.252 | 0.02343
+12 | 0.278 | 27.9 | 27.9 | 0.1197 | 0.048 | 0.005 | 0.154 | 0.02343
+13 | 0.1354 | 13.35 | 13.35 | 0.06088 | 0.024 | 0.003 | 0.086 | 0.02343
+14 | 0.07204 | 5.799 | 5.799 | 0.03044 | 0.011 | 0.001 | 0.045 | 0.02343
+15 | 0.03455 | 2.394 | 2.394 | 0.01519 | 0.005 | 0.000 | 0.025 | 0.02343
+16 | 0.0168 | 1.199 | 1.199 | 0.007583 | 0.003 | 0.000 | 0.014 | 0.02343
+17 | 0.00889 | 0.5903 | 0.5903 | 0.003786 | 0.002 | 0.000 | 0.007 | 0.02343
+18 | 0.004353 | 0.306 | 0.306 | 0.001898 | 0.001 | 0.000 | 0.004 | 0.02343
+19 | 0.002166 | 0.1568 | 0.1568 | 0.0009471 | 0.001 | 0.000 | 0.002 | 0.02343
+20 | 0.00106 | 0.07468 | 0.07468 | 0.0004765 | 0.000 | 0.000 | 0.001 | 0.02343
+21 | 0.0005573 | 0.0368 | 0.0368 | 0.0002373 | 0.000 | 0.000 | 0.001 | 0.02343
+22 | 0.0002711 | 0.01814 | 0.01814 | 0.0001185 | 0.000 | 0.000 | 0.000 | 0.02343
+23 | 0.0001366 | 0.009213 | 0.009213 | 5.938e-05 | 0.000 | 0.000 | 0.000 | 0.02343
+24 | 6.852e-05 | 0.004522 | 0.004522 | 2.962e-05 | 0.000 | 0.000 | 0.000 | 0.02343
+smallest width with pooled output AND state rel L2 err < 0.1 on every vector: 14
+smallest width with pooled output AND state rel L2 err < 0.01 on every vector: 17
+
+seed-7 d=128 sweep fixtures:
+bits  4 T 1: q zero 1.00 k zero 0.85 out zero 1.00 out rel worst-token 1.000 pooled 1.000 state rel 1.5689 max|o| 0.0179
+bits  4 T 2: q zero 1.00 k zero 0.85 out zero 1.00 out rel worst-token 1.000 pooled 1.000 state rel 4.0153 max|o| 0.0179
+bits  4 T 4: q zero 1.00 k zero 0.84 out zero 1.00 out rel worst-token 1.000 pooled 1.000 state rel 2.0974 max|o| 0.0179
+bits  4 T 8: q zero 1.00 k zero 0.84 out zero 1.00 out rel worst-token 1.000 pooled 1.000 state rel 2.0883 max|o| 0.0179
+bits  8 T 1: q zero 0.66 k zero 0.05 out zero 0.55 out rel worst-token 1.300 pooled 1.300 state rel 0.2763 max|o| 0.0179
+bits  8 T 2: q zero 0.66 k zero 0.05 out zero 0.42 out rel worst-token 11.068 pooled 2.243 state rel 1.0190 max|o| 0.0179
+bits  8 T 4: q zero 0.67 k zero 0.05 out zero 0.52 out rel worst-token 11.068 pooled 2.798 state rel 0.5719 max|o| 0.0179
+bits  8 T 8: q zero 0.67 k zero 0.06 out zero 0.51 out rel worst-token 11.068 pooled 3.006 state rel 0.5409 max|o| 0.0179
+bits 12 T 1: q zero 0.11 k zero 0.00 out zero 0.08 out rel worst-token 0.080 pooled 0.080 state rel 0.0183 max|o| 0.0179
+bits 12 T 2: q zero 0.07 k zero 0.00 out zero 0.18 out rel worst-token 0.525 pooled 0.118 state rel 0.0652 max|o| 0.0179
+bits 12 T 4: q zero 0.06 k zero 0.00 out zero 0.19 out rel worst-token 0.525 pooled 0.150 state rel 0.0339 max|o| 0.0179
+bits 12 T 8: q zero 0.05 k zero 0.00 out zero 0.15 out rel worst-token 0.525 pooled 0.161 state rel 0.0319 max|o| 0.0179
+bits 16 T 1: q zero 0.00 k zero 0.00 out zero 0.02 out rel worst-token 0.005 pooled 0.005 state rel 0.0011 max|o| 0.0179
+bits 16 T 2: q zero 0.00 k zero 0.00 out zero 0.01 out rel worst-token 0.032 pooled 0.007 state rel 0.0041 max|o| 0.0179
+bits 16 T 4: q zero 0.00 k zero 0.00 out zero 0.01 out rel worst-token 0.032 pooled 0.009 state rel 0.0021 max|o| 0.0179
+bits 16 T 8: q zero 0.00 k zero 0.00 out zero 0.01 out rel worst-token 0.032 pooled 0.010 state rel 0.0020 max|o| 0.0179

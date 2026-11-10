@@ -1,0 +1,23 @@
+	Command being timed: "<RUNNER_HOME>/flashprove/prover/build/hc/cp_commit -weights made-up-blocks -config config -M 1 -ivk ivk -isk isk"
+	User time (seconds): 4973.08
+	System time (seconds): 2339.13
+	Percent of CPU this job got: 426%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 28:32.65
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 258920716
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 81723343
+	Voluntary context switches: 39953
+	Involuntary context switches: 421180
+	Swaps: 0
+	File system inputs: 456
+	File system outputs: 4219584
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

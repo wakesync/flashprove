@@ -1,0 +1,348 @@
+{
+ "C0": {
+  "per_head_token": {
+   "keys": 525,
+   "cols": 258,
+   "rcells": 256,
+   "rels": 906
+  },
+  "delta_vs_M2": {
+   "keys": 0,
+   "cols": 0,
+   "rcells": 0,
+   "rels": 0
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 37,
+   "cgw": 37
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 276688,
+   "relations": 2402432
+  },
+  "T16_entries": 1605872
+ },
+ "C1": {
+  "per_head_token": {
+   "keys": 654,
+   "cols": 258,
+   "rcells": 256,
+   "rels": 906
+  },
+  "delta_vs_M2": {
+   "keys": 129,
+   "cols": 0,
+   "rcells": 0,
+   "rels": 0
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 278752,
+   "relations": 2402432
+  },
+  "T16_entries": 1607936
+ },
+ "C2": {
+  "per_head_token": {
+   "keys": 654,
+   "cols": 258,
+   "rcells": 256,
+   "rels": 906
+  },
+  "delta_vs_M2": {
+   "keys": 129,
+   "cols": 0,
+   "rcells": 0,
+   "rels": 0
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 278752,
+   "relations": 2402432
+  },
+  "T16_entries": 1607936
+ },
+ "C3": {
+  "per_head_token": {
+   "keys": 1041,
+   "cols": 643,
+   "rcells": 128,
+   "rels": 1167
+  },
+  "delta_vs_M2": {
+   "keys": 516,
+   "cols": 385,
+   "rcells": -128,
+   "rels": 261
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1062960,
+   "range_cells": 270336,
+   "lkp_keys": 284944,
+   "relations": 2406608
+  },
+  "T16_entries": 1618240
+ },
+ "C4": {
+  "per_head_token": {
+   "keys": 1044,
+   "cols": 258,
+   "rcells": 128,
+   "rels": 1034
+  },
+  "delta_vs_M2": {
+   "keys": 519,
+   "cols": 0,
+   "rcells": -128,
+   "rels": 128
+  },
+  "field_bits": {
+   "Vx": 63,
+   "oRc": 57,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 270336,
+   "lkp_keys": 284992,
+   "relations": 2404480
+  },
+  "T16_entries": 1612128
+ },
+ "C5": {
+  "per_head_token": {
+   "keys": 525,
+   "cols": 258,
+   "rcells": 256,
+   "rels": 906
+  },
+  "delta_vs_M2": {
+   "keys": 0,
+   "cols": 0,
+   "rcells": 0,
+   "rels": 0
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 37,
+   "cgw": 37
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 276688,
+   "relations": 2402432
+  },
+  "T16_entries": 1605872
+ },
+ "C1P": {
+  "per_head_token": {
+   "keys": 17294,
+   "cols": 258,
+   "rcells": 256,
+   "rels": 906
+  },
+  "delta_vs_M2": {
+   "keys": 16769,
+   "cols": 0,
+   "rcells": 0,
+   "rels": 0
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 544992,
+   "relations": 2402432
+  },
+  "T16_entries": 1874176
+ },
+ "C2P": {
+  "per_head_token": {
+   "keys": 17294,
+   "cols": 258,
+   "rcells": 256,
+   "rels": 906
+  },
+  "delta_vs_M2": {
+   "keys": 16769,
+   "cols": 0,
+   "rcells": 0,
+   "rels": 0
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 272384,
+   "lkp_keys": 544992,
+   "relations": 2402432
+  },
+  "T16_entries": 1874176
+ },
+ "C3P": {
+  "per_head_token": {
+   "keys": 17681,
+   "cols": 643,
+   "rcells": 128,
+   "rels": 1167
+  },
+  "delta_vs_M2": {
+   "keys": 17156,
+   "cols": 385,
+   "rcells": -128,
+   "rels": 261
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1062960,
+   "range_cells": 270336,
+   "lkp_keys": 551184,
+   "relations": 2406608
+  },
+  "T16_entries": 1884480
+ },
+ "C4P": {
+  "per_head_token": {
+   "keys": 17684,
+   "cols": 258,
+   "rcells": 128,
+   "rels": 1034
+  },
+  "delta_vs_M2": {
+   "keys": 17159,
+   "cols": 0,
+   "rcells": -128,
+   "rels": 128
+  },
+  "field_bits": {
+   "Vx": 63,
+   "oRc": 57,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1056800,
+   "range_cells": 270336,
+   "lkp_keys": 551232,
+   "relations": 2404480
+  },
+  "T16_entries": 1878368
+ },
+ "X1": {
+  "per_head_token": {
+   "keys": 17937,
+   "cols": 643,
+   "rcells": 128,
+   "rels": 1167
+  },
+  "delta_vs_M2": {
+   "keys": 17412,
+   "cols": 385,
+   "rcells": -128,
+   "rels": 261
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1062960,
+   "range_cells": 270336,
+   "lkp_keys": 555280,
+   "relations": 2406608
+  },
+  "T16_entries": 1888576
+ },
+ "X2": {
+  "per_head_token": {
+   "keys": 17937,
+   "cols": 643,
+   "rcells": 128,
+   "rels": 1167
+  },
+  "delta_vs_M2": {
+   "keys": 17412,
+   "cols": 385,
+   "rcells": -128,
+   "rels": 261
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1062960,
+   "range_cells": 270336,
+   "lkp_keys": 555280,
+   "relations": 2406608
+  },
+  "T16_entries": 1888576
+ },
+ "X3": {
+  "per_head_token": {
+   "keys": 17937,
+   "cols": 643,
+   "rcells": 16640,
+   "rels": 17679
+  },
+  "delta_vs_M2": {
+   "keys": 17412,
+   "cols": 385,
+   "rcells": 16384,
+   "rels": 16773
+  },
+  "field_bits": {
+   "Vx": 43,
+   "oRc": 47,
+   "cgw": 41
+  },
+  "T16_head_totals": {
+   "gate_columns": 1062960,
+   "range_cells": 534528,
+   "lkp_keys": 555280,
+   "relations": 2670800
+  },
+  "T16_entries": 2152768
+ },
+ "_M2_base_T16": {
+  "gate_columns": 1056800,
+  "range_cells": 272384,
+  "lkp_keys": 276688,
+  "relations": 2402432,
+  "log_length": 21
+ },
+ "_note": "COUNTED, NOT BUILT. Deltas are per head per token against M2 arm B by count_model.py's rules; T16 totals add 16 x delta to count_model.summary('B', T=16, o_witness=True, norm=True). Term counts omitted (provisional in #66)."
+}
