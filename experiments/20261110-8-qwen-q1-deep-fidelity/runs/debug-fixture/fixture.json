@@ -1,0 +1,32 @@
+{
+ "layer0_sha_equal_pr68": {
+  "model.language_model.layers.0.input_layernorm.weight": true,
+  "model.language_model.layers.0.linear_attn.A_log": true,
+  "model.language_model.layers.0.linear_attn.conv1d.weight": true,
+  "model.language_model.layers.0.linear_attn.dt_bias": true,
+  "model.language_model.layers.0.linear_attn.in_proj_a.weight": true,
+  "model.language_model.layers.0.linear_attn.in_proj_b.weight": true,
+  "model.language_model.layers.0.linear_attn.in_proj_qkv.weight": true,
+  "model.language_model.layers.0.linear_attn.in_proj_z.weight": true,
+  "model.language_model.layers.0.linear_attn.norm.weight": true
+ },
+ "inproj_equal_pr68": true,
+ "arm_rel_y_fixture": {
+  "C0": 0.9853430368430806,
+  "C4P": 0.015674177129206896,
+  "C4+R": 0.015506584968231731,
+  "C4+U": 0.07741627339908774,
+  "C4+G": 0.07343539799742012,
+  "C4+RU": 0.01568786227224319,
+  "XS12": 0.014763154622564556,
+  "XS14": 0.005062438045479213,
+  "XS16": 0.0023229750450432514,
+  "XS18": 0.0017848492759264746,
+  "XS20": 0.001728518995881907,
+  "XS18-K16": 0.0016933365150625119,
+  "XS18-noG": 0.0017794583311153997,
+  "XS18-noU": 0.0030987541576682105
+ },
+ "x4_norm": 78.20765131987223,
+ "seconds": 82.3
+}

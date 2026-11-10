@@ -1,0 +1,275 @@
+{
+ "C0": {
+  "cfg": {
+   "ext_stats": true
+  }
+ },
+ "C4P": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fg": 18,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "ext_stats": true
+  }
+ },
+ "C4+R": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "ext_stats": true
+  }
+ },
+ "C4+U": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "vrnd": "floor",
+   "ext_stats": true
+  }
+ },
+ "C4+G": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "Fg": 18,
+   "ext_stats": true
+  }
+ },
+ "C4+RU": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "Fo": 24,
+   "RC": 56,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "Fg": 12,
+   "ext_stats": true
+  }
+ },
+ "XS12": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 18,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 12,
+   "smin": 2,
+   "ext_stats": true
+  }
+ },
+ "XS14": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 18,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 14,
+   "smin": 4,
+   "ext_stats": true
+  }
+ },
+ "XS16": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 18,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 16,
+   "smin": 6,
+   "ext_stats": true
+  }
+ },
+ "XS18": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 18,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 18,
+   "smin": 8,
+   "ext_stats": true
+  }
+ },
+ "XS20": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 18,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 20,
+   "smin": 10,
+   "ext_stats": true
+  }
+ },
+ "XS18-K16": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 16,
+   "Fg": 18,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 18,
+   "smin": 8,
+   "ext_stats": true
+  }
+ },
+ "XS18-noG": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 12,
+   "Fx": 16,
+   "TAP": 16,
+   "Fc": 16,
+   "Fab": 14,
+   "Fz": 14,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 18,
+   "smin": 8,
+   "ext_stats": true
+  }
+ },
+ "XS18-noU": {
+  "cfg": {
+   "Fw": 16,
+   "Fy": 20,
+   "omode": "shift",
+   "RC": 46,
+   "Fq": 20,
+   "Fcg": 16,
+   "Fk": 12,
+   "Fg": 18,
+   "Fx": 12,
+   "TAP": 12,
+   "Fc": 12,
+   "Fab": 12,
+   "Fz": 12,
+   "rnd": "rhu",
+   "ornd": "rhu",
+   "vrnd": "rhu",
+   "shift_ornd": "rhu",
+   "FS": 18,
+   "smin": 8,
+   "ext_stats": true
+  }
+ }
+}
