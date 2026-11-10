@@ -1,0 +1,36 @@
+{
+ "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+ "rev": "739e3c5b89849f6c238ce1e5b70008612ae42cdd",
+ "tensors": {
+  "model.language_model.layers.17.mlp.down_proj.weight": {
+   "shard": "model-00006-of-00018.safetensors",
+   "range": "bytes=998318656-1176576575",
+   "nbytes": 178257920,
+   "shape": [
+    5120,
+    17408
+   ],
+   "sha256": "e45fbdf1a9e84b832e1775e62afcbe72c124227310dfe7cd10c72aecf6591846"
+  },
+  "model.language_model.layers.17.linear_attn.out_proj.weight": {
+   "shard": "model-00006-of-00018.safetensors",
+   "range": "bytes=935404096-998318655",
+   "nbytes": 62914560,
+   "shape": [
+    5120,
+    6144
+   ],
+   "sha256": "0ae7702fd40b413d46373247a2197485f3a5317ec79816d91525063b874d0771"
+  },
+  "model.language_model.layers.19.self_attn.o_proj.weight": {
+   "shard": "model-00006-of-00018.safetensors",
+   "range": "bytes=2844929536-2907844095",
+   "nbytes": 62914560,
+   "shape": [
+    5120,
+    6144
+   ],
+   "sha256": "699664c3b5c2ab22379e0d9b7a67a1ee54fccfa806209296ae77b002049eece9"
+  }
+ }
+}

@@ -1,0 +1,21 @@
+stock p01-ordinary-short T 13 F 12 tap 12 s 0.2
+stock p01-ordinary-short T 13 F 16 tap 12 s 0.2
+stock p02-ordinary-paragraph T 107 F 12 tap 12 s 1.6
+stock p02-ordinary-paragraph T 107 F 16 tap 12 s 1.6
+stock p03-repeat-word T 512 F 12 tap 12 s 10.9
+stock p03-repeat-word T 512 F 16 tap 12 s 7.3
+stock p04-repeat-punct T 64 F 12 tap 12 s 0.9
+stock p04-repeat-punct T 64 F 16 tap 12 s 0.9
+stock p05-code T 144 F 12 tap 12 s 1.9
+stock p05-code T 144 F 16 tap 12 s 1.9
+stock p06-digits T 465 F 12 tap 12 s 6.2
+stock p06-digits T 465 F 16 tap 12 s 6.3
+stock p07-chat-ordinary T 23 F 12 tap 12 s 0.3
+stock p07-chat-ordinary T 23 F 16 tap 12 s 0.3
+stock p08-chat-refusal T 39 F 12 tap 12 s 1.1
+stock p08-chat-refusal T 39 F 16 tap 12 s 1.0
+stock p09-multilingual T 21 F 12 tap 12 s 0.3
+stock p09-multilingual T 21 F 16 tap 12 s 0.5
+stock p10-long-mixed T 1008 F 12 tap 12 s 15.4
+stock p10-long-mixed T 1008 F 16 tap 12 s 14.7
+stock done 93.0 s
