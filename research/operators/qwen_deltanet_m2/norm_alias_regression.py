@@ -17,7 +17,9 @@ y that is not the integer floor. The review listed 22 such cases. This script:
      there: |v| < 2^31 was assumed for a value the verifier recomputes and did not check);
   E  computes the no-wrap ledger of DESIGN.md section 4.4.2: the largest integer magnitude of every
      closed identity under the admitted bounds, and for each derived value the largest bound that
-     would still keep every identity below p.
+     would still keep every identity below p;
+  F  samples the argument that the derived k and q are in class for every input;
+  G  finds, over every in-class z, the largest |cg| at gains 1, 1.41, 1.4143 and 2 (about 10 s).
 
 What this is not. No proof is built or verified here. The #66 prototype (admit_proto.cpp) works on
 the M1b statement, which has no norm stage and no recompute stage, so there is no C++ guard to
@@ -310,6 +312,22 @@ def part_f():
     return dict(vectors=n, sample_seed=67, max_abs_k=kmax, max_abs_q=qmax, k_bound=ONE, q_bound=362, as_expected=kmax <= ONE and qmax <= 362)
 
 
+# ---- G: for which gains can the cg check fire at all -------------------------------------------
+def part_g():
+    """Exhaustive over every in-class z (|z| < 2^20), with the float64 formula of head_reference.py:
+    the largest |cg| per gain. Shows the check of DESIGN.md 3.1 cannot fire at gain 1 or 1.41, and
+    can at 1.4143 and above. Float64 at the table point: a build with pinned tables must redo this
+    on its own tables."""
+    rows = []
+    for gain, want_fit in ((1.0, True), (1.41, True), (1.4143, False), (2.0, False)):
+        worst = 0
+        for z in range(-(2 ** 20 - 1), 2 ** 20):
+            c = abs(cg_from_gain(gain, z))
+            if c > worst: worst = c
+        rows.append(dict(gain_x10000=int(round(gain * 10000)), max_abs_cg=worst, below_bound=worst < CG_BOUND, as_expected=(worst < CG_BOUND) == want_fit))
+    return dict(z_values=2 ** 21 - 1, rows=rows, as_expected=all(r['as_expected'] for r in rows))
+
+
 def strip_floats(x):
     if isinstance(x, dict): return {k: strip_floats(v) for k, v in x.items() if not isinstance(v, float)}
     if isinstance(x, list): return [strip_floats(v) for v in x]
@@ -318,7 +336,7 @@ def strip_floats(x):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--json'); ap.add_argument('--check')
     a = ap.parse_args()
-    A, B, C, Dd, E, Fq = part_a(), part_b(), part_c(), part_d(), part_e(), part_f()
+    A, B, C, Dd, E, Fq, G = part_a(), part_b(), part_c(), part_d(), part_e(), part_f(), part_g()
     res = dict(
         what='design-level regression of the derived-value admission rule (DESIGN.md 3.1); no proof is built or verified',
         field_p=P, cg_bound=CG_BOUND, v_bound=V_BOUND,
@@ -330,10 +348,10 @@ def main():
             D_derived_v=dict(cases=len(Dd['rows']), as_expected=sum(r['as_expected'] for r in Dd['rows']), below_p=Dd['below_p']),
             E_no_wrap_ledger=dict(identities=len(E['identities']), all_below_p=E['all_below_p'], largest=E['largest'],
                                   largest_bound_without_wrap_log2={k: v['largest_bound_without_wrap_log2'] for k, v in E['derived_value_bounds'].items()}),
-            F_derived_k_q=Fq),
-        A=A, B=B, C=C, D=Dd, E=E, F=Fq)
+            F_derived_k_q=Fq, G_gain_vs_cg_bound=G),
+        A=A, B=B, C=C, D=Dd, E=E, F=Fq, G=G)
     ok = (len(A) == 22 and all(r['as_expected'] for r in A) and all(r['as_expected'] for r in B) and C['as_expected']
-          and all(r['as_expected'] for r in Dd['rows']) and Dd['below_p'] and E['all_below_p'] and Fq['as_expected'])
+          and all(r['as_expected'] for r in Dd['rows']) and Dd['below_p'] and E['all_below_p'] and Fq['as_expected'] and G['as_expected'])
     res['pass_'] = ok
     js = json.dumps(res, indent=1)
     if a.json: pathlib.Path(a.json).write_text(js + '\n')

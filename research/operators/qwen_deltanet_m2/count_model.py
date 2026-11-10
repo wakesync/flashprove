@@ -132,8 +132,8 @@ def norm_only(arm, D=128, F=12):
     return dict(gate_columns=c.cols, relations=c.rels, terms=c.terms, range_cells=c.rcells, lkp_keys=c.keys, terms_closed_form=norm_terms_closed_form(arm, D),
                 closed_form_matches=c.terms == norm_terms_closed_form(arm, D))
 
-# Counts at the M2 head, T = 16, that three independent derivations agree on (this model, the second
-# review's cross-check and the third review's closed forms). The term-count fix must not move them.
+# Counts at the M2 head, T = 16, as committed at 8ec7c799. The third review of #66 derived them from
+# closed forms without this model and they matched. The term-count fix must not move them.
 FROZEN_T16 = {'A': dict(gate_columns=4_377_056, range_cells=272_384, lkp_keys=0, relations=9_042_944, columns_used=4_655_584, log_length=23),
               'B': dict(gate_columns=1_056_800, range_cells=272_384, lkp_keys=276_688, relations=2_402_432, columns_used=1_613_856, log_length=21)}
 SUPERSEDED_TERMS_T16 = {'A': 21_110_960, 'B': 4_786_704}   # runs/model.json at 8ec7c799, before the lowering was specified

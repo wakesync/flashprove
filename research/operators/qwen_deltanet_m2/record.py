@@ -44,9 +44,11 @@ BINARY_INPUTS = ['blocks', 'research/operators/qwen_deltanet_lookup', f'{rel}/ad
 def where():
     """The commit a step ran at, and the sources of the binary it ran. binary_inputs_dirty: whether
     anything the binary or its fixtures are built from (blocks/, lookup.h, the two prototype sources,
-    the M1 reference) differed from that commit. Documents and receipts may differ: the run itself
-    rewrites evidence.json."""
+    the M1 reference) differed from that commit. scripts_dirty: the same for the Python scripts the
+    model, norm and ranges steps run. Documents and receipts may differ: the run itself rewrites
+    evidence.json."""
     return dict(head=git('rev-parse', 'HEAD'), binary_inputs_dirty=bool(git('status', '--porcelain', '--', *BINARY_INPUTS)),
+                scripts_dirty=bool(git('status', '--porcelain', '--', f'{rel}/count_model.py', f'{rel}/norm_alias_regression.py', f'{rel}/norm_alias_expected.json', f'{rel}/head_reference.py')),
                 cxx_sha256={str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in CXX}, cores=CORES)
 
 ev_path = here / 'evidence.json'
