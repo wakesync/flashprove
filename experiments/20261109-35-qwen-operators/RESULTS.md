@@ -8,7 +8,7 @@ Issue #35 therefore remains PARTIAL: this is research operator machinery, not a 
 
 ## Verdict and final proof measurements
 
-CPU-only, shared AMD EPYC-Rome KVM host, affinity 0-5, all proof batches through the shared heavy-job gate. Research target 10 bits. Each performance row is n=10, F=12, seeds1..10; no warmup excluded. Times are seconds, proof sizes bytes. Brackets are min/max; SD is sample SD. Verifier time includes witness-free circuit construction and sizing. No speedup comparison or model-scale extrapolation.
+CPU-only, shared AMD EPYC-Rome KVM host, affinity 0-5, all proof batches through the shared heavy-job gate. Research target 10 bits. Each performance row is n=10, F=12, seeds1..10; no warmup excluded. Times are seconds, proof sizes bytes. Brackets are min/max; SD is sample SD. Verifier time includes witness-free circuit construction and sizing. Prove time excludes circuit lowering, sizing and witness-table assembly, so it is not end-to-end prover latency. No speedup comparison or model-scale extrapolation.
 
 | Profile | Honest | Local hostile rejected (complete proofs) | Prove median [range], SD | Verify median [range], SD | Bytes median [range], SD | Columns / relations |
 |---|---|---|---|---|---|---|
