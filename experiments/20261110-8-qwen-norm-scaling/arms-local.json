@@ -1,29 +1,4 @@
 {
- "C0": {
-  "cfg": {}
- },
- "all_exact": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state",
-    "o",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
  "roundG-upstream": {
   "cfg": {
    "exact": [
@@ -52,6 +27,49 @@
    ]
   }
  },
+ "round1-o": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "round1-o-rhu": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ],
+   "ornd": "rhu"
+  }
+ },
  "roundG-norm": {
   "cfg": {
    "exact": [
@@ -72,6 +90,38 @@
  "exactG-norm": {
   "cfg": {
    "exact": [
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exact1-o": {
+  "cfg": {
+   "exact": [
+    "o"
+   ]
+  }
+ },
+ "C0": {
+  "cfg": {}
+ },
+ "all_exact": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o",
     "sigma",
     "rc",
     "w",
@@ -161,56 +211,6 @@
     "mem",
     "delta",
     "state"
-   ]
-  }
- },
- "round1-o": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
- "round1-o-rhu": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ],
-   "ornd": "rhu"
-  }
- },
- "exact1-o": {
-  "cfg": {
-   "exact": [
-    "o"
    ]
   }
  },
