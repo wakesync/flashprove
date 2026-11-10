@@ -1,0 +1,848 @@
+{
+ "affinity": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "arms": "N1, N2 (a, b), N3",
+ "budget_seconds": 900,
+ "cases": {
+  "N1": {
+   "intended_check": "ID comparison in the key stage, refuse(\"model-statement\") in verifier/src/cp_verify.cpp",
+   "reps": [
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.395,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "clipped-gap example's complete files under the exact-match example's ID",
+       "exit": 1,
+       "last_line": "NO: model-statement",
+       "reason_line": "id: these are not the files of the commitment that you named; nothing in them was checked",
+       "role": "attack",
+       "seconds": 0.304,
+       "tail": [
+        "id: these are not the files of the commitment that you named; nothing in them was checked",
+        "id: take the commitment ID from your own record of where it was published, never from these files",
+        "NO: model-statement"
+       ]
+      }
+     ],
+     "rep": 1
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "clipped-gap example's complete files under the exact-match example's ID",
+       "exit": 1,
+       "last_line": "NO: model-statement",
+       "reason_line": "id: these are not the files of the commitment that you named; nothing in them was checked",
+       "role": "attack",
+       "seconds": 0.405,
+       "tail": [
+        "id: these are not the files of the commitment that you named; nothing in them was checked",
+        "id: take the commitment ID from your own record of where it was published, never from these files",
+        "NO: model-statement"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.605,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      }
+     ],
+     "rep": 2
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.474,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "clipped-gap example's complete files under the exact-match example's ID",
+       "exit": 1,
+       "last_line": "NO: model-statement",
+       "reason_line": "id: these are not the files of the commitment that you named; nothing in them was checked",
+       "role": "attack",
+       "seconds": 0.319,
+       "tail": [
+        "id: these are not the files of the commitment that you named; nothing in them was checked",
+        "id: take the commitment ID from your own record of where it was published, never from these files",
+        "NO: model-statement"
+       ]
+      }
+     ],
+     "rep": 3
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "clipped-gap example's complete files under the exact-match example's ID",
+       "exit": 1,
+       "last_line": "NO: model-statement",
+       "reason_line": "id: these are not the files of the commitment that you named; nothing in them was checked",
+       "role": "attack",
+       "seconds": 0.296,
+       "tail": [
+        "id: these are not the files of the commitment that you named; nothing in them was checked",
+        "id: take the commitment ID from your own record of where it was published, never from these files",
+        "NO: model-statement"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.417,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      }
+     ],
+     "rep": 4
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.442,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "clipped-gap example's complete files under the exact-match example's ID",
+       "exit": 1,
+       "last_line": "NO: model-statement",
+       "reason_line": "id: these are not the files of the commitment that you named; nothing in them was checked",
+       "role": "attack",
+       "seconds": 0.299,
+       "tail": [
+        "id: these are not the files of the commitment that you named; nothing in them was checked",
+        "id: take the commitment ID from your own record of where it was published, never from these files",
+        "NO: model-statement"
+       ]
+      }
+     ],
+     "rep": 5
+    }
+   ]
+  },
+  "N2": {
+   "intended_check": "cpPolicyHeld in verifier/src/cp_verify.cpp (NO: policy, with the reason line policy: ...)",
+   "reps": [
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.434,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q",
+       "desc": "N2a: own ID, no -policy (a client that expects exact match)",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+       "role": "attack",
+       "seconds": 0.003,
+       "tail": [
+        "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy exact-match,256,256,0,16,8",
+       "desc": "N2b: own ID, -policy exact-match",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+       "role": "attack",
+       "seconds": 0.005,
+       "tail": [
+        "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+        "NO: policy"
+       ]
+      }
+     ],
+     "rep": 1
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q",
+       "desc": "N2a: own ID, no -policy (a client that expects exact match)",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+       "role": "attack",
+       "seconds": 0.005,
+       "tail": [
+        "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy exact-match,256,256,0,16,8",
+       "desc": "N2b: own ID, -policy exact-match",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+       "role": "attack",
+       "seconds": 0.004,
+       "tail": [
+        "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.453,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      }
+     ],
+     "rep": 2
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.447,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q",
+       "desc": "N2a: own ID, no -policy (a client that expects exact match)",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+       "role": "attack",
+       "seconds": 0.004,
+       "tail": [
+        "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy exact-match,256,256,0,16,8",
+       "desc": "N2b: own ID, -policy exact-match",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+       "role": "attack",
+       "seconds": 0.004,
+       "tail": [
+        "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+        "NO: policy"
+       ]
+      }
+     ],
+     "rep": 3
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q",
+       "desc": "N2a: own ID, no -policy (a client that expects exact match)",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+       "role": "attack",
+       "seconds": 0.003,
+       "tail": [
+        "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy exact-match,256,256,0,16,8",
+       "desc": "N2b: own ID, -policy exact-match",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+       "role": "attack",
+       "seconds": 0.005,
+       "tail": [
+        "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.42,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      }
+     ],
+     "rep": 4
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy clipped-gap,9244130,323343,1,16,8",
+       "desc": "own ID, own -policy",
+       "exit": 0,
+       "last_line": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+       "role": "control",
+       "seconds": 1.41,
+       "tail": [
+        "covered: r=15 e=47 T=64 C=9244130 theta=323343 cap=1 s=16 sh=8 positions=15..46 tokens=16..47 y=no next-token=no policy=clipped-gap above-clip=1 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=policy id=8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=15 e=47 T=64 tokens=16..47 y=no policy=clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8 sT=4 F=24 above-clip=1 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q",
+       "desc": "N2a: own ID, no -policy (a client that expects exact match)",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+       "role": "attack",
+       "seconds": 0.004,
+       "tail": [
+        "policy: the request covers more than the output token, the parameter file sets another policy than exact-match, and the call has no -policy",
+        "NO: policy"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof-clipped-gap/config examples/accepted-proof-clipped-gap/ivk examples/accepted-proof-clipped-gap/example.req examples/accepted-proof-clipped-gap/example.y examples/accepted-proof-clipped-gap/example.proof -id 8df714349b76202d6f302bb80b33d6d0798bd81d987b9e387038b7fd24c55ae6 -j 1 -q -policy exact-match,256,256,0,16,8",
+       "desc": "N2b: own ID, -policy exact-match",
+       "exit": 1,
+       "last_line": "NO: policy",
+       "reason_line": "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+       "role": "attack",
+       "seconds": 0.005,
+       "tail": [
+        "policy: the option -policy names another kind of policy or another C, theta, cap, s or sh than the parameter file sets",
+        "NO: policy"
+       ]
+      }
+     ],
+     "rep": 5
+    }
+   ]
+  },
+  "N3": {
+   "intended_check": "integrations/check_proof.py Request.__init__ range comparison",
+   "reps": [
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 60:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 60:64 (the proof's own range)",
+       "exit": 0,
+       "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)",
+       "role": "control",
+       "seconds": 1.865,
+       "tail": [
+        "cp_verify: stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "cp_verify: stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "cp_verify: stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "cp_verify: commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "cp_verify: proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "cp_verify: (38 more lines are not shown: the verifier's own account of what its figures rest on, with its caveats, and its line for programs; to see all, pass --show-all)",
+        "result: outcome=verified commitment_id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 range=60:64 checked_tokens=3 end_token=not_checked claim=exact-match policy=exact next_token=199 C=256 theta=256 cap=0 s=16 limits=exact request_tokens=64 leaf=0 commitment_assumed_rounds=49 record=1 work=32 least_round=128.00 least_round_without_work=96.23 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 59:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 59:64 (client expects one more checked token)",
+       "exit": 1,
+       "last_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "reason_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "role": "attack",
+       "seconds": 0.413,
+       "tail": [
+        "verifier: <repo>/bin/cp_verify",
+        "result: outcome=rejected",
+        "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof/config examples/accepted-proof/ivk examples/accepted-proof/example.req examples/accepted-proof/example.y examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q",
+       "desc": "bin/cp_verify alone on the same files: the proof part accepts",
+       "exit": 0,
+       "last_line": "YES",
+       "role": "also",
+       "seconds": 1.573,
+       "tail": [
+        "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "YES"
+       ]
+      }
+     ],
+     "rep": 1
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 59:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 59:64 (client expects one more checked token)",
+       "exit": 1,
+       "last_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "reason_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "role": "attack",
+       "seconds": 0.408,
+       "tail": [
+        "verifier: <repo>/bin/cp_verify",
+        "result: outcome=rejected",
+        "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 60:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 60:64 (the proof's own range)",
+       "exit": 0,
+       "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)",
+       "role": "control",
+       "seconds": 1.849,
+       "tail": [
+        "cp_verify: stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "cp_verify: stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "cp_verify: stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "cp_verify: commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "cp_verify: proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "cp_verify: (38 more lines are not shown: the verifier's own account of what its figures rest on, with its caveats, and its line for programs; to see all, pass --show-all)",
+        "result: outcome=verified commitment_id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 range=60:64 checked_tokens=3 end_token=not_checked claim=exact-match policy=exact next_token=199 C=256 theta=256 cap=0 s=16 limits=exact request_tokens=64 leaf=0 commitment_assumed_rounds=49 record=1 work=32 least_round=128.00 least_round_without_work=96.23 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof/config examples/accepted-proof/ivk examples/accepted-proof/example.req examples/accepted-proof/example.y examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q",
+       "desc": "bin/cp_verify alone on the same files: the proof part accepts",
+       "exit": 0,
+       "last_line": "YES",
+       "role": "also",
+       "seconds": 1.466,
+       "tail": [
+        "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "YES"
+       ]
+      }
+     ],
+     "rep": 2
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 60:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 60:64 (the proof's own range)",
+       "exit": 0,
+       "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)",
+       "role": "control",
+       "seconds": 1.803,
+       "tail": [
+        "cp_verify: stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "cp_verify: stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "cp_verify: stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "cp_verify: commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "cp_verify: proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "cp_verify: (38 more lines are not shown: the verifier's own account of what its figures rest on, with its caveats, and its line for programs; to see all, pass --show-all)",
+        "result: outcome=verified commitment_id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 range=60:64 checked_tokens=3 end_token=not_checked claim=exact-match policy=exact next_token=199 C=256 theta=256 cap=0 s=16 limits=exact request_tokens=64 leaf=0 commitment_assumed_rounds=49 record=1 work=32 least_round=128.00 least_round_without_work=96.23 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 59:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 59:64 (client expects one more checked token)",
+       "exit": 1,
+       "last_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "reason_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "role": "attack",
+       "seconds": 0.413,
+       "tail": [
+        "verifier: <repo>/bin/cp_verify",
+        "result: outcome=rejected",
+        "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof/config examples/accepted-proof/ivk examples/accepted-proof/example.req examples/accepted-proof/example.y examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q",
+       "desc": "bin/cp_verify alone on the same files: the proof part accepts",
+       "exit": 0,
+       "last_line": "YES",
+       "role": "also",
+       "seconds": 1.381,
+       "tail": [
+        "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "YES"
+       ]
+      }
+     ],
+     "rep": 3
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 59:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 59:64 (client expects one more checked token)",
+       "exit": 1,
+       "last_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "reason_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "role": "attack",
+       "seconds": 0.407,
+       "tail": [
+        "verifier: <repo>/bin/cp_verify",
+        "result: outcome=rejected",
+        "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 60:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 60:64 (the proof's own range)",
+       "exit": 0,
+       "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)",
+       "role": "control",
+       "seconds": 1.814,
+       "tail": [
+        "cp_verify: stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "cp_verify: stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "cp_verify: stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "cp_verify: commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "cp_verify: proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "cp_verify: (38 more lines are not shown: the verifier's own account of what its figures rest on, with its caveats, and its line for programs; to see all, pass --show-all)",
+        "result: outcome=verified commitment_id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 range=60:64 checked_tokens=3 end_token=not_checked claim=exact-match policy=exact next_token=199 C=256 theta=256 cap=0 s=16 limits=exact request_tokens=64 leaf=0 commitment_assumed_rounds=49 record=1 work=32 least_round=128.00 least_round_without_work=96.23 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof/config examples/accepted-proof/ivk examples/accepted-proof/example.req examples/accepted-proof/example.y examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q",
+       "desc": "bin/cp_verify alone on the same files: the proof part accepts",
+       "exit": 0,
+       "last_line": "YES",
+       "role": "also",
+       "seconds": 1.411,
+       "tail": [
+        "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "YES"
+       ]
+      }
+     ],
+     "rep": 4
+    },
+    {
+     "arms": [
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 60:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 60:64 (the proof's own range)",
+       "exit": 0,
+       "last_line": "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)",
+       "role": "control",
+       "seconds": 1.857,
+       "tail": [
+        "cp_verify: stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "cp_verify: stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "cp_verify: stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "cp_verify: commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "cp_verify: proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "cp_verify: (38 more lines are not shown: the verifier's own account of what its figures rest on, with its caveats, and its line for programs; to see all, pass --show-all)",
+        "result: outcome=verified commitment_id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 range=60:64 checked_tokens=3 end_token=not_checked claim=exact-match policy=exact next_token=199 C=256 theta=256 cap=0 s=16 limits=exact request_tokens=64 leaf=0 commitment_assumed_rounds=49 record=1 work=32 least_round=128.00 least_round_without_work=96.23 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "check_proof: verified: exact match: every checked token (tokens 61 to 63 of the request) is the model's greedy choice; the next token, 199, is the model's greedy choice; the end of the reply was not checked; commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given; proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits (cp_verify's own figures, not a security level; --show-all has its caveats)"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "python3 integrations/check_proof.py examples/accepted-proof/example.proof examples/accepted-proof/example.req --public-key-dir examples/accepted-proof/ivk --parameter-file examples/accepted-proof/config/policy.txt --scales-file examples/accepted-proof/config/KL.bin --commitment-id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 --range 59:64 --next-token 199 --end-token none --threads 1",
+       "desc": "check_proof.py --range 59:64 (client expects one more checked token)",
+       "exit": 1,
+       "last_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "reason_line": "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64",
+       "role": "attack",
+       "seconds": 0.417,
+       "tail": [
+        "verifier: <repo>/bin/cp_verify",
+        "result: outcome=rejected",
+        "check_proof: rejected: the request file's checked range is 60:64, but you expect 59:64"
+       ]
+      },
+      {
+       "as_expected": true,
+       "cmd": "bin/cp_verify examples/accepted-proof/config examples/accepted-proof/ivk examples/accepted-proof/example.req examples/accepted-proof/example.y examples/accepted-proof/example.proof -id 79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 -j 1 -q",
+       "desc": "bin/cp_verify alone on the same files: the proof part accepts",
+       "exit": 0,
+       "last_line": "YES",
+       "role": "also",
+       "seconds": 1.613,
+       "tail": [
+        "covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (places in the request, counted from 0; y=yes: the answer is about y too; it is about nothing else; above-clip: so many of the tokens named by tokens= may cost more than C, and such a token may be any token. It is no limit on the tokens that may be any token: one that costs C or less may be any token too where the committed model's logits lie close together, and no verifier sees that. All costs, each counted as at most C, add up to at most theta times the number of these tokens)",
+        "stage key: work: 96.23 + 32 (one round's error without its work, in bits, + its bits of work; key: CS (Omega, stage #))",
+        "stage leaf: work: 96.50 + 32 (one round's error without its work, in bits, + its bits of work; leaf: CS (the two folded rows, stage #))",
+        "stage request: work: 100.11 + 28 (one round's error without its work, in bits, + its bits of work; request: CS (Omega, stage #))",
+        "commitment: 49 closeness rounds of the one-time files rest on another source than the bound within a third of the distance; the table has a record: the binding of the weights rests on the theorem on codes (ePrint 2025/2055, Theorem 4.6), taken as given",
+        "proof of work: up to 32 bits counted in 38 rounds; with it the least round has 128.00 bits, without it 96.23 bits",
+        "result-v1 status=0 claim=exact-match id=79a5a2bc7a469b40df73dedf40abeb740671e8ae8077738bd3743897aeb22183 bits=128 work=32 work-rounds=38 least-round=128.00 least-round-without-work=96.23 commitment-assumed-rounds=49 record=1 r=60 e=64 T=64 tokens=61..63 y=yes policy=exact-match C=256 theta=256 cap=0 s=16 sh=8 sT=4 F=24 above-clip=0 leaf=0 stages=key,leaf,request dw=8 build=ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66",
+        "YES"
+       ]
+      }
+     ],
+     "rep": 5
+    }
+   ]
+  }
+ },
+ "dry_run": false,
+ "elapsed_seconds": 34.9,
+ "experiment": "20261110-6-coverage-inventory",
+ "finished_utc": "2026-11-10T23:25:29Z",
+ "inputs_sha256": {
+  "bin/cp_verify": "98931b82db93ee6eb2545c47f4e28fc27bf49e171967a67b1cdc4319fd02a4d0",
+  "examples/accepted-proof-clipped-gap/config": "dir:86152f939d21a69efd8e9884b06590ffd4d932147658abe26a8edecc1140d4ae",
+  "examples/accepted-proof-clipped-gap/example.proof": "368bab49989777a0aebbc9853805ebec7c5b7ef9a8af777439284f211d27530c",
+  "examples/accepted-proof-clipped-gap/example.req": "f6d35d5c30a7c5cbe1e328884e42310cba5e9065edf9974a7c9fd806ab3a6c16",
+  "examples/accepted-proof-clipped-gap/example.y": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "examples/accepted-proof-clipped-gap/ivk": "dir:2d5c14aec8c703af9bd674a330d2e7114b50e1c4025f8991db8bf284a95c30de",
+  "examples/accepted-proof/config": "dir:3d403c9d30adb428b599fed0aacfb000a532734ed3675158fe108313791117a3",
+  "examples/accepted-proof/example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+  "examples/accepted-proof/example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+  "examples/accepted-proof/example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+  "examples/accepted-proof/ivk": "dir:0c7ffbb2b7a7228f02cf97bc9879254c6a008ab5a89a0c9a4001796e9081efe0",
+  "integrations/check_proof.py": "a38cc98d5bb59e53df96af30406027cca670a2ee72bc7688852e31fd93ca6350"
+ },
+ "note_start": "start = the moment fp-heavy.sh granted the slot (this process starts inside the gate)",
+ "order": "odd rep: control then attacks; even rep: attacks then control",
+ "partial": false,
+ "python": "3.12.3",
+ "reps": 5,
+ "started_utc": "2026-11-10T23:24:54Z",
+ "summary": {
+  "N1": {
+   "also": 0,
+   "also_as_expected": 0,
+   "attacks": 5,
+   "attacks_accepted": 0,
+   "attacks_rejected_for_intended_check": 5,
+   "controls": 5,
+   "controls_accepted": 5,
+   "pass": true,
+   "reps_done": 5,
+   "seconds_min_median_max": [
+    0.296,
+    1.395,
+    1.605
+   ]
+  },
+  "N2": {
+   "also": 0,
+   "also_as_expected": 0,
+   "attacks": 10,
+   "attacks_accepted": 0,
+   "attacks_rejected_for_intended_check": 10,
+   "controls": 5,
+   "controls_accepted": 5,
+   "pass": true,
+   "reps_done": 5,
+   "seconds_min_median_max": [
+    0.003,
+    0.005,
+    1.453
+   ]
+  },
+  "N3": {
+   "also": 5,
+   "also_as_expected": 5,
+   "attacks": 5,
+   "attacks_accepted": 0,
+   "attacks_rejected_for_intended_check": 5,
+   "controls": 5,
+   "controls_accepted": 5,
+   "pass": true,
+   "reps_done": 5,
+   "seconds_min_median_max": [
+    0.407,
+    1.466,
+    1.865
+   ]
+  }
+ }
+}

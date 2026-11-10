@@ -1,0 +1,24 @@
+{
+ "M1_symbol_changed": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M2_file_moved": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M3_gap_dropped": {
+  "expected": ">0",
+  "faults": 1,
+  "row": "OP-R5"
+ },
+ "M4_unknown_kind": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "ok": true,
+ "real": {
+  "expected": "0",
+  "faults": 0
+ }
+}
