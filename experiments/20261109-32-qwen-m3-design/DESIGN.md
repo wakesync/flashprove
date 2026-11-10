@@ -188,8 +188,8 @@ Tables M3 needs: silu, sigmoid, softplus, and exp(-x) on [0, 8) (requested from 
   committed weight; a = exp_neg[g]. **beta** = sigmoid[br].
 - **The decay table needs a finer step than table format v1 has.** On real weights the median decay
   is 0.998 (PR #68, draft), so the exponent g is about 0.002. Format v1 has an input step of 1/256,
-  about 0.004: more than half of the real exponents would fall in the first row and read as
-  "no decay". A table keyed on g itself at 2^-12 over [0, 1), with the coarse table beyond, costs
+  about 0.004: at least half of the real exponents would fall in the first row and read as
+  "no decay" (inferred from the reported median, not measured per head). A table keyed on g itself at 2^-12 over [0, 1), with the coarse table beyond, costs
   one more lookup per head per token (1 in about 520). This is a request to #35, and a fidelity
   question for #8; the counts here include one exp lookup, not two.
 
@@ -442,7 +442,8 @@ The first is the one this design can reach without the fidelity question being s
    at 77% of its bound. The other 47 DeltaNet layers, including every layer that abliteration
    changes, are unmeasured.
 5b. **Table domain.** Format v1 rejects inputs outside [-8, 8). Real dt_bias reaches 19.3 (PR #68),
-   so the softplus input leaves that domain on real weights. Section 8.2.
+   so the softplus input is expected to leave that domain on real weights (inferred from the bias
+   range, not measured). Section 8.2.
 6. **State semantics under #34.** The cheap strategy changes the integer model.
 7. **No Lean coverage.** Upstream's soundness theorem is about the Maverick-shaped model. A Qwen
    proof would rest on unverified C++ and CUDA plus this design's arguments.
