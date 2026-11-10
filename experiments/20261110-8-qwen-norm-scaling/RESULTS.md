@@ -19,7 +19,7 @@ Read this first:
 
 **The baseline reproduces exactly**, on the second attempt. The first attempt failed because of my own thread setting, not because of PR #68: a separate test shows the float64 in_proj outputs hash differently under 1 or 3 BLAS threads than under 6 or unset (8 of 10 prompts, `runs/blas-threads.json`). So PR #68's float fields are bit-reproducible only at its BLAS thread count, which its README does not pin. Its integer fields did not depend on it in either attempt. The stop rule fired after attempt 1 and nothing else ran until attempt 2 matched; the rule for attempt 2 was written down first (A-1).
 
-Engine checks on the final code (`runs/engine-check.json`): in the M2 configuration the new engine is bit-identical to PR #68's `IntHead` on all 2,396 tokens x 48 heads (S, o, y); with every rounding off it matches the float64 reference to 5.4e-15 (rel_y) and 5.7e-15 (rel_S). Its C0 arm against PR #68's committed rows: rel_y differs by at most 2.6e-14 relative, integer maxima equal (`runs/cmp-ckpt.json`).
+Engine checks on the final code (`runs/engine-check.json`): in the M2 configuration the new engine is bit-identical to PR #68's `IntHead` on all 2,396 tokens x 48 heads (S, o, y); with every rounding off it matches the float64 reference to 5.0e-15 (rel_y) and 5.8e-15 (rel_S), the largest over the 10 prompts and 48 heads (`engine_facts.py`). Its C0 arm against PR #68's committed rows: rel_y differs by at most 2.6e-14 relative, integer maxima equal (`runs/cmp-ckpt.json`).
 
 ## 2 Where the error comes from (localisation, F = 12, n = 480 pairs per arm, all 45 arms ran)
 
