@@ -79,7 +79,7 @@ Under other settings a rerun may not be bit-identical:
 - Integer fields (range maxima and exact-limb minima) are not guaranteed to match under every setting either. The integer inputs are rounded from float matrix-product outputs, so a last-bit difference can in principle flip a rounding. This PR did not test that.
 - For a bit-identical rerun, use the original settings above.
 
-A separate lane is measuring this sensitivity and will report it in its own PR.
+The sensitivity to thread settings is not measured in this experiment.
 
 The reviewers' exact reruns of all 6,720 rows (RESULTS section 6, A-8) are true for the settings they used; they are not a guarantee for every thread setting.
 
