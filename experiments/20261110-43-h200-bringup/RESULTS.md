@@ -1,10 +1,12 @@
 # RESULTS: 20261110-43-h200-bringup, phase 1
 
-**Verdict for phase 1: package ready, run blocked on decisions. The PREREG's thresholds are for phase 2 and are not evaluated here: no H200 run happened.**
+**Verdict for phase 1: untested draft package, run blocked on decisions. The PREREG's thresholds are for phase 2 and are not evaluated here: no H200 run happened.** The runner and server control flow is tested on CPU with mocks only; the `prover` and `final` image stages are unbuilt; nothing has run on a GPU.
 
-Phase 1 made only read-only calls to the platform (list, get, metrics, hosts, limits, a config validation and an update *plan*, which the API documents as read-only and which deploys nothing). No instance, release, model, secret, volume or SSH key was created or changed.
+Phase 1 made only read-only calls to the platform (list, get, metrics, hosts, limits, a config validation and an update *plan*, which the API documents as read-only and which deploys nothing). No instance, release, model, secret, volume or SSH key was created or changed. The fix round after the review made no platform calls at all.
 
 ## What was measured locally (CPU host, no GPU)
+
+These are local receipts, not ledger results: no rows are added to `research/results.yaml`, and there is no H200 row.
 
 | check | result | receipt |
 |---|---|---|
@@ -13,24 +15,36 @@ Phase 1 made only read-only calls to the platform (list, get, metrics, hosts, li
 | `cp_verify` built in the image, sha256 | `7f9efc1e...04394`, byte-identical to the H100 rentals' and the independent CPU builds' (`research/gpu/logs/binaries.sha256`) | `runs/image-env.txt` |
 | pinned source in the image | `9e2bdd8f...`, the commit of the H100 receipts | `runs/image-env.txt` |
 | `cc_probe.cu` compiles with the image's nvcc for sm_90a | exit 0; on this GPU-less host it stops at its first call ("driver version is insufficient"), as expected without a driver | `runs/cc_probe-compile.txt` |
-| `serve.py` on CPU | 7 of 7 checks pass, incl. that nothing under `isk/` is listed or in the tarball, unknown paths 404, POST refused | `runs/serve_test.txt` |
-| `run_job.sh` | `bash -n` exit 0; shellcheck exit 0 (one SC2094 info suppressed with a reason) | `runs/shellcheck.txt` |
+| `serve.py` on CPU, first version | 7 of 7 checks of the first test pass | `runs/serve_test.txt` |
+| `run_job.sh`, first version | `bash -n` exit 0; shellcheck exit 0 | `runs/shellcheck.txt` |
+| after review: `serve_test.py` (17 checks) | fixed server 17 of 17; the reviewed server 12 of 16 (the 17th check needs the archive cap and is not reached) | `runs/review-fix-serve_test-{after,before}.txt` |
+| after review: `run_job_test.py` (47 checks, mocked GPU programs) | fixed runner 47 of 47; the reviewed runner 13 of 47 | `runs/review-fix-run_job_test-{after,before}.txt` |
+| after review: shellcheck of the fixed `run_job.sh` | exit 0, no suppressions | `runs/review-fix-shellcheck.txt` |
 
-Not built: the `prover` and `final` stages (the default prover build, about half an hour of compiling) on a host shared with other lanes. They are validated by review only. `cc_probe`, `compiler_sample` and the job have not run on any GPU.
+Not built: the `prover` and `final` stages (the default prover build, about half an hour of compiling) on a host shared with other lanes. `cc_probe`, `compiler_sample` and the job have not run on any GPU.
 
 ## What was found (from docs and read-only state; details in research/gpu/tinfoil-h200/README.md)
 
-1. One GPU host, one GPU, held by one live instance at 94 % GPU memory (platform metrics, flat for 7 days). Single-GPU blue/green updates need a second free GPU on the host (`HOST_GPU_BUSY`), so no second GPU instance can boot beside it. A read-only update plan for the live instance reports `blue_green`, `downtime_required: false`, which describes the strategy, not whether a GPU is free.
-2. Source reading: the default `cp_commit` and `cp_prove` refuse a GPU with more than 2 GiB in use, and `cp_commit` needs about 27 GiB free beside its buffer. The small example does not fit in the 6 to 8 GB the live instance leaves.
-3. Source reading plus NVIDIA's release notes: both programs call `cudaHostRegister` and stop if it fails; NVIDIA lists it as not allowed in CC mode. The live instance runs CC-On. The PREREG's prediction (the unmodified prover stops under CC-On) stands untested.
-4. Results out: no SSH in production; the package serves results read-only through the attested shim.
+1. One GPU host surfaced to the org; the live instance on it is assigned one GPU. **The host's total and free GPU count is not established**: the hosts listing's `available_gpu_values: [1]` is a permitted instance shape (host capabilities intersected with org entitlement), not a count of cards. If there is no second free GPU, single-GPU blue/green updates are refused (`HOST_GPU_BUSY`) and no second GPU instance can boot beside the live one; that is an assumption to be confirmed with the provider, not a finding. A read-only update plan for the live instance reports `blue_green`, `downtime_required: false`, which describes the strategy, not whether a GPU is free.
+2. GPU memory of the live instance, platform metrics (integer percent of a reported total of 140, unit not stated): the 24-hour response has 30 of 30 buckets at 94 %. The 7-day response has 30 buckets: 20 empty (total and utilisation 0), then 87 %, 93 % and 8 at 94 %, about 2.3 days of data. Nominally about 8.4 of the reported units free at 94 %; a derived figure, not a measured free amount.
+3. Source reading: the default `cp_commit` and `cp_prove` refuse a GPU with more than 2 GiB in use, and `cp_commit` needs at least about 27 GiB free beside its buffer (a lower bound from the sources). The small example does not fit in what the live instance leaves.
+4. Source reading plus NVIDIA's release notes: both programs call `cudaHostRegister` and stop if it fails; NVIDIA lists it as not allowed in CC mode. The live instance runs CC-On. The PREREG's prediction (the unmodified prover stops under CC-On) stands untested. The CLI flag wording for a CC-off benchmark mode and its entitlement, recorded in phase 1, are unverified.
+5. Results out: no SSH in production; the package serves results read-only through the attested shim, and keeps serving them after a failed job.
+
+## Changes after review
+
+The independent review (PR #69, comment 6757587635) requested changes; all of them were made in new commits on top of the reviewed head:
+- runner: a failed, timed-out or signalled job no longer ends the results server; the job is finalised (marker by rename, last stage line, then SHA256SUMS by rename) and served on every path; runs are classed before their work directory is removed; per-step timeouts, `steps.tsv`, cgroup `memory.peak` at finalisation;
+- server: one no-symlink, inside-the-directory, `O_NOFOLLOW` rule on every route; `/status` reads only the tail; the archive is streamed and capped;
+- docs: host capacity rewritten as not established; metrics stated as above; runbook window sheet with outage budget, cut-off, deadlines, escalation roles, consumer notice, data-loss and spend gates, restore failure path, restore before off-box verification, the previous-latest tag, the credential kept out of argv; B marked not runnable as packaged; the 524288 MB shape for a full-size run; public image presented as a choice; the CC-off flag marked unverified; units in MiB; apt packages stated as not reproducible; `pipefail` in the prover and final stages.
 
 ## Deviations from the PREREG
 
-None for phase 1 (the PREREG governs phase 2). One choice recorded now for phase 2: `FP_ONBOX_BUILD=0` (prebuilt programs, no quickstart) would be a deviation from the PREREG's cold-run definition and must be written up as one if used.
+None for phase 1 (the PREREG governs phase 2). One choice recorded now for phase 2: `FP_ONBOX_BUILD=0` (prebuilt programs, no quickstart) would be a deviation from the PREREG's cold-run definition and must be written up as one if used. The runner now has explicit timeouts (`FP_JOB_TIMEOUT`, per step); see the PREREG's amendment.
 
 ## Open risks
 
-- CC-On refusal of `cudaHostRegister` (item 3) could make phase 2 a negative result on the unmodified prover.
-- The prover stages of the image are unbuilt; a build failure would be found only in phase 2.
-- The live instance's cold boot time on this host is not measured; the downtime estimate (15 to 60 min for restore) rests on its healthcheck limits and earlier held-candidate boots.
+- CC-On refusal of `cudaHostRegister` (item 4) could make phase 2 a negative result on the unmodified prover. The package now keeps and serves that negative result.
+- The prover stages of the image are unbuilt; a build failure would be found only in phase 2. Apt packages are not pinned, so a rebuild may differ.
+- The host's GPU count is not established; whether phase 2 needs downtime at all depends on it.
+- The live instance's stop and cold boot times on this host are not measured; the outage total in RUNBOOK.md has four unmeasured parts.

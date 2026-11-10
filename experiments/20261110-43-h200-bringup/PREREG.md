@@ -40,3 +40,10 @@ Stop and publish what exists if: the prover enclave is not serving its results e
 
 ## Amendments
 (empty at registration)
+
+### Amendment 1 (2026-11-10, after the independent review of PR #69, before any H200 code has run)
+No hypothesis, metric, threshold, run count or comparison rule changes. Implementation of rules already registered above:
+- The kill criterion's limits become runner timeouts: the whole job under `FP_JOB_TIMEOUT` (set from the approved window so that the job ends before the restore cut-off, RUNBOOK.md "Window sheet"), each step under its own timeout. A run stopped by a timeout counts as not `YES`; a job stopped by `FP_JOB_TIMEOUT` is finalised as `FAILED` and its results are published like any other negative result.
+- "Restore starts when the approved downtime expires" is replaced by a restore cut-off inside the window (window end minus the restore estimate), so that the total outage stays within the approval.
+- The cgroup `memory.peak` metric is read at finalisation (`cgroup-final.txt`); per-step exit status, duration and timeout are in `steps.tsv`.
+- The host's GPU count is not established (README.md); whether the window needs the live service stopped at all is decided before phase 2, not assumed.

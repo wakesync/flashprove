@@ -1,5 +1,13 @@
-# FlashProve prover image for one H200 in a Tinfoil enclave. Phase 1: written and partly built
-# (stages `toolkit` and `verifier`, see README.md); the full image has NOT been built or published.
+# FlashProve prover image for one H200 in a Tinfoil enclave. Untested draft: partly built (stages
+# `toolkit`, `source` and `verifier`, see README.md); the `prover` and `final` stages have NOT been
+# built, and nothing has been published.
+#
+# NOT REPRODUCIBLE YET: the Ubuntu apt packages below are neither version-pinned nor taken from a
+# snapshot, so a later rebuild can install different versions. The base image, the CUDA wheels, the
+# driver stub and the source commit are pinned. What apt installed is recorded in /opt/env/dpkg.txt
+# (phase 1's copy: experiments/20261110-43-h200-bringup/runs/image-dpkg.txt). Pinning them (for
+# example to snapshot.ubuntu.com at a fixed date) is open work; it changes the toolkit stage and so
+# needs a rebuild and new receipts.
 #
 # Build context: this directory (research/gpu/tinfoil-h200/).
 #   docker build -t fp-h200-prover .                     # whole image, about half an hour of compiling
@@ -14,7 +22,7 @@
 FROM ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852 AS toolkit
 ARG DEBIAN_FRONTEND=noninteractive
 # gcc/g++ 13 (Ubuntu 24.04's default, 13.3), python3, binutils, flock (util-linux), GNU time, git.
-# OS package versions are not pinned; the image records them in /opt/env/dpkg.txt (a known gap).
+# OS package versions are not pinned (see the header: not reproducible yet); recorded in /opt/env/dpkg.txt.
 RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates curl git build-essential gcc-13 g++-13 binutils python3 python3-pip \
       util-linux time bc xz-utils \
@@ -63,6 +71,11 @@ RUN cd /opt/flashprove && verifier/build.sh && sha256sum bin/cp_verify | tee /op
 
 # ---- stage prover: the default (serving) build, cp_commit + cp_prove + copy of cp_verify ----------
 FROM verifier AS prover
+# From here on every RUN is bash with pipefail, so a failing build is not hidden by `| tail`.
+# (The toolkit/source/verifier stages are left unchanged so that phase 1's build receipts stay
+# valid; their one pipeline, nvcc --version | tail | tee, is checked by content here.)
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN grep -q 'V13.2.86' /opt/env/nvcc.txt && grep -q '^gcc' /opt/env/gcc.txt
 # No GPU here: CUDA_VISIBLE_DEVICES= keeps the compiler sample off any GPU (version check only).
 RUN cd /opt/flashprove/prover && CUDA_VISIBLE_DEVICES= ./build.sh 2>&1 | tail -n 20 \
     && test -x build/hc/cp_commit && test -x build/hc/cp_prove && test -x build/hc/cp_verify \
