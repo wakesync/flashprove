@@ -20,6 +20,8 @@ K12 = lambda b: 12 * math.ceil(b / 12)
 def counted_widths(arm):
     """Tight widths b (bits) that count_cost.py assumed for each exact quantity of this arm, by its own formulas."""
     base = arm.split("-r2")[0].split("+")[0]
+    if base.startswith("round") or base.startswith("exact"):   # localisation rows: M2 norm at Fo = 12 (count_model.py widths)
+        return dict(sigma=24, e1=24, e2=24, Rc=36, rr=24, gap=24)
     c4 = base.startswith("C4"); x = base.startswith("X")
     Uo = 28 if c4 else 18
     sig_b = math.ceil((2 * Uo + 7) / 2) + 1
