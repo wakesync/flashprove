@@ -235,7 +235,8 @@ def float_ref(cache, ckpt, pid, scratch):
                                           RH.run_float(xq, xk, xv, ar, br, zz, Wc, A, dtb, gain, emulate_bf16=True)):
         of.append(o1); yf.append(y1); yb.append(y2)
     out = (np.stack(of), np.stack(yf), S1.astype(np.float64), np.stack(yb), S2.astype(np.float64))
-    np.savez(f, of=out[0], yf=out[1], Sf=out[2], yb=out[3], Sb=out[4])
+    tmp = f.with_name(f"tmp-{os.getpid()}-{f.name}")           # atomic: parallel workers may compute the same reference
+    np.savez(tmp, of=out[0], yf=out[1], Sf=out[2], yb=out[3], Sb=out[4]); os.replace(tmp, f)
     return out
 
 def rel(a, b):
