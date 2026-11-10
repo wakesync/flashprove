@@ -91,3 +91,15 @@ No published H200 measurement of this prover is known. B200 is excluded: binarie
   after TB1 was pulled (16:28 UTC), the H100 after CA1 was pulled (17:07 UTC). The hard-stop timer moved four times
   (16:48, 16:53, 16:58, 17:06, finally 17:13 UTC), each time within the 6 GPU-hour cap and logged before the move. The pass
   bar, the metric and the cost rule (one H100 GPU = half of the 2-GPU box price) are unchanged.
+- 2026-11-10 UTC (text only; no new run, no number changed; added while finishing the PR, in answer to must-fix 5 of
+  the review at `58f725b9`). Rental 1 kill-criterion deviation, as run. The registration says "teardown timers armed
+  before create (H100 2.5 h, H200 3.5 h; sum 6.0 h)". That is not what stopped rental 1. The review of this PR
+  (https://github.com/wakesync/flashprove/pull/44#issuecomment-6627382524; these are the reviewer's descriptive
+  numbers, not values from a committed file of this PR) found that the per-box deadline timers fired at 05:31 UTC and
+  06:00 UTC, about 4.1 h and 4.6 h after the 01:22 UTC create and after both boxes were already gone. They were
+  therefore not anchored at create as registered, and the only stop that acted was the all-instances backstop at
+  04:45 UTC. Both boxes ran about 3.38 h each: about 6.77 instance-hours against the 6-hour cap, an overrun of about
+  0.77 h. Dollars stayed inside the $100 cap. The same review notes that the launch plan used 2.75 h / 3.25 h where
+  this file registers 2.5 h / 3.5 h; no committed file records the values set at launch, so which pair was armed
+  cannot be shown here. The 15:02 amendment above declares the lost data but does not describe the timers; this entry
+  does. Metric, pass bar, arms and every reported number are unchanged.

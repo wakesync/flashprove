@@ -39,12 +39,17 @@ These numbers were recorded in the README section 5 run log at the time and neve
 - CA1 (H100, 24/6, unbound, 30.7-core cgroup): 146.67 tok/s, intervals 168.18 / 167.53 / 167.24 / 167.27 s. +34% over
   upstream 109.09: off-baseline (unbound, more CPU than upstream's 24 bound CPUs).
 - TA1 (H200, 24/6, unbound, 23.0-core cgroup): 142.97 tok/s, intervals 171.13 / 172.28 / 172.16 / 172.01 s.
+- Same configuration (24/6) on the two boxes: TA1 / CA1 = 142.97 / 146.67 = 0.975, from the two run-log rates above
+  (n = 1 session each, 4 intervals each, unbound, different CPU quotas). Stated as recorded at the time. No claim rests
+  on it.
 - CB2 (H100, 24/12): `p258 end 1 cuda-call` at start-up, 0 of 120 proofs.
 - CA3, CB4, CX5, TA2, TB, TC ran or were queued after 02:33 UTC. **Their outputs were never copied off the boxes before
   the 04:45 UTC backstop destroyed them. They are lost and are not reconstructed here.**
-- About 6.77 instance-hours (2 boxes x ~3.38 h), above the 6-hour cap. Dollars were inside the cap. The per-box deadline
-  timers were not anchored at create as the PREREG said, and only the all-instances backstop at 04:45 UTC enforced
-  anything (amendment 2026-11-04 15:02).
+- About 6.77 instance-hours (2 boxes x ~3.38 h), above the 6-hour cap. Dollars were inside the $100 cap: about $23 at
+  the `offers.json` prices (~3.38 h x $1.219/h plus ~3.38 h x $5.540/h; calculated from the quoted prices, not an
+  invoice; no spend receipt for rental 1 is committed). The per-box deadline timers were not anchored at create as the
+  PREREG said, and only the all-instances backstop at 04:45 UTC enforced anything (PREREG amendment 2026-11-10, which
+  describes the timers as run; the lost data is declared in amendment 2026-11-04 15:02).
 
 ### Rental 2 (2026-11-04 15:00:56 to 17:07:27 UTC). Every session bound with taskset to 23 CPUs of the GPU's NUMA node
 
