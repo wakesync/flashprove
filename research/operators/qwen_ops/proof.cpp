@@ -67,6 +67,7 @@ struct Circuit {
     return out;
   }
   std::vector<Wire> selectors(Wire key) {
+    need(!witness || (key.v>=0 && key.v<4096),"lookup domain");
     std::vector<Wire> sel; std::vector<std::pair<Wire,i64>> count,index;
     for(int i=0;i<4096;i++) {auto b=bit(key.v==i);sel.push_back(b);count.push_back({b,1});index.push_back({b,i});}
     eq({term(sum(count))},1); eq({term(sum(index)),term(key,-1)});
@@ -94,13 +95,60 @@ static Circuit nonlinear(const Input& in,bool witness) {
   (void)step;
   return c;
 }
-// Filled by later milestones. The verifier dispatch remains closed to a fixed operator set.
+// One depthwise channel, T=4. x[0..2] is committed incoming history;
+// x[3..6] is the four new inputs. Every use reads the same canonical cell.
+static Circuit conv(const Input& in,bool witness) {
+  Circuit c(witness); const int f=in.f; const i64 S=i64(1)<<f;
+  std::vector<Wire> x,w;
+  for(int i=0;i<11;i++) {
+    auto a=c.cell(witness?in.x.at(i):0); c.range(a,f+1,S);
+    (i<7?x:w).push_back(a);
+  }
+  c.attacks["input"]=x[0];
+  for(int t=0;t<4;t++) {
+    std::vector<std::pair<Wire,i64>> products;
+    for(int j=0;j<4;j++) {
+      auto p=c.mul(x[t+j],w[j]); products.push_back({p,1});
+      if(t==0&&j==0) c.attacks["history-use"]={p.c,0,x[0].v};
+    }
+    auto y=c.floor(c.sum(products),f,t==0?"grid":"");
+    c.range(y,f+4,8*S); c.eq({c.term(y)},in.y.at(t));
+    if(t==0)c.attacks["output"]=y;
+  }
+  return c;
+}
+// One head. No gain, epsilon or additional q scale is silently supplied.
+static Circuit norm(const Input& in,bool witness) {
+  Circuit c(witness); const int f=in.f; const i64 S=i64(1)<<f;
+  const int D=in.op=="l2"?128:256, logD=in.op=="l2"?7:8;
+  std::vector<Wire> x; std::vector<std::pair<Wire,i64>> squares;
+  for(int j=0;j<D;j++) {
+    auto v=c.cell(witness?in.x.at(j):0);c.range(v,f+1,S);x.push_back(v);
+    squares.push_back({c.mul(v,v),1});
+  }
+  c.attacks["input"]=x[0];
+  auto mean_key=c.floor(c.sum(squares),2*f+logD-10,"energy");
+  auto key=c.sum({{mean_key,1}},-256);
+  auto sel=c.selectors(key);
+  auto coefficient=c.lookup(sel,table(in.op=="l2"?7:6,f));
+  c.attacks["table-output"]=coefficient;
+  for(int j=0;j<D;j++) {
+    auto y=c.floor(c.mul(x[j],coefficient),f,j==0?"grid":"");
+    c.range(y,f+3,4*S); c.eq({c.term(y)},in.y.at(j));
+    if(j==0)c.attacks["output"]=y;
+  }
+  return c;
+}
+// The public verifier dispatch is closed to a fixed operator set.
 static Circuit build(const Input& in,bool witness) {
   need(in.f==12||in.f==14||in.f==16,"F unsupported");
-  need(in.op=="nonlinear","operator unsupported");
-  need(in.y.size()==6,"output count");
+  need(in.op=="nonlinear"||in.op=="conv"||in.op=="l2"||in.op=="rms","operator unsupported");
+  size_t outputs=in.op=="nonlinear"?6:in.op=="conv"?4:in.op=="l2"?128:256;
+  need(in.y.size()==outputs,"output count");
   for(auto y:in.y) need(y>=-(i64(8)<<in.f)&&y<(i64(9)<<in.f),"output class");
-  return nonlinear(in,witness);
+  if(in.op=="nonlinear")return nonlinear(in,witness);
+  if(in.op=="conv")return conv(in,witness);
+  return norm(in,witness);
 }
 static WideRun run_for(const Circuit& c) {
   unsigned L=1;while((u64(1)<<L)<c.cols.size())L++;
@@ -112,7 +160,8 @@ static WideRun run_for(const Circuit& c) {
 }
 static Table table_for(const Circuit& c) {
   u64 n=2;while(n<c.cols.size())n*=2;Table t(1,3,n);
-  for(size_t j=0;j<c.cols.size();j++)for(int r=0;r<3;r++)t.set(r,j,E::from(c.cols[j][r]));return t;
+  for(size_t j=0;j<c.cols.size();j++) for(int r=0;r<3;r++) t.set(r,j,E::from(c.cols[j][r]));
+  return t;
 }
 static E eval(const WideRelation& r,const Table& t) {E v=E::zero();for(auto z:r.terms)v+=E::from(z.coefficient)*t.at(z.row,z.column);return v;}
 static size_t violated(const Circuit& c,const Table& t) {size_t n=0;for(auto&r:c.rel)n+=!(eval(r,t)==E::from(r.target));return n;}
@@ -131,8 +180,21 @@ static bool verify(const Input& statement,const u8* data,size_t n) {
 static double elapsed(std::chrono::steady_clock::time_point a) {return std::chrono::duration<double>(std::chrono::steady_clock::now()-a).count();}
 static Input fixture(std::string op,int f,int seed) {
   Input in;in.op=op;in.f=f;std::mt19937 rng(seed);i64 S=i64(1)<<f;
-  in.x={i64(rng()%(16*S))-8*S};int key=int(floor2(in.x[0],f-8)+2048);
-  for(int j=0;j<6;j++)in.y.push_back(table(j,f)[key]);return in;
+  if(op=="nonlinear") {
+    in.x={i64(rng()%(16*S))-8*S};int key=int(floor2(in.x[0],f-8)+2048);
+    for(int j=0;j<6;j++) in.y.push_back(table(j,f)[key]);
+  } else if(op=="conv") {
+    for(int i=0;i<11;i++)in.x.push_back(i64(rng()%(2*S))-S);
+    for(int t=0;t<4;t++) {i64 num=0;for(int j=0;j<4;j++)num+=in.x[t+j]*in.x[7+j];in.y.push_back(floor2(num,f));}
+  } else if(op=="l2"||op=="rms") {
+    const int D=op=="l2"?128:256, logD=op=="l2"?7:8;
+    i64 energy=0;
+    for(int j=0;j<D;j++){i64 v=i64(rng()%(2*S))-S;in.x.push_back(v);energy+=v*v;}
+    i64 key=floor2(energy,2*f+logD-10)-256;need(key>=0&&key<4096,"fixture norm domain");
+    i64 coefficient=table(op=="l2"?7:6,f)[key];
+    for(auto v:in.x)in.y.push_back(floor2(v*coefficient,f));
+  }
+  return in;
 }
 static void setrow(Table&t,Wire w,E v) {
   if(w.r==0){t.set(0,w.c,v);t.set(2,w.c,v*t.at(1,w.c));}
@@ -152,9 +214,20 @@ int main(int argc,char**argv) {try {
   auto report=[&](std::string name,bool accepted,size_t violations,bool complete){total++;rejected+=!accepted;std::cout<<"{\"mode\":\"hostile\",\"op\":\""<<in.op<<"\",\"class\":\""<<name<<"\",\"complete_proof\":"<<(complete?"true":"false")<<",\"violations\":"<<violations<<",\"rejected\":"<<(accepted?"false":"true")<<"}"<<std::endl;};
   auto attack=[&](std::string name,std::function<void(Table&)> change){Table bad=t;change(bad);size_t v=violated(c,bad);need(v>0,"hostile did not violate relation");for(u64 j=0;j<bad.len;j++)need(bad.at(2,j)==bad.at(0,j)*bad.at(1,j),"hostile product broken");auto p=prove(run,bad,true,seed+1000);report(name,verify(statement,p.data(),p.size()),v,true);};
   Wire x=c.attacks.at("input"),y=c.attacks.at("output"),q=c.attacks.at("grid-quotient"),r=c.attacks.at("grid-remainder");
-  attack("wrong-table-row",[&](Table&z){setrow(z,q,z.at(q.r,q.c)+E::one());});
-  attack("out-of-domain",[&](Table&z){setrow(z,x,E::from(fi(i64(8)<<in.f)));});
-  attack("rounding-plus-one-compensated",[&](Table&z){setrow(z,q,z.at(q.r,q.c)+E::one());setrow(z,r,z.at(r.r,r.c)-E::from(fi(i64(1)<<(in.f-8))));});
+  if(in.op=="nonlinear")
+    attack("wrong-table-row",[&](Table&z){setrow(z,q,z.at(q.r,q.c)+E::one());});
+  if(in.op=="conv") {
+    auto h=c.attacks.at("history-use");
+    attack("wrong-history-use",[&](Table&z){setrow(z,h,z.at(h.r,h.c)+E::one());});
+  }
+  if(in.op=="l2"||in.op=="rms") {
+    auto coeff=c.attacks.at("table-output");auto e=c.attacks.at("energy-quotient");
+    attack("wrong-table-row",[&](Table&z){setrow(z,coeff,z.at(coeff.r,coeff.c)+E::one());});
+    attack("mean-square-out-of-domain",[&](Table&z){setrow(z,e,E::from(fi(255)));});
+  }
+  attack("out-of-domain",[&](Table&z){setrow(z,x,E::from(fi((in.op=="nonlinear"?i64(8):i64(1))<<in.f)));});
+  const int remainder_bits=in.op=="nonlinear"?in.f-8:in.f;
+  attack("rounding-plus-one-compensated",[&](Table&z){setrow(z,q,z.at(q.r,q.c)+E::one());setrow(z,r,z.at(r.r,r.c)-E::from(fi(i64(1)<<remainder_bits)));});
   attack("sign-flip",[&](Table&z){setrow(z,x,E::zero()-z.at(x.r,x.c));});
   attack("wrong-output",[&](Table&z){setrow(z,y,z.at(y.r,y.c)+E::one());});
   auto changed=statement;changed.y[0]++;report("public-output",verify(changed,proof.data(),proof.size()),0,false);
