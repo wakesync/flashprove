@@ -1,5 +1,7 @@
 # Per-head bounded L2 and RMS normalization
 
+> **These norms are NOT the M2 design's integer-square-root norm (#66).** They use a bounded mean-square table with unit gain, no epsilon, and no support for low-energy vectors. Do not substitute them for M2's isqrt/epsilon relation.
+
 Implementation: `../proof.cpp`, `norm()`. Shared protocol and artifact instructions: `../README.md`.
 
 ## What is proved
@@ -14,6 +16,13 @@ y_j = floor(x_j*R/S)
 ```
 
 A one-hot selector proves k in [0,4096) and R equals the pinned row. Every output reads the same R. The key floor's remainder and each output floor's remainder are exactly bit-decomposed. Norm outputs have a signed [-4*S,4*S) bound. The table supports mean squares in [1/4,17/4), but combined with the input bound the reachable interval is [1/4,1]. Zero and low-energy vectors do not satisfy the relation; there is no silent clamp or exceptional zero case.
+
+## What is public, committed and prover-chosen
+
+- Public: operator, F, the 128 (L2) or 256 (RMS) outputs.
+- Committed and chosen freely by the prover: the whole input vector x, its energy E, the key k, the selected coefficient R, all remainders and range bits.
+
+A proof therefore shows only: **there exists an in-range input vector, with mean square in the admitted domain, whose bounded norm gives these outputs.** It says nothing about which projection, model weights or token produced x. The outputs are more constrained than for the convolution or rotary (they must be a scaled copy of some in-range vector at a table coefficient), but the input is equally unbound. Binding x to committed weights and earlier layers is the job of the M3 statement (PR #70, draft), not of this PR. See the shared README and https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440.
 
 ## What the verifier recomputes
 
@@ -42,4 +51,4 @@ python3 research/operators/qwen_ops/fidelity.py l2
 python3 research/operators/qwen_ops/fidelity.py rms
 ```
 
-Raw receipts: experiment `runs/l2-*` and `runs/rms-*`. Fidelity uses 10 independent seeded synthetic vectors per F, giving 1280 or 2560 correlated component errors. No input quantization error is included: the float reference receives the dequantized same integers.
+Raw receipts: experiment `runs/l2-*` and `runs/rms-*`. Fidelity uses 10 independent seeded synthetic vectors per F, giving 1280 or 2560 correlated component errors. No input quantization error is included: the float reference receives the dequantized same integers. Limit: 10 uniform [-1,1) vectors have mean square near 1/3, so they mostly sample one region of the admitted interval, not its boundaries or real activation distributions. These are synthetic quantized-input measurements, not model fidelity.

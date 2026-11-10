@@ -6,9 +6,22 @@ This directory is an isolated CPU product-oracle experiment for issue #35, not Q
 
 The public statement is operator kind, F in {12,14,16}, public position for rotary (zero for other operators), and an exactly sized vector of claimed integer outputs. Inputs, selector bits, history and intermediates live in the same Merkle-committed product oracle. They are NOT public input words. The verifier rebuilds every affine relation from its own fixed operator definition, pinned table constants and the public outputs; it does not read a witness, evaluate float nonlinearities, or accept a prover-chosen constraint list. The test compares the witness builder's serialized relation list to the witness-free verifier's list. The research API receives C++ i64 values and proof bytes; it does not implement a production network/statement-file decoder. A future decoder must enforce canonical encodings, allocation bounds and the same shape/class checks before this entry.
 
-**Important limitation:** the statement establishes a relation over an existential committed tuple. It does not authenticate that tuple as the output of a particular model matmul or a prior chunk. Replacing all inputs and recomputing all outputs consistently is another valid statement, not a detected attack. A production composition must put these wires in the existing model oracle or bind openings of the prior commitments. In particular, an internally committed history is not a carried cross-proof history commitment. This lane does not solve issue #34.
+**Important limitation, the statements bind much less than a reader may expect.** The only public values are the operator, F, the rotary position and the outputs. The convolution taps (the kernel), the history and every input of every operator are committed cells that the **prover chooses freely**; nothing outside the proof fixes them. A proof therefore shows "there exist inputs (and, for the convolution, a kernel and a history) in range for which this relation gives these outputs", and nothing about a particular model's weights or a particular earlier chunk.
 
-The backend is the existing wide affine product oracle (PSC, Merkle commitments and IOPP), with a distinct family string in its configuration digest. All equality and range constraints address the same committed cells as the product relations. Research target is **10 bits**, using the backend's plan accounting. Fixed test coins make runs reproducible, not suitable for hiding deployed witnesses. Hostile cases are sampled complete proofs that preserve all product equations while lying about affine targets inside the prover. The verifier is unchanged and keeps its own targets. Byte and statement mutations are separately identified.
+| Operator | Public | Committed, chosen freely by the prover |
+|---|---|---|
+| Nonlinear | operator, F, six outputs | scalar X, quotient/remainder, selector |
+| Convolution | operator, F, four outputs | four taps (kernel), three history words, four inputs, remainders |
+| L2 / RMS | operator, F, 128 / 256 outputs | input vector, energy, key, coefficient, remainders |
+| Rotary | operator, F, position, 256 outputs | 256 inputs, remainders (coefficients fixed by the public position) |
+
+For the convolution and the rotary this means **almost any in-range output vector can be proved**. The nonlinear outputs must be one consistent table row and the norm outputs a scaled copy of some in-range vector, so those are more constrained, but their inputs are equally unbound. Evidence: the opus reviewer built three complete proofs with the unmodified prover that the unchanged verifier accepted (https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440; the reviewer's runs, not committed run files of this PR): a convolution with outputs of the reviewer's choosing, (S,-S+1,1234,-77), via taps (0,0,0,-S); a convolution reproducing the seed-3 public outputs with a different kernel (all taps -S) and freshly solved history and inputs; and a rotary proof at position 517 for a random 256-word target after moving 3 words by 1. The hostile `public-output`/`wrong-output` rejections cannot stop a prover who simply picks a different witness. A production composition must put these wires in the existing model oracle or bind openings of the prior commitments. In particular, an internally committed history is not a carried cross-proof history commitment. Binding the kernel and inputs to committed weights and to the previous chunk is the job of the M3 statement (PR #70, draft) and the state-commitment work (#34), not of this PR.
+
+The backend is the existing wide affine product oracle (PSC, Merkle commitments and IOPP), with a distinct family string in its configuration digest. All equality and range constraints address the same committed cells as the product relations. Research target is **10 bits**, using the backend's plan accounting. This is a **per-round** target that includes 6 bits of proof-of-work on the query rounds (`Plan::holds`: a round's error times 2^-work is at most 2^-10). The weakest query rounds are about 4.3 to 4.5 bits before the work factor. Added over all rounds, a whole proof is about 2^-7.3, roughly 1 in 160, by the opus reviewer's union bound (2^-7.33 over 27 rounds, link above); the review-fix lane recomputed the same sum from the plan objects and got 2^-7.33 for the convolution (27 rounds) and 2^-7.38 for the other profiles (31 or 32 rounds). This is a research setting; the rejection counts do not show production security.
+
+Fixed test coins (`ToyCoins(seed)`) are the prover's own randomness, the salt and the masks. Every verifier challenge is derived from the transcript by hashing. Fixed coins make runs reproducible and remove hiding; they do not weaken soundness, and are not suitable for hiding deployed witnesses.
+
+Hostile cases are sampled complete proofs that preserve all product equations while lying about affine targets inside the prover. The verifier is unchanged and keeps its own targets. Byte and statement mutations are separately identified. These hostile proofs are rejected by an equation check with a large margin, not by a low-probability query round, so they show that each constraint exists and is wired to the right cell; they do not show that the protocol reaches its target. No grinding attack against the weakest query rounds was attempted by anyone.
 
 ## Integer tables and format
 
@@ -17,7 +30,7 @@ The backend is the existing wide affine product oracle (PSC, Merkle commitments 
 - `silu`, `sigmoid`, `softplus`, `decay-half`, `decay-one`, `decay-two`: row i is evaluated at x=(i-2048)/256, for i in [0,4096). Decay means exp(-c softplus(x)), c=1/2,1,2. Integer input X maps to i=floor(X/2^(F-8))+2048. Domain [-8,8), fail closed outside. **No clamping** and no learned A_log/dt_bias support.
 - `rsqrt`: row i approximates 1/sqrt((i+256)/1024).
 - `l2-128`: row i approximates 1/sqrt(128*(i+256)/1024).
-- Norm domain [1/4,17/4); key=floor(1024*sum X_j^2/(D*2^(2F)))-256. This is a deliberately bounded approximation, not the M2 isqrt/epsilon norm. Zero and low-energy vectors have no witness.
+- Norm domain [1/4,17/4); key=floor(1024*sum X_j^2/(D*2^(2F)))-256. This is a deliberately bounded approximation, **not the M2 design's integer-square-root (isqrt/epsilon) norm (#66)**. Zero and low-energy vectors have no witness.
 
 ### Generation, deterministic but not a transcendental rounding theorem
 
@@ -34,8 +47,8 @@ There are at most 4096 Boolean values, so sum=1 cannot wrap Goldilocks. Selected
 ## Gadget boundaries
 
 - [Nonlinear](nonlinear/README.md): six functions on one shared committed scalar/key.
-- [Convolution](conv/README.md): four tokens, one channel, shared committed three-word history and four taps. External carried-history identity is missing.
-- [Norm](norm/README.md): one D128 L2 or D256 RMS head, bounded mean-square table, unit gain and no epsilon.
+- [Convolution](conv/README.md): four tokens, one channel, shared committed three-word history and four taps. Kernel, history and inputs are all prover-chosen; external identity of any of them is missing.
+- [Norm](norm/README.md): one D128 L2 or D256 RMS head, bounded mean-square table, unit gain and no epsilon. Not the M2 isqrt norm (#66).
 - [Rotary](rotary/README.md): public position 0..1023, first 64 of 256 coordinates, theta 10^7, rotate-half pairs and exact copy of the rest. Separate manifest `tables/rotary-manifest.json`.
 
 ## Reproduce

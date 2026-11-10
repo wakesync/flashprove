@@ -3,8 +3,36 @@
 Five scoped operator profiles now have real product-oracle proofs, not just witness checks.
 Their nonlinear and rotary tables are deterministic integer artifacts, with no runtime float evaluation.
 All final honest batches and sampled local-relation attacks meet their registered criteria.
-A consistent replacement of convolution history still verifies, because external history identity is not bound.
+Only the operator, F, the rotary position and the outputs are public. The prover chooses every input, and for the convolution also the kernel (taps) and the history.
+So a proof says nothing about a particular model's weights or a particular earlier chunk, and for the convolution and the rotary almost any in-range output vector can be proved.
 Issue #35 therefore remains PARTIAL: this is research operator machinery, not a Qwen model proof.
+
+## What a proof binds (read before the numbers)
+
+The public statement of every proof is only: the operator, F, the rotary position (zero for the other operators) and the claimed output vector. Everything else is a committed witness cell that the prover chooses freely. Nothing outside the proof fixes those cells: they are not tied to any model's weights, to a matmul output, or to an earlier chunk.
+
+| Operator | Public | Committed, chosen freely by the prover | What an accepting proof shows |
+|---|---|---|---|
+| Nonlinear | operator, F, six outputs | the scalar X in [-8,8), its quotient/remainder, the one-hot selector | there exists an in-domain X whose six pinned table rows are these outputs |
+| Convolution | operator, F, four outputs | the four taps (the kernel), the three history words, the four new inputs, remainders | there exist a kernel, a history and inputs in [-S,S) for which the four-tap floor relation gives these outputs |
+| L2 / RMS | operator, F, 128 / 256 outputs | the whole input vector, its energy, key, selected coefficient, remainders | there exists an in-range input vector, with mean square in the admitted domain, whose bounded norm gives these outputs |
+| Rotary | operator, F, position, 256 outputs | all 256 inputs, remainders (the coefficients are fixed by the public position) | there exist inputs in [-S,S) whose partial rotation at this position gives these outputs |
+
+In words: a proof shows "there exist inputs (and, for the convolution, a kernel and a history) in range for which this relation gives these outputs", and nothing about a particular model's weights or a particular earlier chunk.
+
+For the convolution and the rotary this means **almost any in-range output vector can be proved**. The nonlinear outputs must form one consistent table row and the norm outputs must be a scaled copy of some in-range vector at a table coefficient, so those two are more constrained, but their inputs are equally unbound. The evidence is the opus reviewer's three complete proofs, built with the unmodified prover and accepted by the unchanged verifier (https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440). They are the reviewer's runs, not committed run files of this PR:
+
+- convolution with outputs of the reviewer's choosing, (S, -S+1, 1234, -77), using taps (0,0,0,-S);
+- convolution reproducing the seed-3 public outputs with a different kernel (all taps -S) and freshly solved history and inputs;
+- rotary at position 517 for a random 256-word target, after moving 3 of the 256 target words by 1 (29 of 32 pairs were reachable exactly before that).
+
+The committed history-substitution control below is the narrowest case of the same fact. Binding the kernel and inputs to committed weights and to the previous chunk is the job of the M3 statement (PR #70, draft) and the state-commitment work (#34), not of this PR.
+
+## Security setting (research only)
+
+"Research target 10 bits" is a **per-round** target that includes 6 bits of proof-of-work on the query rounds: `Plan::holds` accepts a round when its error, times 2^-work, is at most 2^-10. The weakest query rounds are about 4.3 to 4.5 bits before the work factor (astra reviewer, https://github.com/wakesync/flashprove/pull/67#issuecomment-6756145013: 4.30 to 4.49 bits across the five profiles). Added over all rounds of a whole proof, the union bound is about 2^-7.3, roughly 1 in 160 (opus reviewer's calculation, 2^-7.33 over 27 rounds, https://github.com/wakesync/flashprove/pull/67#issuecomment-6757161440). The review-fix lane recomputed it from the same plan objects (sum over every plan round of the round's whole error, with draw accounting, times 2^-work, times its count, for the F12 fixture of each profile) and got 2^-7.33 for the convolution (27 rounds) and 2^-7.38 for the other four profiles (31 or 32 rounds), about 1 in 160 to 1 in 167. That computation is reported in the PR thread and is not a committed run file. This is a research setting. The rejection counts below do not show production security.
+
+"Fixed test coins" (`ToyCoins(seed)`) are the prover's own randomness: the salt and the masks. Every verifier challenge is derived from the transcript by hashing (BLAKE2b Fiat-Shamir over the bound configuration, relation list, salt, roots, prior messages and nonces). Fixed coins make runs reproducible and remove hiding; they do not weaken soundness.
 
 ## Verdict and final proof measurements
 
@@ -19,13 +47,15 @@ CPU-only, shared AMD EPYC-Rome KVM host, affinity 0-5, all proof batches through
 | rotary | 10/10 | 19/19 (6) | 0.08809985 [0.0798018, 0.104492], SD 0.00751997102 | 0.0342126 [0.0316884, 0.0507315], SD 0.00563565634 | 118144 [117792, 118240], SD 140.054593 | 5504 / 10880 |
 
 - **Nonlinear PASS, bounded relation:** one proof jointly covers six functions on one committed scalar, not six independent input positions. General learned decay parameters and downstream gate multiplication are absent.
-- **Convolution local PASS, carried-history PARTIAL/FAIL:** four tokens of one depthwise channel use the same canonical three-word history and four taps. The explicit history substitution control accepts the replacement, 1/1, against the SAME public outputs. Both its original and modified tuple proofs are valid. This is a negative result for externally fixed history identity, not a failure of the stated existential relation or a hostile rejection.
-- **Norm PASS under registered bounded semantics:** D128 L2 and D256 RMS, unit gain, no epsilon, no extra query scaling. These are not M2 isqrt semantics or full Qwen norms.
+- **Convolution local PASS; kernel, history and input identity absent (PARTIAL/FAIL for #35):** four tokens of one depthwise channel use the same canonical three-word history and four taps, but taps, history and inputs are all chosen by the prover. The explicit history substitution control accepts the replacement, 1/1, against the SAME public outputs. Both its original and modified tuple proofs are valid. This committed control shows only the narrowest case (history changed, taps fixed); the reviewer's accepted constructions (see "What a proof binds") show that a different kernel, or outputs of the prover's own choosing, are accepted too. This is a negative result for external kernel, history and input identity, not a failure of the stated existential relation or a hostile rejection.
+- **Norm PASS under registered bounded semantics:** D128 L2 and D256 RMS, unit gain, no epsilon, no extra query scaling. **These are NOT the M2 design's integer-square-root (isqrt/epsilon) norm (#66)** and not full Qwen norms.
 - **Rotary PASS under A1:** public position, first64of256, rotate-half, theta10^7, context1024. No private/multimodal position or YaRN.
 
 ## Fidelity against float reference
 
 Absolute real-valued errors on the same dequantized integer inputs. Input quantization error versus a separately sampled float tensor is NOT included. Nonlinear n=8197 per row: 4096 random, every4096grid point, five boundaries/zero points. Conv n=40 outputs from10chunks. L2/RMS n=1280/2560 correlated components from10heads. Rotary n=640 rotated coordinates from10positions/vectors; 1920 other coordinates per F are exactly unchanged, excluded from error quantiles. These are synthetic distributions, not real-weight fidelity.
+
+Limits of this section: these are synthetic, quantized-input measurements, not model fidelity. The convolution threshold (<=2^-F) cannot fail, and the rotary threshold (<=2*2^-F) nearly cannot, because rounding down keeps the error under 2^-F per floor by construction; those two rows check the implementation, not a fidelity margin. The norm fidelity inputs are 10 uniform [-1,1) vectors per F, whose mean square sits near 1/3, so they mostly sample one region of the admitted interval, not its boundaries or real activation distributions.
 
 | Function | F | n | Median | p95 | Max | SD | Threshold | Verdict |
 |---|---|---|---|---|---|---|---|---|
@@ -64,7 +94,7 @@ Higher F does not eliminate the fixed input-grid error. SiLU worst maximum is gr
 
 ## Hostile scope, smoke checks and sanitizer
 
-All operators sample sign changes, out-of-domain operand, quotient+1 with compensating invalid remainder, changed output, changed scale/type, malformed output count, i64 extreme public outputs, flipped proof byte, truncation and trailing data. Nonlinear/norm add wrong table row; norm adds out-of-domain mean-square; conv adds wrong history reuse; rotary adds wrong pair, changed unrotated coordinate and position attacks. Complete malicious proofs preserve all multiplication equations and replace affine targets ONLY inside the malicious prover; the unchanged verifier derives its own targets. This is sampled coverage, not exhaustive soundness.
+All operators sample sign changes, out-of-domain operand, quotient+1 with compensating invalid remainder, changed output, changed scale/type, malformed output count, i64 extreme public outputs, flipped proof byte, truncation and trailing data. Nonlinear/norm add wrong table row; norm adds out-of-domain mean-square; conv adds wrong history reuse; rotary adds wrong pair, changed unrotated coordinate and position attacks. Complete malicious proofs preserve all multiplication equations and replace affine targets ONLY inside the malicious prover; the unchanged verifier derives its own targets. This is sampled coverage, not exhaustive soundness. The committed hostile proofs are rejected by an equation check with a large margin (the plan's ZERO round, about 186 bits in the opus reviewer's plan dump), not by a low-probability query round. They show that each constraint exists and is wired to the right cell. They do not show that the protocol reaches its 10-bit target: no grinding attack against the weakest query rounds was attempted, by this lane or by either reviewer.
 
 - nonlinear: UBSan local hostile 16/16 rejected, one honest accepted, zero sanitizer reports; F14 and F16 smoke PASS (n=1 each, not performance estimates).
 - conv: UBSan local hostile 16/16 rejected, one honest accepted, zero sanitizer reports; F14 and F16 smoke PASS (n=1 each, not performance estimates).
@@ -115,12 +145,14 @@ Nonlinear: 24 headerless i64LE files,4096rows each, F12/14/16; x=(i-2048)/256 fo
 
 ## Deviations and what remains missing from #35
 
-A1 registered rotary before its code; A2 added typed transcript profiles, expanded malformed-statement tests, and a final unified rerun before measuring that profile. Development batches are preserved under runs/milestones, not pooled with final timings. The conservative O4096 selector backend, restricted norm domain and fixed decay examples were registered before code, not post hoc error-budget changes. No failed sample or warmup was removed.
+**Deviation, registration order (added by the review fix).** The original thresholds were registered before any code (first commit `0f0153f`, which contains only the PREREG). A1 was committed in `50d454f`, before the rotary code that arrives in `c8e2a42`. **A2 was not registered before its code:** A2 and the typed-profile implementation it covers first appear together in `c8e2a42`, before the final measurement commit `5e93627`. The raw run files carry no execution timestamps, so the order of the runs themselves cannot be shown from the repository; only commit order can. The final profiles are therefore "registered thresholds; A2 profile co-committed with its code", not "preregistered final profiles". A2 changed no threshold or input distribution. See the dated note appended to PREREG.md.
 
-External commitment identity is the principal gap: no matmul provenance, checkpoint-bound taps/constants or prior-chunk history root. Conv is only one channel/four tokens. Norm lacks learned gains, epsilon, nearzero support and DeltaNet q extra scaling. No sigmoid-times-mixer gate composition, learned A_log/dt_bias, hybrid layer planner, main-prover/CUDA integration, production security/hiding, Lean extension or real-weight fidelity. Upstream no-expert/dq!=d/head256 admission limits are untouched; exact locations and required work are in research/operators/qwen_ops/LIMITS-AND-ROTARY.md. Rotary beyond the public-position text-only1024 profile remains absent.
+A1 registered rotary before its code; A2 added typed transcript profiles, expanded malformed-statement tests, and a final unified rerun before measuring that profile. Development batches are preserved under runs/milestones, not pooled with final timings. The conservative O4096 selector backend, restricted norm domain and fixed decay examples were registered before code (`0f0153f`), not post hoc error-budget changes. No failed sample or warmup was removed.
+
+External commitment identity is the principal gap: no matmul provenance, checkpoint-bound taps/constants or prior-chunk history root. Binding the kernel and inputs to committed weights and to the previous chunk is the job of the M3 statement (PR #70, draft) and the state-commitment work (#34), not of this PR. Conv is only one channel/four tokens. Norm lacks learned gains, epsilon, nearzero support and DeltaNet q extra scaling. No sigmoid-times-mixer gate composition, learned A_log/dt_bias, hybrid layer planner, main-prover/CUDA integration, production security/hiding, Lean extension or real-weight fidelity. Upstream no-expert/dq!=d/head256 admission limits are untouched; exact locations and required work are in research/operators/qwen_ops/LIMITS-AND-ROTARY.md. Rotary beyond the public-position text-only1024 profile remains absent.
 
 ## Reproduction and evidence provenance
 
 See research/operators/qwen_ops/README.md and each gadget README. Run record.py final and record.py ubsan-all through the host heavy-job gate with taskset-c0-5; run check_tables.py, check_rotary_tables.py, crosscheck.py and fidelity.py for each operator. Run report.py after all receipts exist. All commands require only g++, Python standard library and the repository; no weights, GPU or paid API.
 
-Release proof implementation commit `c8e2a428782bf8a8239e9bea7455a1e0b10129fd`, sanitizer commit `95438aba49383998fce3d2cc5106c7bb34368679`; identical proof.cpp SHA-256 `31f1a723f1bb07015e16fa15337e31e7888f4256d608af8ed2b3ee6361e9aa95`. ENV.json pins toolchain, source hashes and compiled artifacts. Raw lines and distribution summaries are in runs/. research/results.yaml links to the receipt commit, not a future squash commit. Independent replication and review are still required.
+Release proof implementation commit `c8e2a428782bf8a8239e9bea7455a1e0b10129fd`, sanitizer commit `95438aba49383998fce3d2cc5106c7bb34368679`; identical proof.cpp SHA-256 `31f1a723f1bb07015e16fa15337e31e7888f4256d608af8ed2b3ee6361e9aa95`. ENV.json pins toolchain, source hashes and compiled artifacts as of the receipt; its hashes of README files and report.py describe the receipt commit and were intentionally not regenerated by the later wording-only review fix (proof.cpp, tables and runs are unchanged). Raw lines and distribution summaries are in runs/. research/results.yaml links to the receipt commit, not a future squash commit. Independent replication and review are still required.

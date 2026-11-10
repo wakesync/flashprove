@@ -404,11 +404,11 @@ results:
   - id: qwen-bounded-operators-1109
     title: "Bounded Qwen operator relations and pinned integer tables"
     status: "measured"
-    status_note: "research only; external input/history identity absent"
+    status_note: "research only; kernel/taps, history and all inputs are prover-chosen (no external identity), so almost any in-range conv or rotary output is provable"
     replication: "unreplicated"
     pr: 67
-    summary: "Local tuple relations only; carried-history identity remains unbound. No model support or production-security claim."
-    conditions: "CPU-only synthetic inputs, research target10bits; preregistered final profiles and explicit negative history control"
+    summary: "Local tuple relations only. Public: operator, F, rotary position, outputs. The convolution kernel (taps), its history and every input are chosen freely by the prover, so a proof shows only that some in-range inputs give these outputs, not a particular model's weights or earlier chunk; binding is for the M3 statement (PR #70) and #34. No model support or production-security claim."
+    conditions: "CPU-only synthetic inputs; research target 10 bits is per round incl. 6 bits proof-of-work, a whole proof is weaker (reviewer union bound in RESULTS), not production security; thresholds registered before code, A2 profile co-committed with its code (no run timestamps); explicit negative history control"
     evidence: ["experiments/20261109-35-qwen-operators/RESULTS.md", "research/operators/qwen_ops/README.md"]
     metrics:
       - {"name":"nonlinear_prove_s","value":0.08549709999999999,"unit":"s","n":10,"stat":"median","spread":{"sd":0.015754509762957114,"min":0.083231,"max":0.135206},"hardware":"cpu-epyc-rome-kvm-16","date":"2026-11-10","commit":"6bb270a8278b1c763d1427d7b0f481b299a9f808","source":"experiments/20261109-35-qwen-operators/runs/nonlinear-summary.json","note":"F12 synthetic research tuple; shared loaded CPU; no model-scale claim"}
