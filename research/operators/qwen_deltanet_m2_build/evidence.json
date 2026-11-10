@@ -1,7 +1,7 @@
 {
  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
  "cores": "0-5",
- "head": "11f218c54781bec1abf7bf140791abfb8adb2577",
+ "head": "89d81cc60f6676dce37f8ad29d2eb387c1a90910",
  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
  "python": "3.12.3",
  "sources": {
@@ -11,14 +11,26 @@
   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770",
   "research/operators/qwen_deltanet_m2_build/head.h": "640ae922a7d6eb85abea8fda0462d085c4ab359fa1a2da6423c70d7cae916399",
   "research/operators/qwen_deltanet_m2_build/kit.h": "4ca8b9f29926e388fdab636b892b5663f7103f239016c187a09c9b0b0bfcecdb",
+  "research/operators/qwen_deltanet_m2_build/public_stage.h": "d244f7b82c73f551e2a03bda818785f2e62d818a02f52724424a735948e5280b",
   "research/operators/qwen_deltanet_m2_build/record.py": "c81553ddf55091777187a0589ece916de305b960e77c5785929458a3f3ec2282",
+  "research/operators/qwen_deltanet_m2_build/reference_m2.py": "ac8bf270e7154f10ed9c7718a68c141f42acff2770ce8731eed7b3f9dd0ae3d1",
   "research/operators/qwen_deltanet_m2_build/stage1.cpp": "5b51c02a4cc951dcea768cf625484eb234adf4f0c514a4a5ec1d81d51e15e965",
+  "research/operators/qwen_deltanet_m2_build/tables.py": "60a871980dda856f43f8842f55ac397106dbd24930e30403e9fd751fdcf67694",
+  "research/operators/qwen_deltanet_m2_build/tables/decay-one-f12.i64le": "ffd373e621ca994094bf876d684498580532286cc28dd005a79524831c3daedb",
+  "research/operators/qwen_deltanet_m2_build/tables/pinned_f12.h": "e1ef921c8be07b91dad975238ca91916e94e752b51920ef680266e19539addf1",
+  "research/operators/qwen_deltanet_m2_build/tables/sigmoid-f12.i64le": "19057d5fd13d67d8895e7b31f9b0d8c55eb75802857f8ae8b5deae67ab9202d5",
+  "research/operators/qwen_deltanet_m2_build/tables/silu-f12.i64le": "cb2ceb05c7a1292a064e8d6d63cf9b63926db1122ea19663faecee21752bf8e9",
   "research/operators/qwen_deltanet_m2_build/two_lookup.h": "6b27a89b448bee1db1dfa6bbd14ebca19afbd837d5e10c6c59b6a7a455be2b07",
   "research/operators/qwen_deltanet_m2_build/two_lookup_prove.h": "47a1c4f854def7df04776283573544a6131976b715e847900b767f3a70f379c0"
  },
  "stage1_compile": {
   "exit": 0,
   "seconds": 37.791,
+  "warnings": 0
+ },
+ "stage1_compile_ubsan": {
+  "exit": 0,
+  "seconds": 56.927,
   "warnings": 0
  },
  "stage1_fixtures": {
@@ -41,6 +53,26 @@
     "seed": 1
    },
    "sha256": "7f86dc8bda6758075a5b6210a4c026d5a97ae2df77d2d3423b251b4df3b22772"
+  },
+  "10": {
+   "meta": {
+    "S0_max_abs": 1699,
+    "S4_max_abs": 1797,
+    "betas": [
+     1637,
+     2751,
+     1777,
+     2565
+    ],
+    "decays": [
+     3998,
+     3559,
+     3351,
+     4042
+    ],
+    "seed": 10
+   },
+   "sha256": "9b0de48cd2c1781d58eaf1f0ec748f3693c83e4dcf25bf389bbee7c049b41164"
   },
   "2": {
    "meta": {
@@ -201,26 +233,325 @@
     "seed": 9
    },
    "sha256": "de1d5924325874b8c74313a8c043c873127f4e7dc122aa3b79c70d84cd97ea18"
-  },
-  "10": {
-   "meta": {
-    "S0_max_abs": 1699,
-    "S4_max_abs": 1797,
-    "betas": [
-     1637,
-     2751,
-     1777,
-     2565
-    ],
-    "decays": [
-     3998,
-     3559,
-     3351,
-     4042
-    ],
-    "seed": 10
-   },
-   "sha256": "9b0de48cd2c1781d58eaf1f0ec748f3693c83e4dcf25bf389bbee7c049b41164"
   }
+ },
+ "stage1_honest": {
+  "accepted": 10,
+  "alphas_differ": 10,
+  "build_s": {
+   "max": 0.244,
+   "median": 0.2015,
+   "min": 0.181,
+   "n": 10,
+   "sd": 0.020725990125122287
+  },
+  "counts": {
+   "D": 128,
+   "F": 12,
+   "T": 4,
+   "columns_used": 427008,
+   "gate_columns": 263168,
+   "key_cells_laid": 81920,
+   "key_parts": 2,
+   "lkp_keys": 67584,
+   "log_length": 19,
+   "mode": "counts",
+   "norm": false,
+   "range_cells": 67072,
+   "relation_terms": 1186816,
+   "relations": 609792,
+   "remainder_multiplicity_places": 69632,
+   "rng_matrices": 2,
+   "rng_multiplicity_places": 155648
+  },
+  "counts_identical_across_seeds": true,
+  "derive_s": {
+   "max": 0.07,
+   "median": 0.064,
+   "min": 0.06,
+   "n": 10,
+   "sd": 0.00257336787541584
+  },
+  "lookup_alphas": [
+   2
+  ],
+  "of": 10,
+  "peak_rss_kb": {
+   "max": 1258632,
+   "median": 1258566.0,
+   "min": 1258500,
+   "n": 10,
+   "sd": 67.49353878541099
+  },
+  "proof_bytes": {
+   "max": 6756944,
+   "median": 6756752.0,
+   "min": 6756144,
+   "n": 10,
+   "sd": 269.8476936677017
+  },
+  "prove_s": {
+   "max": 14.105,
+   "median": 13.667,
+   "min": 13.41,
+   "n": 10,
+   "sd": 0.26895867092671827
+  },
+  "verify_s": {
+   "max": 3.074,
+   "median": 2.99,
+   "min": 2.837,
+   "n": 10,
+   "sd": 0.0963269894104912
+  }
+ },
+ "stage1_hostile": {
+  "accepted_cases": [
+   "research prover path, honest witness, no tamper (must be accepted)"
+  ],
+  "as_expected": 96,
+  "by_class": {
+   "c1-state": [
+    2,
+    2
+   ],
+   "c10-state-out-of-range": [
+    1,
+    1
+   ],
+   "c2-state-floor-preserving": [
+    1,
+    1
+   ],
+   "c3-decay": [
+    1,
+    1
+   ],
+   "c4-beta": [
+    1,
+    1
+   ],
+   "c5-delta-floor": [
+    1,
+    1
+   ],
+   "c5-memory-floor": [
+    2,
+    2
+   ],
+   "c6-range": [
+    2,
+    2
+   ],
+   "c7-public": [
+    8,
+    8
+   ],
+   "c8-bytes": [
+    23,
+    23
+   ],
+   "c9-limb": [
+    3,
+    3
+   ],
+   "class-bound": [
+    16,
+    16
+   ],
+   "control-research-prover": [
+    1,
+    1
+   ],
+   "derive-extremes": [
+    2,
+    2
+   ],
+   "derive-random": [
+    1,
+    1
+   ],
+   "h1-alpha-replay": [
+    2,
+    2
+   ],
+   "h1-planes-place": [
+    2,
+    2
+   ],
+   "h1-relabel-control": [
+    1,
+    1
+   ],
+   "h1-splice": [
+    3,
+    3
+   ],
+   "header": [
+    2,
+    2
+   ],
+   "huge-element": [
+    8,
+    8
+   ],
+   "in-class": [
+    1,
+    1
+   ],
+   "l1-out-of-table": [
+    2,
+    2
+   ],
+   "l2-wrong-multiplicity": [
+    4,
+    4
+   ],
+   "l3-swapped-table-rows": [
+    2,
+    2
+   ],
+   "length": [
+    2,
+    2
+   ],
+   "non-canonical": [
+    1,
+    1
+   ],
+   "r9": [
+    1,
+    1
+   ]
+  },
+  "exit": 0,
+  "seconds": 560.787,
+  "stderr": "",
+  "total": 96
+ },
+ "stage1_hostile_ubsan": {
+  "accepted_cases": [
+   "research prover path, honest witness, no tamper (must be accepted)"
+  ],
+  "as_expected": 96,
+  "by_class": {
+   "c1-state": [
+    2,
+    2
+   ],
+   "c10-state-out-of-range": [
+    1,
+    1
+   ],
+   "c2-state-floor-preserving": [
+    1,
+    1
+   ],
+   "c3-decay": [
+    1,
+    1
+   ],
+   "c4-beta": [
+    1,
+    1
+   ],
+   "c5-delta-floor": [
+    1,
+    1
+   ],
+   "c5-memory-floor": [
+    2,
+    2
+   ],
+   "c6-range": [
+    2,
+    2
+   ],
+   "c7-public": [
+    8,
+    8
+   ],
+   "c8-bytes": [
+    23,
+    23
+   ],
+   "c9-limb": [
+    3,
+    3
+   ],
+   "class-bound": [
+    16,
+    16
+   ],
+   "control-research-prover": [
+    1,
+    1
+   ],
+   "derive-extremes": [
+    2,
+    2
+   ],
+   "derive-random": [
+    1,
+    1
+   ],
+   "h1-alpha-replay": [
+    2,
+    2
+   ],
+   "h1-planes-place": [
+    2,
+    2
+   ],
+   "h1-relabel-control": [
+    1,
+    1
+   ],
+   "h1-splice": [
+    3,
+    3
+   ],
+   "header": [
+    2,
+    2
+   ],
+   "huge-element": [
+    8,
+    8
+   ],
+   "in-class": [
+    1,
+    1
+   ],
+   "l1-out-of-table": [
+    2,
+    2
+   ],
+   "l2-wrong-multiplicity": [
+    4,
+    4
+   ],
+   "l3-swapped-table-rows": [
+    2,
+    2
+   ],
+   "length": [
+    2,
+    2
+   ],
+   "non-canonical": [
+    1,
+    1
+   ],
+   "r9": [
+    1,
+    1
+   ]
+  },
+  "exit": 0,
+  "seconds": 1091.821,
+  "stderr": "",
+  "total": 96,
+  "ubsan_reports": 0
  }
 }
