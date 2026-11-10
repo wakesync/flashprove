@@ -32,7 +32,7 @@ Every number below comes from a file on `main` (the one exception, a reviewer fi
 | Signed model manifest checked next to cp_verify, stored small example (PR #59) | measured, unreplicated | 137 of 137 registered tampers refused, 10 of 10 untampered verifies accepted (cp_verify YES), verify about 1.41 s; 14 of 37 fields are the trusted signer's word: 11 always (10 as a one-field change, plus commitment.kind, which a matching seed file passes even with --public-weights-seed) and 3 (upstream, committed files, seed digest) unless the caller passes the rehash flag; small-order ed25519 keys and R refused; symlinks in rehashed dirs, deep nesting and non-true none refused | stored synthetic example, fixture tokenizer/template/system prompt, no real model; client-side detached manifest, pure-Python ed25519 (RFC 8032 3 of 3, 64 of 64 vs cryptography); CPU only, re-measured after PREREG amendment 3 | [experiments/20261104-58-signed-manifest/RESULTS.md](experiments/20261104-58-signed-manifest/RESULTS.md) |
 | Still open: integer-vs-BF16/FP8 fidelity (#8), KDA model-scale sweep (PR #42), cost teardown and larger-memory GPU test (PR #44) | in progress | none yet | open PRs, issues and lanes, not merged | [docs/research-roadmap.md](docs/research-roadmap.md) |
 
-_Last regenerated from `research/results.yaml` on 2026-11-10 (UTC), against main `4f7a8761`._
+_Last regenerated from `research/results.yaml` on 2026-11-10 (UTC), against main `8727f38c`._
 <!-- results:end -->
 
 What this table does not show: no full-size (Maverick) run, no real model weights on GPU, no serving, no TEE, no production use, and no comparison with other verifiable-inference systems. The GPU rows are upstream's small example on made-up weights.
