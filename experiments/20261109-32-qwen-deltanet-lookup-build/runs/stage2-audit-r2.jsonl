@@ -1,0 +1,55 @@
+{
+  "ledger": {
+    "I1 M floor: 2^2F M + r - a sum_i S_i k_i": 18155133850353663,
+    "I2 delta floor: 2^F delta + r - (v - M) beta": 9016062993489919,
+    "I3 state floor: 2^F S' + r - a S - k_i delta_j": 9007301260206079,
+    "I4 output floor: 2^F o + r - sum_i S'_i q_i": 4432405725183,
+    "I5 state ends: cell - S0, cell - S_T": 8650750,
+    "N1 e1: sum o^2 + eps' - sigma^2 - e1": 9288672067193059,
+    "N2 e2: sigma^2 + 2 sigma - sum o^2 - eps' - e2": 9288672100747489,
+    "N3 rr: Rc sigma + rr - 2^36": 1152921504606846976,
+    "N4 gap: sigma - 1 - rr - gap": 50331646,
+    "N5 w floor: 2^24 w + r - o Rc": 576601421063913472,
+    "N6 y floor: cg w - 2^F y - r": 149533556211712
+  },
+  "all_below_p": true,
+  "matches_design_closed_identities": true,
+  "term_difference": {
+    "build": 4782528,
+    "model": 4782496,
+    "extra_per_token": 2,
+    "tokens": 16,
+    "explanation": "S2/S4 each bind an operand to two sigma limbs (3 terms), model binds to G_ss.a (2 terms)"
+  },
+  "pinned_G": {
+    "rows": [
+      {
+        "gain_x10000": 10000,
+        "G": 46341,
+        "max_abs_cg": 370422,
+        "below_bound": true
+      },
+      {
+        "gain_x10000": 14100,
+        "G": 65341,
+        "max_abs_cg": 522297,
+        "below_bound": true
+      },
+      {
+        "gain_x10000": 14143,
+        "G": 65540,
+        "max_abs_cg": 523887,
+        "below_bound": true
+      },
+      {
+        "gain_x10000": 20000,
+        "G": 92682,
+        "max_abs_cg": 740845,
+        "below_bound": true
+      }
+    ],
+    "admitted_z_values": 65536,
+    "outside_domain_z_values": 2031615
+  },
+  "isqrt": "pure integer; squares and neighbours through INT64_MAX tested by isqrt_test.cpp"
+}
