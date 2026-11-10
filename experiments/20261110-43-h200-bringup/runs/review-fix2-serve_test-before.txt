@@ -1,0 +1,38 @@
+serve_test.py of this fix's tests, run against serve.py of 3e360778 (the re-reviewed head).
+CPU host, shared and loaded, no GPU, mocked GPU programs; python3 3.12.3; 2026-11-10T06:09Z UTC; 1 s.
+$ python3 serve_test.py --serve <file of 3e360778>
+PASS server up
+PASS healthz 200
+PASS status running
+PASS files lists bundle, not isk
+PASS tarball has bundle, not isk
+PASS tarball content intact
+PASS unknown path 404
+PASS POST refused
+PASS status does not follow a stages.log link
+PASS no route serves a linked file or directory
+PASS a linked DONE marker is not a finished job
+PASS status shows the last 20 lines of a long log
+PASS marker without SHA256SUMS is finalising
+PASS status done
+PASS status failed
+PASS archive concurrency is capped (503 when full)
+PASS archive served again once a slot is free
+FAIL ancestor 'a' swapped for a link between check and open: archive has no outside byte
+FAIL ancestor 'a/b' swapped for a link between check and open: archive has no outside byte
+FAIL ancestor 'a/b/c' swapped for a link between check and open: archive has no outside byte
+PASS open_regular refuses a path whose ancestor 'a' is a link
+PASS open_regular refuses a path whose ancestor 'a/b' is a link
+PASS open_regular refuses a path whose ancestor 'a/b/c' is a link
+FAIL directory swapped during the walk: archive has no outside byte
+PASS after the swaps, the deep public file is listed again
+PASS a FIFO is skipped, not opened for reading (archive in < 5 s)
+FAIL 70 KB request line: 414
+PASS server still answers after the long request line
+FAIL connections at the bound: 503 from the accepting thread, no new handler thread
+FAIL connection slots all released after use
+PASS DONE with SEAL-FAILED is not done
+FAIL FAILED with SEAL-FAILED is failed
+FAIL DONE and FAILED and SHA256SUMS is failed, not done
+24 of 33 checks passed
+exit 1

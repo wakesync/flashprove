@@ -20,6 +20,9 @@ These are local receipts, not ledger results: no rows are added to `research/res
 | after review: `serve_test.py` (17 checks) | fixed server 17 of 17; the reviewed server 12 of 16 (the 17th check needs the archive cap and is not reached) | `runs/review-fix-serve_test-{after,before}.txt` |
 | after review: `run_job_test.py` (47 checks, mocked GPU programs) | fixed runner 47 of 47; the reviewed runner 13 of 47 | `runs/review-fix-run_job_test-{after,before}.txt` |
 | after review: shellcheck of the fixed `run_job.sh` | exit 0, no suppressions | `runs/review-fix-shellcheck.txt` |
+| after the second re-reviews: `serve_test.py` (33 checks) | this fix 33 of 33; the server of `3e360778` 24 of 33 (fails the ancestor swap at all three depths, the swap during the walk, the 414, the connection bound and two sealing states) | `runs/review-fix2-serve_test-{after,before}.txt` |
+| after the second re-reviews: `run_job_test.py` (87 checks) | this fix 87 of 87; the runner of `3e360778` 60 of 87 | `runs/review-fix2-run_job_test-{after,before}.txt` |
+| after the second re-reviews: `bash -n`, shellcheck (the digest-pinned image, no network) | exit 0 and exit 0, no suppressions | `runs/review-fix2-shellcheck.txt` |
 
 Not built: the `prover` and `final` stages (the default prover build, about half an hour of compiling) on a host shared with other lanes. `cc_probe`, `compiler_sample` and the job have not run on any GPU.
 
@@ -38,6 +41,20 @@ The independent review (PR #69, comment 6757587635) requested changes; all of th
 - server: one no-symlink, inside-the-directory, `O_NOFOLLOW` rule on every route; `/status` reads only the tail; the archive is streamed and capped;
 - docs: host capacity rewritten as not established; metrics stated as above; runbook window sheet with outage budget, cut-off, deadlines, escalation roles, consumer notice, data-loss and spend gates, restore failure path, restore before off-box verification, the previous-latest tag, the credential kept out of argv; B marked not runnable as packaged; the 524288 MB shape for a full-size run; public image presented as a choice; the CC-off flag marked unverified; units in MiB; apt packages stated as not reproducible; `pipefail` in the prover and final stages.
 
+## Changes after the second re-reviews
+
+Two re-reviews of `3e360778` (PR #69 comments 6759653963, request changes, and 6759737181, approve with should-fix items). Every change below has a test that fails on the code of `3e360778` and passes on this fix (counts in the table above; one test file per component, the older checks kept):
+- server: every open is relative to a kept descriptor of the results directory, one component at a time, no link followed at any depth, `fstat` of each opened object; the walk for `/files` and the archive holds the descriptor of each directory it lists and serves each file from the descriptor it checked. Tests: an ancestor directory swapped for a link between check and open at each of three depths, a directory swapped during the walk, the by-name route with a linked ancestor at each depth, a FIFO;
+- runner: every finalisation step is checked; an export failure, a marker that cannot be put in place, or a checksum failure (hashing or write) ends as `FAILED` (plus `SEAL-FAILED` when sealing failed), with a stage line naming the step, and a nonzero exit (3 when the job itself ended 0); `/status` reports `failed`, never `done` and never `finalising` forever. Tests: each of these injected failures, plus an unreadable file in `results/`;
+- runner: the default quickstart is registered before it starts, so a whole-job timeout during it exports its partial evidence (test: a 3 s job limit during a quickstart that hangs);
+- runner: one job per work directory, an exclusive `flock` lock for the whole job; a second `job` or `serve` refuses with a message and exit 2 and touches nothing (test);
+- runner: the interrupted step gets its own `steps.tsv` row (`interrupted`) at finalisation; the sampler is waited for before the checksums; real warm-repeat cases (cold run `YES`, first repeat rejected or timed out) (tests);
+- runner: duty 6: `out/` and `cp_verify.log` are exported only for runs that `cp_verify` accepted; for others they are listed in `withheld.txt` (tests on rejected, crashed, timed-out and interrupted runs);
+- server: connections bounded before a handler thread is started; a 70 KB request line gets 414 instead of crashing the handler (tests);
+- runbook: restoring the live service wins over collecting results; fetching has a budget on the window sheet, runs under `timeout` until the restore cut-off and is never retried after it; the prover stop has a deadline and an escalation branch; the restore retry happens only inside the reserve; the key reaches one `tinfoil` process at a time (`tf` function with an assignment prefix) instead of being exported to the operator shell; the approvals row lists image publication and the release tag;
+- config: one sentence that it requests one GPU for the instance and says nothing about the host's count;
+- docs: the tests have not run inside the Dockerfile's pinned base image (below and README.md); the Dockerfile's comment on the unchanged stages' pipelines corrected.
+
 ## Deviations from the PREREG
 
 None for phase 1 (the PREREG governs phase 2). One choice recorded now for phase 2: `FP_ONBOX_BUILD=0` (prebuilt programs, no quickstart) would be a deviation from the PREREG's cold-run definition and must be written up as one if used. The runner now has explicit timeouts (`FP_JOB_TIMEOUT`, per step); see the PREREG's amendment.
@@ -46,5 +63,6 @@ None for phase 1 (the PREREG governs phase 2). One choice recorded now for phase
 
 - CC-On refusal of `cudaHostRegister` (item 4) could make phase 2 a negative result on the unmodified prover. The package now keeps and serves that negative result.
 - The prover stages of the image are unbuilt; a build failure would be found only in phase 2. Apt packages are not pinned, so a rebuild may differ.
+- The tests have **not run inside the Dockerfile's pinned base image**: the attempt stopped at `apt-get install` (HTTP 404 for superseded packages of the unpinned archive, `runs/review-fix-ubuntu-image.txt`). They ran on a CPU host and in CI on `ubuntu-24.04`; the image's own bash, coreutils, util-linux (`flock`) and python3 are untested with this code.
 - The host's GPU count is not established; whether phase 2 needs downtime at all depends on it.
 - The live instance's stop and cold boot times on this host are not measured; the outage total in RUNBOOK.md has four unmeasured parts.

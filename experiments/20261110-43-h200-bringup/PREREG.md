@@ -47,3 +47,9 @@ No hypothesis, metric, threshold, run count or comparison rule changes. Implemen
 - "Restore starts when the approved downtime expires" is replaced by a restore cut-off inside the window (window end minus the restore estimate), so that the total outage stays within the approval.
 - The cgroup `memory.peak` metric is read at finalisation (`cgroup-final.txt`); per-step exit status, duration and timeout are in `steps.tsv`.
 - The host's GPU count is not established (README.md); whether the window needs the live service stopped at all is decided before phase 2, not assumed.
+
+### Amendment 2 (2026-11-10, after the second pair of re-reviews of PR #69, before any H200 code has run)
+No hypothesis, metric, threshold, run count or comparison rule changes. Implementation of rules already registered above:
+- Duty 6 for exported evidence: a run's response (`out/`) and its `cp_verify.log` are exported only for runs that `cp_verify` on the box accepted (exit 0, `YES`). For other runs they are withheld and listed in `<run>/withheld.txt`; the run still counts as not `YES` and its verdict line is kept. Threshold 2's host CPU verification therefore applies to the exported bundles of accepted runs, which is every bundle that has an `out/`.
+- The kill criterion's "restore starts at that point regardless of the prover's state" now also bounds result retrieval: fetching has a budget that ends at the restore cut-off, the prover stop has its own deadline and escalation branch, and an unfinished fetch never delays the restore (RUNBOOK.md, "Window sheet", steps 5 and 6). Results not fetched by the cut-off are lost and reported as such.
+- A job whose finalisation fails (an export, the marker, the checksums) is a `FAILED` job, reported like any other negative result.

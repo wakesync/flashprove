@@ -73,7 +73,10 @@ RUN cd /opt/flashprove && verifier/build.sh && sha256sum bin/cp_verify | tee /op
 FROM verifier AS prover
 # From here on every RUN is bash with pipefail, so a failing build is not hidden by `| tail`.
 # (The toolkit/source/verifier stages are left unchanged so that phase 1's build receipts stay
-# valid; their one pipeline, nvcc --version | tail | tee, is checked by content here.)
+# valid. Their pipelines run without pipefail: nvcc --version | tail | tee and gcc --version | head |
+# tee, whose outputs are checked by content on the next line; the driver stub's echo | sha256sum -c,
+# whose last command is the check itself; and the verifier's sha256sum | tee. Phase 1's receipts establish only what those stages
+# printed and produced, not that no earlier command in such a pipeline failed.)
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN grep -q 'V13.2.86' /opt/env/nvcc.txt && grep -q '^gcc' /opt/env/gcc.txt
 # No GPU here: CUDA_VISIBLE_DEVICES= keeps the compiler sample off any GPU (version check only).

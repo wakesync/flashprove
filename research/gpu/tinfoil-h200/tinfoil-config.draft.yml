@@ -5,9 +5,12 @@
 # docs.tinfoil.sh/containers/configuration. The image may be public or private (private needs registry
 # credentials for the org); the config repo must be public.
 #
-# What it runs: one container, the prover image (Dockerfile here), on the one GPU. On boot it starts
+# GPUs: this config requests one GPU for this instance (gpus: 1 below). It says nothing about how many
+# GPUs the host has or how many are free; that count is not established (README.md).
+#
+# What it runs: one container, the prover image (Dockerfile here), on the instance's one assigned GPU. On boot it starts
 # a read-only results server on :8080 and runs the job once (run_job.sh); the results are finalised
-# and stay served whether the job succeeds, fails or times out. No secrets, no egress, no
+# and stay served whether the job succeeds, fails or times out; a failed finalisation ends FAILED. No secrets, no egress, no
 # models block (synthetic weights only), no persistent volume (so updates stay blue/green-capable),
 # no SSH. Results leave only through the attested shim: GET /status, /files, /results.tar.gz.
 cvm-version: 0.14.7          # the version the live service on this host booted with; check the template for a newer one
