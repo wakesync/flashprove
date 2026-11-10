@@ -1,0 +1,21 @@
+abl p01-ordinary-short T 13 F 12 tap 12 s 0.2
+abl p01-ordinary-short T 13 F 16 tap 12 s 0.2
+abl p02-ordinary-paragraph T 107 F 12 tap 12 s 1.5
+abl p02-ordinary-paragraph T 107 F 16 tap 12 s 1.6
+abl p03-repeat-word T 512 F 12 tap 12 s 6.9
+abl p03-repeat-word T 512 F 16 tap 12 s 6.9
+abl p04-repeat-punct T 64 F 12 tap 12 s 0.8
+abl p04-repeat-punct T 64 F 16 tap 12 s 0.8
+abl p05-code T 144 F 12 tap 12 s 1.9
+abl p05-code T 144 F 16 tap 12 s 2.0
+abl p06-digits T 465 F 12 tap 12 s 5.9
+abl p06-digits T 465 F 16 tap 12 s 6.0
+abl p07-chat-ordinary T 23 F 12 tap 12 s 0.3
+abl p07-chat-ordinary T 23 F 16 tap 12 s 0.3
+abl p08-chat-refusal T 39 F 12 tap 12 s 0.5
+abl p08-chat-refusal T 39 F 16 tap 12 s 0.5
+abl p09-multilingual T 21 F 12 tap 12 s 0.3
+abl p09-multilingual T 21 F 16 tap 12 s 0.3
+abl p10-long-mixed T 1008 F 12 tap 12 s 16.2
+abl p10-long-mixed T 1008 F 16 tap 12 s 16.9
+abl done 87.9 s

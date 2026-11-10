@@ -1,0 +1,20 @@
+{
+ "compile_seconds": 37.306,
+ "sources": {
+  "research/operators/qwen_state_commit/chunk.cpp": "bbed71436d41f5c7a453ffbed5878d7ea1ae1a6e807fb82a54aa31b9be68f4fc",
+  "research/operators/qwen_state_commit/window.py": "5afb3bd13620afa6bc0690a01281169fab37efc134f43fe6a49fc820c3b74400",
+  "research/operators/qwen_state_commit/record.py": "f342c14c81db78636e4536f240ec9c07bb552718b25f5d82c778db2a9969e410",
+  "research/operators/qwen_state_commit/sb_ref.py": "59ff96a6a079e63d83ed8d199f37028e37bfc8b29ea39112c4e1654e98356080",
+  "research/operators/qwen_state_commit/sb_summary.py": "a35804edea4b3654615efdff9cac1b81b452346464efcde1ea37b75d314c0c33",
+  "research/operators/qwen_state_commit/count.py": "918afa5fef852b080d1166b64c784b029fc7a1086afb7ed6a2b35d38abbf02b2",
+  "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770",
+  "research/operators/qwen_deltanet/product.h": "bc43212589700ea2cec2c028b356063e1fbbc8da602b5106e2b50146cd20eae8",
+  "research/operators/qwen_deltanet/reference.py": "f6fbd580bf834afd2d6280036ddf52d410be094824299e89c61eb2a1b80edaf0",
+  "blocks/iop/rng.h": "e159bf2c44e4a5a5c1b846d06ee101e56f699a521cfd198ac6cc25cd57ca4e3a"
+ },
+ "chunk_bin_sha256": "83cd81224ed050686dccb60a57f1e057b5ff0f56a930e72c3c62a128e134ea51",
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+ "python": "3.12.3",
+ "numpy": "2.4.3"
+}
