@@ -10,9 +10,9 @@ def row(name, stat, value, unit, n, spread, source, note=None, total=None, serie
     parts = [f'name: {name}']
     if series: parts.append(f'series: {series}')
     if arm: parts.append(f'arm: {arm}')
-    parts += [f'stat: {stat}', f'value: {value}']
+    parts += [f'stat: {stat}', f'value: {int(value) if isinstance(value, float) and value.is_integer() else value}']
     if total is not None: parts.append(f'total: {total}')
-    sp = 'null' if spread is None else '{sd: %s, min: %s, max: %s}' % (round(spread['sd'], 4), spread['min'], spread['max'])
+    sp = 'null' if spread is None else '{sd: %s, min: %s, max: %s}' % (round(spread['sd'], 4), round(spread['min'], 5), round(spread['max'], 5))
     parts += [f'unit: {unit}', f'n: {n}', f'spread: {sp}', f'hardware: {HW}', f'date: {DATE}', f'commit: {commit}', f'source: {source}']
     if note: parts.append(f'note: "{note}"')
     print('      - {' + ', '.join(parts) + '}')
@@ -34,7 +34,7 @@ for C in (16, 64, 1):
     summ = [json.loads(l) for l in p.read_text().splitlines() if l.startswith('{"summary"')]
     if summ:
         h = summ[0]['summary']; row(f'sa_c{C}_boundary_hostile_rejected', 'count', h['rejected'], 'count', 1, None, f'experiments/20261109-34-qwen-state-commit/runs/hostile-C{C}.jsonl', 'seed 1, sampled boundary classes b1..b5; not exhaustive', total=h['total'], series='sa-hostile', arm=f'C{C}')
-for name, f, arm in (('sb', 'sb-ranges-summary.json', 'gb12'), ('sb_gb18', 'sb-ranges-gb18-summary.json', 'gb18'), ('sb_gb24', 'sb-ranges-gb24-summary.json', 'gb24')):
+for name, f, arm in (('sb', 'sb-summary.json', 'gb12'), ('sb_gb18', 'sb-ranges-gb18-summary.json', 'gb18'), ('sb_gb24', 'sb-ranges-gb24-summary.json', 'gb24')):
     d = json.loads((R / f).read_text()); src = f'experiments/20261109-34-qwen-state-commit/runs/{f}'
     for C in ('1', '16', '64'):
         x = d[C]
