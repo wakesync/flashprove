@@ -18,6 +18,15 @@ the earlier runs and are unchanged. Tables below give r2 numbers, with r1 in bra
 differ. The section "r2: changed numbers" lists each one with its reason. The planner was not
 rerun: the count model reads its committed output, and nothing in it changed.
 
+**r3 (2026-11-10), after the round-2 re-reviews** (astra approve:
+https://github.com/wakesync/flashprove/pull/70#issuecomment-6766196703; opus request changes:
+https://github.com/wakesync/flashprove/pull/70#issuecomment-6766653896). One blocker (opus N1): r2's
+dt_bias class admitted only |dt_bias| < 1, so no honest head could be proved; r3 gives dt_bias its
+own class [-2^17, 2^17) (DESIGN 5.0, 6.2). New files `runs/model-r3.json` and `runs/bounds-r3.json`;
+r1 and r2 files unchanged. **No verdict moves.** Arm B counts, every H3 figure in the arm-B rows,
+the packed counts, the VRAM and time extrapolations are unchanged. What moved is in "r3: changed
+numbers" at the end. The tables below are r2's where r3 equals r2, and say r3 where it differs.
+
 ## Verdicts against the registered thresholds
 
 | | hypothesis | verdict |
@@ -58,8 +67,8 @@ r2 (`runs/model-r2.json`); r1 in `runs/model.json`.
 | statement | arm | T | gate columns | range cells | lookup keys | relations | laid columns | table | fits 2^22 |
 |---|---|---|---|---|---|---|---|---|---|
 | **M3a-head** | B | 16 | 1,111,897 | 296,112 | 358,118 | 2,525,004 | 1,783,641 | 2^21 | **yes** |
-| M3a-head | A (bits, one-hot tables, sums split at 256 terms) | 16 | 39,163,811 | 296,112 | 0 | 78,239,934 | 39,475,107 | 2^26 | no |
-| M3a-head | A | 1 | 2,469,611 | 19,587 | 0 | 4,947,534 | 2,502,379 | 2^22 | yes |
+| M3a-head | A (bits, one-hot tables, sums split at 256 terms) | 16 | 39,163,816 (r3) | 296,112 | 0 | 78,239,944 (r3) | 39,475,112 (r3) | 2^26 | no |
+| M3a-head | A | 1 | 2,469,616 (r3) | 19,587 | 0 | 4,947,544 (r3) | 2,502,384 (r3) | 2^22 | yes |
 | M3a-MLP | B | 16 | 835,584 | 835,584 | 2,752,512 | 2,031,616 | 4,423,680 | 2^23 | **no** [r1: yes, 2^22] |
 | one layer as one statement | B | 16 | 54,206,640 | 15,048,960 | 19,942,176 | 123,231,808 | 89,219,248 | 2^27 | no |
 | one layer as one statement | B | 1 | 3,463,200 | 992,400 | 1,471,296 | 8,589,568 | 5,937,184 | 2^23 | no |
@@ -97,6 +106,12 @@ The first of these is the reason the M3a prove time is not estimated from the ta
 Not registered, counted after the fact: arm A with a two-level 64 x 64 selector fits up to T = 9
 (2^23 at T = 16).
 
+**M3a-1's stop-rule fallback does not fit at any T (r3, opus S2).** With the head's weights in the
+proof's own oracle there is no WF range proof, so all 3,288,706 head weights need an in-oracle class
+(3 keys and 2 relations each): 9,866,118 keys, 2^23.23, before the trace is added
+(`runs/model-r3.json`, `harness.m3a1_fallback`). As specified it fits no 2^22 table; it needs a
+separate weight statement or a Qwen WF layout.
+
 ## H4: the upstream planner as an anchor for the dense family (counted)
 
 `cp_verify -plan arrays` on proxy configurations made from `prover/examples/target_full_f2`:
@@ -124,7 +139,8 @@ A proxy is not a Qwen configuration. It has Maverick's attention (40 heads of 12
 ### H5.1 Committed weights (counted from the published shapes)
 
 26,895,337,984 integers [r1: 26,895,323,648; r2 adds the 14,336 retained norm gains], 56.3 GB as
-16-bit weights with a 32-bit embedding. That is 6.7% of the Maverick shape and is smaller than one
+16-bit weights with a 32-bit embedding (r3: and the 2,304 dt_bias values at 32 bits, 56,333,477,376
+bytes; r2 56,333,472,768). That is 6.7% of the Maverick shape and is smaller than one
 H200's memory.
 
 ### H5.2 Committed values per request (counted)
@@ -219,7 +235,9 @@ for Maverick, fixed costs ignored.
   written, the answer depends on a rate nobody has measured for it. At the registered central rate
   (23 bytes per entry, from one upstream Maverick point) the per-token case with one DeltaNet
   segment per layer needs about 41 GB at T = 1,024. At this fork's own measured rate (about 220
-  bytes per entry, from a small synthetic example of a different model) the same case needs about
+  bytes per entry, from a small synthetic example of a different model; measured, unreplicated, and
+  upstream's full-size point contradicts it for the dense family, assumption 3, but nothing says
+  which rate a DeltaNet segment follows) the same case needs about
   393 GB, and nothing fits a 1,024-token window; the largest window that fits is then 256 tokens.
   Both are extrapolations. The per-layer cut also needs 81 segments, and `cp_verify` refuses more
   than 64 today. The low-rank form is not established and is not the plan.
@@ -343,6 +361,32 @@ bounds `runs/bounds.json` and `runs/bounds-r2.json`.
 | largest windows under 127 GB at the own rate | not stated | 256 (per-token), 512 (low-rank, not established) | made prominent (astra 5, opus M2) |
 | segments per window, per-layer cut | 81 | 81 | now compared with cp_verify's cap of 64 |
 
+## r3: changed numbers (old r2 value, new r3 value, reason)
+
+All counted, deterministic, n = 1. Source: `runs/model-r2.json` / `runs/bounds-r2.json` (r2) and
+`runs/model-r3.json` / `runs/bounds-r3.json` (r3). Reason for every row: dt_bias's own class
+[-2^17, 2^17) (opus round-2 N1), except where named.
+
+| quantity | r2 | r3 | reason |
+|---|---|---|---|
+| dt_bias in-trace class | [-4,096, 4,095] | [-2^17, 2^17) | N1: honest real (dt_int -23,424 .. 78,848) and synthetic (-28,292 .. -9,225) heads were out of class |
+| arm B keys and relations per dt_bias cell | 3 / 2 | 3 / 2 | hi in [0, 64) by a key and its complement, same shape as {0, 1} |
+| M3a-head arm B, T = 16 (every column) | 1,783,641 laid, 2,525,004 relations | unchanged | same |
+| M3a-head arm A T16 gate columns / relations / laid columns | 39,163,811 / 78,239,934 / 39,475,107 | 39,163,816 / 78,239,944 / 39,475,112 | the dt cell has 18 bits, not 13 |
+| M3a-head arm A T1 gate columns / relations / laid columns | 2,469,611 / 4,947,534 / 2,502,379 | 2,469,616 / 4,947,544 / 2,502,384 | same; still 2^22 |
+| arm A two-level fallback (descriptive), T16 laid / at max T 9 laid | 6,885,907 / 3,888,650 | 6,885,912 / 3,888,655 | same; max T still 9 |
+| weights bytes (int16, 32-bit embedding, r3 32-bit dt_bias) | 56,333,472,768 | 56,333,477,376 | 2,304 dt_bias values (48 layers x 48 heads) are four-digit units: +4,608 bytes |
+| VRAM with resident weights (every packed case) | e.g. 97.35841 GB | +0.0000046 GB | same; no verdict moves |
+| M3a-1 fallback class keys | not counted | 9,866,118 (2^23.23), fits at no T | opus S2 |
+| bounds: softplus key row | 8,491,022 (2^23.0175) | 8,617,998 (2^23.0389) | dt_bias term 4,096 -> 2^17 |
+| bounds: M3 rows | 33 | 35 | two dt_bias class rows (2^19.0, 2^13.0) |
+| bounds: worst row | 2^60.27 | 2^60.27 | unchanged (q floor) |
+| bounds: completeness (new section C) | not checked | 5 of 5 cell kinds in class on PR #68 layer-0 quantiles and the M2 synthetic dt_bias; r2's dt class refuses both dt_bias sets | N1 |
+| cited real bias 19.3 (astra) | dt_int 79,053 out of class | in class | N1 |
+
+Unchanged in r3: H1 to H5 verdicts, every arm-B count, MLP counts, layer counts, packed entries,
+every GB and second figure of H5.3 except the resident-weights sum, the H200 answer (unknown).
+
 ## Open risks
 
 See DESIGN.md section 11. The ones that bear on these numbers:
@@ -353,7 +397,10 @@ See DESIGN.md section 11. The ones that bear on these numbers:
 - F = 12 with the M2 lowering FAILED the fidelity threshold on layer 0 (PR #68: 10 prompts,
   F = 12, 14, 16). Ranges were measured on layer 0 only, with the memory read at 77% of its bound.
   Deeper layers and every abliterated layer (17 to 51) are unmeasured.
-- The r2 changes to the count model are unreviewed and have no builder.
+- The r2 count-model changes were reproduced by two round-2 reviewers; the r3 changes are
+  unreviewed. None has a builder.
+- The dt_bias class is checked for completeness on five layer-0 quantiles only. The softplus input
+  still leaves table format v1's domain on real weights (DESIGN 8.2).
 - Lookups are a precondition for M3a. PR #67 has standalone arm-A pieces with unbound inputs; the
   efficient lookup keyed on the statement's committed cells exists nowhere yet.
 - No Qwen layout of the weight table's range proof exists; the weight-cell tie is designed and

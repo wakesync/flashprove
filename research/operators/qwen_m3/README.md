@@ -30,13 +30,21 @@ Their outputs are `runs/model-r2.json` and `runs/bounds-r2.json`. `runs/model.js
 `runs/bounds.json` are the r1 outputs and are kept unchanged; the r1 code is at commit `be3da765`.
 The change list is DESIGN.md section 12.
 
+**Revision r3 (2026-11-10)**, after the round-2 re-reviews: dt_bias has its own class
+[-2^17, 2^17) (r2's [-4,096, 4,095] at 2^F refused every honest head); `bounds.py` adds a
+completeness check of every weight-cell class against PR #68's layer-0 values
+(`experiments/20261109-8-qwen-real-weights/runs/weight-stats.json`); `count_m3.py` counts the M3a-1
+fallback and writes `H5.how_to_read`. Outputs `runs/model-r3.json` and `runs/bounds-r3.json`; the
+r2 files are kept unchanged and the r2 code is at commit `82a4601e`. Change list: DESIGN.md
+section 13.
+
 ## Files
 
 | file | what it does | output |
 |---|---|---|
 | `planner_proxy.py` | runs the upstream planner (`cp_verify -plan arrays`) on proxy shapes for Qwen's dense family and sums its arrays | `runs/planner-proxy.json`, `runs/planner-*.arrays.txt` |
-| `count_m3.py` | counts the M3 statements on the research harness (imports `../qwen_deltanet_m2/count_model.py`), counts the packed form of the full model, and extrapolates VRAM, time and proof size | `runs/model-r2.json` (r1: `runs/model.json`) |
-| `bounds.py` | sums \|term\| over every term of every relation with each factor at the edge of its enforced class, exactly; fails if one reaches 2^63, if a control row does not wrap, or if the r1 floor counterexample is not refused | `runs/bounds-r2.json` (r1: `runs/bounds.json`) |
+| `count_m3.py` | counts the M3 statements on the research harness (imports `../qwen_deltanet_m2/count_model.py`), counts the packed form of the full model, and extrapolates VRAM, time and proof size | `runs/model-r3.json` (r2: `runs/model-r2.json`, r1: `runs/model.json`) |
+| `bounds.py` | sums \|term\| over every term of every relation with each factor at the edge of its enforced class, exactly; fails if one reaches 2^63, if a control row does not wrap, if the r1 floor counterexample is not refused, or (r3) if an honest layer-0 weight is outside its class | `runs/bounds-r3.json` (r2: `runs/bounds-r2.json`, r1: `runs/bounds.json`) |
 
 ## Reproduce every number
 
@@ -48,19 +56,23 @@ V=$(mktemp -d)      # a private directory; verifier/build.sh refuses one that ot
 bash verifier/build.sh - "$V"
 R=experiments/20261109-32-qwen-m3-design/runs
 python3 research/operators/qwen_m3/planner_proxy.py --cp-verify "$V/cp_verify" --out $R
-python3 research/operators/qwen_m3/count_m3.py --planner $R/planner-proxy.json --json $R/model-r2.json
-python3 research/operators/qwen_m3/bounds.py --json $R/bounds-r2.json
+python3 research/operators/qwen_m3/count_m3.py --planner $R/planner-proxy.json --json $R/model-r3.json
+python3 research/operators/qwen_m3/bounds.py --json $R/bounds-r3.json
 ```
 
-To check the r2 outputs without the planner step (the count reads the committed
+`bounds.py` reads `experiments/20261109-8-qwen-real-weights/runs/weight-stats.json` by a path
+relative to the repository root (option `--weight-stats`), so run it from the root.
+To check the r3 outputs without the planner step (the count reads the committed
 `planner-proxy.json`), run the last two lines into a scratch directory and compare with `cmp`.
-The planner step rewrites `runs/planner-*`; its outputs are unchanged since r1.
+The planner step rewrites `runs/planner-*`; its outputs are unchanged since r1. The r2 files come
+from the code at `82a4601e` (`git show 82a4601e:<path>` for each of the two scripts and
+`../qwen_deltanet_m2/count_model.py`).
 
-`count_m3.py` prints the five verdicts (H1 to H5). `runs/model-r2.json` holds every number in
+`count_m3.py` prints the five verdicts (H1 to H5), then `H5_r2_plain_answer`. `runs/model-r3.json` holds every number in
 RESULTS.md: `harness` (H1, H2, H3, the MLP and layer statements), `H4`, `packed` (per case and
 window), `m3b`, `sensitivity_open_norm_scaling`, `vram_calibration_descriptive`, `H5`, and
 `H5_r2` (the registered verdicts kept, the own-rate case, segment counts against cp_verify's cap,
-the low-rank status).
+the low-rank status), and (r3) `harness.m3a1_fallback`.
 `runs/model-first-run.json` is the first run, kept because one design choice was changed after it
 (RESULTS.md, "Deviations").
 
@@ -80,9 +92,17 @@ the low-rank status).
 - Every low-rank figure (`low_rank_*`) is **not established**: it depends on a construction that is
   not specified or proved (DESIGN 7.3). The plan of record is the per-token cases.
 - `fits_log22` now also requires every relation to have at most 256 terms (the harness's cap).
+- **The `H5` field and the `H5` block that `count_m3.py` prints are not a fit answer.** Its strings
+  ("fits, also on the high estimate", `pass_: true`, `registered_expectation_held: true`) are the
+  registered decision rule applied at the registered rates. They include segmentations chosen after
+  the first run was seen (post hoc) and the low-rank case, which is not established. This holds for
+  the same strings in `runs/model-r2.json` and `runs/model.json`, which are not edited. The answer
+  is in `H5_r2.plain_answer`: **unknown**. From r3 the file also carries this note as
+  `H5.how_to_read`, and the script prints the plain answer after H5.
 
 ## Limits
 
-No proof, no verifier, no hostile suite: there is nothing here to attack. The packed DeltaNet
+No proof, no verifier, no hostile suite: there is no executable M3 verifier to attack. The design's
+equations and the bound ledger can be attacked on paper, as both reviews did. The packed DeltaNet
 count describes a GPU sub-proof that does not exist. A proxy configuration is not a Qwen
 configuration: it has Maverick's attention shape and no DeltaNet.

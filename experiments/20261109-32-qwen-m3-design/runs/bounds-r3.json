@@ -1,0 +1,505 @@
+{
+ "rows": [
+  {
+   "relation": "in_proj: sum_k a_k W_kj - 2^s x_j - r_j",
+   "bound": 140780417056767,
+   "log2": 47.00044,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "a: admit; W: weight table (linear claim, M3a); x: rng; r: exact [0, 2^s), s <= 24",
+   "then": "x_j = floor(sum / 2^s)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "conv: sum_4 tap*x - 2^s c - r",
+   "bound": 140874927292415,
+   "log2": 47.001408,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "tap: wclass; x: rng (in_proj outputs and history); c: rng; r: exact [0, 2^s)",
+   "then": "c = floor(acc / 2^s)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "conv gate: tap * x",
+   "bound": 34359734272,
+   "log2": 35.0,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "tap: wclass; x: rng",
+   "then": "gate product is the integer product",
+   "n_terms_summed": 1
+  },
+  {
+   "relation": "SiLU key: c - step (idx - off) - r",
+   "bound": 8486926,
+   "log2": 23.016811,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "c: rng; idx: table key (12 bits); off 2,048; r: [0, 16) by two keys",
+   "then": "|c| < 8 x 2^F: the domain bounds c exactly",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "q/k norm S5: sum x^2 + eps - sigma^2 - e1",
+   "bound": 281612172487825,
+   "log2": 48.000703,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "x: table (SiLU image, 32,741); sigma, e1: two key12 limbs each",
+   "then": "with S6: sigma = isqrt(sum x^2 + eps)",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "q/k norm S6: sigma^2 + 2 sigma - sum x^2 - eps - e2",
+   "bound": 281612206042255,
+   "log2": 48.000703,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "as S5; e2: two key12 limbs",
+   "then": "sigma = isqrt",
+   "n_terms_summed": 5
+  },
+  {
+   "relation": "q/k norm S7: Rc sigma + rr - 2^36",
+   "bound": 1152921504606846976,
+   "log2": 60.0,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "Rc: three key12 limbs; sigma, rr: limbs",
+   "then": "Rc = floor(2^36 / sigma) (with S8)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "q/k norm S8: sigma - rr - gap - 1",
+   "bound": 50331646,
+   "log2": 25.584962,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "limbs",
+   "then": "rr < sigma",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "k: x Rc - 2^24 k - r",
+   "bound": 2390681876135962,
+   "log2": 51.086344,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "x: table; Rc: limbs; k: rng; r: two key12",
+   "then": "|k| <= 2^12 (|x| <= sigma)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "q: 362 Rc x - 2^36 q - r",
+   "bound": 1390940620680013357,
+   "log2": 60.270767,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "362: format (round(2^12 / sqrt(128))); x: table; Rc: limbs; q: rng; r: three key12",
+   "then": "|q| <= 362",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "softplus key: ar + dt_bias - step (idx - off) - r",
+   "bound": 8617998,
+   "log2": 23.038921,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "ar: rng; dt_bias: dtclass [-2^17, 2^17) (r3; r2 used the 4,096 of wclass); idx: table key",
+   "then": "the softplus input is in the domain",
+   "n_terms_summed": 5
+  },
+  {
+   "relation": "decay: cA sp - 2^sA g - r",
+   "bound": 140737756790783,
+   "log2": 47.000003,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "cA: wclass; sp: table (softplus); g: rng; r: exact [0, 2^sA)",
+   "then": "g = floor(cA sp / 2^sA)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "recurrence g1 = S a",
+   "bound": 34359734272,
+   "log2": 35.0,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "S: rng; a: table (exp image)",
+   "then": "",
+   "n_terms_summed": 1
+  },
+  {
+   "relation": "recurrence P_j = sum_i S_i k_i",
+   "bound": 4398045986816,
+   "log2": 42.0,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "S: rng; k: implied",
+   "then": "",
+   "n_terms_summed": 1
+  },
+  {
+   "relation": "recurrence g5 = P_j a",
+   "bound": 18014396361998336,
+   "log2": 54.0,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "P_j: row above; a: table",
+   "then": "",
+   "n_terms_summed": 1
+  },
+  {
+   "relation": "recurrence: 2^24 (v - M) + r - g5",
+   "bound": 18155683153182719,
+   "log2": 54.011271,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "v: table (SiLU image); M: rng; r: two key12; g5: row above",
+   "then": "M = v - floor(g5 / 2^24)",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "recurrence g6 = (v - M) beta",
+   "bound": 34493841408,
+   "log2": 35.00562,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "beta: table (sigmoid)",
+   "then": "",
+   "n_terms_summed": 1
+  },
+  {
+   "relation": "recurrence: 2^12 delta + r - g6, delta = 2^18 hi + lo",
+   "bound": 9007267034578943,
+   "log2": 53.000011,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "hi, lo: rng each; r: key12",
+   "then": "delta = floor(g6 / 2^12)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "recurrence g3 = k delta",
+   "bound": 9007232540733440,
+   "log2": 53.000005,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "k: implied; delta: both limbs at the edge",
+   "then": "",
+   "n_terms_summed": 1
+  },
+  {
+   "relation": "recurrence: 2^12 S' + r - g1 - g3",
+   "bound": 9007301260206079,
+   "log2": 53.000016,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "S': rng; r: key12",
+   "then": "S' = floor(.)",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "output: 2^12 o + r - sum_i S'_i q_i",
+   "bound": 423054232319,
+   "log2": 38.622052,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "S': rng; q: implied 362; o: rng",
+   "then": "o = floor(.)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "gated norm S5: sum o^2 + eps - sigma^2 - e1",
+   "bound": 9288672067190929,
+   "log2": 53.044394,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "o: rng; sigma, e1: limbs",
+   "then": "sigma = isqrt",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "gated norm S6: sigma^2 + 2 sigma - sum o^2 - eps - e2",
+   "bound": 9288672100745359,
+   "log2": 53.044394,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "as S5",
+   "then": "",
+   "n_terms_summed": 5
+  },
+  {
+   "relation": "gated norm S7: Rc sigma + rr - 2^36",
+   "bound": 1152921504606846976,
+   "log2": 60.0,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "limbs",
+   "then": "Rc = floor(2^36 / sigma)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "gated norm: o Rc - 2^24 w - r",
+   "bound": 576601421063913472,
+   "log2": 59.000352,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "o: rng; Rc: limbs; w: rng",
+   "then": "|w| <= 2^12 (implied, not used below)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "gated norm: s w - 2^12 t - r",
+   "bound": 309011120154,
+   "log2": 38.168868,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "s: table (SiLU image); w: rng (the implied 2^12 is not used)",
+   "then": "t = floor(s w / 2^12)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "gated norm: gain t - 2^sg y - r",
+   "bound": 140771848089599,
+   "log2": 47.000352,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "gain: wclass; t, y: rng; r: exact [0, 2^sg)",
+   "then": "y = floor(gain t / 2^sg)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "out_proj (one head, inner 128): sum_j y_j Wo_jk - out_k",
+   "bound": 4400193470463,
+   "log2": 42.000704,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "y: rng; Wo: weight table (product argument); out: admit",
+   "then": "the head contribution",
+   "n_terms_summed": 2
+  },
+  {
+   "relation": "weight cell class: w + 4096 - lo - 2^12 hi",
+   "bound": 16383,
+   "log2": 13.999912,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "lo: key12; hi: {0, 1} by a key and its complement",
+   "then": "w in [-4096, 4095] exactly",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "dt_bias class (r3): w + 2^17 - lo - 2^12 hi",
+   "bound": 524287,
+   "log2": 18.999997,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "lo: key12; hi: key12 with complement 63 - hi",
+   "then": "dt_bias in [-2^17, 2^17) exactly",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "dt_bias class (r3): 63 - hi - c",
+   "bound": 8253,
+   "log2": 13.010703,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "hi, c: key12",
+   "then": "hi < 2^6",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "exact 2^s remainder: 2^(s-12) - 1 - r1 - c",
+   "bound": 12287,
+   "log2": 13.584845,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "r1, c: key12",
+   "then": "r < 2^s exactly",
+   "n_terms_summed": 4
+  },
+  {
+   "relation": "M3a-MLP gate/up: sum_k m_k W - 2^s x - r",
+   "bound": 140780417056767,
+   "log2": 47.00044,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "m: admit; W: table; x: rng; r: exact",
+   "then": "gw, u",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "M3a-MLP: s u - 2^12 h - r (r2)",
+   "bound": 309011120154,
+   "log2": 38.168868,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "s: table (SiLU of gw); u, h: rng; r: key12",
+   "then": "h = floor(s u / 2^12)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "M3a-MLP down (r2): sum_j h_j Wd_jk - 2^s out - r",
+   "bound": 36626931273170943,
+   "log2": 55.023754,
+   "below_2_63": true,
+   "control": false,
+   "bounds_from": "h: rng; Wd: table; out: admit",
+   "then": "MLP output",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "CONTROL, r1 M3a-MLP down: sum_j (s u)_j Wd_jk (product unrounded)",
+   "bound": 19619542414009565183,
+   "log2": 64.088925,
+   "below_2_63": false,
+   "control": true,
+   "bounds_from": "the r1 lowering: s u enters the down projection raw",
+   "then": "wraps: this row must fail (found in r2)",
+   "n_terms_summed": 3
+  },
+  {
+   "relation": "CONTROL, #66 M2 at 8ec7c799: cg w - 2^12 y - r with cg = 2^62",
+   "bound": 18446752869802573823,
+   "log2": 64.000001,
+   "below_2_63": false,
+   "control": true,
+   "bounds_from": "cg not bounded at 8ec7c799 (the #66 review alias)",
+   "then": "wraps: this row must fail",
+   "n_terms_summed": 3
+  }
+ ],
+ "worst_log2": 60.270767,
+ "all_m3_relations_below_2_63": true,
+ "controls_wrap": true,
+ "exact_class": {
+  "counterexample": {
+   "sg": 8,
+   "gain": 1,
+   "t": 0,
+   "y": -1,
+   "r": 256,
+   "relation_holds": true,
+   "true_floor": 0
+  },
+  "r1_class_0_to_2e12_accepts": true,
+  "r2_class_0_to_2e_sg_accepts": false,
+  "r2_second_solutions_in_sweep": 0,
+  "pass_": true
+ },
+ "completeness": {
+  "source": "experiments/20261109-8-qwen-real-weights/runs/weight-stats.json",
+  "rows": [
+   {
+    "tensor": "conv_taps",
+    "values": [
+     -0.51171875,
+     -0.10205078125,
+     -1.9490718841552734e-05,
+     0.10302734375,
+     0.431640625
+    ],
+    "exponent": 12,
+    "ints": [
+     -2096,
+     -418,
+     0,
+     422,
+     1768
+    ],
+    "class_": "[-4096, 4095]",
+    "in_class": true,
+    "smallest_abs_int": 0
+   },
+   {
+    "tensor": "gated_norm_gain x sqrt(128)",
+    "values": [
+     8.883028938656004,
+     9.027543887061006,
+     9.811106588963348,
+     10.506280943217373,
+     10.518213370149896
+    ],
+    "exponent": 8,
+    "ints": [
+     2274,
+     2311,
+     2512,
+     2690,
+     2693
+    ],
+    "class_": "[-4096, 4095]",
+    "in_class": true,
+    "smallest_abs_int": 2274
+   },
+   {
+    "tensor": "cA = exp(A_log)",
+    "values": [
+     0.0038391664740261636,
+     0.0041443251923026425,
+     0.030672923016533588,
+     0.24057071377629255,
+     0.3375851514160396
+    ],
+    "exponent": 13,
+    "ints": [
+     31,
+     34,
+     251,
+     1971,
+     2765
+    ],
+    "class_": "[-4096, 4095]",
+    "in_class": true,
+    "smallest_abs_int": 31
+   },
+   {
+    "tensor": "dt_bias, real layer 0",
+    "values": [
+     -5.71875,
+     -5.60125,
+     -1.80859375,
+     18.83875,
+     19.25
+    ],
+    "exponent": 12,
+    "ints": [
+     -23424,
+     -22943,
+     -7408,
+     77164,
+     78848
+    ],
+    "class_": "[-2^17, 2^17) (r3)",
+    "in_class": true,
+    "r2_class_minus4096_4095_accepts": false
+   },
+   {
+    "tensor": "dt_bias, M2 synthetic init edges",
+    "values": [
+     -6.9072552373154705,
+     -2.2521684610440906
+    ],
+    "exponent": 12,
+    "ints": [
+     -28292,
+     -9225
+    ],
+    "class_": "[-2^17, 2^17) (r3)",
+    "in_class": true,
+    "r2_class_minus4096_4095_accepts": false
+   }
+  ],
+  "cited_19_3": {
+   "dt_int": 79053,
+   "in_r3_class": true,
+   "in_r2_class": false
+  },
+  "real_dt_bias_inside_softplus_domain_minus8_8": false,
+  "note": "class completeness only: an honest dt cell is now admissible. The softplus input ar + dt_bias still leaves table format v1's domain [-8, 8) on real weights (DESIGN 8.2); that needs clamp semantics or a wider softplus domain and is not fixed by the class.",
+  "pass_": true
+ },
+ "note": "proved from the class edges by exact integer arithmetic (sum of |term| over all terms); not sampled, not a machine-checked proof, not a test of a verifier. The weight-cell tie is a random linear check in the field and needs no no-wrap row."
+}

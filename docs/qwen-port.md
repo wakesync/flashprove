@@ -46,7 +46,7 @@ needed for it. A proof only earns its keep where the verifier cannot do that.
 | step | proved | the verifier recomputes | not covered |
 |---|---|---|---|
 | M1, M1b (done) | the state update and the head's output for 4 tokens, for inputs that are all public | nothing: it is given every input | everything else in the layer; any link to weights. Since all inputs are public, a verifier could have computed the result itself |
-| M2 design (in review) | by design: the same for 16 tokens, plus the head's output norm | conv, SiLU, the q/k norm and the gates, from public inputs | the layer's matrices, the MLP, other layers. Still all-public: a rehearsal of the machinery, not a useful proof |
+| M2 design (done; merged, PR #66) | by design: the same for 16 tokens, plus the head's output norm | conv, SiLU, the q/k norm and the gates, from public inputs | the layer's matrices, the MLP, other layers. Still all-public: a rehearsal of the machinery, not a useful proof |
 | M3a (planned) | one head from the layer's input to its output, **against committed weights**; then a layer as 48 head proofs and one MLP proof | the layer's public input checks; adding up the 48 public head outputs | the link between layers; the state carried from an earlier chunk; attention layers; the output head |
 | M3b (planned) | a 4-layer block with everything between its ends committed, including the carried state | only the commitment ID and public-input checks | the other 60 layers; real weights |
 | Full model (planned) | every layer from token ids to the next token, against one commitment | only the commitment ID and public-input checks | how close the integer model is to the real one; vision; sampling; whether the commitment is the advertised checkpoint |
@@ -68,9 +68,18 @@ Counted, not built ([RESULTS](../experiments/20261109-32-qwen-m3-design/RESULTS.
 **Whether the full model fits one 141 GB GPU is unknown.** Every estimate is an extrapolation
 from another model, for a GPU sub-proof that has not been written. At the rate taken from
 upstream's published Maverick run, some designs come in under the limit. At the one GPU memory
-rate this fork has measured itself (a small made-up model), none fits a 1,024-token window; the
-largest window that fits is then 256 tokens. The two rates differ by ten times, and only a
+rate this fork has measured itself (a small made-up model; one reading, not repeated, and
+upstream's full-size run contradicts it for the ordinary layers), none fits a 1,024-token window;
+the largest window that fits is then 256 tokens. The two rates differ by ten times, and only a
 measured Qwen run can say which applies. Do not quote either as a result.
+
+**One fix in the third revision of the M3 design (r3).** The second revision fixed a small per-head
+weight, the decay bias (dt_bias), to a number range that real Qwen weights cannot meet, and the
+test weights could not meet it either, so no honest proof would have been possible. It now has its
+own, wider range, checked against the real layer-0 values. The sizes did not move in any way that
+matters. Next steps that are planned and not done: the verifier limit changes of issue #35, a CPU
+reference of the GPU form of the DeltaNet trace, and one cheap measurement of GPU memory per
+committed value on the H200, which is the number that decides between the two rates above.
 
 ## Open risks
 

@@ -190,3 +190,17 @@ H3 unchanged (PASS, 2^21); H5 as in A1, with the low-rank case now marked **not 
 (review of PR #71), so the registered PASS rests on a construction that is not specified or
 proved, and fit on one H200 is reported as unknown. M3a-MLP, reported without a threshold, moves
 from 2^22 to 2^23 at T = 16.
+
+### A5 (2026-11-10, retrospective): r3, dt_bias class after the round-2 re-reviews of PR #70
+Added after the round-2 re-reviews (astra approve, opus request changes, both at `82a4601e`). Opus
+found that r2's dt_bias scale (2^F) and weight-cell class ([-4,096, 4,095]) together admit only
+|dt_bias| < 1, while real layer-0 dt_bias (PR #68) and the M2 synthetic init both lie outside it:
+no honest proof was possible. r3 gives dt_bias its own exact class [-2^17, 2^17) at 2^F, the same
+3 keys and 2 relations in arm B, 18 bits in arm A; the bound ledger's softplus key row uses 2^17;
+a completeness check against PR #68's layer-0 quantiles is added to `bounds.py`; the M3a-1
+hostile suite gains honest-completeness cases. Also: the M3a-1 fallback is counted (it fits no
+2^22 table at any T), the remainder layout at s <= 12 is made explicit, and three ladder rungs are
+added as next steps. Outputs are new files (`runs/model-r3.json`, `runs/bounds-r3.json`); the
+first-run, r1 and r2 files are unchanged. Effect on the registered verdicts: none. H1, H2, H4
+unchanged; H3 unchanged (arm B counts do not move: PASS, 2^21); H5 as in A1 and A4 (fit on one
+H200 unknown). Changed numbers are listed in RESULTS.md, "r3: changed numbers".

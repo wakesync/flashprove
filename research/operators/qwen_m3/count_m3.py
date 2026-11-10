@@ -10,7 +10,8 @@ Two lowerings are counted. They are different things and are never added togethe
    imported, not copied. H1 and H2 check that this file still reproduces the measured M1 / M1b
    statements and the M2 head counts. M3 adds, on top of the M2 head: in_proj outputs as committed
    cells, the 4-tap conv with committed taps, SiLU / softplus / exp / sigmoid as function-table
-   lookups, the q/k L2 norm, the gates, and the gated norm's coefficient cg as a committed cell.
+   lookups, the q/k L2 norm, the gates, and the gated norm with a committed gain and no derived
+   coefficient (s = Ts[z], t = floor(s w / 2^F), y = floor(gain t / 2^sg); M2's cg is gone, DESIGN 5.4).
    TERM counts are PROVISIONAL: a review of #66 found that the norm's term counts in
    count_model.py do not match one explicit lowering (it reproduced columns, range cells, keys,
    relations and layout independently). Sizing here uses only the reproduced kinds of count.
@@ -33,10 +34,28 @@ r2 (2026-11-10, after two reviews of PR #70; DESIGN.md section 12 lists every ch
     [-4096, 4095] and an addressed tie to the committed weight table (wcells below);
   - arm A's one-hot sums of 4,097 terms are split into partial sums of at most 256 terms (the
     harness's own cap, research/operators/qwen_deltanet/product.h, wide_fault);
-  - M3a-MLP: the up value u gets an exact class [-2^17, 2^17); at the range check's 2^23 the down
-    projection's relation can reach p (bounds.py, control row);
+  - M3a-MLP: the product s x u is rounded to h = floor(s u / 2^F), a range cell with an exact
+    12-bit remainder, and the down projection reads h. r1 fed the raw s x u in, and at the range
+    check's 2^23 its relation can reach p (bounds.py, control row). The other fix considered, an
+    exact class [-2^17, 2^17) on u with the product unrounded, was NOT adopted; it is counted for
+    comparison as mlp_alt_exact_u (same 2^23 table at T = 16);
   - the weight inventory counts the retained norm gains;
   - H5 carries the plain answer, the fork's own-rate case, and the segment cap of cp_verify.
+
+r3 (2026-11-10, after the round-2 reviews of PR #70; DESIGN.md section 13):
+  - dt_bias gets its OWN exact class [-2^(F+5), 2^(F+5)) = [-2^17, 2^17) at F = 12 (dt_int =
+    RNE(2^F dt_bias), so |dt_bias| < 32). r2 gave it the weight-cell class [-4096, 4095], which
+    admits only |dt_bias| < 1: real layer 0 (PR #68) has dt_int -23,424 .. 78,848 and the M2
+    synthetic init -28,292 .. -9,225, so no honest head could be proved (opus round-2 N1).
+    Arm B: dt + 2^17 = lo (12-bit key) + 2^12 hi, hi in [0, 2^6) by a key and its complement: the
+    same 3 keys and 2 relations as the narrow class, so arm B counts do not move. Arm A: 18 bits
+    instead of 13 for that one cell. In the weight table dt_bias is a four-digit unit (as the
+    embedding), 2 more bytes per value;
+  - the M3a-1 stop-rule fallback (every head weight classed in the proof's own oracle) is counted
+    (m3a1_fallback): its class keys alone exceed 2^23, so it fits no 2^22 table at any T;
+  - H5 (the registered rule's verdict strings) is printed with a note saying what it is not;
+  - vrem: for a shift s <= 12 the high limb is omitted (two keys); the count keeps three, the
+    layout for s > 12, so it is the larger of the two.
 
 usage: count_m3.py --planner <runs/planner-proxy.json> [--json out.json]
 """
@@ -72,27 +91,41 @@ def wide(c, nterms, n=1):
 
 
 def vrem(c, n=1):
-    """Exact remainder for a public tensor shift 2^s, s in 1..24 (r2, review must-fix 1). Arm B: limbs
-    r0, r1 (12-bit keys, r = r0 + 2^12 r1) and one complement key on the top limb that is in use
-    (2^(s - 12) - 1 - r1 if s > 12, else 2^s - 1 - r0, with r1 = 0 then by a target), one relation for
-    it. Arm A: s exact bits, counted at s = 24. Returns the terms added to the floor relation."""
+    """Exact remainder for a public tensor shift 2^s, s in 1..24 (r2, review must-fix 1). Arm B, the
+    layout is fixed by the public s:
+      s > 12:  limbs r0, r1 (12-bit keys, r = r0 + 2^12 r1) and the complement key
+               2^(s - 12) - 1 - r1, one relation for it: 3 keys, 1 relation;
+      s <= 12: r = r0 only, NO high limb (r3: r2's text left an unused r1 that nothing would
+               constrain), and the complement key 2^s - 1 - r0: 2 keys, 1 relation.
+    The count uses the s > 12 layout everywhere (3 keys), so for small shifts it is one key a floor
+    above the layout. Arm A: s exact bits, counted at s = 24. Returns the terms added to the floor
+    relation."""
     if c.arm == 'B':
         c.key(3 * n); c.rel(2, n)
         return 2
     return c.bits(24, n)
 
 
-def wcells(c, n):
-    """r2 (review must-fix 3): n weight cells read directly by the trace. Each gets the exact class
-    [-4096, 4095] in the trace (arm B: w + 4096 = lo + 2^12 hi, lo a 12-bit key, hi in {0, 1} by a key
-    and its complement; arm A: 13 bits), and all n are tied to the committed weight table by ONE
-    batched equality: sum_i rho_i w_i = the opened combination of the table entries at the cells'
-    addresses (rho from the transcript after the trace is committed), split into relations of at
-    most 256 terms. The opening on the weight table's side is outside this count."""
+DT_CLASS_BITS = 12 + 5   # r3: dt_bias class [-2^(F+5), 2^(F+5)) at F = 12, so |dt_bias| < 32;
+                         # arm A decomposes dt + 2^17 in [0, 2^18): DT_CLASS_BITS + 1 bits
+
+
+def wcells(c, n, n_dt=0):
+    """r2 (review must-fix 3): n weight cells read directly by the trace. Each gets an exact class in
+    the trace, and all n are tied to the committed weight table by ONE batched equality:
+    sum_i rho_i w_i = the opened combination of the table entries at the cells' addresses (rho from
+    the transcript after the trace is committed), split into relations of at most 256 terms. The
+    opening on the weight table's side is outside this count.
+    Classes: n - n_dt cells (conv taps, gain, cA) get [-4096, 4095] (arm B: w + 4096 = lo + 2^12 hi,
+    lo a 12-bit key, hi in {0, 1} by a key and its complement; arm A: 13 bits). r3: the n_dt dt_bias
+    cells get [-2^17, 2^17) (arm B: w + 2^17 = lo + 2^12 hi, hi in [0, 64) by a key and its
+    complement 63 - hi: the same 3 keys and 2 relations; arm A: 18 bits)."""
     if c.arm == 'B':
         c.key(3 * n); c.rel(3, n); c.rel(2, n)
     else:
-        w = c.bits(13, n); c.rel(1 + w, n)
+        w = c.bits(13, n - n_dt); c.rel(1 + w, n - n_dt)
+        if n_dt:
+            w = c.bits(DT_CLASS_BITS + 1, n_dt); c.rel(1 + w, n_dt)
     wide(c, n + 1)
 
 # ------------------------------------------------------------------------------------------------
@@ -125,11 +158,16 @@ def weights():
     # The stream pre-norms and the final norm are folded into the next matrix at conversion (as
     # upstream does, docs/model.md 11.3), so they are not separate tensors here.
     dn_gain, at_gain = Q['D'], 2 * Q['attn_dh']
+    # r3: dt_bias at 2^F (DESIGN 5.0) needs up to 18 bits (real layer 0: |dt_int| <= 78,848), so in
+    # the weight table it is a four-digit (32-bit) unit like the embedding: 2 more bytes per value.
+    dt_values = Q['deltanet_layers'] * Q['v_heads']
     dn_r2 = dict(dn, gated_norm_gain=dn_gain); at_r2 = dict(at, qk_norm_gains=at_gain)
     total_r2 = total + Q['deltanet_layers'] * dn_gain + Q['attention_layers'] * at_gain
     return dict(deltanet_layer=dn_r2, deltanet_layer_total=dn_total + dn_gain, attention_layer=at_r2,
                 attention_layer_total=at_total + at_gain,
-                embedding=emb, output_head=head, total=total_r2, bytes_int16_plus_emb32=2 * (total_r2 - emb) + 4 * emb,
+                embedding=emb, output_head=head, total=total_r2,
+                bytes_int16_plus_emb32=2 * (total_r2 - emb) + 4 * emb + 2 * dt_values,
+                bytes_r2_without_dt_bias_32bit=2 * (total_r2 - emb) + 4 * emb, dt_bias_values_32bit=dt_values,
                 total_r1_without_gains=total, retained_gains=total_r2 - total,
                 m3a_one_v_head=one_v_head + Q['D'], m3a_one_v_head_r1_without_gain=one_v_head,
                 m3a_weight_cells_read_by_trace=Q['conv_taps'] * 3 * Q['D'] + Q['D'] + 2,
@@ -198,7 +236,8 @@ def head_extras(c, T, D=128, F=12):
         flookup(c, 3)                                                # softplus, exp(-x), sigmoid
         c.col(1); c.rel(2, 2); c.rcell(1); r = vrem(c, 1); c.rel(2 + r, 1)    # cA * softplus, floor at 2^s_A (r2)
         # gated norm output, with the gain a committed weight (not a public coefficient): NO derived
-        # coefficient cg. s = Ts[z] (table-bounded), t = floor(s w / 2^F), y = floor(gain t / 2^F).
+        # coefficient cg. s = Ts[z] (table-bounded), t = floor(s w / 2^F), y = floor(gain t / 2^sg),
+        # sg = the gain's public shift (DESIGN 5.0, 5.4).
         # The M2 emission already has the last floor relation and its remainder; M3 adds the rest.
         flookup(c, D)                                                # s = Ts[z]
         c.col(D); c.rel(2, 2 * D)                                    # gate s * w
@@ -212,7 +251,7 @@ def head_extras(c, T, D=128, F=12):
         c.terms += D if c.arm == 'B' else 12 * D
     nw = 4 * n_conv + D + 2
     c.col(nw)                     # weight cells read in gates: conv taps, gain, cA, dt_bias (once)
-    wcells(c, nw)                 # r2: their exact class and their tie to the weight table
+    wcells(c, nw, n_dt=1)         # r2: their exact class and their tie to the weight table; r3: dt_bias wide class
     c.rcell(3 * n_conv)           # conv history H, committed (3 inputs a channel)
 
 
@@ -254,8 +293,9 @@ def mlp_statement(arm, T=16, d=Q['d'], f=Q['f'], F=12):
         # 2^15 x 2^23 against a cheating prover) into the down projection, whose sum over 17,408 units
         # then reaches p (bounds.py, 'M3a-MLP down, r1'). r2 rounds it: h = floor(s u / 2^F), a range
         # cell with an exact 12-bit remainder (F is a format constant, so the class is exact), and the
-        # down projection reads h. (An exact class on u alone, the other fix considered, costs more
-        # keys and makes the statement 2^23 at T = 16; runs/model-r2.json, mlp_alt_exact_u.)
+        # down projection reads h. This rounded-h fix is the ADOPTED one; it is a 2^23 statement at
+        # T = 16 (largest T 15). The other fix considered, an exact class on u with the product
+        # unrounded, was not adopted; it is also 2^23 at T = 16 (runs/model-r2.json, mlp_alt_exact_u).
         c.rcell(2 * f); vrem(c, 2 * f)
         flookup(c, f)
         c.col(f); c.rel(2, 2 * f)
@@ -351,6 +391,16 @@ def harness():
                           mlp_alt_exact_u=dict(armB_T16=summarize(mlp_statement_exact_u('B', 16), 'B', 16),
                                                max_T_armB=max_T(mlp_statement_exact_u, 'B'),
                                                note='r2 alternative fix, not adopted: exact class on u, product unrounded'))
+    # r3 (opus round-2 S2): M3a-1's stop-rule fallback. With the head's weights in the proof's own
+    # oracle there is no WF range proof, so every one of the head's weights needs an in-oracle class
+    # (3 keys + 2 relations each, as wcells). Those keys alone are more than 2^23 laid columns, so the
+    # fallback fits no 2^22 table at any T, before the trace is added.
+    wh = weights()['m3a_one_v_head']
+    res['m3a1_fallback'] = dict(head_weights=wh, class_keys=3 * wh, class_relations=2 * wh,
+                                class_keys_over_2e23=3 * wh > 2 ** 23, class_keys_log2=math.log2(3 * wh),
+                                fits_log22_at_any_T=False,
+                                note='counted, arm B: weight classes only, trace and tie not added; the fallback as specified '
+                                     'does not fit at any T and needs its own weight statement or a Qwen WF layout')
     for T in (1, 16):
         layer = plus(times(m3_head('B', T), Q['v_heads']), mlp_statement('B', T))
         res['one_layer_single_statement_armB_T%d' % T] = summarize(layer, 'B', T)
@@ -512,6 +562,12 @@ def sensitivity(planner, w):
     return out
 
 
+H5_READING = ('r3 disclosure: the verdict strings in H5 ("fits, also on the high estimate", pass_, '
+              'registered_expectation_held) are the REGISTERED RULE applied at the registered rates. They include '
+              'segmentations chosen after the first run (post hoc) and the low-rank case, which is not established. '
+              'They are not an answer to whether Qwen fits one H200: that answer is unknown (H5_r2.plain_answer).')
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--planner', required=True); ap.add_argument('--json')
     a = ap.parse_args()
@@ -609,11 +665,12 @@ def main():
         plain_answer='unknown: no measured Qwen segment exists. At the registered central rate some cases are under 127 GB; at this '
                      'fork\'s own small-example rate no case fits a 1,024-token window (per-token state largest fit T = %s, low-rank T = %s).'
                      % (own['per_token_layer_segments']['largest_window_that_fits'], own['low_rank_c64']['largest_window_that_fits']))
+    res['H5']['how_to_read'] = H5_READING
     js = json.dumps(res, indent=1, default=str)
     if a.json:
         open(a.json, 'w').write(js + '\n')
     brief = dict(H1=res['harness']['H1']['pass_'], H2=res['harness']['H2']['pass_'], H3=res['harness']['H3']['pass_'],
-                 H4=res['H4']['pass_'], H5=res['H5'])
+                 H4=res['H4']['pass_'], H5=res['H5'], H5_r2_plain_answer=res['H5_r2']['plain_answer'])
     print(json.dumps(brief, indent=1))
 
 

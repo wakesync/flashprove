@@ -16,6 +16,15 @@ down projection was fixed; and **whether the full model fits one H200 is unknown
 The low-rank state figures are **not established** and are not the plan. Counts of r2 are in
 `runs/model-r2.json` and `runs/bounds-r2.json`; the r1 files are kept unchanged.
 
+**Revision r3 (2026-11-10), after the round-2 re-reviews** (astra, approve:
+https://github.com/wakesync/flashprove/pull/70#issuecomment-6766196703; opus, request changes:
+https://github.com/wakesync/flashprove/pull/70#issuecomment-6766653896). One blocker: r2 gave
+dt_bias the weight-cell class [-4,096, 4,095] at the scale 2^F, which admits only |dt_bias| < 1,
+so no honest head, real or synthetic, could be proved (a completeness failure, not a soundness
+one). r3 gives dt_bias its own class [-2^17, 2^17) (section 5.0, 6.2) and checks every weight-cell
+class against PR #68's layer-0 values. Section 13 lists the r3 changes; counts in
+`runs/model-r3.json` and `runs/bounds-r3.json`, r1 and r2 files unchanged.
+
 Numbers are of three kinds and are kept apart:
 
 - **counted**: exact outputs of `research/operators/qwen_m3/count_m3.py` or of the upstream planner
@@ -112,7 +121,7 @@ That is not established for this port:
   dt_bias directly as cells. Nothing in r1 tied those cells to the table, so a prover could put
   gain = 2^50 in the trace and make y free (opus review M1; the same kind of gap #66 closed for cg);
 - M3a-1's fallback (commit the head's weights in the proof's own oracle) **drops the WF range
-  proof altogether**.
+  proof altogether**, and with an in-oracle class on every weight it does not fit at any T (6.2, r3).
 Section 6.2 gives the r2 fix: an in-trace exact class on each such cell plus an addressed tie to
 the weight table, counted. The matrix weights (in_proj, out_proj, MLP) are never trace cells:
 their products are claims on the table, and their bound is the table's, which needs a Qwen WF
@@ -210,14 +219,29 @@ the RMS norm's sqrt(128), which M2 put into cg, went. And it used a variable shi
 | quantity | integer form | scale | where the constant lives |
 |---|---|---|---|
 | activations, stream | x at 2^F | F = 12 (open parameter) | format |
-| weight tensor T (every matrix, the conv taps, the gain, cA, dt_bias) | T_int = RNE(2^(e_T) T), \|T_int\| <= 4,095 | e_T per tensor, public | configuration (covered by the ID) |
+| weight tensor T (every matrix, the conv taps, the gain, cA; **not dt_bias**, see its row) | T_int = RNE(2^(e_T) T), \|T_int\| <= 4,095 | e_T per tensor, public | configuration (covered by the ID) |
 | shift of a floor after a product with T | s_T = e_T, admitted only in 1..24 | | configuration |
-| remainder of that floor | **exact class [0, 2^(s_T))**: limbs r0, r1 (12-bit keys) and one complement key on the top limb in use | | relation (counted: `vrem`) |
+| remainder of that floor | **exact class [0, 2^(s_T))**. Layout fixed by the public s (r3, made explicit): s > 12: limbs r0, r1 (12-bit keys), r = r0 + 2^12 r1, and the complement key 2^(s-12) - 1 - r1; s <= 12: **r0 only, no high limb**, and the complement key 2^s - 1 - r0. A build must not read an r1 at s <= 12. | | relation (counted: `vrem`, at the 3-key layout for every s, so one key high for small s) |
 | k | floor(x Rc / 2^24), Rc = floor(2^36 / sigma), sigma = isqrt(sum x^2 + eps) | 2^12 | as #66 |
 | q | floor(362 x Rc / 2^36), 362 = round(2^12 / sqrt(128)) | 2^12 / sqrt(128), \|q\| <= 362 | format constant, as #66 section 3 ("divisor multiplied by round(sqrt(128) 2^12)") up to the rounding of the constant |
 | gated RMSNorm | the sqrt(128) of the mean is folded into the committed gain at conversion: gain_int = RNE(2^(e_g) sqrt(128) gain) | | conversion rule (in the manifest, #59) |
 | decay | g = floor(cA_int sp / 2^(s_A)), cA_int = RNE(2^(e_A) exp(A_log)) | g at 2^F | s_A = e_A: the decay divisor is cA's own exponent |
-| dt_bias | added to ar at ar's scale: dt_int = RNE(2^F dt_bias) | 2^F | its own public exponent F, no shift |
+| dt_bias | added to ar at ar's scale: dt_int = RNE(2^F dt_bias), **class [-2^(F+5), 2^(F+5)) = [-2^17, 2^17) at F = 12** (r3), so \|dt_bias\| < 32 | 2^F | its own public exponent F, no shift; in the weight table a four-digit unit (as the embedding) |
+
+**Why dt_bias has its own class (r3, opus round-2 N1).** r2 put dt_bias at 2^F and in the
+weight-cell class [-4,096, 4,095]. Together these admit only |dt_bias| < 4,095 / 4,096. Real layer
+0 (PR #68, `runs/weight-stats.json`) has dt_bias in [-5.72, 19.25], dt_int -23,424 to 78,848; the
+M2 synthetic init (log(expm1(dt)), dt in [1e-3, 1e-1]) has dt_int -28,292 to -9,225. Every head
+failed the class, so an honest proof was impossible. Two fixes were offered: (a) a wider class of
+its own, (b) fold dt_bias into the in_proj_a bias at conversion. **r3 takes (a).** Qwen's in_proj
+has no bias, so (b) would add one bias column to the in_proj_a claim and the same value, still up
+to 78,848 at 2^F, would then need its own class in the table instead of in the trace; it moves the
+problem without shrinking it, and changes the matmul claim. (a) keeps every other relation as it
+is. The bound 2^(F+5) leaves |dt_bias| < 32 (real max 19.25, 1.66 times headroom). It costs the
+same in arm B: dt + 2^17 = lo + 2^12 hi, lo a 12-bit key, hi in [0, 64) by a key and its
+complement 63 - hi, so the same 3 keys and 2 relations as the narrow class; arm A has 18 bits for
+that cell instead of 13. It cannot be a shift-scaled tensor like the others: it is added to ar,
+which is at 2^F, not multiplied.
 
 Two things that follow. (1) A public shift is an integer in 1..24, checked at admission like every
 configuration word; a shift outside that range is a reject, and the remainder class is never wider
@@ -255,8 +279,9 @@ Tables M3 needs: silu, sigmoid, softplus, and exp(-x) on [0, 8) (requested from 
   integer function, which rejects inputs the isqrt form accepts. This design counts the isqrt form.
   The table form stays a candidate for the attention layers' q/k RMSNorm and for whatever the
   norm-scaling lane recommends.
-- **decay:** sp = softplus[ar + dt_bias]; g = floor(cA x sp / 2^F) with cA = round(2^e exp(A_log)) a
-  committed weight; a = exp_neg[g]. **beta** = sigmoid[br].
+- **decay:** sp = softplus[ar + dt_bias] (dt_bias at 2^F in its own class, 5.0); g = floor(cA x sp /
+  2^(s_A)) with cA = RNE(2^(e_A) exp(A_log)) a committed weight and s_A = e_A its public shift
+  (5.0 is authoritative; r2 wrote 2^F here, corrected in r3); a = exp_neg[g]. **beta** = sigmoid[br].
 - **The decay table needs a finer step than table format v1 has.** On real weights the median decay
   is 0.998 (PR #68), so the exponent g is about 0.002. Format v1 has an input step of 1/256,
   about 0.004: at least half of the real exponents would fall in the first row and read as
@@ -309,7 +334,7 @@ magnitude of every relation, computed from those bounds, stays below 2^63.**
 | format | powers of two, table steps | constants in the verifier | yes |
 | admission | public statement words (M3a: a, the output) | class check at decode, before any relation is built | yes |
 | weight table | matrix weights (in_proj, out_proj, MLP): \|w\| <= 4,096, as table entries | a WF range proof on the table. **Exists for upstream's Maverick layout only; a Qwen layout is a build obligation** | **no** |
-| weight cell (r2) | the weights the trace reads as cells: conv taps, gain, cA, dt_bias | **in-trace exact class [-4,096, 4,095] plus the addressed tie of 6.2** | **no** |
+| weight cell (r2) | the weights the trace reads as cells: conv taps, gain, cA, dt_bias | **in-trace exact class plus the addressed tie of 6.2**: [-4,096, 4,095] for taps, gain, cA; [-2^17, 2^17) for dt_bias (r3) | **no** |
 | table image | outputs of SiLU (\|s\| <= 32,741), sigmoid and exp ([0, 2^12]), softplus (< 2^16) | exact lookup into a public table whose digest the ID covers | no |
 | exact key | 12-bit remainder limbs; remainders at a public shift 2^s: exact [0, 2^s) | lookup-exact (arm B) or bits (arm A) | no |
 | range check | every other cell: \|x\| < 2^23 against a cheating prover | RNG | no |
@@ -334,7 +359,11 @@ all its terms, both sides, every independently ranged limb at its class edge, as
 This is **proved from the classes** (arithmetic on enforced edges), not sampled. Output
 `runs/bounds-r2.json`: 33 M3 rows, the largest 2^60.27 (the q floor, 362 Rc x), all below 2^63;
 the two control rows wrap as they must (#66's cg = 2^62 alias, and r1's unrounded MLP down
-projection at 2^64.09). Rows r1 had wrong, now corrected:
+projection at 2^64.09). **r3** (`runs/bounds-r3.json`): 35 M3 rows. The softplus key row uses
+dt_bias's wider class (2^17 in place of 4,096) and moves from 2^23.0175 to 2^23.0389; two rows for
+the dt_bias class are added (2^19.0, 2^13.0); the worst row is unchanged (2^60.27). r3 also adds a
+**completeness** section (C): every weight-cell class against PR #68's layer-0 values (below,
+6.2). Rows r1 had wrong, now corrected:
 
 | row | r1 | r2 | why |
 |---|---|---|---|
@@ -352,7 +381,11 @@ as `cp_verify` runs its no-overflow conditions, and refuses a configuration that
 hostile suite has a commitment with an out-of-range gain (must fail at the weight-cell class and at
 the table), a trace gain that differs from the table's (must fail at the tie), the boundary pair
 4,095 / 4,097, a public shift of 0 and of 25, the review's (s = 8, y = -1, r = 256) floor, and the
-#66 alias statements.
+#66 alias statements. **It also has honest-completeness cases (r3)**, which must be ACCEPTED: a
+head whose dt_bias is the real layer-0 extreme (dt_int = 78,848 and -23,424), a synthetic M2 head
+(dt_int -28,292), and taps, gain and cA at the real layer-0 extremes after an honest conversion;
+plus dt_int = 2^17 - 1 accepted and 2^17 refused. A class that refuses an honest weight is a
+design bug of the same weight as one that admits a false one.
 
 ### 6.2 Tying the weight cells to the weight table (r2, opus M1, astra must-fix 3)
 
@@ -360,7 +393,25 @@ The trace reads 1,666 weights of one head as cells (1,536 conv taps, 128 gains, 
 each such cell w_i at table address addr_i:
 1. **Class in the trace:** w_i + 4,096 = lo_i + 2^12 hi_i with lo_i a 12-bit key and hi_i in {0, 1}
    (a key and its complement). So w_i is in [-4,096, 4,095] by the trace alone, whatever the table
-   says. This is what the ledger uses.
+   says. This is what the ledger uses. **dt_bias (r3):** w + 2^17 = lo + 2^12 hi with hi in [0, 64)
+   (a key and its complement 63 - hi), so dt_int is in [-2^17, 2^17); same 3 keys and 2 relations.
+
+   **Completeness on real weights (r3, `bounds.py` section C, `runs/bounds-r3.json`).** PR #68's
+   layer-0 quantiles (min, 1%, median, 99%, max), converted as 5.0 says, with the largest
+   per-tensor exponent an honest conversion would pick:
+
+   | cell | layer-0 range | exponent | integers | class | in class |
+   |---|---|---|---|---|---|
+   | conv taps | -0.512 .. 0.432 | 12 | -2,096 .. 1,768 | [-4,096, 4,095] | yes |
+   | gain x sqrt(128) | 8.88 .. 10.52 | 8 | 2,274 .. 2,693 | [-4,096, 4,095] | yes |
+   | cA = exp(A_log) | 0.0038 .. 0.338 | 13 | 31 .. 2,765 | [-4,096, 4,095] | yes (smallest values keep 5 bits: an F-gate precision question) |
+   | dt_bias, real | -5.72 .. 19.25 | F = 12 | -23,424 .. 78,848 | [-2^17, 2^17) | yes (r2's class: **no**) |
+   | dt_bias, M2 synthetic | -6.91 .. -2.25 | F = 12 | -28,292 .. -9,225 | [-2^17, 2^17) | yes (r2's class: **no**) |
+
+   The 19.3 that section 8.2 cites (astra round 2) is dt_int 79,053: in the r3 class, out of r2's.
+   These are five quantiles of one layer, not every value of every layer; the other 47 DeltaNet
+   layers are unmeasured. **The class fix does not fix the softplus domain:** ar + dt_bias still
+   leaves table format v1's [-8, 8) on real weights (8.2, 11 item 5b).
 2. **Tie:** after the trace is committed, the transcript draws rho. The statement proves
    sum_i rho^i w_i = sum_i rho^i Tab[addr_i], where the right side is one batched opening of the
    weight table at the public addresses addr_i (the same LIN / FOLDEQ / member machinery that the
@@ -378,8 +429,10 @@ on WF, which has no Qwen layout yet; the in-trace class does not depend on it.
 M3a-1's stop-rule fallback (the head's weights in the proof's own oracle with the root in the
 statement) keeps step 1 and replaces step 2 by an equality inside that oracle. It has **no WF range
 proof** on the matrix weights, so their bound must then come from an in-oracle class on every
-weight: 3,288,706 x (3 keys + 2 relations), which that fallback does not fit at T = 16. The
-fallback is weaker and is reported as such.
+weight: 3,288,706 x (3 keys + 2 relations). **Those class keys alone are 9,866,118, more than 2^23
+(r3, opus round-2 S2; `runs/model-r3.json`, `harness.m3a1_fallback`), so as specified the fallback
+fits no 2^22 table at any T, before the trace is added.** It is not "weaker but runnable": it needs
+a weight statement of its own (classes proved once, outside the request) or a Qwen WF layout.
 
 ### 6.3 Values the verifier still computes itself: the #66 rule, carried explicitly (opus S5)
 
@@ -418,7 +471,7 @@ r2 counts (`runs/model-r2.json`); r1 values in brackets.
 | one DeltaNet layer (in_proj 84.4M, conv 40,960, out_proj 31.5M, MLP 267.4M, gated-norm gain 128) | 383,262,944 [383,262,816] |
 | one attention layer (with q and k RMSNorm gains, 2 x 256) | 372,244,992 [372,244,480] |
 | embedding; output head | 1,271,398,400 each |
-| **text model** | **26,895,337,984** [26,895,323,648] (56.3 GB as 16-bit weights and a 32-bit embedding) |
+| **text model** | **26,895,337,984** [26,895,323,648] (56.3 GB as 16-bit weights, a 32-bit embedding and, r3, 2,304 dt_bias values at 32 bits: 56,333,477,376 bytes, r2 56,333,472,768) |
 | M3a-head (one V head, with its 128 gains) | 3,288,706 [3,288,578] |
 | M3b block (3 DeltaNet + 1 attention) | 1,522,033,824 [1,522,032,928] |
 
@@ -454,8 +507,9 @@ extra. Neither is counted here (RESULTS.md H3, "What these counts leave out"). T
 lookup becomes a one-hot selector over 4,096 rows. r1 counted three 4,097-term relations per
 lookup; the harness refuses relations of more than 256 terms (`research/operators/qwen_deltanet/product.h`,
 `wide_fault`), so **r1's arm-A counts were not a legal statement**. r2 splits each into partial
-sums of at most 256 terms and recounts: M3a-head arm A needs 2^26 at T = 16 (39,475,107 laid
-columns) and fits only at T = 1 (2,502,379, 2^22). A two-level selector (64 x 64, counted after the
+sums of at most 256 terms and recounts: M3a-head arm A needs 2^26 at T = 16 (39,475,112 laid
+columns; r2 39,475,107, r3 adds 5 bits for the wider dt_bias class) and fits only at T = 1
+(2,502,384, 2^22; r2 2,502,379). A two-level selector (64 x 64, counted after the
 fact, not registered) fits up to T = 9. So M3a without lookups is a T = 9 statement at best, and the
 MLP statement does not fit at all. Lookups are not an optimisation for M3. They are a precondition.
 
@@ -478,7 +532,9 @@ establish a fit. What the numbers do and do not say (all **extrapolated, not mea
 - At the **registered central rate** (23 bytes per entry, from one upstream Maverick point), the
   largest segment of the per-token case with one DeltaNet segment per layer is about 41 GB at
   T = 1,024. At **this fork's own measured rate** (about 220 bytes per entry, its one GPU memory
-  reading, small synthetic example, a different model) the same segment needs about **393 GB** at
+  reading, small synthetic example, a different model; upstream's full-size point contradicts that
+  rate for the dense family, RESULTS H5.3 assumption 3, but nothing says which a DeltaNet segment
+  follows) the same segment needs about **393 GB** at
   T = 1,024. **Neither** that nor the (not established) low-rank form (about 138 GB) fits the
   127 GB rule. At that rate the largest windows that fit are **256 tokens** (per-token state) and
   512 (low-rank). These two rates differ by ten times and nothing here says which one a DeltaNet
@@ -568,7 +624,9 @@ M3 adopts the table format v1 as published. Differences M3 needs resolved:
   whose activations leave the domain cannot be proved at all. On real weights dt_bias alone reaches
   19.3 (PR #68), more than twice the domain's edge, so for such heads the softplus input
   will usually lie outside it (how often was not measured). M3
-  needs clamp semantics (saturating tables, as upstream's Ts) or a wider domain for softplus;
+  needs clamp semantics (saturating tables, as upstream's Ts) or a wider domain for softplus.
+  (r3: this is separate from the dt_bias weight-cell class, which r2 also got wrong and r3 fixed,
+  6.2; with the r3 class the dt cell is admissible, and the table domain is still the problem);
 - the decay table's step is too coarse for real decays near 1 (section 5.3);
 - its norms are a bounded table approximation, not the isqrt semantics this design counts
   (section 5.3);
@@ -594,7 +652,10 @@ M3a build must add.
 
 | step | what | where | evidence gate | stop rule |
 |---|---|---|---|---|
-| **M3a-1** | M3a-head: one V head against committed weights, T = 16 | CPU harness | honest 10/10; hostile suite rejected, including: proof verified under another weight root, one tap changed, history changed, a trace gain out of class (2^50, the opus alias), a trace gain in class but not the table's, a public shift of 0 or 25, the (s = 8, y = -1, r = 256) floor, the #66 aliases; UBSan clean; columns and relations equal to this lane's r2 counts | no honest proof in 8 h of build time: commit the head's weights in the proof's own oracle with the root in the statement and report. **That fallback drops the WF range proof** (6.2) and is weaker; it is reported as such |
+| **M3a-1** | M3a-head: one V head against committed weights, T = 16 | CPU harness | honest 10/10; hostile suite rejected, including: proof verified under another weight root, one tap changed, history changed, a trace gain out of class (2^50, the opus alias), a trace gain in class but not the table's, a public shift of 0 or 25, the (s = 8, y = -1, r = 256) floor, the #66 aliases; honest-completeness cases accepted (r3: real layer-0 dt_bias 78,848 and -23,424, synthetic -28,292, real tap / gain / cA extremes; 6.1); UBSan clean; columns and relations equal to this lane's r3 counts | no honest proof in 8 h of build time: commit the head's weights in the proof's own oracle with the root in the statement and report. **That fallback drops the WF range proof** (6.2), and with an in-oracle class on every weight its keys alone (9,866,118) exceed 2^23, so **it fits no 2^22 table at any T** (r3); it needs a separate weight statement and is reported as such |
+| **#35-limits** (r3, next step, not done) | the `cp_verify` limit changes of section 4 (no experts, query width != d, head dim 256, partial rotary, q/k RMSNorm, sigmoid gate), so that a dense-family call can end `YES` without experts | CPU | the served-form test's "dense" case passes the standard form; existing Maverick tests unchanged | any Maverick verdict changes: stop and report |
+| **CPU packed reference** (r3, next step, not done) | a CPU reference of the packed DeltaNet trace (byte limbs, entries, the arrays of 7.3) for one head and a few tokens, checked against the harness head and against this lane's packed count | CPU | entry count equal to the design count; every limb within its class on synthetic and layer-0 inputs | count off by more than 10%: recount 7.3 before any CUDA |
+| **H200 bytes-per-entry** (r3, next step, not done) | one cheap dense-family run on the H200 (existing prover, a small configuration) that reads peak GPU memory per committed entry of the largest segment | H200 | measured bytes per entry, n >= 3, that decides between the registered 23 B and the fork's 220 B (H5) | needs the owner's GPU decision; result above 220 B: re-plan segments before M3b-1 |
 | **M3a-2** | one full DeltaNet layer as 48 head proofs + 1 MLP proof (MLP at T <= 15, or split), synthetic then real layer-0 weights | CPU harness | the public recombination, done with the checks of 6.3, equals an integer reference of the whole layer; ranges hold on real weights | a range class over 2^18 on real weights: split that class and recount before going on |
 | **F-gate** | fix F, the head-output and norm scaling and the cell widths from real-weight fidelity (#8, the norm-scaling lane). Already known: on layer 0, 10 prompts, with the M2 lowering, no F in {12, 14, 16} passes both range and fidelity (PR #68) | CPU | a registered fidelity threshold met on real weights, on more than layer 0 and including one layer that abliteration changes; ranges re-measured under the chosen arithmetic | no candidate passes: stop before any GPU work; a proof would then be about an integer model that has not been shown to stay close to Qwen. A candidate that widens the recurrence: recount with section 7.4 and redo the bound ledger |
 | **M3b-1** | DeltaNet sub-proof in the GPU prover and in `cp_verify`; one 4-layer block, T = 64, synthetic weights, at the arithmetic the F-gate chose | H200 | `cp_verify` accepts; the standard mutations are rejected; measured VRAM, time and proof size replace every extrapolation here | needs the owner's decision on the GPU (it serves a live endpoint today); measured bytes per entry over twice the central value: take the smaller segments or #34 first |
@@ -659,15 +720,17 @@ The first is the one this design can reach without the fidelity question being s
    changes, are unmeasured.
 5b. **Table domain.** Format v1 rejects inputs outside [-8, 8). Real dt_bias reaches 19.3 (PR #68),
    so the softplus input is expected to leave that domain on real weights (inferred from the bias
-   range, not measured). Section 8.2.
+   range, not measured). Section 8.2. (r3: the dt_bias cell class itself is fixed, 6.2; its
+   completeness is checked on five layer-0 quantiles only.)
 6. **State semantics under #34.** The cheap strategy changes the integer model.
 7. **No Lean coverage.** Upstream's soundness theorem is about the Maverick-shaped model. A Qwen
    proof would rest on unverified C++ and CUDA plus this design's arguments.
 8. **Standard form.** `cp_verify` cannot say `YES` for a model without experts today (section 4).
 9. **Term counts are provisional**, and the M3 additions to the count model have no builder to
    check them against. Two independent reviewers reproduced r1's columns, cells, keys and relations
-   with closed forms (+55,090 / +23,728 / +49,744 / +102,800); the r2 changes have not been
-   reviewed.
+   with closed forms (+55,090 / +23,728 / +49,744 / +102,800). Two round-2 reviewers reproduced
+   r2's increments the same way (+7 gates, +31,686 keys, +19,772 relations at T = 16, arm B). The r3
+   changes (dt_bias class: arm A +5 bits at T = 1 and 16, arm B unchanged) have not been reviewed.
 10. **Fit on one H200 is unknown** (7.3). The registered central rate and this fork's own rate
    differ by ten times; the per-layer cut exceeds `cp_verify`'s 64-segment cap; the low-rank form is
    not established.
@@ -696,3 +759,32 @@ the more precise one is followed (said per item).
    M3c and M3d (9); the results.yaml status is no longer `done`.
 11. **Found in r2, not in either review:** M3a-MLP's down projection wraps in r1 (5.5, 6.1).
     Fixed by rounding h; M3a-MLP no longer fits 2^22 at T = 16.
+
+## 13 Changes in r3 (2026-11-10), by round-2 review item
+
+Round-2 reviews at `82a4601e`: astra APPROVE (design/counts only,
+https://github.com/wakesync/flashprove/pull/70#issuecomment-6766196703), opus REQUEST CHANGES
+(https://github.com/wakesync/flashprove/pull/70#issuecomment-6766653896). Opus's items are N1 and
+S1 to S5; astra's should-fix items are named.
+
+- **N1, dt_bias completeness** (opus; astra's "real-checkpoint limitation"): dt_bias gets its own
+  class [-2^17, 2^17) at 2^F (5.0, 6.2); option (a), why not (b) in 5.0. Arm B counts unchanged
+  (same 3 keys and 2 relations), arm A +5 bits; softplus key row 2^23.0175 -> 2^23.0389; two class
+  rows added; completeness checked against PR #68 layer 0 and the M2 synthetic range (6.2 table);
+  honest-completeness cases in the hostile suite (6.1, 9). The cited 19.3 bias (astra) is dt_int
+  79,053 and now fits the class; the softplus table domain is still a separate open item (8.2).
+  PREREG amendment A5.
+- **S1, legacy H5 strings** (opus): `count_m3.py` now writes `H5.how_to_read` and prints
+  `H5_r2_plain_answer` after H5 (`runs/model-r3.json`); the code README says what the strings are
+  next to the artifact. `runs/model-r2.json` is not edited.
+- **S2, fallback size** (opus): 6.2, 9 and 3.1: 9,866,118 class keys > 2^23, fits at no T
+  (`harness.m3a1_fallback`).
+- **S3, decay divisor** (opus, astra): 5.3 now says 2^(s_A), as 5.0.
+- **S4, stale code text** (opus, astra): `count_m3.py` header (MLP fix adopted = rounded h; the
+  exact-u class is the alternative), the cg line, the gain-floor comment.
+- **S5, ladder rungs** (opus): #35 limit changes, a CPU packed reference, a cheap H200
+  bytes-per-entry run, added to section 9 as next steps, not done.
+- **s <= 12 remainder layout** (astra): 5.0 and `vrem`: at s <= 12 the high limb is omitted; the
+  count keeps the 3-key layout and is one key high there.
+- Nits: code README wording; port page M2 row; results.yaml evidence_note separator; 220 B/entry
+  caveat in RESULTS H5.4 and 7.3.
