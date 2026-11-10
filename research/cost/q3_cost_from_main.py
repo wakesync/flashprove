@@ -18,7 +18,11 @@ USD per GPU-hour used:
   all-in for about 25.5 min of instance life (about 2.78 USD per hour, which the file does not
   break down). Kept only as a mid-range sensitivity point; 2.78 sits inside 2.16 to 3.00.
 - 3.00: assumed by PR #70 (RESULTS.md line 195).
-No H200 price is on main.
+No H200 price is used here. Main does carry one H200 figure since PR #44 merged: 5.5402 USD per
+hour for a one-GPU H200 marketplace box (research/results.yaml:637 on main 420967c4, from
+experiments/20261104-43-h200-memory-lever/offers.json:49, dph_total 5.540204678362573). It is a
+QUOTE saved at create time and includes 100 GB of storage: not an invoice, and not a Tinfoil
+price. It is not one of the rates above and changes no number this script prints.
 
 Usage, from the repository root:
     python3 research/cost/q3_cost_from_main.py

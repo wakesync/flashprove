@@ -53,7 +53,7 @@ Line numbers are on main `5e964019`.
 | I11 | segments per window, per-layer cut | 81, over `cp_verify`'s cap of 64 | counted | RESULTS.md 182, 242-243; model-r2.json 2181-2188 |
 | I12 | upstream's proving-vs-serving multiple, Maverick | 93.0x slower than stock vLLM prefill per GPU at the highest load tried; one pass 20.1x slower than decoding at 512 streams | calculated upstream; records not in this repository | `guide/performance.md` 27 (both multiples); 37 (records not here) |
 | I13 | upstream start-up per service, Maverick | 68.1 to 79.0 s | measured upstream; records not in this repository | `guide/performance.md` 19 |
-| I14 | measured Qwen sub-proofs (none is a full-model proof, none on a GPU) | one DeltaNet head at T = 4: M1 prove 51.4 s median, M1b 39.2 s median (n = 10 each); #71 SA chunk proofs of one head at D = 32 over 64-token windows, window prove medians 153.2 s (C = 1), 39.3 s (C = 16), 40.3 s (C = 64), n = 5 windows; plus standalone operator proofs (#67). All CPU research harness, synthetic inputs, research security (10-bit target) | measured; CPU, not used as a rate in this note | `research/results.yaml` 340 (M1), 358 (M1b), 394, 403, 412 (#71); 657 onward (#67) |
+| I14 | measured Qwen sub-proofs (none is a full-model proof, none on a GPU) | one DeltaNet head at T = 4: M1 prove 51.4 s median, M1b 39.2 s median (n = 10 each); #71 SA chunk proofs of one head at D = 32 over 64-token windows, window prove medians 153.2 s (C = 1), 39.3 s (C = 16), 40.3 s (C = 64), n = 5 windows (r2 reruns after the verifier fix; results.yaml 386 calls their times not comparable across runs); plus standalone operator proofs (#67). All CPU research harness, synthetic inputs, research security (10-bit target) | measured; CPU, not used as a rate in this note | `research/results.yaml` 340 (M1), 358 (M1b), 394, 403, 412 (#71); 657 onward (#67) |
 
 `model-r2.json` is read rather than `model-r3.json` (the merged head's): for every field this note
 uses they are identical, except the resident-weights figures (`weights_resident_gb`,
@@ -220,24 +220,45 @@ Design, folding in both reviews of PR #85:
 - **Above the padding floor.** The planner pads lookups to minimum sizes (RESULTS.md 223-224) and
   allocators round up; drop sizes below the floor, report residuals, and check for jumps at
   allocation or padding thresholds (a change of allocation regime breaks a single line).
-- **Largest size chosen so both hypotheses read out on an 80 GB card**: a largest segment of about
-  3e8 to 5e8 entries is 7 to 12 GB at 23 B/entry and 66 to 110 GB at 220 B/entry, so neither
-  hypothesis ends in an out-of-memory crash with no reading (or the crash is itself the reading,
-  registered beforehand).
+- **Largest size, checked against capacity before registering.** A largest segment of 3e8 to 5e8
+  entries is 7 to 12 GB at 23 B/entry but 66 to 110 GB at 220 B/entry, so under the 220 B/entry
+  hypothesis that range does **not** all fit an 80 GB-class card. The one H100 total on main is
+  81,559 MiB, about 85.5 GB (`research/results.yaml` 641, `nvidia-smi` memory.total, not usable
+  bytes). Against it the per-entry term alone exceeds the card above about 3.9e8 entries (about
+  3.6e8 against a nominal 80 GB), so the upper part of the range, roughly 3.9e8 to 5e8 entries
+  (86 to 110 GB), cannot fit even with zero fixed allocation. At 3e8 entries (66 GB) the headroom
+  is about 19.5 GB of the reported total (14 GB of a nominal 80 GB), and it must also hold the
+  CUDA context, weight-streaming buffers, activations and allocator rounding, none of which is
+  measured (the intercept a below is unknown), so even that size is not shown to fit. The
+  preregistration therefore fixes the largest size N_max only after the small sizes give a, such
+  that a + 220 x N_max < usable device bytes with a stated margin, and records the usable bytes
+  for that card. If no set of sizes above the padding floor satisfies this and still spans two
+  orders of magnitude, the design changes (smaller sizes or a larger card) before any registered
+  run.
+- **Out-of-memory arms are censored, not readings.** An arm above N_max, if wanted, is registered
+  beforehand as censored capacity evidence: an out-of-memory failure at size N gives only
+  a + b x N > usable bytes, is not a point in the slope fit, and does not by itself decide between
+  the hypotheses. An unregistered out-of-memory failure is reported as a failed arm.
 - **Separate fits for memory and time.** Memory = a + b x (largest simultaneously resident
   segment entries). Time = c + d x (total processed entries), plus the pass and weight work. A
   memory slope says nothing about which time rate holds, and the reverse.
-- **Registered decision, with an "inconclusive" outcome.** If b is in [11.5, 46] bytes per entry,
-  PR #70's central memory column is supported for the dense family; if in [110, 440], the own-rate
-  column is; if in (46, 110), or if the residuals do not support a line, neither is, and the
-  result is reported as inconclusive. A slope near 23 with a large intercept a does not validate a
-  zero-intercept 23 x entries column; report a and b together.
+- **Registered decision, exhaustive.** The preregistration fixes the uncertainty interval for b
+  (method and level, from the registered repeats) and the residual check for the line. Then:
+  if the residuals support a line on at least four uncensored sizes and the **whole** interval
+  for b lies in [11.5, 46] bytes per entry, PR #70's central memory column is supported for the
+  dense family; if the whole interval lies in [110, 440], the own-rate column is. **Every other
+  outcome is inconclusive**: fewer than four uncensored sizes, residuals that do not support a
+  line, an interval that crosses 11.5, 46, 110 or 440, and an interval lying below 11.5, in
+  (46, 110) or above 440. An inconclusive result still reports a, b and the interval. A slope near
+  23 with a large intercept a does not validate a zero-intercept 23 x entries column; report a and
+  b together.
 
 In the same session, measure plain Qwen3.8-27B BF16 inference (prefill and decode tokens per
 second, vLLM, same card) as the denominator of section 4. The calibration does not settle G1
 (DeltaNet entries may cost differently in both time and memory), but it removes G10 and narrows
 the dense-family memory and time rates. It is the step named in `docs/qwen-port.md` 81-82 and in
-the PR #70 review (comment 6758415494, item iii). On the Tinfoil H200 it needs the CC-On fix or a
+the PR #70 review (https://github.com/wakesync/flashprove/pull/70#issuecomment-6758415494, item
+iii). On the Tinfoil H200 it needs the CC-On fix or a
 CC-off instance and a free GPU first (section 5 U3); otherwise it is a rented-card run, which the
 2026-11-09 rules route through the coordinator.
 
