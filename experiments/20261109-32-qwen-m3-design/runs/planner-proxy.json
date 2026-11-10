@@ -1,0 +1,202 @@
+{
+ "maverick": {
+  "name": "maverick",
+  "overrides": {},
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 10573982429,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 613435330,
+  "layer_link_entries_typical": 604696530,
+  "layer_link_cells_typical": 476297496,
+  "layer_link_other_typical": 128399034,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 527265781,
+  "head_link_cells": 428572421,
+  "largest_link_entries": 613435330
+ },
+ "dense_f8192": {
+  "name": "dense_f8192",
+  "overrides": {
+   "dense": true,
+   "f": 8192
+  },
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 8862579713,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 470818437,
+  "layer_link_entries_typical": 462079637,
+  "layer_link_cells_typical": 333771405,
+  "layer_link_other_typical": 128308232,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 527265781,
+  "head_link_cells": 428572421,
+  "largest_link_entries": 527265781
+ },
+ "dense_f16384": {
+  "name": "dense_f16384",
+  "overrides": {
+   "dense": true,
+   "f": 16384
+  },
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 9936288713,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 560294187,
+  "layer_link_entries_typical": 551555387,
+  "layer_link_cells_typical": 423230775,
+  "layer_link_other_typical": 128324612,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 527265781,
+  "head_link_cells": 428572421,
+  "largest_link_entries": 560294187
+ },
+ "dense_f17408": {
+  "name": "dense_f17408",
+  "overrides": {
+   "dense": true,
+   "f": 17408
+  },
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 10070797313,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 571503237,
+  "layer_link_entries_typical": 562764437,
+  "layer_link_cells_typical": 434437773,
+  "layer_link_other_typical": 128326664,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 527265781,
+  "head_link_cells": 428572421,
+  "largest_link_entries": 571503237
+ },
+ "dense_f17408_V248320": {
+  "name": "dense_f17408_V248320",
+  "overrides": {
+   "dense": true,
+   "f": 17408,
+   "V": 248320
+  },
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 10165530241,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 571503237,
+  "layer_link_entries_typical": 562764437,
+  "layer_link_cells_typical": 434437773,
+  "layer_link_other_typical": 128326664,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 621998709,
+  "head_link_cells": 523296677,
+  "largest_link_entries": 621998709
+ },
+ "dense_f17408_V248320_L64": {
+  "name": "dense_f17408_V248320_L64",
+  "overrides": {
+   "dense": true,
+   "f": 17408,
+   "V": 248320,
+   "L": 64
+  },
+  "exit_code": 4,
+  "links": 33,
+  "entries_total": 13343794485,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 16,
+  "attention_links": 16,
+  "layer_link_entries_first": 571503237,
+  "layer_link_entries_typical": 562764437,
+  "layer_link_cells_typical": 434437773,
+  "layer_link_other_typical": 128326664,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 621998709,
+  "head_link_cells": 523296677,
+  "largest_link_entries": 621998709
+ },
+ "dense_f17408_G4": {
+  "name": "dense_f17408_G4",
+  "overrides": {
+   "dense": true,
+   "f": 17408,
+   "G": 4
+  },
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 9978133193,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 563782379,
+  "layer_link_entries_typical": 555043579,
+  "layer_link_cells_typical": 426726135,
+  "layer_link_other_typical": 128317444,
+  "attention_link_entries": 231800472,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 527265781,
+  "head_link_cells": 428572421,
+  "largest_link_entries": 563782379
+ },
+ "small_roomy": {
+  "name": "small_roomy",
+  "overrides": {
+   "base": "target_small_f2_roomy"
+  },
+  "exit_code": 4,
+  "links": 5,
+  "entries_total": 87178558,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 2,
+  "attention_links": 2,
+  "layer_link_entries_first": 25235939,
+  "layer_link_entries_typical": 25180679,
+  "layer_link_cells_typical": 8171239,
+  "layer_link_other_typical": 17009440,
+  "attention_link_entries": 10935368,
+  "attention_link_cells": 2971360,
+  "head_link_entries": 14891204,
+  "head_link_cells": 4328644,
+  "largest_link_entries": 25235939
+ },
+ "H4": {
+  "f8192": 462079637,
+  "f16384": 551555387,
+  "f17408": 562764437,
+  "predicted_f17408": 562739856,
+  "error": 4.3679465836609006e-05,
+  "pass_": true
+ }
+}

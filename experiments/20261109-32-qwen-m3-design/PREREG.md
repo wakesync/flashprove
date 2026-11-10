@@ -1,0 +1,206 @@
+# PREREG: 20261109-32-qwen-m3-design
+
+Issue: #32 (touches #34, #35, #7, #8). Lane: qwen-m3-design. Date (UTC): 2026-11-10T00:50Z.
+Base commit: 8ec7c79969ca4ca6044dc4c8b79fe4385910fe8c, the head of PR #66 (the M2 design). #66 is open
+and not on main; this lane reads its files, so it branches from that head. main was
+4f7a876151c309f0159e88b18c8e286d4e1909c9.
+
+This is a design and counting lane. No proof is built. No GPU, no weights, no paid API. Every number
+this lane produces is either a count from a model (deterministic, n = 1) or an extrapolation. None
+is a measurement of a Qwen proof, and none may be reported as one.
+
+## What was looked at before this file was committed (disclosure)
+
+- Read: DESIGN.md and RESULTS.md of #66, FEASIBILITY.md, issues #32, #34, #35, #8,
+  docs/architecture.md, docs/model.md, docs/protocol.md sections 1 to 6, guide/performance.md,
+  research/results.yaml, the head comments of blocks/iop/{req,lin,foldeq,link,member,rng,lkp,psc,
+  relation,laid}.h, prover/README.md, and the sibling lanes' briefs and STATE files.
+- Ran the upstream planner (`cp_verify -plan arrays` and `-plan accounting`) on the stored
+  configuration `prover/examples/target_full_f2`, and summed the planner's array sizes with a
+  short script: 10,573,982,429 committed entries for one 1,024-token request (12 layer links of
+  about 6.05e8, 12 attention links of 2.32e8, one head link of 5.27e8).
+- Fitted "seconds per batch = p x passes + q x requests" to upstream's four published rates
+  (guide/performance.md: batch 1, 8, 24, 64), solving on batch 1 and 8 with 2 opening passes per
+  batch: p = 18.16 s per pass, q = 4.33 s per request; it predicts batch 24 and 64 within -3.6%
+  and -3.4%. Because this was seen before registration it is registered as descriptive (D1), not
+  as a hypothesis.
+- Nothing was counted for Qwen. The planner was not run at any other shape. No M3 counting code
+  existed. A first draft of this file was written before the fit above was run and was replaced by
+  this one before any commit.
+
+## Hypothesis
+
+A first Qwen statement in which the proof does real work (weights committed, so the verifier
+cannot recompute it) can be specified on machinery that exists in this repository plus the three
+interfaces other lanes are building (state commitment #34, operator gadgets #35, the lookup
+composition), such that its smallest instance fits the CPU research harness; and a counting model
+anchored on measured statements and on the upstream planner says whether the full text model fits
+one H200 (141 GB).
+
+Sub-hypotheses, each falsifiable:
+
+- **H1 (the model still reproduces what was measured).** The M3 counting model, at the M1 and M1b
+  statement shapes, reproduces the measured M1 (#47) and M1b (#63) statements on the ten quantities
+  that #66 checked (columns, relations, terms, range cells, log-length).
+- **H2 (M3 reduces to M2).** With every M3 addition switched off, the M3 model gives the #66 M2
+  head counts for arm B at T = 16: 1,056,800 gate columns, 272,384 range cells, 276,688 lookup
+  keys, 2,402,432 relations, table log-length 21.
+- **H3 (the smallest M3 statement fits the CPU harness).** M3a-head, defined here before counting:
+  one V head of one DeltaNet layer, from the layer's normed input a (public, T x 5,120) to that
+  head's out_proj contribution (public), with the head's in_proj and out_proj rows as proved
+  matmuls against committed weights (a product argument, no gate per multiply), and with conv,
+  SiLU, the q/k L2 norm, the decay and beta gates, the recurrence and the gated norm all in
+  relation on committed cells, T = 16, F = 12, remainders and nonlinear tables by lookup (arm B).
+  Claim: it fits a product table of log-length <= 22 with at most 2^23 relations (the harness's
+  own guard).
+- **H4 (the upstream planner is a usable anchor for the dense family).** The planner accepts a
+  proxy shape for Qwen's dense parts (no experts, d = 5,120, f = 17,408, V = 248,320, 64 layers),
+  and its layer-link entry count is linear in f: the count at f = 17,408, predicted from the
+  planner's counts at f = 8,192 and f = 16,384, is within 1% of the planner's own count.
+- **H5 (full model, one H200).** Under the decision rule below, a 1,024-token window of the full
+  text model (48 DeltaNet layers, 16 attention layers, 64 MLPs, norms, embedding, head; vision and
+  MTP excluded) fits one H200 in at least one lowering this design names concretely. Registered
+  expectation: it does NOT fit in the only DeltaNet lowering that has been built (the wide product
+  oracle, every state in the table), and the binding constraint is the DeltaNet state trace, not
+  the weights.
+
+## Metric
+
+Counts, deterministic, from `research/operators/qwen_m3/count_m3.py` (written after this file):
+
+- **Research-harness lowering** (wide product oracle, RNG, LKP): gate columns, RNG range cells,
+  lookup keys, relations, relation terms, laid table log-length. Same counting rules as
+  `research/operators/qwen_deltanet_m2/count_model.py`; its `head()` and `layout()` are the
+  reference for H1 and H2.
+- **Packed lowering** (the upstream prover's form: committed arrays of cells, three cells to an
+  entry (`LANES`, docs/format/11-1-machinery.md), sumchecks, lookups, the smallness test):
+  committed entries (field elements) per token and per window. Dense family: from the upstream
+  planner at a proxy shape. DeltaNet: a design count, cells listed one by one in the code, 2 cells
+  per state cell per token (the new state and one floor remainder), times an overhead factor
+  taken from the planner (the non-cell arrays of a Maverick layer link over its cell arrays).
+- **Weights**: committed integers and bytes, from the shapes in FEASIBILITY.md.
+
+Extrapolations. Each is labelled "extrapolated" with its assumption and is never put in a table
+with measurements:
+
+- **Prove time** per window = p x passes x (Qwen committed weights / Maverick committed weights)
+  + q_e x committed entries, with p = 18.16 s and q_e = 4.33 s / 10,573,982,429 entries (D1), 3
+  passes at one request per batch. Source of p and q: upstream's published rates for Llama 4
+  Maverick on one H100, whose records are not in this repository and which this fork has not
+  reproduced. H200 speed is taken equal to H100. A second calibration from this fork's own measured
+  small synthetic example (cp_prove 2.35 s, PR #26) over that example's planner entry count is
+  reported as an upper bound only, since it is dominated by start-up.
+- **Commit time**: linear in committed weights from upstream's "about 39 minutes" for Maverick.
+- **VRAM**: b x (entries of the largest segment in flight, one request per pass), plus weights if
+  held resident. b central = 80,629 MiB / (6 x entries of the largest Maverick segment), from the
+  one published point (64 per batch, six requests per pass). That point is the card's ceiling, so
+  b central is an upper estimate of need. b low = 16 bytes (one 8-byte element under a rate-1/2
+  code and nothing else). b high = 2 x b central.
+- **Proof size**: linear in committed entries from the planner's 18.78 MB for Maverick.
+- **Cost**: GPU-seconds per token. USD only at a stated hourly rate, which is an assumption.
+
+## Acceptance threshold
+
+- H1: exact equality on all ten quantities. Any mismatch is FAIL.
+- H2: exact equality on the five quantities. Any mismatch is FAIL.
+- H3: PASS if log-length <= 22 and relations <= 2^23 at T = 16 under arm B. Reported without a
+  threshold: the same statement under arm A (exact bits, the lookup build's fallback), the largest
+  T that fits under each arm, and one full DeltaNet layer as a single harness statement (48 V
+  heads; expected not to fit).
+- H4: PASS if the planner returns arrays for the proxy shape and the linearity error at
+  f = 17,408 is <= 1%. If the planner refuses the proxy shape after 20 minutes of trying, H4 is
+  KILLED and the dense family is scaled from the Maverick planner counts instead, with that
+  stated.
+- H5 decision rule, fixed now. "Fits one H200" for a window means both:
+  (a) central VRAM estimate <= 127 GB (90% of 141 GB) at one request per pass, weights streamed;
+  (b) central prove-time estimate <= 3,600 s per window.
+  The verdict is given for each named lowering and state strategy. If the central estimate fits
+  and the high estimate does not, the verdict reads "fits on the central assumption, not robust".
+  The binding constraint is the term that is largest in the first lowering that fails, or, if all
+  fit, the term with the least headroom.
+- D1 (descriptive, seen before registration): the two-parameter fit of upstream's rates.
+
+## Kill criterion
+
+- Time box 3 hours from 2026-11-10T00:08Z. At 2h30 the lane stops counting and writes up what it
+  has, including any hypothesis not reached, as "not run".
+- Any prototype over 10 minutes of CPU is not run. None is planned: the counts take seconds.
+- If H1 or H2 fails, the M3 counts are not reported as anchored: fix the model or report FAIL.
+- Under 3 GB free disk: stop writing and report.
+
+## Runs
+
+Counts are deterministic functions of the shape: n = 1, no seeds, no spread. The planner calls are
+deterministic too; each is run once and its output stored under `runs/`. No timing is measured in
+this lane. No run is excluded.
+
+## Prior art
+
+- In this repository: M1 (#47), M1b (#63) and the M2 design (#66) for the DeltaNet head; the
+  feasibility study (#28); upstream's proved dense family (docs/model.md) and its published
+  Maverick rates (guide/performance.md).
+- zkML systems that prove transformer inference: zkLLM (tlookup, attention-specific arguments),
+  EZKL (Halo2 circuits), Jolt and Expander style sumcheck or GKR provers, and GKR-based LLM
+  provers that report GPT-2 scale. None is known to this lane to prove a gated delta-rule
+  recurrence with a carried matrix state, or a 27B-parameter model end to end on one GPU.
+- Recurrent state across steps: incrementally verifiable computation and folding (Nova family)
+  are the usual tools; this project uses a hash-based IOP with carried commitments instead, and
+  #34 owns that comparison.
+- TEE-only alternatives (H100/H200 confidential computing, TDX, SEV-SNP; Tinfoil, Phala) attest the
+  software, not the arithmetic.
+- No literature search beyond these lists was done in this lane. What is new here is a statement
+  design and a cost model for one specific model on one specific GPU, not a new argument.
+
+## Amendments
+
+(empty at registration)
+
+The amendments below are **retrospective**: each records, after the fact, a change made after the
+first run (`runs/model-first-run.json`). None of them changes a registered question, threshold or
+first-run verdict. They are appended on 2026-11-10 after two independent reviews of PR #70 asked
+for them.
+
+### A1 (2026-11-10, retrospective): H5 segmentation changed after the first result was seen
+The first run put the DeltaNet mixer inside upstream's 4-layer layer link. Its verdict for
+per-token state at T = 1,024 was "does not fit" (138 GB central against 127 GB), and H5 passed
+through the low-rank case only. After that was seen, the DeltaNet sub-proof was made a segment of
+its own (per block, per layer). That change is **exploratory and post hoc**: the verdicts it gives
+are not registered results. The registered per-case verdicts stay: per-token four-layer case FAIL;
+aggregate H5 PASS through low-rank. The first run's "2-layer links" case was dropped (upstream
+allows at most 28 blocks).
+
+### A2 (2026-11-10, retrospective): gated norm changed after the first run
+The derived coefficient cg was replaced by a table cell, two floors and a committed gain, after
+the second review of #66. M3a-head moved from 1,732,306 laid columns to 1,750,866 (r1). The H3
+verdict is the same.
+
+### A3 (2026-11-10, retrospective): additions not registered
+Added during the lane and not registered: the wider-in_proj slope, the two-level arm-A fallback,
+`bounds.py`, the sensitivity table (RESULTS H5.5), the descriptive VRAM calibration at the fork's
+own rate. The packed DeltaNet count was registered as "2 cells per state cell" and is counted as
+5 byte limbs (3 state, 2 remainder).
+
+### A4 (2026-11-10, retrospective): r2 corrections after two reviews of PR #70
+The count model and the bound ledger were corrected (DESIGN section 12): exact 2^s remainder
+classes, the q scale 362, the weight-cell class and tie, arm A split at 256 terms, retained gains
+in the inventory, the M3a-MLP down projection rounded (it could wrap), the bound ledger as exact
+sums over all terms. Outputs are new files (`runs/model-r2.json`, `runs/bounds-r2.json`); the
+first-run and r1 files are unchanged. Effect on the registered verdicts: H1, H2, H4 unchanged;
+H3 unchanged (PASS, 2^21); H5 as in A1, with the low-rank case now marked **not established**
+(review of PR #71), so the registered PASS rests on a construction that is not specified or
+proved, and fit on one H200 is reported as unknown. M3a-MLP, reported without a threshold, moves
+from 2^22 to 2^23 at T = 16.
+
+### A5 (2026-11-10, retrospective): r3, dt_bias class after the round-2 re-reviews of PR #70
+Added after the round-2 re-reviews (astra approve, opus request changes, both at `82a4601e`). Opus
+found that r2's dt_bias scale (2^F) and weight-cell class ([-4,096, 4,095]) together admit only
+|dt_bias| < 1, while real layer-0 dt_bias (PR #68) and the M2 synthetic init both lie outside it:
+no honest proof was possible. r3 gives dt_bias its own exact class [-2^17, 2^17) at 2^F, the same
+3 keys and 2 relations in arm B, 18 bits in arm A; the bound ledger's softplus key row uses 2^17;
+a completeness check against PR #68's layer-0 quantiles is added to `bounds.py`; the M3a-1
+hostile suite gains honest-completeness cases. Also: the M3a-1 fallback is counted (it fits no
+2^22 table at any T), the remainder layout at s <= 12 is made explicit, and three ladder rungs are
+added as next steps. Outputs are new files (`runs/model-r3.json`, `runs/bounds-r3.json`); the
+first-run, r1 and r2 files are unchanged. Effect on the registered verdicts: none. H1, H2, H4
+unchanged; H3 unchanged (arm B counts do not move: PASS, 2^21); H5 as in A1 and A4 (fit on one
+H200 unknown). Changed numbers are listed in RESULTS.md, "r3: changed numbers".

@@ -1,0 +1,23 @@
+fetch_bounded_test.py of this fix, run against RUNBOOK.md of 99d16a77 (git show 99d16a77:research/gpu/tinfoil-h200/RUNBOOK.md, sha256 b7d61deb922459794fb696dccf39da57dad23a4eb4ae1fd759fb8fc5207094b1).
+CPU host, shared and loaded, no GPU, no network use, no provider command, inert local programs in place of the fetch; python3 3.12.3; GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu); timeout (GNU coreutils) 9.4; 2026-11-10T09:36Z UTC; 78 s.
+The helper-only checks are not run in this mode (the old runbook has no helper).
+$ python3 fetch_bounded_test.py --runbook <RUNBOOK.md of 99d16a77>
+runbook: given file
+fetch command prefix (tinfoil path): [ "$(left)" -gt 0 ] && timeout -k 5 "$(left)"
+fetch command prefix (proxy path):   timeout -k 5 "$(left)"
+FAIL static: the tinfoil fetch goes through fetch_bounded.sh
+FAIL static: the proxy fetch goes through fetch_bounded.sh
+FAIL tinfoil path: one_to_zero (1 s then 0 s left): fetch not started: exit 0, started True, finished True
+PASS tinfoil path: at_cutoff (0 s left): fetch not started: exit 1, started False, finished False
+PASS tinfoil path: past_cutoff (30 s past, extra case): fetch not started: exit 1, started False, finished False
+FAIL tinfoil path: insufficient_grace (4 s left, TERM ignored): over by the cut-off: exit 137, started True, finished False, ended +5.4 s from the cut-off
+FAIL tinfoil path: term_ignoring (20 s left, TERM ignored, 40 s fetch): started and over by the cut-off: exit 137, started True, finished False, ended +5.4 s from the cut-off
+PASS tinfoil path: normal_fetch (60 s left, 1 s fetch): runs to the end, exit 0: exit 0, started True, finished True, ended -58.5 s from the cut-off
+FAIL proxy path: one_to_zero (1 s then 0 s left): fetch not started: exit 124, started True, finished False
+FAIL proxy path: at_cutoff (0 s left): fetch not started: exit 0, started True, finished True
+PASS proxy path: past_cutoff (30 s past, extra case): fetch not started: exit 125, started False, finished False, stderr: Try 'timeout --help' for more information.
+FAIL proxy path: insufficient_grace (4 s left, TERM ignored): over by the cut-off: exit 137, started True, finished False, ended +5.7 s from the cut-off
+FAIL proxy path: term_ignoring (20 s left, TERM ignored, 40 s fetch): started and over by the cut-off: exit 137, started True, finished False, ended +5.7 s from the cut-off
+PASS proxy path: normal_fetch (60 s left, 1 s fetch): runs to the end, exit 0: exit 0, started True, finished True, ended -58.3 s from the cut-off
+5 of 14 checks passed
+exit 1

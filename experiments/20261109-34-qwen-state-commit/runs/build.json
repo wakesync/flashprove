@@ -1,0 +1,16 @@
+{
+ "compile_seconds": 32.956,
+ "sources": {
+  "research/operators/qwen_state_commit/chunk.cpp": "bbed71436d41f5c7a453ffbed5878d7ea1ae1a6e807fb82a54aa31b9be68f4fc",
+  "research/operators/qwen_state_commit/window.py": "bf3ae9bcc46b871ac6a539a6a90dbd065a5c3f9a2ee513b25baf85c06b620002",
+  "research/operators/qwen_state_commit/record.py": "1f758f410991d6e0421adb30702d67733feb871a3a900ff2f7b97a67327b6212",
+  "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770",
+  "research/operators/qwen_deltanet/product.h": "bc43212589700ea2cec2c028b356063e1fbbc8da602b5106e2b50146cd20eae8",
+  "research/operators/qwen_deltanet/reference.py": "f6fbd580bf834afd2d6280036ddf52d410be094824299e89c61eb2a1b80edaf0",
+  "blocks/iop/rng.h": "e159bf2c44e4a5a5c1b846d06ee101e56f699a521cfd198ac6cc25cd57ca4e3a"
+ },
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+ "python": "3.12.3",
+ "numpy": "2.4.3"
+}

@@ -1,0 +1,41 @@
+fetch_bounded_test.py of this fix (commit f18ee987), helper and bounds checks only, run against fetch_bounded.sh of f128341b (git show f128341b:research/gpu/tinfoil-h200/fetch_bounded.sh, sha256 83eabd4e10342586b4f95a0b05b14ecf742efebef72ae198cf25e85d4e54b76f).
+CPU host, shared and loaded, no GPU, no network use, no provider command, inert local programs in place of the fetch; python3 3.12.3; GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu); timeout (GNU coreutils) 9.4; 2026-11-10T10:31Z UTC; 2 s.
+The runbook path checks are not run in this mode (the runbook's fetch lines are unchanged by this fix; they are in review-fix4-fetch_bounded_test-after.txt).
+$ python3 fetch_bounded_test.py --helper <fetch_bounded.sh of f128341b>
+helper: given file (helper and bounds checks only)
+PASS helper: bad arguments [] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T10:33:19Z', '5', '5', 'true'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T10:33:19Z', '0', '5', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T10:33:19Z', '5', '0', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T10:33:19Z', 'x', '5', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['2026-11-10T10:33:19Z', '5', '-1', '--'] refused with exit 2: exit 2
+PASS helper: bad arguments ['not a date', '5', '5', '--'] refused with exit 2: exit 2
+PASS helper: the command's own exit status is passed through: exit 7
+PASS helper: grace + margin + 1 s left runs under a 1 s budget (exit 124): exit 124, ['fetch_bounded: fetch budget 1 s (+ 5 s kill grace), ends by cut-off - 5 s']
+PASS helper: exactly grace + margin left is refused (exit 121, budget 0 never passed to timeout): exit 121
+PASS helper: reads the clock exactly once: 1 reads
+FAIL bounds: grace = margin = 2^63-1, clock at the cut-off: refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 2 s (+ 9223372036854775807 s kill grace), ends by cut-off - 9223372036854775807 s
+FAIL bounds: grace = 2^63-1 alone, 100 s left: refused with exit 2, not started: exit 121, started False, stderr: fetch_bounded: 100 s to the cut-off, less than grace 9223372036854775807 s + margin 5 s + 1 s: not fetching; restore now
+FAIL bounds: grace 3601 (over the 3600 s bound), 7300 s left: refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 3694 s (+ 3601 s kill grace), ends by cut-off - 5 s
+FAIL bounds: margin 3601 (over the 3600 s bound), 7300 s left: refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 3694 s (+ 5 s kill grace), ends by cut-off - 3601 s
+FAIL bounds: clock prints 2^64-1: refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 1999999991 s (+ 5 s kill grace), ends by cut-off - 5 s
+FAIL bounds: clock prints 2^63: refused with exit 2, not started: exit 121, started False, stderr: fetch_bounded: -9223372034854775808 s to the cut-off, less than grace 5 s + margin 5 s + 1 s: not fetching; restore now
+FAIL bounds: cut-off prints 2^64-1: refused with exit 2, not started: exit 121, started False, stderr: fetch_bounded: -1999999901 s to the cut-off, less than grace 5 s + margin 5 s + 1 s: not fetching; restore now
+FAIL bounds: clock out of range low (epoch 5, 1970): refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 1999999985 s (+ 5 s kill grace), ends by cut-off - 5 s
+FAIL bounds: clock out of range low (epoch 999999999, before 2001-09-09): refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 999999991 s (+ 5 s kill grace), ends by cut-off - 5 s
+FAIL bounds: clock and cut-off out of range high (year 2286, 1000 s apart): refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 989 s (+ 5 s kill grace), ends by cut-off - 5 s
+PASS bounds: clock negative (-5): refused with exit 2, not started: exit 2, started False, stderr: fetch_bounded: bad clock value '-5'
+FAIL bounds: clock with a leading zero (0999999999): refused with exit 2, not started: exit 1, started False, stderr: <fetch_bounded.sh of f128341b>: line 59: budget: unbound variable
+FAIL bounds: cut-off more than 6 h ahead (6 h + 1 s, typo): refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 21591 s (+ 5 s kill grace), ends by cut-off - 5 s
+FAIL bounds: grace 08 (invalid octal in bash arithmetic): refused with exit 2, not started: exit 1, started False, stderr: <fetch_bounded.sh of f128341b>: line 59: budget: unbound variable
+FAIL bounds: grace 010 (octal 8 in arithmetic, 10 for timeout): refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 87 s (+ 010 s kill grace), ends by cut-off - 5 s
+FAIL bounds: margin 010: refused with exit 2, not started: exit 0, started True, stderr: fetch_bounded: fetch budget 87 s (+ 5 s kill grace), ends by cut-off - 010 s
+PASS bounds: grace -0: refused with exit 2, not started: exit 2, started False, stderr: usage: fetch_bounded.sh <cutoff> <grace s> <margin s> -- <command...>
+PASS bounds: grace +5: refused with exit 2, not started: exit 2, started False, stderr: usage: fetch_bounded.sh <cutoff> <grace s> <margin s> -- <command...>
+PASS bounds: grace with a leading space: refused with exit 2, not started: exit 2, started False, stderr: usage: fetch_bounded.sh <cutoff> <grace s> <margin s> -- <command...>
+PASS bounds: margin with a trailing space: refused with exit 2, not started: exit 2, started False, stderr: usage: fetch_bounded.sh <cutoff> <grace s> <margin s> -- <command...>
+PASS bounds: grace with a newline: refused with exit 2, not started: exit 2, started False, stderr: usage: fetch_bounded.sh <cutoff> <grace s> <margin s> -- <command...>
+PASS bounds: grace = margin = 3600 with 7300 s left: runs (exit 0): exit 0, started True, stderr: fetch_bounded: fetch budget 100 s (+ 3600 s kill grace), ends by cut-off - 3600 s
+PASS bounds: cut-off exactly 6 h ahead: runs (exit 0): exit 0, started True, stderr: fetch_bounded: fetch budget 21590 s (+ 5 s kill grace), ends by cut-off - 5 s
+19 of 34 checks passed
+exit 1

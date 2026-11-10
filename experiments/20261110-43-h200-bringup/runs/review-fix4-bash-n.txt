@@ -1,0 +1,6 @@
+bash -n of this fix's shell scripts (commit f18ee987), 2026-11-10T10:31Z UTC, CPU host; GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu).
+No local shellcheck binary or cached image on this host: shellcheck of both scripts runs in CI (h200-package-tests, `shellcheck run_job.sh fetch_bounded.sh`) on the pushed head.
+$ bash -n run_job.sh
+exit 0
+$ bash -n fetch_bounded.sh
+exit 0

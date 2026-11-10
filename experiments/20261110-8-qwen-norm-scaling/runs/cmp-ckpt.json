@@ -1,0 +1,17 @@
+{
+ "arms": [
+  "C0",
+  "C4P",
+  "X1",
+  "X2",
+  "X3"
+ ],
+ "rows_compared": 2400,
+ "rows_identical": 2400,
+ "engine_C0_vs_pr68": {
+  "rows": 480,
+  "max_rel_diff_rel_y": 2.6479440448415282e-14,
+  "max_rel_diff_rel_S": 1.8057634052320045e-15,
+  "integer_maxima_equal": true
+ }
+}

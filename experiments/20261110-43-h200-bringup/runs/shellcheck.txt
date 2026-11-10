@@ -1,0 +1,3 @@
+bash -n: exit 0
+shellcheck exit 0
+shellcheck image koalaman/shellcheck@sha256:bb596a0d169b85ddd81d8b6d3a2ff6d5baf5fca10b97f575ebc647c3dff62b3d

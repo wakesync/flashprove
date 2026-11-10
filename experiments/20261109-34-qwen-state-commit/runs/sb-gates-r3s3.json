@@ -1,0 +1,64 @@
+{
+ "note": "descriptive gate statistics of the registered failure case; no cause is established by this file",
+ "F": 12,
+ "rows": [
+  {
+   "dist": "R3",
+   "seed": 3,
+   "steps": 1024,
+   "A": 2.2847375071543654,
+   "dt_bias": -5.815714266091966,
+   "decay_float": {
+    "min": 0.8355915561241426,
+    "median": 0.9931793955221998,
+    "max": 0.9995347732407277
+   },
+   "decay_integer_scale_4096": {
+    "min": 3423,
+    "median": 4068.0,
+    "max": 4094
+   },
+   "chunk_start_products": [
+    {
+     "C": 16,
+     "chunks": 64,
+     "G_C0_min": 2996,
+     "G_C0_median": 3441.0,
+     "G_C0_max": 3723,
+     "staged_products_equal_to_zero": 0,
+     "staged_products_below_16": 0,
+     "float_product_min": 0.7334143191901878,
+     "float_product_max": 0.9101525199011227
+    },
+    {
+     "C": 64,
+     "chunks": 16,
+     "G_C0_min": 1727,
+     "G_C0_median": 1945.0,
+     "G_C0_max": 2472,
+     "staged_products_equal_to_zero": 0,
+     "staged_products_below_16": 0,
+     "float_product_min": 0.42735471595937724,
+     "float_product_max": 0.6086318621733371
+    }
+   ]
+  }
+ ],
+ "registered_drift_of_this_case": {
+  "16": [
+   [
+    "R3",
+    3,
+    0.0663
+   ]
+  ],
+  "64": [
+   [
+    "R3",
+    3,
+    0.0942
+   ]
+  ]
+ },
+ "registered_drift_max_at_C1": 0.032116089467873365
+}

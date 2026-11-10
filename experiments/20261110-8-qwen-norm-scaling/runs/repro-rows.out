@@ -1,0 +1,19 @@
+{
+ "stock": {
+  "pr68_rows": 480,
+  "new_rows": 480,
+  "identical": 480,
+  "differing": 0,
+  "differing_fields": {},
+  "extra_new": 0
+ },
+ "abl": {
+  "pr68_rows": 480,
+  "new_rows": 480,
+  "identical": 480,
+  "differing": 0,
+  "differing_fields": {},
+  "extra_new": 0
+ },
+ "mismatches": 0
+}

@@ -1,0 +1,137 @@
+{
+ "source_sha256": "41a55adcfaebf92a762de7ca1c5c456310d3e03c64d4413a90ccf098c00dc6d8",
+ "torch": "2.15.0+cpu",
+ "ckpt": "stock",
+ "rows": [
+  {
+   "prompt": "p01-ordinary-short",
+   "T": 13,
+   "f64_vs_ours_max_abs_y": 3.2098216173892524e-07,
+   "f64_vs_ours_max_abs_o": 5.117937336152067e-07,
+   "f64_vs_ours_rel_y": 8.960365499009582e-08,
+   "bf16_eager_rel_y_vs_f64": 0.0030289090085835082,
+   "bf16_eager_rel_o_vs_f64": 0.0022085377939046217,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.005271965692781223,
+    "max": 0.00877819682241992
+   }
+  },
+  {
+   "prompt": "p02-ordinary-paragraph",
+   "T": 107,
+   "f64_vs_ours_max_abs_y": 6.617071437453603e-07,
+   "f64_vs_ours_max_abs_o": 1.190460623412548e-06,
+   "f64_vs_ours_rel_y": 9.098379298234763e-08,
+   "bf16_eager_rel_y_vs_f64": 0.0027344854393641822,
+   "bf16_eager_rel_o_vs_f64": 0.001992103242848456,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.004988827910241168,
+    "max": 0.00853208854853111
+   }
+  },
+  {
+   "prompt": "p03-repeat-word",
+   "T": 512,
+   "f64_vs_ours_max_abs_y": 5.459781366068395e-06,
+   "f64_vs_ours_max_abs_o": 3.980251724877704e-06,
+   "f64_vs_ours_rel_y": 9.933064656326493e-07,
+   "bf16_eager_rel_y_vs_f64": 0.0030186350568459654,
+   "bf16_eager_rel_o_vs_f64": 0.004064124839725561,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.005184969803668121,
+    "max": 0.008925056615874128
+   }
+  },
+  {
+   "prompt": "p04-repeat-punct",
+   "T": 64,
+   "f64_vs_ours_max_abs_y": 1.326606871354663e-06,
+   "f64_vs_ours_max_abs_o": 1.455435538200156e-07,
+   "f64_vs_ours_rel_y": 2.263968172103837e-07,
+   "bf16_eager_rel_y_vs_f64": 0.0054802031610897564,
+   "bf16_eager_rel_o_vs_f64": 0.003855340279511139,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.005602643295024032,
+    "max": 0.025835264268317823
+   }
+  },
+  {
+   "prompt": "p05-code",
+   "T": 144,
+   "f64_vs_ours_max_abs_y": 5.570237022745061e-07,
+   "f64_vs_ours_max_abs_o": 1.3559713409883045e-06,
+   "f64_vs_ours_rel_y": 8.182432007986653e-08,
+   "bf16_eager_rel_y_vs_f64": 0.0025915213005782696,
+   "bf16_eager_rel_o_vs_f64": 0.002061492625638244,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.005247029515956651,
+    "max": 0.008130312031272317
+   }
+  },
+  {
+   "prompt": "p06-digits",
+   "T": 465,
+   "f64_vs_ours_max_abs_y": 6.316291041308375e-07,
+   "f64_vs_ours_max_abs_o": 1.2243181677362713e-06,
+   "f64_vs_ours_rel_y": 1.2016183448447349e-07,
+   "bf16_eager_rel_y_vs_f64": 0.0024820435637000985,
+   "bf16_eager_rel_o_vs_f64": 0.0023283282174224674,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.006061180052392799,
+    "max": 0.015947525607005138
+   }
+  },
+  {
+   "prompt": "p07-chat-ordinary",
+   "T": 23,
+   "f64_vs_ours_max_abs_y": 8.461466780573801e-07,
+   "f64_vs_ours_max_abs_o": 8.440146550547922e-07,
+   "f64_vs_ours_rel_y": 1.0028530149819714e-07,
+   "bf16_eager_rel_y_vs_f64": 0.003105208861199493,
+   "bf16_eager_rel_o_vs_f64": 0.002234392830937466,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.0050850030129408344,
+    "max": 0.009684377856490393
+   }
+  },
+  {
+   "prompt": "p08-chat-refusal",
+   "T": 39,
+   "f64_vs_ours_max_abs_y": 8.461466780573801e-07,
+   "f64_vs_ours_max_abs_o": 9.654678931880767e-07,
+   "f64_vs_ours_rel_y": 8.655910765483509e-08,
+   "bf16_eager_rel_y_vs_f64": 0.002938177895862057,
+   "bf16_eager_rel_o_vs_f64": 0.0021166638406083663,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.004929086726346071,
+    "max": 0.007949897761462947
+   }
+  },
+  {
+   "prompt": "p09-multilingual",
+   "T": 21,
+   "f64_vs_ours_max_abs_y": 4.438684504393109e-07,
+   "f64_vs_ours_max_abs_o": 3.285387646378979e-07,
+   "f64_vs_ours_rel_y": 9.447181208967426e-08,
+   "bf16_eager_rel_y_vs_f64": 0.0036583139825399095,
+   "bf16_eager_rel_o_vs_f64": 0.00226017439903637,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.005256994802870228,
+    "max": 0.008035725160867662
+   }
+  },
+  {
+   "prompt": "p10-long-mixed",
+   "T": 1008,
+   "f64_vs_ours_max_abs_y": 6.617071437453603e-07,
+   "f64_vs_ours_max_abs_o": 4.02339952287889e-06,
+   "f64_vs_ours_rel_y": 9.390371362928425e-08,
+   "bf16_eager_rel_y_vs_f64": 0.002674843673410363,
+   "bf16_eager_rel_o_vs_f64": 0.0020058955057887197,
+   "bf16_eager_rel_y_per_head": {
+    "median": 0.0050542671732101835,
+    "max": 0.00797915479512308
+   }
+  }
+ ]
+}

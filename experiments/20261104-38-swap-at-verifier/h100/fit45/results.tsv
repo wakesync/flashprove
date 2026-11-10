@@ -1,0 +1,129 @@
+name	prover	exit	last_line
+fp2nd_1_redecode_100	failed	-	-
+fp2nd_1_redecode_109	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_113	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_119	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_125	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_127	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_67	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_69	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_74	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_80	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_81	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_84	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_90	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_95	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_96	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_1_redecode_97	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+fp2nd_4_102	failed	-	-
+fp2nd_4_104	failed	-	-
+fp2nd_4_111	failed	-	-
+fp2nd_4_112	failed	-	-
+fp2nd_4_119	failed	-	-
+fp2nd_4_121	failed	-	-
+fp2nd_4_123	failed	-	-
+fp2nd_4_125	failed	-	-
+fp2nd_4_126	failed	-	-
+fp2nd_4_65	failed	-	-
+fp2nd_4_67	failed	-	-
+fp2nd_4_73	failed	-	-
+fp2nd_4_74	failed	-	-
+fp2nd_4_83	failed	-	-
+fp2nd_4_86	failed	-	-
+fp2nd_4_96	failed	-	-
+honest_101	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_104	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_109	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_112	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_113	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_123	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_124	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_127	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_65	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_67	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_71	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_73	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_75	failed	-	-
+honest_76	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_77	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+honest_94	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_105	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_107	failed	-	-
+rand_1_redecode_109	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_112	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_117	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_119	failed	-	-
+rand_1_redecode_124	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_66	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_73	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_74	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_77	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_81	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_86	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_89	failed	-	-
+rand_1_redecode_91	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_redecode_95	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+int2nd_4_116	failed	-	-
+int2nd_4_119	failed	-	-
+int2nd_4_121	failed	-	-
+int2nd_4_124	failed	-	-
+int2nd_4_64	failed	-	-
+int2nd_4_65	failed	-	-
+int2nd_4_69	failed	-	-
+int2nd_4_70	failed	-	-
+int2nd_4_74	failed	-	-
+int2nd_4_79	failed	-	-
+int2nd_4_82	failed	-	-
+int2nd_4_84	failed	-	-
+int2nd_4_88	failed	-	-
+int2nd_4_89	failed	-	-
+int2nd_4_90	failed	-	-
+int2nd_4_91	failed	-	-
+rand_1_104	failed	-	-
+rand_1_106	failed	-	-
+rand_1_116	proof	0	WITHIN LIMITS: clipped-gap C=5178975 theta=203143 cap=1 s=16 sh=8
+rand_1_117	failed	-	-
+rand_1_124	failed	-	-
+rand_1_125	failed	-	-
+rand_1_66	failed	-	-
+rand_1_71	failed	-	-
+rand_1_73	failed	-	-
+rand_1_75	failed	-	-
+rand_1_79	failed	-	-
+rand_1_84	failed	-	-
+rand_1_85	failed	-	-
+rand_1_89	failed	-	-
+rand_1_94	failed	-	-
+rand_1_99	failed	-	-
+rand_4_104	failed	-	-
+rand_4_108	failed	-	-
+rand_4_111	failed	-	-
+rand_4_114	failed	-	-
+rand_4_117	failed	-	-
+rand_4_121	failed	-	-
+rand_4_124	failed	-	-
+rand_4_66	failed	-	-
+rand_4_72	failed	-	-
+rand_4_75	failed	-	-
+rand_4_81	failed	-	-
+rand_4_82	failed	-	-
+rand_4_86	failed	-	-
+rand_4_89	failed	-	-
+rand_4_96	failed	-	-
+rand_4_98	failed	-	-
+rand_reply_105	failed	-	-
+rand_reply_112	failed	-	-
+rand_reply_113	failed	-	-
+rand_reply_116	failed	-	-
+rand_reply_117	failed	-	-
+rand_reply_122	failed	-	-
+rand_reply_124	failed	-	-
+rand_reply_125	failed	-	-
+rand_reply_67	failed	-	-
+rand_reply_68	failed	-	-
+rand_reply_76	failed	-	-
+rand_reply_83	failed	-	-
+rand_reply_84	failed	-	-
+rand_reply_86	failed	-	-
+rand_reply_95	failed	-	-
+rand_reply_99	failed	-	-
