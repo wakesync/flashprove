@@ -74,9 +74,12 @@ python3 weight_stats.py $C/cache stock
 
 The committed runs used `run_all.sh` as written: `taskset -c 0-5`, one checkpoint at a time, and no BLAS or OpenMP thread variables set (`OPENBLAS_NUM_THREADS`, `OMP_NUM_THREADS` and the like were unset; the runner does not set them and inherits whatever is in the environment). `run_all.sh` is unchanged.
 
-What changing those settings does, from another lane's receipt (lane `qwen-norm-scaling`, files `runs/repro-diff-threads3-stock.json` and `runs/repro-diff-threads3-abl.json` on its branch `research/1109-qwen-norm-scaling`; not committed in this PR, and that lane's PR is not open yet): it reran `real_head.py` with `OPENBLAS_NUM_THREADS=3` and both checkpoints in parallel. Per checkpoint, 473 of 480 rows differed, in float fields only, by at most 4.8e-13 relative; all 13,920 integer fields (range maxima and exact-limb minima) were equal. So:
-- integer fields are expected to match bit for bit across thread settings;
-- float fields match exactly only with the original settings above, and otherwise to about 1e-12 relative.
+Under other settings a rerun may not be bit-identical:
+- Float fields can differ in their last bits under other BLAS thread settings, or when the checkpoints are run in parallel. This PR did not measure by how much.
+- Integer fields (range maxima and exact-limb minima) are not guaranteed to match under every setting either. The integer inputs are rounded from float matrix-product outputs, so a last-bit difference can in principle flip a rounding. This PR did not test that.
+- For a bit-identical rerun, use the original settings above.
+
+A separate lane is measuring this sensitivity and will report it in its own PR.
 
 The reviewers' exact reruns of all 6,720 rows (RESULTS section 6, A-8) are true for the settings they used; they are not a guarantee for every thread setting.
 
