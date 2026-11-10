@@ -19,10 +19,14 @@ and checks: with too little time left the fetch is not started; when it is start
 (including a KILL after the grace) no later than the cut-off by the wall clock; a fetch with time
 enough runs to the end. A static check requires both fetch commands to go through
 fetch_bounded.sh. Without --runbook it also checks the helper's own argument handling and exit
-statuses.
+statuses, and its input bounds (review round 4): grace = margin = 2^63-1 at the cut-off, a clock or
+cut-off printing 2^64-1 or 2^63, out-of-range, negative and leading-zero clock values, grace or
+margin `08`, `010`, `-0`, `+5`, with whitespace, over 3600, and a cut-off more than 6 h ahead must
+all be refused with exit 2 before anything starts; the accepted maxima must still run.
 
   python3 fetch_bounded_test.py                       # this package's RUNBOOK.md and helper
   python3 fetch_bounded_test.py --runbook OLD.md      # e.g. RUNBOOK.md of an earlier commit
+  python3 fetch_bounded_test.py --helper OLD.sh       # helper and bounds checks only, another helper
 
 Prints PASS/FAIL per check and "N of M checks passed"; exit 0 only if all pass.
 """
@@ -82,10 +86,14 @@ open(marker, 'a').write('finished\\n')
 
 MOCK_DATE = '''#!/usr/bin/env python3
 # Mocked `date` for the test: `date -u +%s` returns the next value of the sequence file (the last one
-# repeats); every other form (`-d <cutoff>`, formats) is passed to the real date.
+# repeats); `date -u -d <cutoff> +%s` prints the content of the file `cut` if it exists; every other
+# form is passed to the real date.
 import os, sys
 here = os.path.dirname(os.path.abspath(__file__))
 args = sys.argv[1:]
+if '-d' in args and '+%s' in args and os.path.exists(os.path.join(here, 'cut')):
+    print(open(os.path.join(here, 'cut')).read().strip())
+    sys.exit(0)
 if '-d' not in args and '+%s' in args:
     seq = open(os.path.join(here, 'seq')).read().split()
     n = int(open(os.path.join(here, 'n')).read()) if os.path.exists(os.path.join(here, 'n')) else 0
@@ -202,10 +210,83 @@ def helper_cases(td):
     check('helper: reads the clock exactly once', reads == 1, '%d reads' % reads)
 
 
+def bounds_cases(td, helper):
+    """Review round 4 (PR #69): canonical decimal input and explicit bounds before any arithmetic.
+    Every case below must be refused with exit 2 before the command starts, except the two sanity
+    cases at the accepted maxima. Ported from both round-4 reviews: grace = margin = 2^63-1 at the
+    cut-off (wrapped to a positive budget), a clock printing 2^64-1, grace 08 (bash octal error) and
+    010 (read as 8), a far-future cut-off."""
+    def run(grace, margin, now, cut=None, ahead=None):
+        d = pathlib.Path(tempfile.mkdtemp(prefix='b-', dir=td))
+        mock = d / 'mockbin'
+        mock.mkdir()
+        (mock / 'date').write_text(MOCK_DATE)
+        (mock / 'date').chmod(0o755)
+        (mock / 'seq').write_text(str(now) + '\n')
+        if cut is not None:
+            (mock / 'cut').write_text(str(cut) + '\n')
+        marker = d / 'marker'
+        env = dict(os.environ)
+        env['PATH'] = str(mock) + os.pathsep + env['PATH']
+        r = subprocess.run(['bash', str(helper), FIXED_CUT_ISO, grace, margin, '--', 'touch', str(marker)],
+                           env=env, capture_output=True, text=True, timeout=30)
+        return r.returncode, marker.exists(), (r.stderr.strip().splitlines() or [''])[-1][:140]
+
+    big63 = str(2 ** 63 - 1)
+    big64 = str(2 ** 64 - 1)
+    refused = [
+        # (name, grace, margin, now, cut)
+        ('grace = margin = 2^63-1, clock at the cut-off', big63, big63, FIXED_CUT, None),
+        ('grace = 2^63-1 alone, 100 s left', big63, '5', FIXED_CUT - 100, None),
+        ('grace 3601 (over the 3600 s bound), 7300 s left', '3601', '5', FIXED_CUT - 7300, None),
+        ('margin 3601 (over the 3600 s bound), 7300 s left', '5', '3601', FIXED_CUT - 7300, None),
+        ('clock prints 2^64-1', '5', '5', big64, None),
+        ('clock prints 2^63', '5', '5', str(2 ** 63), None),
+        ('cut-off prints 2^64-1', '5', '5', FIXED_CUT - 100, big64),
+        ('clock out of range low (epoch 5, 1970)', '5', '5', 5, None),
+        ('clock out of range low (epoch 999999999, before 2001-09-09)', '5', '5', 999999999, None),
+        ('clock and cut-off out of range high (year 2286, 1000 s apart)', '5', '5', 9999999000, 9999999999),
+        ('clock negative (-5)', '5', '5', -5, None),
+        ('clock with a leading zero (0999999999)', '5', '5', '0999999999', None),
+        ('cut-off more than 6 h ahead (6 h + 1 s, typo)', '5', '5', FIXED_CUT - 21601, None),
+        ('grace 08 (invalid octal in bash arithmetic)', '08', '5', FIXED_CUT - 100, None),
+        ('grace 010 (octal 8 in arithmetic, 10 for timeout)', '010', '5', FIXED_CUT - 100, None),
+        ('margin 010', '5', '010', FIXED_CUT - 100, None),
+        ('grace -0', '-0', '5', FIXED_CUT - 100, None),
+        ('grace +5', '+5', '5', FIXED_CUT - 100, None),
+        ('grace with a leading space', ' 5', '5', FIXED_CUT - 100, None),
+        ('margin with a trailing space', '5', '5 ', FIXED_CUT - 100, None),
+        ('grace with a newline', '5\n', '5', FIXED_CUT - 100, None),
+    ]
+    for name, g, m, now, cut in refused:
+        rc, started, err = run(g, m, now, cut)
+        check('bounds: %s: refused with exit 2, not started' % name, rc == 2 and not started,
+              'exit %d, started %s, stderr: %s' % (rc, started, err))
+    # Sanity at the accepted maxima: the command still runs.
+    rc, started, err = run('3600', '3600', FIXED_CUT - 7300)
+    check('bounds: grace = margin = 3600 with 7300 s left: runs (exit 0)', rc == 0 and started,
+          'exit %d, started %s, stderr: %s' % (rc, started, err))
+    rc, started, err = run('5', '5', FIXED_CUT - 21600)
+    check('bounds: cut-off exactly 6 h ahead: runs (exit 0)', rc == 0 and started,
+          'exit %d, started %s, stderr: %s' % (rc, started, err))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--runbook', default=str(HERE / 'RUNBOOK.md'))
+    ap.add_argument('--helper', default=None,
+                    help='run only the helper and bounds checks, against this copy of fetch_bounded.sh '
+                         '(e.g. the helper of an earlier commit)')
     a = ap.parse_args()
+    if a.helper:
+        global HELPER
+        HELPER = pathlib.Path(a.helper).resolve()
+        print('helper: given file (helper and bounds checks only)')
+        with tempfile.TemporaryDirectory(prefix='fp-fetch-bounded-') as td:
+            helper_cases(td)
+            bounds_cases(td, HELPER)
+        print('%d of %d checks passed' % (sum(results), len(results)))
+        sys.exit(0 if all(results) else 1)
     text = pathlib.Path(a.runbook).read_text()
     setup, prefix, proxy_prefix = extract(text)
     print('runbook: %s' % ('this package' if a.runbook == str(HERE / 'RUNBOOK.md') else 'given file'))
@@ -223,6 +304,7 @@ def main():
             check('proxy path: present in the runbook', False)
         if a.runbook == str(HERE / 'RUNBOOK.md'):
             helper_cases(td)
+            bounds_cases(td, HELPER)
     print('%d of %d checks passed' % (sum(results), len(results)))
     sys.exit(0 if all(results) else 1)
 
