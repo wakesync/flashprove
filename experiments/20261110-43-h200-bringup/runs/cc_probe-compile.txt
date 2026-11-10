@@ -1,0 +1,3 @@
+cc_probe compiled: exit 0
+{"error": "CUDA driver version is insufficient for CUDA runtime version"}
+cc_probe on a machine without a GPU or driver: exit 2

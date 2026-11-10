@@ -1,0 +1,24 @@
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.3s
+#2 [internal] load metadata for docker.io/library/ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852
+#2 DONE 1.2s
+#3 [internal] load .dockerignore
+#3 DONE 0.1s
+#4 [toolkit 1/5] FROM docker.io/library/ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852
+#5 [internal] load build context
+#5 DONE 0.1s
+#4 [toolkit 1/5] FROM docker.io/library/ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852
+#4 DONE 1.8s
+#6 [toolkit 2/5] RUN apt-get update && apt-get install -y --no-install-recommends       ca-certificates curl git build-essential gcc-13 g++-13 binutils python3 python3-pip       util-linux time bc xz-utils     && rm -rf /var/lib/apt/lists/*     && mkdir -p /opt/env && dpkg-query -W -f '${Package} ${Version}\n' > /opt/env/dpkg.txt
+#6 DONE 38.0s
+#7 [toolkit 3/5] COPY requirements-cuda.txt /opt/env/requirements-cuda.txt
+#7 DONE 0.2s
+#8 [toolkit 4/5] RUN mkdir /opt/cuda-13.2.86     && python3 -m pip install --no-cache-dir --no-deps --require-hashes --break-system-packages          --target /opt/cuda-13.2.86 -r /opt/env/requirements-cuda.txt     && cd /opt/cuda-13.2.86/nvidia/cu13/lib     && for n in cublasLt cublas cudart; do ln -s lib$n.so.13 lib$n.so; done     && mkdir stubs     && curl -fsSLo /tmp/drv.deb       https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-driver-dev-13-2_13.2.86-1_amd64.deb     && echo "ba113b074282ba57132a7dd44d3d454dc43d0b069cdfef992f3bd4f910b76711  /tmp/drv.deb" | sha256sum -c -     && dpkg-deb -x /tmp/drv.deb /tmp/drv     && cp /tmp/drv/usr/local/cuda-13.2/targets/x86_64-linux/lib/stubs/libcuda.so /opt/cuda-13.2.86/nvidia/cu13/lib/stubs/     && rm -rf /tmp/drv /tmp/drv.deb     && chmod -R go-w /opt/cuda-13.2.86
+#8 DONE 12.7s
+#9 [toolkit 5/5] RUN nvcc --version | tail -n 2 | tee /opt/env/nvcc.txt && gcc --version | head -n 1 | tee /opt/env/gcc.txt
+#9 DONE 0.3s
+#10 [source 1/1] RUN git init -q /opt/flashprove && cd /opt/flashprove     && git remote add origin "https://github.com/wakesync/flashprove.git"     && git config core.sparseCheckout true && git sparse-checkout set --no-cone '/*' '!/lean/'     && git fetch -q --depth 1 --filter=blob:none origin "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c"     && git checkout -q FETCH_HEAD     && test "$(git rev-parse HEAD)" = "9e2bdd8ff5bf9c62f18263d7dac189b0400b260c"     && git rev-parse HEAD > /opt/env/flashprove-commit.txt     && chmod -R go-w /opt/flashprove
+#10 DONE 4.8s
+#11 [verifier 1/1] RUN cd /opt/flashprove && verifier/build.sh && sha256sum bin/cp_verify | tee /opt/env/cp_verify.sha256
+#11 DONE 79.0s
+#12 DONE 6.7s
