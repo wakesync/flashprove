@@ -89,8 +89,72 @@ class Manifest:
         return dict(index=i, n=len(self.names), name=name, dtype=d, shape=list(s), sha256=h, path=path)
 
 
+def _is_hex32(x):
+    """Canonical encoding of a 32-byte hash: exactly 64 lowercase hex characters."""
+    return isinstance(x, str) and len(x) == 64 and all(c in "0123456789abcdef" for c in x)
+
+
+def _is_int(x):
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def canonical_opening(op):
+    """None if the opening is canonically encoded for its claimed leaf count n, else the reason.
+
+    Added after the H1 run (PR #87 review, astra item 3): the first verifier accepted an honest
+    opening with index 0 changed to 2048 (n = 1,199) and with an extra trailing None sibling.
+    The tree shape is a function of n alone (levels(): pairs left to right, an odd last node is
+    promoted unchanged), so for a given (n, index) there is exactly one valid path shape:
+      - 0 <= index < n, n >= 1, both plain integers;
+      - len(path) = number of levels above the leaves for n (0 for n = 1);
+      - at each level of width m, with position j: the sibling is None iff j is the promoted last
+        node (j = m - 1 and m odd); otherwise it is a 64-character lowercase hex string;
+      - the walk ends at position 0 of a width-1 level.
+    n itself is authenticated by the id (model_id hashes it), so an opening with a wrong n fails the
+    id comparison; this check makes the index and the path shape unambiguous for that n.
+    """
+    if not isinstance(op, dict):
+        return "opening not an object"
+    keys = {"index", "n", "name", "dtype", "shape", "sha256", "path"}
+    if set(op) != keys:
+        return "fields: expected exactly %s" % sorted(keys)
+    n, i, path = op["n"], op["index"], op["path"]
+    if not _is_int(n) or n < 1:
+        return "n not a positive integer"
+    if not _is_int(i) or not (0 <= i < n):
+        return "index out of range [0, n)"
+    if not isinstance(op["name"], str) or not isinstance(op["dtype"], str):
+        return "name / dtype not strings"
+    if not isinstance(op["shape"], list) or not all(_is_int(d) and d >= 0 for d in op["shape"]):
+        return "shape not a list of non-negative integers"
+    if not _is_hex32(op["sha256"]):
+        return "sha256 not 64 lowercase hex"
+    if not isinstance(path, list):
+        return "path not a list"
+    m, j, depth = n, i, 0
+    while m > 1:
+        if depth >= len(path):
+            return "path too short for n"
+        sib = path[depth]
+        promoted = (j == m - 1 and m % 2 == 1)
+        if promoted:
+            if sib is not None:
+                return "sibling given at a promoted (odd last) node, level %d" % depth
+        elif not _is_hex32(sib):
+            return "sibling missing or not 64 lowercase hex, level %d" % depth
+        j //= 2
+        m = (m + 1) // 2
+        depth += 1
+    if len(path) != depth:
+        return "path too long for n"
+    return None
+
+
 def verify_opening(held_id_hex, op):
-    """True iff the opening recomputes the verifier-held id. The verifier holds only the 32-byte id."""
+    """True iff the opening is canonical for its n (canonical_opening) and recomputes the
+    verifier-held id. The verifier holds only the 32-byte id."""
+    if canonical_opening(op) is not None:
+        return False
     cur, j = leaf_hash(op["name"], op["dtype"], op["shape"], op["sha256"]), op["index"]
     for sib in op["path"]:
         if sib is not None:

@@ -2,7 +2,8 @@
 """Counted (not measured) costs of the weight-binding design, from numbers on main.
 
 Every output is a count from published shapes, or arithmetic on a measured number that is cited.
-Nothing here is a measurement. Writes experiments/20261110-36-weight-binding/runs/counted.json.
+Nothing here is a measurement. Writes experiments/20261110-36-weight-binding/runs/counted.json, or the
+path given as the first argument (used by the PR #87 rerun so the committed file is not rewritten).
 
 Sources:
   shapes: research/operators/qwen_m3/count_m3.py (Q, weights()) at main; #68 runs/stream-stock.json
@@ -79,5 +80,6 @@ out = dict(
                            p_touch_changed_contiguous_block=p_blocks,
                            note="touching a changed layer is necessary, not sufficient: the statement must also open that layer's down_proj / out_proj / o_proj claims against the bound table and bind its input"),
 )
-json.dump(out, open(E / "counted.json", "w"), indent=1)
+out_path = Path(sys.argv[1]) if len(sys.argv) > 1 else E / "counted.json"
+json.dump(out, open(out_path, "w"), indent=1)
 print(json.dumps(out, indent=1))
