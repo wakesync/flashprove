@@ -65,7 +65,7 @@ The two-lookup composition is buildable on the merged M1b machinery and sound, a
 ## Amendments
 (empty at registration)
 
-**2026-11-10T02:31Z, before any D = 128 proof has run. No acceptance threshold is changed.**
+**2026-11-10T02:28Z (commit 19ac0d9, committed 02:27:58Z; the first version of this line said 02:31Z, which was my estimate written ahead of the clock and was wrong), before any D = 128 proof has run. No acceptance threshold is changed.**
 Facts: the stage 1 code was committed at 02:15Z (e3d3f81). The stage 1 batch (honest seeds 1..10, hostile suite, UBSan suite) was queued in the host's heavy-job gate at 02:14:58Z and is still waiting for a slot; other lanes hold both slots. No D = 128 proof of this experiment exists yet, honest or hostile.
 The kill criterion's clock times (02:50Z composition stop, 03:40Z stage 2 stop, 04:08Z hard stop) were written as if the lane could run when its code was ready. They did not allow for time spent waiting in the shared gate. I am not rewriting them. What I commit to instead, now, before seeing any result:
 - If 02:50Z passes with the stage 1 batch still queued or running, RESULTS.md records that the composition stop rule's clock condition was met, with the gate timestamps. I will NOT then report the composition as "not built or not sound" and will not build the arm A fallback, because the cause is queueing and that report would be untrue. The batch that is already queued runs to its end, once, unchanged. Every H1 and H2 number is then labelled as obtained after the registered stop time, and this is listed first under "Deviations from PREREG". A reader who applies the kill criterion strictly should read H1 and H2 as not established inside the registered box.
