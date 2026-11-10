@@ -415,7 +415,7 @@ results:
     pr: null
     pr_note: "draft PR on research/1109-qwen-m3-design, stacked on #66; set the number when it merges"
     summary: "design, not a result: the first Qwen statement whose weights are committed (one DeltaNet head, in_proj to out_proj, 16 tokens) is counted at 1,750,866 product columns and fits the CPU harness's 2^21 table if remainders and tables are lookups (without lookups: one token only); the count model reproduces the measured M1 and M1b statements on 10 of 10 quantities; the upstream planner accepts a dense 64-layer proxy of Qwen's dense family (13.3 billion committed entries per 1,024-token request). Whether the full model fits one GPU is an extrapolation about an unbuilt sub-proof and is not a result"
-    conditions: "counts from a model and from `cp_verify -plan arrays`, deterministic, n = 1; F = 12 with the M2 norm lowering, an arithmetic that misses fidelity on real layer-0 weights (PR #68, in review); the M3 additions to the count model have no builder to check them; no GPU, no weights"
+    conditions: "counts from a model and from `cp_verify -plan arrays`, deterministic, n = 1; F = 12 with the M2 norm lowering, an arithmetic that misses fidelity on real layer-0 weights (PR #68, in review); the M3 additions to the count model have no builder to check them; the column count is the request's trace table only, and leaves out the separate table of the head's 3.3 million committed weights and the matmuls' own rounds; no GPU, no weights"
     evidence: [experiments/20261109-32-qwen-m3-design/RESULTS.md, experiments/20261109-32-qwen-m3-design/DESIGN.md, docs/qwen-port.md]
     evidence_note: "counted, not built"
     metrics:

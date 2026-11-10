@@ -250,7 +250,7 @@ start-up, as `cp_verify` runs its no-overflow conditions, and the hostile suite 
 with an out-of-range gain (must fail at the key), the boundary pair 4,095 / 4,097, and the #66
 alias statements.
 
-## 7 Counting results (section numbers match RESULTS.md)
+## 7 Counting results (verdicts and full tables: RESULTS.md)
 
 ### 7.1 Weights (counted from shapes)
 
@@ -273,8 +273,12 @@ alias statements.
 | one layer as ONE statement, T = 16 | 54,206,304 | 14,770,432 | 17,503,744 | 121,365,248 | 2^27, does not fit |
 | one layer as ONE statement, T = 1 | 3,462,864 | 974,992 | 1,093,984 | 8,322,608 | 2^23, does not fit |
 
-Everything M3 adds to the M2 head costs 137,010 laid columns, 8% more. Largest T that fits 2^22:
-38 for M3a-head, 20 for M3a-MLP. Term counts are in `runs/model.json` as `terms_PROVISIONAL`.
+Everything M3 adds to the M2 head costs 137,010 laid columns, about 8% more. Largest T that fits
+2^22: 38 for M3a-head, 20 for M3a-MLP. Term counts are in `runs/model.json` as `terms_PROVISIONAL`.
+
+These tables are the trace only. The committed weights of the statement (3,288,578 for one head)
+sit in a separate table with its own range proof and opening, and the matmuls' sumcheck rounds are
+extra. Neither is counted here (RESULTS.md H3, "What these counts leave out").
 
 **If the lookup build falls back to exact bits (arm A):** remainders become bits and each table
 lookup becomes a one-hot selector over 4,096 rows. M3a-head then needs 2^26 at T = 16 and fits only
@@ -358,7 +362,8 @@ M3 adopts the table format v1 as published. Differences M3 needs resolved:
 - a plain exp(-x) table, because the decay constant is a committed per-head weight;
 - inputs outside [-8, 8) are **rejected** in v1. Upstream's Ts table clamps. With reject, a request
   whose activations leave the domain cannot be proved at all. On real weights dt_bias alone reaches
-  19.3 (PR #68, draft), so ar + dt_bias is outside the domain for some heads on every token. M3
+  19.3 (PR #68, draft), more than twice the domain's edge, so for such heads the softplus input
+  will usually lie outside it (how often was not measured). M3
   needs clamp semantics (saturating tables, as upstream's Ts) or a wider domain for softplus;
 - the decay table's step is too coarse for real decays near 1 (section 5.3);
 - its norms are a bounded table approximation, not the isqrt semantics this design counts

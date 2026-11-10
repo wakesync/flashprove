@@ -61,6 +61,18 @@ with independent closed forms.
 - The M3 additions (conv, lookups, q/k norm, gates, two-floor gated norm) have no builder to check
   them against. They are design counts.
 
+**What these counts leave out.** "Fits 2^21" is about the trace table only, the product oracle that
+holds the request's cells. Not counted, and found on self-review after the counts were made:
+- the head's 3,288,578 committed weights. They sit in a table of their own, with its own range proof
+  and its own opening. That table, and the composition of a weight table with this harness, has
+  never been built here. It is M3a's main risk and none of its cost is in the table above;
+- the two matmuls' own rounds: in_proj is 514 claims per token on the weight table (8,224 at
+  T = 16) and out_proj 5,120 per token (81,920), each batched into one. The model counts their
+  output cells and remainders and no relation for them;
+- the multiplicity planes of the function-table lookups (about 14 planes of 4,096 places per table;
+  small against the 2^21 row, and not sized by the layout routine).
+The first of these is the reason the M3a prove time is not estimated from the table size alone.
+
 Not registered, counted after the fact: arm A with a two-level 64 x 64 selector fits up to T = 9
 (2^23 at T = 16).
 
