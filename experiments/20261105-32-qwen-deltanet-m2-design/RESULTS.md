@@ -5,12 +5,15 @@ All numbers are **measured or counted on one host, unreplicated**. No M2 proof w
 
 **Verdict against the registered threshold: PASS on H1 to H5, so GO for an M2 build lane**, with arm B (lookup-exact remainders) as the primary arm. One registered item reads as a design constraint: arm A cannot hold the M2 head at T = 16 in a 2^22 table.
 
+**Third review (2026-11-09): changes requested at 8ec7c799, addressed in this revision.** The design's norm relied on a bound on a verifier-derived coefficient (|cg| < 2^24) that no section made the verifier check. That is now a derive-stage admission rule in DESIGN.md (sections 2, 3.1, 4.5, 7), tested at design level only: there is no M2 verifier to test it on. See "Third review" below. Whether the review is satisfied is for a re-review at the new head to decide. No registered verdict moves, and the GO is for a build that implements the rule.
+
 **Scope of that GO (post-review, #66).** At the M2 boundary every input is public, so the whole M2 statement, y included, is verifier-computable. M2 is a rehearsal of the proving machinery for M3, not a useful standalone proof, and it de-risks none of the new operator families (conv1d, the gate tables, the q/k norm), since those moved to verifier recompute. DESIGN.md section 0 says what M3 must add. The post-review corrections and the rerun are in "Post-review corrections" at the end. None of them moves a registered verdict.
 
 Code: `research/operators/qwen_deltanet_m2/`
 - `admit_proto.cpp` + `m1b_builder.h` (H5)
 - `count_model.py` (H1 to H3)
 - `head_reference.py` (H4)
+- `norm_alias_regression.py` + `norm_alias_expected.json` (third review: design-level regression of the derived-value admission rule)
 - `record.py` regenerates everything; `evidence.json` holds commands, exit codes, timings and source SHA-256s.
 
 Raw data in `runs/`:
@@ -19,6 +22,7 @@ Raw data in `runs/`:
 - `model.json`
 - `ranges-head.json` (registered)
 - `ranges-head-q-unscaled.json` and `ranges-head-delta-kernel.json` (secondary, unregistered)
+- third-review rerun, new files, nothing overwritten: `h5-honest-r3.jsonl`, `h5-hostile-seed1-r3.jsonl`, `h5-hostile-seed1-ubsan-r3.jsonl`, `h5-honest-ubsan-r3.jsonl`, `model-r3.json`, `norm-alias-regression-r3.json`
 
 ## H1: counting model reproduces M1 and M1b (threshold: exact)
 
@@ -56,7 +60,8 @@ Raw data in `runs/`:
 | RNG range cells | 272,384 | 272,384 |
 | LKP remainder keys | 0 | 276,688 |
 | relations | 9,042,944 | 2,402,432 |
-| terms | 21,110,960 | 4,786,704 |
+| terms (as first counted; superseded, see "Third review" and Deviations) | 21,110,960 | 4,786,704 |
+| terms, for the lowering of DESIGN.md 4.4.1 (counted for that one lowering; no builder checks it) | 21,107,440 | 4,782,496 |
 | table log-length | **23** | **21** |
 | largest T with log-length <= 22 | 14 | 41 |
 
@@ -94,6 +99,8 @@ Setup: integer reference of the whole head, R1..R4 x seeds 1..5 x 1,024 steps, c
 | public v (post-conv) | < 2^31 | 527,711 |
 | public y | < 2^31 | 101,976 |
 | public cg | < 2^24 | 230,259 |
+
+The last three rows are measured maxima on the synthetic suite at gain 1. They are not what makes the bounds hold. The third review pointed out that the design used "public cg < 2^24" as a fact without a verifier check. v and cg are now derive-stage admission checks (DESIGN.md 3.1); y is a statement word, checked at decode.
 
 **H4: PASS.** No new limb split was needed. (The remainder classes are checked only for >= 0. Their upper bounds hold by the construction of floor: a remainder of floor(x / 2^w) is below 2^w.)
 
@@ -195,6 +202,100 @@ Hostile, seed 1: **44/44 at the expected stage** (was 34/34):
 - derive-overflow (4) and derive-random (1): the witness-free entry rejects at the proof verifier; the checked witness-path control rejects at derive; no exit, no UB;
 - history control (1): H changed in class is ACCEPTED here, as expected, because the M1b relations read no history. That is a control, not a defence. In M2 the conv recompute reads H. The "H changed in class must fail at the proof verifier" case is in the build's suite.
 
+## Third review: derived-value admission, norm term counts, rerun (2026-11-09)
+
+A third independent review (a different model family) requested changes at 8ec7c799. These are corrections to the design text and the count model. They are not re-scored hypotheses. The C++ prototype did not change: its sources have the same SHA-256 as at 8ec7c799 (`evidence.json`, `compile@r3`).
+
+### M1: the bound on the derived norm coefficient was not a checked rule
+
+**The finding, reproduced.** DESIGN.md 4.4 claimed |cg w| < 2^47. That needs |cg| < 2^24. cg is recomputed by the verifier from the gain and z, the gain had no bound, and no section made the verifier check cg. The review gave 22 cases where the y floor relation holds mod p for a y that is not the integer floor (o_0 in {4096, 8192}, cg_0 = 2^52 .. 2^62).
+
+`norm_alias_regression.py` rebuilds them from the equations of DESIGN.md 4.4 in plain Python integers. It imports nothing from the review. It is a reimplementation, not a blind replication: its author read the review's script first, and the case parameters (o_0, the cg range) and the compatible-statement construction are the review's.
+
+| check | result |
+|---|---|
+| the 22 cases are aliases when the rule is absent: relation holds mod p, fails over the integers, every listed witness range holds, alias y in its class and not the true floor | **22 of 22** |
+| each has a complete compatible statement (16-token recurrence giving that o, state constant; a = 4096, beta = 0, q_0 = 362) and a float64 gain that reproduces its cg | 22 of 22 |
+| the same 22, field by field against the review's rows (its evidence file, which is not in this repository): o, cg, w, sigma, Rc, e1, e2, rr, gap, remainders, alias y, true y, S0, gain | 22 rows, 0 differ |
+| with the rule (reject at derive unless \|cg\| < 2^24): verdict | 22 of 22 rejected at derive. This is true by construction (each case has cg >= 2^52), so it tests the script's rule, not a verifier. |
+
+What these are: counterexamples to the design contract as it was written. What they are not: forged proofs (no M2 builder or verifier exists), a break of the M1b admission prototype (it has no norm), or an attack by a prover (the gain is a verifier-fixed constant, about 1.3e11 to 1.4e14 here).
+
+**The fix: option (a), a verifier check.** DESIGN.md 3.1: after the recompute stage and before any relation or field conversion, the verifier checks every derived value against its class and rejects at "derive" otherwise. It is written as a requirement in DESIGN.md sections 2 (class table), 3 and 3.1 (rule, reasons, audit), 4.5 (step 3a) and 7 (build requirement with the regression cases). Option (b), restricting constants so the bound is proved, was not taken: it holds only for |gain| <= 1.41, has to be redone for every table and constant, and does not carry to M3.
+
+**Boundary and no-wrap, design level** (same script):
+
+| check | n | result |
+|---|---|---|
+| \|cg\| = 2^24 - 1, both signs, every channel and one channel: admitted, honest y accepted, y + 1 rejected, floor unique mod p | 4 | 4 of 4 |
+| \|cg\| = 2^24, both signs, every channel and one channel: rejected at derive | 4 | 4 of 4 |
+| y floor, pairs (cg, w) in their bounds incl. the 8 corners: the only solution mod p in the y class is the integer floor | 200,000 (fixed seed) | 0 mismatches |
+| largest magnitude of the y floor identity under the rule | 1 | 149,533,556,211,712 (2^47.09), below p |
+| no-wrap ledger, 11 closed identities of the recurrence and the norm | 11 | all below p; largest 2^60.0 (Rc sigma) |
+
+**Audit of the other derived values** (DESIGN.md 3.1 has the table). Result: **one more gap of the same kind, and one unstated check.**
+- **v (found by this audit).** M1b's no-wrap argument used |v| < 2^31, and M1b checked it at decode, because v was a statement word. In M2 v is recomputed (SiLU of the conv output), the conv taps are unbounded, and the design did not say the verifier checks it. The delta floor has the same kind of alias for a derived v of 2^52 to 2^62: 11 of 11 on that one relation (not a whole statement), each rejected at derive under the rule. Boundary: 2^31 - 1 admitted with a unique floor, 2^31 rejected, both signs, 4 of 4.
+- **a and beta.** In class if the tables are built as specified. The design did not state that the verifier checks them. It does now, with a table-build check.
+- **k and q.** In class for every input, by the L2 norm itself (|u_i| <= isqrt(sum u^2 + 17)). Sampled: 774 vectors at magnitudes up to 2^40, max |k| 4,096, max |q| 362. The check cannot fire; it guards a build error.
+- **Recompute intermediates.** The conv accumulator and the L2 sum of squares can pass 64 bits for extreme constants or inputs. DESIGN.md 3.1 requires 128-bit or checked arithmetic there.
+- Slack: with the other values at their class maxima, no identity wraps until k or a reach 2^22, beta 2^33.0, q 2^34, cg 2^41 or v 2^52.
+
+**Completeness cost of the rule, stated plainly.** The cg check cannot fire for |gain| <= 1.41: over every in-class z (2,097,151 values, float64 formula of `head_reference.py`), max |cg| is 11,863,272 at gain 1 and 16,727,213 at gain 1.41; at gain 1.4143 it is 16,778,225, over the bound. A head with a larger gain can be refused on some inputs. **The real Qwen gains were not measured in this lane.** The v check can fire on in-class inputs if the SiLU table has no clamp; the build's pinned table has to bound it.
+
+**The prototype has no guard, because it has no such stage.** `admit_proto.cpp` works on the M1b statement: a, beta, k, v and q are statement words, class-checked at decode, and there is no recompute stage and no norm. So no C++ changed, and the rule is **not tested through any verifier**. It is a build requirement (DESIGN.md 7), with the boundary cases and the 22 aliases as required cases of the build's suite.
+
+### S1: norm term counts
+
+The review found that the count model's norm **term** counts did not implement one lowering of the documented equations. It derived the gate, range-cell, key, relation and layout counts from closed forms of its own, without this model, and they matched.
+
+DESIGN.md 4.4.1 now gives the lowering relation by relation (S1 to S8 per token, C1 to C6 per channel), and `count_model.py` counts exactly that. It asserts the closed forms (arm B 16D + 26 = 2,074 terms per token, arm A 193D + 815 = 25,519) and asserts that no gate, range, key, relation or layout count moved.
+
+| M2 head, T = 16 | arm A | arm B |
+|---|---|---|
+| terms, before (`runs/model.json`) | 21,110,960 | 4,786,704 |
+| terms, lowering of DESIGN.md 4.4.1 (`runs/model-r3.json`) | 21,107,440 | 4,782,496 |
+| change | -3,520 | -4,208 |
+| the review's totals, for its own direct-substitution lowering (not adopted) | 21,180,592 | 4,786,656 |
+| gate columns, range cells, keys, relations, laid columns, log-length, largest T | unchanged | unchanged |
+
+Every other leaf of `model-r3.json` equals `model.json`: the only differences are these two term totals (which also appear under `remainder_savings`) and the new `norm_terms` block. The M1 and M1b term counts, which are checked against measured statements (H1), did not change: they have no norm.
+
+The review's totals differ from this lowering by exactly 16 x (35D + 92) = 73,152 (arm A) and 16 x (2D + 4) = 4,160 (arm B), which is operand reuse: this lowering ties the Rc and sigma operands to existing cells, the review's rebuilds them from their pieces. Both are valid. **The term counts remain counts for one stated lowering, unchecked by a builder.** No hypothesis reads them.
+
+### Rerun at the new code (prototype sources unchanged)
+
+Setup: same host, shared and loaded (other proving jobs ran at the same time), pinned to 6 cores (10 to 15), through the host's two-slot heavy-job gate, binaries built at commit f5c09762, whose C++ sources equal 8ec7c799's. Raw files have the suffix `-r3`. Timings are indicative only.
+
+**Receipt gap, disclosed.** After the -O2 honest and hostile runs had finished, the -O2 binary was recompiled once more by mistake (a `build` step run a second time, at commit bae6f8f1). So `evidence.json`'s `compile@r3` and `fixtures@r3` describe that later build, not the build the -O2 runs used, and `env@r3` describes the last step that ran (the count model and the norm regression, at commit 9a84ded8). The binary the -O2 runs used no longer exists and its hash was not recorded. What does hold: each run key (`honest@r3`, `hostile@r3`, `hostile_ubsan@r3`, `honest_ubsan@r3`) records its own commit (f5c09762), its own cores (10-15) and the SHA-256 of the C++ sources at the time it ran, and those hashes equal the later build's and 8ec7c799's. A further recompile of the same sources with the same flags gave a byte-identical binary (SHA-256 10fbdebb...de7cf5), which supports, but does not prove, that the earlier binary was the same. The UBSan binary was not rebuilt. The fixtures are byte-identical to the registered run's. No raw run file was touched.
+
+| build | metric | n | median | SD | min | max |
+|---|---|---|---|---|---|---|
+| -O2 | accepted | 10 | **10/10** | | | |
+| -O2 | prove (s) | 10 | 39.88 | 0.81 | 39.65 | 41.70 |
+| -O2 | derive relations + size (s) | 10 | 0.223 | 0.012 | 0.206 | 0.242 |
+| -O2 | proof verify (s) | 10 | 7.65 | 0.33 | 7.28 | 8.09 |
+| -O2 | proof bytes | 10 | 25,411,392 | 313 | 25,410,848 | 25,411,968 |
+| -O2 | peak RSS (KB) | 10 | 4,435,604 | 86 | 4,435,372 | 4,435,608 |
+| UBSan | accepted | 10 | **10/10** | | | |
+| UBSan | prove (s) | 10 | 66.17 | 0.64 | 65.13 | 67.12 |
+| UBSan | derive relations + size (s) | 10 | 0.369 | 0.016 | 0.342 | 0.383 |
+| UBSan | proof verify (s) | 10 | 13.21 | 0.22 | 12.87 | 13.67 |
+
+Honest, seeds 1..10: proof bytes are equal, seed by seed, to the receipts at 8ec7c799. Every process exited 0 with empty stderr, in both builds. The UBSan honest run is new in this rerun (0 reports); it was not registered.
+
+Hostile suite, seed 1, n = 1 run per build (the cases are deterministic):
+
+| build | at the expected stage | rejected | intended accepts (controls) | by stage | UBSan reports | wall (s) |
+|---|---|---|---|---|---|---|
+| -O2 | **44/44** | 42 | 2 | decode 35, derive 2, proof 5, accept 2 | n/a | 133 |
+| UBSan (`-fsanitize=undefined -fno-sanitize-recover`) | **44/44** | 42 | 2 | decode 35, derive 2, proof 5, accept 2 | **0**, exit 0, stderr empty | 229 |
+
+The two accepts are the suite's controls: the R9 statement through the old caller path, and a changed conv history on the M1b relations, which read no history. **No case changed stage:** the case list and the stage of every case equal the receipts at 8ec7c799, in both builds, and the detail lines (first overflow token of the old path, R9 details) are equal too.
+
+Design-level regression (`norm_alias_regression.py`, 3.6 s, no proof): exit 0, output equal to the committed expected file. Count model: exit 0, both assertions hold.
+
+**What this rerun shows and does not show.** It shows the prototype behaves as before. It could not show anything about the new rule, because the prototype has no stage the rule applies to.
+
 ## Kill criterion
 
 Not triggered. The lane started at 14:33Z. H5 honest accept came at about 15:10Z, and all results were in by 15:30Z. Peak RSS was 4.4 GB, and free disk stayed above 30 GB.
@@ -211,6 +312,9 @@ Not triggered. The lane started at 14:33Z. H5 honest accept came at about 15:10Z
 - **H3 (post-review).** The largest-T loop in count_model.py also required relations <= 2^23. That is lookup_size()'s own guard, but it was not in the PREREG's metric text ("the largest T that fits log-length 22"). It does not bind: without it the largest T is still 14 (A) and 41 (B), now also reported in model.json.
 - **H3 (post-review).** The count model first omitted the multiplicity row of the second (remainder) lookup. It now sizes it. No count, log-length or verdict changes (see "Post-review corrections").
 - **H5 (post-review).** The prototype was changed after the registered runs (conv history words, witness-free derivation, verdicts instead of exits, checked i64 arithmetic, 10 more hostile cases). H5 was rerun on it and passes the same registered thresholds. The registered results.yaml metrics still point at e08e5ce2, the commit of the original receipts.
+- **H3 terms (third review).** The M2 head's relation-term totals at T = 16 changed, because the norm's terms were first counted without one stated lowering. Old: 21,110,960 (arm A), 4,786,704 (arm B), in `runs/model.json`. New: 21,107,440 and 4,782,496, in `runs/model-r3.json`, for the lowering of DESIGN.md 4.4.1. Change: -3,520 and -4,208 (0.02% and 0.09%). Terms are a registered H3 metric with no threshold. Columns, relations, range cells, keys, log-length and largest T are unchanged, so no threshold or verdict moves. The old file is kept.
+- **Design contract (third review).** DESIGN.md's verifier now also rejects a statement whose recomputed k, q, a, beta, v or cg is outside its class (|cg| < 2^24, |v| < 2^31, a and beta in [0, 2^F], |k| and |q| <= 2^F). PREREG D6 registered "decodes each word itself ... derives every relation target and coefficient from the decoded integers"; it did not register a check on the derived coefficients. This narrows the set of admitted statements. No registered number changes: H5 ran on the M1b statement, where these values are statement words already checked at decode.
+- **H5 (third review).** H5 was rerun a third time (tag r3), on unchanged prototype sources, and an honest run under UBSan was added (not registered). Same thresholds, same result. The registered results.yaml metrics still point at e08e5ce2.
 - No amendments to PREREG.md.
 
 ## Open risks
@@ -218,10 +322,12 @@ Not triggered. The lane started at 14:33Z. H5 honest accept came at about 15:10Z
 - **M2 is redundant as a standalone proof** (DESIGN.md section 0). All its inputs are public. Its value is as a rehearsal for M3, and it de-risks none of conv1d, the gate tables or the q/k norm.
 - **No M2 proof exists.** Arm B needs a second LKP instance whose keys are product-oracle cells. LKP supports parts and range tables, and RNG already composes a lookup whose key claim is a laid form on a sent message. But a lookup keyed directly on message-0 cells has not been built in this repo, and the two instances' transcript separation (DESIGN.md section 4.3) is a requirement on that build, untested here. That is the build lane's main risk.
 - **Unchecked arithmetic on public inputs (second review).** The first prototype's verifier derivation overflowed signed i64 (UB) at `aP = Pj * a` on an in-class all-extremes statement. No soundness break was seen. It is now fixed in the prototype: the derivation is witness-free, every i64 operation in `build()` is checked and rejects at "derive" on overflow, and the hostile suite is clean under UBSan. For the M2 build this is a requirement (DESIGN.md 4.5): no unchecked arithmetic on public inputs, and a UBSan run of the hostile suite. It stays an open risk until the build's verifier passes that run.
+- **Derived-value admission is specified, not built (third review).** The rule that closes the norm alias (reject at derive unless every recomputed k, q, a, beta, v, cg is in its class) exists in DESIGN.md and in a Python regression of the design equations. No verifier implements it, and no proof system has been run against the 22 alias statements. It stays an open risk until the M2 build's `verify_m2` passes the cases of DESIGN.md section 7. The audit that found the second gap (v) was done by the lane that wrote the design, on the relations the design lists; an independent audit has not been done.
+- **Real gains are unknown here.** The cg bound 2^24 cannot be tripped for |gain| <= 1.41. The real Qwen gated-norm gains were not measured in this lane. If they are larger, some statements are refused until the bound is raised (the no-wrap argument has room up to about 2^41) and the y class is re-derived.
 - **Verifier-recomputed nonlinearities must be bit-exact** across prover and verifier. The prototype uses float64 numpy at table points. The build needs pinned public tables (DESIGN.md section 3).
 - **y fidelity is poor at F = 12** (worst 1.2 absolute) because o is small in integer units. This is a fidelity issue for M0/#8, not soundness, but it argues for a finer o scale before any fidelity claim.
 - **The layer extrapolation is 48x one head.** Per-token cost for 48 layers (231M product cells, arm B) means M3 needs chunked state commitment. M2 does not address that.
-- The count model's norm and arm-B layout are design counts, unchecked by a builder. Same host class, research security (N = 10), hostile classes sampled, unreplicated.
+- The count model's norm and arm-B layout are design counts, unchecked by a builder. The norm's term counts are for one stated lowering (DESIGN.md 4.4.1). Same host class, research security (N = 10), hostile classes sampled, unreplicated.
 
 ## Proposed claims (PR body only, not in claims.json)
 
