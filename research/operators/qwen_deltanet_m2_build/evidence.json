@@ -1,6 +1,59 @@
 {
  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
  "cores": "0-5",
+ "counts_vs_model": {
+  "stage1": {
+   "all_equal": true,
+   "measured": true,
+   "relation_terms_built": 1186816,
+   "relation_terms_model_not_compared": 1186816,
+   "rows": {
+    "columns_used": {
+     "built": 427008,
+     "equal": true,
+     "model": 427008
+    },
+    "gate_columns": {
+     "built": 263168,
+     "equal": true,
+     "model": 263168
+    },
+    "lkp_keys": {
+     "built": 67584,
+     "equal": true,
+     "model": 67584
+    },
+    "log_length": {
+     "built": 19,
+     "equal": true,
+     "model": 19
+    },
+    "range_cells": {
+     "built": 67072,
+     "equal": true,
+     "model": 67072
+    },
+    "relations": {
+     "built": 609792,
+     "equal": true,
+     "model": 609792
+    },
+    "remainder_multiplicity_places": {
+     "built": 69632,
+     "equal": true,
+     "model": 69632
+    },
+    "rng_multiplicity_places": {
+     "built": 155648,
+     "equal": true,
+     "model": 155648
+    }
+   }
+  },
+  "stage2": {
+   "measured": false
+  }
+ },
  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
  "provenance": {
   "build2": {
@@ -40,6 +93,46 @@
     "research/operators/qwen_deltanet_m2_build/two_lookup_prove.h": "47a1c4f854def7df04776283573544a6131976b715e847900b767f3a70f379c0"
    },
    "started_utc": "2026-11-10T03:08:11Z"
+  },
+  "counts": {
+   "cores": "0-5",
+   "files_differing_from_head": [
+    "M research/operators/qwen_deltanet_m2_build/README.md"
+   ],
+   "finished_utc": "2026-11-10T03:20:13Z",
+   "head": "a9ac9f4a254ad2b5999773d74726bb14f2c95409",
+   "loadavg_end": [
+    7.9912109375,
+    7.4912109375,
+    6.44677734375
+   ],
+   "loadavg_start": [
+    7.9912109375,
+    7.4912109375,
+    6.44677734375
+   ],
+   "sources": {
+    "blocks/iop/lkp.h": "1701b4527b99290f3a255adfda9aa5cd27962ba60cdbe307533fd5f216aede0f",
+    "blocks/iop/rng.h": "e159bf2c44e4a5a5c1b846d06ee101e56f699a521cfd198ac6cc25cd57ca4e3a",
+    "research/operators/qwen_deltanet/reference.py": "f6fbd580bf834afd2d6280036ddf52d410be094824299e89c61eb2a1b80edaf0",
+    "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770",
+    "research/operators/qwen_deltanet_m2_build/head.h": "640ae922a7d6eb85abea8fda0462d085c4ab359fa1a2da6423c70d7cae916399",
+    "research/operators/qwen_deltanet_m2_build/kit.h": "4ca8b9f29926e388fdab636b892b5663f7103f239016c187a09c9b0b0bfcecdb",
+    "research/operators/qwen_deltanet_m2_build/m2.cpp": "3156ef2d0f3c1ac8f0d62d3fdd48b91a0aeba525bd8e9464ffb9a2ee4d2daf7b",
+    "research/operators/qwen_deltanet_m2_build/public_stage.h": "a7d83a7c36ed0e45442c2486bcbc27e36b83d6557768070520689ec0a090ae91",
+    "research/operators/qwen_deltanet_m2_build/record.py": "9cbf96cc0eb5e751f135fefaf988356531305fd2753d1c7e0435c3bf7145a214",
+    "research/operators/qwen_deltanet_m2_build/reference_m2.py": "ac8bf270e7154f10ed9c7718a68c141f42acff2770ce8731eed7b3f9dd0ae3d1",
+    "research/operators/qwen_deltanet_m2_build/report.py": "149f9b5be6814d8961ddcf6602ec27e60de013d226bd9f0a777f58d6e82ff6b0",
+    "research/operators/qwen_deltanet_m2_build/stage1.cpp": "5b51c02a4cc951dcea768cf625484eb234adf4f0c514a4a5ec1d81d51e15e965",
+    "research/operators/qwen_deltanet_m2_build/tables.py": "60a871980dda856f43f8842f55ac397106dbd24930e30403e9fd751fdcf67694",
+    "research/operators/qwen_deltanet_m2_build/tables/decay-one-f12.i64le": "ffd373e621ca994094bf876d684498580532286cc28dd005a79524831c3daedb",
+    "research/operators/qwen_deltanet_m2_build/tables/pinned_f12.h": "e1ef921c8be07b91dad975238ca91916e94e752b51920ef680266e19539addf1",
+    "research/operators/qwen_deltanet_m2_build/tables/sigmoid-f12.i64le": "19057d5fd13d67d8895e7b31f9b0d8c55eb75802857f8ae8b5deae67ab9202d5",
+    "research/operators/qwen_deltanet_m2_build/tables/silu-f12.i64le": "cb2ceb05c7a1292a064e8d6d63cf9b63926db1122ea19663faecee21752bf8e9",
+    "research/operators/qwen_deltanet_m2_build/two_lookup.h": "6b27a89b448bee1db1dfa6bbd14ebca19afbd837d5e10c6c59b6a7a455be2b07",
+    "research/operators/qwen_deltanet_m2_build/two_lookup_prove.h": "47a1c4f854def7df04776283573544a6131976b715e847900b767f3a70f379c0"
+   },
+   "started_utc": "2026-11-10T03:20:11Z"
   },
   "stage1_steps_as_first_recorded": {
    "cores": "0-5",
@@ -667,6 +760,57 @@
    },
    "sha256": "b84a7d0eb7b1a263d895564a78e4abe2d5a6cee6ce8a648492d8fe8af1f00b03"
   },
+  "10": {
+   "meta": {
+    "M_max_abs": 1557,
+    "S0_max_abs": 2112,
+    "S_max_abs": 3249,
+    "a": [
+     3905,
+     3769,
+     3661,
+     4004,
+     4043,
+     4039,
+     3614,
+     3966,
+     3521,
+     3498,
+     3991,
+     3954,
+     2911,
+     3494,
+     3980,
+     3983
+    ],
+    "beta": [
+     1680,
+     2668,
+     2583,
+     2768,
+     637,
+     2008,
+     2722,
+     2538,
+     2124,
+     2834,
+     1940,
+     1414,
+     3594,
+     1653,
+     1043,
+     789
+    ],
+    "cg_max_abs": 137348,
+    "delta_max_abs": 8978,
+    "dt_bias": -10962,
+    "o_max_abs": 111,
+    "seed": 10,
+    "w_max_abs": 1818,
+    "y_max_abs": 34133
+   },
+   "sha256": "f3bc913b0127fb0a71dfd08183a8e39c3b90018d2cd234d30b82107ef10a65fd"
+  },
   "2": {
    "meta": {
     "M_max_abs": 1203,
@@ -1074,57 +1218,6 @@
     "y_max_abs": 29536
    },
    "sha256": "ba171b2cf117cf34b56a99b7945ae93bf5702e71ed386ad816b94fb1951fe49b"
-  },
-  "10": {
-   "meta": {
-    "M_max_abs": 1557,
-    "S0_max_abs": 2112,
-    "S_max_abs": 3249,
-    "a": [
-     3905,
-     3769,
-     3661,
-     4004,
-     4043,
-     4039,
-     3614,
-     3966,
-     3521,
-     3498,
-     3991,
-     3954,
-     2911,
-     3494,
-     3980,
-     3983
-    ],
-    "beta": [
-     1680,
-     2668,
-     2583,
-     2768,
-     637,
-     2008,
-     2722,
-     2538,
-     2124,
-     2834,
-     1940,
-     1414,
-     3594,
-     1653,
-     1043,
-     789
-    ],
-    "cg_max_abs": 137348,
-    "delta_max_abs": 8978,
-    "dt_bias": -10962,
-    "o_max_abs": 111,
-    "seed": 10,
-    "w_max_abs": 1818,
-    "y_max_abs": 34133
-   },
-   "sha256": "f3bc913b0127fb0a71dfd08183a8e39c3b90018d2cd234d30b82107ef10a65fd"
   }
  }
 }

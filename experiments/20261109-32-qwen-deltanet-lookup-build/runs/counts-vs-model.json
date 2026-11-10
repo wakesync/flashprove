@@ -1,0 +1,53 @@
+{
+ "stage1": {
+  "measured": true,
+  "all_equal": true,
+  "rows": {
+   "gate_columns": {
+    "built": 263168,
+    "model": 263168,
+    "equal": true
+   },
+   "range_cells": {
+    "built": 67072,
+    "model": 67072,
+    "equal": true
+   },
+   "lkp_keys": {
+    "built": 67584,
+    "model": 67584,
+    "equal": true
+   },
+   "relations": {
+    "built": 609792,
+    "model": 609792,
+    "equal": true
+   },
+   "columns_used": {
+    "built": 427008,
+    "model": 427008,
+    "equal": true
+   },
+   "log_length": {
+    "built": 19,
+    "model": 19,
+    "equal": true
+   },
+   "rng_multiplicity_places": {
+    "built": 155648,
+    "model": 155648,
+    "equal": true
+   },
+   "remainder_multiplicity_places": {
+    "built": 69632,
+    "model": 69632,
+    "equal": true
+   }
+  },
+  "relation_terms_built": 1186816,
+  "relation_terms_model_not_compared": 1186816
+ },
+ "stage2": {
+  "measured": false
+ }
+}
