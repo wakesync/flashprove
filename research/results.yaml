@@ -592,8 +592,7 @@ results:
     status: measured
     status_note: (H1 unchanged-tensor clause FAIL as registered)
     replication: unreplicated
-    pr: null
-    pr_note: "draft PR of the q2-weight-binding lane; set on merge"
+    pr: 87
     summary: "Hash level, not a proof: a per-tensor Merkle manifest per pin (1,199 leaves) refuses the other pin's manifest both ways and 70 of 70 changed-tensor openings; the registered expectation that the other tree's openings of the 1,129 unchanged tensors verify was wrong (0 of 1,129: an opening carries its own tree's path). Integer level, after the repository's conversion rule: 6 of 6 sampled changed tensors differ in 32.7% to 67.9% of integers (same exponents), the layer-16 control is identical; a toy multilinear fingerprint mod 2^31-1 separates 6 of 6 and matches the control"
     conditions: "CPU, no proof; H1 from PR 68's streamed per-tensor hashes; H2/H3 on 7 registered tensors fetched by range request (bytes matched PR 68's hashes 14 of 14), matrix rule without norm folding; 64 of 70 changed tensors not converted; toy prime, not the protocol field; design and costs counted, not built"
     evidence: [experiments/20261110-36-weight-binding/RESULTS.md, research/weight-binding/DESIGN.md]

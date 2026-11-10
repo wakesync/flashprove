@@ -27,12 +27,47 @@ the code: a Merkle opening carries the sibling path of the tree it came from, an
 tree's path for an unchanged tensor still hashes up to the abliterated root, because 70 other
 leaves under it differ. So against the stock id, every opening built from the abliterated tree is
 refused, changed tensor or not. The registered clause tried to express "a statement confined to
-unchanged tensors cannot tell the pins apart". The correct form is at the leaf level: the leaves of
+unchanged tensors cannot tell the pins apart". **(Post-hoc, after the H1 run; not a registered
+result. See PREREG amendment A1.)** The correct form is at the leaf level: the leaves of
 the 1,129 unchanged tensors are byte-identical, so an opening taken from the held pin's own tree
 verifies whether the prover ran stock or abliterated weights for that tensor. That is
 true by construction (the leaf of an unchanged tensor is the same 32 bytes in both trees) and is
 what the design (DESIGN.md A6, R7) relies on. A run that counts it (amendment A1) was written and
 held by the gateway before running; it is not in this PR (deviation 2).
+
+## Provenance per hypothesis (added in the PR #87 review)
+
+| output | code that produced it | committed before the run? | rerun with committed code |
+|---|---|---|---|
+| H1 `runs/h1-manifest-demo.json`, `runs/manifest-{stock,abl}.json` | working-tree `wb_manifest.py`, outputs written 20:41:23 UTC | **no**: `wb_manifest.py` committed in a95885cd at 20:42:28 (deviation 4) | `runs-rerun-pr87/`, code at c7073a6e (verifier fixed, below) |
+| H2 / H3 `runs/h2h3-int.json`, `h2h3.{log,stderr,time}` | `wb_int.py`, `run_registered.sh` at a95885cd | yes: gate granted 20:42:42, after the commit | not rerun (not needed) |
+| counted `runs/counted.json` | working-tree `wb_count.py`, written 21:01:54 UTC | **no**: `wb_count.py` first committed with it in 7c32ea6b at 21:07 (deviation 5) | `runs-rerun-pr87/counted.json`, code at c7073a6e |
+| inventory `runs-rerun-pr87/inventory.json` | `wb_inventory.py` at bec495ba | yes | new in the PR #87 review (counted, not measured) |
+
+**Rerun (PR #87 review, opus item 2).** `research/weight-binding/rerun_pr87.sh`, committed in
+c7073a6e before it ran, wrote H1 and the count into a new directory, `runs-rerun-pr87/`; `runs/`
+is untouched. **It ran the verifier as fixed in this PR** (astra item 3: `canonical_opening`
+rejects index >= n and non-canonical paths), not the code that produced `runs/`. The comparison
+(`runs-rerun-pr87/compare.json`, `compare_rerun.py`):
+- `manifest-stock.json`, `manifest-abl.json`, `counted.json`: byte-identical to `runs/`.
+- `h1-manifest-demo.json`: equal in every key except `seconds` (wall time: 0.168 s original,
+  0.43 s rerun, n = 1 each, shared loaded host; descriptive).
+- All H1 counts are therefore unchanged by the verifier fix: honest openings 1,199 / 1,199,
+  changed 0 / 70, unchanged-from-the-other-tree 0 / 1,129, forged digest refused, both ways. The
+  fix refuses only malformed openings, and every opening in the H1 run is canonical.
+- The reviewer (opus) had reproduced the same with the committed a95885cd code before the fix:
+  byte-identical except `seconds` (0.160 vs 0.168), https://github.com/wakesync/flashprove/pull/87#issuecomment-6779873298.
+
+**Verifier fix (PR #87 review, astra item 3).** The H1 verifier accepted two malformed openings
+the reviewer built (https://github.com/wakesync/flashprove/pull/87#issuecomment-6779552481): an
+honest index-0 opening with `index` set to 2048 (n = 1,199), and one with an extra trailing `None`
+sibling. Neither changes a weight, but the opening's index was not checked. `wb_manifest.py` now
+checks that 0 <= index < n, that the path length equals the tree depth for n, that a `None`
+sibling appears exactly at a promoted odd last node and nowhere else, and that every hash is 64
+lowercase hex. `test_wb_manifest.py` has 29 named tests, both reviewer constructions by name
+(`astra_index_2048_of_1199_refused`, `astra_extra_trailing_none_refused`), and an exhaustive
+index and length mutation sweep on synthetic trees of 1 to 40 leaves. 29 / 29 pass
+(`runs-rerun-pr87/test_wb_manifest.log`); CPU, seconds.
 
 ## H1: a per-tensor manifest for each pin (hash level)
 
@@ -116,6 +151,26 @@ Counts and extrapolations, not measurements:
    (equal leaf inputs) states.
 3. H3's per-tensor fingerprint times were taken inside the registered run, n = 1 per tensor; they
    are descriptive only, as registered.
+4. **H1 ran before its code was committed** (disclosed in the PR #87 review, opus item 2). The H1
+   outputs in `runs/` were written at 20:41:23 UTC; `wb_manifest.py` was last written at 20:41:39
+   and committed in a95885cd at 20:42:28. The first version of ENV.json named a95885c as the code
+   of every registered run, which was true for H2/H3 only. Mitigation: the rerun with committed
+   code above (equal except wall time), and the reviewer's own rerun of a95885cd (byte-identical
+   except `seconds`). ENV.json now states the provenance per hypothesis.
+5. **The count ran before its code was committed.** `runs/counted.json` (21:01:54 UTC) and
+   `wb_count.py` first arrived together in 7c32ea6b (21:07). Rerun with committed code above:
+   byte-identical.
+6. **The verifier changed after the H1 run** (PR #87 review, astra item 3). The rerun uses the
+   fixed verifier; the original `runs/` used the unfixed one. Counts are equal (above).
+7. **PREREG times.** The PREREG header says "Date (UTC): 2026-11-10 20:45"; it was committed at
+   20:39:22 and the H2/H3 gate granted at 20:42:42. A1 says `leaves()` "was added" at 20:44;
+   a95885cd (20:42:28) already contains it. Clarified in PREREG amendment A2; nothing rewritten.
+8. **Design revisions after review** (no new measurement): the production leaf no longer holds
+   y_t (circular; DESIGN 2.0 gives the non-circular order), the effective-weight inventory adds
+   the final norm, the (1 + w) gain form and the A_log -> cA rule (DESIGN R3, R2a, 2.4), the
+   key-file claim is 722 effective text blocks rather than 851 source tensors (counted,
+   `runs-rerun-pr87/inventory.json`), A12 (config substitution) is added, and visual (333) and
+   MTP (15) tensors are stated out of U1 scope.
 
 ## What is established and what is not
 
@@ -133,7 +188,8 @@ abliteration, so they would be equal in both pins in any case.
 ## Next experiment I would register
 
 Route A of DESIGN.md section 4 on CPU where possible: extend H2 to all 70 changed tensors and all
-851 text tensors with the full upstream rule (norm folding included), publish `int_sha256` and
+722 effective text blocks (from the 851 text source tensors, DESIGN 2.4) with the full Qwen rule
+(norm folding with the (1 + w) gain form, A_log -> cA, dt_bias at 2^F), publish `int_sha256` and
 exponents per tensor for both pins, and a recompute of y_t in the Goldilocks cubic extension at
 root-derived points, with a mismatch suite (one entry changed, exponent +1, layer 16 / 17 address
 swap, a quantised copy of one tensor). Threshold: every mismatch refused, every honest tensor
