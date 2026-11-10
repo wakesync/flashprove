@@ -33,6 +33,8 @@ No weight data is in the repo.
 | `summarise.py`, `pick_final.py`, `cmp_ckpt.py` | tables, the verdict arm by the registered rule, stock versus abliterated rows |
 | `count_cost.py` | counted (not built) cost of each candidate against M2 arm B of `count_model.py` |
 | `diag_mech.py` | mechanism numbers for the localisation (decay, q_hat, o sizes) |
+| `tables.py`, `extras.py`, `facts.py` | the RESULTS tables (`runs/tables.md`), pairs within the bar and mixer-output error (`runs/extras.json`), the exact numbers RESULTS quotes |
+| `scrub_paths.py` | replaces host paths in raw run logs with placeholders (path strings only) |
 
 ## Reproduce
 
@@ -54,7 +56,10 @@ python3 repro_check.py fetch                       # every sha256 equal to PR #6
 python3 make_arms.py                               # regenerates arms-*.json (committed)
 python3 unit_smoke.py                              # code test, no weights
 python3 count_cost.py                              # runs/cost.json
+python3 tables.py && python3 extras.py             # runs/tables.md, runs/extras.json
 ```
+
+Every candidate and localisation arm ran through the host's heavy-job gate on 6 cores, between 03:42Z and 03:54Z on 2026-11-10, after a registered stop rule had been moved (PREREG amendment A-3, RESULTS section 6).
 
 `repro_run2.sh` must run with 6 cores and no `OPENBLAS_NUM_THREADS`: PR #68's float fields are bit-reproducible only at its BLAS thread count (RESULTS section 1).
 

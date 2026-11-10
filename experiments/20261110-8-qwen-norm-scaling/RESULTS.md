@@ -56,11 +56,11 @@ Baseline C0: rel_y median 0.659, layer-level 1.12. With every stage exact: 5.5e-
 | norm exact, everything else M2 | 0.622 (0.031 / 137) | 1.10 | 0.0098 |
 | state stages exact, everything else M2 | 0.359 (0.011 / 582) | 1.10 | 0.0033 |
 
-Every other exact-one arm leaves C0 unchanged (0.656 to 0.664). Full table: `runs/tables.md`.
+Exact-one arms, for completeness: state floor alone exact 0.362 (layer level 1.10); w floor alone exact 0.624; the other 12 single stages leave C0 where it is (0.656 to 0.664). Full table: `runs/tables.md`.
 
-**Answer.** Two steps each lose the accuracy on their own, by more than 30 times the 1% bar, and they are independent:
-1. **The floor of the head output o at 2^-12.** Alone: 0.30 per-head median, and 1.08 at layer level. It is the larger term at layer level: making o exact takes C0's layer-level error from 1.12 to 0.17. The floor's bias matters, not only its resolution: rounding o to nearest instead gives 0.13 and 0.091. Mechanism number: 110 of 480 pairs have a float o RMS under 4 integer units at 2^-12, and 134 under 16 (`runs/mech.json`), while the norm rescales o to unit RMS.
-2. **The floor of the state update S' at 2^-12.** Alone: 0.32 per-head median and 0.19 at layer level, with a state error of only 0.95%. With o and the norm both exact, the error is still 0.26 median (0.165 layer level), and it comes from here (state stages alone: 0.30). Mechanism numbers: the decay is slow (1 - a has median 6.4 integer units at 2^-12 over the 480 pairs, and in the median pair 58% of tokens have 1 - a under 8 units), so a biased floor on every state cell every token is not forgotten; and o is small against the state it is read from (o RMS median 187 units, state maxima about 10^5). **This part is my reading of the numbers, not an isolated measurement**: no arm changed only the rounding mode of S'.
+**Answer.** Two steps each lose the accuracy on their own, at about 30 times the 1% bar, and they are independent:
+1. **The floor of the head output o at 2^-12.** Alone: 0.30 per-head median, and 1.08 at layer level. It is the larger term at layer level: making o exact takes C0's layer-level error from 1.12 to 0.17. The floor's bias matters, not only its resolution: rounding o to nearest instead gives 0.13 and 0.091. Mechanism number: in 110 of 480 pairs the float o RMS (median over the prompt's tokens) is under 4 integer units at 2^-12, and in 134 it is under 16 (`runs/mech.json`), while the norm rescales o to unit RMS.
+2. **The floor of the state update S' at 2^-12.** Alone: 0.32 per-head median and 0.19 at layer level, with a state error of only 0.95%. With o and the norm both exact, the error is still 0.26 median (0.165 layer level), and it comes from here (state stages alone: 0.30). Mechanism numbers: the decay is slow (1 - a has median 6.4 integer units at 2^-12 over the 480 pairs, and in the median pair 58% of tokens have 1 - a under 8 units), so a biased floor on every state cell every token is not forgotten; and o is small against the state it is read from (o RMS median 187 units, state maxima about 10^5). That the state floor alone costs 0.32 is measured (memory-read floor alone 0.0040, delta floor alone 0.0071). **Why it costs that much is my reading, not an isolated measurement**: no arm changed only the rounding mode of S', and none varied the decay.
 3. The norm proper is third: 0.097 alone, nearly all of it the floor of w at 2^-12. The public stage is small: 0.0073 in total.
 
 **Against the PR #68 reviewer's reading** (most of the "norm-only" error is the rounding of o before the norm): **confirmed for the arm it was about, and refined.** Confirmed: o rounded to nearest with an exact norm gives 0.132 here, the reviewer's number. Refined in three ways: (i) the M2 design floors o, and the floor alone is 0.30, and 1.08 at layer level against 0.091 for nearest; (ii) the norm proper alone is still 0.097, ten times the bar; (iii) with o and the norm both exact, 0.26 remains from the state floor, so an output-side fix alone cannot pass. The reviewer's split-scale arm shows the same thing from the other side. Not contradicted.
@@ -91,12 +91,12 @@ P = public stage finer (in_proj at 2^16, taps and conv at 2^16, a and b inputs a
 
 Reading:
 - **Output-side candidates alone (C1 to C5) land at 0.26 to 0.34**, where the localisation says they must: they fix o and the norm and leave the state floor. Their rel_S is the baseline's and fails its own max criterion (0.41).
-- **With P, the state criterion is met** (median 0.0015, max 0.017) and rel_y drops about tenfold, to 0.029 to 0.041. That is still 3 to 4 times the median bar and 50 to 70 times the max bar. All ranges stay inside the M2 classes.
+- **With P, the state criterion is met** (median 0.0015, max 0.017) and rel_y drops 7 to 9 times, to 0.029 to 0.041. That is still 3 to 4 times the median bar and 50 to 70 times the max bar. All ranges stay inside the M2 classes.
 - Among C1P to C4P the choice of output lowering barely matters at the median (0.029 to 0.041); it matters at layer level (C1P 0.044 against 0.020 to 0.023).
 - **D-R15 replicates the reviewer's arm**: per-head median 0.310, layer level 0.208, o max 189,042. The reviewer reported 0.31, 0.21 and 189,042. My C1 (0.308, 0.207) is the same arm with a finer w and y; no difference to explain.
 - **X1 and X2 change nothing** against C3P, so the resolution of q_hat and of cg is not what limits C3P.
 - **X3** meets the median bar by a hair (0.0099) and the rel_S bar, and misses the max bar (0.253 against 0.05). 464 of 480 pairs are within 0.05; the 16 over are all in 10 heads (18, 19, 30, 31, 36, 37, 38, 45, 46, 47), the heads PR #68 found with near-zero o. It is post hoc and needs held-out prompts before it means anything. What still limits it was not measured; the round-one table offers one untested lead (k_hat stayed at 2^12 in every arm, and the L2-norm rounding alone has max 0.60).
-- Pairs within the bar per arm (`runs/extras.json`): rel_y at most 0.01 in 0 (C0), 0 (C1 to C5), 38 to 58 (C1P to C4P), 247 (X3) of 480.
+- Pairs within the bar per arm (`runs/extras.json`): rel_y at most 0.01 in 0 (C0), 0 (C1 to C5), 37 to 58 (C1P to C4P), 247 (X3) of 480.
 
 **Ranges.** Full table with every class and its bits: `runs/tables.md`. Maxima over 480 pairs, the classes that move:
 
@@ -105,17 +105,17 @@ Reading:
 | C0 | 175,232 | 202,297 | 159,069 | 23,630 | 4,096 | | 749,931 | a P 2^41.6 |
 | C1 | same | same | same | 189,042 (0.72 of 2^18) | 65,533 | | same | o Rc 2^46 |
 | C3 | same | same | same | 131,071 (class [-2^17, 2^17)) | 65,534 | 10 | same | o Rc 2^46 |
-| C4 | same | same | same | Sigma 96,790,000 (class 2^28) | 65,533 | | same | o Rc 2^56, Vx 2^53.1 |
+| C4 | same | same | same | Sigma about 96.8 million (2^26.5, class 2^28) | 65,533 | | same | o Rc 2^56, Vx 2^53.1 |
 | C3P | 174,798 | 202,193 | 159,069 | 131,071 | 65,534 | 10 | same | a P 2^47.6 |
-| X3 | 11,187,221 (2^23.4, class 2^25) | 12,940,298 | 10,180,000 | 131,071 | 65,534 | 24 | 11,998,896 (0.72 of 2^24) | a P 2^53.6 |
+| X3 | 11,187,221 (2^23.4, class 2^25) | 12,940,298 | about 10.2 million | 131,071 | 65,534 | 24 (its stated maximum) | about 12.0 million (0.72 of 2^24) | a P 2^53.6 |
 
-No guard fired in any arm. For X3 the field bound at the stated classes is 18 + 12 + 25 + 7 = 62 bits for a P, inside the field but with little room.
+No guard fired in any arm. For X3 the field bound at the stated honest classes is 18 + 12 + 25 + 7 = 62 bits for a P, inside the field but with little room. That is at the honest class; the bound a range proof actually enforces is wider (M2: 2^23 proved for an honest 2^18), and X3 was not checked at that bound. X3's shift also reaches its stated maximum of 24 on these prompts.
 
 **Counted cost per head per token against M2 arm B (COUNTED by `count_model.py`'s rules, NOT BUILT, not reviewed):**
 
 | arm | LKP keys | gate columns | RNG cells | relations | head total at T = 16 (columns + cells + keys) |
 |---|---|---|---|---|---|
-| C0 (M2 norm part) | 525 | 258 | 256 | 906 | 1,605,872 |
+| C0 (my tally of M2's norm part plus the o floor; the deltas below are against it) | 525 | 258 | 256 | 906 | 1,605,872 |
 | C1, C2 | +129 | 0 | 0 | 0 | 1,607,936 (+0.1%) |
 | C3 | +516 | +385 | -128 | +261 | 1,618,240 (+0.8%) |
 | C4 | +519 | 0 | -128 | +128 | 1,612,128 (+0.4%) |
@@ -146,7 +146,7 @@ Layer 0's mixer output W_o y is added to the embedding x. On these prompts the f
 - The M2 baseline's error is 9 times the size of the residual stream it is added to. That is not a tolerable error by any reading.
 - The best registered in-bounds candidates put an error of about 10% of the embedding, or 0.7% of the mixer output, into the stream: about 5 times the BF16 path.
 - X3 is at 1.4 times the BF16 path on this measure while failing the per-head max bar. The per-head bar counts a head with a tiny o as much as any other, and the norm does rescale those heads to ordinary size, so they are not negligible downstream. How much head-level error the model tolerates is not answered here; it needs a logit-level or downstream measure.
-- PR #68's "error / float mixer output" for C0 is reproduced (0.57).
+- The "error / float mixer output" number one PR #68 reviewer reported for the baseline (0.57) is reproduced here (0.568).
 
 ## 5 Verdict
 
@@ -175,7 +175,8 @@ Layer 0's mixer output W_o y is added to the embedding x. On these prompts the f
 8. **The thread test** ran outside the gate with up to 6 threads for about a minute.
 9. **Run order** was changed so registered arms ran before post-registration ones and six localisation rows ran before X1 to X3. Arms are independent, so no number depends on it; in the end every arm ran.
 10. **P was not ablated**, the C3 shift gadget and every cost are counted sketches, and the localisation's mechanism for the state floor is a reading (section 2).
-11. **A host path was pushed.** Commit 8b9e4fa contains `runs/engine-check-attempt1-codebug/engine-check.time` with the lane's workspace path in a traceback. The file is scrubbed in the tree from the next commit on (`scrub_paths.py`); the earlier commit still has it. I did not rewrite the branch history, because the amendment timestamps cite those commit hashes. That is the coordinator's call.
+11. **The registered field checks at the soundness bound were not done.** The PREREG made "every field check holds at the soundness bound" part of a candidate pass. What was recorded is the measured maximum of each product (all far below 2^63) and, for X3, one bound at the honest class. No arm was checked at the bound its range proof would enforce. C4's stated class is itself marginal: 128 x (2^28)^2 is exactly 2^63, not below it. Since no arm meets fidelity this does not change the verdict, but "pairs in bounds" in section 3 means the stated honest classes only.
+12. **A host path was pushed.** Commit 8b9e4fa contains `runs/engine-check-attempt1-codebug/engine-check.time` with the lane's workspace path in a traceback. The file is scrubbed in the tree from the next commit on (`scrub_paths.py`); the earlier commit still has it. I did not rewrite the branch history, because the amendment timestamps cite those commit hashes. That is the coordinator's call.
 
 ## 7 Open risks
 
