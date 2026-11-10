@@ -341,7 +341,11 @@ def task(args):
                             seconds=round(time.time() - t0, 1))
     return rows
 
-def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None):
+def past(deadline):
+    """deadline 'HHMM' UTC today (the lane runs 01:26Z to 04:26Z); '' = none."""
+    return bool(deadline) and time.strftime("%H%M", time.gmtime()) >= deadline
+
+def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None, deadline=""):
     from multiprocessing import Pool
     arms = json.load(open(arms_file))
     names = [n for n in arms if (not only or n in only)]
@@ -349,17 +353,27 @@ def run(cache, ckpt, arms_file, out, jobs, only, scratch, only_prompts=None):
     pids = [p["id"] for p in sorted(prompts, key=lambda p: -len(p["token_ids"])) if not only_prompts or p["id"] in only_prompts]
     with Pool(jobs) as pool:  # float references first (cached in scratch)
         pool.starmap(float_ref, [(cache, ckpt, pid, scratch) for pid in pids])
-    tasks = [(cache, ckpt, n, arms[n], pid, scratch) for pid in pids for n in names]
-    t0 = time.time(); k = 0
+    # Arms go in groups of `jobs` (file order); inside a group the tasks are longest prompt first. The PREREG cut-off
+    # ("no new arm starts after ...") is checked before each group, so every arm that starts runs on all 10 prompts.
+    t0 = time.time(); k = 0; total = len(names) * len(pids); started = []
     with open(out, "a") as fo, Pool(jobs) as pool:
-        for rows in pool.imap_unordered(task, tasks):
-            for r in rows: fo.write(json.dumps(r) + "\n")
-            fo.flush(); k += 1
-            print(k, "/", len(tasks), rows[0]["arm"], rows[0]["prompt"], round(time.time() - t0, 1), "error" in rows[0], flush=True)
+        for g in range(0, len(names), jobs):
+            grp = names[g:g + jobs]
+            if past(deadline):
+                print("CUT-OFF", deadline, "UTC: arms not started:", ",".join(names[g:]), flush=True)
+                Path(str(out) + ".notrun").write_text(json.dumps(names[g:]) + "\n")
+                break
+            started += grp
+            tasks = [(cache, ckpt, n, arms[n], pid, scratch) for pid in pids for n in grp]
+            for rows in pool.imap_unordered(task, tasks):
+                for r in rows: fo.write(json.dumps(r) + "\n")
+                fo.flush(); k += 1
+                print(k, "/", total, rows[0]["arm"], rows[0]["prompt"], round(time.time() - t0, 1), "error" in rows[0], flush=True)
+    print("arms run:", ",".join(started), flush=True)
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("args", nargs="*")
-    ap.add_argument("--jobs", type=int, default=6); ap.add_argument("--arms", default=""); ap.add_argument("--prompts", default="")
+    ap.add_argument("--jobs", type=int, default=6); ap.add_argument("--arms", default=""); ap.add_argument("--prompts", default=""); ap.add_argument("--deadline", default="")
     ap.add_argument("--scratch", default=os.environ.get("NS_SCRATCH", "/tmp"))
     a = ap.parse_args()
     if a.cmd == "prep":
@@ -369,6 +383,6 @@ def main():
     if a.cmd == "run":
         cache, ckpt, arms, out = a.args
         run(cache, ckpt, arms, out, a.jobs, set(a.arms.split(",")) if a.arms else None, a.scratch,
-            set(a.prompts.split(",")) if a.prompts else None)
+            set(a.prompts.split(",")) if a.prompts else None, a.deadline)
 
 if __name__ == "__main__": main()

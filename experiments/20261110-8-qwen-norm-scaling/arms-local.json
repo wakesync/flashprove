@@ -24,6 +24,196 @@
    ]
   }
  },
+ "roundG-upstream": {
+  "cfg": {
+   "exact": [
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exactG-upstream": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state"
+   ]
+  }
+ },
+ "roundG-norm": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "o"
+   ]
+  }
+ },
+ "exactG-norm": {
+  "cfg": {
+   "exact": [
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "roundG-output": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state"
+   ]
+  }
+ },
+ "exactG-output": {
+  "cfg": {
+   "exact": [
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "roundG-public": {
+  "cfg": {
+   "exact": [
+    "mem",
+    "delta",
+    "state",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exactG-public": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates"
+   ]
+  }
+ },
+ "roundG-state": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "o",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "exactG-state": {
+  "cfg": {
+   "exact": [
+    "mem",
+    "delta",
+    "state"
+   ]
+  }
+ },
+ "round1-o": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ]
+  }
+ },
+ "round1-o-rhu": {
+  "cfg": {
+   "exact": [
+    "in_qkv",
+    "in_ab",
+    "in_z",
+    "conv",
+    "silu",
+    "l2n",
+    "gates",
+    "mem",
+    "delta",
+    "state",
+    "sigma",
+    "rc",
+    "w",
+    "cg",
+    "y"
+   ],
+   "ornd": "rhu"
+  }
+ },
+ "exact1-o": {
+  "cfg": {
+   "exact": [
+    "o"
+   ]
+  }
+ },
  "exact1-in_qkv": {
   "cfg": {
    "exact": [
@@ -304,34 +494,6 @@
    ]
   }
  },
- "exact1-o": {
-  "cfg": {
-   "exact": [
-    "o"
-   ]
-  }
- },
- "round1-o": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
  "exact1-sigma": {
   "cfg": {
    "exact": [
@@ -470,168 +632,6 @@
     "w",
     "cg"
    ]
-  }
- },
- "exactG-public": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates"
-   ]
-  }
- },
- "roundG-public": {
-  "cfg": {
-   "exact": [
-    "mem",
-    "delta",
-    "state",
-    "o",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
- "exactG-state": {
-  "cfg": {
-   "exact": [
-    "mem",
-    "delta",
-    "state"
-   ]
-  }
- },
- "roundG-state": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "o",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
- "exactG-output": {
-  "cfg": {
-   "exact": [
-    "o",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
- "roundG-output": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state"
-   ]
-  }
- },
- "exactG-norm": {
-  "cfg": {
-   "exact": [
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
- "roundG-norm": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state",
-    "o"
-   ]
-  }
- },
- "exactG-upstream": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state"
-   ]
-  }
- },
- "roundG-upstream": {
-  "cfg": {
-   "exact": [
-    "o",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ]
-  }
- },
- "round1-o-rhu": {
-  "cfg": {
-   "exact": [
-    "in_qkv",
-    "in_ab",
-    "in_z",
-    "conv",
-    "silu",
-    "l2n",
-    "gates",
-    "mem",
-    "delta",
-    "state",
-    "sigma",
-    "rc",
-    "w",
-    "cg",
-    "y"
-   ],
-   "ornd": "rhu"
   }
  }
 }

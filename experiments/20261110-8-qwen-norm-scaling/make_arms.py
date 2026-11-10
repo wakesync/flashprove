@@ -21,6 +21,12 @@ for g, st in groups.items():
 # amendment A-2: o rounded to nearest (not floored) with everything else exact, the PR #68 reviewer's "o rounding plus an exact norm"
 loc["round1-o-rhu"] = dict(cfg=dict(exact=[x for x in SH.STAGES if x != "o"], ornd="rhu"))
 
+# Run order (the run is arm-major and may be cut off at the time box): baseline and all-exact, then the grouped arms, then the
+# o rows, then the remaining single-stage arms.
+first = ["C0", "all_exact"] + [f"{a}-{g}" for g in ("upstream", "o", "norm", "output", "public", "state") for a in ("roundG", "exactG")
+                              if f"{a}-{g}" in loc] + ["round1-o", "round1-o-rhu", "exact1-o"]
+loc = {k: loc[k] for k in first + [k for k in loc if k not in first]}
+
 NORM = dict(Fw=16, Fy=20)
 P = dict(Fx=16, TAP=16, Fc=16, Fab=14, Fz=14, Fg=18, rnd="rhu", ornd="rhu")
 cand = {
