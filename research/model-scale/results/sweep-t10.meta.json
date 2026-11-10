@@ -1,0 +1,41 @@
+{
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+  "cpu": "\t: AMD EPYC-Rome Processor",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compile": {
+    "argv": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-fno-ipa-modref",
+      "-DBLK_FIELD=2",
+      "-DBLK_HASH=1",
+      "-I",
+      "blocks",
+      "research/model-scale/run.cpp",
+      "-o",
+      "<workdir>/run.bin"
+    ],
+    "exit": 0,
+    "seconds": 29.09,
+    "stderr": ""
+  },
+  "args": {
+    "jobs": 6,
+    "first_core": 8,
+    "max_log_len": 21,
+    "target": 10,
+    "dims": "2,4,8,16,32,64,128",
+    "tokens": "1,2,4,8",
+    "bits": "4,8,12",
+    "seed": 7,
+    "work": "<workdir>/",
+    "tag": ""
+  },
+  "started": 1793750624.788082,
+  "seconds": 3655.2,
+  "loadavg_end": "33.44 34.71 31.39 38/1960 1335536",
+  "note": "parallel points pinned to distinct cores on a shared VM; other lanes were running; timings are indicative, not exclusive"
+}
