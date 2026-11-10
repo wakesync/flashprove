@@ -1,0 +1,3 @@
+name, uuid, driver_version, memory.used [MiB], memory.total [MiB], mig.mode.current, compute_cap, pcie.link.gen.max, pcie.link.width.max
+NVIDIA H100 80GB HBM3, GPU-5cf69d33-91f8-ee61-2c21-340016228dd1, 615.71.09, 0 MiB, 81559 MiB, Disabled, 9.0, 5, 16
+NVIDIA H100 80GB HBM3, GPU-e51bc461-be46-2930-9471-bfab7e672ea7, 615.71.09, 0 MiB, 81559 MiB, Disabled, 9.0, 5, 16

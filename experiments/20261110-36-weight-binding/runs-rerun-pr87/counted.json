@@ -1,0 +1,56 @@
+{
+ "label": "COUNTED from published shapes and main's counts; the fingerprint time is EXTRAPOLATED from a toy numpy run. Nothing here is a measurement of a proof.",
+ "tensors_in_checkpoint": 1199,
+ "text_tensors": 851,
+ "committed_integers": 26895337984,
+ "committed_bytes": 56333477376,
+ "manifest": {
+  "leaves": 1199,
+  "path_siblings": 11,
+  "opening_bytes_approx": 584,
+  "note": "hash-level manifest of this PR; opening = sibling path + leaf fields"
+ },
+ "weight_cells": {
+  "per_deltanet_layer": 41184,
+  "conv": 40960,
+  "gain": 128,
+  "cA": 48,
+  "dt_bias": 48,
+  "attention_qk_gain_cells_per_layer": 512,
+  "whole_model": 1985024,
+  "keys_whole_model": 5955072,
+  "relations_whole_model": 3977803,
+  "m3a_one_v_head": 1666,
+  "note": "read once per window (#70 count_m3 'once'); arm B 3 keys + 2 relations per cell + one batched tie split into 256-term sums; table-side opening rides in the matmul batch"
+ },
+ "tie_share_of_window": {
+  "T16": 0.003915426608521437,
+  "T64": 0.0009788566521303592,
+  "T1024": 6.117854075814745e-05
+ },
+ "packed_entries_per_token": 95057841,
+ "fingerprint_toy": {
+  "elements": 393216000,
+  "seconds": 74.02,
+  "elements_per_second": 5312294,
+  "whole_model_minutes_extrapolated": 84.4,
+  "note": "numpy, one process, toy prime 2^31-1, shared loaded host; a C or GPU field kernel would differ"
+ },
+ "commit_minutes_extrapolated_70": 2.6176491262409223,
+ "u2_layer_sampling": {
+  "changed_layers": 35,
+  "of": 64,
+  "p_touch_changed_k_distinct_layers": {
+   "1": 0.546875,
+   "2": 0.7986111111111112,
+   "4": 0.9626189846641988,
+   "8": 0.9990302791145059
+  },
+  "p_touch_changed_contiguous_block": {
+   "1": 0.546875,
+   "4": 0.6229508196721312,
+   "16": 0.9591836734693877
+  },
+  "note": "touching a changed layer is necessary, not sufficient: the statement must also open that layer's down_proj / out_proj / o_proj claims against the bound table and bind its input"
+ }
+}

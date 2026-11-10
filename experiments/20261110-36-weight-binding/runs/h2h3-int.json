@@ -1,0 +1,278 @@
+{
+ "note": "NOT A PROOF. Integer conversion per weight_sums.py (matrix, no norm); toy MLE fingerprint mod 2^31-1.",
+ "revs": {
+  "stock": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+  "abl": "739e3c5b89849f6c238ce1e5b70008612ae42cdd"
+ },
+ "tensors": [
+  {
+   "name": "model.language_model.layers.17.mlp.down_proj.weight",
+   "shape": [
+    5120,
+    17408
+   ],
+   "elements": 89128960,
+   "exponent": {
+    "stock": 14,
+    "abl": 14
+   },
+   "bf16_entries_differing": 68605268,
+   "int_entries_differing": 60499880,
+   "int_fraction_differing": 0.6787903729607078,
+   "int_sha256": {
+    "stock": "e8fd6533c9f7f88413de955c693017e993532e9bd76dbc140e329166c909bdad",
+    "abl": "8cca3fc0602381fc4805a950c0ec5e87329205351095058953ac586fcc86cf72"
+   },
+   "max_abs_int_delta_same_index": 152,
+   "fingerprint_nvars": 27,
+   "fingerprint": {
+    "stock": 1242860022,
+    "abl": 2006928583
+   },
+   "fingerprint_equal": false,
+   "fingerprint_seconds_one": 16.01,
+   "bytes_identical": false
+  },
+  {
+   "name": "model.language_model.layers.17.linear_attn.out_proj.weight",
+   "shape": [
+    5120,
+    6144
+   ],
+   "elements": 31457280,
+   "exponent": {
+    "stock": 12,
+    "abl": 12
+   },
+   "bf16_entries_differing": 24510291,
+   "int_entries_differing": 15633364,
+   "int_fraction_differing": 0.4969712575276693,
+   "int_sha256": {
+    "stock": "a001669ac487fb83669a17d60d97ea55ec2fc1f914502d5caf6d4c8cdc20744a",
+    "abl": "85b606267c9bada69b158909deae6bca6d9061365534ac4602c5997e12c0d056"
+   },
+   "max_abs_int_delta_same_index": 62,
+   "fingerprint_nvars": 25,
+   "fingerprint": {
+    "stock": 1270660616,
+    "abl": 2015319925
+   },
+   "fingerprint_equal": false,
+   "fingerprint_seconds_one": 4.57,
+   "bytes_identical": false
+  },
+  {
+   "name": "model.language_model.layers.19.self_attn.o_proj.weight",
+   "shape": [
+    5120,
+    6144
+   ],
+   "elements": 31457280,
+   "exponent": {
+    "stock": 12,
+    "abl": 12
+   },
+   "bf16_entries_differing": 24335741,
+   "int_entries_differing": 15272203,
+   "int_fraction_differing": 0.48549025853474936,
+   "int_sha256": {
+    "stock": "ce8252ba0d7039b036376afa9af606b6aae820f286684dba747f4aebab469e80",
+    "abl": "2e9c59faa8908601b4b8413813b61a9d50a82a623d589f90a1e7ccce557c1897"
+   },
+   "max_abs_int_delta_same_index": 34,
+   "fingerprint_nvars": 25,
+   "fingerprint": {
+    "stock": 1471642952,
+    "abl": 1803313550
+   },
+   "fingerprint_equal": false,
+   "fingerprint_seconds_one": 3.23,
+   "bytes_identical": false
+  },
+  {
+   "name": "model.language_model.layers.34.linear_attn.out_proj.weight",
+   "shape": [
+    5120,
+    6144
+   ],
+   "elements": 31457280,
+   "exponent": {
+    "stock": 12,
+    "abl": 12
+   },
+   "bf16_entries_differing": 24326327,
+   "int_entries_differing": 15074767,
+   "int_fraction_differing": 0.47921393712361654,
+   "int_sha256": {
+    "stock": "698b4ab1aa1c16fe66dc00d259bb1264376c0b63c30ee201dade879ff747a345",
+    "abl": "311389b7d17ca2d4fe8c3ba1760d926955fd701fc4eba339d0b9222cd2a6a3ea"
+   },
+   "max_abs_int_delta_same_index": 47,
+   "fingerprint_nvars": 25,
+   "fingerprint": {
+    "stock": 324175811,
+    "abl": 1874167040
+   },
+   "fingerprint_equal": false,
+   "fingerprint_seconds_one": 3.99,
+   "bytes_identical": false
+  },
+  {
+   "name": "model.language_model.layers.50.mlp.down_proj.weight",
+   "shape": [
+    5120,
+    17408
+   ],
+   "elements": 89128960,
+   "exponent": {
+    "stock": 12,
+    "abl": 12
+   },
+   "bf16_entries_differing": 67619678,
+   "int_entries_differing": 34872448,
+   "int_fraction_differing": 0.39125832950367645,
+   "int_sha256": {
+    "stock": "6531475f8a7dfa0dc4421d18e6bbb54df8bc2e65e5648cb16ca9dfbe9c1cdb58",
+    "abl": "5fcf1a2f487c176eea03307c802a722c2fcba7d036f9edfbe4a2445dc8b82eb0"
+   },
+   "max_abs_int_delta_same_index": 26,
+   "fingerprint_nvars": 27,
+   "fingerprint": {
+    "stock": 433247234,
+    "abl": 1692988904
+   },
+   "fingerprint_equal": false,
+   "fingerprint_seconds_one": 20.67,
+   "bytes_identical": false
+  },
+  {
+   "name": "model.language_model.layers.51.self_attn.o_proj.weight",
+   "shape": [
+    5120,
+    6144
+   ],
+   "elements": 31457280,
+   "exponent": {
+    "stock": 11,
+    "abl": 11
+   },
+   "bf16_entries_differing": 23918695,
+   "int_entries_differing": 10299940,
+   "int_fraction_differing": 0.327426274617513,
+   "int_sha256": {
+    "stock": "cde3fff051e016d8ff2ba79f5988593c49eef5d144bda12f93f9260b18999819",
+    "abl": "c3d3b883f31c728d891ed9b634258dbdcb0a4dff57c5710262e6fde6f01decd8"
+   },
+   "max_abs_int_delta_same_index": 17,
+   "fingerprint_nvars": 25,
+   "fingerprint": {
+    "stock": 1567966809,
+    "abl": 465703565
+   },
+   "fingerprint_equal": false,
+   "fingerprint_seconds_one": 4.45,
+   "bytes_identical": false
+  },
+  {
+   "name": "model.language_model.layers.16.mlp.down_proj.weight",
+   "shape": [
+    5120,
+    17408
+   ],
+   "elements": 89128960,
+   "exponent": {
+    "stock": 13,
+    "abl": 13
+   },
+   "bf16_entries_differing": 0,
+   "int_entries_differing": 0,
+   "int_fraction_differing": 0.0,
+   "int_sha256": {
+    "stock": "095cb3213dabd1ca014f1df78f80806fa5a363dd667bdb600ecf69f35be37cb0",
+    "abl": "095cb3213dabd1ca014f1df78f80806fa5a363dd667bdb600ecf69f35be37cb0"
+   },
+   "max_abs_int_delta_same_index": 0,
+   "fingerprint_nvars": 27,
+   "fingerprint": {
+    "stock": 2072564833,
+    "abl": 2072564833
+   },
+   "fingerprint_equal": true,
+   "fingerprint_seconds_one": 21.1,
+   "bytes_identical": true
+  }
+ ],
+ "gating": [
+  {
+   "name": "model.language_model.layers.17.mlp.down_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 0.9,
+    "abl": 1.1
+   },
+   "bytes": 178257920
+  },
+  {
+   "name": "model.language_model.layers.17.linear_attn.out_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 0.5,
+    "abl": 1.0
+   },
+   "bytes": 62914560
+  },
+  {
+   "name": "model.language_model.layers.19.self_attn.o_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 0.5,
+    "abl": 0.6
+   },
+   "bytes": 62914560
+  },
+  {
+   "name": "model.language_model.layers.34.linear_attn.out_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 0.5,
+    "abl": 0.6
+   },
+   "bytes": 62914560
+  },
+  {
+   "name": "model.language_model.layers.50.mlp.down_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 1.1,
+    "abl": 1.4
+   },
+   "bytes": 178257920
+  },
+  {
+   "name": "model.language_model.layers.51.self_attn.o_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 0.7,
+    "abl": 0.9
+   },
+   "bytes": 62914560
+  },
+  {
+   "name": "model.language_model.layers.16.mlp.down_proj.weight",
+   "stock_matches_68": true,
+   "abl_matches_68": true,
+   "fetch_seconds": {
+    "stock": 2.2,
+    "abl": 1.1
+   },
+   "bytes": 178257920
+  }
+ ],
+ "seconds_total": 228.2
+}
