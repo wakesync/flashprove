@@ -1,0 +1,12 @@
+{"cls": "control", "attack": "honest chain", "chain_accept": true, "why": "ok", "rejected": false, "expect_accept": true}
+{"cls": "b1-wrong-state", "attack": "S_in(chunk 1)[0,0] += 1, chunk proved honestly from it (and later chunks re-proved)", "chain_accept": false, "why": "boundary 1: carried handle mismatch", "rejected": true}
+{"cls": "b1-wrong-state", "attack": "chunk 1: honest words and header, proof made from S_in[0,0] + 1", "chain_accept": false, "why": "chunk 1 proof rejected", "rejected": true}
+{"cls": "b2-other-chunk-state", "attack": "S_in(chunk 1) := S_in(chunk 0), proved honestly", "chain_accept": false, "why": "boundary 1: carried handle mismatch", "rejected": true}
+{"cls": "b2-other-chunk-state", "attack": "chunk 0 replayed verbatim in slot 1", "chain_accept": false, "why": "header fields at chunk 1", "rejected": true}
+{"cls": "b3-skipped-step", "attack": "chunk 1 dropped from the chain", "chain_accept": false, "why": "token ranges do not cover T", "rejected": true}
+{"cls": "b4-replayed-boundary", "attack": "proof of chunk 0 presented with chunk 1's words and header", "chain_accept": false, "why": "chunk 1 proof rejected", "rejected": true}
+{"cls": "b3-skipped-step", "attack": "chunk 1: witness skips token 32 (decay 1, beta 0), complete hostile proof", "chain_accept": false, "why": "chunk verifier", "rejected": true, "violated_relations": 1268}
+{"cls": "b4-replayed-boundary", "attack": "every chunk proof of request 1 replayed under request 2 (headers and handles recomputed)", "chain_accept": false, "why": "chunk 0 proof rejected", "rejected": true}
+{"cls": "b5-conv-history", "attack": "H_in(chunk 1)[0,0] += 1, header and proof unchanged", "chain_accept": false, "why": "header handles do not match words at chunk 1", "rejected": true}
+{"cls": "b5-conv-history", "attack": "H_in(chunk 1)[0,0] += 1, header recomputed and chunk re-proved honestly", "chain_accept": false, "why": "boundary 1: carried handle mismatch", "rejected": true}
+{"summary": {"C": 64, "T": 128, "chunks": 2, "attacked_boundary": 1, "control_accept": true, "rejected": 10, "total": 10}}

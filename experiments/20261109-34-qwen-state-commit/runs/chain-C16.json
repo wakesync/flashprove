@@ -1,0 +1,135 @@
+{
+ "chains": [
+  {
+   "seed": 1,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 7.35
+  },
+  {
+   "seed": 2,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 7.3
+  },
+  {
+   "seed": 3,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 7.24
+  },
+  {
+   "seed": 4,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 7.22
+  },
+  {
+   "seed": 5,
+   "C": 16,
+   "chunks": 4,
+   "chain_accept": true,
+   "why": "ok",
+   "chain_check_s": 7.28
+  }
+ ],
+ "summary": {
+  "C": 16,
+  "T": 64,
+  "D": 32,
+  "chunk_proofs": 20,
+  "accepted": 20,
+  "chains_accepted": 5,
+  "chains": 5,
+  "per_chunk": {
+   "prove_s": {
+    "n": 20,
+    "median": 9.779,
+    "sd": 0.17427306915177387,
+    "min": 9.62,
+    "max": 10.238
+   },
+   "verify_s": {
+    "n": 20,
+    "median": 1.6475,
+    "sd": 0.05927924550269192,
+    "min": 1.563,
+    "max": 1.789
+   },
+   "proof_bytes": {
+    "n": 20,
+    "median": 6532528.0,
+    "sd": 233.37379097874182,
+    "min": 6532000,
+    "max": 6532992
+   },
+   "peak_rss_kb_prove": {
+    "n": 20,
+    "median": 1176424.0,
+    "sd": 29.015422396410244,
+    "min": 1176420,
+    "max": 1176552
+   },
+   "log_length": {
+    "n": 20,
+    "median": 19.0,
+    "sd": 0.0,
+    "min": 19,
+    "max": 19
+   },
+   "relations": {
+    "n": 20,
+    "median": 594432.0,
+    "sd": 0.0,
+    "min": 594432,
+    "max": 594432
+   },
+   "core_columns": {
+    "n": 20,
+    "median": 305664.0,
+    "sd": 0.0,
+    "min": 305664,
+    "max": 305664
+   }
+  },
+  "per_window": {
+   "prove_s": {
+    "n": 5,
+    "median": 39.277,
+    "sd": 0.4679430520907421,
+    "min": 38.797,
+    "max": 39.989999999999995
+   },
+   "verify_s": {
+    "n": 5,
+    "median": 6.659000000000001,
+    "sd": 0.08374544763746893,
+    "min": 6.513999999999999,
+    "max": 6.729
+   },
+   "proof_bytes": {
+    "n": 5,
+    "median": 26129984,
+    "sd": 565.9568888175141,
+    "min": 26129280,
+    "max": 26130720
+   }
+  },
+  "per_token": {
+   "core_columns": 19104.0,
+   "laid_columns": 20480.0,
+   "relations": 37152.0,
+   "range_cells": 1120.0,
+   "core_columns_per_state_cell": 18.65625,
+   "carried_handle_values": 82.0
+  }
+ }
+}
