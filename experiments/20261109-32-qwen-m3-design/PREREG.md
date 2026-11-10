@@ -154,3 +154,39 @@ this lane. No run is excluded.
 ## Amendments
 
 (empty at registration)
+
+The amendments below are **retrospective**: each records, after the fact, a change made after the
+first run (`runs/model-first-run.json`). None of them changes a registered question, threshold or
+first-run verdict. They are appended on 2026-11-10 after two independent reviews of PR #70 asked
+for them.
+
+### A1 (2026-11-10, retrospective): H5 segmentation changed after the first result was seen
+The first run put the DeltaNet mixer inside upstream's 4-layer layer link. Its verdict for
+per-token state at T = 1,024 was "does not fit" (138 GB central against 127 GB), and H5 passed
+through the low-rank case only. After that was seen, the DeltaNet sub-proof was made a segment of
+its own (per block, per layer). That change is **exploratory and post hoc**: the verdicts it gives
+are not registered results. The registered per-case verdicts stay: per-token four-layer case FAIL;
+aggregate H5 PASS through low-rank. The first run's "2-layer links" case was dropped (upstream
+allows at most 28 blocks).
+
+### A2 (2026-11-10, retrospective): gated norm changed after the first run
+The derived coefficient cg was replaced by a table cell, two floors and a committed gain, after
+the second review of #66. M3a-head moved from 1,732,306 laid columns to 1,750,866 (r1). The H3
+verdict is the same.
+
+### A3 (2026-11-10, retrospective): additions not registered
+Added during the lane and not registered: the wider-in_proj slope, the two-level arm-A fallback,
+`bounds.py`, the sensitivity table (RESULTS H5.5), the descriptive VRAM calibration at the fork's
+own rate. The packed DeltaNet count was registered as "2 cells per state cell" and is counted as
+5 byte limbs (3 state, 2 remainder).
+
+### A4 (2026-11-10, retrospective): r2 corrections after two reviews of PR #70
+The count model and the bound ledger were corrected (DESIGN section 12): exact 2^s remainder
+classes, the q scale 362, the weight-cell class and tie, arm A split at 256 terms, retained gains
+in the inventory, the M3a-MLP down projection rounded (it could wrap), the bound ledger as exact
+sums over all terms. Outputs are new files (`runs/model-r2.json`, `runs/bounds-r2.json`); the
+first-run and r1 files are unchanged. Effect on the registered verdicts: H1, H2, H4 unchanged;
+H3 unchanged (PASS, 2^21); H5 as in A1, with the low-rank case now marked **not established**
+(review of PR #71), so the registered PASS rests on a construction that is not specified or
+proved, and fit on one H200 is reported as unknown. M3a-MLP, reported without a threshold, moves
+from 2^22 to 2^23 at T = 16.
