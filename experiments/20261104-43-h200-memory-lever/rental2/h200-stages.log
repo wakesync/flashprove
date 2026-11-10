@@ -1,0 +1,12 @@
+2026-11-04T15:11:17Z STAGE clone-start
+2026-11-04T15:11:25Z STAGE toolkit-start
+2026-11-04T15:11:34Z STAGE toolkit-done
+2026-11-04T15:11:34Z STAGE quickstart-start
+2026-11-04T15:29:43Z STAGE quickstart-exit 0
+2026-11-04T15:29:43Z STAGE build-only-done
+2026-11-04T15:36:50Z STAGE commit-start
+2026-11-04T16:05:23Z STAGE commit-exit 0
+2026-11-04T16:05:23Z STAGE bind node=1 node_allowed=72 list=48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70
+2026-11-04T16:05:23Z STAGE session-start TB1 batch=24 instep=12 seed=1 batches=5
+2026-11-04T16:27:24Z STAGE session-exit TB1 0 STEADY RATE: 146.05 tokens a second, that is 7.010 seconds a request
+2026-11-04T16:27:24Z STAGE wait-pull TB1

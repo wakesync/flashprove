@@ -1,0 +1,112 @@
+{
+ "sessions": [
+  {
+   "session": "CA1",
+   "arm": "CA",
+   "steady_rate": 93.84,
+   "intervals_s": [
+    262.952738004,
+    261.123807315,
+    261.824828453,
+    261.594806759
+   ],
+   "interval_rates": [
+    93.46166229927658,
+    94.116274776713,
+    93.86428378549141,
+    93.94681914553901
+   ],
+   "last_line": "These lines are in <RUNNER_HOME>/w/m-CA1/report.txt, and every time that they rest on in <RUNNER_HOME>/w/m-CA1/figures.json."
+  },
+  {
+   "session": "TB1",
+   "arm": "TB",
+   "steady_rate": 146.05,
+   "intervals_s": [
+    168.044909676,
+    168.55690283,
+    168.299898256,
+    168.152894957
+   ],
+   "interval_rates": [
+    146.24661971245607,
+    145.80239425012695,
+    146.0250437146289,
+    146.15270231466764
+   ],
+   "last_line": "These lines are in <RUNNER_HOME>/w/m-TB1/report.txt, and every time that they rest on in <RUNNER_HOME>/w/m-TB1/figures.json."
+  }
+ ],
+ "arms": {
+  "CA": {
+   "sessions": [
+    "CA1"
+   ],
+   "interval_rates": [
+    93.46166229927658,
+    94.116274776713,
+    93.86428378549141,
+    93.94681914553901
+   ],
+   "session_rates": [
+    93.84
+   ],
+   "interval_rate_stats": {
+    "n": 4,
+    "median": 93.9055514655152,
+    "sd": 0.2776426778109145,
+    "min": 93.46166229927658,
+    "max": 94.116274776713
+   },
+   "session_rate_stats": {
+    "n": 1,
+    "median": 93.84,
+    "sd": 0.0,
+    "min": 93.84,
+    "max": 93.84
+   },
+   "median_rate": 93.90553333004412
+  },
+  "TB": {
+   "sessions": [
+    "TB1"
+   ],
+   "interval_rates": [
+    146.24661971245607,
+    145.80239425012695,
+    146.0250437146289,
+    146.15270231466764
+   ],
+   "session_rates": [
+    146.05
+   ],
+   "interval_rate_stats": {
+    "n": 4,
+    "median": 146.08887301464827,
+    "sd": 0.19231872505710043,
+    "min": 145.80239425012695,
+    "max": 146.24661971245607
+   },
+   "session_rate_stats": {
+    "n": 1,
+    "median": 146.05,
+    "sd": 0.0,
+    "min": 146.05,
+    "max": 146.05
+   },
+   "median_rate": 146.08884512628512
+  }
+ },
+ "verdict": {
+  "evaluable": true,
+  "ratio_TB_over_CA": 1.5557000737415063,
+  "ranges_disjoint": true,
+  "usd_per_Mtok": {
+   "CA": 7.126695173105372,
+   "TB": 10.534304950621783
+  },
+  "usd_per_Mtok_note": "CA uses half of the 2-GPU box price (one GPU of two); TB the whole 1-GPU box",
+  "PASS_lever": true,
+  "PASS_cost": false
+ }
+}
