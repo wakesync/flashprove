@@ -51,28 +51,6 @@ the integers those leaves name, and that every relation that reads a weight read
 table at an address the configuration fixes. The "model id" below is the checkpoint id of 2.0
 plus the conversion id; section 2.0 fixes their order.
 
-### 2.1 The manifest (hash level, built in this PR, H1)
-
-Leaf of a tensor t, sorted by name:
-`H(0x00 || "fp-wb-leaf-v1" || name || dtype || shape || sha256(source bytes of t))`; nodes
-`H(0x01 || "fp-wb-node-v1" || l || r)`; id `H("fp-wb-id-v1" || n || root)`, H = SHA-256.
-
-The production leaf adds what the conversion needs so that the leaf names integers, not floats:
-- the conversion rule version and the tensor's exponent e_t (public in the configuration, covered
-  by the commitment ID: the leaf must equal the configuration's value);
-- for a matrix that has a norm folded in (`weight_sums.py`, `multipliers`), the source digest of
-  that norm too: its integer is RNE(2^e RN32(v RN32(g c))), so its leaf depends on two tensors;
-- `int_sha256`: SHA-256 of the integers (the `wsums.txt` line). For open weights this file can be
-  published: nothing is hidden (#70 section 10 makes the same point).
-
-**Revised in PR #87 review (astra item 1):** the first version of this list also put the field
-fingerprint `y_t` into the leaf. That is circular: `y_t` is an evaluation at a point derived from
-the model id (2.2), and the model id hashes the leaf. Generating such a manifest needs a fixed point
-of the hash. `y_t` is removed from the leaf. Section 2.0 gives the non-circular definition.
-
-Use tensor-byte hashes, never file hashes: #68 shows all 18 shard hashes differ although 1,129 of
-1,199 tensors are identical.
-
 ### 2.0 Non-circular definition: three objects, hashed in this order
 
 Added in the PR #87 review (astra item 1). Nothing below is built; H1 builds only object 1 at the
@@ -113,6 +91,28 @@ bound is at most Q n_b / |F| per block for Q hash queries, plus the hash's own t
 requires the point derivation to hash the full commitment ID (as above). That full analysis is not
 done in this PR. H3 used a fixed label instead of a commitment ID, so it tests the arithmetic of
 one evaluation, not this transcript.
+
+### 2.1 The manifest (hash level, built in this PR, H1)
+
+Leaf of a tensor t, sorted by name:
+`H(0x00 || "fp-wb-leaf-v1" || name || dtype || shape || sha256(source bytes of t))`; nodes
+`H(0x01 || "fp-wb-node-v1" || l || r)`; id `H("fp-wb-id-v1" || n || root)`, H = SHA-256.
+
+The production leaf adds what the conversion needs so that the leaf names integers, not floats:
+- the conversion rule version and the tensor's exponent e_t (public in the configuration, covered
+  by the commitment ID: the leaf must equal the configuration's value);
+- for a matrix that has a norm folded in (`weight_sums.py`, `multipliers`), the source digest of
+  that norm too: its integer is RNE(2^e RN32(v RN32(g c))), so its leaf depends on two tensors;
+- `int_sha256`: SHA-256 of the integers (the `wsums.txt` line). For open weights this file can be
+  published: nothing is hidden (#70 section 10 makes the same point).
+
+**Revised in PR #87 review (astra item 1):** the first version of this list also put the field
+fingerprint `y_t` into the leaf. That is circular: `y_t` is an evaluation at a point derived from
+the model id (2.2), and the model id hashes the leaf. Generating such a manifest needs a fixed point
+of the hash. `y_t` is removed from the leaf. Section 2.0 gives the non-circular definition.
+
+Use tensor-byte hashes, never file hashes: #68 shows all 18 shard hashes differ although 1,129 of
+1,199 tensors are identical.
 
 ### 2.2 Binding the table to the leaves (in the key file)
 
