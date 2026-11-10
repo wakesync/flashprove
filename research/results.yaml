@@ -408,11 +408,10 @@ results:
       - {name: verify_wall, stat: median, value: 1.407, unit: s, n: 10, spread: {sd: 0.027, min: 1.380, max: 1.471}, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: 05d0ad8e75ae814a514d0106f2bf3c2cb08ec2c0, source: experiments/20261104-58-signed-manifest/numbers.json, note: "whole verify call incl. one cp_verify on the stored small example; shared VM; no threshold"}
 
   - id: qwen-real-weights-layer0
-    title: "Qwen3.8-27B real weights, layer 0: integer M2 head vs float, and stock vs abliterated by tensor (PR pending)"
+    title: "Qwen3.8-27B real weights, layer 0: integer M2 head vs float, and stock vs abliterated by tensor"
     status: negative
     replication: unreplicated
-    pr: null
-    pr_note: "draft PR from research/1109-qwen-real-weights; set on merge"
+    pr: 68
     summary: "FAIL vs prereg: M2 range bounds hold at F = 12 on 480 of 480 (prompt, head) pairs (max M 202,297 = 0.77 of 2^18), but no F in {12, 14, 16} meets the fidelity threshold (median per-head rel_y 0.659 / 0.177 / 0.049; state rel_S median 0.0098 / 0.0042 / 0.0033), and F = 14 and F = 16 break the range bounds, so none of the tested F meets both with the M2 lowering on layer 0 and these prompts (other F and lowerings untested); abliteration changes 70 of 1,199 tensors (down_proj and out/o_proj in layers 17-51), close to rank-1 with one shared direction on the 3 tensors checked (top-1 energy 99.36% to 99.45%); layer 0 and the embedding byte-identical"
     conditions: "layer 0 only, 48 V heads, 10 frozen prompts (2,396 tokens) from sequence start, float64 reference (checked against verbatim Transformers code), CPU, no proof; deeper layers and every abliterated layer (17 to 51) unmeasured for ranges and fidelity; diff covers all tensors by streaming sha256; low-rank structure checked on 3 of 70 differing tensors"
     evidence: [experiments/20261109-8-qwen-real-weights/RESULTS.md]
