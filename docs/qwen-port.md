@@ -27,12 +27,12 @@ Building that is the port. The feasibility study is in
 | Feasibility | desk study: architecture, what is new, why Qwen first | done | [FEASIBILITY.md](../research/ports/qwen3.8-27b/FEASIBILITY.md) (PR #28) |
 | **M1** | one DeltaNet head at real size, 4 tokens, proved on a CPU | done, with a negative result: proofs worked, but a value outgrew its allowed range on heavy-tailed inputs | [RESULTS](../experiments/20261104-11-qwen-deltanet-m1/RESULTS.md) (PR #47) |
 | **M1b** | the same head with a cheaper range check | done: passed its registered thresholds | [RESULTS](../experiments/20261105-32-qwen-deltanet-m1b-lookup/RESULTS.md) (PR #63) |
-| **M2 design** | design of a whole head at 16 tokens; a verifier entry that checks its own inputs | in review, changes requested | PR [#66](https://github.com/wakesync/flashprove/pull/66) |
-| Operator gadgets | pinned integer tables; small proofs of conv, norms, table lookups | in review | PR [#67](https://github.com/wakesync/flashprove/pull/67), issue #35 |
-| Real weights, layer 0 | ranges and accuracy of the integer arithmetic on the real checkpoints; what abliteration changes | in review | PR [#68](https://github.com/wakesync/flashprove/pull/68), issue #8 |
-| State commitment | how to carry the state between parts of a proof without committing all of it | planned (experiment under way) | issue #34 |
+| **M2 design** | design of a whole head at 16 tokens; a verifier entry that checks its own inputs | done (design; merged) | PR [#66](https://github.com/wakesync/flashprove/pull/66) |
+| Operator gadgets | pinned integer tables; small standalone proofs of conv, norms, table lookups, with unbound inputs | done (merged) | PR [#67](https://github.com/wakesync/flashprove/pull/67), issue #35 |
+| Real weights, layer 0 | ranges and accuracy of the integer arithmetic on the real checkpoints; what abliteration changes | done, negative (merged): accuracy threshold missed on layer 0 | PR [#68](https://github.com/wakesync/flashprove/pull/68), issue #8 |
+| State commitment | how to carry the state between parts of a proof without committing all of it | done (merged): full state at each handoff is the plan of record; the cheaper low-rank form is not established | PR [#71](https://github.com/wakesync/flashprove/pull/71), issue #34 |
 | **Lookup build** | the M2 head built with lookup-checked remainders | planned (build under way) | issue #32 |
-| **M3 design** | the first statement where the weights are committed and the proof is needed | in review (this design) | [DESIGN](../experiments/20261109-32-qwen-m3-design/DESIGN.md), [RESULTS](../experiments/20261109-32-qwen-m3-design/RESULTS.md) |
+| **M3 design** | the first statement where the weights are committed and the proof is needed | in progress (design and counts only; in review) | [DESIGN](../experiments/20261109-32-qwen-m3-design/DESIGN.md), [RESULTS](../experiments/20261109-32-qwen-m3-design/RESULTS.md) |
 | **M3a** | one head, then one full DeltaNet layer, against committed weights, on a CPU | planned | DESIGN section 9 |
 | Arithmetic gate | choose number formats that are accurate on real weights and stay in range | planned; blocks everything below | issue #8 |
 | **M3b** | a block of 4 layers in the GPU prover | planned; needs a GPU decision | DESIGN section 9 |
@@ -57,25 +57,35 @@ Nothing has been measured for Qwen beyond the single head on a CPU (about 40 sec
 tokens of one head, with test settings; PR #63).
 
 Counted, not built ([RESULTS](../experiments/20261109-32-qwen-m3-design/RESULTS.md)):
-- The first statement with committed weights (one head, 16 tokens) is 8% larger than the M2 head
+- The first statement with committed weights (one head, 16 tokens) is 11% larger than the M2 head
   and fits the same CPU harness, provided remainders and table steps are checked by lookups.
-  Without lookups it fits for a single token only.
+  Without lookups it fits for a single token only. **This counts the request's trace only:** the
+  separate table of the head's 3.3 million committed weights, its range proof and the matrix
+  products' own rounds are not in the count, and that weight table has not been built for Qwen.
+- The layer's MLP statement fits only up to 15 tokens at a time.
 - If every state is committed for every token, the state is 88% of everything a request commits.
 
-Whether the full model fits one 141 GB GPU is not known. The M3 results give an estimate, built on
-another model's published rates and on a GPU sub-proof that has not been written. It is in the
-RESULTS file with its assumptions and should not be quoted as a result.
+**Whether the full model fits one 141 GB GPU is unknown.** Every estimate is an extrapolation
+from another model, for a GPU sub-proof that has not been written. At the rate taken from
+upstream's published Maverick run, some designs come in under the limit. At the one GPU memory
+rate this fork has measured itself (a small made-up model), none fits a 1,024-token window; the
+largest window that fits is then 256 tokens. The two rates differ by ten times, and only a
+measured Qwen run can say which applies. Do not quote either as a result.
 
 ## Open risks
 
-1. **Accuracy of the integer arithmetic.** On real layer-0 weights the number format used so far
-   keeps its ranges but gives a head output far from the real model's, and a finer format breaks
-   the ranges (PR #68, in review). Until a format passes both, a proof would be about an integer
-   model that does not track Qwen.
+1. **Accuracy of the integer arithmetic.** On real layer-0 weights, 10 prompts, the number format
+   used so far (F = 12 with the M2 arithmetic) keeps its ranges but gives a head output that misses
+   the accuracy threshold, and the two finer formats tried (F = 14, 16) break the ranges (PR #68).
+   Deeper layers, every layer the abliteration changes, and other formats are unmeasured. Until a
+   format passes both, a proof would say nothing about how close the integer model is to Qwen.
 2. **The state.** Committing it every token is too large for a full model in the only form that has
-   been built. The cheaper strategies change the arithmetic and are not built (issue #34).
+   been built. The cheaper low-rank strategy is not established: it has no specified, proved
+   construction (PR #71 and its review).
 3. **No GPU code for DeltaNet.** All Qwen proofs so far ran on a CPU research harness.
-4. **Lookups.** The planned statements depend on lookup compositions that are still being built.
+4. **Lookups and the weight table.** The planned statements depend on a lookup keyed on the
+   proof's own hidden values, which does not exist yet (PR #67 has standalone pieces), and on a
+   range proof for a Qwen weight table, which exists only for upstream's Maverick layout.
 5. **Ranges are measured on one layer.** Deeper layers are unmeasured.
 6. **Limits of the upstream programs.** The verifier does not say YES for a model without routed
    experts, with a query width different from the stream width, or with head dimension 256
@@ -85,8 +95,9 @@ RESULTS file with its assumptions and should not be quoted as a result.
 8. **Security settings.** Every Qwen proof so far used a 10-bit research target. None is a
    production proof.
 9. **Which checkpoint.** The abliterated checkpoint differs from stock in 70 of 1,199 tensors, all
-   in layers 17 to 51 (PR #68, in review). A proof of early layers cannot tell them apart, and file
-   hashes cannot identify the model. Identity has to be bound tensor by tensor.
+   in layers 17 to 51 (PR #68). A proof of early layers cannot tell them apart. A file hash
+   identifies that one file, but every shard's hash differs, so it cannot say which weights
+   changed. Identity has to be bound tensor by tensor.
 
 ## Glossary
 
