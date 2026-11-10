@@ -362,5 +362,475 @@
   "total": 44,
   "ubsan_reports": 0,
   "stderr": ""
+ },
+ "env@r3": {
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "cores": "10-15",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "base": "4f7a876151c309f0159e88b18c8e286d4e1909c9",
+  "sources": {
+   "research/operators/qwen_deltanet_m2/count_model.py": "59e508d92e9706578835be4fdb9b467002dfca2823d164c9d610b78170730032",
+   "research/operators/qwen_deltanet_m2/head_reference.py": "1999ef56efd4752dfe493ea29cd8930b0c8e7bc3c9ee267a5c7f4ccbce3f6ff7",
+   "research/operators/qwen_deltanet_m2/norm_alias_regression.py": "4981df6ad3f6a6676bca96b332dd68a81074b76a6214ab7f7cc29308bfbbfe49",
+   "research/operators/qwen_deltanet_m2/record.py": "fdc19251d563e0eff27260b976a9b19408163a54e01f7d6cce981a7e9fc067c7",
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770",
+   "research/operators/qwen_deltanet/reference.py": "f6fbd580bf834afd2d6280036ddf52d410be094824299e89c61eb2a1b80edaf0"
+  }
+ },
+ "fixtures@r3": {
+  "1": {
+   "meta": {
+    "seed": 1,
+    "S0_max_abs": 1694,
+    "S4_max_abs": 443,
+    "decays": [
+     2440,
+     1208,
+     996,
+     111
+    ],
+    "betas": [
+     1511,
+     2018,
+     572,
+     799
+    ]
+   },
+   "sha256": "7f86dc8bda6758075a5b6210a4c026d5a97ae2df77d2d3423b251b4df3b22772"
+  },
+  "2": {
+   "meta": {
+    "seed": 2,
+    "S0_max_abs": 1949,
+    "S4_max_abs": 2541,
+    "decays": [
+     4028,
+     4014,
+     3935,
+     4063
+    ],
+    "betas": [
+     2197,
+     2120,
+     2965,
+     2514
+    ]
+   },
+   "sha256": "4d919856d214adba60d64ae86dc036a50c996fd86289aec6651ea4ba0e753ff8"
+  },
+  "3": {
+   "meta": {
+    "seed": 3,
+    "S0_max_abs": 3417,
+    "S4_max_abs": 3059,
+    "decays": [
+     4083,
+     3961,
+     4064,
+     4019
+    ],
+    "betas": [
+     2975,
+     1307,
+     2589,
+     917
+    ]
+   },
+   "sha256": "6126b044c6eececc3b22156ca4f6d008bdd464342058fffeb4bee010bac0fc07"
+  },
+  "4": {
+   "meta": {
+    "seed": 4,
+    "S0_max_abs": 1293,
+    "S4_max_abs": 1689,
+    "decays": [
+     3612,
+     3391,
+     3591,
+     3629
+    ],
+    "betas": [
+     1059,
+     684,
+     3075,
+     587
+    ]
+   },
+   "sha256": "761c94c0189f200510ce757c8377ad47a71e2c6c897f0a1c5ba57e14e47d8f85"
+  },
+  "5": {
+   "meta": {
+    "seed": 5,
+    "S0_max_abs": 1191,
+    "S4_max_abs": 964,
+    "decays": [
+     3131,
+     3850,
+     3502,
+     2311
+    ],
+    "betas": [
+     2732,
+     841,
+     1444,
+     963
+    ]
+   },
+   "sha256": "aac3d7e59fdb55d700101d26c0af7f6405b173220a214404737b6e7d4e6163dd"
+  },
+  "6": {
+   "meta": {
+    "seed": 6,
+    "S0_max_abs": 2156,
+    "S4_max_abs": 2162,
+    "decays": [
+     3929,
+     3611,
+     4040,
+     4015
+    ],
+    "betas": [
+     2850,
+     2207,
+     3257,
+     1902
+    ]
+   },
+   "sha256": "1b2e5ed24f777da539d8ced79d63e0c8f46b96240d75396bc97980ecb83bfa53"
+  },
+  "7": {
+   "meta": {
+    "seed": 7,
+    "S0_max_abs": 768,
+    "S4_max_abs": 850,
+    "decays": [
+     3291,
+     1882,
+     2334,
+     2746
+    ],
+    "betas": [
+     3065,
+     398,
+     1140,
+     1423
+    ]
+   },
+   "sha256": "2538419cdcbe58c98c2f0caa7dc40ea5e48b50aa6cd9185d0099c598cdfefa7c"
+  },
+  "8": {
+   "meta": {
+    "seed": 8,
+    "S0_max_abs": 901,
+    "S4_max_abs": 827,
+    "decays": [
+     2708,
+     194,
+     1869,
+     2264
+    ],
+    "betas": [
+     1725,
+     2536,
+     2070,
+     1612
+    ]
+   },
+   "sha256": "0c0c3ae3cf8a1c597ede70f8487c34742f174a569dd0e802ad629881533c1915"
+  },
+  "9": {
+   "meta": {
+    "seed": 9,
+    "S0_max_abs": 2076,
+    "S4_max_abs": 1629,
+    "decays": [
+     3741,
+     4059,
+     3505,
+     3979
+    ],
+    "betas": [
+     384,
+     2249,
+     902,
+     1878
+    ]
+   },
+   "sha256": "de1d5924325874b8c74313a8c043c873127f4e7dc122aa3b79c70d84cd97ea18"
+  },
+  "10": {
+   "meta": {
+    "seed": 10,
+    "S0_max_abs": 1699,
+    "S4_max_abs": 1797,
+    "decays": [
+     3998,
+     3559,
+     3351,
+     4042
+    ],
+    "betas": [
+     1637,
+     2751,
+     1777,
+     2565
+    ]
+   },
+   "sha256": "9b0de48cd2c1781d58eaf1f0ec748f3693c83e4dcf25bf389bbee7c049b41164"
+  }
+ },
+ "compile@r3": {
+  "argv": [
+   "g++",
+   "-std=c++17",
+   "-O2",
+   "-Wall",
+   "-Wextra",
+   "-fno-ipa-modref",
+   "-DBLK_FIELD=2",
+   "-DBLK_HASH=1",
+   "-I",
+   "blocks",
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp",
+   "-o",
+   "research/operators/qwen_deltanet_m2/work/admit_proto.bin"
+  ],
+  "exit": 0,
+  "seconds": 32.517,
+  "stdout": "",
+  "stderr": "In file included from research/operators/qwen_deltanet_m2/admit_proto.cpp:14:\nresearch/operators/qwen_deltanet_m2/m1b_builder.h:59:13: warning: \u2018bool admissible(const Fixture&)\u2019 defined but not used [-Wunused-function]\n   59 | static bool admissible(const Fixture &z) {\n      |             ^~~~~~~~~~\n",
+  "head": "bae6f8f1b0d0b899609dddc2faab16d3ad84a535",
+  "binary_inputs_dirty": false,
+  "scripts_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "0-5"
+ },
+ "model@r3": {
+  "exit": 0,
+  "seconds": 1.214,
+  "stdout": "\"layout\": 2338816,\n   \"log_length\": 22\n  },\n  \"model_m1b\": {\n   \"arm\": \"m1b\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 1074176,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 0,\n   \"relations\": 2231808,\n   \"terms\": 5174272,\n   \"product_columns_per_state_cell_per_token\": 17.414,\n   \"relations_per_state_cell_per_token\": 34.055,\n   \"columns_used\": 1310720,\n   \"columns_nonregion\": 1074176,\n   \"rng_rows\": 8192,\n   \"log_length\": 21\n  }\n },\n \"H2\": {\n  \"armA_m1b_shape\": {\n   \"arm\": \"A\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 1074176,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 0,\n   \"relations\": 2231808,\n   \"terms\": 5174272,\n   \"product_columns_per_state_cell_per_token\": 17.414,\n   \"relations_per_state_cell_per_token\": 34.055,\n   \"columns_used\": 1156096,\n   \"columns_nonregion\": 1074176,\n   \"rng_rows\": [\n    4096,\n    1024\n   ],\n   \"key_parts\": [],\n   \"digit_entries\": 102400,\n   \"rng_multiplicity_places\": 155648,\n   \"remainder_multiplicity_places\": 0,\n   \"multiplicity_row_places\": 155648,\n   \"log_length\": 21\n  },\n  \"armB_m1b_shape\": {\n   \"arm\": \"B\",\n   \"D\": 128,\n   \"T\": 4,\n   \"o_witness\": false,\n   \"norm\": false,\n   \"gate_columns\": 263168,\n   \"range_cells\": 67072,\n   \"lkp_keys\": 67584,\n   \"relations\": 609792,\n   \"terms\": 1186816,\n   \"product_columns_per_state_cell_per_token\": 6.07,\n   \"relations_per_state_cell_per_token\": 9.305,\n   \"columns_used\": 427008,\n   \"columns_nonregion\": 263168,\n   \"rng_rows\": [\n    4096,\n    1024\n   ],\n   \"key_parts\": [\n    65536,\n    16384\n   ],\n   \"digit_entries\": 102400,\n   \"rng_multiplicity_places\": 155648,\n   \"remainder_multiplicity_places\": 69632,\n   \"multiplicity_row_places\": 225280,\n   \"log_length\": 19\n  },\n  \"ratio_columns_per_cell\": 0.349,\n  \"ratio_relations\": 0.273,\n  \"ratio_terms\": 0.229,\n  \"pass_\": true,\n  \"note\": \"arm A at the M1b shape equals M1b (same lowering); arm B swaps exact bits for direct LKP keys\"\n },\n \"norm_terms\": {\n  \"lowering\": \"DESIGN.md section 4.4.1 (gate operand cells reused for sigma and Rc)\",\n  \"per_token\": {\n   \"A\": {\n    \"gate_columns\": 5022,\n    \"relations\": 10304,\n    \"terms\": 25519,\n    \"range_cells\": 128,\n    \"lkp_keys\": 0,\n    \"terms_closed_form\": 25519,\n    \"closed_form_matches\": true\n   },\n   \"B\": {\n    \"gate_columns\": 258,\n    \"relations\": 776,\n    \"terms\": 2074,\n    \"range_cells\": 128,\n    \"lkp_keys\": 397,\n    \"terms_closed_form\": 2074,\n    \"closed_form_matches\": true\n   }\n  },\n  \"closed_forms_match\": true,\n  \"terms_T16\": {\n   \"A\": 21107440,\n   \"B\": 4782496\n  },\n  \"terms_T16_superseded\": {\n   \"A\": 21110960,\n   \"B\": 4786704\n  },\n  \"terms_T16_change\": {\n   \"A\": -3520,\n   \"B\": -4208\n  },\n  \"frozen_counts_T16\": {\n   \"A\": {\n    \"gate_columns\": [\n     4377056,\n     4377056,\n     true\n    ],\n    \"range_cells\": [\n     272384,\n     272384,\n     true\n    ],\n    \"lkp_keys\": [\n     0,\n     0,\n     true\n    ],\n    \"relations\": [\n     9042944,\n     9042944,\n     true\n    ],\n    \"columns_used\": [\n     4655584,\n     4655584,\n     true\n    ],\n    \"log_length\": [\n     23,\n     23,\n     true\n    ]\n   },\n   \"B\": {\n    \"gate_columns\": [\n     1056800,\n     1056800,\n     true\n    ],\n    \"range_cells\": [\n     272384,\n     272384,\n     true\n    ],\n    \"lkp_keys\": [\n     276688,\n     276688,\n     true\n    ],\n    \"relations\": [\n     2402432,\n     2402432,\n     true\n    ],\n    \"columns_used\": [\n     1613856,\n     1613856,\n     true\n    ],\n    \"log_length\": [\n     21,\n     21,\n     true\n    ]\n   }\n  },\n  \"frozen_counts_unchanged\": true,\n  \"note\": \"counted for one stated lowering; no builder exists to check it. A build that reuses operands differently has a different, equally valid total.\"\n },\n \"H3\": {\n  \"armA_T16\": {\n   \"arm\": \"A\",\n   \"D\": 128,\n   \"T\": 16,\n   \"o_witness\": true,\n   \"norm\": true,\n   \"gate_columns\": 4377056,\n   \"range_cells\": 272384,\n   \"lkp_keys\": 0,\n   \"relations\": 9042944,\n   \"terms\": 21107440,\n   \"product_columns_per_state_cell_per_token\": 17.736,\n   \"relations_per_state_cell_per_token\": 34.496,\n   \"columns_used\": 4655584,\n   \"columns_nonregion\": 4377056,\n   \"rng_rows\": [\n    16384,\n    1024\n   ],\n   \"key_parts\": [],\n   \"digit_entries\": 348160,\n   \"rng_multiplicity_places\": 172032,\n   \"remainder_multiplicity_places\": 0,\n   \"multiplicity_row_places\": 172032,\n   \"log_length\": 23,\n   \"prove_s_estimate\": null\n  },\n  \"armB_T16\": {\n   \"arm\": \"B\",\n   \"D\": 128,\n   \"T\": 16,\n   \"o_witness\": true,\n   \"norm\": true,\n   \"gate_columns\": 1056800,\n   \"range_cells\": 272384,\n   \"lkp_keys\": 276688,\n   \"relations\": 2402432,\n   \"terms\": 4782496,\n   \"product_columns_per_state_cell_per_token\": 6.126,\n   \"relations_per_state_cell_per_token\": 9.165,\n   \"columns_used\": 1613856,\n   \"columns_nonregion\": 1056800,\n   \"rng_rows\": [\n    16384,\n    1024\n   ],\n   \"key_parts\": [\n    262144,\n    16384\n   ],\n   \"digit_entries\": 348160,\n   \"rng_multiplicity_places\": 172032,\n   \"remainder_multiplicity_places\": 77824,\n   \"multiplicity_row_places\": 249856,\n   \"log_length\": 21,\n   \"prove_s_estimate\": 39.2,\n   \"single_part_layout\": {\n    \"key_part\": 524288,\n    \"columns_used\": 1859616,\n    \"log_length\": 21\n   }\n  },\n  \"max_T_log22\": {\n   \"A\": 14,\n   \"B\": 41\n  },\n  \"max_T_log22_without_relation_cap\": {\n   \"A\": 14,\n   \"B\": 41\n  },\n  \"layer_extrapolation\": {\n   \"A\": {\n    \"relations_per_token_per_layer\": 27128832,\n    \"columns_per_token_per_layer\": 13948320,\n    \"columns_per_token_48_deltanet_layers\": 669519360\n   },\n   \"B\": {\n    \"relations_per_token_per_layer\": 7207296,\n    \"columns_per_token_per_layer\": 4817616,\n    \"columns_per_token_48_deltanet_layers\": 231245568\n   }\n  },\n  \"fits_2_21_armB_T16\": true,\n  \"pass_\": true,\n  \"note\": \"prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls).\"\n },\n \"remainder_savings\": {\n  \"armA_T16_columns\": 4649440,\n  \"armB_T16_columns\": 1605872,\n  \"relations_A\": 9042944,\n  \"relations_B\": 2402432,\n  \"terms_A\": 21107440,\n  \"terms_B\": 4782496\n }\n}\n",
+  "head": "9a84ded8cb19a0f60d41ebc17e4cb7e6fe57a49b",
+  "binary_inputs_dirty": false,
+  "scripts_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "10-15"
+ },
+ "norm@r3": {
+  "exit": 0,
+  "seconds": 3.649,
+  "stdout": "{\n \"pass_\": true,\n \"A_large_gain_aliases\": {\n  \"cases\": 22,\n  \"aliases_without_rule\": 22,\n  \"rejected_at_derive_with_rule\": 22,\n  \"as_expected\": 22\n },\n \"B_boundary\": {\n  \"cases\": 8,\n  \"as_expected\": 8\n },\n \"C_no_wrap\": {\n  \"as_expected\": true,\n  \"largest_relation_magnitude_log2\": 47.0875,\n  \"samples\": 200000,\n  \"mismatches\": 0\n },\n \"D_derived_v\": {\n  \"cases\": 15,\n  \"as_expected\": 15,\n  \"below_p\": true\n },\n \"E_no_wrap_ledger\": {\n  \"identities\": 11,\n  \"all_below_p\": true,\n  \"largest\": \"N3 rr: Rc sigma + rr - 2^36\",\n  \"largest_bound_without_wrap_log2\": {\n   \"k\": 22.0,\n   \"q\": 34.0,\n   \"a\": 22.0,\n   \"beta\": 32.994,\n   \"v\": 51.999,\n   \"cg\": 41.0\n  }\n },\n \"F_derived_k_q\": {\n  \"vectors\": 774,\n  \"sample_seed\": 67,\n  \"max_abs_k\": 4096,\n  \"max_abs_q\": 362,\n  \"k_bound\": 4096,\n  \"q_bound\": 362,\n  \"as_expected\": true\n },\n \"G_gain_vs_cg_bound\": {\n  \"z_values\": 2097151,\n  \"rows\": [\n   {\n    \"gain_x10000\": 10000,\n    \"max_abs_cg\": 11863272,\n    \"below_bound\": true,\n    \"as_expected\": true\n   },\n   {\n    \"gain_x10000\": 14100,\n    \"max_abs_cg\": 16727213,\n    \"below_bound\": true,\n    \"as_expected\": true\n   },\n   {\n    \"gain_x10000\": 14143,\n    \"max_abs_cg\": 16778225,\n    \"below_bound\": false,\n    \"as_expected\": true\n   },\n   {\n    \"gain_x10000\": 20000,\n    \"max_abs_cg\": 23726544,\n    \"below_bound\": false,\n    \"as_expected\": true\n   }\n  ],\n  \"as_expected\": true\n }\n}\n{\"matches_expected_output\": true}\n",
+  "stderr": "",
+  "head": "9a84ded8cb19a0f60d41ebc17e4cb7e6fe57a49b",
+  "binary_inputs_dirty": false,
+  "scripts_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "10-15"
+ },
+ "honest@r3": {
+  "accepted": 10,
+  "of": 10,
+  "prove_s": {
+   "n": 10,
+   "median": 39.875,
+   "sd": 0.8105386686231171,
+   "min": 39.65,
+   "max": 41.703
+  },
+  "decode_s": {
+   "n": 10,
+   "median": 0.0001,
+   "sd": 0.0,
+   "min": 0.0001,
+   "max": 0.0001
+  },
+  "derive_s": {
+   "n": 10,
+   "median": 0.2225,
+   "sd": 0.011920570456148482,
+   "min": 0.206,
+   "max": 0.242
+  },
+  "verify_s": {
+   "n": 10,
+   "median": 7.6515,
+   "sd": 0.3250807762866194,
+   "min": 7.282,
+   "max": 8.091
+  },
+  "proof_bytes": {
+   "n": 10,
+   "median": 25411392.0,
+   "sd": 313.09891940620514,
+   "min": 25410848,
+   "max": 25411968
+  },
+  "peak_rss_kb": {
+   "n": 10,
+   "median": 4435604.0,
+   "sd": 85.62035064425072,
+   "min": 4435372,
+   "max": 4435608
+  },
+  "nonzero_exits": 0,
+  "runtime_error_lines": 0,
+  "stderr_bytes": 0,
+  "head": "f5c09762f54318354ee3105eb9376e559a8de764",
+  "binary_inputs_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "10-15"
+ },
+ "hostile@r3": {
+  "exit": 0,
+  "seconds": 133.137,
+  "as_expected": 44,
+  "total": 44,
+  "by_class": {
+   "huge-element": [
+    9,
+    9
+   ],
+   "class-bound": [
+    18,
+    18
+   ],
+   "non-canonical": [
+    3,
+    3
+   ],
+   "derive-overflow": [
+    4,
+    4
+   ],
+   "derive-random": [
+    1,
+    1
+   ],
+   "history-control": [
+    1,
+    1
+   ],
+   "header": [
+    2,
+    2
+   ],
+   "length": [
+    2,
+    2
+   ],
+   "in-class": [
+    2,
+    2
+   ],
+   "r9-control": [
+    1,
+    1
+   ],
+   "r9": [
+    1,
+    1
+   ]
+  },
+  "stderr": "",
+  "head": "f5c09762f54318354ee3105eb9376e559a8de764",
+  "binary_inputs_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "10-15"
+ },
+ "hostile_ubsan@r3": {
+  "exit": 0,
+  "seconds": 228.818,
+  "as_expected": 44,
+  "total": 44,
+  "ubsan_reports": 0,
+  "stderr": "",
+  "head": "f5c09762f54318354ee3105eb9376e559a8de764",
+  "binary_inputs_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "10-15"
+ },
+ "honest_ubsan@r3": {
+  "accepted": 10,
+  "of": 10,
+  "prove_s": {
+   "n": 10,
+   "median": 66.168,
+   "sd": 0.6445808629558346,
+   "min": 65.134,
+   "max": 67.117
+  },
+  "decode_s": {
+   "n": 10,
+   "median": 0.0002,
+   "sd": 4.2163702135578373e-05,
+   "min": 0.0002,
+   "max": 0.0003
+  },
+  "derive_s": {
+   "n": 10,
+   "median": 0.369,
+   "sd": 0.015998611050824247,
+   "min": 0.342,
+   "max": 0.383
+  },
+  "verify_s": {
+   "n": 10,
+   "median": 13.2055,
+   "sd": 0.2235256883074812,
+   "min": 12.871,
+   "max": 13.665
+  },
+  "proof_bytes": {
+   "n": 10,
+   "median": 25411392.0,
+   "sd": 313.09891940620514,
+   "min": 25410848,
+   "max": 25411968
+  },
+  "peak_rss_kb": {
+   "n": 10,
+   "median": 4438816.0,
+   "sd": 5.593647190240808,
+   "min": 4438812,
+   "max": 4438828
+  },
+  "nonzero_exits": 0,
+  "runtime_error_lines": 0,
+  "stderr_bytes": 0,
+  "head": "f5c09762f54318354ee3105eb9376e559a8de764",
+  "binary_inputs_dirty": false,
+  "cxx_sha256": {
+   "research/operators/qwen_deltanet_m2/admit_proto.cpp": "f76d96d34cd7cc9d2af7ec2783ac1e08c42db6f49d7aa270afcdc3c5b522a056",
+   "research/operators/qwen_deltanet_m2/m1b_builder.h": "397fe87c2ddf8724303fb27eed561f682cf4ca86169c9daec92655c6d0e74043",
+   "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "cores": "10-15",
+  "ubsan_reports": 0
  }
 }

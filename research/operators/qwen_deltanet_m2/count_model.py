@@ -11,6 +11,7 @@ counts against the measured #47 / #63 statements. Arms 'A' and 'B' are the M2 lo
      floor relation itself, so no recomposition relation is needed.
 M2 adds (DESIGN.md section 4): head output o as a witness RNG cell (not in the statement; computable from public inputs at M2), the proved gated RMSNorm of o
 (o*o and o*Rc gates, isqrt and reciprocal scalars with exact limbs, w RNG cell, y floor), T = 16.
+The norm is counted relation by relation for the lowering written out in DESIGN.md section 4.4.1.
 Usage: count_model.py [--json out.json]
 """
 import argparse, json, math
@@ -94,25 +95,48 @@ def gated_norm(c, D, F):
     """Proved gated RMSNorm of the witness o (DESIGN.md section 4.4). Per token:
     Vx = sum o^2; sigma = isqrt(Vx + eps); Rc = floor(2^36 / sigma); w = floor(o Rc / 2^24);
     y = floor(cg w / 2^F) with cg public (verifier-derived from gain, SiLU(z), sqrt(D)); y public."""
-    # scalars: sigma (2 exact 12-bit limbs), e1 = Vx + eps - sigma^2 (2 limbs), e2 = sigma^2 + 2 sigma - Vx - eps (2),
-    # Rc (3 limbs), rr = 2^36 - Rc sigma (2), sigma - 1 - rr (2)
-    if c.arm == 'B':
-        c.key(2 + 2 + 2 + 3 + 2 + 2)
-    else:
-        c.bits(24 + 24 + 24 + 36 + 24 + 24)
-    c.col(2)                      # gates sigma*sigma, Rc*sigma
-    c.rel(3, 2); c.rel(4, 2)      # their operands tied to the limb sums (2 ties each)
-    c.rel(D + 4 if c.arm == 'B' else D + 2 + 24)  # e1 relation: sum o^2 + eps - sigma^2 - e1 = 0
-    c.rel(D + 5 if c.arm == 'B' else D + 3 + 24)  # e2 relation
-    c.rel(4 if c.arm == 'B' else 2 + 36 + 0)      # rr = 2^36 - Rc sigma (limbs)
-    c.rel(6 if c.arm == 'B' else 2 + 48)          # sigma - 1 - rr = limbs
+    # THE LOWERING IS DESIGN.md section 4.4.1, relation by relation (third review of #66, should-fix
+    # S1: the earlier term counts did not implement one stated lowering). Columns, relations, range
+    # cells and keys are the same as before; only the terms per relation changed.
+    # Exact pieces of a non-negative integer (c.rem): arm B = one key cell per 12 bits, arm A = one
+    # [x, x, x] bit column per bit with its 2 two-term boolean relations. The value returned is the
+    # number of terms the pieces add to a relation that sums them.
+    n_sigma, n_e1, n_e2 = c.rem(24), c.rem(24), c.rem(24)
+    n_Rc, n_rr, n_gap = c.rem(36), c.rem(24), c.rem(24)
+    c.col(2)                      # gates G_ss = [sigma, sigma, sigma^2] and G_rs = [Rc, sigma, Rc sigma]
+    c.rel(1 + n_sigma)            # S1  G_ss.a - pieces(sigma) = 0
+    c.rel(2)                      # S2  G_ss.b - G_ss.a = 0
+    c.rel(1 + n_Rc)               # S3  G_rs.a - pieces(Rc) = 0
+    c.rel(2)                      # S4  G_rs.b - G_ss.a = 0
+    c.rel(D + 1 + n_e1)           # S5  sum_j G_oo_j.c - G_ss.c - pieces(e1) = -eps'
+    c.rel(D + 2 + n_e2)           # S6  G_ss.c + 2 G_ss.a - sum_j G_oo_j.c - pieces(e2) = eps'
+    c.rel(1 + n_rr)               # S7  G_rs.c + pieces(rr) = 2^36
+    c.rel(1 + n_rr + n_gap)       # S8  G_ss.a - pieces(rr) - pieces(gap) = 1
     for _ in range(D):
-        c.col(2)                  # o*o and o*Rc
-        c.rel(2, 2)               # o*o: .a = o, .b = o
-        c.rel(2, 1); c.rel(4 if c.arm == 'B' else 4, 1)  # o*Rc: .a = o, .b = Rc limbs
-        c.rcell()                 # w (|w| <= 2^12 honest)
-        r = c.rem(2 * F); c.rel(2 + r)   # 2^24 w + r - (o Rc) = 0
-        r = c.rem(F); c.rel(1 + r)       # 2^F y + r - cg w = 0, target y (public)
+        c.col(2)                  # G_oo_j = [o_j, o_j, o_j^2] and G_oR_j = [o_j, Rc, o_j Rc]
+        c.rel(2, 3)               # C1..C3  G_oo_j.a, G_oo_j.b, G_oR_j.a each = the o_j range cell
+        c.rel(2)                  # C4  G_oR_j.b - G_rs.a = 0 (the Rc operand cell is reused, not rebuilt from pieces)
+        c.rcell()                 # w_j (|w| <= 2^12 honest)
+        c.rel(2 + c.rem(2 * F))   # C5  2^24 w_j + pieces(rw_j) - G_oR_j.c = 0
+        c.rel(1 + c.rem(F))       # C6  cg_j w_j - pieces(ry_j) = 2^F y_j  (cg_j derived and admitted, y_j public)
+
+def norm_terms_closed_form(arm, D):
+    """Terms of the gated norm per token for the lowering of DESIGN.md 4.4.1, by hand:
+    arm B: S1..S4 = 3 + 2 + 4 + 2, S5..S8 = (D + 3) + (D + 4) + 3 + 5, C1..C6 = 14 per channel.
+    arm A: S1..S4 = 25 + 2 + 37 + 2, S5..S8 = (D + 25) + (D + 26) + 25 + 49, C1..C6 = 47 per channel,
+           plus 4 terms per bit for the boolean relations: 4 x 156 scalar bits, 4 x 36 per channel."""
+    return 16 * D + 26 if arm == 'B' else 193 * D + 815
+
+def norm_only(arm, D=128, F=12):
+    c = C(arm); gated_norm(c, D, F)
+    return dict(gate_columns=c.cols, relations=c.rels, terms=c.terms, range_cells=c.rcells, lkp_keys=c.keys, terms_closed_form=norm_terms_closed_form(arm, D),
+                closed_form_matches=c.terms == norm_terms_closed_form(arm, D))
+
+# Counts at the M2 head, T = 16, as committed at 8ec7c799. The third review of #66 derived them from
+# closed forms without this model and they matched. The term-count fix must not move them.
+FROZEN_T16 = {'A': dict(gate_columns=4_377_056, range_cells=272_384, lkp_keys=0, relations=9_042_944, columns_used=4_655_584, log_length=23),
+              'B': dict(gate_columns=1_056_800, range_cells=272_384, lkp_keys=276_688, relations=2_402_432, columns_used=1_613_856, log_length=21)}
+SUPERSEDED_TERMS_T16 = {'A': 21_110_960, 'B': 4_786_704}   # runs/model.json at 8ec7c799, before the lowering was specified
 
 def layout(c, arm, T):
     """Table length. m1: the columns, padded to 2^L. m1b: one aligned RNG region after the gates (as the
@@ -232,6 +256,18 @@ def main():
         layer[arm]['columns_per_token_48_deltanet_layers'] = 48 * layer[arm]['columns_per_token_per_layer']
         s['prove_s_estimate'] = estimate_prove_s(s['log_length'], s['relations']) if s['log_length'] <= 22 else None
     B16['single_part_layout'] = single_part_layout(head('B', T=16, **m2))
+    frozen = {arm: {k: (s[k], v, s[k] == v) for k, v in FROZEN_T16[arm].items()} for arm, s in (('A', A16), ('B', B16))}
+    frozen_ok = all(x[2] for d in frozen.values() for x in d.values()) and maxT == {'A': 14, 'B': 41}
+    norm = {arm: norm_only(arm) for arm in ('A', 'B')}
+    res['norm_terms'] = dict(
+        lowering='DESIGN.md section 4.4.1 (gate operand cells reused for sigma and Rc)', per_token=norm,
+        closed_forms_match=all(n['closed_form_matches'] for n in norm.values()),
+        terms_T16={'A': A16['terms'], 'B': B16['terms']}, terms_T16_superseded=SUPERSEDED_TERMS_T16,
+        terms_T16_change={arm: s['terms'] - SUPERSEDED_TERMS_T16[arm] for arm, s in (('A', A16), ('B', B16))},
+        frozen_counts_T16=frozen, frozen_counts_unchanged=frozen_ok,
+        note='counted for one stated lowering; no builder exists to check it. A build that reuses operands differently has a different, equally valid total.')
+    assert res['norm_terms']['closed_forms_match'], 'norm term count differs from the closed form of DESIGN.md 4.4.1'
+    assert frozen_ok, 'a gate, range, key, relation or layout count moved: stop and report'
     res['H3'] = dict(armA_T16=A16, armB_T16=B16, max_T_log22=maxT, max_T_log22_without_relation_cap=maxT_nocap, layer_extrapolation=layer,
                      fits_2_21_armB_T16=B16['log_length'] <= 21, pass_=B16['log_length'] <= 22,
                      note='prove_s_estimate is linear in table length from #47/#63 points; indicative only. Layer extrapolation = 48 V heads x per-head-per-token; DeltaNet recurrence + gated norm only (no matmuls).')
