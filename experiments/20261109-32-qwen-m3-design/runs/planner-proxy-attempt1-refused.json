@@ -1,0 +1,95 @@
+{
+ "maverick": {
+  "name": "maverick",
+  "overrides": {},
+  "exit_code": 4,
+  "links": 25,
+  "entries_total": 10573982429,
+  "planner_messages": [
+   "PLAN ONLY: no proof was checked"
+  ],
+  "layer_links": 12,
+  "attention_links": 12,
+  "layer_link_entries_first": 613435330,
+  "layer_link_entries_typical": 604696530,
+  "layer_link_cells_typical": 476297496,
+  "layer_link_other_typical": 128399034,
+  "attention_link_entries": 231801624,
+  "attention_link_cells": 175052344,
+  "head_link_entries": 527265781,
+  "head_link_cells": 428572421,
+  "largest_link_entries": 613435330
+ },
+ "dense_f8192": {
+  "name": "dense_f8192",
+  "overrides": {
+   "dense": true,
+   "f": 8192
+  },
+  "exit_code": 1,
+  "links": 0,
+  "entries_total": 0,
+  "planner_messages": [
+   "NO: policy-gcl"
+  ]
+ },
+ "dense_f16384": {
+  "name": "dense_f16384",
+  "overrides": {
+   "dense": true,
+   "f": 16384
+  },
+  "exit_code": 1,
+  "links": 0,
+  "entries_total": 0,
+  "planner_messages": [
+   "NO: policy-gcl"
+  ]
+ },
+ "dense_f17408": {
+  "name": "dense_f17408",
+  "overrides": {
+   "dense": true,
+   "f": 17408
+  },
+  "exit_code": 1,
+  "links": 0,
+  "entries_total": 0,
+  "planner_messages": [
+   "NO: policy-gcl"
+  ]
+ },
+ "dense_f17408_V248320": {
+  "name": "dense_f17408_V248320",
+  "overrides": {
+   "dense": true,
+   "f": 17408,
+   "V": 248320
+  },
+  "exit_code": 1,
+  "links": 0,
+  "entries_total": 0,
+  "planner_messages": [
+   "NO: policy-gcl"
+  ]
+ },
+ "dense_f17408_V248320_L64": {
+  "name": "dense_f17408_V248320_L64",
+  "overrides": {
+   "dense": true,
+   "f": 17408,
+   "V": 248320,
+   "L": 64
+  },
+  "exit_code": 1,
+  "links": 0,
+  "entries_total": 0,
+  "planner_messages": [
+   "NO: policy-gcl"
+  ]
+ },
+ "H4": {
+  "pass_": false,
+  "note": "the planner did not return arrays for one of the three shapes"
+ }
+}

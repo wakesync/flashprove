@@ -26,6 +26,9 @@ grep -P '^SO-15\.7\t' docs/limits-all-rows.tsv
 - **Reference:** [architecture.md](architecture.md), [protocol.md](protocol.md),
   [model.md](model.md), [format/](format/), [glossary.md](glossary.md),
   [sources-notes.tsv](sources-notes.tsv).
+- **The fork's research:** [research-roadmap.md](research-roadmap.md),
+  [research-evidence.md](research-evidence.md), and [qwen-port.md](qwen-port.md), the status of the
+  Qwen3.8-27B port (no part of that model can be proved end to end today).
 
 [figures.tsv](figures.tsv) has most of the figures that these pages print, and others, one row each.
 An empty `programs` cell means the timed runs, on the released programs; any other cell says what
