@@ -58,3 +58,5 @@ Fixed now:
 
 ## Amendments
 (empty at registration)
+
+- **2026-11-10T01:15Z, A-1 to A-6** (after code and runs; full text in RESULTS.md section 6). Descriptive arms added after the first run: norm-only, o-RMS buckets, layer-level aggregates, the secondary q_unscaled arm (head_reference's own unregistered option), a verbatim-Transformers torch cross-check, weight statistics, and a scaled-projection fit in Q5. The full Q3/Q4 run was repeated, and all 6,720 per-head rows were reproduced exactly. The streaming diff used one whole-file GET per shard, not ranges. Q5 fetched 3 extra matrices per checkpoint. Some descriptive scripts ran outside fp-heavy.sh, on 4 cores. The scratch venv with torch was 1.1 GB. The model card's "18 to 51" was found to be 17 to 51 (0-indexed) in the tensors. No registered metric, threshold or prompt changed.
