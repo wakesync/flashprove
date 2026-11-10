@@ -23,6 +23,8 @@ These are local receipts, not ledger results: no rows are added to `research/res
 | after the second re-reviews: `serve_test.py` (33 checks) | this fix 33 of 33; the server of `3e360778` 24 of 33 (fails the ancestor swap at all three depths, the swap during the walk, the 414, the connection bound and two sealing states) | `runs/review-fix2-serve_test-{after,before}.txt` |
 | after the second re-reviews: `run_job_test.py` (87 checks) | this fix 87 of 87; the runner of `3e360778` 60 of 87 | `runs/review-fix2-run_job_test-{after,before}.txt` |
 | after the second re-reviews: `bash -n`, shellcheck (the digest-pinned image, no network) | exit 0 and exit 0, no suppressions | `runs/review-fix2-shellcheck.txt` |
+| after the third review: `fetch_bounded_test.py` (both runbook fetch paths with an inert program in place of the fetch, plus the helper) | this fix 25 of 25; the runbook of `99d16a77` 5 of 14 (2 static and 12 path checks; the 11 helper-only checks are not run against it, it has no helper). On the old runbook a clock moving from 1 s to 0 s left started the fetch on both paths, the proxy path ran a fetch to the end at 0 s left (`timeout 0`), and a TERM-ignoring fetch ended 5.4 to 5.7 s after the cut-off on both paths; on this fix none started with too little time and the TERM-ignoring fetch was over 4.6 to 4.8 s before the cut-off | `runs/review-fix3-fetch_bounded_test-{after,before}.txt` |
+| after the third review: `bash -n` of `run_job.sh` and `fetch_bounded.sh` | exit 0 and exit 0; shellcheck of both in CI only (no local shellcheck on this host) | `runs/review-fix3-bash-n.txt` |
 
 Not built: the `prover` and `final` stages (the default prover build, about half an hour of compiling) on a host shared with other lanes. `cc_probe`, `compiler_sample` and the job have not run on any GPU.
 
@@ -54,6 +56,13 @@ Two re-reviews of `3e360778` (PR #69 comments 6759653963, request changes, and 6
 - runbook: restoring the live service wins over collecting results; fetching has a budget on the window sheet, runs under `timeout` until the restore cut-off and is never retried after it; the prover stop has a deadline and an escalation branch; the restore retry happens only inside the reserve; the key reaches one `tinfoil` process at a time (`tf` function with an assignment prefix) instead of being exported to the operator shell; the approvals row lists image publication and the release tag;
 - config: one sentence that it requests one GPU for the instance and says nothing about the host's count;
 - docs: the tests have not run inside the Dockerfile's pinned base image (below and README.md); the Dockerfile's comment on the unchanged stages' pipelines corrected.
+
+## Changes after the third review
+
+One review of `99d16a77` (PR #69 comment 6760883534, request changes). Its blocking item and its should-fix and nit:
+- runbook: both fetch paths of step 5 go through `fetch_bounded.sh`: one clock read, budget = cut-off minus now minus the kill grace minus a launch margin, the fetch started under `timeout -k <grace> <budget>` only if that is strictly positive, otherwise not started (exit 121) and the restore begins. The grace and margin are inside the fetch budget, so a fetch that ignores TERM is over before the cut-off, and `timeout 0` is never reached. Test: `fetch_bounded_test.py` takes both fetch commands out of the runbook and runs a clock that moves from 1 s to 0 s left between reads, a cut-off reached and one passed, less time left than the kill grace, a TERM-ignoring fetch, and a fetch with time enough; plus the helper's argument handling, the 1 s budget edge and a single clock read. It fails on the runbook of `99d16a77` and passes on this fix (table above). It runs in CI;
+- runner and README: the lock's scope is stated: `flock` is advisory, assumes a private local work directory with working `flock` and cooperating writers; a writer that does not take the lock, or a replaced lock inode, is out of scope;
+- CI: the push filter for main now includes the workflow file itself; the workflow also runs the new test and shellcheck of `fetch_bounded.sh`.
 
 ## Deviations from the PREREG
 

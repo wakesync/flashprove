@@ -16,3 +16,6 @@ c821a18a8fecf850ed722449e4e5b29ec350daa877ccce6f014b7755e6f6292b  ./review-fix-u
 78cc579b7d3489d73bfe1d7b7bb2c94dca85a7283ba7e29409bb04ea81f24743  ./review-fix2-serve_test-after.txt
 f775de2d6b825df09ef53186b4d48603a86c7eabbba3e2ed4664eed95d259f05  ./review-fix2-serve_test-before.txt
 b4f70d8f9eed375c5ff8ad776cdc70ec983fb51a891b05a18b7f2cc66cb3ac44  ./review-fix2-shellcheck.txt
+72b4e876c317c9cd9453895035f7f0208ae892601fc18987ddd5d0c71537110b  ./review-fix3-fetch_bounded_test-after.txt
+14d519a0060ee0a2381876cd4a0e513d6453b914849639509676a3b89575b27f  ./review-fix3-fetch_bounded_test-before.txt
+2508b645574f0013dd2211810bffe3db26e9e8063e74ee536d6230fd70b2bf4d  ./review-fix3-bash-n.txt
