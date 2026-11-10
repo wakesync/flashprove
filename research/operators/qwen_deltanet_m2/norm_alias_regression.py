@@ -23,7 +23,7 @@ y that is not the integer floor. The review listed 22 such cases. This script:
      closed identity under the admitted bounds, and for each derived value the largest bound that
      would still keep every identity below p;
   F  samples the argument that the derived k and q are in class for every input;
-  G  finds, over every in-class z, the largest |cg| at gains 1, 1.41, 1.4143 and 2 (about 10 s).
+  G  finds, over every in-class z, the largest |cg| at gains 1, 1.41, 1.4143 and 2 (most of the script's few seconds).
 
 What this is not. No proof is built or verified here. The #66 prototype (admit_proto.cpp) works on
 the M1b statement, which has no norm stage and no recompute stage, so there is no C++ guard to
