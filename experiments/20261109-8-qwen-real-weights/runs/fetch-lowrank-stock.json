@@ -1,0 +1,36 @@
+{
+ "repo": "Qwen/Qwen3.8-27B",
+ "rev": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+ "tensors": {
+  "model.language_model.layers.17.mlp.down_proj.weight": {
+   "shard": "model-00006-of-00018.safetensors",
+   "range": "bytes=998318688-1176576607",
+   "nbytes": 178257920,
+   "shape": [
+    5120,
+    17408
+   ],
+   "sha256": "c7dd6fcd5f667367b094ea89183ba8f17498be3e859072a77acbdc87768084a0"
+  },
+  "model.language_model.layers.17.linear_attn.out_proj.weight": {
+   "shard": "model-00006-of-00018.safetensors",
+   "range": "bytes=935404128-998318687",
+   "nbytes": 62914560,
+   "shape": [
+    5120,
+    6144
+   ],
+   "sha256": "470ab458edca58a45520575f877fd3c842185ce1339c448b84391d1220b1f661"
+  },
+  "model.language_model.layers.19.self_attn.o_proj.weight": {
+   "shard": "model-00006-of-00018.safetensors",
+   "range": "bytes=2844929568-2907844127",
+   "nbytes": 62914560,
+   "shape": [
+    5120,
+    6144
+   ],
+   "sha256": "afb29098fad7a15786ee9b8fd30f41debdaf1247994ae60e7b23e3acb65b469b"
+  }
+ }
+}

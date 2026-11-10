@@ -1,0 +1,15 @@
+{
+  "regenerations": [
+    {
+      "regenerated_equal": true,
+      "manifest_sha256": "48fc90bb5e9c65cb66c21753f36b6da565bd2739c1a5bf057a7d78eeb97455a1"
+    },
+    {
+      "regenerated_equal": true,
+      "manifest_sha256": "48fc90bb5e9c65cb66c21753f36b6da565bd2739c1a5bf057a7d78eeb97455a1"
+    }
+  ],
+  "integer_pair_invariants_checked": 98304,
+  "pass_all": true,
+  "manifest_sha256": "48fc90bb5e9c65cb66c21753f36b6da565bd2739c1a5bf057a7d78eeb97455a1"
+}
