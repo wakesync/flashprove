@@ -185,6 +185,20 @@ converted (their BF16 hashes differ, #68; that their integers differ too is like
 Norm-folded tensors (in_proj, gate / up, q / k / v) were not converted; they are unchanged by the
 abliteration, so they would be equal in both pins in any case.
 
+No Fiat-Shamir or grinding security bound for the evaluation transcript of DESIGN 2.0 is
+established. The only bound stated is the fixed-pair Schwartz-Zippel bound (n_b / |F| for a fixed
+pair of tensors and an independent uniform point); adaptive grinding of the commitment can amplify
+the error, and that analysis is open (DESIGN section 6, item 9). H3 is a fixed-label toy and says
+nothing about it.
+
+Robust rejection of malformed inputs is not established (follow-up). The hash-level verifier
+never accepted a malformed opening in the suites run (29 named tests; the reviewers' hostile
+suites), but some malformed inputs raise an exception instead of returning false: a structurally
+valid opening with n = 2^64 (`struct.error`, reported by astra) and a tensor name with an unpaired
+surrogate (`UnicodeEncodeError`). Non-acceptance holds in those cases; returning false is a
+follow-up. The held id is compared case-sensitively, so a verifier holding an uppercase hex id
+refuses honest openings.
+
 ## Next experiment I would register
 
 Route A of DESIGN.md section 4 on CPU where possible: extend H2 to all 70 changed tensors and all

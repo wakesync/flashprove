@@ -83,14 +83,16 @@ So the checkpoint id and the conversion id are fixed before any commitment exist
 ID is fixed before any point, and the points are fixed before any response. No object depends on a
 later one.
 
-**Soundness, what is and is not claimed.** For one fixed table, one fixed pair of integer tensors
-and a uniform point, they agree with probability at most n_b / |F| (Schwartz-Zippel). That is the
-only bound stated here. It is not a Fiat-Shamir bound: a committer who can regrind the commitment
-(re-randomise the anchor, re-seed) gets about one more trial per hash evaluation, so the complete
-bound is at most Q n_b / |F| per block for Q hash queries, plus the hash's own terms, and it
-requires the point derivation to hash the full commitment ID (as above). That full analysis is not
-done in this PR. H3 used a fixed label instead of a commitment ID, so it tests the arithmetic of
-one evaluation, not this transcript.
+**Soundness, what is and is not claimed.** *Fixed-pair bound (the only bound stated here):* for
+one fixed table, one fixed pair of distinct integer tensors and a point drawn uniformly from the
+field, independently of both, the two multilinear extensions agree with probability at most
+n_b / |F| (Schwartz-Zippel). *No Fiat-Shamir or grinding security bound is established here.* In
+the transcript of object 3 the point is a hash output, not an independent uniform draw, and a
+committer who can regrind the commitment (re-randomise the anchor, re-seed) can try many
+commitments against the derived points; adaptive grinding can amplify the error above the
+fixed-pair figure, by an amount not analysed in this PR. Any such analysis needs at least the
+point derivation to hash the full commitment ID (as above). H3 used a fixed label instead of a
+commitment ID, so it tests the arithmetic of one evaluation, not this transcript.
 
 ### 2.1 The manifest (hash level, built in this PR, H1)
 
@@ -130,9 +132,12 @@ use: the evaluation of a block of W at a point is a linear functional of W). The
    conversion id, y_t) for hidden weights. y_t is not read from the manifest (2.0);
 3. checks the key file's claim with those y_t.
 
-Two different integer tensors agree at a random z_t with probability at most n_t / |F| per tensor
-(Schwartz-Zippel; n_t <= 31 here, F the cubic extension of Goldilocks). The point must come after
-the root (Fiat-Shamir): a point known first lets a committer pick a table that agrees at it.
+For a fixed pair of different integer tensors and a uniform z_t independent of both, they agree
+with probability at most n_t / |F| per tensor (Schwartz-Zippel; n_t <= 31 here, F the cubic
+extension of Goldilocks). This is the fixed-pair bound of 2.0 only; no Fiat-Shamir or grinding
+bound for the derived z_t is established (2.0, "Soundness"). The point must come after the root
+(the Fiat-Shamir order): a point known first lets a committer pick a table that agrees at it.
+That ordering is necessary; it is not by itself a security bound.
 H3 in this PR is the toy version (mod 2^31 - 1, numpy): 6 of 6 changed tensors differ, the control
 is equal. With hidden weights y_t leaks one field element per tensor, like the OOD answers do per
 row; with open weights it leaks nothing new.
@@ -252,6 +257,9 @@ to 51 at all.
    model of pin P under rule R", with exact match. That is a U1 claim only if the provider serves
    the integer model. Clipped-gap acceptance against a float-served reply is not model identity
    (A7).
+9. **Fiat-Shamir / grinding analysis of the 2.0 transcript (open).** Only the fixed-pair
+   Schwartz-Zippel bound is stated (2.0). The analysis must count the committer's hash queries
+   over the commitment, the point index i and the block name, not only per commitment.
 
 ## 7 Other use cases
 

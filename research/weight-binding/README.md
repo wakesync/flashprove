@@ -36,8 +36,11 @@ were produced without it, `runs-rerun-pr87/` with it, and the counts are equal.
 Any proof relation; the commitment ID of `cp_commit`; the Qwen weight table and its range proof;
 norm-folded tensors; 64 of the 70 changed tensors at integer level; the protocol's field; the
 conversion id and evaluation responses of DESIGN 2.0 (designed, not built); config.json (A12);
-the 333 visual and 15 MTP tensors are in the H1 id but outside U1 scope. See RESULTS.md "What is
-established and what is not".
+the 333 visual and 15 MTP tensors are in the H1 id but outside U1 scope; any Fiat-Shamir or
+grinding security bound (DESIGN 2.0 states only the fixed-pair Schwartz-Zippel bound). The
+verifier raises an exception, rather than returning false, on some malformed inputs (n = 2^64,
+a tensor name with an unpaired surrogate), and compares the held id case-sensitively. See
+RESULTS.md "What is established and what is not".
 
 ## Reproduce
 
@@ -53,8 +56,9 @@ python3 research/weight-binding/wb_int.py selftest
 research/weight-binding/run_registered.sh        # H2/H3: 7 tensors x 2 pins, about 786 MB per pin over HTTP, 3.8 GB peak RSS
 python3 research/weight-binding/wb_count.py      # writes $E/counted.json
 python3 research/weight-binding/test_wb_manifest.py   # 29 named verifier tests, exit 0 iff all pass
-research/weight-binding/rerun_pr87.sh                 # PR #87 rerun into $E/runs-rerun-pr87/ (tests, H1, count, compare)
-python3 research/weight-binding/wb_inventory.py $E/runs-rerun-pr87/inventory.json
+O=experiments/20261110-36-weight-binding/runs-rerun-pr87   # sibling of runs/, not inside it
+research/weight-binding/rerun_pr87.sh                 # PR #87 rerun into $O/ (tests, H1, count, compare)
+python3 research/weight-binding/wb_inventory.py $O/inventory.json
 ```
 
 Note: the commands for `runs/` above reproduce the original files, but the original H1 outputs and
