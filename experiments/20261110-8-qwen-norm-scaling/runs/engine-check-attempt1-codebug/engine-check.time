@@ -1,18 +1,18 @@
 Traceback (most recent call last):
-  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 388, in <module>
+  File "<REPO>/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 388, in <module>
     if __name__ == "__main__": main()
                                ^^^^^^
-  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 382, in main
+  File "<REPO>/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 382, in main
     cache, ckpt, out = a.args; sys.exit(0 if check(cache, ckpt, out, a.scratch) else 1)
                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 260, in check
+  File "<REPO>/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 260, in check
     for (Si, oi, yi), (Sn, on, yn, _) in zip(RH.run_int(ih, xq, xk, xv, ar, br, zz, Wc, A, dtb, gain, {}),
-  File "/home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 192, in run
+  File "<REPO>/experiments/20261110-8-qwen-norm-scaling/scaled_head.py", line 192, in run
     if float(np.abs(cg).max()) * (2.0 ** c["Fw"] + 1) >= float(L63): raise OverflowError("guard cg w")
                     ^^
 UnboundLocalError: cannot access local variable 'cg' where it is not associated with a value
 Command exited with non-zero status 1
-	Command being timed: "taskset -c 0 python3 scaled_head.py check /home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling-scratch/cache stock runs/engine-check.json --scratch /home/shad0w/.moltbot/projects/flashprove-1109-qwen-norm-scaling-scratch/cache/../fref2"
+	Command being timed: "taskset -c 0 python3 scaled_head.py check <SCRATCH>/cache stock runs/engine-check.json --scratch <SCRATCH>/cache/../fref2"
 	User time (seconds): 0.19
 	System time (seconds): 0.03
 	Percent of CPU this job got: 99%

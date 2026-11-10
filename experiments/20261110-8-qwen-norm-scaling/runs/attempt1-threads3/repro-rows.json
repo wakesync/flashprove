@@ -1,0 +1,53 @@
+{
+ "stock": {
+  "pr68_rows": 480,
+  "new_rows": 480,
+  "identical": 7,
+  "differing": 473,
+  "differing_fields": {
+   "bf16_rel_S": 431,
+   "rel_S": 371,
+   "layer": 10,
+   "bf16_rel_y": 306,
+   "rel_y": 200,
+   "S_f_absmax": 157,
+   "o_rms_int_median": 102,
+   "max_S": 129,
+   "rel_o": 267,
+   "max_o": 115,
+   "y_f_absmax": 46,
+   "bf16_rel_o": 315,
+   "ctx": 2,
+   "o_rms_int_min": 17,
+   "norm_only_rel_y": 197,
+   "max_y": 22
+  },
+  "extra_new": 0
+ },
+ "abl": {
+  "pr68_rows": 480,
+  "new_rows": 480,
+  "identical": 7,
+  "differing": 473,
+  "differing_fields": {
+   "bf16_rel_S": 431,
+   "rel_S": 371,
+   "layer": 10,
+   "bf16_rel_y": 306,
+   "rel_y": 200,
+   "S_f_absmax": 157,
+   "o_rms_int_median": 102,
+   "max_S": 129,
+   "rel_o": 267,
+   "max_o": 115,
+   "y_f_absmax": 46,
+   "bf16_rel_o": 315,
+   "ctx": 2,
+   "o_rms_int_min": 17,
+   "norm_only_rel_y": 197,
+   "max_y": 22
+  },
+  "extra_new": 0
+ },
+ "mismatches": 946
+}
