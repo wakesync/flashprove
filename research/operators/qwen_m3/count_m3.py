@@ -23,6 +23,21 @@ Two lowerings are counted. They are different things and are never added togethe
 Everything under "extrapolated" is an extrapolation with its assumption stated. Nothing in this
 file is a measurement of a Qwen proof.
 
+r2 (2026-11-10, after two reviews of PR #70; DESIGN.md section 12 lists every change):
+  - every floor whose divisor is a tensor's public shift 2^s (in_proj, conv, cA, the gain, the MLP
+    matrices) has an EXACT remainder class [0, 2^s), s in 1..24: three 12-bit keys and one more
+    relation (vrem below). r1 counted a fixed 12-bit class there, which admits a wrong floor
+    (review counterexample: s = 8, gain = 1, t = 0, y = -1, r = 256);
+  - q = floor(362 x Rc / 2^36): the 1/sqrt(128) query scale of the M2 design, a 36-bit remainder;
+  - the weight cells the trace reads (conv taps, gain, cA, dt_bias) get an in-trace exact class
+    [-4096, 4095] and an addressed tie to the committed weight table (wcells below);
+  - arm A's one-hot sums of 4,097 terms are split into partial sums of at most 256 terms (the
+    harness's own cap, research/operators/qwen_deltanet/product.h, wide_fault);
+  - M3a-MLP: the up value u gets an exact class [-2^17, 2^17); at the range check's 2^23 the down
+    projection's relation can reach p (bounds.py, control row);
+  - the weight inventory counts the retained norm gains;
+  - H5 carries the plain answer, the fork's own-rate case, and the segment cap of cp_verify.
+
 usage: count_m3.py --planner <runs/planner-proxy.json> [--json out.json]
 """
 import argparse, importlib.util, json, math, os
@@ -30,6 +45,55 @@ import argparse, importlib.util, json, math, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 _spec = importlib.util.spec_from_file_location('count_model', os.path.join(HERE, '..', 'qwen_deltanet_m2', 'count_model.py'))
 cm = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(cm)
+
+# r2: record the widest relation emitted, so the harness's 256-term cap is checked, not assumed.
+TERM_CAP = 256   # research/operators/qwen_deltanet/product.h, wide_fault: terms.size() > 256 is refused
+_orig_rel = cm.C.rel
+
+
+def _rel(s, nterms, n=1):
+    _orig_rel(s, nterms, n)
+    if n > 0:
+        s.maxterms = max(getattr(s, 'maxterms', 0), nterms)
+
+
+cm.C.rel = _rel
+
+
+def wide(c, nterms, n=1):
+    """A sum relation of nterms terms. Above the cap it is split: k partial-sum cells, k relations of
+    at most 255 original terms plus the partial cell, and one relation of the k partial cells."""
+    if nterms <= TERM_CAP:
+        c.rel(nterms, n); return
+    k = math.ceil(nterms / (TERM_CAP - 1))
+    c.col(k * n)
+    c.rel(TERM_CAP, (k - 1) * n); c.rel(nterms - (TERM_CAP - 1) * (k - 1) + 1, n)
+    c.rel(k, n)
+
+
+def vrem(c, n=1):
+    """Exact remainder for a public tensor shift 2^s, s in 1..24 (r2, review must-fix 1). Arm B: limbs
+    r0, r1 (12-bit keys, r = r0 + 2^12 r1) and one complement key on the top limb that is in use
+    (2^(s - 12) - 1 - r1 if s > 12, else 2^s - 1 - r0, with r1 = 0 then by a target), one relation for
+    it. Arm A: s exact bits, counted at s = 24. Returns the terms added to the floor relation."""
+    if c.arm == 'B':
+        c.key(3 * n); c.rel(2, n)
+        return 2
+    return c.bits(24, n)
+
+
+def wcells(c, n):
+    """r2 (review must-fix 3): n weight cells read directly by the trace. Each gets the exact class
+    [-4096, 4095] in the trace (arm B: w + 4096 = lo + 2^12 hi, lo a 12-bit key, hi in {0, 1} by a key
+    and its complement; arm A: 13 bits), and all n are tied to the committed weight table by ONE
+    batched equality: sum_i rho_i w_i = the opened combination of the table entries at the cells'
+    addresses (rho from the transcript after the trace is committed), split into relations of at
+    most 256 terms. The opening on the weight table's side is outside this count."""
+    if c.arm == 'B':
+        c.key(3 * n); c.rel(3, n); c.rel(2, n)
+    else:
+        w = c.bits(13, n); c.rel(1 + w, n)
+    wide(c, n + 1)
 
 # ------------------------------------------------------------------------------------------------
 # Qwen3.8-27B text shapes (research/ports/qwen3.8-27b/FEASIBILITY.md, section 1)
@@ -56,10 +120,21 @@ def weights():
     emb = head = V * d
     total = Q['deltanet_layers'] * dn_total + Q['attention_layers'] * at_total + emb + head
     one_v_head = d * (3 * Q['D'] + Q['D'] + 2) + 3 * Q['D'] * Q['conv_taps'] + Q['D'] * d + 2
-    return dict(deltanet_layer=dn, deltanet_layer_total=dn_total, attention_layer=at, attention_layer_total=at_total,
-                embedding=emb, output_head=head, total=total, bytes_int16_plus_emb32=2 * (total - emb) + 4 * emb,
-                m3a_one_v_head=one_v_head, m3a_layer=dn_total, m3b_block=3 * dn_total + at_total,
-                maverick_committed=400.71e9, ratio_to_maverick=total / 400.71e9)
+    # r2 (review must-fix 3): the retained norm gains. A DeltaNet layer's gated norm keeps one gain of
+    # D = 128 (shared by its V heads); an attention layer keeps a q and a k RMSNorm gain of 256 each.
+    # The stream pre-norms and the final norm are folded into the next matrix at conversion (as
+    # upstream does, docs/model.md 11.3), so they are not separate tensors here.
+    dn_gain, at_gain = Q['D'], 2 * Q['attn_dh']
+    dn_r2 = dict(dn, gated_norm_gain=dn_gain); at_r2 = dict(at, qk_norm_gains=at_gain)
+    total_r2 = total + Q['deltanet_layers'] * dn_gain + Q['attention_layers'] * at_gain
+    return dict(deltanet_layer=dn_r2, deltanet_layer_total=dn_total + dn_gain, attention_layer=at_r2,
+                attention_layer_total=at_total + at_gain,
+                embedding=emb, output_head=head, total=total_r2, bytes_int16_plus_emb32=2 * (total_r2 - emb) + 4 * emb,
+                total_r1_without_gains=total, retained_gains=total_r2 - total,
+                m3a_one_v_head=one_v_head + Q['D'], m3a_one_v_head_r1_without_gain=one_v_head,
+                m3a_weight_cells_read_by_trace=Q['conv_taps'] * 3 * Q['D'] + Q['D'] + 2,
+                m3a_layer=dn_total + dn_gain, m3b_block=3 * (dn_total + dn_gain) + at_total + at_gain,
+                maverick_committed=400.71e9, ratio_to_maverick=total_r2 / 400.71e9)
 
 # ------------------------------------------------------------------------------------------------
 # 1. Research-harness lowering
@@ -83,13 +158,15 @@ def flookup(c, n=1):
         w = c.bits(4, n); c.rel(3 + w, n)
     else:
         c.col(TABLE_ROWS * n); c.rel(2, 2 * TABLE_ROWS * n)
-        c.rel(TABLE_ROWS + 1, 3 * n)
+        wide(c, TABLE_ROWS + 1, 3 * n)     # r2: split at the 256-term cap (r1 emitted 4,097 terms)
         w = c.bits(4, n); c.rel(3 + w, n)
 
 
-def l2_norm(c, D, n=1):
+def l2_norm(c, D, n=1, q=False):
     """q/k L2 norm of one head's D channels, in relation (DESIGN.md 5.3). The isqrt and reciprocal
-    scalars of count_model.gated_norm, and out = floor(x Rc / 2^24) per channel as a range cell."""
+    scalars of count_model.gated_norm, and out = floor(x Rc / 2^24) per channel as a range cell.
+    r2: for q the floor is q = floor(362 x Rc / 2^36), 362 = round(2^12 / sqrt(128)) (the M2
+    design's query scale), so its remainder is 36 bits (one more key a channel)."""
     for _ in range(n):
         if c.arm == 'B': c.key(13)
         else: c.bits(24 + 24 + 24 + 36 + 24 + 24)
@@ -101,7 +178,7 @@ def l2_norm(c, D, n=1):
         for _j in range(D):
             c.col(2); c.rel(2, 2); c.rel(2, 1); c.rel(4, 1)
             c.rcell()
-            r = c.rem(24); c.rel(2 + r)
+            r = c.rem(36 if q else 24); c.rel(2 + r)
 
 
 def head_extras(c, T, D=128, F=12):
@@ -112,13 +189,14 @@ def head_extras(c, T, D=128, F=12):
     n_in = 3 * D + D + 2          # xq, xk, xv, z, ar, br
     n_conv = 3 * D
     for _t in range(T):
-        c.rcell(n_in); c.rem(24, n_in)                               # in_proj outputs, rq remainder
+        c.rcell(n_in); vrem(c, n_in)                                 # in_proj outputs, exact 2^s remainder (r2)
         c.col(4 * n_conv); c.rel(2, 8 * n_conv)                      # conv: tap (weight cell) x input
-        c.rcell(n_conv); r = c.rem(F, n_conv); c.rel(5 + r, n_conv)  # c = floor(acc / 2^12)
+        c.rcell(n_conv); r = vrem(c, n_conv); c.rel(5 + r, n_conv)   # c = floor(acc / 2^s_conv), exact (r2)
         flookup(c, n_conv)                                           # SiLU
-        l2_norm(c, D, 2)                                             # q and k
+        l2_norm(c, D, 1, q=True)                                     # q (36-bit floor, r2)
+        l2_norm(c, D, 1)                                             # k
         flookup(c, 3)                                                # softplus, exp(-x), sigmoid
-        c.col(1); c.rel(2, 2); c.rcell(1); r = c.rem(F, 1); c.rel(2 + r, 1)   # cA * softplus, floor
+        c.col(1); c.rel(2, 2); c.rcell(1); r = vrem(c, 1); c.rel(2 + r, 1)    # cA * softplus, floor at 2^s_A (r2)
         # gated norm output, with the gain a committed weight (not a public coefficient): NO derived
         # coefficient cg. s = Ts[z] (table-bounded), t = floor(s w / 2^F), y = floor(gain t / 2^F).
         # The M2 emission already has the last floor relation and its remainder; M3 adds the rest.
@@ -127,7 +205,14 @@ def head_extras(c, T, D=128, F=12):
         c.rcell(D); r = c.rem(F, D); c.rel(2 + r, D)                 # t, its floor
         c.col(D); c.rel(2, 2 * D)                                    # gate gain * t
         c.rcell(D)                                                   # y is a cell, no longer public
-    c.col(4 * n_conv + D + 2)     # weight cells read in gates: conv taps, gain, cA, dt_bias (once)
+        # r2: the y floor's divisor is 2^sg (the gain's public shift). The M2 emission counted one
+        # 12-bit key there (C6); the exact class [0, 2^sg) needs two more keys and one relation.
+        c.key(2 * D) if c.arm == 'B' else c.bits(12, D)
+        if c.arm == 'B': c.rel(2, D)
+        c.terms += D if c.arm == 'B' else 12 * D
+    nw = 4 * n_conv + D + 2
+    c.col(nw)                     # weight cells read in gates: conv taps, gain, cA, dt_bias (once)
+    wcells(c, nw)                 # r2: their exact class and their tie to the weight table
     c.rcell(3 * n_conv)           # conv history H, committed (3 inputs a channel)
 
 
@@ -165,24 +250,50 @@ def mlp_statement(arm, T=16, d=Q['d'], f=Q['f'], F=12):
     (function lookup), one gate s * u. The down projection is one sumcheck against the table."""
     c = cm.C(arm); c.fpairs = 0
     for _t in range(T):
-        c.rcell(2 * f); c.rem(24, 2 * f)
+        # r2: gw and u are range cells with exact 2^s remainders. r1 fed the raw product s * u (up to
+        # 2^15 x 2^23 against a cheating prover) into the down projection, whose sum over 17,408 units
+        # then reaches p (bounds.py, 'M3a-MLP down, r1'). r2 rounds it: h = floor(s u / 2^F), a range
+        # cell with an exact 12-bit remainder (F is a format constant, so the class is exact), and the
+        # down projection reads h. (An exact class on u alone, the other fix considered, costs more
+        # keys and makes the statement 2^23 at T = 16; runs/model-r2.json, mlp_alt_exact_u.)
+        c.rcell(2 * f); vrem(c, 2 * f)
         flookup(c, f)
         c.col(f); c.rel(2, 2 * f)
-        c.rem(24, d)              # the public output's rounding remainder
+        c.rcell(f); r = c.rem(F, f); c.rel(2 + r, f)
+        vrem(c, d)                # the public output's rounding remainder, exact for 2^s_down (r2)
+    return c
+
+
+def mlp_statement_exact_u(arm, T=16, d=Q['d'], f=Q['f'], F=12):
+    """The alternative r2 fix, counted for comparison only: u gets an exact class [-2^17, 2^17)
+    (u + 2^17 = lo + 2^12 hi, lo a 12-bit key, hi < 2^6 by a key and its complement), product unrounded."""
+    c = cm.C(arm); c.fpairs = 0
+    for _t in range(T):
+        c.rcell(f); vrem(c, 2 * f)
+        if arm == 'B':
+            c.key(3 * f); c.rel(3, f); c.rel(2, f)
+        else:
+            w = c.bits(18, f); c.rel(1 + w, f)
+        flookup(c, f)
+        c.col(f); c.rel(2, 2 * f)
+        vrem(c, d)
     return c
 
 
 def summarize(c, arm, T, per=None):
     lay = cm.layout(c, arm, T)
+    mt = getattr(c, 'maxterms', 0)
     out = dict(arm=arm, T=T, gate_columns=c.cols, range_cells=c.rcells, lkp_keys=c.keys, function_lookups=c.fpairs,
                relations=c.rels, terms_PROVISIONAL=c.terms, laid_columns=lay['columns_used'], log_length=lay['log_length'],
-               fits_log22=lay['log_length'] <= 22 and c.rels <= 2 ** 23)
+               max_terms_per_relation=mt, within_256_term_cap=mt <= TERM_CAP,
+               fits_log22=lay['log_length'] <= 22 and c.rels <= 2 ** 23 and mt <= TERM_CAP)
     return out
 
 
 def times(c, k):
     o = cm.C(c.arm)
     o.cols, o.rels, o.terms, o.rcells, o.keys, o.fpairs = (k * x for x in (c.cols, c.rels, c.terms, c.rcells, c.keys, c.fpairs))
+    o.maxterms = getattr(c, 'maxterms', 0)
     return o
 
 
@@ -190,6 +301,7 @@ def plus(a, b):
     o = cm.C(a.arm)
     o.cols, o.rels, o.terms, o.rcells, o.keys, o.fpairs = (x + y for x, y in zip(
         (a.cols, a.rels, a.terms, a.rcells, a.keys, a.fpairs), (b.cols, b.rels, b.terms, b.rcells, b.keys, b.fpairs)))
+    o.maxterms = max(getattr(a, 'maxterms', 0), getattr(b, 'maxterms', 0))
     return o
 
 
@@ -235,7 +347,10 @@ def harness():
                          max_T=tA2, at_max_T=summarize(a2('A', max(tA2, 1)), 'A', max(tA2, 1)), at_T16=summarize(a2('A', 16), 'A', 16)))
     # M3a's second statement kind and the whole layer
     mB = summarize(mlp_statement('B', 16), 'B', 16)
-    res['m3a_mlp'] = dict(armB_T16=mB, max_T_armB=max_T(mlp_statement, 'B'), armA_T1=summarize(mlp_statement('A', 1), 'A', 1))
+    res['m3a_mlp'] = dict(armB_T16=mB, max_T_armB=max_T(mlp_statement, 'B'), armA_T1=summarize(mlp_statement('A', 1), 'A', 1),
+                          mlp_alt_exact_u=dict(armB_T16=summarize(mlp_statement_exact_u('B', 16), 'B', 16),
+                                               max_T_armB=max_T(mlp_statement_exact_u, 'B'),
+                                               note='r2 alternative fix, not adopted: exact class on u, product unrounded'))
     for T in (1, 16):
         layer = plus(times(m3_head('B', T), Q['v_heads']), mlp_statement('B', T))
         res['one_layer_single_statement_armB_T%d' % T] = summarize(layer, 'B', T)
@@ -467,6 +582,33 @@ def main():
         pass_=any(v.startswith('fits') for v in (c['verdict'], c1['verdict'], c3['verdict'])),
         registered_expectation_held=wide_gb > FIT_GB,
         binding_constraint='the DeltaNet state trace: GPU memory of its largest segment, then total committed entries (share of committed entries that is DeltaNet mixer: %.0f%% at T = 1,024, per-token state)' % (100 * cases['per_token_block_segments']['T1024']['deltanet_mixer_share']))
+    # r2 (review must-fixes 5 and 6): what the verdicts above do NOT establish, as numbers.
+    own = {}
+    for k, v in (('per_token_layer_segments', pl), ('per_token_block_segments', cases['per_token_block_segments']),
+                 ('low_rank_c64', lr)):
+        gb = {T: v[T]['largest_segment_entries'] * b_small / 1e9 for T in ('T64', 'T128', 'T256', 'T512', 'T1024')}
+        fit = [int(T[1:]) for T, g in gb.items() if g <= FIT_GB]
+        own[k] = dict(gb=gb, largest_window_that_fits=max(fit) if fit else None)
+    cap = 64   # verifier/src/vf_segments.inc line 99: NL > 64 is refused ("plan-shape")
+    segs = {k: cases[k]['T1024']['segments_per_window'] for k in cases}
+    res['H5_r2'] = dict(
+        label='EXTRAPOLATED, not measured; r2 after two reviews of PR #70',
+        registered_verdicts_kept=dict(first_run_per_token_4_layer_link='does not fit (138 GB central vs 127 GB)',
+                                      first_run_aggregate_H5='PASS, through the low-rank case only',
+                                      post_hoc_segmentation='exploratory: chosen after the first run was seen'),
+        low_rank='NOT ESTABLISHED: depends on a chunked low-rank construction that is not specified or proved (review of PR #71); '
+                 'this count also omits a second QK Gram, the staged G table, the P0/Q0 outputs and the M/o remainders, and uses '
+                 'remainder widths that the #71 review found too narrow. It is not the plan of record.',
+        plan_of_record='boundary handoff of the full state at each chunk boundary, per-token cost (per_token_* cases)',
+        own_small_example_rate=dict(bytes_per_entry=b_small, label='EXTRAPOLATED from a different, small synthetic model; not a Qwen requirement',
+                                    cases=own, fit_rule_gb=FIT_GB),
+        wide_oracle_raw_gb_is='aggregate raw trace volume over all 48 DeltaNet layers and the whole window, not peak memory; not comparable with one card',
+        segments_per_window=segs, cp_verify_segment_cap=cap,
+        segment_cap_exceeded={k: n > cap for k, n in segs.items()},
+        high_and_upper_bound_are='labels of a registered range, not proved bounds; a DeltaNet entry is not known to cost what a dense entry costs',
+        plain_answer='unknown: no measured Qwen segment exists. At the registered central rate some cases are under 127 GB; at this '
+                     'fork\'s own small-example rate no case fits a 1,024-token window (per-token state largest fit T = %s, low-rank T = %s).'
+                     % (own['per_token_layer_segments']['largest_window_that_fits'], own['low_rank_c64']['largest_window_that_fits']))
     js = json.dumps(res, indent=1, default=str)
     if a.json:
         open(a.json, 'w').write(js + '\n')
