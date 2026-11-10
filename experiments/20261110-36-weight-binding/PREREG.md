@@ -49,3 +49,5 @@ The 7 tensors, fixed now (first, middle and last of the changed range over the t
 
 ## Amendments
 (empty at registration)
+
+- A1 (2026-11-10 20:44 UTC, after the H1 run, unregistered, no threshold). H1's unchanged-tensor clause expected openings from the other pin's tree to verify against the held id. They cannot: a Merkle opening carries its own tree's path, which hashes to its own root. The registered clause is kept and reported as FAIL. An unregistered leaf-level count (`wb_manifest.py leaves`: the held pin's own path with the other pin's leaf, split by changed / unchanged) was added to the code. The command that ran it was held by the host gateway for approval and was not run any other way; its output is not part of this experiment.
