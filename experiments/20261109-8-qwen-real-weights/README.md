@@ -15,6 +15,7 @@ Earlier Qwen work in this repo (M1, M1b and the M2 design) used made-up weights.
 - **What the float path computes:** float64 Transformers semantics. It is checked against the verbatim Transformers functions, run in torch (`xcheck_torch.py`).
 - **What a verifier would recompute:** not applicable, because there is no proof. In the M2 design, conv, SiLU, the L2 norm and the gates are verifier-recomputed. Here they are computed the way head_reference computes them (float64 at the table points).
 - **Not covered:** layers other than 0, the ablated layers 17 to 51, the full-attention and MLP blocks, built lookup tables, any proof, and FP8.
+- **Scope of the conclusions:** the fidelity verdict covers F = 12, 14 and 16 with the M2 lowering, on layer 0 and the 10 frozen prompts, nothing wider. The near-rank-1 structure of the abliteration edit was analysed on 3 of the 70 changed tensors. The arm stored as `norm_only_rel_y` is o rounded to the 2^-F grid, then the integer norm, so it includes the rounding of o (RESULTS 4.4 point 2).
 
 No weight data is in the repo. Only hashes, byte ranges, shapes and derived statistics are.
 
@@ -33,7 +34,7 @@ No weight data is in the repo. Only hashes, byte ranges, shapes and derived stat
 | `summarise.py`, `buckets.py`, `tables.py` | read the jsonl files and write `runs/summary.json`, `runs/buckets.json` and the RESULTS tables |
 | `xcheck_torch.py` | runs the verbatim modeling_qwen3_5.py functions (pinned, sha256-checked) in torch, float64 and BF16 eager |
 | `weight_stats.py` | layer-0 parameter statistics compared with the synthetic init |
-| `cmp_first.py` | checks that the rerun with extra fields reproduced the first run (used once; the first-run copy was not kept) |
+| `cmp_first.py` | checks that the rerun with extra fields reproduced the first run (used once). **It cannot be run from the repo**: it reads `runs/first-run/`, which was never committed, and the first-run copy was not kept. It is kept as a record of the check, not as a reproduce step |
 
 ## Reproduce
 
@@ -68,6 +69,23 @@ python3 lowrank.py $C/cache
 python3 xcheck_torch.py /path/to/modeling_qwen3_5.py $C/cache stock     # transformers e540ae45, sha256 41a55adc...
 python3 weight_stats.py $C/cache stock
 ```
+
+### Exact-rerun settings
+
+The committed runs used `run_all.sh` as written: `taskset -c 0-5`, one checkpoint at a time, and no BLAS or OpenMP thread variables set (`OPENBLAS_NUM_THREADS`, `OMP_NUM_THREADS` and the like were unset; the runner does not set them and inherits whatever is in the environment). `run_all.sh` is unchanged.
+
+Under other settings a rerun may not be bit-identical:
+- Float fields can differ in their last bits under other BLAS thread settings, or when the checkpoints are run in parallel. This PR did not measure by how much.
+- Integer fields (range maxima and exact-limb minima) are not guaranteed to match under every setting either. The integer inputs are rounded from float matrix-product outputs, so a last-bit difference can in principle flip a rounding. This PR did not test that.
+- For a bit-identical rerun, use the original settings above.
+
+The sensitivity to thread settings is not measured in this experiment.
+
+The reviewers' exact reruns of all 6,720 rows (RESULTS section 6, A-8) are true for the settings they used; they are not a guarantee for every thread setting.
+
+### Two frozen script labels
+
+Scripts are frozen in this PR. Two labels in them are historical and misleading: the comment at `real_head.py` line 292 says the arm "isolates the norm's own error", and `tables.py` line 10 prints the column header "norm-only". That arm rounds the float64 o to the 2^-F grid and then applies the integer norm, so it includes the rounding of o. The corrected description is in RESULTS section 4.4 point 2. The run-file field name `norm_only_rel_y` is kept unchanged.
 
 `modeling_qwen3_5.py`: `https://raw.githubusercontent.com/huggingface/transformers/e540ae4528889920ce36955d1527036cca9b4ca5/src/transformers/models/qwen3_5/modeling_qwen3_5.py`.
 
