@@ -155,10 +155,175 @@ def main():
             c, _ = get(srv.server_address[1], "/results.tar.gz")
             checks.append(("archive served again once a slot is free", c == 200))
             srv.shutdown()
+            srv.server_close()
+        try:
+            checks.extend(fix2_checks(serve, d))
+        except Exception as e:  # an older server without these interfaces: count as failed
+            checks.append(("fix2 checks ran to the end (%s)" % type(e).__name__, False))
     for name, ok in checks:
         print(("PASS " if ok else "FAIL ") + name)
     print("%d of %d checks passed" % (sum(ok for _, ok in checks), len(checks)))
     return 0 if all(ok for _, ok in checks) else 1
+
+
+def load(serve, root):
+    spec = importlib.util.spec_from_file_location("serve_fix2_%d" % time.monotonic_ns(), serve)
+    argv = sys.argv
+    sys.argv = [serve, root, "0"]
+    try:
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+    finally:
+        sys.argv = argv
+    return m
+
+
+def raw(port, data, timeout=10):
+    s = socket.create_connection(("127.0.0.1", port), timeout=timeout)
+    try:
+        s.sendall(data)
+        buf = b""
+        while True:
+            try:
+                chunk = s.recv(65536)
+            except socket.timeout:
+                break
+            if not chunk:
+                break
+            buf += chunk
+        return buf
+    finally:
+        s.close()
+
+
+def archive_payload(body):
+    try:
+        with tarfile.open(fileobj=io.BytesIO(body), mode="r:gz") as t:
+            return t.getnames(), b"".join(t.extractfile(x).read() for x in t if x.isfile())
+    except tarfile.TarError:
+        return None, body
+
+
+def fix2_checks(serve, d):
+    """PR #69 second re-reviews: ancestor swap between check and open at every depth (astra 6),
+    connection bound before a thread exists (astra), a 70 KB request line (opus), sealing states."""
+    out = []
+    base = os.path.join(d, "fix2")
+    root = os.path.join(base, "results")
+    outside = os.path.join(base, "outside")
+    for sub in ("a", "a/b", "a/b/c"):
+        write(os.path.join(outside, sub, "data"), SENTINEL)  # mirrors every depth below results/
+    write(os.path.join(outside, "data"), SENTINEL)
+    write(os.path.join(root, "a", "b", "c", "data"), b"public")
+    write(os.path.join(root, "stages.log"), b"t STAGE x\n")
+    m = load(serve, root)
+    srv = m.Server(("127.0.0.1", 0), m.H)
+    th = threading.Thread(target=srv.serve_forever, daemon=True)
+    th.start()
+    port = srv.server_address[1]
+    try:
+        # astra's deterministic hook, at each depth: just before the server's first open of the deep
+        # file (by any path form), an ancestor directory is renamed and replaced by a link outside.
+        for depth, anc in enumerate(("a", "a/b", "a/b/c")):
+            real_open, done = m.os.open, [False]
+
+            def race_open(path, flags, *args, _anc=anc, _real=real_open, _done=done, **kw):
+                p = os.fsdecode(path)
+                if not _done[0] and (p.endswith("/c/data") or p == "data"):
+                    _done[0] = True
+                    os.rename(os.path.join(root, _anc), os.path.join(root, _anc + ".saved"))
+                    os.symlink(os.path.join(outside, _anc) if _anc != "a/b/c" else os.path.join(outside, "a/b"),
+                               os.path.join(root, _anc), target_is_directory=True)
+                return _real(path, flags, *args, **kw)
+            m.os.open = race_open
+            try:
+                c, b = get(port, "/results.tar.gz")
+            finally:
+                m.os.open = real_open
+            _, payload = archive_payload(b)
+            out.append(("ancestor %r swapped for a link between check and open: archive has no outside byte" % anc,
+                        c == 200 and done[0] and SENTINEL not in payload))
+            if done[0]:
+                os.unlink(os.path.join(root, anc))
+                os.rename(os.path.join(root, anc + ".saved"), os.path.join(root, anc))
+        # the same swap on the by-name route (stages.log behind a swapped directory is not reachable,
+        # so use open_regular directly, as /status and the markers do)
+        for anc in ("a", "a/b", "a/b/c"):
+            os.rename(os.path.join(root, anc), os.path.join(root, anc + ".saved"))
+            os.symlink(os.path.join(outside, "a/b" if anc == "a/b/c" else anc), os.path.join(root, anc), target_is_directory=True)
+            o = m.open_regular("a/b/c/data")
+            if o is not None:
+                os.close(o[0])
+            out.append(("open_regular refuses a path whose ancestor %r is a link" % anc, o is None))
+            os.unlink(os.path.join(root, anc))
+            os.rename(os.path.join(root, anc + ".saved"), os.path.join(root, anc))
+        # the walk while a directory is swapped after it was opened: the walk keeps the old descriptor
+        real_listdir, done = m.os.listdir, [False]
+
+        def race_listdir(fd, _real=real_listdir, _done=done):
+            names = _real(fd)
+            if not _done[0] and "data" in names and isinstance(fd, int):
+                _done[0] = True
+                os.rename(os.path.join(root, "a"), os.path.join(root, "a.saved"))
+                os.symlink(os.path.join(outside, "a"), os.path.join(root, "a"), target_is_directory=True)
+            return names
+        m.os.listdir = race_listdir
+        try:
+            c, b = get(port, "/results.tar.gz")
+        finally:
+            m.os.listdir = real_listdir
+        _, payload = archive_payload(b)
+        out.append(("directory swapped during the walk: archive has no outside byte", c == 200 and done[0] and SENTINEL not in payload))
+        if done[0]:  # a server whose walk does not list by descriptor never reaches the hook
+            os.unlink(os.path.join(root, "a"))
+            os.rename(os.path.join(root, "a.saved"), os.path.join(root, "a"))
+        c, b = get(port, "/files")
+        out.append(("after the swaps, the deep public file is listed again", c == 200 and "a/b/c/data" in [x["path"] for x in json.loads(b)]))
+        # a FIFO and a too-long name do not hang or crash a route
+        os.mkfifo(os.path.join(root, "fifo"))
+        t0 = time.time()
+        c, b = get(port, "/results.tar.gz")
+        names, _ = archive_payload(b)
+        out.append(("a FIFO is skipped, not opened for reading (archive in < 5 s)", c == 200 and time.time() - t0 < 5 and names is not None and "results/fifo" not in names))
+        os.unlink(os.path.join(root, "fifo"))
+        # opus: a 70 KB request line is answered 414 and the server stays up
+        r = raw(port, b"GET /" + b"a" * 70000 + b" HTTP/1.0\r\n\r\n")
+        out.append(("70 KB request line: 414", r.startswith(b"HTTP/1.0 414") or r.startswith(b"HTTP/1.1 414")))
+        out.append(("server still answers after the long request line", get(port, "/healthz")[0] == 200))
+        # astra: the connection bound is enforced before a handler thread is started
+        sem = getattr(m, "CONN_SEM", None)
+        if sem is None:
+            out.append(("connections at the bound: 503 from the accepting thread, no new handler thread", False))
+            out.append(("connection slots all released after use", False))
+        else:
+            held = []
+            end = time.time() + 10  # earlier handler threads release their slots as they finish
+            while len(held) < m.CONN_SLOTS and time.time() < end:
+                if sem.acquire(timeout=0.5):
+                    held.append(1)
+            time.sleep(0.2)
+            n_threads = threading.active_count()
+            try:
+                r = raw(port, b"GET /healthz HTTP/1.0\r\n\r\n")
+                out.append(("connections at the bound: 503 from the accepting thread, no new handler thread",
+                            r.startswith(b"HTTP/1.0 503") and threading.active_count() <= n_threads))
+            finally:
+                for _ in held:
+                    sem.release()
+            out.append(("connection slots all released after use", len(held) == m.CONN_SLOTS and get(port, "/healthz")[0] == 200))
+        # sealing states (run_job.sh writes SEAL-FAILED and FAILED when sealing fails)
+        write(os.path.join(root, "DONE"), b"")
+        write(os.path.join(root, "SEAL-FAILED"), b"x\n")
+        out.append(("DONE with SEAL-FAILED is not done", m.state() != "done"))
+        write(os.path.join(root, "FAILED"), b"x\n")
+        out.append(("FAILED with SEAL-FAILED is failed", m.state() == "failed"))
+        write(os.path.join(root, "SHA256SUMS"), b"")
+        out.append(("DONE and FAILED and SHA256SUMS is failed, not done", m.state() == "failed"))
+    finally:
+        srv.shutdown()
+        srv.server_close()
+    return out
+
 
 
 if __name__ == "__main__":

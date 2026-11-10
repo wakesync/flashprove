@@ -4,7 +4,11 @@
 #
 #   run_job.sh serve   container entrypoint: starts the results server, runs the job once, finalises
 #                      the results (success or failure), and keeps serving them until stopped
-#   run_job.sh job     the job and its finalisation alone, in the foreground (exit status = the job's)
+#   run_job.sh job     the job and its finalisation alone, in the foreground (exit status: see below)
+#
+# One job per work directory: both modes first take an exclusive lock (flock) on $FP_WORK/.lock and
+# hold it for the whole job (in serve mode, for as long as the server runs). A second start on the
+# same work directory refuses with a message and exit status 2, before it writes anything.
 #
 # The job follows the H100 receipts' protocol (research/gpu/README.md, research/gpu/replication-1/),
 # as registered in experiments/20261110-43-h200-bringup/PREREG.md:
@@ -15,19 +19,32 @@
 #      and the cold run is run_target_example.sh alone (a deviation from the PREREG; record it).
 #   3. FP_REPEATS (default 10) warm runs of run_target_example.sh target_small_f2_roomy, each in a new
 #      work directory with a new commitment, cp_commit and cp_prove under /usr/bin/time (GPU_RUN)
-#   4. export: for each run, only the public bundle (config/, ivk/, in/, out/) and the logs. isk/
-#      (the provider's secret side) is never exported and is removed with the work directory.
+#   4. export: for each run, the public files (config/, ivk/, in/) and the logs. out/ and
+#      cp_verify.log only for a run that cp_verify accepted (exit 0 and YES): a response that
+#      cp_verify has not accepted is given to no one (docs/limits.md, duty 6), so for any other run
+#      they are listed in <run>/withheld.txt and removed with the work directory. isk/ (the
+#      provider's secret side) is never exported and is removed with the work directory.
 # A GPU sampler (nvidia-smi, 500 ms) runs for the whole job.
 #
 # Process structure: the job runs as its own process under `timeout` (FP_JOB_TIMEOUT), and every
 # step under its own `timeout`. A failing step ends the job process only, never this shell, so in
 # serve mode the results server outlives the job. When the job process has ended, for any reason
 # (success, failure, timeout, signal), this shell finalises $FP_WORK/results in this order:
-#   stop the sampler; export what a run still holds; record cgroup memory.peak; write the marker
-#   (DONE or FAILED, written to a temporary name then renamed); append the last stages.log line;
-#   write SHA256SUMS last (temporary name, then rename). Nothing in results/ changes after that.
-# serve.py reports "finalising" until SHA256SUMS exists. Per-step exit status, seconds and whether
-# the step timed out are in results/steps.tsv.
+#   stop a step still running (and record it in steps.tsv as interrupted); stop the sampler and wait
+#   for it; export what a run still holds (the default quickstart is registered before it starts,
+#   so a timeout during it still exports its partial evidence); record cgroup memory.peak; write
+#   the job's row; snapshot job.log; write the marker (DONE or FAILED, to a temporary name, then
+#   renamed); append the last stages.log line; write SHA256SUMS last (temporary name, then rename).
+# Every one of these steps is checked. The marker is DONE only if the job ended with status 0, every
+# run's export succeeded and every step before the marker succeeded. If the marker, the last stage
+# line or the checksums cannot be written, finalisation stops: it writes a stage line naming the
+# step that failed, FAILED and SEAL-FAILED (each if it still can), removes DONE, and returns
+# nonzero. serve.py reports "done" only for DONE with SHA256SUMS and without FAILED or SEAL-FAILED,
+# "failed" for FAILED with SHA256SUMS or SEAL-FAILED, and "finalising" in between.
+# Exit status of `job`: the job's own status if nonzero; 3 if the job ended 0 but an export or a
+# finalisation step failed; 2 if refused (lock held, or results/ holds a finished job); else 0.
+# Per-step exit status, seconds and whether the step timed out are in results/steps.tsv; a step
+# stopped at finalisation has the exit "interrupted".
 set -uo pipefail
 FP_REPO=${FP_REPO:-/opt/flashprove}
 FP_WORK=${FP_WORK:-/work}
@@ -60,23 +77,48 @@ fail() {
   exit 1
 }
 
+# take_lock: the exclusive per-work-directory lock, held on fd 9 until this process and every child
+# that inherited fd 9 have exited. Refuses (exit 2) without writing anything if another job holds it.
+take_lock() {
+  mkdir -p "$FP_WORK" || {
+    echo "run_job: cannot create $FP_WORK" >&2
+    exit 2
+  }
+  exec 9>>"$FP_WORK/.lock" || {
+    echo "run_job: cannot open $FP_WORK/.lock" >&2
+    exit 2
+  }
+  if ! flock -n 9; then
+    echo "run_job: another job holds the lock on $FP_WORK (.lock); refusing to start a second job there" >&2
+    exit 2
+  fi
+}
+
 # step <name> <timeout s> <command...>: runs an external command under timeout and records
 # name, exit status, seconds and timed-out (yes/no) in steps.tsv. Returns the command's status.
 # Each step's timeout runs in its own process group (GNU timeout does setpgid); its pid, which is
-# that group's id, is kept in $ST/step.pgid so that finalise can stop the step's whole group if the
-# job process itself is stopped while the step runs.
+# that group's id, is kept in $ST/step.pgid (and the step's name and start in $ST/step.name) so
+# that finalise can stop the step's whole group, and record it, if the job process itself is
+# stopped while the step runs.
 step() {
   local name=$1 t=$2 start=$SECONDS rc to=no pid
   shift 2
+  printf '%s\t%s\n' "$name" "$(date +%s)" >"$ST/step.name"
   timeout -k "$FP_KILL_GRACE" "$t" "$@" &
   pid=$!
   echo "$pid" >"$ST/step.pgid"
   wait "$pid"
   rc=$?
-  rm -f "$ST/step.pgid"
+  rm -f "$ST/step.pgid" "$ST/step.name"
   if [ "$rc" = 124 ] || [ "$rc" = 137 ]; then to=yes; fi
   printf '%s\t%s\t%s\t%s\n' "$name" "$rc" "$((SECONDS - start))" "$to" >>"$R/steps.tsv"
   return "$rc"
+}
+
+# export_failed <run>: an export that did not complete; the job will be finalised as FAILED.
+export_failed() {
+  printf '%s\n' "$1" >>"$ST/export-errors"
+  stage "$1 export failed (work directory kept outside results/, not served); the job will be FAILED"
 }
 
 job() {
@@ -103,7 +145,7 @@ job() {
   stage env-recorded
   # The sampler: time, used MiB, power W, utilization %, for the whole job.
   nvidia-smi --query-gpu=timestamp,memory.used,power.draw,utilization.gpu --format=csv,noheader,nounits -lms 500 \
-    >"$R/gpu-samples.csv" 2>/dev/null &
+    >"$R/gpu-samples.csv" 2>/dev/null 9>&- &
   sampler=$!
   echo "$sampler" >"$ST/sampler.pid"
   trap 'kill "$sampler" 2>/dev/null; wait "$sampler" 2>/dev/null' EXIT
@@ -116,12 +158,15 @@ job() {
   stage compiler-sample-ok
 
   # ---- 2. the cold run
-  local src=$FP_WORK/src build qrc qtop
+  local src=$FP_WORK/src build qrc qtop qverdict
   if [ "$FP_ONBOX_BUILD" = 1 ]; then
     mkdir -m 700 "$src" || fail "cannot create $src"
     cp -a "$FP_REPO/." "$src/" || fail "cannot copy the checkout"
     rm -rf "${src:?}/bin" "${src:?}/prover/build" # the quickstart builds them itself, as on the H100
     git -C "$src" status --porcelain >"$R/git-status-before.txt" 2>&1
+    # Registered BEFORE it starts: its work directory is read from the WORK= line of its output, so
+    # that finalise can export its partial evidence if the job is stopped during the quickstart.
+    printf 'quickstart\t\n' >"$ST/current"
     stage quickstart-start
     step quickstart "$FP_TIMEOUT_QUICKSTART" env -C "$src" TMPDIR="$FP_WORK" "$FP_TIME" -v bash examples/quickstart-gpu.sh \
       >"$R/quickstart.stdout" 2>"$R/whole-run.time"
@@ -131,12 +176,16 @@ job() {
     git -C "$src" status --porcelain >"$R/git-status-after.txt" 2>&1
     # The quickstart's own work directory: export its public bundle and logs BEFORE judging the
     # exit status, so that a failed quickstart's partial evidence is kept.
-    qtop=$(sed -n 's/^WORK=//p' "$R/quickstart.stdout" | head -n 1)
+    qtop=$(quickstart_work)
     if [ -n "$qtop" ]; then
-      printf 'quickstart\t%s\n' "$qtop" >"$ST/current"
-      export_run quickstart "$qtop" || stage "quickstart export incomplete (work directory kept, not served)"
-      rm -f "$ST/current"
+      qverdict=$(tail -n 1 "$qtop/cp_verify.log" 2>/dev/null)
+      if [ "$qrc" = 0 ] && [ "$qverdict" = YES ]; then
+        export_run quickstart "$qtop" yes || export_failed quickstart
+      else
+        export_run quickstart "$qtop" no || export_failed quickstart
+      fi
     fi
+    rm -f "$ST/current"
     [ "$qrc" = 0 ] || fail "the quickstart did not end with exit 0 (quickstart.stdout, quickstart/)"
     build=$src/prover/build/hc RUN_REPO=$src
     sha256sum "$build/cp_commit" "$build/cp_prove" "$build/cp_verify" "$src/bin/cp_verify" >"$R/binaries.sha256"
@@ -155,10 +204,13 @@ job() {
   stage job-steps-finished
 }
 
+# quickstart_work: the quickstart's work directory, from the first WORK= line of its output.
+quickstart_work() { sed -n 's/^WORK=//p' "$R/quickstart.stdout" 2>/dev/null | head -n 1; }
+
 # one_run <name> <dir with the three programs>: one run of the small example under /usr/bin/time.
 # The verdict is read from the work directory BEFORE export_run removes it.
 one_run() {
-  local name=$1 build=$2 top=$FP_WORK/$1 rc verdict
+  local name=$1 build=$2 top=$FP_WORK/$1 rc verdict accepted=no
   mkdir -m 700 "$top" || return 1
   printf '%s\t%s\n' "$name" "$top/example" >"$ST/current"
   stage "$name-start"
@@ -168,10 +220,11 @@ one_run() {
   rc=$?
   verdict=$(tail -n 1 "$top/example/cp_verify.log" 2>/dev/null)
   echo "$rc" >"$R/$name.exit"
-  export_run "$name" "$top/example" || stage "$name export incomplete (work directory kept, not served)"
+  if [ "$rc" = 0 ] && [ "$verdict" = YES ]; then accepted=yes; fi
+  export_run "$name" "$top/example" "$accepted" || export_failed "$name"
   rm -f "$ST/current"
   rmdir "$top" 2>/dev/null
-  if [ "$rc" = 0 ] && [ "$verdict" = YES ]; then
+  if [ "$accepted" = yes ]; then
     echo YES >"$R/$name.verdict"
     stage "$name-exit 0 YES"
     return 0
@@ -181,30 +234,64 @@ one_run() {
   return 1
 }
 
-# export_run <name> <work dir>: copies the public files and logs, checks every copy, and only then
-# removes the work directory, isk/ with it. Nothing below isk/ is ever copied. If a copy fails or
-# differs, the work directory is kept (it is outside results/, so it is not served) and 1 returned.
+# export_run <name> <work dir> <accepted: yes|no>: copies the public files and logs, checks every
+# copy, and only then removes the work directory, isk/ with it. Nothing below isk/ is ever copied.
+# out/ and cp_verify.log are copied only if accepted=yes (duty 6); otherwise their names go to
+# withheld.txt. If a copy fails or differs, the work directory is kept (it is outside results/, so
+# it is not served) and 1 is returned. A work directory outside $FP_WORK, or results/, .runner/ or
+# the checkout copy, is refused (returns 1): the quickstart's directory is read from its output.
 export_run() {
-  local name=$1 w=$2 d=$R/$1 ok=0 part log
+  local name=$1 w=$2 accepted=${3:-no} d=$R/$1 ok=0 part log
+  case $w in
+    "$FP_WORK"/?*) ;;
+    *) return 1 ;;
+  esac
+  case /$w/ in */../* | */./*) return 1 ;; esac
+  case $w/ in "$R"/* | "$ST"/* | "$FP_WORK/src"/*) return 1 ;; esac # never results/ itself, the bookkeeping or the checkout
   [ -d "$w" ] || return 0
   mkdir -p "$d/bundle" || return 1
+  : >"$d/withheld.txt" || return 1
   for part in config ivk in out; do
     [ -d "$w/$part" ] || continue
+    if [ "$part" = out ] && [ "$accepted" != yes ]; then
+      printf 'out/ (cp_verify did not accept this run: docs/limits.md, duty 6)\n' >>"$d/withheld.txt" || ok=1
+      continue
+    fi
     cp -a "$w/$part" "$d/bundle/" && diff -r --no-dereference "$w/$part" "$d/bundle/$part" >/dev/null || ok=1
   done
   for log in cp_commit.log cp_prove.log cp_verify.log; do
     [ -f "$w/$log" ] || continue
+    if [ "$log" = cp_verify.log ] && [ "$accepted" != yes ]; then
+      printf 'cp_verify.log (cp_verify did not accept this run: docs/limits.md, duty 6; its last line is in %s.verdict)\n' "$name" >>"$d/withheld.txt" || ok=1
+      continue
+    fi
     cp "$w/$log" "$d/" && cmp -s "$w/$log" "$d/$log" || ok=1
   done
+  [ -s "$d/withheld.txt" ] || rm -f "$d/withheld.txt"
   (cd "$w" && find . -maxdepth 3 -printf '%TY-%Tm-%TdT%TH:%TM:%TS %p\n' | sort) >"$d/file-times.txt" || ok=1
   [ "$ok" = 0 ] || return 1
   rm -rf "$w"
 }
 
+# abort_final <step> <reason>: a finalisation step that must not fail did. Records it wherever it
+# still can, so that no route ever reports this job as done, and returns 1.
+abort_final() {
+  local what=$1 why=$2
+  echo "run_job: finalisation failed at: $what" >&2
+  stage "finalisation failed at: $what" >/dev/null 2>&1
+  printf 'finalisation failed at: %s\n' "$what" >"$R/SEAL-FAILED" 2>/dev/null
+  printf 'finalisation failed at: %s; %s\n' "$what" "$why" >"$ST/failed.tmp" 2>/dev/null &&
+    mv -fT "$ST/failed.tmp" "$R/FAILED" 2>/dev/null
+  rm -f "$R/DONE" 2>/dev/null
+  return 1
+}
+
 # finalise <job exit status>: see the header. Idempotent: does nothing once SHA256SUMS exists.
+# Returns 0 only if every step succeeded and the marker is DONE or FAILED as the job deserves.
 finalise() {
-  local rc=$1 pid name w marker reason n
+  local rc=$1 pid name w marker reason n started ferr='' ex
   [ -e "$R/SHA256SUMS" ] && return 0
+  [ -e "$R/SEAL-FAILED" ] && return 1
   # A step still running in its own process group (the job process was stopped mid-step): stop the
   # group, TERM then KILL after FP_KILL_GRACE, and wait until it is gone, so nothing writes to
   # results/ after the checksums. The pid is checked to still be a timeout process first.
@@ -216,18 +303,31 @@ finalise() {
       while kill -0 -- "-$pid" 2>/dev/null && [ "$n" -lt "$FP_KILL_GRACE" ]; do sleep 1; n=$((n + 1)); done
       kill -KILL -- "-$pid" 2>/dev/null
       sleep 1 # SIGKILL is not deferred; this leaves time for the exits (zombies would still answer kill -0)
-      stage "a step was still running at finalisation; its process group was stopped"
+      stage "a step was still running at finalisation; its process group was stopped" || ferr+="stage line (interrupted step); "
     fi
     rm -f "$ST/step.pgid"
   fi
+  if [ -s "$ST/step.name" ]; then # the interrupted step's own row, which the killed job could not write
+    IFS=$'\t' read -r name started <"$ST/step.name"
+    printf '%s\tinterrupted\t%s\tyes\n' "$name" "$(($(date +%s) - ${started:-0}))" >>"$R/steps.tsv" ||
+      ferr+="steps.tsv row of the interrupted step; "
+    rm -f "$ST/step.name"
+  fi
   if [ -s "$ST/sampler.pid" ]; then
     pid=$(cat "$ST/sampler.pid")
-    if grep -qa nvidia-smi "/proc/$pid/cmdline" 2>/dev/null; then kill "$pid" 2>/dev/null; fi
+    if grep -qa nvidia-smi "/proc/$pid/cmdline" 2>/dev/null; then
+      kill "$pid" 2>/dev/null
+      n=0
+      while kill -0 "$pid" 2>/dev/null && [ "$n" -lt 10 ]; do sleep 0.5; n=$((n + 1)); done
+      kill -KILL "$pid" 2>/dev/null
+    fi
   fi
-  if [ -s "$ST/current" ]; then # a run the job did not get to export (timeout or signal)
+  if [ -e "$ST/current" ]; then # a run the job did not get to export (timeout or signal)
     IFS=$'\t' read -r name w <"$ST/current"
-    if [ -n "${name:-}" ] && [ -d "${w:-}" ]; then
-      export_run "$name" "$w" || stage "$name export incomplete at finalisation (work directory kept, not served)"
+    if [ "${name:-}" = quickstart ] && [ -z "${w:-}" ]; then w=$(quickstart_work); fi
+    if [ -n "${name:-}" ] && [ -n "${w:-}" ] && [ -d "$w" ]; then
+      # never accepted: it did not finish
+      export_run "$name" "$w" no || export_failed "$name" || ferr+="stage line (export); "
     fi
     rm -f "$ST/current"
   fi
@@ -236,9 +336,18 @@ finalise() {
       printf '== %s\n' "$f"
       cat "$FP_CGROUP/$f" 2>/dev/null || echo unavailable
     done
-  } >"$R/cgroup-final.txt" 2>&1
-  printf 'job\t%s\t%s\t%s\n' "$rc" "$SECONDS" "$([ "$rc" = 124 ] || [ "$rc" = 137 ] && echo yes || echo no)" >>"$R/steps.tsv"
-  if [ "$rc" = 0 ]; then
+  } >"$R/cgroup-final.txt" 2>&1 || ferr+="cgroup-final.txt; "
+  printf 'job\t%s\t%s\t%s\n' "$rc" "$SECONDS" "$([ "$rc" = 124 ] || [ "$rc" = 137 ] && echo yes || echo no)" >>"$R/steps.tsv" ||
+    ferr+="steps.tsv job row; "
+  if [ -s "$ST/export-errors" ]; then
+    ex=$(tr '\n' ' ' <"$ST/export-errors")
+    ferr+="evidence export of: ${ex% }; "
+  fi
+  if [ -f "$FP_WORK/job.log" ]; then # snapshot; the live log is not served
+    cp "$FP_WORK/job.log" "$R/job.log" || ferr+="job.log snapshot; "
+  fi
+  ferr=${ferr%; }
+  if [ "$rc" = 0 ] && [ -z "$ferr" ]; then
     marker=DONE reason="job finished; per-run verdicts in <run>.verdict and steps.tsv"
   else
     marker=FAILED
@@ -246,16 +355,30 @@ finalise() {
       reason=$(cat "$ST/fail-reason")
     elif [ "$rc" = 124 ] || [ "$rc" = 137 ]; then
       reason="the job exceeded FP_JOB_TIMEOUT=${FP_JOB_TIMEOUT}s and was stopped"
-    else
+    elif [ "$rc" != 0 ]; then
       reason="the job process ended with status $rc"
+    else
+      reason="the job ended with status 0"
+    fi
+    if [ -n "$ferr" ]; then
+      reason="$reason; finalisation failed at: $ferr"
+      stage "finalisation failed at: $ferr" || true
     fi
   fi
-  [ -f "$FP_WORK/job.log" ] && cp "$FP_WORK/job.log" "$R/job.log" # snapshot; the live log is not served
-  printf '%s\n' "$reason" >"$ST/marker.tmp" && mv "$ST/marker.tmp" "$R/$marker"
-  if [ "$marker" = DONE ]; then stage job-done; else stage "job-failed (status $rc): $reason"; fi
+  # mv -T: an existing directory of that name is an error, not a place to move the file into.
+  { printf '%s\n' "$reason" >"$ST/marker.tmp" && mv -T "$ST/marker.tmp" "$R/$marker"; } 2>/dev/null ||
+    { abort_final "marker ($marker)" "$reason"; return 1; }
+  if [ "$marker" = DONE ]; then
+    stage job-done || { abort_final "last stage line" "$reason"; return 1; }
+  else
+    stage "job-failed (status $rc): $reason" || { abort_final "last stage line" "$reason"; return 1; }
+  fi
   # Last: the checksums, over every regular file, written outside results/ and renamed in.
-  (cd "$R" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 -r sha256sum) >"$ST/SHA256SUMS.tmp" &&
-    mv "$ST/SHA256SUMS.tmp" "$R/SHA256SUMS"
+  { (cd "$R" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 -r sha256sum) >"$ST/SHA256SUMS.tmp" &&
+    mv -T "$ST/SHA256SUMS.tmp" "$R/SHA256SUMS"; } 2>/dev/null ||
+    { rm -f "$ST/SHA256SUMS.tmp" 2>/dev/null; abort_final "checksums (SHA256SUMS)" "$reason"; return 1; }
+  [ "$marker" = DONE ] || [ -z "$ferr" ] || return 1
+  return 0
 }
 
 # run_and_finalise: runs the job in its own process under FP_JOB_TIMEOUT, then finalises.
@@ -269,7 +392,7 @@ run_and_finalise() {
   local rc
   mkdir -p "$R" "$ST" || return 2
   chmod 700 "$ST"
-  if [ -e "$R/DONE" ] || [ -e "$R/FAILED" ] || [ -e "$R/SHA256SUMS" ]; then
+  if [ -e "$R/DONE" ] || [ -e "$R/FAILED" ] || [ -e "$R/SHA256SUMS" ] || [ -e "$R/SEAL-FAILED" ]; then
     echo "run_job: $R already holds a finished job" >&2
     return 2
   fi
@@ -284,13 +407,17 @@ run_and_finalise() {
     [ "$rc" = 0 ] && rc=143
   fi
   jobpid=
-  finalise "$rc"
+  if ! finalise "$rc"; then
+    echo "run_job: finalisation did not complete cleanly (see stages.log, FAILED, SEAL-FAILED)" >&2
+    [ "$rc" = 0 ] && rc=3
+  fi
   return "$rc"
 }
 
 case "${1:-}" in
   serve)
-    mkdir -p "$R" "$FP_WORK"
+    take_lock
+    mkdir -p "$R"
     python3 "$HERE/serve.py" "$R" "$FP_PORT" 2>"$FP_WORK/serve.log" &
     server=$!
     trap on_term TERM INT
@@ -304,11 +431,12 @@ case "${1:-}" in
     wait "$server"
     ;;
   job)
+    take_lock
     trap on_term TERM INT
     run_and_finalise
     exit $?
     ;;
-  _job) # internal: the job process itself
+  _job) # internal: the job process itself (runs under the parent's lock, inherited on fd 9)
     mkdir -p "$R" "$ST"
     job
     ;;

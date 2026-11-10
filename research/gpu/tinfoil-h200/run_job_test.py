@@ -44,15 +44,18 @@ exec "$@"
 """
 COMPILER_OK = '#!/bin/bash\necho "values are the same on the GPU and on the CPU"\n'
 COMPILER_FAIL = '#!/bin/bash\necho "values differ"\nexit 1\n'
-# run_target_example.sh <kit> <work dir>; MOCK_EXAMPLE: yes | no | crash | sleep
+# run_target_example.sh <kit> <work dir>; MOCK_EXAMPLE: yes | no | crash | sleep, for every run;
+# MOCK_EXAMPLE_REP1 overrides it for the first warm repeat only (a real warm-repeat case).
 MOCK_EXAMPLE = """#!/bin/bash
 w=$2
+mode=${MOCK_EXAMPLE:-yes}
+case $w in */rep1/*) mode=${MOCK_EXAMPLE_REP1:-$mode} ;; esac
 mkdir -p "$w"/config "$w"/ivk "$w"/in "$w"/out "$w"/isk
 echo "public config" >"$w/config/c"
 echo 284 >"$w/out/example.y"
 echo "%s" >"$w/isk/seed"
 echo "commitment ID: mock" >"$w/cp_commit.log"
-case ${MOCK_EXAMPLE:-yes} in
+case $mode in
   yes) echo "covered: mock" >"$w/cp_verify.log"; echo YES >>"$w/cp_verify.log" ;;
   no) echo "NO: mock rejection" >"$w/cp_verify.log"; exit 1 ;;
   crash) echo "cudaHostRegister failed (mock)" >"$w/cp_commit.log"; exit 1 ;;
@@ -190,6 +193,41 @@ class Case:
         return self.read("stages.log") or ""
 
 
+def server_state(runner, results):
+    """The state serve.py (next to the runner under test) reports for a results directory."""
+    import importlib.util
+    path = os.path.join(os.path.dirname(runner), "serve.py")
+    spec = importlib.util.spec_from_file_location("serve_state_probe", path)
+    argv = sys.argv
+    sys.argv = [path, results, "0"]
+    try:
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        return m.state()
+    finally:
+        sys.argv = argv
+
+
+# A sha256sum that fails when it is asked to hash the results (relative ./ paths), as when a file
+# there cannot be read; anything else goes to the real one.
+MOCK_SHA256SUM_FAIL = """#!/bin/bash
+for a in "$@"; do case $a in ./*) echo "sha256sum: mock read error" >&2; exit 77 ;; esac; done
+PATH=${PATH#*:} exec sha256sum "$@"
+"""
+
+
+def bounded(cmd, env, seconds):
+    """Runs cmd in its own session; past the deadline that session is killed and returncode is None."""
+    p = subprocess.Popen(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, start_new_session=True)
+    try:
+        p.stdout_text, p.stderr = p.communicate(timeout=seconds)
+    except subprocess.TimeoutExpired:
+        os.killpg(p.pid, signal.SIGKILL)  # this command's own session only
+        p.stdout_text, p.stderr = p.communicate()
+        p.returncode = None
+    return p
+
+
 def wait_for(pred, seconds):
     end = time.time() + seconds
     while time.time() < end:
@@ -247,7 +285,10 @@ def main():
             p = c.run_job()
             check(c.name, "cold run NO -> job FAILED, exit 1", p.returncode == 1 and c.exists("FAILED") and not c.exists("DONE"))
             check(c.name, "cold classed NO", (c.read("cold.verdict") or "").startswith("NO"))
-            check(c.name, "failed run's files exported", c.exists("cold/bundle/out/example.y") and c.exists("cold/cp_verify.log"))
+            check(c.name, "failed run's public files and commit log exported", c.exists("cold/bundle/config/c") and c.exists("cold/cp_commit.log"))
+            # fix2, duty 6: a response cp_verify did not accept is given to no one.
+            check(c.name, "rejected run: out/ and cp_verify.log withheld, listed in withheld.txt",
+                  not c.exists("cold/bundle/out") and not c.exists("cold/cp_verify.log") and "duty 6" in (c.read("cold/withheld.txt") or ""))
             check(c.name, "SHA256SUMS verifies", c.sums_ok())
 
         # 4. Review item 1: compiler failure in serve mode -> server stays up and serves the failure.
@@ -284,7 +325,8 @@ def main():
                 check(c.name, "/status says failed", code == 200 and json.loads(body)["state"] == "failed")
                 code, body = http(c.port, "/files")
                 paths = [f["path"] for f in json.loads(body)] if code == 200 else []
-                check(c.name, "partial quickstart evidence exported and served", "quickstart/cp_commit.log" in paths and "quickstart/bundle/out/example.y" in paths)
+                check(c.name, "partial quickstart evidence exported and served", "quickstart/cp_commit.log" in paths and "quickstart/bundle/config/c" in paths)
+                check(c.name, "failed quickstart: out/ withheld (duty 6)", not any(x.startswith("quickstart/bundle/out") for x in paths) and "quickstart/withheld.txt" in paths)
                 check(c.name, "the failure's own log is served", "cudaHostRegister failed (mock)" in (c.read("quickstart/cp_commit.log") or ""))
                 check(c.name, "isk never exported", c.no_secret())
                 check(c.name, "SHA256SUMS verifies", c.sums_ok())
@@ -308,7 +350,10 @@ def main():
             p = c.run_job(timeout=30)
             check(c.name, "ended within the job timeout plus grace", p.returncode is not None and time.time() - t0 < 20)
             check(c.name, "FAILED with the timeout reason", c.exists("FAILED") and "FP_JOB_TIMEOUT" in (c.read("FAILED") or ""))
-            check(c.name, "the interrupted run was exported", c.exists("cold/bundle/out/example.y"))
+            check(c.name, "the interrupted run was exported", c.exists("cold/bundle/config/c") and c.exists("cold/cp_commit.log"))
+            check(c.name, "the interrupted run's out/ withheld (never verified)", not c.exists("cold/bundle/out"))
+            # fix2: the interrupted step gets its own row, written at finalisation.
+            check(c.name, "steps.tsv records the interrupted step", "\ncold\tinterrupted\t" in (c.read("steps.tsv") or ""))
             check(c.name, "isk never exported", c.no_secret())
             time.sleep(1)
             check(c.name, "SHA256SUMS still verifies a second later", c.sums_ok())
@@ -329,6 +374,107 @@ def main():
                 check(c.name, "isk never exported", c.no_secret())
             finally:
                 c.stop_serve()
+
+        # ---- fix2 cases (PR #69 second re-reviews) ----
+        # astra 1: whole-job timeout DURING the default on-box quickstart; its partial evidence lives
+        # outside results/ and must be exported at finalisation.
+        if want("quickstart-job-timeout"):
+            c = Case(base, runner, "quickstart-job-timeout", onbox=1, repeats=0, example="sleep", env={"FP_JOB_TIMEOUT": "3"})
+            p = c.run_job(timeout=40)
+            check(c.name, "job stopped by the timeout, FAILED", p.returncode == 124 and c.exists("FAILED") and not c.exists("DONE"))
+            check(c.name, "quickstart's partial evidence exported", c.exists("quickstart/cp_commit.log") and c.exists("quickstart/bundle/config/c"))
+            check(c.name, "its unverified out/ withheld", not c.exists("quickstart/bundle/out"))
+            check(c.name, "steps.tsv records the interrupted quickstart", "\nquickstart\tinterrupted\t" in (c.read("steps.tsv") or ""))
+            check(c.name, "isk never exported", c.no_secret())
+            check(c.name, "SHA256SUMS verifies", c.sums_ok())
+
+        # astra 2 / opus should-fix 1: finalisation failures must not end as DONE.
+        if want("seal-hash-fails"):  # the final manifest's hashing fails
+            c = Case(base, runner, "seal-hash-fails", onbox=0, repeats=0)
+            script(os.path.join(c.mock, "sha256sum"), MOCK_SHA256SUM_FAIL)
+            p = c.run_job()
+            check(c.name, "job exits nonzero", p.returncode not in (0, None))
+            check(c.name, "no DONE; FAILED and SEAL-FAILED written", not c.exists("DONE") and c.exists("FAILED") and c.exists("SEAL-FAILED"))
+            check(c.name, "a stage line names the failed step", "finalisation failed at: checksums" in c.stages())
+            check(c.name, "/status says failed, never done or finalising forever", server_state(runner, c.results) == "failed")
+        if want("seal-unreadable-file"):  # opus: an unreadable file in results/
+            mk = '#!/bin/bash\necho "values are the same on the GPU and on the CPU"\n: >"$FP_WORK/results/unreadable"; chmod 000 "$FP_WORK/results/unreadable"\n'
+            c = Case(base, runner, "seal-unreadable-file", onbox=0, repeats=0, compiler=mk)
+            p = c.run_job()
+            if os.geteuid() == 0:
+                check(c.name, "skipped as root (mode 000 is readable)", True)
+            else:
+                check(c.name, "job exits nonzero, no DONE, SEAL-FAILED", p.returncode not in (0, None) and not c.exists("DONE") and c.exists("SEAL-FAILED"))
+                check(c.name, "/status says failed", server_state(runner, c.results) == "failed")
+            os.chmod(os.path.join(c.results, "unreadable"), 0o600)
+        if want("seal-write-fails"):  # the checksum file cannot be written
+            mk = '#!/bin/bash\necho "values are the same on the GPU and on the CPU"\nmkdir -p "$FP_WORK/.runner/SHA256SUMS.tmp"\n'
+            c = Case(base, runner, "seal-write-fails", onbox=0, repeats=0, compiler=mk)
+            p = c.run_job()
+            check(c.name, "job exits nonzero, no DONE, SEAL-FAILED", p.returncode not in (0, None) and not c.exists("DONE") and c.exists("SEAL-FAILED") and c.exists("FAILED"))
+            check(c.name, "a stage line names the failed step", "finalisation failed at: checksums" in c.stages())
+            check(c.name, "/status says failed", server_state(runner, c.results) == "failed")
+        if want("marker-write-fails"):  # the marker cannot be put in place (a directory named DONE)
+            mk = '#!/bin/bash\necho "values are the same on the GPU and on the CPU"\nmkdir -p "$FP_WORK/results/DONE"\n'
+            c = Case(base, runner, "marker-write-fails", onbox=0, repeats=0, compiler=mk)
+            p = c.run_job()
+            check(c.name, "job exits nonzero", p.returncode not in (0, None))
+            check(c.name, "FAILED and SEAL-FAILED written, stage line names the marker",
+                  os.path.isfile(os.path.join(c.results, "FAILED")) and c.exists("SEAL-FAILED") and "finalisation failed at: marker" in c.stages())
+            check(c.name, "/status says failed", server_state(runner, c.results) == "failed")
+        if want("export-fails"):  # astra: results/cold/bundle is a regular file
+            c = Case(base, runner, "export-fails", onbox=0, repeats=0)
+            os.makedirs(os.path.join(c.results, "cold"))
+            with open(os.path.join(c.results, "cold", "bundle"), "w") as fh:
+                fh.write("collision")
+            p = c.run_job()
+            check(c.name, "job exits nonzero (3), FAILED, no DONE", p.returncode == 3 and c.exists("FAILED") and not c.exists("DONE"))
+            check(c.name, "FAILED and a stage line name the export", "export" in (c.read("FAILED") or "") and "cold export failed" in c.stages())
+            check(c.name, "source kept outside results/", os.path.exists(os.path.join(c.work, "cold", "example", "cp_commit.log")))
+            check(c.name, "SHA256SUMS verifies; /status says failed", c.sums_ok() and server_state(runner, c.results) == "failed")
+
+        # astra / opus should-fix 3: one job per work directory.
+        if want("lock-second-job"):
+            slow = '#!/bin/bash\nsleep 3\necho "values are the same on the GPU and on the CPU"\n'
+            c = Case(base, runner, "lock-second-job", onbox=0, repeats=1, compiler=slow)
+            first = subprocess.Popen(["bash", runner, "job"], env=c.env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+            try:
+                wait_for(lambda: "job-start" in c.stages(), 20)
+                before = sorted(os.listdir(c.results))
+                second = bounded(["bash", runner, "job"], c.env, 20)
+                serve2 = bounded(["bash", runner, "serve"], dict(c.env, FP_PORT=str(free_port())), 10)
+                after = sorted(os.listdir(c.results))
+                check(c.name, "second job refused, exit 2, clear message", second.returncode == 2 and "another job holds the lock" in second.stderr)
+                check(c.name, "second serve refused, exit 2", serve2.returncode == 2 and "another job holds the lock" in serve2.stderr)
+                check(c.name, "refusals touched nothing", before == after and c.stages().count("STAGE job-start") == 1)
+                first.wait(timeout=60)
+            finally:
+                if first.poll() is None:
+                    os.killpg(first.pid, signal.SIGKILL)
+                    first.wait()
+            check(c.name, "first job DONE, exit 0, no FAILED, one job row", first.returncode == 0 and c.exists("DONE") and not c.exists("FAILED")
+                  and (c.read("steps.tsv") or "").count("\njob\t") == 1)
+            check(c.name, "first job's SHA256SUMS verifies", c.sums_ok())
+
+        # astra should-fix: real warm-repeat cases (the cold run succeeds, the first repeat does not).
+        if want("warm-repeat-rejected"):
+            c = Case(base, runner, "warm-repeat-rejected", onbox=0, repeats=2, env={"MOCK_EXAMPLE_REP1": "no"})
+            p = c.run_job()
+            check(c.name, "job DONE, exit 0 (a repeat's NO is reported, not fatal)", p.returncode == 0 and c.exists("DONE"))
+            check(c.name, "cold and rep2 YES, rep1 NO", (c.read("cold.verdict") or "").strip() == "YES" and (c.read("rep2.verdict") or "").strip() == "YES"
+                  and (c.read("rep1.verdict") or "").startswith("NO"))
+            check(c.name, "rep1 stage says not YES", "rep1 did not end with YES" in c.stages())
+            check(c.name, "rep1 out/ and cp_verify.log withheld, rep2's exported", not c.exists("rep1/bundle/out") and not c.exists("rep1/cp_verify.log")
+                  and c.exists("rep2/bundle/out/example.y") and c.exists("rep2/cp_verify.log"))
+            check(c.name, "SHA256SUMS verifies", c.sums_ok())
+        if want("warm-repeat-timeout"):
+            c = Case(base, runner, "warm-repeat-timeout", onbox=0, repeats=2, env={"MOCK_EXAMPLE_REP1": "sleep", "FP_TIMEOUT_RUN": "2"})
+            p = c.run_job(timeout=40)
+            steps = c.read("steps.tsv") or ""
+            check(c.name, "job DONE, exit 0", p.returncode == 0 and c.exists("DONE"))
+            check(c.name, "rep1 recorded 124 timed out, cold and rep2 exit 0", "\nrep1\t124\t" in steps and "\ncold\t0\t" in steps and "\nrep2\t0\t" in steps)
+            check(c.name, "rep1 out/ withheld, its commit log exported", not c.exists("rep1/bundle/out") and c.exists("rep1/cp_commit.log"))
+            check(c.name, "SHA256SUMS verifies, isk never exported", c.sums_ok() and c.no_secret())
 
         # A refusal to reuse a finished results directory.
         if want("no-reuse"):
