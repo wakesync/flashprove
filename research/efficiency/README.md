@@ -80,8 +80,9 @@ sizes (B = 1, 8, 24, 48, 64; 48 is † not released programs; t = B*1024/rate):
 
 Fit residuals are under 1.5 s at every B (B = 1: 57.5 vs 58.8). At B = 24: 38 s fixed (17%), 56 s
 waves (25%), 128 s per-request (58%). Read: three parameters on five points, two of them partly
-collinear; this is a decomposition hypothesis, not a measurement. The GPU run in section 5 measures it
-directly with `-measure` ("the turns' stream stood still for weights X s").
+collinear; this is a decomposition hypothesis, not a measurement. (Corrected 2026-11-10: an earlier version said
+the GPU run in section 5 measures this directly with `-measure`. It does not; no `-measure` breakdown was taken, so
+the fitted fractions remain a hypothesis.)
 
 Consequence: if per-request compute is ~58% of a batch, more GPU memory alone cannot give more than
 ~1.7x at batch 24, and only if it removes all wave and walk overhead. Memory is a real constraint on
@@ -109,23 +110,34 @@ See `experiments/20261104-43-h200-memory-lever/PREREG.md` (written before any GP
 
 ## 5. Results
 
-Full numbers, verdict and files: `experiments/20261104-43-h200-memory-lever/RESULTS.md`. Measured, unreplicated, synthetic
-weights, n = 1 session (4 batch intervals) per arm.
+Full numbers, verdict and files: `experiments/20261104-43-h200-memory-lever/RESULTS.md` (run record, as committed) and
+`RESULTS-ADDENDUM-2026-11-10.md` in the same directory (current reading; it wins where the two differ). Measured,
+unreplicated, synthetic weights, n = 1 session (4 batch intervals) per arm. This section was rewritten 2026-11-10.
 
-- **Verdict: not supported.** Rental 2 computes H200 in-step 12 (TB1) at 146.09 tok/s against H100 in-step 6 (CA1) at
-  93.91 tok/s (median interval rates), which is 1.556x with disjoint ranges. That clears the 1.15x bar on paper. But the H100
-  control box was slow: 14% below upstream's 109.09, with a full-size commit 2.1x as long as the H200 box's. Rental 1's
-  H100 (another host) did 146.67 at in-step 6, and rental 1's H200 at in-step 6 did 142.97. TB1 sits within that host
-  spread, so there is no evidence that the extra memory raises throughput. Neither direction is established.
+- **Verdict: lever not supported; effect not identifiable in this design.** Rental 2: H200 in-step 12 (TB1) 146.09 tok/s
+  against H100 in-step 6 (CA1) 93.91 tok/s, each 24,576 / the session's median batch interval, which is 1.556x with
+  disjoint per-interval ranges. That clears the 1.15x bar as computed. But the two arms ran on two different hosts, one
+  session each, and the H100 control is off baseline (14% below upstream's 109.09; its full-size commit took 2.11x as
+  long as the H200 box's). GPU memory and host speed are confounded, so this design cannot say how much of the 1.556
+  either explains. No supported throughput improvement; this is not evidence of no effect either.
 - **Cost: FAIL.** At the rented prices T-B is $10.53/Mtok against C-A $7.13/Mtok.
-- **Mechanism (measured):** in-step 12 needs 87,237 MiB of GPU memory (TB1 peak) and runs on the H200. That is more than the
-  H100's 81,559 MiB, consistent with rental 1's CB2 start-up failure on the H100. The memory buys a configuration, not a rate.
-- **Rental 1 data after 02:33 UTC is lost** (never pulled before the 04:45 UTC backstop destroyed the boxes). Only CA1, TA1 and CB2
-  are reported from it.
+- **GPU memory.** Observed: in-step 12 at batch 24 ran on the H200 (120 of 120 proofs accepted) with a sampled peak of
+  87,237 MiB (sampling stopped at 889.5 s, so a later peak is not seen); the H100's total is 81,559 MiB. Inferred, not
+  measured: that configuration probably does not fit an 80 GB H100. No committed file shows it run or fail on an H100;
+  rental 1's CB2 start-up failure (`p258 end 1 cuda-call`) is run-log text without a surviving file and is not shown to
+  be an out-of-memory error.
+- **Rental 1 data after 02:33 UTC is lost** (never pulled before the 04:45 UTC backstop destroyed the boxes). CA1, TA1 and
+  CB2 survive only as the run-log text below, without files; no conclusion here rests on them.
+- **Limitations:** both rental-2 session logs carry measure_rate.py's clock-disagreement warning (> 2 s between clock
+  readings at a release; 3 lines in TB1, 10 in CA1); see the addendum. No receipt file is committed for either rental.
 - **Next test that could separate the effects:** both in-step settings on one H200 host (in-step 6 vs 12, AB/BA, >= 5 sessions
   each), which removes the host confound entirely.
 
 ### Run log
+
+Written during rental 1 (2026-11-04). Historical text: none of rental 1's session, report or timing files survives, and
+the readings in this log are superseded by the results above (bracketed notes added 2026-11-10).
+
 - 2026-11-04 01:22 UTC: two instances created (control: 1 GPU of a 2x H100 SXM 80 GB box, $1.219/h; treatment: 1x H200 SXM 141 GB, $5.54/h). Teardown timers armed before create. Both boxes started the pinned build at ~01:31 UTC.
 - 01:42-01:43 UTC: pinned build + `examples/quickstart-gpu.sh` passed on both boxes (cp_verify YES on the small proof). ~17 min each.
 - Early commit observation (n = 1 per box, the commitment's anchor table, from cp_commit's own timing lines): H200 splits the table's tree into 16 parts of 2^28 positions, 452.7 s; H100 into 32 parts of 2^27, 576.3 s (-21%). Inference, not checked in code: the committer appears to size its parts to free GPU memory (16 x 2^28 vs 32 x 2^27). It concerns commit, not prove.
@@ -133,6 +145,6 @@ weights, n = 1 session (4 batch intervals) per arm.
 - 02:33 UTC, first sessions (n = 1 each, 4 intervals each, every proof checked by cp_verify):
   - H100 CA1 (24/6): STEADY 146.67 tok/s, intervals 168.18 / 167.53 / 167.24 / 167.27 s, GPU peak 74,641 MiB, cp_prove RSS 265.5 GB.
   - H200 TA1 (24/6): STEADY 142.97 tok/s, intervals 171.13 / 172.28 / 172.16 / 172.01 s, GPU peak 74,673 MiB.
-  - Same config on H200 is not faster (-2.5%), and uses the same ~74.7 GB: the prover does not use the extra memory by itself.
-  - Both are ~34% above upstream's 109.09 synthetic (24 CPUs bound). These boxes run unbound with a 30.7-core (H100) / 23-core (H200) cgroup quota on 128/144-thread hosts. Host CPU is a confound larger than the GPU difference.
-  - H100 CB2 (24/12): `p258 end 1 cuda-call` at start-up, no proof. in-step 12 does not fit on 80 GB.
+  - Same config on H200 is not faster (-2.5%), and uses the same ~74.7 GB: the prover does not use the extra memory by itself. [2026-11-10: one unbound session per box on two hosts, files lost; not established.]
+  - Both are ~34% above upstream's 109.09 synthetic (24 CPUs bound). These boxes run unbound with a 30.7-core (H100) / 23-core (H200) cgroup quota on 128/144-thread hosts. Host CPU is a confound larger than the GPU difference. [2026-11-10: a hypothesis from one session per box, not established.]
+  - H100 CB2 (24/12): `p258 end 1 cuda-call` at start-up, no proof. in-step 12 does not fit on 80 GB. [2026-11-10: the failure is run-log text without a surviving file and is not shown to be out of memory; the fit statement is an inference, see section 5.]
