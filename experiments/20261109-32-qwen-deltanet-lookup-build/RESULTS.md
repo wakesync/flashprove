@@ -6,7 +6,7 @@ Issue #32. Registration: [PREREG.md](PREREG.md), including its Amendments. Code 
 
 - The M2 design (PR #66) needs two lookups in one proof: the existing range-check lookup and a new one that checks division remainders. That pairing had never been built in this repository. It is built now, and on the smaller of the two test statements it worked: 10 of 10 honest proofs were accepted and every one of 95 tampered cases was rejected.
 - The proof for that statement is about a quarter of the size of the earlier version that spelled remainders out bit by bit, and took about a third of the time. Those two were measured on different days on a shared machine, so read the ratio as rough.
-- The bigger statement (the full M2 head, 16 tokens) is coded. Whether it ran is in the "Stage 2" section below, which is filled only from run files that exist.
+- The bigger statement (the full M2 head, 16 tokens) is coded but **was not proved**. Its run sat in the shared machine's job queue past the deadline this lane registered for it, so by the lane's own rule that part counts as not passed. Nobody knows yet whether it proves, how long it takes, or whether its tamper cases are caught.
 - All of this is on made-up inputs, at a toy security level, on one machine, with nobody else having re-run it. A separate lane found that this design's arithmetic does not track the real model closely enough on real weights (PR #68, unreviewed). So this shows the proving machinery works, not that the real model can be proved yet.
 - The lane made process mistakes (an incomplete first registration commit among them). They are listed under "Deviations" and they weaken how much weight the pass verdicts should carry.
 
@@ -24,9 +24,9 @@ Issue #32. Registration: [PREREG.md](PREREG.md), including its Amendments. Code 
 |---|---|---|---|
 | H1 composition | the two alphas differ 10/10; relabel control rejects; every replay, splice and moved-multiplicity case rejected | 10/10; rejected; 7 of 7 rejected | **PASS**, as sanity checks only (see "What the H1 cases show") |
 | H2 stage 1 | 10/10 honest accepted; 100% of hostile cases rejected, controls giving their registered verdict; 0 sanitizer reports | 10/10; 95 of 95 rejected, 1 of 1 control accepted; 0 reports | **PASS** |
-| H3 counts | every compared count exactly equal, per stage built | stage 1: 8 of 8 equal. Stage 2: see the Stage 2 section | **PASS for stage 1** |
-| H4 stage 2 | 10/10 honest at T = 16 by the stop time, changed H rejected at the proof, registered verdicts, 0 sanitizer reports | see the Stage 2 section | see the Stage 2 section |
-| extrapolation | M2 head prove within 25% of 39.2 s at table 2^21 | see the Stage 2 section | see the Stage 2 section |
+| H3 counts | every compared count exactly equal, per stage built | stage 1: 8 of 8 equal. Stage 2: not measured (one no-proof check on one seed agrees with the model) | **PASS for stage 1. Stage 2 not measured** |
+| H4 stage 2 | 10/10 honest at T = 16 by the stop time, changed H rejected at the proof, registered verdicts, 0 sanitizer reports | no stage 2 proof had run when the registered stop time (03:40Z) passed | **NOT PASSED** (not run: the registered stop rule fired) |
+| extrapolation | M2 head prove within 25% of 39.2 s at table 2^21 | no measurement | **not tested** |
 
 The composition stop rule (no honest two-lookup proof verified by 02:50Z, or an accepted hostile case) did not fire: the 10 honest stage 1 runs had finished by 02:33:34Z and the hostile suite by 02:42:55Z (file times of the run files; the first version of `record.py` did not log per-run times). The fallback to exact bits at T = 8 was therefore not built.
 
@@ -121,11 +121,15 @@ So the soundness of the composition rests on the argument, not on these tests: e
 
 ## Stage 2: the M2 head (T = 16)
 
-**Status as of 2026-11-10T03:27Z: no stage 2 proof has run. H4 has no result, and the extrapolation check has no measurement.** This section is updated only from run files that exist; if it still says this, nothing ran.
+**H4: NOT PASSED. The registered stage 2 stop rule fired.** The rule (PREREG, Kill criterion, restated in the 02:28Z amendment as standing "as written"): with no honest T = 16 accept by 03:40Z, H4 is reported as not passed. At 03:40:11Z no stage 2 proof had started: the batch had been waiting in the shared job gate since 03:08:48Z, and no `runs/stage2-*` file existed. The extrapolation check has no measurement.
+
+This is "not run", not "ran and failed". Nothing here is evidence that the M2 head does not prove. Equally, nothing here is evidence that it does. The cause was queueing behind other lanes' jobs plus this lane reaching stage 2 late (its code was ready at 03:08Z, with 32 minutes left to the stop time and the gate already full). Planning the clock without allowing for the gate was this lane's error.
+
+The queued batch was left in the gate until the registered hard stop (04:08Z). If it produced anything, it is under "After the stop time" at the end of this section, labelled as such; it does not change the verdict.
 
 What exists:
 - The code: `public_stage.h` (the verifier's recompute with pinned tables and the derived-coefficient admission), `m2.cpp` (entry `verify_m2`, the hostile suite), `reference_m2.py`, and the norm block of `head.h`. It compiles with 0 warnings.
-- The batch (honest seeds 1..10, hostile suite, UBSan suite) was queued in the shared host's job gate at 03:08:48Z and had not been given a slot at 03:27Z (last checked 03:27:53Z). Both slots were held by other lanes' jobs.
+- The batch (honest seeds 1..10, hostile suite, UBSan suite) was queued in the shared host's job gate at 03:08:48Z and had not been given a slot at 03:40:11Z. Both slots were held by other lanes' jobs for that whole time. It got a slot at 03:40:33Z.
 - **A no-proof check, seed 1 only** (`m2.bin <fixture> check`, about 2 s; it builds the witness and the relation list and proves nothing). Not a registered measurement, and its output is not in `runs/`. It showed:
   - the C++ public stage and the C++ lowering equal the Python reference value by value over the 16 tokens;
   - the witness-free derivation gives the prover's relation list exactly, and the honest table satisfies every product gate and every relation;
@@ -135,11 +139,13 @@ What exists:
 
 What is therefore **not** established for the M2 head: that it proves, that it verifies, its prove and verify time, proof size and memory, that a changed H is rejected at the proof, that the cg boundary and large-gain cases behave as coded, and that the suite is clean under UBSan. The #66 extrapolation of about 39 s prove is untested.
 
-If the batch gets a slot before the registered stage 2 stop (03:40Z for the first honest accept) and the hard stop (04:08Z), its results replace this text. If it gets a slot later than 03:40Z, H4 is reported as **not passed** under the registered stop rule, and any numbers are labelled as obtained after the stop time.
+### After the stop time
+
+The batch was given a gate slot at 03:40:33Z (the start time of its process), 33 seconds after the registered stop time. Whatever it produces is therefore after the stop and does not change the H4 verdict above. As of 03:42Z it was running its first honest seed and no `runs/stage2-*` file existed yet. This paragraph is replaced after the hard stop (04:08Z) with what ran.
 
 ## Pinned tables
 
-`silu-f12`, `sigmoid-f12` and `decay-one-f12` are the operators lane's files (PR #67), byte for byte, with SHA-256 cb2ceb05..., 19057d5f..., ffd373e6... (full values in `tables.py`, which checks them and checks the compiled header against them). The format was not forked. The #66 prototype's float64 at the table points is gone from the verifier path: `public_stage.h` uses integers and these tables only. Not done: this lane does not regenerate the tables (that is the operators lane's test), and the operators lane states that its generator is deterministic but not proved correctly rounded.
+`silu-f12`, `sigmoid-f12` and `decay-one-f12` are the operators lane's files (PR #67), byte for byte, with SHA-256 cb2ceb05..., 19057d5f..., ffd373e6... (full values in `tables.py`, which checks them and checks the compiled header against them). Checked again at 03:40Z against PR #67's head at that time (191b4df9): the three files there have the same hashes. The format was not forked. The #66 prototype's float64 at the table points is gone from the verifier path: `public_stage.h` uses integers and these tables only. Not done: this lane does not regenerate the tables (that is the operators lane's test), and the operators lane states that its generator is deterministic but not proved correctly rounded.
 
 ## Deviations from PREREG
 

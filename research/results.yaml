@@ -372,11 +372,11 @@ results:
       - {name: head_range_runs_fit, stat: count, value: 20, total: 20, unit: count, n: 20, spread: null, hardware: cpu-epyc-rome-kvm-16, date: 2026-11-05, commit: e08e5ce2603bc442361822c55880ea870b4a9292, source: experiments/20261105-32-qwen-deltanet-m2-design/runs/ranges-head.json}
 
   - id: qwen-deltanet-two-lookup-build
-    title: "Qwen DeltaNet two-lookup composition (lookup remainders) on the M1b statement; M2 head code (PR #73)"
+    title: "Qwen DeltaNet two-lookup composition (lookup remainders) on the M1b statement; M2 head coded, not proved (PR #73)"
     status: measured
     replication: unreplicated
     pr: 73
-    summary: "stage 1 PASS vs prereg, with a defective registration (the first commit is an incomplete PREREG draft): a second lookup keyed on product-oracle cells, next to the range check's digit lookup, proved the M1b statement with lookup remainders 10 of 10 (prove median 13.7 s, verify 3.0 s, 6.76 MB, table 2^19, 609,792 relations); 95 of 95 sampled hostile cases rejected and 1 of 1 acceptance control accepted, 0 UBSan reports; 8 of 8 counts equal the #66 model; the two-lookup tests are sanity checks, not a soundness proof; the M2 head (T = 16) is coded, see RESULTS.md for what ran"
+    summary: "stage 1 PASS vs prereg, with a defective registration (the first commit is an incomplete PREREG draft): a second lookup keyed on product-oracle cells, next to the range check's digit lookup, proved the M1b statement with lookup remainders 10 of 10 (prove median 13.7 s, verify 3.0 s, 6.76 MB, table 2^19, 609,792 relations); 95 of 95 sampled hostile cases rejected and 1 of 1 acceptance control accepted, 0 UBSan reports; 8 of 8 counts equal the #66 model; the two-lookup tests are sanity checks, not a soundness proof; the M2 head (T = 16) is coded but NOT proved: H4 not passed, its run was still queued when the registered stop time passed, so its prove time, proof size and tamper rejection are unknown"
     conditions: "one head, 128 x 128 state, T = 4, F = 12, synthetic inputs, PR #66 lowering (which failed the fidelity threshold on real weights, PR #68 unreviewed), research security (target 10 bits, N = 10 combinations), hostile cases sampled on seed 1 by the lane that wrote the verifier, CPU 6 cores, shared loaded VM; timings vs M1b are not an A/B"
     evidence: [experiments/20261109-32-qwen-deltanet-lookup-build/RESULTS.md]
     metrics:
