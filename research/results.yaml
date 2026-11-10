@@ -878,8 +878,8 @@ results:
     status: "measured"
     replication: "unreplicated"
     pr: 84
-    summary: "91 coverage cells pass sampler checks; no model/proof run, no physical execution guarantee"
-    conditions: "5 seeded runs per cell x 10000 windows; fixed planted invalid units, perfect rejection; simulated not production detection; CPU only"
+    summary: "45 random-simulated coverage cells (225 seed-runs) within the registered bound; 46 deterministic cells exact (40 at probability 1, 6 leaked-challenge cells 0 by construction); no model/proof run, no physical execution guarantee"
+    conditions: "5 seeded runs per cell x 10000 windows; fixed planted invalid units, perfect rejection (except the leaked-challenge arm, whose invalid set is adaptive: the complement of the selected set); simulated not production detection; honest float-served replies fail exact match on main, so the audit needs integer-model serving or a declared tolerance relation (not established); CPU only"
     evidence: ["research/sampled-audit/README.md", "experiments/20261110-7-sampled-audit/RESULTS.md", "experiments/20261110-7-sampled-audit/runs/registered.json"]
     metrics:
       - {"name": "request_whole_model_m1_simulated_detection", "series": "sampled-audit-request", "arm": "whole_model-m1", "stat": "median", "value": 1.0, "unit": "fraction", "n": 5, "spread": {"sd": 0.0, "min": 1.0, "max": 1.0}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-10", "commit": "adde34e54f0b6b4e72d43c62b8892c93d2482e7a", "source": "experiments/20261110-7-sampled-audit/runs/registered.json", "note": "U2 simulation only; each seed has 10000 windows, N=1000, m=1. Planted invalid units with perfect rejection, not measured weight-swap detection. Exact probabilities/cost fractions in TABLES are analytic, not measured."}
