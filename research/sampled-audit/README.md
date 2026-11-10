@@ -1,0 +1,106 @@
+# Q4: can sampled audit become useful? (U2)
+
+**Yes as an output-compliance audit, conditionally. Not yet as a production claim that a particular physical model ran.** Sampling can cut the variable proof workload and expose sustained invalid service. It cannot certify unexamined replies, reliably catch one targeted bad reply at a tiny sample rate, or detect an alternative engine whose outputs satisfy the authorized relation. FlashProve main is not yet an end-to-end Qwen sampled-audit service.
+
+This is a desk design plus a small CPU coverage simulation. It does not run a prover, a Qwen model, an ablation, or quantization. The probability tables are conditional calculations, not measured model-substitution detection. No dollars, GPU throughput or measured commitment overhead are asserted. The experiment is [registered here](../../experiments/20261110-7-sampled-audit/PREREG.md), with [results](../../experiments/20261110-7-sampled-audit/RESULTS.md) and [all probability cells](TABLES.md). Every section below advances U2; Q1/Q2/Q3/Q6 denote dependencies, not results from other lanes.
+
+## U2: the claim to sell, and the claim not to sell
+
+The sellable claim is: "Among an independently enumerated population, a verifier checked a random sample of committed responses against a pinned integer-model policy. Given D invalid responses, this sampling design would find at least one with probability P." State the window, sample size, missing receipts, unavailable proofs, and policy. Do not label every response verified or infer a posterior probability of honesty from a clean sample without a prior.
+
+A provider can serve a cheap model, then recompute the authorized model for sampled requests. If the committed response is valid under the authorized model, that is not a forgery. This protocol cannot prove which hardware or engine produced the original response, even with 100% auditing. Committing a purported trace does not attest that it was physically executed. The useful property is consistency of an immutable claimed computation/output, not provenance of physical execution. Trusted capture/attestation would be a separate U3 hypothesis.
+
+Main's [protocol sections 2 and 3](../../docs/protocol.md) explicitly describe an integer-model relation, not float equivalence. Exact match means greedy top choice at checked positions; normal temperature/top-p sampling is not proved. Clipped gap permits other outputs and is not a model-identity classifier. A hash of the served token transcript cannot convert either policy into one.
+
+## U2: protocol proposal, not implemented here
+
+**0. Agree on a statement before traffic.** The client/auditor pins an independently authenticated model/weight commitment ID, configuration/scales, allowed integer semantics, proof system and security settings, tokenizer/template/system-prompt policy, output acceptance policy, coverage rule, and start-state rule. Bind a model version to a defined epoch; provider-selected substitutions or policy changes are not automatic approvals. Q1 governs fidelity; Q2 governs trusted weight identity. Name the population and epoch close rule, sample size, retention period, deadline, and fail-closed handling of unavailable proofs in advance.
+
+**1. Enumerate every eligible request independently.** The ingress gateway or client assigns an unrepeatable nonce and sequence index, records accepted requests including errors/cancellations, and defines which outcomes belong in the audit population. Clients retain countersigned receipts. A provider-only log cannot demonstrate completeness: it could omit the bad traffic. Gateway counts, independent client receipts and reconciliation of sequence gaps are required. Cover the entire traffic population of interest, not just a recognizable audit endpoint. Tenant/length/risk stratification is allowed if fixed in advance with a random sample within every stratum and separately reported probabilities. Provider-generated dummy requests must not dilute the population.
+
+**2. Commit before learning inclusion.** At response completion the provider returns a signed, canonical receipt and fixes it in an append-only log before the randomness is released. A receipt includes a domain/version tag; epoch and unique request ID; client request nonce; pinned model/configuration/policy digest; input token digest including server-added prompt tokens; output token digest and token count; finish reason; exact checked range/padding convention or an unambiguous rule deriving it; next token if relevant; prior conversation/session state handle; and any retry/error status. All lengths, token order and encoding are canonical and hash-domain separated. Hash the actual returned token IDs, not only rendered text. The client checks the receipt against its sent/received transcript and retains the bytes needed for later proof verification.
+
+Per-request cost is hashing O(input+output bytes), O(1) small digest fields, one receipt authentication (potentially batched signatures), and amortized log insertion. Digest length is not a measurement of total storage or CPU cost. The existing weight commitment is amortized across requests; do not run a new weight commitment for every request. Tokens/prompts and proof data still need retention. Salt sensitive transcript commitments with retained per-request randomness where dictionary attacks matter; public log inclusion does not make private traffic public. Receipt storage, privacy and data deletion policy are deployment work, not proven here.
+
+**3. Close the population, then draw.** The independent auditor fixes an ordered epoch Merkle root plus population count, obtained with client/ingress reconciliation, and acknowledges closure. Only then does it generate a fresh secret-until-now CSPRNG challenge, or use a predesignated future unpredictable beacon round. Domain-separate with audit ID, epoch root, N, sampling algorithm and policy. Select exactly m distinct indices uniformly, with unbiased rejection sampling or a uniform shuffle, then publish the challenge and indices. A verifier secret committed before the epoch and revealed after closure can make rerolls auditable, but last-revealer abort remains an availability failure, not a new sample. Multi-party randomness must include an honest unpredictable contribution and a specified non-reroll abort rule.
+
+Do not use a public request-ID hash, provider-chosen seed, predictable daily schedule, committed simulation seeds, or a provider-controlled Fiat-Shamir message as the outer sampler. Prover transcript challenges inside a proof and the external traffic selection are different problems. Do not allow the provider to grind nonce/epoch/root choices after it sees randomness. Every receipt in an epoch is fixed before its challenge; the next epoch needs fresh independent randomness. Delayed/omitted commitments, selective proof failures, and deadline misses are audit failures, not silently removed observations. A network failure may be operationally indistinguishable from evasion; define dispute/retry policy without changing the challenged sample.
+
+**4. Prove selected commitments, never replacement responses.** For whole-request auditing the provider can retain a witness or recompute from the committed prompt/output and pinned start state. That cost is incurred on every selected request, with a deadline sized for honest recomputation. The verifier rebuilds its expected proof request from the recorded tokens, checks receipt/log inclusion, identity/config/policy, full required output range and next-token rule, then invokes the appropriate proof verifier and checks its actual acceptance result. A process exit alone is insufficient. Every proof must correspond to the pre-challenge committed response; never take the proof-side request, range or model ID as the authority. Freshness comes from the external receipt protocol, not the existing core proof.
+
+**5. Publish the audit outcome.** Report eligible N, selected m, sample/epoch identifier, verified successes, proof rejections, missing commitments/proofs, and the claimed policy. The current client should not rely on a delayed audit for irreversible safety decisions. Use per-response verification or an independent control for those.
+
+## U2: why layers and tokens need more than a cheap response receipt
+
+Whole-request **output** auditing needs no pre-challenge internal trace if full recomputation is allowed: an invalid immutable response cannot be repaired by changing the trace. It also cannot catch changed weights that happen to give valid responses.
+
+Partial layer/token auditing instead needs a fixed claimed computation to sample. Before the challenge, commit an indexed trace root for every eligible request, covering each layer/token input and output, recurrent state, convolution history, attention KV dependencies, and decoding outputs. Make initial and final boundaries agree with the client statement, and shared boundaries use the same committed values. A challenged subproof must open the exact relevant leaves and enforce the layer relation against the authorized weight commitment. A Merkle opening authenticates a number, not its correctness. A hash label claiming "layer 17" or "stock weights" does not prove that the computation consumed those weights.
+
+The Q2 requirement is **authenticated per-layer/per-tensor weight binding in the subproof** to the same authorized model identity; a separate literal Merkle root per layer is one option, not a mathematical necessity. Existing monolithic commitments could suffice only with a sound authenticated projection into each challenged relation. Include shapes, order, quantization/rounding/scales and lookup-table identity. Commit all potentially sampled layers before choosing any. An attacker must not be able to manufacture honest sampled segments after learning their indices and splice them into an uncommitted trace.
+
+For tokens, an arbitrary supplied KV cache/recurrent state is not an authenticated prefix. Q6 requires proof-linked state and history dependencies or re-proving the needed prefix. Cheap random single-token checks are not generally independent one-token computations. Proving a chain from the real input can consume most of a request even if one output token is scored. A global clipped-gap average also cannot be inferred by dropping most positions: sampling checks a different statistic unless a separately specified estimator/confidence test is used. Our token table uses individually invalid local constraints, not clipped-gap averages.
+
+Committing an entire trace might require computing, hashing and retaining it on **all** requests, negating much of sampling's saving. A provider may instead commit a consistent trace from a cheaper engine, but altered weights need not create a violation at every altered layer: inputs can lie in a nullspace, rounding can erase changes, or a dishonest boundary can concentrate the violation elsewhere. The registered 35-layer and eight-layer tables plant invalid local constraints; they do not assume weight differences imply that many violations. Per-layer binding plus an immutable trace is necessary, not evidence of such a violation count.
+
+## U2: detection math and interpretation
+
+Let N be the population, D the number of fixed **invalid** committed units, and m the uniform sample size without replacement. Under a perfectly rejecting check,
+
+`P_detect = 1 - C(N-D,m)/C(N,m)`.
+
+For D=1, this is exactly m/N. A one-off high-value attack survives with probability 1-m/N. For repeated cheating, detection is at least `1-(1-D/N)^m` under this fixed-size scheme; the expression with powers is a conservative with-replacement approximation. For Bernoulli selection of each request at probability p, fixed D gives exactly `1-(1-p)^D`. Do not mix these denominators or call a population-window probability a per-request guarantee.
+
+Let K count changed-model requests. Unless a pinned proof statement actually distinguishes them, **D may be zero even when K=N**. If each selected cheated request is independently rejected with probability q, then fixed-size detection is
+
+`1 - sum_j [C(K,j) C(N-K,m-j) / C(N,m)] (1-q)^j`.
+
+Here q includes semantic distinguishability and verifier rejection, not just cryptographic soundness. The independence/constant-q assumption is optional modeling, not an established fact about Qwen. For genuinely false statements and an execution-wide soundness failure bound epsilon, detection is at least coverage minus epsilon (clipped at zero); do not multiply independent error probabilities without justification. The tables take q=1 for planted violations. Quantization preserving the specified integer relation, identical accepted outputs after swapping, or allowed clipped-gap changes have q=0 for that observation.
+
+For request-then-layer sampling, put `q = 1-C(L-B,l)/C(L,l)` in the formula above if each cheated request has B fixed invalid layers out of L and layer samples are independent across selected requests. The same construction applies to fixed invalid token constraints. Cost ideally scales as `(m/N)*(l/L)` only for equal-cost separable units; dependency proofs and fixed work break that equality.
+
+A blind predictor that labels 10% of requests "probably unsampled" before a fresh independent challenge does no better than ordinary 10% cheating. The simulator fixes those 100 requests. A fully leaked challenge permits cheating on every unselected request with **zero detection**, for any m<N; at m=N there is no unsampled traffic left to cheat on. Intermediate leakage must be described by actual inclusion probability conditional on the predictor, not its overall classification accuracy (predicting "unsampled" always already has high accuracy when sampling is rare). Completeness and challenge unpredictability are necessary to use any row of the table.
+
+## U2: cost fractions, not a Q3 performance estimate
+
+For equal-cost whole requests define plain inference cost I, full-request incremental proof cost P (including witness preparation/recomputation), per-request receipt/retention cost C, one-time model setup amortization A, and audit-epoch fixed cost F per N. A uniform sample fraction p gives
+
+`cost/request = I + C + A + F/N + p*P`.
+
+Relative to proving every request under the same receipt infrastructure, the **incremental verification-work** fraction is `(C+A+F/N+p*P)/(C+A+F/N+P)`, not automatically p. Relative to plain inference, total cost is `1 + (C+A+F/N+p*P)/I`. If P/I were 100 (an illustration, not measured), p=1% still adds one full inference-equivalent before receipt overhead. Batch occupancy, deadlines, peak memory and amortized setup do not necessarily shrink with p. For heterogeneous independent-uniform request selection, expected variable work is p times the full-population sum, but realized cost and detection against cost-targeted attacks need stratified reporting. A request fraction is not a token fraction.
+
+For layer sampling use `(C_trace + A + F/N + p_request*(F_proof + p_layer*P_variable + P_dependencies))` as incremental cost accounting, with quantities defined per request and P_dependencies charged only on selected requests. C_trace applies to all requests. For token sampling, substitute the actual prefix/state recovery cost, not token fraction alone. No values for C_trace, Qwen full proof P, subproof setup or end-to-end GPU cost were measured here; Q3 must establish them on a functioning prover.
+
+A penalty can deter an expected saving G only if detection probability times enforceable loss exceeds G, under an explicitly modeled risk-neutral adversary. No assumed fine or deposit supplies cryptographic correctness, and an adversary optimizing a single high-value response is not covered by a sustained-cheating economic argument.
+
+## U2: what main can and cannot check today
+
+All repository evidence in this section is pinned to main commit **14bc10e395b248583509ae33da3e1ae65293bb6f**. Relative links refer to files present at that commit; nothing from an unmerged lane is established. The protocol document is normative design evidence, not a proof that the released programs meet it.
+
+| Strategy | Main's relevant capability | Not established for production U2 |
+|---|---|---|
+| Whole-model swap, every request | [Protocol](../../docs/protocol.md), sections 2/3/6, specifies checking outputs against a client-held integer weight ID and policy. | Physical execution identity, float fidelity, full Qwen end-to-end proof, independent traffic log and sampling service. A different engine with accepted outputs remains undetectable. |
+| Swap on 10%, 1%, or one request | Same per-proof relation; the client can select proof requests externally. | Any theorem about the unselected requests, omission resistance, or request-level coverage inferred from prover-chosen proof files. |
+| Abliterate only layers 17..51 | Main's [Qwen architecture inventory](../ports/qwen3.8-27b/FEASIBILITY.md) lists 64 layers; the monolithic weight ID design binds its integer artifact/configuration. | A complete Qwen stock/abliterated proof pair; independently sampled Qwen subproofs bound to authorized per-layer weights; assertion that all 35 changed layers produce distinguishable violations. |
+| Quantize selected layers | Integer configuration/scales are part of the commitment design. [Signed-manifest results](../../experiments/20261104-58-signed-manifest/RESULTS.md) distinguish authenticated metadata from fields that remain the signer's word. | That a signed artifact hash proves arithmetic used it, or that quantization changes accepted outputs. Same integer function or acceptable outputs can pass. |
+| Predicted-unsampled cheating | Internal [Fiat-Shamir tests](../../experiments/20261103-fiat-shamir-binding/RESULTS.md) concern proof transcript binding. | A secure outer traffic-selection protocol. Internal Fiat-Shamir is not a traffic audit scheduler; leaked inclusion defeats sampling. |
+| Tokens/windows with adversarial state | [Merged state-commit results](../../experiments/20261109-34-qwen-state-commit/RESULTS.md) show synthetic recurrence chunks plus public-word hash/statement checks. | Hidden committed-state handoff, weight-bound Qwen segments and all semantic dependencies. That document explicitly accepts replaced unbound token inputs and consistent interior history shifts. |
+
+[Main's threat model](../security/threat-model/THREAT-MODEL.md) and [protocol section 6.1](../../docs/protocol.md) retain gaps between the written/Lean protocol and the released programs' binding/soundness. This proposal does not upgrade research security settings to production security. A robust sampler cannot repair an unsound or under-specified relation.
+
+## U2: reproduction and next experiment
+
+Python standard library only; single process, no GPU and no downloaded weights. The committed seeds are for reproducible simulation, never production randomness. From the repository root:
+
+```sh
+python3 research/sampled-audit/simulate.py --fixture-only
+taskset -c 12-15 timeout 180 python3 research/sampled-audit/simulate.py --output /tmp/sampled-audit-reproduction.json
+python3 research/sampled-audit/report.py --input /tmp/sampled-audit-reproduction.json --output /tmp/sampled-audit-tables.md
+cmp experiments/20261110-7-sampled-audit/runs/registered.json /tmp/sampled-audit-reproduction.json
+cmp research/sampled-audit/TABLES.md /tmp/sampled-audit-tables.md
+```
+
+Use fresh output paths if those files exist. The simulator refuses overwrite. TABLES contains exact values plus five-seed median, sample SD, min/max; `report.py` derives every cell without running the suite. Endpoint rows can have a unique possible sample and thus no stochastic variance. Hardware speed is not a result.
+
+The next registration should build a small end-to-end **whole-request** audit with a client-owned log and a currently supported proof relation: fixed responses before challenge; independent enumeration; honest controls; bad response, omitted request, post-challenge rewrite, duplicate/replay, selective timeout, predictor and leaked-challenge cases; real verifier acceptance, not synthetic flags. Measure C, witness retention, recomputation P, batch utilization and detection separately. Include a cheaper-engine response that agrees with the authorized relation as an expected accepted control. Require zero false accepts for registered false-statement cases and zero dropped sampled requests; do not count expected output agreement as a false accept. A later Qwen run needs Q1 fidelity and Q2 weight binding; a sublayer run additionally needs authenticated trace/state relations.
+
+**Decision:** prioritize whole-request random output audits after the underlying prover works and a cheap immutable receipt path is built. Keep layer/token fractions as conditional design space, not a shipping cost claim. The missing work is chiefly a trustworthy statement and complete pre-challenge commitment path, plus a full-size prover whose proof/witness costs and security settings support the intended service.
