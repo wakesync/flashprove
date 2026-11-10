@@ -19,3 +19,6 @@ b4f70d8f9eed375c5ff8ad776cdc70ec983fb51a891b05a18b7f2cc66cb3ac44  ./review-fix2-
 72b4e876c317c9cd9453895035f7f0208ae892601fc18987ddd5d0c71537110b  ./review-fix3-fetch_bounded_test-after.txt
 14d519a0060ee0a2381876cd4a0e513d6453b914849639509676a3b89575b27f  ./review-fix3-fetch_bounded_test-before.txt
 2508b645574f0013dd2211810bffe3db26e9e8063e74ee536d6230fd70b2bf4d  ./review-fix3-bash-n.txt
+887c10a2e799b72e974bd03181e2c3f8c686f1cb049b27376e62e4a7fd22a3de  ./review-fix4-fetch_bounded_test-after.txt
+9511f0d9fc043deab6494df002284c7c64b066c0896a34cd1d6b7a50b6d8c8eb  ./review-fix4-fetch_bounded_test-before.txt
+faa9606a3ef2221a55254d0851d3c729c8690d0c24ca93f0ced498e992523683  ./review-fix4-bash-n.txt
