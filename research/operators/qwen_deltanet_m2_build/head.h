@@ -30,7 +30,17 @@ using namespace blk;
 static void check(bool ok, const char *s) { if (!ok) { std::fprintf(stderr, "FAIL: %s\n", s); std::exit(1); } }
 static F fi(i64 x) { return x >= 0 ? F{u64(x) % P} : F{(P - (u64(0) - u64(x)) % P) % P}; }
 static i64 fdiv(i64 a, i64 b) { i64 q = a / b; if ((a % b) != 0 && ((a < 0) != (b < 0))) --q; return q; }
-static i64 isqrt64(i64 n) { if (n <= 0) return 0; i64 r = (i64)std::sqrt((long double)n); while ((__int128)r * r > n) r--; while ((__int128)(r + 1) * (r + 1) <= n) r++; return r; }
+// Pure integer binary search. hi is exclusive; 3037000500^2 exceeds INT64_MAX.
+// Multiplication is widened before evaluation. No floating conversion or libm ABI assumption.
+static i64 isqrt64(i64 n) {
+  if (n <= 0) return 0;
+  i64 lo = 0, hi = 3037000500LL;
+  while (hi - lo > 1) {
+    const i64 mid = lo + (hi - lo) / 2;
+    if ((__int128)mid * mid <= n) lo = mid; else hi = mid;
+  }
+  return lo;
+}
 constexpr i64 BOUND = i64(1) << 18;    // honest contract of every range cell
 constexpr i64 VBOUND = i64(1) << 31;   // public v, o, y, pre-conv inputs
 constexpr i64 CGBOUND = i64(1) << 24;  // the derived norm coefficient: |cg| < 2^24 (checked admission)
@@ -290,8 +300,12 @@ static Sized size_run(const Built &b) {
 }
 
 // ---- verifier-side helpers shared by the two entries ----
-enum class Verdict { ACCEPT, DECODE, ADMIT, DERIVE, PROOF };
-static const char *stage_name(Verdict x) { return x == Verdict::ACCEPT ? "accept" : x == Verdict::DECODE ? "decode" : x == Verdict::ADMIT ? "admit" : x == Verdict::DERIVE ? "derive" : "proof"; }
+// Verdict names (PR #73 follow-up, 2026-11-10): the design's word for a derived value outside its
+// class (DESIGN.md 3.1 / 4.5 step 3a) is "derive". Runs committed before this change print "admit" for
+// that verdict and "derive" for what is now "derive-build" (the relation-only build overflowed, a
+// sizing guard fired, or no plan holds). The mapping is stated once in README.md.
+enum class Verdict { ACCEPT, DECODE, DERIVE, DERIVE_BUILD, PROOF };
+static const char *stage_name(Verdict x) { return x == Verdict::ACCEPT ? "accept" : x == Verdict::DECODE ? "decode" : x == Verdict::DERIVE ? "derive" : x == Verdict::DERIVE_BUILD ? "derive-build" : "proof"; }
 struct VerifyTiming { double derive_s = 0, verify_s = 0; std::string why; Notes notes; };
 static u64 enc(i64 x) { return fi(x).v; }
 // One word as a signed integer of a class: canonical (< p), then lo <= x <= hi.
@@ -305,10 +319,10 @@ static bool decode(u64 w, i64 lo, i64 hi, i64 &out) {
 static Verdict derive_and_verify(const HeadParams &hp, const Derived &z, const u8 *proof, size_t bytes, VerifyTiming *tm) {
   auto t1 = std::chrono::steady_clock::now();
   const Built b = build(hp, z, true);
-  if (b.overflow) { if (tm) tm->why = "checked arithmetic overflowed while deriving the statement"; return Verdict::DERIVE; }
-  if (two_size_fault(research_setting(), b.L, b.rel, b.rs, b.ks)) { if (tm) tm->why = "derived statement outside the sizing guards"; return Verdict::DERIVE; }
+  if (b.overflow) { if (tm) tm->why = "checked arithmetic overflowed while deriving the statement"; return Verdict::DERIVE_BUILD; }
+  if (two_size_fault(research_setting(), b.L, b.rel, b.rs, b.ks)) { if (tm) tm->why = "derived statement outside the sizing guards"; return Verdict::DERIVE_BUILD; }
   const Sized s = size_run(b);
-  if (!s.ok) { if (tm) tm->why = "no plan holds for the derived statement"; return Verdict::DERIVE; }
+  if (!s.ok) { if (tm) tm->why = "no plan holds for the derived statement"; return Verdict::DERIVE_BUILD; }
   if (tm) tm->derive_s += secs(t1);
   auto t2 = std::chrono::steady_clock::now();
   const char *why = nullptr;

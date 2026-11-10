@@ -81,3 +81,44 @@ From the same check, for the record: the stage 2 builder's counts on seed 1 equa
 Stage 2 runs with a hard stop at 04:08Z: a step that has not started by then is not started, and a running step is killed and reported as incomplete.
 
 Also recorded here: three smoke runs of a debug build (D = 16, not the registered shape) ran at 02:06Z to 02:13Z to find compile and logic errors. They are not results, are not in runs/, and no number in RESULTS.md comes from them. They ran outside the heavy-job gate, which the lane rules do not allow for proving runs; that is a process error of this lane and is reported as such.
+
+
+## H4-r2 follow-up amendment, 2026-11-10T19:58:58.285891+00:00
+
+This is a new follow-up, not a revision of H4: **H4 stays NOT PASSED**. Timestamp above is read from the clock at writing; the containing commit's timestamp is the authoritative registration time. This amendment must be committed and pushed before any follow-up M2 process starts. No M2 binary or construction/debug fixture was executed while developing these changes; compilation only. No seed-11 debug mode was built or run. Prior knowledge: the build lane saw the stage-1 hostile outcomes in three D=16 debug runs, and 8/93 stage-2 outcomes before this registration; its post-stop honest 10/10 and check-mode boundary outcome are also already known.
+
+Deviation newly recorded: `runs/counts-vs-model.json` was first committed in `30e41161` and modified in `3e8a1ba` (stage2 measured=false replaced by measured values). This violates immutable run-file policy; it is not undone. All follow-up receipts have new `-r2` names and exclusive-create writes. The original registered table and original run files stay unchanged.
+
+### Fixed suite and expectations
+
+T=16, D=128, F=12, seed1. The existing 93 cases in m2.cpp run unchanged except the verdict spelling: old `admit` is now `derive`; old `derive` (relation-only build or sizing failure) is `derive-build`. Expected original cases, counted by class:
+- h4-history 1 proof reject; h4-history-same-statement 1 accept; h4-public 6 proof rejects.
+- cg-boundary 2: +2^24-1 accept with its own proof, +2^24 derive reject.
+- cg-large-gain-alias 22 derive rejects (the old weaker first/last-token guard cases).
+- admit-domain 5 derive rejects; derive-random 1 derive reject; derive-extremes 1 proof reject.
+- huge-element 10 decode; class-bound 20 decode; non-canonical 1 decode; header 2 decode; length 2 decode; r9 1 decode.
+- c8-bytes 8 proof; h1-splice 2 proof.
+- control-research-prover 1 accept; n1-sigma, n2-reciprocal, n3-w, n4-o, n5-limb-resplit, c2-state-floor-preserving, c9-limb: 1 proof reject each.
+
+Append exactly 36 new cases (129 total normal, 129 total UBSan), as specified in followup_cases.h:
+- cg-boundary-neg (2): -(2^24-1) accepted with fresh honest zero-state proof; -2^24 derive reject.
+- cg-alias-design-A (22): o0=4096 or 8192 crossed with cg0=2^52..2^62, compatible constant-state recurrence, all derive reject. The exact derived statements of design part A are ported using explicit verifier-configuration adapters: decay[2048]=4096, sigmoid[2048]=0; xq0=4096 yields q0=362; z0=16 and G0=cg0*512. The design's original out-of-domain floating-table raw inputs are NOT admitted by the pinned-table build. This adapter preserves all derived coefficients and the full recurrence/norm witness, not the original raw statement words.
+- v-boundary (3): corrupted SiLU copy at row2049 yields +2^31-1 accepted with a fresh honest proof, +2^31 and -2^31 derive reject. k=0 keeps the state zero. The pinned SiLU itself cannot attain the v boundary.
+- derive-class (6): a=-1/4097 and beta=-1/4097 in verifier table copies, k numerator scale8192, q divisor scale1 and numerator scale8192, all derive reject with class-specific reason.
+- recompute-overflow (3): review conv taps (2^32,2^32,2^31,0) with inputs (2^31-1,2^31-1,2,0); 128 k pre-normalization values764531127 through a modified SiLU copy; q pre-normalization value2^39 through a modified SiLU copy. All derive reject on checked arithmetic. For the last, the checked square overflows before the q numerator is reached, so this does not directly exercise a numerator-overflow branch.
+
+Separate control binary compiled with `-DM2_CONTROL_NO_CG_CHECK`: the same 22 design-A adapted statements, committing the alias witness and valid alias remainder using the ordinary proof generation path. Only the cg class check is disabled; host arithmetic/conversion, other derived classes, decode and proof verification remain checked. Outcome to measure: whether the verifier accepts. Prediction: all22 accept (an alias vulnerability under this deliberately weakened verifier); otherwise record the actual rejecting stage/reason and fail the prediction. This is not an acceptance under the production entry. No control result is presumed.
+
+Ten honest seeds1..10 are rerun, because isqrt64 and public-stage source changed. No earlier honest numbers are reused as follow-up measurements. The floating-seeded corrected root is replaced by pure-integer binary search, avoiding dependence on long-double precision or ABI. Unit checks use 0,1, squares/neighbours through3037000499^2, INT64_MAX, the first100001 squares/neighbours, and100000 fixed-LCG nonnegative i64s; same postcondition at default long double and -mlong-double-64 with UBSan. No root outcome is known at registration.
+
+### Auxiliary obligations and thresholds
+
+`norm_alias_regression.py --check norm_alias_expected.json` must pass unchanged. `followup_audit.py` independently spells the eleven closed identities after operand-tie substitution, compares them with the design ledger, checks every bound below p, and computes part G over all4096 pinned SiLU rows at gains1,1.41,1.4143,2 (gain encoded round-half-up of gain*46341). Table domain admits65536 integer z values; out-of-domain decoded z is rejected, not clamped. This is a source-audited ledger, not a machine-checked mapping from emitted relations. Term counts are not adjusted: S2 and S4 use three terms each (operand minus two sigma limbs), versus the model's two (operand minus G_ss.a); +2 per token x16 =32, explaining4,782,528 vs4,782,496.
+
+H4-r2 PASS requires 129/129 expected normal verdicts, 129/129 under UBSan, zero sanitizer reports, 10/10 honest accepted, the22 alias control outcomes explicitly reported (prediction22 accepts), both root tests and the unchanged design regression passing, and the ledger checks passing. Any missing case, crash, timeout, unpredicted verdict or sanitizer report means NOT PASSED. Record everything completed; no outcome-dependent repair/rerun in this lane without another pushed amendment disclosing the first outcome. Registered original H4 is never promoted.
+
+### Execution and stop rule
+
+Compile only with `python3 research/operators/qwen_deltanet_m2_build/record_r2.py prepare`. After push, invoke `record_r2.py run` through fp-heavy.sh, taskset cores0-5. Its first receipt records the gate-granted UTC, source/commit provenance and binary hashes per process. Two queues run concurrently within one acquired slot: normal hostile then the full hostile suite under `-fsanitize=undefined -fno-sanitize-recover=undefined`; separate control then honest seeds1..10. At most two proof processes, both within cores0-5. Shared loaded host; timings are indicative, not an A/B. This concurrency is chosen before observing results.
+
+Budget: **110 minutes elapsed from the gate grant**, additionally stop all run processes by **2026-11-10T22:12:00Z**. The lane hard stop remains **2026-11-10T22:15:00Z**. No extending either. Kill by child PID, preserve streamed partial output, report partial honestly. Existing compile receipts are separate from run provenance. No stage-2 binary starts before this amendment's push. No committed run file is edited. No GPU.

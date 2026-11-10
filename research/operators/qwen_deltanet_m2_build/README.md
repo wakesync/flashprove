@@ -78,3 +78,22 @@ python3 research/operators/qwen_deltanet_m2_build/record.py counts
 `honestN` proves and verifies seeds 1..10 (one process each) and gives every timing, size and count in RESULTS.md. `hostileN` runs the hostile suite on seed 1. `ubsanN` runs it again under `-fsanitize=undefined -fno-sanitize-recover=undefined`. `counts` compares the builder's counts with `research/operators/qwen_deltanet_m2/count_model.py` arm B. `m2.bin <fixture> check` builds the stage 2 witness and relations and proves nothing (about 2 s).
 
 `-DSTAGE1_D=16` gives a small debug build of stage 1. No reported number comes from it.
+
+
+## H4-r2 follow-up (2026-11-10)
+
+**An accept means the recurrence and norm hold for the recomputed values; it does not distinguish raw public inputs that recompute to identical values (including the H+1 control).**
+
+Verdict mapping for old receipts: `admit` becomes `derive` (public recompute or class failure); the old `derive` becomes `derive-build` (relation-only derivation/sizing failure). Old files retain their original strings. H4 remains NOT PASSED; the new suite has a separate registration and verdict.
+
+New code: followup_cases.h, record_r2.py, followup_audit.py, isqrt_test.cpp. The verifier owns copies of its pinned tables, permitting explicit corrupted-configuration tests without changing pinned files. The design-A aliases use the same derived constant-state recurrence and norm witness as the design, with an adapter for its out-of-domain raw inputs (decay/sigmoid copy entries 4096/0). These are synthetic test configurations, not the normal pinned table configuration. The v boundary and L2 overflow tests also require corrupted table copies. The separate control binary disables only the cg bound. Never use it as the verifier.
+
+Reproduce after reviewing PREREG's stop rules (for a later run, register a new time window and new output names):
+```
+python3 research/operators/qwen_deltanet_m2_build/record_r2.py prepare
+# Inside an acquired CPU heavy-job slot, pinned to cores 0-5:
+python3 research/operators/qwen_deltanet_m2_build/record_r2.py run
+```
+The runner refuses to overwrite run files. It records source hashes, binary hashes, gate time and per-process starts/ends. The root is now pure integer binary search; no float-to-integer conversion remains. The count difference is S2/S4: two three-term ties to sigma limbs instead of two two-term ties to G_ss.a, adding32 terms over16 tokens. Neither count is changed to force agreement.
+
+These remain F=12 rehearsals on synthetic inputs and head constants. The lowering fails fidelity on real layer-0 weights (merged PR #68). Research security only; composition soundness is an unrefereed paper argument. The builders wrote the hostile cases. Earlier prove time was about2.2 times the estimate, with cause not profiled.

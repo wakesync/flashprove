@@ -66,7 +66,7 @@ static size_t w_ST(const HeadParams &s, size_t c) { return w_tok(s, s.T) + c; }
 //      checked against its bound, |cg| < 2^24 among them, BEFORE any relation or field conversion;
 //  (4) every relation is derived from those integers with no witness;
 //  (5) the run is sized and the unchanged proof verifier runs.
-// Every failure is a returned verdict (decode, admit, derive, proof). Nothing here ends the process.
+// Every failure is a returned verdict (decode, derive, derive-build, proof). Nothing here ends the process.
 static Verdict verify_m2(const HeadConsts &hc, const std::vector<u64> &w, const u8 *proof, size_t bytes, VerifyTiming *tm = nullptr) {
   auto t0 = std::chrono::steady_clock::now();
   const HeadParams sh = shape2();
@@ -83,16 +83,22 @@ static Verdict verify_m2(const HeadConsts &hc, const std::vector<u64> &w, const 
   if (ok) in.ST = take(DD, BOUND);
   if (!ok) { if (tm) tm->why = "a public word is non-canonical or outside its class"; return Verdict::DECODE; }
   Derived z; const PubStage st = public_stage(sh, hc, in, z);
-  if (!st.ok) { if (tm) tm->why = st.why; return Verdict::ADMIT; }
+  if (!st.ok) { if (tm) tm->why = st.why; return Verdict::DERIVE; }
   if (tm) tm->derive_s = secs(t0);
   return derive_and_verify(sh, z, proof, bytes, tm);
 }
 static bool same_derived(const Derived &x, const Derived &y) { return x.a == y.a && x.beta == y.beta && x.k == y.k && x.v == y.v && x.q == y.q && x.cg == y.cg; }
 
+#include "followup_cases.h"
+
 int main(int argc, char **argv) {
   check(argc == 3, "usage: m2.bin <fixture.bin> check|honest|hostile");
   const std::string mode = argv[2];
   const HeadParams hp = shape2(); const int D = hp.D, T = hp.T; const i64 one = i64(1) << hp.F;
+  if (mode == "control") {
+    Suite S; followup_cases(S,hp,true); S.summary();
+    return S.as_expected == S.total ? 0 : 1;
+  }
   const Fixture2 fx = load2(argv[1], hp);
   auto t0 = std::chrono::steady_clock::now();
   Derived z; const PubStage ps = public_stage(hp, fx.hc, fx.in, z);
@@ -210,7 +216,7 @@ int main(int argc, char **argv) {
     Proved pe; check(two_prove(*se.run, tab_edge, Hostile(), pe), "boundary prove");
     const std::vector<u8> eb = pe.proof.bytes();
     S.report("cg-boundary", "largest |cg| = 2^24 - 1, honest proof of that statement (accept expected)", verify_m2(hc_edge, words_edge, eb.data(), eb.size()), Verdict::ACCEPT);
-    S.report("cg-boundary", "the same statement and proof, the verifier's gain one step up: cg = 2^24", verify_m2(hc_over, words_edge, eb.data(), eb.size()), Verdict::ADMIT); }
+    S.report("cg-boundary", "the same statement and proof, the verifier's gain one step up: cg = 2^24", verify_m2(hc_over, words_edge, eb.data(), eb.size()), Verdict::DERIVE); }
   for (int e = 52; e <= 62; e++)
     for (int variant = 0; variant < 2; variant++) {
       // The verifier's gain for channel 0 is 2^(e + 9), and z of channel 0 is 16 at every token, so
@@ -229,18 +235,18 @@ int main(int argc, char **argv) {
       for (i64 r = 0; r < one && !alias; r++) { const u64 yv = ((m - F{u64(r)}) * inv_one).v; const i64 ys = yv > P / 2 ? -(i64)(P - yv) : (i64)yv; if (ys > -VBOUND && ys < VBOUND) alias = true, ya = ys, ra = r; }
       if (alias) w[w_y(hp, tok, 0)] = enc(ya);
       std::printf("{\"mode\":\"alias-note\",\"cg_log2\":%d,\"token\":%d,\"alias_exists\":%s,\"alias_y\":%lld,\"alias_remainder\":%lld}\n", e, tok, alias ? "true" : "false", (long long)ya, (long long)ra);
-      S.report("cg-large-gain-alias", "cg = 2^" + std::to_string(e) + " on channel 0, y at token " + std::to_string(tok) + " set to the modular alias (guard regression; no forged proof built)", verify_m2(hc, w, pb.data(), pb.size()), Verdict::ADMIT);
+      S.report("cg-large-gain-alias", "cg = 2^" + std::to_string(e) + " on channel 0, y at token " + std::to_string(tok) + " set to the modular alias (guard regression; no forged proof built)", verify_m2(hc, w, pb.data(), pb.size()), Verdict::DERIVE);
     }
-  S.report("admit-domain", "ar = 2^19 (in class, outside the decay table's domain)", V(with(w_ar(hp, 1), enc(i64(1) << 19))), Verdict::ADMIT);
-  S.report("admit-domain", "br = -2^19 (in class, outside the sigmoid table's domain)", V(with(w_br(hp, 1), enc(-(i64(1) << 19)))), Verdict::ADMIT);
-  S.report("admit-domain", "z = 2^19 (in class, outside the SiLU table's domain)", V(with(w_z(hp, 1, 0), enc(i64(1) << 19))), Verdict::ADMIT);
-  S.report("admit-domain", "xq = 2^30 (in class, conv output outside the SiLU table's domain)", V(with(w_xq(hp, 1, 0), enc(i64(1) << 30))), Verdict::ADMIT);
+  S.report("admit-domain", "ar = 2^19 (in class, outside the decay table's domain)", V(with(w_ar(hp, 1), enc(i64(1) << 19))), Verdict::DERIVE);
+  S.report("admit-domain", "br = -2^19 (in class, outside the sigmoid table's domain)", V(with(w_br(hp, 1), enc(-(i64(1) << 19)))), Verdict::DERIVE);
+  S.report("admit-domain", "z = 2^19 (in class, outside the SiLU table's domain)", V(with(w_z(hp, 1, 0), enc(i64(1) << 19))), Verdict::DERIVE);
+  S.report("admit-domain", "xq = 2^30 (in class, conv output outside the SiLU table's domain)", V(with(w_xq(hp, 1, 0), enc(i64(1) << 30))), Verdict::DERIVE);
   { auto w = words; for (int t = 0; t < T; t++) for (int i = 0; i < D; i++) w[w_xq(hp, t, i)] = w[w_xk(hp, t, i)] = w[w_xv(hp, t, i)] = enc(VBOUND - 1);
-    S.report("admit-domain", "every pre-conv input at its class extreme", V(w), Verdict::ADMIT); }
+    S.report("admit-domain", "every pre-conv input at its class extreme", V(w), Verdict::DERIVE); }
   { auto w = words; u64 st2 = 0x9e3779b97f4a7c15ULL;
     auto rnd = [&](i64 bound) { st2 ^= st2 << 13; st2 ^= st2 >> 7; st2 ^= st2 << 17; return -(bound - 1) + i64(st2 % u64(2 * bound - 1)); };
     for (size_t i = 3; i < w.size(); i++) w[i] = enc(rnd(BOUND));  // every word in every class (2^18 is the narrowest)
-    S.report("derive-random", "every word uniform in (-2^18, 2^18), inside every class", V(w), Verdict::ADMIT); }
+    S.report("derive-random", "every word uniform in (-2^18, 2^18), inside every class", V(w), Verdict::DERIVE); }
   { auto w = words; for (size_t c = 0; c < size_t(D) * D; c++) w[w_S0(hp, c)] = enc((c & 1) ? -(BOUND - 1) : BOUND - 1), w[w_ST(hp, c)] = enc(BOUND - 1);
     for (int t = 0; t < T; t++) for (int i = 0; i < D; i++) w[w_y(hp, t, i)] = enc((i & 1) ? -(VBOUND - 1) : VBOUND - 1);
     S.report("derive-extremes", "S0, S_T and y at their class extremes, honest pre-conv inputs", V(w), Verdict::PROOF); }
@@ -280,6 +286,7 @@ int main(int argc, char **argv) {
     std::printf("{\"mode\":\"hostile-note\",\"attack\":\"%s\",\"wrapped_combinations\":%llu,\"keys_outside_table\":%llu}\n", c.what, (unsigned long long)pr.wrapped, (unsigned long long)pr.uncounted);
     S.report(c.cls, c.what, v, c.want, (long long)viol, t2.why.c_str());
   }
+  followup_cases(S,hp,false);
   S.summary();
   return S.as_expected == S.total ? 0 : 1;
 }
