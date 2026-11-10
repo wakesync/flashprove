@@ -70,6 +70,20 @@ python3 xcheck_torch.py /path/to/modeling_qwen3_5.py $C/cache stock     # transf
 python3 weight_stats.py $C/cache stock
 ```
 
+### Exact-rerun settings
+
+The committed runs used `run_all.sh` as written: `taskset -c 0-5`, one checkpoint at a time, and no BLAS or OpenMP thread variables set (`OPENBLAS_NUM_THREADS`, `OMP_NUM_THREADS` and the like were unset; the runner does not set them and inherits whatever is in the environment). `run_all.sh` is unchanged.
+
+What changing those settings does, from another lane's receipt (lane `qwen-norm-scaling`, files `runs/repro-diff-threads3-stock.json` and `runs/repro-diff-threads3-abl.json` on its branch `research/1109-qwen-norm-scaling`; not committed in this PR, and that lane's PR is not open yet): it reran `real_head.py` with `OPENBLAS_NUM_THREADS=3` and both checkpoints in parallel. Per checkpoint, 473 of 480 rows differed, in float fields only, by at most 4.8e-13 relative; all 13,920 integer fields (range maxima and exact-limb minima) were equal. So:
+- integer fields are expected to match bit for bit across thread settings;
+- float fields match exactly only with the original settings above, and otherwise to about 1e-12 relative.
+
+The reviewers' exact reruns of all 6,720 rows (RESULTS section 6, A-8) are true for the settings they used; they are not a guarantee for every thread setting.
+
+### Two frozen script labels
+
+Scripts are frozen in this PR. Two labels in them are historical and misleading: the comment at `real_head.py` line 292 says the arm "isolates the norm's own error", and `tables.py` line 10 prints the column header "norm-only". That arm rounds the float64 o to the 2^-F grid and then applies the integer norm, so it includes the rounding of o. The corrected description is in RESULTS section 4.4 point 2. The run-file field name `norm_only_rel_y` is kept unchanged.
+
 `modeling_qwen3_5.py`: `https://raw.githubusercontent.com/huggingface/transformers/e540ae4528889920ce36955d1527036cca9b4ca5/src/transformers/models/qwen3_5/modeling_qwen3_5.py`.
 
 ### The exact range requests

@@ -10,9 +10,9 @@ Issue #8 (fidelity), part of #32 (Qwen tracking) and #36 (model identity). PRERE
 | A2 fidelity | some F in {12, 14, 16} with median rel_y <= 1e-2, max rel_y <= 5e-2, median rel_S <= 1e-2, max rel_S <= 5e-2 over 480 pairs | no F passes. Median rel_y 0.659 / 0.177 / 0.0494 at F = 12 / 14 / 16 (max 141 / 54.4 / 19.4) | **FAIL** |
 | A3 abliteration at layer 0 | every layer-0 tensor and the embedding byte-identical | 9 / 9 layer-0 DeltaNet-path tensors, all 14 layer-0 tensors and the embedding identical; all 3,360 result rows identical across checkpoints | **PASS** |
 
-In one sentence: on real layer-0 weights the M2 range bounds hold at F = 12, with less margin than the synthetic study showed. But the integer head output is far from the float model at every F that the 2^18 bounds allow. The state is close; the gated-norm output is not. None of the tested F = 12, 14, 16 meets both the range bounds and the fidelity threshold with the M2 lowering, on layer 0, on these 10 prompts (section 4). Other F values and other lowerings were not tested.
+In one sentence: on real layer-0 weights the M2 range bounds hold at F = 12, with less margin than the synthetic study showed. The state is close; the gated-norm output is not. None of the tested F = 12, 14, 16 meets both the range bounds and the fidelity threshold with the M2 lowering, on layer 0, on these 10 prompts (section 4). Other F values and other lowerings were not tested.
 
-*Text revised after review (two independent reviews at 9b366632, linked in section 6, A-8). No number, script or run file changed.*
+*Text revised after review (two independent reviews at 9b366632, linked in section 6, A-8; a re-review at 061de569, A-9). No number, script or run file changed.*
 
 All numbers are measured, n as stated, unreplicated. Shared, loaded CPU host. Nothing here is a proof run.
 
@@ -93,7 +93,7 @@ All numbers are measured, n as stated, unreplicated. Shared, loaded CPU host. No
   - Plain projection leaves 24% of ||Delta|| unexplained.
   - The scaled fit leaves 7.4% to 8.1%, which is the BF16 rounding level of W_abl (a half-ulp estimate gives 5.3% to 5.8%).
   - Rounded to BF16, the scaled fit reproduces 92.1% to 92.6% of the published entries exactly.
-- So, on the 3 tensors checked, this abliteration is a scaled, close-to-rank-1 directional ablation of residual-writing matrices, with one direction r shared across them. It is not a fine-tune. The other 67 changed tensors were hashed, not analysed; that they have the same structure is an inference, not a measurement of this PR.
+- So, on the 3 tensors checked, this abliteration is a scaled, close-to-rank-1 directional ablation of residual-writing matrices, with one direction r shared across them. That structure is consistent with the method the model card states (abliteration, a directional ablation, section 1); the weights alone do not establish the checkpoint's training history. The other 67 changed tensors were hashed, not analysed; that they have the same structure is an inference, not a measurement of this PR.
 - Reviewers' numbers, not this PR's evidence: the two reviewers checked 5 more changed tensors with their own code and found the same structure, top-1 energy 99.2% to 99.5%, alpha about 1.299, shared direction. astra (n = 2: L18 out_proj 0.9943, L50 down_proj 0.9927, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6756503458>) and opus (n = 3: L34 out_proj 0.9946, L51 o_proj 0.9924, L40 down_proj 0.9926, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>). That makes 8 of 70 looked at by anyone. It is still a sample.
 
 **Layer-0 behaviour (A3).** Layer 0 and the embedding are byte-identical, so the integer and float layer-0 computations must be identical across checkpoints. They were computed independently for both checkpoints and compared: **0 of 1,440 (registered), 0 of 960 (taps at 2^F) and 0 of 960 (q unscaled) result rows differ.** Every layer-0 number below therefore holds for both checkpoints. It says nothing about layers 17 to 51.
@@ -122,7 +122,7 @@ Metrics (PREREG):
 | 14 | 0.0042 (0.0006 / 0.104) | 0.0047 (2.44) | **0.177** (0.0086 / 54.4) | 0.046 | 198 / 480 (S, M over 2^18) |
 | 16 | 0.0033 (0.0002 / 0.030) | 0.0028 (0.63) | **0.049** (0.0023 / 19.4) | 0.012 | 19 / 480 (S, M, o over 2^18; public ar and z over 2^20) |
 
-Layer level: all 48 heads together, pooled into one relative error over the 6,144-wide y that out_proj reads (and, for rel_o, over the 6,144-wide o). out_proj reads y, not o. The gated norm rescales every head's o to unit RMS before the gain and the SiLU(z) gate, so a head with small o does not have small y and is not down-weighted in this pooled number or by out_proj. n = 10 prompts, median (min / max):
+Layer level: all 48 heads together, pooled into one relative error over the 6,144-wide y that out_proj reads (and, for rel_o, over the 6,144-wide o). out_proj reads y, not o. The gated norm divides o by sqrt(mean(o^2) + 1e-6) and then applies the gain and the SiLU(z) gate, so y is not a fixed multiple of o. The normalised o is not exactly unit RMS (the 1e-6 matters most for tiny o), and the gain and the gate also scale y. What follows is narrower: a small o alone does not imply a negligible y, or a negligible contribution to this pooled number or to out_proj (reviewer's observation in 4.4 point 1). n = 10 prompts, median (min / max):
 
 | F | rel_y | rel_o | o-rounded + integer norm rel_y |
 |---|---|---|---|
@@ -178,15 +178,15 @@ Bits needed by F (signed, max over pairs):
 - F = 14: M 21, S 21;
 - F = 16: M 23, S 23, o 20.
 
-At F = 16 the public in_proj outputs also exceed the DESIGN classes: ar reaches 1,504,655 and z reaches 2,310,181 against 2^20. **Each extra bit of F costs one bit of every range class**, and the 2^18 contract (16 x 2^18 = D = 2^22, RNG's completeness condition) holds only at F = 12.
+At F = 16 the public in_proj outputs also exceed the DESIGN classes: ar reaches 1,504,655 and z reaches 2,310,181 against 2^20. Among the tested F = 12, 14 and 16, the 2^18 contract (16 x 2^18 = D = 2^22, RNG's completeness condition) held at F = 12 only: 480 / 480 pairs at F = 12, 198 / 480 at F = 14 and 19 / 480 at F = 16. On these runs the maxima of S and M grew by about 2 bits per 2 bits of F (19, 21 and 23 bits). Three points do not establish a general rule for other F.
 
 ### 4.4 Where the error comes from
 
-1. **The head output o, and with it y, is small in absolute terms at layer 0.**
+1. **The head output o is small in absolute terms at layer 0.**
    - The float o RMS per token per head, in integer units at F = 12, has median 187 over the 480 pairs.
    - 134 of 480 pairs have a median o RMS below 16 integer units.
    - o is rounded to 2^-F before the norm. The gated norm then divides by o's RMS, so a fixed absolute resolution of 2^-F on o becomes a large relative error in y.
-   - This does not make those heads unimportant. out_proj reads y, not o, and the norm has already rescaled y to ordinary size. Reviewer's number, not this PR's evidence (opus, n = 480 pairs at F = 12, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>): 110 of 480 pairs have o RMS below 4 integer units, and their float y absmax still has median 0.167. Small-o heads enter out_proj at close to full weight.
+   - A small o alone does not make a head unimportant. out_proj reads y, not o, and y depends on o only through the norm, the gain and the gate (4.1). Reviewer's number, not this PR's evidence (opus, n = 480 pairs at F = 12, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>): 110 of 480 pairs have o RMS below 4 integer units, and their float y absmax still has median 0.167. So small o does not imply a negligible y or a negligible contribution downstream. How much each head contributes after out_proj was not measured.
 
    Median rel_y by the head's median o RMS in integer units (`runs/buckets.json`):
 
@@ -201,9 +201,9 @@ At F = 16 the public in_proj outputs also exceed the DESIGN classes: ar reaches 
 2. **Rounding o to the grid, then the integer norm** (this arm was called "norm-only" in the first version of this file; the field in the run files is still `norm_only_rel_y`).
    - The arm takes the float64 o, rounds it to the 2^-F grid, applies the integer gated norm (DESIGN 4.4), and compares with the float y. So it measures the rounding of o plus the integer norm. It is not the norm alone, and it is not "a perfect o".
    - Its error is per-head median 0.171 / 0.046 / 0.012 (0.0120) at F = 12 / 14 / 16, a factor of 4 per 2 bits. **At F = 16 the median 0.0120 still fails the 0.01 threshold.**
-   - Where the error comes from inside this arm. Reviewer's decomposition, not this PR's evidence (opus, own code, per-head median over n = 480 pairs, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>): o rounded to the grid with an exact float norm gives 0.132 at F = 12 and 0.0087 at F = 16; the full integer norm gives 0.171 and 0.012. So most of this arm's error is the rounding of the small o, which the norm then scales back to full size. The floors on w and y add the rest.
-   - Design implication: the accuracy is lost mainly when the small head output o is rounded to 2^-F before the norm. The next things to try are finer resolution or a per-head scale on o before the norm. Changing the norm lowering alone cannot recover that loss.
-   - The registered localisation of this error is done by the `qwen-norm-scaling` lane. It is not part of this PR.
+   - Where the error comes from inside this arm. Reviewer's decomposition, not this PR's evidence (opus, own code, per-head median over n = 480 pairs, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>): o rounded to the grid with an exact float norm gives 0.132 at F = 12 and 0.0087 at F = 16; the full integer norm gives 0.171 and 0.012. So, inside this arm and by this descriptive comparison, most of the error goes with the rounding of the small o, and the floors on w and y account for the remainder. Comparing medians in this way is not an additive error budget.
+   - This check concerns the arm that starts from the float o rounded to the grid. It is not a decomposition of the registered integer path, whose per-head medians are 0.659 at F = 12 and 0.049 at F = 16 and which also carries the state and o errors of the integer recurrence.
+   - Design direction, not a settled cause: the reviewer's check supports finer resolution, or a per-head scale on o before the norm, as the direction to try. Within this arm, a different norm lowering cannot restore information already discarded when o was rounded. Which stage dominates the error of the full registered path is not settled here. That is the registered question of the `qwen-norm-scaling` lane, pending, and not part of this PR.
 3. **Conv tap rounding (registered ablation) moves the state error but not y.**
    - At F = 16 with taps at 2^16 instead of 2^12, rel_S median falls 0.0033 to 0.00064, and rel_o falls 0.0028 to 0.00099.
    - rel_y stays at 0.048 (from 0.049), and the layer-level rel_y stays at 0.068.
@@ -215,17 +215,17 @@ At F = 16 the public in_proj outputs also exceed the DESIGN classes: ar reaches 
    - At F = 12 one pair puts o over 2^18 (267,312), so it does not fit the contract.
    - Still no A2 pass.
 
-The worst pairs are heads with near-zero o on a prompt. For example, p04 head 36 has o RMS about 0.1 integer units at F = 12 and float y max 0.028. Rounding o to an absolute grid fails there. These heads are not negligible downstream: out_proj reads y, which the norm has rescaled, so they enter out_proj at close to full weight (point 1). The layer-level rows in 4.1 pool all heads over y, and they fail too, at every tested F (0.068 at F = 16 against 0.01).
+The worst pairs are heads with near-zero o on a prompt. For example, p04 head 36 has o RMS about 0.1 integer units at F = 12 and float y max 0.028. Rounding o to an absolute grid fails there. A small o alone does not make such a head negligible downstream, because out_proj reads y, not o (point 1); its actual contribution after out_proj was not measured. The layer-level rows in 4.1 pool all heads over y, and they fail too, at every tested F (0.068 at F = 16 against 0.01).
 
 ## 5 Verdict
 
 1. **Do the M2 range bounds hold on real weights?** At F = 12, **yes**: 480 / 480 pairs, both checkpoints, every RNG class, exact limb and public class (A1 PASS). The margin is thin for M (0.77 of 2^18) and was 4x larger in the synthetic study. At F = 14 and 16 they **do not** hold (198 / 480, 19 / 480).
 2. **Which F is needed?** **None of 12, 14 or 16 meets the registered fidelity threshold** (A2 FAIL).
    - The state recurrence alone would pass the median at F = 12 and every rel_S criterion at F = 16 (max 0.030).
-   - The gated-norm output fails at every tested F. Layer-0 o is small in absolute terms, it is rounded to 2^-F before the norm, and the norm scales that loss back up to full size (4.4).
+   - The gated-norm output fails at every tested F. Layer-0 o is small in absolute terms and is rounded to 2^-F before the norm (4.4). Which stage dominates the error of the full registered path is not settled here (4.4 point 2).
    - Ranges hold at F = 12 only; F = 14 and F = 16 break them. Fidelity fails at F = 12, 14 and 16.
    - **What was tested: none of F = 12, 14, 16 meets both the range bounds and the fidelity threshold with the M2 lowering, on layer 0, on these 10 prompts.** No argument here covers other F values, other lowerings, other layers or wider cells.
-   - Design input for M3: the accuracy is lost mainly when the small o is rounded to 2^-F before the norm (4.4 point 2). So the next things to try are finer resolution or a per-head (or per-token) scale on o before the norm. Changing the norm lowering alone cannot recover that loss. Wider range cells would cost a bigger RNG window.
+   - Design input for M3, a direction rather than a settled cause: a reviewer's descriptive check on the o-rounding arm (4.4 point 2) supports finer resolution, or a per-head (or per-token) scale on o before the norm, as the next thing to try. Within that arm a different norm lowering cannot restore information already discarded when o was rounded. Whether the rounding of o dominates the error of the full registered path is the registered question of the `qwen-norm-scaling` lane, pending. Wider range cells would cost a bigger RNG window.
    - Reviewer's descriptive number, not this PR's evidence (opus, n = 480 pairs and 10 prompts, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>): a split scale, state at F = 12 and o plus the norm at 2^15, stayed inside every range (o max 189,042, 0.72 of 2^18) and reduced the error (layer-level rel_y 1.12 to 0.21, per-head median 0.31) without meeting the threshold.
 3. **Does the abliterated checkpoint behave differently in a way that matters for the proof?**
    - At layer 0: no. It is byte-identical, and all outputs were identical (A3 PASS).
@@ -255,6 +255,7 @@ The worst pairs are heads with near-zero o on a prompt. For example, p04 head 36
 - **A-8 (2026-11-10, text revised after review; disclosures).** Two independent reviews at `9b366632` (astra <https://github.com/wakesync/flashprove/pull/68#issuecomment-6756503458>, opus <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757172391>) reproduced all 6,720 rows and found no bug, and asked for text changes only. This revision: corrects the out_proj explanation (it reads y, not o); relabels the "norm-only" arm as o rounded to the grid, then the integer norm, and changes the design advice drawn from it; scopes the global-F, rank-1 and file-hash statements to what was tested; renames the BF16 ledger metric to say it is an emulation. No number, script, metric, threshold, prompt or run file changed. Two process facts the reviews pointed out:
   - No fetch, stream or run record carries an absolute UTC timestamp (they record elapsed seconds). So "PREREG predates any fetch" rests on commit order alone (`a02fc72` 00:26:57Z, then `4a4db63` 01:16:54Z), not on the records.
   - The first-run copy used for the 6,720-row comparison in A-1 was not kept, so that comparison cannot be rerun (`cmp_first.py` reads the uncommitted `runs/first-run/`). Both reviewers' fresh reruns reproduced all 6,720 committed rows exactly. That does not retroactively prove the history of the first run.
+- **A-9 (2026-11-10, second text revision after the re-review at `061de569`, <https://github.com/wakesync/flashprove/pull/68#issuecomment-6757460708>).** Text only. Removes the remaining unrestricted statements about F (the summary sentence and the range conclusion in 4.3 now say what was observed at F = 12, 14 and 16); removes "and with it y" and replaces the "unit RMS" wording in 4.1 with the supported statement that small o alone does not imply negligible y or a negligible downstream contribution; rewrites the causal statements in 4.4 point 2 and section 5 as a direction supported by a reviewer's descriptive check of the o-rounding arm, with the full-path localisation pending in `qwen-norm-scaling`; attributes the abliteration method to the model card instead of "It is not a fine-tune"; adds the exact-rerun thread settings and a note on two frozen script labels to README.md. No number, script, metric, threshold, prompt or run file changed.
 
 ## 7 Per-prompt tables at F = 14 and F = 16
 
@@ -298,6 +299,6 @@ F = 16:
 - No proof run and no timing claim.
 - The low-rank structure was checked on 3 of the 70 differing tensors by this PR (8 of 70 counting the reviewers' 5). The others are hashed only.
 - Every abliterated layer (17 to 51) and every layer deeper than 0 is unmeasured for ranges and fidelity.
-- The "o rounded to the grid, then integer norm" arm does not separate the rounding of o from the norm. Its decomposition here is the reviewer's, and the registered localisation belongs to the `qwen-norm-scaling` lane.
+- The "o rounded to the grid, then integer norm" arm does not separate the rounding of o from the norm. Its decomposition here is the reviewer's and covers that arm only, not the full registered path. Which stage dominates the full-path error is the registered question of the `qwen-norm-scaling` lane, pending.
 
 Raw files: `runs/layout.json`, `runs/diff.json`, `runs/stream-{stock,abl}.json`, `runs/fetch-{stock,abl}.json`, `runs/fetch-lowrank-{stock,abl}.json`, `runs/lowrank.json`, `runs/real-{stock,abl}{,-tapF,-qunscaled}.jsonl`, `runs/summary.json`, `runs/buckets.json`, `runs/selfcheck-f12.json`, `runs/xcheck-torch.json`, `runs/weight-stats.json`, `runs/*.time`.
