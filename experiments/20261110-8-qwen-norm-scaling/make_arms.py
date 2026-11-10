@@ -23,8 +23,8 @@ loc["round1-o-rhu"] = dict(cfg=dict(exact=[x for x in SH.STAGES if x != "o"], or
 
 # Run order (the run is arm-major and may be cut off at the time box): baseline and all-exact, then the grouped arms, then the
 # o rows, then the remaining single-stage arms.
-first = ["C0", "all_exact"] + [f"{a}-{g}" for g in ("upstream", "o", "norm", "output", "public", "state") for a in ("roundG", "exactG")
-                              if f"{a}-{g}" in loc] + ["round1-o", "round1-o-rhu", "exact1-o"]
+first = ["roundG-upstream", "exactG-upstream", "round1-o", "round1-o-rhu", "roundG-norm", "exactG-norm",
+         "exact1-o", "C0", "all_exact", "roundG-output", "exactG-output", "roundG-public", "exactG-public", "roundG-state", "exactG-state"]
 loc = {k: loc[k] for k in first + [k for k in loc if k not in first]}
 
 NORM = dict(Fw=16, Fy=20)

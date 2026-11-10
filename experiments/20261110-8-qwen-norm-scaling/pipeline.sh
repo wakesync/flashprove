@@ -4,13 +4,13 @@
 #   engine check 2(a), 2(b) on the final engine code; stop if it fails
 #   candidates (stock), summary, cost; pick the identity-rerun arm; C0 + that arm + X1..X3 on abliterated
 #   localisation (stock), summary; mechanism numbers
-# PREREG kill criterion: no new arm starts after 03:40Z (scaled_head.py --deadline 0340 checks it before each group
-# of 6 arms and lists the arms it did not start in <out>.notrun).
+# PREREG kill criterion as amended in A-3: no new arm starts after 03:55Z (scaled_head.py --deadline checks it before
+# each group of 6 arms and lists the arms it did not start in <out>.notrun).
 # Usage: pipeline.sh <cache_dir> <scratch_dir>
 set -euo pipefail
 cd "$(dirname "$0")"
 C="$1"; X="$2"
-P="$X/prep"; FR="$X/fref2"; DL=0340
+P="$X/prep"; FR="$X/fref2"; DL=0355   # PREREG amendment A-3 (registered: 0340)
 mkdir -p runs "$FR"
 prog() { echo "$1 $(date -u +%FT%TZ)" >> runs/pipeline.progress; }
 [ -e runs/repro.done ] || { prog "no repro.done: not running"; exit 3; }
