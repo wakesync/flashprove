@@ -825,6 +825,8 @@ excluded:
     reason: "counting and cost model, no proof and no relation that enforces anything"
   - path: research/operators/qwen_deltanet_m2_build
     reason: "reached main after this inventory's base (PR #73, main 0bdf8326); its two-lookup relations are not inventoried here (follow-up)"
+  - path: research/operators/qwen_handoff
+    reason: "reached main after the repair run (PR #98, main 2c180575); its joint two-chunk boundary relations are not inventoried here (follow-up)"
 
 # Open gaps: every prover_only and not_enforced row, plus open proof obligations, in plain language.
 # check_inventory.py fails if a prover_only or not_enforced row is in no gap.
