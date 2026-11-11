@@ -2,8 +2,18 @@
 """Registered paired verification suite. Run from repo root; refuses existing receipts.
 Build with verifier/build.sh then build_variants.py. --dry-run invokes no verifier.
 Proofs and mutated inputs stay under bin/subst6; hashes and full checker output are receipts.
+
+Two modes that call the checkers:
+- registered (default, --out): the mode of the registered run, unchanged. It keeps the lane's fixed
+  wall-clock stop 2026-11-11T06:40Z and the 1800 s budget, so any call after that stop does setup,
+  then records no case. It exits 0 even on a partial run (PREREG amendment 5).
+- reproduce (--reproduce DIR --budget-min N): a new run for reproduction, not the registered one.
+  No fixed wall-clock stop; it stops N minutes after its own start. Refuses a DIR that exists or lies
+  under runs/. Writes DIR/reproduce.jsonl, DIR/reproduce.summary.json, altered inputs in DIR/work/.
+  Exit 0 = every planned case and repetition ran and passed, 1 = all ran and one failed,
+  3 = incomplete or empty run. --reps K (1..5) and --cases A,B,... select a subset.
 """
-import argparse, copy, datetime, hashlib, json, os, pathlib, re, statistics, struct, subprocess, sys, time
+import argparse, copy, datetime, hashlib, json, math, os, pathlib, re, statistics, struct, subprocess, sys, time
 HERE=pathlib.Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 WORK=ROOT/'bin/subst6/registered'
@@ -136,8 +146,69 @@ def actual_kind(r):
     if r['last'] in ['NO: proof-refused','NO: key-refused','NO: entry-refused']:return 'proof_constraint'
     return 'application_validation'
 def stats(v):return dict(n=len(v),median=statistics.median(v),sd=statistics.stdev(v) if len(v)>1 else 0,min=min(v),max=max(v))
+
+# Reproduction mode (PREREG amendment 5). Separate from the registered path below, which is unchanged.
+H_NAMES=['H-CFG1','H-CFG2','H-REQ1','H-REQ2','H-REQ3','H-RPL1','H-PFX1','H-PFX2','H-PFX3','H-PFX4','H-PFX5','H-DOM1','H-DOM2','H-MAL1','H-MAL2','H-MAL3','H-MAL4']
+EXIT_PASS,EXIT_CASE_FAILED,EXIT_INCOMPLETE=0,1,3
+def reproduce(args):
+    global WORK
+    b=args.budget_min
+    if b is None or not math.isfinite(b) or not 0<b<=600:raise SystemExit('suite.py --reproduce: --budget-min must be finite, > 0 and <= 600')
+    reps=args.reps if args.reps is not None else 5
+    if not 1<=reps<=5:raise SystemExit('suite.py --reproduce: --reps must be 1..5')
+    d=pathlib.Path(args.reproduce).resolve();runs=(HERE/'runs').resolve()
+    if d==runs or runs in d.parents:raise SystemExit('suite.py --reproduce: refusing a directory under runs/ (registered receipts)')
+    if d.exists() or d.is_symlink():raise SystemExit('suite.py --reproduce: refusing an existing directory: '+str(d))
+    sel=[n for n in args.cases.split(',') if n] if args.cases else None
+    start=time.monotonic();budget=b*60;started=utc()
+    d.mkdir(parents=True);WORK=d/'work'
+    out=d/'reproduce.jsonl';rows=[];partial=False;planned=None
+    with out.open('x') as f:
+        f.write(json.dumps(dict(event='start',mode='reproduce',started_utc=started,budget_seconds=budget,reps=reps,cases=sel,note='reproduction run, not the registered run'))+'\n');f.flush()
+        cases=c_cases()
+        names=[c['case'] for c in cases]+H_NAMES
+        if sel is not None:
+            bad=[n for n in sel if n not in names]
+            if bad:raise SystemExit('suite.py --reproduce: unknown case(s): '+','.join(bad))
+            cases=[c for c in cases if c['case'] in sel]
+        planned=sel if sel is not None else names
+        need_h=any(n.startswith('H-') for n in planned)
+        for rep in range(1,reps+1):
+            hc=[]
+            if need_h:
+                if time.monotonic()-start>budget:partial=True;break
+                hc,g=h_cases(200+rep,rep)
+                if sel is not None:hc=[c for c in hc if c['case'] in sel]
+                f.write(json.dumps(dict(event='generation',mode='reproduce',rep=rep,result=g))+'\n');f.flush()
+            for c in cases+hc:
+                if time.monotonic()-start>budget:partial=True;break
+                pair={}
+                for arm in (['control','attack'] if rep%2 else ['attack','control']):pair[arm]=run(c['control'] if arm=='control' else c['cmd'])
+                row=dict(mode='reproduce',case=c['case'],rep=rep,expected=c['expected'],intended_kind=c['kind'],actual_kind=actual_kind(pair['attack']),control=pair['control'],attack=pair['attack'],generation=c.get('generation'),control_accepts=accepted(pair['control']),attack_accepts=accepted(pair['attack']),intended=judge(pair['attack'],c))
+                row['pass']=row['control_accepts'] and row['intended'];rows.append(row)
+                f.write(json.dumps(row)+'\n');f.flush();print(c['case'],rep,row['attack']['last'],row['pass'],flush=True)
+            if partial:break
+    got={(r['case'],r['rep']) for r in rows}
+    complete=(not partial) and bool(rows) and all((n,rep) in got for n in planned for rep in range(1,reps+1))
+    summary={}
+    for n in sorted({r['case'] for r in rows}):
+        rr=[r for r in rows if r['case']==n]
+        summary[n]=dict(n=len(rr),controls=sum(r['control_accepts'] for r in rr),accepted=sum(r['attack_accepts'] for r in rr),intended=sum(r['intended'] for r in rr),verdict='PASS' if len(rr)==reps and all(r['pass'] for r in rr) else 'FAIL',acceptance=stats([int(r['attack_accepts']) for r in rr]),seconds=stats([r['attack']['seconds'] for r in rr]),checks=sorted({r['attack']['last'] for r in rr}),kinds=sorted({r['actual_kind'] for r in rr}))
+    code=EXIT_INCOMPLETE if not complete else (EXIT_PASS if all(r['pass'] for r in rows) else EXIT_CASE_FAILED)
+    hashes={'work/'+str(p.relative_to(WORK)):sha(p) for p in sorted(WORK.rglob('*')) if p.is_file()}
+    for x in [EX,GAP]:
+        hashes.update({str(p.relative_to(ROOT)):sha(p) for p in x.rglob('*') if p.is_file()})
+    doc=dict(mode='reproduce',note='reproduction run, not the registered run; not evidence for the PREREG verdict',started_utc=started,finished_utc=utc(),budget_seconds=budget,reps=reps,selected=sel,planned=len(planned)*reps,rows=len(rows),partial=partial,complete=complete,exit=code,elapsed_seconds=time.monotonic()-start,cases=summary,inputs=hashes)
+    with out.with_suffix('.summary.json').open('x') as f:json.dump(doc,f,indent=2);f.write('\n')
+    print(json.dumps(dict(mode='reproduce',rows=len(rows),planned=len(planned)*reps,complete=complete,exit=code)),flush=True)
+    return code
+
 def main():
-    a=argparse.ArgumentParser();a.add_argument('--dry-run',action='store_true');a.add_argument('--debug',action='store_true');a.add_argument('--out',default='runs/registered.jsonl');args=a.parse_args()
+    a=argparse.ArgumentParser();a.add_argument('--dry-run',action='store_true');a.add_argument('--debug',action='store_true');a.add_argument('--out',default='runs/registered.jsonl')
+    a.add_argument('--reproduce',metavar='DIR',help='reproduction mode: new run into DIR (not under runs/), see the docstring');a.add_argument('--budget-min',type=float);a.add_argument('--reps',type=int);a.add_argument('--cases')
+    args=a.parse_args()
+    if args.reproduce:return reproduce(args)
+    if args.budget_min is not None or args.reps is not None or args.cases:a.error('--budget-min, --reps and --cases need --reproduce')
     if args.dry_run:
         print(json.dumps([{**c,'cmd':list(map(str,c['cmd'])),'control':list(map(str,c['control']))} for c in c_cases(True)],indent=1));return
     if args.debug:
@@ -169,4 +240,4 @@ def main():
         hashes.update({str(p.relative_to(ROOT)):sha(p) for p in d.rglob('*') if p.is_file()})
     doc=dict(started_utc=started,finished_utc=utc(),partial=partial,elapsed_seconds=time.monotonic()-start,cases=summary,inputs=hashes)
     with out.with_suffix('.summary.json').open('x') as f:json.dump(doc,f,indent=2);f.write('\n')
-if __name__=='__main__':main()
+if __name__=='__main__':sys.exit(main())
