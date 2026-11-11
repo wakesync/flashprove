@@ -6,6 +6,7 @@ import argparse
 import json
 import pathlib
 import statistics
+import subprocess
 
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 EXP=ROOT/'experiments/20261110-93-handoff'
@@ -58,7 +59,7 @@ All built structural observations below have n=5 (one per honest seed). These ar
 |---|---:|---:|---:|---:|
 '''
     for name,v in summary['structure'].items():
-        text+=f"| {name} | {v['median']:g} | {v['sd']:.6g} | {v['min']} | {v['max']} |\n"
+        text+=f"| {name} | {v['median']} | {v['sd']:.6g} | {v['min']} | {v['max']} |\n"
     text+='''
 The exact formula at T=2C is:
 
@@ -105,10 +106,11 @@ Reproduction commands and detailed trust boundary are in `research/operators/qwe
     if not args.commit:raise ValueError('--commit required with --pr')
     path=ROOT/'research/results.yaml';old=path.read_text()
     if '  - id: qwen-joint-handoff\n' in old:raise ValueError('ledger entry already exists; no overwrite')
+    receipt_date=subprocess.check_output(['git','show','-s','--format=%cI',args.commit],cwd=ROOT,text=True).strip().split('T')[0]
     metrics=[]
     def metric(name,value,unit,n,spread,source,note,stat='median',total=None):
         d=dict(name=name,series='qwen-joint-handoff',stat=stat,value=value,unit=unit,n=n,spread=spread,
-               hardware='cpu-epyc-rome-kvm-16',date='2026-11-10',commit=args.commit,source=SOURCE+source,note=note)
+               hardware='cpu-epyc-rome-kvm-16',date=receipt_date,commit=args.commit,source=SOURCE+source,note=note)
         if total is not None:d['total']=total
         metrics.append(d)
     common='Measured, unreplicated, joint two-slot proof only; D8/F12/C2, research target10/work6, deterministic coins; no timing or privacy claim.'

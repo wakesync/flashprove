@@ -46,7 +46,7 @@ All built structural observations below have n=5 (one per honest seed). These ar
 | relations | 12278 | 0 | 12278 | 12278 |
 | relation_terms | 28398 | 0 | 28398 | 28398 |
 | range_cells | 352 | 0 | 352 | 352 |
-| proof_bytes | 1.8057e+06 | 195.436 | 1805480 | 1805928 |
+| proof_bytes | 1805704 | 195.436 | 1805480 | 1805928 |
 
 The exact formula at T=2C is:
 
