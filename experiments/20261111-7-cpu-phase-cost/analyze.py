@@ -5,9 +5,12 @@ print the RESULTS tables (markdown). Definitions are PREREG.md's "Metric" sectio
 Nothing is excluded: every process record is counted; failed processes are listed and kept out of
 timing statistics only (their count is reported).
 """
-import json, pathlib, statistics as stt
+import json, pathlib, statistics as stt, sys
 exp = pathlib.Path(__file__).resolve().parent
-recs = [json.loads(l) for l in open(exp / 'runs/runs.jsonl')]
+# optional: analyze.py <runs.jsonl> <summary.json> (default: runs/runs.jsonl -> runs/summary.json)
+src = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else exp / 'runs/runs.jsonl'
+dst = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else exp / 'runs/summary.json'
+recs = [json.loads(l) for l in open(src)]
 T_POSITIONS = 4  # profile B: T = 4 head positions per statement, each with a proved output
 
 def st(xs):
@@ -161,7 +164,7 @@ if A.get('prove') and out['cells']['A-cold']['ok'] == 10 and out['cells']['A-amo
 else:
     v['A'] = dict(verdict='KILLED', reason='fewer than 10 successful pairs in a cell')
 out['verdicts'] = v
-(exp / 'runs/summary.json').write_text(json.dumps(out, indent=1, sort_keys=True) + '\n')
+dst.write_text(json.dumps(out, indent=1, sort_keys=True) + '\n')
 
 def f(s, d=3, scale=1.0):
     if s is None: return 'n/a'
