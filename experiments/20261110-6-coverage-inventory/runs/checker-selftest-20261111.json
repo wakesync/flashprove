@@ -1,0 +1,74 @@
+{
+ "M10_excluded_missing_dir": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M1_symbol_changed": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M2_file_moved": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M3_gap_dropped": {
+  "cases": 21,
+  "cases_with_faults": 21,
+  "expected": ">0 for every row",
+  "faults": 1,
+  "per_row": {
+   "IS-02": 1,
+   "IS-11": 1,
+   "IS-12": 1,
+   "IS-13": 1,
+   "IS-14": 1,
+   "IS-15": 1,
+   "IS-16": 1,
+   "IS-17": 1,
+   "IS-18": 1,
+   "IS-19": 2,
+   "IS-22": 1,
+   "IS-24": 1,
+   "OP-R5": 1,
+   "OP-R6": 1,
+   "OP-R7": 1,
+   "OP-R9": 1,
+   "OUT-04": 1,
+   "OUT-08": 1,
+   "RR-11": 1,
+   "RR-12": 1,
+   "RR-13": 1
+  }
+ },
+ "M4_unknown_kind": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M5_unknown_kind_declared": {
+  "expected": ">0",
+  "faults": 2
+ },
+ "M6_category_declared": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M7_short_symbol": {
+  "expected": ">0",
+  "faults": 1
+ },
+ "M8_proof_row_in_plain_gap": {
+  "expected": ">0",
+  "faults": 1,
+  "row": "OP-01"
+ },
+ "M9_excluded_dir_dropped": {
+  "expected": ">0",
+  "faults": 1,
+  "path": "research/operators/evidence"
+ },
+ "ok": true,
+ "real": {
+  "expected": "0",
+  "faults": 0
+ }
+}
