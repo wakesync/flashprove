@@ -8,6 +8,10 @@
                     with no wall-clock hard stop, a budget of M minutes (default 45) from its own start and the
                     first N repetitions per cell (default 10). Never part of the registered result; refuses to
                     write under this directory's runs/.
+                    Exit status (PREREG Amendments item 3): 0 and final event `done` only if every requested cell
+                    ran, every child exited 0 and no child printed a reject/refused line; 2 and final event
+                    `stopped` (reason budget) if the budget fired first; 1 and final event `failed` if the suite
+                    ran to the end with a failed or rejecting child. The final event carries the counts.
 
 `registered` keeps the registered hard stop (2026-11-11T06:30Z): after it, that mode runs nothing.
 
@@ -76,18 +80,32 @@ def b_pair(bins, binname, out, cell, rep, fixtures, log):
     with open(log, 'a') as f: f.write(json.dumps(dict(profile='B', cell=cell, rep=rep, role='files', bytes=files_bytes(d))) + '\n')
     return pr, vr
 
+REPLAY_USAGE = 'usage: run.py replay <bin_dir> <fixture_dir> <out_dir> [--budget-min M] [--reps N]'
+
 def replay_args(rest):
-    """--budget-min M (finite, > 0) and --reps N (1..10) for replay mode."""
+    """--budget-min M (finite, > 0 also after conversion to seconds) and --reps N (integer 1..10) for replay mode."""
     budget_min, reps, i = 45.0, 10, 0
     while i < len(rest):
-        if rest[i] == '--budget-min': budget_min = float(rest[i + 1]); i += 2
-        elif rest[i] == '--reps': reps = int(rest[i + 1]); i += 2
-        else: sys.exit(f'replay: unknown argument {rest[i]!r}')
-    if not (0 < budget_min < float('inf')): sys.exit('replay: --budget-min must be finite and > 0')
+        if rest[i] not in ('--budget-min', '--reps'): sys.exit(f'replay: unknown argument {rest[i]!r}\n{REPLAY_USAGE}')
+        if i + 1 >= len(rest): sys.exit(f'replay: {rest[i]} needs a value\n{REPLAY_USAGE}')
+        flag, val = rest[i], rest[i + 1]; i += 2
+        try:
+            if flag == '--budget-min': budget_min = float(val)
+            else: reps = int(val)
+        except ValueError:
+            sys.exit(f'replay: {flag} got {val!r}, not a {"number" if flag == "--budget-min" else "whole number"}\n{REPLAY_USAGE}')
+    budget_s = budget_min * 60
+    if not (0 < budget_s < float('inf')): sys.exit('replay: --budget-min must be finite and > 0 (also in seconds)')
     if not (1 <= reps <= 10): sys.exit('replay: --reps must be 1..10')
-    return budget_min * 60, reps
+    return budget_s, reps
+
+def replay_counts(pairs):
+    procs = [r for p in pairs for r in p]
+    return dict(children=len(procs), nonzero_exits=sum(1 for r in procs if r['exit'] != 0),
+                reject_or_refused_lines=sum(1 for r in procs for l in r['lines'] if 'reject' in l or 'refused' in l))
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == 'replay' and len(sys.argv) < 5: sys.exit(REPLAY_USAGE)
     mode, bins, fx, out = sys.argv[1], *map(lambda x: pathlib.Path(x).resolve(), sys.argv[2:5])
     if mode == 'replay':
         budget_s, reps = replay_args(sys.argv[5:])
@@ -102,7 +120,19 @@ def main():
                     note='replay: not part of the registered result')
         with open(log, 'a') as f: f.write(json.dumps(head) + '\n')
         print(json.dumps(head), flush=True)
-        return suite(bins, fx, out, log, granted, reps, lambda: time.monotonic() - granted > budget_s)
+        pairs = []
+        stopped = suite(bins, fx, out, log, granted, reps, lambda: time.monotonic() - granted > budget_s, pairs)
+        counts = replay_counts(pairs)
+        elapsed = round(time.monotonic() - granted, 1)
+        if stopped is not None:
+            ev, rc = dict(event='stopped', utc=utc(), before=stopped, reason='budget', elapsed_s=elapsed, **counts), 2
+        elif counts['nonzero_exits'] or counts['reject_or_refused_lines']:
+            ev, rc = dict(event='failed', utc=utc(), elapsed_s=elapsed, **counts), 1
+        else:
+            ev, rc = dict(event='done', utc=utc(), elapsed_s=elapsed, **counts), 0
+        with open(log, 'a') as f: f.write(json.dumps(ev) + '\n')
+        print(json.dumps(ev), flush=True)
+        return rc
     out.mkdir(parents=False, exist_ok=False)
     log = out / 'runs.jsonl'
     granted = time.monotonic()
@@ -124,23 +154,28 @@ def main():
     assert mode == 'registered'
     return suite(bins, fx, out, log, granted, 10, over)
 
-def suite(bins, fx, out, log, granted, reps, over):
-    """The registered suite and order (PREREG Runs). `registered` calls it with reps = 10 and the registered stop."""
+def suite(bins, fx, out, log, granted, reps, over, pairs=None):
+    """The registered suite and order (PREREG Runs). `registered` calls it with reps = 10 and the registered stop
+    (pairs None: it logs `stopped`/`done` itself and returns None, unchanged). `replay` passes a list: the pair results
+    are collected there, nothing final is logged here, and the return value is the stop point (None if it completed)."""
     def stop(what):
+        if pairs is not None: return what
         with open(log, 'a') as f: f.write(json.dumps(dict(event='stopped', utc=utc(), before=what)) + '\n')
         print('STOPPED before', what, flush=True)
+    keep = pairs.append if pairs is not None else (lambda p: None)
     for i in range(reps):
         if over(): return stop(f'cold rep {i}')
-        a_pair(bins, out, 'A-cold', i, i, 1, log)
+        keep(a_pair(bins, out, 'A-cold', i, i, 1, log))
         if over(): return stop(f'B cold rep {i}')
-        b_pair(bins, 'phase_b', out, 'B-cold', i, [fx / f'stage1-seed{i + 1}.bin'], log)
+        keep(b_pair(bins, 'phase_b', out, 'B-cold', i, [fx / f'stage1-seed{i + 1}.bin'], log))
     for i in range(reps):
         if over(): return stop(f'amortized rep {i}')
-        a_pair(bins, out, 'A-amort', i, i, A_BATCHES, log)
+        keep(a_pair(bins, out, 'A-amort', i, i, A_BATCHES, log))
         if over(): return stop(f'B amortized rep {i}')
         seeds = [((i + j) % 10) + 1 for j in range(B_PER_PROC)]
-        b_pair(bins, 'phase_b', out, 'B-amort', i, [fx / f'stage1-seed{s}.bin' for s in seeds], log)
+        keep(b_pair(bins, 'phase_b', out, 'B-amort', i, [fx / f'stage1-seed{s}.bin' for s in seeds], log))
+    if pairs is not None: return None
     with open(log, 'a') as f: f.write(json.dumps(dict(event='done', utc=utc(), elapsed_s=round(time.monotonic() - granted, 1))) + '\n')
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())   # registered/debug return None (exit 0, unchanged); replay returns its status

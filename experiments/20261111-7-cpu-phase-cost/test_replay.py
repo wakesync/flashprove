@@ -31,7 +31,7 @@ bins, fx, scratch, receipt = (pathlib.Path(a).resolve() for a in sys.argv[1:5])
 scratch.mkdir(parents=False, exist_ok=False)
 def run(argv):
     sys.argv = [str(exp / 'run.py'), *map(str, argv)]
-    try: R.main(); return 0
+    try: return R.main() or 0   # replay returns its exit status since PREREG Amendments item 3
     except SystemExit as e: return e.code
 def load(d): return [json.loads(l) for l in (d / 'runs.jsonl').read_text().splitlines()]
 res = {'clock': 'run.py datetime.now() = real UTC + 1 day (registered cutoff in the past)', 'registered_hard_stop': R.HARD_STOP,
