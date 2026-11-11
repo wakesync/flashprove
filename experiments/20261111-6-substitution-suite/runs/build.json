@@ -1,0 +1,152 @@
+{
+ "affinity": [
+  6,
+  7,
+  8,
+  9,
+  10,
+  11
+ ],
+ "builds": {
+  "cp_verify": {
+   "binary": "bin/cp_verify",
+   "binary_sha256": "98931b82db93ee6eb2545c47f4e28fc27bf49e171967a67b1cdc4319fd02a4d0",
+   "note": "built by verifier/build.sh before this script"
+  },
+  "dom1": {
+   "binary": "bin/subst6/dom1/cp_verify",
+   "binary_sha256": "55d5fec0c8f9522b0dfe290b1450ef67bcb022da2ff6f089fd70212266b9f007",
+   "flags": [
+    "g++",
+    "-O2",
+    "-fno-ipa-modref",
+    "-D_GLIBCXX_ASSERTIONS",
+    "-U_FORTIFY_SOURCE",
+    "-D_FORTIFY_SOURCE=3",
+    "-fstack-protector-strong",
+    "-fstack-clash-protection",
+    "-ftrivial-auto-var-init=zero",
+    "-fPIE",
+    "-pie",
+    "-Wl,-z,relro,-z,now,-z,noexecstack",
+    "-fcf-protection=full",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wuninitialized",
+    "-Werror=unused-result",
+    "-Wno-misleading-indentation",
+    "-pthread",
+    "-I<repo>/bin/subst6/overlay/dom1",
+    "-I.",
+    "-I../../blocks",
+    "-I../../prover",
+    "-DBLK_FIELD=2",
+    "-DBLK_COUNT_HASH_CALLS=1",
+    "-DSERVING_BUILD=1",
+    "-DDIGEST_WORDS=8",
+    "-DVF_SOURCE_DIGEST=\"9888b8dd566ef6c077174ac43d1c5ebce4136ee267518c35bf5637334a4a9b5e\""
+   ],
+   "overlay_heads_sha256": "9888b8dd566ef6c077174ac43d1c5ebce4136ee267518c35bf5637334a4a9b5e",
+   "replacements": [
+    [
+     "LABEL_FIRST_CHAIN = 0x46524d01",
+     "LABEL_FIRST_CHAIN = 0x46524d00"
+    ]
+   ],
+   "seconds": 87.4
+  },
+  "dom2": {
+   "binary": "bin/subst6/dom2/cp_verify",
+   "binary_sha256": "e6eee2b0095c0d85b3014c00d4c24b49762cd8a6955bd2e7861086666883cca4",
+   "flags": [
+    "g++",
+    "-O2",
+    "-fno-ipa-modref",
+    "-D_GLIBCXX_ASSERTIONS",
+    "-U_FORTIFY_SOURCE",
+    "-D_FORTIFY_SOURCE=3",
+    "-fstack-protector-strong",
+    "-fstack-clash-protection",
+    "-ftrivial-auto-var-init=zero",
+    "-fPIE",
+    "-pie",
+    "-Wl,-z,relro,-z,now,-z,noexecstack",
+    "-fcf-protection=full",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wuninitialized",
+    "-Werror=unused-result",
+    "-Wno-misleading-indentation",
+    "-pthread",
+    "-I<repo>/bin/subst6/overlay/dom2",
+    "-I.",
+    "-I../../blocks",
+    "-I../../prover",
+    "-DBLK_FIELD=2",
+    "-DBLK_COUNT_HASH_CALLS=1",
+    "-DSERVING_BUILD=1",
+    "-DDIGEST_WORDS=8",
+    "-DVF_SOURCE_DIGEST=\"df339ce95fe3c685118767da4a08eacf4149ad6c1ab3a89f5738afd54206e0f3\""
+   ],
+   "overlay_heads_sha256": "df339ce95fe3c685118767da4a08eacf4149ad6c1ab3a89f5738afd54206e0f3",
+   "replacements": [
+    [
+     "LABEL_ONE_TIME_CHAIN = 0x46524d02",
+     "LABEL_ONE_TIME_CHAIN = 0x46524d12"
+    ],
+    [
+     "LABEL_PROOF_SHARED_CHAIN = 0x46524d03",
+     "LABEL_PROOF_SHARED_CHAIN = 0x46524d13"
+    ],
+    [
+     "LABEL_PROOF_SECOND_CHAIN = 0x46524d04",
+     "LABEL_PROOF_SECOND_CHAIN = 0x46524d14"
+    ]
+   ],
+   "seconds": 79.6
+  },
+  "handoff": {
+   "binary": "bin/subst6/handoff.bin",
+   "binary_sha256": "6c010b843cb8636bd7fa525990146fc20424147ba33898baa54b7028948b2808",
+   "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "-I",
+    "research/operators/qwen_handoff"
+   ],
+   "seconds": 35.8,
+   "source_sha256": "c53b2cda7e3c90899665c906742128c1fe406d588b711a81f83343e11ba8d556"
+  },
+  "handoff_fp94": {
+   "binary": "bin/subst6/handoff_fp94.bin",
+   "binary_sha256": "c79d802a8b52a5a4b35fe5fc860ec8ede02ea46d19cc67179b3d3d6ba67ae84f",
+   "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "-I",
+    "research/operators/qwen_handoff"
+   ],
+   "seconds": 35.3,
+   "source_sha256": "669d1b85c386ffbe31a1e93b569c035bf6ed12a760a152c612d9a040b0d6fc3a"
+  }
+ },
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "finished_utc": "2026-11-11T04:44:02Z",
+ "started_utc": "2026-11-11T04:40:04Z"
+}
