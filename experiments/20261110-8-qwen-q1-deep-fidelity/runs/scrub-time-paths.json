@@ -1,0 +1,59 @@
+{
+ "note": "scratch prefix replaced by <SCRATCH> in the time -v command line only, before first commit",
+ "files": [
+  {
+   "file": "arms-T16.time",
+   "sha256_before": "19352b222ce97d509a62a70c7a77293bef8b0afa7f67eac020ef8b4fd34dfa42",
+   "sha256_after": "c3b69381faa81b1055a1d42010b93cd17a4ba761c7115abcb6555389df6b633e",
+   "lines_changed": [
+    1
+   ],
+   "occurrences": 3
+  },
+  {
+   "file": "arms-T20a.time",
+   "sha256_before": "0badc04bf6c7e36afb873600c61557b4c93d0debaad334cf65e6cb054a532890",
+   "sha256_after": "725a069bd6d107b31605120d0e338ba1b131cd7a92a5c813ef3c284e5ccab618",
+   "lines_changed": [
+    1
+   ],
+   "occurrences": 3
+  },
+  {
+   "file": "arms-T20s.time",
+   "sha256_before": "0eb7d78562e64e577a5ebc6c90cf4b0b90d10e301fe8fcb4f0e9ce52d1a2ff00",
+   "sha256_after": "bb2e2951e9382b490cca1a2de45d1c860c3c0c16085816b9f7a490db5f0d4dc3",
+   "lines_changed": [
+    1
+   ],
+   "occurrences": 3
+  },
+  {
+   "file": "stageA.time",
+   "sha256_before": "c23f316cf575d26d9c0759155e0620cc60969c94b4a6ecc4d5e59d1eb0026b94",
+   "sha256_after": "30f34a76eaac465933c286cfa51fd09e93255d94f437a692fcff1c2ffd62ff95",
+   "lines_changed": [
+    1
+   ],
+   "occurrences": 1
+  },
+  {
+   "file": "stageB.time",
+   "sha256_before": "9445d76b1fbfd09c9f969b0868bea9281a234b36a51eb42bd1eff7422a2a6026",
+   "sha256_after": "59635e49b5433d772a16b38bc1e2154eb2f91385d6e2320b5f124b2922f438c2",
+   "lines_changed": [
+    1
+   ],
+   "occurrences": 1
+  },
+  {
+   "file": "stageD.time",
+   "sha256_before": "1485bb2e4a27f56b24418aa4e5787a45cb1d6f5ffdc27501efa067c3c8e66402",
+   "sha256_after": "612f3f3551555129c7ad4ae96550034c083a2f31d05f2aa6500f6cc858897b7a",
+   "lines_changed": [
+    1
+   ],
+   "occurrences": 1
+  }
+ ]
+}

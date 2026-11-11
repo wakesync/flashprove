@@ -1,0 +1,4 @@
+{"ckpt": "fixture", "layer": 0, "type": "linear_attention", "INT": {"fx": 0.0013113735017646095}, "BF16H": {"fx": 0.0012468545715414302}}
+{"ckpt": "fixture", "layer": 1, "type": "linear_attention", "INT": {"fx": 0.0012303275263424107}, "BF16H": {"fx": 0.0013992605309429433}}
+{"ckpt": "fixture", "layer": 2, "type": "linear_attention", "INT": {"fx": 0.0011180619038584306}, "BF16H": {"fx": 0.0016691721657486783}}
+{"ckpt": "fixture", "layer": 3, "type": "full_attention", "INT": {"fx": 0.0009087290589691534}, "BF16H": {"fx": 0.0013927653830580796}}

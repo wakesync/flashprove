@@ -1,0 +1,22 @@
+A layer 0 linear_attention 74.1
+A layer 1 linear_attention 142.4
+A layer 2 linear_attention 208.5
+A layer 3 full_attention 279.2
+A layer 4 linear_attention 343.2
+A layer 5 linear_attention 409.8
+A layer 6 linear_attention 474.6
+A layer 7 full_attention 537.5
+A layer 8 linear_attention 600.1
+A layer 9 linear_attention 662.4
+A layer 10 linear_attention 730.4
+A layer 11 full_attention 798.4
+A layer 12 linear_attention 870.8
+A layer 13 linear_attention 940.7
+A layer 14 linear_attention 1009.6
+A layer 15 full_attention 1072.7
+A layer 16 linear_attention 1147.4
+A layer 17 linear_attention 1215.9
+A layer 18 linear_attention 1269.4
+A layer 19 full_attention 1316.2
+A layer 20 linear_attention 1362.2
+stageA done 1362.2

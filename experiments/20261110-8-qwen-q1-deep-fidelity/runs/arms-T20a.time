@@ -1,0 +1,23 @@
+	Command being timed: "taskset -c 0-5 python3 q1_arms.py <SCRATCH>/prep-abl-L20 abl-L20 <SCRATCH>/Wo-abl-L20.npy runs/arms-T20a.jsonl <SCRATCH>/fref-T20a 2246"
+	User time (seconds): 807.16
+	System time (seconds): 29.92
+	Percent of CPU this job got: 559%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:29.62
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 887160
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3146711
+	Voluntary context switches: 27033
+	Involuntary context switches: 6392
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 949808
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
