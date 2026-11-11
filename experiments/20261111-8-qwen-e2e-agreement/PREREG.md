@@ -61,3 +61,5 @@ In this repo: PR #68 (layer 0; abliteration localised to layers 17 to 51 out_pro
 
 ## Amendments
 (empty at registration)
+
+- **A-1 (2026-11-11T23:22Z, during the registered run, before any registered output was read; no definition, threshold or limit changes).** Arithmetic slip in "Setup" and "Prompt set": the BF16H subset {p01, p07, p08, p09, p03} has 13 + 23 + 39 + 21 + 512 = **608** positions, not 612. The subset itself is as registered (and as frozen in `prompts-e2e.json`); only the count was wrong. BF16H has no bar.
