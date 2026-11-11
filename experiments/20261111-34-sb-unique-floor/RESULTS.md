@@ -1,0 +1,72 @@
+# RESULTS: 20261111-34-sb-unique-floor (issue #34)
+
+Verdict: **FAIL** on every arm against the registered threshold. Reference arithmetic and a relation checker only: no proof, no backend, synthetic gates. Numbers are measured, unreplicated (deterministic integer arithmetic); volumes are counted, not measured.
+
+Plain summary:
+- Lowering L (exact remainder range, quotient range tied to the 2^18 contract, committed squared norms of k and q) gives a **unique witness on every floor checked**: 0 second witnesses over 861,361 registered floors per arm at C = 16 and 736,945 at C = 64 (the same at either GB), and on the checked floors of 202 adversarial admitted chunks per arm, at GB = 12 and GB = 18, C = 16 and 64. The #71 construction (M1b window |Q| < 2^23) on the same floors finds a second witness for **100%** of M and o floors at GB = 18 (327,456 of 327,456 at C = 16) and none at GB = 12, which reproduces #71 at D = 32.
+- At **GB = 12** the proved numerator bounds fit Goldilocks (M and o 59 bits at C = 16, 61 at C = 64, plus the 19-bit window, under 64). The arm still FAILS: honest completeness is **19 of 20** runs, because on R3 seed 3 one honest delta leaves the single-cell 2^18 window that L registered (#71 carries delta as two limbs; L narrowed it).
+- At **GB = 18** the arm FAILS the kill criterion: L's proved (sufficient) M and o numerator bounds are **65 bits (C = 16) and 67 bits (C = 64)**, above the registered integer-correctness (no-wrap) budget of 64 bits minus the window. This shows that L's admission does not prove the numerators stay inside the field. It does not show that an admitted complete trace reaches the bound (none of the adversarial chunks got that far), and it does not rule out other lowerings of this form. Finding no second witness on samples does not rescue the arm.
+- Volume under L at D = 32: 970 (GB 12, C 16), 922 (GB 12, C 64), 1,098 (GB 18, C 16), 1,002 (GB 18, C 64) committed values per head per token, against #71's SB formula at the same D: 648.5, 624.5, 776.5, 704.5. Extra: **321.5 at C = 16 and 297.5 at C = 64** (both GB).
+
+Raw data: `runs/sb-unique.json` is the registered run: one file, all arms, aggregate tallies, per-arm median/min/max of per-run bits, bounds, controls, counts. It does **not** hold per-run rows. Code: `research/operators/qwen_state_commit/sb_unique.py`, `sb_unique_lib.py` (commit 2e6e4a37).
+
+Supplementary per-run evidence: `runs/sb-unique-rows.json`, written after round-1 review (PREREG amendment of 2026-11-11 10:55 UTC). It is a deterministic rerun of the same code, unchanged, through the wrapper `research/operators/qwen_state_commit/sb_unique_rows.py`, which saves what the registered run computed but discarded: one row per (distribution, seed) with `admitted`, `honest_all_accepted`, second-witness count and per-kind bit maxima; the first out-of-window floor of each run (chunk, kind, N, Q and its excess over the window); the per-arm SD of the per-run bit maxima; and one row per adversarial case. It is not the registered run, and its timestamps are its own (2026-11-11 10:47:35 to 10:49:00 UTC, 85.3 s, cores 10-11 through the fp-heavy gate). Check recorded in the file: every key of its aggregate output equals the registered `runs/sb-unique.json` except elapsed `seconds` (`aggregates_equal_registered_except_seconds: true`, no differing keys).
+
+## Registered set, per arm (R1..R4 x seeds 1..5, D = 32, 64 warm-up + 256 tokens)
+
+| arm | floors checked (G / M / delta / o / S_out) | second witnesses | honest runs fully accepted | proved bound bits M, o / S_out / delta / G | fits field | verdict |
+|---|---|---|---|---|---|---|
+| GB 12, C 16 | 43,520 / 163,744 / 163,729 / 163,712 / 326,656 | 0 | 19 / 20 | 59, 59 / 47 / 44 / 25 | yes | FAIL (completeness) |
+| GB 12, C 64 | 166,400 / 163,232 / 163,217 / 163,200 / 80,896 | 0 | 19 / 20 | 61, 61 / 49 / 44 / 25 | yes | FAIL (completeness) |
+| GB 18, C 16 | 43,520 / 163,744 / 163,729 / 163,712 / 326,656 | 0 | 19 / 20 | 65, 65 / 53 / 44 / 31 | **no** | FAIL (kill: bound) |
+| GB 18, C 64 | 166,400 / 163,232 / 163,217 / 163,200 / 80,896 | 0 | 19 / 20 | 67, 67 / 55 / 44 / 31 | **no** | FAIL (kill: bound) |
+
+"Fits field" is `bound + 2^(k+19) < p` (G uses its own GB + 1 bit window). Floor totals per arm (sum of the five kinds): 861,361 at C = 16 and 736,945 at C = 64. Floor counts differ slightly between M, delta and o because the R3 seed 3 run is rejected at its first out-of-window delta and later floors of that chunk are not enumerated (PREREG amendment, committed 09:44:27Z before the run; its own stamp says 10:02 in error, corrected in a second amendment). After a rejected chunk the harness carries on with the reference S_out (`sb_ref.chunk_sb`) as the next chunk's input, so the later chunks of that run are checked as independent chunks, not as part of an accepted chain. R3 seed 3 is the only run with `honest_all_accepted = false` in every arm, per the per-run rows in `runs/sb-unique-rows.json` (supplementary rerun; the registered file has only the count 19 of 20). Its first out-of-window floor is a delta, at 31 numerator bits, with honest quotient Q = 263,412 at GB 12 and 263,426 at GB 18 (C = 16, chunk 14) and 263,408 / 263,425 (C = 64, chunk 3), against the window's top 2^18 - 1 = 262,143: 1,265 to 1,283 over. It is the same R3 seed 3 that failed #71's drift bound; it is the heaviest-tailed input (Student t, 3 degrees of freedom).
+
+Observed numerator bits per run (max over the run; median / min / max over the 20 runs, from the registered file; SD from the supplementary rows file):
+- GB 12: M 49 / 47 / 53, o 47 / 45 / 50, S_out 38 / 36 / 41, delta 27 / 26 / 31, G 24.
+- GB 18: M 55 / 53 / 59, o 53 / 51 / 56, S_out 44 / 42 / 47, delta 27 / 26 / 31, G 30.
+- SD of the per-run maxima (sample SD, n = 20, `max_bits_over_runs` in the rows file), C = 16: M 1.47, o 1.41, S_out 1.15, delta 1.43 bits at both GB; G 0 (constant). C = 64: the same except S_out 1.10. The bit maxima are integers, so the SD is coarse; it shows the spread across distributions and seeds is about 1.5 bits, against a 6 to 8 bit gap to the proved bound.
+Same at C = 16 and C = 64 to within one bit (see `run_bits` in the run file). Honest numerators sit 6 to 8 bits under the proved bound; the gap is the admission, not the data.
+
+## Adversarial admitted set (2 edge chunks + 200 random edge chunks, seed 1111, per arm)
+
+Every one of the 202 chunks passes L's operand admission and **every one is rejected** by L: its honest quotient leaves L's window at some floor (C = 16: first out-of-window floor is an M in 100, a delta in 101, an o in 1). So this set tests uniqueness only on the floors before rejection: per arm 7,171 to 7,306 M floors, 3,617 to 3,713 o floors, 3,749 to 3,849 delta floors and 27,472 (C 16) or 420,160 (C 64) decay-table floors, with **0 second witnesses**. Largest numerator reached: 57 bits (GB 12), 63 bits (GB 18). It does **not** test a complete admitted chunk whose numerators sit at the proved bound: none of the 202 survives to S_out. The PREREG anticipated this ("rejected, counted, not a uniqueness case"). Per-case rows (case, rejected, second witnesses, max bits, first out-of-window floor) are in `runs/sb-unique-rows.json` (supplementary rerun).
+
+This is a second mismatch between L's admission and its own windows, next to the R3 seed 3 one. Admission allows |v| < 2^31 and beta up to 2^F, but delta must sit in the 2^18 window, so a chunk with a token at beta = 2^F and an edge v is rejected at its first delta. L admits inputs it then cannot commit. That is why all 202 are rejected before S_out.
+
+## Controls
+- (a) #71's M1b window (|Q| < 2^23) on the registered M and o floors: second witnesses for **0 of 327,456** (GB 12, C 16), 0 of 326,432 (GB 12, C 64), **327,456 of 327,456** (GB 18, C 16) and **326,432 of 326,432** (GB 18, C 64). The enumerator finds what #71 found; required at GB = 18, met.
+- (b) mutated witnesses (Q + 1 with r - 2^k, Q - 1 with r + 2^k, r + 1, Q + 2^22): **0 accepted** of 3,445,440 (C 16) and 2,947,776 (C 64) per arm. This control is weak. Each mutation is rejected by a range check (r +- 2^k leaves [0, 2^k), Q + 2^22 leaves the window) or by the relation (r + 1), so it shows the checker's range and relation checks are wired, not that L blocks the #71 alias. The stronger test is the #71 alias itself: Q + 2^22 with r - (2^32 - 1) mod p at k = 42. A reviewer spot check (opus round-1 review, <https://github.com/wakesync/flashprove/pull/114#issuecomment-6793204869>; not a registered run) found the M1b window accepts it and L's window rejects it. That pair is not in this run's evidence. The Q + 2^22 mutation is not in the PREREG Metric list; it was added in the code (a deviation, below).
+
+## Why the witness is unique at both GB, and why GB = 18 still fails the no-wrap bound
+Under L, a second witness for the same field residue needs `2^k (Q' - Q) + (r' - r) = m p` with m != 0, inside an integer interval of width 2^(k+19). For the M and o floors k = 2F + GB: 36 at GB = 12 and 42 at GB = 18. The interval is 36 + 19 = 55 bits at GB = 12 and 42 + 19 = 61 bits at GB = 18. Both are narrower than p, so for any fixed residue at most one pair is accepted, at either GB. The 0 second witnesses in the enumeration follows from these widths alone (k + 19 <= 61 < 64): the enumeration confirms the interval argument, it adds no separate evidence.
+
+Uniqueness is not the same as correctness. The unique accepted witness is the integer floor only if the true integer numerator also fits: `|N| + 2^(k+19) < p`, so the field relation equals the integer relation. At GB = 12 L's proved bound gives that (59 or 61 bits). At GB = 18 the proved bound is 65 or 67 bits, so it does not: this is the registered integer-correctness (no-wrap) bound, and GB = 18 fails it. The bound is sufficient, not tight. It shows L's admission (norm of k and q, |S| < 2^18, |delta| < 2^18) does not prove the numerators stay inside the field for 2^18 decay tables at D = 32. It does not show that an admitted complete trace reaches 65 or 67 bits. The dominant term is `(C - 1) 2^GB NB 2^18`, the Gram-times-delta sum; it grows with C, which is why C = 64 is 2 bits worse.
+
+## Counted volume (per V head, per token, D = 32)
+
+| arm | #71 SB formula (count_r2.per_head at D = 32) | L | extra | extra items |
+|---|---|---|---|---|
+| GB 12, C 16 | 648.5 | 970.0 | 321.5 | S_out quotient range limbs 2 D^2/C, decay-table remainder keys (C + 1)/2 (in #71's `extras`, see below), decay-table range limbs, M/delta/o quotient range limbs 6 D, norm cells and slack limbs 8, minus delta_hi (D) |
+| GB 12, C 64 | 624.5 | 922.0 | 297.5 | same |
+| GB 18, C 16 | 776.5 | 1,098.0 | 321.5 | same |
+| GB 18, C 64 | 704.5 | 1,002.0 | 297.5 | same |
+
+Convention is #71's: one count per committed value, 12-bit keys. Part of the "extra" is that convention, not something L adds: #71's `count_r2.per_head` puts the decay-table remainder keys ((C + 1)/2 = 8.5 at C = 16, 32.5 at C = 64) in `extras`, outside its base formula, while L's count includes them. At C = 16: 128 (S_out range limbs) + 8.5 (decay-table remainder keys) + 17 (decay-table range limbs) + 192 (M/delta/o quotient range limbs) + 8 (norm cells and slack limbs) - 32 (delta_hi) = 321.5. Both columns exclude the committed operands (k, q, v, a, beta) and every sumcheck, lookup and commitment overhead. The item list is in `runs/sb-unique.json` (`count.L_items`). L at GB = 12 is **not a working lowering** (completeness failed), so these counts are of the registered specification, not of a sound and complete one.
+
+## What is NOT established
+- SB is still not sound end to end, not built, and not recommended for M3. No proof, no backend, no prover costs here.
+- No result at D = 128 (the real head) or on real gate statistics. Evaluating the published bound formula at D = 128 (`proved_bounds(128, C, GB)`) leaves the M and o bound lengths at 59 / 61 / 65 / 67 bits: only the first Cauchy-Schwarz term doubles, and the dominant Gram-sum term does not depend on D. That is a calculation, not a D = 128 experiment.
+- Admission spec gap. PREREG step 4 commits `sum k_i^2` and range-checks `NB - norm2`, but does not list a per-entry integer range check for each k_i and q_i. In the field the norm can wrap: 2^48 is a square root of -1 in Goldilocks, so k = (2^48, 1, 0, ...) has sum of squares 0 mod p (reviewer spot check, opus round-1 review, link above). `sb_unique.admitted` checks integer norms, so this run is unaffected, but the proved bound assumes per-entry integer ranges that L as written does not list.
+- GB = 12 with a two-limb delta (as #71) would fix the completeness miss, but that changes the window and the bound and was not registered or run.
+- GB = 18 needs a tighter admission (for example a bound on the Gram sum or on the delta norm, or a multi-word relation for M and o); none is specified or costed here.
+- The adversarial set never reaches the proved bound with a complete chunk; uniqueness at the bound rests on the interval argument, checked by enumeration only below it.
+
+## Deviations from the PREREG
+- Amendment (committed 09:44:27Z in 2e6e4a37, before the registered run; stamped 10:02 in error, corrected by a second time-only amendment): a chunk is rejected at its first out-of-window floor and later floors are not enumerated; control (a) required only at GB = 18.
+- S_out bound (found in round-1 review, disclosed in the amendment of 2026-11-11 10:55 UTC): the Hypothesis section displays `C 2^GB 2^F 2^18` for the second S_out term, the code uses `C 2^GB ceil(sqrt(NB)) 2^18` (ceil(sqrt(NB)) = 4100 against 2^F = 4096). The code's form is the one the norm admission justifies (|k_i| <= sqrt(NB)) and is more conservative; S_out bits as in the table.
+- Control (b) tried Q + 2^22 (same r), a mutation the Metric list does not name. It adds a mutation and drops none.
+- Wording after review: the kill-criterion parenthesis "no lowering of this form keeps numerators inside Goldilocks" said more than the criterion tests (see the amendment); this report now states the narrower result.
+- Per-run rows and SD come from a supplementary rerun (`runs/sb-unique-rows.json`), not from the registered run file, which never held them.
+- Seeds, sizes and arms as registered. Run took 92.1 s inside the 30 min budget. The original run's start and end times are self-reported in ENV.json and the lane notes; the registered JSON records elapsed seconds only, and no timestamped original log was committed.
