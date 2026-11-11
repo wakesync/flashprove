@@ -1,0 +1,2405 @@
+{
+  "rows": [
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "2ef7d1e4ad928072588663b0cb0b3e3b7d8ddd3d310e656aebb55c8b136e9f8d"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "7dda01d4db5ea2ea3572c54f808cc917e2385640e6f9771d4561512adc746b41"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "b835775eae3a57d789015f0678f974c2fb707bd121c36ba9ff2fa9b9ccd1c021"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "7dda01d4db5ea2ea3572c54f808cc917e2385640e6f9771d4561512adc746b41"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "db34f3b1b9e071b1c9dfd5083749a656eb7f31fb7fd17eb42789e8bc93d19f27"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "3877c7fe01d6371aaa2a96afedc42ba6342c712fc9afb2dba95beb6c115d7853"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "7dda01d4db5ea2ea3572c54f808cc917e2385640e6f9771d4561512adc746b41"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "02e24960bf27472c341228ccee3fa7cdfabcf98625dc53dce2abfc3359651c1e"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "6c7b65d091c34471b265d9c7eb4cc281a25d3e8cb4e2f19255d6326a9c2c7929"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "7dda01d4db5ea2ea3572c54f808cc917e2385640e6f9771d4561512adc746b41"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "9e9e4b9d87310217b603cafb13f499c2251bcd92e0871632c9ec0bd53c39e06d"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "cd13f93677f5d718ee93636b782044fc10ea69e344b8f11eb0646c75b6f56e16"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "7dda01d4db5ea2ea3572c54f808cc917e2385640e6f9771d4561512adc746b41"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "f26763fbffa26247149ead2d58e367b22448578dfa94c49ec53206f00e75ffe5"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1001,
+      "sha256": "7dda01d4db5ea2ea3572c54f808cc917e2385640e6f9771d4561512adc746b41"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "86742d46669e5df5b67f46a82c3fd8a8bc41c4e1643fb337c948e13d25de4ae2"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "4a7c4a818eae8c64fc75923a9d87fbe902356538ccdda3c20008b68d12ea4725"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "4f541779e3d020dd6ef2423bde1586354edd7cf84de313ce044ee51212773127"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "86742d46669e5df5b67f46a82c3fd8a8bc41c4e1643fb337c948e13d25de4ae2"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "991c57a2d8aab1de8f4147e0f2445173f306b9172a76c51001754e8949e3b53e"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "1db46a5d4d355e20ca328c2bc2cdbeb6191f4bfc7dcb222be26a12e5d9d8ebce"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "86742d46669e5df5b67f46a82c3fd8a8bc41c4e1643fb337c948e13d25de4ae2"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "0584985e514fcf856b51e7c22ce9a704c107ced2402148a6b8e3fe7c1a8a1d23"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "e33518c5e82724a7e375035fc4b3bc1ee6bc8574117c58d8627ced28ecc22340"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "86742d46669e5df5b67f46a82c3fd8a8bc41c4e1643fb337c948e13d25de4ae2"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "fb7f40d27d1b88f7ad46073b2200f4cdec9ff4ed283febd55d25a3727fcb41f5"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "eb86891530c0a9f3a4217cf360812074d4a2fab62d694d30061ef148186bae48"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "86742d46669e5df5b67f46a82c3fd8a8bc41c4e1643fb337c948e13d25de4ae2"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "014305e47a50fa1c569bb18c2fe2a765445aca00325da52dafcb1b4e22828f72"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1002,
+      "sha256": "86742d46669e5df5b67f46a82c3fd8a8bc41c4e1643fb337c948e13d25de4ae2"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "56677df253572bd8b068b157907d2d9669982db4ea5894bead1d76941acc9b7e"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "6397f9f1a98710847abeaed4f4388be9c822de406c329f84389908aa50a4eb6e"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "91624b674cef1c14c53ccf7af6d80065b88172cbe9bfb57e622558aa29930587"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "6397f9f1a98710847abeaed4f4388be9c822de406c329f84389908aa50a4eb6e"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "13428bd9d05d835ba42a0ef5faa907e27eded2aaa687f37c950306ecb4067ce4"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "8b007fee55797afe44a0c0a41efaff614e248ea1b4291f9b05c618c58f8d39e8"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "6397f9f1a98710847abeaed4f4388be9c822de406c329f84389908aa50a4eb6e"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "8f83289b637b4d53e559413ed636f166d7be5b0ccc130abe3f1d6518af3aafe0"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "4ec3ebd229688a7cb1bc8ea46564de21d4f4c477b5d75d3600e234f40f0f45c7"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "6397f9f1a98710847abeaed4f4388be9c822de406c329f84389908aa50a4eb6e"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "d290c25f1c5afbe10deee753dc5723ea4adf1fa65fe387d0e92fe656483d7dcd"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "3bb5b5cb0b6589b22675a5b065176f7fc9064515fc1fb6f6318dd657b82c155e"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "6397f9f1a98710847abeaed4f4388be9c822de406c329f84389908aa50a4eb6e"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "d1da0567a1032b28b9cf5ca67178bf457d5b6cf9d2a0e2848876e5450fc71a19"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1003,
+      "sha256": "6397f9f1a98710847abeaed4f4388be9c822de406c329f84389908aa50a4eb6e"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "db045fb1a5e46ba3dafef630a00734d3439e20be7c6aeeae28ece40b00ab4cb1"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "1d992082e86b588ab566fafe861c87c41754bba39d256a9a83fdf4fa6f745a39"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "33eb4e0c3b34280197f7487be4da0e71e8ed2bed7cb7c4a6072dbff72fee33c4"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "db045fb1a5e46ba3dafef630a00734d3439e20be7c6aeeae28ece40b00ab4cb1"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "5c33d51e8ecfc474ccb6d3ac20fa473e0d9fab3a46932fd774560d9307086fe7"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "f95970ee5725be228f31f7e8c8cb50f92333f5038b39848c07bc68a6b83a7c84"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "db045fb1a5e46ba3dafef630a00734d3439e20be7c6aeeae28ece40b00ab4cb1"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "ad1c7e0f002925d0f36772ed591e2989715ca6762ee2af508e76ce18aa6baadb"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "30b33e207a9d69c47660909a5e8bf7a7e4d145dcc9e810d34956f0e779a6b2a1"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "db045fb1a5e46ba3dafef630a00734d3439e20be7c6aeeae28ece40b00ab4cb1"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "980f89a9066e681470aeb7d135191187b696ffae48db3803bb36830cd359a45b"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "960450ef42a644b8dd51bbba17f241ff6f8f007273178dd22df5221c4aaf389d"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "db045fb1a5e46ba3dafef630a00734d3439e20be7c6aeeae28ece40b00ab4cb1"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "63ccdf0c8d72c90c321e889fd46ca3b6c63e61aea8d487ecd2edc8a89e4506d7"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1004,
+      "sha256": "db045fb1a5e46ba3dafef630a00734d3439e20be7c6aeeae28ece40b00ab4cb1"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "39ab6d6270bccf70f93a57051ebddb565644e44d1e85a8ef8542bf74a5a3fe75"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "231c66ada6dac18e71cd5ca753c664920339f13b538378d9bc1a16914872b803"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "db90e828f7d38338b49115e71085db4279fc0dc2f1cb35cc93559287076edb23"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "231c66ada6dac18e71cd5ca753c664920339f13b538378d9bc1a16914872b803"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "0368ff700e87e56f3236575343d18f0433f3b808a195cf97f494fb777b1d9c39"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "2f8c39c281d93b9fbef71669edddf7606d66a1007ba5bd20f7e6ad4de6345438"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "231c66ada6dac18e71cd5ca753c664920339f13b538378d9bc1a16914872b803"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "918c9e987149e758a4d2d868e042dec5cee7afac905eae6f6d6a75b407038c30"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "51e547cdd94287a22a9bd701d75fe8f8d6aa537b89695be81cb8398e74cb5a09"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "231c66ada6dac18e71cd5ca753c664920339f13b538378d9bc1a16914872b803"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "ffc284c1e1f5e9a82d3041c6ea04e7e70e4613d94f952820a78b3ba847b98ca7"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "d58a1daa4a185e003e91fa83d8858c7ac88270bdf1e6860252b44ca72892db44"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "231c66ada6dac18e71cd5ca753c664920339f13b538378d9bc1a16914872b803"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "00c502408d4b62a9d0348cb94a7bf0c5e4cc65df8b271fff8957184cee623b63"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1005,
+      "sha256": "231c66ada6dac18e71cd5ca753c664920339f13b538378d9bc1a16914872b803"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "e723cde616e247ec2f3954d3babe7a8737f125c6b94f840289bde4ef9e8117f3"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "bc3d366871667788c04dc0dfcd17c1ac81203c23e687d534483d7b2f87664cfe"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "c4ee9aceb1628cb71fb5f543be3339f94dcc711d79b1febb156d5ca8d29c409d"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "e723cde616e247ec2f3954d3babe7a8737f125c6b94f840289bde4ef9e8117f3"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "ebe4aff3b6a89bd41f2bd8602fb97d520504789fab1a770ccd4475dfebfb9354"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "8ab83c0a74a40e537bbd9c3aa5ea441baa929a7a6a297801dd2da297fbf8c47d"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "e723cde616e247ec2f3954d3babe7a8737f125c6b94f840289bde4ef9e8117f3"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "d1d70ba74a2a2d33c587425c8dad991d836efe5758d9080fc05a08bc61b5ffc8"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "a13877c7558176959c00fc5860852a23a05b93f4928aaf3a7a1103af5d611cb3"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "e723cde616e247ec2f3954d3babe7a8737f125c6b94f840289bde4ef9e8117f3"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "57210f7612a5ab29191345ba42aa1d09f776737f9796fa2fa64b578def2706ea"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "6c44e3ea2d72d2ef0a0906d6fdf2427a36074cec559edad5b7da37b33fc1aa45"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "e723cde616e247ec2f3954d3babe7a8737f125c6b94f840289bde4ef9e8117f3"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "61027a6bf25aa737d12b7ab3fed3f8b2f915487bfa290c07b4d97bdfe4603036"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1006,
+      "sha256": "e723cde616e247ec2f3954d3babe7a8737f125c6b94f840289bde4ef9e8117f3"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "d2444115a6ca30fcb41eb6fb4d5cc07bce9ea3ffb114c726fb433a4ca210f4b9"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "b69a6727acae903639b864555343a4b64198e3dd013ff62dd5f076794c32f41d"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "a1cd60732b38a77af6747741bd928cb78c9209e78311060ba9bdd914fa20887f"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "b69a6727acae903639b864555343a4b64198e3dd013ff62dd5f076794c32f41d"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "d1f01d217c48a2155445239e6e7e65239e6b7f1ed1b50beb0e69c18e1d6747ad"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "42572eb98821b486ffa4d5be5c86d9c458b197427817ad2df53db53fd50a3d8c"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "b69a6727acae903639b864555343a4b64198e3dd013ff62dd5f076794c32f41d"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "8584bc2452f48b347ad2c4aabd2297fe9d5adbba8a2fb8ecc5fcbf94a81aa9de"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "2de2ff1b66fd84b5948f0546e18df2074facbf4bda7e7828bff1d7a8d066e0a0"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "b69a6727acae903639b864555343a4b64198e3dd013ff62dd5f076794c32f41d"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "0a3ae262ce0871889abbb18f9043dea5c9ed5a8978ded209f36713c642ad1fd8"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "31e12302b887d9121885fb740f57a5db357f4f36c926263add8f6e704aba69f5"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "b69a6727acae903639b864555343a4b64198e3dd013ff62dd5f076794c32f41d"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "413bc960684346a1483ac44f5688cbdc1944ab024806b72e7ac4d970ad2eb75b"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1007,
+      "sha256": "b69a6727acae903639b864555343a4b64198e3dd013ff62dd5f076794c32f41d"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "37b61d31b49a2d510af44ac39577aa3657788f6e736740774dffe55f703f77a7"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "5dc929e318d482ee98a1b4a701c37ec8df47cc43ea894a2c2043f7af71fa394f"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "6e977571d801035e32fdaac51206e56b63e116ecf691a91786f42c013b5ea7ae"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "37b61d31b49a2d510af44ac39577aa3657788f6e736740774dffe55f703f77a7"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "85a78803f19588048d35a6b0ed738ec574852daf8bd0d003fcda12e2d0d52d43"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "390231727081d057b0a9a37de22400572642440829e8304d27a3ebc3703acee8"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "37b61d31b49a2d510af44ac39577aa3657788f6e736740774dffe55f703f77a7"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "3323d5bc5ffc546b30ae083138106135944cc5bcc82c9a8b3611ff8ad2c4e033"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "bbaafb63c3613ef709fd51bcefbf27d5c5c0c9ee904052b282cb33333d55faaa"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "37b61d31b49a2d510af44ac39577aa3657788f6e736740774dffe55f703f77a7"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "b4c5b8ed6034ba52e1ed22aae63a6619a40942cfbc04e4b3471d6b85328bd053"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "7c8b98e7960afab06e1524670907066abcd6b4c1b428a40c3827fdb5bbb0d0e1"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "37b61d31b49a2d510af44ac39577aa3657788f6e736740774dffe55f703f77a7"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "2ccf87a8f19b40d3f09d86b7a4d9bdb21e42feb66f96c0b14fcc326087d72d3b"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1008,
+      "sha256": "37b61d31b49a2d510af44ac39577aa3657788f6e736740774dffe55f703f77a7"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "2bffc1f7988eaadc2cfdc8b77b0405bd4bdcc784b34017bf4cab0aa8d6915638"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "e7fd3061e296cd625733f2c943585eec40fc5ecd09ac3048504919ba1f83560d"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "9b30ab0401446fbb393b5c1c2a7442e87e47faae2e0668119c2ef0e1dddac658"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "e7fd3061e296cd625733f2c943585eec40fc5ecd09ac3048504919ba1f83560d"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "c3736e496f31a295b737245795c7e76e268a98f8bb956d7061ba6e652cbbb789"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "6d320f24fd04f487f81c54e13c82420e2c6d1bb5a641bbe4159f22789b91c0e7"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "e7fd3061e296cd625733f2c943585eec40fc5ecd09ac3048504919ba1f83560d"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "c69fef247d8f7e03db6ce8ecc5c99aed056918d34955596cc90f50edaa13c197"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "22392ba19d10f71f4b53c6c000bd95e59e2bb1c8004e90040afb14ec30700bfd"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "e7fd3061e296cd625733f2c943585eec40fc5ecd09ac3048504919ba1f83560d"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "24833bd01afad018a19df239a6b788c94acef414ef9b2e50df93dc21ed2fa7c6"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "8a3763de75b834ec8561f2b87650e1e51294cdbaeac4993cf5d12c2c4c7b2aff"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "e7fd3061e296cd625733f2c943585eec40fc5ecd09ac3048504919ba1f83560d"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "2ab1cd70b239034f2badae6fa543b0422ff0622635a1b0b60a827f43ed35eb6b"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1009,
+      "sha256": "e7fd3061e296cd625733f2c943585eec40fc5ecd09ac3048504919ba1f83560d"
+    },
+    {
+      "arm": "bound-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "91c1f890adb88a79659457b96be8e950f12ef7d05d1f02b598af1f584ae1c799"
+    },
+    {
+      "arm": "legacy-honest",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "616225183c1f8156241e6e6ab0e58467aeccf75a30a4722a9fbccfa33cc80119"
+    },
+    {
+      "arm": "one-tensor-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "b4406d910fe315a836ad5128238cae6eca8bc9a9c071895f2b133b60783bd5ee"
+    },
+    {
+      "arm": "one-tensor-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "91c1f890adb88a79659457b96be8e950f12ef7d05d1f02b598af1f584ae1c799"
+    },
+    {
+      "arm": "one-tensor-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "523a3e3f6f6936017a111eca820ca3fa196494102c6a7881423898591940c828"
+    },
+    {
+      "arm": "two-tensors-swapped",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "dc2ebe0ed15e7eae8d8d82708bc05c399e56af792fa33718cc8d5696b5c0ecbb"
+    },
+    {
+      "arm": "two-tensors-swapped-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "91c1f890adb88a79659457b96be8e950f12ef7d05d1f02b598af1f584ae1c799"
+    },
+    {
+      "arm": "two-tensors-swapped-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "f29e5a2e5603a9b23570b4dcc3b1f3f862e9a7a8a64c0b81c9aa5de8e3ccf02e"
+    },
+    {
+      "arm": "tensor-order-permuted",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "BASE: the masked message in the proof does not satisfy the linear claim",
+        "stage": "second chain: a proximity test"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "08834d77ffda8836aafa6d5035181b6c65981409e815ffd7e99ea1e043eb9d33"
+    },
+    {
+      "arm": "tensor-order-permuted-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "91c1f890adb88a79659457b96be8e950f12ef7d05d1f02b598af1f584ae1c799"
+    },
+    {
+      "arm": "tensor-order-permuted-legacy-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "7811a3a3e8d6a2b276fa0af0175fb54c6594781c9a22a37373756ea2027f5534",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "c7f5048312bb6961eee79e3f8dbec567650b7256937c6e0a5b74e27ebbdf9339"
+    },
+    {
+      "arm": "other-checkpoint-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "be255a047f6bfd8fc7abfedd5fa60ff401eb49ab468f86f58f29fe01ad31f6b6"
+    },
+    {
+      "arm": "manifest-root-other-checkpoint",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "16448b2b197498ab864e7b4b62eb53631e8813c8aa324d33794691e909ea12a4",
+        "held_conversion": "fb5aacb7ff0cee59f9e0348cf9030357608eb40aad1cc4447a19d8363bc3a49e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "91c1f890adb88a79659457b96be8e950f12ef7d05d1f02b598af1f584ae1c799"
+    },
+    {
+      "arm": "conversion-id-honest-control",
+      "decision": {
+        "accepted": 1,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 1,
+        "native_attempted": 1,
+        "reason": "accepted",
+        "stage": "all chains"
+      },
+      "exit": 0,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "32ec108bc10eae06b177d11316bcbda75ec5cf22f351d5084346ec11104a0c90"
+    },
+    {
+      "arm": "conversion-id-mismatch",
+      "decision": {
+        "accepted": 0,
+        "held_checkpoint": "d9a2c40e386765a41de911ad202db04ce14508a11952b61366dc217085b70543",
+        "held_conversion": "25724c09cfea7d256bcef87b0de10e88cb57224c21cda24a6fd01c71edbcef7e",
+        "native_accepted": 0,
+        "native_attempted": 1,
+        "reason": "an opening does not lead to its root",
+        "stage": "one-time chain: the ranges"
+      },
+      "exit": 1,
+      "passed": true,
+      "seed": 1010,
+      "sha256": "91c1f890adb88a79659457b96be8e950f12ef7d05d1f02b598af1f584ae1c799"
+    }
+  ],
+  "verdict": "PASS"
+}

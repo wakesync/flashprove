@@ -1,0 +1,17 @@
+{
+  "elapsed_s": 37.543061807751656,
+  "exit": 0,
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks"
+  ],
+  "stderr": "",
+  "stdout": ""
+}
