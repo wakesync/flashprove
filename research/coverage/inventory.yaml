@@ -30,7 +30,7 @@
 # that documents the absence. A site says where; it does not show that the check there is right.
 #
 # Base: main ba1e3067f58b0142dd16a3df884626cfe6ccc585 for rows OP-01 .. OUT-07 (first version, PR #97
-# head 655d70b2). Rows added after review (OP-15, OP-R8 .. OP-R14, RR-15 .. RR-21, RR-R1, IS-23, IS-24,
+# head 655d70b2). Rows added after review (OP-15, OP-R8 .. OP-R14, RR-15 .. RR-21, RR-R1, RR-R2, IS-23, IS-24,
 # OUT-08, OUT-09) were read at main 0bdf8326, where the cited files are unchanged from ba1e3067. Read
 # from source and docs; only rows N1 to N3 of experiments/20261110-6-coverage-inventory/ were run.
 
@@ -516,13 +516,28 @@ rows:
   - id: RR-R1
     category: range_rounding
     scope: research
-    element: "Qwen operator ranges (qwen_ops): inputs in [-2^F, 2^F) (F + 1 bits), outputs in F + 3 or F + 4 bits, remainders bit-decomposed"
-    relation: "c.range() on the shared product oracle"
+    element: "Qwen conv, L2/RMS norm and rotary ranges (qwen_ops): every input cell in [-2^F, 2^F) (F + 1 bits, offset 2^F), outputs in F + 4 bits (conv) or F + 3 bits (norm, rotary), floor remainders bit-decomposed. Not the nonlinear operator: its input interval is wider, see RR-R2"
+    relation: "c.range(cell, f+1, S) on each input cell of conv/norm/rotary; c.range() on outputs; Circuit::floor range-checks its remainder"
     enforcement: proof_constraint
     sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'auto a=c.cell(witness?in.x.at(i):0); c.range(a,f+1,S);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'auto v=c.cell(witness?in.x.at(j):0);c.range(v,f+1,S);x.push_back(v);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'for(int j=0;j<256;j++){auto v=c.cell(witness?in.x.at(j):0);c.range(v,f+1,S);'}
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+4,8*S)'}
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+3,4*S)'}
-      - {file: research/operators/qwen_ops/README.md, symbol: 'The input quotient is tied to X with an exactly bit-decomposed remainder'}
+    note: "narrowed after review of PR #97 (astra round 2): this row used to name all qwen_ops inputs as [-2^F, 2^F), which the nonlinear operator does not enforce; the row's claim for conv/norm/rotary is unchanged"
+  - id: RR-R2
+    category: range_rounding
+    scope: research
+    element: "Qwen nonlinear input range (qwen_ops): X in [-8*2^F, 8*2^F), i.e. x in [-8, 8) on the 1/256 table grid. There is no range call on X itself; the interval follows from q = floor(X / 2^(F-8)) with a bit-decomposed remainder in [0, 2^(F-8)), key = q + 2048, and the 4096-way one-hot selector forcing key in [0, 4096)"
+    relation: "Circuit::floor (remainder range + X = q*2^(F-8) + rem), key = sum({q,1}, 2048), selectors(): sum b_i = 1 and sum i*b_i = key"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'auto q=c.floor(x,f-8,"grid"); auto key=c.sum({{q,1}},2048);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'range(rem,bits); eq({term(a),term(out,-(i64(1)<<bits)),term(rem,-1)});'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'eq({term(sum(count))},1); eq({term(sum(index)),term(key,-1)});'}
+      - {file: research/operators/qwen_ops/README.md, symbol: 'Integer input X maps to i=floor(X/2^(F-8))+2048. Domain [-8,8), fail closed outside.'}
+    note: "split from RR-R1 after review of PR #97 (astra round 2): astra proved 5 of 5 complete nonlinear proofs at F = 12 with X = 8192 .. 8196, outside [-2^F, 2^F) but inside this interval; these are valid proofs of the actual relation, not a soundness break. The narrower interval is not enforced for nonlinear and is not claimed"
   # ---------------------------------------------------------------- committed inputs and state
   - id: IS-01
     category: input_state

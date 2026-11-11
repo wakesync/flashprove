@@ -10,13 +10,17 @@ Fails (exit 1) if:
   - a prover_only or not_enforced row is not listed in any open gap, or a gap names an unknown row;
   - a plain gap (an id not starting with G-OB) names a row that is not prover_only or not_enforced
     (only the open-obligation entries G-OB* may name proof or validation rows);
+  - an open-obligation group fixed in OBLIGATIONS below (G-OB1, G-OB2, G-OB3) is missing, or lacks one
+    of the rows fixed for it, or one of those rows is missing or of another kind than fixed here
+    (review of PR #97: deleting G-OB2, or dropping OUT-09 from it, used to pass);
   - a directory under research/operators/ is neither cited by some row's site nor listed, with a
     reason, under `excluded`; or an `excluded` entry names a directory that does not exist.
 Prints counts by category and kind, and with --json writes them as JSON.
 
 What it does not check: that a row's kind is right. A row moved from verifier_validation to
 proof_constraint, a site whose code was disabled but kept its text, or a row that lost one of two
-sites all pass. The kind is a reviewer's reading, and a review must challenge it.
+sites all pass. OBLIGATIONS pins the rows known today; a new row that compares with a caller-stated
+value is not required to join G-OB2 until it is added to OBLIGATIONS here. The kind is a reviewer's reading, and a review must challenge it.
 
 Usage: python3 research/coverage/check_inventory.py [--inventory PATH] [--root DIR] [--json OUT]
 Standard library plus PyYAML (the same dependency as scripts/update-results.py).
@@ -38,6 +42,17 @@ KINDS = ("proof_constraint", "verifier_validation", "prover_only", "not_enforced
 CATEGORIES = ("operator", "range_rounding", "input_state", "output")
 SCOPES = ("shipped", "research")
 GAP_KINDS = ("prover_only", "not_enforced")
+# Open obligations whose membership the inventory cannot weaken (review of PR #97, opus round 2).
+# Each row must be in the group and have the kind given here. G-OB2 holds the checks that bind only
+# if the caller states the value itself (commitment, policy, range, reply length, the reply's y).
+OBLIGATIONS = {
+    "G-OB1": {"RR-04": "verifier_validation", "RR-08": "verifier_validation"},
+    "G-OB2": {"IS-01": "verifier_validation", "IS-08": "verifier_validation",
+              "OUT-05": "verifier_validation", "OUT-06": "verifier_validation",
+              "OUT-09": "verifier_validation"},
+    "G-OB3": {"OP-01": "proof_constraint", "OP-05": "proof_constraint",
+              "OP-14": "proof_constraint", "RR-03": "proof_constraint"},
+}
 MIN_ROWS = 40
 MIN_SYMBOL = 12
 RESEARCH_DIR = "research/operators"
@@ -91,6 +106,18 @@ def check(inv, root):
     if len(rows) < MIN_ROWS:
         faults.append("only %d rows, fewer than %d" % (len(rows), MIN_ROWS))
     in_gap = set()
+    gap_rows = {str(g.get("id")): list(g.get("rows") or []) for g in inv.get("open_gaps") or []}
+    for gid, fixed in OBLIGATIONS.items():
+        if gid not in gap_rows:
+            faults.append("open obligation %s is missing" % gid)
+            continue
+        for rid, kind in fixed.items():
+            if rid not in gap_rows[gid]:
+                faults.append("open obligation %s no longer names %s" % (gid, rid))
+            if rid not in kind_of:
+                faults.append("open obligation %s: fixed row %s is not in the inventory" % (gid, rid))
+            elif kind_of[rid] != kind:
+                faults.append("open obligation %s: %s is %s, fixed as %s" % (gid, rid, kind_of[rid], kind))
     for g in inv.get("open_gaps") or []:
         gid = str(g.get("id"))
         if not g.get("text") or not g.get("rows"):

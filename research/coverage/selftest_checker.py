@@ -12,9 +12,13 @@ Mutations (each on a fresh in-memory copy of inventory.yaml):
   M8 a proof_constraint row added to a plain gap (G-01)
   M9 one excluded research directory removed from `excluded` (it is then neither cited nor excluded)
   M10 an `excluded` entry for a directory that does not exist
+  M11 the open obligation G-OB2 deleted (review of PR #97, opus round 2)
+  M12 OUT-09 dropped from G-OB2 (same review)
+  M13 each row fixed in check_inventory.OBLIGATIONS in turn dropped from its group (one case per row)
+  M14 OUT-09 relabelled proof_constraint (a fixed obligation row changing kind)
 Every case must give at least one fault; the real inventory must give none.
 Not tested, because the checker cannot see it: a row moved to another valid kind outside a plain
-gap, a disabled check that keeps its text, a row that loses one of two sites.
+gap and outside OBLIGATIONS, a disabled check that keeps its text, a row that loses one of two sites.
 Usage: python3 research/coverage/selftest_checker.py [--json OUT]
 """
 import argparse
@@ -82,9 +86,30 @@ def main():
     m = copy.deepcopy(inv)
     m.setdefault("excluded", []).append({"path": "research/operators/no_such_dir", "reason": "test"})
     out["M10_excluded_missing_dir"] = {"faults": nf(m, root), "expected": ">0"}
+    m = copy.deepcopy(inv)
+    m["open_gaps"] = [g for g in m["open_gaps"] if g["id"] != "G-OB2"]
+    out["M11_obligation_G-OB2_deleted"] = {"faults": nf(m, root), "expected": ">0"}
+    m = copy.deepcopy(inv)
+    g = next(g for g in m["open_gaps"] if g["id"] == "G-OB2")
+    g["rows"] = [x for x in g["rows"] if x != "OUT-09"]
+    out["M12_OUT-09_dropped_from_G-OB2"] = {"faults": nf(m, root), "expected": ">0"}
+    m13 = {}
+    for gid, fixed in check_inventory.OBLIGATIONS.items():
+        for rid in fixed:
+            m = copy.deepcopy(inv)
+            g = next(g for g in m["open_gaps"] if g["id"] == gid)
+            g["rows"] = [x for x in g["rows"] if x != rid]
+            m13[gid + "/" + rid] = nf(m, root)
+    out["M13_obligation_row_dropped"] = {"cases": len(m13), "cases_with_faults": sum(1 for v in m13.values() if v > 0),
+                                         "faults": min(m13.values()) if m13 else 0, "per_row": m13,
+                                         "expected": ">0 for every row"}
+    m = copy.deepcopy(inv)
+    next(r for r in m["rows"] if r["id"] == "OUT-09")["enforcement"] = "proof_constraint"
+    out["M14_OUT-09_kind_changed"] = {"faults": nf(m, root), "expected": ">0"}
 
     ok = out["real"]["faults"] == 0 and all(v["faults"] > 0 for k, v in out.items() if k != "real")
     ok = ok and out["M3_gap_dropped"]["cases"] == out["M3_gap_dropped"]["cases_with_faults"] > 0
+    ok = ok and out["M13_obligation_row_dropped"]["cases"] == out["M13_obligation_row_dropped"]["cases_with_faults"] > 0
     out["ok"] = ok
     print(json.dumps(out, indent=1, sort_keys=True))
     if a.json:
