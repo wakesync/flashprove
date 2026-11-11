@@ -1,0 +1,16 @@
+{
+  "cases": 150,
+  "output_words": 19500,
+  "matched": 150,
+  "mismatches": [],
+  "per_op": {
+    "nonlinear": 30,
+    "conv": 30,
+    "l2": 30,
+    "rms": 30,
+    "rotary": 30
+  },
+  "cpp_stdout_sha256": "0673a747dec57d3ff6f36cf5dab5a68d8a193cf907a2b5efa9e03c3ed92bb669",
+  "source": "research/operators/qwen_ops/reference_crosscheck.cpp",
+  "source_sha256": "4e240f61e1f553836746c19f42448fc90dd755fff8768d4a7819a42f660976c2"
+}
