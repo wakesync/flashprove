@@ -1,0 +1,5 @@
+held_stock {"held_id": "eb2cfd3003c4c8c8503456f860e8c08cb22cd52baa5b3b7101020e75e1fe801f", "own_manifest_accepted": true, "other_manifest_accepted": false, "own_openings_accepted": 1199, "other_changed_openings_accepted": 0, "other_unchanged_openings_accepted": 0, "forged_digest_with_honest_path_accepted": false}
+held_abl {"held_id": "16834f8eea1ae4decd241f69719f729878dfc517e89f2df704141aba22e49e86", "own_manifest_accepted": true, "other_manifest_accepted": false, "own_openings_accepted": 1199, "other_changed_openings_accepted": 0, "other_unchanged_openings_accepted": 0, "forged_digest_with_honest_path_accepted": false}
+changed 70 same 1129 layers 17 .. 51
+Qwen/Qwen3.8-27B 37561816e66b5b9153b1b64c10968c18c1e6f4a0 1199 eb2cfd3003c4c8c8503456f860e8c08cb22cd52baa5b3b7101020e75e1fe801f
+huihui-ai/Huihui-Qwen3.8-27B-abliterated 739e3c5b89849f6c238ce1e5b70008612ae42cdd 1199 16834f8eea1ae4decd241f69719f729878dfc517e89f2df704141aba22e49e86
