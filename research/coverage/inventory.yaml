@@ -593,7 +593,7 @@ rows:
       - {file: blocks/frame/heads.h, symbol: 'inline Digest configuration_digest('}
       - {file: blocks/frame/heads.h, symbol: 'inline Digest published_id('}
       - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("model-statement");'}
-    note: "negative test N1: a complete honest proof of another commitment is rejected here only because the caller passes its own -id"
+    note: "negative test N1: a complete honest proof of another commitment is rejected here only because the caller passes its own -id; substitution suite (experiments/20261111-6-substitution-suite, PR #108): another example's config with its own -policy (C-CFG1) and layout.txt with a 30-byte comment line appended, under the original ID (C-CFG3b), rejected here, NO: model-statement, 5 of 5 each"
   - id: IS-02
     category: input_state
     scope: shipped
@@ -610,6 +610,7 @@ rows:
     enforcement: proof_constraint
     sites:
       - {file: verifier/src/cp_verify.cpp, symbol: 'blk::check_key(*confH, file, tested, why, nullptr, &place);'}
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): layout.txt with a 30-byte comment line appended, under its own recomputed ID (C-CFG3), and a verifier build with changed one-time/proof chain labels (C-DOM2) end NO: key-refused, 5 of 5 each"
   - id: IS-04
     category: input_state
     scope: shipped
@@ -626,6 +627,7 @@ rows:
     enforcement: proof_constraint
     sites:
       - {file: blocks/frame/check.h, symbol: 'inline void bind_request_statement('}
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): complete honest proof under another example's request, one prompt token changed, two prompt tokens swapped, r moved 60 to 59, another reply token, prompt token 0 changed (C-REQ1..4, C-RPL1, C-PFX1) and another example's proof under this request (C-REQ5) all end NO: proof-refused, 5 of 5 each; a verifier build with a changed first-chain label also ends NO: proof-refused (C-DOM1)"
   - id: IS-06
     category: input_state
     scope: shipped
@@ -651,7 +653,7 @@ rows:
     sites:
       - {file: verifier/src/cp_verify.cpp, symbol: 'static void cpPolicyHeld(const PolicyNamed &p, const string &pol, const vector<u32> &request) {'}
       - {file: verifier/src/vf_common.h, symbol: 'static constexpr bool acceptancePolicyIsExactMatch('}
-    note: "negative test N2: a complete honest clipped-gap proof under its own ID is rejected for a caller that expects exact match"
+    note: "negative test N2: a complete honest clipped-gap proof under its own ID is rejected for a caller that expects exact match; substitution suite (experiments/20261111-6-substitution-suite, PR #108): another example's config without -policy ends NO: policy (C-CFG1b), 5 of 5"
   - id: IS-09
     category: input_state
     scope: shipped
@@ -703,6 +705,7 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: docs/protocol.md, symbol: 'The verifier knows nothing about end tokens or the tokenizer'}
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): bare cp_verify on the exact example takes no tokenizer and says YES (C-TOK5, 5 of 5, registered expected accept, gap G-04)"
   - id: IS-14
     category: input_state
     scope: shipped
@@ -727,6 +730,7 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: docs/limits.md, symbol: 'A proof does not name a client or a time'}
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): the unaltered proof replayed with the unaltered request is accepted again (C-RPL2, 5 of 5, registered expected accept, gap G-05)"
   - id: IS-17
     category: input_state
     scope: shipped
@@ -735,6 +739,7 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: research/security/fiat-shamir-attacks.md, symbol: 'not cryptographically identified'}
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): verifier builds with changed chain-label constants reject the unaltered example (C-DOM1 proof-refused, C-DOM2 key-refused, 5 of 5 each); this shows the labels enter the transcript, not that a client can identify its verifier binary"
   - id: IS-18
     category: input_state
     scope: shipped
@@ -760,6 +765,7 @@ rows:
     sites:
       - {file: tools/manifest/manifest.py, symbol: 'def check_config(m, config_dir):'}
       - {file: tools/manifest/README.md, symbol: "signer's word"}
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): one-byte-changed tokenizer.json, another chat template, end tokens differing from the manifest, and a manifest re-signed by another key all REFUSED (C-TOK1, C-TOK2, C-TOK3, C-TOK6, 5 of 5 each); client-side only"
   - id: IS-21
     category: input_state
     scope: research
@@ -890,7 +896,7 @@ rows:
     enforcement: verifier_validation
     sites:
       - {file: integrations/check_proof.py, symbol: 'def check_end_token(self, allowed):'}
-    note: "only in the integration, and skipped with --end-token none; a bare cp_verify YES covers a truncated reply"
+    note: "only in the integration, and skipped with --end-token none; a bare cp_verify YES covers a truncated reply; substitution suite (experiments/20261111-6-substitution-suite, PR #108): check_proof.py with --end-token 5 on a reply ending in 199 rejected, 5 of 5 (C-TOK4)"
   - id: OUT-07
     category: output
     scope: shipped
@@ -916,7 +922,7 @@ excluded:
   - path: research/operators/qwen_deltanet_m2_build
     reason: "reached main after this inventory's base (PR #73, main 0bdf8326); its two-lookup relations are not inventoried here (follow-up)"
   - path: research/operators/qwen_handoff
-    reason: "reached main after the repair run (PR #98, main 2c180575); its joint two-chunk boundary relations are not inventoried here (follow-up)"
+    reason: "reached main after the repair run (PR #98, main 2c180575); its joint two-chunk boundary relations are not inventoried here (follow-up). Verifier-side statement substitution, foreign transcript domain, malformed proofs and state-prefix cases on it are tested in experiments/20261111-6-substitution-suite (PR #108), without inventory rows"
 
 # Open gaps: every prover_only and not_enforced row, plus open proof obligations, in plain language.
 # check_inventory.py fails if a prover_only or not_enforced row is in no gap.

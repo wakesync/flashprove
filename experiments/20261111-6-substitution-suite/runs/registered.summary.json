@@ -1,0 +1,1512 @@
+{
+  "started_utc": "2026-11-11T04:48:48.646388+00:00",
+  "finished_utc": "2026-11-11T04:55:06.629040+00:00",
+  "partial": false,
+  "elapsed_seconds": 377.98268227651715,
+  "cases": {
+    "C-CFG1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.317030418664217,
+        "sd": 0.01536181705922675,
+        "min": 0.30261147767305374,
+        "max": 0.340860228985548
+      },
+      "checks": [
+        "NO: model-statement"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-CFG1b": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.004928667098283768,
+        "sd": 0.0020454085157283614,
+        "min": 0.0034131482243537903,
+        "max": 0.008824367076158524
+      },
+      "checks": [
+        "NO: policy"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-CFG2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.6067929416894913,
+        "sd": 0.01579447443284632,
+        "min": 0.5908885858952999,
+        "max": 0.6340511441230774
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-CFG3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.5869859121739864,
+        "sd": 0.05266671634505016,
+        "min": 0.5814422219991684,
+        "max": 0.7051069252192974
+      },
+      "checks": [
+        "NO: key-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-CFG3b": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.29462020471692085,
+        "sd": 0.0269429601904313,
+        "min": 0.28436457738280296,
+        "max": 0.3501432314515114
+      },
+      "checks": [
+        "NO: model-statement"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-DOM1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.5961624719202518,
+        "sd": 0.023837925897905513,
+        "min": 0.5887922756373882,
+        "max": 0.6419985555112362
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-DOM2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.3048600926995277,
+        "sd": 0.026274310169380095,
+        "min": 1.2784685604274273,
+        "max": 1.3450278602540493
+      },
+      "checks": [
+        "NO: key-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.36096266284585,
+        "sd": 0.035214503542770774,
+        "min": 1.3428375087678432,
+        "max": 1.4289287328720093
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.0302894860506058,
+        "sd": 0.02413402461609065,
+        "min": 1.0002669543027878,
+        "max": 1.0567844547331333
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.3926847614347935,
+        "sd": 0.01958686596410926,
+        "min": 0.38051580265164375,
+        "max": 0.4307141527533531
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL4": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.004305444657802582,
+        "sd": 0.0007315697752560516,
+        "min": 0.0032009445130825043,
+        "max": 0.00489397719502449
+      },
+      "checks": [
+        "NO: cp-proof-length"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-MAL5": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.3780251555144787,
+        "sd": 0.076189471510375,
+        "min": 1.3537751473486423,
+        "max": 1.5403202138841152
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL6": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.4087472669780254,
+        "sd": 0.02890967149805427,
+        "min": 1.3539533130824566,
+        "max": 1.4276860393583775
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL7": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.009060174226760864,
+        "sd": 0.0009096294319922215,
+        "min": 0.007634446024894714,
+        "max": 0.009650591760873795
+      },
+      "checks": [
+        "NO: cp-proof-head"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-MAL8": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.0185813084244728,
+        "sd": 0.02482388368106147,
+        "min": 0.9913428425788879,
+        "max": 1.058661937713623
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-MAL9": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.3745246231555939,
+        "sd": 0.03627761080259728,
+        "min": 1.3466658294200897,
+        "max": 1.4400781095027924
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-PFX1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.598243735730648,
+        "sd": 0.032724710201913074,
+        "min": 0.5854832194745541,
+        "max": 0.6647001169621944
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-REQ1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.6081424951553345,
+        "sd": 0.025483633457214067,
+        "min": 0.5900514721870422,
+        "max": 0.6465967260301113
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-REQ2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.5972899720072746,
+        "sd": 0.015301057608597532,
+        "min": 0.5828788243234158,
+        "max": 0.6247917041182518
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-REQ3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.6211482025682926,
+        "sd": 0.028611503373466754,
+        "min": 0.5602343492209911,
+        "max": 0.6306033991277218
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-REQ4": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.6133062168955803,
+        "sd": 0.04994108731664966,
+        "min": 0.5984179079532623,
+        "max": 0.7190489657223225
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-REQ5": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.6026929393410683,
+        "sd": 0.059116499999077414,
+        "min": 0.5857355929911137,
+        "max": 0.7285444214940071
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-RPL1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.6169161312282085,
+        "sd": 0.008712610049641991,
+        "min": 0.6033309437334538,
+        "max": 0.6256864257156849
+      },
+      "checks": [
+        "NO: proof-refused"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "C-RPL2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 5,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 1,
+        "sd": 0.0,
+        "min": 1,
+        "max": 1
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.3972926065325737,
+        "sd": 0.027509632458625102,
+        "min": 1.3456296846270561,
+        "max": 1.4146896973252296
+      },
+      "checks": [
+        "YES"
+      ],
+      "kinds": [
+        "accepted"
+      ]
+    },
+    "C-TOK1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.05984033644199371,
+        "sd": 0.009178150433221139,
+        "min": 0.05637216567993164,
+        "max": 0.07769482210278511
+      },
+      "checks": [
+        "manifest: REFUSED: serving.tokenizer.files: tokenizer.json digest differs"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-TOK2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.06032530963420868,
+        "sd": 0.003538736553190727,
+        "min": 0.05410267412662506,
+        "max": 0.06238707900047302
+      },
+      "checks": [
+        "manifest: REFUSED: serving.chat_template: file digest differs"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-TOK3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.05796917527914047,
+        "sd": 0.004075087739216917,
+        "min": 0.05132351443171501,
+        "max": 0.061842214316129684
+      },
+      "checks": [
+        "manifest: REFUSED: serving.end_tokens: differ from --end-tokens"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-TOK4": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.4173884801566601,
+        "sd": 0.011847759884543887,
+        "min": 0.39636441692709923,
+        "max": 0.4269215054810047
+      },
+      "checks": [
+        "check_proof: rejected: the last checked token is 199, not one of your end tokens"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "C-TOK5": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 5,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 1,
+        "sd": 0.0,
+        "min": 1,
+        "max": 1
+      },
+      "seconds": {
+        "n": 5,
+        "median": 1.40250850841403,
+        "sd": 0.02809688942657032,
+        "min": 1.3595871701836586,
+        "max": 1.4349430985748768
+      },
+      "checks": [
+        "YES"
+      ],
+      "kinds": [
+        "accepted"
+      ]
+    },
+    "C-TOK6": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.057797953486442566,
+        "sd": 0.008744880209421902,
+        "min": 0.056745998561382294,
+        "max": 0.07705091685056686
+      },
+      "checks": [
+        "manifest: REFUSED: signature: does not verify under the trusted signer key"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "H-CFG1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.04823863506317139,
+        "sd": 0.013465983435957708,
+        "min": 0.04430871456861496,
+        "max": 0.07697802037000656
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-CFG2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.05708150193095207,
+        "sd": 0.013418796330324676,
+        "min": 0.04376765713095665,
+        "max": 0.07358243688941002
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-DOM1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.04544574394822121,
+        "sd": 0.010333134480716486,
+        "min": 0.0444403775036335,
+        "max": 0.06830041483044624
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-DOM2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.047241080552339554,
+        "sd": 0.00989132741145839,
+        "min": 0.04490242525935173,
+        "max": 0.06896203011274338
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-MAL1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.11037706956267357,
+        "sd": 0.0028002380098305383,
+        "min": 0.105959203094244,
+        "max": 0.11270985007286072
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"an opening is cut short or holds a symbol that is not in canonical form\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-MAL2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.11377029120922089,
+        "sd": 0.0029900456735603978,
+        "min": 0.11034683510661125,
+        "max": 0.11866330727934837
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"bytes are left over at the end of the proof\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-MAL3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.11051935330033302,
+        "sd": 0.0048226527029070765,
+        "min": 0.10457200556993484,
+        "max": 0.11700597405433655
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"BASE: the masked message in the proof does not satisfy the linear claim\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-MAL4": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.028164494782686234,
+        "sd": 0.005980275705450239,
+        "min": 0.027194794267416,
+        "max": 0.04146585613489151
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"the chain's salt is missing\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-PFX1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.053193215280771255,
+        "sd": 0.004533681343837657,
+        "min": 0.044201526790857315,
+        "max": 0.054172564297914505
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-PFX2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.0019656866788864136,
+        "sd": 0.00042067987312226234,
+        "min": 0.001897517591714859,
+        "max": 0.002789050340652466
+      },
+      "checks": [
+        "FAIL: verifier initial root opening"
+      ],
+      "kinds": [
+        "application_validation"
+      ]
+    },
+    "H-PFX3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.05174688249826431,
+        "sd": 0.0038757323254268454,
+        "min": 0.04372970387339592,
+        "max": 0.053511880338191986
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-PFX4": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.10986919328570366,
+        "sd": 0.0038615527822809213,
+        "min": 0.10535485297441483,
+        "max": 0.11513940989971161
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"BASE: the masked message in the proof does not satisfy the linear claim\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-PFX5": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.1049329824745655,
+        "sd": 0.007180592194187974,
+        "min": 0.10164322331547737,
+        "max": 0.11993206292390823
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"BASE: the masked message in the proof does not satisfy the linear claim\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-REQ1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.051909614354372025,
+        "sd": 0.007272649064003694,
+        "min": 0.04629604518413544,
+        "max": 0.06531884893774986
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-REQ2": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.04649364948272705,
+        "sd": 0.008766906365379964,
+        "min": 0.04338817298412323,
+        "max": 0.06450298428535461
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-REQ3": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.04533709958195686,
+        "sd": 0.00871947494102648,
+        "min": 0.043879855424165726,
+        "max": 0.06472532078623772
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    },
+    "H-RPL1": {
+      "n": 5,
+      "controls": 5,
+      "accepted": 0,
+      "intended": 5,
+      "verdict": "PASS",
+      "acceptance": {
+        "n": 5,
+        "median": 0,
+        "sd": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "seconds": {
+        "n": 5,
+        "median": 0.05171710252761841,
+        "sd": 0.006135091986266241,
+        "min": 0.045016802847385406,
+        "max": 0.05946977064013481
+      },
+      "checks": [
+        "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}"
+      ],
+      "kinds": [
+        "proof_constraint"
+      ]
+    }
+  },
+  "inputs": {
+    "bin/subst6/registered/C-MAL1.proof": "5030e534ce912a7a80c7458404b220326fc352bb386bd6fbc8bb303695c57ff6",
+    "bin/subst6/registered/C-MAL2.proof": "f73788f3a097ea50b86887209257e62fe87e2835cab9c7075764e4f1fdacc309",
+    "bin/subst6/registered/C-MAL3.proof": "e3f779184d20c97011ea412cd0a79d3ddcc85e573fbd660d9ae6ec6009c0ba0d",
+    "bin/subst6/registered/C-MAL4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/C-MAL5.proof": "c34eb7aaad03e2962892d81d9bab46d0462e626931b8e71743fcc7b15fe813bb",
+    "bin/subst6/registered/C-MAL6.proof": "e7d90eab4484fba70f56ffd80649b7564514c98e39f264d04a5aa016876264a6",
+    "bin/subst6/registered/C-MAL7.proof": "fd07636968241c2d782701330e61d04e12ad7882a352f5b533f3e7bf826c14cf",
+    "bin/subst6/registered/C-MAL8.proof": "5e769da7ab8574d0f88c9f731510f93f0469fda39ab3e8f682ce51ebade2ad82",
+    "bin/subst6/registered/C-MAL9.proof": "aed18035a9eb23f6d9b449f9f580ae524073828be4487504de7842354adb4295",
+    "bin/subst6/registered/C-PFX1.req": "76b895a47e7064100cfd9ba883655197dae9fb68f5b3f95db96eed4f0ce31c31",
+    "bin/subst6/registered/C-REQ2.req": "43a5b155148fbcfe881c3d46337d3b80f10edd4dcba7cc4686e4fd137048633c",
+    "bin/subst6/registered/C-REQ3.req": "a1132c18f31c75751ab02a3c58ce0bae768a425f82258f8088e4ee52d1100f37",
+    "bin/subst6/registered/C-REQ4.req": "e493d4413b17e2ba983122445ff16d2ec13d270e491966efa58bee4129320d82",
+    "bin/subst6/registered/C-RPL1.req": "be460c571aa1aaa0c6b65daf88a8d757a7d36a1412e656d660d9685cbc87a17b",
+    "bin/subst6/registered/build-digest.json": "6c1e7dbed16d23938eece2caccd2a230291515feb2814e26a053ab3df07e260e",
+    "bin/subst6/registered/config-comment/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "bin/subst6/registered/config-comment/layout.txt": "bc2fedb909045f461eba27c53b1400e843261f9a1c9dd0b4ec9c417103b33c05",
+    "bin/subst6/registered/config-comment/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "bin/subst6/registered/derived-id.json": "3d0101536b6030ae5c25d4a5d33d889ffe00a40851c30b3a59d84dc6fa3b055f",
+    "bin/subst6/registered/handoff-201/H-CFG1.stmt": "8446db375f967939fffeb566e5628b3c95e27906f28543ac322f92c922ec16ae",
+    "bin/subst6/registered/handoff-201/H-CFG2.stmt": "55ab399a7e23f846903ab210eafbb143f017a3e00411d668f94b0fbb37379d69",
+    "bin/subst6/registered/handoff-201/H-PFX1.stmt": "2e75de8b69e9b17b3bf4f618b173cc2eef123487c510a372858c8a9510d0a535",
+    "bin/subst6/registered/handoff-201/H-PFX3.stmt": "78188f9b6a8e6a39831825543c8c339e1459e9319cd02d5f7fd7cb5ebb6c09a6",
+    "bin/subst6/registered/handoff-201/H-PFX4/c0.fx": "4e69a61850c9f93bd8da667c5a177d19947894bee596527e6f7c8ec4e5134333",
+    "bin/subst6/registered/handoff-201/H-PFX4/c0.packet": "8aebd3f049ba2c3d381dd0707118887c0a76ee4e4005961d7caadadd81098a59",
+    "bin/subst6/registered/handoff-201/H-PFX4/c1.fx": "79667c99e223970527e7131c53f2f8cd6eab9584eb4494027bc7aa2f1f4c7a90",
+    "bin/subst6/registered/handoff-201/H-PFX4/c1.packet": "94cb3b3a6b3d83682bfc2105571f972bc1094c0b2970aef9194e2bb4f1909df7",
+    "bin/subst6/registered/handoff-201/H-PFX4/hostile.proof": "0c94dcfe312c9b0e4eaf05cdd48f4ee36fcd1bba6af2f837a18fd30835c60c28",
+    "bin/subst6/registered/handoff-201/H-PFX5/c0.fx": "4e69a61850c9f93bd8da667c5a177d19947894bee596527e6f7c8ec4e5134333",
+    "bin/subst6/registered/handoff-201/H-PFX5/c0.packet": "8aebd3f049ba2c3d381dd0707118887c0a76ee4e4005961d7caadadd81098a59",
+    "bin/subst6/registered/handoff-201/H-PFX5/c1.fx": "3d3f904ea200447f9e97df440c7c0691129e182fec16db4160c65a30beb908e2",
+    "bin/subst6/registered/handoff-201/H-PFX5/c1.packet": "94cb3b3a6b3d83682bfc2105571f972bc1094c0b2970aef9194e2bb4f1909df7",
+    "bin/subst6/registered/handoff-201/H-PFX5/hostile.proof": "d5c985e49bfd8678e20da1a349b1605335c9a42a2a424c1ad81bdbf5944f19b1",
+    "bin/subst6/registered/handoff-201/H-REQ1.stmt": "a5f09c2ae8a246356d4ae2fa3260aa4278d2c727ceb23e254355a21992aafea9",
+    "bin/subst6/registered/handoff-201/H-REQ2.stmt": "2654e3cac93ce1a0a241018ed0a76cfcd6d01e1a1dbbf44356c1868bbe2c00f0",
+    "bin/subst6/registered/handoff-201/H-REQ3.stmt": "d79175efa0c5d5bb87d817667d2db9c5ba648c5c90e4cd55fdde4cb0b578637c",
+    "bin/subst6/registered/handoff-201/bad-opening.stmt": "75c4478501609c3c1358096741439178a11eea37262ee9df2dd637de0d9fcdb6",
+    "bin/subst6/registered/handoff-201/fp94.proof": "1c1afa3d5704248a9cc0c599e1523a487274ef99729bab314aaf871b57d7ff25",
+    "bin/subst6/registered/handoff-201/honest/c0.fx": "4e69a61850c9f93bd8da667c5a177d19947894bee596527e6f7c8ec4e5134333",
+    "bin/subst6/registered/handoff-201/honest/c0.packet": "8aebd3f049ba2c3d381dd0707118887c0a76ee4e4005961d7caadadd81098a59",
+    "bin/subst6/registered/handoff-201/honest/c1.fx": "79667c99e223970527e7131c53f2f8cd6eab9584eb4494027bc7aa2f1f4c7a90",
+    "bin/subst6/registered/handoff-201/honest/c1.packet": "94cb3b3a6b3d83682bfc2105571f972bc1094c0b2970aef9194e2bb4f1909df7",
+    "bin/subst6/registered/handoff-201/honest.proof": "71865b3eb2dc6c34b4741cf46d24679a3bc9a993d55ed1dc4b1395556e0d6b6a",
+    "bin/subst6/registered/handoff-201/mal1.proof": "2cfbc7a0434214179d26ac6e9bf578865e8b1df7911eb1990e5727adedb48097",
+    "bin/subst6/registered/handoff-201/mal2.proof": "6339bb812b25f8ca800dbc63393b002a10688616fbd273cff21bf70d00974608",
+    "bin/subst6/registered/handoff-201/mal3.proof": "73e20b7e340b1efcfdd9c1fdc3438c2a04fc28e866ae22abe03d9d7c0c0f83c4",
+    "bin/subst6/registered/handoff-201/mal4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/handoff-201/other.stmt": "f5fde0104f55b09326f99ebc120b0367d500ecc1ce7426f8945021178a743ae3",
+    "bin/subst6/registered/handoff-201/own.stmt": "8d4bc92d09a9de4485090c9df584ba78160c398c8be6d46cd39cb25ed0f8306f",
+    "bin/subst6/registered/handoff-202/H-CFG1.stmt": "da30615be88fbd567e850c439a6d96554b792c0a9a06c0e6679279df6fd33104",
+    "bin/subst6/registered/handoff-202/H-CFG2.stmt": "f07c76e49fe110b8ad69e8d18ba9114390e8b496f2cae591e994d0b8cfdb8482",
+    "bin/subst6/registered/handoff-202/H-PFX1.stmt": "40c8f0ca4d93f0cf44651ef664d376b3a45d919b5ee33c2769026b85b8624e4a",
+    "bin/subst6/registered/handoff-202/H-PFX3.stmt": "a18a6539c1a12cc64abec56022dc74a5885ed304109afd039e9bf99bbe1beb83",
+    "bin/subst6/registered/handoff-202/H-PFX4/c0.fx": "4ff29c0dd1438adc1c7add1c28565a0f4cf3644d69389a0c60d24380d7370ab2",
+    "bin/subst6/registered/handoff-202/H-PFX4/c0.packet": "b4196db6056298fc78a0f9526aaf1065c735faed01e92c0e2a9eedf38782019f",
+    "bin/subst6/registered/handoff-202/H-PFX4/c1.fx": "569626d7c5f98d1e86a442bf8a69e3b71d525cd6fd7c2c50773e8b1d4f2d7bf4",
+    "bin/subst6/registered/handoff-202/H-PFX4/c1.packet": "599bc6f9b957673b03fb7fd3b94dae6fa65e0f723c9ee9ad9c432cbf4610be63",
+    "bin/subst6/registered/handoff-202/H-PFX4/hostile.proof": "34284ef34fa5d539f3f57bcb2bb7f4d89796e2f312d06b1bf659421f93aba589",
+    "bin/subst6/registered/handoff-202/H-PFX5/c0.fx": "4ff29c0dd1438adc1c7add1c28565a0f4cf3644d69389a0c60d24380d7370ab2",
+    "bin/subst6/registered/handoff-202/H-PFX5/c0.packet": "b4196db6056298fc78a0f9526aaf1065c735faed01e92c0e2a9eedf38782019f",
+    "bin/subst6/registered/handoff-202/H-PFX5/c1.fx": "4c12ec5d1a9770a9ab2f84871a10a0b3aacf72e0cdcad940b2a77b965be0a4d2",
+    "bin/subst6/registered/handoff-202/H-PFX5/c1.packet": "599bc6f9b957673b03fb7fd3b94dae6fa65e0f723c9ee9ad9c432cbf4610be63",
+    "bin/subst6/registered/handoff-202/H-PFX5/hostile.proof": "1fb89723ade41d5e4c10d0df0283df50401bc49ecefb06b6b2c9d042012234a2",
+    "bin/subst6/registered/handoff-202/H-REQ1.stmt": "271e84f5b2edc7c5a5843126b10819e304ffff376063deaaba81f43d662d3209",
+    "bin/subst6/registered/handoff-202/H-REQ2.stmt": "b4d2a3c8068739e3acd5b2b09f138fefd6ad4325f1678335693ddb495eab5389",
+    "bin/subst6/registered/handoff-202/H-REQ3.stmt": "612c9cb5b86c5857cdc8f41d76bc720b1a2924e5de02841b40aa235dd1972a38",
+    "bin/subst6/registered/handoff-202/bad-opening.stmt": "d4d6994e425db5d8665dc6de9742687034d77eb326ddcf499a27ede93af30763",
+    "bin/subst6/registered/handoff-202/fp94.proof": "b5037b1e513f4dfd763f525334825bb4303717548a5bfcdbb635d623d053066c",
+    "bin/subst6/registered/handoff-202/honest/c0.fx": "4ff29c0dd1438adc1c7add1c28565a0f4cf3644d69389a0c60d24380d7370ab2",
+    "bin/subst6/registered/handoff-202/honest/c0.packet": "b4196db6056298fc78a0f9526aaf1065c735faed01e92c0e2a9eedf38782019f",
+    "bin/subst6/registered/handoff-202/honest/c1.fx": "569626d7c5f98d1e86a442bf8a69e3b71d525cd6fd7c2c50773e8b1d4f2d7bf4",
+    "bin/subst6/registered/handoff-202/honest/c1.packet": "599bc6f9b957673b03fb7fd3b94dae6fa65e0f723c9ee9ad9c432cbf4610be63",
+    "bin/subst6/registered/handoff-202/honest.proof": "44200c89ddaf6185102816fb503ad9c55e462dc80752cb85a1e87b4a272aeaa4",
+    "bin/subst6/registered/handoff-202/mal1.proof": "78749b6d0e4eeef93da04e3bc301839d1ea44f5cec8a25ac7dd75dbd816dfa76",
+    "bin/subst6/registered/handoff-202/mal2.proof": "d9e6905abd5a44773dc45533f3c955258ea22b0e7ce5023d17e4ea2a6bfcf686",
+    "bin/subst6/registered/handoff-202/mal3.proof": "99554c1c2b3734c5c52729644332c128c4c3bf0b675c5be936e9716946471adc",
+    "bin/subst6/registered/handoff-202/mal4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/handoff-202/other.stmt": "683b587ea78dea2284e8e5fcd5199a579f59ca6acedc6ff247363fe7b40fdc4b",
+    "bin/subst6/registered/handoff-202/own.stmt": "f5fde0104f55b09326f99ebc120b0367d500ecc1ce7426f8945021178a743ae3",
+    "bin/subst6/registered/handoff-203/H-CFG1.stmt": "a50c2c4574c44f952ce639e5c2e4f554f84c19b9b5142199fa4363b5e19d8761",
+    "bin/subst6/registered/handoff-203/H-CFG2.stmt": "5d07f443d0ec851fae9b3bb284a9035bb3c5757e54f72bba8eb8d2ffa02704c9",
+    "bin/subst6/registered/handoff-203/H-PFX1.stmt": "6800836967141fcec1581722dbdd595264064e1d4735b7d44b9e56be7dae30d7",
+    "bin/subst6/registered/handoff-203/H-PFX3.stmt": "2de69a80fbe5ee472a5cfadf85a09b115149ca69f0138a0cbd63d24e2186c7fc",
+    "bin/subst6/registered/handoff-203/H-PFX4/c0.fx": "54358eedb59f740be6546c7fa4612ccecdded5be9e8029bb2f9f151cd37de402",
+    "bin/subst6/registered/handoff-203/H-PFX4/c0.packet": "b8dee1057636fc7a875986b54c913f12847521f8704ef7dc4c8c97f6a912e235",
+    "bin/subst6/registered/handoff-203/H-PFX4/c1.fx": "37eb38c8f3b557340e30557ee7c3eb4994f1124c860db23c47c358850ce354ea",
+    "bin/subst6/registered/handoff-203/H-PFX4/c1.packet": "2aa776fb9b64625bc63e583aa56eaa6a36b95e2e992e088b462df6127684e435",
+    "bin/subst6/registered/handoff-203/H-PFX4/hostile.proof": "539924982b46ee71bd652242255ae8a339103dab97fda771a96296f9f5297d86",
+    "bin/subst6/registered/handoff-203/H-PFX5/c0.fx": "54358eedb59f740be6546c7fa4612ccecdded5be9e8029bb2f9f151cd37de402",
+    "bin/subst6/registered/handoff-203/H-PFX5/c0.packet": "b8dee1057636fc7a875986b54c913f12847521f8704ef7dc4c8c97f6a912e235",
+    "bin/subst6/registered/handoff-203/H-PFX5/c1.fx": "a9e997711c3a5f90121a39424ea267d8a60f14e8ca8020580908feab8cbc7d30",
+    "bin/subst6/registered/handoff-203/H-PFX5/c1.packet": "2aa776fb9b64625bc63e583aa56eaa6a36b95e2e992e088b462df6127684e435",
+    "bin/subst6/registered/handoff-203/H-PFX5/hostile.proof": "f915af065ba4b9d03e02cb47efa7b8e460c892d813b56e8d17aa1cce14308c54",
+    "bin/subst6/registered/handoff-203/H-REQ1.stmt": "6855d702952ef2381b8d83baea22fbd9cae97fc5dc7f5ea1581b2e6a5340f30a",
+    "bin/subst6/registered/handoff-203/H-REQ2.stmt": "dee0da423334d1f76c1ca2b5a870b06b119f9e1209a8c93587b7033c3e18edb0",
+    "bin/subst6/registered/handoff-203/H-REQ3.stmt": "0d0dd1ee7bbb2604b71cd4b7a5bf6f7db39a0fc737c5bb0c98be46a43650d08f",
+    "bin/subst6/registered/handoff-203/bad-opening.stmt": "00db7cfb67b8bfee45b826629bbd379f13136500e0fae01fcb77085bb31b7e61",
+    "bin/subst6/registered/handoff-203/fp94.proof": "7bd7951c7875c0df41560abc27fce62ba240451d3f03b2f5cbcfc657cecf5cc1",
+    "bin/subst6/registered/handoff-203/honest/c0.fx": "54358eedb59f740be6546c7fa4612ccecdded5be9e8029bb2f9f151cd37de402",
+    "bin/subst6/registered/handoff-203/honest/c0.packet": "b8dee1057636fc7a875986b54c913f12847521f8704ef7dc4c8c97f6a912e235",
+    "bin/subst6/registered/handoff-203/honest/c1.fx": "37eb38c8f3b557340e30557ee7c3eb4994f1124c860db23c47c358850ce354ea",
+    "bin/subst6/registered/handoff-203/honest/c1.packet": "2aa776fb9b64625bc63e583aa56eaa6a36b95e2e992e088b462df6127684e435",
+    "bin/subst6/registered/handoff-203/honest.proof": "91cebfd55ceb6bf83da3bff049e8939226d1d02508eb7e60125a20213cfd9c49",
+    "bin/subst6/registered/handoff-203/mal1.proof": "7bfe7b05e90a88ee9e1c340a28e62d0ad30273dc81fb38c5e91335745bf295ec",
+    "bin/subst6/registered/handoff-203/mal2.proof": "6c1e47830d67806e96a80f2fd270a86c1456d11f842ee6ddd8e2c1c50f7b5259",
+    "bin/subst6/registered/handoff-203/mal3.proof": "824f3336cab30989ad30db51056c0b7705852cf94f85a0530a1601bb802577bb",
+    "bin/subst6/registered/handoff-203/mal4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/handoff-203/other.stmt": "44248dcd9442cf7fe82d8d0a2e62f388d8e51010fda8384961d043a444575bbb",
+    "bin/subst6/registered/handoff-203/own.stmt": "683b587ea78dea2284e8e5fcd5199a579f59ca6acedc6ff247363fe7b40fdc4b",
+    "bin/subst6/registered/handoff-204/H-CFG1.stmt": "609eca78144735fdb00cfbd26512af6b3149fd1e19be33c15ebffccff0346910",
+    "bin/subst6/registered/handoff-204/H-CFG2.stmt": "a34e6bf0395431c4d0d72599252905d97ba55573f3337dd6a96776c370c5cd02",
+    "bin/subst6/registered/handoff-204/H-PFX1.stmt": "8080f950d09a2dc1bd43cf8f922dd305fcd18ada3cd969057834a846144b8eef",
+    "bin/subst6/registered/handoff-204/H-PFX3.stmt": "45c36da8ed88cc0c8d60de5acc2c3080ca03e6dda6ae1ead195a14ac65fcdc87",
+    "bin/subst6/registered/handoff-204/H-PFX4/c0.fx": "00afaf92a7f2462eacb31dc7bea2f22daa2ad5b10aaf00fb9a0c960eed0dada2",
+    "bin/subst6/registered/handoff-204/H-PFX4/c0.packet": "839b03d172e03659708bd2fea5cc5d33f4ab2e4496767d88df2ef5d9da22114e",
+    "bin/subst6/registered/handoff-204/H-PFX4/c1.fx": "4b749427de84d226895f6a2ae53db0880425bec39d62459938fa9162d037cdd7",
+    "bin/subst6/registered/handoff-204/H-PFX4/c1.packet": "4d917496aab803205d659e42c2af55a1b6c9126c7d98675f49aec93ff905d21f",
+    "bin/subst6/registered/handoff-204/H-PFX4/hostile.proof": "29a651dbb938a0297bccef38d07bbb29f7a8cb7816efdb3a65fff88658453e7c",
+    "bin/subst6/registered/handoff-204/H-PFX5/c0.fx": "00afaf92a7f2462eacb31dc7bea2f22daa2ad5b10aaf00fb9a0c960eed0dada2",
+    "bin/subst6/registered/handoff-204/H-PFX5/c0.packet": "839b03d172e03659708bd2fea5cc5d33f4ab2e4496767d88df2ef5d9da22114e",
+    "bin/subst6/registered/handoff-204/H-PFX5/c1.fx": "c128ad209fa1dc548bb48e1abdd099328a3716fff1c9f03e5e2abd4145ade08d",
+    "bin/subst6/registered/handoff-204/H-PFX5/c1.packet": "4d917496aab803205d659e42c2af55a1b6c9126c7d98675f49aec93ff905d21f",
+    "bin/subst6/registered/handoff-204/H-PFX5/hostile.proof": "361ac7b3416debb30da90bce4bc3450156816f3025aa2316b870c8c0713b6dae",
+    "bin/subst6/registered/handoff-204/H-REQ1.stmt": "35ba70fa486a7bc505481bf07d9268ca9cedc0eb2273b5b9668a7ef64d8b0656",
+    "bin/subst6/registered/handoff-204/H-REQ2.stmt": "fd63a22a78da52b3ec98c346e5c5ddda5d2c3efedd1ec5ad836348d44837f3cf",
+    "bin/subst6/registered/handoff-204/H-REQ3.stmt": "9a9de2df8d729a9be9d9d878f7dfaada0a192d4ad9a4768340c6159d14910ae7",
+    "bin/subst6/registered/handoff-204/bad-opening.stmt": "e01b760114fac4620a189c3c0634c24c050a6f25b2b8158c2a4ba475dc9bd93f",
+    "bin/subst6/registered/handoff-204/fp94.proof": "59f0d94d57b832a72626f1d95846dadd146592bdf1df56391bb9274e6ea30f5b",
+    "bin/subst6/registered/handoff-204/honest/c0.fx": "00afaf92a7f2462eacb31dc7bea2f22daa2ad5b10aaf00fb9a0c960eed0dada2",
+    "bin/subst6/registered/handoff-204/honest/c0.packet": "839b03d172e03659708bd2fea5cc5d33f4ab2e4496767d88df2ef5d9da22114e",
+    "bin/subst6/registered/handoff-204/honest/c1.fx": "4b749427de84d226895f6a2ae53db0880425bec39d62459938fa9162d037cdd7",
+    "bin/subst6/registered/handoff-204/honest/c1.packet": "4d917496aab803205d659e42c2af55a1b6c9126c7d98675f49aec93ff905d21f",
+    "bin/subst6/registered/handoff-204/honest.proof": "80ef4017a719880459c876dd65653c3df0d46ef10fd42a4a358ee40f7c0b0001",
+    "bin/subst6/registered/handoff-204/mal1.proof": "cf8f99e90ce473dcecc61aeeb5ef477e3f7195a2d788028881b66731248ae1a2",
+    "bin/subst6/registered/handoff-204/mal2.proof": "31cc39385f5e37bec0fdc81dc94b797e6d5c8b04039024deda3116d2cc8e4c16",
+    "bin/subst6/registered/handoff-204/mal3.proof": "c5f2d7e199332f1dbd773c22134b50ecdf67a239e35ed8eb803d985e2b79ebde",
+    "bin/subst6/registered/handoff-204/mal4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/handoff-204/other.stmt": "9895fb35ad8cbbed4bbc8c1d658e78f86939a3fd06f96118dc86e5a7d3c02204",
+    "bin/subst6/registered/handoff-204/own.stmt": "44248dcd9442cf7fe82d8d0a2e62f388d8e51010fda8384961d043a444575bbb",
+    "bin/subst6/registered/handoff-205/H-CFG1.stmt": "31436f515b7c688f44f37e6d378b4d648a9bba24717d700f6dad576ad1ca17e9",
+    "bin/subst6/registered/handoff-205/H-CFG2.stmt": "9a4678d65be9c120062209cad53cab6b402f9fa2a7ea3c07a823aaf7989ff7ed",
+    "bin/subst6/registered/handoff-205/H-PFX1.stmt": "c291dc9d6b43ec047d2c801b74a7faa8bfeabdb597ef40ef35989bdd6d410e46",
+    "bin/subst6/registered/handoff-205/H-PFX3.stmt": "74045f64d0b885ab4993572a2e994f72eca62cf78b9dc2ede397f209c500f1f9",
+    "bin/subst6/registered/handoff-205/H-PFX4/c0.fx": "40a66658fb1d1db24f6eb72ab0bc280fde078e2e29c98d6c5c17b1d4e9327673",
+    "bin/subst6/registered/handoff-205/H-PFX4/c0.packet": "ce02d1eb505bf997c06bc4ef16aff41d9a582f30bd691fed3c27f16765ef9679",
+    "bin/subst6/registered/handoff-205/H-PFX4/c1.fx": "0726aa8a3a91416361e295655f759420423af35324818a6492dedf70fc814ba1",
+    "bin/subst6/registered/handoff-205/H-PFX4/c1.packet": "0b31bde8fcca2defc750b6e0984a94cc0d189d3143aeb59e5b6c3197ec86a8aa",
+    "bin/subst6/registered/handoff-205/H-PFX4/hostile.proof": "b81f73074e1f9dbc79b5858adaacc9f3e0d68641d3f1069141aea7f4433ca531",
+    "bin/subst6/registered/handoff-205/H-PFX5/c0.fx": "40a66658fb1d1db24f6eb72ab0bc280fde078e2e29c98d6c5c17b1d4e9327673",
+    "bin/subst6/registered/handoff-205/H-PFX5/c0.packet": "ce02d1eb505bf997c06bc4ef16aff41d9a582f30bd691fed3c27f16765ef9679",
+    "bin/subst6/registered/handoff-205/H-PFX5/c1.fx": "075f938ef151a7a8bf0819fddb1c6507b7b6324d170cc1c16a7c80d634030e40",
+    "bin/subst6/registered/handoff-205/H-PFX5/c1.packet": "0b31bde8fcca2defc750b6e0984a94cc0d189d3143aeb59e5b6c3197ec86a8aa",
+    "bin/subst6/registered/handoff-205/H-PFX5/hostile.proof": "0157cad3b707c1a675f59612cd93652d8e14f9d8da88f0c32274b3beb7f76bfa",
+    "bin/subst6/registered/handoff-205/H-REQ1.stmt": "069b970a636b9f9a113c198cc1b54bd45f8202302d30abbd6c8c78097df5f767",
+    "bin/subst6/registered/handoff-205/H-REQ2.stmt": "63bd0befd038a46274492695b42429a779dc42ef9ee4ae5395c49b11c6b93871",
+    "bin/subst6/registered/handoff-205/H-REQ3.stmt": "4f4844f0ebf85b6cec90985aa19d0dba71ac03aaaa524e69b9993ea617a4c774",
+    "bin/subst6/registered/handoff-205/bad-opening.stmt": "738fe73b2219b4518ea7b3e69e0ebb5c4effe8cb212c3586f77b949cfd0c132b",
+    "bin/subst6/registered/handoff-205/fp94.proof": "9d664a0977f8cfdb1e5ba4df42193f56497387b24a044890292f336e9ca2b270",
+    "bin/subst6/registered/handoff-205/honest/c0.fx": "40a66658fb1d1db24f6eb72ab0bc280fde078e2e29c98d6c5c17b1d4e9327673",
+    "bin/subst6/registered/handoff-205/honest/c0.packet": "ce02d1eb505bf997c06bc4ef16aff41d9a582f30bd691fed3c27f16765ef9679",
+    "bin/subst6/registered/handoff-205/honest/c1.fx": "0726aa8a3a91416361e295655f759420423af35324818a6492dedf70fc814ba1",
+    "bin/subst6/registered/handoff-205/honest/c1.packet": "0b31bde8fcca2defc750b6e0984a94cc0d189d3143aeb59e5b6c3197ec86a8aa",
+    "bin/subst6/registered/handoff-205/honest.proof": "843dfa7257e3c3b81f4abc0ae90625842f12581c56666dd2180450ecc09869de",
+    "bin/subst6/registered/handoff-205/mal1.proof": "6c9980a61b14e726d8fbf1c972037819e2d8242ad208f808b230ece3125fe620",
+    "bin/subst6/registered/handoff-205/mal2.proof": "e9c677d773de8b3becabaa5946d762bf053bb4bdd6fc92222daf4445298d34ba",
+    "bin/subst6/registered/handoff-205/mal3.proof": "c6cf9f75de2604e7b6690f8e0287b68c9581e1b9c446a518891c06a1d6487448",
+    "bin/subst6/registered/handoff-205/mal4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/handoff-205/other.stmt": "d01613c53801a7b9d63825d01dc2e91c425ab8b4da694d921febc53d04b2f6c5",
+    "bin/subst6/registered/handoff-205/own.stmt": "9895fb35ad8cbbed4bbc8c1d658e78f86939a3fd06f96118dc86e5a7d3c02204",
+    "bin/subst6/registered/handoff-909/H-CFG1.stmt": "eb5a17cf8664f0f48bfaac17be8ca32ad2fccd86e07c39ddf355faf6d0c0a904",
+    "bin/subst6/registered/handoff-909/H-CFG2.stmt": "306748b5c46b0972216707a6a8519a176ba0ae54f6c89ee6389472342591810c",
+    "bin/subst6/registered/handoff-909/H-PFX1.stmt": "e897f7ff8b023e021e43e12f55b7784c4e01a8383bf3db7196f09ebbb2f406d1",
+    "bin/subst6/registered/handoff-909/H-PFX3.stmt": "bb20a3882fc2fbebcc4de1d45d46fc3cb1930604150cda27e1d40e003c9de697",
+    "bin/subst6/registered/handoff-909/H-PFX4/c0.fx": "7d89590a5ee387536b5f780a65e232b3cee18032369cb9b05c4efaf96b6b52da",
+    "bin/subst6/registered/handoff-909/H-PFX4/c0.packet": "51587a9ac1a48ee223d95067114e5dfbf005175ef3c07a3c82796b8f748f6c7e",
+    "bin/subst6/registered/handoff-909/H-PFX4/c1.fx": "e23bf270f4b031017af59e5674e78e3e94a73fc9a3630e2e161ae7ef1bd53903",
+    "bin/subst6/registered/handoff-909/H-PFX4/c1.packet": "8920229ce470cb2739406ae8628bd47c0c7a6a408bdf0db6d057c585517d9d89",
+    "bin/subst6/registered/handoff-909/H-PFX4/hostile.proof": "d821f36db0d122849e2ecd43f2b1ba327c6aab259f5678a762977d04c3a39ee3",
+    "bin/subst6/registered/handoff-909/H-PFX5/c0.fx": "7d89590a5ee387536b5f780a65e232b3cee18032369cb9b05c4efaf96b6b52da",
+    "bin/subst6/registered/handoff-909/H-PFX5/c0.packet": "51587a9ac1a48ee223d95067114e5dfbf005175ef3c07a3c82796b8f748f6c7e",
+    "bin/subst6/registered/handoff-909/H-PFX5/c1.fx": "cd43ac2faef9ff2b08e0c85b28dfc935ab1fd3e74b3deaeaf9efaf19416c691b",
+    "bin/subst6/registered/handoff-909/H-PFX5/c1.packet": "8920229ce470cb2739406ae8628bd47c0c7a6a408bdf0db6d057c585517d9d89",
+    "bin/subst6/registered/handoff-909/H-PFX5/hostile.proof": "319abf3ed7013a9dcc8b1eb7661170f10c4fd3c7f61da1d1702464907326e47e",
+    "bin/subst6/registered/handoff-909/H-REQ1.stmt": "c84f9dadbecb641cb2325b4d8ebd1e13f053a9098b6b91372e039eede1a2f26c",
+    "bin/subst6/registered/handoff-909/H-REQ2.stmt": "67fdca3a918b529d6b081472eb357d9cbcc0212e22cec4f7a51387df1030dd81",
+    "bin/subst6/registered/handoff-909/H-REQ3.stmt": "0516d8f1f937d3f197ac489bdf8ffd89f5225c044efa07e17424b484aa33ea3b",
+    "bin/subst6/registered/handoff-909/bad-opening.stmt": "e3281a72dd9f47e29bb8e9797b82eaa982203d138a07a482907322220b68169c",
+    "bin/subst6/registered/handoff-909/fp94.proof": "10e0e765b100a05655e00917af3616bb5afd0e17dde80fdb22822bc6a491eb0d",
+    "bin/subst6/registered/handoff-909/honest/c0.fx": "7d89590a5ee387536b5f780a65e232b3cee18032369cb9b05c4efaf96b6b52da",
+    "bin/subst6/registered/handoff-909/honest/c0.packet": "51587a9ac1a48ee223d95067114e5dfbf005175ef3c07a3c82796b8f748f6c7e",
+    "bin/subst6/registered/handoff-909/honest/c1.fx": "e23bf270f4b031017af59e5674e78e3e94a73fc9a3630e2e161ae7ef1bd53903",
+    "bin/subst6/registered/handoff-909/honest/c1.packet": "8920229ce470cb2739406ae8628bd47c0c7a6a408bdf0db6d057c585517d9d89",
+    "bin/subst6/registered/handoff-909/honest.proof": "055dc6e3a2bd2b0c5303ca5035f9bf288c0a41d8030a86cefa9c7135b4cad8ce",
+    "bin/subst6/registered/handoff-909/mal1.proof": "cb815c010a8eed459651cf3ca71cf5165ea7f439bb468e9443dafa0457743797",
+    "bin/subst6/registered/handoff-909/mal2.proof": "7cc835288a3edf9b443c280ae0c477f842819ea63bc23dc8882b63ce7c548909",
+    "bin/subst6/registered/handoff-909/mal3.proof": "1920df080fd4cae854bded6acf59faab2b34b5300b23061f77d31c80ee240c39",
+    "bin/subst6/registered/handoff-909/mal4.proof": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bin/subst6/registered/handoff-909/other.stmt": "958af2da73adf297aa5788154aa36450ecacc4c0fe23ad6a8553f98b30016b02",
+    "bin/subst6/registered/handoff-909/own.stmt": "d7c26a06f15248c5266d956d97bc0cd7e541f7fde84487b6b4625dc2dddd5f93",
+    "bin/subst6/registered/manifest/attacker.json": "630f084781a472b6b4287687c5d14cae1f1c7261b6c105481f398af91a4ff02f",
+    "bin/subst6/registered/manifest/attacker.json.sig": "31d40c5e360e683504f2c88964dee193c46c908e7e966c35d8164490dc133925",
+    "bin/subst6/registered/manifest/bad-template": "7c10768d69ccc717795ba44c90dbdb8a622528991bf115210bff47059a9ee7e9",
+    "bin/subst6/registered/manifest/bad-tokenizer/tokenizer.json": "084e49d19daa036452b8d73432b7046f0bd6051f4e1231c22521a54768884bf4",
+    "bin/subst6/registered/manifest/bad-tokenizer/tokenizer_config.json": "c76c51e6c8465a5fa3683bd7ab564ec4fc799ba556f98fc994f225b714052a02",
+    "bin/subst6/registered/manifest/chat_template.jinja": "d1c49e4693a0cad32e002f4fc25fef46be01084b9ee7b3e9c013d27df1642643",
+    "bin/subst6/registered/manifest/manifest.json": "b31db0348f54315cd7f002d57aae497c2ce256ef3490fa3396a6774e11359281",
+    "bin/subst6/registered/manifest/manifest.json.sig": "bf8bb5cc630cef68f5acdb5827ffcf41be22f28ba700d10741379beb43af7ede",
+    "bin/subst6/registered/manifest/system_prompt.txt": "eca6c2bc0d31f931ae2fa23e12622ee920bcec6cb115960b103de452cfe95234",
+    "bin/subst6/registered/manifest/tokenizer/tokenizer.json": "c82dd6e70b346f2f68526ca6bbb0968673fdd449655dc1e588fcc5e3abf214d5",
+    "bin/subst6/registered/manifest/tokenizer/tokenizer_config.json": "c76c51e6c8465a5fa3683bd7ab564ec4fc799ba556f98fc994f225b714052a02",
+    "bin/subst6/registered/manifest/trusted.pub": "ef5d759f7608f49322bcb47de61380c1e69890140bd298a3d594a569cd11d195",
+    "examples/accepted-proof/example.req": "ce700974a03d43586d66ca742f9bbc8ad45c936d03dfdb8614dd559a2780aa13",
+    "examples/accepted-proof/README.md": "1d61a46f28e8b22ab2730eb255440b42925e60e20b810d23dbdd833aee5b0de7",
+    "examples/accepted-proof/example.proof": "5ed47fd101093e826a5bc833e57633e5a9237b49213c8f37cf518a3c1c8d9d99",
+    "examples/accepted-proof/SHA256SUMS": "da8f5562eaa27e177b3b8aa39366d913befdfdc3114786907750ed5c0c18ecea",
+    "examples/accepted-proof/ID.txt": "ad3a4c1abecbae4d9f4f8640851f64796b9b1c595b40ea566d797f25ef2e7ff1",
+    "examples/accepted-proof/example.y": "add7f2a4843f8c512c0e2875546581db11b9ba227ee008b5f719dfacb125de76",
+    "examples/accepted-proof/ivk/key.bin": "123dc39e8947fd3ba838d7a1a35d587c2f0e1707d1bca9b6ed551b52bf0c2e09",
+    "examples/accepted-proof/config/KL.bin": "b8fb55ed7c70c4cdc7bac01e804dd0dc79349022ba7972957c7e50a29dc974a2",
+    "examples/accepted-proof/config/policy.txt": "8d9ae1dda2e503550cafade93c54c1b8ecc8eb4b6dab3b843c72a478bb892d2f",
+    "examples/accepted-proof/config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "examples/accepted-proof/ivk/leaf/0.bin": "c9484f50fedfaf4e28ec9d1b5d19c3cd5e97bf4582511da49f9eb5693f10e1e0",
+    "examples/accepted-proof-clipped-gap/example.req": "f6d35d5c30a7c5cbe1e328884e42310cba5e9065edf9974a7c9fd806ab3a6c16",
+    "examples/accepted-proof-clipped-gap/README.md": "862782a98d9e327e84bd6e0da89fdf5cf109365ee15fbdc77210ce2ce0a1e1fb",
+    "examples/accepted-proof-clipped-gap/example.proof": "368bab49989777a0aebbc9853805ebec7c5b7ef9a8af777439284f211d27530c",
+    "examples/accepted-proof-clipped-gap/SHA256SUMS": "db1d6449464ae8bdd7540a448d3005c4a3245cf88ea99b9a26981e1667468db0",
+    "examples/accepted-proof-clipped-gap/ID.txt": "42671e0e7bd95ac365d71d43f9856dd627d54ef0dca0145ddc7cad7f97a7df0b",
+    "examples/accepted-proof-clipped-gap/example.y": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "examples/accepted-proof-clipped-gap/ivk/key.bin": "b66421c9f80b2ea387010a405cbe070717b14b34b99a869448e17928d40e0953",
+    "examples/accepted-proof-clipped-gap/config/KL.bin": "eba3bc773c63d9dd69d3373170778db9643d835d99de84cd542139bee1b8ea3c",
+    "examples/accepted-proof-clipped-gap/config/policy.txt": "735077ff031e0d679f430c85fc92b3d82177044b045e68574a7f7c0d23f3b2ae",
+    "examples/accepted-proof-clipped-gap/config/layout.txt": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+    "examples/accepted-proof-clipped-gap/ivk/leaf/0.bin": "da0bba9ae7d60b60895ccc63de770967668c0cff055f7c268e7681c1bb01b39c"
+  }
+}
