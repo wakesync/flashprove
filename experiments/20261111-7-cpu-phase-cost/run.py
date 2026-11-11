@@ -3,6 +3,13 @@
 
   run.py registered <bin_dir> <fixture_dir> <out_dir>   the registered suite (run inside fp-heavy.sh)
   run.py debug      <bin_dir> <fixture_dir> <out_dir>   debug fixtures only (A seeds 900..902, B D=16 seed 99)
+  run.py replay     <bin_dir> <fixture_dir> <out_dir> [--budget-min M] [--reps N]
+                    REPLAY (added 2026-11-11, PREREG Amendments): the registered suite in the registered order,
+                    with no wall-clock hard stop, a budget of M minutes (default 45) from its own start and the
+                    first N repetitions per cell (default 10). Never part of the registered result; refuses to
+                    write under this directory's runs/.
+
+`registered` keeps the registered hard stop (2026-11-11T06:30Z): after it, that mode runs nothing.
 
 Every child process is pinned with taskset to CORES and timed with time.monotonic(); peak RSS is the
 child's ru_maxrss from os.wait4 (kernel high-water mark, one value per process, not sampled).
@@ -69,8 +76,33 @@ def b_pair(bins, binname, out, cell, rep, fixtures, log):
     with open(log, 'a') as f: f.write(json.dumps(dict(profile='B', cell=cell, rep=rep, role='files', bytes=files_bytes(d))) + '\n')
     return pr, vr
 
+def replay_args(rest):
+    """--budget-min M (finite, > 0) and --reps N (1..10) for replay mode."""
+    budget_min, reps, i = 45.0, 10, 0
+    while i < len(rest):
+        if rest[i] == '--budget-min': budget_min = float(rest[i + 1]); i += 2
+        elif rest[i] == '--reps': reps = int(rest[i + 1]); i += 2
+        else: sys.exit(f'replay: unknown argument {rest[i]!r}')
+    if not (0 < budget_min < float('inf')): sys.exit('replay: --budget-min must be finite and > 0')
+    if not (1 <= reps <= 10): sys.exit('replay: --reps must be 1..10')
+    return budget_min * 60, reps
+
 def main():
     mode, bins, fx, out = sys.argv[1], *map(lambda x: pathlib.Path(x).resolve(), sys.argv[2:5])
+    if mode == 'replay':
+        budget_s, reps = replay_args(sys.argv[5:])
+        runs_dir = (pathlib.Path(__file__).resolve().parent / 'runs').resolve()
+        if out == runs_dir or runs_dir in out.parents:
+            sys.exit('replay: refusing to write under the registered runs/ directory; pass a fresh output dir')
+        out.mkdir(parents=False, exist_ok=False)
+        log = out / 'runs.jsonl'
+        granted = time.monotonic()
+        head = dict(event='replay_started', utc=utc(), mode='replay', cores=CORES, budget_s=budget_s, reps=reps,
+                    hard_stop=None, registered_hard_stop_not_applied=HARD_STOP, loadavg=os.getloadavg(),
+                    note='replay: not part of the registered result')
+        with open(log, 'a') as f: f.write(json.dumps(head) + '\n')
+        print(json.dumps(head), flush=True)
+        return suite(bins, fx, out, log, granted, reps, lambda: time.monotonic() - granted > budget_s)
     out.mkdir(parents=False, exist_ok=False)
     log = out / 'runs.jsonl'
     granted = time.monotonic()
@@ -90,12 +122,19 @@ def main():
         b_pair(bins, 'phase_b_d16', out, 'debug-B-amort', 99, [fx / 'd16-seed99.bin'] * B_PER_PROC, log)
         return
     assert mode == 'registered'
-    for i in range(10):
+    return suite(bins, fx, out, log, granted, 10, over)
+
+def suite(bins, fx, out, log, granted, reps, over):
+    """The registered suite and order (PREREG Runs). `registered` calls it with reps = 10 and the registered stop."""
+    def stop(what):
+        with open(log, 'a') as f: f.write(json.dumps(dict(event='stopped', utc=utc(), before=what)) + '\n')
+        print('STOPPED before', what, flush=True)
+    for i in range(reps):
         if over(): return stop(f'cold rep {i}')
         a_pair(bins, out, 'A-cold', i, i, 1, log)
         if over(): return stop(f'B cold rep {i}')
         b_pair(bins, 'phase_b', out, 'B-cold', i, [fx / f'stage1-seed{i + 1}.bin'], log)
-    for i in range(10):
+    for i in range(reps):
         if over(): return stop(f'amortized rep {i}')
         a_pair(bins, out, 'A-amort', i, i, A_BATCHES, log)
         if over(): return stop(f'B amortized rep {i}')
