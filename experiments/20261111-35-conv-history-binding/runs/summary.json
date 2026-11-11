@@ -1,0 +1,850 @@
+{
+  "suite": {
+    "arms": {
+      "honest-chain/two-segment": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "honest-unbound/segment-1": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-unbound/original": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-unbound/replacement": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-bound/original-accepted": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-bound/a-replacement-own-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-bound/b-replacement-under-original-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "tail-splice/statement-zero-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "tail-splice/malicious-under-true-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "out-tail-lie/honest-proof-lying-statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "out-tail-lie/malicious-lying-statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "history-reorder/statement-reordered-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "history-reorder/malicious-under-true-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "cross-scale-root/f14-root-held-by-f12-verifier": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "cross-scale-root/f12-proof-f14-statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "proof-transplant/p1-with-s2": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "proof-transplant/p2-with-s1": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "segment-replay/s1-again": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "segment-replay/s1-relabelled-index-proof-bound": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    "sizes": {
+      "honest-chain": {
+        "columns": {
+          "n": 10,
+          "median": 294.0,
+          "sd": 0.0,
+          "min": 294,
+          "max": 294
+        },
+        "relations": {
+          "n": 10,
+          "median": 579.0,
+          "sd": 0.0,
+          "min": 579,
+          "max": 579
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 22300.0,
+          "sd": 199.34827145810252,
+          "min": 21904,
+          "max": 22496
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.0054321000000000005,
+          "sd": 0.00015036998704676558,
+          "min": 0.00530748,
+          "max": 0.00567068
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.02104025,
+          "sd": 0.0011890203020881423,
+          "min": 0.0207686,
+          "max": 0.024571
+        }
+      },
+      "honest-unbound": {
+        "columns": {
+          "n": 10,
+          "median": 294.0,
+          "sd": 0.0,
+          "min": 294,
+          "max": 294
+        },
+        "relations": {
+          "n": 10,
+          "median": 573.0,
+          "sd": 0.0,
+          "min": 573,
+          "max": 573
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 22224.0,
+          "sd": 167.98730110735553,
+          "min": 21960,
+          "max": 22464
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.0052377,
+          "sd": 0.0004276094737335301,
+          "min": 0.00490748,
+          "max": 0.00636024
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.021581950000000003,
+          "sd": 0.0006807385842679339,
+          "min": 0.0206296,
+          "max": 0.0229169
+        }
+      }
+    },
+    "not_applicable": 0,
+    "all_as_registered": true
+  },
+  "suite-ubsan": {
+    "arms": {
+      "honest-chain/two-segment": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "honest-unbound/segment-1": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-unbound/original": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-unbound/replacement": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-bound/original-accepted": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-bound/a-replacement-own-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "c67-bound/b-replacement-under-original-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "tail-splice/statement-zero-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "tail-splice/malicious-under-true-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "out-tail-lie/honest-proof-lying-statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "out-tail-lie/malicious-lying-statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "history-reorder/statement-reordered-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "history-reorder/malicious-under-true-opening": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "cross-scale-root/f14-root-held-by-f12-verifier": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "cross-scale-root/f12-proof-f14-statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "proof-transplant/p1-with-s2": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "proof-transplant/p2-with-s1": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "segment-replay/s1-again": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "segment-replay/s1-relabelled-index-proof-bound": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    "sizes": {
+      "honest-chain": {
+        "columns": {
+          "n": 10,
+          "median": 294.0,
+          "sd": 0.0,
+          "min": 294,
+          "max": 294
+        },
+        "relations": {
+          "n": 10,
+          "median": 579.0,
+          "sd": 0.0,
+          "min": 579,
+          "max": 579
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 22300.0,
+          "sd": 199.34827145810252,
+          "min": 21904,
+          "max": 22496
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.0101998,
+          "sd": 0.0011436186580208165,
+          "min": 0.00938521,
+          "max": 0.0128482
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.054003999999999996,
+          "sd": 0.0015757291125063357,
+          "min": 0.0530552,
+          "max": 0.0571185
+        }
+      },
+      "honest-unbound": {
+        "columns": {
+          "n": 10,
+          "median": 294.0,
+          "sd": 0.0,
+          "min": 294,
+          "max": 294
+        },
+        "relations": {
+          "n": 10,
+          "median": 573.0,
+          "sd": 0.0,
+          "min": 573,
+          "max": 573
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 22224.0,
+          "sd": 167.98730110735553,
+          "min": 21960,
+          "max": 22464
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.008924169999999999,
+          "sd": 0.00024013906077983703,
+          "min": 0.0087529,
+          "max": 0.0094393
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.0548699,
+          "sd": 0.0020903087023744177,
+          "min": 0.0532492,
+          "max": 0.0599631
+        }
+      }
+    },
+    "not_applicable": 0,
+    "all_as_registered": true
+  }
+}

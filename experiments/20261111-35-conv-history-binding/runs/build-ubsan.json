@@ -1,0 +1,25 @@
+{
+  "source_commit": "feaf5c4b154ccf02132b30f079adc9a24ff26475",
+  "dirty_tracked": false,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "python": "3.12.3",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "research/operators/qwen_conv_history/conv_history.cpp",
+    "-o",
+    "research/operators/qwen_conv_history/work/conv_history-ubsan.bin",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined"
+  ],
+  "conv_history_cpp_sha256": "24a437ed2862631804aedca4a2f5bdbb1c59fb55e9d2a63779daf3c93cb945d3",
+  "binary_sha256": "4270cb6b6459a2bd577be38a61628a8195592981bbca9223df4402f1bf4e8ad5"
+}
