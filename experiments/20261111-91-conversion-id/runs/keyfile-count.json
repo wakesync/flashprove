@@ -1,0 +1,106 @@
+{
+ "label": "COUNTED from tensor shapes, not measured, not a proof; proof-side opening cost not counted",
+ "conversion_id": "43a318967b61eb06fb447bfca66b0924e994f66c5c6cf7568416607e138f2dba",
+ "effective": {
+  "blocks": 722,
+  "integers": 26895337984,
+  "padded_entries": 38414602240,
+  "padding_overhead": 0.4283,
+  "point_coordinates": 14110,
+  "fold_mults": 38414601518,
+  "eq_route_mults": 76829203758
+ },
+ "by_class": {
+  "cell_cA": {
+   "blocks": 48,
+   "integers": 2304,
+   "padded_entries": 3072,
+   "padding_overhead": 0.333333,
+   "point_coordinates": 288,
+   "fold_mults": 3024,
+   "eq_route_mults": 6096
+  },
+  "cell_conv": {
+   "blocks": 48,
+   "integers": 1966080,
+   "padded_entries": 3145728,
+   "padding_overhead": 0.6,
+   "point_coordinates": 768,
+   "fold_mults": 3145680,
+   "eq_route_mults": 6291408
+  },
+  "cell_dt_bias": {
+   "blocks": 48,
+   "integers": 2304,
+   "padded_entries": 3072,
+   "padding_overhead": 0.333333,
+   "point_coordinates": 288,
+   "fold_mults": 3024,
+   "eq_route_mults": 6096
+  },
+  "cell_gated_gain": {
+   "blocks": 48,
+   "integers": 6144,
+   "padded_entries": 6144,
+   "padding_overhead": 0.0,
+   "point_coordinates": 336,
+   "fold_mults": 6096,
+   "eq_route_mults": 12240
+  },
+  "cell_qk_norm": {
+   "blocks": 32,
+   "integers": 8192,
+   "padded_entries": 8192,
+   "padding_overhead": 0.0,
+   "point_coordinates": 256,
+   "fold_mults": 8160,
+   "eq_route_mults": 16352
+  },
+  "matrix_embedding": {
+   "blocks": 1,
+   "integers": 1271398400,
+   "padded_entries": 2147483648,
+   "padding_overhead": 0.689072,
+   "point_coordinates": 31,
+   "fold_mults": 2147483647,
+   "eq_route_mults": 4294967295
+  },
+  "matrix_final_norm_folded": {
+   "blocks": 1,
+   "integers": 1271398400,
+   "padded_entries": 2147483648,
+   "padding_overhead": 0.689072,
+   "point_coordinates": 31,
+   "fold_mults": 2147483647,
+   "eq_route_mults": 4294967295
+  },
+  "matrix_norm_folded": {
+   "blocks": 368,
+   "integers": 16633036800,
+   "padded_entries": 23379050496,
+   "padding_overhead": 0.405579,
+   "point_coordinates": 8784,
+   "fold_mults": 23379050128,
+   "eq_route_mults": 46758100624
+  },
+  "matrix_plain": {
+   "blocks": 128,
+   "integers": 7717519360,
+   "padded_entries": 10737418240,
+   "padding_overhead": 0.391304,
+   "point_coordinates": 3328,
+   "fold_mults": 10737418112,
+   "eq_route_mults": 21474836352
+  }
+ },
+ "text_source_851": {
+  "blocks": 851,
+  "integers": 26895998464,
+  "padded_entries": 38415659008,
+  "padding_overhead": 0.428304,
+  "point_coordinates": 15787,
+  "fold_mults": 38415658157,
+  "eq_route_mults": 76831317165
+ },
+ "largest_block": "lm_head.weight"
+}

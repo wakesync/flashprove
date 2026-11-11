@@ -1,0 +1,99 @@
+PASS honest: stock rebuild gives the same id
+PASS honest: abliterated rebuild gives the same id
+PASS honest: stock id != abliterated id
+PASS honest: configs of the two pins pin the same fields (same config pin)
+PASS honest: verify_conversion accepts stock under stock id
+PASS honest: verify_conversion refuses abliterated under stock id
+PASS honest: all 722 stock openings verify
+PASS honest: 9 block classes present
+PASS honest: abliterated opening refused under stock id for every block reading a changed tensor (70)
+PASS class:cell_cA: rule step swapped refused
+PASS class:cell_cA: rule param changed refused
+PASS class:cell_cA: own source hash changed refused
+PASS class:cell_cA: class relabelled refused
+PASS class:cell_conv: rule step swapped refused
+PASS class:cell_conv: rule param changed refused
+PASS class:cell_conv: own source hash changed refused
+PASS class:cell_conv: class relabelled refused
+PASS class:cell_dt_bias: rule step swapped refused
+PASS class:cell_dt_bias: rule param changed refused
+PASS class:cell_dt_bias: own source hash changed refused
+PASS class:cell_dt_bias: class relabelled refused
+PASS class:cell_gated_gain: rule step swapped refused
+PASS class:cell_gated_gain: rule param changed refused
+PASS class:cell_gated_gain: own source hash changed refused
+PASS class:cell_gated_gain: class relabelled refused
+PASS class:cell_qk_norm: rule step swapped refused
+PASS class:cell_qk_norm: rule param changed refused
+PASS class:cell_qk_norm: own source hash changed refused
+PASS class:cell_qk_norm: class relabelled refused
+PASS class:matrix_embedding: rule step swapped refused
+PASS class:matrix_embedding: rule param changed refused
+PASS class:matrix_embedding: own source hash changed refused
+PASS class:matrix_embedding: class relabelled refused
+PASS class:matrix_final_norm_folded: rule step swapped refused
+PASS class:matrix_final_norm_folded: rule param changed refused
+PASS class:matrix_final_norm_folded: own source hash changed refused
+PASS class:matrix_final_norm_folded: class relabelled refused
+PASS class:matrix_norm_folded: rule step swapped refused
+PASS class:matrix_norm_folded: rule param changed refused
+PASS class:matrix_norm_folded: own source hash changed refused
+PASS class:matrix_norm_folded: class relabelled refused
+PASS class:matrix_plain: rule step swapped refused
+PASS class:matrix_plain: rule param changed refused
+PASS class:matrix_plain: own source hash changed refused
+PASS class:matrix_plain: class relabelled refused
+PASS class:matrix_norm_folded: gain form g as stored instead of 1+w refused
+PASS class:matrix_norm_folded: norm source dropped refused
+PASS class:matrix_norm_folded: sources reordered refused
+PASS class:matrix_norm_folded: norm source hash swapped for another norm's refused
+PASS class:matrix_final_norm_folded: gain form g as stored instead of 1+w refused
+PASS class:matrix_final_norm_folded: norm source dropped refused
+PASS class:matrix_final_norm_folded: sources reordered refused
+PASS class:matrix_final_norm_folded: norm source hash swapped for another norm's refused
+PASS class:matrix_final_norm_folded: final norm replaced by layer-63 input norm (honest hash) refused
+PASS class:cell_cA: map exp -> identity (cA = RNE(2^e A_log)) refused
+PASS class:cell_cA: exp evaluated in binary32 instead of binary64 refused
+PASS class:cell_dt_bias: F = 12 -> 14 refused
+PASS class:cell_dt_bias: class bound 2^17 -> 2^12 refused
+PASS class:cell_gated_gain: sqrt(128) constant dropped (1.0) refused
+PASS class:cell_qk_norm: gain form 1+v -> v refused
+PASS class:cell_conv: kernel 4 -> 3 refused
+PASS class:matrix_embedding: eres 12 -> 13 refused
+PASS opening: config_pin changed refused
+PASS opening: rule_version changed refused
+PASS opening: checkpoint_id changed refused
+PASS opening: index changed refused
+PASS opening: n changed refused
+PASS opening: extra path element refused
+PASS opening: extra field refused
+PASS A12: layer_types (layers 0 and 3 swapped) refused (same tensors)
+PASS A12: rms_norm_eps 1e-6 -> 1e-5 refused (same tensors)
+PASS A12: rope_theta 1e7 -> 1e6 refused (same tensors)
+PASS A12: partial_rotary_factor 0.25 -> 0.5 refused (same tensors)
+PASS A12: num_attention_heads 24 -> 48 (head_dim 128) refused (same tensors)
+PASS A12: num_key_value_heads 4 -> 8 refused (same tensors)
+PASS A12: linear_conv_kernel_dim 4 -> 3 refused (same tensors)
+PASS A12: hidden_act silu -> gelu refused (same tensors)
+PASS A12: full_attention_interval 4 -> 2 refused (same tensors)
+PASS A12: attn_output_gate true -> false refused (same tensors)
+PASS A12: mamba_ssm_dtype float32 -> bfloat16 refused (same tensors)
+PASS A12: output_gate_type swish -> sigmoid refused (same tensors)
+PASS A12: pinned field missing refused
+PASS A12: unpinned field (use_cache) change does not change the id (pin is the function-changing set)
+PASS A12: fields pinned >= 7
+PASS inventory: honest 851 = 498 + 224 + 129, 722 effective: {'text': 851, 'matrix': 498, 'cell': 224, 'folded_norm': 129, 'effective': 722}
+PASS inventory: drop one matrix (down_proj) raises
+PASS inventory: drop one cell (linear_attn) raises
+PASS inventory: drop one folded_norm (norm) raises
+PASS inventory: drop one qk_cell (q_norm) raises
+PASS inventory: drop one lm_head (lm_head) raises
+PASS inventory: drop one embedding (embed_tokens) raises
+PASS inventory: extra unknown text tensor raises
+PASS inventory: attention tensor in a DeltaNet layer raises
+PASS inventory: layer 64 tensor (config has 64 layers) raises
+PASS inventory: shape change on in_proj_a raises
+PASS inventory: expected table off by one raises
+PASS scope: visual tensor change changes the conversion id via the checkpoint id
+PASS scope: no block for visual / mtp
+98 / 98 PASS

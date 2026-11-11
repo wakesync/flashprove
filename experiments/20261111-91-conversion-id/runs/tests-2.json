@@ -1,0 +1,511 @@
+{
+ "label": "hash-level tests of wb_conv, NOT A PROOF",
+ "n": 98,
+ "passed": 98,
+ "stock_conversion_id": "43a318967b61eb06fb447bfca66b0924e994f66c5c6cf7568416607e138f2dba",
+ "abl_conversion_id": "8ff69e08a512b32f940bf7145c686b933c80b1b1ad685350e11dd3e343525f8a",
+ "stock_checkpoint_id": "eb2cfd3003c4c8c8503456f860e8c08cb22cd52baa5b3b7101020e75e1fe801f",
+ "abl_checkpoint_id": "16834f8eea1ae4decd241f69719f729878dfc517e89f2df704141aba22e49e86",
+ "config_pin": "9d132dae447f3f74821b909319d3aac8523e899933c8c2dfc1c33c9f8fe45704",
+ "blocks_reading_changed_tensor": 70,
+ "changed_source_tensors": 70,
+ "inventory": {
+  "text": 851,
+  "matrix": 498,
+  "cell": 224,
+  "folded_norm": 129,
+  "effective": 722
+ },
+ "results": [
+  {
+   "group": "honest",
+   "name": "stock rebuild gives the same id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "abliterated rebuild gives the same id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "stock id != abliterated id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "configs of the two pins pin the same fields (same config pin)",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "verify_conversion accepts stock under stock id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "verify_conversion refuses abliterated under stock id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "all 722 stock openings verify",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "9 block classes present",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "abliterated opening refused under stock id for every block reading a changed tensor (70)",
+   "ok": true
+  },
+  {
+   "group": "class:cell_cA",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_cA",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_cA",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_cA",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_conv",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_conv",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_conv",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_conv",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_dt_bias",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_dt_bias",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_dt_bias",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_dt_bias",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_gated_gain",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_gated_gain",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_gated_gain",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_gated_gain",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_qk_norm",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_qk_norm",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_qk_norm",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_qk_norm",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_embedding",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_embedding",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_embedding",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_embedding",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_plain",
+   "name": "rule step swapped refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_plain",
+   "name": "rule param changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_plain",
+   "name": "own source hash changed refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_plain",
+   "name": "class relabelled refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "gain form g as stored instead of 1+w refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "norm source dropped refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "sources reordered refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_norm_folded",
+   "name": "norm source hash swapped for another norm's refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "gain form g as stored instead of 1+w refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "norm source dropped refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "sources reordered refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "norm source hash swapped for another norm's refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_final_norm_folded",
+   "name": "final norm replaced by layer-63 input norm (honest hash) refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_cA",
+   "name": "map exp -> identity (cA = RNE(2^e A_log)) refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_cA",
+   "name": "exp evaluated in binary32 instead of binary64 refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_dt_bias",
+   "name": "F = 12 -> 14 refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_dt_bias",
+   "name": "class bound 2^17 -> 2^12 refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_gated_gain",
+   "name": "sqrt(128) constant dropped (1.0) refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_qk_norm",
+   "name": "gain form 1+v -> v refused",
+   "ok": true
+  },
+  {
+   "group": "class:cell_conv",
+   "name": "kernel 4 -> 3 refused",
+   "ok": true
+  },
+  {
+   "group": "class:matrix_embedding",
+   "name": "eres 12 -> 13 refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "config_pin changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "rule_version changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "checkpoint_id changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "index changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "n changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "extra path element refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "extra field refused",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "layer_types (layers 0 and 3 swapped) refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "rms_norm_eps 1e-6 -> 1e-5 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "rope_theta 1e7 -> 1e6 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "partial_rotary_factor 0.25 -> 0.5 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "num_attention_heads 24 -> 48 (head_dim 128) refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "num_key_value_heads 4 -> 8 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "linear_conv_kernel_dim 4 -> 3 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "hidden_act silu -> gelu refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "full_attention_interval 4 -> 2 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "attn_output_gate true -> false refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "mamba_ssm_dtype float32 -> bfloat16 refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "output_gate_type swish -> sigmoid refused (same tensors)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "pinned field missing refused",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "unpinned field (use_cache) change does not change the id (pin is the function-changing set)",
+   "ok": true
+  },
+  {
+   "group": "A12",
+   "name": "fields pinned >= 7",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "honest 851 = 498 + 224 + 129, 722 effective: {'text': 851, 'matrix': 498, 'cell': 224, 'folded_norm': 129, 'effective': 722}",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "drop one matrix (down_proj) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "drop one cell (linear_attn) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "drop one folded_norm (norm) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "drop one qk_cell (q_norm) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "drop one lm_head (lm_head) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "drop one embedding (embed_tokens) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "extra unknown text tensor raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "attention tensor in a DeltaNet layer raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "layer 64 tensor (config has 64 layers) raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "shape change on in_proj_a raises",
+   "ok": true
+  },
+  {
+   "group": "inventory",
+   "name": "expected table off by one raises",
+   "ok": true
+  },
+  {
+   "group": "scope",
+   "name": "visual tensor change changes the conversion id via the checkpoint id",
+   "ok": true
+  },
+  {
+   "group": "scope",
+   "name": "no block for visual / mtp",
+   "ok": true
+  }
+ ]
+}
