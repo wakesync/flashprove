@@ -1,0 +1,22 @@
+{
+  "experiment": "20261111-91-conversion-id, corrected-code run (PR #100 review fixes, PREREG amendment 2026-11-11)",
+  "kind": "hash-level conversion id with config pin v2 (strict schema, typed encoding); CPU only, no weight read, NOT A PROOF",
+  "commits": {
+    "reviewed_head": "29d8b5f3790ab0097745950d233f681631865529",
+    "main_merged": "7a6d4931 (merge commit 018d9e3, via fp_merge_main.py)",
+    "amendment": "5a58a27 (PREREG ## Amendments, own commit, before the code)",
+    "code_at_run": "49d10b0 (research/weight-binding/wb_conv.py, test_wb_conv.py); run_wb91.sh and wb_keyfile_count.py unchanged since d39c98dc",
+    "runs": "runs-fix100/ written by `bash research/weight-binding/run_wb91.sh experiments/20261111-91-conversion-id/runs-fix100` at 49d10b0, committed in f4e8160",
+    "inputs": "unchanged: PR #68 stream-{stock,abl}.json and runs/config-{stock,abl}.json (sha256 191e0af2..., runs-fix100/config-sha256.txt)"
+  },
+  "toolchain": {"python": "3.12.3 (runs-fix100/python.txt)", "hash": "hashlib SHA-256", "numpy": "not used"},
+  "hardware": {
+    "cpu": "AMD EPYC-Rome, 16 vCPU KVM VM (results.yaml key cpu-epyc-rome-kvm-16), shared with other lanes",
+    "ram_gb": 30,
+    "gpu": "none",
+    "pinning": "none; a few seconds of CPU, under the fp-heavy threshold, not gated"
+  },
+  "seeds": {"all": "none: every id is a deterministic SHA-256 of committed inputs"},
+  "runs": {"build_per_pin": 2, "test_suite": 2, "count": 1,
+           "debug_before_run": "per the amendment: only a synthetic 4-layer config written by the lane, calling the schema / pin functions directly (no Conversion build, no test suite, no pinned config, no stream file); not committed"}
+}

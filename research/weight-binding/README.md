@@ -21,6 +21,26 @@ checks:
   openings the PR #87 review built (index 2048 of 1,199; extra trailing None). CPU, seconds.
 - `rerun_pr87.sh`, `compare_rerun.py`: the PR #87 rerun of H1 and the count with committed code
   into `runs-rerun-pr87/`, and its comparison with `runs/`.
+- `wb_conv.py` (issue #91, PR #100): the conversion id of DESIGN 2.0 object 2, hash level. Order:
+  checkpoint id (from `wb_manifest.py`) -> rule version string -> config pin -> block count -> Merkle
+  root over one leaf per effective text block (722). A leaf carries the block name, its class (9
+  classes), its ordered sources as (name, checkpoint-leaf hash) and the rule step text with its
+  parameters. The builder enforces the inventory 851 = 498 + 224 + 129 (722 effective blocks) and
+  every tensor shape against the pinned config. Functions: `config_fields` (strict config schema),
+  `config_pin`, `classify`, `check_shapes`, `Conversion` (build, `open(block)`), `leaf_well_formed`,
+  `verify_conv_opening` (one block leaf against a held id), `verify_conversion` (whole recompute).
+- Config pin v2 (after the PR #100 reviews): `text_config` must exist; 24 `text_config` fields and 3
+  top-level fields (`architectures`, `model_type`, `tie_word_embeddings`) are pinned with fixed types;
+  any key outside the pinned set and a listed known-unpinned set refuses; only the supported variant
+  builds (both `tie_word_embeddings` false, `attention_bias` false, equal `partial_rotary_factor`
+  copies). The pin hashes a typed tree ([type tag, payload] per value), so the encoding is injective.
+  The first version (`runs/`) hashed only `text_config` and encoded floats as `{"f64": hex}`, which a
+  config could supply literally; see the experiment's RESULTS "Corrected run".
+- `test_wb_conv.py`: 128 named tests of `wb_conv` (honest, per-class hostile leaf mutations, opening
+  mutations, same-tensor config substitutions, inventory errors, scope). Exit 0 iff all pass.
+- `wb_keyfile_count.py`: counted table-side cost of the key-file claim (one multilinear evaluation per
+  effective block, flat padding). Counted from shapes, not measured.
+- `run_wb91.sh <outdir>`: the #91 run: both pins built twice, the test suite twice, the count.
 
 ## What the verifier recomputes
 
@@ -34,9 +54,14 @@ were produced without it, `runs-rerun-pr87/` with it, and the counts are equal.
 ## What is not covered
 
 Any proof relation; the commitment ID of `cp_commit`; the Qwen weight table and its range proof;
-norm-folded tensors; 64 of the 70 changed tensors at integer level; the protocol's field; the
-conversion id and evaluation responses of DESIGN 2.0 (designed, not built); config.json (A12);
-the 333 visual and 15 MTP tensors are in the H1 id but outside U1 scope; any Fiat-Shamir or
+norm-folded tensors at integer level; 64 of the 70 changed tensors at integer level; the protocol's
+field; the evaluation responses of DESIGN 2.0 (designed, not built). The conversion id and the
+config pin (A12) are built (`wb_conv.py`) but only at hash level, with these limits: the leaf has no
+exponent e_b or integer hash int_sha256_b (that needs the 55.6 GB conversion per pin); the rule steps
+are bound as text and no converter here runs them on real bytes; the folded constant c = 1.0 is a
+placeholder; which config fields change the function is a judgement (fail closed on unknown keys,
+but the known-unpinned list in `wb_conv.py` is a choice); only one model variant is supported; nothing
+binds the committed table to the conversion id inside a proof. The 333 visual and 15 MTP tensors are in the H1 id but outside U1 scope; any Fiat-Shamir or
 grinding security bound (DESIGN 2.0 states only the fixed-pair Schwartz-Zippel bound). The
 verifier raises an exception, rather than returning false, on some malformed inputs (n = 2^64,
 a tensor name with an unpaired surrogate), and compares the held id case-sensitively. See
@@ -60,6 +85,19 @@ O=experiments/20261110-36-weight-binding/runs-rerun-pr87   # sibling of runs/, n
 research/weight-binding/rerun_pr87.sh                 # PR #87 rerun into $O/ (tests, H1, count, compare)
 python3 research/weight-binding/wb_inventory.py $O/inventory.json
 ```
+
+Conversion id, config pin, tests and count (issue #91). CPU, seconds, no network, no weights. Write
+into a fresh directory (never into a committed `runs*/` directory) and compare:
+
+```sh
+O=$(mktemp -d)
+bash research/weight-binding/run_wb91.sh "$O"
+diff -r -x python.txt "$O" experiments/20261111-91-conversion-id/runs-fix100   # expect no output
+python3 research/weight-binding/test_wb_conv.py      # 128 / 128 PASS, exit 0
+```
+
+The first-run files in `experiments/20261111-91-conversion-id/runs/` were made by the v1 code at
+d39c98dc and are not reproduced by the current code (the config pin changed, so the ids did).
 
 Note: the commands for `runs/` above reproduce the original files, but the original H1 outputs and
 `counted.json` were written before their scripts were committed (RESULTS deviations 4, 5); the
