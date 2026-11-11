@@ -1,0 +1,14 @@
+{
+  "start": "2026-11-10T20:02:57.255262+00:00",
+  "end": "2026-11-10T20:03:01.432749+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "binary_sha256": null,
+  "head": "a36b3d605910ee73bada50bf22b956bec554f92e",
+  "argv": [
+    "/usr/bin/python3",
+    "research/operators/qwen_deltanet_m2/norm_alias_regression.py",
+    "--check",
+    "research/operators/qwen_deltanet_m2/norm_alias_expected.json"
+  ]
+}
