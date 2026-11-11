@@ -36,7 +36,7 @@
 # Rows OP-R15, OP-R16, RR-R3, RR-R4, IS-25 .. IS-27 (research/operators/qwen_conv_history, PR #101) were
 # read at main 8d579337 from the code and experiments/20261111-35-conv-history-binding/RESULTS.md; nothing
 # was rerun for them.
-# Row OP-R17 (research/operators/qwen_ops_followups, PR #115, issue #94) was read at main 7c40dd9f from the
+# Row OP-R19 (research/operators/qwen_ops_followups, PR #115, issue #94) was read at main 7c40dd9f from the
 # code and experiments/20261111-94-op-followups/RESULTS.md.
 
 schema_version: 1
@@ -358,7 +358,7 @@ rows:
     sites:
       - {file: research/operators/qwen_conv_history/README.md, symbol: '**The kernel is still free.**'}
       - {file: research/operators/qwen_conv_history/README.md, symbol: '**Inputs have no provenance.**'}
-  - id: OP-R17
+  - id: OP-R19
     category: operator
     scope: research
     element: "identity of the pinned Qwen operator tables (research/operators/qwen_ops_followups, issue #94): profile v2 of the PR #67 relations, with the two table manifest SHA-256 values and the SHA-256 of each table the verifier reads in the configuration text"
