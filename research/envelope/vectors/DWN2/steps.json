@@ -1,0 +1,18 @@
+{
+ "description": "envelope says clipped-gap where the client pins exact",
+ "kind": "reject",
+ "name": "DWN2",
+ "steps": [
+  {
+   "deliver": "c8065f3829a5d601af7216ead20359f5e4fe67ddd128942b639c7f5576cbdfef",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: policy-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

@@ -57,3 +57,11 @@ Debug before the registered run: only with `run_suite.py --debug`, which uses a 
 
 ## Amendments
 (empty at registration)
+
+### 2026-11-11T23:14Z, after the client and generator code, before the registered run
+
+Only the debug mode (`run_suite.py --debug`: `debug` label vectors, STUB verifier, in a temporary directory) has run. `cp_verify` was called once directly on each unaltered example to read its `result-v1` line, as Runs allows. No registered vector has been given to the client.
+
+1. **A6 added (accept).** The issue asks that mock attestation stay visibly MOCK. A6 is A1 with `attestation.kind = MOCK`; it must release and its `tee:` line must start `MOCK (not evidence`. 41 vectors: 6 accept (A5 still the expected-accept gap), 35 reject. The reject list and every expected check are unchanged.
+2. **Fixture details fixed by the code, not by the registration.** The clipped-gap example's reply ends in token 0 at max_tokens, so its pinned end set is {511} and its envelope says `finish = length`. SUB4 (y changed to 200) is signed with `finish = length` so that the end-token check passes and the proof check decides, as registered. NC1 is the honest body with the signature first and one-space indentation (other key order and whitespace). The tokenizer, chat-template and provenance digests are TEST digests of labels (the example model is synthetic and has no tokenizer).
+3. **Paths.** As registered: spec `research/envelope/SPEC.md`, client `research/envelope/client_verify.py`, vectors `research/envelope/vectors/`, runner `run_suite.py`. Added: `envelope.py` (shared encoding), `make_vectors.py`, `stub_cp_verify.py` (debug only), `test_envelope.py` (unit tests: parser, byte-for-byte vector regeneration, debug suite).

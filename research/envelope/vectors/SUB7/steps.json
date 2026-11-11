@@ -1,0 +1,18 @@
+{
+ "description": "tokenizer digest other than the client pin",
+ "kind": "reject",
+ "name": "SUB7",
+ "steps": [
+  {
+   "deliver": "b393b5df6ed3297b2651a7856fc08b29c2c85054426e19aa6153d061b09ce3f3",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: version-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

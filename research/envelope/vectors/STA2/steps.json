@@ -1,0 +1,18 @@
+{
+ "description": "prev is not the last released envelope's digest (genesis instead)",
+ "kind": "reject",
+ "name": "STA2",
+ "steps": [
+  {
+   "deliver": "699ee6ce589f061fa2a34c4e17266e47ee06859ee45c20edcd0c735f60884812",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: state",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

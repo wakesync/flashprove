@@ -1,0 +1,18 @@
+{
+ "description": "unknown field inside coverage, re-signed",
+ "kind": "reject",
+ "name": "UNK2",
+ "steps": [
+  {
+   "deliver": "691712888c4892ff91229b2c60eead86b5b5c4b3aefdb082f3a1bcf48610a1f1",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: schema",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

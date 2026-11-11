@@ -1,0 +1,18 @@
+{
+ "description": "signed by an attacker key",
+ "kind": "reject",
+ "name": "SIG2",
+ "steps": [
+  {
+   "deliver": "a6b47e19c76bd8ffac39a763bbefa7f40fde1f28bab5dd859ddfab2c65a9b156",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: signature",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

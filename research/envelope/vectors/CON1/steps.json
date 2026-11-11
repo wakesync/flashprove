@@ -1,0 +1,18 @@
+{
+ "description": "two outstanding; envelope carries A's nonce and B's request digest",
+ "kind": "reject",
+ "name": "CON1",
+ "steps": [
+  {
+   "deliver": "ae819d982c0a70a8c3972a97c7efe31a9335a71867c2002c71f8fb324dbdb03f",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: request-digest",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

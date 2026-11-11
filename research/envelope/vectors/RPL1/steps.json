@@ -1,0 +1,18 @@
+{
+ "description": "envelope for outstanding request A delivered for outstanding request B",
+ "kind": "reject",
+ "name": "RPL1",
+ "steps": [
+  {
+   "deliver": "b43ebcf6ecf4f4259be4bd25c49597d24f90c6f5142cf82ab6791eb0b21035d6",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: nonce",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

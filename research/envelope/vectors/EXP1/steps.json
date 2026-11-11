@@ -1,0 +1,18 @@
+{
+ "description": "client clock after expires_at",
+ "kind": "reject",
+ "name": "EXP1",
+ "steps": [
+  {
+   "deliver": "1b617e6291e5e27080762b159b50e812c8ad74c019755ca1d9d6d5189d6625ef",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: expired",
+   "now": 1793000301,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

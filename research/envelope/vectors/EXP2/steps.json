@@ -1,0 +1,18 @@
+{
+ "description": "issued_at beyond the 60 s clock skew in the future",
+ "kind": "reject",
+ "name": "EXP2",
+ "steps": [
+  {
+   "deliver": "70aa034df70f1b3c5b31c07bdeeb857bbf7d081dd8025d665991cbbab44f6090",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: expired",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

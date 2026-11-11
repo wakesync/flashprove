@@ -1,0 +1,254 @@
+{
+ "label": "registered",
+ "provider_key": "9e48dd7187a4b80ccf99af1ac3c6d8a914ca3f29e2bf4848a98d38d1ad4cda79",
+ "vectors": {
+  "A1": {
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept"
+  },
+  "A2": {
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept"
+  },
+  "A3": {
+   "expect": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "kind": "accept"
+  },
+  "A4": {
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept"
+  },
+  "A5": {
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "expected-accept-gap"
+  },
+  "A6": {
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept"
+  },
+  "CON1": {
+   "expect": [
+    "REJECT: request-digest"
+   ],
+   "kind": "reject"
+  },
+  "CON2": {
+   "expect": [
+    "REJECT: state"
+   ],
+   "kind": "reject"
+  },
+  "DUP1": {
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject"
+  },
+  "DUP2": {
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject"
+  },
+  "DWN1": {
+   "expect": [
+    "REJECT: version"
+   ],
+   "kind": "reject"
+  },
+  "DWN2": {
+   "expect": [
+    "REJECT: policy-pin"
+   ],
+   "kind": "reject"
+  },
+  "DWN3": {
+   "expect": [
+    "REJECT: policy-pin"
+   ],
+   "kind": "reject"
+  },
+  "DWN4": {
+   "expect": [
+    "REJECT: attestation"
+   ],
+   "kind": "reject"
+  },
+  "DWN5": {
+   "expect": [
+    "REJECT: schema"
+   ],
+   "kind": "reject"
+  },
+  "END1": {
+   "expect": [
+    "REJECT: end-token"
+   ],
+   "kind": "reject"
+  },
+  "END2": {
+   "expect": [
+    "REJECT: end-token"
+   ],
+   "kind": "reject"
+  },
+  "EXP1": {
+   "expect": [
+    "REJECT: expired"
+   ],
+   "kind": "reject"
+  },
+  "EXP2": {
+   "expect": [
+    "REJECT: expired"
+   ],
+   "kind": "reject"
+  },
+  "EXP3": {
+   "expect": [
+    "REJECT: expired"
+   ],
+   "kind": "reject"
+  },
+  "NC1": {
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject"
+  },
+  "RPL1": {
+   "expect": [
+    "REJECT: nonce"
+   ],
+   "kind": "reject"
+  },
+  "RPL2": {
+   "expect": [
+    "REJECT: nonce-consumed"
+   ],
+   "kind": "reject"
+  },
+  "RPL3": {
+   "expect": [
+    "REJECT: request-digest"
+   ],
+   "kind": "reject"
+  },
+  "SIG1": {
+   "expect": [
+    "REJECT: signature"
+   ],
+   "kind": "reject"
+  },
+  "SIG2": {
+   "expect": [
+    "REJECT: signature"
+   ],
+   "kind": "reject"
+  },
+  "STA1": {
+   "expect": [
+    "REJECT: state"
+   ],
+   "kind": "reject"
+  },
+  "STA2": {
+   "expect": [
+    "REJECT: state"
+   ],
+   "kind": "reject"
+  },
+  "SUB1": {
+   "expect": [
+    "REJECT: proof"
+   ],
+   "kind": "reject"
+  },
+  "SUB2": {
+   "expect": [
+    "REJECT: commitment-pin"
+   ],
+   "kind": "reject"
+  },
+  "SUB3": {
+   "expect": [
+    "REJECT: commitment-pin"
+   ],
+   "kind": "reject"
+  },
+  "SUB4": {
+   "expect": [
+    "REJECT: proof"
+   ],
+   "kind": "reject"
+  },
+  "SUB5": {
+   "expect": [
+    "REJECT: config-pin"
+   ],
+   "kind": "reject"
+  },
+  "SUB6": {
+   "expect": [
+    "REJECT: provenance-pin"
+   ],
+   "kind": "reject"
+  },
+  "SUB7": {
+   "expect": [
+    "REJECT: version-pin"
+   ],
+   "kind": "reject"
+  },
+  "TRN1": {
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject"
+  },
+  "TRN2": {
+   "expect": [
+    "REJECT: coverage"
+   ],
+   "kind": "reject"
+  },
+  "TRN3": {
+   "expect": [
+    "REJECT: proof-digest"
+   ],
+   "kind": "reject"
+  },
+  "TRN4": {
+   "expect": [
+    "REJECT: proof"
+   ],
+   "kind": "reject"
+  },
+  "UNK1": {
+   "expect": [
+    "REJECT: schema"
+   ],
+   "kind": "reject"
+  },
+  "UNK2": {
+   "expect": [
+    "REJECT: schema"
+   ],
+   "kind": "reject"
+  }
+ },
+ "verifier_build": "ea191b014747c2c6c5c3c4622a06fa51bbda1c2591b314678c717f351663bd66"
+}

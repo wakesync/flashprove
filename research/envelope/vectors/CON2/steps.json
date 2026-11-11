@@ -1,0 +1,18 @@
+{
+ "description": "two responses race with the same seq; the first was released, the second (for B, claiming A's seq and prev) is refused",
+ "kind": "reject",
+ "name": "CON2",
+ "steps": [
+  {
+   "deliver": "20523dedd8e954d2205969882a2d8544c8476f615b87ec568f02bd52b505b597",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: state",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "description": "version flashprove-envelope-v0",
+ "kind": "reject",
+ "name": "DWN1",
+ "steps": [
+  {
+   "deliver": "ac3f065255ef90d76544d9b93e02e35274c4e8218269ed9ce33e6a8e94420c39",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: version",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

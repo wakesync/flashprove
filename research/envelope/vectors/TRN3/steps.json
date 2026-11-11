@@ -1,0 +1,18 @@
+{
+ "description": "proof file cut by one byte, envelope digest honest",
+ "kind": "reject",
+ "name": "TRN3",
+ "steps": [
+  {
+   "deliver": "33d57bb8ad75994acbd971c4d662871af35a9e073638a1536ccacbb8f34da0f0",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: proof-digest",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "cut1"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

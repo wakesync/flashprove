@@ -1,0 +1,29 @@
+{
+ "description": "two outstanding requests (exact as seq 1, clipped as seq 2); responses in reverse order, each released to its own slot",
+ "kind": "accept",
+ "name": "A3",
+ "steps": [
+  {
+   "deliver": "511e7db6dae7a40f36e1af3b42dd1504c712b704341f6981917a3d9adfab74e3",
+   "envelope": "env1.envelope",
+   "expect": "RELEASE",
+   "now": 1793000010,
+   "proof": {
+    "example": "clipped",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  },
+  {
+   "deliver": "e45444a596cf39e10777f3f91662208d862487f1589ad076076f00f3c1250d7b",
+   "envelope": "env2.envelope",
+   "expect": "RELEASE",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env2.reply"
+  }
+ ]
+}

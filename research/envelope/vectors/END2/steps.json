@@ -1,0 +1,18 @@
+{
+ "description": "envelope end_token differs from the reply's last token",
+ "kind": "reject",
+ "name": "END2",
+ "steps": [
+  {
+   "deliver": "1dd46a15757e8c1fb241bb4c4187e4fb75326ae42b472057601dd5391eff92a6",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: end-token",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

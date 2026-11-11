@@ -1,0 +1,18 @@
+{
+ "description": "duplicate top-level key",
+ "kind": "reject",
+ "name": "DUP2",
+ "steps": [
+  {
+   "deliver": "f41f9a9e09634fa75c9b6caa4b2ce6a6259b96899ea0ff34aa4e4c4f600fecce",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: canonical",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

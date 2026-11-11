@@ -1,0 +1,18 @@
+{
+ "description": "envelope bytes cut by 10",
+ "kind": "reject",
+ "name": "TRN1",
+ "steps": [
+  {
+   "deliver": "efd820216ccff7bf5f91ffddeef0577af65da6456623a23683b9a9d32d82220e",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: canonical",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

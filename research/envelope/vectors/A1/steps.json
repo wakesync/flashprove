@@ -1,0 +1,18 @@
+{
+ "description": "honest exact example, fresh session, seq 1",
+ "kind": "accept",
+ "name": "A1",
+ "steps": [
+  {
+   "deliver": "0e2b856015ad07d66940b984b00beef54b21c15d51584b4850e22d5c29c9c8dd",
+   "envelope": "env1.envelope",
+   "expect": "RELEASE",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}
