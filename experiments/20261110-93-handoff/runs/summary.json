@@ -1,0 +1,175 @@
+{
+  "started_utc": "2026-11-10T22:26:09.979386+00:00",
+  "finished_utc": "2026-11-10T22:29:38.376184+00:00",
+  "counts": {
+    "D": 8,
+    "C": 2,
+    "F": 12,
+    "T": 4,
+    "core_columns": 6582,
+    "aligned_columns": 7168,
+    "relations": 12278,
+    "range_cells": 352,
+    "core_columns_per_token": 1645.5,
+    "relations_per_token": 3069.5,
+    "boundary_state_equalities": 64,
+    "history_equalities": 216,
+    "extra_columns": 534
+  },
+  "case_acceptance": {
+    "honest": {
+      "n": 5,
+      "median": 1,
+      "sd": 0.0,
+      "min": 1,
+      "max": 1
+    },
+    "mixed_F12_F13": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "split_chunk": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "replaced_token_inputs": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "two_sided_history_shift": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "changed_last_chunk_history": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "other_layer": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "other_first_state": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "dropped_chunk": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "truncated_window": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "prefix_only_window": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "other_model_weights": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "other_request": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "changed_intermediate_state": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "statement_replay_other_layer": {
+      "n": 5,
+      "median": 0,
+      "sd": 0.0,
+      "min": 0,
+      "max": 0
+    }
+  },
+  "structure": {
+    "core_columns": {
+      "n": 5,
+      "median": 6582,
+      "sd": 0.0,
+      "min": 6582,
+      "max": 6582
+    },
+    "aligned_columns": {
+      "n": 5,
+      "median": 7168,
+      "sd": 0.0,
+      "min": 7168,
+      "max": 7168
+    },
+    "relations": {
+      "n": 5,
+      "median": 12278,
+      "sd": 0.0,
+      "min": 12278,
+      "max": 12278
+    },
+    "relation_terms": {
+      "n": 5,
+      "median": 28398,
+      "sd": 0.0,
+      "min": 28398,
+      "max": 28398
+    },
+    "range_cells": {
+      "n": 5,
+      "median": 352,
+      "sd": 0.0,
+      "min": 352,
+      "max": 352
+    },
+    "proof_bytes": {
+      "n": 5,
+      "median": 1805704,
+      "sd": 195.4359230029116,
+      "min": 1805480,
+      "max": 1805928
+    }
+  },
+  "honest_accepted": 5,
+  "hostile_rejected": 70,
+  "hostile_cases": 70,
+  "verdict": "PASS",
+  "note": "Measured, unreplicated. Low research security. No timing claim. Split/drop/length attacks are fixed-slot witness encodings, not independently resumable variable-size proofs."
+}
