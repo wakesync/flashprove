@@ -144,7 +144,8 @@ static int suite(int seed) {
     const char* pr=pname(v2);
     // C-conv-chosen-outputs (opus #1): taps (0,0,0,-S), x[t+3]=-y[t], history 0.
     {Input in;in.op="conv";in.f=f;in.y={S,-S+1,1234,-77};in.x={0,0,0};
-     for(int t=0;t<4;t++)in.x.push_back(-in.y[t]); for(i64 w:{i64(0),i64(0),i64(0),-S})in.x.push_back(w);
+     for(int t=0;t<4;t++)in.x.push_back(-in.y[t]);
+     for(i64 w:{i64(0),i64(0),i64(0),-S})in.x.push_back(w);
      auto h=prove_profile(in,v2,false,coin);
      out_case("C-conv-chosen-outputs","gap-control",pr,vfy(v2,statement_of(in),h.proof.data(),h.proof.size()),true,0);}
     // C-conv-other-kernel (opus #2): fixture outputs, taps all -S, history searched so that
