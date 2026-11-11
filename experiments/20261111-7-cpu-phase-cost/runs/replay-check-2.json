@@ -1,0 +1,191 @@
+{
+ "real_utc_start": "2026-11-11T07:32:20Z",
+ "cases": {
+  "budget_before_any_child": {
+   "rc": 2,
+   "events": [
+    "replay_started",
+    "stopped"
+   ],
+   "final": {
+    "event": "stopped",
+    "reason": "budget",
+    "before": "cold rep 0",
+    "children": 0,
+    "nonzero_exits": 0,
+    "reject_or_refused_lines": 0
+   },
+   "child_processes": 0,
+   "child_exits": [],
+   "ok": true
+  },
+  "budget_partial_real": {
+   "rc": 2,
+   "events": [
+    "replay_started",
+    "stopped"
+   ],
+   "final": {
+    "event": "stopped",
+    "reason": "budget",
+    "before": "B cold rep 0",
+    "children": 2,
+    "nonzero_exits": 0,
+    "reject_or_refused_lines": 0
+   },
+   "child_processes": 2,
+   "child_exits": [
+    0,
+    0
+   ],
+   "ok": true
+  },
+  "missing_binaries": {
+   "rc": 1,
+   "events": [
+    "replay_started",
+    "failed"
+   ],
+   "final": {
+    "event": "failed",
+    "children": 8,
+    "nonzero_exits": 8,
+    "reject_or_refused_lines": 0
+   },
+   "child_processes": 8,
+   "child_exits": [
+    127,
+    127,
+    127,
+    127,
+    127,
+    127,
+    127,
+    127
+   ],
+   "ok": true
+  },
+  "reject_line": {
+   "rc": 1,
+   "events": [
+    "replay_started",
+    "failed"
+   ],
+   "final": {
+    "event": "failed",
+    "children": 8,
+    "nonzero_exits": 0,
+    "reject_or_refused_lines": 8
+   },
+   "child_processes": 8,
+   "child_exits": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "ok": true
+  },
+  "happy_completion": {
+   "rc": 0,
+   "events": [
+    "replay_started",
+    "done"
+   ],
+   "final": {
+    "event": "done",
+    "children": 8,
+    "nonzero_exits": 0,
+    "reject_or_refused_lines": 0
+   },
+   "child_processes": 8,
+   "child_exits": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "ok": true,
+   "cells": [
+    "A-amort/prover",
+    "A-amort/verifier",
+    "A-cold/prover",
+    "A-cold/verifier",
+    "B-amort/prover",
+    "B-amort/verifier",
+    "B-cold/prover",
+    "B-cold/verifier"
+   ],
+   "process_wall_s": [
+    1.418583,
+    0.25395,
+    14.678322,
+    3.497126,
+    8.253146,
+    1.123811,
+    54.30428,
+    12.380499
+   ]
+  },
+  "registered_after_cutoff": {
+   "rc": 0,
+   "events": [
+    "slot_granted",
+    "stopped"
+   ],
+   "final": {
+    "event": "stopped",
+    "before": "cold rep 0"
+   },
+   "child_processes": 0,
+   "child_exits": [],
+   "ok": true,
+   "note": "unchanged registered behaviour after the cutoff (exit 0, disclosed in PR #106)"
+  },
+  "budget_1e308": {
+   "rc": 1,
+   "message": "replay: --budget-min must be finite and > 0 (also in seconds)",
+   "outdir_created": false,
+   "ok": true
+  },
+  "budget_inf": {
+   "rc": 1,
+   "message": "replay: --budget-min must be finite and > 0 (also in seconds)",
+   "outdir_created": false,
+   "ok": true
+  },
+  "reps_float": {
+   "rc": 1,
+   "message": "replay: --reps got '2.5', not a whole number",
+   "outdir_created": false,
+   "ok": true
+  },
+  "reps_missing_value": {
+   "rc": 1,
+   "message": "replay: --reps needs a value",
+   "outdir_created": false,
+   "ok": true
+  },
+  "budget_word": {
+   "rc": 1,
+   "message": "replay: --budget-min got 'ten', not a number",
+   "outdir_created": false,
+   "ok": true
+  },
+  "too_few_arguments": {
+   "rc": 1,
+   "message": "usage: run.py replay <bin_dir> <fixture_dir> <out_dir> [--budget-min M] [--reps N]",
+   "ok": true
+  }
+ },
+ "all_ok": true,
+ "note": "Exit-status test of the replay path; the real-binary cases are 1 repetition per cell, not a replication, not part of the registered result."
+}

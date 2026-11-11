@@ -1,0 +1,36 @@
+{
+ "compiler": "g++-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "binaries": {
+  "phase_a": {
+   "flags": [
+    "-O2",
+    "-fno-ipa-modref",
+    "-std=c++17",
+    "-pthread",
+    "-DBLK_FIELD=2",
+    "-D_GLIBCXX_ASSERTIONS",
+    "-I",
+    "blocks"
+   ],
+   "seconds": 45.6,
+   "warnings": 0,
+   "sha256": "c0800ce75f3956bd61356628bb2c2adf4288f2d010bb1104c4b0214b35611a53"
+  },
+  "phase_b": {
+   "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks"
+   ],
+   "seconds": 35.6,
+   "warnings": 0,
+   "sha256": "ed6705b07ebf6928afa568629bf7e1a780e30f5c3943a9cde54e8dbb0246c7f4"
+  }
+ }
+}
