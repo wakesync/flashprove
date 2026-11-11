@@ -1,0 +1,146 @@
+{
+  "files": {
+    "calibration-s1.f64le": {
+      "bytes": 383488,
+      "seed": 1,
+      "sha256": "397f402876fd2d9b350590b11734fab059903dc6d94437375a533c8ffc2601c5",
+      "split": "calibration"
+    },
+    "calibration-s2.f64le": {
+      "bytes": 383488,
+      "seed": 2,
+      "sha256": "739c584a2eddf8d725aca5ee3f5727931b43f1ad49d738f98b23cf347bfa9380",
+      "split": "calibration"
+    },
+    "calibration-s3.f64le": {
+      "bytes": 383488,
+      "seed": 3,
+      "sha256": "ede20f2389b366d0c958dd95f1462080251ed0a00894e32fa0cdff47e9fd562a",
+      "split": "calibration"
+    },
+    "calibration-s4.f64le": {
+      "bytes": 383488,
+      "seed": 4,
+      "sha256": "ddae2319cfd63ae873e2acbb501d942411ba8b936d6df3ec48e90358ddc307c9",
+      "split": "calibration"
+    },
+    "calibration-s5.f64le": {
+      "bytes": 383488,
+      "seed": 5,
+      "sha256": "43a3af8b37263e143dc23fc7b59983a4dfeb75f0d4a234a19bcc7ce501edd582",
+      "split": "calibration"
+    },
+    "heldout-s1001.f64le": {
+      "bytes": 383488,
+      "seed": 1001,
+      "sha256": "da98ecfdc01d45f862b8374ee4c976967c05275c7668ce098e9a209b1b1153eb",
+      "split": "heldout"
+    },
+    "heldout-s1002.f64le": {
+      "bytes": 383488,
+      "seed": 1002,
+      "sha256": "06c93954c35302518e8e5038674ffaa05739e6c4d3ec97a7d81ee9dc341c1a94",
+      "split": "heldout"
+    },
+    "heldout-s1003.f64le": {
+      "bytes": 383488,
+      "seed": 1003,
+      "sha256": "df74b35b6296a9c530aac5b0a6e4dbc67d86c93c504efe6a373f96ed36078945",
+      "split": "heldout"
+    },
+    "heldout-s1004.f64le": {
+      "bytes": 383488,
+      "seed": 1004,
+      "sha256": "386d631727fdb56b0283f785860a9464b58da6d9d4897f9899b41c59165c1ad4",
+      "split": "heldout"
+    },
+    "heldout-s1005.f64le": {
+      "bytes": 383488,
+      "seed": 1005,
+      "sha256": "87f0d5538a62f10fc5709898570f687483f489e6dd814dca2fb7e5d1cebbd99f",
+      "split": "heldout"
+    },
+    "stress-s2001.f64le": {
+      "bytes": 383488,
+      "seed": 2001,
+      "sha256": "0626d8f24f72071ebfa2503accbf0de5638a7a92e7f78ba83fcd337944a715be",
+      "split": "stress"
+    },
+    "stress-s2002.f64le": {
+      "bytes": 383488,
+      "seed": 2002,
+      "sha256": "552ba205e3b2057e30b99ebf97429f099ba50931e1c9cfb25e552686f5c67b4a",
+      "split": "stress"
+    },
+    "stress-s2003.f64le": {
+      "bytes": 383488,
+      "seed": 2003,
+      "sha256": "468e830398a29e33ffe61e87d00c85979fba91bae72b0414629886c92853ed84",
+      "split": "stress"
+    },
+    "stress-s2004.f64le": {
+      "bytes": 383488,
+      "seed": 2004,
+      "sha256": "65cc23fa8bf5029c62998b1596184c1d920eeb1a17dba824610f7ce9f538e8ae",
+      "split": "stress"
+    },
+    "stress-s2005.f64le": {
+      "bytes": 383488,
+      "seed": 2005,
+      "sha256": "20e4423f633b0409a105329742281e94be93a8d649c92eb120374f57b6d2bbcb",
+      "split": "stress"
+    }
+  },
+  "format": "flashprove-8-ref-divergence-splits-v1",
+  "generator": "splits.py, numpy PCG64(seed)",
+  "layout": [
+    [
+      "nonlinear.x",
+      [
+        4096
+      ]
+    ],
+    [
+      "conv.inputs",
+      [
+        256,
+        7
+      ]
+    ],
+    [
+      "conv.taps",
+      [
+        256,
+        4
+      ]
+    ],
+    [
+      "l2.x",
+      [
+        64,
+        128
+      ]
+    ],
+    [
+      "rms.x",
+      [
+        64,
+        256
+      ]
+    ],
+    [
+      "rotary.x",
+      [
+        64,
+        256
+      ]
+    ],
+    [
+      "rotary.position",
+      [
+        64
+      ]
+    ]
+  ],
+  "numpy": "2.4.3"
+}

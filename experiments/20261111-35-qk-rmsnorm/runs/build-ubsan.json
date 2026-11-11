@@ -1,0 +1,25 @@
+{
+  "source_commit": "831541e30e76a6508ef9aa3ca43274fd8f34e6eb",
+  "dirty_tracked": false,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "python": "3.12.3",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "research/operators/qwen_qk_norm/qk_norm.cpp",
+    "-o",
+    "research/operators/qwen_qk_norm/work/qk_norm-ubsan.bin",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined"
+  ],
+  "qk_norm_cpp_sha256": "52561c77d00e8bac59abb7027a65d2bfda47289af75123a8a1f313a6d0e4be4b",
+  "binary_sha256": "648985b144d1ff78149b221b7955e03fa0cfa8596f10a33c06da5a18e0a21514"
+}
