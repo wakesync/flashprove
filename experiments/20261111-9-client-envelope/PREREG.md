@@ -34,7 +34,7 @@ Reject (intended check in brackets):
 - Concurrency/interleaving: CON1 two outstanding, envelope carries A's nonce and B's request digest [request-digest]; CON2 two responses race with the same seq, the first released, the second [state].
 - Expired: EXP1 now after `expires_at` [expired]; EXP2 `issued_at` beyond the allowed clock skew in the future [expired]; EXP3 lifetime longer than the client maximum [expired].
 
-38 reject vectors, 5 accept vectors (A3 counts as one vector with two releases).
+35 reject vectors, 5 accept vectors (A3 counts as one vector with two releases).
 
 ## Acceptance threshold
 PASS: every accept vector released, every reject vector rejected by the intended check with no release and no state change, in all 5 runs. Any reject vector released in any run is a FAIL and a named finding (not retried). A reject at another check than registered is "rejected, other check", not a PASS for that vector. A5 accepting is the registered expectation and is reported as a confirmed gap, not a success. Descriptive: finite vectors on two synthetic fixtures do not establish soundness, freshness or privacy.
