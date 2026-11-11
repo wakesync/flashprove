@@ -112,4 +112,4 @@ python3 experiments/20261111-6-substitution-suite/build_variants.py
 python3 experiments/20261111-6-substitution-suite/suite.py --out runs/<new-name>.jsonl
 ```
 
-`suite.py` refuses to overwrite an existing receipt. `--dry-run` builds the altered cp_verify inputs and prints the command lines without calling a checker; `--debug` runs the handoff cases on the disjoint seed 909 at D4/C1.
+`build_variants.py` and `suite.py` refuse to overwrite an existing receipt (`runs/build.json`, the `--out` file); in a fresh clone remove or rename the committed ones first, or compare against them. `--dry-run` builds the altered cp_verify inputs and prints the command lines without calling a checker; `--debug` runs the handoff cases on the disjoint seed 909 at D4/C1.
