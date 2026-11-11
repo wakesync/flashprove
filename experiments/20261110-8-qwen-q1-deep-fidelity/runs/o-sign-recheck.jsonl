@@ -1,0 +1,17 @@
+{"target": "T16", "arm": "XS20", "prompt": "p10-long-mixed", "head": 25, "o_max": 131072.0, "o_min": -131054.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T16", "arm": "XS20", "prompt": "p10-long-mixed", "head": 37, "o_max": 131027.0, "o_min": -131072.0, "abs_max_matches_committed": true, "in_prereg_class": true}
+{"target": "T16", "arm": "XS16", "prompt": "p06-digits", "head": 18, "o_max": 131072.0, "o_min": -129887.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T16", "arm": "XS20", "prompt": "p02-ordinary-paragraph", "head": 25, "o_max": 131072.0, "o_min": -131054.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20s", "arm": "XS16", "prompt": "p10-long-mixed", "head": 6, "o_max": 131072.0, "o_min": -110218.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20s", "arm": "XS18", "prompt": "p10-long-mixed", "head": 6, "o_max": 131072.0, "o_min": -110257.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20s", "arm": "XS14", "prompt": "p03-repeat-word", "head": 24, "o_max": 130909.0, "o_min": -131072.0, "abs_max_matches_committed": true, "in_prereg_class": true}
+{"target": "T20s", "arm": "XS20", "prompt": "p06-digits", "head": 6, "o_max": 131057.0, "o_min": -131072.0, "abs_max_matches_committed": true, "in_prereg_class": true}
+{"target": "T20s", "arm": "XS20", "prompt": "p01-ordinary-short", "head": 39, "o_max": 131072.0, "o_min": -92997.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20s", "arm": "XS18-noG", "prompt": "p05-code", "head": 24, "o_max": 129965.0, "o_min": -131072.0, "abs_max_matches_committed": true, "in_prereg_class": true}
+{"target": "T20s", "arm": "XS18-noG", "prompt": "p10-long-mixed", "head": 30, "o_max": 131072.0, "o_min": -117508.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20a", "arm": "XS20", "prompt": "p10-long-mixed", "head": 28, "o_max": 131072.0, "o_min": -16133.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20a", "arm": "XS12", "prompt": "p03-repeat-word", "head": 4, "o_max": 130842.0, "o_min": -131072.0, "abs_max_matches_committed": true, "in_prereg_class": true}
+{"target": "T20a", "arm": "XS18-K16", "prompt": "p08-chat-refusal", "head": 8, "o_max": 131072.0, "o_min": -64362.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20a", "arm": "XS18-noU", "prompt": "p03-repeat-word", "head": 28, "o_max": 131072.0, "o_min": -13143.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20a", "arm": "XS18-noG", "prompt": "p10-long-mixed", "head": 27, "o_max": 131072.0, "o_min": -103037.0, "abs_max_matches_committed": true, "in_prereg_class": false}
+{"target": "T20a", "arm": "XS18-noU", "prompt": "p10-long-mixed", "head": 22, "o_max": 130727.0, "o_min": -131072.0, "abs_max_matches_committed": true, "in_prereg_class": true}
