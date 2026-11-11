@@ -1,0 +1,1578 @@
+{
+ "accept_all_pass": 6,
+ "accept_steps": 35,
+ "accept_steps_passed": 35,
+ "accept_vectors": 6,
+ "affinity": [
+  13,
+  14,
+  15
+ ],
+ "budget_s": 1800,
+ "cp_verify": "cp_verify",
+ "cp_verify_sha256": "98931b82db93ee6eb2545c47f4e28fc27bf49e171967a67b1cdc4319fd02a4d0",
+ "elapsed_s": 83.81647229194641,
+ "finished_utc": "2026-11-11T23:15:05Z",
+ "granted_unix": 1794438821.3406937,
+ "granted_utc": "2026-11-11T23:13:41Z",
+ "hard_stop": "2026-11-12T01:00:00Z",
+ "killed": null,
+ "mode": "registered",
+ "per_vector": {
+  "A1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.015141999999999989,
+    "median": 0.013905000000000056,
+    "min": 0.013738999999999946,
+    "n": 5,
+    "sd": 0.0006780392319033145
+   },
+   "client_s": {
+    "max": 1.451452,
+    "median": 1.432052,
+    "min": 1.395468,
+    "n": 5,
+    "sd": 0.022543059253348933
+   },
+   "cp_verify_s": {
+    "max": 1.437547,
+    "median": 1.417065,
+    "min": 1.380326,
+    "n": 5,
+    "sd": 0.023033154879434133
+   },
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept",
+   "last_lines": [
+    "RELEASE"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.51304068043828,
+    "median": 1.4988387189805508,
+    "min": 1.4560559540987015,
+    "n": 5,
+    "sd": 0.021796136807754593
+   }
+  },
+  "A2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.0168060000000001,
+    "median": 0.013266,
+    "min": 0.012712999999999974,
+    "n": 5,
+    "sd": 0.0016674749773235684
+   },
+   "client_s": {
+    "max": 1.548231,
+    "median": 1.442891,
+    "min": 1.417109,
+    "n": 5,
+    "sd": 0.05093738050979848
+   },
+   "cp_verify_s": {
+    "max": 1.534965,
+    "median": 1.429885,
+    "min": 1.402853,
+    "n": 5,
+    "sd": 0.05106558481306169
+   },
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept",
+   "last_lines": [
+    "RELEASE"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.6101921163499355,
+    "median": 1.4978413954377174,
+    "min": 1.4845726899802685,
+    "n": 5,
+    "sd": 0.052125168336670684
+   }
+  },
+  "A3": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.018515999999999977,
+    "median": 0.014557000000000153,
+    "min": 0.013751000000000069,
+    "n": 10,
+    "sd": 0.001334315059413514
+   },
+   "client_s": {
+    "max": 1.632186,
+    "median": 1.46517,
+    "min": 1.408271,
+    "n": 10,
+    "sd": 0.06430705351981224
+   },
+   "cp_verify_s": {
+    "max": 1.618097,
+    "median": 1.449756,
+    "min": 1.393614,
+    "n": 10,
+    "sd": 0.06463593950985952
+   },
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept",
+   "last_lines": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 10,
+   "steps_passed": 10,
+   "wall_s": {
+    "max": 1.6889431402087212,
+    "median": 1.5314755104482174,
+    "min": 1.4624903798103333,
+    "n": 10,
+    "sd": 0.06296663537967796
+   }
+  },
+  "A4": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.01884600000000014,
+    "median": 0.014129999999999976,
+    "min": 0.0138370000000001,
+    "n": 5,
+    "sd": 0.002129521941657386
+   },
+   "client_s": {
+    "max": 1.488645,
+    "median": 1.432252,
+    "min": 1.393576,
+    "n": 5,
+    "sd": 0.0340359288546677
+   },
+   "cp_verify_s": {
+    "max": 1.473331,
+    "median": 1.415736,
+    "min": 1.379729,
+    "n": 5,
+    "sd": 0.03372514619241848
+   },
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept",
+   "last_lines": [
+    "RELEASE"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.548458892852068,
+    "median": 1.5011379569768906,
+    "min": 1.456049844622612,
+    "n": 5,
+    "sd": 0.033649585597696714
+   }
+  },
+  "A5": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.01869900000000002,
+    "median": 0.013941999999999899,
+    "min": 0.013322000000000056,
+    "n": 5,
+    "sd": 0.002242059477355593
+   },
+   "client_s": {
+    "max": 1.477557,
+    "median": 1.457843,
+    "min": 1.420162,
+    "n": 5,
+    "sd": 0.0236232835842099
+   },
+   "cp_verify_s": {
+    "max": 1.464235,
+    "median": 1.443901,
+    "min": 1.401463,
+    "n": 5,
+    "sd": 0.025726801826111246
+   },
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "expected-accept-gap",
+   "last_lines": [
+    "RELEASE"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.5330146551132202,
+    "median": 1.5289987213909626,
+    "min": 1.4887775555253029,
+    "n": 5,
+    "sd": 0.020651142818614653
+   }
+  },
+  "A6": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.015328999999999926,
+    "median": 0.01442700000000019,
+    "min": 0.013158000000000003,
+    "n": 5,
+    "sd": 0.0008620169951920746
+   },
+   "client_s": {
+    "max": 1.510377,
+    "median": 1.42147,
+    "min": 1.406207,
+    "n": 5,
+    "sd": 0.043388341375304985
+   },
+   "cp_verify_s": {
+    "max": 1.497219,
+    "median": 1.40732,
+    "min": 1.390878,
+    "n": 5,
+    "sd": 0.04394388580564996
+   },
+   "expect": [
+    "RELEASE"
+   ],
+   "kind": "accept",
+   "last_lines": [
+    "RELEASE"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.5688974298536777,
+    "median": 1.4826052375137806,
+    "min": 1.465496253222227,
+    "n": 5,
+    "sd": 0.044663033193275685
+   }
+  },
+  "CON1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.007812,
+    "median": 0.007445,
+    "min": 0.007105,
+    "n": 5,
+    "sd": 0.00029215355551490385
+   },
+   "client_s": {
+    "max": 0.007812,
+    "median": 0.007445,
+    "min": 0.007105,
+    "n": 5,
+    "sd": 0.00029215355551490385
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: request-digest"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: request-digest"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07414768636226654,
+    "median": 0.06353584304451942,
+    "min": 0.05454103276133537,
+    "n": 5,
+    "sd": 0.007523045826103224
+   }
+  },
+  "CON2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008169,
+    "median": 0.007156,
+    "min": 0.006971,
+    "n": 5,
+    "sd": 0.0005409248561491695
+   },
+   "client_s": {
+    "max": 0.008169,
+    "median": 0.007156,
+    "min": 0.006971,
+    "n": 5,
+    "sd": 0.0005409248561491695
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: state"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: state"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06631743907928467,
+    "median": 0.06017180532217026,
+    "min": 0.05533565953373909,
+    "n": 5,
+    "sd": 0.004110012812614899
+   }
+  },
+  "DUP1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.003689,
+    "median": 0.002819,
+    "min": 0.002685,
+    "n": 5,
+    "sd": 0.00043382392741756425
+   },
+   "client_s": {
+    "max": 0.003689,
+    "median": 0.002819,
+    "min": 0.002685,
+    "n": 5,
+    "sd": 0.00043382392741756425
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: canonical"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06288805603981018,
+    "median": 0.059531450271606445,
+    "min": 0.052760835736989975,
+    "n": 5,
+    "sd": 0.004044034065258765
+   }
+  },
+  "DUP2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.003095,
+    "median": 0.002929,
+    "min": 0.002754,
+    "n": 5,
+    "sd": 0.00012977018147479035
+   },
+   "client_s": {
+    "max": 0.003095,
+    "median": 0.002929,
+    "min": 0.002754,
+    "n": 5,
+    "sd": 0.00012977018147479035
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: canonical"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.0668361745774746,
+    "median": 0.0644601434469223,
+    "min": 0.0523039735853672,
+    "n": 5,
+    "sd": 0.006119168319954376
+   }
+  },
+  "DWN1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.003909,
+    "median": 0.002943,
+    "min": 0.002834,
+    "n": 5,
+    "sd": 0.00048560807242054786
+   },
+   "client_s": {
+    "max": 0.003909,
+    "median": 0.002943,
+    "min": 0.002834,
+    "n": 5,
+    "sd": 0.00048560807242054786
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: version"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: version"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.08117107674479485,
+    "median": 0.05736653879284859,
+    "min": 0.05244431644678116,
+    "n": 5,
+    "sd": 0.011561688508906093
+   }
+  },
+  "DWN2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.007648,
+    "median": 0.007014,
+    "min": 0.006964,
+    "n": 5,
+    "sd": 0.00028773859664633114
+   },
+   "client_s": {
+    "max": 0.007648,
+    "median": 0.007014,
+    "min": 0.006964,
+    "n": 5,
+    "sd": 0.00028773859664633114
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: policy-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: policy-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06454421952366829,
+    "median": 0.06118100509047508,
+    "min": 0.05779903009533882,
+    "n": 5,
+    "sd": 0.002824199401598229
+   }
+  },
+  "DWN3": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008605,
+    "median": 0.007634,
+    "min": 0.006992,
+    "n": 5,
+    "sd": 0.0006006410741865727
+   },
+   "client_s": {
+    "max": 0.008605,
+    "median": 0.007634,
+    "min": 0.006992,
+    "n": 5,
+    "sd": 0.0006006410741865727
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: policy-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: policy-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06493118405342102,
+    "median": 0.06133650243282318,
+    "min": 0.05971341207623482,
+    "n": 5,
+    "sd": 0.0019205386728319053
+   }
+  },
+  "DWN4": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008046,
+    "median": 0.007486,
+    "min": 0.006899,
+    "n": 5,
+    "sd": 0.0004801767382953904
+   },
+   "client_s": {
+    "max": 0.008046,
+    "median": 0.007486,
+    "min": 0.006899,
+    "n": 5,
+    "sd": 0.0004801767382953904
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: attestation"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: attestation"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06933256611227989,
+    "median": 0.06246054545044899,
+    "min": 0.05709473416209221,
+    "n": 5,
+    "sd": 0.004595043480788592
+   }
+  },
+  "DWN5": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.003436,
+    "median": 0.002931,
+    "min": 0.002828,
+    "n": 5,
+    "sd": 0.00027163302450180826
+   },
+   "client_s": {
+    "max": 0.003436,
+    "median": 0.002931,
+    "min": 0.002828,
+    "n": 5,
+    "sd": 0.00027163302450180826
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: schema"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: schema"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.0708874873816967,
+    "median": 0.05926903337240219,
+    "min": 0.05820516496896744,
+    "n": 5,
+    "sd": 0.0052702036753739506
+   }
+  },
+  "END1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.010112,
+    "median": 0.007275,
+    "min": 0.006783,
+    "n": 5,
+    "sd": 0.0013726267518885092
+   },
+   "client_s": {
+    "max": 0.010112,
+    "median": 0.007275,
+    "min": 0.006783,
+    "n": 5,
+    "sd": 0.0013726267518885092
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: end-token"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: end-token"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.08355443179607391,
+    "median": 0.06157371774315834,
+    "min": 0.059370990842580795,
+    "n": 5,
+    "sd": 0.010285953811561227
+   }
+  },
+  "END2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.010956,
+    "median": 0.007498,
+    "min": 0.006976,
+    "n": 5,
+    "sd": 0.0016697141072650732
+   },
+   "client_s": {
+    "max": 0.010956,
+    "median": 0.007498,
+    "min": 0.006976,
+    "n": 5,
+    "sd": 0.0016697141072650732
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: end-token"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: end-token"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.08760205283761024,
+    "median": 0.06921698525547981,
+    "min": 0.06138547509908676,
+    "n": 5,
+    "sd": 0.010340878098437175
+   }
+  },
+  "EXP1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008318,
+    "median": 0.007657,
+    "min": 0.006813,
+    "n": 5,
+    "sd": 0.0006057807359102799
+   },
+   "client_s": {
+    "max": 0.008318,
+    "median": 0.007657,
+    "min": 0.006813,
+    "n": 5,
+    "sd": 0.0006057807359102799
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: expired"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: expired"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07774044573307037,
+    "median": 0.06942444294691086,
+    "min": 0.0663013905286789,
+    "n": 5,
+    "sd": 0.005002336351073171
+   }
+  },
+  "EXP2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.007689,
+    "median": 0.007328,
+    "min": 0.007147,
+    "n": 5,
+    "sd": 0.0002227909333882328
+   },
+   "client_s": {
+    "max": 0.007689,
+    "median": 0.007328,
+    "min": 0.007147,
+    "n": 5,
+    "sd": 0.0002227909333882328
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: expired"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: expired"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.0673534907400608,
+    "median": 0.0665232390165329,
+    "min": 0.060373540967702866,
+    "n": 5,
+    "sd": 0.002917408576180667
+   }
+  },
+  "EXP3": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008842,
+    "median": 0.007519,
+    "min": 0.006715,
+    "n": 5,
+    "sd": 0.0009128635166332367
+   },
+   "client_s": {
+    "max": 0.008842,
+    "median": 0.007519,
+    "min": 0.006715,
+    "n": 5,
+    "sd": 0.0009128635166332367
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: expired"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: expired"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07601939514279366,
+    "median": 0.0690496638417244,
+    "min": 0.055183712393045425,
+    "n": 5,
+    "sd": 0.00926256335796522
+   }
+  },
+  "NC1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.00454,
+    "median": 0.003217,
+    "min": 0.002768,
+    "n": 5,
+    "sd": 0.0007132918757423219
+   },
+   "client_s": {
+    "max": 0.00454,
+    "median": 0.003217,
+    "min": 0.002768,
+    "n": 5,
+    "sd": 0.0007132918757423219
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: canonical"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.0753924585878849,
+    "median": 0.057640496641397476,
+    "min": 0.052686672657728195,
+    "n": 5,
+    "sd": 0.009047746687932508
+   }
+  },
+  "RPL1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008019,
+    "median": 0.007489,
+    "min": 0.007324,
+    "n": 5,
+    "sd": 0.0002658185471331902
+   },
+   "client_s": {
+    "max": 0.008019,
+    "median": 0.007489,
+    "min": 0.007324,
+    "n": 5,
+    "sd": 0.0002658185471331902
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: nonce"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: nonce"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07472941651940346,
+    "median": 0.06196128576993942,
+    "min": 0.05749976262450218,
+    "n": 5,
+    "sd": 0.007126284349910705
+   }
+  },
+  "RPL2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008282,
+    "median": 0.007136,
+    "min": 0.006878,
+    "n": 5,
+    "sd": 0.0005518357545502099
+   },
+   "client_s": {
+    "max": 0.008282,
+    "median": 0.007136,
+    "min": 0.006878,
+    "n": 5,
+    "sd": 0.0005518357545502099
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: nonce-consumed"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: nonce-consumed"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07176779210567474,
+    "median": 0.0605715736746788,
+    "min": 0.05822206288576126,
+    "n": 5,
+    "sd": 0.006880064806533817
+   }
+  },
+  "RPL3": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.010919,
+    "median": 0.007267,
+    "min": 0.00685,
+    "n": 5,
+    "sd": 0.0016722297390011935
+   },
+   "client_s": {
+    "max": 0.010919,
+    "median": 0.007267,
+    "min": 0.00685,
+    "n": 5,
+    "sd": 0.0016722297390011935
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: request-digest"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: request-digest"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.08428175002336502,
+    "median": 0.0630723275244236,
+    "min": 0.05710528418421745,
+    "n": 5,
+    "sd": 0.011049992636356115
+   }
+  },
+  "SIG1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.010306,
+    "median": 0.007837,
+    "min": 0.007662,
+    "n": 5,
+    "sd": 0.0010980348355129719
+   },
+   "client_s": {
+    "max": 0.010306,
+    "median": 0.007837,
+    "min": 0.007662,
+    "n": 5,
+    "sd": 0.0010980348355129719
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: signature"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: signature"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.08461461216211319,
+    "median": 0.06445655226707458,
+    "min": 0.059681814163923264,
+    "n": 5,
+    "sd": 0.0117612065000663
+   }
+  },
+  "SIG2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.009547,
+    "median": 0.008018,
+    "min": 0.007195,
+    "n": 5,
+    "sd": 0.0009162802518880345
+   },
+   "client_s": {
+    "max": 0.009547,
+    "median": 0.008018,
+    "min": 0.007195,
+    "n": 5,
+    "sd": 0.0009162802518880345
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: signature"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: signature"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.0764300487935543,
+    "median": 0.0689755454659462,
+    "min": 0.06085202097892761,
+    "n": 5,
+    "sd": 0.006710178754941227
+   }
+  },
+  "STA1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008718,
+    "median": 0.007506,
+    "min": 0.006978,
+    "n": 5,
+    "sd": 0.000664730020384216
+   },
+   "client_s": {
+    "max": 0.008718,
+    "median": 0.007506,
+    "min": 0.006978,
+    "n": 5,
+    "sd": 0.000664730020384216
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: state"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: state"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.0890783965587616,
+    "median": 0.06212332472205162,
+    "min": 0.05886494368314743,
+    "n": 5,
+    "sd": 0.012484794749282858
+   }
+  },
+  "STA2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008054,
+    "median": 0.00744,
+    "min": 0.006774,
+    "n": 5,
+    "sd": 0.000491371346335946
+   },
+   "client_s": {
+    "max": 0.008054,
+    "median": 0.00744,
+    "min": 0.006774,
+    "n": 5,
+    "sd": 0.000491371346335946
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: state"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: state"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07487291470170021,
+    "median": 0.06247200816869736,
+    "min": 0.05869129300117493,
+    "n": 5,
+    "sd": 0.006265577445205991
+   }
+  },
+  "SUB1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.016600999999999977,
+    "median": 0.014908000000000032,
+    "min": 0.013746999999999954,
+    "n": 5,
+    "sd": 0.001053942930143747
+   },
+   "client_s": {
+    "max": 0.784749,
+    "median": 0.685731,
+    "min": 0.610695,
+    "n": 5,
+    "sd": 0.07146126317663298
+   },
+   "cp_verify_s": {
+    "max": 0.768148,
+    "median": 0.671984,
+    "min": 0.595269,
+    "n": 5,
+    "sd": 0.07094269310013541
+   },
+   "expect": [
+    "REJECT: proof"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: proof"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.8542661406099796,
+    "median": 0.7381743416190147,
+    "min": 0.6771531887352467,
+    "n": 5,
+    "sd": 0.07251207807655859
+   }
+  },
+  "SUB2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008786,
+    "median": 0.007451,
+    "min": 0.006807,
+    "n": 5,
+    "sd": 0.0008102969825934195
+   },
+   "client_s": {
+    "max": 0.008786,
+    "median": 0.007451,
+    "min": 0.006807,
+    "n": 5,
+    "sd": 0.0008102969825934195
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: commitment-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: commitment-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07109177485108376,
+    "median": 0.06612904742360115,
+    "min": 0.06252675876021385,
+    "n": 5,
+    "sd": 0.004042615166813758
+   }
+  },
+  "SUB3": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.0084,
+    "median": 0.007661,
+    "min": 0.007181,
+    "n": 5,
+    "sd": 0.00045772732057416
+   },
+   "client_s": {
+    "max": 0.0084,
+    "median": 0.007661,
+    "min": 0.007181,
+    "n": 5,
+    "sd": 0.00045772732057416
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: commitment-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: commitment-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07148628681898117,
+    "median": 0.06375665590167046,
+    "min": 0.0616665780544281,
+    "n": 5,
+    "sd": 0.004892828693004706
+   }
+  },
+  "SUB4": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.01787800000000006,
+    "median": 0.015012000000000025,
+    "min": 0.013897999999999966,
+    "n": 5,
+    "sd": 0.001572391013711322
+   },
+   "client_s": {
+    "max": 1.740844,
+    "median": 1.340027,
+    "min": 1.322776,
+    "n": 5,
+    "sd": 0.1768122977360455
+   },
+   "cp_verify_s": {
+    "max": 1.725832,
+    "median": 1.324016,
+    "min": 1.304898,
+    "n": 5,
+    "sd": 0.1772648614508809
+   },
+   "expect": [
+    "REJECT: proof"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: proof"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.8007042706012726,
+    "median": 1.4202159866690636,
+    "min": 1.377006884664297,
+    "n": 5,
+    "sd": 0.1762826065795777
+   }
+  },
+  "SUB5": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008675,
+    "median": 0.007466,
+    "min": 0.007014,
+    "n": 5,
+    "sd": 0.0007335180979362406
+   },
+   "client_s": {
+    "max": 0.008675,
+    "median": 0.007466,
+    "min": 0.007014,
+    "n": 5,
+    "sd": 0.0007335180979362406
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: config-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: config-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07804663106799126,
+    "median": 0.061913393437862396,
+    "min": 0.05805414915084839,
+    "n": 5,
+    "sd": 0.007819213825623183
+   }
+  },
+  "SUB6": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.00905,
+    "median": 0.007714,
+    "min": 0.006884,
+    "n": 5,
+    "sd": 0.0008682688523723515
+   },
+   "client_s": {
+    "max": 0.00905,
+    "median": 0.007714,
+    "min": 0.006884,
+    "n": 5,
+    "sd": 0.0008682688523723515
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: provenance-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: provenance-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07255643606185913,
+    "median": 0.06034979969263077,
+    "min": 0.059398259967565536,
+    "n": 5,
+    "sd": 0.0057664415789717175
+   }
+  },
+  "SUB7": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.008048,
+    "median": 0.007644,
+    "min": 0.007208,
+    "n": 5,
+    "sd": 0.00035420544885701554
+   },
+   "client_s": {
+    "max": 0.008048,
+    "median": 0.007644,
+    "min": 0.007208,
+    "n": 5,
+    "sd": 0.00035420544885701554
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: version-pin"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: version-pin"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07472487539052963,
+    "median": 0.06492529436945915,
+    "min": 0.05791451781988144,
+    "n": 5,
+    "sd": 0.006641995532523028
+   }
+  },
+  "TRN1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.003222,
+    "median": 0.002906,
+    "min": 0.002683,
+    "n": 5,
+    "sd": 0.00019388862782535748
+   },
+   "client_s": {
+    "max": 0.003222,
+    "median": 0.002906,
+    "min": 0.002683,
+    "n": 5,
+    "sd": 0.00019388862782535748
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: canonical"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: canonical"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06747878342866898,
+    "median": 0.059480901807546616,
+    "min": 0.052867621183395386,
+    "n": 5,
+    "sd": 0.005528371945335854
+   }
+  },
+  "TRN2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.007635,
+    "median": 0.007173,
+    "min": 0.007087,
+    "n": 5,
+    "sd": 0.0002157468423870904
+   },
+   "client_s": {
+    "max": 0.007635,
+    "median": 0.007173,
+    "min": 0.007087,
+    "n": 5,
+    "sd": 0.0002157468423870904
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: coverage"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: coverage"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.07253821939229965,
+    "median": 0.06281361356377602,
+    "min": 0.06067381799221039,
+    "n": 5,
+    "sd": 0.004912140758294592
+   }
+  },
+  "TRN3": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.010846,
+    "median": 0.00758,
+    "min": 0.006936,
+    "n": 5,
+    "sd": 0.001599691532764989
+   },
+   "client_s": {
+    "max": 0.010846,
+    "median": 0.00758,
+    "min": 0.006936,
+    "n": 5,
+    "sd": 0.001599691532764989
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: proof-digest"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: proof-digest"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.09275270625948906,
+    "median": 0.06662926450371742,
+    "min": 0.05943117290735245,
+    "n": 5,
+    "sd": 0.013179735658831985
+   }
+  },
+  "TRN4": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.016305000000000014,
+    "median": 0.01468399999999992,
+    "min": 0.013952000000000186,
+    "n": 5,
+    "sd": 0.000901431472714327
+   },
+   "client_s": {
+    "max": 1.465384,
+    "median": 1.423073,
+    "min": 1.383344,
+    "n": 5,
+    "sd": 0.02981990223324017
+   },
+   "cp_verify_s": {
+    "max": 1.4507,
+    "median": 1.407672,
+    "min": 1.367039,
+    "n": 5,
+    "sd": 0.03030672935174637
+   },
+   "expect": [
+    "REJECT: proof"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: proof"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 1.5285567045211792,
+    "median": 1.4839092828333378,
+    "min": 1.4426052644848824,
+    "n": 5,
+    "sd": 0.031549750712209196
+   }
+  },
+  "UNK1": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.003142,
+    "median": 0.003097,
+    "min": 0.00288,
+    "n": 5,
+    "sd": 0.00010700327097804054
+   },
+   "client_s": {
+    "max": 0.003142,
+    "median": 0.003097,
+    "min": 0.00288,
+    "n": 5,
+    "sd": 0.00010700327097804054
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: schema"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: schema"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06655313447117805,
+    "median": 0.06228208914399147,
+    "min": 0.05282347649335861,
+    "n": 5,
+    "sd": 0.005263249095560808
+   }
+  },
+  "UNK2": {
+   "all_pass": true,
+   "client_minus_cp_verify_s": {
+    "max": 0.004059,
+    "median": 0.003035,
+    "min": 0.002831,
+    "n": 5,
+    "sd": 0.0004890279133137493
+   },
+   "client_s": {
+    "max": 0.004059,
+    "median": 0.003035,
+    "min": 0.002831,
+    "n": 5,
+    "sd": 0.0004890279133137493
+   },
+   "cp_verify_s": null,
+   "expect": [
+    "REJECT: schema"
+   ],
+   "kind": "reject",
+   "last_lines": [
+    "REJECT: schema"
+   ],
+   "released_any_reject": false,
+   "runs": 5,
+   "steps": 5,
+   "steps_passed": 5,
+   "wall_s": {
+    "max": 0.06524376943707466,
+    "median": 0.05657107010483742,
+    "min": 0.051479827612638474,
+    "n": 5,
+    "sd": 0.0052856525164398606
+   }
+  }
+ },
+ "reject_all_pass": 35,
+ "reject_released": 0,
+ "reject_steps": 175,
+ "reject_steps_passed": 175,
+ "reject_vectors": 35,
+ "release_cp_verify_s": {
+  "max": 1.618097,
+  "median": 1.429885,
+  "min": 1.379729,
+  "n": 35,
+  "sd": 0.047061640260710955
+ },
+ "release_overhead_s": {
+  "max": 0.01884600000000014,
+  "median": 0.01435300000000006,
+  "min": 0.012712999999999974,
+  "n": 35,
+  "sd": 0.0014883657593526842
+ },
+ "rows": 210,
+ "runs_planned": 5,
+ "vector_sums_sha256": "0b3d4e84068f03f878731ec233a1c6372a4cc22f443d5630cc918596b6ab99e1",
+ "vectors": 41,
+ "verdict": "PASS"
+}
