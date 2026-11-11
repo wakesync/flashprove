@@ -1,0 +1,64 @@
+{
+  "note": "regression test of the reproduction mode, not a run of the suite and not evidence for the result",
+  "simulated_utc": "2026-11-12T00:00:00+00:00",
+  "started_utc": "2026-11-11T06:21:43.736394+00:00",
+  "binaries": {
+    "bin/cp_verify": "98931b82db93ee6eb2545c47f4e28fc27bf49e171967a67b1cdc4319fd02a4d0",
+    "bin/subst6/handoff.bin": "6c010b843cb8636bd7fa525990146fc20424147ba33898baa54b7028948b2808",
+    "bin/subst6/handoff_fp94.bin": "c79d802a8b52a5a4b35fe5fc860ec8ede02ea46d19cc67179b3d3d6ba67ae84f"
+  },
+  "suite_sha256": "a6bf0322cb548d2779ac9bba8ff968b79794277d50bd0f7a3c15c9f0541a66c0",
+  "parts": {
+    "a_registered_after_stop_unchanged": {
+      "returned": null,
+      "partial": true,
+      "cases": {},
+      "case_rows": 0,
+      "ok": true
+    },
+    "b_reproduce_slice_runs_cases": {
+      "exit": 0,
+      "seconds": 17.1,
+      "rows": 3,
+      "planned": 3,
+      "complete": true,
+      "mode": "reproduce",
+      "cases": {
+        "C-CFG3": {
+          "control_accepts": true,
+          "attack_last": "NO: key-refused",
+          "intended": true,
+          "passed": true
+        },
+        "C-RPL2": {
+          "control_accepts": true,
+          "attack_last": "YES",
+          "intended": true,
+          "passed": true
+        },
+        "H-PFX1": {
+          "control_accepts": true,
+          "attack_last": "{\"accept\":false,\"check\":\"proof-verifier\",\"why\":\"a nonce does not give the proof of work that its round asks for\"}",
+          "intended": true,
+          "passed": true
+        }
+      },
+      "ok": true
+    },
+    "c_reproduce_budget_used_exits_3": {
+      "exit": 3,
+      "rows": 0,
+      "complete": false,
+      "partial": true,
+      "ok": true
+    },
+    "d_reproduce_refuses_runs_dir": {
+      "refused": true,
+      "message": "suite.py --reproduce: refusing a directory under runs/ (registered receipts)",
+      "created": false,
+      "ok": true
+    }
+  },
+  "finished_utc": "2026-11-11T06:22:01.250275+00:00",
+  "all_ok": true
+}
