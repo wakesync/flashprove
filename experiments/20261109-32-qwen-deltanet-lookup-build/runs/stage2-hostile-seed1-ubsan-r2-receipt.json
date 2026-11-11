@@ -1,0 +1,13 @@
+{
+  "start": "2026-11-10T20:36:01.319269+00:00",
+  "end": "2026-11-10T21:52:30.927561+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "binary_sha256": "4f3024e3c992a1e75a6fbf615ba9551181f16d6f2cfd794ee95c498d55c802f7",
+  "head": "a36b3d605910ee73bada50bf22b956bec554f92e",
+  "argv": [
+    "research/operators/qwen_deltanet_m2_build/work/m2-ubsan-r2.bin",
+    "research/operators/qwen_deltanet_m2_build/work/stage2-seed1-r2.bin",
+    "hostile"
+  ]
+}

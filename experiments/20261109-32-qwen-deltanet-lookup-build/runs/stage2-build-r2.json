@@ -1,0 +1,103 @@
+[
+  {
+    "name": "m2-r2",
+    "start": "2026-11-10T19:56:11.014133+00:00",
+    "end": "2026-11-10T19:56:51.558096+00:00",
+    "exit": 0,
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-fno-ipa-modref",
+      "-DBLK_FIELD=2",
+      "-DBLK_HASH=1",
+      "-I",
+      "blocks"
+    ],
+    "sha256": "d1d7edcacbdf56eea2cc2ba95896110b2b5e06ea605d65a515671d54f6264edd",
+    "warnings": 1
+  },
+  {
+    "name": "m2-ubsan-r2",
+    "start": "2026-11-10T19:56:51.560415+00:00",
+    "end": "2026-11-10T19:57:51.460333+00:00",
+    "exit": 0,
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-fno-ipa-modref",
+      "-DBLK_FIELD=2",
+      "-DBLK_HASH=1",
+      "-I",
+      "blocks",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined"
+    ],
+    "sha256": "4f3024e3c992a1e75a6fbf615ba9551181f16d6f2cfd794ee95c498d55c802f7",
+    "warnings": 1
+  },
+  {
+    "name": "m2-control-r2",
+    "start": "2026-11-10T19:57:51.469539+00:00",
+    "end": "2026-11-10T19:58:29.578318+00:00",
+    "exit": 0,
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-fno-ipa-modref",
+      "-DBLK_FIELD=2",
+      "-DBLK_HASH=1",
+      "-I",
+      "blocks",
+      "-DM2_CONTROL_NO_CG_CHECK"
+    ],
+    "sha256": "030bdc019751dbf1815ec29269767d0478babb3fc6017477b16652ec210750bf",
+    "warnings": 1
+  },
+  {
+    "name": "isqrt-r2",
+    "start": "2026-11-10T19:58:29.580109+00:00",
+    "end": "2026-11-10T19:58:33.844231+00:00",
+    "exit": 0,
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-fno-ipa-modref",
+      "-DBLK_FIELD=2",
+      "-DBLK_HASH=1",
+      "-I",
+      "blocks"
+    ],
+    "sha256": "8d67c06469266cb14783ebee85e1ba153abab37bafb4c76b31fce7286fc8baa6",
+    "warnings": 12
+  },
+  {
+    "name": "isqrt-ld64-r2",
+    "start": "2026-11-10T19:58:33.844417+00:00",
+    "end": "2026-11-10T19:58:38.302656+00:00",
+    "exit": 0,
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-fno-ipa-modref",
+      "-DBLK_FIELD=2",
+      "-DBLK_HASH=1",
+      "-I",
+      "blocks",
+      "-mlong-double-64",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined"
+    ],
+    "sha256": "7baffe21fd9820150135f45676cab25f0895e6a55dbaf0ca3412f396ffc3602d",
+    "warnings": 12
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "start": "2026-11-10T20:03:01.680995+00:00",
+  "end": "2026-11-10T20:44:30.501318+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "binary_sha256": "030bdc019751dbf1815ec29269767d0478babb3fc6017477b16652ec210750bf",
+  "head": "a36b3d605910ee73bada50bf22b956bec554f92e",
+  "argv": [
+    "research/operators/qwen_deltanet_m2_build/work/m2-control-r2.bin",
+    "research/operators/qwen_deltanet_m2_build/work/stage2-seed1-r2.bin",
+    "control"
+  ]
+}
