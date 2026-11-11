@@ -549,7 +549,7 @@ rows:
       - {file: blocks/frame/heads.h, symbol: 'inline Digest configuration_digest('}
       - {file: blocks/frame/heads.h, symbol: 'inline Digest published_id('}
       - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("model-statement");'}
-    note: "negative test N1: a complete honest proof of another commitment is rejected here only because the caller passes its own -id; substitution suite (experiments/20261111-6-substitution-suite, PR #108): another example's config with its own -policy (C-CFG1) and a one-byte-changed layout.txt under the original ID (C-CFG3b) rejected here, NO: model-statement, 5 of 5 each"
+    note: "negative test N1: a complete honest proof of another commitment is rejected here only because the caller passes its own -id; substitution suite (experiments/20261111-6-substitution-suite, PR #108): another example's config with its own -policy (C-CFG1) and layout.txt with a 30-byte comment line appended, under the original ID (C-CFG3b), rejected here, NO: model-statement, 5 of 5 each"
   - id: IS-02
     category: input_state
     scope: shipped
@@ -566,7 +566,7 @@ rows:
     enforcement: proof_constraint
     sites:
       - {file: verifier/src/cp_verify.cpp, symbol: 'blk::check_key(*confH, file, tested, why, nullptr, &place);'}
-    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): a one-byte-changed layout.txt under its own recomputed ID (C-CFG3) and a verifier build with changed one-time/proof chain labels (C-DOM2) end NO: key-refused, 5 of 5 each"
+    note: "substitution suite (experiments/20261111-6-substitution-suite, PR #108): layout.txt with a 30-byte comment line appended, under its own recomputed ID (C-CFG3), and a verifier build with changed one-time/proof chain labels (C-DOM2) end NO: key-refused, 5 of 5 each"
   - id: IS-04
     category: input_state
     scope: shipped
