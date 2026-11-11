@@ -1,0 +1,28 @@
+{
+  "started_utc": "2026-11-11T09:54:02.937980Z",
+  "finished_utc": "2026-11-11T09:54:55.511293Z",
+  "source_commit": "33df8621c5eb0cb6b76ce5afda30113a58b5addb",
+  "dirty_tracked": false,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "python": "3.12.3",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "research/operators/qwen_ops_followups/follow.cpp",
+    "-o",
+    "research/operators/qwen_ops_followups/work/follow-ubsan.bin",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined"
+  ],
+  "follow_cpp_sha256": "5497bda061a0fe6d7bec1a838ad19d2ce4fa1c50d95c0160b120dcd5d9720206",
+  "qwen_ops_proof_cpp_sha256": "31f1a723f1bb07015e16fa15337e31e7888f4256d608af8ed2b3ee6361e9aa95",
+  "binary_sha256": "f4996f69588caa65c771db5273cbfda3aafd266d9a7731f8b81376a380365c00"
+}
