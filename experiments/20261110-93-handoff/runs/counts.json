@@ -1,0 +1,65 @@
+{
+  "kind": "counted-not-built except D8 C2 cross-check",
+  "rows": [
+    {
+      "D": 8,
+      "C": 2,
+      "F": 12,
+      "T": 4,
+      "core_columns": 6582,
+      "aligned_columns": 7168,
+      "relations": 12278,
+      "range_cells": 352,
+      "core_columns_per_token": 1645.5,
+      "relations_per_token": 3069.5,
+      "boundary_state_equalities": 64,
+      "history_equalities": 216,
+      "extra_columns": 534
+    },
+    {
+      "D": 32,
+      "C": 2,
+      "F": 12,
+      "T": 4,
+      "core_columns": 78102,
+      "aligned_columns": 81920,
+      "relations": 150038,
+      "range_cells": 4480,
+      "core_columns_per_token": 19525.5,
+      "relations_per_token": 37509.5,
+      "boundary_state_equalities": 1024,
+      "history_equalities": 864,
+      "extra_columns": 1686
+    },
+    {
+      "D": 128,
+      "C": 2,
+      "F": 12,
+      "T": 4,
+      "core_columns": 1147542,
+      "aligned_columns": 1310720,
+      "relations": 2221718,
+      "range_cells": 67072,
+      "core_columns_per_token": 286885.5,
+      "relations_per_token": 555429.5,
+      "boundary_state_equalities": 16384,
+      "history_equalities": 3456,
+      "extra_columns": 6294
+    },
+    {
+      "D": 128,
+      "C": 64,
+      "F": 12,
+      "T": 128,
+      "core_columns": 36573846,
+      "aligned_columns": 41943040,
+      "relations": 70947478,
+      "range_cells": 2146304,
+      "core_columns_per_token": 285733.171875,
+      "relations_per_token": 554277.171875,
+      "boundary_state_equalities": 16384,
+      "history_equalities": 3456,
+      "extra_columns": 53910
+    }
+  ]
+}
