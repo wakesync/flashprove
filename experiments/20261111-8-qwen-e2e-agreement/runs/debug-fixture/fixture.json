@@ -1,0 +1,46 @@
+{
+ "fixture_layers": 4,
+ "paths": [
+  "REF",
+  "XS18",
+  "XS20",
+  "BF16H",
+  "REF#2",
+  "XS18#2"
+ ],
+ "resid_rel_vs_ref": {
+  "REF": 0.0,
+  "XS18": 0.0009087290589691534,
+  "XS20": 0.0008432790630235195,
+  "BF16H": 0.0013927653830580796,
+  "REF#2": 0.0,
+  "XS18#2": 0.0009087290589691534
+ },
+ "det_equal": {
+  "REF#2": true,
+  "XS18#2": true
+ },
+ "save_load_equal": true,
+ "resume_equal": true,
+ "synthetic": {
+  "XS18": {
+   "kl_absdiff": 1.930313547893192e-15,
+   "top1_equal": true,
+   "mad_equal": true
+  },
+  "XS20": {
+   "kl_absdiff": 1.0658141036401503e-14,
+   "top1_equal": true,
+   "mad_equal": true
+  },
+  "REF#2": {
+   "kl_absdiff": 0.0,
+   "top1_equal": true,
+   "mad_equal": true
+  }
+ },
+ "ref_top1_equal": true,
+ "margin_ok": true,
+ "kl_self": 0.0,
+ "seconds": 72.5
+}
