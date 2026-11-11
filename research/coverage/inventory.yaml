@@ -1,0 +1,878 @@
+# Constraint coverage inventory (issue #6, first deliverable). Descriptive, not a soundness claim,
+# and not complete: it lists the elements named below, and `excluded` names the research directories
+# it does not cover, with the reason. The checker fails if a research directory is neither cited nor
+# excluded; for the shipped verifier, completeness rests on reading and on review.
+#
+# Each row maps one element of the relation that a FlashProve proof is about (an admitted operator,
+# a range or rounding rule, a committed input or state, an output position) to the place in this
+# repository that enforces it, and says what kind of enforcement that is:
+#
+#   proof_constraint     intended to be enforced inside the proof: a sub-proof's sumcheck, lookup,
+#                        range check, or the hash chain itself. That the constraint is correct or
+#                        sufficient is not established here.
+#   verifier_validation  checked by the verifier program or the client's integration on public values,
+#                        outside the proof's relation (parameter conditions, an ID comparison, a policy or
+#                        range comparison with what the caller states); a complete proof of another
+#                        statement passes the proof part and is stopped only here, if the caller states
+#                        the right values
+#   prover_only          done only by an honest committer or prover (cp_commit, cp_prove); nothing in a
+#                        proof, key file or commitment shows a verifier that it happened
+#   not_enforced         nothing in the repository enforces it; the proof says nothing about it
+#
+# scope: shipped (cp_verify, cp_commit, cp_prove, integrations/ on main) or research (the fork's operator
+# prototypes under research/operators/, which are not in cp_verify).
+#
+# sites: file + symbol. `symbol` is a literal string of at least 12 characters that must occur in
+# `file`. The checker (check_inventory.py, run in CI by claims-check) fails if a file is missing or a
+# symbol no longer occurs in it, so a rename or deletion of a cited site is noticed. It does not see a
+# row moved to a stronger kind, a check disabled behind unchanged text, or a row losing one of two
+# sites. A site is where the enforcement lives, or, for prover_only and not_enforced rows, the place
+# that documents the absence. A site says where; it does not show that the check there is right.
+#
+# Base: main ba1e3067f58b0142dd16a3df884626cfe6ccc585 for rows OP-01 .. OUT-07 (first version, PR #97
+# head 655d70b2). Rows added after review (OP-15, OP-R8 .. OP-R14, RR-15 .. RR-21, RR-R1, RR-R2, IS-23, IS-24,
+# OUT-08, OUT-09) were read at main 0bdf8326, where the cited files are unchanged from ba1e3067. Read
+# from source and docs; only rows N1 to N3 of experiments/20261110-6-coverage-inventory/ were run.
+
+schema_version: 1
+base_commit: ba1e3067f58b0142dd16a3df884626cfe6ccc585
+kinds: [proof_constraint, verifier_validation, prover_only, not_enforced]
+categories: [operator, range_rounding, input_state, output]
+
+rows:
+  # ---------------------------------------------------------------- operators, shipped integer model
+  - id: OP-01
+    category: operator
+    scope: shipped
+    element: "layer norm N(x; M, K, eps) before attention and feed-forward (root of the sum of squares, rounded reciprocal, rounded product, clamp)"
+    relation: "docs/model.md section 5; lookup segments N1, N2 (quotient), N1H, N2H (high part), CN1, CN2 (clamp), ROW (the norm's digit row of 9 + 8 equations)"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "N1" || sn == "N2") {'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CN1" || sn == "CN2") {'}
+      - {file: verifier/src/vf_norm_digit_rows.h, symbol: 'template <class T> struct Row5 {'}
+      - {file: docs/model.md, symbol: '## 5 The norm'}
+  - id: OP-02
+    category: operator
+    scope: shipped
+    element: "final norm before the head (NF), with its clamp (CNF)"
+    relation: "docs/model.md section 8 aF_t; output head lookup segments NF, NFH, CNF"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'if (sn == "NF")'}
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'if (sn == "CNF") {'}
+  - id: OP-03
+    category: operator
+    scope: shipped
+    element: "query and key projections with rotary embedding, rounding shift and clamp"
+    relation: "docs/model.md section 6 step 2; segments QK, QKH (quotient, high part), CQK (clamp); rotary table C, S"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "QK" || sn == "QKH") {'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CQK")'}
+  - id: OP-04
+    category: operator
+    scope: shipped
+    element: "value projection with rounding shift and clamp"
+    relation: "docs/model.md section 6 step 3; segments V, VH, CV"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "V") return site('}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CV") return'}
+  - id: OP-05
+    category: operator
+    scope: shipped
+    element: "causal attention: scores, row maximum, exponential table EX, sum Z, accumulator, rounded division o = floor((2 acc + Z) / (2 Z))"
+    relation: "docs/model.md section 6 step 4; the attention sub-proof (SC3, SCD sumchecks, its lookup forest, claim 5 the division)"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_attention_check.h, symbol: 'struct AttentionSubProof {'}
+      - {file: verifier/src/vf_attention_check.h, symbol: 'attention: claim 5: the division: Z o, its remainders'}
+  - id: OP-06
+    category: operator
+    scope: shipped
+    element: "attention output projection and residual add"
+    relation: "docs/model.md section 6 step 5; segments O, OH"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "O") return site('}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "OH") return high('}
+  - id: OP-07
+    category: operator
+    scope: shipped
+    element: "feed-forward gate: wide gate key, low byte g0, clamped high part gc, SiLU table lookup"
+    relation: "docs/model.md section 7 'A block of hidden units'; segments G, GH, G0, CG, F"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "G0") return'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CG") return'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "F")'}
+  - id: OP-08
+    category: operator
+    scope: shipped
+    element: "feed-forward up projection u and the product s u"
+    relation: "docs/model.md section 7; segments U, UH, UT"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "UT") return S("u")'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "G" || sn == "U") {'}
+  - id: OP-09
+    category: operator
+    scope: shipped
+    element: "down projection (dense, or shared plus routed expert sums) and residual add"
+    relation: "docs/model.md section 7 dense layer and MoE step 6; segments D, DH"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "D")'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "DH") return high('}
+  - id: OP-10
+    category: operator
+    scope: shipped
+    element: "MoE router logits: wide logit, high part ly, low 3 bits l3, clamp lr = 8 clamp(ly) + l3"
+    relation: "docs/model.md section 7 MoE step 1; segments LR, LH, L3, CLR"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "LR") {'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "L3") {'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CLR") {'}
+  - id: OP-11
+    category: operator
+    scope: shipped
+    element: "MoE top-1 expert choice: argmax of lr, ties to the lowest index, one-hot selector"
+    relation: "docs/model.md section 7 MoE step 2; segments LT, DD, SEL and the one-hot claim; the parameter condition one-hot keeps NE Ty + 1 below p"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "DD") {'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "SEL") {'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'need((u128)NE * Ty + 1 < P2, "one-hot");'}
+    note: "the third site (one-hot) is a verifier condition on public parameters (a verifier_validation site, as in RR-04); the selection itself is in the proof (DD, SEL)"
+  - id: OP-12
+    category: operator
+    scope: shipped
+    element: "MoE routed input scale: sigmoid table Sig[lr[e*]], xr = rq(sc m, 16)"
+    relation: "docs/model.md section 7 MoE step 3; segments MR, XR"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "MR") return'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "XR") {'}
+  - id: OP-13
+    category: operator
+    scope: shipped
+    element: "output head: logits lam_t = aF_t Wh, the margin of each checked token in three digits, the exponential key for clipped-gap costs"
+    relation: "docs/model.md section 8 (logit gap); docs/format/11-4-output-head.md; segments HD0, HD1, HD2, HE0, HE1"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'if (sn == "HD0" || sn == "HD1" || sn == "HD2") {'}
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'if (sn == "HE0" || sn == "HE1") {'}
+  - id: OP-14
+    category: operator
+    scope: shipped
+    element: "every matrix product against committed weights W (Wq, Wk, Wv, Wo, Wg, Wu, Wd, Wr, experts, Wh): claims on W merged and tied to the leaf table"
+    relation: "docs/protocol.md 6.3 (g M e + mu = v; shared chain; second chain); docs/format/11-5-weights-in-the-table.md"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_weights_pending_claim.h, symbol: 'struct WsPending {'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'blk::check_proof_if_tested('}
+  - id: OP-15
+    category: operator
+    scope: shipped
+    element: "embedding lookup x^0_t = Emb[tok_t], and its value as the first residual stream that layer 0 reads"
+    relation: "group 0's claim on Emb (unit X = 12): v_E = sum_t eq(ztE, t) sum_k phiE[k] Emb[tok_t][k], with the token factor built from the request's tokens; then the claim that v_E is a read of xbI at Z_E"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "// The embedding's claim (unit X = 12)"}
+      - {file: verifier/src/vf_layers_check.inc, symbol: "the embedding's value is a read of the first stream"}
+    note: "RR-02 covers only the range of Emb's digits; this row is the lookup itself (added after review of PR #97)"
+  # ---------------------------------------------------------------- operators, research prototypes
+  - id: OP-R1
+    category: operator
+    scope: research
+    element: "same-oracle sparse affine rows (research/operators/affine_rows)"
+    relation: "verifier-fixed affine relation over the committed product oracle; honest and two complete malicious proofs (README 'Two complete malicious proofs'); reached main through PR #20 (PR #15 was closed unmerged)"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/affine_rows/product.h, symbol: 'inline Row affine_row(OracleId oracle,const AffineRelation &a) {'}
+      - {file: research/operators/affine_rows/README.md, symbol: 'Trusted mutable in-memory runs/plans are not safe untrusted parsers'}
+    note: "the run and plan objects come from a trusted constructor; invalid constructions abort (SIGABRT), there is no untrusted statement decoder. Its substrates research/operators/public_binding and shared_wires are under excluded"
+  - id: OP-R2
+    category: operator
+    scope: research
+    element: "MoE bias-corrected top-k routing gadget (research/operators/moe_topk): selection, normalization, aggregation relations"
+    relation: "research/operators/moe_topk/README.md relations (2) to (6)"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/moe_topk/README.md, symbol: 'Why the selection is unique'}
+      - {file: research/operators/moe_topk/test.cpp, symbol: '// (2) one-hot selection: Boolean P[m,i]; P*K and P*s gathers.'}
+      - {file: research/operators/moe_topk/test.cpp, symbol: '// (6) threshold: u_i = (1 - sel_i) * (G_{k-1} - K_i - 1) in [0, 2^26).'}
+      - {file: research/operators/moe_topk/test.cpp, symbol: '// (8) aggregation: XG[m][d] = sum_i P[m,i] X_i[d]; y[d] = floor(sum_m w_m XG[m][d] / 2^12).'}
+  - id: OP-R3
+    category: operator
+    scope: research
+    element: "MoE top-k gadget input ranges: bias -2^15 <= b_i < 2^15 and expert output |X| < 2^15"
+    relation: "statement-side admission, not a relation"
+    enforcement: verifier_validation
+    sites:
+      - {file: research/operators/moe_topk/test.cpp, symbol: 'static bool admissible(const Fixture &z) {'}
+      - {file: research/operators/moe_topk/README.md, symbol: 'Two inputs are bounded by statement-side admission'}
+  - id: OP-R4
+    category: operator
+    scope: research
+    element: "Qwen Gated DeltaNet head M1b (one head, T = 4) with the RNG/LKP range check"
+    relation: "experiments/20261105-32-qwen-deltanet-m1b-lookup; lookup_verify"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_deltanet_lookup/lookup.h, symbol: 'inline bool lookup_verify('}
+  - id: OP-R5
+    category: operator
+    scope: research
+    element: "Qwen M2 derived-value admission rule (reject out-of-class recomputed k, q, a, beta, v, cg)"
+    relation: "experiments/20261105-32-qwen-deltanet-m2-design DESIGN.md sections 3.1, 4.5, 7"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/qwen_deltanet_m2/README.md, symbol: 'therefore has **no C++ implementation here**'}
+  - id: OP-R6
+    category: operator
+    scope: research
+    element: "Qwen bounded operator relations (conv, nonlinear tables, norm, rotary): binding of the conv kernel, its history and every input to a model"
+    relation: "research/operators/qwen_ops/README.md: public values are operator, F, rotary position, outputs only"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/qwen_ops/README.md, symbol: 'Committed, chosen freely by the prover'}
+  - id: OP-R7
+    category: operator
+    scope: research
+    element: "first top-k constraint prototype (research/operators/topk.py): explicit quadratic constraints checked on a disclosed witness"
+    relation: "research/operators/README.md exact relation v0; constraint satisfaction, no proof"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/README.md, symbol: 'Status: executable **constraint satisfaction**, not a cryptographic proof'}
+    note: "checks a witness; there is no proof or verifier, so nothing is enforced against a prover"
+  - id: OP-R8
+    category: operator
+    scope: research
+    element: "GLM KDA algebra slice (research/operators/glm_kda_slice): two-token transition over field values, with the second token reading the first token's committed state cells"
+    relation: "30 product gates on the shared product oracle, equality rows, affine rows for sums, coordinate rows for public inputs, outputs and final state; research verifier, not cp_verify"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/glm_kda_slice/README.md, symbol: 'committed state cells: token two cannot substitute an unrelated state.'}
+      - {file: research/operators/glm_kda_slice/test.cpp, symbol: 'Wrong subtraction, disconnected second-token state, wrong second delta.'}
+  - id: OP-R9
+    category: operator
+    scope: research
+    element: "GLM KDA algebra slice: rounding, saturation, integer ranges and fixed-point scale"
+    relation: "none; the slice is exact field algebra"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/glm_kda_slice/README.md, symbol: 'There is no rounding, saturation, range enforcement or fixed-point scale here.'}
+  - id: OP-R10
+    category: operator
+    scope: research
+    element: "GLM KDA signed staged-floor micro-slice (research/operators/glm_kda_fixedpoint): each rounded product a*b = 4q + r with signed q in [-8, 7], r in [0, 3]; signed four-bit range decomposition of every value"
+    relation: "56 product gates, 42 wire equalities, 57 affine relations on the shared product oracle; Boolean bits by b*b = b; research verifier, not cp_verify"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Each rounded multiplication binds `a*b = 4*q+r`'}
+      - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Signed range decomposition binds `x+8 = sum(2^i*b_i)`'}
+      - {file: research/operators/glm_kda_fixedpoint/test.cpp, symbol: 'signed staged-floor scalar KDA'}
+    note: "one fixed toy statement (public S = O = -3), not the publisher's numerics"
+  - id: OP-R11
+    category: operator
+    scope: research
+    element: "Qwen nonlinear tables (research/operators/qwen_ops): input floored to the table grid, 4096-way one-hot selector, six outputs read from one pinned table row"
+    relation: "c.floor(x, F - 8), selectors(key), lookup(sel, table) on the shared product oracle; the verifier rebuilds the relation list from its own operator definition"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit nonlinear(const Input& in,bool witness) {'}
+      - {file: research/operators/qwen_ops/README.md, symbol: 'A 4096-way one-hot selector has Boolean entries'}
+    note: "the input is committed and chosen by the prover (OP-R6)"
+  - id: OP-R12
+    category: operator
+    scope: research
+    element: "Qwen depthwise convolution, one channel, T = 4: products of history/input cells with kernel cells, floored sum, output range"
+    relation: "qwen_ops conv(): mul, floor(sum, F), range(y, F + 4)"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit conv(const Input& in,bool witness) {'}
+    note: "kernel, history and inputs are committed and chosen by the prover (OP-R6)"
+  - id: OP-R13
+    category: operator
+    scope: research
+    element: "Qwen L2 / RMS norm of one head: sum of squares, floored mean-square key, table coefficient, floored scaled outputs"
+    relation: "qwen_ops norm(): no gain, no epsilon"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit norm(const Input& in,bool witness) {'}
+    note: "inputs committed and chosen by the prover (OP-R6); not the M2 isqrt norm"
+  - id: OP-R14
+    category: operator
+    scope: research
+    element: "Qwen rotary: first 64 of 256 coordinates rotated with pinned cos/sin at a public position, floored; the rest copied"
+    relation: "qwen_ops rotary(): coefficients from the pinned rotary table at the public position"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit rotary(const Input& in,bool witness) {'}
+    note: "inputs committed and chosen by the prover (OP-R6)"
+  # ---------------------------------------------------------------- range and rounding rules
+  - id: RR-01
+    category: range_rounding
+    scope: shipped
+    element: "every committed weight (all kinds but the embedding) in -2^12 .. 2^12 - 1"
+    relation: "key file range proof WF; WEIGHT_BOUND"
+    enforcement: proof_constraint
+    sites:
+      - {file: blocks/frame/check_key.h, symbol: 'the range proof WF, blocks/iop/wf.h'}
+      - {file: verifier/src/vf_widths_and_bounds.h, symbol: 'WEIGHT_BOUND = 1u << (WEIGHT_WIDTH_BITS - 1)'}
+  - id: RR-02
+    category: range_rounding
+    scope: shipped
+    element: "embedding weights: only their base-256 digits are range-checked; the head's no-overflow condition J-E assumes the digit bound"
+    relation: "docs/protocol.md 6.1 step 2; condition J-E"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/protocol.md, symbol: 'For the embedding, however, only the digits are checked.'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'need(TyX + pw(LBZW + 1) * 16843009ull < P2, "J-E");'}
+    note: "digits in the proof; J-E is a verifier condition on public parameters; docs/model.md section 9 argues the range conditions do not narrow Emb"
+  - id: RR-03
+    category: range_rounding
+    scope: shipped
+    element: "every committed trace cell small, |cell| < Ty = 2^18 (approximate range check, 'smallness')"
+    relation: "random -1/0/1 combinations Z bounded by 2^17 via a digit lookup; docs/protocol.md 6.3"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_smallness_test.h, symbol: 'struct HTailF2 {'}
+      - {file: verifier/src/vf_common.h, symbol: "LBZ: a request's range checks bound Z"}
+    note: "probabilistic and approximate: it shows a looser bound than the cells' intended range, except with small probability over the factors"
+  - id: RR-04
+    category: range_rounding
+    scope: shipped
+    element: "no-overflow conditions: field equations over p = 2^64 - 2^32 + 1 also hold over the integers"
+    relation: "tests on public parameters (no-wrap-*, af-no-wrap-N1..N9, one-hot, J-E)"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'if (!ok) refuse("no-wrap-" + n);'}
+      - {file: verifier/src/vf_attention_shape.h, symbol: 'refuse("af-no-wrap-N1")'}
+      - {file: docs/protocol.md, symbol: "it is not proved that the programs' conditions are enough for the programs' equations"}
+    note: "the tests exist; that they are sufficient is argued from reading, not proved (open obligation G-OB1)"
+  - id: RR-05
+    category: range_rounding
+    scope: shipped
+    element: "rounding shift rq(x, k): quotient plus a remainder in range, at every site (G, U, QK, V, O, D, LR, norms)"
+    relation: "the site() form: quotient, remainder lookup; the high() form for the remainder's top part"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'auto site = [&](const Ex &w, const Aff &SQ, u32 k, int form, const std::function<Aff()> &Srh) {'}
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'auto high = [&](const Ex &w, const Aff &Srh, u32 k, int form) {'}
+  - id: RR-06
+    category: range_rounding
+    scope: shipped
+    element: "clamp to -2047 .. 2047 (table FC) of norm outputs, q, k, v, the final norm"
+    relation: "key aw + 2^15 + 2^28 (a + 2^11) in table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "Lookup table FC's row for x"}
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'is meant to show a = clamp(aw; 2,047)'}
+  - id: RR-07
+    category: range_rounding
+    scope: shipped
+    element: "up projection |u| <= 2^15 (range condition 7)"
+    relation: "UT key u + 2^LBU in a 2^16-row table"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "UT") return S("u") + affC(pw(LBU) * w);'}
+      - {file: verifier/src/vf_widths_and_bounds.h, symbol: 'static constexpr u32 SMAXTOP = 4095, LBU = 15;'}
+  - id: RR-08
+    category: range_rounding
+    scope: shipped
+    element: "attention rounded-division remainders fit three bytes (lt + S + 1 <= 24) and softmax table parameters"
+    relation: "parameter condition af-policy-softmax; remainders in the attention lookup"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/vf_attention_shape.h, symbol: 'lt + cf.S + 1 > 24) refuse("af-policy-softmax");'}
+      - {file: verifier/src/vf_attention_shape.h, symbol: 'remainders mod 2 Z must fit three bytes'}
+    note: "the size argument is 'argued from the sizes, not proved' (docs/model.md section 9)"
+  - id: RR-09
+    category: range_rounding
+    scope: shipped
+    element: "public tables SiLU, sigmoid, rotary, exponential: the verifier recomputes them and compares their digests with the parameter file's"
+    relation: "docs/model.md section 4 'Digests'"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'tblHeld(0, hh, "table-digest-silu");'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'tblHeld(2, hh, "table-digest-rope");'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'tblHeld(3, hh, "table-digest-exp");'}
+  - id: RR-10
+    category: range_rounding
+    scope: shipped
+    element: "norm shift parameters 24 <= M <= 47, 17 <= K <= 32, K >= M - 14; eps in 1 .. 2^59"
+    relation: "docs/model.md section 9 last paragraph"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("KL-norm");'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("policy-norm");'}
+  - id: RR-11
+    category: range_rounding
+    scope: shipped
+    element: "worst case over all prompts: no forward-pass value leaves its range for the committed weights and scales"
+    relation: "cp_commit's worst-case check from weights and scales; scales/worst-case-bounds.md"
+    enforcement: prover_only
+    sites:
+      - {file: prover/weights_commitment/worst_case.cuh, symbol: 'The worst-case check of the committer program cp_commit'}
+      - {file: docs/model.md, symbol: 'bounds, from the weights and scales alone, what any prompt can drive these values to'}
+  - id: RR-12
+    category: range_rounding
+    scope: shipped
+    element: "range conditions between the model's 'defined' interval and the provers' narrower limb interval (e.g. 32,640 .. 32,767)"
+    relation: "docs/model.md section 9 table, last column"
+    enforcement: prover_only
+    sites:
+      - {file: docs/model.md, symbol: 'The last column is narrower because the provers write these values in limbs'}
+    note: "the honest prover answers 'failed' there; nothing tells the client whether a refusal was this or a false claim"
+  - id: RR-13
+    category: range_rounding
+    scope: shipped
+    element: "conversion of the publisher's weights (GGUF blocks, floats) to the committed integers"
+    relation: "docs/model.md section 11"
+    enforcement: not_enforced
+    sites:
+      - {file: docs/model.md, symbol: 'checks this conversion: a proof is about the committed integers.'}
+  - id: RR-14
+    category: range_rounding
+    scope: shipped
+    element: "per-round soundness target of at least 128 bits (the verifier's own accounting)"
+    relation: "BAR; security-bits rejection; docs/protocol.md 6.4 'The target'"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/vf_common.h, symbol: 'static constexpr double BAR = DW == 8 ? 128.0 : 136.0;'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("security-bits");'}
+    note: "a program's calculation, no theorem about the programs; not a security level. Not a range or rounding rule of the model: it is filed here for want of a fifth category (a parameter condition on the proof system)"
+  - id: RR-15
+    category: range_rounding
+    scope: shipped
+    element: "range condition 1: Vx + eps < 2^78 (five limbs; with four limbs Vx < 2^59), the sum of squares a norm reads"
+    relation: "docs/model.md section 9 condition 1; V is held only as byte digits of the norm's digit row, each digit range-checked by the row's lookup (mu x digit a byte)"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/model.md, symbol: '| 1 | Vx + eps | 5 | < 2^78 |'}
+      - {file: verifier/src/vf_norm_digit_rows.h, symbol: 'V exists only as digits'}
+    note: "by reading: the bound follows from the number of digits of V in the row; not separately tested here"
+  - id: RR-16
+    category: range_rounding
+    scope: shipped
+    element: "range condition 2: a norm's quotient w[k] in -32,768 .. 32,767"
+    relation: "the clamp key of CN1 / CN2: aw + 2^15 must be a row number of the 2^16-row table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CN1" || sn == "CN2") {'}
+      - {file: docs/model.md, symbol: "| 2 | a norm's quotient w[k] | 5 | -32,768 .. 32,767 |"}
+    note: "that the key pins the range rests on the radix conditions (guard-radix, RR-04); the provers' narrower interval is RR-12"
+  - id: RR-17
+    category: range_rounding
+    scope: shipped
+    element: "range condition 3: a wide query or key entry qw, kw in -32,768 .. 32,767"
+    relation: "the clamp key of CQK in table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'return S("qkw") + (SBA(wh, 0, dq, "q", lam, Z, 0)'}
+      - {file: docs/model.md, symbol: '| 3 | a wide query or key entry, qw or kw | 6 |'}
+  - id: RR-18
+    category: range_rounding
+    scope: shipped
+    element: "range condition 4: a wide value entry vw in -32,768 .. 32,767"
+    relation: "the clamp key of CV in table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CV") return S("vw") + S("v") * pw(28)'}
+      - {file: docs/model.md, symbol: '| 4 | a wide value entry vw | 6 |'}
+  - id: RR-19
+    category: range_rounding
+    scope: shipped
+    element: "range condition 5: the high part ly of a wide router logit (with rcl 1: lw itself)"
+    relation: "the clamp key of CLR in table FC (rcl 1), L3 for the low bits"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "CLR's key is FC's row for ly exactly if lr - l3 = 8 clamp(ly, +-2047)"}
+      - {file: docs/model.md, symbol: '| 5 | the high part ly of a wide router logit | 7 |'}
+    note: "MoE layers only; by reading, the form without rcl was not traced here"
+  - id: RR-20
+    category: range_rounding
+    scope: shipped
+    element: "range condition 6: the high part gh of a wide gate key in -16,384 .. 16,383 (with gcl 1: gw)"
+    relation: "the key of CG must be a row of the clamp half of table FS (gcl 1); without gcl, the gate key in F"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "CG's must be a row of lookup table FS"}
+      - {file: verifier/src/cp_verify.cpp, symbol: "so that key = row forces gh + 49152 = t for a row of the clamp's half of table FS"}
+      - {file: docs/model.md, symbol: '| 6 | the high part gh of a wide gate key | 7 |'}
+  - id: RR-21
+    category: range_rounding
+    scope: shipped
+    element: "range condition 8: |x[k]| < 2^39 for a stream value a norm reads"
+    relation: "follows from condition 1 on the same norm (docs/model.md section 9); the stream is held in residualStreamLimbs signed-byte limbs"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/model.md, symbol: 'which follows from condition 1'}
+      - {file: verifier/src/vf_norm_digit_rows.h, symbol: 'static int residualStreamLimbs = 4;'}
+    note: "no check of its own: it holds if RR-15 holds, an argument from the docs, not tested here"
+  - id: RR-R1
+    category: range_rounding
+    scope: research
+    element: "Qwen conv, L2/RMS norm and rotary ranges (qwen_ops): every input cell in [-2^F, 2^F) (F + 1 bits, offset 2^F), outputs in F + 4 bits (conv) or F + 3 bits (norm, rotary), floor remainders bit-decomposed. Not the nonlinear operator: its input interval is wider, see RR-R2"
+    relation: "c.range(cell, f+1, S) on each input cell of conv/norm/rotary; c.range() on outputs; Circuit::floor range-checks its remainder"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'auto a=c.cell(witness?in.x.at(i):0); c.range(a,f+1,S);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'auto v=c.cell(witness?in.x.at(j):0);c.range(v,f+1,S);x.push_back(v);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'for(int j=0;j<256;j++){auto v=c.cell(witness?in.x.at(j):0);c.range(v,f+1,S);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+4,8*S)'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+3,4*S)'}
+    note: "narrowed after review of PR #97 (astra round 2): this row used to name all qwen_ops inputs as [-2^F, 2^F), which the nonlinear operator does not enforce; the row's claim for conv/norm/rotary is unchanged"
+  - id: RR-R2
+    category: range_rounding
+    scope: research
+    element: "Qwen nonlinear input range (qwen_ops): X in [-8*2^F, 8*2^F), i.e. x in [-8, 8) on the 1/256 table grid. There is no range call on X itself; the interval follows from q = floor(X / 2^(F-8)) with a bit-decomposed remainder in [0, 2^(F-8)), key = q + 2048, and the 4096-way one-hot selector forcing key in [0, 4096)"
+    relation: "Circuit::floor (remainder range + X = q*2^(F-8) + rem), key = sum({q,1}, 2048), selectors(): sum b_i = 1 and sum i*b_i = key"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'auto q=c.floor(x,f-8,"grid"); auto key=c.sum({{q,1}},2048);'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'range(rem,bits); eq({term(a),term(out,-(i64(1)<<bits)),term(rem,-1)});'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'eq({term(sum(count))},1); eq({term(sum(index)),term(key,-1)});'}
+      - {file: research/operators/qwen_ops/README.md, symbol: 'Integer input X maps to i=floor(X/2^(F-8))+2048. Domain [-8,8), fail closed outside.'}
+    note: "split from RR-R1 after review of PR #97 (astra round 2): astra proved 5 of 5 complete nonlinear proofs at F = 12 with X = 8192 .. 8196, outside [-2^F, 2^F) but inside this interval; these are valid proofs of the actual relation, not a soundness break (reviewer's descriptive figure, https://github.com/wakesync/flashprove/pull/97#issuecomment-6784831796). The narrower interval is not enforced for nonlinear and is not claimed"
+  # ---------------------------------------------------------------- committed inputs and state
+  - id: IS-01
+    category: input_state
+    scope: shipped
+    element: "configuration (policy.txt, KL.bin, layout.txt), anchor root and shape, OOD seeds and answers, hashed into the commitment ID and compared with the caller's -id"
+    relation: "blocks/frame/heads.h configuration_digest, published_id; cp_verify key stage"
+    enforcement: verifier_validation
+    sites:
+      - {file: blocks/frame/heads.h, symbol: 'inline Digest configuration_digest('}
+      - {file: blocks/frame/heads.h, symbol: 'inline Digest published_id('}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("model-statement");'}
+    note: "negative test N1: a complete honest proof of another commitment is rejected here only because the caller passes its own -id"
+  - id: IS-02
+    category: input_state
+    scope: shipped
+    element: "which model the committed weights are (publisher, revision, signature)"
+    relation: "none; the ID covers integers and configuration only"
+    enforcement: not_enforced
+    sites:
+      - {file: blocks/frame/heads.h, symbol: 'The ID does not say whose weights the table contains.'}
+  - id: IS-03
+    category: input_state
+    scope: shipped
+    element: "anchor table well formed (close to a codeword, entries in range) by the key file's one-time test"
+    relation: "blk::check_key"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'blk::check_key(*confH, file, tested, why, nullptr, &place);'}
+  - id: IS-04
+    category: input_state
+    scope: shipped
+    element: "leaf table encodes the same weights as the anchor (link proof)"
+    relation: "blk::check_entry_if_tested"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'blk::check_entry_if_tested(*confH, first, file, why, nullptr, &place);'}
+  - id: IS-05
+    category: input_state
+    scope: shipped
+    element: "request tokens and range r, e in the first chain's first query"
+    relation: "bind_request_statement; PR #41 measured 20 of 20 first-challenge changes"
+    enforcement: proof_constraint
+    sites:
+      - {file: blocks/frame/check.h, symbol: 'inline void bind_request_statement('}
+  - id: IS-06
+    category: input_state
+    scope: shipped
+    element: "every token id (and y) below the vocabulary size V"
+    relation: "token-range"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'if (so.y >= Vv) refuse("token-range");'}
+  - id: IS-07
+    category: input_state
+    scope: shipped
+    element: "request form: exactly T + 2 words, r < e <= T, y = 0 unless e = T"
+    relation: "statement-range"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'if (so.r >= so.e || so.e > T || (so.e < T && so.y != 0)) refuse("statement-range");'}
+  - id: IS-08
+    category: input_state
+    scope: shipped
+    element: "acceptance policy (exact match or clipped gap with C, theta, cap, s, sh) matches what the caller expects"
+    relation: "cpPolicyHeld compares -policy (else exact match) with policy.txt"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'static void cpPolicyHeld(const PolicyNamed &p, const string &pol, const vector<u32> &request) {'}
+      - {file: verifier/src/vf_common.h, symbol: 'static constexpr bool acceptancePolicyIsExactMatch('}
+    note: "negative test N2: a complete honest clipped-gap proof under its own ID is rejected for a caller that expects exact match"
+  - id: IS-09
+    category: input_state
+    scope: shipped
+    element: "the request's seal, slot and batch tree (no splicing of parts of different runs)"
+    relation: "lin_binding_root; R7.18, R14.7"
+    enforcement: proof_constraint
+    sites:
+      - {file: blocks/frame/check.h, symbol: 'lin_binding_root(file, first_ch.get(x.binding)'}
+  - id: IS-23
+    category: input_state
+    scope: shipped
+    element: "stream links between segments: the stream that leaves layer group g - 1 (xbO) is the one that enters group g (xbI), and the last one (xbL) feeds the final norm"
+    relation: "xbI from group 1 on and xbL are not committed by their segment: they are the earlier segment's xbO array, kept by the frame; the reader's placement record must equal the owner's"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/format/11-2-feed-forward-segment.md, symbol: 'From group 1 on, xbI is not committed by this segment'}
+      - {file: docs/format/11-4-output-head.md, symbol: 'xbL is not committed by this segment'}
+      - {file: verifier/src/vf_layers_plan.inc, symbol: 'samePlaceF(hidPlans2[g - 1].tl.ownEntry("stream"), P.tl.plFor[0])'}
+    note: "structural (one committed array read by two segments), by reading; IS-04 is the leaf/anchor link, not this (added after review of PR #97)"
+  - id: IS-10
+    category: input_state
+    scope: shipped
+    element: "Fiat-Shamir challenges recomputed from the chain, proof of work on planned rounds"
+    relation: "every read and draw compared with the next planned round"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_transcript_channel.h, symbol: 'static Ex chainAnswer(blk::VerifierRounds &ch, RoundName round) {'}
+  - id: IS-11
+    category: input_state
+    scope: shipped
+    element: "leaf-table column counter (opened columns stay within the query bound)"
+    relation: "cp_prove adds the batch's columns to the counter on disk before opening"
+    enforcement: prover_only
+    sites:
+      - {file: docs/protocol.md, symbol: 'So every column is counted before it is opened'}
+  - id: IS-12
+    category: input_state
+    scope: shipped
+    element: "masks present in a proof or public file (hiding)"
+    relation: "none on the verifier side"
+    enforcement: not_enforced
+    sites:
+      - {file: docs/protocol.md, symbol: 'because the verifier does not check for masks'}
+  - id: IS-13
+    category: input_state
+    scope: shipped
+    element: "tokenizer and chat template"
+    relation: "none; the proof binds token ids only"
+    enforcement: not_enforced
+    sites:
+      - {file: docs/protocol.md, symbol: 'The verifier knows nothing about end tokens or the tokenizer'}
+  - id: IS-14
+    category: input_state
+    scope: shipped
+    element: "who chose the prompt tokens (system prompt, template tokens, earlier turns)"
+    relation: "none; the request is whatever token ids the request file holds"
+    enforcement: not_enforced
+    sites:
+      - {file: research/security/threat-model/CODE-CHECKS.md, symbol: 'The proof binds the window'}
+  - id: IS-15
+    category: input_state
+    scope: shipped
+    element: "sampling parameters (temperature, top-p, seed)"
+    relation: "none"
+    enforcement: not_enforced
+    sites:
+      - {file: docs/protocol.md, symbol: 'Sampling is not checked under any policy'}
+  - id: IS-16
+    category: input_state
+    scope: shipped
+    element: "freshness, client identity, replay of a proof"
+    relation: "none"
+    enforcement: not_enforced
+    sites:
+      - {file: docs/limits.md, symbol: 'A proof does not name a client or a time'}
+  - id: IS-17
+    category: input_state
+    scope: shipped
+    element: "identity of the verifier binary and its built-in constants"
+    relation: "none; a manual format version stands in"
+    enforcement: not_enforced
+    sites:
+      - {file: research/security/fiat-shamir-attacks.md, symbol: 'not cryptographically identified'}
+  - id: IS-18
+    category: input_state
+    scope: shipped
+    element: "the 32-byte file of cp_commit -public-weights (seed source)"
+    relation: "cp_commit accepts any 32-byte file; nothing shows that the option was used"
+    enforcement: prover_only
+    sites:
+      - {file: prover/common/public_weights.h, symbol: 'cp_commit accepts any 32-byte file.'}
+  - id: IS-19
+    category: input_state
+    scope: shipped
+    element: "what the scale file does to the model (a scale file within the admitted range can switch off blocks)"
+    relation: "KL.bin is bound by the ID and its ranges are checked; its meaning is not"
+    enforcement: not_enforced
+    sites:
+      - {file: guide/known-limits.md, symbol: 'a scale file within the admitted range can switch off'}
+  - id: IS-20
+    category: input_state
+    scope: research
+    element: "signed model manifest next to cp_verify (tools/manifest): upstream, files, tokenizer, template, system prompt"
+    relation: "client-side ed25519 manifest; 14 of 37 fields are the signer's word (PR #59)"
+    enforcement: verifier_validation
+    sites:
+      - {file: tools/manifest/manifest.py, symbol: 'def check_config(m, config_dir):'}
+      - {file: tools/manifest/README.md, symbol: "signer's word"}
+  - id: IS-21
+    category: input_state
+    scope: research
+    element: "Qwen DeltaNet recurrent state at chunk boundaries (issue #34 harness)"
+    relation: "chunk proofs plus comparisons of SHA-256 of public words outside the proofs"
+    enforcement: verifier_validation
+    sites:
+      - {file: research/operators/qwen_state_commit/window.py, symbol: 'def chain_check(outdir, stmt, names, verify_chunk):'}
+      - {file: research/operators/qwen_state_commit/README.md, symbol: 'done in Python, outside the proofs, on public values'}
+  - id: IS-22
+    category: input_state
+    scope: research
+    element: "Qwen state-commit harness: replaced token inputs and a consistently changed conv history"
+    relation: "accepted by design of the harness (issue #34 RESULTS 'Still accepted after the fix')"
+    enforcement: not_enforced
+    sites:
+      - {file: experiments/20261109-34-qwen-state-commit/RESULTS.md, symbol: 'Still accepted after the fix, by design of this harness (open)'}
+  - id: IS-24
+    category: input_state
+    scope: research
+    element: "GLM KDA slices: where the public initial state comes from"
+    relation: "none; the initial state is a public value of the toy statement"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Public initial-state provenance remains external.'}
+  # ---------------------------------------------------------------- output positions
+  - id: OUT-01
+    category: output
+    scope: shipped
+    element: "checked positions r .. min(e, T - 1) - 1: under exact match each checked token is the top choice (gap 0, ties to the lowest id)"
+    relation: "margin digits HD0..HD2 at every real place; the head's policy lines"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'the three digits of a margin D'}
+      - {file: verifier/src/cp_verify.cpp, symbol: 'a token that ties for the largest logit with a lower id has the gap 1, not 0'}
+  - id: OUT-02
+    category: output
+    scope: shipped
+    element: "clipped gap: mean of clipped costs at most theta, at most cap costs above C"
+    relation: "rhoC, phiC lines of the head; aboveClip bound"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_output_head_check.inc, symbol: 'F.lin(gapAt("rhoC", 0, R_)'}
+      - {file: verifier/src/vf_common.h, symbol: 'static constexpr u64 aboveClip('}
+    note: "cap tokens may be any tokens at any positions (docs/protocol.md section 2); WITHIN LIMITS is a weaker claim than YES"
+  - id: OUT-03
+    category: output
+    scope: shipped
+    element: "next token y after the window when e = T is the top choice of its position (under every policy)"
+    relation: "y enters the chain at the output head as the REPLY scalar; the head's margin at position T - 1 is 0"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'y must be the argmax of its position'}
+    note: "split after review of PR #97: the comparison with the caller's y is OUT-09"
+  - id: OUT-09
+    category: output
+    scope: shipped
+    element: "the y in the proof is the y the caller names (the caller's y file)"
+    relation: "check_proof_if_tested compares the proof's unmasked reply with the caller's y; NO with 'the proof is about another reply'"
+    enforcement: verifier_validation
+    sites:
+      - {file: blocks/frame/check.h, symbol: 'why = "the proof is about another reply"'}
+      - {file: verifier/src/cp_verify.cpp, symbol: '"the proof is about another reply") ? "reply-differs"'}
+    note: "application validation on a value the caller states, as IS-01 and OUT-05: it binds only the y the caller brings"
+  - id: OUT-04
+    category: output
+    scope: shipped
+    element: "tokens 0 .. r (the prompt and any earlier turns)"
+    relation: "not checked by design"
+    enforcement: not_enforced
+    sites:
+      - {file: docs/limits.md, symbol: 'cover tokens 0 to r'}
+  - id: OUT-08
+    category: output
+    scope: shipped
+    element: "tokens e + 1 .. T - 1 after the checked range, when e < T"
+    relation: "not checked: only positions r .. e - 1 are marked (hOn); a truncated reply verifies as a shorter reply"
+    enforcement: not_enforced
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'for (u64 t = rowR; t < rowE; t++) {'}
+      - {file: docs/limits.md, symbol: 'A truncated reply verifies'}
+    note: "added after review of PR #97; OUT-05 (client range comparison) and OUT-06 (end token) are what stop a client from taking this as the whole reply"
+  - id: OUT-05
+    category: output
+    scope: shipped
+    element: "the checked range is the one the client asked for (no coverage truncation)"
+    relation: "cp_verify prints covered:/r= e= for the caller to compare; integrations/check_proof.py compares --range with the request file"
+    enforcement: verifier_validation
+    sites:
+      - {file: integrations/check_proof.py, symbol: "the request file's checked range is %d:%d, but you expect %d:%d"}
+    note: "negative test N3: cp_verify alone accepts the narrower proof (YES); only the client's range comparison rejects it"
+  - id: OUT-06
+    category: output
+    scope: shipped
+    element: "reply complete: the last checked token is an end token and no earlier reply token is one"
+    relation: "integrations/check_proof.py --end-token; cp_verify has no notion of end tokens"
+    enforcement: verifier_validation
+    sites:
+      - {file: integrations/check_proof.py, symbol: 'def check_end_token(self, allowed):'}
+    note: "only in the integration, and skipped with --end-token none; a bare cp_verify YES covers a truncated reply"
+  - id: OUT-07
+    category: output
+    scope: shipped
+    element: "which claim kind an accept states (exact-match, policy, next-token)"
+    relation: "result-v1 claim= field"
+    enforcement: verifier_validation
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'o.claim = r + 1 > last ? "next-token" : o.otherKind ? "policy" : "exact-match";'}
+
+# Research directories under research/operators/ that no row covers, with the reason. The checker fails
+# if a directory there is neither cited by a row nor listed here, so a new prototype cannot land unseen.
+excluded:
+  - path: research/operators/evidence
+    reason: "receipts of the first top-k prototype (OP-R7), no relation of its own"
+  - path: research/operators/public_binding
+    reason: "public-coordinate product proof, a substrate of affine_rows (OP-R1); its own coordinate relation is not inventoried row by row"
+  - path: research/operators/shared_wires
+    reason: "shared-wire equality proof, a substrate of affine_rows (OP-R1) and the GLM slices; not inventoried row by row"
+  - path: research/operators/qwen_deltanet
+    reason: "Qwen DeltaNet M1, superseded by the M1b lookup prototype (OP-R4); its M1 verdict is FAIL as registered; not inventoried"
+  - path: research/operators/qwen_m3
+    reason: "counting and cost model, no proof and no relation that enforces anything"
+  - path: research/operators/qwen_deltanet_m2_build
+    reason: "reached main after this inventory's base (PR #73, main 0bdf8326); its two-lookup relations are not inventoried here (follow-up)"
+  - path: research/operators/qwen_handoff
+    reason: "reached main after the repair run (PR #98, main 2c180575); its joint two-chunk boundary relations are not inventoried here (follow-up)"
+
+# Open gaps: every prover_only and not_enforced row, plus open proof obligations, in plain language.
+# check_inventory.py fails if a prover_only or not_enforced row is in no gap.
+open_gaps:
+  - id: G-01
+    rows: [IS-02, RR-13]
+    text: "A commitment says nothing about which model it is. Nothing ties the committed integers to a publisher's checkpoint or to an honest conversion of it. A client must trust whoever tells it the ID belongs to a model."
+  - id: G-02
+    rows: [RR-11, RR-12]
+    text: "Whether every prompt keeps the model inside its ranges is checked only by the honest committer. If a value leaves the provers' range the honest prover answers 'failed', and the client cannot tell that from a false claim."
+  - id: G-03
+    rows: [IS-11, IS-18, IS-12]
+    text: "Weight hiding rests on the honest prover: it counts opened columns, draws fresh seeds and keeps masks. A verifier cannot see a lost mask, a reused seed, a public-weights commitment or an over-used leaf table."
+  - id: G-04
+    rows: [IS-13, IS-14, IS-15, OUT-04, OUT-08]
+    text: "The proof is about token ids. Who chose the prompt tokens, which tokenizer and template made them, how the reply was sampled and what the prompt says are all outside the proof. Tokens up to r are not checked at all, and neither are tokens after e when e < T."
+  - id: G-05
+    rows: [IS-16, IS-17]
+    text: "A proof names no client and no time, so it can be replayed. The verifier binary is not identified in the transcript, so a client must build its own."
+  - id: G-06
+    rows: [IS-19]
+    text: "The scale file is bound by the ID, but a scale file inside the admitted ranges can still switch parts of the model off. The verifier checks ranges, not meaning."
+  - id: G-07
+    rows: [OP-R5, OP-R6, OP-R7, OP-R9, IS-22, IS-24]
+    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, the GLM algebra slice has no rounding or ranges, the GLM slices take their initial state as given, and the state-commit harness accepts replaced token inputs by design."
+  - id: G-OB1
+    rows: [RR-04, RR-08]
+    text: "Open obligation: that cp_verify's no-overflow conditions are enough for the programs' equations to hold over the integers is argued from reading the source and a non-public report, not proved."
+  - id: G-OB2
+    rows: [IS-01, IS-08, OUT-05, OUT-06, OUT-09]
+    text: "Open obligation: the stronger claim the client wants (this commitment, this policy, this whole range, a complete reply, this next token) is enforced only if the caller states each value itself. A bare cp_verify YES on files that came with the proof can be a true answer to a weaker question. End-to-end exact greedy needs all five checks on the client side."
+  - id: G-OB3
+    rows: [OP-01, OP-05, OP-14, RR-03]
+    text: "Open obligation: the Lean soundness theorem is about the Lean verifier at full size and exact match; the C++ verifier is tested against it, not proved, and no theorem covers new research gadgets at their own dimensions."

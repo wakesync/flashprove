@@ -1,0 +1,33 @@
+{
+ "counts": {
+  "by_category": {
+   "input_state": 24,
+   "operator": 29,
+   "output": 9,
+   "range_rounding": 23
+  },
+  "by_kind": {
+   "not_enforced": 17,
+   "proof_constraint": 48,
+   "prover_only": 4,
+   "verifier_validation": 16
+  },
+  "by_scope_kind": {
+   "research/not_enforced": 6,
+   "research/proof_constraint": 11,
+   "research/verifier_validation": 3,
+   "shipped/not_enforced": 11,
+   "shipped/proof_constraint": 37,
+   "shipped/prover_only": 4,
+   "shipped/verifier_validation": 13
+  },
+  "open_gaps": 10,
+  "research_dirs": 15,
+  "research_dirs_excluded": 7,
+  "rows": 85,
+  "rows_in_gaps": 32,
+  "sites": 154
+ },
+ "faults": [],
+ "ok": true
+}

@@ -1,6 +1,7 @@
 # Runs the claim-ledger checkers on every pull request and on pushes to main:
 #   scripts/update-results.py --check  (results.yaml valid, README block + CLAIMS.md in sync)
 #   scripts/check-claims.py            (README block, CLAIMS.md and results.yaml agree)
+#   research/coverage/check_inventory.py and selftest_checker.py (cited coverage sites still exist, issue #6)
 # Unlike host-path-guard, this runs the PR's own copy of the scripts (they change with the ledger).
 # Read-only token, no secrets, full history (metric commits are checked for ancestry).
 name: claims-check
@@ -30,3 +31,7 @@ jobs:
         run: python3 scripts/update-results.py --check
       - name: check-claims
         run: python3 scripts/check-claims.py
+      - name: coverage inventory (cited sites exist)
+        run: python3 research/coverage/check_inventory.py
+      - name: coverage inventory checker self-test
+        run: python3 research/coverage/selftest_checker.py
