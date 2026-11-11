@@ -303,6 +303,27 @@ rows:
     sites:
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit norm(const Input& in,bool witness) {'}
     note: "inputs committed and chosen by the prover (OP-R6); not the M2 isqrt norm"
+  - id: OP-R17
+    category: operator
+    scope: research
+    element: "Qwen q/k RMSNorm per head (research/operators/qwen_qk_norm, issue #35): sigma = isqrt(4^m sum x^2 + epsN), R = floor(2^K / sigma), Z = floor(x R / 2^s), y = floor(g Z / 2^F), learned per-channel gain g, epsilon, Hq = 2 q heads with gq and Hk = 1 k head with gk, D in {16, 256}, F = 12"
+    relation: "build(): two isqrt residual equations, R sigma + rr = 2^K with sigma - 1 - rr = gap, floor equations with bit-decomposed remainders; gains are verifier-side coefficients and y the targets; the verifier rebuilds the relation list from the statement"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'static Circuit build(const Stmt& st,const std::vector<HeadWit>* wit) {'}
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: '// 4^m E + epsN - sigma^2 = e1'}
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: '// R sigma + rr = 2^K'}
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: '// g Z - ry = 2^F y (g, y public)'}
+    note: "not the qwen_ops table norm (OP-R13) and not the M2 gated norm; sampled hostile classes in experiments/20261111-35-qk-rmsnorm, not exhaustive; research security 10 bits per round, toy coins; not in cp_verify"
+  - id: OP-R18
+    category: operator
+    scope: research
+    element: "qwen_qk_norm: binding of the pre-norm inputs to a q/k projection and of the gains to the model's q_norm / k_norm weights"
+    relation: "none; inputs and gains are public statement fields the caller supplies"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/qwen_qk_norm/README.md, symbol: '**The inputs are public and pinned in-proof.**'}
+      - {file: research/operators/qwen_qk_norm/README.md, symbol: '**The gains are public statement fields with an admitted bound.**'}
   - id: OP-R14
     category: operator
     scope: research
@@ -526,6 +547,26 @@ rows:
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+4,8*S)'}
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+3,4*S)'}
     note: "narrowed after review of PR #97 (astra round 2): this row used to name all qwen_ops inputs as [-2^F, 2^F), which the nonlinear operator does not enforce; the row's claim for conv/norm/rotary is unchanged"
+  - id: RR-R5
+    category: range_rounding
+    scope: research
+    element: "qwen_qk_norm ranges: sigma and R, the isqrt residuals e1, e2, the division remainder rr and gap = sigma - 1 - rr, Z in F + D2 + 2 signed bits, the floor remainders rz (s bits) and ry (F bits)"
+    relation: "range(): bit columns b*b = b and an affine reconstruction; an out-of-range hostile value still gets bits, so only the reconstruction fails"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'auto e1c=c.cell(e1); c.range(e1c,e1,E_BITS);'}
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'auto gpc=c.cell(gap); c.range(gpc,gap,SIGMA_BITS);'}
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'auto rzc=c.cell(rz); c.range(rzc,rz,unsigned(p.s));'}
+    note: "no-wrap argument in research/operators/qwen_qk_norm/README.md"
+  - id: RR-R6
+    category: range_rounding
+    scope: research
+    element: "qwen_qk_norm statement admission: F = 12, D in {16, 256}, head count, inputs in [-2^F, 2^F), gains |g| < 2^(F+3), outputs |y| < 2^(F + D2 + 4)"
+    relation: "admit() on the public statement before the circuit is rebuilt; outside the proof's relation"
+    enforcement: verifier_validation
+    sites:
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'static void admit(const Stmt& st) {'}
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'for(auto g:st.gq) need(g>-GB&&g<GB,"q gain bound");'}
   - id: RR-R2
     category: range_rounding
     scope: research
@@ -733,6 +774,15 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: experiments/20261109-34-qwen-state-commit/RESULTS.md, symbol: 'Still accepted after the fix, by design of this harness (open)'}
+  - id: IS-28
+    category: input_state
+    scope: research
+    element: "qwen_qk_norm: the committed input cells of each head equal the public pre-norm integers, and both operands of each square read the same cell"
+    relation: "one-term affine relation per input with the statement's value as target, plus a row-1 = row-0 tie"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_qk_norm/qk_norm.cpp, symbol: 'c.eq({{0,a,F{1}}},st.x[h][j]);'}
+    note: "binds the norm's input to the statement only; where the statement's inputs come from is OP-R18"
   - id: IS-24
     category: input_state
     scope: research
@@ -876,3 +926,6 @@ open_gaps:
   - id: G-OB3
     rows: [OP-01, OP-05, OP-14, RR-03]
     text: "Open obligation: the Lean soundness theorem is about the Lean verifier at full size and exact match; the C++ verifier is tested against it, not proved, and no theorem covers new research gadgets at their own dimensions."
+  - id: G-08
+    rows: [OP-R18]
+    text: "The q/k RMSNorm prototype (issue #35) proves the norm of the inputs and gains it is given; nothing ties those inputs to a projection of a model's hidden state or the gains to a model's norm weights."
