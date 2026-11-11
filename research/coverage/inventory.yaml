@@ -537,7 +537,7 @@ rows:
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'range(rem,bits); eq({term(a),term(out,-(i64(1)<<bits)),term(rem,-1)});'}
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'eq({term(sum(count))},1); eq({term(sum(index)),term(key,-1)});'}
       - {file: research/operators/qwen_ops/README.md, symbol: 'Integer input X maps to i=floor(X/2^(F-8))+2048. Domain [-8,8), fail closed outside.'}
-    note: "split from RR-R1 after review of PR #97 (astra round 2): astra proved 5 of 5 complete nonlinear proofs at F = 12 with X = 8192 .. 8196, outside [-2^F, 2^F) but inside this interval; these are valid proofs of the actual relation, not a soundness break. The narrower interval is not enforced for nonlinear and is not claimed"
+    note: "split from RR-R1 after review of PR #97 (astra round 2): astra proved 5 of 5 complete nonlinear proofs at F = 12 with X = 8192 .. 8196, outside [-2^F, 2^F) but inside this interval; these are valid proofs of the actual relation, not a soundness break (reviewer's descriptive figure, https://github.com/wakesync/flashprove/pull/97#issuecomment-6784831796). The narrower interval is not enforced for nonlinear and is not claimed"
   # ---------------------------------------------------------------- committed inputs and state
   - id: IS-01
     category: input_state
