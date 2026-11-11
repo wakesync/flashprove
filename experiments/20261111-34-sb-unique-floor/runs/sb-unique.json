@@ -1,0 +1,777 @@
+{
+ "note": "reference arithmetic and a relation checker, no proof, no backend; volumes are counted, not measured",
+ "experiment": "20261111-34-sb-unique-floor",
+ "debug": false,
+ "field_p": 18446744069414584321,
+ "F": 12,
+ "D": 32,
+ "warmup": 64,
+ "tokens": 256,
+ "arms": [
+  {
+   "GB": 12,
+   "C": 16,
+   "D": 32,
+   "runs": 20,
+   "honest_runs_all_accepted": 19,
+   "registered": {
+    "G": {
+     "floors": 43520,
+     "honest_accepted": 43520,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 24
+    },
+    "M": {
+     "floors": 163744,
+     "honest_accepted": 163744,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 53
+    },
+    "delta": {
+     "floors": 163729,
+     "honest_accepted": 163728,
+     "honest_outside_window": 1,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 31
+    },
+    "o": {
+     "floors": 163712,
+     "honest_accepted": 163712,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 50
+    },
+    "S_out": {
+     "floors": 326656,
+     "honest_accepted": 326656,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 41
+    }
+   },
+   "adversarial": {
+    "n": 202,
+    "tally": {
+     "G": {
+      "floors": 27472,
+      "honest_accepted": 27472,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 25
+     },
+     "M": {
+      "floors": 7171,
+      "honest_accepted": 7071,
+      "honest_outside_window": 100,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 56
+     },
+     "delta": {
+      "floors": 3749,
+      "honest_accepted": 3648,
+      "honest_outside_window": 101,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 43
+     },
+     "o": {
+      "floors": 3617,
+      "honest_accepted": 3616,
+      "honest_outside_window": 1,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 57
+     },
+     "S_out": {
+      "floors": 0,
+      "honest_accepted": 0,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 0
+     }
+    },
+    "honest_outside_window": 202,
+    "max_bits": 57
+   },
+   "proved_bounds": {
+    "M": {
+     "bound_bits": 59,
+     "k": 36,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "o": {
+     "bound_bits": 59,
+     "k": 36,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "S_out": {
+     "bound_bits": 47,
+     "k": 24,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "delta": {
+     "bound_bits": 44,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "G": {
+     "bound_bits": 25,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    }
+   },
+   "control_a_m1b_window": {
+    "floors": 327456,
+    "with_second": 0
+   },
+   "control_b_mutations": {
+    "tried": 3445440,
+    "accepted": 0
+   },
+   "floors_with_second_witness": 0,
+   "count": {
+    "D": 32,
+    "C": 16,
+    "GB": 12,
+    "count_r2_formula_per_head_per_token": 648.5,
+    "L_per_head_per_token": 970.0,
+    "extra_per_head_per_token": 321.5,
+    "L_items": {
+     "S_out_cells": 64.0,
+     "S_out_remainder_keys": 128.0,
+     "S_out_range_limbs": 128.0,
+     "decay_table_entries": 8.5,
+     "decay_table_remainder_keys": 8.5,
+     "decay_table_range_limbs": 17.0,
+     "gram_KK_QK": 32,
+     "P0_Q0": 64,
+     "M_delta_o": 96,
+     "remainder_keys_M": 96,
+     "remainder_keys_delta": 32,
+     "remainder_keys_o": 96,
+     "quotient_range_limbs_M_delta_o": 192,
+     "norm_cells_k_q": 2,
+     "norm_slack_range_limbs": 6
+    },
+    "note": "counted, not measured; per V head; excludes committed operands k, q, v, a, beta and all sumcheck/lookup/commitment overhead, as count_r2 base formula does"
+   },
+   "verdict": "FAIL",
+   "run_bits": {
+    "G": {
+     "median": 24.0,
+     "min": 24,
+     "max": 24
+    },
+    "M": {
+     "median": 49.0,
+     "min": 47,
+     "max": 53
+    },
+    "delta": {
+     "median": 27.0,
+     "min": 26,
+     "max": 31
+    },
+    "o": {
+     "median": 47.0,
+     "min": 45,
+     "max": 50
+    },
+    "S_out": {
+     "median": 38.0,
+     "min": 36,
+     "max": 41
+    }
+   }
+  },
+  {
+   "GB": 12,
+   "C": 64,
+   "D": 32,
+   "runs": 20,
+   "honest_runs_all_accepted": 19,
+   "registered": {
+    "G": {
+     "floors": 166400,
+     "honest_accepted": 166400,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 24
+    },
+    "M": {
+     "floors": 163232,
+     "honest_accepted": 163232,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 53
+    },
+    "delta": {
+     "floors": 163217,
+     "honest_accepted": 163216,
+     "honest_outside_window": 1,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 31
+    },
+    "o": {
+     "floors": 163200,
+     "honest_accepted": 163200,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 50
+    },
+    "S_out": {
+     "floors": 80896,
+     "honest_accepted": 80896,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 40
+    }
+   },
+   "adversarial": {
+    "n": 202,
+    "tally": {
+     "G": {
+      "floors": 420160,
+      "honest_accepted": 420160,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 25
+     },
+     "M": {
+      "floors": 7306,
+      "honest_accepted": 7210,
+      "honest_outside_window": 96,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 56
+     },
+     "delta": {
+      "floors": 3849,
+      "honest_accepted": 3744,
+      "honest_outside_window": 105,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 43
+     },
+     "o": {
+      "floors": 3713,
+      "honest_accepted": 3712,
+      "honest_outside_window": 1,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 57
+     },
+     "S_out": {
+      "floors": 0,
+      "honest_accepted": 0,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 0
+     }
+    },
+    "honest_outside_window": 202,
+    "max_bits": 57
+   },
+   "proved_bounds": {
+    "M": {
+     "bound_bits": 61,
+     "k": 36,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "o": {
+     "bound_bits": 61,
+     "k": 36,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "S_out": {
+     "bound_bits": 49,
+     "k": 24,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "delta": {
+     "bound_bits": 44,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "G": {
+     "bound_bits": 25,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    }
+   },
+   "control_a_m1b_window": {
+    "floors": 326432,
+    "with_second": 0
+   },
+   "control_b_mutations": {
+    "tried": 2947776,
+    "accepted": 0
+   },
+   "floors_with_second_witness": 0,
+   "count": {
+    "D": 32,
+    "C": 64,
+    "GB": 12,
+    "count_r2_formula_per_head_per_token": 624.5,
+    "L_per_head_per_token": 922.0,
+    "extra_per_head_per_token": 297.5,
+    "L_items": {
+     "S_out_cells": 16.0,
+     "S_out_remainder_keys": 32.0,
+     "S_out_range_limbs": 32.0,
+     "decay_table_entries": 32.5,
+     "decay_table_remainder_keys": 32.5,
+     "decay_table_range_limbs": 65.0,
+     "gram_KK_QK": 128,
+     "P0_Q0": 64,
+     "M_delta_o": 96,
+     "remainder_keys_M": 96,
+     "remainder_keys_delta": 32,
+     "remainder_keys_o": 96,
+     "quotient_range_limbs_M_delta_o": 192,
+     "norm_cells_k_q": 2,
+     "norm_slack_range_limbs": 6
+    },
+    "note": "counted, not measured; per V head; excludes committed operands k, q, v, a, beta and all sumcheck/lookup/commitment overhead, as count_r2 base formula does"
+   },
+   "verdict": "FAIL",
+   "run_bits": {
+    "G": {
+     "median": 24.0,
+     "min": 24,
+     "max": 24
+    },
+    "M": {
+     "median": 49.0,
+     "min": 47,
+     "max": 53
+    },
+    "delta": {
+     "median": 27.0,
+     "min": 26,
+     "max": 31
+    },
+    "o": {
+     "median": 47.0,
+     "min": 45,
+     "max": 50
+    },
+    "S_out": {
+     "median": 38.0,
+     "min": 35,
+     "max": 40
+    }
+   }
+  },
+  {
+   "GB": 18,
+   "C": 16,
+   "D": 32,
+   "runs": 20,
+   "honest_runs_all_accepted": 19,
+   "registered": {
+    "G": {
+     "floors": 43520,
+     "honest_accepted": 43520,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 30
+    },
+    "M": {
+     "floors": 163744,
+     "honest_accepted": 163744,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 59
+    },
+    "delta": {
+     "floors": 163729,
+     "honest_accepted": 163728,
+     "honest_outside_window": 1,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 31
+    },
+    "o": {
+     "floors": 163712,
+     "honest_accepted": 163712,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 56
+    },
+    "S_out": {
+     "floors": 326656,
+     "honest_accepted": 326656,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 47
+    }
+   },
+   "adversarial": {
+    "n": 202,
+    "tally": {
+     "G": {
+      "floors": 27472,
+      "honest_accepted": 27472,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 31
+     },
+     "M": {
+      "floors": 7171,
+      "honest_accepted": 7071,
+      "honest_outside_window": 100,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 62
+     },
+     "delta": {
+      "floors": 3749,
+      "honest_accepted": 3648,
+      "honest_outside_window": 101,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 43
+     },
+     "o": {
+      "floors": 3617,
+      "honest_accepted": 3616,
+      "honest_outside_window": 1,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 63
+     },
+     "S_out": {
+      "floors": 0,
+      "honest_accepted": 0,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 0
+     }
+    },
+    "honest_outside_window": 202,
+    "max_bits": 63
+   },
+   "proved_bounds": {
+    "M": {
+     "bound_bits": 65,
+     "k": 42,
+     "window_bits": 19,
+     "fits_field": false
+    },
+    "o": {
+     "bound_bits": 65,
+     "k": 42,
+     "window_bits": 19,
+     "fits_field": false
+    },
+    "S_out": {
+     "bound_bits": 53,
+     "k": 30,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "delta": {
+     "bound_bits": 44,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "G": {
+     "bound_bits": 31,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    }
+   },
+   "control_a_m1b_window": {
+    "floors": 327456,
+    "with_second": 327456
+   },
+   "control_b_mutations": {
+    "tried": 3445440,
+    "accepted": 0
+   },
+   "floors_with_second_witness": 0,
+   "count": {
+    "D": 32,
+    "C": 16,
+    "GB": 18,
+    "count_r2_formula_per_head_per_token": 776.5,
+    "L_per_head_per_token": 1098.0,
+    "extra_per_head_per_token": 321.5,
+    "L_items": {
+     "S_out_cells": 64.0,
+     "S_out_remainder_keys": 192.0,
+     "S_out_range_limbs": 128.0,
+     "decay_table_entries": 8.5,
+     "decay_table_remainder_keys": 8.5,
+     "decay_table_range_limbs": 17.0,
+     "gram_KK_QK": 32,
+     "P0_Q0": 64,
+     "M_delta_o": 96,
+     "remainder_keys_M": 128,
+     "remainder_keys_delta": 32,
+     "remainder_keys_o": 128,
+     "quotient_range_limbs_M_delta_o": 192,
+     "norm_cells_k_q": 2,
+     "norm_slack_range_limbs": 6
+    },
+    "note": "counted, not measured; per V head; excludes committed operands k, q, v, a, beta and all sumcheck/lookup/commitment overhead, as count_r2 base formula does"
+   },
+   "verdict": "FAIL",
+   "run_bits": {
+    "G": {
+     "median": 30.0,
+     "min": 30,
+     "max": 30
+    },
+    "M": {
+     "median": 55.0,
+     "min": 53,
+     "max": 59
+    },
+    "delta": {
+     "median": 27.0,
+     "min": 26,
+     "max": 31
+    },
+    "o": {
+     "median": 53.0,
+     "min": 51,
+     "max": 56
+    },
+    "S_out": {
+     "median": 44.0,
+     "min": 42,
+     "max": 47
+    }
+   }
+  },
+  {
+   "GB": 18,
+   "C": 64,
+   "D": 32,
+   "runs": 20,
+   "honest_runs_all_accepted": 19,
+   "registered": {
+    "G": {
+     "floors": 166400,
+     "honest_accepted": 166400,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 30
+    },
+    "M": {
+     "floors": 163232,
+     "honest_accepted": 163232,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 59
+    },
+    "delta": {
+     "floors": 163217,
+     "honest_accepted": 163216,
+     "honest_outside_window": 1,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 31
+    },
+    "o": {
+     "floors": 163200,
+     "honest_accepted": 163200,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 56
+    },
+    "S_out": {
+     "floors": 80896,
+     "honest_accepted": 80896,
+     "honest_outside_window": 0,
+     "with_second": 0,
+     "second_witnesses": 0,
+     "max_bits": 46
+    }
+   },
+   "adversarial": {
+    "n": 202,
+    "tally": {
+     "G": {
+      "floors": 420160,
+      "honest_accepted": 420160,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 31
+     },
+     "M": {
+      "floors": 7306,
+      "honest_accepted": 7210,
+      "honest_outside_window": 96,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 62
+     },
+     "delta": {
+      "floors": 3849,
+      "honest_accepted": 3744,
+      "honest_outside_window": 105,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 43
+     },
+     "o": {
+      "floors": 3713,
+      "honest_accepted": 3712,
+      "honest_outside_window": 1,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 63
+     },
+     "S_out": {
+      "floors": 0,
+      "honest_accepted": 0,
+      "honest_outside_window": 0,
+      "with_second": 0,
+      "second_witnesses": 0,
+      "max_bits": 0
+     }
+    },
+    "honest_outside_window": 202,
+    "max_bits": 63
+   },
+   "proved_bounds": {
+    "M": {
+     "bound_bits": 67,
+     "k": 42,
+     "window_bits": 19,
+     "fits_field": false
+    },
+    "o": {
+     "bound_bits": 67,
+     "k": 42,
+     "window_bits": 19,
+     "fits_field": false
+    },
+    "S_out": {
+     "bound_bits": 55,
+     "k": 30,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "delta": {
+     "bound_bits": 44,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    },
+    "G": {
+     "bound_bits": 31,
+     "k": 12,
+     "window_bits": 19,
+     "fits_field": true
+    }
+   },
+   "control_a_m1b_window": {
+    "floors": 326432,
+    "with_second": 326432
+   },
+   "control_b_mutations": {
+    "tried": 2947776,
+    "accepted": 0
+   },
+   "floors_with_second_witness": 0,
+   "count": {
+    "D": 32,
+    "C": 64,
+    "GB": 18,
+    "count_r2_formula_per_head_per_token": 704.5,
+    "L_per_head_per_token": 1002.0,
+    "extra_per_head_per_token": 297.5,
+    "L_items": {
+     "S_out_cells": 16.0,
+     "S_out_remainder_keys": 48.0,
+     "S_out_range_limbs": 32.0,
+     "decay_table_entries": 32.5,
+     "decay_table_remainder_keys": 32.5,
+     "decay_table_range_limbs": 65.0,
+     "gram_KK_QK": 128,
+     "P0_Q0": 64,
+     "M_delta_o": 96,
+     "remainder_keys_M": 128,
+     "remainder_keys_delta": 32,
+     "remainder_keys_o": 128,
+     "quotient_range_limbs_M_delta_o": 192,
+     "norm_cells_k_q": 2,
+     "norm_slack_range_limbs": 6
+    },
+    "note": "counted, not measured; per V head; excludes committed operands k, q, v, a, beta and all sumcheck/lookup/commitment overhead, as count_r2 base formula does"
+   },
+   "verdict": "FAIL",
+   "run_bits": {
+    "G": {
+     "median": 30.0,
+     "min": 30,
+     "max": 30
+    },
+    "M": {
+     "median": 55.0,
+     "min": 53,
+     "max": 59
+    },
+    "delta": {
+     "median": 27.0,
+     "min": 26,
+     "max": 31
+    },
+    "o": {
+     "median": 53.0,
+     "min": 51,
+     "max": 56
+    },
+    "S_out": {
+     "median": 44.0,
+     "min": 41,
+     "max": 46
+    }
+   }
+  }
+ ],
+ "seconds": 92.1
+}
