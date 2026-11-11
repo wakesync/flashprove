@@ -1,0 +1,377 @@
+{
+  "started_utc": "2026-11-11T23:26:22.540159+00:00",
+  "finished_utc": "2026-11-11T23:30:53.080416+00:00",
+  "seeds": [
+    201,
+    202,
+    203,
+    204,
+    205
+  ],
+  "per_case": {
+    "honest_window": {
+      "acceptance": {
+        "n": 5,
+        "median": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "instances": 15,
+      "accepted": 15,
+      "violations": {
+        "n": 15,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "honest_window_hostile_path": {
+      "acceptance": {
+        "n": 5,
+        "median": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "instances": 15,
+      "accepted": 15,
+      "violations": {
+        "n": 15,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "honest_layer4_window": {
+      "acceptance": {
+        "n": 5,
+        "median": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "instances": 5,
+      "accepted": 5,
+      "violations": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "tampered_boundary_state": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 4.0,
+        "sd": 0.4472135954999579,
+        "min": 4.0,
+        "max": 5.0
+      }
+    },
+    "tampered_boundary_history": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 4.0,
+        "sd": 0.0,
+        "min": 4.0,
+        "max": 4.0
+      }
+    },
+    "tampered_output_commitment": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "state_from_other_window": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 20.0,
+        "sd": 0.8944271909999159,
+        "min": 18.0,
+        "max": 20.0
+      }
+    },
+    "other_window_commitment": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 20.0,
+        "sd": 0.8944271909999159,
+        "min": 18.0,
+        "max": 20.0
+      }
+    },
+    "other_layer_state": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 8.0,
+        "sd": 0.0,
+        "min": 8.0,
+        "max": 8.0
+      }
+    },
+    "mixed_F_chain": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 175.0,
+        "sd": 0.8366600265340756,
+        "min": 174.0,
+        "max": 176.0
+      }
+    },
+    "replayed_earlier_window_witness": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 652.0,
+        "sd": 0.0,
+        "min": 652.0,
+        "max": 652.0
+      }
+    },
+    "truncated_chain_relabel": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0,
+      "violations": {
+        "n": 5,
+        "median": 8.0,
+        "sd": 0.0,
+        "min": 8.0,
+        "max": 8.0
+      }
+    },
+    "honest_chain": {
+      "acceptance": {
+        "n": 5,
+        "median": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "instances": 5,
+      "accepted": 5
+    },
+    "replayed_earlier_window": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0
+    },
+    "dropped_middle_window": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0
+    },
+    "spliced_other_layer_proof": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0
+    },
+    "truncated_chain": {
+      "acceptance": {
+        "n": 5,
+        "median": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "instances": 5,
+      "accepted": 0
+    }
+  },
+  "structure": {
+    "core_columns": {
+      "n": 15,
+      "median": 28986.0,
+      "sd": 0.0,
+      "min": 28986.0,
+      "max": 28986.0
+    },
+    "aligned_columns": {
+      "n": 15,
+      "median": 29184.0,
+      "sd": 0.0,
+      "min": 29184.0,
+      "max": 29184.0
+    },
+    "relations": {
+      "n": 15,
+      "median": 48696.0,
+      "sd": 0.0,
+      "min": 48696.0,
+      "max": 48696.0
+    },
+    "relation_terms": {
+      "n": 15,
+      "median": 238158.0,
+      "sd": 0.0,
+      "min": 238158.0,
+      "max": 238158.0
+    },
+    "range_cells": {
+      "n": 15,
+      "median": 240.0,
+      "sd": 0.0,
+      "min": 240.0,
+      "max": 240.0
+    },
+    "hash_columns": {
+      "n": 15,
+      "median": 25704.0,
+      "sd": 0.0,
+      "min": 25704.0,
+      "max": 25704.0
+    },
+    "hash_relations": {
+      "n": 15,
+      "median": 42704.0,
+      "sd": 0.0,
+      "min": 42704.0,
+      "max": 42704.0
+    },
+    "recurrence_columns": {
+      "n": 15,
+      "median": 3024.0,
+      "sd": 0.0,
+      "min": 3024.0,
+      "max": 3024.0
+    },
+    "recurrence_relations": {
+      "n": 15,
+      "median": 5808.0,
+      "sd": 0.0,
+      "min": 5808.0,
+      "max": 5808.0
+    },
+    "proof_bytes": {
+      "n": 15,
+      "median": 1805040.0,
+      "sd": 283.09904038457404,
+      "min": 1804432.0,
+      "max": 1805680.0
+    },
+    "prove_s": {
+      "n": 15,
+      "median": 2.57851,
+      "sd": 0.24479095613394597,
+      "min": 2.446007,
+      "max": 3.431608
+    },
+    "verify_s": {
+      "n": 15,
+      "median": 0.237853,
+      "sd": 0.034628922843690735,
+      "min": 0.215016,
+      "max": 0.346934
+    }
+  },
+  "H1_H2_H3_outcomes_as_expected": true,
+  "H4_counts_match": true,
+  "py_cpp_commit_agree": true,
+  "verifier_inputs_free_of_state_rows": true,
+  "proof_files_containing_a_state_row": 0,
+  "verdict": "PASS",
+  "note": "Measured, unreplicated. Research target 10 / work 6, deterministic toy coins. Unvetted Poseidon-shaped sponge. Synthetic weights labels. Not zero-knowledge."
+}
