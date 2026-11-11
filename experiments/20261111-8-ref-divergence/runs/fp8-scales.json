@@ -1,0 +1,50 @@
+{
+  "manifest_sha256": "503feebe613951d7ae83fd8844eacfad651416e12b5d8b7ebe2e430c724a5147",
+  "rule": "s = float32(448 / amax), amax over all 5 calibration runs, per op and input role",
+  "scales": {
+    "conv:conv.inputs": {
+      "amax": 0.9864131645944499,
+      "scale": 454.1707458496094
+    },
+    "conv:conv.taps": {
+      "amax": 0.9863610537461588,
+      "scale": 454.1947326660156
+    },
+    "decay-half:nonlinear.x": {
+      "amax": 7.820887569454904,
+      "scale": 57.282501220703125
+    },
+    "decay-one:nonlinear.x": {
+      "amax": 7.820887569454904,
+      "scale": 57.282501220703125
+    },
+    "decay-two:nonlinear.x": {
+      "amax": 7.820887569454904,
+      "scale": 57.282501220703125
+    },
+    "l2:l2.x": {
+      "amax": 0.9899945919260217,
+      "scale": 452.5277099609375
+    },
+    "rms:rms.x": {
+      "amax": 0.9899835542564187,
+      "scale": 452.53277587890625
+    },
+    "rotary:rotary.x": {
+      "amax": 0.9899705420331122,
+      "scale": 452.5387268066406
+    },
+    "sigmoid:nonlinear.x": {
+      "amax": 7.820887569454904,
+      "scale": 57.282501220703125
+    },
+    "silu:nonlinear.x": {
+      "amax": 7.820887569454904,
+      "scale": 57.282501220703125
+    },
+    "softplus:nonlinear.x": {
+      "amax": 7.820887569454904,
+      "scale": 57.282501220703125
+    }
+  }
+}
