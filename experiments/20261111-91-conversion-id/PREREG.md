@@ -39,3 +39,24 @@ Deterministic code, so variance is not meaningful: H1 to H4 are unit tests run o
 - New here: the conversion id of #87 DESIGN 2.0 object 2 as code, with per-class rule steps and the config pin as leaves, hostile tests per class, and the inventory enforced in code. Not new: Merkle trees, SHA-256 domain separation, MLE evaluation by folding.
 
 ## Amendments
+
+### 2026-11-11 03:25 UTC: review fixes (PR #100 reviews by astra and opus at 29d8b5f3)
+Written after the original code and runs, before any code change below. The original registration above, the code at d39c98dc and the run files in `runs/` stay as they are; the corrected code is a new commit and its receipts go to a new directory `runs-fix100/`.
+
+**Registration note (protocol deviation of the original run).** ENV.json records one stock build to /tmp and one full test-suite run on the working tree before code commit d39c98dc, on the registered inputs. LANE-COMMON-1109 forbids running the registered suite before its registered run, and this PREREG did not name a separate debug fixture. Those runs were exploratory/debug; their outputs were not committed, and the committed `runs/` files were written by `run_wb91.sh` after d39c98dc. It is reported as a deviation in RESULTS.md and the PR body.
+
+**Findings being fixed (all reproduced against 29d8b5f3 by this lane, with a lane script outside the repo, before any change):**
+1. Top-level `tie_word_embeddings` is not pinned (only `text_config` is read); `true` with unchanged tensors verifies under the stock id.
+2. The config encoding is not injective: a float is encoded as `{"f64": hex}` and the same object is accepted as input, so `rms_norm_eps` or `partial_rotary_factor` replaced by that object verify under the stock id.
+3. `text_config.attention_bias` is not pinned; `true` verifies under the stock id.
+4. A config without `text_config` (fields hoisted to the top level) verifies under the stock id (`cfg.get("text_config", cfg)` fallback).
+
+**Changes (code, after this amendment):**
+- Config pin v2 (`fp-wb-config-v2`): a strict schema runs before hashing. `text_config` must be present (no fallback). Every pinned field has a fixed JSON type (int never bool, float finite, `rope_parameters` an object with an exact key set); anything else raises ConfigError. Unknown keys in `text_config` or at the top level raise ConfigError (fail closed); the known keys left out of the pin are listed in code with the reason. The pin encoding is a typed tag per value (each value becomes [type tag, payload]), injective by construction, and the schema rejects the old `{"f64": ...}` shape where a float is expected.
+- Pinned in addition: top-level `tie_word_embeddings`, `model_type`, `architectures`; `text_config.attention_bias`, `text_config.model_type`. Unsupported values fail closed: top-level and `text_config` `tie_word_embeddings` must both be false (they must agree; the converter has a separate lm_head block), `attention_bias` must be false (the inventory has no projection biases), `rope_parameters.partial_rotary_factor` must equal `text_config.partial_rotary_factor`.
+- Leaf encoding unchanged for honest leaves (so the block leaves and the root do not change). The leaf canonicaliser now refuses floats and non-string keys, `leaf_well_formed` checks each class's parameter key set and the `norm_role` value, and a malformed opening returns False instead of raising.
+- The conversion id changes because the config pin changes. Old and new ids are both reported.
+
+**Corrected-code run (registered now).** After the code commit: `bash research/weight-binding/run_wb91.sh experiments/20261111-91-conversion-id/runs-fix100` (2 builds per pin, the full suite twice, the count). Acceptance: every new hostile config case refused (top-level `tie_word_embeddings` true; top-level and text values disagreeing; `rms_norm_eps`, `partial_rotary_factor` and the nested `rope_parameters.partial_rotary_factor` given as `{"f64": hex}` aliases; `attention_bias` true; `text_config` removed with the fields hoisted; an unknown text key; an int given as bool / float), all original tests still pass, byte-identical rebuilds, and the count numbers unchanged (the count depends on shapes only). Any failure is reported as such.
+
+**Debugging fixture (not the registered suite).** Before the code commit, the new schema and canonical encoding are debugged only on a synthetic 4-layer config written by the lane (not either pinned config.json and not #68's stream files), calling the schema/pin functions directly. No `Conversion` build and no `test_wb_conv.py` run before the code commit.
