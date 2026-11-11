@@ -1,0 +1,2050 @@
+{
+  "suite": {
+    "cases": {
+      "D16/honest/uniform": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/outlier": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/low": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/unit-spike": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/zero": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-scale/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-scale/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/gain-swap/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/gain-over-bound/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/isqrt-plus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/isqrt-minus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/div-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/div-rem-under/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/floor-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/swapped-head/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/swapped-head/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-vector/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/shared-coefficient/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/zero-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/spike-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-output/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/byte-flip/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/truncated/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/trailing/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/dim-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/scale-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/uniform": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/outlier": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/low": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/unit-spike": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/zero": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-scale/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-scale/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/gain-swap/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/gain-over-bound/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/isqrt-plus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/isqrt-minus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/div-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/div-rem-under/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/floor-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/swapped-head/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/swapped-head/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-vector/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/shared-coefficient/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/zero-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/spike-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-output/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/byte-flip/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/truncated/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/trailing/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/dim-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/scale-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    "sizes": {
+      "D16": {
+        "columns": {
+          "n": 10,
+          "median": 3192.0,
+          "sd": 0.0,
+          "min": 3192,
+          "max": 3192
+        },
+        "relations": {
+          "n": 10,
+          "median": 6333.0,
+          "sd": 0.0,
+          "min": 6333,
+          "max": 6333
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 67968.0,
+          "sd": 150.24483721949022,
+          "min": 67728,
+          "max": 68272
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.0440329,
+          "sd": 0.0019745543978044494,
+          "min": 0.0419862,
+          "max": 0.0487452
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.02605025,
+          "sd": 0.0019598347958721192,
+          "min": 0.0243579,
+          "max": 0.0308324
+        }
+      },
+      "D256": {
+        "columns": {
+          "n": 10,
+          "median": 43521.0,
+          "sd": 0.0,
+          "min": 43521,
+          "max": 43521
+        },
+        "relations": {
+          "n": 10,
+          "median": 86262.0,
+          "sd": 0.0,
+          "min": 86262,
+          "max": 86262
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 815088.0,
+          "sd": 185.5202893965449,
+          "min": 814864,
+          "max": 815376
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.7112535,
+          "sd": 0.016809085095070873,
+          "min": 0.683317,
+          "max": 0.738723
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.170096,
+          "sd": 0.009076014348575901,
+          "min": 0.158291,
+          "max": 0.183512
+        }
+      }
+    },
+    "hostile_subcases": 420,
+    "hostile_rejected": 420,
+    "complete_malicious": 240,
+    "complete_rejected": 240,
+    "honest": 100,
+    "honest_accepted": 100,
+    "stderr_bytes": 0,
+    "all_as_registered": true
+  },
+  "suite-ubsan": {
+    "cases": {
+      "D16/honest/uniform": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/outlier": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/low": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/unit-spike": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/honest/zero": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-scale/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-scale/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/gain-swap/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/gain-over-bound/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/isqrt-plus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/isqrt-minus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/div-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/div-rem-under/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/floor-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/swapped-head/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/swapped-head/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-vector/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/shared-coefficient/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/zero-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/spike-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/wrong-output/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/byte-flip/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/truncated/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/trailing/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/dim-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D16/scale-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/uniform": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/outlier": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/low": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/unit-spike": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/honest/zero": {
+        "runs": 10,
+        "accepted": 10,
+        "as_registered": 10,
+        "expected_accept": true,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-scale/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-scale/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/gain-swap/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/gain-over-bound/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/isqrt-plus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/isqrt-minus-one/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/div-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/div-rem-under/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/floor-rem-over/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/swapped-head/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/swapped-head/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-vector/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/shared-coefficient/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/zero-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/spike-no-eps/complete": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/wrong-output/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/byte-flip/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/truncated/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/trailing/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/dim-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "D256/scale-replay/statement": {
+        "runs": 10,
+        "accepted": 0,
+        "as_registered": 10,
+        "expected_accept": false,
+        "seeds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    "sizes": {
+      "D16": {
+        "columns": {
+          "n": 10,
+          "median": 3192.0,
+          "sd": 0.0,
+          "min": 3192,
+          "max": 3192
+        },
+        "relations": {
+          "n": 10,
+          "median": 6333.0,
+          "sd": 0.0,
+          "min": 6333,
+          "max": 6333
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 67968.0,
+          "sd": 150.24483721949022,
+          "min": 67728,
+          "max": 68272
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 0.076597,
+          "sd": 0.006981147592393229,
+          "min": 0.0731976,
+          "max": 0.0953505
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.05878545,
+          "sd": 0.005186575387800058,
+          "min": 0.055208,
+          "max": 0.0725252
+        }
+      },
+      "D256": {
+        "columns": {
+          "n": 10,
+          "median": 43521.0,
+          "sd": 0.0,
+          "min": 43521,
+          "max": 43521
+        },
+        "relations": {
+          "n": 10,
+          "median": 86262.0,
+          "sd": 0.0,
+          "min": 86262,
+          "max": 86262
+        },
+        "proof_bytes": {
+          "n": 10,
+          "median": 815088.0,
+          "sd": 185.5202893965449,
+          "min": 814864,
+          "max": 815376
+        },
+        "prove_s": {
+          "n": 10,
+          "median": 1.217515,
+          "sd": 0.03423502593998011,
+          "min": 1.1554,
+          "max": 1.26538
+        },
+        "verify_s": {
+          "n": 10,
+          "median": 0.3025895,
+          "sd": 0.0105008908219996,
+          "min": 0.282779,
+          "max": 0.308064
+        }
+      }
+    },
+    "hostile_subcases": 420,
+    "hostile_rejected": 420,
+    "complete_malicious": 240,
+    "complete_rejected": 240,
+    "honest": 100,
+    "honest_accepted": 100,
+    "stderr_bytes": 0,
+    "all_as_registered": true
+  }
+}
