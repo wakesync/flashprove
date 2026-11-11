@@ -1,0 +1,200 @@
+{"arm": "honest-chain", "sub": "two-segment", "seed": 1, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22496, "prove_s": 0.00538706, "verify_s": 0.024571, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 1, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22112, "prove_s": 0.00636024, "verify_s": 0.0229169, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 1, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 1, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 1, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 1, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 1, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 2, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22336, "prove_s": 0.00530748, "verify_s": 0.0207772, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 2, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22464, "prove_s": 0.00499314, "verify_s": 0.0224113, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 2, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 2, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 2, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 2, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 2, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 3, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22328, "prove_s": 0.00547714, "verify_s": 0.0214641, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 3, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22400, "prove_s": 0.00535474, "verify_s": 0.0215139, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 3, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 3, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 3, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 3, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 3, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 4, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22496, "prove_s": 0.00531773, "verify_s": 0.020958, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 4, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 21960, "prove_s": 0.00507443, "verify_s": 0.0206296, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 4, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 4, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 4, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 4, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 4, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 5, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22120, "prove_s": 0.00530758, "verify_s": 0.0208821, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 5, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22136, "prove_s": 0.00525329, "verify_s": 0.0208363, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 5, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 5, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 5, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 5, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 5, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 6, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22272, "prove_s": 0.00558019, "verify_s": 0.0211092, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 6, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22368, "prove_s": 0.00490748, "verify_s": 0.0212053, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 6, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 6, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 6, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 6, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 6, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 7, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22104, "prove_s": 0.0053507, "verify_s": 0.0218292, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 7, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22080, "prove_s": 0.00531354, "verify_s": 0.0216141, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 7, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 7, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 7, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 7, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 7, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 8, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22368, "prove_s": 0.00567068, "verify_s": 0.0209713, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 8, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22272, "prove_s": 0.00490876, "verify_s": 0.021625, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 8, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 8, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 8, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 8, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 8, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 9, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 21904, "prove_s": 0.0056412, "verify_s": 0.0225464, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 9, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22176, "prove_s": 0.00554171, "verify_s": 0.0215498, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 9, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 9, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 9, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 9, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 9, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-chain", "sub": "two-segment", "seed": 10, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 579, "proof_bytes": 22024, "prove_s": 0.0056273, "verify_s": 0.0207686, "ubsan": false, "stderr_bytes": 0}
+{"arm": "honest-unbound", "sub": "segment-1", "seed": 10, "accepted": true, "expected_accept": true, "as_registered": true, "columns": 294, "relations": 573, "proof_bytes": 22400, "prove_s": 0.00522211, "verify_s": 0.0219015, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "original", "seed": 10, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-unbound", "sub": "replacement", "seed": 10, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "original-accepted", "seed": 10, "accepted": true, "expected_accept": true, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "a-replacement-own-opening", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "c67-bound", "sub": "b-replacement-under-original-opening", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 4, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "statement-zero-opening", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "tail-splice", "sub": "malicious-under-true-opening", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 3, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "honest-proof-lying-statement", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "out-tail-lie", "sub": "malicious-lying-statement", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 1, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "statement-reordered-opening", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "history-reorder", "sub": "malicious-under-true-opening", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "complete_proof": true, "violations": 2, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f14-root-held-by-f12-verifier", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "cross-scale-root", "sub": "f12-proof-f14-statement", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p1-with-s2", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "proof-transplant", "sub": "p2-with-s1", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-again", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "segment-replay", "sub": "s1-relabelled-index-proof-bound", "seed": 10, "accepted": false, "expected_accept": false, "as_registered": true, "ubsan": false, "stderr_bytes": 0}
+{"arm": "summary", "seed": 10, "checks": 19, "not_as_registered": 0, "ubsan": false, "stderr_bytes": 0}
