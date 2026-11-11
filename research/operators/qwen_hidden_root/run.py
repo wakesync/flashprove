@@ -21,6 +21,7 @@ from count import counts
 HERE = X.HERE
 ROOT = X.ROOT
 EXP = ROOT / 'experiments/20261111-93-hidden-root-handoff'
+REGISTERED = EXP
 WORK = HERE / 'work'
 BINARY = WORK / 'window.bin'
 CORES = os.environ.get('FP_CORES', '6-9')
@@ -192,7 +193,8 @@ def suite():
     start = time.monotonic()
     started = utc()
     print(json.dumps({'slot_granted_utc': started}), flush=True)
-    remaining = (HARD_STOP - datetime.datetime.now(datetime.timezone.utc)).total_seconds()
+    # The lane hard stop applies to the registered run only; a later rerun (--out) keeps the 40 min budget.
+    remaining = (HARD_STOP - datetime.datetime.now(datetime.timezone.utc)).total_seconds() if EXP == REGISTERED else BUDGET
     end = start + min(BUDGET, remaining)
     out = EXP / 'runs/suite.jsonl'
     out.parent.mkdir(exist_ok=True)
