@@ -1,0 +1,77 @@
+{
+ "pass_": true,
+ "A_large_gain_aliases": {
+  "cases": 22,
+  "aliases_without_rule": 22,
+  "rejected_at_derive_with_rule": 22,
+  "as_expected": 22
+ },
+ "B_boundary": {
+  "cases": 8,
+  "as_expected": 8
+ },
+ "C_no_wrap": {
+  "as_expected": true,
+  "largest_relation_magnitude_log2": 47.0875,
+  "samples": 200000,
+  "mismatches": 0
+ },
+ "D_derived_v": {
+  "cases": 15,
+  "as_expected": 15,
+  "below_p": true
+ },
+ "E_no_wrap_ledger": {
+  "identities": 11,
+  "all_below_p": true,
+  "largest": "N3 rr: Rc sigma + rr - 2^36",
+  "largest_bound_without_wrap_log2": {
+   "k": 22.0,
+   "q": 34.0,
+   "a": 22.0,
+   "beta": 32.994,
+   "v": 51.999,
+   "cg": 41.0
+  }
+ },
+ "F_derived_k_q": {
+  "vectors": 774,
+  "sample_seed": 67,
+  "max_abs_k": 4096,
+  "max_abs_q": 362,
+  "k_bound": 4096,
+  "q_bound": 362,
+  "as_expected": true
+ },
+ "G_gain_vs_cg_bound": {
+  "z_values": 2097151,
+  "rows": [
+   {
+    "gain_x10000": 10000,
+    "max_abs_cg": 11863272,
+    "below_bound": true,
+    "as_expected": true
+   },
+   {
+    "gain_x10000": 14100,
+    "max_abs_cg": 16727213,
+    "below_bound": true,
+    "as_expected": true
+   },
+   {
+    "gain_x10000": 14143,
+    "max_abs_cg": 16778225,
+    "below_bound": false,
+    "as_expected": true
+   },
+   {
+    "gain_x10000": 20000,
+    "max_abs_cg": 23726544,
+    "below_bound": false,
+    "as_expected": true
+   }
+  ],
+  "as_expected": true
+ }
+}
+{"matches_expected_output": true}

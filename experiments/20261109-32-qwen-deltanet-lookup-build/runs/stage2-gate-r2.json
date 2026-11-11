@@ -1,0 +1,25 @@
+{
+  "gate_granted_utc": "2026-11-10T20:02:56.675986+00:00",
+  "head": "a36b3d605910ee73bada50bf22b956bec554f92e",
+  "sources": {
+    "research/operators/qwen_deltanet_m2_build/followup_audit.py": "6980544ba5940cf1ff1ff8af442785f92d32628d1f4062ecd0fdeaca898ceac2",
+    "research/operators/qwen_deltanet_m2_build/followup_cases.h": "4b5357cedfeda9014df79e7d985b5a12de48405d99bb25aef6e4519343e642fd",
+    "research/operators/qwen_deltanet_m2_build/head.h": "8d5c79c2270c8213b84b0c9a113c3fe37638b876003f7ca07482073dfc698e69",
+    "research/operators/qwen_deltanet_m2_build/isqrt_test.cpp": "458398b05a1daec89d9118a35e4b8164afd06112ecb93370f83f07b880a6d5ad",
+    "research/operators/qwen_deltanet_m2_build/kit.h": "4ca8b9f29926e388fdab636b892b5663f7103f239016c187a09c9b0b0bfcecdb",
+    "research/operators/qwen_deltanet_m2_build/m2.cpp": "ec6e6a8739ff2266494f93adbb401c4741eb56190f759de3ec1b0451f7c95d24",
+    "research/operators/qwen_deltanet_m2_build/public_stage.h": "624bb88ccdea08e32f3b0415d121ef3ed134cb1c85c8d65a2089554410349173",
+    "research/operators/qwen_deltanet_m2_build/record.py": "9cbf96cc0eb5e751f135fefaf988356531305fd2753d1c7e0435c3bf7145a214",
+    "research/operators/qwen_deltanet_m2_build/record_r2.py": "64116fe51023fd14330398a4ccc9ff0edf6c91ffb048c9d1741d456169c4f7f1",
+    "research/operators/qwen_deltanet_m2_build/reference_m2.py": "ac8bf270e7154f10ed9c7718a68c141f42acff2770ce8731eed7b3f9dd0ae3d1",
+    "research/operators/qwen_deltanet_m2_build/report.py": "149f9b5be6814d8961ddcf6602ec27e60de013d226bd9f0a777f58d6e82ff6b0",
+    "research/operators/qwen_deltanet_m2_build/stage1.cpp": "5b51c02a4cc951dcea768cf625484eb234adf4f0c514a4a5ec1d81d51e15e965",
+    "research/operators/qwen_deltanet_m2_build/tables.py": "60a871980dda856f43f8842f55ac397106dbd24930e30403e9fd751fdcf67694",
+    "research/operators/qwen_deltanet_m2_build/two_lookup.h": "6b27a89b448bee1db1dfa6bbd14ebca19afbd837d5e10c6c59b6a7a455be2b07",
+    "research/operators/qwen_deltanet_m2_build/two_lookup_prove.h": "47a1c4f854def7df04776283573544a6131976b715e847900b767f3a70f379c0"
+  },
+  "cores": "0-5",
+  "budget_seconds": 6600,
+  "hard_stop": "2026-11-10T22:12:00Z",
+  "shared_loaded_host": true
+}

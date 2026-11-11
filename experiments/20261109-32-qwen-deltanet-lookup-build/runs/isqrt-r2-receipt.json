@@ -1,0 +1,11 @@
+{
+  "start": "2026-11-10T20:03:01.548352+00:00",
+  "end": "2026-11-10T20:03:01.612923+00:00",
+  "exit": 0,
+  "timed_out": false,
+  "binary_sha256": "8d67c06469266cb14783ebee85e1ba153abab37bafb4c76b31fce7286fc8baa6",
+  "head": "a36b3d605910ee73bada50bf22b956bec554f92e",
+  "argv": [
+    "research/operators/qwen_deltanet_m2_build/work/isqrt-r2.bin"
+  ]
+}
