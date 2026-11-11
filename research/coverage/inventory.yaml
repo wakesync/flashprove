@@ -1,11 +1,15 @@
-# Constraint coverage inventory (issue #6, first deliverable). Descriptive, not a soundness claim.
+# Constraint coverage inventory (issue #6, first deliverable). Descriptive, not a soundness claim,
+# and not complete: it lists the elements named below, and `excluded` names the research directories
+# it does not cover, with the reason. The checker fails if a research directory is neither cited nor
+# excluded; for the shipped verifier, completeness rests on reading and on review.
 #
 # Each row maps one element of the relation that a FlashProve proof is about (an admitted operator,
 # a range or rounding rule, a committed input or state, an output position) to the place in this
 # repository that enforces it, and says what kind of enforcement that is:
 #
-#   proof_constraint     checked inside the proof: a sub-proof's sumcheck, lookup, range check, or the
-#                        hash chain itself; a cheating prover must break the proof system to get past it
+#   proof_constraint     intended to be enforced inside the proof: a sub-proof's sumcheck, lookup,
+#                        range check, or the hash chain itself. That the constraint is correct or
+#                        sufficient is not established here.
 #   verifier_validation  checked by the verifier program or the client's integration on public values,
 #                        outside the proof's relation (parameter conditions, an ID comparison, a policy or
 #                        range comparison with what the caller states); a complete proof of another
@@ -18,14 +22,17 @@
 # scope: shipped (cp_verify, cp_commit, cp_prove, integrations/ on main) or research (the fork's operator
 # prototypes under research/operators/, which are not in cp_verify).
 #
-# sites: file + symbol. `symbol` is a literal string that must occur in `file`. The checker
-# (check_inventory.py) fails if a file is missing or a symbol no longer occurs in it, so the inventory
-# cannot silently rot when the code moves. A site is where the enforcement lives, or, for prover_only and
-# not_enforced rows, the place that documents the absence. A site says where; it does not show that the
-# check there is right.
+# sites: file + symbol. `symbol` is a literal string of at least 12 characters that must occur in
+# `file`. The checker (check_inventory.py, run in CI by claims-check) fails if a file is missing or a
+# symbol no longer occurs in it, so a rename or deletion of a cited site is noticed. It does not see a
+# row moved to a stronger kind, a check disabled behind unchanged text, or a row losing one of two
+# sites. A site is where the enforcement lives, or, for prover_only and not_enforced rows, the place
+# that documents the absence. A site says where; it does not show that the check there is right.
 #
-# Base: main ba1e3067f58b0142dd16a3df884626cfe6ccc585. Read from source and docs; only rows N1 to N3 of
-# experiments/20261110-6-coverage-inventory/ were run.
+# Base: main ba1e3067f58b0142dd16a3df884626cfe6ccc585 for rows OP-01 .. OUT-07 (first version, PR #97
+# head 655d70b2). Rows added after review (OP-15, OP-R8 .. OP-R14, RR-15 .. RR-21, RR-R1, IS-23, IS-24,
+# OUT-08, OUT-09) were read at main 0bdf8326, where the cited files are unchanged from ba1e3067. Read
+# from source and docs; only rows N1 to N3 of experiments/20261110-6-coverage-inventory/ were run.
 
 schema_version: 1
 base_commit: ba1e3067f58b0142dd16a3df884626cfe6ccc585
@@ -138,6 +145,7 @@ rows:
       - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "DD") {'}
       - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "SEL") {'}
       - {file: verifier/src/cp_verify.cpp, symbol: 'need((u128)NE * Ty + 1 < P2, "one-hot");'}
+    note: "the third site (one-hot) is a verifier condition on public parameters (a verifier_validation site, as in RR-04); the selection itself is in the proof (DD, SEL)"
   - id: OP-12
     category: operator
     scope: shipped
@@ -165,17 +173,27 @@ rows:
     sites:
       - {file: verifier/src/vf_weights_pending_claim.h, symbol: 'struct WsPending {'}
       - {file: verifier/src/cp_verify.cpp, symbol: 'blk::check_proof_if_tested('}
+  - id: OP-15
+    category: operator
+    scope: shipped
+    element: "embedding lookup x^0_t = Emb[tok_t], and its value as the first residual stream that layer 0 reads"
+    relation: "group 0's claim on Emb (unit X = 12): v_E = sum_t eq(ztE, t) sum_k phiE[k] Emb[tok_t][k], with the token factor built from the request's tokens; then the claim that v_E is a read of xbI at Z_E"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "// The embedding's claim (unit X = 12)"}
+      - {file: verifier/src/vf_layers_check.inc, symbol: "the embedding's value is a read of the first stream"}
+    note: "RR-02 covers only the range of Emb's digits; this row is the lookup itself (added after review of PR #97)"
   # ---------------------------------------------------------------- operators, research prototypes
   - id: OP-R1
     category: operator
     scope: research
     element: "same-oracle sparse affine rows (research/operators/affine_rows)"
-    relation: "verifier-fixed affine relation over the committed product oracle; honest and complete malicious proofs in PR #15"
+    relation: "verifier-fixed affine relation over the committed product oracle; honest and two complete malicious proofs (README 'Two complete malicious proofs'); reached main through PR #20 (PR #15 was closed unmerged)"
     enforcement: proof_constraint
     sites:
       - {file: research/operators/affine_rows/product.h, symbol: 'inline Row affine_row(OracleId oracle,const AffineRelation &a) {'}
       - {file: research/operators/affine_rows/README.md, symbol: 'Trusted mutable in-memory runs/plans are not safe untrusted parsers'}
-    note: "the run and plan objects come from a trusted constructor; invalid constructions abort (SIGABRT), there is no untrusted statement decoder"
+    note: "the run and plan objects come from a trusted constructor; invalid constructions abort (SIGABRT), there is no untrusted statement decoder. Its substrates research/operators/public_binding and shared_wires are under excluded"
   - id: OP-R2
     category: operator
     scope: research
@@ -184,6 +202,9 @@ rows:
     enforcement: proof_constraint
     sites:
       - {file: research/operators/moe_topk/README.md, symbol: 'Why the selection is unique'}
+      - {file: research/operators/moe_topk/test.cpp, symbol: '// (2) one-hot selection: Boolean P[m,i]; P*K and P*s gathers.'}
+      - {file: research/operators/moe_topk/test.cpp, symbol: '// (6) threshold: u_i = (1 - sel_i) * (G_{k-1} - K_i - 1) in [0, 2^26).'}
+      - {file: research/operators/moe_topk/test.cpp, symbol: '// (8) aggregation: XG[m][d] = sum_i P[m,i] X_i[d]; y[d] = floor(sum_m w_m XG[m][d] / 2^12).'}
   - id: OP-R3
     category: operator
     scope: research
@@ -226,6 +247,71 @@ rows:
     sites:
       - {file: research/operators/README.md, symbol: 'Status: executable **constraint satisfaction**, not a cryptographic proof'}
     note: "checks a witness; there is no proof or verifier, so nothing is enforced against a prover"
+  - id: OP-R8
+    category: operator
+    scope: research
+    element: "GLM KDA algebra slice (research/operators/glm_kda_slice): two-token transition over field values, with the second token reading the first token's committed state cells"
+    relation: "30 product gates on the shared product oracle, equality rows, affine rows for sums, coordinate rows for public inputs, outputs and final state; research verifier, not cp_verify"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/glm_kda_slice/README.md, symbol: 'committed state cells: token two cannot substitute an unrelated state.'}
+      - {file: research/operators/glm_kda_slice/test.cpp, symbol: 'Wrong subtraction, disconnected second-token state, wrong second delta.'}
+  - id: OP-R9
+    category: operator
+    scope: research
+    element: "GLM KDA algebra slice: rounding, saturation, integer ranges and fixed-point scale"
+    relation: "none; the slice is exact field algebra"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/glm_kda_slice/README.md, symbol: 'There is no rounding, saturation, range enforcement or fixed-point scale here.'}
+  - id: OP-R10
+    category: operator
+    scope: research
+    element: "GLM KDA signed staged-floor micro-slice (research/operators/glm_kda_fixedpoint): each rounded product a*b = 4q + r with signed q in [-8, 7], r in [0, 3]; signed four-bit range decomposition of every value"
+    relation: "56 product gates, 42 wire equalities, 57 affine relations on the shared product oracle; Boolean bits by b*b = b; research verifier, not cp_verify"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Each rounded multiplication binds `a*b = 4*q+r`'}
+      - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Signed range decomposition binds `x+8 = sum(2^i*b_i)`'}
+      - {file: research/operators/glm_kda_fixedpoint/test.cpp, symbol: 'signed staged-floor scalar KDA'}
+    note: "one fixed toy statement (public S = O = -3), not the publisher's numerics"
+  - id: OP-R11
+    category: operator
+    scope: research
+    element: "Qwen nonlinear tables (research/operators/qwen_ops): input floored to the table grid, 4096-way one-hot selector, six outputs read from one pinned table row"
+    relation: "c.floor(x, F - 8), selectors(key), lookup(sel, table) on the shared product oracle; the verifier rebuilds the relation list from its own operator definition"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit nonlinear(const Input& in,bool witness) {'}
+      - {file: research/operators/qwen_ops/README.md, symbol: 'A 4096-way one-hot selector has Boolean entries'}
+    note: "the input is committed and chosen by the prover (OP-R6)"
+  - id: OP-R12
+    category: operator
+    scope: research
+    element: "Qwen depthwise convolution, one channel, T = 4: products of history/input cells with kernel cells, floored sum, output range"
+    relation: "qwen_ops conv(): mul, floor(sum, F), range(y, F + 4)"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit conv(const Input& in,bool witness) {'}
+    note: "kernel, history and inputs are committed and chosen by the prover (OP-R6)"
+  - id: OP-R13
+    category: operator
+    scope: research
+    element: "Qwen L2 / RMS norm of one head: sum of squares, floored mean-square key, table coefficient, floored scaled outputs"
+    relation: "qwen_ops norm(): no gain, no epsilon"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit norm(const Input& in,bool witness) {'}
+    note: "inputs committed and chosen by the prover (OP-R6); not the M2 isqrt norm"
+  - id: OP-R14
+    category: operator
+    scope: research
+    element: "Qwen rotary: first 64 of 256 coordinates rotated with pinned cos/sin at a public position, floored; the rest copied"
+    relation: "qwen_ops rotary(): coefficients from the pinned rotary table at the public position"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit rotary(const Input& in,bool witness) {'}
+    note: "inputs committed and chosen by the prover (OP-R6)"
   # ---------------------------------------------------------------- range and rounding rules
   - id: RR-01
     category: range_rounding
@@ -292,6 +378,7 @@ rows:
     relation: "UT key u + 2^LBU in a 2^16-row table"
     enforcement: proof_constraint
     sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "UT") return S("u") + affC(pw(LBU) * w);'}
       - {file: verifier/src/vf_widths_and_bounds.h, symbol: 'static constexpr u32 SMAXTOP = 4095, LBU = 15;'}
   - id: RR-08
     category: range_rounding
@@ -357,7 +444,85 @@ rows:
     sites:
       - {file: verifier/src/vf_common.h, symbol: 'static constexpr double BAR = DW == 8 ? 128.0 : 136.0;'}
       - {file: verifier/src/cp_verify.cpp, symbol: 'refuse("security-bits");'}
-    note: "a program's calculation, no theorem about the programs; not a security level"
+    note: "a program's calculation, no theorem about the programs; not a security level. Not a range or rounding rule of the model: it is filed here for want of a fifth category (a parameter condition on the proof system)"
+  - id: RR-15
+    category: range_rounding
+    scope: shipped
+    element: "range condition 1: Vx + eps < 2^78 (five limbs; with four limbs Vx < 2^59), the sum of squares a norm reads"
+    relation: "docs/model.md section 9 condition 1; V is held only as byte digits of the norm's digit row, each digit range-checked by the row's lookup (mu x digit a byte)"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/model.md, symbol: '| 1 | Vx + eps | 5 | < 2^78 |'}
+      - {file: verifier/src/vf_norm_digit_rows.h, symbol: 'V exists only as digits'}
+    note: "by reading: the bound follows from the number of digits of V in the row; not separately tested here"
+  - id: RR-16
+    category: range_rounding
+    scope: shipped
+    element: "range condition 2: a norm's quotient w[k] in -32,768 .. 32,767"
+    relation: "the clamp key of CN1 / CN2: aw + 2^15 must be a row number of the 2^16-row table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CN1" || sn == "CN2") {'}
+      - {file: docs/model.md, symbol: "| 2 | a norm's quotient w[k] | 5 | -32,768 .. 32,767 |"}
+    note: "that the key pins the range rests on the radix conditions (guard-radix, RR-04); the provers' narrower interval is RR-12"
+  - id: RR-17
+    category: range_rounding
+    scope: shipped
+    element: "range condition 3: a wide query or key entry qw, kw in -32,768 .. 32,767"
+    relation: "the clamp key of CQK in table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'return S("qkw") + (SBA(wh, 0, dq, "q", lam, Z, 0)'}
+      - {file: docs/model.md, symbol: '| 3 | a wide query or key entry, qw or kw | 6 |'}
+  - id: RR-18
+    category: range_rounding
+    scope: shipped
+    element: "range condition 4: a wide value entry vw in -32,768 .. 32,767"
+    relation: "the clamp key of CV in table FC"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: 'if (sn == "CV") return S("vw") + S("v") * pw(28)'}
+      - {file: docs/model.md, symbol: '| 4 | a wide value entry vw | 6 |'}
+  - id: RR-19
+    category: range_rounding
+    scope: shipped
+    element: "range condition 5: the high part ly of a wide router logit (with rcl 1: lw itself)"
+    relation: "the clamp key of CLR in table FC (rcl 1), L3 for the low bits"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "CLR's key is FC's row for ly exactly if lr - l3 = 8 clamp(ly, +-2047)"}
+      - {file: docs/model.md, symbol: '| 5 | the high part ly of a wide router logit | 7 |'}
+    note: "MoE layers only; by reading, the form without rcl was not traced here"
+  - id: RR-20
+    category: range_rounding
+    scope: shipped
+    element: "range condition 6: the high part gh of a wide gate key in -16,384 .. 16,383 (with gcl 1: gw)"
+    relation: "the key of CG must be a row of the clamp half of table FS (gcl 1); without gcl, the gate key in F"
+    enforcement: proof_constraint
+    sites:
+      - {file: verifier/src/vf_layers_check.inc, symbol: "CG's must be a row of lookup table FS"}
+      - {file: verifier/src/cp_verify.cpp, symbol: "so that key = row forces gh + 49152 = t for a row of the clamp's half of table FS"}
+      - {file: docs/model.md, symbol: '| 6 | the high part gh of a wide gate key | 7 |'}
+  - id: RR-21
+    category: range_rounding
+    scope: shipped
+    element: "range condition 8: |x[k]| < 2^39 for a stream value a norm reads"
+    relation: "follows from condition 1 on the same norm (docs/model.md section 9); the stream is held in residualStreamLimbs signed-byte limbs"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/model.md, symbol: 'which follows from condition 1'}
+      - {file: verifier/src/vf_norm_digit_rows.h, symbol: 'static int residualStreamLimbs = 4;'}
+    note: "no check of its own: it holds if RR-15 holds, an argument from the docs, not tested here"
+  - id: RR-R1
+    category: range_rounding
+    scope: research
+    element: "Qwen operator ranges (qwen_ops): inputs in [-2^F, 2^F) (F + 1 bits), outputs in F + 3 or F + 4 bits, remainders bit-decomposed"
+    relation: "c.range() on the shared product oracle"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+4,8*S)'}
+      - {file: research/operators/qwen_ops/proof.cpp, symbol: 'c.range(y,f+3,4*S)'}
+      - {file: research/operators/qwen_ops/README.md, symbol: 'The input quotient is tied to X with an exactly bit-decomposed remainder'}
   # ---------------------------------------------------------------- committed inputs and state
   - id: IS-01
     category: input_state
@@ -436,6 +601,17 @@ rows:
     enforcement: proof_constraint
     sites:
       - {file: blocks/frame/check.h, symbol: 'lin_binding_root(file, first_ch.get(x.binding)'}
+  - id: IS-23
+    category: input_state
+    scope: shipped
+    element: "stream links between segments: the stream that leaves layer group g - 1 (xbO) is the one that enters group g (xbI), and the last one (xbL) feeds the final norm"
+    relation: "xbI from group 1 on and xbL are not committed by their segment: they are the earlier segment's xbO array, kept by the frame; the reader's placement record must equal the owner's"
+    enforcement: proof_constraint
+    sites:
+      - {file: docs/format/11-2-feed-forward-segment.md, symbol: 'From group 1 on, xbI is not committed by this segment'}
+      - {file: docs/format/11-4-output-head.md, symbol: 'xbL is not committed by this segment'}
+      - {file: verifier/src/vf_layers_plan.inc, symbol: 'samePlaceF(hidPlans2[g - 1].tl.ownEntry("stream"), P.tl.plFor[0])'}
+    note: "structural (one committed array read by two segments), by reading; IS-04 is the leaf/anchor link, not this (added after review of PR #97)"
   - id: IS-10
     category: input_state
     scope: shipped
@@ -515,7 +691,7 @@ rows:
     relation: "KL.bin is bound by the ID and its ranges are checked; its meaning is not"
     enforcement: not_enforced
     sites:
-      - {file: guide/known-limits.md, symbol: 'switch off'}
+      - {file: guide/known-limits.md, symbol: 'a scale file within the admitted range can switch off'}
   - id: IS-20
     category: input_state
     scope: research
@@ -542,6 +718,14 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: experiments/20261109-34-qwen-state-commit/RESULTS.md, symbol: 'Still accepted after the fix, by design of this harness (open)'}
+  - id: IS-24
+    category: input_state
+    scope: research
+    element: "GLM KDA slices: where the public initial state comes from"
+    relation: "none; the initial state is a public value of the toy statement"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Public initial-state provenance remains external.'}
   # ---------------------------------------------------------------- output positions
   - id: OUT-01
     category: output
@@ -565,12 +749,22 @@ rows:
   - id: OUT-03
     category: output
     scope: shipped
-    element: "next token y after the window when e = T (top choice under every policy)"
-    relation: "y enters the chain at the output head; caller's y compared ('the proof is about another reply')"
+    element: "next token y after the window when e = T is the top choice of its position (under every policy)"
+    relation: "y enters the chain at the output head as the REPLY scalar; the head's margin at position T - 1 is 0"
     enforcement: proof_constraint
     sites:
       - {file: verifier/src/cp_verify.cpp, symbol: 'y must be the argmax of its position'}
-      - {file: verifier/src/cp_verify.cpp, symbol: '"the proof is about another reply"'}
+    note: "split after review of PR #97: the comparison with the caller's y is OUT-09"
+  - id: OUT-09
+    category: output
+    scope: shipped
+    element: "the y in the proof is the y the caller names (the caller's y file)"
+    relation: "check_proof_if_tested compares the proof's unmasked reply with the caller's y; NO with 'the proof is about another reply'"
+    enforcement: verifier_validation
+    sites:
+      - {file: blocks/frame/check.h, symbol: 'why = "the proof is about another reply"'}
+      - {file: verifier/src/cp_verify.cpp, symbol: '"the proof is about another reply") ? "reply-differs"'}
+    note: "application validation on a value the caller states, as IS-01 and OUT-05: it binds only the y the caller brings"
   - id: OUT-04
     category: output
     scope: shipped
@@ -579,6 +773,16 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: docs/limits.md, symbol: 'cover tokens 0 to r'}
+  - id: OUT-08
+    category: output
+    scope: shipped
+    element: "tokens e + 1 .. T - 1 after the checked range, when e < T"
+    relation: "not checked: only positions r .. e - 1 are marked (hOn); a truncated reply verifies as a shorter reply"
+    enforcement: not_enforced
+    sites:
+      - {file: verifier/src/cp_verify.cpp, symbol: 'for (u64 t = rowR; t < rowE; t++) {'}
+      - {file: docs/limits.md, symbol: 'A truncated reply verifies'}
+    note: "added after review of PR #97; OUT-05 (client range comparison) and OUT-06 (end token) are what stop a client from taking this as the whole reply"
   - id: OUT-05
     category: output
     scope: shipped
@@ -606,6 +810,22 @@ rows:
     sites:
       - {file: verifier/src/cp_verify.cpp, symbol: 'o.claim = r + 1 > last ? "next-token" : o.otherKind ? "policy" : "exact-match";'}
 
+# Research directories under research/operators/ that no row covers, with the reason. The checker fails
+# if a directory there is neither cited by a row nor listed here, so a new prototype cannot land unseen.
+excluded:
+  - path: research/operators/evidence
+    reason: "receipts of the first top-k prototype (OP-R7), no relation of its own"
+  - path: research/operators/public_binding
+    reason: "public-coordinate product proof, a substrate of affine_rows (OP-R1); its own coordinate relation is not inventoried row by row"
+  - path: research/operators/shared_wires
+    reason: "shared-wire equality proof, a substrate of affine_rows (OP-R1) and the GLM slices; not inventoried row by row"
+  - path: research/operators/qwen_deltanet
+    reason: "Qwen DeltaNet M1, superseded by the M1b lookup prototype (OP-R4); its M1 verdict is FAIL as registered; not inventoried"
+  - path: research/operators/qwen_m3
+    reason: "counting and cost model, no proof and no relation that enforces anything"
+  - path: research/operators/qwen_deltanet_m2_build
+    reason: "reached main after this inventory's base (PR #73, main 0bdf8326); its two-lookup relations are not inventoried here (follow-up)"
+
 # Open gaps: every prover_only and not_enforced row, plus open proof obligations, in plain language.
 # check_inventory.py fails if a prover_only or not_enforced row is in no gap.
 open_gaps:
@@ -619,8 +839,8 @@ open_gaps:
     rows: [IS-11, IS-18, IS-12]
     text: "Weight hiding rests on the honest prover: it counts opened columns, draws fresh seeds and keeps masks. A verifier cannot see a lost mask, a reused seed, a public-weights commitment or an over-used leaf table."
   - id: G-04
-    rows: [IS-13, IS-14, IS-15, OUT-04]
-    text: "The proof is about token ids. Who chose the prompt tokens, which tokenizer and template made them, how the reply was sampled and what the prompt says are all outside the proof. Tokens up to r are not checked at all."
+    rows: [IS-13, IS-14, IS-15, OUT-04, OUT-08]
+    text: "The proof is about token ids. Who chose the prompt tokens, which tokenizer and template made them, how the reply was sampled and what the prompt says are all outside the proof. Tokens up to r are not checked at all, and neither are tokens after e when e < T."
   - id: G-05
     rows: [IS-16, IS-17]
     text: "A proof names no client and no time, so it can be replayed. The verifier binary is not identified in the transcript, so a client must build its own."
@@ -628,14 +848,14 @@ open_gaps:
     rows: [IS-19]
     text: "The scale file is bound by the ID, but a scale file inside the admitted ranges can still switch parts of the model off. The verifier checks ranges, not meaning."
   - id: G-07
-    rows: [OP-R5, OP-R6, OP-R7, IS-22]
-    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, and the state-commit harness accepts replaced token inputs by design."
+    rows: [OP-R5, OP-R6, OP-R7, OP-R9, IS-22, IS-24]
+    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, the GLM algebra slice has no rounding or ranges, the GLM slices take their initial state as given, and the state-commit harness accepts replaced token inputs by design."
   - id: G-OB1
     rows: [RR-04, RR-08]
     text: "Open obligation: that cp_verify's no-overflow conditions are enough for the programs' equations to hold over the integers is argued from reading the source and a non-public report, not proved."
   - id: G-OB2
-    rows: [IS-01, IS-08, OUT-05, OUT-06]
-    text: "Open obligation: the stronger claim the client wants (this commitment, this policy, this whole range, a complete reply) is enforced only if the caller states each value itself. A bare cp_verify YES on files that came with the proof can be a true answer to a weaker question. End-to-end exact greedy needs all four checks on the client side."
+    rows: [IS-01, IS-08, OUT-05, OUT-06, OUT-09]
+    text: "Open obligation: the stronger claim the client wants (this commitment, this policy, this whole range, a complete reply, this next token) is enforced only if the caller states each value itself. A bare cp_verify YES on files that came with the proof can be a true answer to a weaker question. End-to-end exact greedy needs all five checks on the client side."
   - id: G-OB3
     rows: [OP-01, OP-05, OP-14, RR-03]
     text: "Open obligation: the Lean soundness theorem is about the Lean verifier at full size and exact match; the C++ verifier is tested against it, not proved, and no theorem covers new research gadgets at their own dimensions."
