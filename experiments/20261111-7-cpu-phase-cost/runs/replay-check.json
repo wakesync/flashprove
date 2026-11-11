@@ -1,0 +1,108 @@
+{
+ "clock": "run.py datetime.now() = real UTC + 1 day (registered cutoff in the past)",
+ "registered_hard_stop": "2026-11-11T06:30:00Z",
+ "real_utc_start": "2026-11-11T05:28:25Z",
+ "checks": {
+  "registered_stops_after_cutoff": {
+   "ok": true,
+   "events": [
+    {
+     "event": "slot_granted"
+    },
+    {
+     "event": "stopped",
+     "before": "cold rep 0"
+    }
+   ],
+   "child_processes": 0
+  },
+  "replay_runs_children_after_cutoff": {
+   "ok": true,
+   "head": {
+    "event": "replay_started",
+    "mode": "replay",
+    "budget_s": 900.0,
+    "reps": 1,
+    "hard_stop": null,
+    "registered_hard_stop_not_applied": "2026-11-11T06:30:00Z",
+    "cores": "6-11"
+   },
+   "last_event": "done",
+   "elapsed_s": 94.9,
+   "child_processes": 8,
+   "rejects": 0,
+   "children": [
+    {
+     "cell": "A-cold",
+     "rep": 0,
+     "role": "prover",
+     "exit": 0,
+     "process_wall_s": 1.38525,
+     "ru_maxrss_kb": 113140
+    },
+    {
+     "cell": "A-cold",
+     "rep": 0,
+     "role": "verifier",
+     "exit": 0,
+     "process_wall_s": 0.261551,
+     "ru_maxrss_kb": 11044
+    },
+    {
+     "cell": "B-cold",
+     "rep": 0,
+     "role": "prover",
+     "exit": 0,
+     "process_wall_s": 13.865071,
+     "ru_maxrss_kb": 1258632
+    },
+    {
+     "cell": "B-cold",
+     "rep": 0,
+     "role": "verifier",
+     "exit": 0,
+     "process_wall_s": 3.239474,
+     "ru_maxrss_kb": 714924
+    },
+    {
+     "cell": "A-amort",
+     "rep": 0,
+     "role": "prover",
+     "exit": 0,
+     "process_wall_s": 7.99455,
+     "ru_maxrss_kb": 114612
+    },
+    {
+     "cell": "A-amort",
+     "rep": 0,
+     "role": "verifier",
+     "exit": 0,
+     "process_wall_s": 1.088601,
+     "ru_maxrss_kb": 11052
+    },
+    {
+     "cell": "B-amort",
+     "rep": 0,
+     "role": "prover",
+     "exit": 0,
+     "process_wall_s": 54.489379,
+     "ru_maxrss_kb": 1284904
+    },
+    {
+     "cell": "B-amort",
+     "rep": 0,
+     "role": "verifier",
+     "exit": 0,
+     "process_wall_s": 12.564413,
+     "ru_maxrss_kb": 738944
+    }
+   ]
+  },
+  "replay_refuses_runs_dir": {
+   "ok": true,
+   "message": "replay: refusing to write under the registered runs/ directory; pass a fresh output dir"
+  }
+ },
+ "all_ok": true,
+ "note": "Smoke test of the replay path only: 1 repetition per cell, not a replication, not part of the registered result."
+}
