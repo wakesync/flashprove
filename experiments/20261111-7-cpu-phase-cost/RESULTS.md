@@ -5,8 +5,8 @@ Issue #7. Registration: [PREREG.md](PREREG.md) (commit 069c0d27, alone). Environ
 ## In plain words
 
 - This measures where the time goes when one of this repository's two CPU-runnable proof programs makes a proof and a separate program checks it. It is the first phase-by-phase cost table on main for either program. Both are small research programs. Neither is the GPU prover and neither is a real model.
-- **Profile B (one Qwen DeltaNet attention head, 4 positions, made-up inputs): PASS.** Proving is 79% of the time from "start the prover" to "the independent checker said yes" (13.40 s of 16.91 s, medians of 10). Checking is second (3.26 s). Everything else together is under 0.3 s. Proofs are 6.76 MB; the prover peaks at 1.23 GB of memory, the checker at 0.70 GB. Making several proofs in one process does not make each one cheaper: there is no shared setup to spread out.
-- **Profile A (the toy protocol test of PR #40): FAIL, by a hair.** The ordering part of the prediction held: proving a batch of 3 requests (0.74 s) and making the commitment (0.52 s) are the two biggest phases, clearly separated from the rest. But the registered amortization threshold was "a batch on an existing commitment costs below 50% of a cold run", and it came out at **50.02%** (0.823 s vs 1.645 s). That is a FAIL under the registration and is reported as one; it is not rounded into a pass.
+- **Profile B (one Qwen DeltaNet attention head, 4 positions, made-up inputs): PASS.** Proving is 79% of the time from "start the prover" to "the independent checker said yes" (13.40 s of 16.91 s, medians of 10). Checking is second (3.26 s). Everything else together is under 0.3 s. Proofs are 6.76 MB; the prover peaks at 1,229.1 MiB of memory (about 1.29 GB), the checker at 698.1 MiB (about 0.73 GB). Making several proofs in one process does not make each one cheaper: there is no shared setup to spread out.
+- **Profile A (the toy protocol test of PR #40): FAIL, by a hair.** The ordering part of the prediction held: proving a batch of 3 requests (0.74 s) and making the commitment (0.52 s) are the two biggest phases, clearly separated from the rest. But the registered amortization threshold was "a batch on an existing commitment costs below 50% of a cold run", and it came out at **50.02%** (0.823 s vs 1.645 s). That is a FAIL under the registration and is reported as one; it is not rounded into a pass. It is also not robust to how the registration is read: the PREREG words this metric two ways, and the other wording gives 49.99% (see the note under the verdict table).
 - On a single core of this shared virtual machine, these programs are not fast: profile B proves 0.30 head positions per second, 0.24 counting the independent check.
 - **Not measured here:** anything on a GPU, Qwen3.8-27B or any whole model, generated-tokens/s, overhead compared to plain inference (no plain-inference baseline was run), and money.
 
@@ -18,6 +18,8 @@ Issue #7. Registration: [PREREG.md](PREREG.md) (commit 069c0d27, alone). Environ
 | A (i) | commit and prove the two largest phases, each range separate from every smaller phase | order prove > commit > verification > setup > write > witness; commit 0.503..0.535 and prove 0.726..0.784 vs the next, verification 0.238..0.325 | holds |
 | A (ii) | amortized per-batch verified median < 50% of cold e2e median, and amortized max < cold min | 0.8229 / 1.6452 = **0.5002**; max 0.856 < min 1.584 | **does not hold** (ratio) |
 | A | (i) and (ii) | | **FAIL** |
+
+**Note (2026-11-11, after review of PR #106): two registered wordings of A (ii).** The PREREG defines the amortized number twice. Its "Metric" section says the per-batch cost is the median of prove over batches 2..K and the median of check_proof over those batches, i.e. two separate medians, summed. Its "Acceptance threshold" says "the amortized per-batch verified latency median (prove + check_proof x3 of one batch)", i.e. the median of per-batch sums. `analyze.py` implements the threshold wording; it was written after the registered run (commit f70ff0c, not the harness commit 499694a). From the committed `runs/runs.jsonl` (cold e2e median 1.645225 s), median over processes of each process's median per-batch sum: 0.822946 s, ratio **0.500203, FAIL** (this table, the analyzer). Median over processes of [median prove + median check] per process, the literal Metric wording: 0.822399 s, ratio **0.499870**, which would pass (its max 0.847541 s is also below the cold min 1.584263 s). The verdict stays FAIL: the threshold sentence is the one that defines PASS/FAIL, it says "of one batch", and it is the more conservative reading. The honest summary is that A (ii) sits on the threshold and its sign depends on the aggregation, not only on rounding. Both numbers were recomputed from the raw log by a reviewer of PR #106 and again, with separate code, before this note was written. PREREG Amendments (2026-11-11) records the same.
 
 Every one of the 80 processes exited 0; every proof was accepted by its independent verifier (A: 330 proofs, B: 50 statements). No run was excluded, retried or replaced. Registered run: slot granted 04:26:07Z, done 04:42:02Z (955 s of a 2,700 s budget).
 
@@ -47,7 +49,7 @@ Seconds, sample SD, min..max. One prover process (configure, commit, prove one b
 | **independent verification** (verifier process wall) | **0.2500** | 0.0260 | 0.2384..0.3253 |
 | **end-to-end verified-before-release** | **1.6452** | 0.0443 | 1.5843..1.7420 |
 
-Bytes (n = 10): key 500,884 (SD 1,215, 499,432..502,728); entry 131,928 (893, 130,352..133,008); each proof about 576 to 577 KB (577,092 / 576,340 / 576,864 medians for requests 1..3, range 571,716..580,116). Peak RSS (kernel high-water mark per process): prover 110.6 MiB (110.1..111.0), verifier 10.2 MiB (10.1..10.4). Process CPU time is within 0.1% of wall for both (single-threaded).
+Bytes (n = 10): key 500,884 (SD 1,215, 499,432..502,728); entry 131,928 (893, 130,352..133,008); each proof about 576 to 577 KB (577,092 / 576,340 / 576,864 medians for requests 1..3, range 571,716..580,116). Peak RSS (kernel high-water mark per process): prover 110.6 MiB (110.1..111.0), verifier 10.2 MiB (10.1..10.4). The verifier figure is an upper bound: `ru_maxrss` of a child forked from the Python runner carries the high-water mark of the pre-exec fork image, so much of the 10.2 MiB may be the runner's image rather than the verifier (profile B's hundreds of MiB are not materially affected). Process CPU time is within 0.1% of wall for both (single-threaded).
 
 Positions/s: **not applicable.** Toy requests are byte strings and the toy segments do not prove model inference or the replies (see `blocks/frame/tests/seam_world.h`). Notable: the verifier spends 44% of its time re-parsing and sizing the public files (configure), more than on checking the three proofs.
 
@@ -117,7 +119,9 @@ PR #40 timed profile A's stages inside one process as the baseline arm of a hash
 - **Raw log path scrub.** The runner wrote absolute paths of the lane's clone into each child's argv. Before committing, `scrub.py` replaced that one prefix with "." (210 occurrences) and nothing else; the first line of `runs/runs.jsonl` records the SHA-256 of the unscrubbed file. Analysis was run on both and gives identical statistics.
 - **Artifacts not committed.** The 470 proof/commitment files (0.5 GB) are not in the repository; their SHA-256 values are (`runs/artifact-hashes.json`). Rerunning the registered command regenerates them deterministically (test coins).
 - The PREREG "Metric" section said profile A witness generation was `toy_matrix_in_range` and `lin_table_rows`. Both are timed; at 0.1 ms the matrix is trivial. The per-request vectors drawn inside `prove_batch` are, as registered, counted in prove.
-- None other. Thresholds, n, seeds, cores, ordering and the budget were as registered.
+- **Two wordings of the A amortized metric (added 2026-11-11, after review).** See the note under the verdict table: the analyzer (written after the run, f70ff0c) implements the threshold wording (0.500203, FAIL); the literal Metric wording gives 0.499870. Verdict unchanged, FAIL.
+- **Replay mode (added 2026-11-11, after review).** `run.py registered` keeps the registered hard stop 2026-11-11T06:30Z and after it runs nothing. To reproduce later, `run.py replay` runs the same suite and order with a budget relative to its own start (`--budget-min`, default 45) and optionally the first N repetitions (`--reps`); it never writes under `runs/`. `test_replay.py` with the clock set after the cutoff shows `registered` still stops and `replay` runs its child processes; receipt `runs/replay-check.json` (a new file, 1 repetition per cell, a smoke test, not a replication). PREREG Amendments (2026-11-11).
+- Thresholds, n, seeds, cores, ordering and the budget of the registered run were as registered.
 
 ## Not established
 
@@ -125,7 +129,8 @@ PR #40 timed profile A's stages inside one process as the baseline arm of a hash
 - Any Qwen3.8-27B or whole-model cost. Profile B is one head of one layer, at research security (10-bit target, toy coins), on synthetic inputs, with a lowering that failed fidelity on real weights (PR #68). Multiplying 0.30 positions/s up to a model is an extrapolation and is not made here.
 - Generated tokens/s and any overhead vs plain inference: no matched plain-inference baseline was measured.
 - Money: no unit price is applied.
-- Replication: one lane, one shared host, one day. Times are indicative; the phase ordering is robust (ranges far apart), the A amortization ratio is not (0.5002 vs 0.50).
+- Replication: one lane, one shared host, one day. Times are indicative; the phase ordering is robust (ranges far apart), the A amortization ratio is not (0.5002 vs 0.50 under the analyzer, 0.4999 under the literal Metric wording).
+- `ENV.json` `binary_sha256` values reproduce only from a build in the same directory: the binaries embed the absolute source path (`__FILE__` in check messages), so a build elsewhere gives different bytes with identical outputs.
 
 ## Reproduce
 
@@ -135,7 +140,8 @@ From the repository root, CPU only (g++ 13, Python 3 with numpy):
 python3 experiments/20261111-7-cpu-phase-cost/build.py scratch/bin
 python3 experiments/20261111-7-cpu-phase-cost/fixtures.py registered scratch/fx
 # on a shared host, inside its heavy-job gate; cores via COST7_CORES (default 6-11); the output dir must not exist
-python3 experiments/20261111-7-cpu-phase-cost/run.py registered scratch/bin scratch/fx <new_out_dir>
+# `replay` = the registered suite and order with a relative budget (the `registered` mode stops at its 2026-11-11T06:30Z cutoff)
+python3 experiments/20261111-7-cpu-phase-cost/run.py replay scratch/bin scratch/fx <new_out_dir> --budget-min 45
 python3 experiments/20261111-7-cpu-phase-cost/analyze.py <new_out_dir>/runs.jsonl <new_out_dir>/summary.json
 # with no arguments, analyze.py regenerates runs/summary.json from the committed runs/runs.jsonl
 # hashes.py needs a run's artifacts under runs/artifacts/ (not committed)
