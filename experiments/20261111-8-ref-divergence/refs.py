@@ -32,11 +32,13 @@ def round_to_format(v, mant, emin, maxv, saturate):
     r = np.rint(v / quantum) * quantum     # v / quantum exact (power of two); np.rint is ties-to-even
     r = np.where(v == 0, 0.0, r)
     over = np.abs(r) > maxv
-    n_over = int(over.sum())
     if saturate:
-        r = np.where(over, np.sign(v) * maxv, r)
+        # PREREG: |v| > max maps to sign * max and is counted (counted on the input, before rounding).
+        n_over = int((np.abs(v) > maxv).sum())
+        r = np.where(over, np.copysign(maxv, v), r)
     else:
-        r = np.where(over, np.sign(v) * np.inf, r)
+        n_over = int(over.sum())
+        r = np.where(over, np.copysign(np.inf, v), r)
     n_under = int(((v != 0) & (r == 0)).sum())
     return r, n_over, n_under
 
