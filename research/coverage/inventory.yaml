@@ -33,6 +33,9 @@
 # head 655d70b2). Rows added after review (OP-15, OP-R8 .. OP-R14, RR-15 .. RR-21, RR-R1, RR-R2, IS-23, IS-24,
 # OUT-08, OUT-09) were read at main 0bdf8326, where the cited files are unchanged from ba1e3067. Read
 # from source and docs; only rows N1 to N3 of experiments/20261110-6-coverage-inventory/ were run.
+# Rows OP-R15, OP-R16, RR-R3, RR-R4, IS-25 .. IS-27 (research/operators/qwen_conv_history, PR #101) were
+# read at main 8d579337 from the code and experiments/20261111-35-conv-history-binding/RESULTS.md; nothing
+# was rerun for them.
 
 schema_version: 1
 base_commit: ba1e3067f58b0142dd16a3df884626cfe6ccc585
@@ -312,6 +315,26 @@ rows:
     sites:
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'static Circuit rotary(const Input& in,bool witness) {'}
     note: "inputs committed and chosen by the prover (OP-R6)"
+  - id: OP-R15
+    category: operator
+    scope: research
+    element: "Qwen conv1d with carried history (research/operators/qwen_conv_history, issue #35): one channel, four taps, three history cells, four new inputs, y[t] = floor(sum_j w[j] * input[t + j] / 2^F); the PR #67 conv relation copied, with a bound and an unbound profile in one binary"
+    relation: "conv(): mul, floor(sum, F), range(y, F + 4), y pinned to the statement's outputs; the verifier rebuilds the relation list from its own statement (at F = 12: bound profile 294 columns, 579 relations; unbound profile 573 relations, as PR #67)"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'static Circuit conv(const CStmt& st,const std::vector<i64>* wit) {'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'for(int j=0;j<4;j++) products.push_back({c.mul(x[t+j],w[j]),1});'}
+      - {file: research/operators/qwen_conv_history/README.md, symbol: 'keeps the #67 relation unchanged'}
+    note: "a copy of the qwen_ops conv circuit, not the #67 binary (README lists the differences); the unbound profile is kept as the named negative control and accepts the #67 replaced-history construction by design. Kernel and inputs are free (OP-R16)"
+  - id: OP-R16
+    category: operator
+    scope: research
+    element: "qwen_conv_history: binding of the conv kernel (taps) and of the new inputs X[0..3] to a model"
+    relation: "none; taps and new inputs are committed cells the prover chooses. The taps (0, 0, 0, -S) construction (y[t] = -X[t]) still verifies; the tail opening only ties the next segment to this segment's own inputs"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/qwen_conv_history/README.md, symbol: '**The kernel is still free.**'}
+      - {file: research/operators/qwen_conv_history/README.md, symbol: '**Inputs have no provenance.**'}
   # ---------------------------------------------------------------- range and rounding rules
   - id: RR-01
     category: range_rounding
@@ -538,6 +561,27 @@ rows:
       - {file: research/operators/qwen_ops/proof.cpp, symbol: 'eq({term(sum(count))},1); eq({term(sum(index)),term(key,-1)});'}
       - {file: research/operators/qwen_ops/README.md, symbol: 'Integer input X maps to i=floor(X/2^(F-8))+2048. Domain [-8,8), fail closed outside.'}
     note: "split from RR-R1 after review of PR #97 (astra round 2): astra proved 5 of 5 complete nonlinear proofs at F = 12 with X = 8192 .. 8196, outside [-2^F, 2^F) but inside this interval; these are valid proofs of the actual relation, not a soundness break (reviewer's descriptive figure, https://github.com/wakesync/flashprove/pull/97#issuecomment-6784831796). The narrower interval is not enforced for nonlinear and is not claimed"
+  - id: RR-R3
+    category: range_rounding
+    scope: research
+    element: "qwen_conv_history ranges: every history, input and tap cell in [-2^F, 2^F) (F + 1 bits, offset 2^F), outputs in F + 4 bits, floor remainders bit-decomposed in F bits"
+    relation: "range(): bit columns b*b = b and an affine reconstruction; for an out-of-range witness the bits take the low bits of n, every product gate still holds and only the affine reconstruction fails"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'auto a=c.cell(wit?wit->at(i):0); c.range(a,f+1,S);'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'c.range(y,f+4,8*S); c.eq({c.term(y)},st.y.at(t));'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'Hostile witnesses may be out of range'}
+    note: "the honest-side range gadget does not refuse out-of-range witnesses (so hostile witnesses can be proved, README); enforcement is the in-proof reconstruction. Research security 10 bits per round, toy coins"
+  - id: RR-R4
+    category: range_rounding
+    scope: research
+    element: "qwen_conv_history statement admission: F in {12, 14, 16}, four outputs in [-8 * 2^F, 8 * 2^F), history and tail opening words in [-2^F, 2^F)"
+    relation: "admit() on the public statement before the root comparison and before the circuit is rebuilt; outside the proof's relation"
+    enforcement: verifier_validation
+    sites:
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'static void admit(const CStmt& st) {'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'need(v>=-S&&v<S,"history opening class");'}
+    note: "in verify_bound, admit() runs before the held-root comparison; the history and tail opening class checks apply only to the bound profile (the unbound entry checks F and the outputs only)"
   # ---------------------------------------------------------------- committed inputs and state
   - id: IS-01
     category: input_state
@@ -741,6 +785,37 @@ rows:
     enforcement: not_enforced
     sites:
       - {file: research/operators/glm_kda_fixedpoint/README.md, symbol: 'Public initial-state provenance remains external.'}
+  - id: IS-25
+    category: input_state
+    scope: research
+    element: "qwen_conv_history incoming history opens the root the verifier holds (genesis or the root its previous accept returned); on accept the verifier returns the next root H(F, segment + 1, outgoing opening)"
+    relation: "tail_root = SHA-256(fp-conv-tail-v1, F, segment index, 3, three words); verify_bound compares it with the held root on public values, OUTSIDE the arithmetic proof (as PR #98's initial root)"
+    enforcement: verifier_validation
+    sites:
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'if(tail_root(st.f,st.segment,st.in_open)!=held) return std::nullopt;'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'return tail_root(st.f,st.segment+1,st.out_open);'}
+      - {file: research/operators/qwen_conv_history/README.md, symbol: 'This check is **outside** the arithmetic proof'}
+    note: "binds only if the verifier holds the right root; 5 of the 14 registered hostile sub-cases of issue #35 are rejected by this comparison, not by the proof (experiments/20261111-35-conv-history-binding/RESULTS.md, column 'rejected by'). Genesis is trusted (IS-27)"
+  - id: IS-26
+    category: input_state
+    scope: research
+    element: "qwen_conv_history in-proof pins: the three committed history cells equal the public incoming opening, the last three committed inputs X[1..3] equal the public outgoing opening; segment index and both roots are in the configuration text, so in the transcript"
+    relation: "six one-term affine relations with verifier-owned targets (bound profile only, 579 = 573 + 6); profile string history=bound-v1 segment= in-root= out-root= appended to the shape text"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'c.eq({c.term(x[j])},st.in_open[j]);'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'c.eq({c.term(x[4+j])},st.out_open[j]);'}
+      - {file: research/operators/qwen_conv_history/conv_history.cpp, symbol: 'p<<" history=bound-v1 segment="<<st.segment<<" in-root="'}
+    note: "registered suite (issue #35, seeds 1..10, release and UBSan): 4 complete malicious proofs per seed, every product gate holding and at least one pin violated, 0 of 80 accepted; sampled hostile classes, not exhaustive. One channel, T = 4, F = 12 only; not integrated with qwen_ops, qwen_handoff or cp_verify"
+  - id: IS-27
+    category: input_state
+    scope: research
+    element: "qwen_conv_history: correctness of the genesis root (what the first history is) and hiding of history and tail words"
+    relation: "none; the first root is whatever the verifier was given, and history and tail words are public openings (no in-circuit hash, no hidden commitment)"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/qwen_conv_history/README.md, symbol: '**Genesis trust.**'}
+      - {file: research/operators/qwen_conv_history/README.md, symbol: '**No hiding.**'}
   # ---------------------------------------------------------------- output positions
   - id: OUT-01
     category: output
@@ -865,8 +940,8 @@ open_gaps:
     rows: [IS-19]
     text: "The scale file is bound by the ID, but a scale file inside the admitted ranges can still switch parts of the model off. The verifier checks ranges, not meaning."
   - id: G-07
-    rows: [OP-R5, OP-R6, OP-R7, OP-R9, IS-22, IS-24]
-    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, the GLM algebra slice has no rounding or ranges, the GLM slices take their initial state as given, and the state-commit harness accepts replaced token inputs by design."
+    rows: [OP-R5, OP-R6, OP-R7, OP-R9, IS-22, IS-24, OP-R16, IS-27]
+    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, the GLM algebra slice has no rounding or ranges, the GLM slices take their initial state as given, and the state-commit harness accepts replaced token inputs by design. The conv carried-history prototype (issue #35) binds history continuity only: its kernel and new inputs are still free, its genesis root is trusted as given, and its history is public, not hidden."
   - id: G-OB1
     rows: [RR-04, RR-08]
     text: "Open obligation: that cp_verify's no-overflow conditions are enough for the programs' equations to hold over the integers is argued from reading the source and a non-public report, not proved."
