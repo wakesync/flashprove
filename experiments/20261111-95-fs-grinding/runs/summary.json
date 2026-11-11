@@ -1,0 +1,155 @@
+{
+  "gate_arms": [
+    "A",
+    "B"
+  ],
+  "overall": "PASS",
+  "arms": {
+    "A": {
+      "round_index": 26,
+      "round": "BASE",
+      "where": "a, b, c, last stage",
+      "t": 9,
+      "log_n": 9,
+      "work_bits": 6,
+      "bits_without_work": 4.300226,
+      "e": 0.0507578066,
+      "A": 367,
+      "n": 512,
+      "p0": 0.0499533858,
+      "runs": 5,
+      "tries": 500000,
+      "forges": 24923,
+      "nonces": 32002828,
+      "forge_rate": 0.049846,
+      "forge_rate_log2": -4.326378452687898,
+      "cp99_low": 0.04905652185893536,
+      "cp99_high": 0.05064405795040039,
+      "cp99_contains_p0": true,
+      "cp99_high_le_e_x1_05": true,
+      "per_run_forge_rate": {
+        "n": 5,
+        "median": 0.04951,
+        "sd": 0.0008199573159622391,
+        "min": 0.04897,
+        "max": 0.05082
+      },
+      "per_run_nonces_per_try": {
+        "n": 5,
+        "median": 64.00418,
+        "sd": 0.17514983108755583,
+        "min": 63.80071,
+        "max": 64.26445
+      },
+      "per_run_wall_s": {
+        "n": 5,
+        "median": 1.553,
+        "sd": 0.029262604121984823,
+        "min": 1.501,
+        "max": 1.572
+      },
+      "nonces_per_forge": 1284.0680495927456,
+      "expected_nonces_per_forge": 1281.1944370745737,
+      "nonces_per_forge_within_10pct": true,
+      "verdict": "PASS"
+    },
+    "B": {
+      "round_index": 26,
+      "round": "BASE",
+      "where": "a, b, c, last stage",
+      "t": 9,
+      "log_n": 9,
+      "work_bits": 6,
+      "bits_without_work": 4.300226,
+      "e": 0.0507578066,
+      "A": 367,
+      "n": 512,
+      "p0": 0.0499533858,
+      "runs": 5,
+      "tries": 500000,
+      "forges": 24864,
+      "nonces": 31960360,
+      "forge_rate": 0.049728,
+      "forge_rate_log2": -4.329797780916464,
+      "cp99_low": 0.0489394127192353,
+      "cp99_high": 0.05052516935620778,
+      "cp99_contains_p0": true,
+      "cp99_high_le_e_x1_05": true,
+      "per_run_forge_rate": {
+        "n": 5,
+        "median": 0.04987,
+        "sd": 0.0005986401256180538,
+        "min": 0.0488,
+        "max": 0.05034
+      },
+      "per_run_nonces_per_try": {
+        "n": 5,
+        "median": 63.98291,
+        "sd": 0.1479925112970258,
+        "min": 63.72215,
+        "max": 64.0905
+      },
+      "per_run_wall_s": {
+        "n": 5,
+        "median": 5.048,
+        "sd": 0.09511729600866521,
+        "min": 4.917,
+        "max": 5.163
+      },
+      "nonces_per_forge": 1285.4070141570141,
+      "expected_nonces_per_forge": 1281.1944370745737,
+      "nonces_per_forge_within_10pct": true,
+      "verdict": "PASS"
+    },
+    "C": {
+      "round_index": 26,
+      "round": "BASE",
+      "where": "a, b, c, last stage",
+      "t": 9,
+      "log_n": 9,
+      "work_bits": 0,
+      "bits_without_work": 4.300226,
+      "e": 0.0507578066,
+      "A": 367,
+      "n": 512,
+      "p0": 0.0499533858,
+      "runs": 5,
+      "tries": 500000,
+      "forges": 24847,
+      "nonces": 500000,
+      "forge_rate": 0.049694,
+      "forge_rate_log2": -4.330784516916593,
+      "cp99_low": 0.04890566963672416,
+      "cp99_high": 0.05049091309170829,
+      "cp99_contains_p0": true,
+      "cp99_high_le_e_x1_05": true,
+      "per_run_forge_rate": {
+        "n": 5,
+        "median": 0.04978,
+        "sd": 0.0010876948101374764,
+        "min": 0.04822,
+        "max": 0.05117
+      },
+      "per_run_nonces_per_try": {
+        "n": 5,
+        "median": 1.0,
+        "sd": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "per_run_wall_s": {
+        "n": 5,
+        "median": 3.474,
+        "sd": 0.05775205624044906,
+        "min": 3.398,
+        "max": 3.554
+      },
+      "nonces_per_forge": 20.123153700647965,
+      "expected_nonces_per_forge": 20.018663079290214,
+      "nonces_per_forge_within_10pct": true,
+      "verdict": "PASS"
+    }
+  },
+  "python": "3.12.3",
+  "method": "Clopper-Pearson 99%, exact binomial sums in log space (standard library)"
+}
