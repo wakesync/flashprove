@@ -884,6 +884,26 @@ rows:
     sites:
       - {file: research/operators/qwen_conv_history/README.md, symbol: '**Genesis trust.**'}
       - {file: research/operators/qwen_conv_history/README.md, symbol: '**No hiding.**'}
+  - id: IS-29
+    category: input_state
+    scope: research
+    element: "qwen_hidden_root window boundary: the first token's state cells, the incoming history and a private salt open the verifier-held incoming commitment, and the last token's state cells, the outgoing history and a second salt open the claimed outgoing commitment; no boundary state is public"
+    relation: "two in-circuit sponge evaluations (width 12, x^7, 8+22 rounds; 4 product columns per S-box, linear layers folded into affine terms) with 4 one-term pins each to the commitment words in the statement; public initial and final state pins of the lowering are removed; capacity is SHA-256 of the context (F, D, C, N, request, layer, policy, boundary index, model and weights labels), computed by the verifier"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_hidden_root/window.cpp, symbol: 'for (int i = 0; i < 4; i++) { cc.pin(ci[i], s.cin[i]); w.in_hash[i] = ci[i].v; }'}
+      - {file: research/operators/qwen_hidden_root/window.cpp, symbol: 'for (int i = 0; i < 4; i++) { cc.pin(co[i], s.cout[i]); w.out_hash[i] = co[i].v; }'}
+      - {file: research/operators/qwen_hidden_root/window.cpp, symbol: 'if (initial || final) continue;'}
+    note: "registered suite (issue #93, seeds 201..205, D8/F12/C2/N3): 9 complete hostile window proofs per seed and 3 spliced chains rejected by the proof verifier, 0 of 60 accepted; chain truncation is rejected by the verifier-held window count outside the arithmetic. Unvetted sponge, toy coins, not zero-knowledge (IS-30)"
+  - id: IS-30
+    category: input_state
+    scope: research
+    element: "qwen_hidden_root: collision and binding resistance of the sponge parameters, hiding of the state inside the proof, origin of the initial root R0, and chain length inside the arithmetic"
+    relation: "none; the sponge is a Poseidon-shaped stand-in without cryptanalysis, the proof system is not zero-knowledge, R0 is whatever the verifier was given, and the window count is checked by the chain verifier, not the proof"
+    enforcement: not_enforced
+    sites:
+      - {file: research/operators/qwen_hidden_root/README.md, symbol: 'The sponge parameters are unvetted'}
+      - {file: research/operators/qwen_hidden_root/README.md, symbol: 'Not zero-knowledge: "hidden" means the verifier is not handed the state'}
   # ---------------------------------------------------------------- output positions
   - id: OUT-01
     category: output
@@ -1008,8 +1028,8 @@ open_gaps:
     rows: [IS-19]
     text: "The scale file is bound by the ID, but a scale file inside the admitted ranges can still switch parts of the model off. The verifier checks ranges, not meaning."
   - id: G-07
-    rows: [OP-R5, OP-R6, OP-R7, OP-R9, IS-22, IS-24, OP-R16, IS-27]
-    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, the GLM algebra slice has no rounding or ranges, the GLM slices take their initial state as given, and the state-commit harness accepts replaced token inputs by design. The conv carried-history prototype (issue #35) binds history continuity only: its kernel and new inputs are still free, its genesis root is trusted as given, and its history is public, not hidden."
+    rows: [OP-R5, OP-R6, OP-R7, OP-R9, IS-22, IS-24, OP-R16, IS-27, IS-30]
+    text: "Research operators are not model coverage: the M2 admission rule has no implementation, the Qwen operator proofs bind no particular weights or history, the first top-k prototype has no proof, the GLM algebra slice has no rounding or ranges, the GLM slices take their initial state as given, and the state-commit harness accepts replaced token inputs by design. The conv carried-history prototype (issue #35) binds history continuity only: its kernel and new inputs are still free, its genesis root is trusted as given, and its history is public, not hidden. The hidden-root window prototype (issue #93) keeps the boundary state out of the verifier's inputs, but its sponge is unvetted, its proofs are not zero-knowledge, its initial root is trusted as given, and chain length is checked outside the proof."
   - id: G-OB1
     rows: [RR-04, RR-08]
     text: "Open obligation: that cp_verify's no-overflow conditions are enough for the programs' equations to hold over the integers is argued from reading the source and a non-public report, not proved."
