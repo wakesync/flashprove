@@ -51,11 +51,11 @@ def summarize(out):
     return dict(verdict='PASS' if rows and all(r['pass'] for r in rows) else 'FAIL',
                 rows=len(rows), arms=arms, timing_scope='key verification including held-manifest hashing and expected MLE recomputation; not prover or plan construction')
 
-def environment(binary):
+def environment(binary, ubsan=False):
     cpu=next((line.split(':',1)[1].strip() for line in Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name')),'unknown')
     ram=next(line for line in Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemTotal:'))
     return dict(commits={'repo':command(['git','rev-parse','HEAD']), 'base':'cf4b213f1fe4d1c0073e0e1266281eee7e92b79b'},
-                toolchain={'compiler':command(['g++','--version']).splitlines()[0], 'python':platform.python_version(), 'flags':FLAGS},
+                toolchain={'compiler':command(['g++','--version']).splitlines()[0], 'python':platform.python_version(), 'flags':FLAGS+(['-fsanitize=undefined','-fno-sanitize-recover=all','-g'] if ubsan else [])},
                 hardware={'cpu':cpu, 'affinity':sorted(os.sched_getaffinity(0)), 'memory':ram, 'gpu':'not used', 'provider':'shared CPU host', 'shared_loaded':True},
                 binary_sha256=hashlib.sha256(binary.read_bytes()).hexdigest())
 
@@ -77,7 +77,7 @@ def main():
         raise SystemExit(p.returncode)
     # Invoke the whole command through the host heavy-job gate. This timestamp is
     # taken only once the gate grants its slot, so it also records budget start.
-    start=time.monotonic();grant=now();env=environment(binary)
+    start=time.monotonic();grant=now();env=environment(binary,a.ubsan)
     seeds=[9001] if a.mode=='debug' else list(range(1001,1011))
     env.update(seeds=seeds,gate_granted_utc=grant.isoformat(),elapsed_budget_s=2100,hard_stop_utc=DEADLINE.isoformat(),deadline_enforced=a.enforce_deadline)
     dump(out/'ENV.json',env)
