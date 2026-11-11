@@ -1,0 +1,27 @@
+{
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks"
+  ],
+  "binary_sha256": "6c010b843cb8636bd7fa525990146fc20424147ba33898baa54b7028948b2808",
+  "sources": {
+    "research/operators/qwen_handoff/handoff.cpp": "c53b2cda7e3c90899665c906742128c1fe406d588b711a81f83343e11ba8d556",
+    "research/operators/qwen_handoff/lowering.h": "d149d11ab1d519dc9b4b15943100f0df57da65f78f1ee2faf437474a124e4ab0",
+    "research/operators/qwen_handoff/sha256.h": "5e1243321ce8828e2a39e11d7f9e0cf2756995512316f8379c82932fc63cd6f1",
+    "research/operators/qwen_handoff/fixtures.py": "700a81628b74fac763c91e4c6e5bca4bbe3f1c671ba8baa8ea4c5f00636d1310",
+    "research/operators/qwen_handoff/run.py": "7f2c87d57087650cf7062a641015ba08ac3878165c536c34930eedccc45f06cc",
+    "research/operators/qwen_handoff/count.py": "e961e597a1e13465a7dd180ff2984a8d2293595c363537e39d56d9d849c6ae02",
+    "research/operators/qwen_deltanet/reference.py": "f6fbd580bf834afd2d6280036ddf52d410be094824299e89c61eb2a1b80edaf0",
+    "research/operators/qwen_deltanet_lookup/lookup.h": "04bc74b28fb34f5a3a20ce7413d1310297c7fbb2f22a8da7aa9ae5caaaefd770"
+  },
+  "warnings": "",
+  "started_utc": "2026-11-10T22:23:58.418293+00:00"
+}
