@@ -14,7 +14,13 @@ Leaf of block b (v1):
     block: name, cls: tensor class, sources: [[source name, checkpoint-leaf hash hex], ...] in the order
     the rule reads them, rule: {step: string, params: {...}} }
 Node: H(0x01 || "fp-wb-conv-node-v1" || l || r), odd last node promoted (as wb_manifest).
-Config pin: H("fp-wb-config-v1" || len||canonical-json(pinned text_config fields)), floats as binary64 hex.
+Config pin (v2, PR #100 review fix): a strict schema runs first (config_fields): text_config required, every
+  pinned field of a fixed type, unknown keys refused, unsupported values refused (top-level and text
+  tie_word_embeddings must both be false, attention_bias must be false). Then
+  H("fp-wb-config-v2" || len||typed-json({"top": pinned top-level fields, "text": pinned text_config fields})),
+  where typed-json tags every value with its type (["f", binary64 hex], ["i", decimal], ...), so the encoding
+  is injective. v1 (the first run, runs/) hashed only text_config with floats as {"f64": hex}; that was not
+  injective (a literal {"f64": hex} object aliased the float) and missed the top-level tie_word_embeddings.
 Conversion id: H("fp-wb-conv-id-v1" || checkpoint id || len||rule version || config pin || n (8 LE) || root).
 
 What a leaf does NOT carry (open, DESIGN 2.0 lists them): the exponent e_b and int_sha256_b. They are
@@ -57,40 +63,145 @@ def _f32hex(x):
 
 
 def _canon(obj):
-    """Canonical JSON: sorted keys, no spaces, floats replaced by {"f64": hex} so no repr ambiguity."""
-    def fix(o):
-        if isinstance(o, bool) or o is None or isinstance(o, (int, str)):
-            return o
-        if isinstance(o, float):
-            return {"f64": struct.pack(">d", o).hex()}
+    """Canonical JSON of a block leaf: sorted keys, no spaces. Leaves carry no floats (constants are binary32
+    hex strings), so a float, a non-string key or any other type is refused (TypeError); on that domain
+    (None, bool, int, str, list, str-keyed dict) sorted-key JSON is injective. Unchanged output for the
+    honest leaves of the first run."""
+    def chk(o):
+        if o is None or isinstance(o, (bool, int, str)):
+            return
         if isinstance(o, list):
-            return [fix(x) for x in o]
+            for x in o:
+                chk(x)
+            return
         if isinstance(o, dict):
-            return {k: fix(v) for k, v in o.items()}
+            for k, v in o.items():
+                if not isinstance(k, str):
+                    raise TypeError("non-string key")
+                chk(v)
+            return
         raise TypeError(type(o))
-    return json.dumps(fix(obj), sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+    chk(obj)
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
 
 
-# ---------------------------------------------------------------- config pin (A12)
-PINNED_FIELDS = [
-    "attn_output_gate", "full_attention_interval", "head_dim", "hidden_act", "hidden_size",
-    "intermediate_size", "layer_types", "linear_conv_kernel_dim", "linear_key_head_dim",
-    "linear_num_key_heads", "linear_num_value_heads", "linear_value_head_dim", "mamba_ssm_dtype",
-    "num_attention_heads", "num_hidden_layers", "num_key_value_heads", "output_gate_type",
-    "partial_rotary_factor", "rms_norm_eps", "rope_parameters", "tie_word_embeddings", "vocab_size",
-]
+def _typed(o):
+    """Typed value tree for the config pin: each value becomes [tag, payload]. The tag fixes the type, so two
+    distinct values (including 1 vs 1.0 vs true, or a float vs any object) never encode the same."""
+    if o is None:
+        return ["n"]
+    if isinstance(o, bool):
+        return ["b", o]
+    if isinstance(o, int):
+        return ["i", str(o)]
+    if isinstance(o, float):
+        if not math.isfinite(o):
+            raise ConfigError("non-finite float")
+        return ["f", struct.pack(">d", o).hex()]
+    if isinstance(o, str):
+        return ["s", o]
+    if isinstance(o, list):
+        return ["l", [_typed(x) for x in o]]
+    if isinstance(o, dict):
+        if any(not isinstance(k, str) for k in o):
+            raise ConfigError("non-string key")
+        return ["d", [[k, _typed(o[k])] for k in sorted(o)]]
+    raise ConfigError("unsupported type %s" % type(o).__name__)
+
+
+def _typed_canon(obj):
+    return json.dumps(_typed(obj), separators=(",", ":"), ensure_ascii=True).encode()
+
+
+# ---------------------------------------------------------------- config pin (A12), v2
+# Field types. "int" never accepts a bool; "float" is a finite JSON float (not an int, not an object);
+# "num" is int or finite float; ("list", t) a list of t; "rope" the exact rope_parameters object below.
+TEXT_SCHEMA = {
+    "attention_bias": "bool", "attn_output_gate": "bool", "full_attention_interval": "int", "head_dim": "int",
+    "hidden_act": "str", "hidden_size": "int", "intermediate_size": "int", "layer_types": ("list", "str"),
+    "linear_conv_kernel_dim": "int", "linear_key_head_dim": "int", "linear_num_key_heads": "int",
+    "linear_num_value_heads": "int", "linear_value_head_dim": "int", "mamba_ssm_dtype": "str", "model_type": "str",
+    "num_attention_heads": "int", "num_hidden_layers": "int", "num_key_value_heads": "int", "output_gate_type": "str",
+    "partial_rotary_factor": "float", "rms_norm_eps": "float", "rope_parameters": "rope", "tie_word_embeddings": "bool",
+    "vocab_size": "int",
+}
+ROPE_SCHEMA = {"mrope_interleaved": "bool", "mrope_section": ("list", "int"), "partial_rotary_factor": "float",
+               "rope_theta": "num", "rope_type": "str"}
+TOP_SCHEMA = {"architectures": ("list", "str"), "model_type": "str", "tie_word_embeddings": "bool"}
+PINNED_FIELDS = sorted(TEXT_SCHEMA)          # text_config fields in the pin (24)
+PINNED_TOP_FIELDS = sorted(TOP_SCHEMA)       # top-level fields in the pin (3)
+# Known keys that are NOT pinned, and why. Any key outside pinned + known refuses the build (fail closed).
+UNPINNED_TEXT = {
+    "attention_dropout": "training only", "bos_token_id": "tokenizer / generation", "eos_token_id": "tokenizer / generation",
+    "pad_token_id": "tokenizer / generation", "dtype": "storage dtype, bound per tensor by the checkpoint id",
+    "initializer_range": "initialisation only", "max_position_embeddings": "context limit, not the per-token function",
+    "use_cache": "runtime", "mtp_num_hidden_layers": "MTP head, out of U1 scope (tensors under the checkpoint id)",
+    "mtp_use_dedicated_embeddings": "MTP head, out of U1 scope",
+}
+UNPINNED_TOP = {
+    "image_token_id": "vision path, out of U1 scope", "video_token_id": "vision path, out of U1 scope",
+    "vision_start_token_id": "vision path, out of U1 scope", "vision_end_token_id": "vision path, out of U1 scope",
+    "vision_config": "vision tower, out of U1 scope (tensors under the checkpoint id)",
+    "language_model_only": "whether the vision tower is loaded, not the text function",
+    "transformers_version": "metadata", "text_config": "the text fields above",
+}
+# Supported values (fail closed on anything else): the converter has a separate lm_head block, so tied
+# embeddings are unsupported at either level (this also fixes the top-level vs text_config precedence:
+# both must be false, a disagreement refuses); the inventory has no projection biases.
+SUPPORTED = {("top", "tie_word_embeddings"): False, ("text", "tie_word_embeddings"): False,
+             ("text", "attention_bias"): False, ("top", "model_type"): "qwen3_5",
+             ("text", "model_type"): "qwen3_5_text", ("top", "architectures"): ["Qwen3_5ForConditionalGeneration"]}
+
+
+def _type_ok(v, t):
+    if isinstance(t, tuple):
+        return isinstance(v, list) and all(_type_ok(x, t[1]) for x in v)
+    if t == "bool":
+        return isinstance(v, bool)
+    if t == "int":
+        return isinstance(v, int) and not isinstance(v, bool)
+    if t == "float":
+        return isinstance(v, float) and math.isfinite(v)
+    if t == "num":
+        return _type_ok(v, "int") or _type_ok(v, "float")
+    if t == "str":
+        return isinstance(v, str)
+    if t == "rope":
+        return (isinstance(v, dict) and set(v) == set(ROPE_SCHEMA)
+                and all(_type_ok(v[k], ROPE_SCHEMA[k]) for k in ROPE_SCHEMA))
+    raise AssertionError(t)
 
 
 def config_fields(cfg):
-    tc = cfg.get("text_config", cfg)
-    missing = [k for k in PINNED_FIELDS if k not in tc]
-    if missing:
-        raise ConfigError("config lacks pinned fields %s" % missing)
-    return {k: tc[k] for k in PINNED_FIELDS}
+    """Strict schema, then the pinned fields {"top": {...}, "text": {...}}. Raises ConfigError on: no
+    text_config, a missing pinned field, a pinned field of the wrong type (alias objects, bool for int, int
+    for float, extra rope keys), an unknown key at either level, or an unsupported value (SUPPORTED)."""
+    if not isinstance(cfg, dict) or not isinstance(cfg.get("text_config"), dict):
+        raise ConfigError("config has no text_config object (no fallback to top-level fields)")
+    tc = cfg["text_config"]
+    out = {}
+    for lvl, d, schema, known in (("top", cfg, TOP_SCHEMA, UNPINNED_TOP), ("text", tc, TEXT_SCHEMA, UNPINNED_TEXT)):
+        missing = sorted(k for k in schema if k not in d)
+        if missing:
+            raise ConfigError("config lacks pinned %s fields %s" % (lvl, missing))
+        unknown = sorted(str(k) for k in d if k not in schema and k not in known)
+        if unknown:
+            raise ConfigError("unknown %s config keys %s (fail closed)" % (lvl, unknown))
+        bad = sorted(k for k in schema if not _type_ok(d[k], schema[k]))
+        if bad:
+            raise ConfigError("pinned %s fields of the wrong type %s" % (lvl, bad))
+        out[lvl] = {k: d[k] for k in sorted(schema)}
+    for (lvl, k), v in SUPPORTED.items():
+        if out[lvl][k] != v or type(out[lvl][k]) is not type(v):
+            raise ConfigError("unsupported %s.%s = %r (supported: %r)" % (lvl, k, out[lvl][k], v))
+    t = out["text"]
+    if struct.pack(">d", t["rope_parameters"]["partial_rotary_factor"]) != struct.pack(">d", t["partial_rotary_factor"]):
+        raise ConfigError("rope_parameters.partial_rotary_factor != text_config.partial_rotary_factor")
+    return out
 
 
 def config_pin(fields):
-    return _h(b"fp-wb-config-v1", _lp(_canon(fields)))
+    return _h(b"fp-wb-config-v2", _lp(_typed_canon(fields)))
 
 
 # ---------------------------------------------------------------- inventory + rules
@@ -117,6 +228,7 @@ def _rule(step, **params):
 def classify(names, fields):
     """Return (blocks, folded_norms). Raises InventoryError unless the text tensors are exactly what the
     pinned config implies and split 851 = 498 + 224 + 129. blocks: name -> (cls, [source names], rule)."""
+    fields = fields["text"]
     lt = fields["layer_types"]
     L = fields["num_hidden_layers"]
     if not isinstance(lt, list) or len(lt) != L or any(t not in ("linear_attention", "full_attention") for t in lt):
@@ -192,6 +304,7 @@ def classify(names, fields):
 def check_shapes(tensors, fields):
     """The config must be consistent with the tensor shapes it governs (A12: a config that changes
     head counts / widths / conv width / vocab must disagree with the bytes)."""
+    fields = fields["text"]
     H, I, V = fields["hidden_size"], fields["intermediate_size"], fields["vocab_size"]
     hd, nq, nkv = fields["head_dim"], fields["num_attention_heads"], fields["num_key_value_heads"]
     dk, dv = fields["linear_key_head_dim"], fields["linear_value_head_dim"]
@@ -286,19 +399,32 @@ EXPECTED_STEP = {"matrix_plain": STEP_MATRIX, "matrix_norm_folded": STEP_FOLDED,
                  "matrix_embedding": STEP_EMBED, "cell_conv": STEP_CONV, "cell_gated_gain": STEP_GATED,
                  "cell_cA": STEP_CA, "cell_dt_bias": STEP_DT, "cell_qk_norm": STEP_QK}
 EXPECTED_NSRC = {"matrix_norm_folded": 2, "matrix_final_norm_folded": 2}
+_FOLD_P = {"c_f32", "norm_role"}
+EXPECTED_PARAMS = {"matrix_plain": set(), "matrix_norm_folded": _FOLD_P, "matrix_final_norm_folded": _FOLD_P,
+                   "matrix_embedding": {"eres"}, "cell_conv": {"kernel"}, "cell_gated_gain": {"width", "sqrt_f32"},
+                   "cell_cA": {"map", "fmt"}, "cell_dt_bias": {"F", "cls_lo", "cls_hi"}, "cell_qk_norm": set()}
+EXPECTED_NORM_ROLE = {"matrix_norm_folded": ("input_layernorm", "post_attention_layernorm"),
+                      "matrix_final_norm_folded": ("final_norm",)}
 
 
 def leaf_well_formed(obj):
     """Structural check of a block leaf (the verifier's own rule table): class known, step = the class's
-    step, source count right, first source = the block itself, hashes canonical hex."""
+    step, parameter keys = the class's keys (plus round / int), norm_role one the class allows, source
+    count right, first source = the block itself, hashes canonical hex. Not a substitute for the id
+    comparison: parameter VALUES are bound only by the id."""
     if not isinstance(obj, dict) or set(obj) != {"block", "cls", "sources", "rule"}:
         return "leaf fields"
     c = obj["cls"]
-    if c not in EXPECTED_STEP:
+    if not isinstance(c, str) or c not in EXPECTED_STEP:
         return "unknown class"
     r = obj["rule"]
     if not isinstance(r, dict) or set(r) != {"step", "params"} or r["step"] != EXPECTED_STEP[c]:
         return "rule step is not the class's step"
+    p = r["params"]
+    if not isinstance(p, dict) or set(p) != set(COMMON) | EXPECTED_PARAMS[c]:
+        return "rule parameter keys are not the class's"
+    if c in EXPECTED_NORM_ROLE and p["norm_role"] not in EXPECTED_NORM_ROLE[c]:
+        return "norm_role not allowed for the class"
     s = obj["sources"]
     if not isinstance(s, list) or len(s) != EXPECTED_NSRC.get(c, 1):
         return "source count"
@@ -310,7 +436,15 @@ def leaf_well_formed(obj):
 
 
 def verify_conv_opening(held_id_hex, op):
-    """True iff the block-leaf opening is canonical and recomputes the verifier-held conversion id."""
+    """True iff the block-leaf opening is canonical and recomputes the verifier-held conversion id. A
+    malformed opening (wrong types anywhere) returns False rather than raising."""
+    try:
+        return _verify_conv_opening(held_id_hex, op)
+    except (TypeError, ValueError, KeyError, AttributeError, OverflowError):
+        return False
+
+
+def _verify_conv_opening(held_id_hex, op):
     keys = {"checkpoint_id", "config_pin", "rule_version", "n", "index", "leaf", "path"}
     if not isinstance(op, dict) or set(op) != keys:
         return False

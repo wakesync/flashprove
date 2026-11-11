@@ -6,7 +6,7 @@ CPU only, seconds. Run from the top of the tree:
 Exit 0 iff every test passes. Inputs: PR #68's streamed per-tensor hashes of both pins and the two
 pinned config.json files committed under experiments/20261111-91-conversion-id/runs/. No weight is read.
 """
-import copy, json, sys
+import copy, json, struct, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -155,7 +155,7 @@ A12 = {
     "rms_norm_eps 1e-6 -> 1e-5": ("rms_norm_eps", 1e-05),
     "rope_theta 1e7 -> 1e6": ("rope_parameters", dict(CS["text_config"]["rope_parameters"], rope_theta=1000000)),
     "partial_rotary_factor 0.25 -> 0.5": ("partial_rotary_factor", 0.5),
-    "num_attention_heads 24 -> 48 (head_dim 128)": ("num_attention_heads", 48),
+    "num_attention_heads 24 -> 48 (head_dim 256)": ("num_attention_heads", 48),
     "num_key_value_heads 4 -> 8": ("num_key_value_heads", 8),
     "linear_conv_kernel_dim 4 -> 3": ("linear_conv_kernel_dim", 3),
     "hidden_act silu -> gelu": ("hidden_act", "gelu"),
@@ -164,9 +164,24 @@ A12 = {
     "mamba_ssm_dtype float32 -> bfloat16": ("mamba_ssm_dtype", "bfloat16"),
     "output_gate_type swish -> sigmoid": ("output_gate_type", "sigmoid"),
 }
+PIN0 = wc.config_pin(wc.config_fields(CS))
+a12_mechanism = {}
 for label, (k, v) in A12.items():
     c = cfg_with(k, v)
     check("A12", label + " refused (same tensors)", not wc.verify_conversion(SID, TS, c))
+    # which mechanism fires (opus review nonblocking): the pin alone, or the shape / inventory check
+    try:
+        pin_changed = wc.config_pin(wc.config_fields(c)) != PIN0
+    except wc.ConfigError as e:
+        pin_changed = "schema: " + str(e)
+    try:
+        wc.Conversion(TS, c)
+        how = "pin (build succeeds, id differs)"
+    except wc.InventoryError as e:
+        how = "InventoryError: " + str(e)[:100]
+    except wc.ConfigError as e:
+        how = "ConfigError: " + str(e)[:100]
+    a12_mechanism[label] = dict(pin_changed=pin_changed, refused_by=how)
 c = copy.deepcopy(CS)
 del c["text_config"]["rms_norm_eps"]
 check("A12", "pinned field missing refused", not wc.verify_conversion(SID, TS, c))
@@ -175,6 +190,81 @@ c["text_config"]["use_cache"] = False
 check("A12", "unpinned field (use_cache) change does not change the id (pin is the function-changing set)",
       wc.verify_conversion(SID, TS, c))
 check("A12", "fields pinned >= 7", len(wc.PINNED_FIELDS) >= 7)
+
+
+# ---- A12 review fixes (PR #100, astra + opus at 29d8b5f3): every case below verified under the stock id there
+def f64alias(x):
+    return {"f64": struct.pack(">d", x).hex()}
+
+
+def cfg_mod(fn):
+    c = copy.deepcopy(CS)
+    fn(c)
+    return c
+
+
+def refused_cfg(fn):
+    return not wc.verify_conversion(SID, TS, cfg_mod(fn))
+
+
+def hoist(c):
+    t = c.pop("text_config")
+    for k, v in t.items():
+        c.setdefault(k, v)
+
+
+TC = CS["text_config"]
+FIX = {
+    "top-level tie_word_embeddings false -> true (opus M1)": lambda c: c.__setitem__("tie_word_embeddings", True),
+    "text_config tie_word_embeddings false -> true": lambda c: c["text_config"].__setitem__("tie_word_embeddings", True),
+    "both tie_word_embeddings true (agreeing, tied: unsupported)": lambda c: (c.__setitem__("tie_word_embeddings", True),
+                                                                             c["text_config"].__setitem__("tie_word_embeddings", True)),
+    "top-level tie_word_embeddings removed": lambda c: c.pop("tie_word_embeddings"),
+    "rms_norm_eps as {f64: hex} alias of the same value (astra M1)":
+        lambda c: c["text_config"].__setitem__("rms_norm_eps", f64alias(TC["rms_norm_eps"])),
+    "partial_rotary_factor as {f64: hex} alias (astra M1)":
+        lambda c: c["text_config"].__setitem__("partial_rotary_factor", f64alias(TC["partial_rotary_factor"])),
+    "rope_parameters.partial_rotary_factor as {f64: hex} alias (nested)":
+        lambda c: c["text_config"]["rope_parameters"].__setitem__("partial_rotary_factor", f64alias(TC["partial_rotary_factor"])),
+    "rope_parameters.partial_rotary_factor disagrees with text_config (0.25 -> 0.5)":
+        lambda c: c["text_config"]["rope_parameters"].__setitem__("partial_rotary_factor", 0.5),
+    "rope_parameters extra key (factor)": lambda c: c["text_config"]["rope_parameters"].__setitem__("factor", 2.0),
+    "mrope_section [11,11,10] -> [10,11,11]": lambda c: c["text_config"]["rope_parameters"].__setitem__("mrope_section", [10, 11, 11]),
+    "attention_bias false -> true (astra M2)": lambda c: c["text_config"].__setitem__("attention_bias", True),
+    "attention_bias removed": lambda c: c["text_config"].pop("attention_bias"),
+    "text_config removed, fields hoisted to the top level": hoist,
+    "unknown text_config key (mlp_bias)": lambda c: c["text_config"].__setitem__("mlp_bias", True),
+    "unknown top-level key": lambda c: c.__setitem__("rope_scaling", {"type": "yarn"}),
+    "num_key_value_heads 4 -> true (bool for int)": lambda c: c["text_config"].__setitem__("num_key_value_heads", True),
+    "head_dim 256 -> 256.0 (float for int)": lambda c: c["text_config"].__setitem__("head_dim", 256.0),
+    "rms_norm_eps NaN": lambda c: c["text_config"].__setitem__("rms_norm_eps", float("nan")),
+    "model_type qwen3_5 -> qwen3_next": lambda c: c.__setitem__("model_type", "qwen3_next"),
+    "architectures -> Qwen3_5ForCausalLM": lambda c: c.__setitem__("architectures", ["Qwen3_5ForCausalLM"]),
+    "text_config.model_type changed": lambda c: c["text_config"].__setitem__("model_type", "qwen3_5_moe_text"),
+}
+for label, fn in FIX.items():
+    check("A12-fix", label + " refused (same tensors)", refused_cfg(fn))
+check("A12-fix", "vision_config change does not change the id (vision out of U1 scope; tensors under the checkpoint id)",
+      wc.verify_conversion(SID, TS, cfg_mod(lambda c: c["vision_config"].__setitem__("depth", 1))))
+check("A12-fix", "typed pin: 1 vs 1.0 vs true encode differently",
+      len({wc._typed_canon(v) for v in (1, 1.0, True)}) == 3)
+check("A12-fix", "typed pin: float vs its {f64: hex} object encode differently",
+      wc._typed_canon(1e-06) != wc._typed_canon(f64alias(1e-06)))
+check("A12-fix", "leaf canonicaliser refuses a float", raises(lambda: wc._canon({"a": 1.0}), TypeError))
+check("A12-fix", "pinned fields: 24 text + 3 top-level", len(wc.PINNED_FIELDS) == 24 and len(wc.PINNED_TOP_FIELDS) == 3)
+
+# leaf_well_formed / opening robustness (review nonblocking)
+lm_leaf = S.open("lm_head.weight")["leaf"]
+check("opening", "lm_head relabelled matrix_norm_folded is not well formed (norm_role final_norm)",
+      wc.leaf_well_formed(dict(lm_leaf, cls="matrix_norm_folded")) is not None)
+check("opening", "extra rule parameter key not well formed",
+      wc.leaf_well_formed(dict(lm_leaf, rule=dict(lm_leaf["rule"], params=dict(lm_leaf["rule"]["params"], x=1)))) is not None)
+op = S.open(b0)
+op["leaf"] = dict(op["leaf"], cls=[])
+check("opening", "leaf.cls = [] returns False (no exception)", wc.verify_conv_opening(SID, op) is False)
+op = S.open(b0)
+op["leaf"] = dict(op["leaf"], rule=dict(op["leaf"]["rule"], params=dict(op["leaf"]["rule"]["params"], round=1.5)))
+check("opening", "float in leaf params returns False (no exception)", wc.verify_conv_opening(SID, op) is False)
 
 # ---- inventory enforced in code (H3)
 inv = {"text": 851, "matrix": sum(1 for o in S.leaf_objs if o["cls"] in wc.MATRIX_CLASSES),
@@ -225,7 +315,7 @@ if len(sys.argv) > 1:
     out = dict(label="hash-level tests of wb_conv, NOT A PROOF", n=len(results), passed=sum(r["ok"] for r in results),
                stock_conversion_id=SID, abl_conversion_id=A.id.hex(), stock_checkpoint_id=S.ck.id.hex(),
                abl_checkpoint_id=A.ck.id.hex(), config_pin=S.pin.hex(), blocks_reading_changed_tensor=len(blocks_changed),
-               changed_source_tensors=len(changed_src), inventory=inv, results=results)
+               changed_source_tensors=len(changed_src), inventory=inv, a12_mechanism=a12_mechanism, results=results)
     with open(sys.argv[1], "w") as f:
         json.dump(out, f, indent=1)
         f.write("\n")
