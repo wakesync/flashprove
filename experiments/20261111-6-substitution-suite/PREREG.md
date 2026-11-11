@@ -83,3 +83,7 @@ Hard stop for the lane 2026-11-11T06:40Z wall clock, queueing in fp-heavy.sh inc
 
 ## Amendments
 (empty at registration)
+
+### 2026-11-11T04:38Z, before any suite code or run (only `verifier/build.sh` has run)
+
+1. **C-DOM1 / C-DOM2 label values.** `blocks/frame/configure.h` statically asserts that the seven chain labels rise in the order FIRST < ONE_TIME < PROOF_SHARED < PROOF_SECOND < LIN_SHARED < .... The registered values do not compile (0x46524d11 > ONE_TIME; 0x46524d12 alone is > PROOF_SHARED). Replaced by: C-DOM1 `LABEL_FIRST_CHAIN` 0x46524d01 to 0x46524d00 (expect `NO: proof-refused`, unchanged); C-DOM2 `LABEL_ONE_TIME_CHAIN`, `LABEL_PROOF_SHARED_CHAIN`, `LABEL_PROOF_SECOND_CHAIN` each + 0x10 (0x46524d12, 13, 14; order kept). The key stage runs first and its one-time chain uses the changed label, so the expectation stays `NO: key-refused`. Each variant build is controlled by the unaltered example on the unchanged build in the same repetition (the variant has no proof of its own domain).
