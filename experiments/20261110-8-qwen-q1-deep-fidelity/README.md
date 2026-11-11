@@ -17,7 +17,7 @@ No weight data is in the repo. Weights are read by HTTP range request into memor
 
 ## Outcome (see RESULTS.md)
 
-Measured, unreplicated, negative against the bar. No arm passes at layer 16 or layer 20 on either checkpoint. Medians are well under the bar from FS = 16 up, but the max fails on a few pairs, mostly from the repeated-word prompt. End to end on the stock checkpoint, XS18 keeps top-1 on 96 of 96 positions (descriptive). The abliterated end-to-end stage stopped at layer 45 and is **not finished**.
+Measured, unreplicated, negative against the bar. No arm passes at layer 16 or layer 20 on either checkpoint. Medians are well under the bar from FS = 16 up, but the max fails on a few pairs (post hoc: mostly from the repeated-word prompt). Under the PREREG class text, 11 pairs in 10 X-family cells have o = +2^17 and are out of class (amendment A-1), so the registered best arm is XS18-K16 (T16, T20s) and XS18 (T20a). End to end on the stock checkpoint, XS18 keeps top-1 on 96 of 96 positions (descriptive). The abliterated end-to-end stage stopped at layer 45 and is **partial, not finished**.
 
 ## Files
 
@@ -30,6 +30,8 @@ Measured, unreplicated, negative against the bar. No arm passes at layer 16 or l
 | `run_q1.sh` | the registered run, one heavy slot, stop rule |
 | `run_fixture.sh`, `run_fixture2.sh` | the two debug runs (output in `runs/debug-fixture/`) |
 | `summarise_q1.py` | per-target tables, decay buckets, the state-precision rule, H1, U1 reading, end-to-end tables -> `runs/summary.json`, `runs/summary.md` |
+| `recheck_o_sign.py` | post-review (amendment A-1): signed o range of the 17 X-family rows with max abs o = 2^17, by rerunning `scaled_head.Head` unchanged on the run's head inputs -> `runs/o-sign-recheck.jsonl` |
+| `summarise_q1_v2.py` | derived summary v2 (current): sample SD (n - 1), classes under the PREREG text, registered best arm, post-hoc items marked -> `runs/summary-v2.json`, `runs/summary-v2.md`; v1 files unchanged |
 | `peek_e2e.py` | prints the end-to-end, U1 and bucket parts of `runs/summary.json` and the last divergence rows (reading aid) |
 | `scrub_time_paths.py` | replaced the scratch prefix in the `time -v` headers by `<SCRATCH>` before the run files were committed (`runs/scrub-time-paths.json`) |
 
@@ -42,6 +44,8 @@ python3 make_arms_q1.py && python3 check_arms.py
 ./run_fixture.sh $X/fixture && ./run_fixture2.sh $X/fixture      # debug only
 ./run_q1.sh $X                                                  # about 75 minutes on 6 cores of a shared EPYC VM
 python3 summarise_q1.py $X > runs/summary.md
+python3 recheck_o_sign.py $X                                    # signed o for the edge rows, one process, a few minutes
+python3 summarise_q1_v2.py                                      # summary v2, no scratch needed
 ```
 
 `run_q1.sh` writes to `runs/` and has a wall-clock stop rule (PREREG); remove its time checks to rerun at another time of day. Float fields depend on the BLAS thread count in the last bits (PR #74 section 1); the dense forward uses 6 threads, the arm workers 1.
