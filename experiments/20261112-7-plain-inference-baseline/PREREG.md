@@ -108,3 +108,22 @@ Seeds: request seed 1112; prompt seeds 1112000 + index; order seeds 1112 + round
 ## Amendments
 
 (empty at registration)
+
+### Amendment 1 (2026-11-12 16:40 UTC, after the admission probe, before any registered request)
+
+The single admission probe (8,192 words, 55,593 characters, `max_tokens = 1`) was rejected by the route with HTTP 413
+`prompt over 16000 chars`. This is a character limit in the route in front of the engine, not the engine's context limit, and
+it carries no token count, so the words-to-tokens ratio could not be read from the probe. Per the registered rule (no second
+probe, no search), prefill cells are re-sized against 90% of the stated limit (14,400 characters) in words of the fixed
+vocabulary (mean 6.76 characters per word including the space), not in tokens:
+
+- Prefill arm (unique prompts): 16, 256, 512, 1,024 and 2,048 words (the last is about 13,900 characters, under the cap; any
+  prompt over 14,400 characters would be truncated at a word boundary, and is recorded). Served `usage.prompt_tokens` is still
+  the fit's x variable, so the token sizes are whatever the engine reports.
+- Repeated-prompt case: 1,024 words, compared with the 1,024-word unique cell.
+- Decode arm, ordering, seeds, warm-ups, exclusions, PASS and kill rules unchanged. Requests: 3 used (2 debug, 1 probe) + 110
+  cells + 2 attestation = 115, under 150.
+
+Consequence stated in advance: the prefill arm covers at most a few thousand prompt tokens, so the seconds-per-prompt-token
+rate measured here is for short prompts through this route, and says nothing about the long-context prefill the cost model's
+window sizes involve.
