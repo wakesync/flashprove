@@ -1,0 +1,84 @@
+# PREREG: 20261112-132-int-mlp-e2e
+Issue: #132 (part of #8, tracking #32). Lane: intmlp8 (CPU only; integer reference arithmetic against a float64 reference; no proof is built). Date (UTC): 2026-11-12T16:35Z (clock estimate; the commit time is the record). Base commit: d96cdda066f443a9b0c0f481b30eaaf45108ae65 (main).
+
+This file is the first commit of the experiment, alone, before any experiment code and before any measurement. What was read before writing it, all on main at the base commit: `experiments/20261111-8-qwen-e2e-agreement/` (PR #124: PREREG, RESULTS, `e2e.py`, `run_e2e.sh`, `prompts-e2e.json`, `runs/summary.md`, `runs/progress.log.jsonl`, ENV.json), `experiments/20261109-32-qwen-m3-design/DESIGN.md` (PR #70, r3) sections 3.2, 5.0, 5.1, 5.2, 5.5, 6, 6.1, 7.4, 8.2, `research/operators/qwen_m3/bounds.py` and `runs/bounds-r3.json`, `research/operators/qwen_m3/count_m3.py` (`mlp_statement`, `flookup`), `research/operators/qwen_ops/tables.py` and the pinned table `tables/silu-f12.i64le` (PR #67), `docs/model.md` sections 1 to 7. Nothing was run on Qwen weights for this lane before this file. `bounds.py` was run once (unchanged, prints the r3 summary).
+
+## Why
+PR #124 (merged) showed that the XS18 integer lowering of the DeltaNet heads, with everything else float64, keeps top-1 on 1,460 of 1,461 positions on both checkpoints. A reply under proof needs every other block in integers too. This lane adds the next block: the SwiGLU MLP of all 64 layers, lowered exactly as the M3 design on main specifies it (DESIGN.md 5.5 "M3a-MLP", r2 rounding of h), with the DeltaNet heads kept at XS18, and asks whether the model still predicts the same tokens, and whether the integer MLP values stay inside the bounds the design's ledger gives them.
+
+## The lowering measured (taken from the design; nothing new is added to the arithmetic)
+Per layer, per position, for a path whose MLP is integer. F = 12.
+
+| step | integer form | source on main |
+|---|---|---|
+| normed input m | m_float = the float64 RMSNorm output with Qwen's gain (1 + w), exactly as the float path (`q1_forward.rms0`, post_attention_layernorm); then **m = RNE(2^F m_float)**, no clamp | scale 2^F, F = 12: DESIGN.md 5.0 row "activations, stream". The class \|m\| <= 2,047: DESIGN.md 3.2 (M3a public normed input) and `bounds.py` `A_PUB`. The float-to-integer step at m is this lane's boundary, because the issue keeps every norm float64; RNE is the rounding DESIGN.md 5.0 uses for conversion |
+| weights Wg, Wu, Wd | **W_int = RNE(2^(e_T) W)**, one exponent per tensor, e_T = the largest e with RNE(2^e max\|W\|) <= 4,095 | DESIGN.md 5.0 row "weight tensor T"; the exponent rule is `bounds.py` `completeness_check` ("as an honest conversion picks it"). Class \|W_int\| <= 4,096: DESIGN.md 6 table, `bounds.py` `W`. Admitted shift range 1..24: DESIGN.md 5.0 |
+| gate key, up value | **gw = floor((m . Wg_int) / 2^(e_g))**, **u = floor((m . Wu_int) / 2^(e_u))**, both at 2^F | DESIGN.md 5.1 (x_j = rq(sum a W, s) with an exact remainder of class [0, 2^s), i.e. a floor), 5.0 ("shift of a floor after a product with T: s_T = e_T"), 5.5 ("gate key and up value as range cells with exact 2^s remainders"). Ledger: rng cells, \|x\| < 2^23 against a cheating prover, honest cells < 2^18 (`bounds.py` `RNG` and its comment; DESIGN.md 7.4 "cell contract (2^18 honest)") |
+| SiLU | **s = Ts[idx], idx = floor(gw / 2^(F-8)) + 2,048**, the pinned v1 table `silu-f12.i64le` (4,096 rows, input step 2^(F-8) = 1/256, output scale 2^F, domain [-8, 8)) | DESIGN.md 5.2 (table format v1), `count_m3.py` `flookup` (idx = floor(x / step) + offset), `research/operators/qwen_ops/tables.py`. Image \|s\| <= 32,741: DESIGN.md 6 table, `bounds.py` `SILU` |
+| SiLU out of domain | gw outside [-2^15, 2^15) (pre-activation outside [-8, 8)): **index saturated to row 0 or 4,095**, every event counted | v1 **rejects** such inputs (DESIGN.md 8.2); DESIGN.md 8.2 says M3 "needs clamp semantics (saturating tables, as upstream's Ts) or a wider domain". The design leaves this open; this lane takes the saturating option named there so that the forward can continue, and reports every event as a finding: under v1 reject semantics each event is a statement that cannot be proved |
+| product | **h = floor(s u / 2^F)** | DESIGN.md 5.5 (r2: "h = floor(s u / 2^F) as a range cell with an exact 12-bit remainder"). Ledger row "M3a-MLP: s u - 2^12 h - r (r2)" |
+| down projection | **out = floor((h . Wd_int) / 2^(e_d))**, at 2^F; the residual gets out / 2^F (float64) | DESIGN.md 5.5 ("down projection of h by the product argument"), 5.0 (shift = e_d), 5.1. Output class \|out\| < 2^31: DESIGN.md 3.2, `bounds.py` `OUT_PUB`. Ledger row "M3a-MLP down (r2)" (2^55.02 worst case) |
+
+Everything else is exactly PR #124's forward. In the integer-MLP paths **in_proj, out_proj, full attention, every RMSNorm (including the MLP's own pre-norm), the final norm and lm_head stay float64**, and the DeltaNet heads are either float64 or XS18 (PR #124 / PR #88 arm, `scaled_head.py` unchanged). This is said in every output file and in RESULTS.
+
+Implementation note (not arithmetic): the integer matmuls are done as float64 BLAS products of integer-valued arrays. They are exact as long as every partial sum stays below 2^53. Before each such product the code checks max\|a\| x max\|W_int\| x (inner length) < 2^53 and, if that cheap bound fails, the exact bound sum\|a\| \|W_int\|; if that also fails it raises (a guard error, see Acceptance). No value is clamped by the code except the SiLU index above.
+
+## Paths (all closed loop through all layers, teacher-forced, each path its own residual stream)
+- **REF**: float64 throughout (PR #124's REF).
+- **XM18** (the registered arm): XS18 DeltaNet heads + the integer MLP above in **every** layer (48 DeltaNet + 16 attention layers).
+- **FM** (descriptive, no bar): float64 heads + the integer MLP in every layer. It separates the MLP lowering's own effect from XS18's.
+- **XM18#2** (determinism): XM18 again on p01, p04, p09, separate worker tasks and separate dense calls.
+
+The XS18-only path is not rerun: its numbers against REF are committed on main (PR #124 `runs/e2e-abl.json`, `runs/summary.md`) and are cited from there, labelled as PR #124's run. As a consistency check (post hoc, no bar), this run's REF top-1 ids on abl are compared with PR #124's committed `ref_top1` lists.
+
+## Prompt set and checkpoints
+- The 10 frozen prompts of PR #124, `experiments/20261111-8-qwen-e2e-agreement/prompts-e2e.json` on main (1,461 tokens: p01 13, p07 23, p08 39, p09 21, p02 107, p04 64, p05 144, p03 512, p06a 256, p11 282), read unchanged.
+- **Abliterated checkpoint first**, as PR #124: huihui-ai/Huihui-Qwen3.8-27B-abliterated@739e3c5b89849f6c238ce1e5b70008612ae42cdd for layers 17 to 63, final norm and lm_head, on top of the byte-identical stock layers 0 to 16 (Qwen/Qwen3.8-27B@37561816e66b5b9153b1b64c10968c18c1e6f4a0; PR #68 `runs/diff.json`). Weight fetch, manifests and their comparison with PR #124's and PR #88's committed manifests: as PR #124.
+- **Stock**: registered now as conditional. After the abl logits the job continues with the stock leg (layers 17 to 63 from the saved layer-16 state, stock final norm and lm_head). The stock cell is reported only if its logits complete before the compute hard stop; otherwise it is reported as not finished. Nothing about the abl verdict depends on it.
+- **Reduced set, decided by the clock only, registered now:** if the heavy slot is granted after 2026-11-12T17:25Z, the run uses the subset p01, p07, p08, p09, p02, p04, p05, p06a (667 tokens, without p03 and p11), because the full set would not finish. The choice is made by `run_mlp.sh` from the grant time, and logged. No other reduction.
+
+## Metric
+Exactly PR #124's, by its code (`e2e.Stream`, `logits_metrics`, `lm_head_chunks`, imported unchanged): per position, top-1 agreement with REF (ties to lowest id), KL(REF || path) in nats over the full 248,320-token vocabulary, max \|z_REF - z_P\| / SD(z_REF), REF's top-1 margin. Pooled and per prompt: fraction agreeing, KL median / p99 / max / SD; spread over the per-prompt values. Per layer: residual relative L2 difference to REF. Per (layer, prompt) for the DeltaNet heads of XM18: rel_y of the XS18 heads vs float heads on the same inputs (as PR #124, descriptive).
+
+**Range behaviour (descriptive, no threshold, registered):** for every integer MLP quantity of every integer-MLP path, per (leg, layer, prompt): max \|.\| of m, gw, u, s, h, the down-projection accumulator (h . Wd_int, before the floor) and out; the exponents e_g, e_u, e_d; and the number of entries that are
+- m: \|m\| > 2,047 (DESIGN 3.2 / A_PUB);
+- gw, u, h: \|x\| >= 2^18 (honest cell contract) and \|x\| >= 2^23 (rng class);
+- gw: outside [-2^15, 2^15) (SiLU table domain, saturated);
+- accumulator: \|acc\| >= 2^53 (my float exactness, a guard) and against the ledger's 2^55.02 and 2^63;
+- out: \|out\| >= 2^31 (OUT_PUB);
+- exponents: e outside 1..24 (DESIGN 5.0 admission), and \|W_int\| > 4,095 (cannot happen by construction; checked).
+RESULTS reports the largest magnitude against each bound per quantity over all layers and prompts, which layers hold the extremes, and every count. A value outside its bound is reported as a finding, not clamped (the only clamp is the SiLU index, counted).
+
+## Acceptance threshold
+PR #124's bar, unchanged. The XM18 cell on a checkpoint passes iff over all registered positions, with no guard error on any prompt:
+1. top-1 agreement >= 99.0% of positions, and
+2. KL(REF || XM18) median <= 1e-4 nats, and
+3. KL max <= 0.1 nats.
+A guard error (an exactness guard above, or any failure of the path on a prompt) counts every position of that prompt as disagreeing with KL = infinity.
+- **H (numerical):** XM18 passes on abl. (On stock too, if the stock leg finishes.)
+- **Range verdict, separate from the bar:** IN-BOUND if no integer MLP quantity of XM18 leaves its ledger bound listed above on any position; otherwise OUT-OF-BOUND, with the counts. The issue's question has two parts and both are answered: whether the tokens survive (the bar) and whether the design's classes hold on real activations (the range verdict). A PASS of the bar with an OUT-OF-BOUND range verdict means: the arithmetic keeps the tokens, but the statement as specified would refuse (or, for the SiLU domain under v1, could not prove) those positions.
+- If XM18 fails the bar, FM and the per-layer residual drift are used to say which part loses the accuracy (MLP lowering itself vs its combination with XS18), and RESULTS names the next arm that would be registered. Descriptive.
+
+## Kill criterion
+- Forward sanity: REF's top-1 at the last position of p01 is " Tokyo" (25358) on each finished checkpoint, else no cell is a result.
+- **Compute hard stop: 2026-11-12T18:25Z** (wall clock; time waiting for the lock counts against it). A watchdog in `run_mlp.sh` kills the job by pid then. Not moved after registration. Anything unfinished is reported as not finished. Lane hard stop 18:45Z.
+- Checkpointing: the full state (every path's residual for every prompt, all logs) is saved after every layer as in PR #124, so a lost process resumes at the next layer with the same code. Because the forward is layer-major (one weight fetch per layer for all prompts), a prompt cannot finish before the others; the per-layer checkpoint covers every prompt. A resume is logged and is not a rerun.
+- Memory: start only if MemAvailable >= 10 GB; RSS over 14 GB or free disk under 3 GB: stop, report. Gated or 401/403: stop, no credential search.
+- Budget (from PR #124's committed timing, `runs/progress.log.jsonl`: 48 to 67 s per layer for REF + XS18 + XS20 on 1,461 tokens plus BF16H on 608 and two duplicate paths, on a loaded host): this run has one integer-head path instead of two and no BF16H, plus three integer matmuls per integer-MLP path; expected 40 to 65 s per layer, 64 layers about 45 to 70 min, plus about 2 min of logits. Measured on the fixture (below) before the run and recorded in ENV.json.
+
+## Runs
+Deterministic float64 and integer arithmetic, no seeds. Five or more repeats of a deterministic forward give identical numbers and are not meaningful; the spread reported is over the positions and the per-prompt values. Determinism: XM18#2 must be bit-identical to XM18 after every layer and in every logit metric; a mismatch makes the cell "not deterministic" (no PASS).
+- Heavy work only as `flock <planning>/locks/bigmem.lock <planning>/fp-heavy.sh taskset -c 6-11 <command>`, BLAS 6 threads in the main process, 6 spawned head workers with 1 BLAS thread each. Host shared and loaded; recorded.
+- No exclusions.
+- **Debug before the registered run (disclosed now):** the new code is debugged only on the fixture "The capital of Italy is" ([760, 6511, 314, 14898, 369], not in the suite) through stock layers 0 to 3, and the integer MLP on synthetic arrays (numpy `default_rng(0)`) against a direct integer (Python int / int64) computation of the same formulas. No registered prompt, no layer above 3 and no lm_head row is touched before the registered run. The fixture also gives the per-layer timing.
+
+## Prior art
+In this repo: PR #124 (XS18 / XS20 heads end to end, the harness and bar reused here), PR #88 (per-head bar fails at layers 16 and 20), PR #74 (XS18 engine), PR #68 (layer-0 real weights; abliteration localised to `out_proj` / `o_proj` and `down_proj` of layers 17 to 51, so the integer down projection is exactly where the checkpoints differ), PR #70 (the M3 design and its bound ledger, whose r2 found the wrap of the unrounded down projection), PR #67 (pinned v1 tables). Upstream FlashProve's Maverick model (`docs/model.md` 5, 7) clamps activations to 12 bits and saturates its SiLU table; the M3 design rejects instead. Outside: LLM.int8() (Dettmers et al. 2022) found outlier features of large magnitude in the inputs of transformer feed-forward layers that break 8-bit per-tensor activation scales; SmoothQuant (Xiao et al. 2023), GPTQ (Frantar et al. 2023), AWQ (Lin et al. 2024) report whole-model fidelity of quantised MLPs; "Massive activations in LLMs" (Sun et al. 2024) reports single residual entries thousands of times the median. zkLLM (Sun et al. CCS 2024) and EZKL use per-tensor fixed-point scales and report output agreement. **New here:** the M3 statement's own MLP lowering (13-bit per-tensor weights, 2^12 activations, the pinned v1 SiLU table, rounded h) measured end to end on all 64 layers of a real 27B hybrid model, abliterated, with the design's range classes checked on every value.
+
+## Amendments
+(empty at registration)
+
+- **A-1 (2026-11-12, during the registered run; reason: sensor format, no change of substance).** The standards sensor looks for a section named "Hypothesis"; the registered hypothesis sits under "Acceptance threshold". It is restated here verbatim. No definition, threshold, limit, arm or prompt changes. The registered text above is not edited.
+
+### Hypothesis
+**H (numerical):** XM18 passes on abl. (On stock too, if the stock leg finishes.)
