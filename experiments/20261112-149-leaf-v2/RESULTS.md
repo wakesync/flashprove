@@ -26,7 +26,7 @@ Code: `research/weight-binding/wb_leafv2.py` (runner, leaf v2, subset tree, `ver
 
 ## Run 3
 
-(Filled in by a later commit only if run 3 runs; see PREREG A-1. If this section still says nothing, run 3 did not run.)
+**Not run.** PREREG A-1's start condition (free disk at least 22 GB before 2026-11-13T00:00Z) was never met while the lane watched: free disk went 21.6 GB (22:28Z), 18.2 GB (22:32Z), 16.3 GB (22:36Z), 12.9 GB (22:40Z), 11.5 GB (22:43Z). Other work on the shared host was using the space. The lane stopped watching at 22:43Z with the disk still falling. H3 therefore stays at run 2's 8 blocks, below the registered coverage, as A-1 says. Running run 3 (`bash research/weight-binding/run_leafv2.sh <fresh dir> --reverse`, then `wb_leafv2.py compare`) on a host with free disk is the cheapest way to close H3 (about 15 minutes, about 2.2 GB RAM, nothing kept on disk).
 
 ## What is and is not established
 
