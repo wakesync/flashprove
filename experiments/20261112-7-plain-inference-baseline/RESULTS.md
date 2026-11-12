@@ -14,9 +14,11 @@ client at batch size 1, an engine configuration this lane does not control, and 
 other callers of the route. **A lower bound on what the card can do for this model, not a GPU benchmark.** Model, revision, dtype
 and engine image are as reported by the deployment configuration (ENV.json), not independently hashed.
 
-Reasoning tokens: no reply in any file (debug, probe, batch) carried a `reasoning_content` / `reasoning` field, and no `content`
-contained a think block. So `usage.completion_tokens` here counts only visible reply tokens; whether the engine would count
-reasoning tokens in `usage` when it emits them is **not observed** by this run.
+Reasoning content: no reply in any file (debug, probe, batch) carried a nonempty `reasoning_content` / `reasoning` field, and no
+`content` contained a think block. What is reported is the served `usage` counts as returned (decode rows: `completion_tokens`
+equal to `max_tokens` in all 40 timed rows) and "no nonempty reasoning content observed". These receipts carry no token ids and
+were not reconciled against a tokenizer, so they do not establish what `usage.completion_tokens` counts: reasoning-token
+accounting is **not established** by this run.
 
 ## Against the registration
 
@@ -28,6 +30,9 @@ reasoning tokens in `usage` when it emits them is **not observed** by this run.
   `max_tokens` at most 256. No prompt hit the 14,400-character truncation (largest 2,048-word prompt is below it).
 - PASS rules: both arms PASS (extreme cells' min/max do not overlap, every cell has 10 timed rows, every decode row ended with
   `finish_reason = length`, 40 of 40, positive slope).
+- Hypothesis (a), "close to linear" in served prompt tokens, is **partly refuted**: below about 1,000 prompt tokens the prefill
+  cells are flat (see the prefill answer below). The registered PASS rule did not test linearity, so the PASS stands on the
+  registered rule. Hypothesis (b) (decode) holds, R² 0.999.
 
 ## Cells (timed rows only, n = 10 each; seconds)
 
@@ -50,16 +55,22 @@ reasoning tokens in `usage` when it emits them is **not observed** by this run.
   1 through the route.** Two-point cross-check from the 16 and 256 medians: 0.0931 s per token. Intercept 0.31 s (fixed
   per-request overhead plus prefill of the 32-token prompt).
 - **Prefill: 0.000178 s per prompt token (OLS over 50 rows, SE 0.000007, R² 0.93), about 5,600 prompt tokens per second, over
-  42 to 2,146 prompt tokens.** Two-point cross-check (41.5 vs 2,145.5 medians): 0.000162 s per token (6,200 per second).
+  cells with median 42 to 2,146 served prompt tokens** (observed span of the 50 timed rows: 40 to 2,166). Two-point cross-check
+  (41.5 vs 2,145.5 medians): 0.000162 s per token (6,200 per second).
   Intercept 0.33 s. The arm PASSes, but it is not linear across its range: the 16, 256 and 512-word cells overlap each other
   (medians 0.38 s), and the rise appears only from about 1,000 tokens. Below that the per-request overhead hides prefill. The
   slope is a short-prompt figure fitted mostly on the two largest cells and should not be extrapolated to long contexts.
+  Its SE does not capture this misfit: refitting the same committed rows on subsets gives 0.000195 (256 to 2,048 words),
+  0.000207 (512 to 2,048 words) and 0.000161 (1,024 and 2,048 words), so the slope is uncertain by roughly ±15%, not ±4%.
+  (Offline refits of committed data, no new requests.)
 - **Repeated prompt (labelled):** the identical 1,024-word prompt took a median 0.399 s against 0.552 s for unique 1,024-word
-  prompts, ranges not overlapping. Consistent with the engine reusing a cached prefix, about 0.15 s saved per request. This is
-  why the registered prefill arm uses unique prompts.
+  prompts, ranges not overlapping, about 0.15 s less per request. The latency difference is measured; its mechanism is not.
+  It is consistent with the engine reusing a cached prefix, which is why the registered prefill arm uses unique prompts.
 - Context only, no claim: 10.7 tokens per second is well below what a single uncontended H200 is usually quoted at for a 27B BF16
-  model at batch 1. The gap is unexplained here (route overhead is in the intercept, not the slope, so candidates are the shared
-  card, the second engine, CC mode and engine configuration). This run cannot separate them.
+  model at batch 1. The cause is not resolved by this run. The intercept absorbs only the constant part of the per-request
+  overhead; the whole non-streaming request is timed, so anything that scales with token count (response size, serialization,
+  transport, the serving layers' behaviour) can sit in the slope as well as the shared card, the second engine, CC mode and
+  engine configuration. This run cannot separate any of them.
 
 ## Conditional multiple of plain inference (does not change PR #126)
 
@@ -73,16 +84,24 @@ plain-inference cost of that window is what this route measured, **then** provin
 pass of the window, and about **0.46 times** generating the window token by token at batch 1. At the high rate (86.3) the factors
 are 486x and 0.93x; at the small-example rate (2,559) 14,400x and 27x. At T = 64 central: 541x and 1.03x.
 
+The prefill factor inherits the prefill slope's fit sensitivity (above): with the subset refits (0.000161 to 0.000207 s per
+token) the T = 1,024 central prefill factor is roughly **205x to 265x**, not a sharp 240x. The decode slope is tight (R² 0.999).
+
 Why both, and why neither is "the" multiple: proving covers the whole window (prompt plus reply) in one pass, like prefill, so the
 prefill ratio is the like-for-like compute comparison; but a served reply is generated at decode speed, so the decode ratio is the
 user-facing one. The units also differ: the cost model is GPU-seconds on a dedicated card; the route figure is wall seconds of
 one stream on a shared card, and decode at batch 1 leaves most of the card idle (a batched server shares that time across many
-streams). The decode ratio therefore overstates how cheap proving is relative to serving. Not a cost claim, not a bound.
+streams). The decode ratio therefore overstates how cheap proving is relative to serving. The cards also differ: the cost
+model's GPU-seconds are calibrated on H100 with H200 speed assumed equal (its gap G-H200), while the denominator here is H200
+route wall time. Not a cost claim, not a bound, not a measured proving overhead.
 
 ## Not established
 
 - Any GPU-level number: no telemetry, no engine logs, no streaming (no time-to-first-token, no inter-token latency).
 - Prefill at long contexts (the route rejects prompts over 16,000 characters, about 2,500 tokens of this vocabulary).
 - Batched throughput, the effect of the second engine or of other callers, whether CC mode costs anything.
-- Whether `usage` counts reasoning tokens (none were emitted).
+- The cause of the low decode rate (see the context note above).
+- Reasoning-token accounting: what `usage` counts (no nonempty reasoning content was observed; no token ids, no tokenizer
+  reconciliation).
+- The mechanism behind the repeated-prompt difference (consistent with prefix reuse, not shown to be it).
 - Replication (one batch, one lane, one day).
