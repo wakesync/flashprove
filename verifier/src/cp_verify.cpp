@@ -2395,9 +2395,17 @@ static int runStage(const StageInputs &in) {
         onePlacement = placedAlike(layoutH.find(l, "M" + std::to_string(linksH[l].tl->pxMat[i])),
                                    layoutH.find(0, "M" + std::to_string(linksH[0].tl->pxMat[i])));
     }
+  /* A dense parameter file: NE 0, and so no router, no expert classes or weight kinds (refused above:
+     header-absent-class, header-absent-kind), no rcl or gcl (policy-rcl, policy-gcl) and no lines of
+     the tables' digests (policy-tables). For such a file the three conditions on what only a model
+     with routed experts has are met (routed-experts, both-clamps, table-digests); for NE above 0
+     `dense` is false and they are what they were. Why each is met, and what a dense YES then does not
+     pin (the SiLU, rotary and softmax tables by digest lines): verifier/docs/parameter-file.md, "The
+     standard parameter form". */
+  const bool dense = h.NE == 0 && !RCL && !GCL && tblAt == 0;
   string notServed =
-      servedForm({h.NE > 0, residualStreamLimbs == 5, RCL && GCL, h.toksrc == 1, layoutP != nullptr,
-                    tblAt == TBLW, !egSeen && !smaxSeen, h.Sx < 32, h.D == 2048, oneShift, onePlacement,
+      servedForm({h.NE > 0 || dense, residualStreamLimbs == 5, (RCL && GCL) || dense, h.toksrc == 1, layoutP != nullptr,
+                    tblAt == TBLW || dense, !egSeen && !smaxSeen, h.Sx < 32, h.D == 2048, oneShift, onePlacement,
                     h.Sx == 12 && h.rx == 8, rotaryServed(h.theta0, dh, h.lt),
                     normShifts, twoCodesH,
                     !ask.nextTokenAsked || ((u64)so.r + 1 == T && so.e == T),
