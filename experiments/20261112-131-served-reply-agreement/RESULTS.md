@@ -8,7 +8,8 @@ An attested H200 serving deployment (vLLM, BF16) of the abliterated Qwen3.8-27B 
 
 - float64, XS18 and XS20 each pick the served token at **287 of 291** positions (98.6%; bar 98%).
 - XS18 and XS20 pick **the same token as float64 at 291 of 291** reply positions (bar 99%), and at 226 of 226 prompt positions (descriptive).
-- All 4 misses are the same in all three paths: float64 itself picks a different token from the served one. They are **serving-precision effects (BF16 GPU vs float64), not lowering effects**. Lowering effects: 0 for XS18, 0 for XS20.
+- All 4 misses are the same in all three paths: float64 itself picks a different token from the served one, and XS18 and XS20 pick the same token as float64. **Four shared served-vs-reference mismatches, consistent with a serving-precision difference but not causally attributed; zero additional XS18/XS20 top-1 mismatches relative to REF on these inputs.**
+- The PREREG sorts misses into two bins. A miss where float64 disagrees with the served token goes into the bin it names "serving precision" (4 here). A miss where float64 agrees with the served token and XS18 / XS20 does not goes into "lowering" (0 for XS18, 0 for XS20). The name "serving precision" is the registered bin name and is descriptive: it means "float64 disagrees with the served token". It does not mean BF16 precision was shown to be the cause. The cause of the 4 misses was not isolated (see "Every disagreement" and "What is NOT established").
 - 8 of 10 replies are reproduced at every position by every path. On those 8 prompts, a greedy run of float64, XS18 or XS20 from the same prompt would have produced the same reply token sequence as rebuilt here. That does not hold for q02 and q09.
 - The serving deployment returned identical text on all 3 repetitions of each of the 10 prompts.
 
@@ -44,7 +45,7 @@ Spread over the 10 prompts of the per-prompt fraction "served = path": median 1.
 
 ## Every disagreement (`runs/summary.json` `disagreement_positions`, `runs/disagreement-text.json`)
 
-| prompt | reply pos | served | float64, XS18, XS20 all pick | float64 top-2 margin (logits) | kind |
+| prompt | reply pos | served | float64, XS18, XS20 all pick | float64 top-2 margin (logits) | registered bin (descriptive name, not a cause) |
 |---|---|---|---|---|---|
 | q02 | 30 | " like" (1040) | "," (11) | 0.212 | serving precision |
 | q02 | 32 | " or" (466) | " and" (321) | 1.386 | serving precision |
@@ -68,7 +69,8 @@ Stop positions (`runs/stop-ids.json`): on all 8 replies that stopped, float64, X
 
 - **No proof and no soundness.** Only the DeltaNet head computation is integer. in_proj, out_proj, attention, MLP, norms and lm_head are float64. The arms are numerical lowerings, not sound relations.
 - **Token ids are reconstructed, not observed.** The route returns text and counts only. Equal counts plus an exact decode round trip leave open a non-canonical generation of the same text with the same number of tokens. The 287 agreeing positions make that unlikely to matter, but it is not excluded.
-- **Served model identity** is as reported by the deployment configuration and is not hashed here. The 2 misses with float64 top-2 margins above 1 logit (q02 reply position 32, q09 reply position 45) are unexplained (see above).
+- **The cause of the 4 shared misses.** They are consistent with a serving-precision difference (BF16 GPU vs float64), and none of them is attributed to one. No served logits, no controlled BF16-vs-float64 comparison of the same forward, and no independent check of the served weights or configuration are available through this route. What the data do establish is narrower: XS18 and XS20 add zero top-1 mismatches relative to float64 on these reconstructed inputs. The registered bin name "serving precision" is a label for "float64 disagrees with the served token", not a finding about the cause.
+- **Served model identity** is as reported by the deployment configuration and is not hashed here. The 2 misses with float64 top-2 margins above 1 logit (q02 reply position 32, q09 reply position 45) are larger than one might expect from BF16 rounding alone and are unexplained (see above).
 - **Small n.** 10 short prompts, 291 reply positions, one checkpoint (abliterated), greedy only, at most 64 tokens. One deterministic CPU run. All replies were collected within about 10 minutes (probe 15:59Z, batch 16:08Z to 16:10Z), from one deployment state.
 - "A greedy integer run would have produced the reply" holds only for the 8 fully matched replies and only under teacher forcing with reconstructed ids. No free-running generation was done on the CPU.
 - The 98% bar for served vs float64 was fixed before the data. With n = 291 the minimum passing count is 286 (0.98 x 291 = 285.2); 287 is one position above it. One more miss would still pass, two more would fail.
