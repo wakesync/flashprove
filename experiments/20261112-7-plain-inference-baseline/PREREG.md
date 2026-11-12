@@ -127,3 +127,12 @@ vocabulary (mean 6.76 characters per word including the space), not in tokens:
 Consequence stated in advance: the prefill arm covers at most a few thousand prompt tokens, so the seconds-per-prompt-token
 rate measured here is for short prompts through this route, and says nothing about the long-context prefill the cost model's
 window sizes involve.
+
+### Clarification to Amendment 1 timing (2026-11-12, added after the results, review round 1)
+
+The Amendment 1 heading above says "16:40 UTC". That was an approximate time written in the heading, and it is later than
+the actual events. From git, the GitHub push log and the committed receipts: Amendment 1 was committed (22638a2) at
+16:38:57Z and pushed at 16:38:59Z; the first registered request (the start attestation check, utc minus wall time in
+`runs/batch.jsonl`) began at 16:39:29.7Z. So the amendment was committed and pushed before any registered request. The
+heading is left unchanged, so the registration history is not rewritten; this note only corrects the time it states. No
+change to the design, rules or data.
