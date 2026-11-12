@@ -1,0 +1,102 @@
+{
+ "what": "summarise_served.py determinism-coverage guard, checked on temporary copies of committed run files",
+ "committed_sha256": {
+  "served-ids.json": "bc0689e621f57474832fbf3ca9e63343d5229211dabb092a5ede705004a427d2",
+  "forward.json": "53345e2cc507fc8f39eac8b2af7e1cdc5b3c90fd60e8f1941fe2696f742bc682",
+  "divergence-abl.jsonl": "669fa96c122a5d230e32dbb95e2669f68e9d7ce6389b99716fdd102973168cbd",
+  "summary.json": "b63c92a78755319e371b2468df035bb525ded8ea3880689abca16401496a07b6",
+  "summary.md": "12d0aa512d31f72eca5798e07a3684b4f247434f21a953d933ad45ef49b4ed39"
+ },
+ "committed_run_files_untouched": true,
+ "cases": [
+  {
+   "case": "unchanged_copy",
+   "expect": "exit 0, summary byte-identical to committed",
+   "exit_code": 0,
+   "byte_identical": {
+    "summary.json": true,
+    "summary.md": true
+   },
+   "summary_sha256": {
+    "summary.json": "b63c92a78755319e371b2468df035bb525ded8ea3880689abca16401496a07b6",
+    "summary.md": "12d0aa512d31f72eca5798e07a3684b4f247434f21a953d933ad45ef49b4ed39"
+   },
+   "ok": true
+  },
+  {
+   "case": "layer_rows_63",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "layer_rows_1",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "layer_rows_0",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "duplicated_layer",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "layer_out_of_range",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "missing_duplicate_key",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "extra_duplicate_key",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "non_boolean_value",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "forward_duplicate_path_missing",
+   "expect": "non-zero exit, no summary written",
+   "exit_code": 1,
+   "summary_files_written": [],
+   "ok": true
+  },
+  {
+   "case": "false_equality_complete_record",
+   "expect": "exit 0, every cell NOT DETERMINISTIC",
+   "exit_code": 0,
+   "verdict": {
+    "H0": "NOT DETERMINISTIC",
+    "H1_XS18": "NOT DETERMINISTIC",
+    "H2_XS20": "NOT DETERMINISTIC"
+   },
+   "ok": true
+  }
+ ],
+ "all_ok": true
+}

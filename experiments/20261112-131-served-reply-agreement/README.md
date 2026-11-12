@@ -26,7 +26,8 @@ PR #124 showed that the integer DeltaNet heads (arms XS18, XS20) pick the same n
 | `rebuild_ids.py` | rebuilds prompt and reply token ids, applies the registered inclusion rule -> `runs/served-ids.json` |
 | `served_e2e.py` | the CPU forward: imports PR #124's `e2e.py` and runs its abl leg on the served sequences with paths REF, XS18, XS20 (+ REF#2, XS18#2 on q01, q02) -> `runs/forward.json`; `fixture` = timing/debug on the template-probe sequence (not a suite prompt) |
 | `run_served.sh` | the registered run under its hard stop (through the big-memory lock and `fp-heavy.sh`) |
-| `summarise_served.py` | the bars, the three-way per-prompt table, every disagreement with REF's top-2 margin -> `runs/summary.json`, `runs/summary.md` |
+| `summarise_served.py` | the bars, the three-way per-prompt table, every disagreement with REF's top-2 margin -> `runs/summary.json`, `runs/summary.md`. Since the review fix it refuses to write a summary unless the determinism record is complete: exactly layers 0 to 63, exactly the four registered duplicate keys per layer, boolean values (PREREG Amendment A-1). Optional argument: a runs directory, so it can be run on a copy |
+| `test_summarise_served.py` | checks that guard on temporary copies of the committed run files: the unchanged copy gives a byte-identical summary, 9 incomplete or malformed records are refused, a complete record with a false equality gives "NOT DETERMINISTIC" -> `runs/summariser-guard-check.json` |
 | `check_manifests.py` | sha256 of every fetched tensor vs PR #124's committed manifests -> `runs/manifest-check.json` |
 | `time_summary.py`, `env.py`, `add_results_row.py` | run-time fields, `ENV.json`, the `research/results.yaml` row |
 
@@ -41,6 +42,7 @@ python3 rebuild_ids.py <dir with pinned tokenizer.json + chat_template.jinja> ru
 fp-heavy.sh bash run_served.sh $X        # about 40 min on 6 cores of a shared VM; resumes from $X/ckpt.npz
 python3 summarise_served.py
 python3 check_manifests.py
+python3 test_summarise_served.py         # seconds, CPU only, works on temporary copies; exit 0 = guard behaves as stated
 ```
 
 The served replies (`runs/replies.jsonl`) cannot be regenerated without access to a serving deployment; `served_route.py collect prompts-served.json <out>` with `BRIDGE_URL`, `BRIDGE_KEY_FILE`, `BRIDGE_MODEL` set is how they were collected. `run_served.sh` has a registered wall-clock stop; edit its cap to rerun at another time.

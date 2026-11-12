@@ -3,17 +3,47 @@
 
 Reply position k (0-based) of a prompt with n_prompt prompt ids is input position n_prompt - 1 + k; its logits predict
 reply_ids[k]. At a stop position (last reply id 248046 when finish_reason == stop) a path picks the served token iff its
-argmax is 248046 or 248044 (PREREG). Ties are broken by lowest id (e2e.Stream)."""
-import json, statistics
+argmax is 248046 or 248044 (PREREG). Ties are broken by lowest id (e2e.Stream).
+
+Determinism coverage is fail-closed (added after review, PREREG Amendment A-1; no bar or definition changed): the
+summary is written only if `divergence-abl.jsonl` has exactly one row for each of layers 0..63, every row's
+`det_bit_equal` has exactly the registered duplicate keys (REF#2 and XS18#2 on the first two included prompts) with
+boolean values, and `forward.json` has the top-1 arrays of those same duplicate paths. Anything else exits non-zero
+and writes nothing. A complete record with a false equality still gives the registered "NOT DETERMINISTIC" verdict.
+
+Usage: summarise_served.py [runs_dir]   (default: runs/ next to this file; a directory argument lets the check run on
+a copy without touching the committed run files)"""
+import json, statistics, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent; R = HERE / "runs"
 IM_END, ENDOFTEXT = 248046, 248044
 PATHS = ["REF", "XS18", "XS20"]
+N_LAYERS = 64
+DUP_PATHS = ("REF#2", "XS18#2")
+N_DUP_PROMPTS = 2
 
-def main():
+def coverage_errors(top1_keys, rows, expected):
+    """Problems that make the determinism record incomplete or malformed (empty list = complete)."""
+    errs = []
+    if set(top1_keys) != expected:
+        errs.append(f"forward.json duplicate top-1 paths {sorted(top1_keys)} != expected {sorted(expected)}")
+    layers = [r.get("layer") if isinstance(r, dict) else None for r in rows]
+    if any(type(l) is not int for l in layers) or sorted(layers) != list(range(N_LAYERS)):
+        missing = sorted(set(range(N_LAYERS)) - {l for l in layers if type(l) is int})
+        errs.append(f"divergence-abl.jsonl must have exactly one row per layer 0..{N_LAYERS - 1}: {len(rows)} rows, missing {missing}")
+    for i, r in enumerate(rows):
+        d = r.get("det_bit_equal") if isinstance(r, dict) else None
+        if not isinstance(d, dict) or set(d) != expected:
+            errs.append(f"row {i}: det_bit_equal keys {sorted(d) if isinstance(d, dict) else d} != expected {sorted(expected)}")
+        elif not all(isinstance(v, bool) for v in d.values()):
+            errs.append(f"row {i}: det_bit_equal has a non-boolean value")
+    return errs
+
+def main(R=R):
     S = json.load(open(R / "served-ids.json")); FW = json.load(open(R / "forward.json"))
     inc = [q for q in S["prompts"] if q["included"]]
+    expected_dup = {f"{p2}|{q['id']}" for q in inc[:N_DUP_PROMPTS] for p2 in DUP_PATHS}
     per = []; dis = []; tot = {k: 0 for k in ("n", "REF_s", "XS18_s", "XS20_s", "XS18_r", "XS20_r", "prompt_n", "XS18_rp", "XS20_rp")}
     serving_prec = {"XS18": 0, "XS20": 0}; lowering = {"XS18": 0, "XS20": 0}; ref_serv = 0
     det = {}
@@ -63,7 +93,11 @@ def main():
         v = [r["frac"][key] for r in per]
         spread[key] = dict(median=statistics.median(v), min=min(v), max=max(v), sd=statistics.pstdev(v)) if v else None
     # registered check: residuals bit-identical after every layer (e2e.layer_all writes det_bit_equal per layer)
-    layer_det = [all(json.loads(l)["det_bit_equal"].values()) for l in open(R / "divergence-abl.jsonl")]
+    rows = [json.loads(l) for l in open(R / "divergence-abl.jsonl")]
+    errs = coverage_errors(list(det), rows, expected_dup)
+    if errs:
+        sys.exit("summarise_served: determinism coverage incomplete, no summary written\n  " + "\n  ".join(errs[:8]))
+    layer_det = [all(r["det_bit_equal"].values()) for r in rows]
     det["residuals_bit_equal_all_layers"] = bool(layer_det) and all(layer_det)
     det["layers_checked"] = len(layer_det)
     deterministic = all(v for k, v in det.items() if k != "layers_checked") if det else False
@@ -99,4 +133,4 @@ def main():
     L += ["", "Verdict: " + json.dumps(out["verdict"]), "Deterministic (REF#2, XS18#2 top-1 equal): " + str(deterministic)]
     (R / "summary.md").write_text("\n".join(L) + "\n"); print("\n".join(L))
 
-if __name__ == "__main__": main()
+if __name__ == "__main__": main(Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else R)
