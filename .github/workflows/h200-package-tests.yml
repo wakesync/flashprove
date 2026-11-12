@@ -1,7 +1,8 @@
 # CPU-only tests of the undeployed H200 package (research/gpu/tinfoil-h200/): the results server's
 # routes and file boundary (serve_test.py), the job runner's control flow with mocked GPU programs
-# (run_job_test.py), the runbook's bounded result fetch (fetch_bounded_test.py), bash -n and
-# shellcheck. No GPU, no secrets, no network calls beyond checkout.
+# (run_job_test.py, run_job_calib_test.py), the runbook's bounded result fetch (fetch_bounded_test.py),
+# the off-box verification helper (verify_offbox_test.py), the static image/config contract
+# (image_contract_test.py, no docker), bash -n and shellcheck. No GPU, no secrets, no network calls beyond checkout.
 name: h200-package-tests
 
 on:
@@ -43,3 +44,9 @@ jobs:
       - name: fetch_bounded_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 fetch_bounded_test.py
+      - name: verify_offbox_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 verify_offbox_test.py
+      - name: image_contract_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 image_contract_test.py

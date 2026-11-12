@@ -7,7 +7,8 @@ place of cp_commit, cp_prove and cp_verify. It tests the runner, not the prover:
 then each configuration smallest first), that every response of a batch is exported only when every
 one was accepted (duty 6), that isk/ never is, the per-run windows of cp_commit and cp_prove, the
 sampler interval, step and job timeouts during a calibration run, a cp_commit refusal (not replaced),
-and that a malformed FP_CALIB ends the job FAILED before any GPU step. With FP_CALIB empty the job
+and that a malformed FP_CALIB (including a repeated id or whitespace only) ends the job FAILED before
+any GPU step. With FP_CALIB empty the job
 is the #43 job (run_job_test.py's 87 checks test that).
 
 usage: python3 run_job_calib_test.py [--runner PATH_TO_run_job.sh] [--only NAME]   (exit 0 = all passed)
@@ -158,8 +159,11 @@ def main():
             check(c.name, "SHA256SUMS verifies, isk never exported", c.sums_ok() and c.no_secret())
 
         if want("calib-malformed"):
+            # the last three since review round 1 of PR #141: a repeated id, the reviewer's reproduction
+            # (C1-1 run twice, mixed evidence), and a value of whitespace only (no calibration, DONE)
             bads = ("C1:0:1:1:30", "C1:2:3:1:30", "C1:2:1:1:030", "ZZ:1:1:1:30", "C1:1:1:1", "../C1:1:1:1:30",
-                    "C1:65:1:1:30", "C1:2:1:21:30")
+                    "C1:65:1:1:30", "C1:2:1:21:30", "C1:1:1:1:30 C2:1:1:1:30 C1:1:1:1:30",
+                    "C1:2:1:1:30 C1:1:1:1:30", "   ")
             for i, bad in enumerate(bads):
                 c = calib_case(base, runner, "calib-malformed-%d" % i, bad)
                 p = c.run_job()

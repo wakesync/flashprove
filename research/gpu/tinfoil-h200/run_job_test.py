@@ -83,7 +83,7 @@ def script(path, text):
 
 def free_port():
     s = socket.socket()
-    s.bind(("127.0.0.1", 0))
+    s.bind(("localhost", 0))
     p = s.getsockname()[1]
     s.close()
     return p
@@ -91,7 +91,7 @@ def free_port():
 
 def http(port, path):
     try:
-        with urllib.request.urlopen(f"http://127.0.0.1:{port}{path}", timeout=5) as r:
+        with urllib.request.urlopen(f"http://localhost:{port}{path}", timeout=5) as r:
             return r.status, r.read()
     except urllib.error.HTTPError as e:
         return e.code, e.read()
@@ -115,6 +115,8 @@ class Case:
                 fh.write(v)
         script(os.path.join(self.mock, "nvidia-smi"), MOCK_NVIDIA_SMI)
         script(os.path.join(self.mock, "time"), MOCK_TIME)
+        # the compiler that FP_ONBOX_BUILD=1 needs (checked before any GPU step); a case can remove it
+        script(os.path.join(self.mock, "nvcc"), "#!/bin/bash\necho mock nvcc\n")
         script(os.path.join(self.repo, "prover/build/compiler_sample"), compiler)
         for p in ("cp_commit", "cp_prove", "cp_verify"):
             script(os.path.join(self.repo, "prover/build/hc", p), "#!/bin/bash\n")
@@ -278,6 +280,26 @@ def main():
             check(c.name, "quickstart bundle exported", c.exists("quickstart/bundle/out/example.y"))
             check(c.name, "SHA256SUMS verifies", c.sums_ok())
             check(c.name, "isk never exported", c.no_secret())
+
+        # 2b. PR #141 review round 1: a runtime-stage image (no compiler) started with FP_ONBOX_BUILD=1, or a
+        # value other than 0/1, ends FAILED before any GPU step (here: FP_NVCC names no program, as in
+        # the runtime image, where nvcc is absent).
+        if want("onbox-no-compiler"):
+            c = Case(base, runner, "onbox-no-compiler", onbox=1, repeats=1, env={"FP_NVCC": "fp-h200-no-such-nvcc"})
+            p = c.run_job()
+            steps = c.read("steps.tsv") or ""
+            check(c.name, "FP_ONBOX_BUILD=1 without a compiler: FAILED, exit 1, reason names it",
+                  p.returncode == 1 and c.exists("FAILED") and "FP_ONBOX_BUILD=1 needs the compiler" in (c.read("FAILED") or ""))
+            check(c.name, "before any GPU step (no cc_probe, compiler_sample, quickstart)",
+                  not any(s in steps for s in ("cc_probe", "compiler_sample", "quickstart")) and c.sums_ok())
+            c = Case(base, runner, "onbox-bad-value", onbox=0, repeats=1, env={"FP_ONBOX_BUILD": "yes"})
+            p = c.run_job()
+            check(c.name, "FP_ONBOX_BUILD=yes refused before any GPU step",
+                  p.returncode == 1 and "FP_ONBOX_BUILD must be 0 or 1" in (c.read("FAILED") or "")
+                  and "compiler_sample" not in (c.read("steps.tsv") or ""))
+            c = Case(base, runner, "onbox-0-no-compiler", onbox=0, repeats=1, env={"FP_NVCC": "fp-h200-no-such-nvcc"})
+            p = c.run_job()
+            check(c.name, "FP_ONBOX_BUILD=0 needs no compiler: DONE", p.returncode == 0 and c.exists("DONE"))
 
         # 3. Review item 2: one repeat rejected by the verifier -> that run classed failed, job DONE.
         if want("repeat-rejected"):

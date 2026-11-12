@@ -1,6 +1,7 @@
-# FlashProve prover image for one H200 in a Tinfoil enclave. Untested draft: partly built (stages
-# `toolkit`, `source` and `verifier`, see README.md); the `prover` and `final` stages have NOT been
-# built, and nothing has been published.
+# FlashProve prover image for one H200 in a Tinfoil enclave. Untested on a GPU. All stages were built
+# locally on 2026-11-12 (issue #140: `prover`, `final`, `runtime`; receipts in
+# experiments/20261112-7-h200-dense-calibration/runs/; phase 1 had built `toolkit`, `source`,
+# `verifier` only); nothing has been pushed or published, and nothing has run on a GPU.
 #
 # NOT REPRODUCIBLE YET: the Ubuntu apt packages below are neither version-pinned nor taken from a
 # snapshot, so a later rebuild can install different versions. The base image, the CUDA wheels, the
@@ -13,7 +14,12 @@
 #   docker build --target final -t fp-h200-prover .      # the full image (toolkit + on-box build), about half an hour of compiling
 #   docker build --target runtime -t fp-h200-runtime .    # binaries + redistributable runtime libraries only (README.md, "Licences")
 #   docker build --target verifier -t fp-h200-verifier .  # toolkit + cp_verify only, a few minutes
-# (Since issue #140 the last stage is `runtime`, so a build without --target builds that one.)
+# The last stage is `final`, so a build without --target builds the full image (moved there in PR #141
+# review round 1; before that a build without --target gave `runtime`, which cannot do the on-box build).
+# Stage <-> flag: final <-> FP_ONBOX_BUILD=1, runtime <-> FP_ONBOX_BUILD=0 (set in the runtime stage);
+# run_job.sh refuses FP_ONBOX_BUILD=1 without nvcc before any GPU step.
+# The config's healthcheck runs python3 (installed in both final and runtime; the runtime stage has no
+# curl). image_contract_test.py checks these stage/config facts statically on every CI run.
 # The driver stub (stubs/libcuda.so) is never copied into the runtime image: the driver's own
 # libcuda.so.1 comes from the NVIDIA container runtime.
 #
@@ -94,21 +100,6 @@ RUN cd /opt/flashprove/prover && CUDA_VISIBLE_DEVICES= ./build.sh compiler_sampl
 COPY cc_probe.cu /opt/fp-h200/cc_probe.cu
 RUN nvcc -std=c++17 --gpu-architecture=sm_90a --cudart=static -o /opt/fp-h200/cc_probe /opt/fp-h200/cc_probe.cu
 
-# ---- final: job runner and results server ----------------------------------------------------------
-FROM prover AS final
-COPY run_job.sh serve.py stamp.sh calib_run.sh /opt/fp-h200/
-# The calibration configurations of issue #140 (make_calib_configs.py writes them; FP_CALIB selects them).
-COPY calib/ /opt/fp-h200/calib/
-RUN chmod 0755 /opt/fp-h200/run_job.sh /opt/fp-h200/serve.py /opt/fp-h200/stamp.sh /opt/fp-h200/calib_run.sh \
-    && chmod -R go-w /opt/fp-h200/calib \
-    && useradd --uid 10001 --create-home --shell /bin/bash prover
-ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility \
-    FP_REPO=/opt/flashprove \
-    FP_WORK=/work
-USER 10001:10001
-EXPOSE 8080
-ENTRYPOINT ["/opt/fp-h200/run_job.sh", "serve"]
-
 # ---- runtime-picks: what the runtime-only image takes from the prover stage ------------------------
 # The CUDA libraries that the built programs load, each checked against the list of files that the
 # CUDA Toolkit EULA (Attachment A) names as redistributable; any other toolkit library ends the build.
@@ -155,6 +146,23 @@ ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility \
     FP_REPO=/opt/flashprove \
     FP_WORK=/work \
     FP_ONBOX_BUILD=0
+USER 10001:10001
+EXPOSE 8080
+ENTRYPOINT ["/opt/fp-h200/run_job.sh", "serve"]
+
+# ---- final: job runner and results server ----------------------------------------------------------
+# The LAST stage (since PR #141 review round 1), so a `docker build` without --target gives this one:
+# the draft config's FP_ONBOX_BUILD "1" needs its compiler. Its content is unchanged by the move.
+FROM prover AS final
+COPY run_job.sh serve.py stamp.sh calib_run.sh /opt/fp-h200/
+# The calibration configurations of issue #140 (make_calib_configs.py writes them; FP_CALIB selects them).
+COPY calib/ /opt/fp-h200/calib/
+RUN chmod 0755 /opt/fp-h200/run_job.sh /opt/fp-h200/serve.py /opt/fp-h200/stamp.sh /opt/fp-h200/calib_run.sh \
+    && chmod -R go-w /opt/fp-h200/calib \
+    && useradd --uid 10001 --create-home --shell /bin/bash prover
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility \
+    FP_REPO=/opt/flashprove \
+    FP_WORK=/work
 USER 10001:10001
 EXPOSE 8080
 ENTRYPOINT ["/opt/fp-h200/run_job.sh", "serve"]

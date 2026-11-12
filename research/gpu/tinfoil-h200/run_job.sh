@@ -65,6 +65,7 @@ FP_REPO=${FP_REPO:-/opt/flashprove}
 FP_WORK=${FP_WORK:-/work}
 FP_REPEATS=${FP_REPEATS:-10}
 FP_ONBOX_BUILD=${FP_ONBOX_BUILD:-1}
+FP_NVCC=${FP_NVCC:-nvcc} # the compiler the on-box build needs; checked before any GPU step
 FP_PORT=${FP_PORT:-8080}
 FP_TIME=${FP_TIME:-/usr/bin/time}
 FP_CC_PROBE=${FP_CC_PROBE:-/opt/fp-h200/cc_probe}
@@ -145,13 +146,18 @@ export_failed() {
 # calib_ok: FP_CALIB is empty or a list of <id>:<requests>:<in-step>:<repeats>:<timeout s>, ids of
 # letters, digits and _ (at most 16), requests 1 to 64, in-step 1 to 16 and at most requests, repeats
 # 1 to 20, timeout 1 to 86400, each a canonical decimal; and each <id> has a directory in FP_CALIB_DIR.
+# Refused as well: an <id> named twice (its runs would share names and overwrite each other's
+# evidence) and a value of whitespace only (it would run no calibration and still end DONE).
 calib_ok() {
-  local e id n k r t
+  local e id n k r t seen=' '
+  [ -z "$FP_CALIB" ] || [ -n "${FP_CALIB//[[:space:]]/}" ] || return 1
   for e in $FP_CALIB; do
     [[ $e =~ ^([A-Za-z0-9_]{1,16}):([1-9][0-9]{0,1}):([1-9][0-9]{0,1}):([1-9][0-9]{0,1}):([1-9][0-9]{0,4})$ ]] || return 1
     id=${BASH_REMATCH[1]} n=${BASH_REMATCH[2]} k=${BASH_REMATCH[3]} r=${BASH_REMATCH[4]} t=${BASH_REMATCH[5]}
     [ "$n" -le 64 ] && [ "$k" -le 16 ] && [ "$k" -le "$n" ] && [ "$r" -le 20 ] && [ "$t" -le 86400 ] || return 1
     [ -d "$FP_CALIB_DIR/$id" ] || return 1
+    case $seen in *" $id "*) return 1 ;; esac
+    seen="$seen$id "
   done
   return 0
 }
@@ -160,8 +166,17 @@ job() {
   umask 077
   stage job-start
   printf 'step\texit\tseconds\ttimed_out\n' >"$R/steps.tsv"
-  calib_ok || fail "FP_CALIB is malformed or names a configuration that is not in FP_CALIB_DIR: '$FP_CALIB'"
+  calib_ok || fail "FP_CALIB is malformed, names an id twice, or names a configuration that is not in FP_CALIB_DIR: '$FP_CALIB'"
   [ -z "$FP_CALIB" ] || printf '%s\n' "$FP_CALIB" >"$R/calib-plan.txt"
+  # The image stage and FP_ONBOX_BUILD must match (RUNBOOK.md, window sheet): the on-box build needs
+  # the compiler, which only the `final` stage has. Checked before any GPU step, so that a `runtime`
+  # image started with FP_ONBOX_BUILD=1 fails here and not 20 min into the window.
+  case $FP_ONBOX_BUILD in
+    0) ;;
+    1) command -v "$FP_NVCC" >/dev/null 2>&1 ||
+      fail "FP_ONBOX_BUILD=1 needs the compiler ($FP_NVCC), which this image does not have (the runtime stage): use the final image, or FP_ONBOX_BUILD=0" ;;
+    *) fail "FP_ONBOX_BUILD must be 0 or 1, not '$FP_ONBOX_BUILD'" ;;
+  esac
   # ---- 0. environment
   {
     step env-gpu-query "$FP_TIMEOUT_ENV" nvidia-smi --query-gpu=name,compute_cap,driver_version,memory.total,memory.used,mig.mode.current,power.limit,persistence_mode --format=csv
