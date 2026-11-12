@@ -48,10 +48,10 @@ The failing prompts are both deterministic-continuation prompts (punctuation, di
 ## Deviations
 PREREG Amendment A-1, registered before the run: start from PR #124's x16 state (sha256 6d495e1b...), a fused single pass, the real-weight fixture dropped, and grant-time prompt tiers. Condition (3) was rescaled to 80% of the prompts run. No other changes before the run.
 
-Notes on A-1 (added after review, PREREG Amendment A-2):
+Notes on A-1 (added after review, PREREG Amendments A-2 and A-3):
 - **Time of A-1.** A-1 is headed "2026-11-12T17:50Z", but it was committed at 17:39:26Z (commit c56e972a). The heading was a clock estimate; the commit time is the record. Either way A-1 comes before the slot grant at 18:25:18Z and before any D existed.
 - **What A-1 left alone and what it changed.** A-1's heading says "no metric, threshold or hard stop changes". The numerical cutoffs are unchanged: 0.95 and 0.50 for the pooled shares, and 0.90 per prompt. The prompt count of condition (3) did change: "at least 8 of the 10 prompts" became "at least 80% of the prompts run", rounded up, which is 8 of 9 on the tier that ran. The result is 7 of 9, so condition (3) fails under that rule and would also fail a literal 8.
-- **The subset was chosen with E visible.** The tiers were written after PR #124's per-position E had been read, and the prompt left out of tier 2 (p03) has PR #124's largest E, so that fact was available when the tier was defined. The reason recorded for the choice is cost: p03 is 512 of the 1,461 positions. No D existed for any prompt at that time.
+- **The subset was chosen with E visible.** The tiers were written after PR #124's per-position E had been read, and the prompt left out of tier 2 (p03) has PR #124's largest E, so that fact was available when the tier was defined. A-1 records why a subset was run (the time left before the hard stop) and each tier's size. It does not say why p03 is the prompt that tier 2 drops. p03 is the largest prompt (512 of the 1,461 positions), so dropping it saves the most time, but that is an inference, not a recorded reason. No D existed for any prompt at that time.
 
 ## Changes after review (no rerun of the model, no number changed)
 The first review round of PR #139 found that `analyse.py`, as committed for the registered run, accepted incomplete evidence. With both tensor manifests emptied it still reported the manifest gate as passed, with 0 tensors compared. With the D file also cut down to p08-chat-refusal it reported PASS, with the " Tokyo" check skipped and 1 prompt needed of 1 run. The committed result was not produced that way: its evidence is complete (`postreview/input-validation.json`). Both reviewers also report that they recomputed the numbers above from the committed files with their own scripts; those are the reviewers' statements, in the PR comments [6834296442](https://github.com/wakesync/flashprove/pull/139#issuecomment-6834296442) and [6834351986](https://github.com/wakesync/flashprove/pull/139#issuecomment-6834351986), and their scripts are not in this repository.
@@ -63,6 +63,8 @@ The first review round of PR #139 found that `analyse.py`, as committed for the 
 - `runs/progress.log` shows one grant, the matching tier line and one clean end before the hard stop.
 
 The " Tokyo" check must be true, and each fetched tensor's hash must also equal PR #87's. The D against E formulas and the thresholds are untouched.
+
+Part of this goes beyond the registered gates (PREREG Amendment A-3). The registered gate (c) compares hashes "where both exist", which is what the old script did. Requiring the full set of expected tensors and equality with PR #87's hashes are requirements added after the results were known. The check that the log shows a clean end before the registered hard stop is also new in the script. They can only refuse or KILL an input that was accepted before, never the reverse, and the committed run meets all of them.
 
 Receipts, all under `postreview/` (new files; nothing under `runs/` was modified):
 - `analysis.json`: the changed script run on the committed `runs/` inputs. It is byte-identical to the committed `runs/analysis.json` (sha256 d7d127f6...54a11): FAIL (mixed), 885 / 949 above 10 E, 623 / 949 above 100 E, 7 of 9 prompts. `reproduction.json` records the comparison and `input-validation.json` what was checked.
