@@ -1,0 +1,1375 @@
+{
+ "affinity": [
+  10,
+  11
+ ],
+ "all_pass": false,
+ "client": "client_verify.py",
+ "finished_utc": "2026-11-12T00:19:10Z",
+ "label": "post-registration-concurrency-test",
+ "repeats": 20,
+ "rows": [
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 1,
+   "walls": [
+    3.6,
+    3.224,
+    3.484
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 2,
+   "walls": [
+    3.765,
+    2.943,
+    3.535
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 3,
+   "walls": [
+    3.328,
+    3.476,
+    3.726
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 4,
+   "walls": [
+    2.67,
+    3.42,
+    3.496
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 5,
+   "walls": [
+    3.257,
+    3.503,
+    3.464
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 6,
+   "walls": [
+    3.064,
+    3.625,
+    3.291
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 7,
+   "walls": [
+    3.377,
+    2.775,
+    3.417
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 8,
+   "walls": [
+    2.762,
+    3.49,
+    3.496
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 9,
+   "walls": [
+    2.539,
+    3.619,
+    3.594
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 10,
+   "walls": [
+    3.464,
+    3.499,
+    3.513
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 11,
+   "walls": [
+    3.454,
+    2.444,
+    3.441
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 12,
+   "walls": [
+    3.164,
+    3.083,
+    3.591
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 13,
+   "walls": [
+    3.277,
+    2.944,
+    3.598
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 14,
+   "walls": [
+    3.366,
+    2.397,
+    3.409
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 15,
+   "walls": [
+    3.476,
+    3.783,
+    3.528
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 16,
+   "walls": [
+    3.0,
+    3.636,
+    3.491
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 17,
+   "walls": [
+    3.529,
+    3.567,
+    3.303
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 18,
+   "walls": [
+    3.046,
+    3.636,
+    3.414
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 19,
+   "walls": [
+    3.113,
+    3.687,
+    3.707
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "released": [
+    true,
+    true,
+    true
+   ],
+   "released_records": 1,
+   "rep": 20,
+   "walls": [
+    3.739,
+    3.486,
+    3.476
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 1,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.508,
+    2.332
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 2,
+   "replays": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    2.242,
+    2.581
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 3,
+   "replays": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    2.301,
+    2.343
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 4,
+   "replays": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    2.088,
+    2.359
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 5,
+   "replays": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    2.301,
+    2.315
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 6,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.617,
+    1.882
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 7,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.353,
+    2.154
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 8,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.383,
+    2.125
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 9,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.592,
+    1.879
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 10,
+   "replays": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    2.004,
+    2.434
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 11,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.691,
+    1.908
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 12,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.695,
+    1.851
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 13,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.695,
+    1.893
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 14,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.684,
+    1.838
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 15,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.302,
+    2.222
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 16,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.552,
+    1.834
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 17,
+   "replays": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    2.203,
+    2.256
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 18,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.545,
+    1.868
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 19,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.297,
+    2.236
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "outstanding": 1,
+   "rep": 20,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "released": true,
+     "state_changed": true
+    }
+   ],
+   "walls": [
+    2.76,
+    1.896
+   ]
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=bde77c49c9a39c517341d179f378c62c8c13f712a218ed3a158ed7d2085f099f prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 1
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=96b86e8fb53f0e6481be192d81bd9a54b71f3d043afde51b6221062c787948aa prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 2
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=e31d031543a716b6edc4cf211146ad784b59f020e705f750f82ef0f5291e5a1a prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 3
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=8155336d2912c0323d467aba908b3c8aaa363da0d1a6e09009c6bad6ac6a3119 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 4
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=83fd09f00e9f7df9e6f548f10512c192c5a4f49a8fc626bf8a506bdf7f5fc44c prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 5
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=17f4a9664cd91173a87f7d0501ee65e6cefa42aafad941241fd3f65a433cd705 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 6
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=f92a54be5d073713dc8682f9818d82425fb5d6cc8bb663ab62a52629edcae4c2 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 7
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=a7618fc441e5fafd16584e747c74e151ba7d23470a58f9517a66d6e6007c6233 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 8
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=fe59229b357d153531f2fa52bac8db74b49760d79d335cadd3228b54f90d2dd3 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 9
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=56a9662709694d5e383298d242702e9fe28ef802bf6d4cea7042fcc5a6f14346 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 10
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=aa0e8d23be8269f31f8eb9f0a480be472d10f2b5bd44a90f4b19c5795b88cb34 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 11
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=c6c9e0d3140c5d6c54ad894231b3e562c8cbd0b521ec9a65f6173bd37a8ae252 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 12
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=c3e62bf27a0aa8ad65f2665ff1e936dd9eed0a773da3029570ed4d7e2d1d29e3 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 13
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=b9397ca77894578072b1ec9d3b1e7a34c1ab17248b3662e1691ba73c31dc728a prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 14
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=a1e3b49174b086821eb88f02bacc65a3e21c074d1247337c112046a3efc31612 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 15
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=5ab12803cfcf40e5ad480635f0638f3016b25dd7c71a243a020c867ae21ecc63 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 16
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=17c1070832cb6f24158af4cacae082ebd652b593a24570219107504e0b2c0b81 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 17
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=ec04dc3d2b8a2f41f737dc1434a96645c39a481c1baea81a7745c74c31c04b67 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": false,
+   "next_seq": 2,
+   "ok": false,
+   "rep": 18
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=721d0bff1f3bf3419b3daa9c18ee665dca4b9ee7d9881022923897e05506e735 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 19
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=ded4d234da582b9c24063d823ac5ed15da525b5246d34c13f14d39b20f24a70a prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 20
+  },
+  {
+   "case": "release-dir-missing",
+   "exit": 2,
+   "last": "REJECT: error",
+   "leftover_tmp": [],
+   "ok": false,
+   "released": false,
+   "state_byte_identical": false
+  },
+  {
+   "case": "post-commit-failure",
+   "exit": 97,
+   "last": "NOT-APPLICABLE",
+   "leftover_tmp": [],
+   "nonce_consumed": false,
+   "ok": false,
+   "other_file_untouched": false,
+   "second_delivery": "RELEASE"
+  }
+ ],
+ "started_utc": "2026-11-12T00:15:55Z",
+ "summary": {
+  "distinct-nonces": {
+   "passed": 0,
+   "runs": 20
+  },
+  "issue-vs-deliver": {
+   "passed": 11,
+   "runs": 20
+  },
+  "post-commit-failure": {
+   "passed": 0,
+   "runs": 1
+  },
+  "release-dir-missing": {
+   "passed": 0,
+   "runs": 1
+  },
+  "same-nonce": {
+   "passed": 0,
+   "runs": 20
+  }
+ }
+}

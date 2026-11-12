@@ -1,0 +1,1375 @@
+{
+ "affinity": [
+  10,
+  11
+ ],
+ "all_pass": true,
+ "client": "client_verify.py",
+ "finished_utc": "2026-11-12T00:15:43Z",
+ "label": "post-registration-concurrency-test",
+ "repeats": 20,
+ "rows": [
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    true,
+    false
+   ],
+   "released_records": 1,
+   "rep": 1,
+   "walls": [
+    1.834,
+    1.828,
+    1.839
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 2,
+   "walls": [
+    1.845,
+    1.84,
+    1.852
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 3,
+   "walls": [
+    1.778,
+    1.797,
+    1.784
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    true,
+    false
+   ],
+   "released_records": 1,
+   "rep": 4,
+   "walls": [
+    1.753,
+    1.74,
+    1.755
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 5,
+   "walls": [
+    1.777,
+    1.786,
+    1.777
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 6,
+   "walls": [
+    1.701,
+    1.716,
+    1.705
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    true,
+    false
+   ],
+   "released_records": 1,
+   "rep": 7,
+   "walls": [
+    1.767,
+    1.755,
+    1.754
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    true,
+    false
+   ],
+   "released_records": 1,
+   "rep": 8,
+   "walls": [
+    1.829,
+    1.825,
+    1.834
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    true,
+    false
+   ],
+   "released_records": 1,
+   "rep": 9,
+   "walls": [
+    1.866,
+    1.859,
+    1.859
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 10,
+   "walls": [
+    1.563,
+    1.571,
+    1.581
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 11,
+   "walls": [
+    1.594,
+    1.611,
+    1.597
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 12,
+   "walls": [
+    1.831,
+    1.852,
+    1.853
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    false,
+    true
+   ],
+   "released_records": 1,
+   "rep": 13,
+   "walls": [
+    1.832,
+    1.826,
+    1.813
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 14,
+   "walls": [
+    1.536,
+    1.54,
+    1.546
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 15,
+   "walls": [
+    1.691,
+    1.719,
+    1.714
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 16,
+   "walls": [
+    1.79,
+    1.802,
+    1.799
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    false,
+    true,
+    false
+   ],
+   "released_records": 1,
+   "rep": 17,
+   "walls": [
+    1.726,
+    1.708,
+    1.729
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 18,
+   "walls": [
+    1.672,
+    1.679,
+    1.666
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 19,
+   "walls": [
+    1.56,
+    1.577,
+    1.58
+   ]
+  },
+  {
+   "case": "same-nonce",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "released": [
+    true,
+    false,
+    false
+   ],
+   "released_records": 1,
+   "rep": 20,
+   "walls": [
+    1.565,
+    1.578,
+    1.571
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 1,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.012,
+    1.548
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 2,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.72,
+    3.412
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 3,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.5,
+    1.729
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 4,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.777,
+    3.395
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 5,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.869,
+    3.683
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 6,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.504,
+    2.971
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 7,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.387,
+    1.71
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 8,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.395,
+    1.668
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 9,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.717,
+    3.373
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 10,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.502,
+    3.243
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 11,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.533,
+    3.199
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 12,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.436,
+    3.078
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 13,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.353,
+    1.706
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 14,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.373,
+    1.727
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 15,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.297,
+    1.69
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 16,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.32,
+    1.715
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 17,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.423,
+    1.819
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 18,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.397,
+    1.722
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 19,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    1.631,
+    3.364
+   ]
+  },
+  {
+   "case": "distinct-nonces",
+   "consumed": 2,
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "outstanding": 0,
+   "rep": 20,
+   "replays": [
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    },
+    {
+     "exit": 1,
+     "last": "REJECT: nonce-consumed",
+     "released": false,
+     "state_changed": false
+    }
+   ],
+   "walls": [
+    3.746,
+    1.881
+   ]
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=bde77c49c9a39c517341d179f378c62c8c13f712a218ed3a158ed7d2085f099f prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 1
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=96b86e8fb53f0e6481be192d81bd9a54b71f3d043afde51b6221062c787948aa prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 2
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=e31d031543a716b6edc4cf211146ad784b59f020e705f750f82ef0f5291e5a1a prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 3
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=8155336d2912c0323d467aba908b3c8aaa363da0d1a6e09009c6bad6ac6a3119 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 4
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=83fd09f00e9f7df9e6f548f10512c192c5a4f49a8fc626bf8a506bdf7f5fc44c prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 5
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=17f4a9664cd91173a87f7d0501ee65e6cefa42aafad941241fd3f65a433cd705 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 6
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=f92a54be5d073713dc8682f9818d82425fb5d6cc8bb663ab62a52629edcae4c2 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 7
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=a7618fc441e5fafd16584e747c74e151ba7d23470a58f9517a66d6e6007c6233 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 8
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=fe59229b357d153531f2fa52bac8db74b49760d79d335cadd3228b54f90d2dd3 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 9
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=56a9662709694d5e383298d242702e9fe28ef802bf6d4cea7042fcc5a6f14346 prev=7cf59d916cf50f151820fd2d8d590755124d6d2258d89add82c54201b2d5291b"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 10
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=aa0e8d23be8269f31f8eb9f0a480be472d10f2b5bd44a90f4b19c5795b88cb34 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 11
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=c6c9e0d3140c5d6c54ad894231b3e562c8cbd0b521ec9a65f6173bd37a8ae252 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 12
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=c3e62bf27a0aa8ad65f2665ff1e936dd9eed0a773da3029570ed4d7e2d1d29e3 prev=92befc28bdcb3bc8446e2bbc796873cd479eb1fc6a6ea037e7cbb91c92651f94"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 13
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=b9397ca77894578072b1ec9d3b1e7a34c1ab17248b3662e1691ba73c31dc728a prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 14
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=a1e3b49174b086821eb88f02bacc65a3e21c074d1247337c112046a3efc31612 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 15
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=5ab12803cfcf40e5ad480635f0638f3016b25dd7c71a243a020c867ae21ecc63 prev=3ebf0ad20a6f74f50223e99d3f59c8d2aed6d27e1749e8925cb3daebb9770707"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 16
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=17c1070832cb6f24158af4cacae082ebd652b593a24570219107504e0b2c0b81 prev=2cc925419adb67eedee38cd79c32abd5128b15aef5a07c5203a5b2fdcd368fb8"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 17
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=ec04dc3d2b8a2f41f737dc1434a96645c39a481c1baea81a7745c74c31c04b67 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 18
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=721d0bff1f3bf3419b3daa9c18ee665dca4b9ee7d9881022923897e05506e735 prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 19
+  },
+  {
+   "case": "issue-vs-deliver",
+   "consumed": true,
+   "lasts": [
+    "RELEASE",
+    "issued seq=2 nonce=ded4d234da582b9c24063d823ac5ed15da525b5246d34c13f14d39b20f24a70a prev=ba60c350139658500d5dca2f831f4d7c5c7311ce1d48a77801e9805a1d96ae1d"
+   ],
+   "leftover_tmp": [],
+   "new_outstanding": true,
+   "next_seq": 3,
+   "ok": true,
+   "rep": 20
+  },
+  {
+   "case": "release-dir-missing",
+   "exit": 2,
+   "last": "REJECT: error",
+   "leftover_tmp": [],
+   "ok": true,
+   "released": false,
+   "state_byte_identical": true
+  },
+  {
+   "case": "post-commit-failure",
+   "exit": 3,
+   "last": "CONSUMED-UNRELEASED",
+   "leftover_tmp": [],
+   "nonce_consumed": true,
+   "ok": true,
+   "other_file_untouched": true,
+   "second_delivery": "REJECT: nonce-consumed"
+  }
+ ],
+ "started_utc": "2026-11-12T00:13:18Z",
+ "summary": {
+  "distinct-nonces": {
+   "passed": 20,
+   "runs": 20
+  },
+  "issue-vs-deliver": {
+   "passed": 20,
+   "runs": 20
+  },
+  "post-commit-failure": {
+   "passed": 1,
+   "runs": 1
+  },
+  "release-dir-missing": {
+   "passed": 1,
+   "runs": 1
+  },
+  "same-nonce": {
+   "passed": 20,
+   "runs": 20
+  }
+ }
+}

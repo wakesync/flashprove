@@ -9,8 +9,30 @@ directory; the encoding helpers are `envelope.py`; the test vectors are `vectors
 
 A provider answers a client's request with three things: the reply tokens, a `cp_verify` proof, and
 an envelope that ties them to that one request. The client releases the reply to its caller only
-after every check in section 5 passes. Any failure, error or timeout means: no release, no state
-change. There is no "accept with warning".
+after every check in section 5 passes. There is no "accept with warning". A delivery ends in one
+of four ways:
+
+| last line | exit | reply released | client state |
+|---|---|---|---|
+| `RELEASE` | 0 | yes, the release file holds the reply bytes | nonce consumed, envelope digest recorded |
+| `REJECT: <check>` | 1 | no release file | byte-identical to before |
+| `REJECT: error` | 2 | no release file | byte-identical to before |
+| `CONSUMED-UNRELEASED` | 3 | no (the release path does not hold the reply) | nonce consumed, envelope digest recorded |
+
+`REJECT: <check>` is a failed check, including a `cp_verify` timeout. `REJECT: error` is a usage,
+input or environment error found before anything is committed, including a release path whose
+directory is missing or not writable: the client writes the reply bytes to a uniquely named
+temporary file in the release file's directory before it commits the nonce, and if that fails it
+stops with `REJECT: error`. `CONSUMED-UNRELEASED` means every check passed and the nonce was
+committed, but the last step, which puts the prepared file at the release path, failed (for
+example because another file appeared at that path, which the client never overwrites). It fails
+closed: the request is lost, not replayable. The client never restores an earlier state after an
+output error, so a consumed nonce is never released later. A caller that gets exit 3 must issue a
+new request.
+
+(Before the post-registration fix of 2026-11-12, see PREREG amendment 2, a release-file error after
+the checks printed `REJECT: error` with the nonce already consumed, which contradicted this section.
+The registered run never hit that path.)
 
 The envelope keeps three verdicts apart (section 6). A valid signature does not make a proof valid,
 a MOCK attestation is not evidence, and a valid proof says nothing about who ran it or where.
@@ -86,9 +108,34 @@ signed word, or display text.
 The client keeps, per session: `next_seq`, the outstanding requests (nonce, seq, prev, pinned
 commitment ID, prompt, r, e, max_tokens, request digest), the consumed nonces, and the released
 envelopes' digests in order. `issue` fixes seq and prev when the request is sent, so that two
-responses racing for the same slot cannot both be released, and an old envelope cannot be replayed
-into a new slot. A release consumes the nonce and appends the envelope digest before the reply
-bytes are handed out. The state file is written atomically (rename).
+responses for the same slot cannot both be released, and an old envelope cannot be replayed into a
+new slot. A release consumes the nonce and appends the envelope digest before the reply bytes are
+handed out.
+
+Concurrent client processes. Every state change (`issue` and `deliver`) is one transaction under an
+exclusive `flock` on a sidecar file `<state>.lock` next to the state file: the client takes the
+lock, reads the state, runs every check (for `deliver`, all 15 of section 5, `cp_verify`
+included), writes the new state and puts the release file in place, and only then releases the
+lock. So client processes that share one state file are serialised: a nonce is released at most
+once, two releases of different nonces both stay recorded, and an `issue` racing a `deliver` keeps
+both changes. The state is never read before the lock is held, so a stale snapshot is never
+written back. The cost is that deliveries on one state file run one at a time (including their
+`cp_verify` calls). The lock is advisory: it serialises processes running this client, not other
+programs that write the state file, and it needs a filesystem with working `flock` (a local
+filesystem; not checked on network filesystems).
+
+Writes. The state file and the release file are written to a uniquely named temporary file in the
+same directory (`mkstemp`), fsynced, then moved into place (the state with an atomic rename, the
+release file with a hard link that never overwrites an existing file), and the directory is
+fsynced. A crash before the state rename leaves the old state and no release. A crash after it
+leaves the nonce consumed and possibly no release file: fail closed, the request is lost. Power
+loss is covered only as far as the filesystem honours fsync; this is not tested.
+
+(The registered run measured the client before this transaction rule existed, at fb63aa8. That
+client read the state before its checks and wrote it back without a lock, with a fixed temporary
+name `<state>.tmp`, and two reviews of PR #122 showed that concurrent processes could then release
+one nonce twice or lose a consumption. The registered vectors are sequential and did not cover
+this. See PREREG amendment 2 and RESULTS.)
 
 ## 5. Client checks, in this order
 
@@ -121,8 +168,10 @@ The first failing check names the reject (`REJECT: <check>`).
     line (`YES`, or `WITHIN LIMITS: clipped-gap ...` under a clipped gap, which is released as
     within limits, never as exact).
 
-Only then: consume the nonce, record the envelope digest, write the reply bytes to the release
-file, print `RELEASE`.
+Only then, still under the state lock of section 4: write the reply bytes to a temporary file in
+the release directory (on failure `REJECT: error`, nothing committed), consume the nonce and record
+the envelope digest (the state rename is the commit), put the release file in place (on failure
+`CONSUMED-UNRELEASED`), print `RELEASE`.
 
 ### Verified before release, and what is not done here
 
@@ -130,7 +179,9 @@ file, print `RELEASE`.
 - Abort or restart: the client writes state only on release, atomically, so a crash before release
   leaves the request outstanding and nothing released. A crash between the state write and the
   reply write leaves the nonce consumed and the reply unreleased: fail closed (the request is then
-  lost, not replayable).
+  lost, not replayable). An output failure at that point is reported as `CONSUMED-UNRELEASED`
+  (section 1). A crash can leave a `.<name>.*.tmp` file in the state or release directory; it is
+  never read.
 - Batch proofs: one envelope covers one request and one proof. A batch is released only if every
   member's envelope passes; this prototype has no batch envelope.
 - Mask exhaustion and the provider-side budget of proofs on one commitment are outside the client's
@@ -140,7 +191,10 @@ file, print `RELEASE`.
 
 ## 6. Three verdicts, none a stand-in for another
 
-The client prints three lines on every call:
+`deliver` prints these three lines on every call that gets past argument parsing, `REJECT: error`
+and `CONSUMED-UNRELEASED` included; a verdict not reached reads `not checked`. (Before the
+2026-11-12 fix, the `REJECT: error` paths printed only the error and the last line.) A usage error
+found by the argument parser prints its usage message only. `issue` prints none of them:
 
 - `signature:` the provider's Ed25519 signature authenticates that the holder of the pinned key
   said these bytes. It says nothing about whether what it says is true.

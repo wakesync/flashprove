@@ -11,15 +11,37 @@ Two commands:
            outstanding request it is delivered for, and release the reply only if every check passes.
 
 deliver prints three separate verdict lines (`signature:`, `tee:`, `proof:`), then a last line:
-`RELEASE` (exit 0) or `REJECT: <check>` (exit 1). Exit 2 is a usage or environment error; nothing is
-released. On anything but RELEASE no release file is written and the state file is not touched.
-The checks run in the fixed order of SPEC.md section 5; the first failing check names the reject.
+`RELEASE` (exit 0), `REJECT: <check>` (exit 1), `REJECT: error` (exit 2: a usage, input or
+environment error) or `CONSUMED-UNRELEASED` (exit 3). The checks run in the fixed order of SPEC.md
+section 5; the first failing check names the reject.
+
+Output contract (SPEC.md section 1):
+- RELEASE: the nonce is consumed in the state file and the release file holds the reply bytes.
+- REJECT (exit 1 or 2): no release file is written and the state file is byte-identical to before.
+  This includes a release path that cannot be prepared: before it commits any state, the client
+  creates a uniquely named temporary file in the release file's directory and writes the reply
+  bytes to it; if that fails it prints `REJECT: error` and changes nothing.
+- CONSUMED-UNRELEASED (exit 3): every check passed and the nonce was committed as consumed, but
+  the last step, which puts the prepared release file at its path, failed (for example because
+  the path was taken in the meantime or the directory went away). The reply is not released. The
+  nonce stays consumed and can never be released (fail closed: the request is lost, not
+  replayable). The client never restores an earlier state after an output error.
+
+Concurrency (SPEC.md section 4): every state change (`issue` and `deliver`) holds an exclusive
+`fcntl.flock` on a sidecar lock file `<state>.lock` from before it reads the state until the new
+state and the release file are in place. So concurrent client processes on one state file are
+serialised: a nonce is released at most once and no consumption or issued request is lost. State
+and release files are written to unique temporary names in the same directory (mkstemp), fsynced,
+moved into place and the directory fsynced. The lock is advisory: it serialises client processes
+that use this code, not other programs that write the state file.
 
 Software only. A `MOCK` attestation is printed as MOCK and is never evidence. Any other attestation
 kind is refused, because this client verifies no TEE evidence.
 """
 
 import argparse
+import contextlib
+import fcntl
 import os
 import pathlib
 import re
@@ -37,7 +59,8 @@ import envelope as E  # noqa: E402
 
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 HEX128 = re.compile(r"^[0-9a-f]{128}$")
-EXIT_RELEASE, EXIT_REJECT, EXIT_ERROR = 0, 1, 2
+EXIT_RELEASE, EXIT_REJECT, EXIT_ERROR, EXIT_CONSUMED_UNRELEASED = 0, 1, 2, 3
+VERDICTS = None  # the deliver call's three verdict lines, so that an error prints them too
 
 OUTER_KEYS = {"body", "sig"}
 BODY_KEYS = {"version", "sig_alg", "provider_key", "request", "state", "issued_at", "expires_at",
@@ -318,54 +341,77 @@ def load_canonical(path):
     return E.parse_canonical(pathlib.Path(path).read_bytes())
 
 
-def write_atomic(path, data):
-    path = pathlib.Path(path)
-    tmp = path.with_name(path.name + ".tmp")
-    tmp.write_bytes(data)
-    os.replace(tmp, path)
-
-
-def fail(why):
-    print("client_verify: error: %s" % why)
-    print("REJECT: error")
-    sys.exit(EXIT_ERROR)
-
-
-def cmd_issue(args):
-    ctx = load_canonical(args.context)
-    state = load_canonical(args.state)
-    if args.model not in ctx["models"]:
-        fail("model not pinned in the context")
-    if not HEX64.match(args.nonce):
-        fail("nonce: 64 hex digits")
-    if args.nonce in state["outstanding"] or args.nonce in state["consumed"]:
-        fail("nonce reused")
-    prompt = E.bytes_tokens(pathlib.Path(args.prompt).read_bytes())
-    rec = E.issue(state, args.nonce, args.model, prompt, args.e, args.max_tokens)
-    write_atomic(args.state, E.canonical(state))
-    print("issued seq=%d nonce=%s prev=%s" % (rec["seq"], args.nonce, rec["prev"]))
-    return 0
-
-
-def cmd_deliver(args):
-    t0 = time.perf_counter()
-    args.cp_verify_s, args.cp_verify_exit, args.cp_verify_last = 0.0, None, None
-    args.verdicts = {"signature": "not checked", "tee": "not checked", "proof": "not checked"}
-    root = pathlib.Path(args.root).resolve()
-    ctx = load_canonical(args.context)
-    state = load_canonical(args.state)
-    if ctx.get("version") != E.CONTEXT_VERSION or state.get("version") != E.STATE_VERSION:
-        fail("context or state version")
-    if pathlib.Path(args.release).exists():
-        fail("release file exists already")
-    env_bytes = pathlib.Path(args.envelope).read_bytes()
-    reply_bytes = pathlib.Path(args.reply).read_bytes()
-    proof_bytes = pathlib.Path(args.proof).read_bytes()
+def fsync_dir(directory):
+    fd = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
     try:
-        record, failure = deliver(args, ctx, state, root, env_bytes, reply_bytes, proof_bytes,
-                                  args.now), None
-    except Reject as rej:
-        record, failure = None, rej
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def unlink_quietly(path):
+    if path is not None:
+        with contextlib.suppress(OSError):
+            os.unlink(path)
+
+
+def write_temp(path, data):
+    """data in a new, uniquely named file next to `path` (mkstemp, same directory), fsynced.
+    Returns the temporary path. Raises OSError, leaving nothing behind, if that fails."""
+    path = pathlib.Path(path)
+    fd, tmp = tempfile.mkstemp(prefix=".%s." % path.name, suffix=".tmp", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "wb") as f:
+            f.write(data)
+            f.flush()
+            os.fsync(f.fileno())
+    except BaseException:
+        unlink_quietly(tmp)
+        raise
+    return tmp
+
+
+def write_atomic(path, data):
+    """Unique temporary file, fsync, rename over `path`, fsync of the directory."""
+    tmp = write_temp(path, data)
+    try:
+        os.replace(tmp, path)
+    except BaseException:
+        unlink_quietly(tmp)
+        raise
+    fsync_dir(pathlib.Path(path).parent)
+
+
+def place_release(tmp, path):
+    """The last step of a release, after the nonce is committed: the prepared file (already
+    written and fsynced, same directory) gets the release path as a hard link, which never
+    overwrites a file that appeared there in the meantime (FileExistsError), then the temporary
+    name is removed and the directory fsynced. Once the link exists the reply is released; a
+    failure to remove the temporary name or to fsync after that is reported, not a reject."""
+    os.link(tmp, path)
+    try:
+        os.unlink(tmp)
+        fsync_dir(pathlib.Path(path).parent)
+    except OSError as failure:
+        print("warning: release file in place, cleanup or fsync after it failed: %r" % failure)
+
+
+@contextlib.contextmanager
+def state_lock(state_path):
+    """Exclusive flock on the sidecar `<state>.lock`, held for the whole transaction. The sidecar is
+    never renamed, so the lock stays on one inode while the state file itself is replaced."""
+    lock = os.open(str(state_path) + ".lock", os.O_RDWR | os.O_CREAT | os.O_CLOEXEC, 0o600)
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        yield
+    finally:
+        os.close(lock)  # closing the descriptor releases the lock
+
+
+def print_verdicts(args, t0):
+    if getattr(args, "printed", True):
+        return
+    args.printed = True
     v = args.verdicts
     print("signature: %s" % v["signature"])
     print("tee: %s" % v["tee"])
@@ -373,13 +419,102 @@ def cmd_deliver(args):
     print("cp_verify: exit=%s seconds=%.6f last=%r" % (args.cp_verify_exit, args.cp_verify_s,
                                                        args.cp_verify_last))
     print("client: seconds=%.6f" % (time.perf_counter() - t0))
-    if failure is not None:
-        print("why: %s" % failure.why)
-        print("REJECT: %s" % failure.check)
-        return EXIT_REJECT
-    E.release(state, record["nonce"], env_bytes)
-    write_atomic(args.state, E.canonical(state))
-    write_atomic(args.release, reply_bytes)
+
+
+def fail(why):
+    """REJECT: error (exit 2). Only called before any state is committed: nothing is released and
+    the state file is unchanged. Under deliver the three verdict lines are printed first."""
+    if VERDICTS is not None:
+        print_verdicts(*VERDICTS)
+    print("client_verify: error: %s" % why)
+    print("REJECT: error")
+    sys.exit(EXIT_ERROR)
+
+
+def cmd_issue(args):
+    ctx = load_canonical(args.context)
+    if args.model not in ctx["models"]:
+        fail("model not pinned in the context")
+    if not HEX64.match(args.nonce):
+        fail("nonce: 64 hex digits")
+    prompt = E.bytes_tokens(pathlib.Path(args.prompt).read_bytes())
+    with state_lock(args.state):
+        state = load_canonical(args.state)  # read under the lock, never before it
+        if args.nonce in state["outstanding"] or args.nonce in state["consumed"]:
+            fail("nonce reused")
+        rec = E.issue(state, args.nonce, args.model, prompt, args.e, args.max_tokens)
+        write_atomic(args.state, E.canonical(state))
+    print("issued seq=%d nonce=%s prev=%s" % (rec["seq"], args.nonce, rec["prev"]))
+    return 0
+
+
+def cmd_deliver(args):
+    global VERDICTS
+    t0 = time.perf_counter()
+    args.cp_verify_s, args.cp_verify_exit, args.cp_verify_last = 0.0, None, None
+    args.verdicts = {"signature": "not checked", "tee": "not checked", "proof": "not checked"}
+    args.printed = False
+    VERDICTS = (args, t0)
+    root = pathlib.Path(args.root).resolve()
+    ctx = load_canonical(args.context)
+    if ctx.get("version") != E.CONTEXT_VERSION:
+        fail("context version")
+    release = pathlib.Path(args.release)
+    if release.exists() or release.is_symlink():
+        fail("release file exists already")
+    env_bytes = pathlib.Path(args.envelope).read_bytes()
+    reply_bytes = pathlib.Path(args.reply).read_bytes()
+    proof_bytes = pathlib.Path(args.proof).read_bytes()
+    with state_lock(args.state):
+        # Load, all 15 checks and the commit happen under one exclusive lock: no other client
+        # process can read or write this state in between, so no stale snapshot is ever written.
+        state = load_canonical(args.state)
+        if state.get("version") != E.STATE_VERSION:
+            fail("state version")
+        try:
+            record, failure = deliver(args, ctx, state, root, env_bytes, reply_bytes,
+                                      proof_bytes, args.now), None
+        except Reject as rej:
+            record, failure = None, rej
+        print_verdicts(args, t0)
+        if failure is not None:
+            print("why: %s" % failure.why)
+            print("REJECT: %s" % failure.check)
+            return EXIT_REJECT
+        # Prepare the release output before committing anything. If it cannot be prepared, this is
+        # REJECT: error and the state file is unchanged.
+        try:
+            if release.exists() or release.is_symlink():
+                raise FileExistsError("release file exists already")
+            release_tmp = write_temp(release, reply_bytes)
+        except OSError as failure:
+            fail("release output cannot be prepared, nothing committed: %r" % failure)
+        E.release(state, record["nonce"], env_bytes)
+        try:
+            state_tmp = write_temp(args.state, E.canonical(state))
+        except OSError as failure:
+            unlink_quietly(release_tmp)
+            fail("state cannot be written, nothing committed: %r" % failure)
+        try:
+            os.replace(state_tmp, args.state)  # the commit: atomic, old state or new state
+        except OSError as failure:
+            unlink_quietly(state_tmp)
+            unlink_quietly(release_tmp)
+            fail("state cannot be committed, nothing committed: %r" % failure)
+        # Committed: the nonce is consumed from here on, whatever happens next.
+        try:
+            fsync_dir(pathlib.Path(args.state).parent)
+        except OSError as failure:
+            print("warning: state committed, fsync of its directory failed: %r" % failure)
+        try:
+            place_release(release_tmp, release)
+        except OSError as failure:
+            unlink_quietly(release_tmp)
+            print("why: nonce %s committed as consumed, but the release file could not be put in "
+                  "place: %r. The reply is not released and this request cannot be released "
+                  "again." % (record["nonce"], failure))
+            print("CONSUMED-UNRELEASED")
+            return EXIT_CONSUMED_UNRELEASED
     print("release: verdict=%r covered=%s" % (record["verdict"],
                                               E.canonical(record["covered"]).decode()))
     print("provenance: client pin %s; the envelope label %r is display text, not provenance"

@@ -1,7 +1,11 @@
 # RESULTS: 20261111-9-client-envelope
 
 Issue #9. Verdict vs the PREREG threshold: **PASS** (measured, unreplicated; descriptive tests on
-two stored synthetic examples, not a soundness claim).
+two stored synthetic examples, not a soundness claim). The registered numbers below were measured
+on the pre-fix client at fb63aa8. After the run, two reviews found that client unsafe for
+concurrent processes sharing a state file; it was fixed and tested after the run (PREREG
+amendment 2, section "Post-registration fix and checks" below). That section is not part of the
+registered result.
 
 ## In plain language
 
@@ -73,9 +77,18 @@ client verifies no TEE evidence.
   generated twice before the registered run (the second time after changing NC1's encoding); neither
   set was given to the client before the registered run, and the committed set is the one the run
   used (`vector_sums_sha256` in the summary).
-- Two agent sessions shared this clone briefly at the start (see the PR body): the PREREG commit
-  6695101 and its count fix 2fc685b are the registration; an uncommitted alternative PREREG from the
-  other session was discarded, never committed.
+- Two agent sessions shared this clone briefly at the start (lane STATE log, outside the repo).
+  The duplicate session wrote and committed 6695101, the registered PREREG, pushed it and opened
+  this PR, then stopped writing (22:41:41Z). The session that owns the lane and did the run
+  committed 2fc685b (the 38 to 35 count fix) right after 6695101, then drafted a different design
+  of its own (an alternative PREREG naming `tools/envelope/client.py` and `fp-envelope/1`) in the
+  working tree, discarded it uncommitted (22:39:08Z) and adopted the registered PREREG at 2fc685b.
+  So the run was done by the session that did not write the registered design. The STATE log
+  records no code for the discarded alternative and none was committed; its text cannot be
+  recovered. Registration-before-code holds: 6695101 and 2fc685b change only PREREG.md, 2fc685b only
+  fixes a count, and the first code commit is d4856a4.
+- After the registered run: PREREG amendment 2 and the client fix (next section). The registered
+  run files in `runs/registered/` are unchanged.
 
 ## What this does not establish
 
@@ -89,3 +102,68 @@ client verifies no TEE evidence.
 - No TEE claim, no privacy claim, no confidentiality claim. Mock attestation stays MOCK.
 - No batch envelope, no mask-exhaustion check (G-03), no real network, no real provider.
 - Timing is one host, loaded, two tiny examples; not a benchmark (issue #7 owns latency).
+- Concurrent use was not covered by the registered vectors: they are sequential (CON1 and CON2 are
+  sequential state checks). The pre-fix client that the registered run measured was unsafe for
+  concurrent processes on one state file. Fixed and tested after the run, see Amendments
+  (amendment 2) and the next section; that test is a post-registration check, not a registered
+  result, and covers one local filesystem and client processes running this code only.
+- `versions.verifier_build` is compared with the `build=` digest the `cp_verify` binary prints
+  about itself (SPEC section 3). A tampered binary can print any digest, so this does not show which
+  binary ran.
+
+## Post-registration fix and checks (after the registered run; no threshold)
+
+What was found (PR #122 reviews, round 1, both families, at head 3db2f6eb): with the pre-fix
+client, two `deliver` processes on one state file could both release one nonce, and two concurrent
+releases of different nonces could lose a consumption, after which the lost nonce released again.
+A release-file error after the checks returned `REJECT: error` with the nonce already consumed.
+
+What changed in `research/envelope/client_verify.py` (the 15 checks and their order are unchanged):
+- `issue` and `deliver` each run as one transaction under an exclusive `flock` on `<state>.lock`:
+  read the state under the lock, check, commit, release the lock. No stale snapshot is written.
+- Temporary files have unique names (`mkstemp`, same directory), are fsynced, moved into place, and
+  the directory is fsynced.
+- Output contract (SPEC section 1): the release output is prepared before the nonce is committed;
+  if that fails, `REJECT: error` (exit 2) with the state unchanged. If putting the prepared file at
+  the release path fails after the commit, the new verdict `CONSUMED-UNRELEASED` (exit 3): nonce
+  consumed, reply not released, never replayable. No old state is ever restored.
+- `REJECT: error` from `deliver` now prints the three verdict lines too.
+
+Re-run of the 41 vectors on the fixed client, `runs/postfix/` (`run_suite.py --registered --runs 5`,
+slot granted 2026-11-12T00:19:21Z, `taskset -c 10-11` under the heavy-job gate, same cp_verify build
+and binary sha256 as ENV.json, same vector set sha256). `compare_postfix.py` compares it step by
+step with `runs/registered/`; output `runs/postfix/compare.json`:
+
+| | registered (pre-fix, fb63aa8) | post-fix |
+|---|---|---|
+| steps | 210 | 210 |
+| steps with a different exit, last line, release or state change | | 0 |
+| reject steps refused at the registered check | 175 / 175 | 175 / 175 |
+| reject steps that released or changed state | 0 | 0 |
+| accept steps released | 35 / 35 | 35 / 35 |
+| reject vectors reaching cp_verify | SUB1, SUB4, TRN4 | SUB1, SUB4, TRN4 |
+
+Timing of the post-fix re-run, diagnostic only (other cores, other load, not comparable with the
+registered timing and not a claim): cp_verify on released steps median 1.678 s (SD 0.052, min
+1.578, max 1.795, n 35); client overhead median 0.0150 s (SD 0.0019, 0.0134 to 0.0225).
+
+Concurrency and output-failure tests, `research/envelope/test_concurrency.py` (real cp_verify, own
+TEST label, every client call its own OS process, concurrent calls released by one barrier, each
+concurrent case 20 times), output in `runs/postfix-concurrency/`:
+
+| case | fixed client (`fixed-client.json`) | pre-fix client at 3db2f6e (`prefix-client-3db2f6e.json`) |
+|---|---|---|
+| same nonce, 3 processes at once: exactly one RELEASE, nonce consumed once | 20 / 20 | 0 / 20 (all 3 released, every time) |
+| two distinct nonces at once: both RELEASE, both consumed, replay of either `REJECT: nonce-consumed` | 20 / 20 | 0 / 20 |
+| `issue` racing `deliver`: both changes kept | 20 / 20 | 11 / 20 (9 lost updates) |
+| release directory missing: `REJECT: error`, state byte-identical | 1 / 1 | 0 / 1 (state changed) |
+| post-commit output failure: `CONSUMED-UNRELEASED`, nonce consumed, other file untouched, second delivery `REJECT: nonce-consumed` | 1 / 1 | 0 / 1 (no such step in that client; second delivery released) |
+
+The pre-fix column runs the same test file against the client file of the reviewed head 3db2f6e;
+it shows the tests detect the defect. The reviewers' own probe scripts were also re-run against
+both clients (outside the repository; see the PR comment): on the pre-fix client they reproduce
+both reviews' findings, on the fixed client the concurrency and release-error cases behave as
+above and every other probe gives the same verdict as before.
+
+These are post-registration checks of one fix, on one host and one local filesystem. They are not
+a replication of the registered run and add no soundness claim.
