@@ -1,0 +1,437 @@
+{
+ "what": "analyse.py input validation, checked on temporary copies of committed run files; no model forward",
+ "script": "analyse.py of this directory",
+ "script_sha256": "92afcd5623259c829b45a173f0ed2e40099aed5b0ee3f29492a590b3fd4b6a69",
+ "committed_sha256": {
+  "d-per-position.json": "74f5fa123723b6bb8cd7c4b4c8d511a6be8c7c55a8cad4a37796c2fc9740460f",
+  "manifest-stock.json": "735fe50d3aeaf0d9f3487c50c711e9e8139d9accc8f8a75a40b99cd967ca5ba8",
+  "manifest-abl.json": "cc479c57e7acf34deaf4509328219174f3e118de1ba3abfceb3067ea6b38b814",
+  "progress.log": "9588e958c07dcffce82979803eb98f39f20f1a371ec3be90e3cfce9a906cfd0e",
+  "analysis.json": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11"
+ },
+ "committed_run_files_untouched": true,
+ "n_cases": 39,
+ "n_ok": 39,
+ "cases": [
+  {
+   "case": "unchanged_copy",
+   "expect": "exit 0, analysis.json byte-identical to the committed runs/analysis.json",
+   "exit_code": 0,
+   "byte_identical": true,
+   "analysis_sha256": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11",
+   "verdict": "FAIL (mixed)",
+   "ok": true
+  },
+  {
+   "case": "reviewer_empty_manifests",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (stock): the fetched tensors are not the expected 624 (0 present, 624 expected ones missing, 0 not expected)",
+    "manifest (abl): the fetched tensors are not the expected 71 (0 present, 71 expected ones missing, 0 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "reviewer_p08_only_and_empty_manifests",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: the prompts are not the registered tier 2 set (9 prompts, 949 positions): missing ['p01-ordinary-short', 'p07-chat-ordinary', 'p09-multilingual', 'p02-ordinary-paragraph', 'p04-repeat-punct', 'p05-code', 'p06a-digits-256', 'p11-chat-long'], not in the tier []",
+    "manifest (stock): the fetched tensors are not the expected 624 (0 present, 624 expected ones missing, 0 not expected)",
+    "manifest (abl): the fetched tensors are not the expected 71 (0 present, 71 expected ones missing, 0 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "p08_only_full_manifests",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: the prompts are not the registered tier 2 set (9 prompts, 949 positions): missing ['p01-ordinary-short', 'p07-chat-ordinary', 'p09-multilingual', 'p02-ordinary-paragraph', 'p04-repeat-punct', 'p05-code', 'p06a-digits-256', 'p11-chat-long'], not in the tier []"
+   ],
+   "ok": true
+  },
+  {
+   "case": "p01_dropped_no_tokyo_check",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: the prompts are not the registered tier 2 set (9 prompts, 949 positions): missing ['p01-ordinary-short'], not in the tier []"
+   ],
+   "ok": true
+  },
+  {
+   "case": "tier3_prompts_under_a_tier2_grant",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: the prompts are not the registered tier 2 set (9 prompts, 949 positions): missing ['p02-ordinary-paragraph', 'p04-repeat-punct', 'p05-code'], not in the tier []"
+   ],
+   "ok": true
+  },
+  {
+   "case": "extra_prompt_not_in_tier",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: the prompts are not the registered tier 2 set (9 prompts, 949 positions): missing [], not in the tier ['p03-repeat-word']"
+   ],
+   "ok": true
+  },
+  {
+   "case": "position_arrays_truncated",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p05-code.stock_top1: not a list of 144 values",
+    "D file p05-code.abl_top1: not a list of 144 values",
+    "D file p05-code.stock_margin: not a list of 144 values",
+    "D file p05-code.abl_margin: not a list of 144 values"
+   ],
+   "ok": true
+  },
+  {
+   "case": "positions_fewer_than_frozen_prompt",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p05-code: T is not the frozen prompt's 144 positions"
+   ],
+   "ok": true
+  },
+  {
+   "case": "D_nan",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p02-ordinary-paragraph.D_kl_stock_abl: 1 value(s) missing, non-finite, of the wrong type or out of range"
+   ],
+   "ok": true
+  },
+  {
+   "case": "D_null",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p02-ordinary-paragraph.D_kl_stock_abl: 1 value(s) missing, non-finite, of the wrong type or out of range"
+   ],
+   "ok": true
+  },
+  {
+   "case": "D_negative",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p02-ordinary-paragraph.D_kl_stock_abl: 1 value(s) missing, non-finite, of the wrong type or out of range"
+   ],
+   "ok": true
+  },
+  {
+   "case": "margin_infinite",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p07-chat-ordinary.abl_margin: 1 value(s) missing, non-finite, of the wrong type or out of range"
+   ],
+   "ok": true
+  },
+  {
+   "case": "top1_boolean",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p07-chat-ordinary.stock_top1: 1 value(s) missing, non-finite, of the wrong type or out of range"
+   ],
+   "ok": true
+  },
+  {
+   "case": "top1_out_of_vocabulary",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file p07-chat-ordinary.stock_top1: 1 value(s) missing, non-finite, of the wrong type or out of range"
+   ],
+   "ok": true
+  },
+  {
+   "case": "D_file_not_json",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: not readable as JSON without duplicate keys (d-per-position.json, JSONDecodeError)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "D_file_duplicate_prompt_key",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: not readable as JSON without duplicate keys (d-per-position.json, ValueError)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "D_file_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "D file: file missing (d-per-position.json)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "stock_tensor_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (stock): the fetched tensors are not the expected 624 (623 present, 1 expected ones missing, 0 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "stock_lm_head_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (stock): the fetched tensors are not the expected 624 (623 present, 1 expected ones missing, 0 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "abl_changed_tensor_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (abl): the fetched tensors are not the expected 71 (70 present, 1 expected ones missing, 0 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "abl_final_norm_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (abl): the fetched tensors are not the expected 71 (70 present, 1 expected ones missing, 0 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "abl_unexpected_tensor",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (abl): the fetched tensors are not the expected 71 (72 present, 0 expected ones missing, 1 not expected)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "tensor_entry_without_sha256",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (stock): 1 entr(ies) without a sha256"
+   ],
+   "ok": true
+  },
+  {
+   "case": "manifest_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "manifest (abl): file missing (manifest-abl.json)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "progress_log_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: file missing (its slot grant time decides the registered prompt tier, A-1)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "grant_time_moved_to_tier1_with_9_prompts",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: the logged tier line is not the A-1 tier 1 line that this grant time requires",
+    "D file: the prompts are not the registered tier 1 set (10 prompts, 1461 positions): missing ['p03-repeat-word'], not in the tier []"
+   ],
+   "ok": true
+  },
+  {
+   "case": "tier_line_says_tier3_under_a_tier2_grant",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: the logged tier line is not the A-1 tier 2 line that this grant time requires"
+   ],
+   "ok": true
+  },
+  {
+   "case": "grant_after_last_tier",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: the grant is after 2026-11-12T18:35:00Z; A-1 registers no run for it"
+   ],
+   "ok": true
+  },
+  {
+   "case": "run_end_nonzero",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: no clean end of the registered run (need exactly one 'end rc=0' line)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "run_end_after_hard_stop",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: no clean end of the registered run (end time outside [grant, hard stop 2026-11-12T18:50:00Z])"
+   ],
+   "ok": true
+  },
+  {
+   "case": "run_end_line_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 2,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [
+    "progress.log: no clean end of the registered run (need exactly one 'end rc=0' line)"
+   ],
+   "ok": true
+  },
+  {
+   "case": "tokyo_wrong_on_stock",
+   "expect": "exit 3, verdict KILLED (validity gate), gate a_tokyo false",
+   "exit_code": 3,
+   "verdict": "KILLED (validity gate)",
+   "gate": "a_tokyo",
+   "gate_value": false,
+   "ok": true
+  },
+  {
+   "case": "top1_differs_from_pr124",
+   "expect": "exit 3, verdict KILLED (validity gate), gate b_reproduce false",
+   "exit_code": 3,
+   "verdict": "KILLED (validity gate)",
+   "gate": "b_reproduce",
+   "gate_value": false,
+   "ok": true
+  },
+  {
+   "case": "margin_differs_from_pr124",
+   "expect": "exit 3, verdict KILLED (validity gate), gate b_reproduce false",
+   "exit_code": 3,
+   "verdict": "KILLED (validity gate)",
+   "gate": "b_reproduce",
+   "gate_value": false,
+   "ok": true
+  },
+  {
+   "case": "stock_tensor_sha256_changed",
+   "expect": "exit 3, verdict KILLED (validity gate), gate c_manifest false",
+   "exit_code": 3,
+   "verdict": "KILLED (validity gate)",
+   "gate": "c_manifest",
+   "gate_value": false,
+   "ok": true
+  },
+  {
+   "case": "abl_tensor_sha256_changed",
+   "expect": "exit 3, verdict KILLED (validity gate), gate c_manifest false",
+   "exit_code": 3,
+   "verdict": "KILLED (validity gate)",
+   "gate": "c_manifest",
+   "gate_value": false,
+   "ok": true
+  },
+  {
+   "case": "existing_output_not_overwritten",
+   "expect": "exit 4, existing analysis.json left as it was",
+   "exit_code": 4,
+   "existing_file_unchanged": true,
+   "ok": true
+  },
+  {
+   "case": "documented_limit_consistent_tier3_log_and_prompts",
+   "expect": "exit 0 as a 6-prompt tier 3 subset: the tier comes from the run's own log, which is not authenticated",
+   "exit_code": 0,
+   "prompts_run": 6,
+   "prompts_needed": 5,
+   "subset": true,
+   "verdict": "FAIL (mixed)",
+   "ok": true
+  }
+ ],
+ "all_ok": true
+}

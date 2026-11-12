@@ -1,0 +1,4 @@
+{"leg": "fx", "layer": 0, "type": "linear_attention", "seconds": 24.2, "mix_s": 1.0, "XM18": {"fx": 0.0022215471540596777}, "FM": {"fx": 0.001992500295195787}, "XM18#2": {"fx": 0.0022215471540596777}, "det_bit_equal": {"XM18#2|fx": true}}
+{"leg": "fx", "layer": 1, "type": "linear_attention", "seconds": 23.6, "mix_s": 0.5, "XM18": {"fx": 0.002899121160057134}, "FM": {"fx": 0.0024365490469880654}, "XM18#2": {"fx": 0.002899121160057134}, "det_bit_equal": {"XM18#2|fx": true}}
+{"leg": "fx", "layer": 2, "type": "linear_attention", "seconds": 23.2, "mix_s": 0.6, "XM18": {"fx": 0.0037878223332454687}, "FM": {"fx": 0.0033458970068326543}, "XM18#2": {"fx": 0.0037878223332454687}, "det_bit_equal": {"XM18#2|fx": true}}
+{"leg": "fx", "layer": 3, "type": "full_attention", "seconds": 24.8, "mix_s": 0.1, "XM18": {"fx": 0.0037784723514123985}, "FM": {"fx": 0.003351093847433353}, "XM18#2": {"fx": 0.0037784723514123985}, "det_bit_equal": {"XM18#2|fx": true}}
