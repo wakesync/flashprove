@@ -1,0 +1,4 @@
+slot granted 2026-11-12T18:25:18Z
+tier 2 prompts p01-ordinary-short,p07-chat-ordinary,p08-chat-refusal,p09-multilingual,p02-ordinary-paragraph,p04-repeat-punct,p05-code,p06a-digits-256,p11-chat-long
+MemAvailable ok 21655184 kB; registered run start 2026-11-12T18:25:18Z
+end rc=0 2026-11-12T18:46:41Z

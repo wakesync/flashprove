@@ -1,0 +1,414 @@
+{
+ "what": "analyse.py input validation, checked on temporary copies of committed run files; no model forward",
+ "script": "another copy of analyse.py (see the file name of this receipt)",
+ "script_sha256": "be43f35ecfb80e0afae2ff5924b08bd5b5ec8b2a665427a18d348bbb1a0b2cae",
+ "committed_sha256": {
+  "d-per-position.json": "74f5fa123723b6bb8cd7c4b4c8d511a6be8c7c55a8cad4a37796c2fc9740460f",
+  "manifest-stock.json": "735fe50d3aeaf0d9f3487c50c711e9e8139d9accc8f8a75a40b99cd967ca5ba8",
+  "manifest-abl.json": "cc479c57e7acf34deaf4509328219174f3e118de1ba3abfceb3067ea6b38b814",
+  "progress.log": "9588e958c07dcffce82979803eb98f39f20f1a371ec3be90e3cfce9a906cfd0e",
+  "analysis.json": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11"
+ },
+ "committed_run_files_untouched": true,
+ "n_cases": 39,
+ "n_ok": 2,
+ "cases": [
+  {
+   "case": "unchanged_copy",
+   "expect": "exit 0, analysis.json byte-identical to the committed runs/analysis.json",
+   "exit_code": 0,
+   "byte_identical": true,
+   "analysis_sha256": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11",
+   "verdict": "FAIL (mixed)",
+   "ok": true
+  },
+  {
+   "case": "reviewer_empty_manifests",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "reviewer_p08_only_and_empty_manifests",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "PASS",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "p08_only_full_manifests",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "PASS",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "p01_dropped_no_tokyo_check",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "tier3_prompts_under_a_tier2_grant",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "extra_prompt_not_in_tier",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "position_arrays_truncated",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "positions_fewer_than_frozen_prompt",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "D_nan",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "D_null",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "D_negative",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "margin_infinite",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "KILLED (validity gate)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "top1_boolean",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "KILLED (validity gate)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "top1_out_of_vocabulary",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "KILLED (validity gate)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "D_file_not_json",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "D_file_duplicate_prompt_key",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "D_file_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "stock_tensor_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "stock_lm_head_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "abl_changed_tensor_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "abl_final_norm_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "abl_unexpected_tensor",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "KILLED (validity gate)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "tensor_entry_without_sha256",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "manifest_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 1,
+   "files_written": [],
+   "verdict_if_written": null,
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "progress_log_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "grant_time_moved_to_tier1_with_9_prompts",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "tier_line_says_tier3_under_a_tier2_grant",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "grant_after_last_tier",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "run_end_nonzero",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "run_end_after_hard_stop",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "run_end_line_missing",
+   "expect": "exit 2 (INVALID), nothing written",
+   "exit_code": 0,
+   "files_written": [
+    "analysis.json"
+   ],
+   "verdict_if_written": "FAIL (mixed)",
+   "reasons": [],
+   "ok": false
+  },
+  {
+   "case": "tokyo_wrong_on_stock",
+   "expect": "exit 3, verdict KILLED (validity gate), gate a_tokyo false",
+   "exit_code": 0,
+   "verdict": "KILLED (validity gate)",
+   "gate": "a_tokyo",
+   "gate_value": false,
+   "ok": false
+  },
+  {
+   "case": "top1_differs_from_pr124",
+   "expect": "exit 3, verdict KILLED (validity gate), gate b_reproduce false",
+   "exit_code": 0,
+   "verdict": "KILLED (validity gate)",
+   "gate": "b_reproduce",
+   "gate_value": false,
+   "ok": false
+  },
+  {
+   "case": "margin_differs_from_pr124",
+   "expect": "exit 3, verdict KILLED (validity gate), gate b_reproduce false",
+   "exit_code": 0,
+   "verdict": "KILLED (validity gate)",
+   "gate": "b_reproduce",
+   "gate_value": false,
+   "ok": false
+  },
+  {
+   "case": "stock_tensor_sha256_changed",
+   "expect": "exit 3, verdict KILLED (validity gate), gate c_manifest false",
+   "exit_code": 0,
+   "verdict": "KILLED (validity gate)",
+   "gate": "c_manifest",
+   "gate_value": false,
+   "ok": false
+  },
+  {
+   "case": "abl_tensor_sha256_changed",
+   "expect": "exit 3, verdict KILLED (validity gate), gate c_manifest false",
+   "exit_code": 0,
+   "verdict": "KILLED (validity gate)",
+   "gate": "c_manifest",
+   "gate_value": false,
+   "ok": false
+  },
+  {
+   "case": "existing_output_not_overwritten",
+   "expect": "exit 4, existing analysis.json left as it was",
+   "exit_code": 0,
+   "existing_file_unchanged": false,
+   "ok": false
+  },
+  {
+   "case": "documented_limit_consistent_tier3_log_and_prompts",
+   "expect": "exit 0 as a 6-prompt tier 3 subset: the tier comes from the run's own log, which is not authenticated",
+   "exit_code": 0,
+   "prompts_run": 6,
+   "prompts_needed": 5,
+   "subset": true,
+   "verdict": "FAIL (mixed)",
+   "ok": true
+  }
+ ],
+ "all_ok": false
+}
