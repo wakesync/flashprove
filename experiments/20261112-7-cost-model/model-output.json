@@ -1,0 +1,477 @@
+{
+ "inputs": {
+  "bytes_per_entry": {
+   "label": "extrapolated",
+   "note": "central from one upstream Maverick point; own_rate = this fork's 5,293 MiB on the small example (500 ms samples, not a true peak); upstream's full-size dense point contradicts own_rate for the dense family; nothing decides it for DeltaNet",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json vram_calibration_descriptive.bytes_per_entry",
+   "value": {
+    "central": 22.970537172462283,
+    "high": 45.941074344924566,
+    "low": 16.0,
+    "own_rate": 219.92891835726817
+   }
+  },
+  "commit_minutes": {
+   "label": "extrapolated",
+   "note": "linear in committed weights from upstream's ~39 min for Maverick; fixed costs ignored",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 2.6176491262409223
+  },
+  "deltanet_head_layers": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json qwen_shapes",
+   "value": 2304
+  },
+  "deltanet_mixer_entries_per_layer_token": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 1744121.714310755
+  },
+  "deltanet_share": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 0.880704224519267
+  },
+  "entries_per_token_packed": {
+   "label": "counted",
+   "note": "plan of record (packed limbs, every state committed); the DeltaNet sub-proof is NOT built",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json packed.per_token_layer_segments.T1024.entries_per_token.all_layers",
+   "value": 95057841.1641135
+  },
+  "largest_segment_entries_T1024": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 1785980635.4542131
+  },
+  "largest_segment_entries_T256": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 446495158.8635533
+  },
+  "largest_segment_entries_T64": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 111623789.71588832
+  },
+  "m2_head_laid_columns_T16": {
+   "label": "counted",
+   "note": "one head, T = 16, built and equal to the #66 model",
+   "source": "experiments/20261109-32-qwen-deltanet-lookup-build/runs/counts-vs-model.json stage2.rows.columns_used.built",
+   "value": 1613856
+  },
+  "m2_prove_s": {
+   "label": "measured",
+   "note": "CPU research harness, shared loaded VM, after the lane's stop time",
+   "source": "research/results.yaml qwen-deltanet-two-lookup-build/stage2_prove_wall_after_stop",
+   "value": 86.746
+  },
+  "m2_prove_s_estimate": {
+   "label": "extrapolated",
+   "note": "#66's straight line in table length",
+   "source": "experiments/20261109-32-qwen-deltanet-lookup-build/RESULTS.md ('#66 estimated about 39 s prove')",
+   "value": 39.0
+  },
+  "m2_verify_s": {
+   "label": "measured",
+   "note": "CPU, one head, 16 tokens",
+   "source": "research/results.yaml qwen-deltanet-two-lookup-build/stage2_verify_wall_after_stop",
+   "value": 30.74
+  },
+  "maverick_entries_per_request": {
+   "label": "counted",
+   "note": "one 1,024-token request",
+   "source": "experiments/20261109-32-qwen-m3-design/RESULTS.md H4 table (cp_verify -plan arrays)",
+   "value": 10573982429.0
+  },
+  "maverick_tok_per_s_h100": {
+   "label": "measured",
+   "note": "one session per arm, two hosts, H100 host 14% below upstream; Maverick shape, synthetic weights",
+   "source": "research/results.yaml h200-memory-lever/ca1_batch_interval (24,576 tokens per batch / interval)",
+   "value": 93.84664290656313
+  },
+  "maverick_tok_per_s_h200": {
+   "label": "measured",
+   "note": "one session per arm, two hosts, H100 host 14% below upstream; Maverick shape, synthetic weights",
+   "source": "research/results.yaml h200-memory-lever/tb1_batch_interval (24,576 tokens per batch / interval)",
+   "value": 146.05649997064288
+  },
+  "maverick_usd_per_mtok_h100": {
+   "label": "measured",
+   "note": "calculated in the row from measured rate and the rented quote",
+   "source": "research/results.yaml h200-memory-lever",
+   "value": 7.1267
+  },
+  "maverick_usd_per_mtok_h200": {
+   "label": "measured",
+   "note": "calculated in the row from measured rate and the rented quote",
+   "source": "research/results.yaml h200-memory-lever",
+   "value": 10.5343
+  },
+  "plain_qwen_tok_per_s": {
+   "label": "not established",
+   "note": "no plain-inference rate for Qwen3.8-27B on any card is on main",
+   "source": "search of main",
+   "value": null
+  },
+  "proof_mb_T1024": {
+   "label": "extrapolated",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 172.8800609898896
+  },
+  "proof_mb_T256": {
+   "label": "extrapolated",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 43.2200152474724
+  },
+  "proof_mb_T64": {
+   "label": "extrapolated",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 10.8050038118681
+  },
+  "prove_s_T1024": {
+   "label": "extrapolated",
+   "note": "PR #70: central/high from a fit to upstream's four Maverick H100 rates (records not in this repo); small-example from this fork's 2.35 s cp_prove on the tiny synthetic example (mostly start-up). Not bounds",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json packed.per_token_layer_segments.T1024.extrapolated.prove_s",
+   "value": {
+    "central": 43.54446521536452,
+    "high": 88.4030667704088,
+    "small_example": 2620.5431304480467
+   }
+  },
+  "prove_s_T256": {
+   "label": "extrapolated",
+   "note": "PR #70: central/high from a fit to upstream's four Maverick H100 rates (records not in this repo); small-example from this fork's 2.35 s cp_prove on the tiny synthetic example (mostly start-up). Not bounds",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json packed.per_token_layer_segments.T256.extrapolated.prove_s",
+   "value": {
+    "central": 13.628758175860057,
+    "high": 24.84340856462113,
+    "small_example": 655.1357826120117
+   }
+  },
+  "prove_s_T64": {
+   "label": "extrapolated",
+   "note": "PR #70: central/high from a fit to upstream's four Maverick H100 rates (records not in this repo); small-example from this fork's 2.35 s cp_prove on the tiny synthetic example (mostly start-up). Not bounds",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json packed.per_token_layer_segments.T64.extrapolated.prove_s",
+   "value": {
+    "central": 6.1498314159839405,
+    "high": 8.953494013174208,
+    "small_example": 163.78394565300292
+   }
+  },
+  "segment_cap": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json H5_r2.cp_verify_segment_cap",
+   "value": 64
+  },
+  "segments_per_window": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 81
+  },
+  "upstream_multiple_decode": {
+   "label": "measured upstream",
+   "note": "one pass vs decoding at 512 streams; a pass checks one token",
+   "source": "guide/performance.md Cost paragraph",
+   "value": 20.1
+  },
+  "upstream_multiple_prefill": {
+   "label": "measured upstream",
+   "note": "calculated upstream vs stock vLLM FP8 on 8 H100s",
+   "source": "guide/performance.md Cost paragraph",
+   "value": 93.0
+  },
+  "upstream_startup_s": {
+   "label": "measured upstream",
+   "note": "",
+   "source": "guide/performance.md",
+   "value": [
+    68.1,
+    79.0
+   ]
+  },
+  "upstream_steady_tok_s_b24": {
+   "label": "measured upstream",
+   "note": "Maverick, one H100, records not in this repository",
+   "source": "guide/performance.md rate table, 24 per batch",
+   "value": 111.23
+  },
+  "usd_assumed": {
+   "label": "assumed",
+   "note": "",
+   "source": "PR #70 RESULTS.md (assumed 3 USD per GPU-hour)",
+   "value": 3.0
+  },
+  "usd_h100_invoice": {
+   "label": "measured",
+   "note": "",
+   "source": "research/gpu/replication-1/README.md (invoice, H100)",
+   "value": 2.16
+  },
+  "usd_h100_quote_per_gpu": {
+   "label": "measured",
+   "note": "a quote for a 2-GPU box, not an invoice",
+   "source": "research/results.yaml h200-memory-lever/price_per_hour_h100_box / 2",
+   "value": 2.40925
+  },
+  "usd_h200_quote": {
+   "label": "measured",
+   "note": "a quote incl. 100 GB storage; not Tinfoil",
+   "source": "research/results.yaml h200-memory-lever/price_per_hour_h200_box",
+   "value": 5.5402
+  },
+  "weights_resident_gb": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json",
+   "value": 56.333477376
+  }
+ },
+ "model": {
+  "built_mixer_columns_per_token": 232395264.0,
+  "built_vs_plan_mixer": 2.7759347070071305,
+  "built_vs_plan_total": 2.5640731989315664,
+  "entries_qwen_over_maverick": 9.20554105377474,
+  "envelope_central": 0.03543657650989951,
+  "envelope_usd_per_1k": {
+   "high": 10.098217412657844,
+   "high_window": 256,
+   "low": 0.025514335087127648,
+   "ratio": 395.78603080087873
+  },
+  "estimate_miss": 2.22425641025641,
+  "fit_window": {
+   "central": {
+    "t_max": 3169.974586043171,
+    "t_pow2": 2048,
+    "with_resident_weights_t_pow2": 1024
+   },
+   "high": {
+    "t_max": 1584.9872930215854,
+    "t_pow2": 1024,
+    "with_resident_weights_t_pow2": 512
+   },
+   "low": {
+    "t_max": 4551.001191529087,
+    "t_pow2": 4096,
+    "with_resident_weights_t_pow2": 2048
+   },
+   "own_rate": {
+    "t_max": 331.08887911765146,
+    "t_pow2": 256,
+    "with_resident_weights_t_pow2": 128
+   }
+  },
+  "gaps": [
+   [
+    "G-plain: plain-inference rate for the multiple",
+    "inf",
+    "the multiple only; not on main"
+   ],
+   [
+    "G-time: which GPU-s per entry a DeltaNet entry costs (central vs small-example rate)",
+    60.18085461578701,
+    "USD and GPU-s"
+   ],
+   [
+    "G-mem: bytes per entry of a DeltaNet segment (16 vs 220)",
+    13.74555739732926,
+    "GPU memory; USD only if it forces T down"
+   ],
+   [
+    "G-price: USD per GPU-hour (H100 invoice vs H200 quote)",
+    2.564907407407407,
+    "USD"
+   ],
+   [
+    "G-volume: entries of the lowering that gets built (plan of record vs built M2 volume)",
+    2.5640731989315664,
+    "USD, GPU-s and memory (unit caveat)"
+   ],
+   [
+    "G-window: per-token share of fixed passes (T = 64 vs 1,024, central)",
+    2.2596971203822225,
+    "USD and GPU-s"
+   ],
+   [
+    "G-estimate: estimator miss seen on main (#73 measured / #66 estimate)",
+    2.22425641025641,
+    "USD and GPU-s (CPU evidence, transferred)"
+   ],
+   [
+    "G-fidelity: wider recurrence if F12 is replaced (+17%, a lower bound)",
+    1.169368301081536,
+    "USD, GPU-s and memory"
+   ],
+   [
+    "G-H200: H200 speed vs H100 (assumed equal)",
+    "nan",
+    "USD and GPU-s; not quantified on main"
+   ]
+  ],
+  "gpu_s_per_1k": {
+   "1024": {
+    "central": 42.52389181187941,
+    "high": 86.33111989297734,
+    "small_example": 2559.1241508281705
+   },
+   "256": {
+    "central": 53.23733662445335,
+    "high": 97.04456470555128,
+    "small_example": 2559.1241508281705
+   },
+   "64": {
+    "central": 96.09111587474906,
+    "high": 139.898343955847,
+    "small_example": 2559.1241508281705
+   }
+  },
+  "largest_segment_gb": {
+   "1024": {
+    "central": 41.02493457599881,
+    "high": 82.04986915199763,
+    "low": 28.57569016726741,
+    "own_rate": 392.78878936247156
+   },
+   "256": {
+    "central": 10.256233643999703,
+    "high": 20.512467287999407,
+    "low": 7.143922541816853,
+    "own_rate": 98.19719734061789
+   },
+   "64": {
+    "central": 2.564058410999926,
+    "high": 5.128116821999852,
+    "low": 1.7859806354542132,
+    "own_rate": 24.549299335154473
+   }
+  },
+  "maverick_gpu_s_per_token": {
+   "h100": 0.010655682174967446,
+   "h200": 0.0068466655041097
+  },
+  "maverick_implied_plain_prefill_tok_s": 10344.390000000001,
+  "multiple_at_assumed_plain": {
+   "1000.0": {
+    "central": 42.52389181187941,
+    "high": 86.33111989297734,
+    "small_example": 2559.1241508281705
+   },
+   "10000.0": {
+    "central": 425.2389181187941,
+    "high": 863.3111989297735,
+    "small_example": 25591.241508281706
+   },
+   "5000.0": {
+    "central": 212.61945905939706,
+    "high": 431.65559946488673,
+    "small_example": 12795.620754140853
+   }
+  },
+  "prices": {
+   "assumed": 3.0,
+   "h100_invoice": 2.16,
+   "h100_quote_per_gpu": 2.40925,
+   "h200_quote": 5.5402
+  },
+  "qwen_central_over_maverick_h100": 3.9907244898667713,
+  "startup_vs_window_central": [
+   1.56391862118842,
+   1.81423746070316
+  ],
+  "u2": {
+   "0.001": {
+    "central": 0.04252389181187941,
+    "high": 0.08633111989297734,
+    "small_example": 2.5591241508281706
+   },
+   "0.01": {
+    "central": 0.4252389181187941,
+    "high": 0.8633111989297735,
+    "small_example": 25.591241508281705
+   },
+   "0.1": {
+    "central": 4.252389181187941,
+    "high": 8.633111989297735,
+    "small_example": 255.91241508281706
+   },
+   "1": {
+    "central": 42.52389181187941,
+    "high": 86.33111989297734,
+    "small_example": 2559.1241508281705
+   }
+  },
+  "usd_per_1k": {
+   "1024": {
+    "central": {
+     "assumed": 0.03543657650989951,
+     "h100_invoice": 0.025514335087127644,
+     "h100_quote_per_gpu": 0.028458523985491795,
+     "h200_quote": 0.0654419070600484
+    },
+    "high": {
+     "assumed": 0.07194259991081445,
+     "h100_invoice": 0.05179867193578641,
+     "h100_quote_per_gpu": 0.05777590294504324,
+     "h200_quote": 0.13285879734196474
+    },
+    "small_example": {
+     "assumed": 2.1326034590234757,
+     "h100_invoice": 1.5354744904969024,
+     "h100_quote_per_gpu": 1.7126582945507696,
+     "h200_quote": 3.9383498945606195
+    }
+   },
+   "256": {
+    "central": {
+     "assumed": 0.04436444718704446,
+     "h100_invoice": 0.03194240197467201,
+     "h100_quote_per_gpu": 0.03562834812846229,
+     "h200_quote": 0.08192930343522123
+    },
+    "high": {
+     "assumed": 0.0808704705879594,
+     "h100_invoice": 0.05822673882333077,
+     "h100_quote_per_gpu": 0.06494572708801373,
+     "h200_quote": 0.14934619371713756
+    },
+    "small_example": {
+     "assumed": 2.1326034590234757,
+     "h100_invoice": 1.5354744904969024,
+     "h100_quote_per_gpu": 1.7126582945507696,
+     "h200_quote": 3.9383498945606195
+    }
+   },
+   "64": {
+    "central": {
+     "assumed": 0.08007592989562422,
+     "h100_invoice": 0.05765466952484944,
+     "h100_quote_per_gpu": 0.06430764470034422,
+     "h200_quote": 0.14787888893591242
+    },
+    "high": {
+     "assumed": 0.11658195329653916,
+     "h100_invoice": 0.0839390063735082,
+     "h100_quote_per_gpu": 0.09362502365989565,
+     "h200_quote": 0.21529577921782872
+    },
+    "small_example": {
+     "assumed": 2.1326034590234757,
+     "h100_invoice": 1.5354744904969024,
+     "h100_quote_per_gpu": 1.7126582945507696,
+     "h200_quote": 3.9383498945606195
+    }
+   }
+  }
+ }
+}
