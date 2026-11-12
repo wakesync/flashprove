@@ -23,6 +23,12 @@
    "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json qwen_shapes",
    "value": 2304
   },
+  "deltanet_layers": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json qwen_shapes.deltanet_layers",
+   "value": 48
+  },
   "deltanet_mixer_entries_per_layer_token": {
    "label": "counted",
    "note": "",
@@ -40,6 +46,18 @@
    "note": "plan of record (packed limbs, every state committed); the DeltaNet sub-proof is NOT built",
    "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json packed.per_token_layer_segments.T1024.entries_per_token.all_layers",
    "value": 95057841.1641135
+  },
+  "fit_rule_gb": {
+   "label": "assumed",
+   "note": "PR #70's one-H200 fit rule, a chosen headroom",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json H5_r2.own_small_example_rate.fit_rule_gb",
+   "value": 127.0
+  },
+  "h100_box_gpus": {
+   "label": "counted",
+   "note": "",
+   "source": "research/results.yaml h200-memory-lever/price_per_hour_h100_box note",
+   "value": 2
   },
   "largest_segment_entries_T1024": {
    "label": "counted",
@@ -64,6 +82,12 @@
    "note": "one head, T = 16, built and equal to the #66 model",
    "source": "experiments/20261109-32-qwen-deltanet-lookup-build/runs/counts-vs-model.json stage2.rows.columns_used.built",
    "value": 1613856
+  },
+  "m2_head_tokens": {
+   "label": "counted",
+   "note": "tokens in the built stage 2 statement",
+   "source": "experiments/20261109-32-qwen-deltanet-lookup-build/RESULTS.md ('## Stage 2: the M2 head (T = 16)')",
+   "value": 16.0
   },
   "m2_prove_s": {
    "label": "measured",
@@ -92,24 +116,30 @@
   "maverick_tok_per_s_h100": {
    "label": "measured",
    "note": "one session per arm, two hosts, H100 host 14% below upstream; Maverick shape, synthetic weights",
-   "source": "research/results.yaml h200-memory-lever/ca1_batch_interval (24,576 tokens per batch / interval)",
+   "source": "research/results.yaml h200-memory-lever/ca1_batch_interval (tokens per batch / interval)",
    "value": 93.84664290656313
   },
   "maverick_tok_per_s_h200": {
    "label": "measured",
    "note": "one session per arm, two hosts, H100 host 14% below upstream; Maverick shape, synthetic weights",
-   "source": "research/results.yaml h200-memory-lever/tb1_batch_interval (24,576 tokens per batch / interval)",
+   "source": "research/results.yaml h200-memory-lever/tb1_batch_interval (tokens per batch / interval)",
    "value": 146.05649997064288
   },
+  "maverick_tokens_per_batch": {
+   "label": "counted",
+   "note": "",
+   "source": "research/results.yaml h200-memory-lever/tb1_batch_interval note ('24 x 1,024 tokens per interval')",
+   "value": 24576
+  },
   "maverick_usd_per_mtok_h100": {
-   "label": "measured",
-   "note": "calculated in the row from measured rate and the rented quote",
+   "label": "calculated",
+   "note": "calculated in the row from a measured rate and a quoted price",
    "source": "research/results.yaml h200-memory-lever",
    "value": 7.1267
   },
   "maverick_usd_per_mtok_h200": {
-   "label": "measured",
-   "note": "calculated in the row from measured rate and the rented quote",
+   "label": "calculated",
+   "note": "calculated in the row from a measured rate and a quoted price",
    "source": "research/results.yaml h200-memory-lever",
    "value": 10.5343
   },
@@ -209,26 +239,32 @@
   "usd_assumed": {
    "label": "assumed",
    "note": "",
-   "source": "PR #70 RESULTS.md (assumed 3 USD per GPU-hour)",
+   "source": "experiments/20261109-32-qwen-m3-design/RESULTS.md (PR #70: 'At an **assumed** 3 USD per GPU-hour')",
    "value": 3.0
   },
   "usd_h100_invoice": {
-   "label": "measured",
+   "label": "invoiced",
    "note": "",
    "source": "research/gpu/replication-1/README.md (invoice, H100)",
    "value": 2.16
   },
   "usd_h100_quote_per_gpu": {
-   "label": "measured",
+   "label": "quoted",
    "note": "a quote for a 2-GPU box, not an invoice",
-   "source": "research/results.yaml h200-memory-lever/price_per_hour_h100_box / 2",
+   "source": "research/results.yaml h200-memory-lever/price_per_hour_h100_box / GPUs per box",
    "value": 2.40925
   },
   "usd_h200_quote": {
-   "label": "measured",
+   "label": "quoted",
    "note": "a quote incl. 100 GB storage; not Tinfoil",
    "source": "research/results.yaml h200-memory-lever/price_per_hour_h200_box",
    "value": 5.5402
+  },
+  "v_heads": {
+   "label": "counted",
+   "note": "",
+   "source": "experiments/20261109-32-qwen-m3-design/runs/model-r3.json qwen_shapes.v_heads",
+   "value": 48
   },
   "weights_resident_gb": {
    "label": "counted",
@@ -238,6 +274,7 @@
   }
  },
  "model": {
+  "built_mixer_columns_per_layer_token": 4841568.0,
   "built_mixer_columns_per_token": 232395264.0,
   "built_vs_plan_mixer": 2.7759347070071305,
   "built_vs_plan_total": 2.5640731989315664,
@@ -245,7 +282,8 @@
   "envelope_central": 0.03543657650989951,
   "envelope_usd_per_1k": {
    "high": 10.098217412657844,
-   "high_window": 256,
+   "high_window": 64,
+   "high_window_plan_volume_own_rate": 256,
    "low": 0.025514335087127648,
    "ratio": 395.78603080087873
   },
@@ -253,23 +291,53 @@
   "fit_window": {
    "central": {
     "t_max": 3169.974586043171,
+    "t_max_resident": 1763.8667779694867,
     "t_pow2": 2048,
     "with_resident_weights_t_pow2": 1024
    },
    "high": {
     "t_max": 1584.9872930215854,
+    "t_max_resident": 881.9333889847434,
     "t_pow2": 1024,
     "with_resident_weights_t_pow2": 512
    },
    "low": {
     "t_max": 4551.001191529087,
+    "t_max_resident": 2532.3104619137107,
     "t_pow2": 4096,
     "with_resident_weights_t_pow2": 2048
    },
    "own_rate": {
     "t_max": 331.08887911765146,
+    "t_max_resident": 184.227557218286,
     "t_pow2": 256,
     "with_resident_weights_t_pow2": 128
+   }
+  },
+  "fit_window_built": {
+   "central": {
+    "t_max": 1141.9485400868357,
+    "t_max_resident": 635.4136404999226,
+    "t_pow2": 1024,
+    "with_resident_weights_t_pow2": 512
+   },
+   "high": {
+    "t_max": 570.9742700434178,
+    "t_max_resident": 317.7068202499613,
+    "t_pow2": 512,
+    "with_resident_weights_t_pow2": 256
+   },
+   "low": {
+    "t_max": 1639.448211818981,
+    "t_max_resident": 912.237040562066,
+    "t_pow2": 1024,
+    "with_resident_weights_t_pow2": 512
+   },
+   "own_rate": {
+    "t_max": 119.27113353275314,
+    "t_max_resident": 66.36595477308997,
+    "t_pow2": 64,
+    "with_resident_weights_t_pow2": 64
    }
   },
   "gaps": [
@@ -336,6 +404,10 @@
     "small_example": 2559.1241508281705
    }
   },
+  "largest_segment_entries_per_token": {
+   "built": 4841568.0,
+   "plan": 1744121.714310755
+  },
   "largest_segment_gb": {
    "1024": {
     "central": 41.02493457599881,
@@ -354,6 +426,32 @@
     "high": 5.128116821999852,
     "low": 1.7859806354542132,
     "own_rate": 24.549299335154473
+   }
+  },
+  "largest_segment_gb_built": {
+   "1024": {
+    "central": 113.88253974221196,
+    "high": 227.76507948442392,
+    "low": 79.324250112,
+    "own_rate": 1090.356032914598
+   },
+   "128": {
+    "central": 14.235317467776495,
+    "high": 28.47063493555299,
+    "low": 9.915531264,
+    "own_rate": 136.29450411432475
+   },
+   "256": {
+    "central": 28.47063493555299,
+    "high": 56.94126987110598,
+    "low": 19.831062528,
+    "own_rate": 272.5890082286495
+   },
+   "64": {
+    "central": 7.1176587338882475,
+    "high": 14.235317467776495,
+    "low": 4.957765632,
+    "own_rate": 68.14725205716238
    }
   },
   "maverick_gpu_s_per_token": {
@@ -385,6 +483,7 @@
    "h200_quote": 5.5402
   },
   "qwen_central_over_maverick_h100": 3.9907244898667713,
+  "small_example_per_token_flat": 1.0,
   "startup_vs_window_central": [
    1.56391862118842,
    1.81423746070316
@@ -409,6 +508,36 @@
     "central": 42.52389181187941,
     "high": 86.33111989297734,
     "small_example": 2559.1241508281705
+   }
+  },
+  "u2_scenarios": {
+   "0.001": {
+    "high_gpu_s": 6.561781647877016,
+    "high_usd": 0.010098217412657843,
+    "high_window": 64,
+    "low_gpu_s": 0.04252389181187941,
+    "low_usd": 2.551433508712765e-05
+   },
+   "0.01": {
+    "high_gpu_s": 65.61781647877015,
+    "high_usd": 0.10098217412657844,
+    "high_window": 64,
+    "low_gpu_s": 0.4252389181187941,
+    "low_usd": 0.00025514335087127647
+   },
+   "0.1": {
+    "high_gpu_s": 656.1781647877016,
+    "high_usd": 1.0098217412657844,
+    "high_window": 64,
+    "low_gpu_s": 4.252389181187941,
+    "low_usd": 0.002551433508712765
+   },
+   "1": {
+    "high_gpu_s": 6561.7816478770155,
+    "high_usd": 10.098217412657844,
+    "high_window": 64,
+    "low_gpu_s": 42.52389181187941,
+    "low_usd": 0.025514335087127648
    }
   },
   "usd_per_1k": {
