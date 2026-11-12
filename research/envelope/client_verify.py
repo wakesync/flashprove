@@ -29,7 +29,10 @@ Output contract (SPEC.md section 1):
 
 Concurrency (SPEC.md section 4): every state change (`issue` and `deliver`) holds an exclusive
 `fcntl.flock` on a sidecar lock file `<state>.lock` from before it reads the state until the new
-state and the release file are in place. So concurrent client processes on one state file are
+state and the release file are in place. `<state>` is the real path of the state file (realpath:
+symlinks, symlinked directories and relative parts resolved), and every read, write and rename
+uses that real path, so two different spellings of one state file share one lock. A state file
+with more than one hard link, or that is not a regular file, is refused (`REJECT: error`). So concurrent client processes on one state file are
 serialised: a nonce is released at most once and no consumption or issued request is lost. State
 and release files are written to unique temporary names in the same directory (mkstemp), fsynced,
 moved into place and the directory fsynced. The lock is advisory: it serialises client processes
@@ -45,6 +48,7 @@ import fcntl
 import os
 import pathlib
 import re
+import stat
 import subprocess
 import sys
 import tempfile
@@ -398,14 +402,44 @@ def place_release(tmp, path):
 
 @contextlib.contextmanager
 def state_lock(state_path):
-    """Exclusive flock on the sidecar `<state>.lock`, held for the whole transaction. The sidecar is
-    never renamed, so the lock stays on one inode while the state file itself is replaced."""
-    lock = os.open(str(state_path) + ".lock", os.O_RDWR | os.O_CREAT | os.O_CLOEXEC, 0o600)
+    """Exclusive flock on the sidecar `<real state>.lock`, held for the whole transaction, where
+    <real state> is the state path with every symlink and every `.`/`..` resolved (realpath). So
+    every client process that reaches one state file, by a symlink, a symlinked directory, a
+    relative or an absolute path, takes the same lock and reads, writes and renames the same
+    directory entry. Yields that real path; the caller uses only it from then on.
+
+    Refused with `REJECT: error`, before the state is read and with the state file untouched:
+    a path that does not resolve to an existing file, a state file that is not a regular file,
+    a state file with more than one hard link (st_nlink > 1: another name for the same file would
+    take another lock and could release the same nonce again), and a path that resolves to a
+    different file once the lock is held (a symlink changed in between). The sidecar is never
+    renamed, so the lock stays on one inode while the state file itself is replaced."""
+    real = os.path.realpath(state_path, strict=True)
+    lock = os.open(real + ".lock", os.O_RDWR | os.O_CREAT | os.O_CLOEXEC, 0o600)
     try:
         fcntl.flock(lock, fcntl.LOCK_EX)
-        yield
+        if os.path.realpath(state_path, strict=True) != real:
+            fail("state path resolved to another file while waiting for the lock")
+        check_single_name(real)
+        yield real
     finally:
         os.close(lock)  # closing the descriptor releases the lock
+
+
+def check_single_name(real, inode=None):
+    """The state file at `real` is a regular file with exactly one hard link (and, if `inode` is
+    given, still the same file). Otherwise `REJECT: error`. Called after the lock is taken, and again
+    just before the commit, so a second name for the file is refused before the state is replaced.
+    Returns the inode."""
+    info = os.lstat(real)
+    if not stat.S_ISREG(info.st_mode):
+        fail("state file is not a regular file")
+    if info.st_nlink != 1:
+        fail("state file has %d hard links; one state file must have exactly one name "
+             "(SPEC section 4)" % info.st_nlink)
+    if inode is not None and (info.st_dev, info.st_ino) != inode:
+        fail("state file was replaced by another program while the lock was held")
+    return (info.st_dev, info.st_ino)
 
 
 def print_verdicts(args, t0):
@@ -438,12 +472,12 @@ def cmd_issue(args):
     if not HEX64.match(args.nonce):
         fail("nonce: 64 hex digits")
     prompt = E.bytes_tokens(pathlib.Path(args.prompt).read_bytes())
-    with state_lock(args.state):
-        state = load_canonical(args.state)  # read under the lock, never before it
+    with state_lock(args.state) as state_path:
+        state = load_canonical(state_path)  # read under the lock, never before it
         if args.nonce in state["outstanding"] or args.nonce in state["consumed"]:
             fail("nonce reused")
         rec = E.issue(state, args.nonce, args.model, prompt, args.e, args.max_tokens)
-        write_atomic(args.state, E.canonical(state))
+        write_atomic(state_path, E.canonical(state))
     print("issued seq=%d nonce=%s prev=%s" % (rec["seq"], args.nonce, rec["prev"]))
     return 0
 
@@ -465,10 +499,12 @@ def cmd_deliver(args):
     env_bytes = pathlib.Path(args.envelope).read_bytes()
     reply_bytes = pathlib.Path(args.reply).read_bytes()
     proof_bytes = pathlib.Path(args.proof).read_bytes()
-    with state_lock(args.state):
+    with state_lock(args.state) as state_path:
         # Load, all 15 checks and the commit happen under one exclusive lock: no other client
         # process can read or write this state in between, so no stale snapshot is ever written.
-        state = load_canonical(args.state)
+        # state_path is the resolved real path (symlinks and relative parts resolved, one link).
+        inode = check_single_name(state_path)
+        state = load_canonical(state_path)
         if state.get("version") != E.STATE_VERSION:
             fail("state version")
         try:
@@ -491,19 +527,25 @@ def cmd_deliver(args):
             fail("release output cannot be prepared, nothing committed: %r" % failure)
         E.release(state, record["nonce"], env_bytes)
         try:
-            state_tmp = write_temp(args.state, E.canonical(state))
+            state_tmp = write_temp(state_path, E.canonical(state))
         except OSError as failure:
             unlink_quietly(release_tmp)
             fail("state cannot be written, nothing committed: %r" % failure)
         try:
-            os.replace(state_tmp, args.state)  # the commit: atomic, old state or new state
+            check_single_name(state_path, inode)
+        except SystemExit:
+            unlink_quietly(state_tmp)
+            unlink_quietly(release_tmp)
+            raise
+        try:
+            os.replace(state_tmp, state_path)  # the commit: atomic, old state or new state
         except OSError as failure:
             unlink_quietly(state_tmp)
             unlink_quietly(release_tmp)
             fail("state cannot be committed, nothing committed: %r" % failure)
         # Committed: the nonce is consumed from here on, whatever happens next.
         try:
-            fsync_dir(pathlib.Path(args.state).parent)
+            fsync_dir(pathlib.Path(state_path).parent)
         except OSError as failure:
             print("warning: state committed, fsync of its directory failed: %r" % failure)
         try:
