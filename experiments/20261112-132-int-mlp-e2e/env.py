@@ -31,7 +31,7 @@ env = {
                  "ram_gb": 30, "os": "Linux 6.8 x86_64", "gpu": "none",
                  "pinning": "registered run: flock bigmem.lock + fp-heavy.sh + taskset -c 6-11; fixture debug the same",
                  "time_v": {k: grab(k) for k in ("Elapsed (wall clock) time (h:mm:ss or m:ss)", "Maximum resident set size (kbytes)", "User time (seconds)", "Percent of CPU this job got", "Exit status")},
-                 "time_v_note": "one entry per process start; the first process was killed at 17:00:32Z by a restart of the agent host's session service (not by the run) and left no time -v block"},
+                 "time_v_note": "no time -v block exists for either process start: runs/run.time holds only two resource-tracker warnings, so every field above is null. The first process was killed at 17:00:32Z by a restart of the agent host's session service (not by the run); the resumed one was killed by the watchdog at 18:25:18Z. Likely cause: the signal reaches /usr/bin/time itself ($! in run_mlp.sh), which dies before printing. Peak RSS and CPU share are not recorded (corrected after the PR 138 round-1 review)"},
     "seeds": {"registered_run": "none (deterministic float64 and integer arithmetic)", "debug_fixture_synthetic": "numpy default_rng(0)"},
     "repeats": "one deterministic run; >= 5 repeats would be identical and are not meaningful; spread over prompts and positions reported instead; determinism checked by the duplicate path XM18#2 on p01, p04, p09",
     "data_on_disk": "scratch outside the repo: ckpt.npz (all paths' residual states, overwritten after every layer), about 0.2 GB; no weight data in the repo",
