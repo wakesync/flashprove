@@ -72,6 +72,16 @@
    "rejects": 0
   }
  },
+ "coverage": {
+  "label": "COMPLETE",
+  "set": "S10",
+  "partial_layers": null,
+  "layers": 48,
+  "heads": 48,
+  "prompts": 10,
+  "cells_per_arm": 23040,
+  "checked_by": "suite.py + summarise.validate"
+ },
  "arms": {
   "T0": {
    "verdict": "FAIL",
@@ -2483,6 +2493,8 @@
     ]
    },
    "rejects_total": 280358,
+   "heads_with_reject": 978,
+   "cells_with_reject": 4136,
    "e_tok_max_over_cells": {
     "n": 18904,
     "min": 6.290736541236797e-06,
@@ -5148,6 +5160,8 @@
     ]
    },
    "rejects_total": 0,
+   "heads_with_reject": 0,
+   "cells_with_reject": 0,
    "e_tok_max_over_cells": {
     "n": 23040,
     "min": 9.23438672306709e-07,
@@ -7163,6 +7177,8 @@
     ]
    },
    "rejects_total": 0,
+   "heads_with_reject": 0,
+   "cells_with_reject": 0,
    "e_tok_max_over_cells": {
     "n": 23040,
     "min": 9.23438672306709e-07,
@@ -9050,6 +9066,8 @@
     ]
    },
    "rejects_total": 0,
+   "heads_with_reject": 0,
+   "cells_with_reject": 0,
    "e_tok_max_over_cells": {
     "n": 23040,
     "min": 9.23438672306709e-07,
@@ -9306,6 +9324,7 @@
   "share_g_below_step": 0.3897106006160164,
   "heads_any_x_out": 939,
   "heads_all_x_out": 1,
+  "heads_any_g_ge_8": 43,
   "heads_majority_g_below_step": 965,
   "n_heads": 2304,
   "share_x_out_per_head": {

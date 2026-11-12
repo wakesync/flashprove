@@ -8,7 +8,14 @@ with the pinned integer generator's own functions (`tables.expq`, `tables.neares
 
 Usage:
   decay_tables.py selftest <out.json>                     synthetic checks (no model data)
-  decay_tables.py eval <ar_dir> <out_dir> [--fixture]     registered evaluation (or the debug fixture)
+  decay_tables.py eval <ar_dir> <out_dir> [--fixture | --set S10|S7 | --partial-layers N]
+                                                          registered evaluation (or the debug fixture)
+
+Since the review of PR #146 (RESULTS section 6), `eval` refuses (exit 2, nothing written) an input directory that
+is not the registered suite: every registered DeltaNet layer file present and no other, 48 heads with finite A and
+dt_bias, exactly the registered prompts with their registered token counts, finite ar. A PARTIAL run (PREREG
+"Kill criterion") must be declared with --partial-layers N; the debug fixture with --fixture (internal consistency
+only). The table code is unchanged.
 """
 import csv, gzip, hashlib, json, math, struct, sys, time
 from pathlib import Path
@@ -18,6 +25,8 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 sys.path.insert(0, str(REPO / "research" / "operators" / "qwen_ops"))
 import tables as TB   # PR #67, unchanged
+sys.path.insert(0, str(HERE))
+import suite as SU     # registered suite + completeness checks (post-run, review of PR #146)
 
 Q = TB.Q
 F = 12
@@ -130,19 +139,45 @@ def split_sources(ar, A, dtb, SP, EXPC):
     return out
 
 # ------------------------------------------------------------------ driver
-def load_layers(ar_dir):
+def load_layers(ar_dir, mode=None):
+    """Per-layer (i, A, dt_bias, {prompt: ar}) for the expected suite. mode as suite.expected (default: S10, complete).
+    Raises SU.Incomplete if the directory is not exactly the expected layers / heads / prompts / token counts."""
+    mode = dict(fixture=False, set="S10", partial_layers=None) if mode is None else mode
+    want_layers, toks = SU.expected(mode)
     out = []
-    for p in sorted(Path(ar_dir).glob("ar-L*.npz")):
-        d = np.load(p); i = int(p.stem.split("L")[1])
-        out.append((i, d["A"], d["dt_bias"], {k.split("|", 1)[1]: d[k] for k in d.files if k.startswith("ar|")}))
+    paths = sorted(Path(ar_dir).glob("ar-L*.npz"))
+    SU.need(paths, f"no ar-L*.npz files in {Path(ar_dir).name}")
+    for p in paths:
+        tag = p.stem.split("L", 1)[1]
+        SU.need(tag.isdigit() and len(tag) == 2, f"unexpected layer file name {p.name}")
+        d = np.load(p); i = int(tag)
+        SU.need("A" in d.files and "dt_bias" in d.files, f"{p.name}: A / dt_bias missing")
+        A, dtb = d["A"], d["dt_bias"]
+        SU.need(A.shape == (SU.N_HEADS,) and dtb.shape == (SU.N_HEADS,), f"{p.name}: A {A.shape}, dt_bias {dtb.shape}, expected ({SU.N_HEADS},)")
+        SU.need(bool(np.isfinite(A).all() and np.isfinite(dtb).all() and (A > 0).all()), f"{p.name}: non-finite or non-positive A / dt_bias")
+        ars = {k.split("|", 1)[1]: d[k] for k in d.files if k.startswith("ar|")}
+        SU.need(ars, f"{p.name}: no ar|<prompt> arrays")
+        for pid, ar in ars.items():
+            SU.need(ar.ndim == 2 and ar.shape[1] == SU.N_HEADS and ar.shape[0] >= 1, f"{p.name}: ar|{pid} shape {ar.shape}")
+            SU.need(bool(np.isfinite(ar).all()), f"{p.name}: ar|{pid} has non-finite values")
+            if toks is not None: SU.need(pid in toks and ar.shape[0] == toks[pid], f"{p.name}: ar|{pid} has {ar.shape[0]} tokens, registered {toks.get(pid)}")
+        if toks is not None: SU.need(set(ars) == set(toks), f"{p.name}: prompts {sorted(ars)} are not the registered {sorted(toks)}")
+        out.append((i, A, dtb, ars))
+    got = [i for i, *_ in out]
+    SU.need(len(set(got)) == len(got), "duplicate layer files")
+    if want_layers is not None: SU.need(got == want_layers, f"layer files {got} are not the expected DeltaNet layers {want_layers}")
+    else: SU.need(all(i in SU.DELTANET_LAYERS for i in got), "fixture: a layer file names a non-DeltaNet layer")
+    p0 = {k: v.shape[0] for k, v in out[0][3].items()}
+    SU.need(all({k: v.shape[0] for k, v in o[3].items()} == p0 for o in out), "prompts / token counts differ between layer files")
     return out
 
 def q(v): return [float(np.min(v)), float(np.median(v)), float(np.max(v))]
 
-def cmd_eval(ar_dir, out_dir, fixture=False):
+def cmd_eval(ar_dir, out_dir, fixture=False, mode=None):
+    mode = dict(fixture=fixture, set="S10", partial_layers=None) if mode is None else mode
+    layers = load_layers(ar_dir, mode)     # refuses an incomplete / inconsistent input before anything is written
     t0 = time.time(); od = Path(out_dir); od.mkdir(parents=True, exist_ok=True)
     SP, sp_sha = softplus_v1(); EXPC = coarse_exp()
-    layers = load_layers(ar_dir)
     cells = []; dom = []; split = []; sweep = []
     sweep_tabs = {f: (softplus_grid(f), coarse_exp(f)) for f in (14, 16, 18)}
     for i, A, dtb, ars in layers:
@@ -181,7 +216,8 @@ def cmd_eval(ar_dir, out_dir, fixture=False):
     wcsv("cells.csv.gz", cells); wcsv("split-T3.csv.gz", split); wcsv("sweep-T3-F.csv.gz", sweep)
     with gzip.open(od / "domain.json.gz", "wt") as fh: json.dump(dom, fh)
     meta = dict(softplus_table_sha256=sp_sha, coarse_exp_sha256=hashlib.sha256(struct.pack("<4096q", *[int(v) for v in EXPC])).hexdigest(),
-                layers=[i for i, *_ in layers], prompts=sorted(layers[0][3]) if layers else [], fixture=fixture,
+                layers=[i for i, *_ in layers], prompts=sorted(layers[0][3]) if layers else [], fixture=bool(mode["fixture"]),
+                set=None if mode["fixture"] else mode["set"], partial_layers=mode["partial_layers"],
                 seconds=round(time.time() - t0, 1), bar=dict(e_tok=E_TOK, e_cum=E_CUM, rejects=0))
     (od / "eval-meta.json").write_text(json.dumps(meta, indent=1) + "\n"); print(json.dumps(meta))
 
@@ -215,4 +251,10 @@ def cmd_selftest(out):
 
 if __name__ == "__main__":
     if sys.argv[1] == "selftest": cmd_selftest(sys.argv[2])
-    else: cmd_eval(sys.argv[2], sys.argv[3], "--fixture" in sys.argv)
+    else:
+        import summarise as SM   # same flag parser as summarise.py
+        try:
+            md = SM.parse_mode(sys.argv[4:])
+            cmd_eval(sys.argv[2], sys.argv[3], md["fixture"], md)
+        except SU.Incomplete as e:
+            print("decay_tables.py eval: REFUSED, input is not the expected suite: " + str(e), file=sys.stderr); sys.exit(2)
