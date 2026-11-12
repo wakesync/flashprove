@@ -1,0 +1,39 @@
+    80  masked: ---- stage key ---- 1 thread(s), <t> s
+    80  masked: ---- stage leaf ---- 1 thread(s), <t> s
+    80  masked: ---- stage request ---- 1 thread(s), <t> s
+    60  masked: ok public inputs: parameter file, shape, no-overflow conditions; profile 4; 12 blocks of layers  <t> s
+    60  masked: ok public inputs: parameter file, shape, no-overflow conditions; profile 4; 2 blocks of layers  <t> s
+    20  masked: read: sub-proof A_0: 1191 claims listed (tested at the chain's end), 3076 slots  <t> s
+    20  masked: read: sub-proof A_0: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_10: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_11: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_1: 1191 claims listed (tested at the chain's end), 3076 slots  <t> s
+    20  masked: read: sub-proof A_1: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_2: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_3: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_4: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_5: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_6: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_7: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_8: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof A_9: 767 claims listed (tested at the chain's end), 4190 slots  <t> s
+    20  masked: read: sub-proof G_0: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 1549 claims listed (tested at the chain's end), 3204 slots  <t> s
+    20  masked: read: sub-proof G_0: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 803 claims listed (tested at the chain's end), 4059 slots  <t> s
+    20  masked: read: sub-proof G_10: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_11: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_1: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 1516 claims listed (tested at the chain's end), 3203 slots  <t> s
+    20  masked: read: sub-proof G_1: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_2: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_3: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_4: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_5: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_6: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_7: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_8: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof G_9: 8 lookup calls in one forest, 2 more in the smallness test's, 9 matrices, 801 claims listed (tested at the chain's end), 4058 slots  <t> s
+    20  masked: read: sub-proof H: 6 lookup calls in one forest, 2 more in the smallness test's, 5 matrices, 897 claims listed (tested at the chain's end), 2879 slots  <t> s
+    20  masked: read: sub-proof H: 6 lookup calls in one forest, 2 more in the smallness test's, 8 matrices, 297 claims listed (tested at the chain's end), 3570 slots  <t> s
+    40  removed: seconds: before the proof is read (the scan, the plans, blk::configure(), the request's form, the accounting) <t>
+   600  removed: seconds: the frame's first() <t> | the sub-proof's own checks <t> | the frame's later() <t> | the equation's terms made <t> | the frame's close() <t>
+    40  removed: seconds: the links with their last test <t> | behind them (the rows on the table, the place, the shared chain, the second chain) <t>
+    40  removed: seconds: the links' last proximity test (the frame's finish()) <t>
