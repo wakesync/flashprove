@@ -35,6 +35,10 @@ T0 = the moment the live stop is sent (step 3). Window W = the owner's approved 
 - **Create the prover no later than** cut-off - F - 75 min (T0 + 30 min). If the live instance is not Stopped by then, do not create the prover: restore and report "window not started".
 - If the prover is not serving `/healthz` 20 min after create, stop it and restore (the #43 kill criterion's 60 min no longer fits this window; Amendment 5 shortens it).
 
+**These sums are nominal, not completion guarantees; the restore cut-off is the only authoritative bound.** `FP_JOB_TIMEOUT` (3300 s) bounds the job's execution only: the kill grace (`FP_KILL_GRACE`, 30 s), export, hashing and finalisation (SHA256SUMS) run after it, outside the 55 min, and boot (20 min) is unmeasured. The restore reserve of 65 min is 5 min prover stop + about 60 min live deploy (unmeasured) and holds **no separate allowance** for the end-to-end check (step 7) or a deploy retry at the worst case: if the live deploy takes its full 60 min, the window overruns by the end-to-end check. The operator's sheet therefore carries explicit slack and an escalation time (below); whatever any sum says, at the cut-off step 6 starts.
+
+**Image stage and `FP_ONBOX_BUILD` (window sheet):** `final` (the full image, the Dockerfile's last stage and the default of a build without `--target`) with `FP_ONBOX_BUILD` `1`; or `runtime` (public variant) with `FP_ONBOX_BUILD` `0` (a #43 deviation that needs its own dated amendment first). `run_job.sh` refuses `FP_ONBOX_BUILD=1` on an image without `nvcc` before any GPU step, so a mismatch shows within the first minutes of `/status`, not after the build time. The window must use the exact pushed image, pinned by digest in the config (apt packages are unpinned, so a rebuild is a different image).
+
 Proposed values (blank = owner-only):
 
 | window-sheet field | proposed | basis |
@@ -42,11 +46,14 @@ Proposed values (blank = owner-only):
 | approved outage window, start and end (UTC) | | owner |
 | restore cut-off | T0 + W - 65 min | rule above |
 | restore reserve | 65 min | live deploy about 60 min (unmeasured, healthcheck limits) + prover stop 5 min |
-| fetch budget | 10 min | the archive is small (estimate: under 300 MB: 64 proofs of at most 4.3 MB each in C3 x 3, plus logs and samples) |
+| fetch budget | 10 min | the archive size is **not known** (estimate only: C3's proofs alone are 64 x 4.3 MB x 3 runs = 825.6 MB if each is as large as the small example's 4.3 MB proof, and the proof size at C3's shape is unmeasured; plus C2's 3 x 8 proofs, C1, logs, 100 ms samples). The earlier "under 300 MB" contradicted its own premise and is withdrawn. The bounded fetch (step 5) still ends at the cut-off whatever the size; a slow link can lose part of C3's evidence, which the window sheet's data-loss choice covers |
 | deadline for the live stop to reach Stopped | 10 min | step 3's example; unmeasured |
 | deadline for the prover to reach Running and serve `/healthz` | 20 min | 75 min budget minus `FP_JOB_TIMEOUT` 55 min |
 | deadline for the job (`FP_JOB_TIMEOUT`) | 3300 s | brief: at most 75 min from create to finished job |
 | deadline for the prover to reach Stopped | 5 min | step 6's example |
+| image stage and `FP_ONBOX_BUILD` | `final` + `1` (or `runtime` + `0`, registered first) | rule above; checked by `run_job.sh` before any GPU step |
+| image digest in the config | the digest that `docker push` printed | apt packages are unpinned: never a tag, never a rebuild |
+| slack and escalation | nominal sums above have no allowance for finalisation, the end-to-end check or a deploy retry; owner sets the escalation time | rule above: the cut-off is authoritative |
 | spend | | owner |
 | who to contact if restore fails, notice to consumers, acceptance of data loss | | owner |
 
@@ -59,9 +66,9 @@ What `--disable-cc-mode` is, from the CLI's own help text (`tinfoil container cr
 - whether this org has the entitlement is **not established** (not visible without a call; ask the provider).
 - Tinfoil's own benchmark harness (github.com/tinfoilsh/model-benchbox, `bench/README.md`, read 2026-11-12T18:13Z) creates its CC-off arm with `--debug --ssh-key <key> ... --disable-cc-mode --yes` and notes that "on this Intel/B300 host `--disable-cc-mode` flips both the GPU CC/PPCIe data path and CPU TDX memory encryption". What it does on this AMD SEV-SNP H200 host is **not established**. `cc_probe.json` and `nvidia-smi conf-compute` in `gpu-env.txt` record what the GPU reports.
 
-**Config from a local file, without a public config repo?** The CLI's help shows `tinfoil container create app --config tinfoil-config.yml` (`--source local`, implied by `--config`); its source sends the file's contents with `source: local` and refuses `--repo`/`--tag` with it. The docs pages on containers (configuration.md, cli.md, read 2026-11-12) still say every container needs `tinfoil-config.yml` at the root of a public GitHub repo and do not describe `--config`. Whether a local config is accepted for a **GPU** instance, with `--disable-cc-mode`, for this org: **not established**. If it is, no public config repo and no release tag are needed (steps 2's tag and the "Where the config lives" decision fall away); the image digest must still be pinned in the file.
+**Config from a local file, without a public config repo?** The CLI's help shows `tinfoil container create app --config tinfoil-config.yml` (`--source local`, implied by `--config`); its source sends the file's contents with `source: local` and refuses `--repo`/`--tag` with it. The docs pages on containers (<https://docs.tinfoil.sh/containers/configuration.md>, <https://docs.tinfoil.sh/containers/cli.md>, read 2026-11-12) still say every container needs `tinfoil-config.yml` at the root of a public GitHub repo and do not describe `--config`. Whether a local config is accepted for a **GPU** instance, with `--disable-cc-mode`, for this org: **not established**. If it is, no public config repo and no release tag are needed (steps 2's tag and the "Where the config lives" decision fall away); the image digest must still be pinned in the file.
 
-**Can results be fetched attested from a CC-off instance?** Probably not: the CLI says the mode disables hardware attestation, and the docs say debug instances (which also do not attest) are refused by `SecureClient`, `container connect` and the tunnels (connecting.md, debug-mode.md, read 2026-11-12). Whether `tinfoil http get --enclave` or `container connect` refuse a CC-off instance in the same way: **not established**. Ways out, in order of preference:
+**Can results be fetched attested from a CC-off instance?** Probably not: the CLI says the mode disables hardware attestation, and the docs say debug instances (which also do not attest) are refused by `SecureClient`, `container connect` and the tunnels (<https://docs.tinfoil.sh/containers/connecting.md>, <https://docs.tinfoil.sh/containers/debug-mode.md>, read 2026-11-12). Whether `tinfoil http get --enclave` or `container connect` refuse a CC-off instance in the same way: **not established**. Ways out, in order of preference:
 1. **Plain HTTPS through the shim, unattested**: `curl -sf https://<DOMAIN>/status` and `.../results.tar.gz` through `fetch_bounded.sh`. Whether the shim serves a CC-off instance's domain the same way: not established. Nothing in this experiment needs attestation of the results: every proof is checked off the box by `cp_verify` built on our side (step 8), and `SHA256SUMS` checks the archive's integrity end to end; the timings and memory readings were never attested in any case. The results are synthetic weights and public files only (`isk/` never leaves the box).
 2. **Debug mode** (`--debug --ssh-key <ORG_SSH_KEY_NAME>`), as Tinfoil's benchmark harness does: SSH into the toolbox, `tindbg exec` into the prover container, copy `/work/results` out with `scp`. Needs an org SSH key registered (a write, with its own yes) and a `--debug` create, which is a different instance kind (`<name>.debug.<org>...` domain).
 
@@ -311,14 +318,22 @@ Then the live service's own end-to-end check: one attested request to each model
 
 ## 8. Off the box: independent verification (CPU, after restore)
 
-Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine, then for every run directory in `results/` that has a bundle:
+Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine. Then check **every expected response of every expected run** with `verify_offbox.py` (this directory; CPU only, no network; tested by `verify_offbox_test.py` with a mocked verifier). It does not judge from what happens to be in the archive: it derives the expected runs from the job's plan and fails closed.
 
 ```sh
-ID=$(sed -n 's/^commitment ID: //p' results/<run>/cp_commit.log | tr -d ' ')
-(cd results/<run>/bundle && <cp_verify> config ivk in/example.req out/example.y out/example.proof -id "$ID"; echo "exit $?")
+# the #140 window (FP_ONBOX_BUILD=1, FP_REPEATS=10, FP_CALIB read from results/calib-plan.txt):
+python3 research/gpu/tinfoil-h200/verify_offbox.py --cp-verify <cp_verify> --results results \
+  --repeats 10 --cold quickstart --report offbox-verify.json; echo "exit $?"
+# #43 alone with prebuilt programs (FP_ONBOX_BUILD=0, no FP_CALIB): --cold cold
 ```
 
-Plus the five mutation cases of research/gpu/local-verify on each bundle (proof bit flip, answer bit flip, request bit flip, proof truncated, wrong ID): each must exit 1 with `NO`.
+- Expected runs: the cold run (`quickstart` or `cold`), `rep1`..`rep<N>` (response `example`), and for each FP_CALIB entry `<id>:<requests>:...:<repeats>:...` the runs `<id>-1`..`<id>-<repeats>`, each with responses `r01`..`r<requests>` (C2: r01..r08, C3: r01..r64). `--plan` may give FP_CALIB explicitly; it must equal `results/calib-plan.txt` if that exists.
+- Each response: `cp_verify config ivk in/<r>.req out/<r>.y out/<r>.proof -id <the run's own commitment ID from its cp_commit.log>`; it counts only with exit 0 and last line `YES`. Every response is checked and reported, so an early `NO` or a missing response is never hidden by later `YES`.
+- A run FAILS on: a missing run directory, `out/` withheld on the box (`withheld.txt`), a missing request/answer/proof, any rejection or verifier crash or timeout, no single commitment ID, or a response file the plan did not expect (a mixed tree).
+- Mutations (research/gpu/local-verify's five: proof bit flip, answer bit flip, request bit flip, proof truncated, wrong ID) on the first response of every run that passed (`--mutations all` for every response): each must exit nonzero with a last line starting `NO`; one accepted mutation fails the run. `--mutations none` makes the overall verdict FAIL (the PREREG requires them).
+- **Overall PASS (exit 0) only if every expected run passed.** Exit 1 = FAIL, 2 = usage error (nothing checked; an empty, whitespace-only or duplicate plan is a usage error, never a PASS). The JSON report has every response's exit and last line and every mutation's; keep it with the results (redacted as in step 9).
+
+A run that fails here is not counted in any fit (experiments/20261112-7-h200-dense-calibration/PREREG.md: both verifiers must say YES for every proof of the batch); it is reported, not rerun.
 
 ## 9. Write-up
 

@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# Mock cp_verify for verify_offbox_test.py (CPU, no prover): `cp_verify config ivk <req> <y> <proof> -id <id>`.
+# A "proof" is valid when it equals sha256(id | req | y | ivk/key.bin) in hex, so every registered
+# mutation (proof, answer or request bit flip, a truncated proof, a wrong ID) is refused, as the real
+# verifier refuses them. MOCK_VERIFY=accept-all says YES to everything (a broken verifier: the
+# mutation checks must catch it); MOCK_VERIFY=crash exits 3 with no output.
+import hashlib
+import os
+import sys
+
+mode = os.environ.get("MOCK_VERIFY", "")
+if mode == "crash":
+    sys.exit(3)
+a = sys.argv[1:]
+if len(a) != 7 or a[5] != "-id":
+    print("NO: usage")
+    sys.exit(2)
+cfg, ivk, req, y, proof, cid = a[0], a[1], a[2], a[3], a[4], a[6]
+if mode == "accept-all":
+    print("covered: mock")
+    print("YES")
+    sys.exit(0)
+try:
+    if not os.path.isfile(os.path.join(cfg, "policy.txt")):
+        print("NO: config")
+        sys.exit(1)
+    h = hashlib.sha256()
+    h.update(cid.encode())
+    for p in (req, y, os.path.join(ivk, "key.bin")):
+        with open(p, "rb") as f:
+            h.update(f.read())
+    with open(proof, "rb") as f:
+        got = f.read()
+except OSError:
+    print("NO: io")
+    sys.exit(1)
+if got != h.hexdigest().encode():
+    print("NO: proof-refused")
+    sys.exit(1)
+print("covered: mock")
+print("YES")
