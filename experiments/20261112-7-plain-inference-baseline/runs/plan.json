@@ -1,0 +1,69 @@
+{
+  "amendment": 1,
+  "limit_chars": 16000,
+  "max_chars": 14400,
+  "cells": [
+    {
+      "cell": "prefill_w16",
+      "arm": "prefill",
+      "words": 16,
+      "max_tokens": 1,
+      "max_chars": 14400
+    },
+    {
+      "cell": "prefill_w256",
+      "arm": "prefill",
+      "words": 256,
+      "max_tokens": 1,
+      "max_chars": 14400
+    },
+    {
+      "cell": "prefill_w512",
+      "arm": "prefill",
+      "words": 512,
+      "max_tokens": 1,
+      "max_chars": 14400
+    },
+    {
+      "cell": "prefill_w1024",
+      "arm": "prefill",
+      "words": 1024,
+      "max_tokens": 1,
+      "max_chars": 14400
+    },
+    {
+      "cell": "prefill_w2048",
+      "arm": "prefill",
+      "words": 2048,
+      "max_tokens": 1,
+      "max_chars": 14400
+    },
+    {
+      "cell": "decode_16",
+      "arm": "decode",
+      "max_tokens": 16
+    },
+    {
+      "cell": "decode_64",
+      "arm": "decode",
+      "max_tokens": 64
+    },
+    {
+      "cell": "decode_128",
+      "arm": "decode",
+      "max_tokens": 128
+    },
+    {
+      "cell": "decode_256",
+      "arm": "decode",
+      "max_tokens": 256
+    },
+    {
+      "cell": "repeat_w1024",
+      "arm": "repeat",
+      "words": 1024,
+      "max_tokens": 1,
+      "max_chars": 14400
+    }
+  ]
+}

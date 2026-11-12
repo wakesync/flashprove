@@ -1,0 +1,64 @@
+{
+  "inputs": {
+    "cost_model_gpu_s_per_1k": {
+      "1024": {
+        "central": 42.52389181187941,
+        "high": 86.33111989297734,
+        "small_example": 2559.1241508281705
+      },
+      "256": {
+        "central": 53.23733662445335,
+        "high": 97.04456470555128,
+        "small_example": 2559.1241508281705
+      },
+      "64": {
+        "central": 96.09111587474906,
+        "high": 139.898343955847,
+        "small_example": 2559.1241508281705
+      }
+    },
+    "plain_route_s_per_1k": {
+      "prefill_s_per_1k": 0.17770874427978686,
+      "decode_s_per_1k": 93.07151880561644
+    },
+    "note": "plain = fitted slope only (per-request intercept excluded); route wall seconds, batch 1, not GPU-seconds"
+  },
+  "multiple": {
+    "T1024_central": {
+      "vs_prefill_only_window": 239.28981088814214,
+      "vs_decode_only_window": 0.45689478755248686
+    },
+    "T1024_high": {
+      "vs_prefill_only_window": 485.80119252351784,
+      "vs_decode_only_window": 0.9275782860413325
+    },
+    "T1024_small_example": {
+      "vs_prefill_only_window": 14400.665320098451,
+      "vs_decode_only_window": 27.49631878440711
+    },
+    "T256_central": {
+      "vs_prefill_only_window": 299.576348030662,
+      "vs_decode_only_window": 0.5720045971919899
+    },
+    "T256_high": {
+      "vs_prefill_only_window": 546.0877296660377,
+      "vs_decode_only_window": 1.0426880956808355
+    },
+    "T256_small_example": {
+      "vs_prefill_only_window": 14400.665320098451,
+      "vs_decode_only_window": 27.49631878440711
+    },
+    "T64_central": {
+      "vs_prefill_only_window": 540.7224966007414,
+      "vs_decode_only_window": 1.0324438357500019
+    },
+    "T64_high": {
+      "vs_prefill_only_window": 787.2338782361171,
+      "vs_decode_only_window": 1.5031273342388476
+    },
+    "T64_small_example": {
+      "vs_prefill_only_window": 14400.665320098451,
+      "vs_decode_only_window": 27.49631878440711
+    }
+  }
+}
