@@ -134,3 +134,9 @@ PASS if and only if all hold:
 
 ## Amendments
 
+
+### Amendment 1, 2026-11-12 21:27 UTC (after code, during the registered runs)
+
+The first registered stored-proof run (`runs/compare-1`, normalisation N, 2 rounds per binary) showed that the whole calls print wall times outside lines that begin `seconds:`: the stage headers (`---- stage key ---- 1 thread(s), 1.547 s`), per-step lines ending `0.052 s`, and indented `   seconds:` lines. So N leaves times in, and two runs of the SAME binary already give different hashes. This is a fault of the registered normalisation, not a difference between main and head. The planning calls carry no times and gave one hash on both binaries in that run.
+
+Change, as the Runs section foresaw for nondeterministic output: a second run `compare2.py` (normalisation N2) with 5 rounds per binary, alternating main, head. N2 = N plus: a line whose text after leading blanks begins `seconds:` is removed, and every `<digits>.<digits> s` is replaced by `<t> s`. N2 also writes `n2-touched.txt`, the list of every line shape it removed or masked, so a reader can check that only wall times were touched. The acceptance threshold is unchanged except that "normalised SHA-256" now means N2. compare-1 is kept as run and reported as is. Run budget and hard stop unchanged.
