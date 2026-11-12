@@ -1,0 +1,18 @@
+{
+ "description": "current nonce, request digest of another request",
+ "kind": "reject",
+ "name": "RPL3",
+ "steps": [
+  {
+   "deliver": "f530d55569f3b4ea6563ec140a252918f771ede33fe0e726c38a45d764f6731b",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: request-digest",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

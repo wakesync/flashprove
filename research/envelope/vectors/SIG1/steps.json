@@ -1,0 +1,18 @@
+{
+ "description": "nonce edited after signing",
+ "kind": "reject",
+ "name": "SIG1",
+ "steps": [
+  {
+   "deliver": "40f99aaec599724abf64965a39445a2badda35af119ee73fc1b4e6575a0f828d",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: signature",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

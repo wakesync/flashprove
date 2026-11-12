@@ -1,0 +1,18 @@
+{
+ "description": "reply token y changed 199 to 200, reply digest updated, re-signed (finish=length so that the end-token check passes and the proof decides)",
+ "kind": "reject",
+ "name": "SUB4",
+ "steps": [
+  {
+   "deliver": "49b36f277c7fed4bf946f8201e1231627f1ddbc1c33be583f6a33f0f4e47987d",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: proof",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

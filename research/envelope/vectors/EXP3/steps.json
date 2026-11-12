@@ -1,0 +1,18 @@
+{
+ "description": "lifetime 601 s, longer than the client maximum 600 s",
+ "kind": "reject",
+ "name": "EXP3",
+ "steps": [
+  {
+   "deliver": "a528349fdc84f463d99e4ec7e5339c070508fc054e86f14050f90a751c9b2f85",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: expired",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

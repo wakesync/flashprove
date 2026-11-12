@@ -1,0 +1,18 @@
+{
+ "description": "unknown top-level body field, re-signed",
+ "kind": "reject",
+ "name": "UNK1",
+ "steps": [
+  {
+   "deliver": "163a8e42227bed43dbe4d1938dc5705330075b006c38242ddfd982ccfa13cea5",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: schema",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

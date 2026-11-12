@@ -1,0 +1,18 @@
+{
+ "description": "proof cut by one byte, digest updated, re-signed",
+ "kind": "reject",
+ "name": "TRN4",
+ "steps": [
+  {
+   "deliver": "75e7bbfa249d0abdbba71d81e2869be5e2703d07095b22c42c605934efd486e5",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: proof",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "cut1"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

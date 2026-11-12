@@ -1,0 +1,18 @@
+{
+ "description": "seq equal to the last released seq",
+ "kind": "reject",
+ "name": "STA1",
+ "steps": [
+  {
+   "deliver": "b03ca5e27dffce0742c4eeab3a0ee63ebfc62504add03e340ecfb3a635982ce4",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: state",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

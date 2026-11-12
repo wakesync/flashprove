@@ -1,0 +1,18 @@
+{
+ "description": "signature algorithm none",
+ "kind": "reject",
+ "name": "DWN5",
+ "steps": [
+  {
+   "deliver": "b94cea12935f220d1d8840b5f4d662ebd5cdbffbf4ab68590fb1be10466cd5dc",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: schema",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

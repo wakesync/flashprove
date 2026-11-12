@@ -1,0 +1,18 @@
+{
+ "description": "clipped-gap proof in the exact envelope, digest updated, re-signed",
+ "kind": "reject",
+ "name": "SUB1",
+ "steps": [
+  {
+   "deliver": "230ca914a8c0ce7bf117d02a0be77df3120ae67695df0f0839c25f529887e999",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: proof",
+   "now": 1793000010,
+   "proof": {
+    "example": "clipped",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

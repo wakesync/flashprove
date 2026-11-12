@@ -1,0 +1,18 @@
+{
+ "description": "same content, other whitespace, valid signature of the canonical body",
+ "kind": "reject",
+ "name": "NC1",
+ "steps": [
+  {
+   "deliver": "19798294fb1897041082f3cde8405eb71b4a368b21fba4d9db2936124a653308",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: canonical",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

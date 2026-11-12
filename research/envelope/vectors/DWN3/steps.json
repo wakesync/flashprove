@@ -1,0 +1,18 @@
+{
+ "description": "proof bits 96 where the client pins 128",
+ "kind": "reject",
+ "name": "DWN3",
+ "steps": [
+  {
+   "deliver": "f200d16cfbcbea028871e13ef10ba88de846d2522014c52da01a18dac8abeb0d",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: policy-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

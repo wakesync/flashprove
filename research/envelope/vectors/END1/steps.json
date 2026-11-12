@@ -1,0 +1,18 @@
+{
+ "description": "finish=end, but the reply's last token (199) is not in the client's end set {5}",
+ "kind": "reject",
+ "name": "END1",
+ "steps": [
+  {
+   "deliver": "cfe300f4eb652ac4fb922fa3ccf85a83200ae974f33e4d300bbe7956bfef419d",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: end-token",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

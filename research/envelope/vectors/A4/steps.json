@@ -1,0 +1,18 @@
+{
+ "description": "display label names a well-known checkpoint; released, provenance is the client pin, the label is display text only",
+ "kind": "accept",
+ "name": "A4",
+ "steps": [
+  {
+   "deliver": "df7e1654923c8755b8266caf65d250083f54d34073ad8915d9a0c3338d5c26f2",
+   "envelope": "env1.envelope",
+   "expect": "RELEASE",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "description": "commitment ID other than the client pin",
+ "kind": "reject",
+ "name": "SUB2",
+ "steps": [
+  {
+   "deliver": "1f3a04a47e692b5a87cb60b5cbd6a80cdc60936a4c991e8749b0cb5dd1aa8117",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: commitment-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

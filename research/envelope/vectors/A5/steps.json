@@ -1,0 +1,18 @@
+{
+ "description": "unchanged proof of an earlier release re-wrapped under a new nonce and seq for the same prompt, re-signed. Released: the proof relation binds no nonce (gap G-05); freshness rests on the provider signature and the client state only",
+ "kind": "expected-accept-gap",
+ "name": "A5",
+ "steps": [
+  {
+   "deliver": "93940ae324901652e7cc4e85c614abae5aa50080d13597fc6358252a9a6d0df2",
+   "envelope": "env1.envelope",
+   "expect": "RELEASE",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

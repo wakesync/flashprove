@@ -1,0 +1,18 @@
+{
+ "description": "the released envelope delivered again for its own (consumed) nonce",
+ "kind": "reject",
+ "name": "RPL2",
+ "steps": [
+  {
+   "deliver": "45a3c0a67a71fcf8ba59bb912baa30db5054eea5b883c545a703b5fb6ac84b79",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: nonce-consumed",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

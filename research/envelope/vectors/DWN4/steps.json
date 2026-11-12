@@ -1,0 +1,18 @@
+{
+ "description": "attestation kind claims a hardware TEE",
+ "kind": "reject",
+ "name": "DWN4",
+ "steps": [
+  {
+   "deliver": "44e11ca02017dce615dd0c3753ef0c34337064ebe65a32c2fae2931317e94ad6",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: attestation",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

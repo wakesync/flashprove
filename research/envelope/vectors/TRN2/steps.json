@@ -1,0 +1,18 @@
+{
+ "description": "covered range e = 63 where the client asked e = 64, re-signed",
+ "kind": "reject",
+ "name": "TRN2",
+ "steps": [
+  {
+   "deliver": "436c771e23bd35aeda63a7e4a08a764b6e8ef8d8111abf6146b281b1df75c602",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: coverage",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

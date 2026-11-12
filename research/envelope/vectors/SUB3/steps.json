@@ -1,0 +1,18 @@
+{
+ "description": "the whole clipped-gap package (ID, config, policy, coverage, proof) answering an exact request",
+ "kind": "reject",
+ "name": "SUB3",
+ "steps": [
+  {
+   "deliver": "1d8d284c86b429536692e2aa4393ec0802512d0745ee4c2c8553f3caeffa827c",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: commitment-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "clipped",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

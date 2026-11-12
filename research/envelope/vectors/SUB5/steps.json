@@ -1,0 +1,18 @@
+{
+ "description": "configuration digests of the other example",
+ "kind": "reject",
+ "name": "SUB5",
+ "steps": [
+  {
+   "deliver": "1e5f21a39ca4467d72252ebb755f346a681bb67d47c52d52493067d65bc6a870",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: config-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

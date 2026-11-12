@@ -1,0 +1,18 @@
+{
+ "description": "honest envelope with a MOCK attestation block; released on signature and proof, the tee line says MOCK (not evidence)",
+ "kind": "accept",
+ "name": "A6",
+ "steps": [
+  {
+   "deliver": "8c2a713b7d79e239d76ea390ae07b247f549842ab6a63193f82863ef162d80e6",
+   "envelope": "env1.envelope",
+   "expect": "RELEASE",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

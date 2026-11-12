@@ -1,0 +1,18 @@
+{
+ "description": "duplicate key inside request (same value), bytes signed as sent",
+ "kind": "reject",
+ "name": "DUP1",
+ "steps": [
+  {
+   "deliver": "3c502ce7a5b6f3bfed544ca169c9c99b041b471bcf60a9d56ac8370e935ac58e",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: canonical",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

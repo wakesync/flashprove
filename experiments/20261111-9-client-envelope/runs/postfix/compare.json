@@ -1,0 +1,33 @@
+{
+ "differences": [],
+ "note": "post-registration check of the fixed client, no threshold; registered numbers are the ones in runs/registered (pre-fix client, fb63aa8)",
+ "postfix_accept_steps": 35,
+ "postfix_accept_steps_released": 35,
+ "postfix_reach_cp_verify_reject_vectors": [
+  "SUB1",
+  "SUB4",
+  "TRN4"
+ ],
+ "postfix_reject_released": 0,
+ "postfix_reject_state_changed": 0,
+ "postfix_reject_steps": 175,
+ "postfix_reject_steps_at_registered_check": 175,
+ "postfix_release_cp_verify_s_diagnostic": {
+  "max": 1.795095,
+  "median": 1.677793,
+  "min": 1.578244,
+  "n": 35,
+  "sd": 0.05241457451224001
+ },
+ "postfix_release_overhead_s_diagnostic": {
+  "max": 0.022541000000000144,
+  "median": 0.015033999999999992,
+  "min": 0.013422000000000045,
+  "n": 35,
+  "sd": 0.0019055907396990778
+ },
+ "steps_differing": 0,
+ "steps_postfix": 210,
+ "steps_registered": 210,
+ "steps_same_verdict": 210
+}

@@ -1,0 +1,18 @@
+{
+ "description": "provenance reference other than the client pin",
+ "kind": "reject",
+ "name": "SUB6",
+ "steps": [
+  {
+   "deliver": "752790831afd51d2ed18b3fea5e46c7e09d9b5f1cd9162996187b73742f5bc32",
+   "envelope": "env1.envelope",
+   "expect": "REJECT: provenance-pin",
+   "now": 1793000010,
+   "proof": {
+    "example": "exact",
+    "transform": "none"
+   },
+   "reply": "env1.reply"
+  }
+ ]
+}

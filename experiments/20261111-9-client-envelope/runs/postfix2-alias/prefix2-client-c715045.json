@@ -1,0 +1,3178 @@
+{
+ "affinity": [
+  14,
+  15
+ ],
+ "all_pass": false,
+ "client": "zz_c715045_client_verify.py",
+ "finished_utc": "2026-11-12T01:41:44Z",
+ "label": "post-registration-alias-test",
+ "repeats": 20,
+ "rows": [
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 1
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 2
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 3
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 4
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 5
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 6
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 7
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 8
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 9
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 10
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 11
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 12
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 13
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 14
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 15
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 16
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 17
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 18
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 19
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "lock_files": [
+    "alias.json.lock",
+    "state.json.lock"
+   ],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 20
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 1,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 2,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 3,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 4,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 5,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 6,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 7,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 8,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 9,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 10,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 11,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 12,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 13,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 14,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 15,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 16,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 17,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 18,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 19,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink": false,
+   "case": "symlink-sequential",
+   "lasts": [
+    "RELEASE",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 20,
+   "state_unchanged_after_first": [
+    false,
+    true
+   ]
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 1,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 2,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 3,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 4,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 5,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 6,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 7,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 8,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 9,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 10,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 11,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 12,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 13,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 14,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 15,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 16,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 17,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 18,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 19,
+   "request_in_state_json": false
+  },
+  {
+   "alias_still_symlink_after_issue": false,
+   "case": "symlink-issue",
+   "issue_exit": 0,
+   "lasts": [],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 0,
+   "releases_of_nonce": 0,
+   "rep": 20,
+   "request_in_state_json": false
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 1,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 2,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 3,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 4,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 5,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 6,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 7,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 8,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 9,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 10,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 11,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 12,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 13,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 14,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 15,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 16,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 17,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 18,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 19,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "case": "hardlink-concurrent",
+   "exits": [
+    0,
+    0
+   ],
+   "lasts": [
+    "RELEASE",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 20,
+   "state_byte_identical": false,
+   "verdict_lines": [
+    [
+     "signature",
+     "tee",
+     "proof"
+    ],
+    [
+     "signature",
+     "tee",
+     "proof"
+    ]
+   ]
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=a64e0295f0eeb70574a40d44ab3f9de8d507c8627e636c23ae7ed4b68768ae57 prev=dba98fa69a4e669bd2c5be12cb9e72e9793f201990db21c316e2aca618e91192",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=b10d8a70945633caa3e9b6acb44cd6dc07979a1cb40410b003d675260dc3ad3c prev=dba98fa69a4e669bd2c5be12cb9e72e9793f201990db21c316e2aca618e91192",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 1,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=4e1662be6eaf0f79d3ea16d22683feacf05b3a2fcafc34e1bf5b0e6671648e00 prev=d6f565540b00b5371a144bad892d0b59fdebb4c59afeadd65f58fb18739848ad",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=c2dcd7e9ae899421827f52f16c8d560afd2dd3c3861b75a8d7d13e7b9772987c prev=d6f565540b00b5371a144bad892d0b59fdebb4c59afeadd65f58fb18739848ad",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 2,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=005d7c9cfb0c375cb869f6490416e5cc76b189635050927a76b9714ed5489a4d prev=8e726cd2e58da52110bd848f5d02988a0a1629a3e0217f87b172d3b93992f7d5",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=400ff3ae57cd6baa5574b47f941ec90facb89358c2e9370f37ab962c2c1a41b8 prev=8e726cd2e58da52110bd848f5d02988a0a1629a3e0217f87b172d3b93992f7d5",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 3,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=0f31214884f68957f1eb3a271018bdde8db1a5fef6a90a3eb162a9cef2dc098e prev=2770fa104ff29d4fed13cb7f3e46f4c3f2ac0cd762c7c2f62c27be20adeb6a7a",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=f0e00975b98f245d0d550f24ae690e6c5d29c42630cd08411e6bea2126abc746 prev=2770fa104ff29d4fed13cb7f3e46f4c3f2ac0cd762c7c2f62c27be20adeb6a7a",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 4,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=035d0816bca8640885a92d09ed74a19b722544e0ee724a6e25ace4900adccce4 prev=a0ad8bde0382120fafc4660bcfa64b5cbe08ed8ae6e932fe0e7a2d39dae0ddb3",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=c7bb071ba4c048b78aa01f1ddf5ebbf2e0c0d9ac6e8e238c8acfb9226618198f prev=a0ad8bde0382120fafc4660bcfa64b5cbe08ed8ae6e932fe0e7a2d39dae0ddb3",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 5,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=25c32b0fa80e32e41e39d22e77ccba4b445c4e0fc983310fc643523d5ccd14df prev=052b76bb8d0a003df0eacd7601b64d20a4fde28c1ba86763bf9ce1f3d3036be8",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=231241423ca9349b50d293080fcc4d27d0be731f1884ecde3331159f21525307 prev=052b76bb8d0a003df0eacd7601b64d20a4fde28c1ba86763bf9ce1f3d3036be8",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 6,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=24e04033f3c794ef14b7b28e301542910d0dd5ceab4d4dffabf146b60c616e3d prev=652a612cb34cc5288cbddaf3ecb38095810d46fb35135465e367c8c23eec8e6a",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=59650177930a17a527c2f0f73b77b0d10c54a87f232c683e10f70f41e0cb2212 prev=652a612cb34cc5288cbddaf3ecb38095810d46fb35135465e367c8c23eec8e6a",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 7,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=5487aa9f7492dc57ee4493fd00ea030dc70392085ffe65e7c01f2b3853386a7a prev=e21ee19235a69a376d0224d8c6700980c706f6757abf0be5a65aac65abc5d8e6",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=5412cae39e49f10e1b9cfdf5829915d7c46a3335b80a247760985bdc4ea3ba02 prev=e21ee19235a69a376d0224d8c6700980c706f6757abf0be5a65aac65abc5d8e6",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 8,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=1c75eb92ff00b090a2f0b511363233ed2323c52def35ce965c60654ecf6839fc prev=9523a924f3f278c09d84729e19a3575739919bb93048284803244c2b43dbc5bc",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=23045eff19833c38febfa3589ac4b90a2b13213eb8c0ab726eb9699799439460 prev=9523a924f3f278c09d84729e19a3575739919bb93048284803244c2b43dbc5bc",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 9,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=b030d11f5a33db8c19fdaf6a43b6d7f5e195c29ee379b1ecf01463cf56d1bfdb prev=63e9ce810809568b9d497e9b0a9872d992481eae62a70f694be06c9e8ee80e8b",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=1091dfe20cb2777352555407a5409568b9b73a5c7d3bed2c15ebf8000bf20ff3 prev=63e9ce810809568b9d497e9b0a9872d992481eae62a70f694be06c9e8ee80e8b",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 10,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=f71f18c25df2359bf2ce2a777469974411713b0b15134894366293e54ce1637c prev=153f9e121676f89d3289669bc50347f04658c1adeca799b28c31641c9c4fd79f",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=845fa8ee540099da85794b65e5c666c9ae168ad3d0207fab638b65c63b23abf5 prev=153f9e121676f89d3289669bc50347f04658c1adeca799b28c31641c9c4fd79f",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 11,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=032c6fcae5f3ca983574d585e31ec22116af4b55e446c505af71b3a8227d21c7 prev=6e3c8129ef06ab60a6405d21d579a0c704d25aeed321ecf2f4d9d33df5d20835",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=3ee8f07d852b6cac0eedfaa3a175f23b5854d28eb2dcf8a47c878e858a7df508 prev=6e3c8129ef06ab60a6405d21d579a0c704d25aeed321ecf2f4d9d33df5d20835",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 12,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=b5414d1ac0fc9e5ba2b32d411333dfc3108d47ddbbbaa38ea6303c82fdbea325 prev=8160909699473e9d04f486dc10351bf112480cbc582a73547ca0ffc9981f39b4",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=2edfdcddf72353c3eb95d608dbed9369410c9620f42b385de9d3ebc2e1f2341a prev=8160909699473e9d04f486dc10351bf112480cbc582a73547ca0ffc9981f39b4",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 13,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=fc3154dd7b4493b97c8348c4642419c14cbf2f931cdb9ac35f1867b36c46612f prev=55b9f41be4b0955d2a1a07719b182944571a1a9ae188ad6224930f9932038c60",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=7651131f4c8a07a3ac741d3bf5756a0c5c7d944ad92422d2c93921559ad4ab31 prev=55b9f41be4b0955d2a1a07719b182944571a1a9ae188ad6224930f9932038c60",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 14,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=14a92c7f594dcd23618716e0b6538a9f031fd79b16892dcadad0874de67aafbe prev=74dfe3f0d927c08aafe519dab00ee766186e05fe78d55eb25b4fac58c991d9e8",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=6d17c3d62dc77056405160decd34f3511bf0df4a4ad902aaeb2d1381cc371b7d prev=74dfe3f0d927c08aafe519dab00ee766186e05fe78d55eb25b4fac58c991d9e8",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 15,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=4803c136ba6a26316445bbbb4704c0e6fca1cf514216796aa4d60e2a149c76a5 prev=de2f16a9553d4fb9408dedd7d128f0da85dd9745defe27fdc61383a2374d435b",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=472b8b1adf016412019b17f9fcf8ebc0fcc89c6c1a79ad400eb00fa60b489e27 prev=de2f16a9553d4fb9408dedd7d128f0da85dd9745defe27fdc61383a2374d435b",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 16,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=707dfd8a00b07a7e439abfefc9eaea0f30a0f4a4e1ff25424d0dbcac1e6b06b4 prev=3bdb2e2b5ef3983d3c969a80a125840e7af1e17a11c06306a8b94e04302d57c0",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=ff79f07d1676d0eec9c48a07bf650fcb3cdc03223a038c647c8700336ee3c8f6 prev=3bdb2e2b5ef3983d3c969a80a125840e7af1e17a11c06306a8b94e04302d57c0",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 17,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=fcf14962bdb75d64da394c8495885bc858bd95e84da61f6ec64c0546dee11d36 prev=807a7661aabf1e6bede85d95adf346ea94adef2dad6467d97d2e431bcf635b4f",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=c87ef499563f01fb26275cbd2a552982ea2b71e36cf58a44814e97f20ed923fa prev=807a7661aabf1e6bede85d95adf346ea94adef2dad6467d97d2e431bcf635b4f",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 18,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=55c779af817131af8ade3ab8eefbda6185c3fe329725d8c980abea6d36a729e3 prev=1590a12dad6468f4f002e49629522bf27a67807952d552a10283ca8dd73f8db0",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=0c418f6f48a9506d9d9d53625e74965fdd63954e1fc5e5f7b62bb254a93660d4 prev=1590a12dad6468f4f002e49629522bf27a67807952d552a10283ca8dd73f8db0",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 19,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "after_unlink": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "case": "hardlink-sequential",
+   "deliveries_with_link": [
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "hard.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    },
+    {
+     "exit": 0,
+     "last": "RELEASE",
+     "path": "state.json",
+     "verdict_lines": [
+      "signature",
+      "tee",
+      "proof"
+     ]
+    }
+   ],
+   "issues_with_link": [
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=5e076ad7630a43f94c3e9e058473300c39ab45476bb72d9a22e2571160378fbd prev=cd5526a3d422f58834d376ef934ee12a49e0b75c41ae58f672b574f8c72e1e1c",
+     "path": "hard.json"
+    },
+    {
+     "exit": 0,
+     "last": "issued seq=2 nonce=a6b5448405fc30314f82aa975dbf701287705e2a8c231da9044af987b9890115 prev=cd5526a3d422f58834d376ef934ee12a49e0b75c41ae58f672b574f8c72e1e1c",
+     "path": "state.json"
+    }
+   ],
+   "leftover_tmp": [],
+   "ok": false,
+   "release_files": 2,
+   "releases_of_nonce": 2,
+   "rep": 20,
+   "state_byte_identical_while_linked": false
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 1
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 2
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 3
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 4
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 5
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 6
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 7
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 8
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 9
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 10
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 11
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 12
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 13
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 14
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 15
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 16
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 17
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 18
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed",
+    "RELEASE"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 19
+  },
+  {
+   "case": "relative-concurrent",
+   "consumed": 1,
+   "lasts": [
+    "REJECT: nonce-consumed",
+    "RELEASE",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 20
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 1,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 2,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 3,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 4,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 5,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 6,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 7,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 8,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 9,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 10,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 11,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 12,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 13,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 14,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 15,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 16,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 17,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 18,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 19,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "case": "relative-sequential",
+   "lasts": [
+    "RELEASE",
+    "REJECT: nonce-consumed",
+    "REJECT: nonce-consumed"
+   ],
+   "leftover_tmp": [],
+   "ok": true,
+   "release_files": 1,
+   "releases_of_nonce": 1,
+   "rep": 20,
+   "state_unchanged_after_first": [
+    true,
+    true
+   ]
+  }
+ ],
+ "started_utc": "2026-11-12T01:35:26Z",
+ "summary": {
+  "hardlink-concurrent": {
+   "max_releases_of_nonce": 2,
+   "passed": 0,
+   "runs": 20,
+   "runs_with_more_than_one_release": 20
+  },
+  "hardlink-sequential": {
+   "max_releases_of_nonce": 2,
+   "passed": 0,
+   "runs": 20,
+   "runs_with_more_than_one_release": 20
+  },
+  "relative-concurrent": {
+   "max_releases_of_nonce": 1,
+   "passed": 20,
+   "runs": 20,
+   "runs_with_more_than_one_release": 0
+  },
+  "relative-sequential": {
+   "max_releases_of_nonce": 1,
+   "passed": 20,
+   "runs": 20,
+   "runs_with_more_than_one_release": 0
+  },
+  "symlink-concurrent": {
+   "max_releases_of_nonce": 2,
+   "passed": 0,
+   "runs": 20,
+   "runs_with_more_than_one_release": 20
+  },
+  "symlink-issue": {
+   "max_releases_of_nonce": 0,
+   "passed": 0,
+   "runs": 20,
+   "runs_with_more_than_one_release": 0
+  },
+  "symlink-sequential": {
+   "max_releases_of_nonce": 2,
+   "passed": 0,
+   "runs": 20,
+   "runs_with_more_than_one_release": 20
+  }
+ }
+}
