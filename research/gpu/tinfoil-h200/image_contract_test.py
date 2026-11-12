@@ -119,15 +119,23 @@ def main():
     check("healthcheck targets a local port and path", port is not None)
     hport, hpath = (int(port.group(1)), port.group(2)) if port else (None, None)
     serve = read("serve.py")
-    check("serve.py default port == healthcheck port",
-          re.search(r"else (\d+)$", re.search(r"^PORT = .*$", serve, re.M).group(0)).group(1) == str(hport))
     check("serve.py binds all IPv4 interfaces (loopback reachable)", 'Server(("0.0.0.0", PORT)' in serve)
-    check("serve.py answers the healthcheck path", 'self.path == "%s"' % hpath in serve)
-    check("run_job.sh FP_PORT default == healthcheck port", "FP_PORT=${FP_PORT:-%d}" % hport in read("run_job.sh"))
-    for stage in ("final", "runtime"):
-        check("stage %s EXPOSEs %d" % (stage, hport), "EXPOSE %d" % hport in body.get(stage, []))
-    check("shim upstream-port == healthcheck port", re.search(r"upstream-port:\s*%d\b" % hport, cfg) is not None)
-    check("shim paths include the healthcheck path", re.search(r"^\s*-\s*%s\s*$" % re.escape(hpath), cfg, re.M) is not None)
+    if hport is None:
+        # no parsable localhost:<port>/<path>: one readable FAIL line per dependent check, not a TypeError
+        for label in ("serve.py default port == healthcheck port", "serve.py answers the healthcheck path",
+                      "run_job.sh FP_PORT default == healthcheck port", "stage final EXPOSEs the healthcheck port",
+                      "stage runtime EXPOSEs the healthcheck port", "shim upstream-port == healthcheck port",
+                      "shim paths include the healthcheck path"):
+            check(label + " (no healthcheck port/path parsed)", False)
+    else:
+        check("serve.py default port == healthcheck port",
+              re.search(r"else (\d+)$", re.search(r"^PORT = .*$", serve, re.M).group(0)).group(1) == str(hport))
+        check("serve.py answers the healthcheck path", 'self.path == "%s"' % hpath in serve)
+        check("run_job.sh FP_PORT default == healthcheck port", "FP_PORT=${FP_PORT:-%d}" % hport in read("run_job.sh"))
+        for stage in ("final", "runtime"):
+            check("stage %s EXPOSEs %d" % (stage, hport), "EXPOSE %d" % hport in body.get(stage, []))
+        check("shim upstream-port == healthcheck port", re.search(r"upstream-port:\s*%d\b" % hport, cfg) is not None)
+        check("shim paths include the healthcheck path", re.search(r"^\s*-\s*%s\s*$" % re.escape(hpath), cfg, re.M) is not None)
 
     check("final is the last stage (a build without --target gives it)", names and names[-1] == "final")
     check("final's chain installs the toolkit (nvcc in PATH via the toolkit stage)",
