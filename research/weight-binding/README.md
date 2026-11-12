@@ -43,6 +43,18 @@ The original hash-level work has a design and these CPU checks:
 - `wb_keyfile_count.py`: counted table-side cost of the key-file claim (one multilinear evaluation per
   effective block, flat padding). Counted from shapes, not measured.
 - `run_wb91.sh <outdir>`: the #91 run: both pins built twice, the test suite twice, the count.
+- `wb_leafv2.py` (issue #149, experiment `20261112-149-leaf-v2`): conversion leaf v2 on real bytes for
+  a SUBSET of blocks: the 70 tensors #68 found different plus 8 registered byte-identical controls (all
+  class `matrix_plain`). Per block it fetches the BF16 bytes of both pins (memory only, one tensor at a
+  time), checks them against #68's hashes, runs `wb_int.py`'s matrix rule (imported unchanged) and adds
+  two fields to the #91 leaf object: `e` (the exponent) and `int_sha256` (SHA-256 of the int16
+  little-endian row-major integers). The tree over those 78 blocks gives a subset id (tag
+  `fp-wb-conv-subset-v2`), which is NOT a model conversion id (that needs all 722 blocks).
+  `verify_opening_v2` checks a v2 opening: v1 structure, `e` a plain int in [-64, 64], `int_sha256` 64
+  lowercase hex, then path and id. Hash level, not a proof.
+- `test_wb_leafv2.py`: 38 named checks on the leaf-v2 subset (honest, 15 kinds of mutation of the two
+  new fields, 8 #100 mutation kinds on v2 leaves, opening-level). `run_leafv2.sh <outdir> [--reverse]`:
+  the #149 run (fetch + convert, then tree and the suite twice).
 
 ## What the verifier recomputes
 
@@ -57,10 +69,12 @@ were produced without it, `runs-rerun-pr87/` with it, and the counts are equal.
 
 The keyfile adapter's separate scope and limitations are in [its README](keyfile/README.md).
 For the original files below: any proof relation; the commitment ID of `cp_commit`; the Qwen weight table and its range proof;
-norm-folded tensors at integer level; 64 of the 70 changed tensors at integer level; the protocol's
+norm-folded tensors at integer level; 64 of the 70 changed tensors at integer level (in these original
+files; leaf v2 below converts all 70 and 8 controls); the protocol's
 field; the evaluation responses of DESIGN 2.0 (designed, not built). The conversion id and the
-config pin (A12) are built (`wb_conv.py`) but only at hash level, with these limits: the leaf has no
-exponent e_b or integer hash int_sha256_b (that needs the 55.6 GB conversion per pin); the rule steps
+config pin (A12) are built (`wb_conv.py`) but only at hash level, with these limits: the v1 leaf has no
+exponent e_b or integer hash int_sha256_b (the full tree needs the 55.6 GB conversion per pin; leaf v2
+adds them for 78 blocks only); the rule steps
 are bound as text and no converter here runs them on real bytes; the folded constant c = 1.0 is a
 placeholder; which config fields change the function is a judgement (fail closed on unknown keys,
 but the known-unpinned list in `wb_conv.py` is a choice); only one model variant is supported; nothing
@@ -69,6 +83,11 @@ grinding security bound (DESIGN 2.0 states only the fixed-pair Schwartz-Zippel b
 verifier raises an exception, rather than returning false, on some malformed inputs (n = 2^64,
 a tensor name with an unpaired surrogate), and compares the held id case-sensitively. See
 RESULTS.md "What is established and what is not".
+
+Leaf v2 (`wb_leafv2.py`, issue #149) covers only the 78 registered `matrix_plain` blocks; the
+norm-folded matrices, the embedding, lm_head and the weight cells have no `e` / `int_sha256` yet, and
+the subset id is not a conversion id for the model. It binds which integers the rule produces from the
+pinned bytes; it does not bind a commitment or a proof to them.
 
 ## Reproduce
 
@@ -97,6 +116,17 @@ O=$(mktemp -d)
 bash research/weight-binding/run_wb91.sh "$O"
 diff -r -x python.txt "$O" experiments/20261111-91-conversion-id/runs-fix100   # expect no output
 python3 research/weight-binding/test_wb_conv.py      # 128 / 128 PASS, exit 0
+```
+
+Conversion leaf v2 (issue #149). CPU, network: fetches about 8.8 GB per pin by range request (memory
+only, about 2.2 GB peak RSS), about 15 minutes on the shared host. Write into a fresh directory:
+
+```sh
+O=$(mktemp -d)
+bash research/weight-binding/run_leafv2.sh "$O"            # registered order; --reverse for run 2
+cmp "$O/leaves-v2.json" experiments/20261112-149-leaf-v2/runs/run1/leaves-v2.json   # expect no output
+cmp "$O/tests-1.json" experiments/20261112-149-leaf-v2/runs/run1/tests-1.json
+python3 research/weight-binding/wb_leafv2.py compare "$O" experiments/20261112-149-leaf-v2/runs/run1 "$O/compare.json"
 ```
 
 The first-run files in `experiments/20261111-91-conversion-id/runs/` were made by the v1 code at

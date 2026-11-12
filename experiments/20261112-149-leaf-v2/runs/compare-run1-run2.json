@@ -1,0 +1,50 @@
+{
+ "n_a": 78,
+ "n_b": 8,
+ "n_common": 8,
+ "n_common_changed": 4,
+ "n_common_controls": 4,
+ "n_identical": 8,
+ "rows": [
+  {
+   "identical": true,
+   "kind": "changed",
+   "name": "model.language_model.layers.50.linear_attn.out_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "changed",
+   "name": "model.language_model.layers.50.mlp.down_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "changed",
+   "name": "model.language_model.layers.51.mlp.down_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "changed",
+   "name": "model.language_model.layers.51.self_attn.o_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "control",
+   "name": "model.language_model.layers.52.linear_attn.out_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "control",
+   "name": "model.language_model.layers.52.mlp.down_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "control",
+   "name": "model.language_model.layers.55.mlp.down_proj.weight"
+  },
+  {
+   "identical": true,
+   "kind": "control",
+   "name": "model.language_model.layers.55.self_attn.o_proj.weight"
+  }
+ ]
+}
