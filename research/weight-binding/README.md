@@ -123,7 +123,7 @@ only, about 2.2 GB peak RSS), about 15 minutes on the shared host. Write into a 
 
 ```sh
 O=$(mktemp -d)
-bash research/weight-binding/run_leafv2.sh "$O"            # registered order; --reverse for run 2
+bash research/weight-binding/run_leafv2.sh "$O"            # registered order; --reverse for runs 2 and 3
 cmp "$O/leaves-v2.json" experiments/20261112-149-leaf-v2/runs/run1/leaves-v2.json   # expect no output
 cmp "$O/tests-1.json" experiments/20261112-149-leaf-v2/runs/run1/tests-1.json
 python3 research/weight-binding/wb_leafv2.py compare "$O" experiments/20261112-149-leaf-v2/runs/run1 "$O/compare.json"
