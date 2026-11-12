@@ -5,8 +5,10 @@ claims?). Part of #36. Design: [DESIGN.md](DESIGN.md). Results: [experiments/202
 
 ## What is proved
 
-**Nothing.** No file here makes or checks a proof. This directory has a design and three CPU
-checks:
+The original #87/#100 files below make no proof. The new [keyfile research adapter](keyfile/README.md)
+adds per-tensor evaluation claims to the existing CPU small-key WF/BATT/LIN fixture, with a separate
+research key format. It is not production cp_verify or a Qwen proof, and establishes no soundness level.
+The original hash-level work has a design and these CPU checks:
 - `wb_manifest.py`: a per-tensor manifest (Merkle tree over one leaf per tensor: name, dtype, shape,
   SHA-256 of the tensor's bytes) and a verifier that holds only a 32-byte model id. Hash level only.
 - `wb_int.py`: fetches named tensors of both pinned checkpoints by HTTP range request (in memory),
@@ -51,9 +53,10 @@ path to the root, and the id; it compares with the id it holds. n is authenticat
 Nothing else. The canonical check was added after the H1 run (PR #87 review); the original `runs/`
 were produced without it, `runs-rerun-pr87/` with it, and the counts are equal.
 
-## What is not covered
+## What is not covered by the original hash-level files
 
-Any proof relation; the commitment ID of `cp_commit`; the Qwen weight table and its range proof;
+The keyfile adapter's separate scope and limitations are in [its README](keyfile/README.md).
+For the original files below: any proof relation; the commitment ID of `cp_commit`; the Qwen weight table and its range proof;
 norm-folded tensors at integer level; 64 of the 70 changed tensors at integer level; the protocol's
 field; the evaluation responses of DESIGN 2.0 (designed, not built). The conversion id and the
 config pin (A12) are built (`wb_conv.py`) but only at hash level, with these limits: the leaf has no

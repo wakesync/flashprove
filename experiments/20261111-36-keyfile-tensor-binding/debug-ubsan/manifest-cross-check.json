@@ -1,0 +1,37 @@
+{
+  "expected": "d942866097fbf43a7472d78ff178ec401b136ecdb81f665f3a9f4c2760cf87bc",
+  "native": [
+    "d942866097fbf43a7472d78ff178ec401b136ecdb81f665f3a9f4c2760cf87bc"
+  ],
+  "pass_all": true,
+  "tensors": {
+    "debug.tensor.0": [
+      "I64",
+      [
+        4
+      ],
+      "eae5c50b1deffe0b9dbb9adc7c262efd7997d3399ab6def24cf0fb9d1d350fe8"
+    ],
+    "debug.tensor.1": [
+      "I64",
+      [
+        4
+      ],
+      "7d4c76563b565fc91f2180aac6823b164ffa32d180d4041c8b87a73ce3b01d7e"
+    ],
+    "debug.tensor.2": [
+      "I64",
+      [
+        4
+      ],
+      "26997d60b8fff84db42b0f93b1741140b88a86374ab621b1a7e460efa322e90d"
+    ],
+    "debug.tensor.3": [
+      "I64",
+      [
+        4
+      ],
+      "757c4f4ea6f2a32f5ca7f7f87147de227da0163d2aaff9718b1ef58c95dc727d"
+    ]
+  }
+}

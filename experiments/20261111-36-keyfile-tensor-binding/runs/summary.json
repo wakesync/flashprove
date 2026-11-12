@@ -1,0 +1,518 @@
+{
+  "arms": {
+    "bound-honest": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.991122,
+        "median": 1.4022160000000001,
+        "min": 1.260837,
+        "n": 10,
+        "sd": 0.26335643142276466
+      }
+    },
+    "conversion-id-honest-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.996573,
+        "median": 1.4943485,
+        "min": 1.334374,
+        "n": 10,
+        "sd": 0.21240812017895067
+      }
+    },
+    "conversion-id-mismatch": {
+      "accepted": 0,
+      "expected_accept": 0,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 0,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "an opening does not lead to its root"
+      ],
+      "stages": [
+        "one-time chain: the ranges"
+      ],
+      "verify_ms": {
+        "max": 0.56695,
+        "median": 0.4378575,
+        "min": 0.372336,
+        "n": 10,
+        "sd": 0.05800977724487484
+      }
+    },
+    "legacy-honest": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.903108,
+        "median": 1.338692,
+        "min": 1.120664,
+        "n": 10,
+        "sd": 0.2751636063383423
+      }
+    },
+    "manifest-root-other-checkpoint": {
+      "accepted": 0,
+      "expected_accept": 0,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 0,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "an opening does not lead to its root"
+      ],
+      "stages": [
+        "one-time chain: the ranges"
+      ],
+      "verify_ms": {
+        "max": 0.611263,
+        "median": 0.42607550000000005,
+        "min": 0.369651,
+        "n": 10,
+        "sd": 0.08357628119010002
+      }
+    },
+    "one-tensor-swapped": {
+      "accepted": 0,
+      "expected_accept": 0,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 0,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "BASE: the masked message in the proof does not satisfy the linear claim"
+      ],
+      "stages": [
+        "second chain: a proximity test"
+      ],
+      "verify_ms": {
+        "max": 1.972547,
+        "median": 1.4754325000000001,
+        "min": 1.330977,
+        "n": 10,
+        "sd": 0.19492798081240156
+      }
+    },
+    "one-tensor-swapped-honest-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.809271,
+        "median": 1.501331,
+        "min": 1.345977,
+        "n": 10,
+        "sd": 0.1295824187672335
+      }
+    },
+    "one-tensor-swapped-legacy-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.986323,
+        "median": 1.3802905,
+        "min": 1.189072,
+        "n": 10,
+        "sd": 0.29172186769221353
+      }
+    },
+    "other-checkpoint-honest-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 2.059679,
+        "median": 1.553669,
+        "min": 1.344632,
+        "n": 10,
+        "sd": 0.23910115254845596
+      }
+    },
+    "tensor-order-permuted": {
+      "accepted": 0,
+      "expected_accept": 0,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 0,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "BASE: the masked message in the proof does not satisfy the linear claim"
+      ],
+      "stages": [
+        "second chain: a proximity test"
+      ],
+      "verify_ms": {
+        "max": 2.012121,
+        "median": 1.478765,
+        "min": 1.282557,
+        "n": 10,
+        "sd": 0.2500132104560566
+      }
+    },
+    "tensor-order-permuted-honest-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 2.038731,
+        "median": 1.3035665,
+        "min": 1.239847,
+        "n": 10,
+        "sd": 0.244933614214251
+      }
+    },
+    "tensor-order-permuted-legacy-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.740153,
+        "median": 1.341944,
+        "min": 1.181588,
+        "n": 10,
+        "sd": 0.1658337701297095
+      }
+    },
+    "two-tensors-swapped": {
+      "accepted": 0,
+      "expected_accept": 0,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 0,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "BASE: the masked message in the proof does not satisfy the linear claim"
+      ],
+      "stages": [
+        "second chain: a proximity test"
+      ],
+      "verify_ms": {
+        "max": 1.954022,
+        "median": 1.4597479999999998,
+        "min": 1.29425,
+        "n": 10,
+        "sd": 0.195346217897694
+      }
+    },
+    "two-tensors-swapped-honest-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63944,
+        "median": 63944.0,
+        "min": 63944,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.734883,
+        "median": 1.421162,
+        "min": 1.230149,
+        "n": 10,
+        "sd": 0.17499765524146632
+      }
+    },
+    "two-tensors-swapped-legacy-control": {
+      "accepted": 10,
+      "expected_accept": 1,
+      "key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "native_accepted": 10,
+      "native_attempted": 10,
+      "native_key_bytes": {
+        "max": 63872,
+        "median": 63872.0,
+        "min": 63872,
+        "n": 10,
+        "sd": 0.0
+      },
+      "passed": 10,
+      "reasons": [
+        "accepted"
+      ],
+      "stages": [
+        "all chains"
+      ],
+      "verify_ms": {
+        "max": 1.494322,
+        "median": 1.3045735,
+        "min": 1.227935,
+        "n": 10,
+        "sd": 0.09964738374672293
+      }
+    }
+  },
+  "elapsed_s": 3.9208574816584587,
+  "rows": 150,
+  "timing_scope": "key verification including held-manifest hashing and expected MLE recomputation; not prover or plan construction",
+  "verdict": "PASS"
+}

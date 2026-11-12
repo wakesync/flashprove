@@ -1,0 +1,36 @@
+name: keyfile-tensor-binding
+on:
+  pull_request:
+    paths:
+      - 'research/weight-binding/**'
+      - 'research/operators/qwen_handoff/sha256.h'
+      - 'blocks/**'
+      - '.github/workflows/keyfile-tensor-binding.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'research/weight-binding/**'
+      - 'research/operators/qwen_handoff/sha256.h'
+      - 'blocks/**'
+      - '.github/workflows/keyfile-tensor-binding.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-small-key:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Regenerate the reviewed adapter
+        run: python3 research/weight-binding/keyfile/generate_adapter.py
+      - name: Check generated source is current
+        run: git diff --exit-code -- research/weight-binding/keyfile/key_adapter.h
+      - name: Build native CPU test
+        run: python3 research/weight-binding/keyfile/run.py build --out /tmp/keyfile-build
+      - name: Separate debug and parser checks
+        run: python3 research/weight-binding/keyfile/run.py debug --out /tmp/keyfile-debug
+      - name: Ten seeds with paired honest and hostile arms
+        run: python3 research/weight-binding/keyfile/run.py suite --out /tmp/keyfile-suite
+      - name: Replay saved keys in fresh verifier processes
+        run: python3 research/weight-binding/keyfile/replay.py --runs /tmp/keyfile-suite --binary research/weight-binding/keyfile/work/test.bin --out /tmp/keyfile-replay.json
