@@ -96,9 +96,12 @@ committed value on the H200, which is the number that decides between the two ra
    proof's own hidden values, which does not exist yet (PR #67 has standalone pieces), and on a
    range proof for a Qwen weight table, which exists only for upstream's Maverick layout.
 5. **Ranges are measured on one layer.** Deeper layers are unmeasured.
-6. **Limits of the upstream programs.** The verifier does not say YES for a model without routed
-   experts, with a query width different from the stream width, or with head dimension 256
-   (issue #35).
+6. **Limits of the upstream programs.** The verifier does not say YES for a model with a query
+   width different from the stream width, or with head dimension 256 (issue #35). A dense parameter
+   file (no routed experts) can meet the standard parameter form since issue #135
+   (`experiments/20261112-135-dense-standard-form/`), but no dense proof has been made or checked,
+   and under a dense file the SiLU, rotary and softmax tables are not pinned by digest lines
+   (verifier/docs/parameter-file.md, "The standard parameter form").
 7. **No machine-checked theorem.** Upstream's Lean soundness theorem covers the Maverick-shaped
    model only.
 8. **Security settings.** Every Qwen proof so far used a 10-bit research target. None is a

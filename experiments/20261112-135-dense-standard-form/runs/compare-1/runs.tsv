@@ -1,0 +1,49 @@
+call	binary	round	status	sha256_normalised	last_line
+full-size.whole	main	0	0	4e91f2515ae370c33cc268da63c1cfdf67875639b9237698f9ce19e6eacd6032	YES
+full-size.whole	head	0	0	8f7e0b3edd7642618a51d664b148a34b6e31ff01636644fb39fcb98d02ed34f1	YES
+full-size.whole	main	1	0	6bc02d1b3f1a7b9c782a7cca0adac3f87f1ec5cc54e517517ce38603cd94338d	YES
+full-size.whole	head	1	0	dbc78f846fb4713a6facb9439d09a7229116e40715933a63eead89e73119f63a	YES
+full-size.whole-q	main	0	0	f5494dc61b89b87d26b04b977dfc9d4fe51825e10be96ddcc5a500e57a7edc7b	YES
+full-size.whole-q	head	0	0	318a83074e2c1f79f9a9f2dd77099e4a7438600ab6ddde25a7ffbae6527ac3ca	YES
+full-size.whole-q	main	1	0	dc781be61bf58d542718e81de6c83c847c90ad46346af84cfa1bff5bbfcaa4d7	YES
+full-size.whole-q	head	1	0	62b2acf5b19a18e1a2f686a332c5a9dc8c36fa65cd2136f58789b55de5fce680	YES
+full-size.plan-request	main	0	4	59d524c64682c87727d3b5d355592bb587bb2363ceafa515129afcd7f19f4f9c	PLAN ONLY: no proof was checked
+full-size.plan-request	head	0	4	59d524c64682c87727d3b5d355592bb587bb2363ceafa515129afcd7f19f4f9c	PLAN ONLY: no proof was checked
+full-size.plan-request	main	1	4	59d524c64682c87727d3b5d355592bb587bb2363ceafa515129afcd7f19f4f9c	PLAN ONLY: no proof was checked
+full-size.plan-request	head	1	4	59d524c64682c87727d3b5d355592bb587bb2363ceafa515129afcd7f19f4f9c	PLAN ONLY: no proof was checked
+full-size-clipped-gap.whole	main	0	0	06978716b93cefab1a061fc92664d58a9c203930ea949a9ae5c5846f217088f8	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole	head	0	0	aa227ede3b4f57582d288850cfccc55c86957df4bc5142373cf1f201903e0fa9	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole	main	1	0	3af8e467820c0e1996f4a3290b67d2a6d86228cc979462b54a2199c7b6997940	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole	head	1	0	434f191506943758260f2c34d8615632781ed7e7f240da8103514b4866e35768	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole-q	main	0	0	dc70a9f471fc7370757a05c434a69554eec7e781d2325a4ce4070b387365e116	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole-q	head	0	0	7ad9c91894459333ffa184949162c296f8ba2ae3802f0a1a280a4db46fe3770d	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole-q	main	1	0	9209287d67b619aab39bd2f080647f37ef2bdbe94b4e939dcd1cc0805894f9ff	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.whole-q	head	1	0	52b1dd6f47f4c7d877be4340ab3f28f02801a63f60ba06a56a86bf86b7e9f85e	WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8
+full-size-clipped-gap.plan-request	main	0	4	6f576c625f05f86ce3ba38f68b087be9b0cee93766d2f0e07075fa121ce15ae5	PLAN ONLY: no proof was checked
+full-size-clipped-gap.plan-request	head	0	4	6f576c625f05f86ce3ba38f68b087be9b0cee93766d2f0e07075fa121ce15ae5	PLAN ONLY: no proof was checked
+full-size-clipped-gap.plan-request	main	1	4	6f576c625f05f86ce3ba38f68b087be9b0cee93766d2f0e07075fa121ce15ae5	PLAN ONLY: no proof was checked
+full-size-clipped-gap.plan-request	head	1	4	6f576c625f05f86ce3ba38f68b087be9b0cee93766d2f0e07075fa121ce15ae5	PLAN ONLY: no proof was checked
+accepted-proof.whole	main	0	0	5fe5785b8666212e732a8bc080c668f57e357ba44c82fa81615a89d6974d31b6	YES
+accepted-proof.whole	head	0	0	17bdb7b9b7586891ce2d50763ae34fb38670e7c8007fb40c01da675dea610f82	YES
+accepted-proof.whole	main	1	0	55f330504fcbb42bccb5249ea17b40b0be4a9ab4fa9b5d2e58b5ba327541b58a	YES
+accepted-proof.whole	head	1	0	ada3d4ed965f9c21f19fc3fd13e083163f552580efd40fab17d84bf32b8426ba	YES
+accepted-proof.whole-q	main	0	0	35ff05d67c102b994b83034f3d107986b4ebcd518dd218e2ae37e3f3087e7781	YES
+accepted-proof.whole-q	head	0	0	73d2caf03ce274cf1c1eb35bdb7074bc484bbae13257eb9a94d449cf571e835d	YES
+accepted-proof.whole-q	main	1	0	30ac38bd902769ce60d7b84b49add6bd9283830c205cedceb19c94dda1269097	YES
+accepted-proof.whole-q	head	1	0	ab43f505a46b0975d36aa25c95a389089be633f0715573897a1fed94d3b96c00	YES
+accepted-proof.plan-request	main	0	4	e32676beb092176156d21e505b0390dc082ea941fd5b792be1fd00c07d616691	PLAN ONLY: no proof was checked
+accepted-proof.plan-request	head	0	4	e32676beb092176156d21e505b0390dc082ea941fd5b792be1fd00c07d616691	PLAN ONLY: no proof was checked
+accepted-proof.plan-request	main	1	4	e32676beb092176156d21e505b0390dc082ea941fd5b792be1fd00c07d616691	PLAN ONLY: no proof was checked
+accepted-proof.plan-request	head	1	4	e32676beb092176156d21e505b0390dc082ea941fd5b792be1fd00c07d616691	PLAN ONLY: no proof was checked
+accepted-proof-clipped-gap.whole	main	0	0	4d85214e3372ef2213737e5899dacbf52daf8914eed4a407470a5efa9082a663	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole	head	0	0	3ca52f700348a3a2049d7f2920c35665b2c43ddba3fde7cf448cf2d779ea524c	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole	main	1	0	7cc8445968d541e50838e6a4270c9c01e5695328becc29a9103f3dc93a29cfa4	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole	head	1	0	aef5399a795f0c8bbd839a165592a78fe8f23bcb9b9aa28cc0c537ed190cd587	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole-q	main	0	0	f92970fac4153e3428cc1891690d50088558bc6e3f95e15592da4e7c54cfa20c	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole-q	head	0	0	4bfa5fc8cc8341851cc065fd65f0906f449e4760d4a0baff17f5f91993069792	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole-q	main	1	0	99efaf38be97e324dd9b3391191a71cd6fb66929056a3e2df9e9174875b94685	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.whole-q	head	1	0	a0495b2396fffae4f7d7ce1953e466359f4a89646a7076936b91ab901f942807	WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8
+accepted-proof-clipped-gap.plan-request	main	0	4	318c697a809f5665c460d3d4c87e57c235130241d8851870c32543e3ce102f10	PLAN ONLY: no proof was checked
+accepted-proof-clipped-gap.plan-request	head	0	4	318c697a809f5665c460d3d4c87e57c235130241d8851870c32543e3ce102f10	PLAN ONLY: no proof was checked
+accepted-proof-clipped-gap.plan-request	main	1	4	318c697a809f5665c460d3d4c87e57c235130241d8851870c32543e3ce102f10	PLAN ONLY: no proof was checked
+accepted-proof-clipped-gap.plan-request	head	1	4	318c697a809f5665c460d3d4c87e57c235130241d8851870c32543e3ce102f10	PLAN ONLY: no proof was checked

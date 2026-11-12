@@ -1,0 +1,211 @@
+{
+ "rounds": 5,
+ "normalisation": "N2",
+ "calls": {
+  "full-size.whole": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "YES",
+     "2014e9ec6dd39979c82628cafb7c8832ca034f3686f1f6a1a5bbc6df10eacead"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "YES",
+     "2014e9ec6dd39979c82628cafb7c8832ca034f3686f1f6a1a5bbc6df10eacead"
+    ]
+   ]
+  },
+  "full-size.whole-q": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "YES",
+     "2bf7ca47e9a91a4c3013ac560d814b846019baa621c83fc4b62ba77dbcbaa45e"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "YES",
+     "2bf7ca47e9a91a4c3013ac560d814b846019baa621c83fc4b62ba77dbcbaa45e"
+    ]
+   ]
+  },
+  "full-size.plan-request": {
+   "same": true,
+   "main": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "59d524c64682c87727d3b5d355592bb587bb2363ceafa515129afcd7f19f4f9c"
+    ]
+   ],
+   "head": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "59d524c64682c87727d3b5d355592bb587bb2363ceafa515129afcd7f19f4f9c"
+    ]
+   ]
+  },
+  "full-size-clipped-gap.whole": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8",
+     "e413e3fdaa1d9a536a9820c1ed1800e6ba20446c140e623ac10fd29f37a66105"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8",
+     "e413e3fdaa1d9a536a9820c1ed1800e6ba20446c140e623ac10fd29f37a66105"
+    ]
+   ]
+  },
+  "full-size-clipped-gap.whole-q": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8",
+     "9d551657c853f754b9cdda50b3b270d6942468d4b85b73616a310c9d4bdd3309"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=25856 theta=512 cap=1 s=15 sh=8",
+     "9d551657c853f754b9cdda50b3b270d6942468d4b85b73616a310c9d4bdd3309"
+    ]
+   ]
+  },
+  "full-size-clipped-gap.plan-request": {
+   "same": true,
+   "main": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "6f576c625f05f86ce3ba38f68b087be9b0cee93766d2f0e07075fa121ce15ae5"
+    ]
+   ],
+   "head": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "6f576c625f05f86ce3ba38f68b087be9b0cee93766d2f0e07075fa121ce15ae5"
+    ]
+   ]
+  },
+  "accepted-proof.whole": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "YES",
+     "5b40cc1d966a8b676985485079e90470f69e1b30b2cc5b5263c5ff841be79af9"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "YES",
+     "5b40cc1d966a8b676985485079e90470f69e1b30b2cc5b5263c5ff841be79af9"
+    ]
+   ]
+  },
+  "accepted-proof.whole-q": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "YES",
+     "d7f168f5c4ddf8b8296bcc17ef5e6ddd954ed64e9c66a72c1cb9a03dd6f88062"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "YES",
+     "d7f168f5c4ddf8b8296bcc17ef5e6ddd954ed64e9c66a72c1cb9a03dd6f88062"
+    ]
+   ]
+  },
+  "accepted-proof.plan-request": {
+   "same": true,
+   "main": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "e32676beb092176156d21e505b0390dc082ea941fd5b792be1fd00c07d616691"
+    ]
+   ],
+   "head": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "e32676beb092176156d21e505b0390dc082ea941fd5b792be1fd00c07d616691"
+    ]
+   ]
+  },
+  "accepted-proof-clipped-gap.whole": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+     "674ed535473d895b2a766e22cf0cb202634a637f2bb35e57c76441b5e2329321"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+     "674ed535473d895b2a766e22cf0cb202634a637f2bb35e57c76441b5e2329321"
+    ]
+   ]
+  },
+  "accepted-proof-clipped-gap.whole-q": {
+   "same": true,
+   "main": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+     "b11c9f3ca3f2be29edc9e3e849c8d4e79ee3c6c8bb649dca09590732dc10854e"
+    ]
+   ],
+   "head": [
+    [
+     0,
+     "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+     "b11c9f3ca3f2be29edc9e3e849c8d4e79ee3c6c8bb649dca09590732dc10854e"
+    ]
+   ]
+  },
+  "accepted-proof-clipped-gap.plan-request": {
+   "same": true,
+   "main": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "318c697a809f5665c460d3d4c87e57c235130241d8851870c32543e3ce102f10"
+    ]
+   ],
+   "head": [
+    [
+     4,
+     "PLAN ONLY: no proof was checked",
+     "318c697a809f5665c460d3d4c87e57c235130241d8851870c32543e3ce102f10"
+    ]
+   ]
+  }
+ },
+ "differ": 0
+}
