@@ -16,6 +16,17 @@ errors (no mode, both modes, no --repeats, empty, duplicate or malformed plan, n
 The "registration" cases are the round-2 reviewers' reproductions on PR #141 (both families), each of
 which returned PASS before this change.
 
+The "boundary" cases are the round-3 reproductions (astra: a file or directory symbolic link in the
+archive, followed by the check and written through by its mutation copies, while the report said PASS;
+opus: a byte copy of a run, a linked run directory). Each hostile tree must FAIL as a structural
+archive problem with no run checked, and every outside target's sha256 must be the same before and
+after: file links (proof, answer, request, ivk, cp_commit.log; left out of or listed in SHA256SUMS),
+directory links (out/, a run, a bundle), a link to an outside sibling, a relative link inside the tree,
+a hard link, a fifo, isk/, --results itself a link, a SHA256SUMS path outside results/, the full 17-run
+/ 227-response plan, and the tar -xzf round trip of the RUNBOOK (which, like sha256sum -c, accepts the
+links). The intact control passes and its bytes are unchanged; a verifier that writes to its inputs
+only writes private copies.
+
 usage: python3 verify_offbox_test.py [--only NAME]   (exit 0 = all passed)
 """
 import argparse
@@ -26,6 +37,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import tarfile
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -96,14 +108,17 @@ def make_tree(base, plan=REGISTERED, repeats=2, cold="quickstart"):
     return res
 
 
-def seal(res):
-    """SHA256SUMS as run_job.sh's finalisation writes it: every regular file but itself, ./name paths."""
+def seal(res, links="follow"):
+    """SHA256SUMS as run_job.sh's finalisation writes it: every regular file but itself, ./name paths.
+    links: "follow" hashes a file link's target under the link's name (what sha256sum -c then checks),
+    "skip" leaves file links out (what the round-3 checksum walk did). Directory links are never
+    descended into (os.walk), so a linked directory's content is never listed either way."""
     lines = []
     for d, _dirs, files in os.walk(res):
         for fn in files:
             p = os.path.join(d, fn)
             rel = os.path.relpath(p, res)
-            if rel == "SHA256SUMS":
+            if rel == "SHA256SUMS" or (links == "skip" and os.path.islink(p)) or not os.path.isfile(p):
                 continue
             with open(p, "rb") as f:
                 lines.append((rel, hashlib.sha256(f.read()).hexdigest()))
@@ -127,6 +142,32 @@ def run_tool(res, *extra, env=None, sealed=True):
         with open(rep) as f:
             data = json.load(f)
     return p.returncode, p.stdout.decode(errors="replace"), data
+
+
+def sha_tree(top):
+    """{relative path: sha256} of every regular file under top (links not followed), the outside
+    targets' fingerprint before and after a check."""
+    out = {}
+    for d, _dirs, files in os.walk(top):
+        for fn in files:
+            p = os.path.join(d, fn)
+            if os.path.islink(p) or not os.path.isfile(p):
+                continue
+            with open(p, "rb") as f:
+                out[os.path.relpath(p, top)] = hashlib.sha256(f.read()).hexdigest()
+    return out
+
+
+def move_out(res, rel, outside):
+    """Moves results/rel (a file or a directory) to outside/ and leaves a symbolic link in its place,
+    the hostile archive of the round-3 review. Returns the outside path."""
+    src = os.path.join(res, rel)
+    os.makedirs(outside, exist_ok=True)
+    dst = os.path.join(outside, rel.replace("/", "__"))
+    is_dir = os.path.isdir(src)
+    shutil.move(src, dst)
+    os.symlink(dst, src, target_is_directory=is_dir)
+    return dst
 
 
 def run_of(data, name):
@@ -438,6 +479,151 @@ def main():
             os.remove(os.path.join(res, "steps.tsv"))
             rc, out, d = run_tool(res, *args)
             check("archive", "steps.tsv missing: FAIL", rc == 1 and archive_has(d, "steps.tsv missing"))
+
+        # ---- the round-3 review (astra): the archive's file boundary. Each hostile tree must FAIL as an
+        # archive problem before any run is checked, and an outside target's bytes must not change.
+        if want("boundary"):
+            def full(name):
+                return make_tree(fresh(name), repeats=10)
+
+            def hostile(label, res, outside, links="follow", extra=reg + ("--repeats", "10")):
+                seal(res, links=links)
+                before = sha_tree(outside)
+                rc, out, d = run_tool(res, *extra, sealed=False)
+                after = sha_tree(outside)
+                check("boundary", "%s: FAIL (exit 1) as a structural archive problem, no run checked" % label,
+                      rc == 1 and d and d["verdict"] == "FAIL" and d["structural_problems"] and d["runs"] == []
+                      and "no run was verified" in out)
+                check("boundary", "%s: outside target unchanged (sha256 before = after, %d files)" % (label, len(before)),
+                      before and before == after)
+                return d
+
+            res = full("bnd-intact")
+            outside = os.path.join(os.path.dirname(res), "outside")
+            os.makedirs(outside)
+            with open(os.path.join(outside, "bystander"), "wb") as f:
+                f.write(b"not part of the archive\n")
+            seal(res)
+            sums_before = sha_tree(res)
+            rc, out, d = run_tool(res, *reg, "--repeats", "10", sealed=False)
+            check("boundary", "intact control, 17 runs / 227 responses: PASS",
+                  rc == 0 and d["verdict"] == "PASS" and d["runs_expected"] == 17 and d["responses_expected"] == 227
+                  and d["structural_problems"] == [])
+            check("boundary", "intact control: archive bytes unchanged by the check", sha_tree(res) == sums_before)
+
+            # file links: proof (the full-plan 17-run / 227-response probe), answer, request
+            for label, rel in (("proof file link (17 runs / 227 responses)", "quickstart/bundle/out/example.proof"),
+                               ("answer file link", "C2-1/bundle/out/r01.y"),
+                               ("request file link", "C3-3/bundle/in/r64.req"),
+                               ("ivk file link", "rep4/bundle/ivk/key.bin"),
+                               ("cp_commit.log link", "rep1/cp_commit.log")):
+                for links in ("skip", "follow"):
+                    res = full("bnd-%s-%s" % (rel.replace("/", "_"), links))
+                    outside = os.path.join(os.path.dirname(res), "outside")
+                    move_out(res, rel, outside)
+                    d = hostile("%s, link %s by SHA256SUMS" % (label, "left out" if links == "skip" else "listed"),
+                                res, outside, links=links)
+                    check("boundary", "%s: the link is named" % label,
+                          d and any(rel in p and "symbolic link" in p for p in d["structural_problems"]))
+            # directory links: out/, a whole run, a whole bundle
+            for label, rel in (("out/ directory link", "C2-2/bundle/out"),
+                               ("run directory link", "C3-1"),
+                               ("bundle directory link", "rep2/bundle")):
+                res = full("bnd-dir-%s" % rel.replace("/", "_"))
+                outside = os.path.join(os.path.dirname(res), "outside")
+                move_out(res, rel, outside)
+                hostile(label, res, outside)
+            # a link to a sibling outside the archive that the archive never had (an extra, unlisted file)
+            res = full("bnd-sibling")
+            outside = os.path.join(os.path.dirname(res), "outside")
+            os.makedirs(outside)
+            with open(os.path.join(outside, "secret.txt"), "wb") as f:
+                f.write(b"outside the archive\n")
+            os.symlink(os.path.join(outside, "secret.txt"), os.path.join(res, "notes.txt"))
+            hostile("link to an outside sibling", res, outside)
+            # a link that stays inside the tree is refused too (only directories and regular files)
+            res = full("bnd-inside-link")
+            outside = os.path.join(os.path.dirname(res), "outside")
+            os.makedirs(outside)
+            with open(os.path.join(outside, "bystander"), "wb") as f:
+                f.write(b"x\n")
+            p = os.path.join(res, "C2-3", "bundle", "out", "r02.proof")
+            os.remove(p)
+            os.symlink(os.path.join("..", "..", "..", "C2-1", "bundle", "out", "r02.proof"), p)
+            hostile("relative link inside the tree", res, outside)
+            # a hard link to a file outside the tree (same file system)
+            res = full("bnd-hardlink")
+            outside = os.path.join(os.path.dirname(res), "outside")
+            os.makedirs(outside)
+            p = os.path.join(res, "C3-2", "bundle", "out", "r10.proof")
+            os.link(p, os.path.join(outside, "r10.proof"))
+            d = hostile("hard-linked proof (st_nlink 2)", res, outside)
+            check("boundary", "hard link named", d and any("hard-linked" in x for x in d["structural_problems"]))
+            # a fifo (reading it would block) and an isk/ directory
+            res = full("bnd-fifo")
+            outside = os.path.join(os.path.dirname(res), "outside")
+            os.makedirs(outside)
+            with open(os.path.join(outside, "bystander"), "wb") as f:
+                f.write(b"x\n")
+            os.mkfifo(os.path.join(res, "rep3", "bundle", "in", "pipe"))
+            hostile("fifo in the tree", res, outside)
+            res = full("bnd-isk")
+            os.makedirs(os.path.join(res, "rep5", "bundle", "isk"))
+            with open(os.path.join(res, "rep5", "bundle", "isk", "k"), "wb") as f:
+                f.write(b"k")
+            hostile("isk/ in the tree", res, outside)
+            # the results directory itself given as a link
+            res = full("bnd-root-link")
+            seal(res)
+            alias = os.path.join(os.path.dirname(res), "results-alias")
+            os.symlink(res, alias, target_is_directory=True)
+            rc, out, d = run_tool(alias, *reg, "--repeats", "10", sealed=False)
+            check("boundary", "--results given as a symbolic link: FAIL, no run checked",
+                  rc == 1 and d and d["runs"] == [] and any("symbolic link" in x for x in d["structural_problems"]))
+            # SHA256SUMS naming a path outside results/
+            res = full("bnd-sums-outside")
+            seal(res)
+            with open(os.path.join(res, "SHA256SUMS"), "a") as f:
+                f.write("%s  ./../outside/bystander\n" % ("0" * 64))
+            rc, out, d = run_tool(res, *reg, "--repeats", "10", sealed=False)
+            check("boundary", "SHA256SUMS lists ./../outside/...: FAIL, no run checked",
+                  rc == 1 and d and d["runs"] == [] and any("outside results" in x for x in d["structural_problems"]))
+            # the round-3 tar route: links packed into a tar.gz and unpacked with the RUNBOOK's tar -xzf
+            res = full("bnd-tar")
+            base = os.path.dirname(res)
+            outside = os.path.join(base, "outside")
+            move_out(res, "quickstart/bundle/out/example.proof", outside)
+            move_out(res, "C2-2/bundle/out", outside)
+            seal(res, links="skip")
+            tgz = os.path.join(base, "hostile.tar.gz")
+            with tarfile.open(tgz, "w:gz", dereference=False) as t:
+                t.add(res, arcname="results")
+            dest = os.path.join(base, "extracted")
+            os.makedirs(dest)
+            before = sha_tree(outside)
+            x = subprocess.run(["tar", "-xzf", tgz, "-C", dest], capture_output=True)
+            s = subprocess.run(["sha256sum", "-c", "--quiet", "SHA256SUMS"], cwd=os.path.join(dest, "results"),
+                               capture_output=True)
+            rc, out, d = run_tool(os.path.join(dest, "results"), *reg, "--repeats", "10", sealed=False)
+            check("boundary", "tar -xzf + sha256sum -c of a linked archive both exit 0 (they are not the boundary)",
+                  x.returncode == 0 and s.returncode == 0)
+            check("boundary", "the same extracted tree: FAIL, no run checked, outside unchanged",
+                  rc == 1 and d and d["runs"] == [] and sha_tree(outside) == before)
+            # a verifier that writes to its inputs only ever writes private copies
+            res = full("bnd-scribble")
+            seal(res)
+            before = sha_tree(res)
+            rc, out, d = run_tool(res, *reg, "--repeats", "10", env={"MOCK_VERIFY": "scribble"}, sealed=False)
+            check("boundary", "a verifier that appends to every input: archive unchanged, PASS (each check had its own copy)",
+                  rc == 0 and d["verdict"] == "PASS" and sha_tree(res) == before
+                  and subprocess.run(["sha256sum", "-c", "--quiet", "SHA256SUMS"], cwd=res, capture_output=True).returncode == 0)
+            # opus round 3 nonblocking 1: a byte copy of a run is not a second run
+            res = full("bnd-duplicate-run")
+            shutil.rmtree(os.path.join(res, "C3-2"))
+            shutil.copytree(os.path.join(res, "C3-1"), os.path.join(res, "C3-2"))
+            rc, out, d = run_tool(res, *reg, "--repeats", "10")
+            check("boundary", "C3-2 a byte copy of C3-1 (same commitment ID): FAIL",
+                  rc == 1 and archive_has(d, "C3-1 C3-2 share one commitment ID"))
 
     for name, ok in results:
         print(("PASS " if ok else "FAIL ") + name)

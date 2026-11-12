@@ -277,8 +277,12 @@ echo "fetch exit $? at $(date -u +%FT%TZ)"   # 121: not started (no budget left)
 
 ```sh
 tar -tzf h200-results.tar.gz | grep -c . ; tar -tzf h200-results.tar.gz | grep -c isk     # second number must be 0
-tar -xzf h200-results.tar.gz && (cd results && sha256sum -c --quiet SHA256SUMS)          # only if the state was done or failed
+tar -tvzf h200-results.tar.gz | grep -vc '^[-d]'      # must be 0: only regular files and directories (no link, device, fifo)
+mkdir h200-x && tar -xzf h200-results.tar.gz -C h200-x --no-same-owner --no-same-permissions \
+  && (cd h200-x/results && sha256sum -c --quiet SHA256SUMS)                               # only if the state was done or failed
 ```
+
+Extract into a new, empty directory (`h200-x`), never over an existing tree. `serve.py` streams regular files only (no symbolic or hard link, no device), so an archive from the prover holds nothing else; the `tar -tvzf` count is a first look, not the boundary. `sha256sum -c` is not a boundary either: it follows links, and a link left out of `SHA256SUMS` is never looked at. The boundary is step 8's `verify_offbox.py`, which refuses (FAIL, no run checked) any extracted tree that holds anything but directories and single-link regular files, all listed in `SHA256SUMS`.
 
 A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, through the same helper: `tf container connect <PROVER> -p 3301` in one shell and `"$FB" "$CUTOFF" 5 5 -- curl -s http://localhost:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). Stop the proxy (Ctrl-C in its shell) when the fetch has ended, and in any case at the cut-off. The server allows two archive downloads at a time and answers 503 to a third; a retry is another call of the helper, which refuses by itself once the budget is gone (exit 121).
 
@@ -320,12 +324,14 @@ Then the live service's own end-to-end check: one attested request to each model
 
 Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine. Then check **every expected response of every expected run** with `verify_offbox.py` (this directory; CPU only, no network; tested by `verify_offbox_test.py` with a mocked verifier). It does not judge from what happens to be in the archive: the expected runs come only from the **registered** values typed on the command line (`--plan` or `--no-calibration`, and `--repeats`, all required), and the archive is checked against them, never the other way round.
 
-Run it only after step 5's `sha256sum -c` passed (the tool checks `SHA256SUMS` again itself; a missing or mismatching one is a FAIL).
+Run it only after step 5's `sha256sum -c` passed (the tool checks `SHA256SUMS` again itself; a missing or mismatching one is a FAIL), on the tree extracted in step 5 (`--results h200-x/results`, the directory itself, not a link to it).
+
+**The archive's file boundary is checked first, and a problem there stops the check** (FAIL, exit 1, no run verified, no mutation copy made): the tree is walked without following any link, and every entry at every depth must be a directory or a regular file with one hard link. A symbolic link (to a file or a directory, pointing inside or outside the tree), a hard-linked file, a device, a fifo, a socket, a component named `isk`, a file `SHA256SUMS` does not list, a listed path that is not such a file or lies outside `results/`, or a mismatch: each is a structural FAIL. After that the tool reads only the files it walked, each opened one component at a time without following links and checked to be the same file; `cp_verify` runs on a private copy of each run's bundle (every file checked against `SHA256SUMS` while copied), and every mutation gets its own fresh private copy, so neither the archive nor anything outside it is ever written. The tree is walked again at the end; any change is a FAIL.
 
 ```sh
 # the #140 window: FP_CALIB and FP_REPEATS as registered (experiments/20261112-7-h200-dense-calibration/PREREG.md, Amendment 1),
 # typed here from the PREREG, NOT read from the archive; FP_ONBOX_BUILD=1, so the cold run is the quickstart:
-python3 research/gpu/tinfoil-h200/verify_offbox.py --cp-verify <cp_verify> --results results \
+python3 research/gpu/tinfoil-h200/verify_offbox.py --cp-verify <cp_verify> --results h200-x/results \
   --plan 'C2:8:4:3:300 C3:64:10:3:900' --repeats 10 --cold quickstart --report offbox-verify.json; echo "exit $?"
 # #43 alone (no FP_CALIB): --no-calibration --repeats 10 instead of --plan; with prebuilt programs (FP_ONBOX_BUILD=0) --cold cold
 ```
@@ -333,7 +339,7 @@ python3 research/gpu/tinfoil-h200/verify_offbox.py --cp-verify <cp_verify> --res
 - Expected runs: the cold run (`quickstart` or `cold`), `rep1`..`rep<N>` for `--repeats N` (response `example`), and for each entry `<id>:<requests>:...:<repeats>:...` of `--plan` the runs `<id>-1`..`<id>-<repeats>`, each with responses `r01`..`r<requests>` (C2: r01..r08, C3: r01..r64): 17 runs and 227 responses for the #140 window.
 - The archive is cross-checked, never trusted to choose: with `--plan`, `results/calib-plan.txt` must exist, be non-empty and name the same plan (missing, empty or different = FAIL); with `--no-calibration` it must be absent. `results/steps.tsv` must exist. Any run the registration did not name is a FAIL: a directory in `results/` that is not an expected run, a run row in `steps.tsv` or a run file (`<run>.exit`, `.verdict`, `.stdout`, `.time`, `.windows`) of a run not expected (an extra repeat, `C2-4`, `C3-4`, `rep11`). A `--repeats` lower than the job's therefore fails (its extra repeats are unexpected), and a higher one fails (missing runs).
 - Each response: `cp_verify config ivk in/<r>.req out/<r>.y out/<r>.proof -id <the run's own commitment ID from its cp_commit.log>`; it counts only with exit 0 and last line `YES`. Every response is checked and reported, so an early `NO` or a missing response is never hidden by later `YES`.
-- A run FAILS on: a missing run directory, `out/` withheld on the box (`withheld.txt`), a missing request/answer/proof, any rejection or verifier crash or timeout, no single commitment ID, or a response file the plan did not expect (a mixed tree).
+- A run FAILS on: a missing run directory, `out/` withheld on the box (`withheld.txt`), a missing request/answer/proof, any rejection or verifier crash or timeout, no single commitment ID, or a response file the plan did not expect (a mixed tree). Two runs with the same commitment ID fail the whole check (a fresh commitment per run is registered; a byte copy of a run is not a second run).
 - Mutations (research/gpu/local-verify's five: proof bit flip, answer bit flip, request bit flip, proof truncated, wrong ID) on the first response of every run that passed (`--mutations all` for every response): each must exit nonzero with a last line starting `NO`; one accepted mutation fails the run. `--mutations none` makes the overall verdict FAIL (the PREREG requires them).
 - **Overall PASS (exit 0) only if every expected run passed and the archive checks found nothing.** Exit 1 = FAIL, 2 = usage error (nothing checked: no `--plan`/`--no-calibration`, both, no `--repeats`, or an empty, whitespace-only, malformed or duplicate `--plan` is a usage error, never a PASS). The JSON report has every response's exit and last line and every mutation's; keep it with the results (redacted as in step 9).
 

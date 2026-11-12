@@ -4,6 +4,21 @@
 Checks EVERY response that the job was registered to produce, against the run's own commitment ID,
 with a cp_verify built by the operator from the pinned commit, and fails closed:
 
+  * the archive's file boundary comes first, before anything else is read (a STRUCTURAL check; any
+    problem here stops the check with FAIL, no run is verified and no mutation copy is made):
+    - --results itself must be a directory, not a symbolic link. Below it the tree is walked with
+      lstat, never following a link: every entry, at every depth, must be a directory or a regular
+      file with one hard link (st_nlink == 1). A symbolic link (to a file or a directory, inside or
+      outside the tree), a hard-linked file, a device, a fifo or a socket is a FAIL. So is a
+      component named isk (run_job.sh never exports isk/) or a tree deeper than 32 levels.
+    - results/SHA256SUMS must exist (a regular file), list exactly the regular files of the tree but
+      itself (no path outside results/, no ghost, no omission), and match each one.
+    After this check the set of files is fixed: the checker reads only files of that set, each opened
+    one path component at a time relative to the results directory with O_NOFOLLOW and checked with
+    fstat to be the same regular file (device and inode) that the walk saw. cp_verify never reads the
+    archive: each run's bundle is copied into a fresh private directory, every file checked against
+    SHA256SUMS while it is copied, and cp_verify runs there. At the end the tree is walked again; any
+    change during the check is a FAIL.
   * the expected runs come from the REGISTERED plan given on the command line, never from the archive:
     `--plan '<FP_CALIB>'` (calibration mode; the #140 window passes the PREREG's value) or
     `--no-calibration` (the #43 job alone), one of the two is required, and `--repeats N` is required.
@@ -17,8 +32,8 @@ with a cp_verify built by the operator from the pinned commit, and fails closed:
     not an expected run, and any run-shaped step row in steps.tsv or run file (<run>.exit, .verdict,
     .stdout, .time, .windows) of a run not expected (an extra repeat, C2-4, C3-4, rep11), is a FAIL.
     So is a --repeats smaller than the job's (its extra repeats are unexpected runs) or larger
-    (missing runs).
-  * results/SHA256SUMS must exist, list every regular file of results/ but itself, and match each one.
+    (missing runs). Two runs with the same commitment ID are a FAIL (the PREREG registers a fresh
+    commitment per run; a byte copy of a run is not a second run).
   * a run passes only if its cp_commit.log has one commitment ID, every expected response has its
     request, answer and proof in the bundle, cp_verify exits 0 with the last line YES on each of them,
     and the bundle has no response that the plan did not expect (a mixed tree is a failure).
@@ -29,13 +44,17 @@ with a cp_verify built by the operator from the pinned commit, and fails closed:
     request bit flip, proof truncated by one byte, wrong commitment ID) on the first response of
     every run that passed (--mutations first, the default; `all` for every response; `none` to skip,
     which makes the overall verdict FAIL, since the PREREG requires them): each must make cp_verify
-    exit nonzero with a last line starting NO. One accepted mutation fails the run.
+    exit nonzero with a last line starting NO. One accepted mutation fails the run. Every mutation
+    gets its own fresh private copy (a new temporary directory; config/, ivk/ and the one response,
+    each file copied from the checked descriptor into a file created there with O_CREAT|O_EXCL); only
+    that copy is written, never the archive and never anything outside the copy.
   * the overall verdict is PASS only if every expected run passed, the archive checks above found
     nothing, and at least one run was expected.
 
 Exit status: 0 PASS, 1 FAIL, 2 usage error (nothing checked). A JSON report goes to --report.
 It never contacts any host. SHA256SUMS checks the archive's integrity only; it does not show that the
-producer ran the registered plan (that is what --plan, --repeats and the unexpected-run check are for).
+producer ran the registered plan (that is what --plan, --repeats and the unexpected-run check are for),
+and `sha256sum -c` is not a link-safety check (it follows links): the file boundary above is.
 
 usage: python3 verify_offbox.py --cp-verify PATH --results DIR (--plan FP_CALIB | --no-calibration)
                                 --repeats N [--cold quickstart|cold|none] [--mutations first|all|none]
@@ -47,6 +66,7 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -59,10 +79,19 @@ MUTATIONS = ("proof-bitflip", "answer-bitflip", "request-bitflip", "proof-trunca
 RUN_NAME = re.compile(r"^(quickstart|cold|rep[0-9]+|[A-Za-z0-9_]{1,16}-[0-9]+)$")
 RUN_FILE = re.compile(r"^(.+)\.(exit|verdict|stdout|time|windows)$")
 SUM_LINE = re.compile(r"^([0-9a-f]{64}) [ *]\./(.+)$")
+MAX_DEPTH = 32
+_O_DIR = os.O_RDONLY | os.O_NOFOLLOW | os.O_DIRECTORY | getattr(os, "O_CLOEXEC", 0)
+_O_FILE = os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_NONBLOCK", 0) | getattr(os, "O_CLOEXEC", 0)
+_O_NEW = os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
+_O_RW = os.O_RDWR | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
 
 
 class Usage(Exception):
     pass
+
+
+class Boundary(Exception):
+    """A read that would leave the checked set of files (never expected after a clean scan)."""
 
 
 def parse_plan(text):
@@ -93,12 +122,177 @@ def expected_runs(plan, repeats, cold):
     return runs
 
 
-def commitment_id(path):
-    try:
-        with open(path, errors="replace") as f:
-            ids = [m.group(1) for m in (ID_LINE.match(line.rstrip("\n")) for line in f) if m]
-    except OSError:
+class Archive:
+    """The results tree as the lstat walk found it. Every read goes through open_file(), which only
+    opens a path of the walked set, one component at a time with O_NOFOLLOW, and checks that it is the
+    same regular file (device, inode) the walk saw."""
+
+    def __init__(self, root):
+        self.root = root
+        self.files = {}  # rel -> (st_dev, st_ino, st_size, st_mtime_ns)
+        self.dirs = {""}
+        self.problems = []
+        self.sums = None  # rel -> sha256 from SHA256SUMS, set once checksum_problems found nothing
+
+    def scan(self):
+        self.files, self.dirs, self.problems = {}, {""}, []
+        try:
+            st = os.lstat(self.root)
+        except OSError as e:
+            self.problems.append("results directory unreadable: %s" % e.strerror)
+            return self
+        if stat.S_ISLNK(st.st_mode):
+            self.problems.append("results directory is a symbolic link")
+            return self
+        if not stat.S_ISDIR(st.st_mode):
+            self.problems.append("results is not a directory")
+            return self
+        self._walk("", 0)
+        return self
+
+    def _walk(self, rel, depth):
+        if depth > MAX_DEPTH:
+            self.problems.append("tree deeper than %d levels at %s" % (MAX_DEPTH, rel))
+            return
+        path = os.path.join(self.root, rel) if rel else self.root
+        try:
+            names = sorted(os.listdir(path))
+        except OSError as e:
+            self.problems.append("directory %s unreadable: %s" % (rel or ".", e.strerror))
+            return
+        for name in names:
+            r = os.path.join(rel, name) if rel else name
+            if name == "isk":
+                self.problems.append("%s: a component named isk (never exported)" % r)
+                continue
+            try:
+                st = os.lstat(os.path.join(path, name))
+            except OSError as e:
+                self.problems.append("%s unreadable: %s" % (r, e.strerror))
+                continue
+            m = st.st_mode
+            if stat.S_ISLNK(m):
+                self.problems.append("%s is a symbolic link (only directories and regular files are allowed)" % r)
+            elif stat.S_ISDIR(m):
+                self.dirs.add(r)
+                self._walk(r, depth + 1)
+            elif stat.S_ISREG(m):
+                if st.st_nlink != 1:
+                    self.problems.append("%s is a hard-linked file (%d links)" % (r, st.st_nlink))
+                else:
+                    self.files[r] = (st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns)
+            else:
+                self.problems.append("%s is not a directory or a regular file (mode %o)" % (r, stat.S_IFMT(m)))
+
+    def snapshot(self):
+        return dict(self.files), set(self.dirs)
+
+    def isfile(self, rel):
+        return rel in self.files
+
+    def isdir(self, rel):
+        return rel in self.dirs
+
+    def listdir(self, rel):
+        pre = rel + "/" if rel else ""
+        out = set()
+        for p in list(self.files) + list(self.dirs):
+            if p and p.startswith(pre):
+                out.add(p[len(pre):].split("/", 1)[0])
+        return sorted(out)
+
+    def open_file(self, rel):
+        """A read-only descriptor of the walked regular file rel; raises Boundary otherwise."""
+        if rel not in self.files:
+            raise Boundary("%s is not a checked file of the archive" % rel)
+        if not _inside(self.root, os.path.join(self.root, rel)):
+            raise Boundary("%s resolves outside the results directory" % rel)
+        parts = rel.split("/")
+        fd = os.open(self.root, _O_DIR)
+        try:
+            for p in parts[:-1]:
+                nfd = os.open(p, _O_DIR, dir_fd=fd)
+                os.close(fd)
+                fd = nfd
+            ffd = os.open(parts[-1], _O_FILE, dir_fd=fd)
+        except OSError as e:
+            raise Boundary("%s: %s" % (rel, e.strerror))
+        finally:
+            os.close(fd)
+        st = os.fstat(ffd)
+        dev, ino = self.files[rel][:2]
+        if not stat.S_ISREG(st.st_mode) or (st.st_dev, st.st_ino) != (dev, ino):
+            os.close(ffd)
+            raise Boundary("%s changed since the walk" % rel)
+        return ffd
+
+    def read_bytes(self, rel):
+        with os.fdopen(self.open_file(rel), "rb") as f:
+            return f.read()
+
+    def read_text(self, rel):
+        return self.read_bytes(rel).decode(errors="replace")
+
+    def sha256(self, rel):
+        h = hashlib.sha256()
+        with os.fdopen(self.open_file(rel), "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        return h.hexdigest()
+
+    def copy_to(self, rel, dst):
+        """Copies the checked file rel into a NEW file dst (O_CREAT|O_EXCL|O_NOFOLLOW: never an existing
+        file, never through a link), hashing what it copies: the copy must match SHA256SUMS."""
+        if self.sums is None or rel not in self.sums:
+            raise Boundary("%s is not listed in SHA256SUMS" % rel)
+        src = self.open_file(rel)
+        try:
+            out = os.open(dst, _O_NEW, 0o600)
+        except OSError:
+            os.close(src)
+            raise
+        h = hashlib.sha256()
+        with os.fdopen(src, "rb") as fi, os.fdopen(out, "wb") as fo:
+            for chunk in iter(lambda: fi.read(1 << 20), b""):
+                h.update(chunk)
+                fo.write(chunk)
+        if h.hexdigest() != self.sums[rel]:
+            raise Boundary("%s changed since SHA256SUMS was checked" % rel)
+
+
+def checksum_problems(ar):
+    """results/SHA256SUMS (run_job.sh's finalisation, `./name` paths) must list every regular file but
+    itself, nothing else, and match each one."""
+    if not ar.isfile("SHA256SUMS"):
+        return ["results/SHA256SUMS missing"]
+    listed, probs = {}, []
+    for line in ar.read_text("SHA256SUMS").splitlines():
+        m = SUM_LINE.match(line)
+        if not m:
+            probs.append("SHA256SUMS: unreadable line %r" % line[:80])
+            continue
+        rel = os.path.normpath(m.group(2))
+        if rel.startswith("/") or rel == ".." or rel.startswith("../"):
+            probs.append("SHA256SUMS lists %s, a path outside results/" % m.group(2))
+            continue
+        listed[rel] = m.group(1)
+    present = set(ar.files) - {"SHA256SUMS"}
+    for rel in sorted(present - set(listed)):
+        probs.append("SHA256SUMS does not list %s" % rel)
+    for rel in sorted(listed):
+        if rel not in present:
+            probs.append("SHA256SUMS lists %s, which is not a regular file in results/" % rel)
+        elif ar.sha256(rel) != listed[rel]:
+            probs.append("SHA256SUMS mismatch: %s" % rel)
+    if not probs:
+        ar.sums = dict(listed)
+    return probs
+
+
+def commitment_id(ar, rel):
+    if not ar.isfile(rel):
         return None
+    ids = [m.group(1) for m in (ID_LINE.match(line) for line in ar.read_text(rel).splitlines()) if m]
     return ids[0] if len(set(ids)) == 1 else None
 
 
@@ -114,55 +308,96 @@ def call(cp_verify, cwd, name, cid, timeout):
     return {"exit": p.returncode, "last_line": lines[-1].strip() if lines else ""}
 
 
-def flip(path, offset):
-    with open(path, "r+b") as f:
-        size = os.path.getsize(path)
+def _inside(d, p):
+    """p's real path is strictly inside d's real path."""
+    rd = os.path.realpath(d)
+    return os.path.realpath(p).startswith(rd + os.sep)
+
+
+def _open_copy(d, rel):
+    """A read-write descriptor of the private copy d/rel: a regular file inside d, opened without
+    following a link."""
+    p = os.path.join(d, rel)
+    if not _inside(d, p):
+        raise Boundary("mutation target %s leaves its copy" % rel)
+    fd = os.open(p, _O_RW)
+    if not stat.S_ISREG(os.fstat(fd).st_mode):
+        os.close(fd)
+        raise Boundary("mutation target %s is not a regular file" % rel)
+    return fd
+
+
+def flip(d, rel, offset):
+    fd = _open_copy(d, rel)
+    try:
+        size = os.fstat(fd).st_size
         if size == 0:
             return False
         offset %= size
-        f.seek(offset)
-        b = f.read(1)[0]
-        f.seek(offset)
-        f.write(bytes([b ^ 1]))
+        b = os.pread(fd, 1, offset)[0]
+        os.pwrite(fd, bytes([b ^ 1]), offset)
+    finally:
+        os.close(fd)
     return True
 
 
-def mutate(bundle, name, cid, case, tmp):
-    """Copy the bundle and apply one mutation; returns (copy dir, commitment ID to use)."""
+def stage_copy(ar, bundle, names, tmp):
+    """A fresh private directory with config/, ivk/ and the responses names (None: every file of in/
+    and out/), each file copied from the checked archive file into a new file and checked against
+    SHA256SUMS. Nothing in it is a link; nothing outside it is written."""
     d = tempfile.mkdtemp(dir=tmp)
     for part in ("config", "ivk", "in", "out"):
-        shutil.copytree(os.path.join(bundle, part), os.path.join(d, part), symlinks=True)
+        os.mkdir(os.path.join(d, part), 0o700)
+    parts = ("config", "ivk") if names is not None else ("config", "ivk", "in", "out")
+    rels = [r for r in sorted(ar.files) if any(r.startswith("%s/%s/" % (bundle, p)) for p in parts)]
+    for n in names or ():
+        rels += ["%s/in/%s.req" % (bundle, n), "%s/out/%s.y" % (bundle, n), "%s/out/%s.proof" % (bundle, n)]
+    for rel in rels:
+        sub = rel[len(bundle) + 1:]
+        dst = os.path.join(d, sub)
+        os.makedirs(os.path.dirname(dst), 0o700, exist_ok=True)
+        if not _inside(d, dst):
+            raise Boundary("copy target %s leaves its copy" % sub)
+        ar.copy_to(rel, dst)
+    return d
+
+
+def mutate(ar, bundle, name, cid, case, tmp):
+    """A fresh private copy with one mutation applied; returns (copy dir, commitment ID to use)."""
+    d = stage_copy(ar, bundle, [name], tmp)
     if case == "proof-bitflip":
-        p = os.path.join(d, "out", name + ".proof")
-        flip(p, os.path.getsize(p) // 2)
+        rel = "out/%s.proof" % name
+        flip(d, rel, os.path.getsize(os.path.join(d, rel)) // 2)
     elif case == "answer-bitflip":
-        flip(os.path.join(d, "out", name + ".y"), 0)
+        flip(d, "out/%s.y" % name, 0)
     elif case == "request-bitflip":
-        p = os.path.join(d, "in", name + ".req")
-        flip(p, os.path.getsize(p) - 1)
+        rel = "in/%s.req" % name
+        flip(d, rel, os.path.getsize(os.path.join(d, rel)) - 1)
     elif case == "proof-truncated":
-        p = os.path.join(d, "out", name + ".proof")
-        with open(p, "r+b") as f:
-            f.truncate(max(0, os.path.getsize(p) - 1))
+        fd = _open_copy(d, "out/%s.proof" % name)
+        try:
+            os.ftruncate(fd, max(0, os.fstat(fd).st_size - 1))
+        finally:
+            os.close(fd)
     elif case == "wrong-id":
         cid = cid[:-1] + "%x" % (int(cid[-1], 16) ^ 1)
     return d, cid
 
 
-def check_run(cp_verify, results, run, names, mutations, timeout, tmp):
-    rep = {"run": run, "expected": len(names), "responses": {}, "mutations": {}, "problems": []}
-    top = os.path.join(results, run)
-    bundle = os.path.join(top, "bundle")
-    if not os.path.isdir(top):
+def check_run(ar, cp_verify, run, names, mutations, timeout, tmp):
+    rep = {"run": run, "expected": len(names), "responses": {}, "mutations": {}, "problems": [], "commitment_id": None}
+    bundle = run + "/bundle"
+    if not ar.isdir(run):
         rep["problems"].append("run directory missing")
-    elif not os.path.isdir(os.path.join(bundle, "out")):
-        why = "out/ withheld (on-box verifier did not accept)" if os.path.exists(os.path.join(top, "withheld.txt")) else "out/ missing"
+    elif not ar.isdir(bundle + "/out"):
+        why = "out/ withheld (on-box verifier did not accept)" if ar.isfile(run + "/withheld.txt") else "out/ missing"
         rep["problems"].append(why)
-    cid = commitment_id(os.path.join(top, "cp_commit.log")) if os.path.isdir(top) else None
-    if os.path.isdir(top) and cid is None:
+    cid = commitment_id(ar, run + "/cp_commit.log") if ar.isdir(run) else None
+    rep["commitment_id"] = cid
+    if ar.isdir(run) and cid is None:
         rep["problems"].append("no single commitment ID in cp_commit.log")
     for part in ("config", "ivk", "in"):
-        if os.path.isdir(top) and not os.path.isdir(os.path.join(bundle, part)):
+        if ar.isdir(run) and not ar.isdir("%s/%s" % (bundle, part)):
             rep["problems"].append("bundle/%s missing" % part)
     if rep["problems"]:
         for n in names:
@@ -171,26 +406,32 @@ def check_run(cp_verify, results, run, names, mutations, timeout, tmp):
         return rep
     # responses present that the plan did not expect (a mixed tree, e.g. a stale r02 next to r01)
     for sub in ("in", "out"):
-        for f in sorted(os.listdir(os.path.join(bundle, sub))):
+        for f in ar.listdir("%s/%s" % (bundle, sub)):
             m = RESP.match(f)
             if m and m.group(1) not in names:
                 rep["problems"].append("unexpected response file %s/%s" % (sub, f))
-    for n in names:
-        files = ["in/%s.req" % n, "out/%s.y" % n, "out/%s.proof" % n]
-        missing = [f for f in files if not os.path.isfile(os.path.join(bundle, f))]
-        if missing:
-            rep["responses"][n] = {"verdict": "FAIL", "why": "missing " + ", ".join(missing)}
-            continue
-        r = call(cp_verify, bundle, n, cid, timeout)
-        r["verdict"] = "YES" if r["exit"] == 0 and r["last_line"] == "YES" else "FAIL"
-        rep["responses"][n] = r
+    # cp_verify reads a private copy of the run's bundle (every file checked against SHA256SUMS while
+    # copied), never the archive itself
+    cwd = stage_copy(ar, bundle, None, tmp)
+    try:
+        for n in names:
+            files = ["in/%s.req" % n, "out/%s.y" % n, "out/%s.proof" % n]
+            missing = [f for f in files if not ar.isfile("%s/%s" % (bundle, f))]
+            if missing:
+                rep["responses"][n] = {"verdict": "FAIL", "why": "missing " + ", ".join(missing)}
+                continue
+            r = call(cp_verify, cwd, n, cid, timeout)
+            r["verdict"] = "YES" if r["exit"] == 0 and r["last_line"] == "YES" else "FAIL"
+            rep["responses"][n] = r
+    finally:
+        shutil.rmtree(cwd, ignore_errors=True)
     bad = [n for n in names if rep["responses"][n]["verdict"] != "YES"]
     if bad:
         rep["problems"].append("responses not accepted: " + " ".join(bad))
     if mutations != "none" and not bad:
         for n in (names if mutations == "all" else names[:1]):
             for case in MUTATIONS:
-                d, mid = mutate(bundle, n, cid, case, tmp)
+                d, mid = mutate(ar, bundle, n, cid, case, tmp)
                 r = call(cp_verify, d, n, mid, timeout)
                 shutil.rmtree(d, ignore_errors=True)
                 r["rejected"] = r["exit"] not in (0, "timeout", "error") and (r["last_line"] or "").startswith("NO")
@@ -201,78 +442,35 @@ def check_run(cp_verify, results, run, names, mutations, timeout, tmp):
     return rep
 
 
-def archive_problems(results, run_names, calibration, plan_text):
+def registration_problems(ar, run_names, calibration, plan_text):
     """Cross-checks of the archive against the registration. Returns a list of problems (empty = ok)."""
     probs = []
     expected = set(run_names)
-    pf = os.path.join(results, "calib-plan.txt")
     if calibration:
-        if not os.path.isfile(pf):
-            probs.append("results/calib-plan.txt missing (the job writes it whenever FP_CALIB is set)")
+        if not ar.isfile("calib-plan.txt"):
+            what = "is not a regular file" if ar.isdir("calib-plan.txt") else "missing"
+            probs.append("results/calib-plan.txt %s (the job writes it whenever FP_CALIB is set)" % what)
         else:
-            with open(pf, errors="replace") as f:
-                on_disk = f.read()
+            on_disk = ar.read_text("calib-plan.txt")
             if on_disk.strip() == "":
                 probs.append("results/calib-plan.txt is empty")
             elif on_disk.split() != plan_text.split():
                 probs.append("results/calib-plan.txt (%r) differs from the registered --plan" % on_disk.strip())
-    elif os.path.lexists(pf):
+    elif ar.isfile("calib-plan.txt") or ar.isdir("calib-plan.txt"):
         probs.append("results/calib-plan.txt present, but --no-calibration was given")
-    for e in sorted(os.listdir(results)):
-        p = os.path.join(results, e)
-        if os.path.isdir(p) and e not in expected:
+    for e in ar.listdir(""):
+        if ar.isdir(e) and e not in expected:
             probs.append("unexpected run directory %s (not in the registered plan/repeats)" % e)
         m = RUN_FILE.match(e)
         if m and RUN_NAME.match(m.group(1)) and m.group(1) not in expected:
             probs.append("unexpected run file %s (not in the registered plan/repeats)" % e)
-    st = os.path.join(results, "steps.tsv")
-    if not os.path.isfile(st):
+    if not ar.isfile("steps.tsv"):
         probs.append("results/steps.tsv missing")
     else:
-        with open(st, errors="replace") as f:
-            for line in f:
-                name = line.split("\t", 1)[0].strip()
-                if RUN_NAME.match(name) and name not in expected:
-                    probs.append("steps.tsv has a step %s that is not in the registered plan/repeats" % name)
-    probs += checksum_problems(results)
-    return probs
-
-
-def checksum_problems(results):
-    """results/SHA256SUMS (run_job.sh's finalisation, `./name` paths) must list every regular file but
-    itself and match each one."""
-    sums = os.path.join(results, "SHA256SUMS")
-    if not os.path.isfile(sums):
-        return ["results/SHA256SUMS missing"]
-    listed, probs = {}, []
-    with open(sums, errors="replace") as f:
-        for line in f:
-            m = SUM_LINE.match(line.rstrip("\n"))
-            if not m:
-                probs.append("SHA256SUMS: unreadable line %r" % line[:80])
-                continue
-            listed[os.path.normpath(m.group(2))] = m.group(1)
-    present = set()
-    for d, dirs, files in os.walk(results):
-        for fn in files:
-            p = os.path.join(d, fn)
-            rel = os.path.relpath(p, results)
-            if rel == "SHA256SUMS" or os.path.islink(p) or not os.path.isfile(p):
-                continue
-            present.add(rel)
-    for rel in sorted(present - set(listed)):
-        probs.append("SHA256SUMS does not list %s" % rel)
-    for rel in sorted(listed):
-        p = os.path.join(results, rel)
-        if rel not in present:
-            probs.append("SHA256SUMS lists %s, which is not a regular file in results/" % rel)
-            continue
-        h = hashlib.sha256()
-        with open(p, "rb") as f:
-            for chunk in iter(lambda: f.read(1 << 20), b""):
-                h.update(chunk)
-        if h.hexdigest() != listed[rel]:
-            probs.append("SHA256SUMS mismatch: %s" % rel)
+        for line in ar.read_text("steps.tsv").splitlines():
+            name = line.split("\t", 1)[0].strip()
+            if RUN_NAME.match(name) and name not in expected:
+                probs.append("steps.tsv has a step %s that is not in the registered plan/repeats" % name)
     return probs
 
 
@@ -294,8 +492,8 @@ def main(argv=None):
             raise Usage("--repeats 0 to 100")
         if not (os.path.isfile(a.cp_verify) and os.access(a.cp_verify, os.X_OK)):
             raise Usage("--cp-verify is not an executable file")
-        if not os.path.isdir(a.results):
-            raise Usage("--results is not a directory")
+        if not os.path.lexists(a.results):
+            raise Usage("--results does not exist")
         cp_verify = os.path.abspath(a.cp_verify)
         calibration = a.plan is not None
         plan_text = a.plan if calibration else ""
@@ -308,32 +506,71 @@ def main(argv=None):
     except Usage as e:
         print("verify_offbox: usage error: %s" % e, file=sys.stderr)
         return 2
-    results = os.path.abspath(a.results)
-    archive = archive_problems(results, [r for r, _ in runs], calibration, plan_text)
-    for p in archive:
-        print("FAIL archive: %s" % p)
-    reports = []
-    with tempfile.TemporaryDirectory(prefix="fp-verify-offbox-") as tmp:
-        for run, names in runs:
-            rep = check_run(cp_verify, results, run, names, a.mutations, a.timeout, tmp)
-            reports.append(rep)
-            print("%s %s (%d responses)%s" % (rep["verdict"], run, len(names),
-                                               "" if rep["verdict"] == "PASS" else ": " + "; ".join(rep["problems"])))
-    ok = all(r["verdict"] == "PASS" for r in reports) and a.mutations != "none" and not archive
-    summary = {"verdict": "PASS" if ok else "FAIL", "runs_expected": len(runs),
-               "runs_passed": sum(r["verdict"] == "PASS" for r in reports),
+    # the given path itself must not be a link; its parent directories are the operator's
+    given = os.path.abspath(a.results)
+    results = os.path.join(os.path.realpath(os.path.dirname(given)), os.path.basename(given))
+    ar = Archive(results).scan()
+    structural = list(ar.problems)
+    if not structural:
+        try:
+            structural += checksum_problems(ar)
+        except Boundary as e:
+            structural.append("archive read refused: %s" % e)
+    summary = {"verdict": "FAIL", "runs_expected": len(runs), "runs_passed": 0,
                "responses_expected": sum(len(n) for _, n in runs), "mutations": a.mutations,
                "mode": "calibration" if calibration else "no-calibration",
                "plan": plan_text.strip(), "repeats": a.repeats, "cold": a.cold,
-               "archive_problems": archive, "runs": reports}
+               "structural_problems": structural, "archive_problems": list(structural), "runs": []}
+    if structural:
+        for p in structural:
+            print("FAIL archive: %s" % p)
+        print("OVERALL FAIL: the archive is not a checked tree of regular files; no run was verified "
+              "(%d structural problems)" % len(structural))
+        return finish(a, summary, 1)
+    archive = registration_problems(ar, [r for r, _ in runs], calibration, plan_text)
+    for p in archive:
+        print("FAIL archive: %s" % p)
+    reports = []
+    before = ar.snapshot()
+    try:
+        with tempfile.TemporaryDirectory(prefix="fp-verify-offbox-") as tmp:
+            for run, names in runs:
+                rep = check_run(ar, cp_verify, run, names, a.mutations, a.timeout, tmp)
+                reports.append(rep)
+                print("%s %s (%d responses)%s" % (rep["verdict"], run, len(names),
+                                                   "" if rep["verdict"] == "PASS" else ": " + "; ".join(rep["problems"])))
+    except Boundary as e:
+        archive.append("archive read refused during the run checks: %s" % e)
+        print("FAIL archive: %s" % archive[-1])
+    # a fresh commitment per run (PREREG): a byte copy of a run is not a second run
+    seen = {}
+    for rep in reports:
+        if rep.get("commitment_id"):
+            seen.setdefault(rep["commitment_id"], []).append(rep["run"])
+    for cid, rs in sorted(seen.items()):
+        if len(rs) > 1:
+            archive.append("runs %s share one commitment ID (each run must be a fresh commitment)" % " ".join(rs))
+            print("FAIL archive: %s" % archive[-1])
+    after = Archive(results).scan()
+    if after.problems or after.snapshot() != before:
+        archive.append("the results tree changed while it was checked")
+        print("FAIL archive: %s" % archive[-1])
+    ok = (len(reports) == len(runs) and all(r["verdict"] == "PASS" for r in reports)
+          and a.mutations != "none" and not archive)
+    summary.update({"verdict": "PASS" if ok else "FAIL", "runs_passed": sum(r["verdict"] == "PASS" for r in reports),
+                    "archive_problems": archive, "runs": reports})
     if a.mutations == "none":
         print("mutation checks skipped: the PREREG requires them, so the overall verdict is FAIL")
     print("OVERALL %s: %d of %d runs passed, %d archive problems" % (summary["verdict"], summary["runs_passed"],
                                                                   len(runs), len(archive)))
+    return finish(a, summary, 0 if ok else 1)
+
+
+def finish(a, summary, rc):
     if a.report:
         with open(a.report, "w") as f:
             json.dump(summary, f, indent=1)
-    return 0 if ok else 1
+    return rc
 
 
 if __name__ == "__main__":
