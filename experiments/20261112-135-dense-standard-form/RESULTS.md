@@ -2,7 +2,7 @@
 
 Issue #135 (part of #35). PREREG: [PREREG.md](PREREG.md) (first commit 06b69f22f2cac21af4f0228538613e0c159a88a8, Amendment 1 dated 2026-11-12 21:27 UTC). Environment: [ENV.json](ENV.json).
 
-## Verdict: PASS (measured, unreplicated), with one disclosed weakening
+## Verdict: PASS (measured, unreplicated) on every registered criterion, with one disclosed weakening
 
 Against the registered threshold (Amendment 1 for the hash normalisation):
 
@@ -12,9 +12,9 @@ Against the registered threshold (Amendment 1 for the hash normalisation):
 | `dense-with-digests` -> `policy-tables`, `dense-with-gcl` -> `policy-gcl`, `dense-with-rcl` -> `policy-rcl`, `NE-0` -> `header-absent-class` on head, as on main | all four as on main | `runs/served/*.log` |
 | every other served-form case: same status and result on head as on main | 46 of 47 cases identical; the 47th is `routed-experts.dense` | table below |
 | every registered stored-proof call: same exit status, last line and normalised SHA-256 on head as on main | 12 of 12 calls, 5 rounds per binary, 120 runs, one N2 hash per call | `runs/compare-2/summary.json`, `runs/compare-2/runs.tsv` |
-| registered suite rows that pass on main pass on head | **not run** (see "What was not run") | |
+| registered suite rows that pass on main pass on head | 13 of 13 rows pass on both trees; 1 row left out on both (needs a GPU) | `runs/suite/main.log`, `runs/suite/head.log` |
 
-The one registered criterion that was not run is the suite subset. The served-form row of that subset is the same script as the served-form runs above, so its outcome on both trees is known; the other rows were not run by this lane.
+The suite subset ran after the first version of this file was committed (it waited for the host's heavy-job gate); this table and the section "Registered suite subset" were updated on 2026-11-12 at 22:10 UTC with its logs.
 
 ## What changed
 
@@ -103,10 +103,13 @@ Four stored sets: `examples/full-size` (Llama 4 Maverick shape, 48 layers, 128 r
 
 **compare-1** (the registered N, 2 rounds per binary), kept as run: status and last line identical between main and head for all 12 calls; the four planning calls gave one N hash on both binaries; the eight whole calls gave a different N hash on every run, also between two runs of the same binary, because N left wall times in. That was a fault of the registered normalisation (Amendment 1), not a difference between the binaries.
 
+## Registered suite subset
+
+`./run_suite.py cpu <work> --jobs 4 --only '<the PREREG's expression>'`, once on a checkout of main at c810b3e9 and once on a checkout of this branch at e571b190, each confined by the runner, 4 pinned cores. Both: `13 rows passed, 0 passed in part, 0 failed, 0 not run`, exit 0 (`runs/suite/main.log`, `runs/suite/head.log`; local folders replaced by `<REPO>`, `<WORK>`). Rows: `build.verifier`, `build.verifier.target`, `build.verifier.unit`, `verifier.plan_tau`, `verifier.kit_rounds`, `verifier.kit_rounds_second`, `verifier.served.form`, `verifier.call_accounting.examples`, `verifier.example_kits`, `verifier.commitment_id.examples`, `verifier.record_altered_sets.example`, `verifier.record_altered_sets.full` (the full-size Maverick-shape set: honest set YES and 23 altered sets as expected), `verifier.extreme_files` (2141 calls on 2073 files: fault 0, honest calls not as expected 0). The PREREG's expression also matched `verifier.kit_rounds_second`, which it did not name; it passed on both. Note that `verifier.served.form` passes on main with main's test file and on head with the branch's: each tree's expectation for `dense` is its own.
+
 ## What was not run
 
-- The registered suite subset (`run_suite.py cpu --only ...`, once per tree). It was queued behind the host's two-slot heavy-job gate from 21:22 UTC; both slots were held by other lanes' jobs and it had not started when this file was written. Rows not run therefore include `build.verifier`, `verifier.call_accounting.examples`, `verifier.commitment_id.examples`, `verifier.record_altered_sets.example/.full`, `verifier.example_kits`, `verifier.extreme_files`, `verifier.plan_tau`, `verifier.kit_rounds`. The served-form row `verifier.served.form` runs the same script as the runs above. [If the suite finishes before the lane's hard stop, its logs are added under `runs/suite/` in a later commit and this paragraph is replaced by a dated note.]
-- `verifier.served.form.world.kit` and every GPU row: need a GPU or worlds made by `cp_commit`/`cp_prove`.
+- `verifier.served.form.world.kit` and every GPU row: the runner leaves them out in mode cpu (they need worlds made by `cp_commit`/`cp_prove` on a GPU).
 
 ## What is not established
 
