@@ -8,7 +8,7 @@ In merged #98 the two chunks shared one proof, and the starting state was tied t
 
 ## Binding chosen, and why
 
-- **Choice:** a Poseidon-shaped sponge over Goldilocks (width 12, rate 8, capacity 4, x^7 S-box, 8 full + 22 partial rounds, Cauchy MDS, SHA-256 counter constants). Capacity is initialised from a SHA-256 of the public context (F, D, C, N, request, layer, policy, boundary index, model and weights labels), computed by the verifier natively. So a commitment for boundary b of layer l under F12 cannot be opened as boundary b' or layer l' or F13.
+- **Choice:** a Poseidon-shaped sponge over Goldilocks (width 12, rate 8, capacity 4, x^7 S-box, 8 full + 22 partial rounds, Cauchy MDS, SHA-256 counter constants). Capacity is initialised from a SHA-256 of the public context (F, D, C, N, request, layer, policy, boundary index, model and weights labels), computed by the verifier natively. The intent is context separation: assuming the sponge is binding (collision resistant) and the proof system is sound, both unproven here (no hash-security level, no soundness level), a commitment for boundary b of layer l under F12 could not be opened as boundary b' or layer l' or F13. The suite only shows that the registered cases of that kind (`other_window_commitment`, `other_layer_state`, `mixed_F_chain`, the chain splices) were rejected, not that no such opening exists.
 - **Why:** SHA-256 inside this product/affine proof needs bit decomposition of every 32-bit word; an x^7 sponge is 4 product columns per S-box with all linear layers folded into affine relation terms.
 - **Not established:** these sponge parameters are not the vetted Plonky2 instance and have had no cryptanalysis. They are a research stand-in. The suite checks an independent Python implementation (`fixtures.py`) against the in-circuit one on every honest window (15/15 agree).
 
@@ -37,6 +37,8 @@ Acceptance is per instance by the standalone window verifier (separate process) 
 | dropped_middle_window (chain, w0, w2) | 0/5 | n/a | proof verifier at slot 1, and verifier-held N |
 | spliced_other_layer_proof (chain, layer-4 proof in slot 1) | 0/5 | n/a | proof verifier at slot 1 |
 | truncated_chain (chain, w0, w1 of 3) | 0/5 | n/a | **chain-statement check outside the arithmetic** (verifier-held N=3); both supplied windows verify |
+
+How the chain-level rejections happen: in `replayed_earlier_window`, `dropped_middle_window` and `spliced_other_layer_proof`, the rejected slot holds a genuine, internally consistent proof made for a different statement. Its relations are not violated. It fails because the verifier's Fiat-Shamir transcript header (statement, C_in and C_out of the slot) differs from the one the proof was made under, which in every rejected slot (20 slot rejections across those 15 chain instances; `spliced_other_layer_proof` fails at slots 1 and 2) shows up as the proof-of-work nonce check failing (`why` = "a nonce does not give the proof of work that its round asks for" in `runs/suite.jsonl`). So these are transcript-binding rejections by the proof verifier, under the toy coins (target 10, work 6), not relation violations. The window-level negatives instead fail the linear claim ("the masked message in the proof does not satisfy the linear claim"). `dropped_middle_window` is also caught by the verifier-held N.
 
 All per-seed acceptance fractions have SD 0 (every seed identical). H1 (honest chains), H2 (all named negatives rejected), H3 (paired honest controls accepted) and H4 (counts) hold. Python and C++ commitments agree on all 15 honest windows. None of the verifier's non-proof inputs (statement, C_in, C_out) contains any full state row of S0..S3 (15/15 honest windows scanned); the proof files were scanned too, 0/15 contained a state row, but that is a diagnostic only, not a hiding claim.
 
@@ -74,11 +76,13 @@ Timing, descriptive only (shared loaded host, cores 6-9, n=15 honest windows): p
 
 - No soundness level: research target 10 bits, work 6, deterministic toy coins (inherited). Booleans above are observations, not soundness estimates.
 - The sponge is unvetted; collision/binding resistance of these parameters is assumed, not shown.
-- Not zero-knowledge. "Hidden" means the verifier is never handed the state; the proof system may leak table values through openings. The salt only stops a verifier from brute-forcing a low-entropy state from the commitment.
+- Not zero-knowledge. "Hidden" means the verifier is never handed the state; the proof system may leak table values through openings. The private salt is intended to impede a verifier guessing a low-entropy state and checking the guess against the commitment. That is a design intent, not a demonstrated hiding property: no hiding or zero-knowledge guarantee is claimed.
 - Window-0 trust: the initial root R0 is verifier-held, produced here by the trusted test harness from the synthetic state. How a real verifier obtains R0 (e.g. from an earlier proof or a published commitment) is out of scope.
 - Truncation of a chain is rejected by the verifier-held window count, outside the arithmetic proof. No recursion or aggregation: the chain verifier runs N proof verifiers.
 - Model and weights are synthetic labels in the context. No weight binding, projection, convolution or real-checkpoint claim.
-- One head, D8/F12, C2, N3, five seeds, unreplicated. D32/D128 are counted, not built.
+- One head, D8/F12, C2, N3, five seeds, unreplicated. D32/D128 are counted, not built. No full five-seed independent replication: the round-1 reviews rebuilt the binary and spot-checked one seed only.
+- No sponge security analysis or cryptanalysis of any kind, by the lane or its reviewers.
+- Field-element binding, not byte binding. State, history and salt words enter the sponge as Goldilocks field elements (each value reduced mod P = 2^64 - 2^32 + 1). Two integers that differ by a multiple of P are the same word, so they give the same commitment and the same proof. A reviewer showed this on a deliberately crafted history outside the registered fixtures: `Hin[0,0] = -2^63+1` and `-2^63+1+P` gave the same commitment and an identical accepted proof ([astra review](https://github.com/wakesync/flashprove/pull/123#issuecomment-6810544514), descriptive). This is not a sponge collision and does not affect the registered trusted R0 (registered history values are in [-1000, 1000), salts in [0, 2^62)). Binding a history or salt as arbitrary signed 64-bit integers or bytes would need a canonical encoding or range constraints on those words. The incoming state cells are already range cells (|x| < 2^23); the history and salt words are not range-constrained.
 
 ## Deviations
 
