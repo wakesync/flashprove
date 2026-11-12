@@ -1,0 +1,44 @@
+{
+  "kind": "descriptive-cache-probe",
+  "network_used": false,
+  "pins": {
+    "huihui": "739e3c5b",
+    "stock": "37561816"
+  },
+  "reason": "No safetensors files were found in the searched local weight/cache directories. No weight download and no recomputation from old hash receipts.",
+  "roots": [
+    {
+      "errors": [],
+      "exists": true,
+      "safetensors": [],
+      "search_root_index": 0
+    },
+    {
+      "errors": [],
+      "exists": true,
+      "safetensors": [],
+      "search_root_index": 1
+    },
+    {
+      "errors": [],
+      "exists": false,
+      "safetensors": [],
+      "search_root_index": 2
+    },
+    {
+      "errors": [],
+      "exists": false,
+      "safetensors": [],
+      "search_root_index": 3
+    }
+  ],
+  "roots_computed": false,
+  "searched_labels": [
+    "lane-projects",
+    "standard-user-cache",
+    "legacy-hf-cache",
+    "user-models"
+  ],
+  "utc": "2026-11-11T22:51:59.359041+00:00",
+  "verdict": "NOT DONE"
+}

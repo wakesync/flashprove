@@ -1,0 +1,20 @@
+{
+  "elapsed_s": 81.18464645370841,
+  "exit": 0,
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-fno-ipa-modref",
+    "-DBLK_FIELD=2",
+    "-DBLK_HASH=1",
+    "-I",
+    "blocks",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=all",
+    "-g"
+  ],
+  "stderr": "In file included from /usr/include/c++/13/string:51,\n                 from /usr/include/c++/13/stdexcept:39,\n                 from /usr/include/c++/13/system_error:43,\n                 from /usr/include/c++/13/bits/fs_fwd.h:35,\n                 from /usr/include/c++/13/filesystem:48,\n                 from research/weight-binding/keyfile/test.cpp:8:\nIn static member function \u2018static _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = const blk::LkpKeyBlock; _Up = blk::LkpKeyBlock; bool _IsMove = false]\u2019,\n    inlined from \u2018_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = const blk::LkpKeyBlock*; _OI = blk::LkpKeyBlock*]\u2019 at /usr/include/c++/13/bits/stl_algobase.h:506:30,\n    inlined from \u2018_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = const blk::LkpKeyBlock*; _OI = blk::LkpKeyBlock*]\u2019 at /usr/include/c++/13/bits/stl_algobase.h:533:42,\n    inlined from \u2018_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = const blk::LkpKeyBlock*; _OI = blk::LkpKeyBlock*]\u2019 at /usr/include/c++/13/bits/stl_algobase.h:540:31,\n    inlined from \u2018_OI std::copy(_II, _II, _OI) [with _II = const blk::LkpKeyBlock*; _OI = blk::LkpKeyBlock*]\u2019 at /usr/include/c++/13/bits/stl_algobase.h:633:7,\n    inlined from \u2018void std::vector<_Tp, _Alloc>::_M_assign_aux(_ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = const blk::LkpKeyBlock*; _Tp = blk::LkpKeyBlock; _Alloc = std::allocator<blk::LkpKeyBlock>]\u2019 at /usr/include/c++/13/bits/vector.tcc:341:15,\n    inlined from \u2018std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(std::initializer_list<_Tp>) [with _Tp = blk::LkpKeyBlock; _Alloc = std::allocator<blk::LkpKeyBlock>]\u2019 at /usr/include/c++/13/bits/stl_vector.h:790:21,\n    inlined from \u2018std::vector<blk::LkpPublic> blk::wf_lookups(const WfPublic&, const WfMatrix&)\u2019 at blocks/iop/wf.h:132:38:\n/usr/include/c++/13/bits/stl_algobase.h:437:30: warning: \u2018void* __builtin_memcpy(void*, const void*, long unsigned int)\u2019 forming offset 24 is out of the bounds [0, 24] of object \u2018<anonymous>\u2019 with type \u2018const blk::LkpKeyBlock [1]\u2019 [-Warray-bounds=]\n  437 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);\n      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nIn file included from blocks/iop/tests/wf_world.h:20,\n                 from blocks/iop/tests/wf_small_world.h:24,\n                 from research/weight-binding/keyfile/test.cpp:13:\nblocks/iop/wf.h: In function \u2018std::vector<blk::LkpPublic> blk::wf_lookups(const WfPublic&, const WfMatrix&)\u2019:\nblocks/iop/wf.h:132:38: note: \u2018<anonymous>\u2019 declared here\n  132 |     p.keys = {LkpKeyBlock{0, 0, 0, 0}};\n      |                                      ^\n",
+  "stdout": ""
+}

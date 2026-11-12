@@ -1,0 +1,52 @@
+{
+  "caveats": [
+    "72-byte envelope holds tag/version and two IDs; expected values are recomputed, so no per-tensor response is serialized by this adapter.",
+    "The native WF/BATT/LIN proof size and verification time for Qwen are NOT counted or extrapolated. New sizing and tensor placement are needed.",
+    "First-attempt point hashes omit rare rejection-sampling retries; no finite exact count of retries is asserted.",
+    "The 1,199-source MLE count is hypothetical, not the Qwen conversion. The design has 722 effective text blocks; 129 text norms fold into matrices, visual/MTP are out of scope.",
+    "Integer conversion, CPU time, peak memory, hiding and soundness are not established by these counts."
+  ],
+  "checkpoint_manifest_1199": {
+    "description": "Hashes cover every source tensor, including visual/MTP/folded norms; these are not all effective table blocks.",
+    "held_checkpoint_id_bytes": 32,
+    "merkle_internal_hashes": 1198,
+    "source_tensors": 1199,
+    "tensor_digest_bytes": 38368
+  },
+  "effective_source": "experiments/20261111-91-conversion-id/runs-fix100/keyfile-count.json",
+  "hypothetical_one_block_per_source": {
+    "blocks": 1199,
+    "integers": 27781427952,
+    "internal_target_bytes": 28776,
+    "linear_claims": 1199,
+    "mle_fold_multiplications": 39699842385,
+    "padded_entries": 39699843584,
+    "point_coordinates": 21084,
+    "point_sha256_first_attempts": 63252,
+    "serialized_response_bytes": 0
+  },
+  "kind": "COUNTED, not measured; not implemented for Qwen",
+  "qwen_text_design_722": {
+    "blocks": 722,
+    "integers": 26895337984,
+    "internal_target_bytes": 17328,
+    "linear_claims": 722,
+    "mle_fold_multiplications": 38414601518,
+    "padded_entries": 38414602240,
+    "point_coordinates": 14110,
+    "point_sha256_first_attempts": 42330,
+    "serialized_response_bytes": 0
+  },
+  "source_shapes": "experiments/20261109-8-qwen-real-weights/runs/stream-stock.json",
+  "toy": {
+    "extension_header_bytes": 72,
+    "integers": 16,
+    "internal_target_bytes": 96,
+    "linear_claims": 4,
+    "mle_fold_multiplications": 12,
+    "point_coordinates": 8,
+    "point_sha256_first_attempts": 24,
+    "serialized_response_bytes": 0,
+    "tensors": 4
+  }
+}
