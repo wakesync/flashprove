@@ -1,0 +1,5 @@
+{"t": "2026-11-12T21:20:06Z", "slot_granted": true, "set": "S10", "seconds_to_stop": 6294, "mem_available_gb": 17}
+{"t": "2026-11-12T21:20:15Z", "start": true, "set": "S10", "prompts": {"p01-ordinary-short": 13, "p07-chat-ordinary": 23, "p08-chat-refusal": 39, "p09-multilingual": 21, "p02-ordinary-paragraph": 107, "p04-repeat-punct": 64, "p05-code": 144, "p03-repeat-word": 512, "p06a-digits-256": 256, "p11-chat-long": 282}}
+{"t": "2026-11-12T21:20:54Z", "layer": 0, "ckpt": "stock", "type": "linear_attention", "fetch_wait_s": 20.1, "layer_s": 19.2}
+{"t": "2026-11-12T21:21:16Z", "layer": 1, "ckpt": "stock", "type": "linear_attention", "fetch_wait_s": 0.0, "layer_s": 21.7}
+{"t": "2026-11-12T21:21:42Z", "layer": 2, "ckpt": "stock", "type": "linear_attention", "fetch_wait_s": 2.2, "layer_s": 24.2}
