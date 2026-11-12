@@ -93,7 +93,12 @@ for arm in ("C", "S3", "S4", "S5", "W"):
                          passes=bool(len(r) == NPROMPT and med <= MED_BAR and max(r) <= MAX_BAR)))
     ok = [x for x in rows if not x.get("error")]
     shifts_ok = (1 <= out["shifts_min"] and out["shifts_max"] <= 24) if ok else None
-    in_class = (out["n_out_of_class"] == 0 and out["errors"] == 0 and (shifts_ok if arm.startswith("S") else True)) if ok else None
+    # Arm W's mixer input IS the baseline q12 of input_layernorm, so its class is also checked on every baseline layer
+    # (all 64), not only on the layers where the arms ran. C is in class by construction; S by its k rule (M is over 64 layers).
+    base_ge18 = sum(B[n]["total"]["ge18"] for n in NORMS)
+    out["baseline_ge_2e18_all_baseline_layers"] = base_ge18
+    in_class = (out["n_out_of_class"] == 0 and out["errors"] == 0 and (shifts_ok if arm.startswith("S") else True)
+                and (base_ge18 == 0 if arm == "W" else True)) if ok else None
     layers_pass = sum(1 for x in rows if x["passes"])
     A[arm] = dict(layers=rows, totals=out, n_layers=len(rows), layers_pass=layers_pass, layers_fail=[x["layer"] for x in rows if not x["passes"]],
                   in_class_on_layers_done=in_class, shifts_in_1_24=shifts_ok,
