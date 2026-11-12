@@ -77,3 +77,8 @@ In this repo: PR #124 (XS18 / XS20 heads end to end, the harness and bar reused 
 
 ## Amendments
 (empty at registration)
+
+- **A-1 (2026-11-12, during the registered run; reason: sensor format, no change of substance).** The standards sensor looks for a section named "Hypothesis"; the registered hypothesis sits under "Acceptance threshold". It is restated here verbatim. No definition, threshold, limit, arm or prompt changes. The registered text above is not edited.
+
+### Hypothesis
+**H (numerical):** XM18 passes on abl. (On stock too, if the stock leg finishes.)
