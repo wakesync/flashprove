@@ -1,0 +1,19 @@
+#!/bin/bash
+# Mock cp_prove for run_job_calib_test.py: one answer and one proof per request of -in, and the
+# -in-step it was given on stdout. MOCK_CALIB=sleep: a prove that does not end.
+[ "${MOCK_CALIB:-yes}" = sleep ] && sleep 600
+src='' dst=''
+while [ $# -gt 0 ]; do
+  case $1 in
+    -in) src=$2 && shift 2 ;;
+    -out) dst=$2 && shift 2 ;;
+    -in-step) echo "in-step $2" && shift 2 ;;
+    *) shift ;;
+  esac
+done
+mkdir -p "$dst"
+for r in "$src"/*.req; do
+  n=$(basename "$r" .req)
+  echo 284 >"$dst/$n.y"
+  echo proof >"$dst/$n.proof"
+done

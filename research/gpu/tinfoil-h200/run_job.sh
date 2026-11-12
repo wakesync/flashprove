@@ -29,7 +29,17 @@
 #      cp_verify has not accepted is given to no one (docs/limits.md, duty 6), so for any other run
 #      they are listed in <run>/withheld.txt and removed with the work directory. isk/ (the
 #      provider's secret side) is never exported and is removed with the work directory.
-# A GPU sampler (nvidia-smi, 500 ms) runs for the whole job.
+#   5. calibration (issue #140, experiments/20261112-7-h200-dense-calibration), only if FP_CALIB is
+#      set (empty by default: the #43 job alone, unchanged): after the warm repeats, for each entry
+#      <id>:<requests>:<in-step>:<repeats>:<timeout s> of FP_CALIB, in the order given (smallest
+#      first), <repeats> runs of calib_run.sh on $FP_CALIB_DIR/<id> (one fresh commitment and one
+#      cp_prove batch each), named <id>-1, <id>-2, ...; before them the planner's arrays of each
+#      configuration on this box's cp_verify (plan-<id>.arrays.txt). A run that is not accepted is
+#      reported and the job goes on; export and duty 6 as for a warm repeat. FP_CALIB is checked
+#      before step 0: a malformed value ends the job FAILED before any GPU work.
+# A GPU sampler (nvidia-smi, every FP_SAMPLE_MS ms, default 500) runs for the whole job. Every
+# cp_commit and cp_prove of a warm repeat or a calibration run is wrapped by stamp.sh, which appends
+# its start and end (epoch seconds with nanoseconds) to <run>.windows, so samples can be cut by run.
 #
 # Process structure: the job runs as its own process under `timeout` (FP_JOB_TIMEOUT), and every
 # step under its own `timeout`. A failing step ends the job process only, never this shell, so in
@@ -68,7 +78,12 @@ FP_TIMEOUT_COMPILER=${FP_TIMEOUT_COMPILER:-600}
 FP_TIMEOUT_QUICKSTART=${FP_TIMEOUT_QUICKSTART:-2700}
 FP_TIMEOUT_RUN=${FP_TIMEOUT_RUN:-600}
 FP_KILL_GRACE=${FP_KILL_GRACE:-30}
+FP_SAMPLE_MS=${FP_SAMPLE_MS:-500}
+FP_CALIB=${FP_CALIB:-}
 HERE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+FP_CALIB_DIR=${FP_CALIB_DIR:-$HERE/calib}
+FP_CALIB_RUNNER=${FP_CALIB_RUNNER:-$HERE/calib_run.sh}
+FP_STAMP=${FP_STAMP:-$HERE/stamp.sh}
 SELF=$HERE/$(basename -- "${BASH_SOURCE[0]}")
 R=$FP_WORK/results
 ST=$FP_WORK/.runner # runner bookkeeping, never served (outside results/)
@@ -127,10 +142,26 @@ export_failed() {
   stage "$1 export failed (work directory kept outside results/, not served); the job will be FAILED"
 }
 
+# calib_ok: FP_CALIB is empty or a list of <id>:<requests>:<in-step>:<repeats>:<timeout s>, ids of
+# letters, digits and _ (at most 16), requests 1 to 64, in-step 1 to 16 and at most requests, repeats
+# 1 to 20, timeout 1 to 86400, each a canonical decimal; and each <id> has a directory in FP_CALIB_DIR.
+calib_ok() {
+  local e id n k r t
+  for e in $FP_CALIB; do
+    [[ $e =~ ^([A-Za-z0-9_]{1,16}):([1-9][0-9]{0,1}):([1-9][0-9]{0,1}):([1-9][0-9]{0,1}):([1-9][0-9]{0,4})$ ]] || return 1
+    id=${BASH_REMATCH[1]} n=${BASH_REMATCH[2]} k=${BASH_REMATCH[3]} r=${BASH_REMATCH[4]} t=${BASH_REMATCH[5]}
+    [ "$n" -le 64 ] && [ "$k" -le 16 ] && [ "$k" -le "$n" ] && [ "$r" -le 20 ] && [ "$t" -le 86400 ] || return 1
+    [ -d "$FP_CALIB_DIR/$id" ] || return 1
+  done
+  return 0
+}
+
 job() {
   umask 077
   stage job-start
   printf 'step\texit\tseconds\ttimed_out\n' >"$R/steps.tsv"
+  calib_ok || fail "FP_CALIB is malformed or names a configuration that is not in FP_CALIB_DIR: '$FP_CALIB'"
+  [ -z "$FP_CALIB" ] || printf '%s\n' "$FP_CALIB" >"$R/calib-plan.txt"
   # ---- 0. environment
   {
     step env-gpu-query "$FP_TIMEOUT_ENV" nvidia-smi --query-gpu=name,compute_cap,driver_version,memory.total,memory.used,mig.mode.current,power.limit,persistence_mode --format=csv
@@ -150,7 +181,10 @@ job() {
   step cc_probe "$FP_TIMEOUT_ENV" "$FP_CC_PROBE" >"$R/cc_probe.json" 2>&1
   stage env-recorded
   # The sampler: time, used MiB, power W, utilization %, for the whole job.
-  nvidia-smi --query-gpu=timestamp,memory.used,power.draw,utilization.gpu --format=csv,noheader,nounits -lms 500 \
+  # timestamp is nvidia-smi's local time (the container's TZ, recorded in host-env.txt); the runs'
+  # windows (<run>.windows) are epoch seconds.
+  date +'%Z %z' >>"$R/host-env.txt" 2>&1
+  nvidia-smi --query-gpu=timestamp,memory.used,power.draw,utilization.gpu --format=csv,noheader,nounits -lms "$FP_SAMPLE_MS" \
     >"$R/gpu-samples.csv" 2>/dev/null 9>&- &
   sampler=$!
   echo "$sampler" >"$ST/sampler.pid"
@@ -207,7 +241,54 @@ job() {
   for i in $(seq 1 "$FP_REPEATS"); do
     one_run "rep$i" "$build" || stage "rep$i did not end with YES (kept, reported)"
   done
+
+  # ---- 5. calibration (only with FP_CALIB)
+  if [ -n "$FP_CALIB" ]; then
+    local e id n k r t j
+    stage calibration-start
+    for e in $FP_CALIB; do # the planner's arrays on this box, before any calibration run
+      id=${e%%:*}
+      step "plan-$id" "$FP_TIMEOUT_ENV" "$build/cp_verify" -plan arrays "$FP_CALIB_DIR/$id" 128 >"$R/plan-$id.arrays.txt" 2>&1
+    done
+    for e in $FP_CALIB; do
+      # split without a here-string (bash before 5.1 writes one to a file in TMPDIR)
+      id=${e%%:*} e=${e#*:}
+      n=${e%%:*} e=${e#*:}
+      k=${e%%:*} e=${e#*:}
+      r=${e%%:*} t=${e#*:}
+      for j in $(seq 1 "$r"); do
+        calib_one "$id-$j" "$FP_CALIB_DIR/$id" "$n" "$k" "$t" "$build" || stage "$id-$j did not end with YES (kept, reported)"
+      done
+    done
+  fi
   stage job-steps-finished
+}
+
+# calib_one <name> <configuration dir> <requests> <in-step> <timeout s> <dir with the programs>: one
+# calibration run (calib_run.sh) under its own step timeout, exported like a warm repeat.
+calib_one() {
+  local name=$1 cfg=$2 n=$3 k=$4 t=$5 build=$6 top=$FP_WORK/$1 rc verdict accepted=no
+  mkdir -m 700 "$top" || return 1
+  printf '%s\t%s\n' "$name" "$top/example" >"$ST/current"
+  stage "$name-start ($n requests, in-step $k)"
+  step "$name" "$t" env -C "$RUN_REPO" BUILD="$build" FP_REPO="$RUN_REPO" \
+    GPU_RUN="$FP_STAMP $R/$name.windows $FP_TIME -o $R/$name.time -a -f %e|%M|%x|%U|%S|%C" \
+    bash "$FP_CALIB_RUNNER" "$cfg" "$top/example" "$n" "$k" >"$R/$name.stdout" 2>&1
+  rc=$?
+  verdict=$(tail -n 1 "$top/example/cp_verify.log" 2>/dev/null)
+  echo "$rc" >"$R/$name.exit"
+  if [ "$rc" = 0 ] && [ "$verdict" = YES ]; then accepted=yes; fi
+  export_run "$name" "$top/example" "$accepted" || export_failed "$name"
+  rm -f "$ST/current"
+  rmdir "$top" 2>/dev/null
+  if [ "$accepted" = yes ]; then
+    echo YES >"$R/$name.verdict"
+    stage "$name-exit 0 YES"
+    return 0
+  fi
+  printf '%s\n' "${verdict:-no cp_verify.log}" >"$R/$name.verdict"
+  stage "$name-exit $rc ${verdict:-no cp_verify.log}"
+  return 1
 }
 
 # quickstart_work: the quickstart's work directory, from the first WORK= line of its output.
@@ -221,7 +302,7 @@ one_run() {
   printf '%s\t%s\n' "$name" "$top/example" >"$ST/current"
   stage "$name-start"
   # GPU_RUN puts /usr/bin/time before cp_commit and cp_prove (prover/examples/run_target_example.sh).
-  step "$name" "$FP_TIMEOUT_RUN" env -C "$RUN_REPO" BUILD="$build" GPU_RUN="$FP_TIME -o $R/$name.time -a -f %e|%M|%x|%U|%S|%C" \
+  step "$name" "$FP_TIMEOUT_RUN" env -C "$RUN_REPO" BUILD="$build" GPU_RUN="$FP_STAMP $R/$name.windows $FP_TIME -o $R/$name.time -a -f %e|%M|%x|%U|%S|%C" \
     prover/examples/run_target_example.sh "$KIT" "$top/example" >"$R/$name.stdout" 2>&1
   rc=$?
   verdict=$(tail -n 1 "$top/example/cp_verify.log" 2>/dev/null)

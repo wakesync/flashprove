@@ -1,0 +1,10 @@
+#!/bin/bash
+# Mock cp_commit for run_job_calib_test.py (CPU only). MOCK_CALIB=crash: the predicted CC-on refusal.
+[ "${MOCK_CALIB:-yes}" = crash ] && {
+  echo "cudaHostRegister failed (mock)"
+  exit 1
+}
+mkdir -p ivk isk
+echo "SECRET-isk-must-never-be-exported" >isk/seed
+echo ivk >ivk/k
+echo "commitment ID: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"

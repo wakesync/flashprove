@@ -92,8 +92,11 @@ RUN nvcc -std=c++17 --gpu-architecture=sm_90a --cudart=static -o /opt/fp-h200/cc
 
 # ---- final: job runner and results server ----------------------------------------------------------
 FROM prover AS final
-COPY run_job.sh serve.py /opt/fp-h200/
-RUN chmod 0755 /opt/fp-h200/run_job.sh /opt/fp-h200/serve.py \
+COPY run_job.sh serve.py stamp.sh calib_run.sh /opt/fp-h200/
+# The calibration configurations of issue #140 (make_calib_configs.py writes them; FP_CALIB selects them).
+COPY calib/ /opt/fp-h200/calib/
+RUN chmod 0755 /opt/fp-h200/run_job.sh /opt/fp-h200/serve.py /opt/fp-h200/stamp.sh /opt/fp-h200/calib_run.sh \
+    && chmod -R go-w /opt/fp-h200/calib \
     && useradd --uid 10001 --create-home --shell /bin/bash prover
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility \
     FP_REPO=/opt/flashprove \

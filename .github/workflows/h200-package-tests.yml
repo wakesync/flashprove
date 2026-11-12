@@ -30,13 +30,16 @@ jobs:
           persist-credentials: false
       - name: bash -n and shellcheck
         working-directory: research/gpu/tinfoil-h200
-        run: bash -n run_job.sh && bash -n fetch_bounded.sh && shellcheck --version && shellcheck run_job.sh fetch_bounded.sh
+        run: bash -n run_job.sh && bash -n fetch_bounded.sh && bash -n calib_run.sh && bash -n stamp.sh && shellcheck --version && shellcheck run_job.sh fetch_bounded.sh calib_run.sh stamp.sh
       - name: serve_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 serve_test.py
       - name: run_job_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 run_job_test.py
+      - name: run_job_calib_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 run_job_calib_test.py
       - name: fetch_bounded_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 fetch_bounded_test.py
