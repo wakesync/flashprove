@@ -67,3 +67,43 @@ from main to better than some factor) is a valid result and is reported as such.
 - Counted is not built; built on CPU is not GPU. CPU research-harness rates are reported for
   context and are never used as GPU rates.
 - No results.yaml row is added: nothing here is measured.
+
+## Amendments
+
+### 2026-11-12, after code (round-1 review of PR #126, both reviewers)
+
+Written after the script, note and results existed (commit 2dd48460). The registration above (b84fc2d9) is
+not changed. Both reviewers found that the six template headings required by the research standards were
+missing. This entry maps each one to what was registered, and states where a desk model has nothing to put.
+Nothing below adds a threshold, a run or a spend after the fact.
+
+- **Hypothesis.** None. This is a desk question (what does main imply for cost), not a test of a falsifiable
+  claim. Nothing is run that could falsify a sentence about Qwen proving cost, so no hypothesis was registered
+  and none is added now.
+- **Metric.** As the script computes it from files on main: GPU-seconds and USD per 1,000 window tokens
+  (prompt plus reply tokens of one proved window, at T = 64, 256 and 1,024); GB of the largest segment and the
+  largest power-of-two window under PR #70's 127 GB rule; the spread factor (high / low) of each gap with the
+  others held central; and the multiple of plain inference (GPU-s per token x plain tok/s), evaluated only at
+  assumed plain rates because no plain Qwen rate is on main.
+- **Acceptance threshold.** None, as the registration says ("No threshold: this is a desk model").
+- **Kill criterion.** No time or spend budget, because there is no spend and no run beyond a deterministic
+  script. The script stops with an error if a cited source no longer contains the value it reads (a changed
+  results.yaml metric, a changed JSON field, or prose that no longer matches its pattern). That is the only
+  stop rule.
+- **Runs.** One deterministic run of a standard-library + PyYAML script, n = 1. There is no variance by
+  construction. The committed `model-output.json` must be byte-identical when the script is rerun.
+- **Prior art.** Within this repository: PR #85's `research/cost/Q3-COST-QWEN-1110.md`, which this extends,
+  and PR #70's cost columns in `experiments/20261109-32-qwen-m3-design/`. Outside it: not scanned. The cost
+  reporting of zkLLM, EZKL, Jolt and Expander was not compared, because none of them proves this fork's
+  statement or a DeltaNet recurrence, and their costs are not on main. A literature comparison is left to a
+  prior-art lane.
+
+Source status since registration: PR #123 (hidden-root window handoff) merged at 253d9c12 at
+2026-11-12T01:27:30Z, eight seconds before this registration was committed and after its text was written
+against main cc4fe82. By registration it stays out of every computed number. The note cites its figures from
+main as context only. Whether its per-token handoff joins the volume factor is left to a later amendment or
+lane.
+
+Model changes in the same fix (listed as deviations in RESULTS.md): the built-volume scenario is now carried
+through memory and window selection, U2 is reported for the same scenarios as U1, and the hard-coded
+constants are read from or asserted against their sources.
