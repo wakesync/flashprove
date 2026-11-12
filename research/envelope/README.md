@@ -20,6 +20,9 @@ covered, and how to reproduce every number.
 - `test_concurrency.py`: post-registration regression tests with the real `cp_verify` and several
   OS processes started behind a barrier (same nonce, distinct nonces, issue racing deliver, release
   directory missing, post-commit output failure).
+- `test_aliases.py`: post-registration regression tests for one state file reached by several
+  names (symlink, symlinked directory, hard link, relative and absolute paths), concurrent and
+  sequential, with the real `cp_verify`.
 
 ## What is proved, what the client recomputes
 
@@ -42,8 +45,11 @@ covered, and how to reproduce every number.
 - No batch envelope, no mask-exhaustion check (gap G-03), no network, no real provider.
 - Concurrency: the registered vectors are sequential. Serialisation of concurrent client processes
   on one state file (an advisory `flock` on `<state>.lock`) was added after the registered run and is
-  tested by `test_concurrency.py` only, on one local filesystem. It does not cover other programs
-  writing the state file, network filesystems, or power loss beyond what fsync gives.
+  tested by `test_concurrency.py` and `test_aliases.py` only, on one local filesystem. The lock is
+  keyed on the state file's real path (symlinks and relative parts resolved); a state file with more
+  than one hard link is refused. It does not cover other programs writing the state file, network
+  filesystems, or power loss beyond what fsync gives. Lock acquisition has no timeout (SPEC
+  section 4).
 - `versions.verifier_build` is compared with what the binary itself prints (`build=`); it does not
   show which binary ran.
 
@@ -60,6 +66,8 @@ python3 experiments/20261111-9-client-envelope/run_suite.py --registered \
     --cp-verify bin/cp_verify --runs 5 --out /tmp/envelope-run
 python3 research/envelope/test_concurrency.py --cp-verify bin/cp_verify --repeats 20 \
     --out /tmp/concurrency.json
+python3 research/envelope/test_aliases.py --cp-verify bin/cp_verify --repeats 20 \
+    --out /tmp/aliases.json
 ```
 
 `<build>` is the `build=` digest that `verifier/build.sh` prints on its first line; the vectors pin
@@ -69,5 +77,6 @@ with another digest regenerates other vectors and is refused by the registered c
 output directory that exists. The registered numbers are in
 `experiments/20261111-9-client-envelope/runs/registered/` (pre-fix client, fb63aa8); the
 post-registration re-run on the fixed client is in `runs/postfix/`; the concurrency test output of
-this PR is `experiments/20261111-9-client-envelope/runs/postfix-concurrency/`. See that directory's
+this PR is `experiments/20261111-9-client-envelope/runs/postfix-concurrency/`, and the alias test
+output (second fix) is `runs/postfix2-alias/`. See that directory's
 `RESULTS.md` for what each set shows.

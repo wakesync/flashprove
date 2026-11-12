@@ -124,6 +124,27 @@ written back. The cost is that deliveries on one state file run one at a time (i
 programs that write the state file, and it needs a filesystem with working `flock` (a local
 filesystem; not checked on network filesystems).
 
+One state file, one name. The lock and every read, write, rename and directory fsync use the real
+path of the state file: the path as given, with every symlink (of the file or of a directory on
+the way) and every `.` and `..` resolved (`realpath`). So a symlink to the state file, a path
+through a symlinked directory, and a relative and an absolute path to the same file all take the
+same lock `<real path>.lock`, and a symlink is never replaced by the rename. A hard link cannot
+be resolved to one name, so a state file with more than one hard link (`st_nlink > 1`) is refused
+with `REJECT: error`, state untouched, before it is read; so is a state file that is not a
+regular file, a path that resolves to another file once the lock is held, and (checked again just
+before the commit) a state file whose inode or link count changed while the lock was held. Not
+covered: one file reached through a bind mount or a second mount of its filesystem has two real
+paths and one link, so this rule does not join them; keep one state file on one path. (Before
+the 2026-11-12 second fix the lock and the rename used the path as given, and a symlink or hard
+link alias of one state file released one nonce twice; see RESULTS.)
+
+Availability limit. Taking the lock has no timeout: a client process that holds it blocks every
+other client process on that state file until it finishes. In practice the hold is bounded by the
+holder's `cp_verify` timeout (`--timeout`, default 300 s) plus the file writes, and the lock is
+released when the holder exits or is killed. A holder that hangs elsewhere (for example on a stuck
+filesystem) blocks the others indefinitely. This is a known availability limit, not a safety one:
+waiting never releases anything.
+
 Writes. The state file and the release file are written to a uniquely named temporary file in the
 same directory (`mkstemp`), fsynced, then moved into place (the state with an atomic rename, the
 release file with a hard link that never overwrites an existing file), and the directory is
@@ -180,8 +201,11 @@ the envelope digest (the state rename is the commit), put the release file in pl
   leaves the request outstanding and nothing released. A crash between the state write and the
   reply write leaves the nonce consumed and the reply unreleased: fail closed (the request is then
   lost, not replayable). An output failure at that point is reported as `CONSUMED-UNRELEASED`
-  (section 1). A crash can leave a `.<name>.*.tmp` file in the state or release directory; it is
-  never read.
+  (section 1). A crash can leave a uniquely named `.<name>.*.tmp` file in the state or release
+  directory; it is never read by the client. A temporary file left next to the release path holds
+  the verified reply bytes (it was written before the commit), so a crash after the commit can
+  leave the reply on disk under a temporary name even though it was not released. Such a file is
+  not a release and must not be handed on as one.
 - Batch proofs: one envelope covers one request and one proof. A batch is released only if every
   member's envelope passes; this prototype has no batch envelope.
 - Mask exhaustion and the provider-side budget of proofs on one commitment are outside the client's

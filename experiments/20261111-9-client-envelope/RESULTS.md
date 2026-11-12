@@ -4,7 +4,9 @@ Issue #9. Verdict vs the PREREG threshold: **PASS** (measured, unreplicated; des
 two stored synthetic examples, not a soundness claim). The registered numbers below were measured
 on the pre-fix client at fb63aa8. After the run, two reviews found that client unsafe for
 concurrent processes sharing a state file; it was fixed and tested after the run (PREREG
-amendment 2, section "Post-registration fix and checks" below). That section is not part of the
+amendment 2, section "Post-registration fix and checks" below). A second review round found that
+a symlink or hard-link alias of the state file still let one nonce be released twice; that was
+fixed and tested too (section "Second post-registration fix"). Neither section is part of the
 registered result.
 
 ## In plain language
@@ -93,7 +95,8 @@ client verifies no TEE evidence.
 ## What this does not establish
 
 - No soundness: 41 finite vectors on two synthetic stored examples. The envelope is a research
-  prototype with no independent review yet.
+  prototype. A two-family review of PR #122 is in progress (two rounds so far, the second found
+  the alias defect fixed below); nothing here is replicated.
 - No freshness from the proof: A5 confirms gap G-05. Freshness and slot binding rest on the
   provider's signature and the client's own state.
 - No checkpoint identity: provenance is a client pin of a digest; nothing here checks that a real
@@ -107,6 +110,10 @@ client verifies no TEE evidence.
   concurrent processes on one state file. Fixed and tested after the run, see Amendments
   (amendment 2) and the next section; that test is a post-registration check, not a registered
   result, and covers one local filesystem and client processes running this code only.
+- The lock is advisory (`flock`): it serialises client processes running this code, not other
+  programs that write the state file. Tested on a single local filesystem only: no
+  network-filesystem test, no power-loss test. Lock acquisition has no timeout (an availability
+  limit, SPEC section 4).
 - `versions.verifier_build` is compared with the `build=` digest the `cp_verify` binary prints
   about itself (SPEC section 3). A tampered binary can print any digest, so this does not show which
   binary ran.
@@ -167,3 +174,47 @@ above and every other probe gives the same verdict as before.
 
 These are post-registration checks of one fix, on one host and one local filesystem. They are not
 a replication of the registered run and add no soundness claim.
+
+## Second post-registration fix: one state file, several names (after the run; no threshold)
+
+What was found (PR #122 review round 2, opus, at head c715045e): the lock `<state>.lock` and the
+atomic rename used the state path as given on the command line. A symlink to the state file took
+another lock file, and the rename replaced the symlink with a regular file; a hard link to the
+state file took another lock too. Either way one nonce was released twice, with the two
+deliveries at once and one after the other.
+
+What changed in `research/envelope/client_verify.py` (6836843; the 15 checks, their order and the
+output contract are unchanged): the state path is resolved with `realpath` before the lock path
+is derived, and every read, write, rename and directory fsync uses that real path; the path is
+resolved again once the lock is held and refused if it moved. A state file that is not a regular
+file or has more than one hard link (`st_nlink > 1`) is refused with `REJECT: error`, state
+untouched, before it is read and again just before the commit (SPEC section 4).
+
+Tests, `research/envelope/test_aliases.py` (real cp_verify, own TEST label, every client call its
+own OS process, concurrent calls released by one barrier, 20 repetitions per case), output in
+`runs/postfix2-alias/` (see its README for commands and times):
+
+| case | second-fix client (`fixed-client.json`) | client at c715045e (`prefix2-client-c715045.json`) |
+|---|---|---|
+| symlink, concurrent: 3 processes via `state.json`, `alias.json -> state.json`, `dirlink/state.json`; exactly one RELEASE | 20 / 20 (1 release each) | 0 / 20 (2 releases each) |
+| symlink, sequential: the same three names one after the other; RELEASE then `REJECT: nonce-consumed` twice | 20 / 20 (1 release) | 0 / 20 (2 releases each) |
+| symlink, `issue` through the alias, then deliver through both names | 20 / 20 (1 release) | 0 / 20 (the issue turned the symlink into a separate file; the request never reached `state.json`, 0 releases) |
+| hard link, concurrent: 2 processes via `state.json` and `hard.json`; both `REJECT: error`, state byte-identical | 20 / 20 (0 releases) | 0 / 20 (2 releases each) |
+| hard link, sequential: both names refused (deliver and issue); after the second name is removed, one RELEASE then `REJECT: nonce-consumed` | 20 / 20 (1 release, after the unlink) | 0 / 20 (2 releases each) |
+| relative vs absolute, concurrent: `state.json`, `sub/../state.json`, absolute; exactly one RELEASE | 20 / 20 | 20 / 20 |
+| relative vs absolute, sequential | 20 / 20 | 20 / 20 |
+
+The relative-path cases pass on both clients (the same directory entry gives the same lock file
+even unresolved); they guard against a regression, they do not show the defect. On the second-fix
+client, no case released one nonce more than once in any of its 140 repetitions. The first fix's
+`test_concurrency.py`, rerun on the second-fix client (`runs/postfix2-alias/concurrency-fixed-client.json`),
+passes 20 / 20, 20 / 20, 20 / 20, 1 / 1 and 1 / 1 as before. The reviewer's probe scripts were
+rerun against the second-fix client (outside the repository; see the PR comment): its symlink
+race gives one release in 3 of 3 runs (it gave two in 3 of 3), its sequential symlink probe one
+release (it gave two), its sequential hard-link probe `REJECT: error` twice and no release (it gave
+two releases); its other probes give the same result as at c715045e.
+
+Not established by this: other programs writing the state file, a state file reached through a
+bind mount or a second mount of one filesystem (realpath cannot see those; the hard-link check
+does not either), network filesystems, power loss. Same host and filesystem as the first fix;
+not a replication.
