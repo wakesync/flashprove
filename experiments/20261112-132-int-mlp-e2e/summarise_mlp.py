@@ -137,13 +137,26 @@ def fmt(v, n=3):
 
 def main():
     legs = {leg: leg_summary(leg) for leg in ("abl", "stock")}
-    rg = {"abl": ranges([R / "ranges-abl.jsonl"]), "stock": ranges([R / "ranges-stock.jsonl"])} if (R / "ranges-abl.jsonl").exists() else {}
+    rg = {leg: ranges([R / f"ranges-{leg}.jsonl"]) for leg in ("abl", "stock") if (R / f"ranges-{leg}.jsonl").exists()}
+    for leg in ("abl", "stock"):
+        D = jl(R / f"divergence-{leg}.jsonl")
+        if D and not legs[leg].get("finished"):
+            legs[leg]["layers_done"] = [r["layer"] for r in D]
+            legs[leg]["divergence_by_layer"] = {p: [dict(layer=r["layer"], **{k: v for k, v in (r.get(p) or {}).items()}) for r in D] for p in ("XM18", "FM")}
+            legs[leg]["det_bit_equal_every_layer"] = all(all(r["det_bit_equal"].values()) for r in D)
     S = dict(note=NOTE, bars=dict(top1=TOP1_BAR, kl_median_nats=KLMED_BAR, kl_max_nats=KLMAX_BAR), legs=legs, ranges=rg)
     (R / "summary.json").write_text(json.dumps(S, indent=1) + "\n")
     L = [f"# Summary ({NOTE})", "", f"Bars: top-1 >= {TOP1_BAR:.0%}, KL median <= {KLMED_BAR} nats, KL max <= {KLMAX_BAR} nats, no guard error.", ""]
     for leg in ("abl", "stock"):
         s = legs[leg]; L.append(f"## {leg}")
-        if not s.get("finished"): L += ["logits not finished", ""]
+        if not s.get("finished"):
+            L += ["logits not finished" + (f"; layers done {s['layers_done'][0]}..{s['layers_done'][-1]}; XM18#2 bit-equal every layer: {s['det_bit_equal_every_layer']}" if s.get("layers_done") else ""), ""]
+            if s.get("layers_done"):
+                L += ["Residual relative L2 vs REF after the last layer done, per prompt:", "", "| prompt | XM18 | FM |", "|---|---|---|"]
+                lx = s["divergence_by_layer"]["XM18"][-1]; lf = s["divergence_by_layer"]["FM"][-1]
+                for pid in ORDER_ALL:
+                    if pid in lx: L.append(f"| {pid} | {fmt(lx.get(pid))} | {fmt(lf.get(pid))} |")
+                L.append("")
         else:
             L.append(f"prompts {len(s['prompts'])}; sanity p01 -> {s['sanity_p01_last_top1']} pass={s['sanity_pass']}; deterministic={s['deterministic']}; errors={len(s['errors'])}")
             L += ["", "| path | n | top-1 agree | KL median | KL p99 | KL max | KL SD | maxdiff/std median (max) | bar |", "|---|---|---|---|---|---|---|---|---|"]
