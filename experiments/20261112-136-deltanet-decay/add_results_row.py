@@ -27,9 +27,11 @@ for arm in ("T0", "T1", "T2", "T3"):
                   note=f"(layer, head) pairs failing the bar on at least one prompt (reject, per-token |a_table - a| > 2^-9, or max_t |prod a_table - prod a| > 0.01); "
                        f"{a['verdict']} vs prereg; failing cells {a['n_fail_cells']} of {a['n_cells']}; {NOTE}"))
     ec = a["e_cum_max_over_cells"]
+    t0 = ("; T0 only: a rejected token enters the product as a = 0 (a sentinel, not a table value), so in the "
+          f"{a.get('cells_with_reject', 4136)} cells with a reject this is not an ordinary decay error, only 'failed'") if arm == "T0" else ""
     rows.append(m(f"decay_{arm.lower()}_ecum_median", "median", g(ec["median"]), "abs_diff", ec["n"], arm=arm, series="decay-table-ecum",
                   spread=dict(sd=g(ec["sd"]), min=g(ec["min"]), max=g(ec["max"])),
-                  note=f"per (layer, head, prompt) cell, max over tokens of |prod a_table - prod a| (accumulated state decay); spread over the 23,040 cells; bar 0.01 on every cell; {NOTE}"))
+                  note=f"per (layer, head, prompt) cell, max over tokens of |prod a_table - prod a| (accumulated state decay); spread over the 23,040 cells; bar 0.01 on every cell{t0}; {NOTE}"))
 rows.append(m("decay_softplus_input_out_of_domain", "single", g(dm["share_x_out"]), "fraction", dm["n_token_head_values"],
               note=f"share of (token, head, layer) values with x = ar + dt_bias outside [-8, 8): {dm['x_out_of_domain']} of {dm['n_token_head_values']} "
                    f"({dm['x_lt_m8']} below -8, {dm['x_ge_8']} at or above 8); {dm['heads_any_x_out']} of 2,304 (layer, head) pairs have at least one; {NOTE}"))
