@@ -318,20 +318,24 @@ Then the live service's own end-to-end check: one attested request to each model
 
 ## 8. Off the box: independent verification (CPU, after restore)
 
-Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine. Then check **every expected response of every expected run** with `verify_offbox.py` (this directory; CPU only, no network; tested by `verify_offbox_test.py` with a mocked verifier). It does not judge from what happens to be in the archive: it derives the expected runs from the job's plan and fails closed.
+Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine. Then check **every expected response of every expected run** with `verify_offbox.py` (this directory; CPU only, no network; tested by `verify_offbox_test.py` with a mocked verifier). It does not judge from what happens to be in the archive: the expected runs come only from the **registered** values typed on the command line (`--plan` or `--no-calibration`, and `--repeats`, all required), and the archive is checked against them, never the other way round.
+
+Run it only after step 5's `sha256sum -c` passed (the tool checks `SHA256SUMS` again itself; a missing or mismatching one is a FAIL).
 
 ```sh
-# the #140 window (FP_ONBOX_BUILD=1, FP_REPEATS=10, FP_CALIB read from results/calib-plan.txt):
+# the #140 window: FP_CALIB and FP_REPEATS as registered (experiments/20261112-7-h200-dense-calibration/PREREG.md, Amendment 1),
+# typed here from the PREREG, NOT read from the archive; FP_ONBOX_BUILD=1, so the cold run is the quickstart:
 python3 research/gpu/tinfoil-h200/verify_offbox.py --cp-verify <cp_verify> --results results \
-  --repeats 10 --cold quickstart --report offbox-verify.json; echo "exit $?"
-# #43 alone with prebuilt programs (FP_ONBOX_BUILD=0, no FP_CALIB): --cold cold
+  --plan 'C2:8:4:3:300 C3:64:10:3:900' --repeats 10 --cold quickstart --report offbox-verify.json; echo "exit $?"
+# #43 alone (no FP_CALIB): --no-calibration --repeats 10 instead of --plan; with prebuilt programs (FP_ONBOX_BUILD=0) --cold cold
 ```
 
-- Expected runs: the cold run (`quickstart` or `cold`), `rep1`..`rep<N>` (response `example`), and for each FP_CALIB entry `<id>:<requests>:...:<repeats>:...` the runs `<id>-1`..`<id>-<repeats>`, each with responses `r01`..`r<requests>` (C2: r01..r08, C3: r01..r64). `--plan` may give FP_CALIB explicitly; it must equal `results/calib-plan.txt` if that exists.
+- Expected runs: the cold run (`quickstart` or `cold`), `rep1`..`rep<N>` for `--repeats N` (response `example`), and for each entry `<id>:<requests>:...:<repeats>:...` of `--plan` the runs `<id>-1`..`<id>-<repeats>`, each with responses `r01`..`r<requests>` (C2: r01..r08, C3: r01..r64): 17 runs and 227 responses for the #140 window.
+- The archive is cross-checked, never trusted to choose: with `--plan`, `results/calib-plan.txt` must exist, be non-empty and name the same plan (missing, empty or different = FAIL); with `--no-calibration` it must be absent. `results/steps.tsv` must exist. Any run the registration did not name is a FAIL: a directory in `results/` that is not an expected run, a run row in `steps.tsv` or a run file (`<run>.exit`, `.verdict`, `.stdout`, `.time`, `.windows`) of a run not expected (an extra repeat, `C2-4`, `C3-4`, `rep11`). A `--repeats` lower than the job's therefore fails (its extra repeats are unexpected), and a higher one fails (missing runs).
 - Each response: `cp_verify config ivk in/<r>.req out/<r>.y out/<r>.proof -id <the run's own commitment ID from its cp_commit.log>`; it counts only with exit 0 and last line `YES`. Every response is checked and reported, so an early `NO` or a missing response is never hidden by later `YES`.
 - A run FAILS on: a missing run directory, `out/` withheld on the box (`withheld.txt`), a missing request/answer/proof, any rejection or verifier crash or timeout, no single commitment ID, or a response file the plan did not expect (a mixed tree).
 - Mutations (research/gpu/local-verify's five: proof bit flip, answer bit flip, request bit flip, proof truncated, wrong ID) on the first response of every run that passed (`--mutations all` for every response): each must exit nonzero with a last line starting `NO`; one accepted mutation fails the run. `--mutations none` makes the overall verdict FAIL (the PREREG requires them).
-- **Overall PASS (exit 0) only if every expected run passed.** Exit 1 = FAIL, 2 = usage error (nothing checked; an empty, whitespace-only or duplicate plan is a usage error, never a PASS). The JSON report has every response's exit and last line and every mutation's; keep it with the results (redacted as in step 9).
+- **Overall PASS (exit 0) only if every expected run passed and the archive checks found nothing.** Exit 1 = FAIL, 2 = usage error (nothing checked: no `--plan`/`--no-calibration`, both, no `--repeats`, or an empty, whitespace-only, malformed or duplicate `--plan` is a usage error, never a PASS). The JSON report has every response's exit and last line and every mutation's; keep it with the results (redacted as in step 9).
 
 A run that fails here is not counted in any fit (experiments/20261112-7-h200-dense-calibration/PREREG.md: both verifiers must say YES for every proof of the batch); it is reported, not rerun.
 

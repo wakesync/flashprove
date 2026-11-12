@@ -1,14 +1,24 @@
 #!/usr/bin/env python3
 """Off-box verification of an H200 job's results (RUNBOOK.md step 8), on CPU, after restore.
 
-Checks EVERY response that the job was expected to produce, against the run's own commitment ID,
+Checks EVERY response that the job was registered to produce, against the run's own commitment ID,
 with a cp_verify built by the operator from the pinned commit, and fails closed:
 
-  * the expected runs come from the plan, not from what is in the archive: the #43 cold run
-    (`quickstart` with FP_ONBOX_BUILD=1, `cold` with 0, or none), the warm repeats rep1..repN
-    (each one response, `example`), and every calibration run <id>-1..<id>-<repeats> of the
-    FP_CALIB plan (each <requests> responses r01..rNN). The plan is read from results/calib-plan.txt
-    (the job writes it) or given with --plan; if both exist they must be equal.
+  * the expected runs come from the REGISTERED plan given on the command line, never from the archive:
+    `--plan '<FP_CALIB>'` (calibration mode; the #140 window passes the PREREG's value) or
+    `--no-calibration` (the #43 job alone), one of the two is required, and `--repeats N` is required.
+    Expected: the #43 cold run (`quickstart` with FP_ONBOX_BUILD=1, `cold` with 0, or none), the warm
+    repeats rep1..repN (each one response, `example`), and every calibration run <id>-1..<id>-<repeats>
+    of the plan (each <requests> responses r01..rNN).
+  * the archive's own metadata is only cross-checked, never used to choose what is expected: in
+    calibration mode results/calib-plan.txt (the job writes it) must exist, be non-empty and name the
+    same plan; with --no-calibration it must be absent. results/steps.tsv must exist. Otherwise FAIL.
+  * the archive must not hold a run the registration did not name: any directory in results/ that is
+    not an expected run, and any run-shaped step row in steps.tsv or run file (<run>.exit, .verdict,
+    .stdout, .time, .windows) of a run not expected (an extra repeat, C2-4, C3-4, rep11), is a FAIL.
+    So is a --repeats smaller than the job's (its extra repeats are unexpected runs) or larger
+    (missing runs).
+  * results/SHA256SUMS must exist, list every regular file of results/ but itself, and match each one.
   * a run passes only if its cp_commit.log has one commitment ID, every expected response has its
     request, answer and proof in the bundle, cp_verify exits 0 with the last line YES on each of them,
     and the bundle has no response that the plan did not expect (a mixed tree is a failure).
@@ -20,16 +30,19 @@ with a cp_verify built by the operator from the pinned commit, and fails closed:
     every run that passed (--mutations first, the default; `all` for every response; `none` to skip,
     which makes the overall verdict FAIL, since the PREREG requires them): each must make cp_verify
     exit nonzero with a last line starting NO. One accepted mutation fails the run.
-  * the overall verdict is PASS only if every expected run passed and at least one run was expected.
+  * the overall verdict is PASS only if every expected run passed, the archive checks above found
+    nothing, and at least one run was expected.
 
 Exit status: 0 PASS, 1 FAIL, 2 usage error (nothing checked). A JSON report goes to --report.
-It never contacts any host. It does not check SHA256SUMS (RUNBOOK.md step 5's tar/sha256sum lines do).
+It never contacts any host. SHA256SUMS checks the archive's integrity only; it does not show that the
+producer ran the registered plan (that is what --plan, --repeats and the unexpected-run check are for).
 
-usage: python3 verify_offbox.py --cp-verify PATH --results DIR [--plan FP_CALIB] [--repeats N]
-                                [--cold quickstart|cold|none] [--mutations first|all|none]
+usage: python3 verify_offbox.py --cp-verify PATH --results DIR (--plan FP_CALIB | --no-calibration)
+                                --repeats N [--cold quickstart|cold|none] [--mutations first|all|none]
                                 [--timeout S] [--report FILE]
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -42,6 +55,10 @@ ENTRY = re.compile(r"^([A-Za-z0-9_]{1,16}):([1-9][0-9]?):([1-9][0-9]?):([1-9][0-
 ID_LINE = re.compile(r"^commitment ID: *([0-9a-f]{64}) *$")
 RESP = re.compile(r"^(.+)\.(req|y|proof)$")
 MUTATIONS = ("proof-bitflip", "answer-bitflip", "request-bitflip", "proof-truncated", "wrong-id")
+# names run_job.sh gives to runs: the cold run, the warm repeats, the calibration runs <id>-<j>
+RUN_NAME = re.compile(r"^(quickstart|cold|rep[0-9]+|[A-Za-z0-9_]{1,16}-[0-9]+)$")
+RUN_FILE = re.compile(r"^(.+)\.(exit|verdict|stdout|time|windows)$")
+SUM_LINE = re.compile(r"^([0-9a-f]{64}) [ *]\./(.+)$")
 
 
 class Usage(Exception):
@@ -184,12 +201,89 @@ def check_run(cp_verify, results, run, names, mutations, timeout, tmp):
     return rep
 
 
+def archive_problems(results, run_names, calibration, plan_text):
+    """Cross-checks of the archive against the registration. Returns a list of problems (empty = ok)."""
+    probs = []
+    expected = set(run_names)
+    pf = os.path.join(results, "calib-plan.txt")
+    if calibration:
+        if not os.path.isfile(pf):
+            probs.append("results/calib-plan.txt missing (the job writes it whenever FP_CALIB is set)")
+        else:
+            with open(pf, errors="replace") as f:
+                on_disk = f.read()
+            if on_disk.strip() == "":
+                probs.append("results/calib-plan.txt is empty")
+            elif on_disk.split() != plan_text.split():
+                probs.append("results/calib-plan.txt (%r) differs from the registered --plan" % on_disk.strip())
+    elif os.path.lexists(pf):
+        probs.append("results/calib-plan.txt present, but --no-calibration was given")
+    for e in sorted(os.listdir(results)):
+        p = os.path.join(results, e)
+        if os.path.isdir(p) and e not in expected:
+            probs.append("unexpected run directory %s (not in the registered plan/repeats)" % e)
+        m = RUN_FILE.match(e)
+        if m and RUN_NAME.match(m.group(1)) and m.group(1) not in expected:
+            probs.append("unexpected run file %s (not in the registered plan/repeats)" % e)
+    st = os.path.join(results, "steps.tsv")
+    if not os.path.isfile(st):
+        probs.append("results/steps.tsv missing")
+    else:
+        with open(st, errors="replace") as f:
+            for line in f:
+                name = line.split("\t", 1)[0].strip()
+                if RUN_NAME.match(name) and name not in expected:
+                    probs.append("steps.tsv has a step %s that is not in the registered plan/repeats" % name)
+    probs += checksum_problems(results)
+    return probs
+
+
+def checksum_problems(results):
+    """results/SHA256SUMS (run_job.sh's finalisation, `./name` paths) must list every regular file but
+    itself and match each one."""
+    sums = os.path.join(results, "SHA256SUMS")
+    if not os.path.isfile(sums):
+        return ["results/SHA256SUMS missing"]
+    listed, probs = {}, []
+    with open(sums, errors="replace") as f:
+        for line in f:
+            m = SUM_LINE.match(line.rstrip("\n"))
+            if not m:
+                probs.append("SHA256SUMS: unreadable line %r" % line[:80])
+                continue
+            listed[os.path.normpath(m.group(2))] = m.group(1)
+    present = set()
+    for d, dirs, files in os.walk(results):
+        for fn in files:
+            p = os.path.join(d, fn)
+            rel = os.path.relpath(p, results)
+            if rel == "SHA256SUMS" or os.path.islink(p) or not os.path.isfile(p):
+                continue
+            present.add(rel)
+    for rel in sorted(present - set(listed)):
+        probs.append("SHA256SUMS does not list %s" % rel)
+    for rel in sorted(listed):
+        p = os.path.join(results, rel)
+        if rel not in present:
+            probs.append("SHA256SUMS lists %s, which is not a regular file in results/" % rel)
+            continue
+        h = hashlib.sha256()
+        with open(p, "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        if h.hexdigest() != listed[rel]:
+            probs.append("SHA256SUMS mismatch: %s" % rel)
+    return probs
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--cp-verify", required=True)
     ap.add_argument("--results", required=True)
-    ap.add_argument("--plan")
-    ap.add_argument("--repeats", type=int, default=10)
+    mode = ap.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--plan", help="the registered FP_CALIB (calibration mode)")
+    mode.add_argument("--no-calibration", action="store_true", help="the #43 job alone, no FP_CALIB")
+    ap.add_argument("--repeats", type=int, required=True, help="the registered FP_REPEATS")
     ap.add_argument("--cold", choices=("quickstart", "cold", "none"), default="quickstart")
     ap.add_argument("--mutations", choices=("first", "all", "none"), default="first")
     ap.add_argument("--timeout", type=float, default=900)
@@ -203,16 +297,10 @@ def main(argv=None):
         if not os.path.isdir(a.results):
             raise Usage("--results is not a directory")
         cp_verify = os.path.abspath(a.cp_verify)
-        on_disk = None
-        pf = os.path.join(a.results, "calib-plan.txt")
-        if os.path.exists(pf):
-            with open(pf) as f:
-                on_disk = f.read()
-        if a.plan is not None and on_disk is not None and a.plan.split() != on_disk.split():
-            raise Usage("--plan differs from results/calib-plan.txt")
-        plan_text = a.plan if a.plan is not None else (on_disk or "")
-        if plan_text.strip() == "" and plan_text != "":
-            raise Usage("whitespace-only plan")
+        calibration = a.plan is not None
+        plan_text = a.plan if calibration else ""
+        if calibration and plan_text.strip() == "":
+            raise Usage("empty or whitespace-only --plan (for the #43 job alone use --no-calibration)")
         plan = parse_plan(plan_text)
         runs = expected_runs(plan, a.repeats, a.cold)
         if not runs:
@@ -220,21 +308,28 @@ def main(argv=None):
     except Usage as e:
         print("verify_offbox: usage error: %s" % e, file=sys.stderr)
         return 2
+    results = os.path.abspath(a.results)
+    archive = archive_problems(results, [r for r, _ in runs], calibration, plan_text)
+    for p in archive:
+        print("FAIL archive: %s" % p)
     reports = []
     with tempfile.TemporaryDirectory(prefix="fp-verify-offbox-") as tmp:
         for run, names in runs:
-            rep = check_run(cp_verify, os.path.abspath(a.results), run, names, a.mutations, a.timeout, tmp)
+            rep = check_run(cp_verify, results, run, names, a.mutations, a.timeout, tmp)
             reports.append(rep)
             print("%s %s (%d responses)%s" % (rep["verdict"], run, len(names),
                                                "" if rep["verdict"] == "PASS" else ": " + "; ".join(rep["problems"])))
-    ok = all(r["verdict"] == "PASS" for r in reports) and a.mutations != "none"
+    ok = all(r["verdict"] == "PASS" for r in reports) and a.mutations != "none" and not archive
     summary = {"verdict": "PASS" if ok else "FAIL", "runs_expected": len(runs),
                "runs_passed": sum(r["verdict"] == "PASS" for r in reports),
                "responses_expected": sum(len(n) for _, n in runs), "mutations": a.mutations,
-               "plan": plan_text.strip(), "repeats": a.repeats, "cold": a.cold, "runs": reports}
+               "mode": "calibration" if calibration else "no-calibration",
+               "plan": plan_text.strip(), "repeats": a.repeats, "cold": a.cold,
+               "archive_problems": archive, "runs": reports}
     if a.mutations == "none":
         print("mutation checks skipped: the PREREG requires them, so the overall verdict is FAIL")
-    print("OVERALL %s: %d of %d runs passed" % (summary["verdict"], summary["runs_passed"], len(runs)))
+    print("OVERALL %s: %d of %d runs passed, %d archive problems" % (summary["verdict"], summary["runs_passed"],
+                                                                  len(runs), len(archive)))
     if a.report:
         with open(a.report, "w") as f:
             json.dump(summary, f, indent=1)
