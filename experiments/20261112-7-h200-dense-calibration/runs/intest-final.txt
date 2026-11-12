@@ -1,0 +1,26 @@
+image fp-h200cal7:final sha256:947eee8d50dcf90843b968d7d3a542a457184eb4c6f41c0141062e5c762ba9c8
+2026-11-12T18:20:17Z
+Python 3.12.3
+GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)
+== serve_test.py
+PASS FAILED with SEAL-FAILED is failed
+PASS DONE and FAILED and SHA256SUMS is failed, not done
+33 of 33 checks passed
+exit 0
+== run_job_test.py
+PASS no-reuse: second run refused with exit 2
+PASS no-reuse: first run's checksums intact
+87 of 87 checks passed
+exit 0
+== run_job_calib_test.py
+PASS calib-malformed-6: 'C1:65:1:1:30' refused before any GPU step
+PASS calib-malformed-7: 'C1:2:1:21:30' refused before any GPU step
+33 of 33 checks passed
+exit 0
+== fetch_bounded_test.py
+PASS bounds: grace = margin = 3600 with 7300 s left: runs (exit 0): exit 0, started True, stderr: fetch_bounded: fetch budget 100 s (+ 3600 s kill grace), ends by cut-off - 3600 s
+PASS bounds: cut-off exactly 6 h ahead: runs (exit 0): exit 0, started True, stderr: fetch_bounded: fetch budget 21590 s (+ 5 s kill grace), ends by cut-off - 5 s
+48 of 48 checks passed
+exit 0
+docker exit 0
+2026-11-12T18:21:33Z

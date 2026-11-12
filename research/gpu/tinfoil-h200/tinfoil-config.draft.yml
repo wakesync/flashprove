@@ -8,6 +8,11 @@
 # GPUs: this config requests one GPU for this instance (gpus: 1 below). It says nothing about how many
 # GPUs the host has or how many are free; that count is not established (README.md).
 #
+# Issue #140 window: created with --disable-cc-mode (RUNBOOK.md, "The window of issue #140"); the CC
+# mode is a create flag, not a field of this file. A local config (--config) may make the public
+# repo unnecessary (not established). The image: the full one (stage final, on-box build) or, for a
+# public image, stage runtime with FP_ONBOX_BUILD "0" (a #43 deviation, not registered).
+#
 # What it runs: one container, the prover image (Dockerfile here), on the instance's one assigned GPU. On boot it starts
 # a read-only results server on :8080 and runs the job once (run_job.sh); the results are finalised
 # and stay served whether the job succeeds, fails or times out; a failed finalisation ends FAILED. No secrets, no egress, no
@@ -32,8 +37,11 @@ containers:
       - FP_ONBOX_BUILD: "1"     # 1: rebuild with examples/quickstart-gpu.sh as on the H100 (about 20 min more,
                                 #    18 to 20 min on the H100); 0: use the image's prebuilt programs (shorter
                                 #    window, a registered deviation)
-      - FP_JOB_TIMEOUT: "3600"  # seconds; set from RUNBOOK.md's window sheet so the job ends before the
-                                # restore cut-off. Per-step limits: FP_TIMEOUT_{ENV,COMPILER,QUICKSTART,RUN}
+      - FP_JOB_TIMEOUT: "3300"  # seconds; set from RUNBOOK.md's window sheet so the job ends before the
+                                # restore cut-off. Per-step limits: FP_TIMEOUT_{ENV,COMPILER,QUICKSTART,RUN}.
+                                # 3300 for the issue #140 window (75 min from create, at most 20 for boot)
+      - FP_CALIB: "C2:8:4:3:300 C3:64:10:3:900"   # issue #140 calibration after the #43 repeats; "" = #43 only
+      - FP_SAMPLE_MS: "100"     # GPU sampler interval (#140 needs 100 ms or finer)
     cap_add: ["IPC_LOCK"]     # cp_commit mlock()s key material; without it, it warns and goes on
     tmpfs:
       /work: "size=24g,mode=0700,uid=10001,gid=10001,exec"   # checkout copy, builds, TMPDIR, results

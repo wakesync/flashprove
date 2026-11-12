@@ -76,6 +76,43 @@ A first Qwen GPU block does not exist in the prover yet (the Qwen port is CPU-on
 - `RUNBOOK.md`: the window sheet the owner fills in, bring-up, the baseline run, result retrieval, teardown, restoring the live instance, recovery if restore fails, and checking that it serves again.
 - CI: `.github/workflows/h200-package-tests.yml` runs the three tests, `bash -n` and shellcheck of both shell scripts on every PR that touches this directory or the workflow, and on pushes to main that touch either.
 
+## Issue #140: the CC-off window, calibration, image stages and licences (prepared, not run)
+
+Issue #140 (2026-11-12): the owner approved one H200 window with confidential computing off, about 3 hours. Its one job runs `cc_probe`, #43 phase 2 (amended: `experiments/20261110-43-h200-bringup/PREREG.md`, Amendment 5) and the dense calibration `experiments/20261112-7-h200-dense-calibration/PREREG.md`, smallest first. Commands, budget and cut-off rule: RUNBOOK.md, "The window of issue #140". Nothing of it has run on a GPU.
+
+New files: `calib_run.sh` (one calibration run: fresh commitment, n requests made by `prover/tools/make_request.py` from seeded pseudo-random tokens, one `cp_prove -in-step k` batch, `cp_verify` on every response), `stamp.sh` (per-program start/end around `cp_commit` and `cp_prove`), `make_calib_configs.py` (writes `calib/C2`, `calib/C3` from `target_small_f2_roomy` and records the planner's entry counts), `run_job_calib_test.py` with `calib_test_mocks/` (33 CPU checks of the calibration step). `run_job.sh` gains `FP_CALIB` and `FP_SAMPLE_MS`; with `FP_CALIB` empty the job is the #43 job (its 87 checks still pass).
+
+**Image stages built locally (2026-11-12, legacy builder, `--cpuset-cpus=12-15`).** Receipts: `experiments/20261112-7-h200-dense-calibration/runs/` (`image-*.txt`, `build-prover.steps.txt`, `intest-*.txt`).
+
+| stage | image id | size | contents |
+|---|---|---|---|
+| `prover` | `sha256:77a7084c5552...` | 1,730,970,789 B | toolkit + pinned checkout + programs; 2004 s to build |
+| `final` | `sha256:947eee8d50dc...` | 1,731,190,333 B | `prover` + job runner, server, calibration configs |
+| `runtime` | `sha256:ccbb29aa1ede...` | 1,032,430,139 B | Ubuntu + programs + `libcudart.so.13`, `libcublas.so.13`, `libcublasLt.so.13` only; no compiler |
+
+Programs (identical in all three): `cp_commit` `72b1a4be...e466a`, `cp_prove` `18394950...94bd`, `cp_verify` `7f9efc1e...04394` (byte-identical to the H100 runs' verifier, research/gpu/logs/binaries.sha256). nvcc `V13.2.86`, gcc 13.3.0, commit `9e2bdd8f`. `compiler_sample` was built and not run (no GPU: status 77, version check only). The four CPU test files ran **inside** the `final` and the `runtime` image (network none, the image's own user, python 3.12.3, bash 5.2.21): 33/33, 87/87, 33/33, 48/48 in each. Ubuntu packages are still unpinned, so a rebuild can differ (unchanged from phase 1). Nothing was pushed.
+
+<a id="licences"></a>
+**Licences: may the image be public?** Read 2026-11-12: NVIDIA "License Agreement for NVIDIA Software Development Kits" with the "CUDA Toolkit Supplement", https://docs.nvidia.com/cuda/eula/index.html ("Last updated: January 26, 2026"); every toolkit wheel's metadata says `License-Expression: LicenseRef-NVIDIA-Proprietary`. What it says, quoted:
+- 1.1.1: distribute "those portions of the SDK that are identified in this Agreement as distributable, as incorporated in object code format into a software application" meeting 1.1.2; 1.1.2: "Your application must have material additional functionality", "The distributable portions of the SDK shall only be accessed by your application", and "Unless a developer tool is identified in this Agreement as distributable, it is delivered for your internal use only."
+- 1.2: "you may not ... distribute ... any portion of the SDK" except as expressly provided, and "you may not distribute or sublicense the SDK as a stand-alone product."
+- 2.3: Linux-only portions "may be copied and redistributed for use in accordance with this Agreement, provided that the object code files are not modified in any way".
+- 2.6 Attachment A lists as distributable, among others: CUDA Runtime (`libcudart.so`, `libcudart_static.a`, `libcudadevrt.a`), cuBLAS (`libcublas.so`, `libcublasLt.so`, `_static.a`), NVRTC (`libnvrtc.so`, `libnvrtc-builtins.so`, `nvrtc.h`), NVVM (`libnvvm.so`), `libnvJitLink.so`, `libdevice.10.bc`, `cuda_occupancy.h`, the floating-point type headers and a short list of runtime-compilation headers.
+
+The NVIDIA components of the `final` image and how they stand:
+
+| component (in `/opt/cuda-13.2.86/nvidia/cu13`) | size | Attachment A |
+|---|---|---|
+| `bin/`: `nvcc`, `ptxas`, `nvlink`, `fatbinary`, `cudafe++`, `bin2c`, `crt`, `__nvcc_device_query` | 135 MB | **not listed**: developer tools, "internal use only" (1.1.2) |
+| `include/` (25 MB), `cuda_cccl` (CCCL/Thrust headers) | | **mostly not listed** (only the few headers named in A); Thrust/CCCL parts are Apache-2.0 per Attachment B, the rest is not shown to be distributable |
+| `nvvm/` (79 MB: `libnvvm`, `libdevice`) | | `libnvvm.so` and `libdevice.10.bc` listed; the rest of the directory is not shown |
+| `lib/libcudart.so.13`, `libcudart_static.a`, `libcudadevrt.a` | | listed |
+| `lib/libcublas.so.13`, `libcublasLt.so.13`, `libnvblas.so.13` | | listed |
+| `lib/libnvrtc.so.13`, `libnvrtc-builtins.so.13.2` | | listed |
+| `lib/stubs/libcuda.so` (from `cuda-driver-dev-13-2`) | | `libcuda.so` is listed under "NVIDIA CUDA Driver Libraries"; whether the link stub is meant is not stated |
+
+So: **a public `final` image is doubtful** (it ships the compiler and headers that the EULA does not list as distributable, in what amounts to the toolkit as a whole, which 1.2 forbids "as a stand-alone product"). This is a reading of the licence, not legal advice; the owner decides. The **`runtime` stage** is the variant for a public image: it ships the programs (our application) and only the three runtime libraries they load (`ldd`, checked against Attachment A in the build, unmodified files), no compiler, no headers, no static libraries, no driver stub. What it costs: **no on-box build** (`FP_ONBOX_BUILD=0` is set in it), so the #43 cold run uses the image's prebuilt programs, a deviation from the #43 PREREG that has to be registered as a dated amendment before the window (not done: the brief leaves the choice to the coordinator); the `compiler_sample` check by value on the GPU still runs (it is a built program). A private `final` image with registry credentials for the org keeps the on-box build and avoids the question.
+
 ## Reproduce what phase 1 did
 
 ```sh

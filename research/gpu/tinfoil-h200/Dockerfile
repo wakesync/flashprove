@@ -10,8 +10,12 @@
 # needs a rebuild and new receipts.
 #
 # Build context: this directory (research/gpu/tinfoil-h200/).
-#   docker build -t fp-h200-prover .                     # whole image, about half an hour of compiling
+#   docker build --target final -t fp-h200-prover .      # the full image (toolkit + on-box build), about half an hour of compiling
+#   docker build --target runtime -t fp-h200-runtime .    # binaries + redistributable runtime libraries only (README.md, "Licences")
 #   docker build --target verifier -t fp-h200-verifier .  # toolkit + cp_verify only, a few minutes
+# (Since issue #140 the last stage is `runtime`, so a build without --target builds that one.)
+# The driver stub (stubs/libcuda.so) is never copied into the runtime image: the driver's own
+# libcuda.so.1 comes from the NVIDIA container runtime.
 #
 # The prover is built from the same pinned commit as the H100 receipts (research/gpu/README.md), with
 # the same toolkit wheels (requirements-cuda.txt), so that the H200 numbers are comparable. The build
@@ -101,6 +105,56 @@ RUN chmod 0755 /opt/fp-h200/run_job.sh /opt/fp-h200/serve.py /opt/fp-h200/stamp.
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility \
     FP_REPO=/opt/flashprove \
     FP_WORK=/work
+USER 10001:10001
+EXPOSE 8080
+ENTRYPOINT ["/opt/fp-h200/run_job.sh", "serve"]
+
+# ---- runtime-picks: what the runtime-only image takes from the prover stage ------------------------
+# The CUDA libraries that the built programs load, each checked against the list of files that the
+# CUDA Toolkit EULA (Attachment A) names as redistributable; any other toolkit library ends the build.
+FROM prover AS runtime-picks
+RUN set -e; mkdir -p /picks/lib; \
+    allow=' libcudart.so libcublas.so libcublasLt.so libnvrtc.so libnvrtc-builtins.so libnvJitLink.so '; \
+    for b in /opt/flashprove/prover/build/hc/cp_commit /opt/flashprove/prover/build/hc/cp_prove \
+             /opt/flashprove/prover/build/hc/cp_verify /opt/flashprove/prover/build/compiler_sample /opt/fp-h200/cc_probe; do \
+      ldd "$b" | awk '/=> \/opt\/cuda-13.2.86\// && !/\/stubs\// {print $3}'; \
+    done | sort -u >/picks/needed.txt; \
+    while read -r lib; do \
+      base=$(basename "$lib"); stem=${base%%.so*}.so; \
+      case "$allow" in *" $stem "*) ;; *) echo "not redistributable by Attachment A: $lib" >&2; exit 1 ;; esac; \
+      cp -L "$lib" /picks/lib/"$base"; \
+    done </picks/needed.txt; \
+    cat /picks/needed.txt; ls -l /picks/lib
+
+# ---- runtime: binaries + redistributable runtime libraries only (no compiler, headers or static libs)
+# For a PUBLIC image (README.md, "Licences"). It cannot rebuild on the box: run it with
+# FP_ONBOX_BUILD=0, which is a deviation from the #43 PREREG that has to be registered first.
+# The programs keep their run path to /opt/cuda-13.2.86/nvidia/cu13/lib, so the picked libraries go
+# to the same place. The pinned checkout is copied whole, with its build directory (the three
+# programs, their .build records and compiler_sample; no toolkit file is in it: the build links the
+# toolkit's shared libraries, and cc_probe links cudart_static, which Attachment A lists as
+# redistributable).
+FROM ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852 AS runtime
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates python3 util-linux time git \
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /opt/env && dpkg-query -W -f '${Package} ${Version}\n' > /opt/env/dpkg.txt
+COPY --from=runtime-picks /picks/lib/ /opt/cuda-13.2.86/nvidia/cu13/lib/
+COPY --from=prover /opt/flashprove/ /opt/flashprove/
+COPY --from=prover /opt/env/nvcc.txt /opt/env/gcc.txt /opt/env/flashprove-commit.txt /opt/env/cp_verify.sha256 /opt/env/programs.sha256 /opt/env/
+COPY --from=prover /opt/fp-h200/cc_probe /opt/fp-h200/cc_probe
+# (Copied files keep their modes, root-owned and not group/other-writable as in the prover stage; a
+# chmod -R here would only copy ~0.8 GB into a second layer. The check below fails the build if not.)
+RUN test -z "$(find /opt/cuda-13.2.86 /opt/flashprove /opt/fp-h200 \( -perm -g+w -o -perm -o+w \) ! -type l -print -quit)"
+COPY run_job.sh serve.py stamp.sh calib_run.sh /opt/fp-h200/
+COPY calib/ /opt/fp-h200/calib/
+RUN chmod 0755 /opt/fp-h200/run_job.sh /opt/fp-h200/serve.py /opt/fp-h200/stamp.sh /opt/fp-h200/calib_run.sh \
+    && chmod -R go-w /opt/fp-h200/calib \
+    && useradd --uid 10001 --create-home --shell /bin/bash prover
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility \
+    FP_REPO=/opt/flashprove \
+    FP_WORK=/work \
+    FP_ONBOX_BUILD=0
 USER 10001:10001
 EXPOSE 8080
 ENTRYPOINT ["/opt/fp-h200/run_job.sh", "serve"]

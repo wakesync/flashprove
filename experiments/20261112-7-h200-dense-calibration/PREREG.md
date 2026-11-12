@@ -76,3 +76,9 @@ C1 also serves #43 phase 2: its runs are the #43 warm repeats (below), judged th
 
 ## Amendments
 (empty at registration)
+
+### Amendment 1 (2026-11-12T18:27Z, before any run; no hypothesis, metric, threshold, configuration or run count changes)
+- The entry counts of C1, C2 and C3 were re-printed on CPU by the pinned commit's own `cp_verify` (sha256 `7f9efc1e...04394`, inside the locally built `final` image, `runs/planner-in-image.txt`): identical to the table above (87,178,558 / 25,235,939; 105,868,606 / 33,247,791; 147,640,092 / 50,857,541).
+- The job's variables are fixed: `FP_CALIB="C2:8:4:3:300 C3:64:10:3:900"`, `FP_SAMPLE_MS=100`, `FP_JOB_TIMEOUT=3300`, `FP_ONBOX_BUILD=1`, `FP_REPEATS=10` (research/gpu/tinfoil-h200/tinfoil-config.draft.yml). Each calibration run records its `cp_commit` and `cp_prove` start and end in `<run>.windows` (`stamp.sh`); the prove window of the Metric is that pair.
+- In C2 and C3 the on-box `cp_verify` runs after `cp_prove` has exited, so its CPU time is outside the prove window and is not in y_time.
+- If the image used in the window is the `runtime` stage (public image, no on-box build), `FP_ONBOX_BUILD` is 0; that changes #43, not this experiment.

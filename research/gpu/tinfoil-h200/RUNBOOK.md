@@ -6,6 +6,85 @@ Nothing in this file has been run against Tinfoil. It is a draft for an untested
 
 Protocol: experiments/20261110-43-h200-bringup/PREREG.md. Control arm: research/gpu/ and research/gpu/replication-1/ (H100 80 GB).
 
+## The window of issue #140: CC off, one combined job, about 3 hours (prepared, NOT run)
+
+The owner approved (issue #140, 2026-11-12) running the existing prover on the existing H200 with confidential computing (CC) **off**, for a window of about 3 hours of outage, live service stopped until it serves again. This section is the plan for that window. Where it differs from the steps below, this section wins; the steps below still give the credential handling ("Credentials"), the restore order (step 6), the end-to-end check (step 7) and the off-box verification (step 8). Nothing here has been run against the provider; everything about the provider's behaviour is **from the docs, not tried**.
+
+### What runs: one job, in this order
+
+`run_job.sh serve` with these variables (`tinfoil-config.draft.yml`):
+
+| variable | value | why |
+|---|---|---|
+| `FP_ONBOX_BUILD` | `1` | the #43 PREREG's cold run (quickstart, rebuild on the box); no deviation |
+| `FP_REPEATS` | `10` | #43 warm repeats = calibration configuration C1 (n = 10) |
+| `FP_CALIB` | `C2:8:4:3:300 C3:64:10:3:900` | calibration (experiments/20261112-7-h200-dense-calibration/PREREG.md): C2 = 8 requests, in-step 4, 3 runs, 300 s each; C3 = 64 requests, in-step 10, 3 runs, 900 s each; smallest first |
+| `FP_SAMPLE_MS` | `100` | GPU sampler at 100 ms (#140 needs 100 ms or finer; #43 Amendment 5) |
+| `FP_JOB_TIMEOUT` | `3300` | 55 min; with at most 20 min for boot and image pull, the job is over 75 min after the create at the latest |
+
+Order inside the job: environment record and `cc_probe` (it shows whether `cudaHostRegister` works, so it doubles as the check that CC really is off), the compiler check, the #43 cold quickstart, the 10 warm repeats, the planner's arrays of C2 and C3 on the box's own `cp_verify`, C2 x 3, C3 x 3. A job timeout loses C3's last run first. Results are finalised and served as for #43 (`/status`, `/files`, `/results.tar.gz`), on success, failure and timeout alike (run_job_test.py and run_job_calib_test.py, CPU, mocked GPU programs).
+
+Job time, estimate: build 20 min (H100 18 to 20 min, research/gpu/replication-1), C1 cold + 10 warm about 6 min (H100), C2 about 3 min (estimate), C3 up to about 24 min (estimate: up to 255 s prove + 64 on-box verifies + about 20 s commit, x 3). About 53 of the 55 min; if C3's worst case holds, its third run is cut by `FP_JOB_TIMEOUT` and reported as timed out.
+
+### The 3-hour budget and the restore cut-off rule
+
+T0 = the moment the live stop is sent (step 3). Window W = the owner's approved outage (about 180 min). Restore reserve R = 65 min (live deploy up to about 60 min, unmeasured, from the live config's healthcheck limits; prover stop 5 min). Fetch budget F = 10 min.
+
+- **Restore cut-off = T0 + W - R.** With W = 180: T0 + 115 min. At the cut-off step 6 starts, whatever the job or the fetch is doing.
+- **Fetch start at the latest = cut-off - F** (T0 + 105 min); every fetch goes through `fetch_bounded.sh` with the cut-off (step 5).
+- **Create the prover no later than** cut-off - F - 75 min (T0 + 30 min). If the live instance is not Stopped by then, do not create the prover: restore and report "window not started".
+- If the prover is not serving `/healthz` 20 min after create, stop it and restore (the #43 kill criterion's 60 min no longer fits this window; Amendment 5 shortens it).
+
+Proposed values (blank = owner-only):
+
+| window-sheet field | proposed | basis |
+|---|---|---|
+| approved outage window, start and end (UTC) | | owner |
+| restore cut-off | T0 + W - 65 min | rule above |
+| restore reserve | 65 min | live deploy about 60 min (unmeasured, healthcheck limits) + prover stop 5 min |
+| fetch budget | 10 min | the archive is small (estimate: under 300 MB: 64 proofs of at most 4.3 MB each in C3 x 3, plus logs and samples) |
+| deadline for the live stop to reach Stopped | 10 min | step 3's example; unmeasured |
+| deadline for the prover to reach Running and serve `/healthz` | 20 min | 75 min budget minus `FP_JOB_TIMEOUT` 55 min |
+| deadline for the job (`FP_JOB_TIMEOUT`) | 3300 s | brief: at most 75 min from create to finished job |
+| deadline for the prover to reach Stopped | 5 min | step 6's example |
+| spend | | owner |
+| who to contact if restore fails, notice to consumers, acceptance of data loss | | owner |
+
+### Creating the prover with CC off (from the docs, not tried)
+
+What `--disable-cc-mode` is, from the CLI's own help text (`tinfoil container create --help`, read locally 2026-11-12, no network call) and its source (github.com/tinfoilsh/tinfoil-cli, `internal/cli/container.go`, main branch, read 2026-11-12T18:13Z):
+- help: "EXPERIMENTAL: disable confidential computing (benchmarks only; requires org entitlement)". `--yes` skips its interactive confirmation; without a terminal and without `--yes` the CLI refuses.
+- the confirmation text it prints: "Disables memory encryption and hardware attestation for this container. It will not provide CC guarantees and is not suitable for production workloads. Intended for benchmarking against non-CC baselines." and "The host operator can read memory and observe execution."
+- it is a flag of `container create` only (the request body gets `disable_cc_mode: true`); `deploy` and `update` have no such flag. So a CC-off prover is a new instance, created for the window and stopped afterwards.
+- whether this org has the entitlement is **not established** (not visible without a call; ask the provider).
+- Tinfoil's own benchmark harness (github.com/tinfoilsh/model-benchbox, `bench/README.md`, read 2026-11-12T18:13Z) creates its CC-off arm with `--debug --ssh-key <key> ... --disable-cc-mode --yes` and notes that "on this Intel/B300 host `--disable-cc-mode` flips both the GPU CC/PPCIe data path and CPU TDX memory encryption". What it does on this AMD SEV-SNP H200 host is **not established**. `cc_probe.json` and `nvidia-smi conf-compute` in `gpu-env.txt` record what the GPU reports.
+
+**Config from a local file, without a public config repo?** The CLI's help shows `tinfoil container create app --config tinfoil-config.yml` (`--source local`, implied by `--config`); its source sends the file's contents with `source: local` and refuses `--repo`/`--tag` with it. The docs pages on containers (configuration.md, cli.md, read 2026-11-12) still say every container needs `tinfoil-config.yml` at the root of a public GitHub repo and do not describe `--config`. Whether a local config is accepted for a **GPU** instance, with `--disable-cc-mode`, for this org: **not established**. If it is, no public config repo and no release tag are needed (steps 2's tag and the "Where the config lives" decision fall away); the image digest must still be pinned in the file.
+
+**Can results be fetched attested from a CC-off instance?** Probably not: the CLI says the mode disables hardware attestation, and the docs say debug instances (which also do not attest) are refused by `SecureClient`, `container connect` and the tunnels (connecting.md, debug-mode.md, read 2026-11-12). Whether `tinfoil http get --enclave` or `container connect` refuse a CC-off instance in the same way: **not established**. Ways out, in order of preference:
+1. **Plain HTTPS through the shim, unattested**: `curl -sf https://<DOMAIN>/status` and `.../results.tar.gz` through `fetch_bounded.sh`. Whether the shim serves a CC-off instance's domain the same way: not established. Nothing in this experiment needs attestation of the results: every proof is checked off the box by `cp_verify` built on our side (step 8), and `SHA256SUMS` checks the archive's integrity end to end; the timings and memory readings were never attested in any case. The results are synthetic weights and public files only (`isk/` never leaves the box).
+2. **Debug mode** (`--debug --ssh-key <ORG_SSH_KEY_NAME>`), as Tinfoil's benchmark harness does: SSH into the toolbox, `tindbg exec` into the prover container, copy `/work/results` out with `scp`. Needs an org SSH key registered (a write, with its own yes) and a `--debug` create, which is a different instance kind (`<name>.debug.<org>...` domain).
+
+**The create command** (placeholders; the operator substitutes them from their own notes; `tf` as in "Credentials"):
+
+```sh
+# from a release tag of a public config repo
+tf container create <PROVER> --repo <OWNER>/<REPO> --tag <TAG> --mark-latest=false --secret="" --disable-cc-mode --yes
+# or, if a local config is accepted for a GPU instance (not established)
+tf container create <PROVER> --config <PATH>/tinfoil-config.yml --secret="" --disable-cc-mode --yes
+# fallback for fetching, if unattested HTTPS is not served (needs a registered org SSH key: its own yes)
+tf container create <PROVER> --repo <OWNER>/<REPO> --tag <TAG> --mark-latest=false --secret="" --debug --ssh-key <ORG_SSH_KEY_NAME> --disable-cc-mode --yes
+```
+
+No `--host` (host selection was not enabled for the org). `--mark-latest=false` and `--secret=""` as in step 4. Status during the window: `tf container get <PROVER>` (shows `Confidential: disabled` for such an instance, per the CLI source).
+
+### Open questions for the coordinator and the owner, before the window
+1. Does the org have the `--disable-cc-mode` entitlement? (provider)
+2. Is a local config (`--config`) accepted for a GPU instance with CC off? If not: which public config repo and tag (README.md decision 3)?
+3. Does the shim serve plain HTTPS for a CC-off instance, or is the debug-mode fetch needed (then: an org SSH key)?
+4. Image: public (runtime-only variant, `Dockerfile` stage `runtime`, README.md "Licences") or private with registry credentials (full image, on-box build)? If runtime-only: `FP_ONBOX_BUILD` must be 0, a registered deviation from #43 (not taken now).
+5. The window sheet's owner-only fields.
+
 ## Credentials: never in a process's argument list
 
 The org admin key must not appear on any command line, in shell history, in a log or in a file outside a mode-600 file of the operator's own. Anything in a command's arguments can be read by other processes on the machine (`ps`, `/proc/<pid>/cmdline`), so `curl -H "Authorization: Bearer $KEY"` is wrong even when `$KEY` came from a file: the shell expands it into curl's argv.
@@ -103,7 +182,7 @@ The image holds only public code and NVIDIA's toolkit wheels, no secrets. It can
 ```sh
 cd research/gpu/tinfoil-h200
 python3 serve_test.py && python3 run_job_test.py                        # both must end "N of N checks passed"
-docker build -t ghcr.io/<OWNER>/flashprove-h200-prover:phase2 .        # unmeasured; the prover stage has not been built yet
+docker build --target final -t ghcr.io/<OWNER>/flashprove-h200-prover:phase2 .   # built locally 2026-11-12 in 2004 s on 4 cores (README.md, issue #140); for a public image see README.md "Licences" (--target runtime)
 docker run --rm --entrypoint cat ghcr.io/<OWNER>/flashprove-h200-prover:phase2 /opt/env/nvcc.txt /opt/env/flashprove-commit.txt /opt/env/programs.sha256
 docker run --rm --entrypoint sha256sum ghcr.io/<OWNER>/flashprove-h200-prover:phase2 /opt/flashprove/bin/cp_verify
 ```
@@ -194,7 +273,7 @@ tar -tzf h200-results.tar.gz | grep -c . ; tar -tzf h200-results.tar.gz | grep -
 tar -xzf h200-results.tar.gz && (cd results && sha256sum -c --quiet SHA256SUMS)          # only if the state was done or failed
 ```
 
-A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, through the same helper: `tf container connect <PROVER> -p 3301` in one shell and `"$FB" "$CUTOFF" 5 5 -- curl -s http://127.0.0.1:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). Stop the proxy (Ctrl-C in its shell) when the fetch has ended, and in any case at the cut-off. The server allows two archive downloads at a time and answers 503 to a third; a retry is another call of the helper, which refuses by itself once the budget is gone (exit 121).
+A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, through the same helper: `tf container connect <PROVER> -p 3301` in one shell and `"$FB" "$CUTOFF" 5 5 -- curl -s http://localhost:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). Stop the proxy (Ctrl-C in its shell) when the fetch has ended, and in any case at the cut-off. The server allows two archive downloads at a time and answers 503 to a third; a retry is another call of the helper, which refuses by itself once the budget is gone (exit 121).
 
 ## 6. Teardown and restore (ends the downtime; before any lengthy off-box work)
 
