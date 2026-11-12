@@ -1,0 +1,19 @@
+{
+ "softplus_table_sha256": "d2c1a4504ec3a7eca897cd818e7e572e70e3f82835b52f4cf55f9fc61e633b24",
+ "coarse_exp_sha256": "5c64304f1a54d50705addafc08d11f1de9a897e9ed65860f0445a0f5cc10fa44",
+ "layers": [
+  0,
+  1,
+  2
+ ],
+ "prompts": [
+  "fx"
+ ],
+ "fixture": true,
+ "seconds": 1.1,
+ "bar": {
+  "e_tok": 0.001953125,
+  "e_cum": 0.01,
+  "rejects": 0
+ }
+}
