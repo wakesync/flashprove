@@ -1,0 +1,9 @@
+{
+ "D_absdiff": 3.3306690738754696e-15,
+ "rev_absdiff": 4.3576253716537394e-15,
+ "top1_ok": true,
+ "margins_ok": true,
+ "consistent_top1": true,
+ "n_changed_tensors": 70,
+ "ok": true
+}

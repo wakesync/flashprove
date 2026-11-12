@@ -1,0 +1,55 @@
+{
+ "what": "input validation of analyse.py (PREREG Amendment A-2); written only when the evidence is complete",
+ "tier": 2,
+ "slot_granted": "2026-11-12T18:25:18Z",
+ "run_end": "2026-11-12T18:46:41Z",
+ "prompts": [
+  "p01-ordinary-short",
+  "p07-chat-ordinary",
+  "p08-chat-refusal",
+  "p09-multilingual",
+  "p02-ordinary-paragraph",
+  "p04-repeat-punct",
+  "p05-code",
+  "p06a-digits-256",
+  "p11-chat-long"
+ ],
+ "positions": 949,
+ "positions_registered_for_tier": 949,
+ "tokyo_checked": true,
+ "tensor_coverage": {
+  "stock": {
+   "expected": 624,
+   "present": 624,
+   "sha256_compared": 624,
+   "sha256_mismatch": 0
+  },
+  "abl": {
+   "expected": 71,
+   "present": 71,
+   "sha256_compared": 71,
+   "sha256_mismatch": 0
+  }
+ },
+ "E_nonpositive_positions": {
+  "XS18": [],
+  "XS20": [
+   {
+    "prompt": "p11-chat-long",
+    "t": 279,
+    "E_stock": -7.105427357601002e-15,
+    "E_abl": 0.0,
+    "D": 2.5153212845907547e-12
+   }
+  ]
+ },
+ "E_nonpositive_note": "E = max(E_stock, E_abl) <= 0: the ratio counts as +inf in the shares and is left out of the finite log10 ratio statistics (PREREG Metric)",
+ "gates": {
+  "a_tokyo": true,
+  "b_reproduce": true,
+  "c_manifest": true,
+  "all_ok": true
+ },
+ "verdict": "FAIL (mixed)",
+ "exit_code": 0
+}

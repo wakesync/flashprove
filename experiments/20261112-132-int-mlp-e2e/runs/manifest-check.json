@@ -1,0 +1,25 @@
+{
+ "stock": {
+  "fetched": 226,
+  "vs_pr124_compared": 226,
+  "vs_pr124_mismatch": [],
+  "emb_rows_compared": 319,
+  "emb_rows_mismatch": [],
+  "vs_pr68_diff_compared": 226,
+  "vs_pr68_diff_mismatch": []
+ },
+ "abl": {
+  "fetched": 198,
+  "vs_pr124_compared": 198,
+  "vs_pr124_mismatch": [],
+  "emb_rows_compared": 0,
+  "emb_rows_mismatch": [],
+  "vs_pr68_diff_compared": 198,
+  "vs_pr68_diff_mismatch": []
+ },
+ "abl_vs_stock": {
+  "common": 0,
+  "different": 0,
+  "different_as_pr68": true
+ }
+}

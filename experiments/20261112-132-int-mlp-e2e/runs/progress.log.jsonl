@@ -1,0 +1,33 @@
+{"t": "2026-11-12T16:52:08Z", "start": true, "prompt_set": "full", "paths": {"REF": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "XM18": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "FM": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "XM18#2": ["p01-ordinary-short", "p09-multilingual", "p04-repeat-punct"]}}
+{"t": "2026-11-12T16:55:00Z", "leg": "abl", "layer": 0, "ckpt": "stock", "fetch_wait_s": 16.8, "layer_s": 155.3}
+{"t": "2026-11-12T16:57:09Z", "leg": "abl", "layer": 1, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 128.0}
+{"t": "2026-11-12T16:59:18Z", "leg": "abl", "layer": 2, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 128.5}
+{"t": "2026-11-12T17:08:57Z", "resume": true, "meta": {"leg": "abl", "next_layer": 3, "legs_done": [], "prompt_set": "full"}}
+{"t": "2026-11-12T17:12:17Z", "leg": "abl", "layer": 3, "ckpt": "stock", "fetch_wait_s": 15.7, "layer_s": 183.9}
+{"t": "2026-11-12T17:15:13Z", "leg": "abl", "layer": 4, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 175.2}
+{"t": "2026-11-12T17:17:50Z", "leg": "abl", "layer": 5, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 157.0}
+{"t": "2026-11-12T17:20:20Z", "leg": "abl", "layer": 6, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 149.4}
+{"t": "2026-11-12T17:22:47Z", "leg": "abl", "layer": 7, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 145.9}
+{"t": "2026-11-12T17:25:24Z", "leg": "abl", "layer": 8, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 157.3}
+{"t": "2026-11-12T17:28:18Z", "leg": "abl", "layer": 9, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 173.5}
+{"t": "2026-11-12T17:31:09Z", "leg": "abl", "layer": 10, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 169.8}
+{"t": "2026-11-12T17:33:53Z", "leg": "abl", "layer": 11, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 163.7}
+{"t": "2026-11-12T17:36:43Z", "leg": "abl", "layer": 12, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 169.8}
+{"t": "2026-11-12T17:39:45Z", "leg": "abl", "layer": 13, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 181.0}
+{"t": "2026-11-12T17:42:18Z", "leg": "abl", "layer": 14, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 152.4}
+{"t": "2026-11-12T17:44:38Z", "leg": "abl", "layer": 15, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 140.3}
+{"t": "2026-11-12T17:47:53Z", "leg": "abl", "layer": 16, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 194.2}
+{"t": "2026-11-12T17:50:45Z", "leg": "abl", "layer": 17, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 171.6}
+{"t": "2026-11-12T17:53:35Z", "leg": "abl", "layer": 18, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 169.5}
+{"t": "2026-11-12T17:56:16Z", "leg": "abl", "layer": 19, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 160.5}
+{"t": "2026-11-12T17:59:18Z", "leg": "abl", "layer": 20, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 180.9}
+{"t": "2026-11-12T18:02:23Z", "leg": "abl", "layer": 21, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 184.9}
+{"t": "2026-11-12T18:05:16Z", "leg": "abl", "layer": 22, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 172.6}
+{"t": "2026-11-12T18:07:38Z", "leg": "abl", "layer": 23, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 140.9}
+{"t": "2026-11-12T18:10:11Z", "leg": "abl", "layer": 24, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 152.9}
+{"t": "2026-11-12T18:12:12Z", "leg": "abl", "layer": 25, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 120.0}
+{"t": "2026-11-12T18:14:27Z", "leg": "abl", "layer": 26, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 134.6}
+{"t": "2026-11-12T18:16:45Z", "leg": "abl", "layer": 27, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 137.8}
+{"t": "2026-11-12T18:19:37Z", "leg": "abl", "layer": 28, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 171.3}
+{"t": "2026-11-12T18:22:29Z", "leg": "abl", "layer": 29, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 171.4}
+{"t": "2026-11-12T18:25:14Z", "leg": "abl", "layer": 30, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 164.6}
