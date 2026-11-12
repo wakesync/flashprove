@@ -1,0 +1,95 @@
+{
+ "counters": {
+  "n_over": 3,
+  "rows": 2,
+  "ch": 3,
+  "ge15": 1,
+  "ge17": 0,
+  "max": 34816.0,
+  "argmax": [
+   2,
+   9
+  ],
+  "clamped": 3,
+  "clamp_max": 2047.0,
+  "hist_nonzero": {
+   "11": 1,
+   "12": 2,
+   "16": 1
+  },
+  "ok": true
+ },
+ "synthetic": {
+  "W": {
+   "equal_python_int": true,
+   "n_clamped": 0,
+   "shifts": {
+    "g": 14,
+    "u": 14,
+    "d": 14
+   },
+   "max_m": 164864.0,
+   "sat": [
+    0,
+    0
+   ]
+  },
+  "C": {
+   "equal_python_int": true,
+   "n_clamped": 156,
+   "shifts": {
+    "g": 14,
+    "u": 14,
+    "d": 14
+   },
+   "max_m": 2047.0,
+   "sat": [
+    0,
+    0
+   ]
+  },
+  "S4": {
+   "equal_python_int": true,
+   "n_clamped": 0,
+   "shifts": {
+    "g": 6,
+    "u": 6,
+    "d": 14
+   },
+   "max_m": 644.0,
+   "sat": [
+    0,
+    0
+   ]
+  },
+  "S3": {
+   "equal_python_int": true,
+   "n_clamped": 0,
+   "shifts": {
+    "g": 5,
+    "u": 5,
+    "d": 14
+   },
+   "max_m": 322.0,
+   "sat": [
+    0,
+    0
+   ]
+  },
+  "S5": {
+   "equal_python_int": true,
+   "n_clamped": 0,
+   "shifts": {
+    "g": 7,
+    "u": 7,
+    "d": 14
+   },
+   "max_m": 1288.0,
+   "sat": [
+    0,
+    0
+   ]
+  }
+ },
+ "synthetic_ok": true
+}
