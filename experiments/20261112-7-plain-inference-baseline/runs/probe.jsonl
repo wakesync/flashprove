@@ -1,0 +1,1 @@
+{"kind": "chat", "utc": "2026-11-12T16:36:48.875428+00:00", "http_status": 413, "wall_seconds": 0.8207508288323879, "max_tokens": 1, "prompt_sha256": "6dcf31cec193926f9cb6731b34ed355fcc87de5866dba3b7c33b907ae3191465", "prompt_chars": 55593, "error": "{\"error\": {\"type\": \"upstream_error\", \"message\": \"prompt over 16000 chars\"}}", "role": "admission_probe", "words": 8192}

@@ -1,0 +1,19 @@
+[
+ {
+  "http_status": 200,
+  "wall_seconds": 1.0319,
+  "t_utc": "2026-11-12T15:59:24.899699+00:00",
+  "content": "Tokyo",
+  "reasoning": "",
+  "finish_reason": "stop",
+  "usage": {
+   "prompt_tokens": 20,
+   "completion_tokens": 3,
+   "total_tokens": 23
+  },
+  "content_sha256": "ec2d191680171ca9603105aa2be38a46228a8e1c75e3ef0383c7ebbd1287110a",
+  "id": "probe-1",
+  "rep": 0,
+  "role": "template probe, not measured"
+ }
+]

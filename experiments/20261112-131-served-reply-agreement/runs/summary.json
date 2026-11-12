@@ -1,0 +1,459 @@
+{
+ "n_included": 10,
+ "n_excluded": 0,
+ "measured_positions": 291,
+ "pooled": {
+  "REF_served": 0.9862542955326461,
+  "XS18_served": 0.9862542955326461,
+  "XS20_served": 0.9862542955326461,
+  "XS18_REF": 1.0,
+  "XS20_REF": 1.0,
+  "counts": {
+   "REF_s": 287,
+   "XS18_s": 287,
+   "XS20_s": 287,
+   "XS18_r": 291,
+   "XS20_r": 291
+  }
+ },
+ "prompt_positions_descriptive": {
+  "n": 226,
+  "XS18_REF": 226,
+  "XS20_REF": 226
+ },
+ "disagreements_vs_served": {
+  "serving_precision": {
+   "XS18": 4,
+   "XS20": 4
+  },
+  "lowering": {
+   "XS18": 0,
+   "XS20": 0
+  }
+ },
+ "spread_over_prompts": {
+  "REF_served": {
+   "median": 1.0,
+   "min": 0.9444444444444444,
+   "max": 1.0,
+   "sd": 0.018191926246430193
+  },
+  "XS18_served": {
+   "median": 1.0,
+   "min": 0.9444444444444444,
+   "max": 1.0,
+   "sd": 0.018191926246430193
+  },
+  "XS20_served": {
+   "median": 1.0,
+   "min": 0.9444444444444444,
+   "max": 1.0,
+   "sd": 0.018191926246430193
+  },
+  "XS18_REF": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 1.0,
+   "sd": 0.0
+  },
+  "XS20_REF": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 1.0,
+   "sd": 0.0
+  }
+ },
+ "determinism": {
+  "REF#2|q01": true,
+  "XS18#2|q01": true,
+  "REF#2|q02": true,
+  "XS18#2|q02": true,
+  "residuals_bit_equal_all_layers": true,
+  "layers_checked": 64
+ },
+ "deterministic": true,
+ "sanity_ref_ge_80pct": true,
+ "verdict": {
+  "H0": "PASS",
+  "H1_XS18": "PASS",
+  "H2_XS20": "PASS"
+ },
+ "per_prompt": [
+  {
+   "id": "q01",
+   "n_reply": 2,
+   "stop": true,
+   "n": 2,
+   "REF_s": 2,
+   "XS18_s": 2,
+   "XS20_s": 2,
+   "XS18_r": 2,
+   "XS20_r": 2,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 19,
+    "XS18_REF": 19,
+    "XS20_REF": 19
+   }
+  },
+  {
+   "id": "q02",
+   "n_reply": 36,
+   "stop": true,
+   "n": 36,
+   "REF_s": 34,
+   "XS18_s": 34,
+   "XS20_s": 34,
+   "XS18_r": 36,
+   "XS20_r": 36,
+   "frac": {
+    "REF_served": 0.9444444444444444,
+    "XS18_served": 0.9444444444444444,
+    "XS20_served": 0.9444444444444444,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": false,
+    "XS18": false,
+    "XS20": false
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 22,
+    "XS18_REF": 22,
+    "XS20_REF": 22
+   }
+  },
+  {
+   "id": "q03",
+   "n_reply": 8,
+   "stop": true,
+   "n": 8,
+   "REF_s": 8,
+   "XS18_s": 8,
+   "XS20_s": 8,
+   "XS18_r": 8,
+   "XS20_r": 8,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 22,
+    "XS18_REF": 22,
+    "XS20_REF": 22
+   }
+  },
+  {
+   "id": "q04",
+   "n_reply": 10,
+   "stop": true,
+   "n": 10,
+   "REF_s": 10,
+   "XS18_s": 10,
+   "XS20_s": 10,
+   "XS18_r": 10,
+   "XS20_r": 10,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 23,
+    "XS18_REF": 23,
+    "XS20_REF": 23
+   }
+  },
+  {
+   "id": "q05",
+   "n_reply": 23,
+   "stop": true,
+   "n": 23,
+   "REF_s": 23,
+   "XS18_s": 23,
+   "XS20_s": 23,
+   "XS18_r": 23,
+   "XS20_r": 23,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 19,
+    "XS18_REF": 19,
+    "XS20_REF": 19
+   }
+  },
+  {
+   "id": "q06",
+   "n_reply": 4,
+   "stop": true,
+   "n": 4,
+   "REF_s": 4,
+   "XS18_s": 4,
+   "XS20_s": 4,
+   "XS18_r": 4,
+   "XS20_r": 4,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 28,
+    "XS18_REF": 28,
+    "XS20_REF": 28
+   }
+  },
+  {
+   "id": "q07",
+   "n_reply": 27,
+   "stop": true,
+   "n": 27,
+   "REF_s": 27,
+   "XS18_s": 27,
+   "XS20_s": 27,
+   "XS18_r": 27,
+   "XS20_r": 27,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 23,
+    "XS18_REF": 23,
+    "XS20_REF": 23
+   }
+  },
+  {
+   "id": "q08",
+   "n_reply": 53,
+   "stop": true,
+   "n": 53,
+   "REF_s": 53,
+   "XS18_s": 53,
+   "XS20_s": 53,
+   "XS18_r": 53,
+   "XS20_r": 53,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 25,
+    "XS18_REF": 25,
+    "XS20_REF": 25
+   }
+  },
+  {
+   "id": "q09",
+   "n_reply": 64,
+   "stop": false,
+   "n": 64,
+   "REF_s": 62,
+   "XS18_s": 62,
+   "XS20_s": 62,
+   "XS18_r": 64,
+   "XS20_r": 64,
+   "frac": {
+    "REF_served": 0.96875,
+    "XS18_served": 0.96875,
+    "XS20_served": 0.96875,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": false,
+    "XS18": false,
+    "XS20": false
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 21,
+    "XS18_REF": 21,
+    "XS20_REF": 21
+   }
+  },
+  {
+   "id": "q10",
+   "n_reply": 64,
+   "stop": false,
+   "n": 64,
+   "REF_s": 64,
+   "XS18_s": 64,
+   "XS20_s": 64,
+   "XS18_r": 64,
+   "XS20_r": 64,
+   "frac": {
+    "REF_served": 1.0,
+    "XS18_served": 1.0,
+    "XS20_served": 1.0,
+    "XS18_REF": 1.0,
+    "XS20_REF": 1.0
+   },
+   "whole_reply": {
+    "REF": true,
+    "XS18": true,
+    "XS20": true
+   },
+   "guard_error": {
+    "XS18": false,
+    "XS20": false
+   },
+   "reps_text_identical": true,
+   "prompt_positions": {
+    "n": 24,
+    "XS18_REF": 24,
+    "XS20_REF": 24
+   }
+  }
+ ],
+ "disagreement_positions": [
+  {
+   "id": "q02",
+   "reply_pos": 30,
+   "input_pos": 52,
+   "served": 1040,
+   "stop_position": false,
+   "REF": 11,
+   "XS18": 11,
+   "XS20": 11,
+   "ref_top2_margin": 0.212459523645677
+  },
+  {
+   "id": "q02",
+   "reply_pos": 32,
+   "input_pos": 54,
+   "served": 466,
+   "stop_position": false,
+   "REF": 321,
+   "XS18": 321,
+   "XS20": 321,
+   "ref_top2_margin": 1.385830086439718
+  },
+  {
+   "id": "q09",
+   "reply_pos": 10,
+   "input_pos": 31,
+   "served": 303,
+   "stop_position": false,
+   "REF": 6121,
+   "XS18": 6121,
+   "XS20": 6121,
+   "ref_top2_margin": 0.07367141313839909
+  },
+  {
+   "id": "q09",
+   "reply_pos": 45,
+   "input_pos": 66,
+   "served": 20359,
+   "stop_position": false,
+   "REF": 310,
+   "XS18": 310,
+   "XS20": 310,
+   "ref_top2_margin": 1.0664535034176055
+  }
+ ]
+}
