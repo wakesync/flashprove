@@ -1,0 +1,54 @@
+[
+ {
+  "id": "q02",
+  "reply_pos": 30,
+  "served_id": 1040,
+  "served_text": " like",
+  "ref_id": 11,
+  "ref_text": ",",
+  "ref_margin": 0.212459523645677,
+  "context_tail": "rth's atmosphere than longer wavelengths",
+  "rest_head": " like red or orange.",
+  "ref_pick_is_prefix_of_served_rest": false,
+  "canonical_reencode_of_rest_starts_with_served": true
+ },
+ {
+  "id": "q02",
+  "reply_pos": 32,
+  "served_id": 466,
+  "served_text": " or",
+  "ref_id": 321,
+  "ref_text": " and",
+  "ref_margin": 1.385830086439718,
+  "context_tail": "osphere than longer wavelengths like red",
+  "rest_head": " or orange.",
+  "ref_pick_is_prefix_of_served_rest": false,
+  "canonical_reencode_of_rest_starts_with_served": true
+ },
+ {
+  "id": "q09",
+  "reply_pos": 10,
+  "served_id": 303,
+  "served_text": " in",
+  "ref_id": 6121,
+  "ref_text": " dark",
+  "ref_margin": 0.07367141313839909,
+  "context_tail": "tands as a solitary sentinel against the",
+  "rest_head": " inky blackness of the ocean, its white ",
+  "ref_pick_is_prefix_of_served_rest": false,
+  "canonical_reencode_of_rest_starts_with_served": true
+ },
+ {
+  "id": "q09",
+  "reply_pos": 45,
+  "served_id": 20359,
+  "served_text": " safely",
+  "ref_id": 310,
+  "ref_text": " to",
+  "ref_margin": 1.0664535034176055,
+  "context_tail": "through the darkness to guide lost ships",
+  "rest_head": " safely to shore. The rhythmic crash of ",
+  "ref_pick_is_prefix_of_served_rest": false,
+  "canonical_reencode_of_rest_starts_with_served": true
+ }
+]
