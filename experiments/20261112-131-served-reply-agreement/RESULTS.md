@@ -68,7 +68,7 @@ Stop positions (`runs/stop-ids.json`): on all 8 replies that stopped, float64, X
 
 - **No proof and no soundness.** Only the DeltaNet head computation is integer. in_proj, out_proj, attention, MLP, norms and lm_head are float64. The arms are numerical lowerings, not sound relations.
 - **Token ids are reconstructed, not observed.** The route returns text and counts only. Equal counts plus an exact decode round trip leave open a non-canonical generation of the same text with the same number of tokens. The 287 agreeing positions make that unlikely to matter, but it is not excluded.
-- **Served model identity** is as reported by the deployment configuration and is not hashed here. The 4 misses with margins above 1 logit are unexplained (see above).
+- **Served model identity** is as reported by the deployment configuration and is not hashed here. The 2 misses with float64 top-2 margins above 1 logit (q02 reply position 32, q09 reply position 45) are unexplained (see above).
 - **Small n.** 10 short prompts, 291 reply positions, one checkpoint (abliterated), greedy only, at most 64 tokens. One deterministic CPU run. All replies were collected within about 10 minutes (probe 15:59Z, batch 16:08Z to 16:10Z), from one deployment state.
 - "A greedy integer run would have produced the reply" holds only for the 8 fully matched replies and only under teacher forcing with reconstructed ids. No free-running generation was done on the CPU.
 - The 98% bar for served vs float64 was fixed before the data. With n = 291 the minimum passing count is 286 (0.98 x 291 = 285.2); 287 is one position above it. One more miss would still pass, two more would fail.
