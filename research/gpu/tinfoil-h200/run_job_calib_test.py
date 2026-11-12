@@ -150,8 +150,13 @@ def main():
                            env={"MOCK_CALIB": "sleep", "FP_JOB_TIMEOUT": "6"})
             p = c.run_job(timeout=60)
             steps = c.read("steps.tsv") or ""
-            check(c.name, "job stopped by FP_JOB_TIMEOUT: FAILED, exit 124",
-                  p.returncode == 124 and c.exists("FAILED") and "FP_JOB_TIMEOUT" in (c.read("FAILED") or ""))
+            # GNU timeout returns 124 after TERM, or 137 if the job was still there FP_KILL_GRACE (2 s in
+            # the test) later and got KILL; run_job.sh treats both as the job timeout (steps.tsv, FAILED).
+            # On a loaded CPU the job process can take longer than 2 s to exit after TERM, and then the
+            # status is 137: reproduced 5 of 5 times with busy loops on the same core, 124 when idle
+            # (the PR #141 round-3 35/36 run). The exit status is in the label.
+            check(c.name, "job stopped by FP_JOB_TIMEOUT: FAILED, exit 124 or 137 (got %s)" % p.returncode,
+                  p.returncode in (124, 137) and c.exists("FAILED") and "FP_JOB_TIMEOUT" in (c.read("FAILED") or ""))
             check(c.name, "the running calibration step recorded interrupted, C2 never started",
                   "\nC1-1\tinterrupted\t" in steps and "C2-1" not in steps)
             check(c.name, "its partial evidence exported, out/ withheld",

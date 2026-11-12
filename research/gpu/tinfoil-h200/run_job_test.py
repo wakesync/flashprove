@@ -403,7 +403,9 @@ def main():
         if want("quickstart-job-timeout"):
             c = Case(base, runner, "quickstart-job-timeout", onbox=1, repeats=0, example="sleep", env={"FP_JOB_TIMEOUT": "3"})
             p = c.run_job(timeout=40)
-            check(c.name, "job stopped by the timeout, FAILED", p.returncode == 124 and c.exists("FAILED") and not c.exists("DONE"))
+            # 124 (TERM) or 137 (KILL after FP_KILL_GRACE on a loaded host): both are the job timeout to run_job.sh
+            check(c.name, "job stopped by the timeout, FAILED (exit %s)" % p.returncode,
+                  p.returncode in (124, 137) and c.exists("FAILED") and not c.exists("DONE"))
             check(c.name, "quickstart's partial evidence exported", c.exists("quickstart/cp_commit.log") and c.exists("quickstart/bundle/config/c"))
             check(c.name, "its unverified out/ withheld", not c.exists("quickstart/bundle/out"))
             check(c.name, "steps.tsv records the interrupted quickstart", "\nquickstart\tinterrupted\t" in (c.read("steps.tsv") or ""))
