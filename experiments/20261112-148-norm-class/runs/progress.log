@@ -1,0 +1,7 @@
+slot granted 2026-11-12T23:11:53Z set=pending (run_all.sh: fixture debug first, PREREG A-1)
+fixture end rc=0 2026-11-12T23:16:28Z
+decide_set: layer set r33; projected 4460 s for 64 layers, available 2792 s; t_delta 57.1 s, t_attn 41.1 s (512-token fixture probe); fixture ok; grant 2026-11-12T23:11:53Z; 2026-11-12T23:16:28Z
+slot granted 2026-11-12T23:16:28Z set=r33
+first grant 2026-11-12T23:11:53Z; stop at 2026-11-13T00:05:00Z (min of grant + 80 min and 2026-11-13T00:05:00Z); MemAvailable 16059500 kB
+free disk 34561277952 bytes
+end rc=4 2026-11-12T23:49:04Z

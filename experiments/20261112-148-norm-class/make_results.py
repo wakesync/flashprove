@@ -17,7 +17,8 @@ g = lambda x: "n/a" if x is None else f"{x:.3g}"
 i_ = lambda x: f"{int(x):,}"
 a, m = B["input_layernorm"], B["post_attention_layernorm"]
 passing = [n for n, v in V.items() if v["verdict"] == "PASS"]
-if not complete: head = "PARTIAL: the run did not finish its registered layer set. No arm has a verdict."
+if not complete: head = ("PARTIAL: the run stopped itself on the registered free-disk floor before finishing its layer set. No arm has a registered verdict. "
+                         "Every arm already has failing layers among those done (section 2).")
 elif passing: head = f"H HOLDS on the layers measured: arm{'s' if len(passing) > 1 else ''} {', '.join(passing)} pass{'' if len(passing) > 1 else 'es'} (class and per-layer fidelity bar)."
 else: head = "NEGATIVE: H does not hold. No registered arm is both in class and inside the per-layer fidelity bar."
 L = ["# RESULTS: 20261112-148-norm-class", "",
@@ -26,7 +27,9 @@ L = ["# RESULTS: 20261112-148-norm-class", "",
      "the arm W ledger cost is counted, not measured.", "",
      f"**{head}**", "",
      f"Scope actually run: baseline on {nb} of 64 layers; arms on {nl} layers (layer set: {ls}"
-     + ("; the registered reduced set R33, PREREG Kill criterion and A-1" if ls == "r33" else "") + "); abliterated checkpoint; 6 prompts, 672 tokens (includes p03-repeat-word); "
+     + ("; the registered reduced set R33, PREREG Kill criterion and A-1" if ls == "r33" else "")
+     + (f": the members of the reduced set R33 up to layer {max(S['layers_arms'])}; the run ended after layer {max(S['layers_baseline'])}, see Deviations" if ls == "partial" else "")
+     + "); abliterated checkpoint;" 6 prompts, 672 tokens (includes p03-repeat-word); "
      "open loop (each layer starts from the float64 stream). No logits and no token agreement were computed.", "",
      "## 1. Plain summary", ""]
 both_all = a["layers_with_any_over"] == a["n_layers"] and m["layers_with_any_over"] == m["n_layers"]
@@ -58,7 +61,23 @@ L += ["", f"k rule for arm S (PREREG): M = {K['M']:.6g} is the largest |norm out
       + (f", all 64 layers and 672 tokens; k* = {K['k_star']}, so arm S is the run's S{K['k_star']}" + ("." if K["in_ladder"] else ", which is outside the measured ladder (3, 4, 5): arm S has no verdict.")
          if K["evaluable"] else "; the rule needs the baseline of all 64 layers, which this run does not have, so k* is not evaluated."),
       f"Determinism: arm C computed twice on p01 and p09, layer outputs {'bit-identical in all ' + str(S['determinism']['layers_checked']) + ' arm layers' if S['determinism']['all_bit_equal'] else 'NOT shown bit-identical'}.",
-      "", "## 3. Baseline: both pre-norm outputs at 2^12 (item 1 of the issue)", "",
+      ""]
+if not complete:
+    kmax = max(k for k in range(-40, 13) if round(2.0 ** k * K["M"]) <= 2047)
+    lad = [f"S{k}" for k in (3, 4, 5) if k <= kmax]
+    xc, xw = A["C"], A["W"]
+    L += ["**What the layers done already settle (arithmetic on the registered rule, not a registered verdict).** The bar needs every measured layer to pass, "
+          "so a failing layer among those done cannot be undone by the layers that were not run.",
+          f"- Arm C: in class by construction; {len(xc['layers_fail'])} of {xc['n_layers']} layers done fail the fidelity bar.",
+          f"- Arm W: {xw['totals']['n_out_of_class']:,} entries at or over 2^18 in its own rows on the {xw['n_layers']} arm layers ({xw['totals']['baseline_ge_2e18_all_baseline_layers']:,} in the baseline of the "
+          f"{nb} layers done), so it is out of its registered class under either reading of A-2; and {len(xw['layers_fail'])} of {xw['n_layers']} layers done fail the fidelity bar.",
+          f"- Arm S: M over the {nb} baseline layers done is {K['M']:.6g}. More layers can only raise M, so the rule's k is at most {kmax}. The measured ladder points at or under that, "
+          + " and ".join(f"{s} ({len(A[s]['layers_fail'])} of {A[s]['n_layers']} layers done fail the bar)" for s in lad)
+          + (": every one of them has failing layers." if all(A[s]["layers_fail"] for s in lad) else ": not all of them have failing layers, so arm S is NOT settled by the layers done.")
+          + " If the rule's k came out under 3 the arm would be unmeasured and would have no verdict.",
+          ("- So no completion of this run could have given any arm a PASS, and it could not have shown H to hold. This says nothing about an arm S at a scale below the ladder, which was not measured."
+           if (xc["layers_fail"] and xw["layers_fail"] and all(A[s]["layers_fail"] for s in lad)) else "- The layers done do not settle every arm."), ""]
+L += ["## 3. Baseline: both pre-norm outputs at 2^12 (item 1 of the issue)", "",
       "q12 = RNE(2^12 x norm output) on the float64 stream. n = layers x 672 tokens x 5,120 channels. Supports both readings of section 5 (it is the class question).", "",
       "| norm output | layers | entries n | over 2,047 | share | per-layer share: median (min to max) | layers with any entry over | token rows with any entry over | max \\|q12\\| | at layer, prompt | >= 2^15 | >= 2^17 | >= 2^18 |",
       "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
@@ -66,6 +85,10 @@ for key, lab in (("input_layernorm", "input_layernorm (mixer input a)"), ("post_
     b = B[key]; t = b["total"]; s = b["share_per_layer"]
     L.append(f"| {lab} | {b['n_layers']} | {t['n']:,} | {t['over']:,} | {pct(b['share_over_2047'])} | {pct(s['median'])} ({pct(s['min'])} to {pct(s['max'])}) | {b['layers_with_any_over']} of {b['n_layers']} | "
              f"{t['rows_over']:,} of {t['rows']:,} | {i_(b['max_q12'])} | {b['max_layer']}, {b['max_prompt']} | {t['ge15']:,} | {t['ge17']:,} | {t['ge18']:,} |")
+mrow = {r["layer"]: r for r in m["layers"]}
+if 26 in mrow and 30 in mrow:
+    L += ["", f"Consistency with PR #138 (descriptive; a different stream and prompt set, so equality is not expected): the MLP input maximum here is {i_(mrow[26]['max_q12'])} at layer 26 and "
+          f"{i_(mrow[30]['max_q12'])} at layer 30, on the float64 stream and 6 prompts; PR #138 RESULTS reports 142,651 at layer 26 and 148,536 at its post-cutoff layer 30, on its integer path and 10 prompts."]
 L += ["", "Per-layer rows (share and maximum for both norms, every layer): [runs/summary.md](runs/summary.md), section \"Per layer\". Raw: `runs/baseline.jsonl`.", "",
       "## 4. Arms: per-layer output error and class checks (items 2 and 3 of the issue)", "",
       "r = ||(x + out_arm) - (x + out_float64)|| / ||x + out_float64|| per (layer, prompt), all tokens of the prompt. Spread is over the 6 prompts per layer, then over layers. "
