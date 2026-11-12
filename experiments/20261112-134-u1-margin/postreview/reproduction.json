@@ -1,0 +1,125 @@
+{
+ "what": "post-review analyse.py on the committed inputs vs the committed analysis of the registered run; no rerun of the model",
+ "committed_runs_analysis_sha256": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11",
+ "postreview_analysis_sha256": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11",
+ "byte_identical": true,
+ "analyse_py_sha256": "92afcd5623259c829b45a173f0ed2e40099aed5b0ee3f29492a590b3fd4b6a69",
+ "toolchain": {
+  "python": "3.12.3",
+  "numpy": "2.4.3"
+ },
+ "headline_equal": true,
+ "headline": {
+  "verdict": {
+   "verdict": "FAIL (mixed)",
+   "c1": false,
+   "c2": true,
+   "c3": false,
+   "prompts_needed": 8,
+   "prompts_run": 9,
+   "subset": true
+  },
+  "gates_all_ok": true,
+  "positions": 949,
+  "xs18_count_gt10": 885,
+  "xs18_share_gt10": 0.9325605900948367,
+  "xs18_count_gt100": 623,
+  "xs18_share_gt100": 0.6564805057955743,
+  "xs18_prompts_share10_ge_090": 7,
+  "xs18_log10r": {
+   "median": 2.452655391771831,
+   "sd": 0.9695206101092487,
+   "min": -1.9669906752222088,
+   "max": 5.728080848684197,
+   "p1": 0.4100939201623089,
+   "p10": 1.1580327324598276,
+   "p90": 3.6650246746199886
+  },
+  "xs20_share_gt10": 0.9852476290832455,
+  "xs20_share_gt100": 0.7397260273972602,
+  "xs20_prompts_share10_ge_090": 9,
+  "D": {
+   "n": 949,
+   "median": 0.0003794759993169805,
+   "max": 1.6680526188378657,
+   "min": 2.5153212845907547e-12,
+   "p10": 3.4055977558011823e-06,
+   "p90": 0.02191359778348812
+  },
+  "E_XS18": {
+   "median": 2.4085774690263406e-06,
+   "max": 0.0025114954117988475
+  },
+  "top1_differ": 23,
+  "per_prompt_xs18": {
+   "p01-ordinary-short": [
+    1.0,
+    1.0
+   ],
+   "p07-chat-ordinary": [
+    0.9565217391304348,
+    0.9130434782608695
+   ],
+   "p08-chat-refusal": [
+    1.0,
+    1.0
+   ],
+   "p09-multilingual": [
+    1.0,
+    1.0
+   ],
+   "p02-ordinary-paragraph": [
+    1.0,
+    0.9439252336448598
+   ],
+   "p04-repeat-punct": [
+    0.78125,
+    0.421875
+   ],
+   "p05-code": [
+    0.9861111111111112,
+    0.7083333333333334
+   ],
+   "p06a-digits-256": [
+    0.83984375,
+    0.1640625
+   ],
+   "p11-chat-long": [
+    0.9787234042553191,
+    0.9113475177304965
+   ]
+  }
+ },
+ "input_validation": {
+  "tier": 2,
+  "positions": 949,
+  "tensor_coverage": {
+   "stock": {
+    "expected": 624,
+    "present": 624,
+    "sha256_compared": 624,
+    "sha256_mismatch": 0
+   },
+   "abl": {
+    "expected": 71,
+    "present": 71,
+    "sha256_compared": 71,
+    "sha256_mismatch": 0
+   }
+  },
+  "E_nonpositive_positions": {
+   "XS18": [],
+   "XS20": [
+    {
+     "prompt": "p11-chat-long",
+     "t": 279,
+     "E_stock": -7.105427357601002e-15,
+     "E_abl": 0.0,
+     "D": 2.5153212845907547e-12
+    }
+   ]
+  },
+  "exit_code": 0
+ },
+ "ok": true
+}
