@@ -1,0 +1,15 @@
+{
+ "note": "Frozen in PREREG.md. Ordinary harmless user messages, one user turn each, no system message.",
+ "prompts": [
+  {"id": "q01", "message": "Reply with just the capital of France."},
+  {"id": "q02", "message": "In one sentence, explain why the sky is blue."},
+  {"id": "q03", "message": "List three fruits that are red, separated by commas."},
+  {"id": "q04", "message": "Translate 'good morning, how are you?' into Spanish."},
+  {"id": "q05", "message": "Write a haiku about autumn leaves."},
+  {"id": "q06", "message": "What is 17 multiplied by 23? Answer with the number only."},
+  {"id": "q07", "message": "Write a Python function that returns the square of a number."},
+  {"id": "q08", "message": "Give two tips for sleeping better, as a short bulleted list."},
+  {"id": "q09", "message": "Describe a lighthouse at night in three sentences."},
+  {"id": "q10", "message": "Name the planets of the solar system in order from the Sun."}
+ ]
+}

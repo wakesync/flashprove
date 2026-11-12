@@ -1,0 +1,8 @@
+{
+ "mode": "collect",
+ "requests_sent_incl_attestation": 31,
+ "replies": 30,
+ "error": null,
+ "wall_seconds": 94.57,
+ "end_utc": "2026-11-12T16:09:52.816238+00:00"
+}
