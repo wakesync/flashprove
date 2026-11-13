@@ -12,7 +12,8 @@ Usage: merge10.py <run1 dir> <run2 dir or -> <out dir> [<pr139 runs dir>]
   analyse.analyse(), imported unchanged.
 - Determinism: run 2's per-position arrays equal to run 1's bit for bit (if run 2 is given).
 Writes <out dir>/merged-analysis.json and <out dir>/merge-validation.json, never overwrites.
-Exit 0 = gates pass, verdict written; 2 = invalid input; 3 = KILLED (validity gate); 4 = output exists.
+Exit 0 = gates pass, verdict written; 2 = invalid input (including malformed JSON, duplicate keys, missing prompts or
+keys); 3 = KILLED (validity gate); 4 = output exists.
 """
 import hashlib, json, math, re, sys
 from pathlib import Path
@@ -45,7 +46,7 @@ def check_p03(bad, r, where):
     A.arr(bad, f"{where}.D_kl_stock_abl", r.get("D_kl_stock_abl"), T03, A.is_num, -1e-9)
     A.arr(bad, f"{where}.kl_abl_stock", r.get("kl_abl_stock"), T03, A.is_num, -1e-9)
 
-def main(argv):
+def compute(argv):
     r1 = Path(argv[1]); r2 = None if argv[2] == "-" else Path(argv[2]); OUT = Path(argv[3])
     R139 = Path(argv[4]) if len(argv) > 4 else P139 / "runs"
     if any((OUT / f).exists() for f in OUTS): print("NOT RUN: output exists", file=sys.stderr); return 4
@@ -161,10 +162,25 @@ def main(argv):
     val = dict(pr139_d_sha256=D139_SHA, run1=str(r1.name), run2=(r2.name if r2 else None), prompts=A.FULL,
                positions=sum(merged[p]["T"] for p in A.FULL), gates={k: (g if isinstance(g, bool) else g.get("ok")) for k, g in out["gates"].items()},
                verdict=out["verdict"]["verdict"])
+    summary = dict(verdict=out["verdict"], gates=val["gates"], p03_XS18=p03["XS18"], p03_D=p03["D"], top1_p03=p03["top1_differ"],
+                   ten_XS18=out["pooled"]["XS18"], determinism=(det or {}).get("all_bit_equal"))
+    return OUT, text, val, summary, valid
+
+# Validation-only hardening after the PR #162 reviews: malformed or truncated JSON, duplicate keys, an absent prompt
+# or arm in PR #124's E files, or any other missing key now exits 2 ("INVALID, nothing written") instead of an
+# uncaught traceback (exit 1). Nothing is written before every input has been read and checked. The statistics, gates,
+# verdict and the bytes written for valid input are unchanged.
+MALFORMED = (KeyError, IndexError, TypeError, ValueError, AttributeError, OSError)
+
+def main(argv):
+    try: r = compute(argv)
+    except MALFORMED as e:
+        return invalid([f"malformed or incomplete input ({type(e).__name__}: {e})"])
+    if isinstance(r, int): return r
+    OUT, text, val, summary, valid = r
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "merged-analysis.json").write_text(text); (OUT / "merge-validation.json").write_text(json.dumps(val, indent=1) + "\n")
-    print(json.dumps(dict(verdict=out["verdict"], gates=val["gates"], p03_XS18=p03["XS18"], p03_D=p03["D"], top1_p03=p03["top1_differ"],
-                          ten_XS18=out["pooled"]["XS18"], determinism=(det or {}).get("all_bit_equal")), indent=1))
+    print(json.dumps(summary, indent=1))
     return 0 if valid else 3
 
 def invalid(bad):
