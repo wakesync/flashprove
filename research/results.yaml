@@ -77,6 +77,18 @@ hardware:
     description: "one H200 of an attested serving deployment (vLLM, BF16, confidential computing on), reached from the client host through a local bridge and attested TLS; card shared with a second loaded engine and other callers; engine configuration not controlled; client-side wall time, not GPU time"
 
 results:
+  - id: cpu-reader-dense-table-parity
+    title: "CPU reader dense table-line parity proposal (#182)"
+    status: in progress
+    status_note: "PARTIAL, build refused before compilation"
+    replication: n/a
+    pr: null
+    pr_note: "draft pending; no functional result"
+    summary: "Untested reader-only proposal; no parse/admission/verifier matrix established"
+    conditions: "Initial CPU unit build refused by its output-directory safety check; release and UBSan tests not run"
+    evidence: [experiments/20261113-182-reader-parity/RESULTS.md, experiments/20261113-182-reader-parity/runs/build/attempt.json]
+    metrics: []
+
   - id: cpu-reproduction
     title: CPU verification of upstream's stored synthetic proofs
     status: reproduced
