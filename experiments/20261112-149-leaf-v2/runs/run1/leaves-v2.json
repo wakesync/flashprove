@@ -1,0 +1,3151 @@
+{
+ "id_tag": "fp-wb-conv-subset-v2",
+ "leaf_tag": "fp-wb-conv-leaf-v2",
+ "node_tag": "fp-wb-conv-node-v2",
+ "note": "conversion leaf v2 subset (78 matrix_plain blocks), hash level, NOT A PROOF, NOT a model conversion id",
+ "pins": {
+  "abl": {
+   "checkpoint_id": "16834f8eea1ae4decd241f69719f729878dfc517e89f2df704141aba22e49e86",
+   "config_pin": "dad1aa0120b86537c1a966518e711299a3f0447f8312b6a763075efe168c25f3",
+   "leaf_hashes": [
+    "a4cd620e4da24dfb0514235bf898f1778edfb93de443d9346d2d145376015241",
+    "a86f43f443e0b60529590bd2da65174bd934f2f37161fe86484f6d466541c924",
+    "dc90c78de2dd66250516d06dda5d7c4fed22284d62f544850f2430023147cba4",
+    "fcfef7e224019e1b571f64ae323d11e6fa9ec0e25ad759354ef462bd3138a24e",
+    "3b0ffaf6811e1ca3ab24c4f30d0b09475140f1a2e46c320a216a4fc2cb8fc947",
+    "2e95f9b58d71934c00adc3d87c04ef0d0bbf93f26a07ec81cbabc92f6f89232e",
+    "5da4b6d18bb65a9018c91c4359d3937e0a993a1ee43f6631cd8e8adf7f2b4b28",
+    "ef695eb97d045fddf76b0a1d79fc8ce3a4d74ca77f95beee6e6b1c8d9a4b9e9f",
+    "e39229a0ec006544584a834b41f4106b25ba6019a7edf546c532ccf3ec9b47c1",
+    "d9006bc4b450919cc04652bd9135ec60a1cacfb7e80071b2c3400f1763bcbd3a",
+    "2830e657020d80cc2cf339e261d5894ae31f600ad20a6982168d6f4e1b934cd1",
+    "75d136e45bf6db34d73873d01cb850e771f27aba3b67b2891741e959cd9083f4",
+    "29497d34dcf22d1600d2970ccf70b4a85d90a1f7edf49eb041214ab551683603",
+    "b6062fbd1f1cfc4a2f4bf4df81df9ede6090673641f8ffc2660f8d8f45814da1",
+    "d43106c10ff5ae687d971e72ce1c2c60d0b9a5163a5df80e04feeb533d36c661",
+    "c440eb3587f6bda2e1631d6cbff84ed5f1a3449ca3ad7bc86d552619adbbb07e",
+    "7aeccee5792a3ffcbbf638a3e2c58c82db6f3611c6d810874868bfca8fcc7cd3",
+    "0d478b791a5f41e313f438478790f42e965f7566034f3c5fbf6045883ba3b5c7",
+    "b8d905c7a3d80107d8cb77140a82f8bdd599379cda95158b575dd4c86a723dde",
+    "4ea5a67f86081a9b2c95d454459bce689e960e6a5ab88c58d16d0736eab708f0",
+    "011ea634c42245980c33a959c4e0438091c921535b2e5f6a54ba3836c08da4fe",
+    "ea76f2954d1eedb55509f98418e6ac618cc3ffb624d5af719539042297d2bf17",
+    "adc5c4b9f25dde2fb10245083fde9f6f5a21fdb2c6aff2b01998f56212634f16",
+    "47ab1c9397872539586d2fdfae15e51dbdefb82e9523d4f83e64709754507a20",
+    "aa14d4c54db713ee550454a1eea2f4e9c33bdcce9b138f98879371261f11b4e6",
+    "8f7864baf8f71cc3cafa2e280fb546b5099acaa1d0ec7096e361c3b4c143fb8d",
+    "99b71dbe8dd547408c8747747cadde344fead851f170c58e751252d3cfa1ccbc",
+    "0635314086172b20b2997bae08fb0c920035626f9269b636abe4692cc28a2207",
+    "141dbf388db51a1140157d8016b567dc8661a7651fb675c5785304131b45eafa",
+    "d172d06b13a6255dfd677b4d3f148df9efbca1e0f1a452f9ea8ca54611ea2143",
+    "c76e7c5f76f6c5b655a2f506fc565d18883e4a6915a7898c01c83dbdb66a6d5c",
+    "0a817e6797c51d6cf602422c44b5d89123a1fe329b1e2ac3debb1928f43d3e95",
+    "76543ad9e7b8c5e9ff3e12524248a34455e56f92e68a12e1a67cd0b22df40da6",
+    "0ed9a29ee6c8b309dfa412af746fa78ce0e340721ec7e8d4f84d3e5f0b34c43c",
+    "00a74ff4184f0abb976956515d8c6e919a57d538a9fd11f61fae27cb9478a7ad",
+    "d525fb286fd51569992da4f36641576d2539ed8b2ccae31ef1923e44a88a0a77",
+    "4555ffc9add34e905102bbe32a0eec1fafbea4ffca0d95415b1a47be72d88914",
+    "718cabe026058eb1a8ddda1f926d9384fedead0c9938c0d1e8fe1df0aca101b1",
+    "59d2384f133160598adfd498b0a813e5bd9e97624f81349509a587a2aef03544",
+    "446dd4633442b58fef0ab29495616e7ef0356006e62066ad16493741f44816d9",
+    "c1645824a08d783efc3ec096bf659d1d76a8cc089070ba9fd4e4473a6dba61c0",
+    "ba578008bea46b94d778edabe6488547062a25635d18618412fcff17471cc6a3",
+    "780febefdadc23f261b8823b0c2de4c5ac2d93095606cf853c7d2b93d706e543",
+    "97d02586c4b45ea2c269cf9853fbc6e728b61fff0233b7a8f8b247af9bb91647",
+    "5c84fcf37a821bc29b8e5f015fbd8f9850b4be2ea2ba7949f51fd5250b72ed8c",
+    "3afa4a1deed354841ab7c31c034e607f19d3e9af8e80fe1a036763abe9b046d4",
+    "60a518e97679e875ef6268744a4cd87b4c17376a1175ec8353122cb3578b1e05",
+    "47191cbb13fc8228c75e98bfe1b7aeb0c696d162e937dea2e8c6b64c23fe7105",
+    "3ee746beb93801fca65ab071a255a2a761e633c234fa484cc3ee3f3b01ade0df",
+    "42e285fbfffff2cbe59f0456fdc20f07559e3cd3615da11e2bcb30e1b934e612",
+    "37da486066c73c615dfb4cc5c6257974f7dda9b47036c4104764fdd41c281417",
+    "243a02894e6da97a60d7ed78ff35d2f00c0b6d310afa0ea944e9a3d477ca4663",
+    "14785c406a8a9fa3252e3306798cec523f1f00269897ece590af85c29dc14326",
+    "aaaec27ac42529d0cd08524c52d617f4433ed08936bc7a98dc7b7f8afd8c8855",
+    "f339223d6a59c081893bc53200146c2338d14cbe6986ecfaaafaaf3eb26ccd32",
+    "fba53fac959711382b8526addc2357a5d109c6f957877953cad6b40c77b45d8d",
+    "d2a877731c8b8ba530fe49761cf0f23a8d8fb0d8acdda4627a09cffab02c4421",
+    "5a708e0deec194f7d1c745a4a1b0c4f051b94283230756aff9b47afa5ea0f445",
+    "455905306a0869733d8cbd92a7862ee443b7e2798b581998ad0f3ff02a029589",
+    "0eb679fbb5b944f9202a30f90c00e30bb600741f549f4e4269dad7759586aa84",
+    "b6e4f8304910b33608aeae24cb11ad8ec4bfb2e44b1f6a22f177bd10a279d4ce",
+    "66e3642aedee0348eae2dd21528c841fff3247503ba56661166968d1519fb232",
+    "552642443c1b5082ee0dbe24692489d26e11b5230ca2d6fea11397a5ad803863",
+    "44fe3cc2b208c1799dca8b0831d7d2fa4c5b7f11e4b3992976b18ee4f4df8d79",
+    "91f7ea2b8f96abddc502716b2c6de8902a040349fb5cdafabbd5cdf9852da59b",
+    "d103a782bf624192e1b41ef9519872a4c1eaeb99a758782520322811aa24d438",
+    "7049426452f0c2208f91e8932d6f57e0206d1b13bcb4951928c49ffe82b53bab",
+    "1d4bfc29b9237b3bf76942eebc4e7c69851670aa3c9ba9fbc575eae461058b61",
+    "589c699b39d0008c8ebc592bae61811b9d851960db831523cf598540547262fb",
+    "db29855dcea3a1456ad42d01fcd64a868a90e0f73617115cce6b37af92b34f89",
+    "5c5322b336b963840bb06ce46df508d17e893deb52ab7e69cec2f523275a2b3b",
+    "3dd0f932294d57f14cdec496749ce63c9202aacbb7c392af10db376059dae360",
+    "4b8b87c73a4993c8909fb2fc592c6bea8c980d4edfd62d80b57f1a17fa731f97",
+    "799c4ec0c4889af3816f4de278258c4024b8ab0fd1c1205c9eac0da893108bda",
+    "74aca75b6817c232419333f278e2b64f645c062f48832973ca16fea4dca24873",
+    "8bae5701abeb624f1892bab969cec81586558e901cb19e2312cf3e3486aaa008",
+    "595c54ce33fa262a73a37c0f6235990b2527bf2f089d0d4a4310be2a18861eaf",
+    "3dd6db685f6585d5cc7df43ea7a3b51c5015c91a3045a6c53db6195517df87df"
+   ],
+   "leaves": [
+    {
+     "block": "model.language_model.layers.15.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 14,
+     "int_sha256": "67a27dc64b78a429715b40910a0e7cc8e8329671f04869652fc6a1d1235dc16f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.15.mlp.down_proj.weight",
+       "d49c4895da1abcd8b9174725b17360f8ad82c3f720d607b17a020c4b80e68cd2"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.15.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "883398e7d593810b0e5894199854659dcfccc5cdd43fc4e6eba374e55a894323",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.15.self_attn.o_proj.weight",
+       "4f828d2e7c8ea137e403c81b865e64da8e1ddaf956ed735f68125b4c4084d173"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.16.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "1cd05163d53bd801d643bc6a5674c83b97c49279249785d07b78714c3eecfccd",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.16.linear_attn.out_proj.weight",
+       "033ca4ab502c6585a8bcae660b381e6a10c31aa6bee97dca6beebeda791c0a8a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.16.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "095cb3213dabd1ca014f1df78f80806fa5a363dd667bdb600ecf69f35be37cb0",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.16.mlp.down_proj.weight",
+       "14b0c3d18a9b1345331b68cbe5d519a0c9a8db5c28d635fde1d3daff8a674bac"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.17.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "85b606267c9bada69b158909deae6bca6d9061365534ac4602c5997e12c0d056",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.17.linear_attn.out_proj.weight",
+       "7163f579782ac99f54adfe7f72f0ab88e7717aaa1576bdb3974fa7aa6c3672cf"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.17.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 14,
+     "int_sha256": "8cca3fc0602381fc4805a950c0ec5e87329205351095058953ac586fcc86cf72",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.17.mlp.down_proj.weight",
+       "86a12f452e0764f1ef64ca73078a74c67035486d50d304bfbdaf8cb2f266e323"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.18.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "1b8424485251711cc88826f141116ed7c4578e8143623fe2e5e11bbfcc01a966",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.18.linear_attn.out_proj.weight",
+       "b076fedd1879ab485afd41ab5e7872670f15d1a3e744ea7701fe466cade323c7"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.18.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "cc825436117a6b91fe93f224e75711ed66304484253e6e35f6e8c6f48b984cb1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.18.mlp.down_proj.weight",
+       "c7f15fcfa77758613cabf27f591269f9bd64b9112c419c9f69d1a3973a2fe693"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.19.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "8c64f16eda5e325ccfda10456f748b23bbba4e3e0e4f0395708815dfdbf75cfc",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.19.mlp.down_proj.weight",
+       "5cd753f3232a9c81528e441902615bbc549399eb3f80410cc7a8ccfb70ed1dd1"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.19.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "2e9c59faa8908601b4b8413813b61a9d50a82a623d589f90a1e7ccce557c1897",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.19.self_attn.o_proj.weight",
+       "33e91f9ad434d50cc2e9a72aadb738ee913cabac5e48930ad73d29e1f8a4b24e"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.20.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "469f42128f5a75337e1af2461f6dc5b38b78fd5aa3a0e172682910d371f06af4",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.20.linear_attn.out_proj.weight",
+       "7497c3f54b67927fa69b61e05b41fcbcbb1b42ccde504ca82de60c6cb9b5806b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.20.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "a3a1548c6aec0507b7ad729100f1b5477e1488b8ce0dcbce33749c6c632cbbe1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.20.mlp.down_proj.weight",
+       "39ad27af3d4e6dddc3c5aa82e5916267f1afdc31c116a88f948899cf7b4953ec"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.21.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "114d8954197b4d788e8996dddedc729ac683c94950f77a582d608619f00a916d",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.21.linear_attn.out_proj.weight",
+       "4203054fdd7607a2eb4a2a50e9b6326c670f898f4b33fa974010330c4521922d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.21.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 14,
+     "int_sha256": "7db19e18a2920c8f10eb3841a7addde1220ac28217705fe42393687d698e8c8c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.21.mlp.down_proj.weight",
+       "863498de3792e981452ee3ed61cbfc0d4e1372e048a21ac7290e1fac5ab10389"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.22.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "bccf002bf80d9c26aad80584824f29f8b839fc07dcccbcbf429730393b94ccf3",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.22.linear_attn.out_proj.weight",
+       "aa534529235a0790dc6fae60b30cda222c667837102e36a62551eeb89885c06c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.22.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "c254fd611960bd53d9d311abc180f98b5ab80cefec5f3b5b3dab8901cbaa156e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.22.mlp.down_proj.weight",
+       "5cc2d81e7d0986b5abac81a8346045485ca55f856f166c1471a8ad4fb2b4c913"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.23.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "883633e30f09e001f0941cea87df2efca354493d13de9327eb7f79da05fab515",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.23.mlp.down_proj.weight",
+       "ce62a17a101794548f18a3176937899c5da5fe3a8c9cce5452b5ecdc6276b5eb"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.23.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "f71e8273c30f9d11a1e7e0f62ab20897ec2cea5fb21012804150e3484d090317",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.23.self_attn.o_proj.weight",
+       "dac6749de2bec61ccd3d5dee98375cf564275dd2627cf7751ca7ab03bdb4371b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.24.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "7b095ebafcde80559f370e4fff77940fb70048d2d6c5f7041ff99fbfe5057786",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.24.linear_attn.out_proj.weight",
+       "79657d84467fd6e8b18ec7038e6d045adf8cee96a62940f80f51d38ca0e66dfd"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.24.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "3be0dad94d561ef86c539bde4f0576618131b8d82ad07acca9e12044f57661f2",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.24.mlp.down_proj.weight",
+       "fe6fa0c5ba2e27492f75c0c0fea6d45f783559ef35fd32bce72624bb11dd0fe8"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.25.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "91a1038312d689d33212d352dff3a9f557dd2d93d240f08730c11a7613aba810",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.25.linear_attn.out_proj.weight",
+       "d2219808eedab17088f5c6283d3f80a5e7b913c23192815b64ece5be6afa19e4"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.25.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "2ac9e0bb71a4b97c5030069ac2e921a236e5b7545aacac928fd459406f743e3a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.25.mlp.down_proj.weight",
+       "0022a80dc87c798f89b911176a440348144373df7e444308a3f7c35de3e9e7fa"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.26.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "28087a21c7180151e514b70a4126261996a7bd5e7dec2c16387ce383a7afa02a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.26.linear_attn.out_proj.weight",
+       "7e0a7f5a5d519e317fcca23dff14b0fd72c6ac11a37c04c238175f97eb511e09"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.26.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "ae799a5ef967fbe0d600ec1822c4e082b18fca9c076ebaa4bbb82805a57a373a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.26.mlp.down_proj.weight",
+       "8a23b51f3c86193670aa0891578f84aa6b52a82b5747127f080abb0cbba5ecfe"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.27.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "ef845e845b42a6fc54c803d377a9670dba76057be1ec9be33205935126813463",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.27.mlp.down_proj.weight",
+       "4b25145e00d3bba49424815407d262485461c691334ed5399a16b9461620163c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.27.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "edd3ef2465077112ebcd181b2ccb035d77935672d0b2df1bc6f2d15941395927",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.27.self_attn.o_proj.weight",
+       "2ccb5158124247197bc49038d0379dbd1be149d84da76733908b59af7d1b0d40"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.28.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "4c79c25255bb75aed9080daaa339bba5b597e513b3278c0d1019d21dcc6c92fc",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.28.linear_attn.out_proj.weight",
+       "0b5b71ba231114fdcb441d9c23a1f3cab4699716f079e50d29f87bd3819305e1"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.28.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "695eff64ba80488ac5e372ffaa7bf209456e4b79b6ad4611de4eee232e4b336b",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.28.mlp.down_proj.weight",
+       "72c48b5eb9575ccb603f9c77a8777e7ecec07c6bd219d5aea2a6d6e003fc2d6d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.29.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "2590a412fb8950db41a856c9ecc82218002f19cb0d79656c6653890cdefc4a32",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.29.linear_attn.out_proj.weight",
+       "5f0aec603228923d9fd83bac88c5f1a014fca9d530ac7ac773247a5cbeba3381"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.29.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "02edd145edeb46918c98119b23991fd0ee59072a0ab8bc1ae8e734c8b807657b",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.29.mlp.down_proj.weight",
+       "2714e896d4655c8c7563e06425927dfab826c5acc556c4ab033493c7fd530a23"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.30.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "3ddb6ece352b367d0e7630d2d4c4fd0687ff79ffea1077f9e52f1dbed3fda3d1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.30.linear_attn.out_proj.weight",
+       "671d40b528122916ac04c9d3649174e8d0d910072f694230894aba430797f0ae"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.30.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "6a25cda54a11564c2e4ad12dec4c8d4c60dff103e231f9f8c6d2e17a3ec40ca1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.30.mlp.down_proj.weight",
+       "68ab3a8e84d329b5fa70ec5326dbc29d99bb418292b566d55edacbd003fc9ed1"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.31.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "9f39cc223702548783bc1a08314b3de723b271466ed12cd9326639905f3211bc",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.31.mlp.down_proj.weight",
+       "abb31121a2da84fc40969c65f2b4b7e9d1c0fa22867511737ee59300d041b84f"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.31.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "6259c9477fa0c28082dadb4616fcc9003a1263283e97efe5b7b813dac9aa58e1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.31.self_attn.o_proj.weight",
+       "34a0f253518f4bd1577b8f9748404b90259139d717717d0e1764fdeb268b2169"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.32.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d2654c07dcf2954ea1a9e98258d3096af5a18aead2925fdb8771c630d2dbe1d0",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.32.linear_attn.out_proj.weight",
+       "46f8314ceeea2f00213266fb4d559ada855b7386c4e027a311cb5ec77f2b271b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.32.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "4d137a4e875d5203389afca04a7f0a0493f7d00145ef029e792eeac81f00348b",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.32.mlp.down_proj.weight",
+       "3e67a74d5551014cd9b1c4a59aee5a4e0c095d00e3c17679fe1b1cc4e960ce53"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.33.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0cb4a22fbbae6213a8f20d2f4dcbb33d18dc3cd234de5d4ac2be4f7a02421c93",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.33.linear_attn.out_proj.weight",
+       "3c6878957e78f21f4a15a482fc069a8f1e1d7ab50b769170fbcff23ae4ee4091"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.33.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "0cc0062f614353874130de65bdf15847ba6c176b8521a2e0cbe641d96cb5e6f4",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.33.mlp.down_proj.weight",
+       "c0b624b2f2273c8d57622f0568c42c12cd8a090af93ebc101d87f2db6960a015"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.34.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "311389b7d17ca2d4fe8c3ba1760d926955fd701fc4eba339d0b9222cd2a6a3ea",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.34.linear_attn.out_proj.weight",
+       "80e1a004bcf98907dc4179196634701f52f65fa684482a7288c1c4fabf90a3d3"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.34.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "8fd1e6ff5a8ad60fa68c219180a77b3a433ff8cc65ee06f09857e0514297de11",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.34.mlp.down_proj.weight",
+       "886048f46fba739e1dbd3ea7b6ef7099ecf5cc641f3fa38599c02dac18794eb4"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.35.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "2601607f0c2f6bafc05aa18c6f8fba90e495305fc9aa31bad0c89b3581755a7e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.35.mlp.down_proj.weight",
+       "659761c81c0963e8d65f9c15817f45769dd4c7bcc341326c03fee0d69fabe54b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.35.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "3b96b39a5bb3f708e2305b5d4773b68af8053b694a4220e3742b9304ed6c3e42",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.35.self_attn.o_proj.weight",
+       "29f71cea1f1715e1b10a788eba86baf9a35f6b45c551dc7e1a8dc2dcc9f86db0"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.36.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "769313fe124a5c56142cb11a0cd9d872f3f136019784516bf3f2e1da2e3ae7a7",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.36.linear_attn.out_proj.weight",
+       "6c873088106d9eaf41f5fe3eb354a30a5918655fdcbff05ff99ecdbe5ec0b9b7"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.36.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "4d0db23ca55ee79e5b467c9e654e26ffd2f5e93d5bcb0570c320c0fff229a579",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.36.mlp.down_proj.weight",
+       "4ca17e7abf237a4c7432f3fa922cb6595cd57905e040be93184202b4a3a1ec31"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.37.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "77f3d4dd044ac3ce1997b154e04157f10dce0cce08ba7faeb1442d292ad1bb22",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.37.linear_attn.out_proj.weight",
+       "e490b23133edf4cc078a2c63ac97c0f43d2cb133ef5c18d041b97fe98668c43b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.37.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "e63445171fdcac4ebc82fecec383589d1bf1d3f9807b0230b9453977de0ec3ba",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.37.mlp.down_proj.weight",
+       "c334d8d4f655dd6efb3330e9f126cd4e70e3899a45ae060424be6c9f360652bf"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.38.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "c3d838edc215fa7eb2159c889bad9eab5e6c52f0a3cc58ea7b2cf6f6dbb592ec",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.38.linear_attn.out_proj.weight",
+       "4eb11ea3a7ee91180b2a9d464aebe7c2f0961cb622347ce15b4934e748d70a55"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.38.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "03d481847dc4fe12389799f8bdcd33be9ec01ba2c063e643a56e7f2921231b73",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.38.mlp.down_proj.weight",
+       "8c4dac94544c840fea4d24e3cb4916685149895cd58288f2ac18f30d6b0f0211"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.39.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "45661601b7c3627c0304607ea69cfb2e1a482e8de32f5e7d7f0264079cf675f2",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.39.mlp.down_proj.weight",
+       "8b64c37433405557ea30269336d4d6d2238aa41e641aa1d492e10929addae5e0"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.39.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "2ae3c2102ccd01349127bee3e5c726f4c68f29694f0ce803a79eceeb3cf0dffa",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.39.self_attn.o_proj.weight",
+       "b182694b106450a502e838a6a0e3fafa038142f285d8e2ab9127c5fcfb61493c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.40.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "459bb45d592e8fec5f69d61e10cd568d7a0dbb9f921ded872f60565a9f221583",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.40.linear_attn.out_proj.weight",
+       "aa090e95c7c750a8a059816ca7faad0a73d92538037e64cbd959b3317a51fff1"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.40.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "4ce811a7fe563b4c55ead9c240054cce264ae5235b5f0cb25fd99f7df8f27f70",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.40.mlp.down_proj.weight",
+       "244c3b4f5b79440adac01dedca9a18e1de306fd8ec597e72aae059448faf0db5"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.41.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0b74d510ec44fda987e2fdb837750ce3c13aa1b943894d21566fe35a7acee2d0",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.41.linear_attn.out_proj.weight",
+       "ac236d577818f6fa4bd126ab8f84d0aece95a702bb88e7aa02580ede6e9a74b9"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.41.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "560924d283d85cd103b9ffa89ab0029471373f22ed06e280057dd84e94e0c82d",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.41.mlp.down_proj.weight",
+       "b465b54daec8ef6fe576dfe7edd3a65a19fe50acef8c0368ac4393c4df2b4b15"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.42.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "87c8f0c1f3aca23bb7e4b26457f64677aa321b160a864842700584859fe061dd",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.42.linear_attn.out_proj.weight",
+       "8e135067e3fa37e8d30d28ebbec863acb03fc1d44a0edfaa78dcf23cc07b8211"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.42.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "645490a827d2470cbd9eccb29605e162a461dcfeb2e7f15f3a4ad14a1b441a59",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.42.mlp.down_proj.weight",
+       "980c94f12479f1c66c77d149bdd2ca1436f34515027c91ee40ed8bd08c39dbda"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.43.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "258aa77879465ee9d4aa4d7e3a40ae58f28167afe43dfae490215ca17f8a9aec",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.43.mlp.down_proj.weight",
+       "6d45bb199cc0491798766b8692ca769e487079c7d229ad4b77aeda5a89536759"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.43.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "d8958579b43ed24ab453a5481c850ed6e6225851c07f46fa09f45da93df54848",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.43.self_attn.o_proj.weight",
+       "73f2615fffc7646289cdbac863d00c0f97622b7297e45746fb3534e8c1baf28d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.44.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "a506ef17e23b66a34eb0cb1207d9250ea15278f24455c864f0a16b483e78e06e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.44.linear_attn.out_proj.weight",
+       "84efae8367bb645d6c24c18b0ad26621750426f7e5d1c05a62e498720a605337"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.44.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "dec475d1a5c3b1fd11c9c0b6ec85de05b4c00b800b7e81af393a2ae471050e0b",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.44.mlp.down_proj.weight",
+       "c576231971b10ac8620dcb86a2f2f9f211e1b5aa4a686183c8598258754f9384"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.45.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "9e45cb05047e01676320c4c4db946821628e6a7e5e01a791f97d4e2a1e965669",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.45.linear_attn.out_proj.weight",
+       "f60313f929c39296781b4a9e8dc55810c223e3dc4583887afacc5a9f18a02e8c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.45.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "d51dee24656faa5243c70b5c25eb949f86775469d180468a6d4e4d82fbb71aeb",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.45.mlp.down_proj.weight",
+       "0e677266d97db6f77f21dbb69590e30e00eca320793b918df47ea8178b6cb5e7"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.46.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "807a3665577f3582c4bdd51717875a5ed4ad453e4d5ce39cb395b1fa858d6c0e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.46.linear_attn.out_proj.weight",
+       "a08daed2d6575698e0fb4d0d05a3d4096dd4477eb13b352940029cd412522634"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.46.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "433e8e2ec55b42a6b069b7c04f853d149b2ea020472da524a01824ba431049b3",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.46.mlp.down_proj.weight",
+       "9a5caa1a5f1db56c63962f75f0697c6bc85702ab2a5697fb08c1091db88d227a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.47.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "1737506b65cb5dd3b8dc04a036cc2945506c443a81c7b08d0700a917a217e52c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.47.mlp.down_proj.weight",
+       "fb3a0415913b2cc0c632bc702753c9eae53d0be651cf6171596740e588cf835d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.47.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "e23586739bfffee8d5f1a8e82e5808ea599d15cee881f93787b8e33e14d3e50e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.47.self_attn.o_proj.weight",
+       "84a2b1ff7a22f7736bc1f072a2053352fdafa31a8ffe652913d02a0111e6c713"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.48.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "e167b08f5a5c5111cfca925b8eb6338d24ba0c98cba8215c2fe4f7ff08704117",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.48.linear_attn.out_proj.weight",
+       "cda1f8d02579129dc48d51d7a130a6ce23ef0daa359a93342b51d768aa61f01e"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.48.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "396a45370cae7911a8ccab4b4e1b60511e7bc75b7f95e583d65e5d8152636737",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.48.mlp.down_proj.weight",
+       "a0ba73fb8d39feab6cfb089a097c2e5a1e61deed764c9683386a9849a5809e99"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.49.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "ae0cf153731c81737b9201125d4e8b51768c5478523e60924dd11bac27a3fa97",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.49.linear_attn.out_proj.weight",
+       "688d7476b5d7ea1708e8a04570fa43fe8b782ae26c242643efe4b3a5b2555516"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.49.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "df3fead50ea5c785871fffa8d64193b94035003b93f5f4e1f33ee657e49baff1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.49.mlp.down_proj.weight",
+       "77eeb49f5c7ea4f104d6942f527d4bd9256736060affde964c83dd11dbc4b63b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.50.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "f0b11da66f6cf303ffdfa393b88a7978eacc80e9451a128de6f922b4e0c53009",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.50.linear_attn.out_proj.weight",
+       "eb792318fa815a3143b320b8495735d1a939d329e2efd9f3b5ace1289e53e54b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.50.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "5fcf1a2f487c176eea03307c802a722c2fcba7d036f9edfbe4a2445dc8b82eb0",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.50.mlp.down_proj.weight",
+       "1411f5d55635cd9f74645bec8b58c1e424812c7f32ed04155a9d272ded5ab746"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.51.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "ba18f3d8a3aeaef8a3b0b5f0a31f1b1809721833ecf15463552714f522918c06",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.51.mlp.down_proj.weight",
+       "2025b66a36fe6daae5f70eacdb191663df436554fb042224a9be3ceb9c793faf"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.51.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "c3d3b883f31c728d891ed9b634258dbdcb0a4dff57c5710262e6fde6f01decd8",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.51.self_attn.o_proj.weight",
+       "fded7688feab88fae0290695554daea672018549ae697993a0e040b8d0eb4a28"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.52.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d429ebd3a091fc621c9b5400e5d1db87cf35afa1cec784085be2f1dcfd226f4f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.52.linear_attn.out_proj.weight",
+       "a639803dbf25a16378c6b8dba51187350eb5f1f7ba2350499bda27429809f3e0"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.52.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0219d95f2fc41def14b03d5cd70ade891852cb7475a38851d3514d71afa0f92c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.52.mlp.down_proj.weight",
+       "f95012d7246a51965e4bfe249f9f298bd49334928f9f51a9d462ea5c6df8866c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.55.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0ced5c971b8cc0bb76dbcba26e8cd24ca3c6484e993d4919b1f1c47e33899364",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.55.mlp.down_proj.weight",
+       "485e30584356d3e88b25a40acbb865e69677224c76c58f7fd34dffc42d0631df"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.55.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "9b6728fbfc7c942c128cc732e0c76586904e46b12fcde7e088e0575fcbad7a78",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.55.self_attn.o_proj.weight",
+       "dfccabc2e3106636e6d9fa5fe58f27ae4208342782909476b23f9db344e5ab51"
+      ]
+     ]
+    }
+   ],
+   "n": 78,
+   "root": "b8af6e0ab4a353c7734c43c7fea8852696e4b6faca4c5794dfb4993cafdfaf09",
+   "subset_id": "2808edc948f4b81cfb96b1a9b0201ab84d617ef83731e83cc0c4b12357311887"
+  },
+  "stock": {
+   "checkpoint_id": "eb2cfd3003c4c8c8503456f860e8c08cb22cd52baa5b3b7101020e75e1fe801f",
+   "config_pin": "dad1aa0120b86537c1a966518e711299a3f0447f8312b6a763075efe168c25f3",
+   "leaf_hashes": [
+    "a4cd620e4da24dfb0514235bf898f1778edfb93de443d9346d2d145376015241",
+    "a86f43f443e0b60529590bd2da65174bd934f2f37161fe86484f6d466541c924",
+    "dc90c78de2dd66250516d06dda5d7c4fed22284d62f544850f2430023147cba4",
+    "fcfef7e224019e1b571f64ae323d11e6fa9ec0e25ad759354ef462bd3138a24e",
+    "5efcfdca55eceddb0fe95843c966f65b191485d4e3859aac7313c82c1232aad3",
+    "c0184244e817ef0b08e61e8f5ace247b01baf28d5eeba667c03552c239235289",
+    "04fbebce66fa34398d7c6b3bd029897781167a7098e1e1acb5afc9d6774e2935",
+    "40c0f9a9db0cb425600303741bd69f0d610b0fdaa569a01ae2e2ce18d84dddb4",
+    "d5f9cc8e73d72e5d5d5e6ddd85d02600c8a7929cef9f9d6f963f2d17667b5410",
+    "5b5472ae76dd4f8c9afb9d4fe8bcd44c7b317164544c66a64029d2def01f24fc",
+    "bf8c264683401de78376de81f1b7732b74b50f7e0a663277dee3546c35f887dc",
+    "cdec73fb26d112de7cd2a81e1b4565df0da4c89a3ae43403ce1464c80010c4eb",
+    "f207bc86bded6be7c7d1f40f4925da459625a13ff703b0be5cfe54776aff56dd",
+    "d385a85d826819afbb2d042bb236e704804fb707fe380c3f6f1b0000ebcd943b",
+    "eedb2773e5420f51f93ed3a03bcffeaa88db51e7ac2a77815c9a8a45a73a368d",
+    "d244d1fca548da06d8e0738d183936016d3388db4cdd2b0a1573753c77a9f88d",
+    "70d83182df5c66af0c60907b63dc05422c664349ebeedd1e0fb196b9873447d6",
+    "3aa67107f6da94561a3e19256bec2c0aa78480eb63aba3fa357091f971ca1fe2",
+    "0ae4dabd44a050ef8639ded18711363cc2cbc1f9fb0c5f7c5c67c7aa50646519",
+    "9f546ac427191c7b802b4ef558efa20dc26ce01924f8d307db92e053f8b9235e",
+    "1f763206d7fa48d1bf05c467a2ae77bfbed7045bb9be80812b8ecf223735503a",
+    "c43d753a6284d7378a31b563d14b0047f4050acecf358f8f6c6b4e43167f1ebe",
+    "2f547b00505af0c93b1d79ca8f6f0cee568a62b6c6aebd8dbe1492035c0f7f39",
+    "182ca52c66f6dc16df13a671349a47087279e21f65f82f3b03708e68d8693b7a",
+    "2809181f8e35fd6133915f432614f3e3fd11b07a1fa38c4e3eb06009a9fdd396",
+    "13c7cd1d69b66b52b20b3f89c9feb3482a26652feebb84cb4f3a76056e2ad339",
+    "032934f6695dba216418656354eeb2a00f70631c44fe52a398bfc6fcb400c2c9",
+    "55022f0afbb29fbdf48b57cc3c009fe405fee189fbc3992752b97b098bbfb826",
+    "ce7ca7b09aa3c2042d5064a98635ec7cf75b18fd22fffb4dd0dc60f012526855",
+    "b6d7210e4b56e16786931d99b1f2377017df67c1412573de98ad4a7e7645f65a",
+    "aabde615b643a03d92a092b50720d403335eb42a52f80af652cb33f434b8de38",
+    "5abd5991340c27bea1ffeb0d3f07738f376e53e07f4fa75a221b36c46bc929df",
+    "da5f4b2b089f4800a6b7637a4cbb5fa55b15950129339fa61152b83d19c4bf11",
+    "5aba2c7b369b42464de23e2a2836beafdb39300c8ab71ce6696e5215137917e5",
+    "79f51d89d12a159608acd1a85cdfdd5338e656ec9af909742dea7b637631ecc0",
+    "b6e69708675b515630f1df1389833e729e483578f70ea3ca84384d8bb8fe7abd",
+    "4104006008b00c3a5ff88cadace87e501188383bde000ef7b5aac318aade3fdd",
+    "91f8a197016cdfc1bf6aa34886487fa14430d472fb5c9018ff16c04dc09559e8",
+    "a1a1f1f934dbb3df06e60f4029c417599c182a1a1363e4abbe8e451aa1eb9a3b",
+    "f7af1d1ae46ced782fe2d33f5d350e4b05b2db5809a6390c16b48419f9d88a2d",
+    "bb472427730ca2ab5d26225810d8f22899f7998eb7dbdad26e3ebfd0933f72c2",
+    "70339751bc5dbd8f03f17fbd156110227332ecf8a990c6f56fd9cb69b7e7dce9",
+    "19a61738a4259471fdb86d9e710c150bf46a8356c9da21fbbea8fe3d38c5cdcc",
+    "281a56c83f053601da54e3e4e26b7bfb6a6d8fb37ff0f5c3ab3fd39466012142",
+    "9c11d3322fc4a033e8ff70958f9ea12130361fad5e29115f5dad964b2a54b069",
+    "e62a96d07161a5b7fb1c7782e98fcdcbb149fe523c248560e80bf221b49e8e5f",
+    "0d8130511ee913e3c4446987e24da1bc0e41527689c6f23d55c6e25e90f87fe0",
+    "d908734aa4e6d8d1cfc8d7fef3011873a0ba11c4577e1baf9a6c9930e1087dae",
+    "e41cb97ddde8b2603d4465b532f0e676f81037877aacddc041e3e74810ae3b8e",
+    "516dbf94cc3a135345240a8afecb1dac4d4c4d770ccff0493704c34b47b1100c",
+    "28cad35e4d3d919724e08efc3081b4022d9bb0bde615dbcf1138f4e96a529754",
+    "dc7e807e2b4bcc7ed49cd54ed5e8d990c034c1121d930c3bddafa8ad7a0a9876",
+    "80da5c84d6cb79838cf3dc761acf4e96b56858caf469f072b6ea64f06784ba26",
+    "fcc107386b55c416c9d2a26e6e8fb426247cf18e9d0cacb7ba309a1aea5a9659",
+    "5addaeef6401b3aebc59a0b2ef1c02ce6d0c0e4af974e0caae9a29fcd0766c5d",
+    "b0eed3d0037fcd9fb73618216dd202609e9706847c9ff234706ef26462e491c7",
+    "626e5ae88d93158f4774f1af7936e0147f911a85e10067289366e9359c6ad748",
+    "01da7ea0c3b72c9a2903df69dfe0ab6352674f39d339c2f2704070e7d313e1ce",
+    "9771bf0dc2d241ae2a2b968699a23545002658ae6cbc171e8e996a27d41aa90d",
+    "591fbbf200116bd11f893428b3e675006261028b864849d766258b467aa0b335",
+    "8ea36cb1476b5df293f1748554ba70ef3a16ef1d52b89ca05eace30bcce6a84a",
+    "4fe5d82505c222e01568a8bf314085676c1f84e5f7ad4e608e095c146810c8d2",
+    "d3c60d0f5272ca9525d1dbdd5d79645cdcfdffbb1a14faa24cf2f2f4c82ed14a",
+    "8a345ded3e262bd36065d3e81ebec0badad647f3fb01312dcc68483a850c347a",
+    "a4ac0e7a988bfb685b0dedf95117d277c70c7f2fadd71e2790fc4af8736ad31e",
+    "2530c7528580d01d53aceb83961952db63ba5344eeeaf8a9079cd702a8fd6b7e",
+    "16b021c9e465ab933953bac7cd832da8922f8a92d84631d09a258f1948d74ad6",
+    "76471879b82c7827befac7768960417c60dde5b61f7cbf6f4853936ee34a07ed",
+    "1b8eabde1d8e1930b874a28cf47c38426c05ad7e8ec0a3cb6306ec82e0920119",
+    "762392ef302640edcf831e5c67b765687899d35805497005f65fb628c118a3ad",
+    "70b7e4456f9e44d881b184122cf3f60078846817e9fcad49dda37cc96a828f8b",
+    "86ec64eb463009960fe53e06a8f4dee8b057745e17c2498c38b70046fdcabb55",
+    "2fa633d4e8800a230b21255d761bf8226a21003e9b376e4c16d505a6146bb639",
+    "8e778a68f8fd2e0cce10fd5dbaf2430d6a2ddf63242dc0ea0901c2fadebb2870",
+    "74aca75b6817c232419333f278e2b64f645c062f48832973ca16fea4dca24873",
+    "8bae5701abeb624f1892bab969cec81586558e901cb19e2312cf3e3486aaa008",
+    "595c54ce33fa262a73a37c0f6235990b2527bf2f089d0d4a4310be2a18861eaf",
+    "3dd6db685f6585d5cc7df43ea7a3b51c5015c91a3045a6c53db6195517df87df"
+   ],
+   "leaves": [
+    {
+     "block": "model.language_model.layers.15.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 14,
+     "int_sha256": "67a27dc64b78a429715b40910a0e7cc8e8329671f04869652fc6a1d1235dc16f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.15.mlp.down_proj.weight",
+       "d49c4895da1abcd8b9174725b17360f8ad82c3f720d607b17a020c4b80e68cd2"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.15.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "883398e7d593810b0e5894199854659dcfccc5cdd43fc4e6eba374e55a894323",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.15.self_attn.o_proj.weight",
+       "4f828d2e7c8ea137e403c81b865e64da8e1ddaf956ed735f68125b4c4084d173"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.16.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "1cd05163d53bd801d643bc6a5674c83b97c49279249785d07b78714c3eecfccd",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.16.linear_attn.out_proj.weight",
+       "033ca4ab502c6585a8bcae660b381e6a10c31aa6bee97dca6beebeda791c0a8a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.16.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "095cb3213dabd1ca014f1df78f80806fa5a363dd667bdb600ecf69f35be37cb0",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.16.mlp.down_proj.weight",
+       "14b0c3d18a9b1345331b68cbe5d519a0c9a8db5c28d635fde1d3daff8a674bac"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.17.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "a001669ac487fb83669a17d60d97ea55ec2fc1f914502d5caf6d4c8cdc20744a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.17.linear_attn.out_proj.weight",
+       "27571e1126803fd8fe72a18cc87becc710b7e920c5e325b1b3fbbd5a6dd029f6"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.17.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 14,
+     "int_sha256": "e8fd6533c9f7f88413de955c693017e993532e9bd76dbc140e329166c909bdad",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.17.mlp.down_proj.weight",
+       "bb67a6eafa4a2068e2ccb1b06e0fd39a26e16b3e9c8e37f1b9c5aab47aaa5f63"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.18.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "547eba20ead2236315d2b9624722850ffca1bb229aaac1eae1a5defb4d86abbd",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.18.linear_attn.out_proj.weight",
+       "789bfd0c8f37800620de61e56177a535cc27d2bf52c77322ddfd5235a63564c2"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.18.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "49f4f6d5456077c60af83f2af18341c96882b8c82944f623b714cda558017d4e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.18.mlp.down_proj.weight",
+       "8369ed80800d2f678ebc5a6e0976fa90fdd74ae0546320af4c20c956c83e6a05"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.19.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "b4f0a41a7ed66a9064489eaa2b1282eba4b8743e93a84dfda29e7f85a49a9700",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.19.mlp.down_proj.weight",
+       "b2b49cae47f4ab1162df8b3d06ffb10aeb58e3f28130e9f546872722685a29cd"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.19.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "ce8252ba0d7039b036376afa9af606b6aae820f286684dba747f4aebab469e80",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.19.self_attn.o_proj.weight",
+       "08f3486219efd8e11eb0ffc5b545e47c8f5b8d39397bc84024c47d093654d34a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.20.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "5a09674d14e10953c604e2382d9ffaa0b59a27cac4d37707f74098477bfa8861",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.20.linear_attn.out_proj.weight",
+       "4b6f5bca9da773957c344bd9f5e6de7a4c723d3a6a6775549d2f5d9adfbbb09e"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.20.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "ca043c6b27f2724a5bbdb3317a0a76a5151f1efa28247c9def053277de5dfd9a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.20.mlp.down_proj.weight",
+       "a752b456841be046a05daa1c16619b03e2c43fe95d68eee1525c30b6c06b6612"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.21.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "4a8d06818da0c1b300744b8b3a99f6bd4612844762d550c8a2124e5444aaecb3",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.21.linear_attn.out_proj.weight",
+       "df3771a0365883fa0ee56459572d390378ce69d274daa1dd5c7dabdeae096f05"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.21.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 14,
+     "int_sha256": "e86c4318d4d296ced2c8103fb45bb8652dabf897f2201ca84b37edb313b74556",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.21.mlp.down_proj.weight",
+       "d132f1c1085461930022f680a1210841b08f618e82ecbdd9d8819d97ca826569"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.22.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "8868b2e9740f2192e027bc2ae39a2267d14ee903639f8971cfa3b25f355393ad",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.22.linear_attn.out_proj.weight",
+       "77293172cf8dcd82f8b238daef0bb036bb7251342179de3b33204a198184ce0d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.22.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "a87865e42564cb7c639c621b7957f4805609f0d10badf9aa1f85a9b680138afa",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.22.mlp.down_proj.weight",
+       "993a1b9adfaf3b222c9baf42fabeac3347f831fe3b326769c550896a3a2a2401"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.23.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "c7eb33323aa13b64205d4018f2ef939790acde3ad0fd2e9d41c8fbc4cb57cde9",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.23.mlp.down_proj.weight",
+       "4f5a852f4aa7ae7bb5b327fd4cc3e8bf5924a43d9cba76907189b7ec55b3489a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.23.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "b0c7c3153471bda4a00d7aead8cdab0f77828453b512062dc0cc3ea6bcb1b2d6",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.23.self_attn.o_proj.weight",
+       "f508ee4fc35c378e1bb9c12f395d96f07337a4956872fb12d49a62e7a06e355e"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.24.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "89c106ac82b054ad8dd4a35b459c63e235c31b1dd511d4d41b92ad3167a4096b",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.24.linear_attn.out_proj.weight",
+       "2df334e81ce7ee2860a6cfabfaa69d8b16e3d45c12a59e2c59d2b736af0cebe6"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.24.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "9d0ed81035c64d8f952032c40f9fdcbaf54fb830da479a7d46c6987e2c335cf5",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.24.mlp.down_proj.weight",
+       "d072bc64be108c4908708b7284898d80e9fab694f8fbcb21194b08f0594f5343"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.25.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d54d9af7ad37d7513ebc3d97c56b1a0be541b02c1201bba0166b311564296b5a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.25.linear_attn.out_proj.weight",
+       "9d0f65fc13fe3c9bfb7fc96bb033f57ce41f54476032a6feeebaed3341beb8b1"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.25.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "947e3dd57e6dc9bf64a820cb7b38c64984760a8d11b1d99194ad3771dcb59f65",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.25.mlp.down_proj.weight",
+       "59598ad1e5b38af427a879d98d669bc52530eed4892541adb4658b26e21af629"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.26.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "9633cce6d2067ab54ed7b0d8fe81626f76b128c120da9eacbd56349638665b88",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.26.linear_attn.out_proj.weight",
+       "9cfdb3299dc7be5e7fd97260ad56aaa21cbbbae196f6ca33448a3609056e3a72"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.26.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "4dfb3fd26b8bad0bbd64c17ecf4e263bff06ddc92556a0f2df0f72bbbe955ed3",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.26.mlp.down_proj.weight",
+       "e445484f567cedbd8041d6add0be881017dec4d2d2ec855fc0ef138e7a010854"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.27.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "166177adc7f803d938445acd08b5660907ef2ea748d246ca1deec9f68dfdbbea",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.27.mlp.down_proj.weight",
+       "8db1c31e940a683b2475cadfa6c621fe11380dc6e2e158f4bd3acb1c216569ca"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.27.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "fa41d0d3113357495cc7018cf14faa50cd7668dee7ebada30d15020debd3b8d8",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.27.self_attn.o_proj.weight",
+       "a42d8eaea5415fe08173ffe44f2b6d530aa7bf765556622dbd6fe67635b9fbea"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.28.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d0d4dbdc45b4167ceb97659872f72419a0291a982d3cf7eebec5333897693fac",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.28.linear_attn.out_proj.weight",
+       "03fa91802d6db160da0ded0864e5819ac4d1c0444341d7977ce7d4ead6a147ff"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.28.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "b2183da91b91ca4c3bb8f69307d016cb7358d33726af57c28657fdbaf8b03c7c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.28.mlp.down_proj.weight",
+       "2308344de9c4a65b60a700424e54ac31590c57222d8466e3d612dc22bbf936da"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.29.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "44f0696a0a57aeabfbfb991dbe13a2edca32a2b789ad50d6b96968b34f17de31",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.29.linear_attn.out_proj.weight",
+       "4a157d20ae582173edf7572adcc1f14bfffd17d0cec23b2e3db61f366a6df290"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.29.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "c9039268dabd04ebdc4710942306e8990c5d117bb79b6de6979f6f56b38ee4f1",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.29.mlp.down_proj.weight",
+       "ad8082ef5d6ca3516fc325c34d9457360b4ff56126c34c45a22475509a1c4d6a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.30.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "23535c863bc7691ba55dd4452b54dd90921a9f525bac42ab8d863515127088d7",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.30.linear_attn.out_proj.weight",
+       "c0547b61b66681b611be8b2d9fee86bca4208bbf9844aa44ca44ea666a715173"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.30.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "da685c64fda1f58d1ebec03833fd9aea9139dcd374d37a04315d60eeda5ce875",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.30.mlp.down_proj.weight",
+       "4aa155c45d0a87a9de1a2e010e2a826e07f585dbd3bdfba75e9f94313b69f3d5"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.31.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "627e74b07e53e291085af489febcf4dfbda347f320ad1ec139d424ec0ce02c59",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.31.mlp.down_proj.weight",
+       "6b9d7cfe3fc3a9f23a0db20e1debae729bb2c0252e3878c6a97ea6f2fc8431f2"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.31.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "edad792a204499d510772c7e5cbcd4cd495648fb9c38a62c0af532952c0fc768",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.31.self_attn.o_proj.weight",
+       "d93d6beea2dc693fb32755e28b6447adb20e84f6c75fca52a90e8b5ead9323d8"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.32.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "c7b565ed1aefefc4111ab6d2831b71d5b482acf7953a68f6b389d1dfa99699cd",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.32.linear_attn.out_proj.weight",
+       "5ce757b4824ccd3cab9bc9b2346fb49c69e22d19e93fb71afb2cfff86904ced4"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.32.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d488734f1519d61c377d8b14c85dd7326112d0a6e84a24286ea141597f705335",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.32.mlp.down_proj.weight",
+       "894f5064bf64a38d88161bc20391db0f08fd99c2c0655d217dfa1b03943bf03d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.33.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "968c9b286e5d7e0f361f8fde461018770497b5b5bf584488485c49829f02a269",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.33.linear_attn.out_proj.weight",
+       "4031241b688065fbe897197bc4d1f0b5173edea701de8ffb4f0ada4f2bfe7dce"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.33.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "9da6b3a520165d42376499ad1f25d54394537aa2ca188efcb6795db940fb1d39",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.33.mlp.down_proj.weight",
+       "0284c5f7a2b8fcdf09844ebf148ac6931388b9782b7cc54d98ee9b162edc889a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.34.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "698b4ab1aa1c16fe66dc00d259bb1264376c0b63c30ee201dade879ff747a345",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.34.linear_attn.out_proj.weight",
+       "9dd9dbd78115e02db55c9a536a11996d7c89c4cffcfcb7e41e4d17a9a2d57364"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.34.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "263492a3e4daff256203ea0fb0714369c28b0e02aab73ba0e1e946683ea5464c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.34.mlp.down_proj.weight",
+       "58fb9e3613a46ec72f399a61074eea92cd14574ba2a7c278abf392ece191a514"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.35.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "b23ec235ecbca7fb25215e52eb988a276eb7566fc7dcedc1c75d175449935c59",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.35.mlp.down_proj.weight",
+       "580e0b3c79cfa4c51d071b42e513066b63c6dbf5e28990dd0b124f937f909c65"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.35.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "11ba2d06993476befa836a3aaf4db87d777af7eb55edf6332f15b474f90331ef",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.35.self_attn.o_proj.weight",
+       "187323f3abe3f3fae4fbc3f2847f3d765eabd9ec51e7152246b9e175f9f4a3e1"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.36.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "ae622507654f2c117171b53bcb8ff9f2658bc6d7f2aa90eb6849eb38da57a571",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.36.linear_attn.out_proj.weight",
+       "e6b9214d619690e86f5914c79c10106b9ff7299324dae0f4f90c738148768952"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.36.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "c3bfd7d6e3ba087a6150edf0e2f99e73a93d96b6d8c546718989eeff5d7d4f07",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.36.mlp.down_proj.weight",
+       "706a209692a5640c9a794d0035ae7702e881da86476166b5da38acfb9effa60c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.37.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "5d64d4a4e7182686a77ffd10282706270de13d627f7f85fcaaf08a537cb0951f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.37.linear_attn.out_proj.weight",
+       "402e6df5029bca933b2eed72e00879bec637e698768a860c41bd8b3c4bb795c0"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.37.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "90f72b62b9bab44ec5996b86eb2ffc63ea53c24bd9be1a6a4cfdc6f8412c4b85",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.37.mlp.down_proj.weight",
+       "bca624aeea6eeeb05419ac4d68814da786d298461fc2746926d7b4b870318e46"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.38.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "d02669d50152fd0c33cb0108c78bb8dfede8a6133331ae6d4147495f780bdbd6",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.38.linear_attn.out_proj.weight",
+       "fc9d9deb2ed7dc4fd37ed08c45ba589339b682e5a269bf9f29b2b7059a2ab783"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.38.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0d1162d131643ca5d9b13fb351ecec052c1f11b145696abbf431dc628a1dda4c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.38.mlp.down_proj.weight",
+       "5ee316904580d3779e97eae309e19723aeab0b90b0371c90c883e2326711b816"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.39.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "04396e56dbe8bd52bbe1191bd9a2b07b5055575a970e6173cc670824e4c22afc",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.39.mlp.down_proj.weight",
+       "d3c9782c939f96d5d2862826b219a257e7154e6a880c963f769f0ec9fa21813b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.39.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "012d63a5dbecb46a462bee5730a1f764f0a737ac95d4883412d599ad9a879899",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.39.self_attn.o_proj.weight",
+       "fba6b8e15393f7b23bab67583674f84bc594709054a071eb87146cb0b82d06ed"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.40.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "6234fe2b0e07c2b9c1de2b643a4c2b65235489712a21e40dbd4c3bc0e592e482",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.40.linear_attn.out_proj.weight",
+       "5517957b351f7711647194504586d25f748cd86605d3e2e6888cd0c3fa69c88a"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.40.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "1fc30b2bf51ef325bd3cc763dc7aeb05a1f9a11098d99e93e2ea2171e16a710f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.40.mlp.down_proj.weight",
+       "a67b703fd6db2d23aa95dcf6c0e70a5db2eca2a12c519ce69650cbfaa23f45fe"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.41.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "7aee519b2b36ca6f2f22ae91971ef1c8fe9643d786be7da8f9ea4f1129a36b97",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.41.linear_attn.out_proj.weight",
+       "2698a1c94fc00a9bbe98b3b48a1e312232da984b44ab0e3f94c25fad42ee9fbb"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.41.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "02e4765e51a587b5bfa5f00893e82dbd699fcaeb26148e0dd1257f1d815dd7bc",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.41.mlp.down_proj.weight",
+       "7eb0d3331dd2be015786a1ad9db12e54bf0b5101696b50cae8f334cca935c89b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.42.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "b05686b799b235d13fd5c913a0f20bb40ca1cb2a602cf4f9f48b8168b287a667",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.42.linear_attn.out_proj.weight",
+       "5c7078a594114af975bf82bfdd8c84dd39b6c209522c35a823ec639e9709452f"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.42.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "75703c52426e3037b60bac7f769148f73d861f1c1cdfbac64c7ea3ace3162c10",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.42.mlp.down_proj.weight",
+       "5433454d30b5dc12ca8cb9f2e13c22be224c4efd5dc1a48a4bc6f325b3f47fbf"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.43.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "3620ec5f67a8c0241ef39157df387a328f51320d3e13f833b19ddac4d4fd7e2c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.43.mlp.down_proj.weight",
+       "f4a2ffc32e6c5bd084141f1c80e09efd4bc2a0ee33128f91f63bb1f263ba3ac7"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.43.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "82600d69ddeb4738723229dea07e56085638d11b560975c4f92d8293c69a0ed8",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.43.self_attn.o_proj.weight",
+       "0bd290d4633fa9ea14354ba6d47b881221224b57782f05e17ca9e6a16a3f6019"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.44.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "27f3d9559ed863427497a982f914c68ffd25853b435bf7ae2a294e49ea76607d",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.44.linear_attn.out_proj.weight",
+       "270e2785db63c8493cb2800b57e25eb267015ec38b41f0370e798ae70bf09738"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.44.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "0ea424d42168882bc459371b4eebe693887af8c95625a7d7d2cf93c2d7254d45",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.44.mlp.down_proj.weight",
+       "13ceb62289c433b2cd5ba3be419f2213dfa3739cc4af07242ef86a73c47f8c64"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.45.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "5fe7e7b0e8c7d8a3bd9ca5ef5daf79a27ca7ca725248226e0671d338779afb1b",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.45.linear_attn.out_proj.weight",
+       "098f7d6752fff38751ffc074387935098c89d863b133e94757f88a0862446790"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.45.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 13,
+     "int_sha256": "c429de58672ef924fb4632e9eb86f6c3694367ea97eaf8e8c53a221db8e1cc73",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.45.mlp.down_proj.weight",
+       "6e3a6fcd5ed6d9227521101c5862f5c2cb4fb68e793797ff8add1ae764c4cc58"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.46.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0135a8c3e39c61ca66063e87f6d1c743ad109874dbe7ba5c197b57765209ae4c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.46.linear_attn.out_proj.weight",
+       "cfd206194d1fc9458ea5e96660fd7df32a722b8ed356b66c1305b23c367188ec"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.46.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "cdb511cda307eebf1226aae90e06ea9638952abe59cdcb00b94b68a206962754",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.46.mlp.down_proj.weight",
+       "3d21fd693056a4c391da5dced0b6cb6f043cc446e17f56e38c724ce12a287f2d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.47.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "65101b6a57c448f173f462296d33bb99482fac10b0bec6dbd6db05f296aaee7f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.47.mlp.down_proj.weight",
+       "d557a5556f54f89d9e3ec55ecb8edc675e82bd1abdd8f1a21c70ac5a206f94f4"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.47.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "79b347549f096ac044c189c7344f85cd9382496c5c02f6694a7747d6e41491f3",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.47.self_attn.o_proj.weight",
+       "b7e7ecfb4e615ef10f40eed1574c779c04ad6f0dfb3550907e2476255c2bdd6b"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.48.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "c46d01ea8b70749f9cff738fcc966808ba869ff6528ed395c905efa6049efb28",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.48.linear_attn.out_proj.weight",
+       "d8796c6ec3b69cae42ac28141145860feb7a6be5d559dcced1a981acd1b6a120"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.48.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "c3ed31dbe37fdb4635ff9c0453bf6121c96240454a58f82cd9f5bd4cde20b322",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.48.mlp.down_proj.weight",
+       "cfea1a90012fea91477c47665d8103012b9ff6ba72b5e1740e460f2c8f2608d9"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.49.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d00ae15303793f9602b2be4d43be4e28bc035a8128a332979d3efe162434242d",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.49.linear_attn.out_proj.weight",
+       "9cd3f890b0a904cb86b888ae8fdab5b62096ab48a7b821dc09d5e4e5561a7710"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.49.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "b81ed558ee500377afcbecada8e8c22648aba0f00a21a8f5f30c4944d08c0191",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.49.mlp.down_proj.weight",
+       "f1070216892ee9f7b4df8aa1fa9c0918de64eac761be447d05d9913dffe56806"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.50.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "4ea3062037d757d07331b43e20f3a271f93d0bd805dabf19c1b03d0faecb5b8a",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.50.linear_attn.out_proj.weight",
+       "00d79234d0fa93c8abc400703fdeace2a27760537eb1ea17668116ab23569c5d"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.50.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "6531475f8a7dfa0dc4421d18e6bbb54df8bc2e65e5648cb16ca9dfbe9c1cdb58",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.50.mlp.down_proj.weight",
+       "be9014a4c7edc13014978db0f296a82f7ee643e4ad40e50778c08df2625cc0de"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.51.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "1c934353f732efd08dceec086b5407b0e4a102fdf33d8b4e3c617d096fc57f5e",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.51.mlp.down_proj.weight",
+       "f25c86eb26c5cc794d57b4a8ba6bcf7ab02c5f2b5cde033c03dee91bdbcaaaf3"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.51.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "cde3fff051e016d8ff2ba79f5988593c49eef5d144bda12f93f9260b18999819",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.51.self_attn.o_proj.weight",
+       "651822abf6f02118c1606c775635db527e6b7776077b51d9b336d0948a88667f"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.52.linear_attn.out_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "d429ebd3a091fc621c9b5400e5d1db87cf35afa1cec784085be2f1dcfd226f4f",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.52.linear_attn.out_proj.weight",
+       "a639803dbf25a16378c6b8dba51187350eb5f1f7ba2350499bda27429809f3e0"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.52.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0219d95f2fc41def14b03d5cd70ade891852cb7475a38851d3514d71afa0f92c",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.52.mlp.down_proj.weight",
+       "f95012d7246a51965e4bfe249f9f298bd49334928f9f51a9d462ea5c6df8866c"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.55.mlp.down_proj.weight",
+     "cls": "matrix_plain",
+     "e": 12,
+     "int_sha256": "0ced5c971b8cc0bb76dbcba26e8cd24ca3c6484e993d4919b1f1c47e33899364",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.55.mlp.down_proj.weight",
+       "485e30584356d3e88b25a40acbb865e69677224c76c58f7fd34dffc42d0631df"
+      ]
+     ]
+    },
+    {
+     "block": "model.language_model.layers.55.self_attn.o_proj.weight",
+     "cls": "matrix_plain",
+     "e": 11,
+     "int_sha256": "9b6728fbfc7c942c128cc732e0c76586904e46b12fcde7e088e0575fcbad7a78",
+     "rule": {
+      "params": {
+       "int": "two's complement",
+       "round": "RNE"
+      },
+      "step": "e=max{e: RNE(2^e max|v|)<=4095}; w=RNE(2^e v); int16; v=BF16->binary32 exact"
+     },
+     "sources": [
+      [
+       "model.language_model.layers.55.self_attn.o_proj.weight",
+       "dfccabc2e3106636e6d9fa5fe58f27ae4208342782909476b23f9db344e5ab51"
+      ]
+     ]
+    }
+   ],
+   "n": 78,
+   "root": "82a9f1b2e4f65074c9259977dbb26dbc29fda4c25df4375af115ad1073b616f2",
+   "subset_id": "d502ce1133396fafed2606c306de67c75c3c33de9101155d3444e6e94d7b5230"
+  }
+ },
+ "rule_version": "fp-qwen3.8-conv-rules-v1"
+}

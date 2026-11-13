@@ -1,0 +1,19 @@
+run_suite.py: the rows run confined: files; of signals only those to -1 are refused (this kernel cannot confine signals); rows that build may also write in <WORK>/build
+passed   scales.policy_tables                            53.0 s  status 0; OK
+passed   scales.table_ties                               61.3 s  status 0; OK: 26 checks
+passed   build.verifier.target                           82.4 s  status 0; THE VERIFIER IS BUILT: <WORK>/shared/bin-target-f2/cp_verify
+passed   build.verifier                                  82.9 s  status 0; THE VERIFIER IS BUILT: <REPO>/bin/cp_verify
+passed   verifier.kit_rounds                              2.4 s  status 0; kit_rounds_test.py: 3 kits, 1219 kinds of rounds; 0 kits not as stored
+passed   verifier.kit_rounds_second                       7.7 s  status 0; kit_rounds_second.py: 3 kits: 1219 stored lines, 403 computed: 397 the same, 6 known to claim less, 
+passed   verifier.plan_tau                                2.3 s  status 0; plan_tau_test.py: 13 cases: all as expected
+passed   verifier.served.form                            21.3 s  status 0; served_form_test.py: all as expected
+passed   verifier.example_kits                           23.5 s  status 0; example_kits_test.py: 7 parameter files (1 bare, 5 work, 1 yes), 12 plays with a line changed; 0 not
+passed   verifier.commitment_id.examples                  5.3 s  status 0; commitment_id_test.py: all as expected
+passed   verifier.record_altered_sets.example            28.9 s  status 0; record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all 
+passed   verifier.call_accounting.examples               28.1 s  status 0; call_accounting_test.py: 33 lines of the plan's accounting, 0 not as in the call
+passed   build.verifier.unit                             84.8 s  status 0; 
+passed   verifier.record_altered_sets.full              303.1 s  status 0; record_altered_sets_test.py: 7 calls on the honest set and its unaltered copy, 23 altered sets: all 
+passed   verifier.extreme_files                          37.8 s  status 0; extreme_files_test.py: 2141 calls on 2073 files: planned 116, refused 2025, usage 0; fault 0, not-ch
+left out verifier.served.form.world.kit: it needs a row that needs nvcc or a GPU (setup.target.other_parameters_worlds); mode all runs it
+run_suite.py: 15 rows passed, 0 passed in part (status 77: their last lines say what was not run), 0 failed, 0 not run, 0 left out under version word H821, 1 left out in mode cpu because they need nvcc or a GPU, 0 taken and not run (--taken) and 0 that only these need; 0 ended with status 3; 0 lines to look at; 479 s; the screens are in <WORK>/screens; the rows ran confined: files; of signals only those to -1 are refused (this kernel cannot confine signals); rows that build may also write in <WORK>/build; the call chose 15 of the table's 173 rows
+exit 0

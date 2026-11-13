@@ -43,6 +43,36 @@ The original hash-level work has a design and these CPU checks:
 - `wb_keyfile_count.py`: counted table-side cost of the key-file claim (one multilinear evaluation per
   effective block, flat padding). Counted from shapes, not measured.
 - `run_wb91.sh <outdir>`: the #91 run: both pins built twice, the test suite twice, the count.
+- `wb_leafv2.py` (issue #149, experiment `20261112-149-leaf-v2`): conversion leaf v2 on real bytes for
+  a SUBSET of blocks: the 70 tensors #68 found different plus 8 registered byte-identical controls (all
+  class `matrix_plain`). Per block it fetches the BF16 bytes of both pins (memory only, one tensor at a
+  time), checks them against #68's hashes, runs `wb_int.py`'s matrix rule (imported unchanged) and adds
+  two fields to the #91 leaf object: `e` (the exponent) and `int_sha256` (SHA-256 of the int16
+  little-endian row-major integers). The tree over those 78 blocks gives a subset id (tag
+  `fp-wb-conv-subset-v2`), which is NOT a model conversion id (that needs all 722 blocks).
+  `verify_opening_v2` checks a v2 opening: v1 structure, `e` a plain int in [-64, 64], `int_sha256` 64
+  lowercase hex, then path and id. Hash level, not a proof.
+- `test_wb_leafv2.py`: 38 named checks on the leaf-v2 subset (honest, 15 kinds of mutation of the two
+  new fields, 8 #100 mutation kinds on v2 leaves, opening-level). `run_leafv2.sh <outdir> [--reverse]`:
+  the #149 run (fetch + convert, then tree and the suite twice).
+- Reading leaf-v2 run files (added after review round 1 of PR #151, PREREG A-3 of the experiment).
+  `wb_leafv2.load_records` is the one loader for a run directory's `blocks.jsonl`; `tree`, `compare`,
+  `test_wb_leafv2.py` and the experiment's `summarise.py` all use it. It refuses (`EvidenceError`, exit
+  status 2) a duplicate record for a block (an identical duplicate too), a name outside the registered
+  78, a wrong kind, malformed fields, a derived flag that does not follow from the record's own fields
+  or from #68's hash and shape, a record order that is not a prefix of the registered order or of its
+  reverse, and a count or order that disagrees with `run-meta.json`. `load_leaves` accepts a stored
+  `leaves-v2.json` only if it is byte for byte the tree rebuilt from those records. `compare` compares
+  the canonical leaf-v2 JSON per block and pin and the fetched-bytes hash, computes root and id equality
+  on rebuilt trees, and writes a `status`: `identical-complete`, `identical-partial` (a run that
+  covers fewer blocks, such as run 2), `no-common-blocks` or `mismatch` (exit status 1). What this
+  does not do: it cannot check `e` or `int_sha256` against the weights (that needs the bytes), so a
+  record altered consistently is accepted as a record and shows up only as a difference from another run.
+- `test_wb_leafv2_evidence.py`: 162 expectations over 59 cases on altered temporary copies of the
+  committed #149 run files (duplicates, altered or truncated stored trees, dropped or reordered
+  records, swapped payloads, flipped flags, edited compare files). Each of `compare`, the hostile suite
+  and `summarise.py` must refuse the copy or report the difference; the unaltered files must pass. No
+  network, no weights. It tests the readers, not the conversion.
 
 ## What the verifier recomputes
 
@@ -57,10 +87,12 @@ were produced without it, `runs-rerun-pr87/` with it, and the counts are equal.
 
 The keyfile adapter's separate scope and limitations are in [its README](keyfile/README.md).
 For the original files below: any proof relation; the commitment ID of `cp_commit`; the Qwen weight table and its range proof;
-norm-folded tensors at integer level; 64 of the 70 changed tensors at integer level; the protocol's
+norm-folded tensors at integer level; 64 of the 70 changed tensors at integer level (in these original
+files; leaf v2 below converts all 70 and 8 controls); the protocol's
 field; the evaluation responses of DESIGN 2.0 (designed, not built). The conversion id and the
-config pin (A12) are built (`wb_conv.py`) but only at hash level, with these limits: the leaf has no
-exponent e_b or integer hash int_sha256_b (that needs the 55.6 GB conversion per pin); the rule steps
+config pin (A12) are built (`wb_conv.py`) but only at hash level, with these limits: the v1 leaf has no
+exponent e_b or integer hash int_sha256_b (the full tree needs the 55.6 GB conversion per pin; leaf v2
+adds them for 78 blocks only); the rule steps
 are bound as text and no converter here runs them on real bytes; the folded constant c = 1.0 is a
 placeholder; which config fields change the function is a judgement (fail closed on unknown keys,
 but the known-unpinned list in `wb_conv.py` is a choice); only one model variant is supported; nothing
@@ -69,6 +101,11 @@ grinding security bound (DESIGN 2.0 states only the fixed-pair Schwartz-Zippel b
 verifier raises an exception, rather than returning false, on some malformed inputs (n = 2^64,
 a tensor name with an unpaired surrogate), and compares the held id case-sensitively. See
 RESULTS.md "What is established and what is not".
+
+Leaf v2 (`wb_leafv2.py`, issue #149) covers only the 78 registered `matrix_plain` blocks; the
+norm-folded matrices, the embedding, lm_head and the weight cells have no `e` / `int_sha256` yet, and
+the subset id is not a conversion id for the model. It binds which integers the rule produces from the
+pinned bytes; it does not bind a commitment or a proof to them.
 
 ## Reproduce
 
@@ -98,6 +135,34 @@ bash research/weight-binding/run_wb91.sh "$O"
 diff -r -x python.txt "$O" experiments/20261111-91-conversion-id/runs-fix100   # expect no output
 python3 research/weight-binding/test_wb_conv.py      # 128 / 128 PASS, exit 0
 ```
+
+Conversion leaf v2 (issue #149). CPU, network: fetches 9.41 GB (8.76 GiB) per pin by range request
+(memory only, about 2.2 GB peak RSS), about 15 minutes on the shared host. Write into a fresh directory:
+
+```sh
+O=$(mktemp -d)
+bash research/weight-binding/run_leafv2.sh "$O"            # registered order; --reverse for runs 2 and 3
+cmp "$O/leaves-v2.json" experiments/20261112-149-leaf-v2/runs/run1/leaves-v2.json   # expect no output
+cmp "$O/tests-1.json" experiments/20261112-149-leaf-v2/runs/run1/tests-1.json
+python3 research/weight-binding/wb_leafv2.py compare "$O" experiments/20261112-149-leaf-v2/runs/run1 "$O/compare.json"   # exit 0, status identical-complete
+```
+
+Leaf v2 from the committed run files only (no network, no weights, seconds to about half a minute):
+
+```sh
+O=$(mktemp -d)
+E=experiments/20261112-149-leaf-v2
+python3 research/weight-binding/test_wb_leafv2.py $E/runs/run1 "$O/tests.json"      # 38 / 38, exit 0
+cmp "$O/tests.json" $E/runs/run1/tests-1.json                                        # expect no output
+python3 research/weight-binding/wb_leafv2.py compare $E/runs/run1 $E/runs/run3 "$O/compare.json"   # exit 0
+python3 $E/summarise.py --check                                                      # exit 0: runs/summary.json is current
+python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 162 / 162, exit 0
+cmp "$O/evidence.json" $E/runs-fix151/evidence-tests.json                            # expect no output
+```
+
+The last `cmp` was observed equal on three runs with Python 3.12.3. The receipt quotes refusal messages,
+some of which come from Python's JSON decoder, so another Python version may word them differently; the
+count (162 of 162) and the exit status are what the test asserts.
 
 The first-run files in `experiments/20261111-91-conversion-id/runs/` were made by the v1 code at
 d39c98dc and are not reproduced by the current code (the config pin changed, so the ids did).

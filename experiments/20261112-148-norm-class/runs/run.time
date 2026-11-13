@@ -1,0 +1,24 @@
+Command exited with non-zero status 4
+	Command being timed: "python3 norm_class.py run <SCRATCH>/run runs r33"
+	User time (seconds): 5838.04
+	System time (seconds): 1309.05
+	Percent of CPU this job got: 365%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 32:35.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8290648
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 258499
+	Minor (reclaiming a frame) page faults: 170588695
+	Voluntary context switches: 1967766
+	Involuntary context switches: 770191
+	Swaps: 0
+	File system inputs: 4489432
+	File system outputs: 2806264
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 4

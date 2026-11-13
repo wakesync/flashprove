@@ -1,0 +1,9 @@
+block 1 model.language_model.layers.55.self_attn.o_proj.weight control e 11 11 int_equal True sha68 True True s 1.75 1.68
+block 2 model.language_model.layers.55.mlp.down_proj.weight control e 12 12 int_equal True sha68 True True s 5.74 7.26
+block 3 model.language_model.layers.52.mlp.down_proj.weight control e 12 12 int_equal True sha68 True True s 5.66 7.41
+block 4 model.language_model.layers.52.linear_attn.out_proj.weight control e 12 12 int_equal True sha68 True True s 1.8 1.84
+block 5 model.language_model.layers.51.self_attn.o_proj.weight changed e 11 11 int_equal False sha68 True True s 1.68 1.9
+block 6 model.language_model.layers.51.mlp.down_proj.weight changed e 12 12 int_equal False sha68 True True s 6.07 6.74
+block 7 model.language_model.layers.50.mlp.down_proj.weight changed e 12 12 int_equal False sha68 True True s 5.69 8.99
+block 8 model.language_model.layers.50.linear_attn.out_proj.weight changed e 12 12 int_equal False sha68 True True s 3.82 3.94
+done {"started_utc": "2026-11-12T22:23:31Z", "reverse": true, "budget_s": 2400.0, "n_registered": 78, "free_disk_start": 21615255552, "stopped": "free disk 20423561216 < 21 GB before model.language_model.layers.49.mlp.down_proj.weight", "done": 8, "seconds": 82.6, "free_disk_end": 20423561216, "rss_max_kb": 2176216, "finished_utc": "2026-11-12T22:24:54Z"}

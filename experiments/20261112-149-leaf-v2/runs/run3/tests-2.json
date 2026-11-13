@@ -1,0 +1,200 @@
+{
+ "n_checks": 38,
+ "n_new_field_kinds": 15,
+ "n_pass": 38,
+ "note": "hostile leaf-v2 suite, hash level, NOT A PROOF",
+ "results": [
+  {
+   "group": "honest",
+   "name": "all 78 stock openings verify",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "all 78 abliterated openings verify under the abliterated id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "stock subset id != abliterated subset id",
+   "ok": true
+  },
+  {
+   "group": "honest",
+   "name": "abliterated leaf (stock path) refused under stock id, 70 of 70 changed blocks",
+   "ok": true
+  },
+  {
+   "group": "controls",
+   "name": "abliterated control leaves are identical to stock and verify under the stock id (8 of 8)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e + 1 refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e - 1 refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e as string refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e as bool refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e as float refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e missing refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "int_sha256 one hex digit changed refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "int_sha256 uppercase refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "int_sha256 truncated refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "int_sha256 missing refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "int_sha256 all zero refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e and int_sha256 swapped refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "extra leaf field refused (78 of 78 blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "int_sha256 set to the abliterated value refused (70 of 70 changed blocks)",
+   "ok": true
+  },
+  {
+   "group": "new-field",
+   "name": "e and int_sha256 both set to the abliterated values refused (70 of 70)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "rule step swapped to STEP_FOLDED refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "rule param added refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "rule round changed refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "source hash changed refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "class changed to matrix_norm_folded refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "block renamed refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "float in params refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "v1-kind",
+   "name": "cls = [] refused (78 of 78)",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "config_pin changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "rule_version changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "checkpoint_id changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "n changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "index changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "path element changed refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "extra path element refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "extra field refused",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "v1 leaf (no e, no int_sha256) refused under the v2 id",
+   "ok": true
+  },
+  {
+   "group": "opening",
+   "name": "v1 conversion-id opening of the same block refused under the v2 id",
+   "ok": true
+  }
+ ],
+ "subset_id_abl": "2808edc948f4b81cfb96b1a9b0201ab84d617ef83731e83cc0c4b12357311887",
+ "subset_id_stock": "d502ce1133396fafed2606c306de67c75c3c33de9101155d3444e6e94d7b5230"
+}

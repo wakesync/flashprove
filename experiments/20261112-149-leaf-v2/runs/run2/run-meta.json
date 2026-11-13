@@ -1,0 +1,13 @@
+{
+ "budget_s": 2400.0,
+ "done": 8,
+ "finished_utc": "2026-11-12T22:24:54Z",
+ "free_disk_end": 20423561216,
+ "free_disk_start": 21615255552,
+ "n_registered": 78,
+ "reverse": true,
+ "rss_max_kb": 2176216,
+ "seconds": 82.6,
+ "started_utc": "2026-11-12T22:23:31Z",
+ "stopped": "free disk 20423561216 < 21 GB before model.language_model.layers.49.mlp.down_proj.weight"
+}

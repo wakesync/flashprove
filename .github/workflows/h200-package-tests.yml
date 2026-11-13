@@ -1,7 +1,8 @@
 # CPU-only tests of the undeployed H200 package (research/gpu/tinfoil-h200/): the results server's
 # routes and file boundary (serve_test.py), the job runner's control flow with mocked GPU programs
-# (run_job_test.py), the runbook's bounded result fetch (fetch_bounded_test.py), bash -n and
-# shellcheck. No GPU, no secrets, no network calls beyond checkout.
+# (run_job_test.py, run_job_calib_test.py), the runbook's bounded result fetch (fetch_bounded_test.py),
+# the off-box verification helper (verify_offbox_test.py), the static image/config contract
+# (image_contract_test.py, no docker), bash -n and shellcheck. No GPU, no secrets, no network calls beyond checkout.
 name: h200-package-tests
 
 on:
@@ -30,13 +31,22 @@ jobs:
           persist-credentials: false
       - name: bash -n and shellcheck
         working-directory: research/gpu/tinfoil-h200
-        run: bash -n run_job.sh && bash -n fetch_bounded.sh && shellcheck --version && shellcheck run_job.sh fetch_bounded.sh
+        run: bash -n run_job.sh && bash -n fetch_bounded.sh && bash -n calib_run.sh && bash -n stamp.sh && shellcheck --version && shellcheck run_job.sh fetch_bounded.sh calib_run.sh stamp.sh
       - name: serve_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 serve_test.py
       - name: run_job_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 run_job_test.py
+      - name: run_job_calib_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 run_job_calib_test.py
       - name: fetch_bounded_test.py
         working-directory: research/gpu/tinfoil-h200
         run: python3 fetch_bounded_test.py
+      - name: verify_offbox_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 verify_offbox_test.py
+      - name: image_contract_test.py
+        working-directory: research/gpu/tinfoil-h200
+        run: python3 image_contract_test.py

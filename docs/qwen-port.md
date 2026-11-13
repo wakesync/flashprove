@@ -99,9 +99,11 @@ committed value on the H200, which is the number that decides between the two ra
 6. **Limits of the upstream programs.** The verifier does not say YES for a model with a query
    width different from the stream width, or with head dimension 256 (issue #35). A dense parameter
    file (no routed experts) can meet the standard parameter form since issue #135
-   (`experiments/20261112-135-dense-standard-form/`), but no dense proof has been made or checked,
-   and under a dense file the SiLU, rotary and softmax tables are not pinned by digest lines
-   (verifier/docs/parameter-file.md, "The standard parameter form").
+   (`experiments/20261112-135-dense-standard-form/`), and since issue #156 only with the digest
+   lines of its SiLU, rotary and softmax tables, which the verifier compares with its own tables
+   (`experiments/20261113-156-dense-table-digests/`; verifier/docs/parameter-file.md, "The standard
+   parameter form"). No dense proof has been made or checked, and the provers' reader of the
+   parameter file does not yet take digest lines without experts.
 7. **No machine-checked theorem.** Upstream's Lean soundness theorem covers the Maverick-shaped
    model only.
 8. **Security settings.** Every Qwen proof so far used a 10-bit research target. None is a

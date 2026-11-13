@@ -1,0 +1,34 @@
+2026-11-12T17:43:58Z slot granted; MemAvailable 13 GiB
+Step 1/20 : FROM ubuntu:24.04@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852 AS toolkit
+Step 2/20 : ARG DEBIAN_FRONTEND=noninteractive
+Step 3/20 : RUN apt-get update && apt-get install -y --no-install-recommends       ca-certificates curl git build-essential gcc-13 g++-13 binutils python3 python3-pip       util-linux time bc xz-utils     && rm -rf /var/lib/apt/lists/*     && mkdir -p /opt/env && dpkg-query -W -f '${Package} ${Version}\n' > /opt/env/dpkg.txt
+Step 4/20 : COPY requirements-cuda.txt /opt/env/requirements-cuda.txt
+Step 5/20 : RUN mkdir /opt/cuda-13.2.86     && python3 -m pip install --no-cache-dir --no-deps --require-hashes --break-system-packages          --target /opt/cuda-13.2.86 -r /opt/env/requirements-cuda.txt     && cd /opt/cuda-13.2.86/nvidia/cu13/lib     && for n in cublasLt cublas cudart; do ln -s lib$n.so.13 lib$n.so; done     && mkdir stubs     && curl -fsSLo /tmp/drv.deb       https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-driver-dev-13-2_13.2.86-1_amd64.deb     && echo "ba113b074282ba57132a7dd44d3d454dc43d0b069cdfef992f3bd4f910b76711  /tmp/drv.deb" | sha256sum -c -     && dpkg-deb -x /tmp/drv.deb /tmp/drv     && cp /tmp/drv/usr/local/cuda-13.2/targets/x86_64-linux/lib/stubs/libcuda.so /opt/cuda-13.2.86/nvidia/cu13/lib/stubs/     && rm -rf /tmp/drv /tmp/drv.deb     && chmod -R go-w /opt/cuda-13.2.86
+Successfully installed cuda-toolkit-13.2.2 nvidia-cublas-13.4.1.3 nvidia-cuda-cccl-13.2.86 nvidia-cuda-crt-13.2.86 nvidia-cuda-nvcc-13.2.86 nvidia-cuda-nvrtc-13.2.86 nvidia-cuda-runtime-13.2.86 nvidia-nvvm-13.2.86
+Step 6/20 : ENV PATH=/opt/cuda-13.2.86/nvidia/cu13/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Step 7/20 : RUN nvcc --version | tail -n 2 | tee /opt/env/nvcc.txt && gcc --version | head -n 1 | tee /opt/env/gcc.txt
+Step 8/20 : FROM toolkit AS source
+Step 9/20 : ARG FLASHPROVE_REPO=https://github.com/wakesync/flashprove.git
+Step 10/20 : ARG FLASHPROVE_COMMIT=9e2bdd8ff5bf9c62f18263d7dac189b0400b260c
+Step 11/20 : RUN git init -q /opt/flashprove && cd /opt/flashprove     && git remote add origin "$FLASHPROVE_REPO"     && git config core.sparseCheckout true && git sparse-checkout set --no-cone '/*' '!/lean/'     && git fetch -q --depth 1 --filter=blob:none origin "$FLASHPROVE_COMMIT"     && git checkout -q FETCH_HEAD     && test "$(git rev-parse HEAD)" = "$FLASHPROVE_COMMIT"     && git rev-parse HEAD > /opt/env/flashprove-commit.txt     && chmod -R go-w /opt/flashprove
+Step 12/20 : FROM source AS verifier
+Step 13/20 : RUN cd /opt/flashprove && verifier/build.sh && sha256sum bin/cp_verify | tee /opt/env/cp_verify.sha256
+Step 14/20 : FROM verifier AS prover
+Step 15/20 : SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+Step 16/20 : RUN grep -q 'V13.2.86' /opt/env/nvcc.txt && grep -q '^gcc' /opt/env/gcc.txt
+Step 17/20 : RUN cd /opt/flashprove/prover && CUDA_VISIBLE_DEVICES= ./build.sh 2>&1 | tail -n 20     && test -x build/hc/cp_commit && test -x build/hc/cp_prove && test -x build/hc/cp_verify     && sha256sum build/hc/cp_commit build/hc/cp_prove build/hc/cp_verify | tee /opt/env/programs.sha256
+Compiled by /opt/cuda-13.2.86/nvidia/cu13/bin/nvcc, release 13.2, V13.2.86
+Compiled by /opt/cuda-13.2.86/nvidia/cu13/bin/nvcc, release 13.2, V13.2.86
+cp_prove and cp_commit carry a run path to /opt/cuda-13.2.86/nvidia/cu13/lib: they load the CUDA libraries from there.
+THE PROGRAMS ARE BUILT: cp_commit, cp_prove and cp_verify lie in /opt/flashprove/prover/build/hc
+72b1a4be50d799371798381961b67e1e7c43472d9613824dc91f2f85b00e466a  build/hc/cp_commit
+183949504a0713b058d02cfaf74cdd2bdc83e0f22ea8d7064e35aff6e09c94bd  build/hc/cp_prove
+7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394  build/hc/cp_verify
+Step 18/20 : RUN cd /opt/flashprove/prover && CUDA_VISIBLE_DEVICES= ./build.sh compiler_sample 2>&1 | tail -n 3     && test -x build/compiler_sample
+build.sh: the compiler sample was built but not run to its end, so this build has not checked the compiler by value (status 77: compiler_sample: no GPU was found, so nothing was compared): only the compiler's version has been checked; see prover/docs/build.md
+Compiled by /opt/cuda-13.2.86/nvidia/cu13/bin/nvcc, release 13.2, V13.2.86
+Step 19/20 : COPY cc_probe.cu /opt/fp-h200/cc_probe.cu
+Step 20/20 : RUN nvcc -std=c++17 --gpu-architecture=sm_90a --cudart=static -o /opt/fp-h200/cc_probe /opt/fp-h200/cc_probe.cu
+Successfully built 77a7084c5552
+Successfully tagged fp-h200cal7:prover
+2026-11-12T18:17:22Z build prover exit 0 after 2004 s

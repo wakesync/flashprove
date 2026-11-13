@@ -1,0 +1,13 @@
+{
+ "budget_s": 3000.0,
+ "done": 78,
+ "finished_utc": "2026-11-12T22:22:25Z",
+ "free_disk_end": 22013775872,
+ "free_disk_start": 25331916800,
+ "n_registered": 78,
+ "reverse": false,
+ "rss_max_kb": 2176528,
+ "seconds": 891.1,
+ "started_utc": "2026-11-12T22:07:34Z",
+ "stopped": null
+}
