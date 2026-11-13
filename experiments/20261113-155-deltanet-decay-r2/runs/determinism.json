@@ -1,0 +1,47 @@
+{
+ "cells.csv.gz": {
+  "run1_sha256_decompressed": "d524afbb10076483cc5e3d6571b29e9c662de762746eb263b7be1cd2d08cbfda",
+  "run2_sha256_decompressed": "d524afbb10076483cc5e3d6571b29e9c662de762746eb263b7be1cd2d08cbfda",
+  "equal": true
+ },
+ "heads.json.gz": {
+  "run1_sha256_decompressed": "5ea2d6c93d98bf6e2201df5abe1eccdf26cc24328ce400469b641943e8bec121",
+  "run2_sha256_decompressed": "5ea2d6c93d98bf6e2201df5abe1eccdf26cc24328ce400469b641943e8bec121",
+  "equal": true
+ },
+ "equal": true,
+ "runs": [
+  {
+   "event": "start",
+   "label": "registered-run-1",
+   "utc": "2026-11-13T01:47:25Z",
+   "code_commit": "cba5725ba5a39bea4fe002cb670bc2729f11bf4f",
+   "arm_code_modified": false
+  },
+  {
+   "event": "end",
+   "label": "registered-run-1",
+   "utc": "2026-11-13T01:47:39Z",
+   "exit": 0,
+   "wall_seconds": 13.6,
+   "child_max_rss_kb": 154524,
+   "stderr_tail": ""
+  },
+  {
+   "event": "start",
+   "label": "registered-run-2-determinism",
+   "utc": "2026-11-13T01:47:43Z",
+   "code_commit": "cba5725ba5a39bea4fe002cb670bc2729f11bf4f",
+   "arm_code_modified": false
+  },
+  {
+   "event": "end",
+   "label": "registered-run-2-determinism",
+   "utc": "2026-11-13T01:47:56Z",
+   "exit": 0,
+   "wall_seconds": 13.1,
+   "child_max_rss_kb": 154648,
+   "stderr_tail": ""
+  }
+ ]
+}

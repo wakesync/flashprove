@@ -1,0 +1,42 @@
+{
+ "arms": [
+  "U1",
+  "U2",
+  "U3",
+  "U4"
+ ],
+ "G": 20,
+ "layers": [
+  0,
+  1,
+  2
+ ],
+ "prompts": [
+  "fx"
+ ],
+ "fixture": true,
+ "set": null,
+ "input_list_sha256": null,
+ "tables_sha256": {
+  "softplus_f12_v1": "d2c1a4504ec3a7eca897cd818e7e572e70e3f82835b52f4cf55f9fc61e633b24",
+  "coarse_exp_f12": "5c64304f1a54d50705addafc08d11f1de9a897e9ed65860f0445a0f5cc10fa44",
+  "softplus_f20": "95f264104320c0a4d307c3b6385a8568546978b4a2f1110031873476b7db7854",
+  "coarse_exp_f20": "fa717e74d0e0850112df4a0b580cdb55b7fdc0140195d4003e0f8db59b2053b7",
+  "softplus_f20_wide": "df3304ec56bf46b19af3d7ed2e28a355753f670de98574cdaeb86ffe371e324b",
+  "fine_exp_f20": "58935f414d1075654248b3bea38f3af9a82bdca41fa95ef0a7c0a158e407a95c"
+ },
+ "softplus_wide": {
+  "rows": 6144,
+  "lo_row": -4096
+ },
+ "u4": {
+  "rows_per_head": 12288,
+  "lo_row": -4096
+ },
+ "bar": {
+  "e_tok": 0.001953125,
+  "e_cum": 0.01,
+  "rejects": 0
+ },
+ "seconds": 1.0
+}

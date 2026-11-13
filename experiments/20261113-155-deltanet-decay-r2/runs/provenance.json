@@ -1,0 +1,19 @@
+{
+ "ok": true,
+ "sha256_all_equal": true,
+ "cells_equal": true,
+ "domain_equal": true,
+ "files": 48,
+ "input_list_sha256": "25db4a834cc701467a9c685ff62318e4e024e9e69672d61da7c9fdda77a265cc",
+ "pr146_eval_exit": 0,
+ "cells_sha256_decompressed": {
+  "recomputed": "6f5d1c7571e800507eaf50246e091575ebf2e4bc4ad88e9cb72f74e1d664eba4",
+  "committed": "6f5d1c7571e800507eaf50246e091575ebf2e4bc4ad88e9cb72f74e1d664eba4"
+ },
+ "domain_sha256_decompressed": {
+  "recomputed": "a26534ee9ac72da8792931d60ec6cc8f3b2f4ebc2c2362def9294706d799646a",
+  "committed": "a26534ee9ac72da8792931d60ec6cc8f3b2f4ebc2c2362def9294706d799646a"
+ },
+ "seconds": 52.0,
+ "what": "PR #146's unchanged decay_tables.py eval (arms T0..T3) on the input files, compared with PR #146's committed runs/eval output"
+}
