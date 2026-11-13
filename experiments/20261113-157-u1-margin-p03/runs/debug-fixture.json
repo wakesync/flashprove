@@ -1,0 +1,39 @@
+{
+ "prompt": "The capital of Italy is (debug fixture, not in the suite)",
+ "layers": {
+  "shared": [
+   0,
+   3
+  ],
+  "fused": [
+   17
+  ]
+ },
+ "patched_at_17": 2,
+ "save_load_equal": true,
+ "resid_rel_abl_vs_stock_after_L17": 0.002978260335988653,
+ "D_stream": [
+  2.0153645120757346e-05,
+  2.8585742626319188e-05,
+  3.0095374903282845e-07,
+  1.2305529679679239e-05,
+  2.767415278270846e-06
+ ],
+ "D_dense": [
+  2.0153645120486255e-05,
+  2.85857426257032e-05,
+  3.009537476209245e-07,
+  1.2305529680263123e-05,
+  2.767415277970529e-06
+ ],
+ "D_absdiff": 1.4119039731851427e-15,
+ "rev_absdiff": 1.4294409433250957e-15,
+ "top1_ok": true,
+ "margins_ok": true,
+ "manifest_counts": {
+  "stock": 41,
+  "abl": 3
+ },
+ "seconds": 110.6,
+ "fixture_ok": true
+}
