@@ -1185,12 +1185,14 @@ digest of it is among the words of the item `request` (R15.5, R15.6; 12.6).
 The rules of this subsection hold for one form of the parameter file: the line `prof` is 20:
 attention, the embedding and the output head are proved (the programs' notes call this profile 4);
 `NE` is not 0; and the 32 lines of the tables' digests are there. `cp_verify` accepts under one
-other form as well, a dense file (`NE` 0, no lines `rcl`, `gcl` or of the digests; 13.7, condition
+other form as well, a dense file (`NE` 0, no lines `rcl` or `gcl`, the 32 lines of the digests there
+with `tsig0` to `tsig7` 0; 13.7, condition
 10 and the table after it), whose statement this page does not define beyond what follows. It runs
 some other forms to their end without an acceptance. This page does not define them.
-Of their statements it says this much. The 32 lines can be absent, and must be absent
-where `NE` is 0; the eight-word positions then hold the digests that the program computes itself,
-and zeros for `tsig` where `NE` is 0.
+Of their statements it says this much. The 32 lines can be absent; the eight-word positions then
+hold the digests that the program computes itself,
+and zeros for `tsig` where `NE` is 0. Where `NE` is 0 and the lines are there, the lines `tsig0` to
+`tsig7` are 0, so the 32 lines are the 32 words of these positions there too.
 
 The rules say which value is in which word. They do not say what a word means for the model, and
 they do not list the tests that the programs make on these numbers; section 13 lists those.
@@ -1485,7 +1487,7 @@ are those of R3.1, from 160 to below 240.
 | of the scale file | all its words | TK | words 95 to 102 of the item |
 | of the request | the 2^lt + 2 words of the request file | TK | words 163 to 170 of the item |
 | of the table SiLU | 65,536 words | K under 72 | compared with the lines `tsilu0` to `tsilu7`; words 71 to 78 of the item |
-| of the table sigmoid | 65,536 words | K under 72 | compared with `tsig0` to `tsig7`; words 79 to 86. Without experts this table is not formed and the eight words are zeros (from the programs' source); such a model misses the standard parameter form (13.7, `routed-experts`) |
+| of the table sigmoid | 65,536 words | K under 72 | compared with `tsig0` to `tsig7`; words 79 to 86. Without experts this table is not formed and the eight words are zeros (from the programs' source); the lines `tsig0` to `tsig7` of such a file, if it has the digest lines, must be 0 (`policy-tables`; 13.7, condition 10) |
 | of the rotary table | 2^lt dh words | K under 72 | compared with `trope0` to `trope7`; words 87 to 94 |
 | of the softmax table | u0 words | K under 72 | compared with `texp0` to `texp7`; words 114 to 121 |
 
@@ -1955,12 +1957,12 @@ verifier gives an acceptance only if:
    right by K bits. The tests of 13.8 bound M - K from above and not from below, and from K = M + 3
    on the norm's output is 0 for every input. The condition excludes that; a small M - K leaves
    little of the output all the same.
-10. *The public tables.* The 32 lines of the tables' digests are there (`table-digests`), or the
-    file is dense (the table below, `routed-experts`), where they may not stand. Why: four
+10. *The public tables.* The 32 lines of the tables' digests are there (`table-digests`). This is
+    asked of a dense file (the table below, `routed-experts`) too: it has no sigmoid table, its
+    lines `tsig0` to `tsig7` are 0, and the other 24 lines hold the digests of its SiLU, rotary and
+    softmax tables. Why: the
     public tables are computed in floating point, and only these lines fix them (13.4, step 4; on
-    what that rests: R15.3). So under a dense file the SiLU, rotary and softmax tables are not fixed
-    by the file: an acceptance under it does not show that the prover's library and the verifier's
-    gave the same tables.
+    what that rests: R15.3). A dense file without the lines misses this condition.
 11. *The acceptance policy.* Four things are required. (a) sT = sh - 4, so that the policy's kind is
     `exact-match` or `clipped-gap` (12.5), whether or not a token of the request is checked. (b) If
     a token of the request is checked (r < T - 1), the kind is `exact-match`, or else the caller has
@@ -1999,7 +2001,7 @@ verifier gives an acceptance only if:
 
 | name in `cp_verify` | what must hold |
 |---|---|
-| `routed-experts` | NE is above 0, or the file is dense: NE is 0 and none of the lines `rcl`, `gcl`, `tsilu0` to `texp7` is there (such a file also meets conditions 8 and 10; verifier/docs/parameter-file.md, "The standard parameter form", says why and what a dense acceptance does not pin) |
+| `routed-experts` | NE is above 0, or the file is dense: NE is 0 and neither of the lines `rcl` and `gcl` is there (such a file also meets condition 8, and not condition 10 unless it has the digest lines; verifier/docs/parameter-file.md, "The standard parameter form", says why) |
 | `five-limbs` | the line `xl 5` is there |
 | `placement-table` | the configuration directory has a layout file (without one the call is rejected earlier) |
 | `no-range-words` | neither the line `eg` nor the line `smax` is there |
@@ -2132,7 +2134,7 @@ with such a fault is rejected by the stage key, the first in the order:
 | `policy-rcl` | The optional line `rcl` has the value 1, occurs once, and is in its position (13.4). | `policy.txt` | 
 | `policy-gcl` | The optional line `gcl` has the value 1, occurs once, and is in its position (13.4). | `policy.txt` | 
 | `policy-xl` | The optional line `xl` has the value 5, occurs once, and is in its position (13.4). | `policy.txt` | 
-| `policy-tables` | The 32 lines `tsilu0` to `texp7` are all there or none is; they are in their position (13.4), before the first call line; they follow one another directly, in the order of R15.2; each is one word; and they are there only with NE above 0. | `policy.txt` | 
+| `policy-tables` | The 32 lines `tsilu0` to `texp7` are all there or none is; they are in their position (13.4), before the first call line; they follow one another directly, in the order of R15.2; each is one word; and with NE 0 each of the eight lines `tsig0` to `tsig7` is 0. | `policy.txt` | 
 | `policy-call-line` | Every other line is a call line: it ends with a line feed; its tokens are separated by single blanks, none is empty, and each consists of the bytes A-Z a-z 0-9 . _ - only; its second token, the call's name, has at most 8 characters; it has at least four tokens; the first is call, callA or callH; and the three kinds come in this order. | `policy.txt` | 
 | `policy-length` | All lines from prof to F are there. | `policy.txt` | 
 | `hid-tau` | tau is a multiple of 32 from 32 to 256, and tau less the largest power of two that is not above it is 0 or a power of two. | `policy.txt` | 
