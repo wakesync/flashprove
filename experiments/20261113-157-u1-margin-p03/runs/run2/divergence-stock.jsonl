@@ -1,0 +1,47 @@
+{"leg": "stock", "layer": 17, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 18, "type": "linear_attention", "seconds": 6.1, "inputs_s": 0.9, "det_bit_equal": {}}
+{"leg": "stock", "layer": 19, "type": "full_attention", "seconds": 5.9, "det_bit_equal": {}}
+{"leg": "stock", "layer": 20, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 21, "type": "linear_attention", "seconds": 5.8, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 22, "type": "linear_attention", "seconds": 6.0, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 23, "type": "full_attention", "seconds": 6.3, "det_bit_equal": {}}
+{"leg": "stock", "layer": 24, "type": "linear_attention", "seconds": 6.3, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 25, "type": "linear_attention", "seconds": 5.7, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 26, "type": "linear_attention", "seconds": 10.4, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 27, "type": "full_attention", "seconds": 6.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 28, "type": "linear_attention", "seconds": 6.4, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 29, "type": "linear_attention", "seconds": 6.5, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 30, "type": "linear_attention", "seconds": 6.5, "inputs_s": 1.2, "det_bit_equal": {}}
+{"leg": "stock", "layer": 31, "type": "full_attention", "seconds": 6.2, "det_bit_equal": {}}
+{"leg": "stock", "layer": 32, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 33, "type": "linear_attention", "seconds": 6.1, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 34, "type": "linear_attention", "seconds": 6.6, "inputs_s": 1.2, "det_bit_equal": {}}
+{"leg": "stock", "layer": 35, "type": "full_attention", "seconds": 5.4, "det_bit_equal": {}}
+{"leg": "stock", "layer": 36, "type": "linear_attention", "seconds": 6.0, "inputs_s": 0.6, "det_bit_equal": {}}
+{"leg": "stock", "layer": 37, "type": "linear_attention", "seconds": 6.1, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 38, "type": "linear_attention", "seconds": 7.3, "inputs_s": 1.0, "det_bit_equal": {}}
+{"leg": "stock", "layer": 39, "type": "full_attention", "seconds": 6.0, "det_bit_equal": {}}
+{"leg": "stock", "layer": 40, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 41, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 42, "type": "linear_attention", "seconds": 6.3, "inputs_s": 1.0, "det_bit_equal": {}}
+{"leg": "stock", "layer": 43, "type": "full_attention", "seconds": 5.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 44, "type": "linear_attention", "seconds": 5.8, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 45, "type": "linear_attention", "seconds": 5.9, "inputs_s": 1.1, "det_bit_equal": {}}
+{"leg": "stock", "layer": 46, "type": "linear_attention", "seconds": 6.3, "inputs_s": 1.0, "det_bit_equal": {}}
+{"leg": "stock", "layer": 47, "type": "full_attention", "seconds": 5.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 48, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 49, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.6, "det_bit_equal": {}}
+{"leg": "stock", "layer": 50, "type": "linear_attention", "seconds": 6.1, "inputs_s": 0.9, "det_bit_equal": {}}
+{"leg": "stock", "layer": 51, "type": "full_attention", "seconds": 5.6, "det_bit_equal": {}}
+{"leg": "stock", "layer": 52, "type": "linear_attention", "seconds": 5.8, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 53, "type": "linear_attention", "seconds": 6.2, "inputs_s": 0.6, "det_bit_equal": {}}
+{"leg": "stock", "layer": 54, "type": "linear_attention", "seconds": 6.2, "inputs_s": 1.0, "det_bit_equal": {}}
+{"leg": "stock", "layer": 55, "type": "full_attention", "seconds": 4.9, "det_bit_equal": {}}
+{"leg": "stock", "layer": 56, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 57, "type": "linear_attention", "seconds": 5.1, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 58, "type": "linear_attention", "seconds": 6.1, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "stock", "layer": 59, "type": "full_attention", "seconds": 4.8, "det_bit_equal": {}}
+{"leg": "stock", "layer": 60, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.6, "det_bit_equal": {}}
+{"leg": "stock", "layer": 61, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.6, "det_bit_equal": {}}
+{"leg": "stock", "layer": 62, "type": "linear_attention", "seconds": 6.0, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "stock", "layer": 63, "type": "full_attention", "seconds": 3.9, "det_bit_equal": {}}

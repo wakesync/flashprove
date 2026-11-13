@@ -1,0 +1,17 @@
+{"leg": "shared", "layer": 0, "type": "linear_attention", "seconds": 6.0, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "shared", "layer": 1, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.6, "det_bit_equal": {}}
+{"leg": "shared", "layer": 2, "type": "linear_attention", "seconds": 7.1, "inputs_s": 1.1, "det_bit_equal": {}}
+{"leg": "shared", "layer": 3, "type": "full_attention", "seconds": 5.9, "det_bit_equal": {}}
+{"leg": "shared", "layer": 4, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "shared", "layer": 5, "type": "linear_attention", "seconds": 6.3, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "shared", "layer": 6, "type": "linear_attention", "seconds": 5.9, "inputs_s": 0.9, "det_bit_equal": {}}
+{"leg": "shared", "layer": 7, "type": "full_attention", "seconds": 6.1, "det_bit_equal": {}}
+{"leg": "shared", "layer": 8, "type": "linear_attention", "seconds": 5.6, "inputs_s": 0.9, "det_bit_equal": {}}
+{"leg": "shared", "layer": 9, "type": "linear_attention", "seconds": 5.1, "inputs_s": 0.5, "det_bit_equal": {}}
+{"leg": "shared", "layer": 10, "type": "linear_attention", "seconds": 6.2, "inputs_s": 1.0, "det_bit_equal": {}}
+{"leg": "shared", "layer": 11, "type": "full_attention", "seconds": 6.2, "det_bit_equal": {}}
+{"leg": "shared", "layer": 12, "type": "linear_attention", "seconds": 5.3, "inputs_s": 0.7, "det_bit_equal": {}}
+{"leg": "shared", "layer": 13, "type": "linear_attention", "seconds": 5.4, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "shared", "layer": 14, "type": "linear_attention", "seconds": 6.7, "inputs_s": 0.8, "det_bit_equal": {}}
+{"leg": "shared", "layer": 15, "type": "full_attention", "seconds": 6.1, "det_bit_equal": {}}
+{"leg": "shared", "layer": 16, "type": "linear_attention", "seconds": 5.4, "inputs_s": 0.9, "det_bit_equal": {}}
