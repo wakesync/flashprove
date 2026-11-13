@@ -1,142 +1,228 @@
 # The Qwen3.8-27B port: where it stands
 
-This page tracks the work to run Qwen3.8-27B, and its abliterated checkpoint, under proof. It is a
-living page of the research fork, kept in plain language. Tracking issue:
+This page tracks Qwen3.8-27B and its abliterated checkpoint under proof. Tracking issue:
 [#32](https://github.com/wakesync/flashprove/issues/32).
 
-**Today no part of Qwen3.8-27B can be proved end to end.** What exists is one piece of one layer,
-proved on a CPU with test-level security settings, on made-up inputs. Everything else on this page
-is a design, a count or a plan, and is marked so.
+**No end-to-end proof of the real Qwen3.8-27B model or an abliterated reply exists in this
+snapshot.** There are synthetic CPU proofs of components, real-weight numerical measurements,
+and designs and cost counts. A numerical forward through all layers is not a proof. [E1, E3, E5, E12]
 
-Last updated: 2026-11-10. Rule for this page: a step is "done" only if its evidence is merged on
-`main`. Work in an open pull request is "in review". Anything else is "planned".
+Updated from main pinned once at `59bff9a4608e0cc720d58d7c30823a8838fa43e4` (2026-11-13).
+“Built” below means the cited build evidence is in that tree, not that it proves the real model.
+Historical verdicts stay as recorded. This is a documentation refresh, not an experiment: no
+PREREG or results-ledger row is added. PRs #173, #174 and #180 merged after the pin and are
+summarised only in the dated section below. PRs #178 and #179 were open at the pin and remain
+open at the main revision checked below; neither is used. The
+[evidence map](qwen-port-evidence.md) gives the source path, section and scope for every E-reference.
 
-## Why Qwen is not a small change
+## Merged after the pin (not incorporated above)
 
-FlashProve proves Llama 4 Maverick's integer model. Qwen3.8-27B is smaller (6.7% of the committed
-weights) and has no routing, but three quarters of its layers are a different kind of layer, a
-Gated DeltaNet. Such a layer keeps a memory: for each of its 48 heads a 128 x 128 table of numbers,
-the state, that every token updates. FlashProve had no way to prove a layer with a carried state.
-Building that is the port. The feasibility study is in
-[research/ports/qwen3.8-27b/FEASIBILITY.md](../research/ports/qwen3.8-27b/FEASIBILITY.md).
+2026-11-13 update, checked against main `4991f69acbc9db0c9cd0bc80b79ad658078e3737`.
+Except for this dated section, the body remains the snapshot at the original pin and was not
+re-derived; the pointers below do not replace its historical verdicts.
 
-## Milestones
+- **PR #173: FAIL** on the registered integer-MLP token-agreement bar for the abliterated XM18
+  path (XS18 heads plus M3 integer MLP): top-1 agreement is 1,423 of 1,461 positions (97.40%
+  against >= 99.0%), and both registered KL criteria also fail. This is measured, unreplicated
+  numerical evidence, not a proof or a stock-leg result, and it does not move the original run's
+  cutoff. [E19]
+- **PR #174: KILLED** for XS18, XS18+U4 and XS18+U3 in the abliterated decay-table end-to-end
+  run after 21 of 64 layers. No logits were produced, so the token-agreement hypothesis remains
+  untested; the partial measurements are descriptive, unreplicated and not a proof. [E20]
+- **PR #180: design only**, a desk note on head dimension 256 and partial rotary, not a
+  registered experimental PASS/FAIL verdict. It supplies no implementation, measurement,
+  soundness theorem or build green light. [E21]
 
-| step | what it is | status | evidence |
+## Why this is a port, not a loader change
+
+Qwen's text model is dense, with 64 layers: 48 Gated DeltaNet layers and 16 full-attention layers.
+Each DeltaNet layer has 48 value heads, each carrying a 128 x 128 state. Its full-attention shape
+has query width 6,144 against stream width 5,120, head dimension 256 and partial rotary embedding.
+These are architectural requirements, not evidence of prover support. [E2]
+
+## Merged evidence at a glance
+
+| work | status at the pin | what that status does not mean | source |
 |---|---|---|---|
-| Feasibility | desk study: architecture, what is new, why Qwen first | done | [FEASIBILITY.md](../research/ports/qwen3.8-27b/FEASIBILITY.md) (PR #28) |
-| **M1** | one DeltaNet head at real size, 4 tokens, proved on a CPU | done, with a negative result: proofs worked, but a value outgrew its allowed range on heavy-tailed inputs | [RESULTS](../experiments/20261104-11-qwen-deltanet-m1/RESULTS.md) (PR #47) |
-| **M1b** | the same head with a cheaper range check | done: passed its registered thresholds | [RESULTS](../experiments/20261105-32-qwen-deltanet-m1b-lookup/RESULTS.md) (PR #63) |
-| **M2 design** | design of a whole head at 16 tokens; a verifier entry that checks its own inputs | done (design; merged) | PR [#66](https://github.com/wakesync/flashprove/pull/66) |
-| Operator gadgets | pinned integer tables; small standalone proofs of conv, norms, table lookups, with unbound inputs | done (merged) | PR [#67](https://github.com/wakesync/flashprove/pull/67), issue #35 |
-| Real weights, layer 0 | ranges and accuracy of the integer arithmetic on the real checkpoints; what abliteration changes | done, negative (merged): accuracy threshold missed on layer 0 | PR [#68](https://github.com/wakesync/flashprove/pull/68), issue #8 |
-| State commitment | how to carry the state between parts of a proof without committing all of it | done (merged): full state at each handoff is the plan of record; the cheaper low-rank form is not established | PR [#71](https://github.com/wakesync/flashprove/pull/71), issue #34 |
-| **Lookup build** | the M2 head built with lookup-checked remainders | planned (build under way) | issue #32 |
-| **M3 design** | the first statement where the weights are committed and the proof is needed | in progress (design and counts only; in review) | [DESIGN](../experiments/20261109-32-qwen-m3-design/DESIGN.md), [RESULTS](../experiments/20261109-32-qwen-m3-design/RESULTS.md) |
-| **M3a** | one head, then one full DeltaNet layer, against committed weights, on a CPU | planned | DESIGN section 9 |
-| Arithmetic gate | choose number formats that are accurate on real weights and stay in range | planned; blocks everything below | issue #8 |
-| **M3b** | a block of 4 layers in the GPU prover | planned; needs a GPU decision | DESIGN section 9 |
-| **Full model** | all 64 layers and the output head; then real weights; then the abliterated checkpoint | planned | DESIGN sections 9 and 10 |
+| M1 and M1b | Synthetic CPU head proofs built. M1 FAIL on its registered range test; M1b PASS on its own thresholds | No real weights or full layer proved | E3 |
+| M2 two-lookup build | Built, including the 16-token head. Original H4 **NOT PASSED**; separately registered H4-r2 **PASS** | Not a retrospective H4 pass, production security or real-model fidelity | E4 |
+| Whole-forward, head-only fidelity | XS18 and XS20 PASS on both checkpoints, teacher-forced, with only DeltaNet head arithmetic lowered | Not a fully integer model or a proof | E5 |
+| Served-reply comparison | Registered bars PASS on the recorded abliterated replies | Reconstructed token ids, not observed server ids; no CPU free-running generation or proof | E6 |
+| Integer MLP | **PARTIAL / NOT FINISHED** on token agreement; input class exceeded on the layers completed | No MLP token-agreement verdict; the state-regeneration follow-up adds no logits. For the later registered **FAIL**, see [Merged after the pin](#merged-after-the-pin-not-incorporated-above). | E7 |
+| Norm classes | **PARTIAL**, no registered all-layer arm verdict; measured class/fidelity failures | No logits, no token agreement, no selected arithmetic | E8 |
+| Decay round 2 | U1/U2/U3 FAIL; U4 PASS as decay-only emulation | U4 is not a built committed-table lookup or end-to-end test | E9 |
+| Stock-vs-abliterated U1 margin | **FAIL (mixed)** on all 10 registered prompts | Not a detection algorithm or an impossibility theorem | E10 |
+| Dense table-digest admission | Dense verifier planning accepts the required table digests | No dense proof or dense `YES`; producer reader still mismatches | E11 |
+| Query-width design | Merged desk audit of `dq != d` | No gate opened; head dimension and partial rotary remain barriers | E11 |
+| M3 | Merged design and counts for committed-weight proofs | M3a through full-model milestones are not established builds | E12 |
 
-## What is proved, recomputed and not covered at each step
+## What the proof machinery actually covers
 
-"Recomputed" means the verifier works the value out itself from public inputs, so no proof is
-needed for it. A proof only earns its keep where the verifier cannot do that.
+The two-lookup build composes range checking and exact remainder checking. The smaller, four-token
+statement accepted 10/10 honest proofs and rejected 95/95 hostile cases. For the full 16-token head,
+the original H4 missed its stop rule and left its hostile suite incomplete. H4-r2 separately accepted
+10/10 honest proofs and obtained all 129/129 expected hostile-suite verdicts, normally and under
+UBSan. The suite includes acceptance controls, so 129/129 does **not** mean 129 rejections. [E4]
 
-| step | proved | the verifier recomputes | not covered |
-|---|---|---|---|
-| M1, M1b (done) | the state update and the head's output for 4 tokens, for inputs that are all public | nothing: it is given every input | everything else in the layer; any link to weights. Since all inputs are public, a verifier could have computed the result itself |
-| M2 design (done; merged, PR #66) | by design: the same for 16 tokens, plus the head's output norm | conv, SiLU, the q/k norm and the gates, from public inputs | the layer's matrices, the MLP, other layers. Still all-public: a rehearsal of the machinery, not a useful proof |
-| M3a (planned) | one head from the layer's input to its output, **against committed weights**; then a layer as 48 head proofs and one MLP proof | the layer's public input checks; adding up the 48 public head outputs | the link between layers; the state carried from an earlier chunk; attention layers; the output head |
-| M3b (planned) | a 4-layer block with everything between its ends committed, including the carried state | only the commitment ID and public-input checks | the other 60 layers; real weights |
-| Full model (planned) | every layer from token ids to the next token, against one commitment | only the commitment ID and public-input checks | how close the integer model is to the real one; vision; sampling; whether the commitment is the advertised checkpoint |
+Those proofs use synthetic inputs and head constants, F = 12, a 10-bit research target and toy
+coins. The verifier recomputes the public front end; this does not bind the head to a real
+checkpoint or compose a model proof. The build remains unreplicated; its sampled hostile cases
+and paper composition argument do not establish general soundness or production security. [E4]
 
-## What is known about cost
+M3's planned statement instead binds weights and intermediate values. Its efficient function lookup
+keyed on committed statement cells, Qwen weight-table range proof and ties to that table remain
+build obligations in the design. The completed M2 remainder lookup is not completion of those
+obligations. M3a is the CPU head/layer plan; M3b is a GPU block plan; M3c/M3d extend to all layers,
+then real stock and abliterated weights. [E12]
 
-Nothing has been measured for Qwen beyond the single head on a CPU (about 40 seconds to prove 4
-tokens of one head, with test settings; PR #63).
+The state-commit study recommends full-state handoff at chunk boundaries (SA at C = 64), not the
+cheaper low-rank SB construction. Its registered SB drift test failed; its descriptive higher-precision
+arm is not a sound lowering in that study. Neither that study nor M3's low-rank count establishes a
+full-model state proof. [E13]
 
-Counted, not built ([RESULTS](../experiments/20261109-32-qwen-m3-design/RESULTS.md)):
-- The first statement with committed weights (one head, 16 tokens) is 11% larger than the M2 head
-  and fits the same CPU harness, provided remainders and table steps are checked by lookups.
-  Without lookups it fits for a single token only. **This counts the request's trace only:** the
-  separate table of the head's 3.3 million committed weights, its range proof and the matrix
-  products' own rounds are not in the count, and that weight table has not been built for Qwen.
-- The layer's MLP statement fits only up to 15 tokens at a time.
-- If every state is committed for every token, the state is 88% of everything a request commits.
+## Real-weight fidelity: what improved and what is still missing
 
-**Whether the full model fits one 141 GB GPU is unknown.** Every estimate is an extrapolation
-from another model, for a GPU sub-proof that has not been written. At the rate taken from
-upstream's published Maverick run, some designs come in under the limit. At the one GPU memory
-rate this fork has measured itself (a small made-up model; one reading, not repeated, and
-upstream's full-size run contradicts it for the ordinary layers), none fits a 1,024-token window;
-the largest window that fits is then 256 tokens. The two rates differ by ten times, and only a
-measured Qwen run can say which applies. Do not quote either as a result.
+### Head-only teacher forcing
 
-**One fix in the third revision of the M3 design (r3).** The second revision fixed a small per-head
-weight, the decay bias (dt_bias), to a number range that real Qwen weights cannot meet, and the
-test weights could not meet it either, so no honest proof would have been possible. It now has its
-own, wider range, checked against the real layer-0 values. The sizes did not move in any way that
-matters. Next steps that are planned and not done: the verifier limit changes of issue #35, a CPU
-reference of the GPU form of the DeltaNet trace, and one cheap measurement of GPU memory per
-committed value on the H200, which is the number that decides between the two rates above.
+The whole-forward comparison covers 10 prompts and 1,461 positions on stock and abliterated
+weights, with XS18 or XS20 in every DeltaNet layer. All four cells pass their registered bar:
+top-1 matches are 1,460/1,461 except XS20 stock at 1,461/1,461. Projections, full attention, MLP,
+norms and the output head remain float64. This is measured, unreplicated, deterministic CPU
+numerics, not proof-ready relations. [E5]
 
-## Open risks
+Deeper-layer work is no longer unmeasured: the earlier deep-fidelity study tests layers 16 and 20,
+and the whole-forward study logs head errors across all 48 DeltaNet layers. The deep study's
+per-head failures remain failures; a pass on a different next-token metric does not overturn them.
+The whole-forward study still finds head outliers, especially on repetition. [E5, E14]
 
-1. **Accuracy of the integer arithmetic.** On real layer-0 weights, 10 prompts, the number format
-   used so far (F = 12 with the M2 arithmetic) keeps its ranges but gives a head output that misses
-   the accuracy threshold, and the two finer formats tried (F = 14, 16) break the ranges (PR #68).
-   Deeper layers, every layer the abliteration changes, and other formats are unmeasured. Until a
-   format passes both, a proof would say nothing about how close the integer model is to Qwen.
-2. **The state.** Committing it every token is too large for a full model in the only form that has
-   been built. The cheaper low-rank strategy is not established: it has no specified, proved
-   construction (PR #71 and its review).
-3. **No GPU code for DeltaNet.** All Qwen proofs so far ran on a CPU research harness.
-4. **Lookups and the weight table.** The planned statements depend on a lookup keyed on the
-   proof's own hidden values, which does not exist yet (PR #67 has standalone pieces), and on a
-   range proof for a Qwen weight table, which exists only for upstream's Maverick layout.
-5. **Ranges are measured on one layer.** Deeper layers are unmeasured.
-6. **Limits of the upstream programs.** The verifier does not say YES for a model with a query
-   width different from the stream width, or with head dimension 256 (issue #35). A dense parameter
-   file (no routed experts) can meet the standard parameter form since issue #135
-   (`experiments/20261112-135-dense-standard-form/`), and since issue #156 only with the digest
-   lines of its SiLU, rotary and softmax tables, which the verifier compares with its own tables
-   (`experiments/20261113-156-dense-table-digests/`; verifier/docs/parameter-file.md, "The standard
-   parameter form"). No dense proof has been made or checked, and the provers' reader of the
-   parameter file does not yet take digest lines without experts.
-7. **No machine-checked theorem.** Upstream's Lean soundness theorem covers the Maverick-shaped
-   model only.
-8. **Security settings.** Every Qwen proof so far used a 10-bit research target. None is a
-   production proof.
-9. **Which checkpoint.** The abliterated checkpoint differs from stock in 70 of 1,199 tensors, all
-   in layers 17 to 51 (PR #68). A proof of early layers cannot tell them apart. A file hash
-   identifies that one file, but every shard's hash differs, so it cannot say which weights
-   changed. Identity has to be bound tensor by tensor.
+### Recorded served replies
+
+On 10 short abliterated replies, float64, XS18 and XS20 each match the reconstructed served token
+at 287/291 reply positions; XS18 and XS20 match float64 at all 291/291. The four shared misses
+are not causally attributed to serving precision. The route returned text and counts, not token ids;
+a different same-count tokenisation earlier in a prefix remains possible. This is teacher-forced
+comparison on recorded replies, not a free-running integer CPU generation or proof. [E6]
+
+### Integer MLP and norm classes
+
+The paragraph below is historical: the later integer-MLP token-agreement **FAIL** is summarised
+in [Merged after the pin](#merged-after-the-pin-not-incorporated-above), not incorporated here.
+
+The integer-MLP run completed layers 0 through 29 before its cutoff; layer 30 is descriptive
+post-cutoff evidence. Within the cutoff, the MLP input exceeds the design's class of 2,047 in every
+layer measured, with maximum 142,651. Six SiLU inputs leave the v1 domain; the numerical run
+saturated them, whereas the v1 proof rule would reject them. No logits were reached. The later
+state regeneration reproduces 374/374 rows through layer 30, excluding named timing fields, but
+adds no token result and does not move the original cutoff. [E7]
+
+The norm-class study measured both pre-norms on 52 layers and arms on 27 layers, with six prompts
+and 672 tokens, open loop from the float64 stream. Both pre-norms exceed 2,047 in every measured
+baseline layer. Clamp arm C has 0/27 layers meeting its fidelity bar; widened arm W has 12/27 and
+2,108 out-of-class entries. The smaller-scale arm's selection rule needs the missing full baseline.
+The run stopped on its registered disk floor and has **no registered arm verdict**, not an all-layer
+FAIL or PASS. Every arm already has failing layers among those completed; the source explains
+that no completion of this run could have given any arm a PASS, while an S scale below the measured
+ladder remains unmeasured. Its measured failures do not choose a new norm format, and it computed
+no logits. [E8]
+
+### Decay and checkpoint separation
+
+Decay round 2 evaluates 23,040 (layer, head, prompt) cells per arm on the abliterated checkpoint.
+U1/U2/U3 fail, while U4's per-head direct table passes the registered decay-error bar. That is
+emulation on recorded inputs, with domains chosen from those same prompts and float64-generated
+U4 rows. U4 would require 28,311,552 weight-dependent rows, counted not built, plus a committed-table
+lookup, a tie to the learned parameter and an integer row generator. No proof, table-format/digest
+change or end-to-end token test of U4 is established. [E9]
+
+Separately, the **U1 use-case margin** study is about stock-vs-abliterated outputs, not the decay
+arm named U1. On the full 10-prompt set, its pooled shares with D > 10 E and D > 100 E are 0.676
+and 0.439; all three registered criteria fail. Here D is stock-vs-abliterated float64 KL distance,
+and E is head-only lowering error. This does not establish a verifier acceptance radius, a working
+detector or that detection is impossible. [E10]
+
+## Admission is not a dense proof
+
+For dense parameter files (`NE 0`), verifier planning now requires all 32 table-digest lines: eight
+sigmoid words must be zero, and the other 24 must match the verifier's SiLU, rotary and softmax
+tables. The passing dense planning case still exits as a plan, not `YES`. No dense proof was made
+or checked in that result. The producer's parameter reader still refuses digest lines without
+experts; this mismatch is source-read evidence, not a measured producer run. [E11]
+
+The merged `dq != d` note finds the audited verifier sizes already use the appropriate widths,
+but calls for an explicit query-width bound and admission changes on both verifier and prover.
+It changes no code. The equality gate, `dh = 256` no-wrap barrier and partial-rotary barrier remain
+explicit dependencies; dense table admission does not resolve them or Qwen's other operators. [E11]
+
+## Cost: three different kinds of evidence
+
+- **Measured CPU component cost.** The separate-process four-token head profile (n = 10) reports
+  median prove 13.4016 s (13.2702 to 13.6726), independent verification 3.2605 s (3.1442 to 3.3857),
+  and end-to-end verified latency 16.9118 s (16.7979 to 17.3505). All inputs are public: a model
+  commitment phase is not applicable, not free. This is one synthetic head, not model throughput.
+  H4-r2's 16-token head reports median prove 88.453 s (86.344 to 94.687, n = 10), with shared-core
+  timing caveats. [E15, E4]
+- **Measured route-level plain inference.** The baseline fits 0.0931 s per reported generated token
+  over 40 timed decode requests, and 0.000178 s per reported prompt token over 50 prefill requests.
+  These are client wall times including transport and serving layers, not GPU timings or proof
+  overhead. The prefill fit is sensitive to its range and should not be extrapolated to long
+  contexts; reasoning-token accounting is not established from text and usage counts alone. [E16]
+- **Conditional proving cost.** The desk model's selected variable-cost scenarios span $0.0255 to
+  $10.0982 per 1,000 window tokens, not bounds on actual Qwen cost. They omit fixed costs and
+  assume an unbuilt DeltaNet GPU sub-proof and borrowed rates. The later route comparison's
+  approximately 240x prefill / 0.46x decode central ratios are conditional, with GPU-seconds in the
+  numerator and shared-route wall seconds in the denominator, not measured proving overhead. [E17, E16]
+
+**Full-model fit on one 141 GB GPU is still unknown.** The cost model changes its fitting window
+with the assumed rate and planned versus built volume; its segment count is also over the verifier
+cap. The dense GPU calibration directory at this pin contains registration, planner and CPU/image
+preparation receipts, but no `RESULTS.md`. The preparation README labels it “prepared, not run”.
+A completed GPU calibration is therefore **NOT ESTABLISHED by this snapshot**. No availability
+promise or live-route action follows from this page. [E1, E17, E18]
+
+M3's CPU trace-size counts are also not a build: its lookup-based 16-token head excludes the
+separate committed weight table, that table's range proof and the matrix-product rounds. Its MLP
+count fits at most 15 tokens. Do not turn those trace counts into a whole-proof memory claim. [E12]
+
+## The endpoint remains a choice, not a result
+
+M3 DESIGN section 10 keeps two distinct targets. This page selects neither: [E12]
+
+- **Integer-served, exact match:** generate the reply with the committed integer model and prove
+  that each reply token is its top choice. This alone says nothing about the float model.
+- **Float-served, clipped gap:** take a reply from the float engine and prove that its tokens score
+  within fitted limits under the integer model. The meaning depends on fidelity between the models.
+
+The design's smallest full target covers all 64 layers, committed abliterated weights, a short prompt
+and reply in a 64-token window, and a manifest naming the commitment ID. It requires per-tensor
+identity: stock and abliterated differ in 70 of 1,199 tensors, in layers 17 through 51; early-layer
+proofs alone cannot distinguish them. The design does not supply a Qwen Lean soundness theorem.
+These remain target and coverage statements, not an achieved abliterated proof. [E12]
+
+## Source disagreements and historical limits
+
+Do not silently make older source text agree with newer results:
+
+- M3 DESIGN sections 10 and 11 say fidelity/ranges beyond layer 0 are unmeasured. The later
+  deep-fidelity, whole-forward and norm-class results contain deeper-layer measurements. Keep the
+  design as a historical design; use the later results only for their measured arithmetic and scope.
+  They do not establish a fully integer proof. [E12, E14, E5, E8]
+- M3 RESULTS' “Proposed claims” says the no-lookup head fits only at T = 1; its H3 section and
+  DESIGN 7.2 also describe an unregistered two-level selector count fitting through T = 9. That
+  blanket T = 1 wording is not a safe general summary. Both are counts, not builds; neither is
+  promoted here into a new verdict. [E12]
+- The cost-model RESULTS says no plain Qwen rate is on main. The later plain-inference RESULTS
+  supplies a route-level baseline and conditional ratios, not the missing GPU-level calibration.
+  The original cost model is not rewritten or recalibrated here. [E17, E16]
+- The lookup RESULTS preserves H4's incomplete-suite account alongside the explicit H4-r2
+  follow-up. Read the two registrations separately: the later PASS never changes the original
+  NOT PASSED. [E4]
 
 ## Glossary
 
-- **Integer model:** the network with weights and activations as whole numbers. Proofs are about
-  this model, not the floating-point one.
-- **Committed:** fixed by a hash that the prover publishes, without showing the values. The verifier
-  checks claims about committed values without seeing them.
-- **Public input:** a value the verifier holds itself.
-- **Witness:** a value inside the proof that is neither public nor separately committed.
-- **Gated DeltaNet:** Qwen's linear-attention layer. Each head keeps a state and updates it at
-  every token with a decay and a correction.
-- **State:** a head's 128 x 128 table of numbers. A layer has 48.
-- **Head:** one of the parallel units of a layer. "V head" is a value head; three V heads share one
-  query/key head.
-- **Chunk:** a run of consecutive tokens proved together, with the state handed from one chunk to
-  the next.
-- **Range check:** the part of a proof that shows a hidden number is small, so that an equation
-  that holds in the proof's arithmetic also holds for whole numbers.
-- **Remainder:** what is left over when the integer model divides and rounds. It must be shown to
-  be in range for the rounding to be the right one.
-- **Lookup:** a proof step that shows a hidden value appears in a public table.
-- **Research harness:** the CPU test setup used for M1, M1b and the designs. Not the GPU prover.
-- **Arm A, arm B:** two ways to check remainders: bit by bit (A) or by lookup (B).
-- **F:** the number of fraction bits in the fixed-point numbers. F = 12 means steps of 1/4096.
-- **Counted, extrapolated, measured:** a count is an exact size from a model; an extrapolation is a
-  count times a rate borrowed from other runs; only a measurement comes from running the thing.
-- **Abliterated:** a checkpoint edited to remove a behaviour, here refusals. Same architecture as
-  the stock model, different weights in some layers.
+- **Measured:** recorded execution within the stated scope, not an extrapolation to the full model.
+- **Counted / extrapolated:** a layout count / a count combined with an assumed or borrowed rate.
+- **Teacher forcing:** compare next-token choices under the recorded prefix, rather than let each
+  path generate its own continuation. [E5, E6]
+- **Committed:** bound to a commitment checked by the verifier; a numerical emulation is not by
+  itself a committed proof. [E12]
+- **Research security:** test parameters, not a production soundness target. [E4]
