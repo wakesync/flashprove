@@ -6,6 +6,7 @@ every head and x drawn uniformly between that head's committed minimum and maxim
 numpy seed 155), as registered in PREREG.md "Runs" (debug).
 
 usage: R2_FINE20=<fine20.npy> python3 test_r2.py        (fine20.npy from `decay_r2.py fine20`; about 1 minute)
+Without R2_FINE20 the table-dependent tests are skipped; the input and summary tests still run.
 """
 import gzip, json, math, os, sys, tempfile, unittest
 from pathlib import Path
@@ -23,7 +24,9 @@ _T = None
 
 def tables():
     global _T
-    if _T is None: _T = R.load_tables(os.environ["R2_FINE20"])
+    if _T is None:
+        if not os.environ.get("R2_FINE20"): raise unittest.SkipTest("R2_FINE20 is not set (path to fine20.npy from `decay_r2.py fine20`)")
+        _T = R.load_tables(os.environ["R2_FINE20"])
     return _T
 
 
@@ -220,6 +223,61 @@ class Summary(unittest.TestCase):
         self.assertEqual(S2.verdicts(cells)["U1"]["verdict"], "PASS")
         cells[0]["e_tok_max"] = repr(float(np.nextafter(2.0 ** -9, 1)))
         v = S2.verdicts(cells)["U1"]; self.assertEqual(v["verdict"], "FAIL"); self.assertEqual(v["n_fail_cells"], 1)
+
+    # Negative or inconsistent absolute errors (review of PR #159): refused, not read as "under the bar".
+    def test_negative_e_tok_max(self):
+        cells = fake_cells(); cells[3]["e_tok_max"] = "-1"; cells[3]["e_tok_med"] = "-2"; self.refuse(fake_meta(), cells)
+    def test_negative_e_tok_med(self):
+        cells = fake_cells(); cells[4]["e_tok_med"] = "-0.00001"; self.refuse(fake_meta(), cells)
+    def test_negative_e_cum_max(self):
+        cells = fake_cells(); cells[5]["e_cum_max"] = "-0.5"; self.refuse(fake_meta(), cells)
+    def test_median_above_max(self):
+        cells = fake_cells(); cells[6]["e_tok_med"] = "0.001"; self.refuse(fake_meta(), cells)
+    def test_negative_zero_and_equal_median_accepted(self):
+        cells = fake_cells(); cells[8]["e_tok_max"] = "0.0"; cells[8]["e_tok_med"] = "-0.0"; cells[9]["e_tok_med"] = cells[9]["e_tok_max"]
+        self.assertEqual(S2.validate(fake_meta(), cells, fixture=False), "COMPLETE")
+
+
+COMMITTED = HERE / "runs" / "eval"
+
+
+class CommittedGrid(unittest.TestCase):
+    """Hostile edits of the committed 92,160-row cells.csv.gz (registered grid shape), as in the PR #159 review."""
+    @classmethod
+    def setUpClass(cls):
+        cls.meta = S2.rd_meta(COMMITTED / "eval-meta.json"); cls.cells = S2.rd(COMMITTED / "cells.csv.gz")
+
+    def copy(self): return [dict(c) for c in self.cells]
+
+    def test_committed_control(self):
+        cells = self.copy(); self.assertEqual(S2.validate(self.meta, cells, fixture=False), "COMPLETE")
+        v = S2.verdicts(cells)
+        self.assertEqual({a: v[a]["verdict"] for a in R.ARMS}, dict(U1="FAIL", U2="FAIL", U3="FAIL", U4="PASS"))
+        self.assertEqual(v["U3"]["n_fail_cells"], 815)
+
+    def test_negated_u3_failures_refused(self):
+        cells = self.copy(); n = 0
+        for c in cells:
+            if c["arm"] == "U3" and float(c["e_tok_max"]) > 2.0 ** -9: c["e_tok_max"] = repr(-float(c["e_tok_max"])); n += 1
+        self.assertEqual(n, 815)
+        # without the sign check these rows read as under the bar and U3 (hence H) would flip to PASS
+        self.assertEqual(S2.verdicts(cells)["U3"]["verdict"], "PASS")
+        with self.assertRaises(SU.Incomplete): S2.validate(self.meta, cells, fixture=False)
+
+    def test_single_u4_minus_one_refused(self):
+        cells = self.copy(); c = next(c for c in cells if c["arm"] == "U4" and c["rejects"] == "0"); c["e_tok_max"] = "-1"
+        with self.assertRaises(SU.Incomplete): S2.validate(self.meta, cells, fixture=False)
+
+    def test_truncated_files_refused_cleanly(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d); raw = (COMMITTED / "cells.csv.gz").read_bytes(); mt = (COMMITTED / "eval-meta.json").read_bytes()
+            (d / "cells.csv.gz").write_bytes(raw[: len(raw) // 2]); (d / "eval-meta.json").write_bytes(mt)
+            with self.assertRaises(SU.Incomplete): S2.main(d)
+            (d / "cells.csv.gz").write_bytes(raw); (d / "eval-meta.json").write_bytes(mt[: len(mt) // 2])
+            with self.assertRaises(SU.Incomplete): S2.main(d)
+            (d / "eval-meta.json").unlink()
+            with self.assertRaises(SU.Incomplete): S2.main(d)
+            self.assertFalse((d / "summary.json").exists() or (d / "summary.md").exists())
 
 
 if __name__ == "__main__":

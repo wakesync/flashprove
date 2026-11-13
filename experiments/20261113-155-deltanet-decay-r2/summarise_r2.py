@@ -5,10 +5,11 @@ usage: summarise_r2.py <eval_dir> [--fixture]   -> <eval_dir>/summary.json, summ
 Before any verdict the per-cell file is checked against the registered suite (PR #146's suite.py): eval-meta.json
 must name exactly the 48 registered DeltaNet layers, the 10 registered prompts and the registered bar, and
 cells.csv.gz must hold exactly one row per (arm, layer, head, prompt), with the registered token count, an integer
-reject count (only U4 can reject) and finite e_tok / e_cum unless the cell has a rejected lookup. Anything else exits
-2 with nothing written. The debug fixture (--fixture) is checked for internal consistency only and is never a
+reject count (only U4 can reject) and, unless the cell has a rejected lookup, finite nonnegative e_tok_max, e_tok_med
+and e_cum_max (these are absolute differences) with e_tok_med <= e_tok_max. A missing, truncated or unparsable
+eval-meta.json or cells.csv.gz is refused the same way. Anything else exits 2 with nothing written. The debug fixture (--fixture) is checked for internal consistency only and is never a
 registered verdict."""
-import csv, gzip, json, sys
+import csv, gzip, json, sys, zlib
 from collections import Counter, defaultdict
 from pathlib import Path
 import numpy as np
@@ -24,7 +25,19 @@ need = SU.need
 
 
 def rd(p):
-    with gzip.open(p, "rt") as fh: return list(csv.DictReader(fh))
+    try:
+        with gzip.open(p, "rt") as fh: return list(csv.DictReader(fh))
+    except (OSError, EOFError, UnicodeDecodeError, csv.Error, zlib.error) as e:
+        raise SU.Incomplete(f"{Path(p).name}: unreadable ({type(e).__name__}: {e})")
+
+
+def rd_meta(p):
+    try:
+        m = json.loads(Path(p).read_text())
+    except (OSError, UnicodeDecodeError, ValueError) as e:
+        raise SU.Incomplete(f"{Path(p).name}: unreadable ({type(e).__name__}: {e})")
+    need(isinstance(m, dict), f"{Path(p).name}: not a JSON object")
+    return m
 
 
 def st(v):
@@ -62,6 +75,8 @@ def validate(meta, cells, fixture=False):
         if r == 0:
             for k in ("e_tok_max", "e_tok_med", "e_cum_max"):
                 need(SU.finite(c[k]), f"cells.csv.gz: non-finite {k}={c[k]!r} in a cell without a rejected lookup ({where})")
+                need(float(c[k]) >= 0, f"cells.csv.gz: negative {k}={c[k]!r} (an absolute error) in a cell without a rejected lookup ({where})")
+            need(float(c["e_tok_med"]) <= float(c["e_tok_max"]), f"cells.csv.gz: e_tok_med={c['e_tok_med']!r} > e_tok_max={c['e_tok_max']!r} ({where})")
     return "FIXTURE (debug, not a registered verdict)" if fixture else "COMPLETE"
 
 
@@ -92,7 +107,7 @@ def verdicts(cells):
 
 
 def main(d, fixture=False):
-    d = Path(d); meta = json.loads((d / "eval-meta.json").read_text()); cells = rd(d / "cells.csv.gz")
+    d = Path(d); meta = rd_meta(d / "eval-meta.json"); cells = rd(d / "cells.csv.gz")
     cov = validate(meta, cells, fixture)
     arms = verdicts(cells)
     H = None if fixture else bool(arms["U3"]["verdict"] == "PASS" and arms["U1"]["verdict"] == "FAIL" and arms["U2"]["verdict"] == "FAIL")
