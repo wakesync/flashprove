@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "case": "wrong_checkpoint",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    },
+    {
+      "case": "missing_checkpoint",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    },
+    {
+      "case": "wrong_arm",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    },
+    {
+      "case": "missing_input_sha256",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    },
+    {
+      "case": "wrong_digest",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    },
+    {
+      "case": "wrong_status",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    },
+    {
+      "case": "wrong_pooled_n",
+      "comparison_count": 494,
+      "exit_code": 0,
+      "mismatch_count": 0,
+      "output_status": "MATCH",
+      "output_written": true,
+      "stderr": "",
+      "stdout": "MATCH: 494 comparisons, 0 mismatches"
+    }
+  ],
+  "code_head": "426c71521e227b67275c27996c1677daa69639b5",
+  "phase": "before-review-fix"
+}
