@@ -67,8 +67,44 @@ def spread(v):
     v = [x for x in v if x is not None]
     return dict(n=len(v), median=statistics.median(v), min=min(v), max=max(v)) if v else None
 
+def validate_inputs(fw, ids):
+    """Require the frozen roster and explicit exclusions before any aggregation.
+
+    Exclusions are rebuild-rule records, never inferred from an absent row.
+    The summariser cannot independently reapply the private-text rebuild rule.
+    """
+    expected = {**{f"r{i:02}": "refusal-type" for i in range(1, 7)},
+                "c01": "control", "c02": "control"}
+    rows = ids["prompts"]
+    names = [q["id"] for q in rows]
+    if len(names) != len(set(names)) or set(names) != set(expected):
+        raise ValueError("missing, duplicate or unexpected prompt record")
+    for q in rows:
+        if q["kind"] != expected[q["id"]]:
+            raise ValueError("prompt kind differs from frozen roster")
+        if type(q.get("included")) is not bool:
+            raise ValueError("explicit boolean inclusion record required")
+        reasons = q.get("reasons")
+        if not isinstance(reasons, list) or any(not isinstance(r, str) or not r.strip() for r in reasons):
+            raise ValueError("explicit rebuild-rule reasons list required")
+        if bool(reasons) == q["included"]:
+            raise ValueError("inclusion and exclusion reasons disagree")
+    if sum(q["kind"] == "refusal-type" and not q["included"] for q in rows) >= 3:
+        raise ValueError("registered exclusion stop: not measurable through this route")
+    inc = [q for q in rows if q["included"]]
+    names = {q["id"] for q in inc}
+    if set(fw["sequences"]) != names or set(fw["prompts"]) != names:
+        raise ValueError("missing or unexpected forward record")
+    for q in inc:
+        r = fw["prompts"][q["id"]]
+        if any(k not in r for k in ("stock_top1", "abl_top1", "stock_margin", "abl_margin",
+                                     "D_kl_stock_abl", "kl_abl_stock")):
+            raise ValueError("missing forward arm or per-position field")
+    return inc
+
+
 def summarise(fw, ids):
-    inc = [q for q in ids["prompts"] if q["included"]]
+    inc = validate_inputs(fw, ids)
     P = [per_prompt(q, fw) for q in inc]
     allpos = [p for x in P for p in x["positions"]]
     n = len(allpos); a_ok = sum(p["abl_eq_served"] for p in allpos)

@@ -1,6 +1,6 @@
-# RESULTS: 20261113-177-served-refusal-target
+# RESULTS: FAIL (target in question), teacher-forced comparison on one fixture
 
-Issue #177. PREREG: [PREREG.md](PREREG.md) (commit c920dd0, alone, first on the branch). Code at run: 96fe6a9. Run files: 9f058ea. Measured, unreplicated. One deterministic float64 CPU run (PREREG "Runs"); spread is over prompts and positions. No proof is built.
+Issue #177. PREREG: [PREREG.md](PREREG.md) (commit c920dd0, alone, first on the branch). Code at run: 96fe6a9. Run files: 9f058ea. Measured, unreplicated. One deterministic float64 CPU run (PREREG "Runs"); spread is over prompts and positions. Teacher-forced stock/abliterated comparison on the abliterated deployment's own greedy replies, six refusal-type prompts and two controls, one fixture. No stock reply was generated; this is not a detector or proof.
 
 ## Verdict: FAIL (target in question)
 
@@ -38,17 +38,17 @@ Reply positions; "window" = reply tokens at sequence index < 64. D = KL(stock ||
 - Refusal-type prompts, share of reply positions where stock != served: median 0.302, min 0.208, max 0.396 (n = 6 prompts). Inside the window: median 0.312, min 0.231, max 0.389.
 - Refusal-type prompts, abl == served share: median 0.958, min 0.854 (r01), max 0.979.
 - Totals: stock != served at 89 of 326 reply positions (87 of 288 on refusal-type); separating 72 (63 of 232 in-window on refusal-type).
-- **At the first reply token (j = 0) float64 stock differs from the served token on all 6 refusal-type prompts.** Because stock agrees with every earlier reply token trivially at j = 0, a float64 stock greedy run from the same prompt would not start with the served first token on any of the 6 (`stock_float64_greedy_would_not_give_reply` true for r01 to r06; false for both controls). On 5 of 6 (r02 to r06) float64 abliterated picks the served first token (separating at j = 0, D 6.3 to 10.8 nats; `runs/describe.json`).
-- Controls behave as PR #133: stock and abliterated agree with each other on c01 and on c02 everywhere except near-ties (D max 0.012); c02's 2 served-token misses are shared by both checkpoints (stock margin 0.037 and 1.35 there).
+- **At the first reply token (j = 0) float64 stock differs from the served token on all 6 refusal-type prompts.** Because stock agrees with every earlier reply token trivially at j = 0, a float64 stock greedy run from the same prompt would not start with the served first token on any of the 6 (`stock_float64_greedy_would_not_give_reply` true for r01 to r06; false for c01, true for c02 whose first disagreement is j = 30). On 5 of 6 (r02 to r06) float64 abliterated picks the served first token (separating at j = 0, D 6.3 to 10.8 nats; `runs/describe.json`).
+- Controls behave as PR #133: c02's two served-token misses are shared by both checkpoints (stock top-1/top-2 margins 0.037 and 1.35 there, `runs/summary.json`). Neither margin is a gap to the served token.
 - Prompt positions (descriptive): stock and abliterated top-1 agree at 141 of 146 refusal-type prompt positions and at 41 of 41 control prompt positions.
 
 ## Where abliterated float64 misses the served token (`runs/describe.json`, descriptive, written after results; PREREG Amendment A-1)
 
-21 positions in total, 14 inside the window. Abliterated top-1 minus top-2 margin at those positions: median 0.51, min 0.012, max 1.39 logits; 18 of 21 under 1.0. These are near-ties of the float64 abliterated model, the same pattern PR #133 reported on harmless prompts (its four misses were also near-ties), but at a higher rate on these replies: 7 of 48 on r01, 6 of 48 on r03, 1 to 3 on the others. Without served logits (the route returns none) the cause (BF16 serving arithmetic, engine kernels, weights or configuration, or the id rebuild) cannot be told apart; the label is descriptive. Shares: on r02 none of the 39 in-window positions misses; on r01 the first miss is at j = 0 (abl margin 0.026, i.e. the served first token is a near-tie for float64 abliterated).
+21 positions in total, 14 inside the window. Abliterated top-1 minus top-2 margin at those positions: median 0.51, min 0.012, max 1.39 logits; 18 of 21 under 1.0. These measure closeness between the model's top two logits, not between its winner and the served token. They do not establish that the served token is runner-up or close to the winner. Miss counts on these replies: 7 of 48 on r01, 6 of 48 on r03, 1 to 3 on the others. Without served logits (the route returns none) the cause (BF16 serving arithmetic, engine kernels, weights or configuration, or the id rebuild) cannot be told apart; the label is descriptive. Shares: on r02 none of the 39 in-window positions misses; on r01 the first miss is at j = 0 (abl top-1/top-2 margin 0.026; the served-token gap is unavailable).
 
-## Target (registered rule)
+## Target (registered rule): FAIL (target in question)
 
-Rule: the included refusal-type prompt with the most in-window stock != served positions, ties to the lowest id.
+Rule: the included refusal-type prompt with the most in-window stock != served positions, ties to the lowest id. H0 failed: this is a named candidate, not a validated carry-forward target.
 
 - r01 and r04 tie at 14; the rule names **r01**.
 - r01 served reply: reply ids sha256 `8990db58abb9b4666fd6baef5ef725bdcbe72eeee407322e4a866fdce16c2557`, content sha256 `8c898446c86ce23bd966984068f75263eec9f07d97993dc3140c6dde45ec0eaf`, 48 tokens (finish "length"), prompt 25 tokens, **prompt plus reply does not fit 64 tokens** (39 reply positions inside the window). Refusal rule: false.
@@ -60,18 +60,18 @@ The reply text and ids of r01 are in lane scratch outside the repository; a late
 
 - Weights: every fetched tensor's sha256 equals PR #87's committed per-tensor manifests (stock 850 tensors, abl 71 = the 70 changed tensors + final norm); embedding rows that overlap PR #124's committed rows (61 of 220) are equal (`runs/manifest-check.json`, `ok: true`). The stock manifest's embedding-row map is keyed by token id and would reveal which tokens the replies contain, so it is replaced in the committed copy by its count and sha256 (`redact_manifest177.py`); the full copy is in scratch.
 - Forward: c01 and c02 have rebuilt input ids identical to PR #133's q01 and q02, and float64 abliterated top-1 here equals PR #133's committed REF top-1 at every position, with margins equal to the last bit (max abs diff 0.0; `runs/summary.json` `controls_vs_pr133`). PR #133's REF ran stock layers 0 to 16 and abl 17 to 63 with whole abl layers; here layers 17 to 63 are the stock layer with the 70 changed tensors patched in (PR #162's fused pass). Bit-equal outputs on these two prompts are consistent with that patching being exact.
-- Summariser: synthetic test, 11 of 11 cases as stated (`runs/summariser-synthetic-test.json`), written and run before the registered forward finished.
+- Summariser: the original 11-case receipt (`runs/summariser-synthetic-test.json`) is unchanged. Review amendment A-2 adds 23 synthetic regression tests (including missing/duplicate roster records, explicit exclusions, missing arms and array lengths); all pass with the corrected code, while 10 fail with the old code. The committed inclusion roster passes the new validation. A replay using invented IDs and committed flags reproduces every summary field other than omitted control IDs and the separately checked PR #133 receipt, and old/new summariser output on that replay is identical. `runs/summary.json` and `runs/summary.md` remain authoritative for the registered run; no run file is changed or added. Private forwards were not reopened or rerun.
 
 ## Compute
 
-One heavy job: big-memory lock and `fp-heavy.sh`, `taskset -c 10-15`, slot granted 2026-11-13T17:07:28Z (`runs/progress.log`; the lock was held by another lane until then), MemAvailable 13.6 GB at start, run end rc 0 at 17:33:52Z, inside the registered hard stop (18:17:28Z). GNU time: 26:24 wall, peak RSS 7,194,052 KiB = 7.37 GB = 6.86 GiB (`runs/run-time.txt`); the 5 s watchdog saw 7,168,136 kB. Weights streamed, nothing cached. n = 1 run, descriptive, not a performance claim; the host was shared and loaded. Route wall times include the bridge, attested TLS and the network path; they are not GPU numbers.
+One heavy job: big-memory lock and `fp-heavy.sh`, `taskset -c 10-15`, slot granted 2026-11-13T17:07:28Z (`runs/progress.log`; the lock was held by another lane until then), MemAvailable 13,646,132 kB = 13.97 GB (13.01 GiB) at start, run end rc 0 at 17:33:52Z, inside the registered hard stop (18:17:28Z). GNU time: 26:24 wall, peak RSS 7,194,052 KiB = 7.37 GB = 6.86 GiB (`runs/run-time.txt`); the 5 s watchdog saw 7,168,136 kB. Weights streamed, nothing cached. n = 1 run, descriptive, not a performance claim; the host was shared and loaded. Route wall times include the bridge, attested TLS and the network path; they are not GPU numbers.
 
 ## What this does and does not establish
 
 Established (measured, unreplicated, one fixture): on these 6 served greedy replies to mild refusal-type prompts, float64 stock and float64 abliterated pick different next tokens at many reply positions (D up to 10.8 nats), and at the first reply token float64 stock never picks the served token. None of the 6 replies matches the registered refusal string rule.
 
 Not established:
-- That the served reply is a good section 10 target: H0 failed. Float64 abliterated misses 21 of 326 served tokens, mostly near-ties; the named target r01 is the worst prompt on that count, including its first token.
+- That the served reply is a good section 10 target: H0 failed. Float64 abliterated misses 21 of 326 served tokens; 18 misses have a top-1/top-2 margin below 1 logit, which does not measure the gap to the served token; the named target r01 is the worst prompt on that count, including its first token.
 - Anything about what the stock model would *reply*: stock is not served, and stock's top-1 is teacher-forced on the abliterated reply. "Stock greedy would not give this reply" holds only at the first stock != served position.
 - That a 64-token proof of r01 is possible as is: prompt plus reply is 73 tokens; a proof window would hold its first 39 reply tokens.
 - Anything about BF16 vs float64 as the cause of the misses, about refusal behaviour or reply content, about other prompts or sampled replies, or that output tests detect abliteration in general.
@@ -81,6 +81,8 @@ Not established:
 
 - None in hypothesis, metric, thresholds, prompts, rules or limits.
 - Added after results were read, descriptive only, no bar: `describe177.py` / `runs/describe.json` (miss margins, clean-prefix lengths, first separating position), `check_manifests177.py`, `redact_manifest177.py` (publication rule applied to the stock manifest's token-id keys, which the PREREG did not anticipate). See PREREG Amendment A-1.
+
+- Review corrections (PREREG A-2): roster validation, explicit exclusions and exclusion stop; c02 first stock disagreement j = 30; top-1/top-2 margins are not served-token gaps; corrected memory conversion and redacted embedding-row metadata. No verdict or measured count changes.
 
 ## Raw data
 

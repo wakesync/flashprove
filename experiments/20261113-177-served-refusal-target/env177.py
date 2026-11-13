@@ -20,7 +20,7 @@ def timev(p):
 def man(which):
     p = R / f"manifest-{which}.json"
     if not p.exists(): return None
-    m = json.load(open(p)); return dict(repo=m["repo"], rev=m["rev"], tensors=len(m["tensors"]), embedding_rows=len(m["embedding_rows"]))
+    m = json.load(open(p)); return dict(repo=m["repo"], rev=m["rev"], tensors=len(m["tensors"]), embedding_rows=m.get("embedding_rows_redacted", {}).get("count", len(m["embedding_rows"])))
 
 base, prereg, code = sys.argv[1:4]
 env = {
