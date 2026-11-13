@@ -1,0 +1,10 @@
+{
+ "ckpt.npz": {
+  "sha256": "22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009",
+  "bytes": 183551075
+ },
+ "x16.npz": {
+  "sha256": "67dde0e845de248c26838448b1df50bd1b6ed8eb2b1b03ddb40cd9feff3c53d5",
+  "bytes": 183551023
+ }
+}
