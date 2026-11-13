@@ -43,3 +43,6 @@ In this repo: PR #139 (this measurement on 9 of 10 prompts: FAIL (mixed), pooled
 
 ## Amendments
 (empty at registration)
+
+### A-1 (2026-11-13, after review of PR #162; clarification only)
+The introduction says p03's XS18 E "reaches 2.8e-3 (the largest E of PR #124)". That figure is the stock checkpoint's maximum only: on p03, PR #124's committed XS18 KL has maximum 0.00278892 on stock and 0.00565722 on abliterated. The registered metric uses E = max(E_stock, E_abl) per position (Metric section), so the largest E the analysis uses on p03 is 5.66e-3, and RESULTS reports it (E max 5.7e-3). Reason: a reviewer (PR #162 review, REQUEST CHANGES, nonblocking item) pointed out that the introductory figure could be read as the E the analysis used. This amendment changes no rule, threshold, metric, gate, code or number; the text above is left as registered.
