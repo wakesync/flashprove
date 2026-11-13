@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-rcl-zero/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-rcl-zero/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-rcl-zero/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: policy-rcl\n",
+  "stderr": "",
+  "repetition": 4,
+  "case": "experts-rcl-zero",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "policy-rcl",
+  "observed": "policy-rcl",
+  "matches": true
+}

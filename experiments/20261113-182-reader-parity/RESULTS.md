@@ -1,69 +1,47 @@
-# RESULTS: 20261113-182-reader-parity
+# CPU reader dense table-line parity, issue #182
 
-## Verdict: PARTIAL, blocked before compilation
+## Verdict: PARTIAL against the full PREREG
 
-This is an **untested patch proposal**, not evidence that issue #182 is resolved.
-PREREG.md was the first and only file in commit `3d9321c`; implementation followed it.
-The first baseline release build was refused by the existing `prover/tests/unit.sh`
-output-directory safety check: an ancestor of the requested output directory was writable
-by group/others and had no sticky bit. The script explicitly reported that nothing ran.
-The lane's instruction forbids rerunning a refused command in another form, so the lane
-neither relocated this build nor invoked a compiler directly, changed directory permissions,
-or altered the safety check. This is an environment/safety blocker, not a verifier-rule blocker.
+Release-only evidence supports the narrow reader change, but the registered milestone is **not PASS**. The unchanged unit harness provides no sanitizer-build option, so the registered UBSan arms and their controls were **not run**. The first release series also failed its runner expectations; a separately labelled supplementary series diagnoses and corrects runner mistakes without deleting or overwriting any first-series output. Neither series makes a proof.
 
-The refusal is retained in `runs/build/before-release-parameter_file_tables_test.txt`.
-`runs/build/attempt.json` records the requested command and exit categories. Host-specific
-paths in the text receipt are replaced by `<REPO>` and `<WORKSPACE>`; no outcome text is changed.
-The unit script returned status 2; the orchestration process stopped with status 1.
-There are **zero compiled binaries and zero executed registered cases**. Binary hashes,
-runtime variance, and the required pre-change reproduction are consequently unavailable,
-not zero-valued successful measurements. Source SHA-256 values are in `runs/source-hashes.json`.
+The initial refusal remains byte-identical under `runs/build/`. The dated output-directory amendment was committed alone before the continuation builds. Seven release binaries were built successfully through the unchanged repository harnesses (six reader/control binaries via `prover/tests/unit.sh`, one unmodified verifier via `verifier/build.sh`) into a private output directory created by `mktemp -d`. No permissions, harness checks, compiler selection, digest algorithm or verifier source changed.
 
-## Proposed change (static reading only)
+## Measured counts and variance
 
-`prover/common/parameter_file.h` replaces only the experts-only table-line rule in
-`limit_missed()` with a zero-sigmoid predicate. At NE 0 with digest lines present, every
-`tsig0` through `tsig7` value must be zero. The predicate is vacuous with experts or without
-lines. The parser's all-or-none group, order, duplicates and numeric encoding logic is
-unchanged. All other limit rules, including rcl/gcl and absent classes/kinds, are unchanged.
-This describes source intent, **not demonstrated behavior**.
+Both series contain **33 fixtures** (21 dense, 12 experts-present), five repetitions, and three observations per fixture: baseline reader, patched reader, and verifier planning. Each series therefore has **330 reader calls and 165 verifier calls, 495 total**. Readers alternate before/after ordering by repetition; cases are lexical. No completed execution is excluded.
 
-`prover/tests/parameter_file_tables_test.cpp` is an uncompiled CPU-only probe that reports
-parse and limit outcomes separately. It is not yet an implemented synthetic regression suite.
-No verifier source or digest algorithm was changed. Historical experiment files were not changed.
+- First series, `runs/continuation-matrix/`: **25 expectation mismatches**, five per repetition. Median 5, population SD 0, min/max 5/5 over n=5. The four existing-test invocations all fail usage because this lane omitted their required policy-file argument; no regression assertion executes in those four calls.
+- Supplementary series, `runs/supplementary-matrix/`: **0 expectation mismatches**, zero per repetition. Median 0, population SD 0, min/max 0/0 over n=5. Four separately labelled corrected existing-test invocations pass (two tests by two reader arms).
+- Combined execution accounting: **660 reader probes, 330 request-planning calls, eight existing-test invocations**, four failing usage and four passing. Two array-planning calls and two layout-packer calls are fixture construction, not additional matrix trials. There are no UBSan binaries or executions.
+- Commands, exact rejection text and process exits are in per-call JSON; source and binary SHA-256 are in `runs/continuation-source-hashes.json` and `runs/continuation-build/hashes.json`. Fixture hashes are recorded separately for each series. No timing/performance claim is made.
 
-## Required outcome matrix: not run
+See [MATRIX.md](MATRIX.md) for all 33 before/after/verifier rows. All five repetitions agree on category and exit within each series.
 
-| Registered category | CPU parse | CPU admission | cp_verify planning/standard form |
-| --- | --- | --- | --- |
-| Dense own-digest form, before and after | not run | not run | not run |
-| Dense no digest lines | not run | not run | not run |
-| Partial, reordered and duplicate digest words | not run | not run | not run |
-| Dense nonzero sigmoid, each word position | not run | not run | not run |
-| Changed SiLU, rotary and softmax digest words | not run | not run | not run |
-| Invalid word encoding | not run | not run | not run |
-| Dense rcl/gcl and absent-class/absent-kind | not run | not run | not run |
-| Experts-present forms and malformed controls | not run | not run | not run |
-| Existing one_bits/one_place regression tests | not run | not run | not applicable |
+## Why the first series does not pass
 
-Both release and UBSan runtime coverage are missing. This fails to establish the preregistered
-acceptance threshold. There is no PASS, no claim that malformed groups remain rejected at runtime,
-and no claim that experts-present outcomes have been preserved experimentally.
+Five mismatches recur in each repetition:
 
-## Boundary and limitations
+1. Dense valid and dense no-digests verifier calls return `plan-layout`, not the registered standard-form outcomes. The runner combined the layout packer's standard error with standard output. Its diagnostic text landed inside a layout line. This is a fixture-generation error, not verifier rejection of the digest contract.
+2. Dense and experts invalid word encodings are rejected by the verifier as `policy-tables`, not the runner's expected `policy-line-form`. Both readers correctly reject them during parsing as `policy-line-form`. The PREREG requires parse failure, not identical reader/verifier error names.
+3. The baseline absent-kind fixture with digest lines returns `policy-tables` before reaching the absent-kind limit. The patched reader and verifier return `header-absent-kind`. Both versions reject it; no malformed file becomes admissible.
 
-The reader does not recompute table hashes. Main's verifier, not this proposed reader predicate,
-compares its public tables to supplied digests and enforces table-digests as a standard-form
-condition. The intended difference between parseable no-digest files and standard-form files
-must still be measured, as must rejection of syntactically admitted incorrect digests.
-No dense proof, producer-path support, converter behavior, model forward pass, key production,
-cp_commit/cp_prove execution or Qwen model support is established. No performance result exists.
+The supplementary runner separates standard output/error, supplies the existing tests' documented argument, and corrects only those three expected diagnostic tags. It writes a new directory, including new full fixtures. The original inputs, expectations, output and summary remain unchanged. This is an explicitly labelled later rerun under the PREREG's rerun rule, not retroactive replacement of the registered first result or relaxation of the acceptance threshold.
 
-## Deviations and next step
+## What the release observations establish
 
-The preregistered suite, fixture generation, release/UBSan builds and repetitions were not
-completed because the first build was refused. Only the source proposal and probe are delivered.
-A separately authorized continuation needs a safe output location accepted by the existing
-unit harness, then the complete registered matrix and source/binary receipts before this draft
-can be considered for review or merge. Do not treat documentation describing the older reader
-as superseded by a measured result from this partial lane.
+- All five baseline valid-dense probes parse but reject admission as `policy-tables`. All five patched probes parse and admit. In the supplementary series the unchanged verifier matches the dense public tables and reports standard form met (planning exit 4, not proof success).
+- Dense no-digests parses and is admitted by both readers. Supplementary verifier planning reports only `table-digests` unmet. Parsing without digests is deliberately not globally banned.
+- Partial, reordered, duplicate and out-of-range words fail parsing in both readers for dense and experts kits. Dense nonzero sigmoid is rejected at every one of its eight positions. Dense rcl/gcl and absent-class/absent-kind cases remain rejected.
+- Changed dense SiLU, rotary and softmax words are syntactically admitted by the patched reader but rejected by the unchanged verifier as `table-digest-silu`, `table-digest-rope`, and `table-digest-exp`. This occurs in both series, before any layout acceptance.
+- All 12 experts-present cases have identical before/after reader categories and exits in every repetition, including valid/no-digest, four malformed forms, four changed table digests and two invalid clamp values. Valid experts includes the existing valid clamps.
+
+## Boundary and exclusions
+
+The reader does syntax and limit admission only. It does **not recompute table hashes**. Actual table generation/hash comparison, quantization-scale and layout checks, and the complete standard-form decision remain in `cp_verify`. No cryptographic validation is attributed to the reader. None of these planning calls consumes a key or proof. No dense key, dense proof, Qwen forward, conversion, GPU build, `cp_commit`, `cp_prove`, model weights, serving or attestation call occurred. The full dense producer path remains unestablished; other producer-only limits are outside this patch.
+
+## Deviations, limits and next step
+
+- UBSan is not run: the unchanged harness has no supported interface for the registered sanitizer flags. The authorization explicitly forbids direct compilation or altering/bypassing that harness. No substitute sanitizer mode is claimed.
+- The continuation uses cores 12-13 as explicitly directed, rather than the first lane's 10-11. Every build/test has a 4 GiB address-space cap and 115/120-second soft/hard CPU limit. Full build and matrix batches use the shared heavy-job gate. The continuation's last test completed 299.3883728981018 seconds after its first build, inside its 25-minute run budget and before the original 21:40Z hard stop. The separately authorized continuation starts a new run budget after the first lane's refused, zero-compilation attempt; this does not make the elapsed gap between lanes a compliant original run.
+- First-series runner mistakes and their corrected supplementary rerun are disclosed above. The full PREREG is not declared satisfied.
+- Measured, unreplicated. The draft needs a two-family review pair and a separately authorized plan for UBSan support before the milestone can be declared complete. No historical experiment receipt has been edited.

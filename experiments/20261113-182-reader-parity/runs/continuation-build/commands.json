@@ -1,0 +1,37 @@
+[
+  {
+    "label": "before-release-parameter_file_tables_test",
+    "command": "bash prover/tests/unit.sh build <PRIVATE_BUILD>/baseline/parameter_file_tables_test.cpp <PRIVATE_BUILD>/before-release",
+    "exit": 0
+  },
+  {
+    "label": "after-release-parameter_file_tables_test",
+    "command": "bash prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <PRIVATE_BUILD>/after-release",
+    "exit": 0
+  },
+  {
+    "label": "before-release-parameter_file_one_bits_test",
+    "command": "bash prover/tests/unit.sh build <PRIVATE_BUILD>/baseline/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/before-release",
+    "exit": 0
+  },
+  {
+    "label": "after-release-parameter_file_one_bits_test",
+    "command": "bash prover/tests/unit.sh build tests/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/after-release",
+    "exit": 0
+  },
+  {
+    "label": "before-release-parameter_file_one_place_test",
+    "command": "bash prover/tests/unit.sh build <PRIVATE_BUILD>/baseline/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/before-release",
+    "exit": 0
+  },
+  {
+    "label": "after-release-parameter_file_one_place_test",
+    "command": "bash prover/tests/unit.sh build tests/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/after-release",
+    "exit": 0
+  },
+  {
+    "label": "verifier-release",
+    "command": "bash verifier/build.sh - <PRIVATE_BUILD>/verifier",
+    "exit": 0
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-header-absent-class/policy.txt",
+  "exit": 2,
+  "output": "parse: ok\nadmission: header-absent-class: line 58: hr must be 0\n",
+  "stderr": "",
+  "repetition": 2,
+  "case": "dense-header-absent-class",
+  "arm": "before",
+  "mode": "release",
+  "expected": "header-absent-class",
+  "observed": "header-absent-class",
+  "matches": true
+}

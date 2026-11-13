@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/experts-changed-silu/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/experts-changed-silu/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/experts-changed-silu/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: table-digest-silu\n",
+  "repetition": 2,
+  "case": "experts-changed-silu",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "table-digest-silu",
+  "observed": "table-digest-silu",
+  "matches": true
+}

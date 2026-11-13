@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-rcl/policy.txt",
+  "exit": 2,
+  "output": "parse: ok\nadmission: policy-rcl: line 131: the line rcl needs a model with experts\n",
+  "stderr": "",
+  "repetition": 3,
+  "case": "dense-rcl",
+  "arm": "before",
+  "mode": "release",
+  "expected": "policy-rcl",
+  "observed": "policy-rcl",
+  "matches": true
+}

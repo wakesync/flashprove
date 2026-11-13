@@ -1,0 +1,21 @@
+{
+  "fixtures": 33,
+  "repetitions": 5,
+  "reader_calls": 330,
+  "verifier_calls": 165,
+  "controls": 4,
+  "control_failures": 0,
+  "mismatches_per_repetition": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "median": 0,
+  "population_sd": 0.0,
+  "min": 0,
+  "max": 0,
+  "UBSan": "NOT RUN: unchanged unit.sh offers no sanitizer flags interface",
+  "elapsed_since_first_build_seconds": 299.3883728981018
+}

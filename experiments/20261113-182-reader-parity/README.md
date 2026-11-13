@@ -1,31 +1,17 @@
-# CPU parameter-reader parity: blocked proposal
+# Host-reader dense table-line probe
 
-Part of #182. Read [RESULTS.md](RESULTS.md) first: **PARTIAL, no compiled or executed tests**.
+This directory tests a narrow parser/admission boundary, not a proof. `RESULTS.md` is PARTIAL: release evidence only, first-series runner errors preserved, a labelled supplementary series, and no UBSan run. `MATRIX.md` separates baseline admission, patched admission and verifier outcomes. The verifier alone recomputes and compares public tables and decides standard form; no reader-level cryptographic validation or full producer support is claimed.
 
-The proposed host-reader change admits dense table-line groups only when the sigmoid words
-are zero. It leaves all parsing and other admission rules untouched. This is source intent;
-no successful behavior is proved by this experiment. The unmodified verifier remains
-responsible for public-table recomputation and standard-form checks. Dense producer execution,
-proof validity and model support are outside scope and unestablished.
+## Inputs and derivation
 
-The first release build was refused by the unit harness's output-directory safety check.
-No number here represents a performance or verification measurement. The receipt records only
-that refusal. The registered matrix and UBSan checks were not run.
+Dense policies originate in merged experiment `20261113-156-dense-table-digests/runs/served/dense-files/routed-experts.dense-with-digests.policy.txt`. Experts policies/scales/layout come from `prover/tests/configurations/pinned_no_proof_of_work`. Dense scales retain the first `13 * L` 32-bit words. The unmodified verifier's `-plan arrays` and `prover/tools/pack_layout.py --arrays ... 17 4` construct the dense layout. The runners preserve every complete derived file, including the first-series malformed layout, and SHA-256 manifests. Mutations are deterministic; no seeds.
 
-## Continuation commands, not run successfully here
+## Reproduction
 
-From the repository root, after a separately authorized continuation has selected a safe
-output directory (all ancestors must satisfy the harness's ownership/permissions checks):
+From the repository root, create a private build directory using `mktemp -d`. Substitute that directory for `<PRIVATE_BUILD>` and the checkout for `<REPO>` in the committed JSON command arrays/text. Never place builds in an untrusted directory or bypass the repository's output-directory check. Use a 4 GiB address-space limit and two allocated CPU cores. No sanitizer build is supported by this unchanged harness.
 
-```text
-bash prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <safe-output>
-<safe-output>/parameter_file_tables_test <policy.txt>
-bash prover/tests/unit.sh both tests/parameter_file_one_bits_test.cpp <safe-output> examples/target_small_f2/policy.txt
-bash prover/tests/unit.sh both tests/parameter_file_one_place_test.cpp <safe-output> examples/target_small_f2/policy.txt
-```
+For each of `parameter_file_tables_test`, `parameter_file_one_bits_test`, and `parameter_file_one_place_test`, build the current source with `bash prover/tests/unit.sh build tests/NAME.cpp <PRIVATE_BUILD>/after-release`. For the before arm, obtain `prover/common/parameter_file.h` with `git show 59bff9a4608e0cc720d58d7c30823a8838fa43e4:prover/common/parameter_file.h`; place it as `parameter_file_baseline.h` beside copies of the three test sources whose one header include is changed to that basename. Invoke the same unchanged harness with those absolute source paths and `<PRIVATE_BUILD>/before-release`. Build the verifier using `bash verifier/build.sh - <PRIVATE_BUILD>/verifier`. All exact build invocations are in `runs/continuation-build/commands.json`; binary and source hashes accompany them.
 
-The probe emits parse and admission separately. Its exit codes are 0 (admitted), 1 (parse
-rejection), 2 (limit rejection), and 3 (usage/read failure). A subsequent lane must implement
-and retain the complete fixture suite, compare the pinned original reader against the patch,
-build UBSan variants, and run unmodified cp_verify planning calls. These commands alone do not
-reproduce the missing matrix and are not a complete regression runner.
+The executed matrix programs are `reader182b_matrix.py` and `reader182b_supplement.py`. They take checkout and private-build directory arguments, generate the fixtures, then perform five lexical repetitions with alternating reader order. They intentionally refuse to overwrite an existing results directory (`mkdir` without `exist_ok`). For reproduction, use copies with their `R` output constant changed to a fresh directory; do not overwrite the committed outputs. The first intentionally retains its documented mistakes, while the supplementary version separates streams and supplies the legacy-test argument. Adjust the budget-file reference to a new receipt with `first_build_epoch` set at your first build, `budget_seconds` 1500, and register your own wall-clock stop before running; the executed programs pin the original 21:40Z stop and are not an authorization to run after it. Alternatively replay their per-call JSON commands on the already committed fixture files, writing output to fresh files; do not count a replay as the registered run.
+
+Each reader command is `<PRIVATE_BUILD>/ARM-release/parameter_file_tables_test POLICY`. The verifier command is `<PRIVATE_BUILD>/verifier/cp_verify -plan request POLICY KL 0 -layout LAYOUT -prompt REQUEST -reply REPLY -q`. The four corrected legacy controls are `bash prover/tests/unit.sh run SOURCE <PRIVATE_BUILD>/ARM-release tests/configurations/pinned_no_proof_of_work/policy.txt`. Expected categories, exact commands and complete results are recorded independently in each series. Summarize expectation-mismatch counts across five repetitions using median, population SD, min and max; do not pool the two series or discard the first.

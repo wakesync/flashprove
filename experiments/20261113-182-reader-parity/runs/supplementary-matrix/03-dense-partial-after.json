@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/after-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-partial/policy.txt",
+  "exit": 1,
+  "output": "parse: policy-tables: line 163: this must be the line texp7\nadmission: not-run\n",
+  "stderr": "",
+  "repetition": 3,
+  "case": "dense-partial",
+  "arm": "after",
+  "mode": "release",
+  "expected": "parse:policy-tables",
+  "observed": "parse:policy-tables",
+  "matches": true
+}

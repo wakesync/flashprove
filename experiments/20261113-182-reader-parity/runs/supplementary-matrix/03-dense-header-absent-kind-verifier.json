@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-header-absent-kind/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-header-absent-kind/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-header-absent-kind/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: header-absent-kind\n",
+  "stderr": "",
+  "repetition": 3,
+  "case": "dense-header-absent-kind",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "header-absent-kind",
+  "observed": "header-absent-kind",
+  "matches": true
+}
