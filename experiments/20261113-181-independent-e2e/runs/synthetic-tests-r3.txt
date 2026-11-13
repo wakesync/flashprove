@@ -1,0 +1,20 @@
+test_all_per_position_arrays_lengths_and_T (__main__.ReaderTests.test_all_per_position_arrays_lengths_and_T) ... ok
+test_cli_rejection_no_output_and_hash_admission (__main__.ReaderTests.test_cli_rejection_no_output_and_hash_admission) ... ok
+test_determinism_missing_and_false (__main__.ReaderTests.test_determinism_missing_and_false) ... ok
+test_flip_recovered_from_ids (__main__.ReaderTests.test_flip_recovered_from_ids) ... ok
+test_head_missing_extra_duplicate_truncated (__main__.ReaderTests.test_head_missing_extra_duplicate_truncated) ... ok
+test_layer_missing_extra_duplicate_and_wrong_type (__main__.ReaderTests.test_layer_missing_extra_duplicate_and_wrong_type) ... ok
+test_median_sd_and_nearest_rank (__main__.ReaderTests.test_median_sd_and_nearest_rank) ... ok
+test_negative_kl_retained_at_registered_tolerance (__main__.ReaderTests.test_negative_kl_retained_at_registered_tolerance) ... ok
+test_nonfinite_json_and_duplicate_keys (__main__.ReaderTests.test_nonfinite_json_and_duplicate_keys) ... ok
+test_nullable_prompt_text_is_metadata_only (__main__.ReaderTests.test_nullable_prompt_text_is_metadata_only) ... ok
+test_positive_synthetic_and_shared_prefix (__main__.ReaderTests.test_positive_synthetic_and_shared_prefix) ... ok
+test_prompt_missing_extra_duplicate (__main__.ReaderTests.test_prompt_missing_extra_duplicate) ... ok
+test_sanity_and_guard (__main__.ReaderTests.test_sanity_and_guard) ... ok
+test_threshold_edges_inclusive_no_epsilon (__main__.ReaderTests.test_threshold_edges_inclusive_no_epsilon) ... ok
+test_token_flag_types_and_domains (__main__.ReaderTests.test_token_flag_types_and_domains) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.070s
+
+OK
