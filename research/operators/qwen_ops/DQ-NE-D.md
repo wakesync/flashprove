@@ -116,6 +116,32 @@ Classes used in the table:
 | 65 | verifier/tests/parameter_walk.py:33, 218 | the random walk sets `d = H * dh` | NEW (test harness keeps every walked file at dq = d; the walk never explores dq != d) |
 | 66 | integrations/vllm/integer_model/tests/chosen_model.py:227-231 | `d = H * dh` in the integer model's chosen shapes | OK for now (documents today's rule; Unknown whether the integer model itself assumes dq = d elsewhere) |
 
+### 1f. Residual-width uses and derived sizes (completeness)
+
+Rows 1-66 cover every use that touches the query side or the equality. The rows below cover the remaining reads of `d` (and of sizes derived from it) in the six files, plus two prover comments, so that the inventory is exhaustive for these files. Related uses are grouped by range.
+
+| # | file:line | what it says | class | the statement it protects |
+|---|---|---|---|---|
+| 67 | cp_verify.cpp:514 | `d % S2 || f % S2 || (p3 && fe % S2)` rejects (`shape-la`) | OK | S2 divides the stream's tensors (J = d, row 14) and the feed-forward ones; residual and hidden widths, never dq |
+| 68 | cp_verify.cpp:672 | MoE segment XR: n = d | OK | the router's rounding over its input, the normed stream `m` (width d); `XR`'s LINE is row 76 |
+| 69 | cp_verify.cpp:758-770 | weight kinds 3-11: g, u, gs, us, gr, ur, r have segs `2 nd d` (input d); dn and dnr have L = d (output d) | OK | every dense and MoE projection reads or writes the residual stream, width d; none reads attention's output |
+| 70 | cp_verify.cpp:1686-1727 | output head: offsets `oRa = 2 d`, `oD1 = 4 d`, `oD2`, `oE`, `feat = 4 d + ...`, `fillD = 2 d`; segments NF, NFH, CNF with n = d | OK | the final norm and the head read the residual stream, width d |
+| 71 | cp_verify.cpp:1869 | `SH = 2 d BCh BW + 1`, used by `W-HD0` and `three-digits` (`cp_verify.cpp:1871`, `:1874`) | OK | a logit is a sum over the normed stream, d products of a clamped cell and a weight; dq does not enter the head |
+| 72 | cp_verify.cpp:2092 | `muV = lNI + lPd + lt` (with `muH`, `muH2` from f, fe), `shape-product-layer` | OK | rounds of the norm product layer, over Pd (row 3) |
+| 73 | cp_verify.cpp:2177 | `muVH = lPd + lt`, `shape-product-layer-H` | OK | the head's norm product layer, over Pd |
+| 74 | vf_layers_plan.inc:71-72 | lamS's MoE terms: `2^(wm + clog2 d)`, `2^(le + clog2 d)`, `2^(le + clog2 fe)` | OK | the router and routed experts' panels, input d (rows 77-78); the dq term is row 41 |
+| 75 | vf_layers_check.inc:469 | LINE of CN1/CN2: sum over x < d of `a` or `m` | OK | the clamp of the normed stream, width d |
+| 76 | vf_layers_check.inc:486 | LINE of XR: sum over x < d of `xr` | OK | MoE router input, width d |
+| 77 | vf_layers_check.inc:677 | panel LR: A = `m`, ny = d | OK | router's product over the normed stream |
+| 78 | vf_layers_check.inc:707, 729-730 | token panels: XR sums `m` over x < d; routed G/U `tri(claim, d, ...)` over `xr` | OK | MoE inputs, width d |
+| 79 | vf_layers_check.inc:923 | MoE weight claim `wk = clog2(d)` for G/U (fe for D) | OK | matches rows 77-78's panel widths, as row 39 matches row 37 |
+| 80 | vf_layers_check.inc:953-954 | embedding claim: point over `lPd - G.z` bits | OK | the embedding writes the stream, width d (padded to Pd) |
+| 81 | vf_weights_layout.h:168-184 | units 3-13: `kk` or `x` of width d for g, u, dn, gs, us, gr, ur, dnr, r, embedding (12) and head (13) | OK | same sides as row 69; unit 2 (row 28) is the only unit with a dq group |
+| 82 | prover/common/parameter_file.h:378 | comment on the prover's `shape-la`: "and so (H + G) dh = d + G dh" | NEW (restate comment) | states the equality. The rule itself (`G dh` divisible by S2) does not rely on it; the comment's conclusion that S2 divides `(H + G) dh` then needs the verifier's own `nqk % S2` test (row 7), which the prover has no copy of. See N5 |
+| 83 | prover/common/parameter_file.h:469-475 | comment above `prover-only-f`: `prover_gemm()` adds products of signed bytes (at most 2^14 each) into 32-bit words, so a word holds 131,071 of them; "A word gets at most 2 d of them ... d = H dh is at most 63 * 128 by the rules on H, G and dh" | NEW (restate argument) | the int32 no-overflow argument of the prover's forward pass. Once the equality goes, the o projection (`gemm3(b.mT, d, dq)`, `prover/prover/forward.cuh:1551`) sums over dq, not d. See N5 |
+| 84 | prover/common/parameter_file.h:481-482 | "by the other rules d, G dh and (H + G) dh have at most six one-bits" | OK | does not use the equality: d's odd part is at most 32 (`:467`), G is a power of two, H + G <= 64 |
+| 85 | vf_attention_shape.h:157, 226, 327; vf_lookup_argument.h:66 and its uses | local `ShD d` (a shift's digit table) and `h.d()` (a forest's depth) | n/a | unrelated variables also named d; listed so that a grep for `\bd\b` is fully accounted for |
+
 The prover side was only grepped, not audited. Its weight code already sizes the o projection's input from `H * dh` (`prover/weights_blocks/block_weights.cuh:69`, `prover/weights_commitment/fold_source.cuh:35`, `prover/weights_commitment/kernels.cuh:113,123` via `S.dq`), so it looks dq-aware behind the two gates. That is not established here.
 
 ## 2. What each NEW row needs
@@ -128,7 +154,11 @@ The prover side was only grepped, not audited. Its weight code already sizes the
 
 **N4: the statement binds dq (rows 1, 10).** dq is a function of the statement words H and dh, which are words 7 and 9 of the statement, counting from 0 (`cp_verify.cpp:356-358`, value-line order at `cp_verify.cpp:950-951`), and the whole statement except y is the first chain's first query (`cp_verify.cpp:2441-2445`). So a proof made under (d, H, dh) with H dh = d and checked under (d, H', dh') with H' dh' != d meets a different first query. Soundness need: the existing Fiat-Shamir binding of the statement; nothing new. Test that would catch a mistake: none today exercises two statements that differ only in H or dh (T3 below).
 
-**N5: the prover gates (rows 63, 64).** Out of the verifier's scope, but no honest dq != d proof can exist until both are opened. Unknown whether the prover has other places that assume dq = d; it was grepped, not read.
+**N5: the prover gates and the prover's stated arguments (rows 63, 64, 82, 83).** Out of the verifier's scope, but no honest dq != d proof can be produced until both gates are opened. When the build lane opens them it must also:
+- restate the int32 no-overflow comment at `prover/common/parameter_file.h:469-475` (row 83). Its conclusion still holds, for other reasons: `no-wrap-H-three-digits` (`:413-415`) keeps d <= 8,191 (7,936 at sh 7), and `prover-only-attention` (dh in {32, 64, 128}, `:490`) with H + G <= 64 (`:376`) keeps dq = H dh <= 63 * 128 = 8,064 (7,680 once `H <= 16 G`, `:500`, also applies). So a word gets at most 2 max(d, dq) <= 16,382 products, below 131,071. Recomputed by script (`fix166_arith.py`, a desk script of this fix lane, not committed: it enumerates H, G, dh under the quoted rules and evaluates the `no-wrap-H-three-digits` inequality for every d). The build lane should either write this two-bound argument into the comment or add an explicit rule `2 max(d, dq) <= 131,071`;
+- restate the `:378` comment (row 82): S2 divides `(H + G) dh` because it divides `G dh` and must divide `H dh`, which the prover then needs as its own test (today it follows from `d % S2`, `:370`, and the equality);
+- note that the note's grep terms (`H * dh`) did not match `:473`, which writes "d = H dh" without an asterisk; the build lane should grep the prover for `d = H dh`, `H dh = d` and `dq != s.d` too.
+Unknown whether the prover has other places that assume dq = d; it was grepped, not read.
 
 **N6: the walk harness (row 65).** `parameter_walk.py` must be allowed to change H or dh without resetting d, or the walk will keep testing only dq = d files.
 
@@ -159,7 +189,7 @@ CPU-only unless marked. "Planning call" means `cp_verify` on a parameter file wi
 Estimate (counted from the rows above, not built):
 - Verifier code: `cp_verify.cpp:520` (drop `H dh != d`, add `dq > 2^20`), about 3 lines. No other verifier code row needs a change.
 - Docs: 5 rows (58-62), about 10 lines.
-- Prover gates: 2 places (63, 64), about 4 lines. Required for T4 and T6 only.
+- Prover gates: 2 places (63, 64), about 4 lines, plus the two comments of rows 82-83 (or one new rule). Required for T4 and T6 only.
 - Tests: T1 (one shape line), T2 and T7 (one small Python test, about 80-150 lines, modelled on `example_kits_test.py`), T5 (about 40 lines in `ws_build_fuzz.cpp` or a new test), N6 (`parameter_walk.py`, about 5 lines). T3 depends on a fixture (Unknown). T4 and T6 need a GPU slot.
 - Time: the CPU part (code, docs, T1, T2, T5, T7, T8) fits one 2.5 h lane. T4 and T6 are a second, GPU lane.
 
