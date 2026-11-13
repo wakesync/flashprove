@@ -1,0 +1,6 @@
+slot granted 2026-11-13T15:23:28Z
+hard stop 2026-11-13T15:50:00Z
+MemAvailable 13.8 GB at start 2026-11-13T15:23:28Z
+fixture end rc=0 tree_rss_peak_gb=3.45 2026-11-13T15:25:08Z
+HARD STOP run kill 2061981 2026-11-13T15:50:04Z
+run end rc=-15 tree_rss_peak_gb=8.25 2026-11-13T15:50:09Z
