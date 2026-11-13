@@ -15,7 +15,9 @@ Writes <out dir>/merged-analysis.json and <out dir>/merge-validation.json, never
 Exit 0 = gates pass, verdict written; 2 = invalid input (including malformed JSON, duplicate keys, missing prompts or
 keys); 3 = KILLED (validity gate); 4 = output exists.
 """
-import hashlib, json, math, re, sys
+import sys
+sys.dont_write_bytecode = True   # round-3 review: never leave or rely on a bytecode cache for the pinned code
+import hashlib, importlib.util, json, math, re
 from pathlib import Path
 import numpy as np
 
@@ -23,17 +25,26 @@ HERE = Path(__file__).resolve().parent
 EXP = HERE.parent
 P139 = EXP / "20261112-134-u1-margin"
 
-def sha_file(p):
-    h = hashlib.sha256(); h.update(Path(p).read_bytes()); return h.hexdigest()
+# Round-3 review: a pin must cover the bytes that are used. Each pinned file is read ONCE; its sha256 is checked on
+# those bytes, and those same bytes are parsed (JSON) or compiled and executed (PR #139's analyse.py). Nothing pinned
+# is read a second time, so a file swapped after the check, or a bytecode cache next to the source, cannot be used.
+def read_verified(p, h):
+    """Read p once; return its bytes if their sha256 is h, else None (missing, unreadable or different)."""
+    try: data = Path(p).read_bytes()
+    except OSError: return None
+    return data if hashlib.sha256(data).hexdigest() == h else None
 
-# Committed identity of PR #139's analyse.py, checked before it is imported (round-2 review hardening).
+# Committed identity of PR #139's analyse.py (round-2 review). Round 3: it is executed from the verified bytes, not
+# through the import system, so a stale or planted __pycache__ file cannot substitute other code.
 ANALYSE_SHA = "92afcd5623259c829b45a173f0ed2e40099aed5b0ee3f29492a590b3fd4b6a69"
-try: _ok = sha_file(P139 / "analyse.py") == ANALYSE_SHA
-except OSError: _ok = False
-if not _ok:
+_src = read_verified(P139 / "analyse.py", ANALYSE_SHA)
+if _src is None:
     print("INVALID, nothing written:\n - PR #139 analyse.py: missing or sha256 is not the committed one", file=sys.stderr); sys.exit(2)
-sys.path.insert(0, str(P139))
-import analyse as A        # PR #139, unchanged
+A = importlib.util.module_from_spec(importlib.util.spec_from_loader("analyse", None, origin=str(P139 / "analyse.py")))
+A.__file__ = str(P139 / "analyse.py")
+sys.modules["analyse"] = A
+exec(compile(_src, A.__file__, "exec"), A.__dict__)   # PR #139, unchanged (the verified bytes)
+del _src
 P124D = EXP / "20261111-8-qwen-e2e-agreement"; P124 = P124D / "runs"
 P87 = EXP / "20261110-36-weight-binding" / "runs"
 PID = "p03-repeat-word"; T03 = 512; TOK03 = 279
@@ -58,18 +69,20 @@ PINNED_139 = {
 }
 
 def check_pins(R139):
-    bad = []
+    """Read every pinned file once and verify it. Returns (problems, {path: verified bytes})."""
+    bad, blobs = [], {}
     for p, h in [*PINNED_FIXED.items(), *((R139 / f, h) for f, h in PINNED_139.items())]:
-        try: ok = sha_file(p) == h
-        except OSError: ok = False
-        if not ok: bad.append(f"fixed input {p.parent.name}/{p.name}: missing or sha256 is not the committed one")
-    return bad
+        data = read_verified(p, h)
+        if data is None: bad.append(f"fixed input {p.parent.name}/{p.name}: missing or sha256 is not the committed one")
+        else: blobs[p] = data
+    return bad, blobs
 LAYER = re.compile(r"^model\.language_model\.layers\.(\d+)\.")
 NORM, LM_HEAD = A.NORM, A.LM_HEAD
 ARR_KEYS = ("stock_top1", "abl_top1", "stock_margin", "abl_margin", "D_kl_stock_abl", "kl_abl_stock")
 OUTS = ("merged-analysis.json", "merge-validation.json")
 
-def jl(p): return json.loads(Path(p).read_text(), object_pairs_hook=A.no_dup)
+def jl(p): return json.loads(Path(p).read_text(), object_pairs_hook=A.no_dup)   # this run's own files only
+def jb(data): return json.loads(data, object_pairs_hook=A.no_dup)              # verified bytes of a pinned file
 
 def check_p03(bad, r, where):
     if not isinstance(r, dict) or not A.is_int(r.get("T")) or r["T"] != T03:
@@ -83,22 +96,23 @@ def compute(argv):
     r1 = Path(argv[1]); r2 = None if argv[2] == "-" else Path(argv[2]); OUT = Path(argv[3])
     R139 = Path(argv[4]) if len(argv) > 4 else P139 / "runs"
     if any((OUT / f).exists() for f in OUTS): print("NOT RUN: output exists", file=sys.stderr); return 4
-    bad = check_pins(R139)
+    bad, V = check_pins(R139)
     if bad: return invalid(bad)
     # PR #139 committed inputs
-    if sha_file(R139 / "d-per-position.json") != D139_SHA: bad.append("PR #139 D file: sha256 is not the registered one")
-    d139 = jl(R139 / "d-per-position.json")["prompts"]
+    dbytes = read_verified(R139 / "d-per-position.json", D139_SHA)
+    if dbytes is None: return invalid(["PR #139 D file: missing or sha256 is not the registered one"])
+    d139 = jb(dbytes)["prompts"]
     nine = [p for p in A.FULL if p != PID]
     if sorted(d139) != sorted(nine): bad.append("PR #139 D file: prompts are not the 9 of tier 2")
     # this run
     d1 = jl(r1 / "d-p03.json")["prompts"] if (r1 / "d-p03.json").is_file() else None
     if d1 is None or list(d1) != [PID]: bad.append("run 1: d-p03.json missing or not exactly p03-repeat-word"); d1 = None
     else: check_p03(bad, d1[PID], "run 1 p03")
-    es = jl(P124 / "e2e-stock.json")["prompts"]; ea = jl(P124 / "e2e-abl.json")["prompts"]
+    es = jb(V[P124 / "e2e-stock.json"])["prompts"]; ea = jb(V[P124 / "e2e-abl.json"])["prompts"]
     # merged input, validated with PR #139's own per-prompt checks on the 10 prompts
     if bad: return invalid(bad)
     merged = dict(d139); merged[PID] = d1[PID]
-    frozen = {p["id"]: p["n_tokens"] for p in jl(P124D / "prompts-e2e.json")["prompts"]}
+    frozen = {p["id"]: p["n_tokens"] for p in jb(V[P124D / "prompts-e2e.json"])["prompts"]}
     for pid in A.FULL:
         r, T = merged[pid], frozen[pid]
         if r.get("T") != T: bad.append(f"{pid}: T is not {T}"); continue
@@ -113,8 +127,8 @@ def compute(argv):
                 a = c["paths"][arm]; A.arr(bad, f"PR124 {leg} {pid}.{arm}.kl", a.get("kl"), T, A.is_num)
                 A.arr(bad, f"PR124 {leg} {pid}.{arm}.top1_agree", a.get("top1_agree"), T, A.is_bool)
     # manifests: PR #87 hashes, PR #124 manifests, expected coverage
-    b87 = {ck: {t["name"]: t["sha256"] for t in jl(P87 / f"manifest-{ck}.json")["tensors"]} for ck in ("stock", "abl")}
-    o124 = {ck: jl(P124 / f"manifest-{ck}.json") for ck in ("stock", "abl")}
+    b87 = {ck: {t["name"]: t["sha256"] for t in jb(V[P87 / f"manifest-{ck}.json"])["tensors"]} for ck in ("stock", "abl")}
+    o124 = {ck: jb(V[P124 / f"manifest-{ck}.json"]) for ck in ("stock", "abl")}
     changed = sorted(k for k in b87["stock"] if b87["abl"][k] != b87["stock"][k])
     exp_mine = dict(stock={n for n in b87["stock"] if LAYER.match(n)} | {NORM, LM_HEAD}, abl=set(changed) | {NORM})
     if len(changed) != A.N_CHANGED or len(exp_mine["stock"]) != 850 or len(exp_mine["abl"]) != A.N_ABL:
@@ -125,7 +139,7 @@ def compute(argv):
         if (m.get("repo"), m.get("rev")) != (o124[ck]["repo"], o124[ck]["rev"]): bad.append(f"run 1 manifest {ck}: repo/rev not PR #124's")
         miss = exp_mine[ck] - set(m["tensors"]); unk = set(m["tensors"]) - exp_mine[ck]
         if miss or unk: bad.append(f"run 1 manifest {ck}: {len(miss)} expected tensors missing, {len(unk)} unexpected")
-        theirs[ck] = jl(R139 / f"manifest-{ck}.json")["tensors"]
+        theirs[ck] = jb(V[R139 / f"manifest-{ck}.json"])["tensors"]
     er = mine["stock"].get("embedding_rows", {})
     if set(er) != {str(TOK03)}: bad.append(f"run 1 stock manifest: embedding rows are not exactly [{TOK03}]")
     if set(mine["abl"].get("embedding_rows", {})): bad.append("run 1 abl manifest: unexpected embedding rows")
@@ -185,7 +199,7 @@ def compute(argv):
             sh = {k: [hashlib.sha256(np.array(x[k]).tobytes()).hexdigest() for x in (d1[PID], d2)] for k in ARR_KEYS}
             det = dict(shown=True, all_bit_equal=all(eq.values()), equal=eq, sha256_run1_run2=sh)
     # PR #139 9-prompt numbers, unchanged, from its committed analysis
-    a139 = jl(R139 / "analysis.json")
+    a139 = jb(V[R139 / "analysis.json"])
     nine_view = dict(source="experiments/20261112-134-u1-margin/runs/analysis.json (committed, unchanged)",
                      verdict=a139["verdict"], pooled_XS18=a139["pooled"]["XS18"], pooled_XS20=a139["pooled"]["XS20"],
                      D=a139["pooled"]["D"], top1_differ=a139["pooled"]["top1_differ"])
