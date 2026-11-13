@@ -1,0 +1,19 @@
+{
+ "summarise_rc": 0,
+ "inputs": {
+  "baseline.jsonl": "cdb1d964003771433eb45c8253c89ed7f55aa294b5b30699f69e82e1d039aba9",
+  "arms.jsonl": "84be3e54478c5c107914c85e1fed5a77a8ba6735ff36262d7c42b32f784404e9",
+  "progress.log.jsonl": "5374aedd32ca6c9c0ae550784b27807431c1d661f4ad495212df69549f09f041"
+ },
+ "summary.json": {
+  "committed_sha256": "b362e5721bfa273facb6d3fed17fc50af4f84a217740ba12ac61bff3987952c9",
+  "regenerated_sha256": "b362e5721bfa273facb6d3fed17fc50af4f84a217740ba12ac61bff3987952c9",
+  "byte_identical": true
+ },
+ "summary.md": {
+  "committed_sha256": "af078dccea79761279fd5678086d39a48342df904c9391794173d627b3289355",
+  "regenerated_sha256": "af078dccea79761279fd5678086d39a48342df904c9391794173d627b3289355",
+  "byte_identical": true
+ },
+ "ok": true
+}
