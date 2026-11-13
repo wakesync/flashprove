@@ -1,0 +1,27 @@
+{
+ "pr139_d_sha256": "74f5fa123723b6bb8cd7c4b4c8d511a6be8c7c55a8cad4a37796c2fc9740460f",
+ "run1": "run1",
+ "run2": "run2",
+ "prompts": [
+  "p01-ordinary-short",
+  "p07-chat-ordinary",
+  "p08-chat-refusal",
+  "p09-multilingual",
+  "p02-ordinary-paragraph",
+  "p04-repeat-punct",
+  "p05-code",
+  "p03-repeat-word",
+  "p06a-digits-256",
+  "p11-chat-long"
+ ],
+ "positions": 1461,
+ "gates": {
+  "a_tokyo": true,
+  "b_reproduce": true,
+  "c_manifest": true,
+  "all_ok": true,
+  "b_p03_bit_for_bit": true,
+  "c_this_run": true
+ },
+ "verdict": "FAIL (mixed)"
+}
