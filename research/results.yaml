@@ -78,16 +78,18 @@ hardware:
 
 results:
   - id: cpu-reader-dense-table-parity
-    title: "CPU reader dense table-line parity proposal (#182)"
-    status: in progress
-    status_note: "PARTIAL, build refused before compilation"
-    replication: n/a
+    title: "CPU reader dense table-line release parity, partial milestone (#182)"
+    status: measured
+    status_note: "PARTIAL vs full PREREG: UBSan not run; original runner errors and supplementary diagnostic rerun retained"
+    replication: unreplicated
     pr: 184
-    pr_note: "blocked draft; no functional result"
-    summary: "Untested reader-only proposal; no parse/admission/verifier matrix established"
-    conditions: "Initial CPU unit build refused by its output-directory safety check; release and UBSan tests not run"
-    evidence: [experiments/20261113-182-reader-parity/RESULTS.md, experiments/20261113-182-reader-parity/runs/build/attempt.json]
-    metrics: []
+    pr_note: "draft; milestone incomplete"
+    summary: "Release-only: 33 synthetic fixtures, five repetitions per series. First series 25 expectation mismatches and four legacy-test usage failures; separate corrected supplementary series zero mismatches and four passing controls. Narrow valid-dense reader admission changes as intended; no full-PREREG PASS, sanitizer result, producer-support or proof claim"
+    conditions: "Unchanged CPU unit/build harnesses, private output directory, 4 GiB address-space cap, two CPU cores on shared host. Original and supplementary series each 330 reader probes plus 165 verifier request-planning calls. No malformed parse newly admitted; experts reader outcomes unchanged. UBSan unavailable through unchanged harness"
+    evidence: [experiments/20261113-182-reader-parity/RESULTS.md, experiments/20261113-182-reader-parity/MATRIX.md]
+    metrics:
+      - {"name": "reader_first_expectation_mismatches_per_repetition", "stat": "median", "value": 5, "unit": "count", "n": 5, "spread": {"sd": 0, "min": 5, "max": 5}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-13", "commit": "0a88677c9dd29d702f97ebf7a4887b9caacf7532", "source": "experiments/20261113-182-reader-parity/runs/continuation-matrix/summary.json", "note": "Measured, unreplicated; 99 expected observations per repetition (33 cases x baseline reader, patched reader, verifier), deterministic release outcomes, population SD. Initial series retained, including two layout-generation errors and three expected-tag errors per repetition; four additional control usage failures outside this denominator."}
+      - {"name": "reader_supplementary_expectation_mismatches_per_repetition", "stat": "median", "value": 0, "unit": "count", "n": 5, "spread": {"sd": 0, "min": 0, "max": 0}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-13", "commit": "0a88677c9dd29d702f97ebf7a4887b9caacf7532", "source": "experiments/20261113-182-reader-parity/runs/supplementary-matrix/summary.json", "note": "Measured, unreplicated; 99 expected observations per repetition (33 cases x baseline reader, patched reader, verifier), deterministic release outcomes, population SD. Separately labelled supplementary diagnostic series after runner corrections, not a replacement for original series or full-PREREG PASS; four corrected controls pass, UBSan not run."}
 
   - id: cpu-reproduction
     title: CPU verification of upstream's stored synthetic proofs
