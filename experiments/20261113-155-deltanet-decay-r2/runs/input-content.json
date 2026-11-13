@@ -1,0 +1,199 @@
+{
+ "what": "sha256 over (array name, dtype, shape, raw little-endian bytes) of every array in each layer file, arrays in name order",
+ "layers": {
+  "ar-L00.npz": {
+   "content_sha256": "5ffc31d7234f5dccc094da023ae3fe819350a42a98d83a5aa0d7515f59d994e5",
+   "arrays": 12
+  },
+  "ar-L01.npz": {
+   "content_sha256": "c2fbdacb884694e9b7da36c2fcb90c282a7d3b7e4a96fc0a7fa7c19238ebea59",
+   "arrays": 12
+  },
+  "ar-L02.npz": {
+   "content_sha256": "fdc53cd70f710d1a5b7863aee32b940ac1885c3eea4ef05a7667ac4df7f18ccf",
+   "arrays": 12
+  },
+  "ar-L04.npz": {
+   "content_sha256": "9dfa71b8130c85f5b1be2fc345c77ca0b82f9b4f89c1ab9b8dce914d8514b7b5",
+   "arrays": 12
+  },
+  "ar-L05.npz": {
+   "content_sha256": "d3116d66d72e37dce1e83b2b29d168fc08a7e24088de539fe535c67181a1beab",
+   "arrays": 12
+  },
+  "ar-L06.npz": {
+   "content_sha256": "12b39b6309ba4e3f8367e335e4c71fa8bb488c763b41b66b0ffe40f966d205d4",
+   "arrays": 12
+  },
+  "ar-L08.npz": {
+   "content_sha256": "85fddfe07f0f737a0d537bd71d62eb9c84648bb2d0110685dc4590871a3f46e3",
+   "arrays": 12
+  },
+  "ar-L09.npz": {
+   "content_sha256": "1f66df3a8d18df786dda9fefe0ab8add3e0002d78d043a788170608d11d597d6",
+   "arrays": 12
+  },
+  "ar-L10.npz": {
+   "content_sha256": "f8ab2d354496e182f2421e89ee1c6e6480349b45690efe5c9b3d87b874ad51a0",
+   "arrays": 12
+  },
+  "ar-L12.npz": {
+   "content_sha256": "32e86419c646be006b11023a022ae1a6dce2df433cac4bfcbd7c8cdc2779b873",
+   "arrays": 12
+  },
+  "ar-L13.npz": {
+   "content_sha256": "27cb03812e5643dbe3b62e43351f6c40a68bf399a1adeb09f46429538a0182c6",
+   "arrays": 12
+  },
+  "ar-L14.npz": {
+   "content_sha256": "4aa228d73ee004b847bcc6d23610d0b5ffff14d73b96ed40e85712814d7d566c",
+   "arrays": 12
+  },
+  "ar-L16.npz": {
+   "content_sha256": "5d11d2b02e88be41f6c303fb261d3df50c0c947c0ff99523b10aca363beffd12",
+   "arrays": 12
+  },
+  "ar-L17.npz": {
+   "content_sha256": "6a4b16ae88fcc27e5406d077f140f12a86158a6abecdcc2b8e74ed19528e13d1",
+   "arrays": 12
+  },
+  "ar-L18.npz": {
+   "content_sha256": "7631ef65acd664310a3a701a97b8fa675c37af2d2f09ec2e255da14740204860",
+   "arrays": 12
+  },
+  "ar-L20.npz": {
+   "content_sha256": "fe00cdb6245c6e46cd67f0f19a1cd0b09c9e0e7769cd8949a49dbaae28c2d652",
+   "arrays": 12
+  },
+  "ar-L21.npz": {
+   "content_sha256": "f8a84557aaf89a74f77a9aeb623252556f142917a9491029323653021bb47402",
+   "arrays": 12
+  },
+  "ar-L22.npz": {
+   "content_sha256": "cb91ccbe9537bbe49987e643f48bbb23727e5b538a2776e7f0e8365b68deb20f",
+   "arrays": 12
+  },
+  "ar-L24.npz": {
+   "content_sha256": "c274e83cbd489780727c9715927b7912412bf01e17839ae905aaf723f69a4bb3",
+   "arrays": 12
+  },
+  "ar-L25.npz": {
+   "content_sha256": "2aec3e2c5de45fcd293d03cbdb0f1b567eff94e0452cc99e8ffb41d9e271f431",
+   "arrays": 12
+  },
+  "ar-L26.npz": {
+   "content_sha256": "b79ff483ce5e788f37f52f9e2230512f024943dfd78ec33dc42fc1d2116bd09c",
+   "arrays": 12
+  },
+  "ar-L28.npz": {
+   "content_sha256": "d04eb34ad09eb77a9b7e67eb19fd756cf4e249b9945e6cb83e00a156e7a8ea65",
+   "arrays": 12
+  },
+  "ar-L29.npz": {
+   "content_sha256": "2f3ecd4a4543cdd7ba859faea8f4e8c41f5357d0cdc0d5246b6f159c947cd257",
+   "arrays": 12
+  },
+  "ar-L30.npz": {
+   "content_sha256": "338b2e1b09bead25b8118692da7408b9b409538128bbd1aeb651a6e8ac5aad55",
+   "arrays": 12
+  },
+  "ar-L32.npz": {
+   "content_sha256": "d422d79288089ef8ecfc956ced7bc721acd4f4bfa975910e0e8cb6cf00046cd3",
+   "arrays": 12
+  },
+  "ar-L33.npz": {
+   "content_sha256": "1d4bb70a3d280634de939c52ceb7f772216baf422cf0aeae8e2cb29b2552990f",
+   "arrays": 12
+  },
+  "ar-L34.npz": {
+   "content_sha256": "7822c99869a0c06945c5df29b9934066c3467da68c6d2426a344a2b47d7ba5b5",
+   "arrays": 12
+  },
+  "ar-L36.npz": {
+   "content_sha256": "907ac8b90b9a66351bc022d95c762d7a5ea4154669a2015ff5e6d7083feb3924",
+   "arrays": 12
+  },
+  "ar-L37.npz": {
+   "content_sha256": "2972e09538ef95753acee2ad5c6f7e9e82ccfe00f85cb0837fdf65dbfeeb89be",
+   "arrays": 12
+  },
+  "ar-L38.npz": {
+   "content_sha256": "e88165cd25aba23582dd3fdd2b463cfcc4b5a5a445a6dcfc06e3f8d6a103b9db",
+   "arrays": 12
+  },
+  "ar-L40.npz": {
+   "content_sha256": "7924d9b450fd6c458451184439a348aa11ede50e7bf7aef9b945f977b9e2927b",
+   "arrays": 12
+  },
+  "ar-L41.npz": {
+   "content_sha256": "07aaa213e1420b78dcd765f891f7dd66b40bcec675ac062bdf44fd0f27ba30b0",
+   "arrays": 12
+  },
+  "ar-L42.npz": {
+   "content_sha256": "94f0597607b6dfcb41e7a8e65024527bf4add8e4c67ff1a530c80e8fee3ce519",
+   "arrays": 12
+  },
+  "ar-L44.npz": {
+   "content_sha256": "e9577aaf017fac22fb9b1084851c4c5ba5206118aaf2ad7f8ed87a0cbb497e0d",
+   "arrays": 12
+  },
+  "ar-L45.npz": {
+   "content_sha256": "dbd6267ac47e37150a8385daed816f4f7b19368a05966708361ec82afe1dfb9c",
+   "arrays": 12
+  },
+  "ar-L46.npz": {
+   "content_sha256": "d60573ab19040e1cfce3923afae408b04c7cbae586c376e5643df192ea2363bc",
+   "arrays": 12
+  },
+  "ar-L48.npz": {
+   "content_sha256": "87584c4653567d228d0503cb5cea22c2785da52205e70edc99f374f3bc5cf411",
+   "arrays": 12
+  },
+  "ar-L49.npz": {
+   "content_sha256": "7e46306058f90c8fb04ba3ac763c727190c66e25af38ff3ccb948cd5f0ac8884",
+   "arrays": 12
+  },
+  "ar-L50.npz": {
+   "content_sha256": "1f769d56710ad22a852263d80f4b9c8314cef95d295bf3afeb0f4fd9887af38d",
+   "arrays": 12
+  },
+  "ar-L52.npz": {
+   "content_sha256": "f0e360f7de3d63718ae9641c4a8facea8a1b8d8de81c54dff6663e4d7c6b5fe9",
+   "arrays": 12
+  },
+  "ar-L53.npz": {
+   "content_sha256": "6516320094d423fa088408719c4f308dbb46db1c2abe3bf70c5b73185b820ab9",
+   "arrays": 12
+  },
+  "ar-L54.npz": {
+   "content_sha256": "01fd525798616759260c6e99f73f26c8330e2b2f85e89f9975f9854ea341b7a7",
+   "arrays": 12
+  },
+  "ar-L56.npz": {
+   "content_sha256": "2cc60da08fda49f712b1712ba64d3cd27449b55f01ea692b38327e453de51b91",
+   "arrays": 12
+  },
+  "ar-L57.npz": {
+   "content_sha256": "c0363e6472f717aa2e29f2b50eb4ee82b34c8d62f78b8c1f2f50cb9f28684c80",
+   "arrays": 12
+  },
+  "ar-L58.npz": {
+   "content_sha256": "e70f8fc73c8794d67f2c39cc01bbd224e05c0eacde31c5230b254996df656112",
+   "arrays": 12
+  },
+  "ar-L60.npz": {
+   "content_sha256": "2d323873fdc197a6c73b40f315983ac049a2a68fc12099efc1266d8b4ecd5c0a",
+   "arrays": 12
+  },
+  "ar-L61.npz": {
+   "content_sha256": "80808eec9680815306fd622ba682143e7096cdc2d790409900c89c844e7d3e41",
+   "arrays": 12
+  },
+  "ar-L62.npz": {
+   "content_sha256": "da0e65f59b61b5b952af8259b443550d2f0c486a9cc503670d62545ece8985b6",
+   "arrays": 12
+  }
+ },
+ "all_layers_sha256": "c6adea7c5ea4ed9dd4d622ce061e734574403cb5b0a816ab5c8b3136eeb8e5c6",
+ "file_bytes_match_prereg_list": true
+}

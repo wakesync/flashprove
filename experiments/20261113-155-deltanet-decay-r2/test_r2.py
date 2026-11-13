@@ -113,6 +113,7 @@ class Arms(unittest.TestCase):
         self.assertTrue(np.array_equal(a[0], a[1])); self.assertFalse(bool(rej.any()))
 
     def test_u4_brute_force_and_bound(self):
+        # 4096 x - X is in [-0.5, 1.5) (floor of ar, RNE of dt_bias); X - 4096 mid is in {-8..7}; so 4096 |x - mid| <= 8.5
         T = tables(); bound = (8.5 / 4096) / math.e + 2.0 ** -21 + 1e-12; worst = 0.0
         for l, A, dtb, ar in synthetic():
             a4, rej = R.arm_decay(ar, A, dtb, "U4", T); x, g, a = DT.float_decay(ar, A, dtb); X, r = R.front(ar, dtb)
