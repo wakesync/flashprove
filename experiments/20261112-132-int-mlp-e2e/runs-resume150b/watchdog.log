@@ -1,0 +1,41 @@
+{"t": "2026-11-13T13:55:55Z", "event": "supervisor_start", "pid": 1735924, "poll_s": 2.0, "hard_stop": "2026-11-13T16:45:00Z", "cores": "6-11", "dummy": false}
+{"t": "2026-11-13T13:55:55Z", "event": "queue", "cmd": ["flock", "<PLANNING>/locks/bigmem.lock", "<PLANNING>/fp-heavy.sh", "taskset", "-c", "6-11", "/usr/bin/time", "-v", "-o", "<OUT>/run.time", "/usr/bin/python3", "<PLANNING>/lanes-1110/resume150br2_entry.py", "<OUT>/python.pid", "<OUT>/progress.log", "<REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py", "<STATE>", "<OUT>/runs"]}
+{"t": "2026-11-13T13:55:57Z", "event": "python_started", "python_pid": 1735931, "python_cmd": "/usr/bin/python3 <REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py run <PLANNING>/scratch/", "grant_unix": 1794578155}
+{"t": "2026-11-13T13:58:55Z", "event": "layer_done", "leg": "abl", "layer": 31, "layer_s": 155.0, "rss_kb": 3885632, "disk_free_gb": 54.0}
+{"t": "2026-11-13T14:01:57Z", "event": "layer_done", "leg": "abl", "layer": 32, "layer_s": 182.5, "rss_kb": 4233904, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:04:50Z", "event": "layer_done", "leg": "abl", "layer": 33, "layer_s": 171.9, "rss_kb": 4123644, "disk_free_gb": 56.3}
+{"t": "2026-11-13T14:08:04Z", "event": "layer_done", "leg": "abl", "layer": 34, "layer_s": 192.1, "rss_kb": 3359720, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:11:20Z", "event": "layer_done", "leg": "abl", "layer": 35, "layer_s": 194.5, "rss_kb": 3207188, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:14:26Z", "event": "layer_done", "leg": "abl", "layer": 36, "layer_s": 184.4, "rss_kb": 4325988, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:16:54Z", "event": "layer_done", "leg": "abl", "layer": 37, "layer_s": 149.5, "rss_kb": 4374824, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:19:29Z", "event": "layer_done", "leg": "abl", "layer": 38, "layer_s": 154.6, "rss_kb": 4268024, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:21:49Z", "event": "layer_done", "leg": "abl", "layer": 39, "layer_s": 138.0, "rss_kb": 4166268, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:24:38Z", "event": "layer_done", "leg": "abl", "layer": 40, "layer_s": 168.5, "rss_kb": 4038708, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:27:25Z", "event": "layer_done", "leg": "abl", "layer": 41, "layer_s": 166.0, "rss_kb": 4331896, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:29:16Z", "event": "layer_done", "leg": "abl", "layer": 42, "layer_s": 109.3, "rss_kb": 2951928, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:32:02Z", "event": "layer_done", "leg": "abl", "layer": 43, "layer_s": 165.9, "rss_kb": 3984456, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:34:37Z", "event": "layer_done", "leg": "abl", "layer": 44, "layer_s": 154.2, "rss_kb": 4320684, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:37:16Z", "event": "layer_done", "leg": "abl", "layer": 45, "layer_s": 158.8, "rss_kb": 4457088, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:40:00Z", "event": "layer_done", "leg": "abl", "layer": 46, "layer_s": 163.5, "rss_kb": 4124808, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:42:28Z", "event": "layer_done", "leg": "abl", "layer": 47, "layer_s": 146.6, "rss_kb": 4371768, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:45:07Z", "event": "layer_done", "leg": "abl", "layer": 48, "layer_s": 157.7, "rss_kb": 4405716, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:47:44Z", "event": "layer_done", "leg": "abl", "layer": 49, "layer_s": 156.6, "rss_kb": 4488612, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:50:25Z", "event": "layer_done", "leg": "abl", "layer": 50, "layer_s": 162.4, "rss_kb": 4297864, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:52:46Z", "event": "layer_done", "leg": "abl", "layer": 51, "layer_s": 138.7, "rss_kb": 4501648, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:55:16Z", "event": "layer_done", "leg": "abl", "layer": 52, "layer_s": 151.4, "rss_kb": 4409388, "disk_free_gb": 56.2}
+{"t": "2026-11-13T14:57:58Z", "event": "layer_done", "leg": "abl", "layer": 53, "layer_s": 159.7, "rss_kb": 4615712, "disk_free_gb": 55.2}
+{"t": "2026-11-13T15:00:33Z", "event": "layer_done", "leg": "abl", "layer": 54, "layer_s": 155.8, "rss_kb": 4264984, "disk_free_gb": 57.1}
+{"t": "2026-11-13T15:02:59Z", "event": "layer_done", "leg": "abl", "layer": 55, "layer_s": 145.0, "rss_kb": 4378336, "disk_free_gb": 57.1}
+{"t": "2026-11-13T15:05:23Z", "event": "layer_done", "leg": "abl", "layer": 56, "layer_s": 141.8, "rss_kb": 4371044, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:07:47Z", "event": "layer_done", "leg": "abl", "layer": 57, "layer_s": 143.3, "rss_kb": 4681760, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:10:12Z", "event": "layer_done", "leg": "abl", "layer": 58, "layer_s": 146.4, "rss_kb": 4328652, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:12:18Z", "event": "layer_done", "leg": "abl", "layer": 59, "layer_s": 125.0, "rss_kb": 4427688, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:14:42Z", "event": "layer_done", "leg": "abl", "layer": 60, "layer_s": 142.3, "rss_kb": 4443956, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:16:43Z", "event": "layer_done", "leg": "abl", "layer": 61, "layer_s": 119.8, "rss_kb": 3619180, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:19:26Z", "event": "layer_done", "leg": "abl", "layer": 62, "layer_s": 163.8, "rss_kb": 4437804, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:21:43Z", "event": "layer_done", "leg": "abl", "layer": 63, "layer_s": 135.7, "rss_kb": 1326376, "disk_free_gb": 57.0}
+{"t": "2026-11-13T15:23:28Z", "event": "abl_logits_done_seen", "rss_kb": 1466932}
+{"t": "2026-11-13T15:23:28Z", "event": "stop", "reason": "abl_done", "python_pid": 1735931, "python_cmd": "/usr/bin/python3 <REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py run <PLANNING>/scratch/", "kids": [1736010, 1736011, 1736012, 1736013, 1736014, 1736015, 1736021]}
+{"t": "2026-11-13T15:23:28Z", "event": "stopped", "sigkill": []}
+{"t": "2026-11-13T15:23:28Z", "event": "job_final", "rc": 143, "reason": "abl_done"}
+{"t": "2026-11-13T15:23:29Z", "event": "done", "reason": "abl_done", "state": {"ckpt.npz": {"sha256": "521dd9e937bd17c59b55d209a994c610de656286067e69f8279eafcc9402d211", "bytes": 183551082}, "x16.npz": {"sha256": "67dde0e845de248c26838448b1df50bd1b6ed8eb2b1b03ddb40cd9feff3c53d5", "bytes": 183551023}}}
