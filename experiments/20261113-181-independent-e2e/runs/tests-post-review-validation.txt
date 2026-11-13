@@ -1,0 +1,50 @@
+Post-review validation at code head 588bc5bca1b44652b1fe0925e5f5f50c4cef9869
+test_admission_precedes_target_access (recomp181_admission_tests.ReceiptCLITests.test_admission_precedes_target_access) ... ok
+test_bad_consistency_fields (recomp181_admission_tests.ReceiptCLITests.test_bad_consistency_fields) ... ok
+test_boolean_and_string_numbers (recomp181_admission_tests.ReceiptCLITests.test_boolean_and_string_numbers) ... ok
+test_consistent_negative_receipt_remains_negative (recomp181_admission_tests.ReceiptCLITests.test_consistent_negative_receipt_remains_negative) ... ok
+test_duplicate_out_of_range_and_equal_token_flip (recomp181_admission_tests.ReceiptCLITests.test_duplicate_out_of_range_and_equal_token_flip) ... ok
+test_existing_output_is_never_replaced (recomp181_admission_tests.ReceiptCLITests.test_existing_output_is_never_replaced) ... ok
+test_extra_cell (recomp181_admission_tests.ReceiptCLITests.test_extra_cell) ... ok
+test_extra_digest_and_absence_corruption (recomp181_admission_tests.ReceiptCLITests.test_extra_digest_and_absence_corruption) ... ok
+test_honest_receipt_same_comparisons_and_explicit_counts (recomp181_admission_tests.ReceiptCLITests.test_honest_receipt_same_comparisons_and_explicit_counts) ... ok
+test_inconsistent_negative_status (recomp181_admission_tests.ReceiptCLITests.test_inconsistent_negative_status) ... ok
+test_missing_and_extra_prompt (recomp181_admission_tests.ReceiptCLITests.test_missing_and_extra_prompt) ... ok
+test_missing_cell (recomp181_admission_tests.ReceiptCLITests.test_missing_cell) ... ok
+test_missing_checkpoint (recomp181_admission_tests.ReceiptCLITests.test_missing_checkpoint) ... ok
+test_missing_fields_and_wrong_types (recomp181_admission_tests.ReceiptCLITests.test_missing_fields_and_wrong_types) ... ok
+test_missing_input_sha256 (recomp181_admission_tests.ReceiptCLITests.test_missing_input_sha256) ... ok
+test_non_string_digest (recomp181_admission_tests.ReceiptCLITests.test_non_string_digest) ... ok
+test_valid_numeric_mismatch_remains_negative (recomp181_admission_tests.ReceiptCLITests.test_valid_numeric_mismatch_remains_negative) ... ok
+test_wrong_arm (recomp181_admission_tests.ReceiptCLITests.test_wrong_arm) ... ok
+test_wrong_checkpoint (recomp181_admission_tests.ReceiptCLITests.test_wrong_checkpoint) ... ok
+test_wrong_digest (recomp181_admission_tests.ReceiptCLITests.test_wrong_digest) ... ok
+test_wrong_per_prompt_denominator (recomp181_admission_tests.ReceiptCLITests.test_wrong_per_prompt_denominator) ... ok
+test_wrong_pooled_denominator (recomp181_admission_tests.ReceiptCLITests.test_wrong_pooled_denominator) ... ok
+test_missing_ledger_metric_has_name (recomp181_admission_tests.TargetDiagnosticsTests.test_missing_ledger_metric_has_name) ... ok
+test_missing_summary_per_prompt_key_has_path (recomp181_admission_tests.TargetDiagnosticsTests.test_missing_summary_per_prompt_key_has_path) ... ok
+test_string_ledger_number_reports_actual_type (recomp181_admission_tests.TargetDiagnosticsTests.test_string_ledger_number_reports_actual_type) ... ok
+test_string_target_number_reports_actual_type (recomp181_admission_tests.TargetDiagnosticsTests.test_string_target_number_reports_actual_type) ... ok
+test_count_flip_margin_decision_and_aggregate_mutations_are_negative (recomp181_compare_tests.ComparatorTests.test_count_flip_margin_decision_and_aggregate_mutations_are_negative) ... ok
+test_float_and_rounded_tolerances (recomp181_compare_tests.ComparatorTests.test_float_and_rounded_tolerances) ... ok
+test_honest_synthetic_targets (recomp181_compare_tests.ComparatorTests.test_honest_synthetic_targets) ... ok
+test_all_per_position_arrays_lengths_and_T (recomp181_tests.ReaderTests.test_all_per_position_arrays_lengths_and_T) ... ok
+test_cli_rejection_no_output_and_hash_admission (recomp181_tests.ReaderTests.test_cli_rejection_no_output_and_hash_admission) ... ok
+test_determinism_missing_and_false (recomp181_tests.ReaderTests.test_determinism_missing_and_false) ... ok
+test_flip_recovered_from_ids (recomp181_tests.ReaderTests.test_flip_recovered_from_ids) ... ok
+test_head_missing_extra_duplicate_truncated (recomp181_tests.ReaderTests.test_head_missing_extra_duplicate_truncated) ... ok
+test_layer_missing_extra_duplicate_and_wrong_type (recomp181_tests.ReaderTests.test_layer_missing_extra_duplicate_and_wrong_type) ... ok
+test_median_sd_and_nearest_rank (recomp181_tests.ReaderTests.test_median_sd_and_nearest_rank) ... ok
+test_negative_kl_retained_at_registered_tolerance (recomp181_tests.ReaderTests.test_negative_kl_retained_at_registered_tolerance) ... ok
+test_nonfinite_json_and_duplicate_keys (recomp181_tests.ReaderTests.test_nonfinite_json_and_duplicate_keys) ... ok
+test_nullable_prompt_text_is_metadata_only (recomp181_tests.ReaderTests.test_nullable_prompt_text_is_metadata_only) ... ok
+test_positive_synthetic_and_shared_prefix (recomp181_tests.ReaderTests.test_positive_synthetic_and_shared_prefix) ... ok
+test_prompt_missing_extra_duplicate (recomp181_tests.ReaderTests.test_prompt_missing_extra_duplicate) ... ok
+test_sanity_and_guard (recomp181_tests.ReaderTests.test_sanity_and_guard) ... ok
+test_threshold_edges_inclusive_no_epsilon (recomp181_tests.ReaderTests.test_threshold_edges_inclusive_no_epsilon) ... ok
+test_token_flag_types_and_domains (recomp181_tests.ReaderTests.test_token_flag_types_and_domains) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 3.702s
+
+OK
