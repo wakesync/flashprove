@@ -12,6 +12,13 @@ import re
 import subprocess
 import sys
 import recomp181_reader as R
+import recomp181_admission as A
+
+
+def field(obj, key, where):
+    R.require(type(obj) is dict, where + ': expected object')
+    R.require(key in obj, where + ': missing field ' + str(key))
+    return obj[key]
 
 KL = {'median':'kl_median','max':'kl_max','min':'kl_min',
       'sample_sd':'kl_sd','p99_nearest_rank':'kl_p99'}
@@ -21,33 +28,39 @@ PKL = {'median':'median','max':'max','min':'min',
 class Comparison:
     def __init__(self):
         self.checks=[]
-    def check(self,name,a,b,mode='exact'):
+    def check(self,name,a,b,mode='exact',kind='independent_vs_target'):
         if mode=='float':
-            R.number(a,name)
-            R.number(b,name)
+            A.number(a,name)
+            A.number(b,name)
             tolerance=1e-12+1e-10*max(abs(a),abs(b))
             ok=abs(a-b)<=tolerance
         elif mode=='rounded':
             # b is a Decimal constructed from the original printed numeric lexeme.
+            A.number(a,name)
+            R.require(type(b) in (Decimal,int),name+': expected printed number, got '+type(b).__name__)
+            b=Decimal(b)
+            R.require(b.is_finite(),name+': nonfinite printed number')
             a=Decimal(str(a))
             tolerance=Decimal('0.5')*(Decimal(10)**b.as_tuple().exponent)+abs(b)*Decimal('1e-12')
             ok=abs(a-b)<=tolerance
         else:
             ok=type(a) is type(b) and a==b
             tolerance=0
-        self.checks.append({'field':name,'independent':str(a) if isinstance(a,Decimal) else a,
+        self.checks.append({'field':name,'kind':kind,'independent':str(a) if isinstance(a,Decimal) else a,
                             'target':str(b) if isinstance(b,Decimal) else b,'mode':mode,
                             'tolerance':str(tolerance) if isinstance(tolerance,Decimal) else tolerance,'match':ok})
 
 def compare(ind,summary,ledger_text,results_text):
     c=Comparison()
-    c.check('source_main',ind['source_main'],R.SOURCE_SHA)
-    c.check('cells',sorted(ind['cells']),sorted(l+'/'+a for l in ('stock','abl') for a in R.ARMS))
-    c.check('summary.bars',summary['bars'],{'top1':0.99,'kl_median_nats':1e-4,'kl_max_nats':0.1})
+    # The review's listed cohort has 14 fixed-expectation checks, not 14
+    # independent confirmations. summary.bars is one additional contract check.
+    c.check('source_main',ind['source_main'],R.SOURCE_SHA,kind='fixed_expectation')
+    c.check('cells',sorted(ind['cells']),sorted(l+'/'+a for l in ('stock','abl') for a in R.ARMS),kind='fixed_expectation')
+    c.check('summary.bars',summary['bars'],{'top1':0.99,'kl_median_nats':1e-4,'kl_max_nats':0.1},kind='threshold_contract')
     for leg in ('stock','abl'):
         s=summary['legs'][leg]
-        c.check(leg+'.finished',True,s['finished'])
-        c.check(leg+'.errors',[],s['errors'])
+        c.check(leg+'.finished',True,s['finished'],kind='fixed_expectation')
+        c.check(leg+'.errors',[],s['errors'],kind='fixed_expectation')
         c.check(leg+'.sanity',ind['checks'][leg]['sanity'],s['sanity_pass'])
         c.check(leg+'.deterministic',ind['global_recorded_determinism'],s['deterministic'])
         c.check(leg+'.BF16H_context_n',ind['bf16h_context_positions'],s['context']['BF16H']['n'])
@@ -64,19 +77,21 @@ def compare(ind,summary,ledger_text,results_text):
             c.check(name+'.agree',a['agree'],b['agree'])
             c.check(name+'.fraction',a['agreement_fraction'],b['frac'],'float')
             c.check(name+'.prompt_count',a['prompts'],len(b['per_prompt']))
-            c.check(name+'.dead_prompts',[],b['dead_prompts'])
+            c.check(name+'.dead_prompts',[],b['dead_prompts'],kind='fixed_expectation')
             c.check(name+'.verdict',a['verdict']=='PASS',b['PASS'])
             for x,y in [('top1_ge_99pct','top1'),('kl_median_le_1e_4','kl_median'),('kl_max_le_0_1','kl_max')]:
                 c.check(name+'.bar.'+x,a['bars'][x],b['pass'][y])
-            c.check(name+'.guard',True,b['pass']['no_guard_error'])
+            c.check(name+'.guard',True,b['pass']['no_guard_error'],kind='fixed_expectation')
             for x,y in KL.items(): c.check(name+'.kl.'+x,a['kl'][x],b[y],'float')
             c.check(name+'.prompt_ids',sorted(a['per_prompt']),sorted(b['per_prompt']))
             for pid,p in a['per_prompt'].items():
-                q=b['per_prompt'][pid]
-                c.check(name+'.'+pid+'.n',p['positions'],q['T'])
-                c.check(name+'.'+pid+'.agree',p['agree'],q['agree'])
-                c.check(name+'.'+pid+'.fraction',p['agreement_fraction'],q['frac'],'float')
-                for x,y in PKL.items(): c.check(name+'.'+pid+'.kl.'+x,p['kl'][x],q['kl'][y],'float')
+                where='summary.'+name+'.per_prompt.'+pid
+                q=field(b['per_prompt'],pid,'summary.'+name+'.per_prompt')
+                c.check(name+'.'+pid+'.n',p['positions'],field(q,'T',where))
+                c.check(name+'.'+pid+'.agree',p['agree'],field(q,'agree',where))
+                c.check(name+'.'+pid+'.fraction',p['agreement_fraction'],field(q,'frac',where),'float')
+                for x,y in PKL.items():
+                    c.check(name+'.'+pid+'.kl.'+x,p['kl'][x],field(field(q,'kl',where),y,where+'.kl'),'float')
             af=sorted(a['flips'],key=lambda f:(f['prompt'],f['position']))
             bf=sorted(b['flips'],key=lambda f:(f['prompt'],f['pos']))
             c.check(name+'.flip_count',len(af),len(bf))
@@ -98,17 +113,17 @@ def compare(ind,summary,ledger_text,results_text):
         for arm in R.ARMS:
             a=ind['cells'][leg+'/'+arm]
             suffix=arm.lower()+'_'+leg
-            top=by_name['top1_agree_'+suffix]
+            top=field(by_name,'top1_agree_'+suffix,'ledger metrics')
             used.append(top['name'])
             for key,v in [('value',a['agree']),('n',a['positions']),('total',a['positions'])]:
-                c.check('ledger.'+top['name']+'.'+key,v,top[key])
-            kl=by_name['kl_median_'+suffix]
+                c.check('ledger.'+top['name']+'.'+key,v,field(top,key,'ledger.'+top['name']))
+            kl=field(by_name,'kl_median_'+suffix,'ledger metrics')
             used.append(kl['name'])
-            c.check('ledger.'+kl['name']+'.n',a['positions'],kl['n'])
-            c.check('ledger.'+kl['name']+'.value',a['kl']['median'],kl['value'],'rounded')
+            c.check('ledger.'+kl['name']+'.n',a['positions'],field(kl,'n','ledger.'+kl['name']))
+            c.check('ledger.'+kl['name']+'.value',a['kl']['median'],field(kl,'value','ledger.'+kl['name']),'rounded')
             for key,x in [('sd','sample_sd'),('min','min'),('max','max')]:
-                c.check('ledger.'+kl['name']+'.'+key,a['kl'][x],kl['spread'][key],'rounded')
-        det=by_name['determinism_'+leg]
+                c.check('ledger.'+kl['name']+'.'+key,a['kl'][x],field(field(kl,'spread','ledger.'+kl['name']),key,'ledger.'+kl['name']+'.spread'),'rounded')
+        det=field(by_name,'determinism_'+leg,'ledger metrics')
         used.append(det['name'])
         c.check('ledger.'+det['name'],int(ind['global_recorded_determinism']),det['value'])
     # Check the four main RESULTS table rows at their printed precision.
@@ -131,7 +146,11 @@ def compare(ind,summary,ledger_text,results_text):
         c.check('RESULTS.'+leg+'/'+arm+'.verdict',a['verdict'],cols[7].strip('*'))
     R.require(len(found)==4,'missing RESULTS rows')
     mismatches=[r for r in c.checks if not r['match']]
+    kinds={kind:sum(r['kind']==kind for r in c.checks)
+           for kind in ('independent_vs_target','fixed_expectation','threshold_contract')}
     return {'status':'MATCH' if not mismatches else 'NEGATIVE',
+            'comparison_counts_by_kind':kinds,
+            'count_note':'14 reviewer-listed fixed expectations plus 1 threshold contract; other checks compare repeated summaries of the same measurements, not independent confirmations',
             'scope':'aggregation-only comparison, no whole-experiment replication',
             'comparison_count':len(c.checks),'mismatch_count':len(mismatches),
             'mismatches':mismatches,'checks':c.checks,'ledger_metrics_compared':used,
@@ -151,6 +170,7 @@ def main(argv=None):
         ind=R.loads(independent_bytes.decode())
         blocks=re.findall(r'```json\n(.*?)\n```',a.prereg.read_text(),re.S)
         R.require(len(blocks)==2,'prereg target manifest missing')
+        A.admit(ind,R.loads(blocks[0]))
         manifest=R.loads(blocks[1])
         targets={}
         for path,digest in manifest.items():
@@ -163,7 +183,7 @@ def main(argv=None):
         with a.output.open('x') as f: f.write(json.dumps(result,indent=2,sort_keys=True,allow_nan=False)+'\n')
         print(f"{result['status']}: {result['comparison_count']} comparisons, {result['mismatch_count']} mismatches")
         return 0 if result['status']=='MATCH' else 1
-    except (R.InvalidEvidence, OSError, ValueError, KeyError, TypeError, subprocess.CalledProcessError) as e:
+    except (R.InvalidEvidence, OSError, ValueError, KeyError, TypeError, OverflowError, subprocess.CalledProcessError) as e:
         print('COMPARISON INVALID: '+str(e),file=sys.stderr)
         return 2
 
