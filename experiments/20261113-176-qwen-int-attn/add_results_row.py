@@ -23,7 +23,7 @@ def arm_txt(a):
             f"per-layer max from {g(min(mxs))} to {g(max(mxs))} (largest at layer {worst['layer']}); pooled over {x['pooled']['n']:,} cells: median {g(x['pooled']['median'])}, "
             f"over 0.05: {x['pooled']['n_over_005']:,}; over-clamp entries q/k/v {sum(p['q_over'] for p in per):,}/{sum(p['k_over'] for p in per):,}/{sum(p['v_over'] for p in per):,}")
 
-summary = ((("PASS" if all(v == "PASS" for v in verd.values()) else "Mixed or negative") + " vs prereg. " if complete else "PARTIAL vs prereg (not all 16 attention layers done). ")
+summary = ((("PASS vs prereg. " if all(v == "PASS" for v in verd.values()) else ("NEGATIVE vs prereg: both arms FAIL. " if all(v == "FAIL" for v in verd.values()) else "Mixed vs prereg. ")) if complete else "PARTIAL vs prereg (not all 16 attention layers done). ")
            + "Upstream's integer attention (docs/model.md 6 steps 2 clamp only, 3, 4) on the 16 full-attention layers of Qwen3.8-27B abliterated, open loop, 10 frozen prompts (1,461 tokens), "
            + "bar = PR 88's A2 per-head bar (median rel_y <= 0.01, max <= 0.05 over 240 (prompt, head) pairs per layer, every layer): "
            + "; ".join(arm_txt(a) for a in ("C2047", "C1665"))
