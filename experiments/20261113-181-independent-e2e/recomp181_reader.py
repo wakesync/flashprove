@@ -112,7 +112,7 @@ def prompt_manifest(doc, counts, bf, det):
         array(p['token_ids'], counts[pid], pid, 'token')
         digest = hashlib.sha256(json.dumps(p['token_ids']).encode()).hexdigest()
         require(p['ids_sha256'] == digest, pid + ': token hash mismatch')
-        require(type(p['origin']) is str and type(p['text']) is str, pid + ': invalid metadata')
+        require(type(p['origin']) is str and (p['text'] is None or type(p['text']) is str), pid + ': invalid metadata')
     require(seen == set(counts), 'missing prompt')
 
 def stats(values):

@@ -73,6 +73,12 @@ class ReaderTests(unittest.TestCase):
         self.assertEqual(result['layer_coverage']['abl']['physical_layers'],1)
         self.assertEqual(result['bf16h_context_positions'],2)
 
+    def test_nullable_prompt_text_is_metadata_only(self):
+        b=fixture()
+        b['prompts']['prompts'][1]['text']=None
+        self.assertEqual(evaluate(b)['cells']['stock/XS20']['verdict'],'PASS')
+        self.invalid(lambda b:b['prompts']['prompts'][1].update(text=17))
+
     def test_prompt_missing_extra_duplicate(self):
         changes = [lambda b:b['prompts']['prompts'].pop(),
                    lambda b:b['prompts']['prompts'].append(copy.deepcopy(b['prompts']['prompts'][0])),

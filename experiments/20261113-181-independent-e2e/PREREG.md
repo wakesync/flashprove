@@ -76,3 +76,5 @@ Not aggregation inputs, read only after independent output exists. Paths relativ
 
 ## Amendments
 (empty at registration)
+
+- 2026-11-13, after first reader attempt and before any independent aggregate or comparison target was read: the first attempt failed at prompt metadata validation because p06a's committed `text` is null (its token IDs are present and pinned). Permit null prompt text as non-numeric metadata, with a synthetic regression test. This is a reader schema correction, not a denominator, tolerance, token or threshold change. Retain the failed-attempt log. Start a fresh five-execution series under new output names after the correction; no historical records are edited.
