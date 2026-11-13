@@ -44,8 +44,8 @@ A = S["arms"]
 summary = ("FAIL (mixed) vs prereg: H (U3 passes, U1 and U2 fail) is false because U3 fails; U1, U2, U3 FAIL, U4 PASS. Per arm, failing (layer, head) of 2,304 and failing cells of 23,040: "
            + ", ".join(f"{k} {A[k]['verdict']} {A[k]['n_fail_layer_heads']} / {A[k]['n_fail_cells']}" for k in ("U1", "U2", "U3", "U4"))
            + f" (PR #146's best, T3: 1513 / 6391). The three table-chain arms (softplus lookup, product with cA, exp lookup) still fail: U3, with a per-head exponent, 2^-20 scale and softplus rows down to -16, "
-           f"has no accumulated-decay failure left but misses the per-token bar on {A['U3']['fail_by_reason']['e_tok']} cells (largest per-token error {g(A['U3']['e_tok_max_over_cells']['max'])}, bar 0.001953). "
-           f"U4, one per-head table keyed on x (12,288 rows per head, one lookup), meets the bar on every cell (largest per-token error {g(A['U4']['e_tok_max_over_cells']['max'])}, "
+           f"has no accumulated-decay failure left but misses the per-token bar on {A['U3']['fail_by_reason']['e_tok']} cells (largest per-token error {g(A['U3']['e_tok_max_over_cells']['max'])}, bar 0.001953; that these misses sit on tokens with g >= 1 is a post hoc descriptive attribution). "
+           f"U4, one per-head table keyed on x (12,288 rows per head, one lookup; rows computed in float64, not by an integer generator, and output a at 2^-20, not the 2^-12 stream scale), meets the bar on every cell (largest per-token error {g(A['U4']['e_tok_max_over_cells']['max'])}, "
            f"largest accumulated error {g(A['U4']['e_cum_max_over_cells']['max'])}, bar 0.01). Emulation of table semantics only: no proof, no end-to-end token check; the table domains were fixed from the ranges seen on the same 10 prompts; "
            "U4 needs a lookup into a committed per-head table (counted, not built: 28,311,552 rows for the 48 layers), which no design on main specifies")
 entry = f'''  - id: {RID}
@@ -54,7 +54,7 @@ entry = f'''  - id: {RID}
     replication: unreplicated
     pr: {PR}
     summary: {json.dumps(summary)}
-    conditions: "same recorded decay inputs, metric and bar as PR #146 (48 DeltaNet layers x 48 V heads x 10 frozen prompts, 1,461 tokens, at most 512 per prompt); the 48 recorded array files are PR #146's scratch output, pinned by sha256 in the PREREG before use and accepted only after PR #146's unchanged evaluation on them reproduced its committed per-cell output; four arms registered before any code; integer emulation with tables from the pinned integer generator (U4's per-head rows in float64 by registration); CPU, one deterministic evaluation run twice, shared loaded host; no forward pass, no proof, no constraint build, no table digest or format change"
+    conditions: "same recorded decay inputs, metric and bar as PR #146 (48 DeltaNet layers x 48 V heads x 10 frozen prompts, 1,461 tokens, at most 512 per prompt); the 48 recorded array files are PR #146's scratch output, pinned by sha256 in the PREREG before use and accepted only after PR #146's unchanged evaluation on them reproduced its committed per-cell output; four arms registered before any arm-evaluation code (one design-tabulation script over PR #146's committed per-head ranges ran before the registration); integer emulation with tables from the pinned integer generator (U4's per-head rows in float64 by registration); CPU, one deterministic evaluation run twice, shared loaded host; no forward pass, no proof, no constraint build, no table digest or format change"
     evidence: [{X}/RESULTS.md]
     metrics:
 ''' + "\n".join(rows) + "\n\n"

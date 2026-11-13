@@ -29,7 +29,7 @@ No forward pass is run here and no weight is fetched.
 | `decay_r2.py` | integer emulation of U1 to U4; `fine20` builds the 2^20-row fine exp table; `eval` is the registered evaluation; `split` the descriptive split by source. Refuses an input that is not the registered files |
 | `provenance.py` | the input rule: sha256 of every input file, and PR #146's unchanged evaluation on them compared with PR #146's committed output -> `runs/provenance.json` |
 | `run_eval.py` | runs `decay_r2.py eval` with a start / end log -> `runs/progress.log.jsonl` |
-| `summarise_r2.py` | verdicts against the registered bar -> `runs/eval/summary.{json,md}`; refuses (exit 2) a per-cell file that is not the complete registered cell set |
+| `summarise_r2.py` | verdicts against the registered bar -> `runs/eval/summary.{json,md}`; refuses (exit 2) a per-cell file that is not the complete registered cell set, has a negative or non-finite error (or median above max) on a cell without a rejected lookup, or is unreadable |
 | `determinism.py` | compares the two runs of the registered evaluation -> `runs/determinism.json` |
 | `posthoc.py` | POST HOC (Amendment A3): per-token error by band of g for U1 to U3 -> `runs/descriptive/gband.csv.gz` |
 | `report_r2.py` | descriptive tables -> `runs/descriptive/report.{json,md}` |
