@@ -4,7 +4,12 @@
 Extends #100's opening tests (test_wb_conv.py) to the two new leaf fields e and int_sha256.
 Input: a run directory with blocks.jsonl (all 78 blocks). Output: JSON of every check.
 
-Usage: test_wb_leafv2.py <rundir> <out.json>
+Precondition (added after review round 1 of PR #151; the checks and the output JSON are unchanged): the
+records come through wb_leafv2's validated loader, and a leaves-v2.json stored in the run directory must
+be the tree of those records. Duplicate, malformed or inconsistent evidence is refused (exit 2) before
+any check runs. The suite itself still tests openings against the tree it builds from the records.
+
+Usage: test_wb_leafv2.py <rundir> <out.json>      exit 0 all checks pass, 1 a check failed, 2 evidence refused
 """
 import copy, json, sys
 from pathlib import Path
@@ -22,10 +27,11 @@ def check(group, name, cond):
 
 
 def main(rundir, outp):
-    recs = lv.load_records(rundir)
+    recs = lv.load_records(rundir, require_all=True)
     names, changed = lv.registered()
-    assert set(recs) == set(names)
     conv = lv.conversions()
+    if (Path(rundir) / "leaves-v2.json").exists():
+        lv.load_leaves(rundir, recs, conv)
     S = lv.SubsetV2(conv["stock"], recs, "stock")
     A = lv.SubsetV2(conv["abl"], recs, "abl")
     SID = S.id.hex()
@@ -151,4 +157,8 @@ def main(rundir, outp):
 
 
 if __name__ == "__main__":
-    sys.exit(0 if main(sys.argv[1], sys.argv[2]) else 1)
+    try:
+        sys.exit(0 if main(sys.argv[1], sys.argv[2]) else 1)
+    except lv.EvidenceError as ex:
+        print("REFUSED:", ex, file=sys.stderr)
+        sys.exit(2)

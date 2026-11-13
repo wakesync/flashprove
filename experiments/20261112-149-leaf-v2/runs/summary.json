@@ -49,18 +49,46 @@
   ]
  },
  "h3": {
+  "overall": {
+   "committed_compare_files": {
+    "compare-run1-run2.json": {
+     "agrees_with_recomputation": true,
+     "sha256": "9b592d610ab90ceb81cd9e25aa3880f0e71969a4c8b69021efed2168b80109dc"
+    },
+    "compare-run1-run3.json": {
+     "agrees_with_recomputation": true,
+     "sha256": "a93072dd9fcae23a3694d7292b720d5be88d9f2f12fde9c7148eea357dbc75f8"
+    }
+   },
+   "evidence": "recomputed from validated run files by wb_leafv2.compare_runs; stored trees must equal the trees rebuilt from the records; committed compare files must agree with the recomputation",
+   "n_registered": 78,
+   "rule": "FAIL on any mismatch (block leaf, fetched-bytes hash, root, subset id, stored tree file); PASS when the union covers all registered blocks; PASS-SUBSET at the registered reduced coverage (>= 10 blocks, >= 2 controls, >= 5 changed); otherwise BELOW-COVERAGE",
+   "status": "PASS"
+  },
   "run2": {
+   "inputs": {
+    "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+    "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+    "b_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5"
+   },
    "n_a": 78,
    "n_b": 8,
    "n_common": 8,
    "n_common_changed": 4,
    "n_common_controls": 4,
-   "n_identical": 8
+   "n_identical": 8,
+   "status": "identical-partial"
   },
   "run3": {
    "ids_equal": {
     "abl": true,
     "stock": true
+   },
+   "inputs": {
+    "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+    "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+    "b_blocks_sha256": "9ed836cbbed31b022888e37a7fa8de170f778e43b63a470413c98e3b598b2a88",
+    "b_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e"
    },
    "leaves_file_sha256_equal": true,
    "n_a": 78,
@@ -72,7 +100,8 @@
    "roots_equal": {
     "abl": true,
     "stock": true
-   }
+   },
+   "status": "identical-complete"
   },
   "union": {
    "all_identical": true,
