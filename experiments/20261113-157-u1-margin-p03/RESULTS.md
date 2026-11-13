@@ -63,6 +63,7 @@ The forward is deterministic float64, so the registered variance check is a repe
 ## Deviations
 - The layer-16 state that PR #139 used was not found, so stock layers 0 to 16 were recomputed for p03 in each run (registered in the PREREG before code). Gate (b) passed bit for bit, so the recomputed chain is the same forward that produced PR #124's REF values.
 - None of the 9 prompts was rerun; their D is PR #139's committed file, checked by sha256.
+- Validation-only change after the round-2 review: `merge10.py` now also checks the committed sha256 of every reused fixed input (PR #124's E files, manifests and prompt file, PR #87's manifests, PR #139's manifests, `analysis.json` and `analyse.py`) and exits 2 with nothing written on a mismatch. The reviewer showed that corrupted E files were accepted before this. No measured number, threshold, rule (including the registered E <= 0 handling of the real XS20 position p11 t = 279), run file or verdict changed; `runs/merged-analysis.json` and `runs/merge-validation.json` are reproduced byte for byte from the unchanged inputs (`test_merge10.py`).
 - No amendment to the PREREG that changes the registration. A dated clarification (A-1, 2026-11-13, after review) was added under Amendments: the introduction's "largest E 2.8e-3" is the stock-only maximum; it changes no rule, threshold or number.
 - In both committed `runs/run{1,2}/run.time` files, the scratch path on the command line (line 1) is replaced by `<SCRATCH>` so that no host path is committed. Nothing else in those files was edited.
 

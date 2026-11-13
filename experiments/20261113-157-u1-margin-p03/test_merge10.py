@@ -43,8 +43,27 @@ def missing_prompts_file(r): (r / "20261111-8-qwen-e2e-agreement/prompts-e2e.jso
 def dupkey_p87(r): edit_text(r / "20261110-36-weight-binding/runs/manifest-stock.json", lambda s: s.replace("{", '{"x": 1, "x": 2, ', 1))
 def run2_wrong_prompt(r): edit_text(r / ME / "runs/run2/d-p03.json", lambda s: s.replace('"p03-repeat-word"', '"p03-other"', 1))
 
+# Round-2 review (astra) reproduction: materially negative reused PR #124 E on p03 XS18 in both legs. Before the pins
+# this gave exit 0 PASS; the fixed inputs are now checked against their committed sha256 and it must exit 2.
+def _neg_e(d):
+    kl = d["prompts"]["p03-repeat-word"]["paths"]["XS18"]["kl"]; kl[1:] = [-1.0] * (len(kl) - 1)
+def negative_e_xs18_both(r):
+    for leg in ("stock", "abl"): edit_json(r / f"20261111-8-qwen-e2e-agreement/runs/e2e-{leg}.json", _neg_e)
+def negative_e_one_value(r):
+    def f(d): d["prompts"]["p05-code"]["paths"]["XS20"]["kl"][0] = -1e-3
+    edit_json(r / "20261111-8-qwen-e2e-agreement/runs/e2e-abl.json", f)
+def e_whitespace_only(r): edit_text(r / "20261111-8-qwen-e2e-agreement/runs/e2e-stock.json", lambda s: s + "\n")
+def p124_manifest_changed(r): edit_text(r / "20261111-8-qwen-e2e-agreement/runs/manifest-abl.json", lambda s: s + " ")
+def p87_manifest_changed(r): edit_text(r / "20261110-36-weight-binding/runs/manifest-abl.json", lambda s: s + " ")
+def p139_analysis_changed(r): edit_text(r / "20261112-134-u1-margin/runs/analysis.json", lambda s: s + " ")
+def p139_analyse_py_changed(r): edit_text(r / "20261112-134-u1-margin/analyse.py", lambda s: s + "\n")
+
 HOSTILE = [truncated_run1, dupkey_run1, truncated_run2, absent_e_stock, absent_e_abl_other, absent_xs18, truncated_e,
-           malformed_manifest, manifest_no_tensors, missing_prompts_file, dupkey_p87, run2_wrong_prompt]
+           malformed_manifest, manifest_no_tensors, missing_prompts_file, dupkey_p87, run2_wrong_prompt,
+           negative_e_xs18_both, negative_e_one_value, e_whitespace_only, p124_manifest_changed, p87_manifest_changed,
+           p139_analysis_changed, p139_analyse_py_changed]
+PINNED_CASES = {negative_e_xs18_both, negative_e_one_value, e_whitespace_only, p124_manifest_changed, p87_manifest_changed,
+                p139_analysis_changed, p139_analyse_py_changed}
 
 def main():
     fails = 0
@@ -59,6 +78,7 @@ def main():
             root = tree(tmp); case(root); out = Path(tmp) / "out"
             p = run(root, out)
             ok = p.returncode == 2 and "INVALID, nothing written" in p.stderr and "Traceback" not in p.stderr and not out.exists()
+            if case in PINNED_CASES: ok = ok and "sha256 is not the committed one" in p.stderr   # refused by the pin check
             print(f"{'ok  ' if ok else 'FAIL'} {case.__name__}: rc={p.returncode} wrote={out.exists()} traceback={'Traceback' in p.stderr}")
             if not ok: print(p.stderr[-800:])
             fails += not ok

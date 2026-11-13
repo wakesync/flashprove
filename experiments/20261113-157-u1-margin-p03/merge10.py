@@ -22,19 +22,52 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 EXP = HERE.parent
 P139 = EXP / "20261112-134-u1-margin"
+
+def sha_file(p):
+    h = hashlib.sha256(); h.update(Path(p).read_bytes()); return h.hexdigest()
+
+# Committed identity of PR #139's analyse.py, checked before it is imported (round-2 review hardening).
+ANALYSE_SHA = "92afcd5623259c829b45a173f0ed2e40099aed5b0ee3f29492a590b3fd4b6a69"
+try: _ok = sha_file(P139 / "analyse.py") == ANALYSE_SHA
+except OSError: _ok = False
+if not _ok:
+    print("INVALID, nothing written:\n - PR #139 analyse.py: missing or sha256 is not the committed one", file=sys.stderr); sys.exit(2)
 sys.path.insert(0, str(P139))
 import analyse as A        # PR #139, unchanged
 P124D = EXP / "20261111-8-qwen-e2e-agreement"; P124 = P124D / "runs"
 P87 = EXP / "20261110-36-weight-binding" / "runs"
 PID = "p03-repeat-word"; T03 = 512; TOK03 = 279
 D139_SHA = "74f5fa123723b6bb8cd7c4b4c8d511a6be8c7c55a8cad4a37796c2fc9740460f"
+# Committed sha256 of every other fixed (reused) input file. Round-2 review: the reused PR #124 E files were read from
+# working-tree paths without an identity check, so a corrupted copy (e.g. negative XS18 KL) could change the verdict.
+# Any mismatch now exits 2 with nothing written. Values are the sha256 of the files as committed on main.
+PINNED_FIXED = {
+    P124 / "e2e-stock.json": "1e066da307b848e007ffdf39823c9b2a245f8bcc27a7aa38c05bc54d7c5d3fa8",       # PR #124 E (stock)
+    P124 / "e2e-abl.json": "614f49f56b5fb905b391de29b2357b3e9304850881010709e78b8e4f62decc88",         # PR #124 E (abl)
+    P124 / "manifest-stock.json": "cbcf30147e00f2472c6b2e6938a4ea3c720b068ef16458446ef45559bf2f2e73",
+    P124 / "manifest-abl.json": "2ef8f90d8c39e99b6b1fae9cf14b0fa2044b5f0a527cd40e7789268b6c014918",
+    P124D / "prompts-e2e.json": "47aa61b46e142382ffa58b88f918df6ec63f1158629df5938ec00961a5242cfc",
+    P87 / "manifest-stock.json": "bef43106f808d91a26731122bcbfdde0f43d353beb4354f6184c7c98176393ab",
+    P87 / "manifest-abl.json": "66269fc451c52b3a5a370cb789c037e7b126a6a09b5a1203b09cbaa357ea975f",
+}
+# PR #139 committed files read from the PR #139 runs dir (D is D139_SHA above).
+PINNED_139 = {
+    "manifest-stock.json": "735fe50d3aeaf0d9f3487c50c711e9e8139d9accc8f8a75a40b99cd967ca5ba8",
+    "manifest-abl.json": "cc479c57e7acf34deaf4509328219174f3e118de1ba3abfceb3067ea6b38b814",
+    "analysis.json": "d7d127f697c317b5ac6198d838076adc31bca0443c5242842d6e7122f7c54a11",
+}
+
+def check_pins(R139):
+    bad = []
+    for p, h in [*PINNED_FIXED.items(), *((R139 / f, h) for f, h in PINNED_139.items())]:
+        try: ok = sha_file(p) == h
+        except OSError: ok = False
+        if not ok: bad.append(f"fixed input {p.parent.name}/{p.name}: missing or sha256 is not the committed one")
+    return bad
 LAYER = re.compile(r"^model\.language_model\.layers\.(\d+)\.")
 NORM, LM_HEAD = A.NORM, A.LM_HEAD
 ARR_KEYS = ("stock_top1", "abl_top1", "stock_margin", "abl_margin", "D_kl_stock_abl", "kl_abl_stock")
 OUTS = ("merged-analysis.json", "merge-validation.json")
-
-def sha_file(p):
-    h = hashlib.sha256(); h.update(Path(p).read_bytes()); return h.hexdigest()
 
 def jl(p): return json.loads(Path(p).read_text(), object_pairs_hook=A.no_dup)
 
@@ -50,7 +83,8 @@ def compute(argv):
     r1 = Path(argv[1]); r2 = None if argv[2] == "-" else Path(argv[2]); OUT = Path(argv[3])
     R139 = Path(argv[4]) if len(argv) > 4 else P139 / "runs"
     if any((OUT / f).exists() for f in OUTS): print("NOT RUN: output exists", file=sys.stderr); return 4
-    bad = []
+    bad = check_pins(R139)
+    if bad: return invalid(bad)
     # PR #139 committed inputs
     if sha_file(R139 / "d-per-position.json") != D139_SHA: bad.append("PR #139 D file: sha256 is not the registered one")
     d139 = jl(R139 / "d-per-position.json")["prompts"]
