@@ -127,3 +127,11 @@ Reason: the registered descriptive split is "for the best arm", and the best arm
 - the same source split for U3 (the failing arm with the fewest failing cells), by the split code committed before the run (`decay_r2.py split`, unchanged);
 - for U1, U2 and U3, per cell: the largest per-token error over the tokens with float64 g < 1 and over the tokens with g >= 1 separately, the number of tokens with g >= 1, and g and x at the token of the largest error (new file `posthoc.py`, committed with this amendment, before it is run). This checks the expectation written under "Hypothesis" (two floors in the same direction on tokens with g >= 1).
 Neither changes an arm, a table constant, the bar, the prompt set or a verdict. The arm code `decay_r2.py` is not edited.
+
+### A4, 2026-11-13, after the registered run and after A1 to A3. The commit time of this amendment is the record.
+A gap in the registration, recorded after the fact. The debug fixture named under "Runs" was evaluated before the registered run (about 01:45Z) from three array files in the same scratch output of PR #146 (`fx/fx-ar/`, 3,432 bytes each: the fixture prompt, stock layers 0 to 2, 5 tokens). Their sha256 was not recorded before that use; only the 48 files of the registered recording were. Recorded now, about 35 minutes after the use (the files' modification times, 2026-11-12T21:18Z, are before this lane started, which is consistent with them being unchanged but does not prove it):
+- fixture layer 0: a52b9df37039503b68e37ac43c290693ad3854d54b8aab3169a096e5c2a7e0d2
+- fixture layer 1: c26f241afb9b735e05e4bf7cff9d8c062ba5a7c9943a118b2b023295dbbdc146
+- fixture layer 2: 74ce59181f35842dc55c142cc7b2a4077682a987479146ced317f6b8f84e911b
+
+The fixture is not a suite prompt and its output is not a verdict (`runs/debug-fixture/`). No registered number depends on these files.

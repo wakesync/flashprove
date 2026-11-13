@@ -14,7 +14,7 @@ PR #146 found that none of four lookup-table designs kept the DeltaNet decay a =
 
 ## 1. Run record
 
-- PREREG `PREREG.md`: first commit `ef9bac0769b089673a72a2e012db4cec447ff64d`, alone, before any code. Amendments A1 to A3 (commit `fa595731`), all after the registered run: a correction of the header time, a record of the input branch taken, and two post hoc descriptive computations declared before they were run.
+- PREREG `PREREG.md`: first commit `ef9bac0769b089673a72a2e012db4cec447ff64d`, alone, before any code. Amendments A1 to A3 (commit `fa595731`), all after the registered run: a correction of the header time, a record of the input branch taken, and two post hoc descriptive computations declared before they were run. Amendment A4 (later commit): the sha256 of the three debug-fixture files, recorded after their use.
 - Arm code: `decay_r2.py`, `summarise_r2.py`, `provenance.py`, `test_r2.py` in `4c25604e`. The registered run was made at `cba5725b` (`runs/progress.log.jsonl`, `arm_code_modified: false`); `decay_r2.py`, `summarise_r2.py` and `provenance.py` have not changed since `4c25604e`.
 - Debug before the run, as registered: synthetic heads only (`test_r2.py`, numpy seed 155; receipt of a later run `runs/test_r2.json`) and PR #146's debug fixture, "The capital of Italy is", stock layers 0 to 2, 5 tokens, not a suite prompt (`runs/debug-fixture/`). The fixture output was seen before the registered run: U1, U2 and U3 missed the per-token bar on 15, 10 and 10 of 144 fixture cells, U4 on none.
 - Input (`runs/provenance.json`): the 48 array files of PR #146's registered recording were still in that lane's scratch output. Every file's sha256 equals the list written in the PREREG before use, and PR #146's unchanged `decay_tables.py eval` on them reproduces PR #146's committed `runs/eval/cells.csv.gz` and `domain.json.gz` (equal decompressed bytes). So the arrays were used and `record.py` was not rerun. A container-independent digest of the array contents is in `runs/input-content.json`.
@@ -96,7 +96,7 @@ DESIGN 5.3 counts for the decay, per head per token: one softplus lookup, one pr
 |---|---|---|---|---|---|
 | DESIGN 5.3 as counted | 2 (softplus, exp) | cA, dt_bias | 8,192 | 0 | one exponent per layer |
 | T3 (PR #146) | 3 (softplus, coarse exp, fine exp) | cA, dt_bias | 12,288 | 0 | plus a branch on x >= 8, not counted in DESIGN |
-| U1 | 3 | cA, dt_bias (unchanged) | 12,288 | 0 | 48 public exponents per layer instead of 1 (2,304 in the model). 1,412 heads get a shift above 12 against 192 under the per-layer rule; DESIGN 7 already counts the two-limb remainder for every shift, so its count does not change |
+| U1 | 3 | cA, dt_bias (unchanged) | 12,288 | 0 | 48 public exponents per layer instead of 1 (2,304 in the model). 1,412 heads get a shift above 12 against 192 under the per-layer rule; DESIGN 5.0 says its count uses the 3-key remainder layout for every shift, so on that reading the count does not change (not recounted here) |
 | U2 | 3 | cA, dt_bias | 1,056,768 (fine exp 1,048,576) | 0 | as U1; sp and g at 2^-20 |
 | U3 | 3 | cA, dt_bias | 1,058,816 (2,048 more softplus rows) | 0 | as U2 |
 | U4 | 1 | dt_bias only (no cA cell, no product, no floor remainder) | 0 | 12,288 per head, 589,824 per layer, 28,311,552 for the 48 layers | the table replaces cA; no exponent |
@@ -120,6 +120,7 @@ Not counted, and each one is a real obligation for a build:
 
 - Arms, table constants, metric, bar and prompt set are as registered. No round-2 arm (U1 to U4) was evaluated on a registered array before the registered run. PR #146's own arms T0 to T3 were, once, by the input check of section 1, as the PREREG says.
 - **Amendment A1.** The PREREG header says its date was "read from the host clock". The clock was read at 01:34:40Z and "01:36Z" was typed as an estimate of when the commit would land (it landed at 01:36:07Z); the commit time is the record.
+- **Amendment A4.** The three fixture array files also came from PR #146's scratch output, and their sha256 was not recorded before the fixture was evaluated; it was recorded about 35 minutes afterwards. No registered number depends on them.
 - **Amendment A3, post hoc.** The U3 split and the g-band table of section 4 were added after the verdicts were seen. They are descriptive, have no threshold and change no verdict. The amendment and `posthoc.py` were committed before either was run.
 - The design constants (G = 20, the -16 softplus bound, U4's [-16, 32) domain) were fixed from PR #146's committed per-head minimum, median and maximum of x and g, which come from the same 10 prompts the arms are then evaluated on. The bar and the metric were not tuned, but the domains are in-sample: on other prompts x could fall below -16 (clamped, error at most A softplus(-16)) or reach 32 (U4 rejects).
 - `design_inputs.py`, the script that produced that tabulation, was run from outside the repo before the PREREG and committed afterwards (docstring changed, code not).

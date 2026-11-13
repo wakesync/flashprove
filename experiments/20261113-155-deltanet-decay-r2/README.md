@@ -1,6 +1,6 @@
 # DeltaNet decay tables, round 2: per-head exponent, 2^-20 scale, wider softplus, and one per-head table keyed on x (CPU, no proof)
 
-Issue #155 (part of #35, follows #136 / PR #146, informs #8). PREREG: [PREREG.md](PREREG.md) (first commit `ef9bac0`, alone; three dated amendments after the run). Results: [RESULTS.md](RESULTS.md).
+Issue #155 (part of #35, follows #136 / PR #146, informs #8). PREREG: [PREREG.md](PREREG.md) (first commit `ef9bac0`, alone; four dated amendments after the run). Results: [RESULTS.md](RESULTS.md).
 
 ## What this is, in plain language
 
@@ -24,7 +24,7 @@ No forward pass is run here and no weight is fetched.
 
 | file | what it does |
 |---|---|
-| `PREREG.md` | registration (arms, bar, input rule, sha256 of the 48 input files) and amendments A1 to A3 |
+| `PREREG.md` | registration (arms, bar, input rule, sha256 of the 48 input files) and amendments A1 to A4 |
 | `design_inputs.py` | the tabulation of PR #146's committed per-head table that fixed the design constants (run before the PREREG; committed afterwards for the record) |
 | `decay_r2.py` | integer emulation of U1 to U4; `fine20` builds the 2^20-row fine exp table; `eval` is the registered evaluation; `split` the descriptive split by source. Refuses an input that is not the registered files |
 | `provenance.py` | the input rule: sha256 of every input file, and PR #146's unchanged evaluation on them compared with PR #146's committed output -> `runs/provenance.json` |
