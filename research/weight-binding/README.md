@@ -137,7 +137,7 @@ python3 research/weight-binding/test_wb_conv.py      # 128 / 128 PASS, exit 0
 ```
 
 Conversion leaf v2 (issue #149). CPU, network: fetches 9.41 GB (8.76 GiB) per pin by range request
-(memory only, about 2.1 GiB peak RSS), about 15 minutes on the shared host. Write into a fresh directory:
+(memory only, about 2.2 GB peak RSS), about 15 minutes on the shared host. Write into a fresh directory:
 
 ```sh
 O=$(mktemp -d)
