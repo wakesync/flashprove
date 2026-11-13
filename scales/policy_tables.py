@@ -21,8 +21,11 @@ With --check, the program compares the file's digest lines, in the order of the 
 what it finds. It does not test where the lines are; the verifier does.
 With --strip, the program prints the file without its digest lines and interprets no other line.
 
-To compute the lines, the program needs a file with "prof 20" and NE above 0, because only such a
-model has all four tables. It rejects cs above 12 and S above 31, where an entry would not fit a
+To compute the lines, the program needs a file with "prof 20". With NE above 0 the model has all
+four tables. With NE 0 (a dense file: no routed experts) it has no sigmoid table: the program then
+computes the SiLU, rotary and softmax digests as it does with experts and writes the eight lines
+tsig0 to tsig7 with the value 0, which is what the verifier asks of such a file
+(verifier/docs/parameter-file.md, "Digests of the public tables"). It rejects cs above 12 and S above 31, where an entry would not fit a
 32-bit word. It does not test whether the verifier accepts the file's values. Time and memory grow
 with the rotary tables (2^lt * dh entries) and the softmax table (in proportion to 2^rx).
 
@@ -365,8 +368,8 @@ def _parameters(lines):
         if name not in found:
             raise ValueError('there is no line of the exact form "%s <number>": the name, one space and decimal digits, and '
                              "nothing after them, not even a carriage return" % name)  # fmt: skip
-    if found["prof"] != 20 or found["NE"] == 0:
-        raise ValueError('the file does not have "prof 20" and NE above 0, so its model lacks one of the four tables')
+    if found["prof"] != 20:
+        raise ValueError('the file does not have "prof 20", so its model lacks one of the tables')
     for name, largest in _LARGEST.items():
         if found[name] > largest:
             raise ValueError("the line %s is above %d, the largest value that this program handles" % (name, largest))
@@ -381,9 +384,14 @@ def digests(lines):
 
     lines are the lines of a parameter file without their line feeds. Digest lines among them are ignored. The words
     that are hashed are those of docs/model.md, "4 Public tables", "Digests". If the lines do not
-    determine the four tables, the function raises a ValueError whose text says why.
+    determine the tables, the function raises a ValueError whose text says why.
+
+    With NE 0 (no routed experts) the model has no sigmoid table. The second digest is then DW zero words, not the
+    digest of a table: the verifier writes zeros at that place of the statement and asks the lines tsig0 to tsig7 to be 0.
+    The other three digests do not depend on NE.
     """
     p = _parameters(lines)
+    dense = p["NE"] == 0
     sigmoid = sigmoid_table()
     if "gcl" in p:
         # With the gate's clamp, the table that is hashed has the sigmoid's middle keys in its lower half, and in its
@@ -395,7 +403,7 @@ def digests(lines):
         [entry + _OFFSET for table in rotary_tables(2 ** p["lt"], p["dh"], p["cs"], p["theta0"]) for entry in table],
         softmax_table(p["S"], p["rx"]),
     )
-    return [hash_words(_TABLE_NUMBER, words) for words in hashed]
+    return [[0] * DW if dense and k == 1 else hash_words(_TABLE_NUMBER, words) for k, words in enumerate(hashed)]
 
 
 def table_lines(d):

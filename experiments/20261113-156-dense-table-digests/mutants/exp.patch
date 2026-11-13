@@ -1,0 +1,15 @@
+diff --git a/verifier/src/vf_attention_shape.h b/verifier/src/vf_attention_shape.h
+index f267031a..09743acb 100644
+--- a/verifier/src/vf_attention_shape.h
++++ b/verifier/src/vf_attention_shape.h
+@@ -208,7 +208,9 @@ struct AFork {
+         u0 = u;
+         break;
+       }
+-      Tt.push_back((u64)v);
++      // MUTANT (experiments/20261113-156-dense-table-digests): one entry of the softmax table moved by
++      // 1, as a floating-point library that rounds this entry differently would give it. Never merged.
++      Tt.push_back((u64)v + (u == 5 ? 1 : 0));
+       if (u > (1u << 20)) refuse("af-policy-softmax");
+     }
+     Smax = dh * CLAMP * CLAMP;

@@ -1,0 +1,9 @@
+case	binary	binary_sha256	status	result
+routed-experts.dense-with-digests	head	cbfabbdb267aae01f1df4b51253de62b63868d2b3df2c64b109e9f52da3fe852	4	met
+routed-experts.dense-with-digests	silu	b03b584ef50f244bf769ee66ab1a57eae637a95fd2ce59b119c2ffb4d0f3e5b0	1	NO: table-digest-silu
+routed-experts.dense-with-digests	rope	5f0b9318e1b3557d08690cef8b42595c1fc8f251b706034ebbac9439d930543f	1	NO: table-digest-rope
+routed-experts.dense-with-digests	exp	e63fb1275900d1f38993f1f91e6cb08202060e3d9cf82bd575d0b0176b39db38	1	NO: table-digest-exp
+routed-experts.dense	head	cbfabbdb267aae01f1df4b51253de62b63868d2b3df2c64b109e9f52da3fe852	4	not met: table-digests
+routed-experts.dense	silu	b03b584ef50f244bf769ee66ab1a57eae637a95fd2ce59b119c2ffb4d0f3e5b0	4	not met: table-digests
+routed-experts.dense	rope	5f0b9318e1b3557d08690cef8b42595c1fc8f251b706034ebbac9439d930543f	4	not met: table-digests
+routed-experts.dense	exp	e63fb1275900d1f38993f1f91e6cb08202060e3d9cf82bd575d0b0176b39db38	4	not met: table-digests

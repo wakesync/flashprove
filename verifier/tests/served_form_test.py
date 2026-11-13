@@ -31,11 +31,16 @@ met. "--list" prints every case with what it changes and what is expected, one o
   - "met": exit status 4 and no line "plan: not ..": a control, which changes the same values and
     violates nothing (the case none.kit changes nothing).
 Conditions without a case in which that condition alone is not met:
-  - routed-experts: the verifier accepts the digest lines of the four public tables all or none,
-    and rejects them unless the model has routed experts (policy-tables). Without routed experts
-    it also rejects the clamps' lines rcl and gcl. A dense file (NE 0 with no router, no experts'
-    weight kinds, no clamps and no digest lines) meets routed-experts, both-clamps and
-    table-digests: the case "dense" is met, and cases show the three rejections and NE 0 alone;
+  - routed-experts: without routed experts the verifier rejects the clamps' lines rcl and gcl. A
+    dense file (NE 0 with no router, no experts' weight kinds and no clamps) meets routed-experts
+    and both-clamps, and nothing else is waived for it: table-digests is asked of it as of any
+    file. The verifier accepts the digest lines of the public tables all or none; a dense model
+    has no sigmoid table, and its eight lines tsig<i> must be 0 (policy-tables otherwise). So the
+    case "dense" (no digest lines) misses table-digests alone, "dense-with-digests" (the lines
+    that scales/policy_tables.py computes for the dense file) is met, and the other dense cases
+    are rejections: a nonzero sigmoid word, a part of the lines, a digest word of the SiLU, rotary
+    or softmax table altered, the same three tables moved under unchanged digest lines (by eg,
+    theta0, rx), the two clamps, and NE 0 alone;
   - prompt-source, three-bytes: the verifier rejects the files of their cases;
   - placement-table: without a layout file the planning call is rejected (plan-layout).
 Two parts of rotary-table have no case: lt (log2 of a request's tokens) at most 10, dh (a head's
@@ -362,6 +367,29 @@ def the_cases(verifier, kit, work):
     digests = [x for x in good if DIGEST.match(x)]
     behind_digests = good[max(i for i, x in enumerate(good) if DIGEST.match(x)) + 1]
 
+    def dense_digests():
+        """The digest lines of the dense file, computed by scales/policy_tables.py, which shares no
+        code with the verifier: the SiLU, rotary and softmax digests, and eight lines tsig<i> 0."""
+        return policy_tables.table_lines(policy_tables.digests([x for x in no_experts()[0] if x]))
+
+    def dense_with(new, moved=None):
+        """The dense file's three files with these digest lines directly before the first line
+        "call"; moved: a function that changes the other lines first (the digest lines stay)."""
+        lines, words_kl, table = no_experts()
+        lines = moved(lines) if moved else lines
+        at = [i for i, x in enumerate(lines) if x.startswith("call ")][0]
+        return lines[:at] + new() + lines[at:], words_kl, table
+
+    def dense_altered(i, value=None):
+        """The dense file's digest lines with the lowest bit of line i flipped, or line i set to value."""
+        new = dense_digests()
+        name, old = new[i].split(" ")
+        return new[:i] + ["%s %d" % (name, int(old) ^ 1 if value is None else value)] + new[i + 1 :]
+
+    def before_xl(line):
+        """A function that puts this line directly before the line xl, where the format has eg."""
+        return lambda lines: lines[: [i for i, x in enumerate(lines) if x.startswith("xl ")][0]] + [line] + lines[[i for i, x in enumerate(lines) if x.startswith("xl ")][0] :]
+
     def with_digests(new):
         """policy.txt's lines with these lines in place of the digest lines."""
         first = good.index(digests[0])
@@ -385,8 +413,21 @@ def the_cases(verifier, kit, work):
         ("profile", "prof-19", "prof 19 and nothing else", kit_with(lambda: put("prof", 19)), 0, "policy-profile"),
         ("routed-experts", "NE-0", "NE 0 and nothing else", kit_with(lambda: put("NE", 0)), 0, "header-absent-class"),
         ("routed-experts", "dense", "NE 0 with all that follows from it: no router, no experts' weight kinds, no clamps, no digest lines; the layout file made again",
-         no_experts, 0, "met"),
-        ("routed-experts", "dense-with-digests", "the same with the kit's digest lines", lambda: and_lines(no_experts, digests, behind_digests), 0, "policy-tables"),
+         no_experts, 0, ("table-digests",)),
+        ("routed-experts", "dense-with-digests", "the same with the digest lines computed for it: those of its SiLU, rotary and softmax tables, and eight lines tsig<i> 0",
+         lambda: dense_with(dense_digests), 0, "met"),
+        ("routed-experts", "dense-with-sigmoid-digest", "the dense file with the kit's own digest lines, whose sigmoid digest is not 0", lambda: dense_with(lambda: digests), 0, "policy-tables"),
+        ("routed-experts", "dense-sigmoid-one-bit", "dense-with-digests with the line tsig7 1", lambda: dense_with(lambda: dense_altered(15, 1)), 0, "policy-tables"),
+        ("routed-experts", "dense-partial-digests", "dense-with-digests without the eight lines tsig<i>", lambda: dense_with(lambda: dense_digests()[:8] + dense_digests()[16:]), 0, "policy-tables"),
+        ("routed-experts", "dense-silu-altered", "dense-with-digests with one bit of the last word of the SiLU table's digest", lambda: dense_with(lambda: dense_altered(7)), 0, "table-digest-silu"),
+        ("routed-experts", "dense-rope-altered", "dense-with-digests with one bit of a word of the rotary tables' digest", lambda: dense_with(lambda: dense_altered(21)), 0, "table-digest-rope"),
+        ("routed-experts", "dense-exp-altered", "dense-with-digests with one bit of the last word of the softmax table's digest", lambda: dense_with(lambda: dense_altered(31)), 0, "table-digest-exp"),
+        ("routed-experts", "dense-silu-table-moved", "dense-with-digests with a line eg 7 and the digest lines unchanged: another SiLU table under the stated digest",
+         lambda: dense_with(dense_digests, before_xl("eg 7")), 0, "table-digest-silu"),
+        ("routed-experts", "dense-rope-table-moved", "dense-with-digests with theta_0 %s and the digest lines unchanged: other rotary tables under the stated digest" % format(other_theta, ","),
+         lambda: dense_with(dense_digests, lambda lines: put("theta0_lo", other_theta, lines)), 0, "table-digest-rope"),
+        ("routed-experts", "dense-exp-table-moved", "dense-with-digests with rx 7 and the digest lines unchanged: another softmax table under the stated digest",
+         lambda: dense_with(dense_digests, lambda lines: put("rx", 7, lines)), 0, "table-digest-exp"),
         ("routed-experts", "dense-with-gcl", "the same with the line gcl 1", lambda: and_lines(no_experts, ["gcl 1"], "xl "), 0, "policy-gcl"),
         ("routed-experts", "dense-with-rcl", "the same with the line rcl 1", lambda: and_lines(no_experts, ["rcl 1"], "xl "), 0, "policy-rcl"),
         ("five-limbs", "no-xl", "no line xl; the layout file made again", lambda: anew("five-limbs", put("xl", None), scales), 0, ("five-limbs",)),

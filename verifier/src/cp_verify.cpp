@@ -1189,9 +1189,14 @@ static Lay polLayout(PolScan &PS) {
   if ((u32)TAU < statedTarget.hb) refuse("policy-tau-hb");
   for (auto &c : y.calls)
     if (c.c.kappa != 5) refuse("hid-planes-" + c.c.name);
-  // The tables' lines (DW for each of the four) are accepted only if all four tables are computed,
-  // so that every digest is compared: that is with MoE layers.
-  if (PS.tblAt && !h.NE) refuse("policy-tables");
+  // The tables' lines (DW for each of the four) are all there or none (polScan). With MoE layers all
+  // four tables are computed and every digest is compared (tblHeld). Without them (NE 0) the SiLU,
+  // rotary and softmax tables are computed and compared, and no sigmoid table is formed: its DW
+  // words in the statement are zeros, and the file's DW lines tsig<i> must then be 0 too, so that
+  // the file's lines are the statement's words in both cases and no word of them is left uncompared.
+  if (PS.tblAt && !h.NE)
+    for (size_t i = 0; i < DW; i++)
+      if (PS.tblPol[1][i]) refuse("policy-tables");
   return y;
 }
 // Requested bits: an integer from 0 to 1,000,000. A program that links this unit passes a double.
@@ -2396,16 +2401,16 @@ static int runStage(const StageInputs &in) {
                                    layoutH.find(0, "M" + std::to_string(linksH[0].tl->pxMat[i])));
     }
   /* A dense parameter file: NE 0, and so no router, no expert classes or weight kinds (refused above:
-     header-absent-class, header-absent-kind), no rcl or gcl (policy-rcl, policy-gcl) and no lines of
-     the tables' digests (policy-tables). For such a file the three conditions on what only a model
-     with routed experts has are met (routed-experts, both-clamps, table-digests); for NE above 0
-     `dense` is false and they are what they were. Why each is met, and what a dense YES then does not
-     pin (the SiLU, rotary and softmax tables by digest lines): verifier/docs/parameter-file.md, "The
-     standard parameter form". */
-  const bool dense = h.NE == 0 && !RCL && !GCL && tblAt == 0;
+     header-absent-class, header-absent-kind) and no rcl or gcl (policy-rcl, policy-gcl). For such a
+     file the two conditions on what only a model with routed experts has are met (routed-experts,
+     both-clamps); for NE above 0 `dense` is false and they are what they were. table-digests is asked
+     of every file, dense or not: a dense file states the digests of its SiLU, rotary and softmax
+     tables in the same DW lines each, with the sigmoid's lines 0 (polLayout), and tblHeld() has
+     compared them. Why: verifier/docs/parameter-file.md, "The standard parameter form". */
+  const bool dense = h.NE == 0 && !RCL && !GCL;
   string notServed =
       servedForm({h.NE > 0 || dense, residualStreamLimbs == 5, (RCL && GCL) || dense, h.toksrc == 1, layoutP != nullptr,
-                    tblAt == TBLW || dense, !egSeen && !smaxSeen, h.Sx < 32, h.D == 2048, oneShift, onePlacement,
+                    tblAt == TBLW, !egSeen && !smaxSeen, h.Sx < 32, h.D == 2048, oneShift, onePlacement,
                     h.Sx == 12 && h.rx == 8, rotaryServed(h.theta0, dh, h.lt),
                     normShifts, twoCodesH,
                     !ask.nextTokenAsked || ((u64)so.r + 1 == T && so.e == T),
@@ -2458,8 +2463,12 @@ static int runStage(const StageInputs &in) {
     if (RCL) printf("plan: the router's logits are clamped (line rcl)\n");
     if (GCL) printf("plan: the input of the SiLU table is clamped (line gcl)\n");
     if (residualStreamLimbs == 5) printf("plan: a value of the residual stream has five limbs (line xl)\n");
-    if (tblAt == TBLW)
+    if (tblAt == TBLW && h.NE)
       printf("plan: this program's four public tables match the parameter file's digests (lines tsilu0 .. texp%u)\n",
+             DW - 1);
+    if (tblAt == TBLW && !h.NE)
+      printf("plan: this program's three public tables of a model without experts (SiLU, rotary, softmax) match the "
+             "parameter file's digests (lines tsilu0 .. texp%u); the sigmoid's lines are 0\n",
              DW - 1);
     // The statement's length in words, and the place of y in it; words are counted from 0.
     printf("statement: %zu words, y at word %zu\n", st.size(), (size_t)(h.hTok - st.data()) + DW);

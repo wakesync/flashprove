@@ -77,8 +77,8 @@ _ONLY_VALUE = {
 _RANGE_IF_PRESENT = {"lidb": (23, 30)}
 _MOST_CALL_LINES = {"call": 8, "callH": 6}
 _NO_EXPERTS = (
-    "NE is 0, a model without routed experts. A parameter file for such a model cannot carry the "
-    "digests of the public tables, which this package requires."
+    "NE is 0, a model without routed experts. This package requires experts: its own reading of "
+    "the 32 digest lines of the public tables covers only a file with NE above 0."
 )
 _NO_DIGESTS = (
     " The 32 lines tsilu0 to texp7 carry the digests of the public tables. Without them nothing "

@@ -1,0 +1,21 @@
+{
+ "stock": {
+  "fetched": 226,
+  "vs_pr124_compared": 226,
+  "vs_pr124_mismatch": [],
+  "emb_rows_compared": 73,
+  "emb_rows_mismatch": [],
+  "vs_pr68_diff_compared": 226,
+  "vs_pr68_diff_mismatch": []
+ },
+ "abl": {
+  "fetched": 463,
+  "vs_pr124_compared": 463,
+  "vs_pr124_mismatch": [],
+  "emb_rows_compared": 0,
+  "emb_rows_mismatch": [],
+  "vs_pr68_diff_compared": 463,
+  "vs_pr68_diff_mismatch": []
+ },
+ "all_match": true
+}

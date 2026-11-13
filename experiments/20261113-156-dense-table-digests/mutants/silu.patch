@@ -1,0 +1,14 @@
+diff --git a/verifier/src/cp_verify.cpp b/verifier/src/cp_verify.cpp
+index 7fa6f745..b5bfb6df 100644
+--- a/verifier/src/cp_verify.cpp
++++ b/verifier/src/cp_verify.cpp
+@@ -200,6 +200,9 @@ static int gateTableEntry(int t) {
+   if (c < -top) c = -top;
+   if (c > top - 1) c = top - 1;
+   double z = c / (double)(1 << gateTableInputFractionBits), v = round(64.0 * (z / (1.0 + exp(-z))));
++  // MUTANT (experiments/20261113-156-dense-table-digests): one entry of the SiLU table moved by 1, as
++  // a floating-point library that rounds this entry differently would give it. Never merged.
++  if (t == 33024) return (v < -SMAX ? -SMAX : v > SMAX ? SMAX : (int)v) + 1;
+   return v < -SMAX ? -SMAX : v > SMAX ? SMAX : (int)v;
+ }
+ static int sigmoidClampTableEntry(int t) {
