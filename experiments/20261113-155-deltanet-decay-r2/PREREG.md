@@ -115,3 +115,15 @@ In this repo: PR #146 (`experiments/20261112-136-deltanet-decay`: T0 to T3 all F
 
 ## Amendments
 (empty at registration)
+
+### A1, 2026-11-13, after the registered run (`runs/progress.log.jsonl`: 01:47:25Z to 01:47:56Z) and its verdicts, before any of the computations named in A3. The commit time of this amendment is the record.
+Correction of the header, no change to the registration. The header says "Date (UTC): 2026-11-13T01:36Z (read from the host clock)". That is not accurate: the clock was read at 01:34:40Z and "01:36Z" was typed as an estimate of when the commit would land. The commit time (01:36:07Z) is the record, as the header also says. The text above is left as committed.
+
+### A2, same commit as A1
+Record of which branch of the input rule was taken (not a change). The 48 scratch files matched the sha256 list and PR #146's unchanged evaluation on them reproduced PR #146's committed `cells.csv.gz` and `domain.json.gz` (`runs/provenance.json`), so the arrays were used and `record.py` was not rerun. The 2^20-row fine exp table was generated in full with the integer generator, so the float64 fallback and its sample check were not used.
+
+### A3, same commit as A1: two descriptive computations added after the verdicts were seen (post hoc, no threshold, no verdict)
+Reason: the registered descriptive split is "for the best arm", and the best arm (U4) passes, so its split does not say where U1 to U3 still fail, which issue #155 asks for ("remaining failures attributed by source"). Added, and labelled post hoc wherever reported:
+- the same source split for U3 (the failing arm with the fewest failing cells), by the split code committed before the run (`decay_r2.py split`, unchanged);
+- for U1, U2 and U3, per cell: the largest per-token error over the tokens with float64 g < 1 and over the tokens with g >= 1 separately, the number of tokens with g >= 1, and g and x at the token of the largest error (new file `posthoc.py`, committed with this amendment, before it is run). This checks the expectation written under "Hypothesis" (two floors in the same direction on tokens with g >= 1).
+Neither changes an arm, a table constant, the bar, the prompt set or a verdict. The arm code `decay_r2.py` is not edited.

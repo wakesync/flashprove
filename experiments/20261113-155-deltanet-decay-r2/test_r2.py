@@ -84,7 +84,7 @@ class Arms(unittest.TestCase):
             a1, rej = R.arm_decay(ar, A, dtb, "U1", T, per_head=False)
             self.assertTrue(np.array_equal(a1, a3)); self.assertFalse(bool(rej.any()))
 
-    def test_u2_with_layer_exponent_is_sweep_shape(self):
+    def test_u2_against_big_integer_recomputation(self):
         """U2's g path against a direct big-integer recomputation on a few (token, head) pairs."""
         T = tables(); l, A, dtb, ar = synthetic()[9]
         e, cA = R.head_consts(A); X, r = R.front(ar, dtb); a2, _ = R.arm_decay(ar, A, dtb, "U2", T)
