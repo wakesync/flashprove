@@ -1,0 +1,27 @@
+{
+ "rounds_per_tree": 5,
+ "cases_main": 47,
+ "cases_head": 56,
+ "changed": [
+  "routed-experts.dense",
+  "routed-experts.dense-with-digests"
+ ],
+ "new_on_head": [
+  "routed-experts.dense-with-sigmoid-digest",
+  "routed-experts.dense-sigmoid-one-bit",
+  "routed-experts.dense-partial-digests",
+  "routed-experts.dense-silu-altered",
+  "routed-experts.dense-rope-altered",
+  "routed-experts.dense-exp-altered",
+  "routed-experts.dense-silu-table-moved",
+  "routed-experts.dense-rope-table-moved",
+  "routed-experts.dense-exp-table-moved"
+ ],
+ "same_main_head": 45,
+ "dense_cases_under_both_binaries": 14,
+ "configuration_dense": "cc0907c9dfa63ff19cf6c2f2f84c0333426a47b8ced02262e1c1174d97d30f53",
+ "configuration_dense_with_digests": "650e0b249cb8ba74f92608241fdf3f7a1402a94519b797f81e90a1d2d89ff973",
+ "statement_dense": "statement: 177 words, y at word 171",
+ "statement_dense_with_digests": "statement: 177 words, y at word 171",
+ "not_as_registered": []
+}

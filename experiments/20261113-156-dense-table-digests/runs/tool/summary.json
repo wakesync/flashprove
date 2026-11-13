@@ -1,0 +1,20 @@
+{
+ "files_with_experts": 9,
+ "modes": 3,
+ "runs_per_tool": 27,
+ "same": 27,
+ "dense_file": {
+  "default": {
+   "main_status": 2,
+   "head_status": 0,
+   "head_prints_the_file_unchanged": true
+  },
+  "--check": {
+   "main_status": 2,
+   "head_status": 0,
+   "head_prints_the_file_unchanged": false
+  }
+ },
+ "dense_file_sha256": "aa998c94cd535402b8bccf3c9d3591ab50eae03450d552f370802b0026207013",
+ "not_as_registered": []
+}
