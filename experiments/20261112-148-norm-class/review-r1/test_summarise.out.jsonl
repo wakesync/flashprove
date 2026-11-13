@@ -1,0 +1,50 @@
+{"case": "control_complete_C_fails_layer_3", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"FAIL\", \"S\": \"FAIL\", \"W\": \"FAIL\"}"}
+{"case": "control_complete_C_passes", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"PASS\", \"S\": \"FAIL\", \"W\": \"FAIL\"}"}
+{"case": "control_stopped_run_is_partial", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"NO VERDICT\", \"S\": \"NO VERDICT\", \"W\": \"NO VERDICT\"}"}
+{"case": "astra_missing_arm_C_on_failing_layer", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 3: arms ['S3', 'S4', 'S5', 'W'] are not exactly ['C', 'S3', 'S4', 'S5', 'W']"}
+{"case": "missing_arm_W", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 11: arms ['C', 'S3', 'S4', 'S5'] are not exactly ['C', 'S3', 'S4', 'S5', 'W']"}
+{"case": "extra_arm", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 0: arms ['C', 'S3', 'S4', 'S5', 'S6', 'W'] are not exactly ['C', 'S3', 'S4', 'S5', 'W']"}
+{"case": "dup_baseline_row_identical", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline.jsonl line 65: duplicate row for layer 43"}
+{"case": "dup_arm_row_identical", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl line 34: duplicate row for layer 0"}
+{"case": "dup_arm_row_changed_value", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl line 34: duplicate row for layer 3"}
+{"case": "dup_arm_row_changed_consistently", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl line 34: duplicate row for layer 3"}
+{"case": "dup_baseline_row_adjacent", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline.jsonl line 12: duplicate row for layer 10"}
+{"case": "opus_missing_prompt_baseline_pooled_kept", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 10 post_attention_layernorm: prompt set ['p01-ordinary-short', 'p04-repeat-punct', 'p07-chat-ordin"}
+{"case": "missing_prompt_baseline_pooled_recomputed", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 10 input_layernorm: prompt set ['p01-ordinary-short', 'p04-repeat-punct', 'p07-chat-ordinary', 'p0"}
+{"case": "missing_prompt_arm", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 4 arm S4: prompt set ['p01-ordinary-short', 'p03-repeat-word', 'p04-repeat-punct', 'p07-chat-ordinary'"}
+{"case": "extra_prompt_baseline", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 0 input_layernorm: prompt set ['p01-ordinary-short', 'p03-repeat-word', 'p04-repeat-punct', 'p05-c"}
+{"case": "renamed_prompt_arm", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 0 arm W: prompt set ['p02-ordinary-paragraph', 'p03-repeat-word', 'p04-repeat-punct', 'p07-chat-ordina"}
+{"case": "det_flag_missing_prompt", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 8: det_bit_equal must hold exactly ['p01-ordinary-short', 'p09-multilingual'], booleans"}
+{"case": "truncated_json_last_arm_line", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl line 33: not JSON (Unterminated string starting at)"}
+{"case": "truncated_missing_final_newline", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline.jsonl: last line not terminated (truncated file)"}
+{"case": "truncated_last_arm_row_dropped", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl: layers [0, 3, 4, 7, 8, 11, 12, 15, 16, 19, 20, 23, 24, 26, 27, 28, 31, 32, 35, 36, 39, 40, 43, 44, 47"}
+{"case": "truncated_last_baseline_row_dropped", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl: layers [0, 3, 4, 7, 8, 11, 12, 15, 16, 19, 20, 23, 24, 26, 27, 28, 31, 32, 35, 36, 39, 40, 43, 44, 47"}
+{"case": "dropped_middle_arm_row", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl: layers [0, 3, 4, 7, 8, 12, 15, 16, 19, 20, 23, 24, 26, 27, 28, 31, 32, 35, 36, 39, 40, 43, 44, 47, 48"}
+{"case": "dropped_middle_baseline_row", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline.jsonl: layers are not 0..62 in order"}
+{"case": "truncated_consistently_becomes_partial", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"NO VERDICT\", \"S\": \"NO VERDICT\", \"W\": \"NO VERDICT\"}"}
+{"case": "all_done_without_64_layers", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: progress.log.jsonl says all_done but the baseline is not 64 layers"}
+{"case": "empty_arms_file", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl: layers [] are not the arm-on layers of R33 or the full set up to layer 63"}
+{"case": "blank_line", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl line 4: blank line"}
+{"case": "extra_layer_99", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline.jsonl line 65: layer missing or outside 0..63"}
+{"case": "arms_off_registered_set", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms.jsonl: layers [0, 2, 4, 7, 8, 11, 12, 15, 16, 19, 20, 23, 24, 26, 27, 28, 31, 32, 35, 36, 39, 40, 43, 44, 47"}
+{"case": "value_change_r_only", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 0 arm W p03-repeat-word: r != num / den_stream"}
+{"case": "value_change_consistent_is_visible", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"PASS\", \"S\": \"FAIL\", \"W\": \"FAIL\"}"}
+{"case": "opus_pooled_over_changed", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 0 input_layernorm pooled.n_over_2047 = 19 != sum over prompts 18"}
+{"case": "astra_prompt_counter_changed", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 0 input_layernorm p01-ordinary-short: histogram tail disagrees with the class counters"}
+{"case": "histogram_changed_tail_kept_is_visible", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"FAIL\", \"S\": \"FAIL\", \"W\": \"FAIL\"}"}
+{"case": "histogram_changed_tail", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 7 post_attention_layernorm p04-repeat-punct: histogram tail disagrees with the class counters"}
+{"case": "token_count_changed_arm", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 7 arm S3 p07-chat-ordinary: n_tokens 24 != registered 23"}
+{"case": "token_count_changed_baseline", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline layer 2 input_layernorm p01-ordinary-short: n_rows 12 != registered tokens 13"}
+{"case": "arm_W_mixer_input_differs_from_baseline", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 4 arm W p01-ordinary-short.qa: arm W's mixer input counters differ from the baseline input_layernorm c"}
+{"case": "denominator_differs_between_arms", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 4 arm S5 p01-ordinary-short: den_stream / den_out differ between arms"}
+{"case": "shift_inconsistent", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 4 arm S4 p01-ordinary-short.mlp: shifts"}
+{"case": "clamp_outside_arm_C", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 4 arm W p01-ordinary-short.qm: only arm C clamps"}
+{"case": "det_flag_false_gives_no_verdict", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"NO VERDICT\", \"S\": \"NO VERDICT\", \"W\": \"NO VERDICT\"}"}
+{"case": "layer_type_wrong", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: baseline.jsonl line 4: type linear_attention is not layer 3's"}
+{"case": "nan_in_r", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: non-finite number NaN"}
+{"case": "infinity_in_num", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: non-finite number Infinity"}
+{"case": "overflow_number", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: non-finite number 1e999"}
+{"case": "negative_value", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 0 arm C p01-ordinary-short.mix_rel: not a non-negative number"}
+{"case": "errored_arm_counts_as_failing", "expect": "ok", "rc": 0, "ok": true, "detail": "{\"C\": \"FAIL\", \"S\": \"FAIL\", \"W\": \"FAIL\"}"}
+{"case": "errored_arm_on_some_prompts_only", "expect": "refuse", "rc": 2, "ok": true, "detail": "summarise.py: REFUSED, input fails validation: arms layer 3 arm C: error entries must cover all six prompts and hold only 'error'"}
+{"cases": 49, "failed": 0}

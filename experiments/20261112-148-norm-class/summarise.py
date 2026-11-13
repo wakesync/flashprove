@@ -5,16 +5,24 @@ Writes runs/summary.json and runs/summary.md. Applies the registered rules as wr
     both norms, all 64 layers, all registered tokens. Evaluated only if the baseline covers all 64 layers.
   - class verdict per arm; fidelity bar per layer: median over prompts of r <= 1e-3 and max over prompts of r <= 1e-2.
 A partial run gets per-layer rows and no all-layer verdict.
+Input validation (validate_runs.py, added in review round 1 after the run): duplicate or changed duplicate rows, a
+missing arm or prompt, truncated files, inconsistent counts or non-finite values make it exit 2 and write nothing.
 Usage: summarise.py [runs_dir]"""
 import json, math, statistics, sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from validate_runs import EvidenceError, load_runs
+
 R = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent / "runs"
 NL = 64; NPROMPT = 6; MED_BAR = 1e-3; MAX_BAR = 1e-2
 NORMS = ("input_layernorm", "post_attention_layernorm")
-load = lambda n: [json.loads(l) for l in open(R / n)] if (R / n).exists() else []
-base = {r["layer"]: r for r in load("baseline.jsonl")}
-arms = {r["layer"]: r for r in load("arms.jsonl")}
+try:
+    _base_rows, _arm_rows, _ = load_runs(R)
+except EvidenceError as e:
+    print(f"summarise.py: REFUSED, input fails validation: {e}", file=sys.stderr); sys.exit(2)
+base = {r["layer"]: r for r in _base_rows}
+arms = {r["layer"]: r for r in _arm_rows}
 S = dict(layers_baseline=sorted(base), layers_arms=sorted(arms), baseline_complete=sorted(base) == list(range(NL)),
          arms_complete_64=sorted(arms) == list(range(NL)), bar=dict(median_r=MED_BAR, max_r=MAX_BAR))
 
@@ -62,7 +70,7 @@ for arm in ("C", "S3", "S4", "S5", "W"):
                           n_h_ge_2e18=0, n_gwuh_ge_2e23=0, n_out_ge_2e31=0, shifts_min=99, shifts_max=-99, errors=0)
     for i in sorted(arms):
         d = arms[i]["arms"].get(arm)
-        if d is None: continue
+        if d is None: raise SystemExit(f"summarise.py: arm {arm} missing on layer {i}")   # unreachable: validate_runs requires every arm
         if any("error" in v for v in d.values()):
             out["errors"] += 1; rows.append(dict(layer=i, type=arms[i]["type"], error=True, passes=False)); continue
         r = [v["r"] for v in d.values()]; c = [v["c"] for v in d.values()]; dd = [v["d"] for v in d.values() if v["d"] is not None]
