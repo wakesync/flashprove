@@ -24,6 +24,10 @@ The program wants to prove one real abliterated reply end to end (DESIGN section
 | `run177.sh` | the registered run under its start-by, hard stop and 5 s RSS / disk watchdog |
 | `summarise177.py` | flags, counts, window counts, bars, target; public `runs/summary.json` / `summary.md` without reply ids for refusal-type prompts |
 | `test_summarise177.py` | synthetic test of the summariser (window, stop rule, tie to lowest id, verdicts, no ids in public output) -> `runs/summariser-synthetic-test.json` |
+| `describe177.py` | descriptive, after results (PREREG A-1): margins at abliterated misses, clean-prefix lengths, first separating position -> `runs/describe.json` |
+| `check_manifests177.py` | fetched tensor sha256 vs PR #87's per-tensor manifests, embedding rows vs PR #124 -> `runs/manifest-check.json` |
+| `redact_manifest177.py` | replaces the stock manifest's token-id-keyed embedding-row map by count + sha256 (publication rule, PREREG A-1) |
+| `env177.py`, `add_results_row177.py` | `ENV.json`, the `research/results.yaml` row |
 
 Changes relative to reused code: none inside the reused files. `forward177.py` builds a state of 8 prompts where `u1_p03.py` built p03 alone, and writes per-position output instead of `d-p03.json`. The route client differs from PR #133's in max_tokens (48), repetitions (1) and the request cap (20, counted across batches).
 
@@ -36,6 +40,8 @@ python3 rebuild177.py <dir with pinned tokenizer.json + chat_template.jinja> $X/
 fp-heavy.sh taskset -c 10-15 bash run177.sh $X/fw $X/served-ids-private.json $X/forward-private.json
 python3 summarise177.py $X/forward-private.json $X/served-ids-private.json runs $X/detail-private.json --pr133 ../20261112-131-served-reply-agreement/runs/forward.json ../20261112-131-served-reply-agreement/runs/served-ids.json
 python3 test_summarise177.py runs/summariser-synthetic-test.json
+python3 check_manifests177.py              # before redact_manifest177.py
+python3 describe177.py runs/summary.json runs/describe.json
 ```
 
 `$X/replies.jsonl` (the served replies) cannot be regenerated without access to a serving deployment; `served_route177.py collect <state.json> prompts-refusal.json <out>` with `BRIDGE_URL`, `BRIDGE_KEY_FILE`, `BRIDGE_MODEL` set is how they were collected. A later lane that holds the scratch replies checks them against the `content_sha256` and `reply_ids_sha256` in `runs/served-ids-public.json`.
