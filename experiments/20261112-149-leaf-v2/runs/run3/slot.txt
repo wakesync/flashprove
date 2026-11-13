@@ -1,0 +1,3 @@
+slot_granted_utc 2026-11-12T22:56:48Z
+blocks 78
+finished_utc 2026-11-12T23:15:45Z

@@ -1,0 +1,23 @@
+	Command being timed: "python3 research/weight-binding/wb_leafv2.py run experiments/20261112-149-leaf-v2/runs/run1 --budget-s 3000"
+	User time (seconds): 115.67
+	System time (seconds): 658.94
+	Percent of CPU this job got: 86%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 14:51.37
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2176528
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 89616546
+	Voluntary context switches: 207550
+	Involuntary context switches: 9300
+	Swaps: 0
+	File system inputs: 256
+	File system outputs: 488
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

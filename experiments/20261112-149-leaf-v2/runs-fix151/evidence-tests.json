@@ -1,0 +1,1628 @@
+{
+ "n_cases": 59,
+ "n_checks": 162,
+ "n_pass": 162,
+ "note": "evidence-handling regression tests for leaf v2 run files (review round 1 of PR 151); altered copies of the committed run files must be refused or reported as different, never accepted as the passing result; hash level, NOT A PROOF",
+ "results": [
+  {
+   "case": "baseline",
+   "expected": "identical-complete",
+   "expected_reason": null,
+   "got": "identical-complete",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "baseline",
+   "expected": "identical-partial",
+   "expected_reason": null,
+   "got": "identical-partial",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "run2"
+  },
+  {
+   "case": "baseline",
+   "expected": "pass",
+   "expected_reason": null,
+   "got": "pass",
+   "ok": true,
+   "reader": "suite",
+   "reason": "",
+   "run": "run1"
+  },
+  {
+   "case": "baseline",
+   "expected": "pass",
+   "expected_reason": null,
+   "got": "pass",
+   "ok": true,
+   "reader": "suite",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "baseline",
+   "expected": "PASS",
+   "expected_reason": null,
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "baseline",
+   "expected": "committed fields reproduced",
+   "expected_reason": null,
+   "got": "committed fields reproduced",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "compare-run1-run2.json"
+  },
+  {
+   "case": "baseline",
+   "expected": "committed fields reproduced",
+   "expected_reason": null,
+   "got": "committed fields reproduced",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "compare-run1-run3.json"
+  },
+  {
+   "case": "baseline",
+   "expected": "rc 0",
+   "expected_reason": null,
+   "got": "rc 0",
+   "ok": true,
+   "reader": "summarise --check",
+   "reason": "",
+   "run": "committed"
+  },
+  {
+   "case": "dup-identical-control-first",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-identical-control-first/runs/run3/blocks.jsonl line 2: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-identical-control-first",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-identical-control-first/runs/run3/blocks.jsonl line 2: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-identical-control-first",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-identical-control-first/runs/run3/blocks.jsonl line 2: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-identical-control-last",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-identical-control-last/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-identical-control-last",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-identical-control-last/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-identical-control-last",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-identical-control-last/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-control-first",
+   "expected": "refused",
+   "expected_reason": "e_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-conflicting-control-first/runs/run3/blocks.jsonl line 1: e_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-control-first",
+   "expected": "refused",
+   "expected_reason": "e_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-conflicting-control-first/runs/run3/blocks.jsonl line 1: e_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-control-first",
+   "expected": "refused",
+   "expected_reason": "e_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-conflicting-control-first/runs/run3/blocks.jsonl line 1: e_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-consistent-first",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-conflicting-consistent-first/runs/run3/blocks.jsonl line 2: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-consistent-first",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-conflicting-consistent-first/runs/run3/blocks.jsonl line 2: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-consistent-first",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-conflicting-consistent-first/runs/run3/blocks.jsonl line 2: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-consistent-last",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-conflicting-consistent-last/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-consistent-last",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-conflicting-consistent-last/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-conflicting-consistent-last",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-conflicting-consistent-last/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "dup-zero-int-hash-first",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-zero-int-hash-first/runs/run3/blocks.jsonl line 1: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-zero-int-hash-first",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-zero-int-hash-first/runs/run3/blocks.jsonl line 1: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-zero-int-hash-first",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-zero-int-hash-first/runs/run3/blocks.jsonl line 1: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-zero-int-hash-last",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-zero-int-hash-last/runs/run3/blocks.jsonl line 79: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-zero-int-hash-last",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/dup-zero-int-hash-last/runs/run3/blocks.jsonl line 79: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-zero-int-hash-last",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-zero-int-hash-last/runs/run3/blocks.jsonl line 79: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "dup-in-partial-run2",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/dup-in-partial-run2/runs/run2/blocks.jsonl line 9: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run2"
+  },
+  {
+   "case": "dup-in-partial-run2",
+   "expected": "refused",
+   "expected_reason": "duplicate record",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/dup-in-partial-run2/runs/run2/blocks.jsonl line 9: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run2"
+  },
+  {
+   "case": "leaf-byte-flip",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/leaf-byte-flip/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].int_sha256)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-byte-flip",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/leaf-byte-flip/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].int_sha256)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-byte-flip",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/leaf-byte-flip/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].int_sha256)",
+   "run": "run3"
+  },
+  {
+   "case": "swap-leaf-objects",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/swap-leaf-objects/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].block)",
+   "run": "run3"
+  },
+  {
+   "case": "swap-leaf-objects",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/swap-leaf-objects/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].block)",
+   "run": "run3"
+  },
+  {
+   "case": "swap-leaf-objects",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/swap-leaf-objects/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].block)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-e-plus-1",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/leaf-e-plus-1/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].e)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-e-plus-1",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/leaf-e-plus-1/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].e)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-e-plus-1",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/leaf-e-plus-1/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[0].e)",
+   "run": "run3"
+  },
+  {
+   "case": "stored-root-changed",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/stored-root-changed/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.abl.root)",
+   "run": "run3"
+  },
+  {
+   "case": "stored-root-changed",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/stored-root-changed/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.abl.root)",
+   "run": "run3"
+  },
+  {
+   "case": "stored-root-changed",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/stored-root-changed/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.abl.root)",
+   "run": "run3"
+  },
+  {
+   "case": "stored-tree-reformatted",
+   "expected": "refused",
+   "expected_reason": "formatting",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/stored-tree-reformatted/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at byte level only: formatting)",
+   "run": "run3"
+  },
+  {
+   "case": "stored-tree-reformatted",
+   "expected": "refused",
+   "expected_reason": "formatting",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/stored-tree-reformatted/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at byte level only: formatting)",
+   "run": "run3"
+  },
+  {
+   "case": "stored-tree-reformatted",
+   "expected": "refused",
+   "expected_reason": "formatting",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/stored-tree-reformatted/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at byte level only: formatting)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-flip-in-run1",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/leaf-flip-in-run1/runs/run1/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[3].int_sha256)",
+   "run": "run3"
+  },
+  {
+   "case": "leaf-flip-in-run1",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/leaf-flip-in-run1/runs/run1/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[3].int_sha256)",
+   "run": "run1"
+  },
+  {
+   "case": "leaf-flip-in-run1",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/leaf-flip-in-run1/runs/run1/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaves[3].int_sha256)",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-leaf-json",
+   "expected": "refused",
+   "expected_reason": "not valid JSON",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/truncated-leaf-json/runs/run3/leaves-v2.json: not valid JSON (Expecting value: line 3150 column 17 (char 104790))",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-leaf-json",
+   "expected": "refused",
+   "expected_reason": "not valid JSON",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/truncated-leaf-json/runs/run3/leaves-v2.json: not valid JSON (Expecting value: line 3150 column 17 (char 104790))",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-leaf-json",
+   "expected": "refused",
+   "expected_reason": "not valid JSON",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/truncated-leaf-json/runs/run3/leaves-v2.json: not valid JSON (Expecting value: line 3150 column 17 (char 104790))",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-blocks-30",
+   "expected": "refused",
+   "expected_reason": "not newline-terminated",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/truncated-blocks-30/runs/run3/blocks.jsonl: last line is not newline-terminated (truncated file?)",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-blocks-30",
+   "expected": "refused",
+   "expected_reason": "not newline-terminated",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/truncated-blocks-30/runs/run3/blocks.jsonl: last line is not newline-terminated (truncated file?)",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-blocks-30",
+   "expected": "refused",
+   "expected_reason": "not newline-terminated",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/truncated-blocks-30/runs/run3/blocks.jsonl: last line is not newline-terminated (truncated file?)",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-blocks-300",
+   "expected": "refused",
+   "expected_reason": "not newline-terminated",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/truncated-blocks-300/runs/run3/blocks.jsonl: last line is not newline-terminated (truncated file?)",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-blocks-300",
+   "expected": "refused",
+   "expected_reason": "not newline-terminated",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/truncated-blocks-300/runs/run3/blocks.jsonl: last line is not newline-terminated (truncated file?)",
+   "run": "run3"
+  },
+  {
+   "case": "truncated-blocks-300",
+   "expected": "refused",
+   "expected_reason": "not newline-terminated",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/truncated-blocks-300/runs/run3/blocks.jsonl: last line is not newline-terminated (truncated file?)",
+   "run": "run3"
+  },
+  {
+   "case": "garbage-line",
+   "expected": "refused",
+   "expected_reason": "not valid JSON",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/garbage-line/runs/run3/blocks.jsonl line 6: not valid JSON (Expecting property name enclosed in double quotes: line 1 column 2 (char 1))",
+   "run": "run3"
+  },
+  {
+   "case": "garbage-line",
+   "expected": "refused",
+   "expected_reason": "not valid JSON",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/garbage-line/runs/run3/blocks.jsonl line 6: not valid JSON (Expecting property name enclosed in double quotes: line 1 column 2 (char 1))",
+   "run": "run3"
+  },
+  {
+   "case": "garbage-line",
+   "expected": "refused",
+   "expected_reason": "not valid JSON",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/garbage-line/runs/run3/blocks.jsonl line 6: not valid JSON (Expecting property name enclosed in double quotes: line 1 column 2 (char 1))",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block",
+   "expected": "refused",
+   "expected_reason": "run-meta.json",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/drop-last-block/runs/run3/run-meta.json: says done=78 of 78, blocks.jsonl has 77 records of 78 registered",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block",
+   "expected": "refused",
+   "expected_reason": "run-meta.json",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/drop-last-block/runs/run3/run-meta.json: says done=78 of 78, blocks.jsonl has 77 records of 78 registered",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block",
+   "expected": "refused",
+   "expected_reason": "run-meta.json",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/drop-last-block/runs/run3/run-meta.json: says done=78 of 78, blocks.jsonl has 77 records of 78 registered",
+   "run": "run3"
+  },
+  {
+   "case": "drop-middle-block",
+   "expected": "refused",
+   "expected_reason": "record order",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/drop-middle-block/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)",
+   "run": "run3"
+  },
+  {
+   "case": "drop-middle-block",
+   "expected": "refused",
+   "expected_reason": "record order",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/drop-middle-block/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)",
+   "run": "run3"
+  },
+  {
+   "case": "drop-middle-block",
+   "expected": "refused",
+   "expected_reason": "record order",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/drop-middle-block/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block-meta-edited",
+   "expected": "refused",
+   "expected_reason": "not stopped",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/drop-last-block-meta-edited/runs/run3/run-meta.json: says the run was not stopped, but blocks.jsonl has 77 of 78 records",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block-meta-edited",
+   "expected": "refused",
+   "expected_reason": "not stopped",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/drop-last-block-meta-edited/runs/run3/run-meta.json: says the run was not stopped, but blocks.jsonl has 77 of 78 records",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block-meta-edited",
+   "expected": "refused",
+   "expected_reason": "not stopped",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/drop-last-block-meta-edited/runs/run3/run-meta.json: says the run was not stopped, but blocks.jsonl has 77 of 78 records",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block-stored-tree-kept",
+   "expected": "refused",
+   "expected_reason": "incomplete run",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/drop-last-block-stored-tree-kept/runs/run3/leaves-v2.json: a stored tree next to an incomplete run (77 of 78 records)",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block-stored-tree-kept",
+   "expected": "refused",
+   "expected_reason": "all 78 blocks are needed",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/drop-last-block-stored-tree-kept/runs/run3/blocks.jsonl: all 78 blocks are needed here (have 77)",
+   "run": "run3"
+  },
+  {
+   "case": "drop-last-block-stored-tree-kept",
+   "expected": "refused",
+   "expected_reason": "incomplete run",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/drop-last-block-stored-tree-kept/runs/run3/leaves-v2.json: a stored tree next to an incomplete run (77 of 78 records)",
+   "run": "run3"
+  },
+  {
+   "case": "consistent-partial-77",
+   "expected": "identical-partial",
+   "expected_reason": null,
+   "got": "identical-partial",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "consistent-partial-77",
+   "expected": "refused",
+   "expected_reason": "all 78 blocks are needed",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/consistent-partial-77/runs/run3/blocks.jsonl: all 78 blocks are needed here (have 77)",
+   "run": "run3"
+  },
+  {
+   "case": "consistent-partial-77",
+   "expected": "refused",
+   "expected_reason": "stale or altered",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/consistent-partial-77/runs/compare-run1-run3.json: stale or altered, it disagrees with the comparison recomputed from the run files on ids_equal, leaves_file_sha256_equal, n_b, n_common, n_common_controls, n_identical, roots_equal, rows",
+   "run": "run3"
+  },
+  {
+   "case": "consistent-partial-77 (compare file regenerated)",
+   "expected": "PASS-SUBSET",
+   "expected_reason": null,
+   "got": "PASS-SUBSET",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "swap-block-payloads-0-1",
+   "expected": "refused",
+   "expected_reason": "is not #68's",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/swap-block-payloads-0-1/runs/run3/blocks.jsonl line 1: stock shape [5120, 17408] is not #68's [5120, 6144]",
+   "run": "run3"
+  },
+  {
+   "case": "swap-block-payloads-0-1",
+   "expected": "refused",
+   "expected_reason": "is not #68's",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/swap-block-payloads-0-1/runs/run3/blocks.jsonl line 1: stock shape [5120, 17408] is not #68's [5120, 6144]",
+   "run": "run3"
+  },
+  {
+   "case": "swap-block-payloads-0-1",
+   "expected": "refused",
+   "expected_reason": "is not #68's",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/swap-block-payloads-0-1/runs/run3/blocks.jsonl line 1: stock shape [5120, 17408] is not #68's [5120, 6144]",
+   "run": "run3"
+  },
+  {
+   "case": "swap-block-payloads-same-shape",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/swap-block-payloads-same-shape/runs/run3/blocks.jsonl line 5: stock sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "swap-block-payloads-same-shape",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/swap-block-payloads-same-shape/runs/run3/blocks.jsonl line 5: stock sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "swap-block-payloads-same-shape",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/swap-block-payloads-same-shape/runs/run3/blocks.jsonl line 5: stock sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "swap-line-order-only",
+   "expected": "refused",
+   "expected_reason": "record order",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/swap-line-order-only/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)",
+   "run": "run3"
+  },
+  {
+   "case": "swap-line-order-only",
+   "expected": "refused",
+   "expected_reason": "record order",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/swap-line-order-only/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)",
+   "run": "run3"
+  },
+  {
+   "case": "swap-line-order-only",
+   "expected": "refused",
+   "expected_reason": "record order",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/swap-line-order-only/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/record-int-hash-flip/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaf_hashes[73])",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/record-int-hash-flip/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaf_hashes[73])",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/record-int-hash-flip/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.stock.leaf_hashes[73])",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip (tree and compare file rebuilt)",
+   "expected": "mismatch",
+   "expected_reason": null,
+   "got": "mismatch",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip (tree and compare file rebuilt)",
+   "expected": "FAIL",
+   "expected_reason": null,
+   "got": "FAIL",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip (tree and compare file rebuilt)",
+   "expected": "pass",
+   "expected_reason": null,
+   "got": "pass",
+   "ok": true,
+   "reader": "suite",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "record-int-hash-flip (tree and compare file rebuilt)",
+   "expected": "rc 1",
+   "expected_reason": null,
+   "got": "rc 1",
+   "ok": true,
+   "reader": "compare (command line)",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1",
+   "expected": "refused",
+   "expected_reason": "e_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/control-e-plus-1/runs/run3/blocks.jsonl line 1: e_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1",
+   "expected": "refused",
+   "expected_reason": "e_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/control-e-plus-1/runs/run3/blocks.jsonl line 1: e_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1",
+   "expected": "refused",
+   "expected_reason": "e_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/control-e-plus-1/runs/run3/blocks.jsonl line 1: e_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1-consistent",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/control-e-plus-1-consistent/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.abl.leaf_hashes[77])",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1-consistent",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/control-e-plus-1-consistent/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.abl.leaf_hashes[77])",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1-consistent",
+   "expected": "refused",
+   "expected_reason": "stored tree is not the tree rebuilt",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/control-e-plus-1-consistent/runs/run3/leaves-v2.json: stored tree is not the tree rebuilt from blocks.jsonl (first difference at $.pins.abl.leaf_hashes[77])",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1-consistent (tree rebuilt, committed compare file kept)",
+   "expected": "refused",
+   "expected_reason": "stale or altered",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/control-e-plus-1-consistent/runs/compare-run1-run3.json: stale or altered, it disagrees with the comparison recomputed from the run files on ids_equal, leaves_file_sha256_equal, n_identical, roots_equal, rows",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1-consistent (tree and compare file rebuilt)",
+   "expected": "mismatch",
+   "expected_reason": null,
+   "got": "mismatch",
+   "ok": true,
+   "reader": "compare",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "control-e-plus-1-consistent (tree and compare file rebuilt)",
+   "expected": "FAIL",
+   "expected_reason": null,
+   "got": "FAIL",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "unknown-block-name",
+   "expected": "refused",
+   "expected_reason": "is not one of the 78 registered blocks",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/unknown-block-name/runs/run3/blocks.jsonl line 3: name 'model.language_model.layers.52.mlp.down_proj.weight2' is not one of the 78 registered blocks",
+   "run": "run3"
+  },
+  {
+   "case": "unknown-block-name",
+   "expected": "refused",
+   "expected_reason": "is not one of the 78 registered blocks",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/unknown-block-name/runs/run3/blocks.jsonl line 3: name 'model.language_model.layers.52.mlp.down_proj.weight2' is not one of the 78 registered blocks",
+   "run": "run3"
+  },
+  {
+   "case": "unknown-block-name",
+   "expected": "refused",
+   "expected_reason": "is not one of the 78 registered blocks",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/unknown-block-name/runs/run3/blocks.jsonl line 3: name 'model.language_model.layers.52.mlp.down_proj.weight2' is not one of the 78 registered blocks",
+   "run": "run3"
+  },
+  {
+   "case": "control-marked-changed",
+   "expected": "refused",
+   "expected_reason": "is not the registered kind",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/control-marked-changed/runs/run3/blocks.jsonl line 1: kind 'changed' is not the registered kind of this block",
+   "run": "run3"
+  },
+  {
+   "case": "control-marked-changed",
+   "expected": "refused",
+   "expected_reason": "is not the registered kind",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/control-marked-changed/runs/run3/blocks.jsonl line 1: kind 'changed' is not the registered kind of this block",
+   "run": "run3"
+  },
+  {
+   "case": "control-marked-changed",
+   "expected": "refused",
+   "expected_reason": "is not the registered kind",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/control-marked-changed/runs/run3/blocks.jsonl line 1: kind 'changed' is not the registered kind of this block",
+   "run": "run3"
+  },
+  {
+   "case": "changed-marked-control",
+   "expected": "refused",
+   "expected_reason": "is not the registered kind",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/changed-marked-control/runs/run3/blocks.jsonl line 5: kind 'control' is not the registered kind of this block",
+   "run": "run3"
+  },
+  {
+   "case": "changed-marked-control",
+   "expected": "refused",
+   "expected_reason": "is not the registered kind",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/changed-marked-control/runs/run3/blocks.jsonl line 5: kind 'control' is not the registered kind of this block",
+   "run": "run3"
+  },
+  {
+   "case": "changed-marked-control",
+   "expected": "refused",
+   "expected_reason": "is not the registered kind",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/changed-marked-control/runs/run3/blocks.jsonl line 5: kind 'control' is not the registered kind of this block",
+   "run": "run3"
+  },
+  {
+   "case": "fetched-hash-changed-flag-kept",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/fetched-hash-changed-flag-kept/runs/run3/blocks.jsonl line 5: stock sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "fetched-hash-changed-flag-kept",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/fetched-hash-changed-flag-kept/runs/run3/blocks.jsonl line 5: stock sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "fetched-hash-changed-flag-kept",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/fetched-hash-changed-flag-kept/runs/run3/blocks.jsonl line 5: stock sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "sha-matches-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/sha-matches-flag-flipped/runs/run3/blocks.jsonl line 5: abl sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "sha-matches-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/sha-matches-flag-flipped/runs/run3/blocks.jsonl line 5: abl sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "sha-matches-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "sha_matches_68",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/sha-matches-flag-flipped/runs/run3/blocks.jsonl line 5: abl sha_matches_68 does not follow from sha256 and #68's hash for this block",
+   "run": "run3"
+  },
+  {
+   "case": "bytes-identical-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "bytes_identical",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/bytes-identical-flag-flipped/runs/run3/blocks.jsonl line 5: bytes_identical is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "bytes-identical-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "bytes_identical",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/bytes-identical-flag-flipped/runs/run3/blocks.jsonl line 5: bytes_identical is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "bytes-identical-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "bytes_identical",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/bytes-identical-flag-flipped/runs/run3/blocks.jsonl line 5: bytes_identical is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "int-sha256-equal-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/int-sha256-equal-flag-flipped/runs/run3/blocks.jsonl line 5: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "int-sha256-equal-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/int-sha256-equal-flag-flipped/runs/run3/blocks.jsonl line 5: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "int-sha256-equal-flag-flipped",
+   "expected": "refused",
+   "expected_reason": "int_sha256_equal",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/int-sha256-equal-flag-flipped/runs/run3/blocks.jsonl line 5: int_sha256_equal is True but the record's own fields give False",
+   "run": "run3"
+  },
+  {
+   "case": "int-hash-uppercase",
+   "expected": "refused",
+   "expected_reason": "64 lowercase hex",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/int-hash-uppercase/runs/run3/blocks.jsonl line 2: stock sha256 / int_sha256 must be 64 lowercase hex",
+   "run": "run3"
+  },
+  {
+   "case": "int-hash-uppercase",
+   "expected": "refused",
+   "expected_reason": "64 lowercase hex",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/int-hash-uppercase/runs/run3/blocks.jsonl line 2: stock sha256 / int_sha256 must be 64 lowercase hex",
+   "run": "run3"
+  },
+  {
+   "case": "int-hash-uppercase",
+   "expected": "refused",
+   "expected_reason": "64 lowercase hex",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/int-hash-uppercase/runs/run3/blocks.jsonl line 2: stock sha256 / int_sha256 must be 64 lowercase hex",
+   "run": "run3"
+  },
+  {
+   "case": "e-as-bool",
+   "expected": "refused",
+   "expected_reason": "e must be an int",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/e-as-bool/runs/run3/blocks.jsonl line 2: stock e must be an int in [-64, 64]",
+   "run": "run3"
+  },
+  {
+   "case": "e-as-bool",
+   "expected": "refused",
+   "expected_reason": "e must be an int",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/e-as-bool/runs/run3/blocks.jsonl line 2: stock e must be an int in [-64, 64]",
+   "run": "run3"
+  },
+  {
+   "case": "e-as-bool",
+   "expected": "refused",
+   "expected_reason": "e must be an int",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/e-as-bool/runs/run3/blocks.jsonl line 2: stock e must be an int in [-64, 64]",
+   "run": "run3"
+  },
+  {
+   "case": "e-as-string",
+   "expected": "refused",
+   "expected_reason": "e must be an int",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/e-as-string/runs/run3/blocks.jsonl line 2: stock e must be an int in [-64, 64]",
+   "run": "run3"
+  },
+  {
+   "case": "e-as-string",
+   "expected": "refused",
+   "expected_reason": "e must be an int",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/e-as-string/runs/run3/blocks.jsonl line 2: stock e must be an int in [-64, 64]",
+   "run": "run3"
+  },
+  {
+   "case": "e-as-string",
+   "expected": "refused",
+   "expected_reason": "e must be an int",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/e-as-string/runs/run3/blocks.jsonl line 2: stock e must be an int in [-64, 64]",
+   "run": "run3"
+  },
+  {
+   "case": "extra-record-field",
+   "expected": "refused",
+   "expected_reason": "record fields are not exactly",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/extra-record-field/runs/run3/blocks.jsonl line 2: record fields are not exactly the runner's",
+   "run": "run3"
+  },
+  {
+   "case": "extra-record-field",
+   "expected": "refused",
+   "expected_reason": "record fields are not exactly",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/extra-record-field/runs/run3/blocks.jsonl line 2: record fields are not exactly the runner's",
+   "run": "run3"
+  },
+  {
+   "case": "extra-record-field",
+   "expected": "refused",
+   "expected_reason": "record fields are not exactly",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/extra-record-field/runs/run3/blocks.jsonl line 2: record fields are not exactly the runner's",
+   "run": "run3"
+  },
+  {
+   "case": "extra-pin-field",
+   "expected": "refused",
+   "expected_reason": "fields are not exactly",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/extra-pin-field/runs/run3/blocks.jsonl line 2: abl fields are not exactly ['convert_s', 'e', 'fetch_s', 'int_sha256', 'sha256', 'sha_matches_68', 'shape', 'total_s']",
+   "run": "run3"
+  },
+  {
+   "case": "extra-pin-field",
+   "expected": "refused",
+   "expected_reason": "fields are not exactly",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/extra-pin-field/runs/run3/blocks.jsonl line 2: abl fields are not exactly ['convert_s', 'e', 'fetch_s', 'int_sha256', 'sha256', 'sha_matches_68', 'shape', 'total_s']",
+   "run": "run3"
+  },
+  {
+   "case": "extra-pin-field",
+   "expected": "refused",
+   "expected_reason": "fields are not exactly",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/extra-pin-field/runs/run3/blocks.jsonl line 2: abl fields are not exactly ['convert_s', 'e', 'fetch_s', 'int_sha256', 'sha256', 'sha_matches_68', 'shape', 'total_s']",
+   "run": "run3"
+  },
+  {
+   "case": "fraction-inconsistent",
+   "expected": "refused",
+   "expected_reason": "int_fraction_differing",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/fraction-inconsistent/runs/run3/blocks.jsonl line 5: int_fraction_differing is not int_entries_differing / elements",
+   "run": "run3"
+  },
+  {
+   "case": "fraction-inconsistent",
+   "expected": "refused",
+   "expected_reason": "int_fraction_differing",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/fraction-inconsistent/runs/run3/blocks.jsonl line 5: int_fraction_differing is not int_entries_differing / elements",
+   "run": "run3"
+  },
+  {
+   "case": "fraction-inconsistent",
+   "expected": "refused",
+   "expected_reason": "int_fraction_differing",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/fraction-inconsistent/runs/run3/blocks.jsonl line 5: int_fraction_differing is not int_entries_differing / elements",
+   "run": "run3"
+  },
+  {
+   "case": "entries-zero-on-changed",
+   "expected": "refused",
+   "expected_reason": "int_fraction_differing",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/entries-zero-on-changed/runs/run3/blocks.jsonl line 5: int_fraction_differing is not int_entries_differing / elements",
+   "run": "run3"
+  },
+  {
+   "case": "entries-zero-on-changed",
+   "expected": "refused",
+   "expected_reason": "int_fraction_differing",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/entries-zero-on-changed/runs/run3/blocks.jsonl line 5: int_fraction_differing is not int_entries_differing / elements",
+   "run": "run3"
+  },
+  {
+   "case": "entries-zero-on-changed",
+   "expected": "refused",
+   "expected_reason": "int_fraction_differing",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/entries-zero-on-changed/runs/run3/blocks.jsonl line 5: int_fraction_differing is not int_entries_differing / elements",
+   "run": "run3"
+  },
+  {
+   "case": "elements-wrong",
+   "expected": "refused",
+   "expected_reason": "elements",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/elements-wrong/runs/run3/blocks.jsonl line 2: elements does not equal the product of the shape",
+   "run": "run3"
+  },
+  {
+   "case": "elements-wrong",
+   "expected": "refused",
+   "expected_reason": "elements",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/elements-wrong/runs/run3/blocks.jsonl line 2: elements does not equal the product of the shape",
+   "run": "run3"
+  },
+  {
+   "case": "elements-wrong",
+   "expected": "refused",
+   "expected_reason": "elements",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/elements-wrong/runs/run3/blocks.jsonl line 2: elements does not equal the product of the shape",
+   "run": "run3"
+  },
+  {
+   "case": "unknown-name-in-partial-run2",
+   "expected": "refused",
+   "expected_reason": "is not one of the 78 registered blocks",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/unknown-name-in-partial-run2/runs/run2/blocks.jsonl line 1: name 'model.language_model.layers.0.linear_attn.out_proj.weight' is not one of the 78 registered blocks",
+   "run": "run2"
+  },
+  {
+   "case": "unknown-name-in-partial-run2",
+   "expected": "refused",
+   "expected_reason": "is not one of the 78 registered blocks",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/unknown-name-in-partial-run2/runs/run2/blocks.jsonl line 1: name 'model.language_model.layers.0.linear_attn.out_proj.weight' is not one of the 78 registered blocks",
+   "run": "run2"
+  },
+  {
+   "case": "run-meta-reverse-flipped",
+   "expected": "refused",
+   "expected_reason": "does not match reverse",
+   "got": "refused",
+   "ok": true,
+   "reader": "compare",
+   "reason": "<fixture>/run-meta-reverse-flipped/runs/run3/run-meta.json: record order does not match reverse=False",
+   "run": "run3"
+  },
+  {
+   "case": "run-meta-reverse-flipped",
+   "expected": "refused",
+   "expected_reason": "does not match reverse",
+   "got": "refused",
+   "ok": true,
+   "reader": "suite",
+   "reason": "REFUSED: <fixture>/run-meta-reverse-flipped/runs/run3/run-meta.json: record order does not match reverse=False",
+   "run": "run3"
+  },
+  {
+   "case": "run-meta-reverse-flipped",
+   "expected": "refused",
+   "expected_reason": "does not match reverse",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/run-meta-reverse-flipped/runs/run3/run-meta.json: record order does not match reverse=False",
+   "run": "run3"
+  },
+  {
+   "case": "compare-file-count-edited",
+   "expected": "refused",
+   "expected_reason": "stale or altered",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/compare-file-count-edited/runs/compare-run1-run3.json: stale or altered, it disagrees with the comparison recomputed from the run files on n_identical",
+   "run": "run3"
+  },
+  {
+   "case": "compare-file-row-edited",
+   "expected": "refused",
+   "expected_reason": "stale or altered",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/compare-file-row-edited/runs/compare-run1-run3.json: stale or altered, it disagrees with the comparison recomputed from the run files on rows",
+   "run": "run3"
+  },
+  {
+   "case": "compare-file-root-flag-edited",
+   "expected": "refused",
+   "expected_reason": "stale or altered",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/compare-file-root-flag-edited/runs/compare-run1-run3.json: stale or altered, it disagrees with the comparison recomputed from the run files on roots_equal",
+   "run": "run3"
+  },
+  {
+   "case": "compare-file-extra-claim",
+   "expected": "refused",
+   "expected_reason": "stale or altered",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/compare-file-extra-claim/runs/compare-run1-run3.json: stale or altered, it disagrees with the comparison recomputed from the run files on verdict",
+   "run": "run3"
+  },
+  {
+   "case": "compare-file-without-its-run",
+   "expected": "refused",
+   "expected_reason": "a comparison without its run",
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "REFUSED: <fixture>/compare-file-without-its-run/runs/compare-run1-run3.json exists but run3 has no run directory: a comparison without its run",
+   "run": "run3"
+  },
+  {
+   "case": "compare-files-removed",
+   "expected": "PASS",
+   "expected_reason": null,
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "run2-only",
+   "expected": "BELOW-COVERAGE",
+   "expected_reason": null,
+   "got": "BELOW-COVERAGE",
+   "ok": true,
+   "reader": "summarise",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "cli",
+   "expected": "rc 0",
+   "expected_reason": null,
+   "got": "rc 0",
+   "ok": true,
+   "reader": "compare (command line)",
+   "reason": "",
+   "run": "run3"
+  },
+  {
+   "case": "cli",
+   "expected": "rc 2",
+   "expected_reason": "duplicate record",
+   "got": "rc 2",
+   "ok": true,
+   "reader": "compare (command line)",
+   "reason": "REFUSED: <fixture>/cli/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  },
+  {
+   "case": "cli",
+   "expected": "rc 2",
+   "expected_reason": "duplicate record",
+   "got": "rc 2",
+   "ok": true,
+   "reader": "tree (command line)",
+   "reason": "REFUSED: <fixture>/cli/runs/run3/blocks.jsonl line 79: duplicate record for block model.language_model.layers.55.self_attn.o_proj.weight (first at line 1); duplicates are refused, identical or not",
+   "run": "run3"
+  }
+ ]
+}
