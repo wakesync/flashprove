@@ -1,0 +1,164 @@
+{
+ "issue": 164,
+ "code_commit": "1960ec5f81b4ad9fd092bed7bbaa7571a56fb4cf",
+ "committed_rows_source": "experiments/20261112-132-int-mlp-e2e/runs/{divergence,ranges,heads}-abl.jsonl (PR #138, main)",
+ "stop_reason": "layer30_done",
+ "slot_grant": [
+  "slot granted 2026-11-13T05:50:00Z pid 4180765 MemAvailable 13866352 kB affinity [10, 11, 12, 13, 14, 15]"
+ ],
+ "rows_committed_layers_0_30": 374,
+ "rows_compared": 374,
+ "rows_equal": 374,
+ "all_rows_equal_and_complete": true,
+ "first_difference": null,
+ "per_file": {
+  "divergence-abl.jsonl": {
+   "committed_rows_l0_30": 31,
+   "rows_compared": 31,
+   "rows_equal": 31,
+   "complete": true,
+   "post_stop_rows_not_compared": []
+  },
+  "ranges-abl.jsonl": {
+   "committed_rows_l0_30": 31,
+   "rows_compared": 31,
+   "rows_equal": 31,
+   "complete": true,
+   "post_stop_rows_not_compared": []
+  },
+  "heads-abl.jsonl": {
+   "committed_rows_l0_30": 312,
+   "rows_compared": 312,
+   "rows_equal": 312,
+   "complete": true,
+   "post_stop_rows_not_compared": []
+  }
+ },
+ "excluded_fields": {
+  "divergence-abl.jsonl": [
+   "seconds",
+   "mix_s"
+  ],
+  "ranges-abl.jsonl": [],
+  "heads-abl.jsonl": []
+ },
+ "layers_done": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30
+ ],
+ "layer_seconds": {
+  "n": 31,
+  "median": 134.3,
+  "min": 121.3,
+  "max": 165.5,
+  "per_layer": {
+   "0": 161.3,
+   "1": 154.7,
+   "2": 131.9,
+   "3": 128.6,
+   "4": 124.8,
+   "5": 126.6,
+   "6": 131.9,
+   "7": 121.3,
+   "8": 125.1,
+   "9": 127.8,
+   "10": 127.8,
+   "11": 124.4,
+   "12": 123.6,
+   "13": 136.8,
+   "14": 149.6,
+   "15": 144.9,
+   "16": 131.3,
+   "17": 131.1,
+   "18": 135.5,
+   "19": 127.5,
+   "20": 134.3,
+   "21": 165.5,
+   "22": 154.3,
+   "23": 152.7,
+   "24": 148.3,
+   "25": 142.6,
+   "26": 140.9,
+   "27": 135.8,
+   "28": 150.9,
+   "29": 152.0,
+   "30": 127.7
+  },
+  "note": "wall clock per layer from progress.log.jsonl layer_s (mlp_e2e.py), shared loaded host, descriptive"
+ },
+ "time_v": {
+  "Command terminated by signal": null,
+  "Elapsed (wall clock) time (h:mm:ss or m:ss)": null,
+  "Maximum resident set size (kbytes)": "8493992",
+  "User time (seconds)": "7399.16",
+  "System time (seconds)": "3126.43",
+  "Percent of CPU this job got": "243%",
+  "Exit status": "0"
+ },
+ "time_v_terminated": [
+  "Command terminated by signal 15"
+ ],
+ "watchdog_rss_kb_max_at_layer_ends": 5060308,
+ "watchdog_disk_free_gb_min": 51.7,
+ "manifests_vs_pr138": {
+  "stock": {
+   "rerun_tensors": 226,
+   "compared_with_pr138": 226,
+   "sha256_mismatch": [],
+   "rerun_only_not_in_pr138_manifest": [],
+   "emb_rows_compared": 319,
+   "emb_rows_mismatch": [],
+   "repo": "Qwen/Qwen3.8-27B",
+   "rev": "37561816e66b5b9153b1b64c10968c18c1e6f4a0"
+  },
+  "abl": {
+   "rerun_tensors": 198,
+   "compared_with_pr138": 198,
+   "sha256_mismatch": [],
+   "rerun_only_not_in_pr138_manifest": [],
+   "emb_rows_compared": 0,
+   "emb_rows_mismatch": [],
+   "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+   "rev": "739e3c5b89849f6c238ce1e5b70008612ae42cdd"
+  }
+ },
+ "state_after_last_layer": {
+  "ckpt.npz": {
+   "sha256": "22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009",
+   "bytes": 183551075
+  },
+  "x16.npz": {
+   "sha256": "67dde0e845de248c26838448b1df50bd1b6ed8eb2b1b03ddb40cd9feff3c53d5",
+   "bytes": 183551023
+  }
+ }
+}

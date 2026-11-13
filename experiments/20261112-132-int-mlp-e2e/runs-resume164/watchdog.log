@@ -1,0 +1,38 @@
+{"t": "2026-11-13T05:50:00Z", "event": "supervisor_start", "pid": 4180754, "poll_s": 2.0, "hard_stop": "2026-11-13T07:45:00Z", "dummy": false}
+{"t": "2026-11-13T05:50:00Z", "event": "queue", "cmd": ["flock", "<PLANNING>/locks/bigmem.lock", "<PLANNING>/fp-heavy.sh", "taskset", "-c", "10-15", "/usr/bin/time", "-v", "-o", "<OUT>/run.time", "/usr/bin/python3", "<PLANNING>/lanes-1110/resume164_entry.py", "<OUT>/python.pid", "<OUT>/progress.log", "<REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py", "<STATE>", "<OUT>/runs"]}
+{"t": "2026-11-13T05:50:02Z", "event": "python_started", "python_pid": 4180765, "python_cmd": "/usr/bin/python3 <REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py run <PLANNING>/scratch/res", "grant_unix": 1794549000}
+{"t": "2026-11-13T05:53:11Z", "event": "layer_done", "layer": 0, "layer_s": 161.3, "rss_kb": 4714800, "disk_free_gb": 54.1}
+{"t": "2026-11-13T05:55:45Z", "event": "layer_done", "layer": 1, "layer_s": 154.7, "rss_kb": 4694176, "disk_free_gb": 53.6}
+{"t": "2026-11-13T05:57:57Z", "event": "layer_done", "layer": 2, "layer_s": 131.9, "rss_kb": 4474500, "disk_free_gb": 53.6}
+{"t": "2026-11-13T06:00:07Z", "event": "layer_done", "layer": 3, "layer_s": 128.6, "rss_kb": 4720640, "disk_free_gb": 54.2}
+{"t": "2026-11-13T06:02:13Z", "event": "layer_done", "layer": 4, "layer_s": 124.8, "rss_kb": 4775424, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:04:20Z", "event": "layer_done", "layer": 5, "layer_s": 126.6, "rss_kb": 5060308, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:06:32Z", "event": "layer_done", "layer": 6, "layer_s": 131.9, "rss_kb": 4679480, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:08:33Z", "event": "layer_done", "layer": 7, "layer_s": 121.3, "rss_kb": 4757976, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:10:39Z", "event": "layer_done", "layer": 8, "layer_s": 125.1, "rss_kb": 4699332, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:12:47Z", "event": "layer_done", "layer": 9, "layer_s": 127.8, "rss_kb": 4588496, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:14:57Z", "event": "layer_done", "layer": 10, "layer_s": 127.8, "rss_kb": 4764192, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:17:00Z", "event": "layer_done", "layer": 11, "layer_s": 124.4, "rss_kb": 4651896, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:19:06Z", "event": "layer_done", "layer": 12, "layer_s": 123.6, "rss_kb": 4684404, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:21:23Z", "event": "layer_done", "layer": 13, "layer_s": 136.8, "rss_kb": 4724988, "disk_free_gb": 58.0}
+{"t": "2026-11-13T06:23:52Z", "event": "layer_done", "layer": 14, "layer_s": 149.6, "rss_kb": 4499472, "disk_free_gb": 57.5}
+{"t": "2026-11-13T06:26:18Z", "event": "layer_done", "layer": 15, "layer_s": 144.9, "rss_kb": 4608604, "disk_free_gb": 56.7}
+{"t": "2026-11-13T06:28:31Z", "event": "layer_done", "layer": 16, "layer_s": 131.3, "rss_kb": 4754508, "disk_free_gb": 56.5}
+{"t": "2026-11-13T06:30:42Z", "event": "layer_done", "layer": 17, "layer_s": 131.1, "rss_kb": 4943160, "disk_free_gb": 56.4}
+{"t": "2026-11-13T06:32:59Z", "event": "layer_done", "layer": 18, "layer_s": 135.5, "rss_kb": 4705248, "disk_free_gb": 56.4}
+{"t": "2026-11-13T06:35:07Z", "event": "layer_done", "layer": 19, "layer_s": 127.5, "rss_kb": 4813428, "disk_free_gb": 56.4}
+{"t": "2026-11-13T06:37:21Z", "event": "layer_done", "layer": 20, "layer_s": 134.3, "rss_kb": 4400332, "disk_free_gb": 56.4}
+{"t": "2026-11-13T06:40:08Z", "event": "layer_done", "layer": 21, "layer_s": 165.5, "rss_kb": 4586108, "disk_free_gb": 55.5}
+{"t": "2026-11-13T06:42:42Z", "event": "layer_done", "layer": 22, "layer_s": 154.3, "rss_kb": 4336700, "disk_free_gb": 55.5}
+{"t": "2026-11-13T06:45:15Z", "event": "layer_done", "layer": 23, "layer_s": 152.7, "rss_kb": 4517016, "disk_free_gb": 55.5}
+{"t": "2026-11-13T06:47:45Z", "event": "layer_done", "layer": 24, "layer_s": 148.3, "rss_kb": 4425720, "disk_free_gb": 55.5}
+{"t": "2026-11-13T06:50:08Z", "event": "layer_done", "layer": 25, "layer_s": 142.6, "rss_kb": 4403312, "disk_free_gb": 54.9}
+{"t": "2026-11-13T06:52:30Z", "event": "layer_done", "layer": 26, "layer_s": 140.9, "rss_kb": 3982452, "disk_free_gb": 53.7}
+{"t": "2026-11-13T06:54:47Z", "event": "layer_done", "layer": 27, "layer_s": 135.8, "rss_kb": 4305816, "disk_free_gb": 52.7}
+{"t": "2026-11-13T06:57:18Z", "event": "layer_done", "layer": 28, "layer_s": 150.9, "rss_kb": 4262496, "disk_free_gb": 51.7}
+{"t": "2026-11-13T06:59:51Z", "event": "layer_done", "layer": 29, "layer_s": 152.0, "rss_kb": 4400916, "disk_free_gb": 52.1}
+{"t": "2026-11-13T07:01:59Z", "event": "layer_done", "layer": 30, "layer_s": 127.7, "rss_kb": 4286808, "disk_free_gb": 54.8}
+{"t": "2026-11-13T07:02:00Z", "event": "stop", "reason": "layer30_done", "python_pid": 4180765, "python_cmd": "/usr/bin/python3 <REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py run <PLANNING>/scratch/res", "kids": [4180813, 4180814, 4180815, 4180816, 4180817, 4180818, 4180819]}
+{"t": "2026-11-13T07:02:01Z", "event": "stopped", "sigkill": []}
+{"t": "2026-11-13T07:02:01Z", "event": "job_final", "rc": 143, "reason": "layer30_done"}
+{"t": "2026-11-13T07:02:01Z", "event": "done", "reason": "layer30_done", "rows_compared": 374, "rows_equal": 374, "all_equal_complete": true, "state": {"ckpt.npz": {"sha256": "22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009", "bytes": 183551075}, "x16.npz": {"sha256": "67dde0e845de248c26838448b1df50bd1b6ed8eb2b1b03ddb40cd9feff3c53d5", "bytes": 183551023}}}

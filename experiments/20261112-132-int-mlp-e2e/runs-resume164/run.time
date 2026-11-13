@@ -1,0 +1,24 @@
+Command terminated by signal 15
+	Command being timed: "/usr/bin/python3 <PLANNING>/lanes-1110/resume164_entry.py <OUT>/python.pid <OUT>/progress.log <REPO@1960ec5>/experiments/20261112-132-int-mlp-e2e/mlp_e2e.py <STATE> <OUT>/runs"
+	User time (seconds): 7399.16
+	System time (seconds): 3126.43
+	Percent of CPU this job got: 243%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:12:00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8493992
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 10768
+	Minor (reclaiming a frame) page faults: 529114687
+	Voluntary context switches: 1041553
+	Involuntary context switches: 767921
+	Swaps: 0
+	File system inputs: 536288
+	File system outputs: 11478976
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

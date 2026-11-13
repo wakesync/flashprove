@@ -1,0 +1,276 @@
+{
+ "sha256": "22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009",
+ "meta": {
+  "leg": "abl",
+  "next_layer": 31,
+  "legs_done": [],
+  "prompt_set": "full"
+ },
+ "n_arrays": 33,
+ "arrays": {
+  "FM|p01-ordinary-short": {
+   "shape": [
+    13,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "2a2f45ec83f292fae86f61bd20f618c51a402a190a26e60fbff20d871600d7fa"
+  },
+  "FM|p02-ordinary-paragraph": {
+   "shape": [
+    107,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "995d1b15fc42733b997b60c5edda3ad1c3733d809bc9451be9200d6a67d706ad"
+  },
+  "FM|p03-repeat-word": {
+   "shape": [
+    512,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "c7bb0691b0cdff53029433ffccef613ce452d65ae2b91baf8cae60b8b7ded6af"
+  },
+  "FM|p04-repeat-punct": {
+   "shape": [
+    64,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "7d33dbb1fe9227b5e629879f4503f942df5687b4302fc41548d6d77372b633d3"
+  },
+  "FM|p05-code": {
+   "shape": [
+    144,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "bd8c0df8d5f76ee3ef50490d687c697f8c236fecc67c92acea1a755a2965387e"
+  },
+  "FM|p06a-digits-256": {
+   "shape": [
+    256,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "6d9911716419fbb23a47783ca6ae974bf7406a1450f906351b93d9cd40318dbe"
+  },
+  "FM|p07-chat-ordinary": {
+   "shape": [
+    23,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "7b335901f64fb374f60aaee9691fd9476a0d4b0b497e86963ce8c60eb70962cc"
+  },
+  "FM|p08-chat-refusal": {
+   "shape": [
+    39,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "f0c5b1cc0dfacf4cffa1743b81944a2460baaea97a52992658d714620bfd9aba"
+  },
+  "FM|p09-multilingual": {
+   "shape": [
+    21,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "d5b75e10ecbf8418b82b661496b9a6418c69908add530c0ce163c9faa1c10788"
+  },
+  "FM|p11-chat-long": {
+   "shape": [
+    282,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "c9de113c5435ca21348311052227f1612086597b88202bac9b4a450731549f19"
+  },
+  "REF|p01-ordinary-short": {
+   "shape": [
+    13,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "5cdbc0c34b9da615c8e6fd9f59e9dd02c113f003ddf4c3dc8be76c30bcb3c4f9"
+  },
+  "REF|p02-ordinary-paragraph": {
+   "shape": [
+    107,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "bfcf64647bdb3e3d919e264b5734e2a6bcd72f135a5595a8cf9ae4d259547aaf"
+  },
+  "REF|p03-repeat-word": {
+   "shape": [
+    512,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "1a10682feadd55f5e2310079e48ee4d6e0a4a8d98f738169abf3f7ac801ef1df"
+  },
+  "REF|p04-repeat-punct": {
+   "shape": [
+    64,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "f33863ee10eb4bafa52320c8b69769d62e3e1fdf154e03147bbc477007c604a4"
+  },
+  "REF|p05-code": {
+   "shape": [
+    144,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "7803f388b1bb10d989beefe1e639140cc8ba1dd0d9b74f918ce8df050c3baa14"
+  },
+  "REF|p06a-digits-256": {
+   "shape": [
+    256,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "e8ce11877572682903c9f82d70be32ba7877ff6aa9ebfc9dad8e1ee3d0ede446"
+  },
+  "REF|p07-chat-ordinary": {
+   "shape": [
+    23,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "e72ba5328d40310c759dd1c05aa1db1e1d0be5968ccdd9ee5169e701e657355d"
+  },
+  "REF|p08-chat-refusal": {
+   "shape": [
+    39,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "a7cc05c7e74bdd8ab6ef615019ac231d98d765a2215f94a39b79d4ecae76ffa3"
+  },
+  "REF|p09-multilingual": {
+   "shape": [
+    21,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "482d0f54dcf00457dbe41a0c487b1b3395cf5dedbe6707f4fc09dd0422898c6b"
+  },
+  "REF|p11-chat-long": {
+   "shape": [
+    282,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "48b92cb597f0a7e06840391962f828612bf3a64cbd6aafc5e474b5daad78e4f0"
+  },
+  "XM18#2|p01-ordinary-short": {
+   "shape": [
+    13,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "d53b0b7ec2b84d497d3a5001064b444816d0a1fbd6ad07a09969f7354452e212"
+  },
+  "XM18#2|p04-repeat-punct": {
+   "shape": [
+    64,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "ae84780b60b09e53f0582878a4d5f24ac0653d8c4ea54ad46b503964c5dc2eb2"
+  },
+  "XM18#2|p09-multilingual": {
+   "shape": [
+    21,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "c6b724cd63df764e9c0373b687c9b45e67c17a2301298025b7265500674489b4"
+  },
+  "XM18|p01-ordinary-short": {
+   "shape": [
+    13,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "d53b0b7ec2b84d497d3a5001064b444816d0a1fbd6ad07a09969f7354452e212"
+  },
+  "XM18|p02-ordinary-paragraph": {
+   "shape": [
+    107,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "d739d8a5b7fa03649e51ef33f1d4824132e86e2b4704bcf3634df0a53d37cc5f"
+  },
+  "XM18|p03-repeat-word": {
+   "shape": [
+    512,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "81f3869565032d4bf5d9925d1df92be5b2c89c25418b581e3e3046f92c9ff444"
+  },
+  "XM18|p04-repeat-punct": {
+   "shape": [
+    64,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "ae84780b60b09e53f0582878a4d5f24ac0653d8c4ea54ad46b503964c5dc2eb2"
+  },
+  "XM18|p05-code": {
+   "shape": [
+    144,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "11e05347a5e2b1074186eec6f43c714ba0d9c2d7daad8e2e3d3a2e0c79e2e0e5"
+  },
+  "XM18|p06a-digits-256": {
+   "shape": [
+    256,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "32a276d38917efa7ed070820fc9ba6330671e3072812e30969e723c52ee3f30f"
+  },
+  "XM18|p07-chat-ordinary": {
+   "shape": [
+    23,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "f01bccb1bea6e30b88dc33120dc9bd6b83ed0c706d63552d166f954b7ae1f6a0"
+  },
+  "XM18|p08-chat-refusal": {
+   "shape": [
+    39,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "b27a220304982c6e20fecaeec3cc84b2ae85158214cb7a9ac55191d4dd2bca17"
+  },
+  "XM18|p09-multilingual": {
+   "shape": [
+    21,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "c6b724cd63df764e9c0373b687c9b45e67c17a2301298025b7265500674489b4"
+  },
+  "XM18|p11-chat-long": {
+   "shape": [
+    282,
+    5120
+   ],
+   "dtype": "float64",
+   "sha256": "993c9ae72e08fb2895c72794f8d3c24eeffd971729251a8366e0dcf08f23c85f"
+  }
+ }
+}
