@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+"""Apply the PREREG bar to runs/layers.jsonl and runs/cells.jsonl -> runs/summary.json, runs/summary.md.
+
+Per arm: every one of the 16 attention layers must have median rel_y <= 0.01 and max <= 0.05 over its 240
+(prompt, head) pairs (recomputed here from cells.jsonl, cross-checked against layers.jsonl), and the determinism
+check (C2047 twice on p01 and p09, bit-identical integer o) must hold on every layer. A run with fewer than 16
+attention layers gets no all-layer verdict.
+"""
+import json, sys
+from pathlib import Path
+import numpy as np
+
+HERE = Path(__file__).resolve().parent
+RUNS = HERE / "runs"
+ATT = [i for i in range(64) if i % 4 == 3]
+ARMS = ("C2047", "C1665")
+
+def rd(p): return [json.loads(l) for l in open(p)] if p.exists() else []
+
+def main():
+    lay = rd(RUNS / "layers.jsonl"); cells = rd(RUNS / "cells.jsonl"); prow = rd(RUNS / "prompt-rows.jsonl")
+    tim = {r["layer"]: r for r in rd(RUNS / "attn-timing.jsonl")}
+    prog = rd(RUNS / "progress.log")
+    out = dict(arms={}, layers_done=sorted({r["layer"] for r in lay}), note="measured, unreplicated; open loop; in-sample scale fit")
+    md = ["| arm | layer | E_q E_k E_v | sh (fit) | max \\|qw\\| \\|kw\\| \\|vw\\| | over-clamp q/k/v | max \\|s\\| / Smax | e=0 share | rel_y median | rel_y max | >0.01 | >0.05 | mix rel median | pass | arm s |",
+          "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for arm in ARMS:
+        rows = sorted([r for r in lay if r["arm"] == arm], key=lambda r: r["layer"]); per = []
+        for r in rows:
+            a = np.array([c["rel_y"] for c in cells if c["arm"] == arm and c["layer"] == r["layer"]])
+            med, mx = float(np.median(a)), float(a.max())
+            assert a.size == r["n_pairs"] and abs(med - r["rel_median"]) < 1e-15 and abs(mx - r["rel_max"]) < 1e-15
+            mixr = [p["mix_rel"] for p in prow if p["arm"] == arm and p["layer"] == r["layer"]]
+            ok = med <= 0.01 and mx <= 0.05
+            per.append(dict(layer=r["layer"], n_pairs=int(a.size), rel_median=med, rel_max=mx, rel_min=float(a.min()),
+                            n_over_001=int((a > 0.01).sum()), n_over_005=int((a > 0.05).sum()), pass_=ok,
+                            Eq=r["Eq"], Ek=r["Ek"], Ev=r["Ev"], sh=r["sh"], sh_fit=r["sh_fit"], adjust=r["adjust"],
+                            q_over=r["q_over"], q_n=r["q_n"], k_over=r["k_over"], k_n=r["k_n"], v_over=r["v_over"], v_n=r["v_n"],
+                            q_maxw=r["q_maxw"], k_maxw=r["k_maxw"], v_maxw=r["v_maxw"], max_abs_s=r["max_abs_s"], Smax=r["Smax"],
+                            e_zero=r["e_zero"], causal=r["causal"], wide_over_32767=r["wide_over_32767"],
+                            mix_rel_median=float(np.median(mixr)), mix_rel_max=float(np.max(mixr)),
+                            det=r["det_bit_equal"], arm_seconds=r["arm_seconds"],
+                            layer_seconds=tim.get(r["layer"], {}).get("total_s")))
+            md.append(f"| {arm} | {r['layer']} | {r['Eq']} {r['Ek']} {r['Ev']} | {r['sh']} ({r['sh_fit']}) | {r['q_maxw']} {r['k_maxw']} {r['v_maxw']} | "
+                      f"{r['q_over']}/{r['k_over']}/{r['v_over']} | {r['max_abs_s']:.0f} / {r['Smax']} | {r['e_zero'] / r['causal']:.3f} | "
+                      f"{med:.5f} | {mx:.5f} | {int((a > 0.01).sum())} | {int((a > 0.05).sum())} | {float(np.median(mixr)):.5f} | {'yes' if ok else 'NO'} | {r['arm_seconds']} |")
+        done = [p["layer"] for p in per]; complete = done == ATT
+        det_ok = all(all(r["det_bit_equal"].values()) and len(r["det_bit_equal"]) == 2 for r in lay if r["arm"] == "C2047")
+        npass = sum(p["pass_"] for p in per)
+        if complete and det_ok: verdict = "PASS" if npass == 16 else "FAIL"
+        elif not det_ok: verdict = "FAIL (determinism)"
+        else: verdict = "PARTIAL: " + ("fails already on a layer done" if npass < len(per) else "no failing layer among those done")
+        allc = np.array([c["rel_y"] for c in cells if c["arm"] == arm])
+        out["arms"][arm] = dict(verdict=verdict, layers_done=done, layers_pass=npass, determinism_ok=det_ok, per_layer=per,
+                                pooled=dict(n=int(allc.size), median=float(np.median(allc)) if allc.size else None,
+                                            max=float(allc.max()) if allc.size else None, min=float(allc.min()) if allc.size else None,
+                                            n_over_001=int((allc > 0.01).sum()), n_over_005=int((allc > 0.05).sum())))
+    stop = [p for p in prog if "kill" in p or "stop" in p or "exit" in p]
+    out["stops"] = stop
+    out["peak_tree_rss_gb"] = next((p.get("peak_tree_rss_gb") for p in prog if "peak_tree_rss_gb" in p), None)
+    out["timing"] = [dict(layer=k, **{x: v for x, v in t.items() if x in ("float_s", "ref_attention_s", "total_s", "mix_bit_equal_q1", "peak_rss_gb_self")}) for k, t in sorted(tim.items())]
+    (RUNS / "summary.json").write_text(json.dumps(out, indent=1) + "\n")
+    lines = ["# summary (generated by summarise.py)", ""]
+    for arm in ARMS:
+        a = out["arms"][arm]; p = a["pooled"]
+        lines.append(f"- {arm}: {a['verdict']}; layers passing {a['layers_pass']} of {len(a['layers_done'])} done; determinism ok {a['determinism_ok']}; "
+                     f"pooled n={p['n']} median {p['median']} max {p['max']}, over 0.01: {p['n_over_001']}, over 0.05: {p['n_over_005']}")
+    lines += ["", *md, ""]
+    (RUNS / "summary.md").write_text("\n".join(lines) + "\n")
+    print("\n".join(lines[:4]))
+
+if __name__ == "__main__":
+    main()
