@@ -82,8 +82,8 @@ results:
     status: in progress
     status_note: "PARTIAL, build refused before compilation"
     replication: n/a
-    pr: null
-    pr_note: "draft pending; no functional result"
+    pr: 184
+    pr_note: "blocked draft; no functional result"
     summary: "Untested reader-only proposal; no parse/admission/verifier matrix established"
     conditions: "Initial CPU unit build refused by its output-directory safety check; release and UBSan tests not run"
     evidence: [experiments/20261113-182-reader-parity/RESULTS.md, experiments/20261113-182-reader-parity/runs/build/attempt.json]
