@@ -181,16 +181,27 @@ different table has nothing to compare against, and since this change it at leas
   matches it, `verifier.served.form.world.kit`, which the runner left out in mode cpu because it
   needs a GPU-dependent setup row (16 rows match the expression; 15 ran). Corrected after review:
   the first version of `ENV.json` called all 158 "outside the registered expression".
-- **A second caller of the table tool changes behaviour and was not tested** (found after the runs,
+- **A second caller of the table tool changes behaviour and was not tested in the registered runs** (found after the runs,
   by reading; added to this file after its first commit). `scales/words_to_policy.py` calls
   `policy_tables.digests()` when its base parameter file has digest lines. For a base file with `NE 0`
   and digest lines, main's converter ends with `input-policy-tables` (status 20) because `digests()`
   raised; on this branch `digests()` returns, so the converter should go on and write the dense lines.
   For `NE` above 0 the function's result is unchanged (item 4 covers the tool, not the converter). No
-  row of `SUITE.md` names the converter, and this lane ran no test of it.
-- `integrations/vllm/integer_model/integer_model/parameters.py` refuses `NE 0` with a message that says
-  such a file "cannot carry the digests of the public tables". That sentence is now out of date for the
-  verifier. It was left as it is (outside the scope; the package still requires experts).
+  row of `SUITE.md` named the converter, and this lane ran no test of it in its registered runs.
+  After review (both reviewers, nonblocking) a regression test was added:
+  `scales/tests/test_words_to_policy_dense.py` (6 tests: a
+  dense base with digest lines gets 32 lines equal to `policy_tables.py`'s, the eight sigmoid lines 0;
+  the expert sigmoid lines on a dense base are replaced; partial lines are completed; a new `rx` moves
+  only the softmax lines; a dense base without lines gets none; control: a base with experts and its
+  own values is returned byte for byte). Run against the base commit's `scales/` it fails 4 of 6 (the
+  four with dense digest lines, `ValueError` from `digests()`). It is not part of the registered
+  runs or of the PASS. It is not yet a row of `SUITE.md` (adding one changes the table's 173 rows
+  that this file and `docs/limits.md` count); run it with
+  `python3 -B scales/tests/test_words_to_policy_dense.py`.
+- `integrations/vllm/integer_model/integer_model/parameters.py` refused `NE 0` with a message that
+  said such a file "cannot carry the digests of the public tables". That sentence was out of date for
+  the verifier. After review the message was reworded (the package still refuses `NE 0`; its own
+  reading of the digest lines covers only files with experts). No behaviour changes.
 
 ## Deviations from the PREREG
 
