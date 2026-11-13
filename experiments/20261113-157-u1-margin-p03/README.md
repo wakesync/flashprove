@@ -23,6 +23,7 @@ Issue #157. Follows PR #139 (`experiments/20261112-134-u1-margin/`), which measu
 - `u1_p03.py`: driver. `run` (registered), `fixture` (debug on a prompt not in the suite).
 - `run_p03.sh`: the registered job (slot grant log, memory wait, run 1 and run 2, watchdog for the hard stop, disk and memory).
 - `merge10.py`: 10-prompt merge, gates, statistics (through PR #139's `analyse.analyse()`, unchanged), determinism check.
+- `test_merge10.py`: hostile-input tests for `merge10.py` (added after the PR #162 reviews, validation only): the committed inputs reproduce `runs/merged-analysis.json` and `runs/merge-validation.json` byte for byte, and 12 malformed inputs (truncated JSON, duplicate keys, an absent prompt or arm in PR #124's E files, missing manifest keys or files) exit 2 with nothing written.
 - `add_results_row.py`: writes the `research/results.yaml` row from `runs/merged-analysis.json`.
 - `runs/run1/`, `runs/run2/`: per-position D (`d-p03.json`), manifests, progress logs, `run.time`.
 - `runs/merged-analysis.json`, `runs/merge-validation.json`: the result.
@@ -33,7 +34,9 @@ Analysis from the committed files (seconds, no weights):
 
     python3 merge10.py runs/run1 runs/run2 <new dir>
 
-It refuses to overwrite an existing output; give it a new directory.
+It refuses to overwrite an existing output; give it a new directory. Input tests (seconds, temporary copies only):
+
+    python3 test_merge10.py
 
 The p03 run (about 30 min per run on 6 cores, peak RSS under 9 GB, weights streamed over HTTP, nothing cached):
 
