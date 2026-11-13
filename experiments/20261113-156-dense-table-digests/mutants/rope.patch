@@ -1,0 +1,14 @@
+diff --git a/verifier/src/cp_verify.cpp b/verifier/src/cp_verify.cpp
+index 7fa6f745..b5a9d974 100644
+--- a/verifier/src/cp_verify.cpp
++++ b/verifier/src/cp_verify.cpp
+@@ -1600,6 +1600,9 @@ static int runStage(const StageInputs &in) {
+     // l = ~0 is used for the hash below.
+     if (l != ~0ull && !klRp(l)) return sine ? 0 : (i64)1 << h.cs;
+     double ang = (double)t * pow((double)h.theta0, -2.0 * (double)i / (double)dh);
++    // MUTANT (experiments/20261113-156-dense-table-digests): one cosine of the rotary table moved by
++    // 1, as a floating-point library that rounds this entry differently would give it. Never merged.
++    if (t == 3 && i == 1 && !sine) return (i64)round((double)(1u << h.cs) * cos(ang)) + 1;
+     return (i64)round((double)(1u << h.cs) * (sine ? sin(ang) : cos(ang)));
+   };
+   // The statement's RoPE hash. Format: docs/format/FORMAT.md, "The digests".
