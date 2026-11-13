@@ -1,0 +1,20 @@
+{
+ "binaries": [
+  "exp",
+  "head",
+  "rope",
+  "silu"
+ ],
+ "case_files_checked_against_the_registered_run": 6,
+ "results": {
+  "head on dense-with-digests": "met",
+  "silu on dense-with-digests": "NO: table-digest-silu",
+  "rope on dense-with-digests": "NO: table-digest-rope",
+  "exp on dense-with-digests": "NO: table-digest-exp",
+  "head on dense": "not met: table-digests",
+  "silu on dense": "not met: table-digests",
+  "rope on dense": "not met: table-digests",
+  "exp on dense": "not met: table-digests"
+ },
+ "not_as_registered": []
+}

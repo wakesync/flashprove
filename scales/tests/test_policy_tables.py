@@ -286,6 +286,39 @@ class Program(unittest.TestCase):
         odd = ["odd  line\t\r", "", "tsilu 5", "tsilux 5", "callx 1"]
         self.assert_prints(self.run_tool(self.plain[:3] + odd + self.plain[3:]), self.good[:3] + odd + self.good[3:])
 
+    def test_a_file_without_experts_has_zero_sigmoid_lines(self):
+        """With NE 0 the SiLU, rotary and softmax lines are those of the file with experts, and tsig0 to tsig7 are 0.
+
+        Only the line NE is changed here: such a file is not one that the verifier accepts (it asks more of a file
+        without experts), but the program reads no other line for its tables.
+        """
+        zeros = ["tsig%d 0" % i for i in range(DW)]
+        dense_tables = self.tables[:DW] + zeros + self.tables[2 * DW :]
+        dense = self.replaced("NE", "NE 0", base=self.with_tables(dense_tables))
+        self.assertNotEqual(self.tables[DW : 2 * DW], zeros)
+        for what, lines in (
+            ("the right lines", dense),
+            ("no lines", self.replaced("NE", "NE 0", base=self.plain)),
+            ("the lines of the file with experts", self.replaced("NE", "NE 0")),
+        ):
+            with self.subTest(what):
+                self.assert_prints(self.run_tool(lines), dense)
+        # The line gcl changes the sigmoid table of a file with experts; without experts there is none to change.
+        self.assert_prints(self.run_tool(self.optional("gcl 1", base=dense)), self.optional("gcl 1", base=dense))
+        run = self.run_tool("--check", dense)
+        self.assertEqual((run.returncode, run.stdout, run.stderr), (0, b"the %d digest lines match the tables\n" % LINES, b""))
+        # --check: the sigmoid digest of the file with experts does not match a file without them, and one line says so.
+        run = self.run_tool("--check", self.replaced("NE", "NE 0"))
+        self.assertEqual((run.returncode, run.stderr, run.stdout.count(b"\n")), (policy_tables.DIFFERS, b"", 1))
+        self.assertIn(b"tsig0", run.stdout)
+        # A nonzero sigmoid word, and an altered word of each of the three tables, each named by its own group.
+        for at, group in ((DW + 7, b"tsig0"), (3, b"tsilu0"), (2 * DW + 5, b"trope0"), (3 * DW + 7, b"texp0")):
+            name, value = dense_tables[at].split(" ")
+            bent = dense_tables[:at] + ["%s %d" % (name, int(value) ^ 1)] + dense_tables[at + 1 :]
+            run = self.run_tool("--check", self.replaced("NE", "NE 0", base=self.with_tables(bent)))
+            self.assertEqual((run.returncode, run.stderr, run.stdout.count(b"\n")), (policy_tables.DIFFERS, b"", 1), group)
+            self.assertIn(group, run.stdout)
+
     def test_each_table_follows_its_own_lines(self):
         """A change of a line changes the digests of the tables that depend on it, and no others."""
         for lines, tables in (
@@ -408,8 +441,6 @@ class Program(unittest.TestCase):
             ("an empty file", b"", every),
             ("prof 19", self.replaced("prof", "prof 19"), computing),
             ("prof 21", self.replaced("prof", "prof 21"), computing),
-            ("NE 0", self.replaced("NE", "NE 0"), computing),
-            ("NE 0, no digest lines", self.replaced("NE", "NE 0", base=self.plain), computing),
             ("theta0 is 0", self.replaced("theta0_lo", "theta0_lo 0"), computing),
             ("CR LF line ends", [line + "\r" for line in self.good], computing),
             ("cs above the limit", self.replaced("cs", "cs 13"), computing),
