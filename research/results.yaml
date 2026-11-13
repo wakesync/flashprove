@@ -669,7 +669,7 @@ results:
     status: in progress
     replication: n/a
     pr: 174
-    summary: "KILLED vs prereg: the registered run reached 21 of 64 layers before the hard stop (the heavy-CPU slot was held by another lane until shortly before it); no logits, no verdict for XS18, XS18+U4 or XS18+U3"
+    summary: "KILLED vs prereg: the registered run reached 21 of 64 layers before the hard stop (the committed run log records the heavy-CPU slot grant at 15:23:28Z); no logits, no verdict for XS18, XS18+U4 or XS18+U3"
     conditions: "teacher-forced on PR #124's 10 frozen prompts (1,461 positions), abl leg only (stock layers 0 to 16, byte-identical, then abl 17 to 63); only the DeltaNet head computation is lowered (XS18), and in the U arms only its decay a; decay tables emulated as PR #159, U4 rows float64; CPU, one deterministic run, shared loaded host, no proof"
     evidence: [experiments/20261113-170-decay-e2e/RESULTS.md]
     metrics:

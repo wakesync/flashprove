@@ -5,26 +5,26 @@
 ## Plain-language summary
 
 - The question was whether PR #159's table decays (U4, which passed its per-head bar, and U3, which did not) change the abliterated model's next-token predictions when they replace XS18's float decay in all 48 DeltaNet layers, using PR #124's harness and bar.
-- The run needs the shared big-memory CPU slot. Another lane (#150 part B) held it from before this PREREG until 15:23:28Z. The PREREG fixed a hard stop of 2026-11-13T15:50:00Z before any code was written, so 26.5 minutes were left against about 75 minutes of work at the rate this run reached (about 70 s per layer). The watchdog stopped the run at 15:50:04Z after layer 20, as registered.
-- What was checked: the harness was debugged on a non-suite fixture, and it works: the control path is bit-identical to PR #124's XS18 heads (fixture) and its per-layer residual drift equals PR #124's committed numbers exactly for all 21 finished layers and 10 prompts. Inside the model, the decay the U4 path used was at most 0.00071 from float64 per token (U3: 0.0027), as PR #159 measured on recorded inputs.
-- What was not checked: any logit, any top-1, any KL. Through layer 20 the three integer paths drift from REF by almost the same amount (see section 3), but that is not a token result, and the residual is not the output.
+- The run needs the shared big-memory CPU slot. The committed `runs/progress.log` records the slot grant at 15:23:28Z. The PREREG fixed a hard stop of 2026-11-13T15:50:00Z before any code was written, so 26.5 minutes were left against about 75 minutes of work at the rate this run reached (about 70 s per layer). The watchdog stopped the run at 15:50:04Z after layer 20, as registered.
+- What was checked: the harness was debugged on a non-suite fixture, and it works: the control path is bit-identical to PR #124's XS18 heads (fixture) and its per-layer residual drift equals PR #124's committed numbers exactly for all 21 finished layers and 10 prompts. Inside the model, the maximum absolute per-token decay error from float64 was about 0.000710087 for U4 and 0.00271555 for U3 (`runs/decay-err-abl.jsonl`). These are descriptive maxima from this partial run, not bounds rounded downward or equalities with PR #159.
+- What was not checked: any logit, any top-1, any KL. Through layer 20 the three integer paths have similar scalar residual distances to REF (see section 3). Similar distances do not establish that the integer residual tensors are close to one another, and say nothing about tokens.
 - A respawn can run it unchanged: `decay_e2e.py run` resumes from the scratch checkpoint, but a new registration with a new hard stop is needed (see section 5).
 
 ## 1. Run record
 
 - PREREG `PREREG.md`: first commit `ec71c8d523679036c36d7599b7e239c92231f1d3`, alone, before any code. No amendments.
 - Code: `decay_e2e.py` committed in `b674bdb2d1cb75d19d9a2469ffe5de1bdca69dce` before the run (the run used that commit's file). `summarise.py`, `env.py`, `add_results_row.py`, `partial_report.py`, `partial_control.py` were written while waiting or after the stop and do not touch the forward.
-- Fine exp table for U3 (`decay_r2.py fine20`, PR #159's generator): 1,048,576 rows, sha256 `58935f414d1075654248b3bea38f3af9a82bdca41fa95ef0a7c0a158e407a95c`, 0 rows differ from float64 round-to-nearest, as PR #159. All table hashes are in `runs/progress.log.jsonl` (`start` line) and `ENV.json`.
+- Fine exp table for U3 (`decay_r2.py fine20`, PR #159's generator): 1,048,576 rows, sha256 `58935f414d1075654248b3bea38f3af9a82bdca41fa95ef0a7c0a158e407a95c`, 0 rows differ from float64 round-to-nearest according to PR #159's receipt on main, `experiments/20261113-155-deltanet-decay-r2/runs/fine20.json` (`rows_differing_from_float64_rne`), whose table sha256 matches this run. All table hashes are in `runs/progress.log.jsonl` (`start` line) and `ENV.json`.
 - Before the registered run, outside the heavy gate: one synthetic head check on random inputs (no model data, light): the control head equals `scaled_head.Head.run` bit for bit. Not committed (helper outside the repo); the fixture below repeats the check on real weights.
 - `runs/progress.log`: slot granted 15:23:28Z (shared lock plus `fp-heavy.sh`, cores 10 to 15), hard stop 15:50:00Z (the registered lane stop, earlier than grant + 100 min), MemAvailable 13.8 GB at start. Debug fixture 15:23:28Z to 15:25:08Z, rc 0, process-tree RSS peak 3.45 GB. Registered run from 15:25:08Z; `HARD STOP run kill` at 15:50:04Z, rc -15 (SIGTERM, by pid), process-tree RSS peak 8.25 GB (under the 14 GB stop; `time -v` printed no summary because its child was signalled and it was the one killed: `runs/run.time` has only the resource tracker warning).
-- Layers finished: 0 to 20 (`runs/progress.log.jsonl`, `runs/run.log`). Per layer: DeltaNet about 68 to 75 s, attention about 53 to 58 s, first-layer fetch wait 20.3 s, later fetches overlapped (`runs/divergence-abl.jsonl` `seconds`). Host shared and loaded.
+- Layers finished: 0 to 20 (`runs/progress.log.jsonl`, `runs/run.log`). Per layer: DeltaNet 68.1 to 78.6 s (16 layers), attention 50.4 to 57.5 s (5 layers), first-layer fetch wait 20.3 s, later fetches overlapped (`runs/divergence-abl.jsonl` `seconds`). Host shared and loaded.
 - Guard errors: none (no `errors-abl.jsonl`). U4 never rejected a lookup in layers 0 to 20.
 
 ## 2. Debug fixture (`runs/debug-fixture/fixture.json`, "The capital of Italy is", stock layers 0 to 3, not a suite prompt)
 
 - Control: the substituted head with XS18's own decay is bit-identical to `scaled_head.Head.run` (`q1_forward.head_out(.., "INT", XS18)`) in layers 0, 1, 2.
 - The decay value read inside the head for U4 and U3 equals `floor((a20 + 2) / 4)` of PR #159's `arm_decay` output at every token, layers 0 to 2.
-- Save / load and resume after layer 1: bit-equal. REF#2 and XS18+U4#2: bit-equal to REF and XS18+U4. Streaming logit metrics on synthetic logits: KL within 1.1e-14 of a dense computation, top-1 equal. `all_ok: true`.
+- Save / load and resume after layer 1: bit-equal. REF#2 and XS18+U4#2: bit-equal to REF and XS18+U4. Streaming logit metrics on synthetic logits: the maximum absolute KL difference from dense computation is 1.4210854715202004e-14 (XS18+U3), and top-1 is equal. This passes the fixture's actual `< 1e-12` KL test (`decay_e2e.py`, fixture `all_ok` expression); it is not exact KL equality. Source: `runs/debug-fixture/fixture.json`, `synthetic.*.kl_absdiff`. `all_ok: true`.
 
 ## 3. Partial, descriptive (no threshold, no verdict): layers 0 to 20
 
@@ -34,7 +34,9 @@ Source `runs/partial.json`, `runs/partial.md` (`partial_report.py`), `runs/parti
 
 **Determinism.** REF#2 and XS18+U4#2 (p01, p09) are bit-identical to REF and XS18+U4 after every finished layer.
 
-**Decay error the paths actually used** (max over prompts, tokens and V heads, per DeltaNet layer, |a_path / 2^18 - a_float64(ar)|): XS18 3.7e-6 to 1.3e-5; XS18+U4 1.4e-4 (layer 0) then 5.8e-4 to 7.1e-4; XS18+U3 1.4e-3 (layer 0) then 1.9e-3 to 2.7e-3. These match PR #159's U4 and U3 per-token maxima on recorded inputs (0.00071 and 0.0028) to within the added 2^-19 conversion. The bar PR #159 used is 0.00195 per token: U3 exceeds it inside the model too, U4 does not.
+**Decay error the paths actually used** (max over prompts, tokens and V heads, per DeltaNet layer, |a_path / 2^18 - a_float64(ar)|): the rounded ranges are approximately XS18 3.7e-6 to 1.3e-5; XS18+U4 1.4e-4 (layer 0) then 5.8e-4 to 7.1e-4; XS18+U3 1.4e-3 (layer 0) then 1.9e-3 to 2.7e-3. Across all 16 completed DeltaNet layers, the exact ranges of layer maxima are U4 0.00014105987709656098 to 0.0007100866920380366 and U3 0.0014339916926072171 to 0.002715552378274755 (`runs/decay-err-abl.jsonl`, `max_abs_a_minus_float`, reduced over prompts per layer).
+
+These maxima have the same magnitude as PR #159's recorded-input maxima, U4 0.0007123179577963046 and U3 0.002816707418314579, but are not equal. Those comparison figures are the maxima of `e_tok_max` by arm in `experiments/20261113-155-deltanet-decay-r2/runs/eval/cells.csv.gz` on main. Only layer 0's maxima agree exactly; the closed-loop inputs differ from layer 1 on, and PR #159 covers 48 DeltaNet layers versus 16 here. The 2^-19 conversion bound applies to converting one fixed a20 value, not to differences between maxima over different inputs and layer coverage. The bar PR #159 used is approximately 0.00195 per token: U3 exceeds it inside the model too, U4 does not.
 
 **Residual drift after layer 20** (relative L2 difference from REF):
 
@@ -51,7 +53,7 @@ Source `runs/partial.json`, `runs/partial.md` (`partial_report.py`), `runs/parti
 | p09-multilingual | 0.00173 | 0.00175 | 0.00175 |
 | p11-chat-long | 0.00146 | 0.00147 | 0.00148 |
 
-Closed-loop heads over rel_y 0.05 in layers 0 to 20 are nearly the same in the three paths (p03: 273 / 272 / 271; p04: 41 / 39 / 41; p06a: 6 / 6 / 6; none elsewhere). Reading, descriptive only: through layer 20 the table decay adds little to the drift XS18 already has, and p03 is the prompt that drifts most in every path. Over 64 layers in PR #124, XS18's drift on p03 reached 6.1% to 6.5%; whether the U paths stay with it to the output, and whether any top-1 changes, was not measured.
+Closed-loop heads over rel_y 0.05 in layers 0 to 20 are nearly the same in the three paths (p03: 273 / 272 / 271; p04: 41 / 39 / 41; p06a: 6 / 6 / 6; none elsewhere). Reading, descriptive only: after layer 20 the three scalar relative L2 distances to REF span at most about 0.00015 per prompt (maximum 0.00014537750532830234 on p01, from `runs/divergence-abl.jsonl`), and p03 has the largest distance in every path. Similar distances to REF do not show small pairwise differences between the integer residual tensors or establish token fidelity. Over 64 layers in PR #124, XS18's drift on p03 reached 6.1% to 6.5%; whether the U paths stay with it to the output, and whether any top-1 changes, was not measured.
 
 ## 4. Registered cells vs the bar
 
@@ -79,6 +81,8 @@ H: not tested. Source `runs/summary.json`, `runs/summary.md` (`summarise.py`, wh
 - Replication: none.
 
 ## 7. Deviations and disclosures
+
+- Review corrections are text-only reductions of committed receipts, not a rerun or independent forward replication. All `runs/` files remain unchanged, including the rounded tables in `runs/partial.md`; those displayed values are approximations, not upper bounds. The registration and code also remain unchanged. Section 3 supersedes the earlier cross-experiment agreement wording: the same-a20 conversion bound does not apply to maxima from different inputs.
 
 - The registered run stopped at the hard stop, as the Kill criterion says. Not a deviation, but the result is KILLED for every arm.
 - `time -v` gave no resource summary (it was the signalled process); peak RSS comes from the job's own 5 s watchdog over the process tree (8.25 GB) instead.
