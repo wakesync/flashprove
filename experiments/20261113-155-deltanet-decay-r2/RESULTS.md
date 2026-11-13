@@ -118,7 +118,7 @@ Not counted, and each one is a real obligation for a build:
 
 ## 7. Deviations from the PREREG and disclosures
 
-- Arms, table constants, metric, bar and prompt set are as registered. No arm was evaluated on a registered array before the registered run.
+- Arms, table constants, metric, bar and prompt set are as registered. No round-2 arm (U1 to U4) was evaluated on a registered array before the registered run. PR #146's own arms T0 to T3 were, once, by the input check of section 1, as the PREREG says.
 - **Amendment A1.** The PREREG header says its date was "read from the host clock". The clock was read at 01:34:40Z and "01:36Z" was typed as an estimate of when the commit would land (it landed at 01:36:07Z); the commit time is the record.
 - **Amendment A3, post hoc.** The U3 split and the g-band table of section 4 were added after the verdicts were seen. They are descriptive, have no threshold and change no verdict. The amendment and `posthoc.py` were committed before either was run.
 - The design constants (G = 20, the -16 softplus bound, U4's [-16, 32) domain) were fixed from PR #146's committed per-head minimum, median and maximum of x and g, which come from the same 10 prompts the arms are then evaluated on. The bar and the metric were not tuned, but the domains are in-sample: on other prompts x could fall below -16 (clamped, error at most A softplus(-16)) or reach 32 (U4 rejects).
