@@ -12,6 +12,9 @@ Each reader must either refuse the altered copy (EvidenceError, exit 2) or repor
 (compare status "mismatch" / partial coverage, summary status other than PASS). An altered copy that a
 reader accepts as the full passing result is a test failure. The committed files themselves must pass
 unchanged (case "baseline"), and the regenerated summary must equal the committed runs/summary.json.
+Issue #189 additionally pins optional metadata: removing only metadata from a complete run is accepted;
+a line-boundary cut with metadata/tree/cache absent is partial, not a full PASS. These cases document
+current behavior, not a recommendation to accept metadata-free evidence as a registered stopped run.
 
 Usage (from the top of the tree): test_wb_leafv2_evidence.py [out.json]     exit 0 iff every expectation holds
 """
@@ -350,6 +353,50 @@ def cases():
     recompare(runs)
     expect("consistent-partial-77 (compare file regenerated)", runs, "summarise", "PASS-SUBSET",
            also=lambda s: s["h3"]["union"]["n_blocks"] == 77 and s["h3"]["union"]["all_identical"] is True)
+
+    # ---- missing metadata boundary (#189, independently reproduced before adding these cases)
+    runs = fixture("missing-meta-cut-last")
+    put(runs, lines(runs)[:-1])
+    (runs / "run3/run-meta.json").unlink()
+    (runs / "run3/leaves-v2.json").unlink()
+    (runs / CMP["run3"]).unlink()
+    expect("missing-meta-cut-last", runs, "compare", "identical-partial",
+           also=lambda d: d["n_common"] == 77 and d["n_identical"] == 77 and "roots_equal" not in d)
+    expect("missing-meta-cut-last", runs, "suite", "refused", "all 78 blocks are needed")
+    expect("missing-meta-cut-last", runs, "summarise", "PASS-SUBSET",
+           also=lambda s: s["h3"]["union"]["n_blocks"] == 77 and s["h3"]["union"]["all_identical"] is True
+           and s["h3"]["run3"]["status"] == "identical-partial")
+
+    runs = fixture("meta-kept-cut-last-no-tree-cache")
+    put(runs, lines(runs)[:-1])
+    (runs / "run3/leaves-v2.json").unlink()
+    (runs / CMP["run3"]).unlink()
+    refused_by_all("meta-kept-cut-last-no-tree-cache", runs, "run-meta.json")
+
+    runs = fixture("missing-meta-cut-last-tree-kept")
+    put(runs, lines(runs)[:-1])
+    (runs / "run3/run-meta.json").unlink()
+    (runs / CMP["run3"]).unlink()
+    expect("missing-meta-cut-last-tree-kept", runs, "compare", "refused", "incomplete run")
+    expect("missing-meta-cut-last-tree-kept", runs, "suite", "refused", "all 78 blocks are needed")
+    expect("missing-meta-cut-last-tree-kept", runs, "summarise", "refused", "incomplete run")
+
+    runs = fixture("missing-meta-complete")
+    (runs / "run3/run-meta.json").unlink()
+    expect("missing-meta-complete", runs, "compare", "identical-complete",
+           also=lambda d: d["n_common"] == 78 and d["n_identical"] == 78 and all(d["roots_equal"].values()))
+    expect("missing-meta-complete", runs, "suite", "pass", also=lambda d: d["n_pass"] == d["n_checks"] == 38)
+    expect("missing-meta-complete", runs, "summarise", "PASS",
+           also=lambda s: (runs / "summary.json").read_bytes() == (SRC / "summary.json").read_bytes())
+
+    runs = fixture("missing-meta-reordered-no-tree-cache")
+    ls = lines(runs)
+    ls[3], ls[40] = ls[40], ls[3]
+    put(runs, ls)
+    (runs / "run3/run-meta.json").unlink()
+    (runs / "run3/leaves-v2.json").unlink()
+    (runs / CMP["run3"]).unlink()
+    refused_by_all("missing-meta-reordered-no-tree-cache", runs, "record order")
 
     # ---- altered records (opus flip, e + 1, payload swap, line order; Astra payload swap)
     runs = fixture("swap-block-payloads-0-1")            # Astra: pin payloads of the first two records swapped

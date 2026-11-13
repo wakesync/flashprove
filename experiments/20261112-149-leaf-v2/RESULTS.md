@@ -92,3 +92,19 @@ Limits of the fix:
 - The order check is stricter than the reviewers asked: a `blocks.jsonl` whose lines are reordered with their content unchanged is now refused, where one reviewer expected it to compare as identical.
 - The new tests exercise the readers, not the conversion. They are not a second implementation of the rule and add nothing to H1, H2 or H4.
 - Not done, left as follow-up: binding the CPU pin of runs 1 and 2 into a run file (it cannot be added to committed run files; it is in the PREREG and ENV.json), and a continuous-integration job for the two leaf-v2 test files (they are run by hand; the commands are in `research/weight-binding/README.md`).
+
+## Limits addendum, 2026-11-13: missing metadata (issue #189)
+
+This append-only clarification does not change any text, registered result, or run file above. The reader's behavior is unchanged. The motivating finding is the [PR #151 after-merge auditor's observation](https://github.com/wakesync/flashprove/pull/151#issuecomment-6863785743); the following measurements are this follow-up's independent fixture reproduction, not numbers borrowed from the audit.
+
+`run-meta.json` is optional in `wb_leafv2._load`. When absent, recorded completion (`done`, `n_registered`, `stopped`) and direction (`reverse`) are unchecked. The reader still validates block identities, fields, uniqueness, and that file order is a prefix of the registered order or its reverse. Accepting an ordered prefix therefore does **not** show that it came from a registered stopped run. Removing metadata from an otherwise complete run can still give H3 `PASS`; that status checks coverage and agreement of the supplied records, not provenance or the existence of completion metadata.
+
+Independent scratch-copy fixtures, registered before code in `experiments/20261113-189-missing-metadata/PREREG.md`, give the following in each of five deterministic replays (measured, unreplicated):
+- Run 3 with its final complete line cut and its metadata, stored tree and cached comparison removed: `identical-partial`, 77 common and identical blocks; recomputed H3 `PASS-SUBSET`, never full `PASS`.
+- The same cut with original metadata retained (tree/cache removed): both readers refuse on the metadata count. With original stored tree retained instead (metadata/cache removed): both refuse an incomplete run next to a stored tree.
+- Noncanonical line reordering without metadata/tree/cache: both refuse record order.
+- Complete run 3 with only metadata removed: `identical-complete` and H3 `PASS`, like the unchanged baseline.
+
+Receipts: `experiments/20261113-189-missing-metadata/runs/registered/summary.json` and its per-repetition JSON files, with before/after source hashes. The extended evidence suite receipt is `experiments/20261113-189-missing-metadata/runs/evidence-tests.json`. The missing-metadata cases document a boundary, not a new proof, new conversion, or independent validation of integer hashes against weights.
+
+**Recommendation (not implemented): require metadata by default for evidence presented as a registered run.** Its small compatibility cost is preferable to silently losing the completion/direction checks while retaining a success-like label. If metadata-free exploratory comparison remains useful, it should be explicit and visibly distinct from registered evidence, not an implicit fallback. Requiring metadata would check consistency, not authenticate metadata or prove provenance: an attacker can rewrite metadata too. Any behavior change needs its own dated PREREG amendment and review. The CI-job and historical CPU-pin follow-ups remain outside this issue.

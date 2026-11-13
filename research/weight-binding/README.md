@@ -61,18 +61,23 @@ The original hash-level work has a design and these CPU checks:
   status 2) a duplicate record for a block (an identical duplicate too), a name outside the registered
   78, a wrong kind, malformed fields, a derived flag that does not follow from the record's own fields
   or from #68's hash and shape, a record order that is not a prefix of the registered order or of its
-  reverse, and a count or order that disagrees with `run-meta.json`. `load_leaves` accepts a stored
+  reverse, and a count or order that disagrees with `run-meta.json` **when present**. Without that
+  file, recorded completion and direction are unchecked; an accepted prefix is not evidence that
+  a run stopped under its registration. Complete metadata-free input may still report H3 `PASS`.
+  See the dated [limits addendum](../../experiments/20261112-149-leaf-v2/RESULTS.md#limits-addendum-2026-11-13-missing-metadata-issue-189).
+  `load_leaves` accepts a stored
   `leaves-v2.json` only if it is byte for byte the tree rebuilt from those records. `compare` compares
   the canonical leaf-v2 JSON per block and pin and the fetched-bytes hash, computes root and id equality
   on rebuilt trees, and writes a `status`: `identical-complete`, `identical-partial` (a run that
   covers fewer blocks, such as run 2), `no-common-blocks` or `mismatch` (exit status 1). What this
   does not do: it cannot check `e` or `int_sha256` against the weights (that needs the bytes), so a
   record altered consistently is accepted as a record and shows up only as a difference from another run.
-- `test_wb_leafv2_evidence.py`: 162 expectations over 59 cases on altered temporary copies of the
+- `test_wb_leafv2_evidence.py`: regression expectations on altered temporary copies of the
   committed #149 run files (duplicates, altered or truncated stored trees, dropped or reordered
-  records, swapped payloads, flipped flags, edited compare files). Each of `compare`, the hostile suite
-  and `summarise.py` must refuse the copy or report the difference; the unaltered files must pass. No
-  network, no weights. It tests the readers, not the conversion.
+  records, swapped payloads, flipped flags, edited compare files, and optional metadata). Each of
+  `compare`, the hostile suite and `summarise.py` must produce the specified refusal or coverage result;
+  the unaltered files must pass. The complete metadata-free control also passes; the cut metadata-free
+  case gives H3 `PASS-SUBSET`, not `PASS`. No network, no weights. It tests readers, not conversion.
 
 ## What the verifier recomputes
 
@@ -156,13 +161,15 @@ python3 research/weight-binding/test_wb_leafv2.py $E/runs/run1 "$O/tests.json"  
 cmp "$O/tests.json" $E/runs/run1/tests-1.json                                        # expect no output
 python3 research/weight-binding/wb_leafv2.py compare $E/runs/run1 $E/runs/run3 "$O/compare.json"   # exit 0
 python3 $E/summarise.py --check                                                      # exit 0: runs/summary.json is current
-python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 162 / 162, exit 0
-cmp "$O/evidence.json" $E/runs-fix151/evidence-tests.json                            # expect no output
+python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # exit 0
+cmp "$O/evidence.json" experiments/20261113-189-missing-metadata/runs/evidence-tests.json
 ```
 
-The last `cmp` was observed equal on three runs with Python 3.12.3. The receipt quotes refusal messages,
-some of which come from Python's JSON decoder, so another Python version may word them differently; the
-count (162 of 162) and the exit status are what the test asserts.
+The current receipt includes the issue #189 metadata-boundary cases; the older
+`runs-fix151/evidence-tests.json` remains unchanged and describes the earlier suite. Receipts quote
+refusal messages, some from Python's JSON decoder, so other Python versions may word them differently.
+The suite asserts expectations and exit status; see the [follow-up reproduction guide](../../experiments/20261113-189-missing-metadata/README.md)
+for the independent metadata fixture runner, measurements and limitations.
 
 The first-run files in `experiments/20261111-91-conversion-id/runs/` were made by the v1 code at
 d39c98dc and are not reproduced by the current code (the config pin changed, so the ids did).
