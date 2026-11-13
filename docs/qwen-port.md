@@ -10,8 +10,28 @@ and designs and cost counts. A numerical forward through all layers is not a pro
 Updated from main pinned once at `59bff9a4608e0cc720d58d7c30823a8838fa43e4` (2026-11-13).
 “Built” below means the cited build evidence is in that tree, not that it proves the real model.
 Historical verdicts stay as recorded. This is a documentation refresh, not an experiment: no
-PREREG or results-ledger row is added. Open-PR results are excluded. The
+PREREG or results-ledger row is added. PRs #173, #174 and #180 merged after the pin and are
+summarised only in the dated section below. PRs #178 and #179 were open at the pin and remain
+open at the main revision checked below; neither is used. The
 [evidence map](qwen-port-evidence.md) gives the source path, section and scope for every E-reference.
+
+## Merged after the pin (not incorporated above)
+
+2026-11-13 update, checked against main `4991f69acbc9db0c9cd0bc80b79ad658078e3737`.
+Except for this dated section, the body remains the snapshot at the original pin and was not
+re-derived; the pointers below do not replace its historical verdicts.
+
+- **PR #173: FAIL** on the registered integer-MLP token-agreement bar for the abliterated XM18
+  path (XS18 heads plus M3 integer MLP): top-1 agreement is 1,423 of 1,461 positions (97.40%
+  against >= 99.0%), and both registered KL criteria also fail. This is measured, unreplicated
+  numerical evidence, not a proof or a stock-leg result, and it does not move the original run's
+  cutoff. [E19]
+- **PR #174: KILLED** for XS18, XS18+U4 and XS18+U3 in the abliterated decay-table end-to-end
+  run after 21 of 64 layers. No logits were produced, so the token-agreement hypothesis remains
+  untested; the partial measurements are descriptive, unreplicated and not a proof. [E20]
+- **PR #180: design only**, a desk note on head dimension 256 and partial rotary, not a
+  registered experimental PASS/FAIL verdict. It supplies no implementation, measurement,
+  soundness theorem or build green light. [E21]
 
 ## Why this is a port, not a loader change
 
@@ -28,7 +48,7 @@ These are architectural requirements, not evidence of prover support. [E2]
 | M2 two-lookup build | Built, including the 16-token head. Original H4 **NOT PASSED**; separately registered H4-r2 **PASS** | Not a retrospective H4 pass, production security or real-model fidelity | E4 |
 | Whole-forward, head-only fidelity | XS18 and XS20 PASS on both checkpoints, teacher-forced, with only DeltaNet head arithmetic lowered | Not a fully integer model or a proof | E5 |
 | Served-reply comparison | Registered bars PASS on the recorded abliterated replies | Reconstructed token ids, not observed server ids; no CPU free-running generation or proof | E6 |
-| Integer MLP | **PARTIAL / NOT FINISHED** on token agreement; input class exceeded on the layers completed | No MLP token-agreement verdict; the state-regeneration follow-up adds no logits | E7 |
+| Integer MLP | **PARTIAL / NOT FINISHED** on token agreement; input class exceeded on the layers completed | No MLP token-agreement verdict; the state-regeneration follow-up adds no logits. For the later registered **FAIL**, see [Merged after the pin](#merged-after-the-pin-not-incorporated-above). | E7 |
 | Norm classes | **PARTIAL**, no registered all-layer arm verdict; measured class/fidelity failures | No logits, no token agreement, no selected arithmetic | E8 |
 | Decay round 2 | U1/U2/U3 FAIL; U4 PASS as decay-only emulation | U4 is not a built committed-table lookup or end-to-end test | E9 |
 | Stock-vs-abliterated U1 margin | **FAIL (mixed)** on all 10 registered prompts | Not a detection algorithm or an impossibility theorem | E10 |
@@ -85,6 +105,9 @@ comparison on recorded replies, not a free-running integer CPU generation or pro
 
 ### Integer MLP and norm classes
 
+The paragraph below is historical: the later integer-MLP token-agreement **FAIL** is summarised
+in [Merged after the pin](#merged-after-the-pin-not-incorporated-above), not incorporated here.
+
 The integer-MLP run completed layers 0 through 29 before its cutoff; layer 30 is descriptive
 post-cutoff evidence. Within the cutoff, the MLP input exceeds the design's class of 2,047 in every
 layer measured, with maximum 142,651. Six SiLU inputs leave the v1 domain; the numerical run
@@ -96,8 +119,11 @@ The norm-class study measured both pre-norms on 52 layers and arms on 27 layers,
 and 672 tokens, open loop from the float64 stream. Both pre-norms exceed 2,047 in every measured
 baseline layer. Clamp arm C has 0/27 layers meeting its fidelity bar; widened arm W has 12/27 and
 2,108 out-of-class entries. The smaller-scale arm's selection rule needs the missing full baseline.
-The run stopped on its disk floor: preserve **no registered arm verdict**, not an all-layer FAIL or
-PASS. Its measured failures do not choose a new norm format, and it computed no logits. [E8]
+The run stopped on its registered disk floor and has **no registered arm verdict**, not an all-layer
+FAIL or PASS. Every arm already has failing layers among those completed; the source explains
+that no completion of this run could have given any arm a PASS, while an S scale below the measured
+ladder remains unmeasured. Its measured failures do not choose a new norm format, and it computed
+no logits. [E8]
 
 ### Decay and checkpoint separation
 
@@ -139,7 +165,7 @@ explicit dependencies; dense table admission does not resolve them or Qwen's oth
   over 40 timed decode requests, and 0.000178 s per reported prompt token over 50 prefill requests.
   These are client wall times including transport and serving layers, not GPU timings or proof
   overhead. The prefill fit is sensitive to its range and should not be extrapolated to long
-  contexts; token accounting is not established from text and usage counts alone. [E16]
+  contexts; reasoning-token accounting is not established from text and usage counts alone. [E16]
 - **Conditional proving cost.** The desk model's selected variable-cost scenarios span $0.0255 to
   $10.0982 per 1,000 window tokens, not bounds on actual Qwen cost. They omit fixed costs and
   assume an unbuilt DeltaNet GPU sub-proof and borrowed rates. The later route comparison's
@@ -151,7 +177,7 @@ with the assumed rate and planned versus built volume; its segment count is also
 cap. The dense GPU calibration directory at this pin contains registration, planner and CPU/image
 preparation receipts, but no `RESULTS.md`. The preparation README labels it “prepared, not run”.
 A completed GPU calibration is therefore **NOT ESTABLISHED by this snapshot**. No availability
-promise or live-route action follows from this page. [E17, E18]
+promise or live-route action follows from this page. [E1, E17, E18]
 
 M3's CPU trace-size counts are also not a build: its lookup-based 16-token head excludes the
 separate committed weight table, that table's range proof and the matrix-product rounds. Its MLP
