@@ -1,0 +1,158 @@
+{
+ "issue": "150 (part B)",
+ "amendment": "A-3",
+ "code_commit": "1960ec5f81b4ad9fd092bed7bbaa7571a56fb4cf",
+ "stop_reason": "abl_done",
+ "slot_grant": [
+  "slot granted 2026-11-13T13:55:55Z pid 1735931 MemAvailable 13319468 kB affinity [6, 7, 8, 9, 10, 11]"
+ ],
+ "resume_line": [
+  {
+   "t": "2026-11-13T13:55:56Z",
+   "resume": true,
+   "meta": {
+    "leg": "abl",
+    "next_layer": 31,
+    "legs_done": [],
+    "prompt_set": "full"
+   }
+  }
+ ],
+ "abl_layers_done": [
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62,
+  63
+ ],
+ "abl_logits_done": [
+  {
+   "t": "2026-11-13T15:23:26Z",
+   "leg": "abl",
+   "logits_done": true,
+   "seconds": 103.6,
+   "sanity_pass": true
+  }
+ ],
+ "stock_progress_lines_after_abl": [],
+ "layer_seconds": {
+  "n": 33,
+  "median": 155.0,
+  "min": 109.3,
+  "max": 194.5,
+  "per_layer": {
+   "31": 155.0,
+   "32": 182.5,
+   "33": 171.9,
+   "34": 192.1,
+   "35": 194.5,
+   "36": 184.4,
+   "37": 149.5,
+   "38": 154.6,
+   "39": 138.0,
+   "40": 168.5,
+   "41": 166.0,
+   "42": 109.3,
+   "43": 165.9,
+   "44": 154.2,
+   "45": 158.8,
+   "46": 163.5,
+   "47": 146.6,
+   "48": 157.7,
+   "49": 156.6,
+   "50": 162.4,
+   "51": 138.7,
+   "52": 151.4,
+   "53": 159.7,
+   "54": 155.8,
+   "55": 145.0,
+   "56": 141.8,
+   "57": 143.3,
+   "58": 146.4,
+   "59": 125.0,
+   "60": 142.3,
+   "61": 119.8,
+   "62": 163.8,
+   "63": 135.7
+  },
+  "note": "wall clock per layer, layer_s in runs/progress.log.jsonl (mlp_e2e.py), shared loaded host, descriptive"
+ },
+ "time_v": {
+  "Command terminated by signal": "15",
+  "Elapsed (wall clock) time (h:mm:ss or m:ss)": "1:27:33",
+  "Maximum resident set size (kbytes)": "8152664",
+  "User time (seconds)": "8894.70",
+  "System time (seconds)": "3735.57",
+  "Percent of CPU this job got": "240%",
+  "Exit status": "0"
+ },
+ "time_v_first_line": [
+  "Command terminated by signal 15"
+ ],
+ "watchdog_rss_kib_max_at_logged_events": 4681760,
+ "watchdog_disk_free_gib_min_at_logged_events": 54.0,
+ "manifests_vs_pr124": {
+  "stock": {
+   "rerun_manifest": false
+  },
+  "abl": {
+   "fetched_tensors": 437,
+   "compared_with_pr124_manifest": 437,
+   "sha256_mismatch": [],
+   "not_in_pr124_manifest": [],
+   "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+   "rev": "739e3c5b89849f6c238ce1e5b70008612ae42cdd"
+  }
+ },
+ "state_start": {
+  "ckpt.npz": {
+   "sha256": "22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009",
+   "bytes": 183551075,
+   "source_equal": true
+  },
+  "x16.npz": {
+   "sha256": "67dde0e845de248c26838448b1df50bd1b6ed8eb2b1b03ddb40cd9feff3c53d5",
+   "bytes": 183551023,
+   "source_equal": true
+  }
+ },
+ "state_end": {
+  "ckpt.npz": {
+   "sha256": "521dd9e937bd17c59b55d209a994c610de656286067e69f8279eafcc9402d211",
+   "bytes": 183551082
+  },
+  "x16.npz": {
+   "sha256": "67dde0e845de248c26838448b1df50bd1b6ed8eb2b1b03ddb40cd9feff3c53d5",
+   "bytes": 183551023
+  }
+ },
+ "units_note": "Linux kB in /proc and time -v are KiB; disk_free_gb in watchdog.log is bytes / 1024^3 (GiB)"
+}

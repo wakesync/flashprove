@@ -1,0 +1,7 @@
+{
+ "layers": 21,
+ "pairs": 210,
+ "bit_equal_pairs": 210,
+ "max_abs_diff": 0.0,
+ "note": "XS18 residual rel diff vs REF per (layer, prompt), this run vs PR #124's committed abl divergence file; descriptive"
+}
