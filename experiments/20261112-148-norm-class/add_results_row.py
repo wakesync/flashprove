@@ -24,11 +24,12 @@ g = lambda x: f"{x:.3g}"
 
 def arm_txt(name):
     v = V[name]; arm = v.get("arm")
-    if arm is None or arm not in A or not A[arm]["n_layers"]: return f"{name}: no verdict ({v.get('why', 'not measured')})"
+    if arm is None or arm not in A or not A[arm]["n_layers"]:
+        return f"{name}: no verdict (" + ("run partial, its k rule needs all 64 baseline layers" if not complete else v.get("why", "not measured")) + ")"
     x = A[arm]; rm = x["r_median_over_layers"]; t = x["totals"]
     cls = "in class" if x["in_class_on_layers_done"] else f"OUT of class ({t['n_out_of_class']:,} entries)"
     extra = f", {t['n_clamped_a'] + t['n_clamped_m']:,} of {t['n_entries']:,} entries clamped" if arm == "C" else ""
-    return (f"{name}{'' if arm == name else ' (k = ' + arm[1:] + ')'}: {v['verdict']}, {cls}{extra}, {x['layers_pass']} of {x['n_layers']} layers meet the bar, "
+    return (f"{name}{'' if arm == name else ' (k = ' + arm[1:] + ')'}: {v['verdict'] if complete else 'no registered verdict (partial)'}, {cls}{extra}, {x['layers_pass']} of {x['n_layers']} layers meet the bar, "
             f"per-layer median r from {g(rm['min'])} to {g(rm['max'])}, largest r {g(x['r_max_over_layers'])} (layer {x['worst_layer']})")
 
 
@@ -36,12 +37,14 @@ lead = ("PARTIAL / not finished vs prereg (the run stopped itself on its registe
         ("H holds: at least one arm passes. " if S["H_holds"] else "NEGATIVE vs prereg: no registered arm passes (class and per-layer fidelity bar together). "))
 summary = (lead + f"Baseline at 2^12 over {nb} of 64 layers, 672 tokens: input_layernorm output over 2,047 on {a['total']['over']:,} of {a['total']['n']:,} entries "
            f"({pct(a['share_over_2047'])}), max {int(a['max_q12']):,} (layer {a['max_layer']}); post_attention_layernorm output over 2,047 on {m['total']['over']:,} of "
-           f"{m['total']['n']:,} ({pct(m['share_over_2047'])}), max {int(m['max_q12']):,} (layer {m['max_layer']}); every layer has entries over the class on both norms: "
-           f"{a['layers_with_any_over'] == a['n_layers'] and m['layers_with_any_over'] == m['n_layers']}. Arms, open loop, {nl} layers"
+           f"{m['total']['n']:,} ({pct(m['share_over_2047'])}), max {int(m['max_q12']):,} (layer {m['max_layer']}); layers with entries over the class: {a['layers_with_any_over']} of {a['n_layers']} and {m['layers_with_any_over']} of {m['n_layers']}; all token rows have one on both norms: "
+           f"{'yes' if (a['total']['rows_over'] == a['total']['rows'] and m['total']['rows_over'] == m['total']['rows']) else 'no'} "
+           f"({a['total']['rows']:,} rows). Arms, open loop, {nl} layers"
            f"{' (registered reduced set R33)' if ls == 'r33' else ''}, bar = per-layer output rel L2 vs float64 median <= 1e-3 and max <= 1e-2 over 6 prompts: "
            + "; ".join(arm_txt(n) for n in ("C", "S", "W"))
            + (f". k rule gave k = {kst}" if kst is not None else ". The k rule for arm S needs the baseline of all 64 layers and was not evaluable; ladder points S3, S4, S5: "
               + ", ".join(f"{A[s]['layers_pass']} of {A[s]['n_layers']}" for s in ("S3", "S4", "S5")) + " layers meet the bar")
+           + ". Arm W changes the norm outputs only by rounding at 2^12, so its misses show the bar is about as tight as PR 138's integer MLP itself"
            + ". Open loop: no logits, no token agreement, no compounding. No proof")
 cond = (f"abliterated checkpoint (stock layers 0 to 16 byte-identical), 6 of PR 124's frozen prompts (672 tokens, includes p03-repeat-word); open loop: each layer starts "
         f"from the float64 stream; arms change only the two pre-norm outputs (mixer input and MLP input); mixer float64 with float heads, MLP = PR 138's integer M3 "
@@ -71,7 +74,7 @@ for name in ("C", "S", "W"):
     x = A[arm]; rm = x["r_median_over_layers"]; t = x["totals"]
     met(f"arm_{name}_layers_meeting_bar", "count", x["layers_pass"], "count", x["n_layers"], "null",
         f"arm {arm}: layers whose output rel L2 vs float64 has median over 6 prompts <= 1e-3 and max <= 1e-2; open loop; out-of-class entries {t['n_out_of_class']:,} "
-        f"of {t['n_entries']:,}; SiLU v1 domain exits {t['silu_exits']:,} of {t['n_hidden']:,} hidden entries; verdict {V[name]['verdict']}", total=x["n_layers"])
+        f"of {t['n_entries']:,}; SiLU v1 domain exits {t['silu_exits']:,} of {t['n_hidden']:,} hidden entries; {'registered verdict ' + V[name]['verdict'] if complete else 'no registered verdict, partial run'}", total=x["n_layers"])
     met(f"arm_{name}_r_per_layer_median", "median", f"{rm['median']:.4g}", "ratio", x["n_layers"], f"{{sd: null, min: {rm['min']:.4g}, max: {rm['max']:.4g}}}",
         f"arm {arm}: median over layers of the per-layer median (6 prompts) of the layer output rel L2 vs float64, open loop; largest single prompt-layer value "
         f"{g(x['r_max_over_layers'])} at layer {x['worst_layer']}; one deterministic run, spread over layers")
