@@ -1,0 +1,25 @@
+{
+ "stock": {
+  "repo": "Qwen/Qwen3.8-27B",
+  "rev": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+  "fetched": 850,
+  "vs_pr87_compared": 850,
+  "vs_pr87_missing": [],
+  "vs_pr87_mismatch": [],
+  "emb_rows_fetched": 220,
+  "emb_rows_compared_pr124": 61,
+  "emb_rows_mismatch": []
+ },
+ "abl": {
+  "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+  "rev": "739e3c5b89849f6c238ce1e5b70008612ae42cdd",
+  "fetched": 71,
+  "vs_pr87_compared": 71,
+  "vs_pr87_missing": [],
+  "vs_pr87_mismatch": [],
+  "emb_rows_fetched": 0,
+  "emb_rows_compared_pr124": 0,
+  "emb_rows_mismatch": []
+ },
+ "ok": true
+}

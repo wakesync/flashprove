@@ -1,9 +1,9 @@
-"""served177 route client. PR #133 served_route.py, changed: max_tokens 48, one repetition per prompt, lane-wide
+"""Route client for issue #177 (PREREG "Collection"). PR #133 served_route.py, changed: max_tokens 48, one repetition per prompt, lane-wide
 request cap 20 persisted in <state> (counts every HTTP attempt incl. attestation, probe and retries).
 Endpoint, key and model come from env (never logged). Keeps only: verified flag + own timestamp; per reply: content,
 reasoning, finish_reason, usage, wall time, sha256 of content.
-Usage: served177_route.py probe <state.json> <out_dir>
-       served177_route.py collect <state.json> <prompts.json> <out_dir>
+Usage: served_route177.py probe <state.json> <out_dir>
+       served_route177.py collect <state.json> <prompts.json> <out_dir>
 429/503: wait 30 s, retry once, then stop."""
 import datetime, hashlib, json, os, pathlib, sys, time, urllib.error, urllib.request
 
