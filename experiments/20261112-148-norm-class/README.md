@@ -30,6 +30,8 @@ It runs open loop: every arm starts each layer from the float64 reference stream
 | `runs/ledger-w.json` | output of `ledger_w.py` |
 | `run_all.sh`, `decide_set.py` | PREREG A-1: the fixture debug and the registered run as one queued job, and the layer-set rule (timing only) |
 | `summarise.py` | applies the registered rules to `runs/baseline.jsonl` and `runs/arms.jsonl`; writes `runs/summary.json` and `runs/summary.md` |
+| `validate_runs.py` | review round 1, added after the run: input validation `summarise.py` runs first. It refuses (exit 2, nothing written) duplicate rows, layers off the registered set or missing from `runs/progress.log.jsonl`, a prompt set that is not the registered six, a missing arm, pooled counts that disagree with the prompts, inconsistent counts and non-finite values |
+| `test_summarise.py`, `check_committed.py`, `review-r1/` | review round 1: regression tests on synthetic fixtures (every reviewer mutation), and the check that the fixed summariser reproduces the committed `summary.json` and `summary.md` byte for byte; their outputs |
 | `make_results.py`, `results_tail.md` | write RESULTS.md from `runs/summary.json`, `runs/ledger-w.json`, `runs/progress.log` and the fixed prose |
 | `add_results_row.py` | writes this experiment's `research/results.yaml` entry from `runs/summary.json` and `runs/ledger-w.json` |
 | `check_manifests.py`, `env.py`, `scrub_time_path.py` | weight manifest comparison with PR #124 and PR #68; ENV.json; placeholder for the scratch path in `runs/run.time` |
@@ -61,6 +63,8 @@ bash experiments/20261112-148-norm-class/run_norm.sh <scratch>/run r33
 
 # summary, manifest check and write-up from the committed raw rows (seconds, no network)
 python3 experiments/20261112-148-norm-class/summarise.py
+python3 experiments/20261112-148-norm-class/test_summarise.py      # synthetic fixtures only, exit 0 iff every case behaves
+python3 experiments/20261112-148-norm-class/check_committed.py     # committed rows -> byte-identical summary.json / summary.md
 python3 experiments/20261112-148-norm-class/check_manifests.py
 python3 experiments/20261112-148-norm-class/make_results.py experiments/20261112-148-norm-class/results_tail.md
 ```

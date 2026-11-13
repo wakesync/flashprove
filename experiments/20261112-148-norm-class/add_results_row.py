@@ -44,7 +44,7 @@ summary = (lead + f"Baseline at 2^12 over {nb} of 64 layers, 672 tokens: input_l
            + "; ".join(arm_txt(n) for n in ("C", "S", "W"))
            + (f". k rule gave k = {kst}" if kst is not None else ". The k rule for arm S needs the baseline of all 64 layers and was not evaluable; ladder points S3, S4, S5: "
               + ", ".join(f"{A[s]['layers_pass']} of {A[s]['n_layers']}" for s in ("S3", "S4", "S5")) + " layers meet the bar")
-           + ". Arm W changes the norm outputs only by rounding at 2^12, so its misses show the bar is about as tight as PR 138's integer MLP itself"
+           + ". Post-hoc interpretation, written after this run's numbers were read (not a registered claim): arm W changes the norm outputs only by rounding at 2^12, so its misses suggest the bar is about as tight as PR 138's integer MLP itself"
            + ". Open loop: no logits, no token agreement, no compounding. No proof")
 cond = (f"abliterated checkpoint (stock layers 0 to 16 byte-identical), 6 of PR 124's frozen prompts (672 tokens, includes p03-repeat-word); open loop: each layer starts "
         f"from the float64 stream; arms change only the two pre-norm outputs (mixer input and MLP input); mixer float64 with float heads, MLP = PR 138's integer M3 "

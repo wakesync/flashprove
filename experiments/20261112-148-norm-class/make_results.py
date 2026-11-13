@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Write RESULTS.md from runs/summary.json, runs/ledger-w.json and runs/progress.log. Every number in RESULTS.md comes
+"""Write RESULTS.md from runs/summary.json, runs/ledger-w.json and runs/progress.log (and, for the arm W mixer / MLP
+parts in the post-hoc caveat of section 4, runs/arms.jsonl). Every number in RESULTS.md comes
 from those committed files; the fixed prose (deviations, what is not established, raw data) is read from a text file.
 Usage: make_results.py <tail.md>   (the committed prose file is results_tail.md)"""
 import json, sys
@@ -107,10 +108,14 @@ for arm in ("C", "S3", "S4", "S5", "W"):
     t = x["totals"]; rm = x["r_median_over_layers"]
     L.append(f"| {arm} | {x['n_layers']} | {x['layers_pass']} | {g(rm['median'])} ({g(rm['min'])} to {g(rm['max'])}) | {g(x['r_max_over_layers'])} ({x['worst_layer']}) | {t['n_entries']:,} | {t['n_out_of_class']:,} | "
              f"{t['n_clamped_a']:,} / {t['n_clamped_m']:,} | {i_(t['max_qa'])} / {i_(t['max_qm'])} | {t['shifts_min']} to {t['shifts_max']} | {t['n_ge_2e15']:,} / {t['n_ge_2e17']:,} / {t['n_ge_2e18']:,} |")
-L += ["", "**Caveat on the bar (by construction of the arms, not a registered claim).** Arm W changes a norm output only by rounding it at 2^12, so the rest of its difference from float64 is "
-      f"PR #138's integer MLP itself. Its per-layer median r runs from {g(A['W']['r_median_over_layers']['min'])} to {g(A['W']['r_median_over_layers']['max'])}, around the registered 1e-3, and "
-      f"{len(A['W']['layers_fail'])} of {A['W']['n_layers']} layers fail the bar. So the registered bar is about as tight as the unchanged MLP lowering, and an arm failing it is not by itself evidence "
-      "against that arm's norm arithmetic. Compare each arm's r with arm W's on the same layers; `d` in `runs/arms.jsonl` is the arm's distance to arm W."]
+_wcells = [v for l in open(R / "arms.jsonl") for v in json.loads(l)["arms"]["W"].values()]
+_wmix = max(v["mix_rel"] for v in _wcells); _wmlp = (min(v["mlp_rel"] for v in _wcells), max(v["mlp_rel"] for v in _wcells))
+L += ["", "**Caveat on the bar: a post-hoc interpretation, written after the registered numbers of this run were read (not a registered claim; see Deviations).** "
+      "Arm W changes a norm output only by rounding it at 2^12, so the rest of its difference from float64 is "
+      f"PR #138's integer MLP itself: over its {len(_wcells)} layer and prompt cells in `runs/arms.jsonl` the mixer part `mix_rel` is at most {_wmix:.3g} and the MLP part `mlp_rel` runs from "
+      f"{_wmlp[0]:.3g} to {_wmlp[1]:.3g}. Its per-layer median r runs from {g(A['W']['r_median_over_layers']['min'])} to {g(A['W']['r_median_over_layers']['max'])}, around the registered 1e-3, and "
+      f"{len(A['W']['layers_fail'])} of {A['W']['n_layers']} layers fail the bar. Read after the fact, this suggests the registered bar is about as tight as the unchanged MLP lowering, so an arm failing it "
+      "is not by itself evidence against that arm's norm arithmetic. Compare each arm's r with arm W's on the same layers; `d` in `runs/arms.jsonl` is the arm's distance to arm W."]
 L += ["", "Layers failing the bar, per arm: " + "; ".join(f"{arm}: {('none' if not A[arm]['layers_fail'] else ', '.join(str(v) for v in A[arm]['layers_fail']))}" for arm in ("C", "S3", "S4", "S5", "W") if A[arm]["n_layers"]) + ".",
       "", "Per-layer r (median / max over prompts) for every arm: [runs/summary.md](runs/summary.md). The stricter ratio c (against the layer's own contribution), the distance d to arm W, and the mixer and MLP parts are in `runs/arms.jsonl` and `runs/summary.json`.", "",
       "### MLP range counters and SiLU v1 domain exits, per arm (recorded counts, no bar)", "",
