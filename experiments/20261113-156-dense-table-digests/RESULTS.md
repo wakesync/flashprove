@@ -177,7 +177,10 @@ different table has nothing to compare against, and since this change it at leas
   of #148) or the other limits of #35.
 - No Lean file and no part of the soundness argument was changed or re-checked.
 - 158 of the 173 rows of `SUITE.md` were not run, among them every GPU row and the tests of the
-  provers' parameter-file reader.
+  provers' parameter-file reader: 157 rows outside the registered expression, and one row that
+  matches it, `verifier.served.form.world.kit`, which the runner left out in mode cpu because it
+  needs a GPU-dependent setup row (16 rows match the expression; 15 ran). Corrected after review:
+  the first version of `ENV.json` called all 158 "outside the registered expression".
 - **A second caller of the table tool changes behaviour and was not tested** (found after the runs,
   by reading; added to this file after its first commit). `scales/words_to_policy.py` calls
   `policy_tables.digests()` when its base parameter file has digest lines. For a base file with `NE 0`
