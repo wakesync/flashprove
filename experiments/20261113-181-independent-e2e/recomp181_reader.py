@@ -219,7 +219,9 @@ def aggregate(bundle, counts=None, bf=None, det=None, layer_sets=None):
     counts = COUNTS if counts is None else counts
     bf = BF if bf is None else bf
     det = DET if det is None else det
-    layer_sets = {'stock': set(range(64)), 'abl': set(range(17,64))} if layer_sets is None else layer_sets
+    # The first leg is called abl but uses STOCK weights through layer 16.
+    # The stock leg resumes that prefix, so shared rows live in the abl file.
+    layer_sets = {'stock': set(range(17,64)), 'abl': set(range(64))} if layer_sets is None else layer_sets
     keys(bundle, ['prompts','e2e','divergence','heads','errors'], 'bundle')
     prompt_manifest(bundle['prompts'], counts, bf, det)
     for field in ('e2e','divergence','heads','errors'):
