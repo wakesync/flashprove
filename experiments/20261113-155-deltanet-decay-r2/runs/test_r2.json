@@ -1,0 +1,9 @@
+{
+ "command": "R2_FINE20=<fine20.npy> python3 test_r2.py",
+ "exit": 0,
+ "tests_run": 29,
+ "last_line": "OK",
+ "repo_head_at_run": "d69ecef7dd9b285267b6eb54516347123de8d433",
+ "test_or_arm_code_uncommitted_at_run": false,
+ "data": "synthetic heads only (numpy seed 155) and fabricated per-cell rows; no registered activation array is read"
+}

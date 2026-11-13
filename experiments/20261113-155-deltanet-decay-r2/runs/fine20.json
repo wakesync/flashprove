@@ -1,0 +1,9 @@
+{
+ "rows": 1048576,
+ "sha256_int64_le": "58935f414d1075654248b3bea38f3af9a82bdca41fa95ef0a7c0a158e407a95c",
+ "equals_table_used_by_registered_run": true,
+ "rows_differing_from_float64_rne": 0,
+ "sample_rows_regenerated_with_integer_generator": 10001,
+ "sample_mismatches": 0,
+ "generator": "decay_r2.py fine20: research/operators/qwen_ops/tables.py expq / nearest, all 2^20 rows"
+}
