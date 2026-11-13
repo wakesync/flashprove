@@ -6,7 +6,7 @@ Desk note. It changes no code and reports no measurement. "Unknown" marks what t
 ## Answer in three lines
 
 1. In the six verifier files, every size that belongs to the query or attention-output side already uses `dq` (or `dkv`, or `nqk = dq + dkv`). Every use of `d` belongs to the residual stream or to a projection input or output of width d. This note found no place where `d` stands for `dq`.
-2. The equality `H * dh = d` (`cp_verify.cpp:520`) is not used by any bound or theorem argument in those files. It does three things only: it bounds dq and dh through `d <= 2^20` (`cp_verify.cpp:492`), it is the stated reason in two format rows (`FORMAT.md:2162`, `FORMAT.md:2183`), and the prover enforces the same equality (`prover/common/parameter_file.h:376`, `prover/prover/layout.h:189`). So admitting dq != d is an admission change: drop the equality, add an explicit bound on dq, restate four doc rows, and open the prover's gate. It is not a design change.
+2. The equality `H * dh = d` (`cp_verify.cpp:520`) is not used by any bound or theorem argument in those files. It does three things only: it bounds dq and dh through `d <= 2^20` (`cp_verify.cpp:492`), it is stated or relied on in five doc rows (rows 58-62 below; two of them, `FORMAT.md:2162` and `FORMAT.md:2183`, give it as a reason), and the prover enforces the same equality (`prover/common/parameter_file.h:376`, `prover/prover/layout.h:188`). So admitting dq != d is an admission change: drop the equality, add an explicit bound on dq, restate the five doc rows, and open the prover's gate. It is not a design change.
 3. The one no-overflow condition that reads dq, the output projection's site `W-o` (`cp_verify.cpp:1483`), gives the same verdict at dq = 6,144 as at dq = 5,120 for every allowed shift k and digit form (arithmetic below). The negative outcome described in the issue was not found. Qwen's full-attention shape is still refused, by limits that do not depend on dq: dh = 256 fails `af-no-wrap-N4` (`vf_attention_shape.h:234`), and rotary is out of the standard form (`vf_common.h:706`).
 
 ## Scope and method
@@ -31,11 +31,11 @@ Classes used in the table:
 |---|---|---|---|---|
 | 1 | cp_verify.cpp:355-358 | the statement's words d, H, Gk, dh are read separately (`parseHeader`) | OK | d, H, Gk and dh are four words of the statement, so dq = H dh is fixed by the statement independently of d |
 | 2 | cp_verify.cpp:492 | `d > (1u << 20)` rejects (`shape-words`) | OK for d; see row 4 | bounds every d-sized vector |
-| 3 | cp_verify.cpp:505-506 | `Pd = 2^clog2(d)`, `lPd` | OK | Pd pads d only; used only for the stream and norm rows (rows 30-33) |
+| 3 | cp_verify.cpp:505-506 | `Pd = 2^clog2(d)`, `lPd` | OK | Pd pads d only; used only for the stream and norm rows (rows 32-33) |
 | 4 | cp_verify.cpp:520-521 | `shape-heads`: H, Gk, dh nonzero, dh a power of two at least 2, **H dh = d**, H + Gk <= 64 | NEW | the equality is the only thing in the verifier that bounds dq and dh from above (through row 2). Without it, dq = H dh can reach 63 * 2^31, about 2^37 (H < 64, dh a power of two in a 32-bit word). See section 2, need N1 |
 | 5 | cp_verify.cpp:522-524 | `y.dq = H dh`, `y.dkv = Gk dh`, `y.nqk = dq + dkv` | OK | derived from H and dh, never from d |
 | 6 | cp_verify.cpp:525 | `ldh = clog2(dh)` | OK | |
-| 7 | cp_verify.cpp:526 | `dkv % S2 || nqk % S2` rejects (`shape-la`) | OK | S2 divides nqk and dkv, so S2 divides dq = nqk - dkv without the equality. Today's doc reasons via "H dh = d" instead (row 41) |
+| 7 | cp_verify.cpp:526 | `dkv % S2 || nqk % S2` rejects (`shape-la`) | OK | S2 divides nqk and dkv, so S2 divides dq = nqk - dkv without the equality. Today's doc reasons via "H dh = d" instead (row 60) |
 | 8 | vf_attention_shape.h:192-196 | the attention fork derives `dq = H dh`, `dkv = G dh` from its own `ACfg` (H, lgk, ldh) | OK | the fork never sees d at all: `ACfg` has no d field (`vf_attention_shape.h:78-91`) |
 | 9 | cp_verify.cpp:1947-1949 | the layer side passes `c.H = h.H`, `c.ldh = ldh` to the fork | OK | |
 | 10 | cp_verify.cpp:1999-2000 | `X.A.dq != y.dq || X.A.dkv != y.dkv || ... || X.A.dh % y.S2` rejects (`plan-tensor-layout`) | OK | owner (layer sub-proof) and reader (attention sub-proof) agree on dq, dkv; S2 divides dh |
@@ -51,14 +51,14 @@ Classes used in the table:
 | 15 | cp_verify.cpp:584-587 | `a`, `m`, `xr`: J = d | OK | normed stream (the q/k/v projections' input), width d |
 | 16 | cp_verify.cpp:599-602 | qa: `q` J = dq, `kx` J = dkv, `v` J = dkv, `o` J = dq | OK | q and o are two separate tensors, each dq wide. Nothing packs q and o into one segment of width d |
 | 17 | cp_verify.cpp:622-625 | stream xb: J = d, `tensorsFill(..., NLx d, S2, "stream")` | OK | |
-| 18 | cp_verify.cpp:626-629 | `tensorsFill(qa, feat[3], S2, "qa")` | OK | tests at run time that every qa tensor's J is a multiple of S2 (`cp_verify.cpp:116`) and that q, kx, v, o tile qa exactly |
+| 18 | cp_verify.cpp:626-629 | `tensorsFill(qa, feat[3], S2, "qa")` | OK | tests at run time that every qa tensor's J is a multiple of S2 (`cp_verify.cpp:113`) and that q, kx, v, o tile qa exactly |
 | 19 | vf_attention_shape.h:349-359 | ao: `oRhp = Lam dq`, `featO = 2 Lam dq`; qa: `oK = 2 Lam dq`, `oV = oK + 2 Lam dkv`, `oO = oV + 2 Lam dkv`, `featQ = oO + 2 Lam dq`; `atQ/atO` J = dq, `atK/atV` J = dkv | OK | same layout as rows 16-18 on the reader's side; row 10 and `tensorsAgree` (`cp_verify.cpp:1995-1998`) compare them |
 | 20 | vf_layers_check.inc:224-226 | `AH[hd]` for hd < H + Gk: `headFeat(tq, hd, dh)` on q (J = dq), then `tq.J + headFeat(tk, ...)` on kx | OK | head hd's columns in QK; `headFeat` rejects unless dh divides J and hd < J / dh (`vf_attention_shape.h:72-74`), i.e. hd < H on q |
 | 21 | cp_verify.cpp:752 | weight kind 0 `qk`: L = 64, segs `2 Lam d dh` | OK | the q/k projection's input is the normed stream, width d. Per `cp_verify.cpp:448-449` "Only idx is read" |
 | 22 | cp_verify.cpp:753 | kind 1 `v`: L = dkv, segs `2 Lam d` | OK | input d, output dkv |
 | 23 | cp_verify.cpp:754 | kind 2 `o`: L = d, segs `2 Lam dq` | OK | input dq, output d |
 | 24 | cp_verify.cpp:1573-1578 | `WsShape` gets d, dh, dkv, dq separately | OK | |
-| 25 | vf_weights_layout.h:146-147 | d, dh, dkv, dq, f each in 1..2^24 else `shape-words` | OK, and see row 42 | a live bound on dq at layout time; today it cannot fail (`FORMAT.md:2183`) |
+| 25 | vf_weights_layout.h:146-147 | d, dh, dkv, dq, f each in 1..2^24 else `shape-words` | OK, and see row 61 | a live bound on dq at layout time; today it cannot fail (`FORMAT.md:2183`) |
 | 26 | vf_weights_layout.h:164 | unit 0: groups `hd` (64, class A), `cd` (dh, class A), `kk` (d, class E) | OK | queries and keys as 64 head slots of dh by input d. Needs H + Gk <= 64 (row 4 keeps it; Qwen 24 + 4 = 28) |
 | 27 | vf_weights_layout.h:165 | unit 1: `kk` d, `x` dkv | OK | |
 | 28 | vf_weights_layout.h:166 | unit 2: `kk` dq (class E, low), `x` d (class E, high) | OK | class E splits R = o 2^z with o odd (`vf_weights_layout.h:83-96`). dq = 6,144 = 3 * 2^11 and 5,120 = 5 * 2^10 are both of that kind; `weights_twin_test` already builds unit 2 with dq != d (row T1 below) |
@@ -68,7 +68,7 @@ Classes used in the table:
 | # | file:line | what it says | class | the statement it protects |
 |---|---|---|---|---|
 | 29 | cp_verify.cpp:662-663, 691 | segments QK, QKH, CQK: n = nqk | OK | the q and k projections' rounding and clamp, one key per output feature |
-| 30 | cp_verify.cpp:664-669, 679-680, 689-690 | N1, N1H, N2, N2H, **O**, D, OH, DH, CN1, CN2: n = d | OK | O and OH are the o projection's rounding: its quotient is the stream difference `str(2 lam + 1) - str(2 lam)` (`vf_layers_check.inc:450`), d keys per token. Its accumulator sums over dq (row 35), but its keys are per output feature, d |
+| 30 | cp_verify.cpp:664-669, 679-680, 689-690 | N1, N1H, N2, N2H, **O**, D, OH, DH, CN1, CN2: n = d | OK | O and OH are the o projection's rounding: its quotient is the stream difference `str(2 lam + 1) - str(2 lam)` (`vf_layers_check.inc:450`), d keys per token. Its accumulator sums over dq (rows 37 and 45), but its keys are per output feature, d |
 | 31 | cp_verify.cpp:670, 681, 692 | V, VH, CV: n = dkv | OK | |
 | 32 | vf_layers_check.inc:96-114 | norm product layer over `NI` instances of `Pd` features, scale 2^-lPd | OK | norms of the stream, width d |
 | 33 | vf_layers_check.inc:1002-1010, 1153-1158 | the norm claim and the embedding claim sum over `d / S2` blocks of xb, `e[(i Pd) / S2 + kh]` | OK | stream only |
@@ -82,7 +82,7 @@ Classes used in the table:
 | 41 | vf_layers_plan.inc:67-68 | lamS: `4 * 2^(wi + clog2 d) + 2^(wi + clog2 dq) + 2^(wi + clog2 f) + 2 * 2^wi` | OK | the batched sumcheck's size; the dq term is the O panel (row 37). It must equal the panels' placement, tested at `vf_layers_check.inc:745` (`internal-stack`) |
 | 42 | vf_layers_plan.inc:99 | `LayerRounds.lPd = lPd` | OK | norm rounds |
 | 43 | cp_verify.cpp:1445 | `acc = d BC BWw` | OK | accumulator bound for sites whose sum is over the normed input (gate, up, qk, v): width d |
-| 44 | cp_verify.cpp:1481 | site `qk`: `A = 2 * 2^cs * acc` | OK | input width d, times the rotary factor 2^cs |
+| 44 | cp_verify.cpp:1482 | site `qk`: `A = 2 * 2^cs * acc` | OK | input width d, times the rotary factor 2^cs |
 | 45 | cp_verify.cpp:1483 | site `o`: `A = dq BC BWw`, span `2^(lsg + 2)`, quotient `2^(lsg + 1)` | OK; margin checked in section 2 | the o projection's sum is over dq products of a clamped-scale value and a weight |
 | 46 | cp_verify.cpp:1524 | `no-wrap-ledger`: `residualStreamLimbs d Ty^2 < 2^53` | OK | convolution sums of the stream, width d |
 | 47 | cp_verify.cpp:1600-1611 | rotary table over `dh / 2` pairs | DEP | independent of dq; rotary width is a separate #35 limit |
@@ -112,7 +112,7 @@ Classes used in the table:
 | 61 | docs/format/FORMAT.md:2183 | `shape-words` "none of these can fail ... H dh ... from 1 to 2^24" | NEW (restate, once need N1 exists) |
 | 62 | docs/format/11-2-feed-forward-segment.md:294, 1035 | "dq = H dh, which must equal d"; row `shape-heads` | NEW (restate) |
 | 63 | prover/common/parameter_file.h:376 | prover's own `shape-heads` with `H * dh == d` | NEW (prover gate; out of this note's code scope, but an honest dq != d proof needs it opened) |
-| 64 | prover/prover/layout.h:189 | `L.dq != s.d` rejects in `make_layer_layout` | NEW (prover gate, same) |
+| 64 | prover/prover/layout.h:188 | `L.dq != s.d` rejects in `make_layer_layout` | NEW (prover gate, same) |
 | 65 | verifier/tests/parameter_walk.py:33, 218 | the random walk sets `d = H * dh` | NEW (test harness keeps every walked file at dq = d; the walk never explores dq != d) |
 | 66 | integrations/vllm/integer_model/tests/chosen_model.py:227-231 | `d = H * dh` in the integer model's chosen shapes | OK for now (documents today's rule; Unknown whether the integer model itself assumes dq = d elsewhere) |
 
