@@ -1,0 +1,8 @@
+test_count_flip_margin_decision_and_aggregate_mutations_are_negative (__main__.ComparatorTests.test_count_flip_margin_decision_and_aggregate_mutations_are_negative) ... ok
+test_float_and_rounded_tolerances (__main__.ComparatorTests.test_float_and_rounded_tolerances) ... ok
+test_honest_synthetic_targets (__main__.ComparatorTests.test_honest_synthetic_targets) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.021s
+
+OK
