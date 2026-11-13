@@ -21,9 +21,11 @@ Source: `runs/summary.json` `legs.abl.cells`, `runs/summary.md`, `runs/e2e-abl.j
 
 | path | n | top-1 agree | KL median | KL p99 | KL max | KL SD | bar |
 |---|---|---|---|---|---|---|---|
-| XM18 | 1,461 | 1,423 (0.9740) | 0.00159 | 0.101 | 1.92 | 0.0707 | FAIL |
-| FM (float heads, integer MLP; descriptive) | 1,461 | 1,422 (0.9733) | 0.00160 | 0.101 | 1.92 | 0.0705 | (would fail) |
+| XM18 | 1,461 | 1,423 (0.9740) | 0.00159 | 0.101 (nearest-rank) | 1.92 | 0.0707 | FAIL |
+| FM (float heads, integer MLP; descriptive) | 1,461 | 1,422 (0.9733) | 0.00160 | 0.101 (nearest-rank) | 1.92 | 0.0705 | (would fail) |
 | XS18 only (PR #124 committed run, cited) | 1,461 | 1,460 | 2.95e-06 | - | 0.00566 | - | PASS in PR #124 |
+
+KL p99 is the nearest-rank 99th percentile over the 1,461 positions (`summarise_mlp.py` uses `np.quantile(kl, 0.99, method="higher")`; XM18 0.10087); numpy's default linear interpolation on the same values gives 0.0978 (XM18). Descriptive, no bar. In `numbers.json`, `XM18.kl_over_0p1` = 7 and `FM.kl_over_0p1` = 7 count prompts whose KL max is over 0.1 nats, not positions; the position count is `XM18_positions_kl_over_0p1` = 15.
 
 REF top-1 equals PR #124's committed REF on every prompt (post hoc consistency check, `ref_top1_equal_pr124`).
 
@@ -46,7 +48,7 @@ Spread over the 10 per-prompt values (XM18): top-1 fraction median 0.9605, SD 0.
 
 **Called out (as registered by issue #150):**
 - **p03-repeat-word** (512 positions): 511 agree, one flip at position 1 (ref 271 -> 198, REF margin 0.144, KL 0.155). Its KL median 3.1e-4 is among the lowest; the drift that PR #138 saw on p03 by layer 29 did not turn into many flips.
-- **p06a-digits-256** (256 positions): 9 flips, mostly digit-to-digit with small REF margins (0.00077 to 0.478; median 0.0160): positions 8, 114, 145, 161, 168, 172, 181, 192, 207. PR #124's XS18-only run had 1 flip here (position 81).
+- **p06a-digits-256** (256 positions): 9 flips with small REF margins (0.00077 to 0.478; median 0.0160): positions 8, 114, 145, 161, 168, 172, 181, 192, 207. Seven are digit-to-digit; two (positions 8 and 181) are space to zero (REF 220 -> 15; 220 is the space and 15 the digit 0 in the committed `p06-digits` text and token ids of `experiments/20261109-8-qwen-real-weights/prompts.json`). PR #124's XS18-only run had 1 flip here (position 81).
 - The largest flips by KL are not on these two: p11-chat-long position 9 (REF 248046 -> 220, REF margin 2.90, KL 1.92) and p08-chat-refusal position 35 (REF 198 -> 248068, REF margin 0.787, KL 1.66). Token ids 248046 and 248068 are near the top of the 248,320-id vocabulary (not decoded here; descriptive).
 - p02-ordinary-paragraph has the most flips (11 of 107) and the lowest agreement (89.7%).
 
@@ -60,9 +62,11 @@ Source: `runs/summary.md` "ranges", `runs/ranges-abl.jsonl`, `numbers.json`. Poo
 | m | 235,253 | 17.84 | layer 63, p03 | \|m\| <= 2,047 | 101,566,552 of 246,850,560 entries (41.1%) |
 | gw | 236,620 | 17.85 | layer 62, p11 | honest < 2^18, rng < 2^23; SiLU domain [-2^15, 2^15) | 0 over 2^18; SiLU saturated: 28,771 low + 153,193 high = 181,964 of 839,291,904 hidden entries |
 | u | 248,495 | 17.92 | layer 63, p06a | honest < 2^18 | 0 |
-| h | 1,167,750 | 20.16 | layer 62, p11 | honest < 2^18, rng < 2^23 | 622 entries >= 2^18 (layers 52 to 62), 0 >= 2^23 |
+| h | 1,167,750 | 20.16 | layer 62, p11 | honest < 2^18, rng < 2^23 | 622 entries >= 2^18 (layers 52 to 63, none at 55; 350 of them at layer 63), 0 >= 2^23 |
 | down accumulator | 8.75e9 | 33.03 | layer 63, p06a | ledger 2^55.02 | 0 |
-| out | 2,136,640 | 21.03 | layer 63, p06a | < 2^31 | 0 |
+| out | 2,136,643 | 21.03 | layer 63, p06a | < 2^31 | 0 |
+
+h entries >= 2^18 per layer (XM18, summed over the 10 prompts, from `runs/ranges-abl.jsonl` `n_h_ge_2e18`): 52: 1, 53: 1, 54: 55, 56: 1, 57: 9, 58: 62, 59: 27, 60: 13, 61: 14, 62: 89, 63: 350 (total 622); no other layer has any. The h maximum is at layer 62 (p11), while most events are at layer 63. FM (descriptive): 634 h entries >= 2^18, same layers (362 at layer 63), same file. Note on `runs/summary.md`: the registered summariser prints only the first 10 layers of each "(layers [...])" list (`summarise_mlp.py` slices `[:10]`), so its lists for h, m and SiLU saturation are truncated and are not complete layer lists; the counts it prints are complete, and the full lists are in `runs/summary.json` (`ranges.abl.XM18.h.layers_with_events` is [52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63]). Exact values here come from `runs/ranges-abl.jsonl` and `runs/summary.json` (`ranges`), not from the `%g`-formatted maxima in `summary.md` (for example out prints there as 2.13664e+06; the exact value is 2,136,643).
 
 Weight exponents 11 to 14, all in 1..24; all \|W_int\| <= 4,095. Range verdict: OUT-OF-BOUND (XM18 class events 101,748,516: m over class plus SiLU saturations). New against PR #138's layers 0 to 30: the h honest contract 2^18 is exceeded (622 entries, PR #138: none, max 145,770), and SiLU saturations grow from 6 (PR #138, layers 21 to 26) to 181,964. The m share per layer rises from 26.0% at layer 31 to 59.8% at layer 62 (57.2% at 63).
 
