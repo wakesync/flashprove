@@ -1184,8 +1184,10 @@ digest of it is among the words of the item `request` (R15.5, R15.6; 12.6).
 
 The rules of this subsection hold for one form of the parameter file: the line `prof` is 20:
 attention, the embedding and the output head are proved (the programs' notes call this profile 4);
-`NE` is not 0; and the 32 lines of the tables' digests are there. `cp_verify` accepts under no other
-form. It runs some other forms to their end without an acceptance. This page does not define them.
+`NE` is not 0; and the 32 lines of the tables' digests are there. `cp_verify` accepts under one
+other form as well, a dense file (`NE` 0, no lines `rcl`, `gcl` or of the digests; 13.7, condition
+10 and the table after it), whose statement this page does not define beyond what follows. It runs
+some other forms to their end without an acceptance. This page does not define them.
 Of their statements it says this much. The 32 lines can be absent, and must be absent
 where `NE` is 0; the eight-word positions then hold the digests that the program computes itself,
 and zeros for `tsig` where `NE` is 0.
@@ -1946,15 +1948,19 @@ verifier gives an acceptance only if:
 7. *The model's input.* `toksrc` is 1: the model's input is the embedding of the request's tokens
    (`prompt-source`; a file with another value is rejected earlier).
 8. *The clamps.* The lines `rcl 1` and `gcl 1` are both there, so that the router's clamp and the
-   gate's clamp are part of what is proved (`both-clamps`).
+   gate's clamp are part of what is proved (`both-clamps`), or the file is dense (the table below,
+   `routed-experts`), where neither line may stand.
 9. *The norms.* KF <= MF, and K1 <= M1 and K2 <= M2 in every layer's record of `KL.bin`
    (`norm-shifts`). Why: a norm multiplies by a reciprocal that is scaled by 2^M and then shifts
    right by K bits. The tests of 13.8 bound M - K from above and not from below, and from K = M + 3
    on the norm's output is 0 for every input. The condition excludes that; a small M - K leaves
    little of the output all the same.
-10. *The public tables.* The 32 lines of the tables' digests are there (`table-digests`). Why: four
+10. *The public tables.* The 32 lines of the tables' digests are there (`table-digests`), or the
+    file is dense (the table below, `routed-experts`), where they may not stand. Why: four
     public tables are computed in floating point, and only these lines fix them (13.4, step 4; on
-    what that rests: R15.3).
+    what that rests: R15.3). So under a dense file the SiLU, rotary and softmax tables are not fixed
+    by the file: an acceptance under it does not show that the prover's library and the verifier's
+    gave the same tables.
 11. *The acceptance policy.* Four things are required. (a) sT = sh - 4, so that the policy's kind is
     `exact-match` or `clipped-gap` (12.5), whether or not a token of the request is checked. (b) If
     a token of the request is checked (r < T - 1), the kind is `exact-match`, or else the caller has
@@ -1993,7 +1999,7 @@ verifier gives an acceptance only if:
 
 | name in `cp_verify` | what must hold |
 |---|---|
-| `routed-experts` | NE is above 0 |
+| `routed-experts` | NE is above 0, or the file is dense: NE is 0 and none of the lines `rcl`, `gcl`, `tsilu0` to `texp7` is there (such a file also meets conditions 8 and 10; verifier/docs/parameter-file.md, "The standard parameter form", says why and what a dense acceptance does not pin) |
 | `five-limbs` | the line `xl 5` is there |
 | `placement-table` | the configuration directory has a layout file (without one the call is rejected earlier) |
 | `no-range-words` | neither the line `eg` nor the line `smax` is there |

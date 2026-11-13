@@ -1,0 +1,27 @@
+{
+ "stock": {
+  "repo": "Qwen/Qwen3.8-27B",
+  "rev": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+  "same_rev": true,
+  "tensors_fetched": 226,
+  "tensors_in_pr124": 226,
+  "tensors_equal": 226,
+  "not_in_pr124": [],
+  "embedding_rows_fetched": 319,
+  "embedding_rows_in_pr124": 319,
+  "embedding_rows_equal": 319
+ },
+ "abl": {
+  "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+  "rev": "739e3c5b89849f6c238ce1e5b70008612ae42cdd",
+  "same_rev": true,
+  "tensors_fetched": 624,
+  "tensors_in_pr124": 624,
+  "tensors_equal": 624,
+  "not_in_pr124": [],
+  "embedding_rows_fetched": 0,
+  "embedding_rows_in_pr124": 0,
+  "embedding_rows_equal": 0
+ },
+ "all_equal": true
+}
