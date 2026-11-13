@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Append this experiment's entry to research/results.yaml from runs/summary.json (committed).
-Usage: add_results_row.py <full sha of the runs commit> <pr number>"""
+Usage: add_results_row.py <full sha of the runs commit> <pr number>
+The summary wording was revised on 2026-11-13 after review of PR #178 (in-sample label, measured and unreplicated,
+the N4 clamp qualified by C); no number in the entry changed. The entry in research/results.yaml is this script's output."""
 import json, sys
 from pathlib import Path
 import numpy as np
@@ -25,9 +27,11 @@ def arm_txt(a):
 
 summary = ((("PASS vs prereg. " if all(v == "PASS" for v in verd.values()) else ("NEGATIVE vs prereg: both arms FAIL. " if all(v == "FAIL" for v in verd.values()) else "Mixed vs prereg. ")) if complete else "PARTIAL vs prereg (not all 16 attention layers done). ")
            + "Upstream's integer attention (docs/model.md 6 steps 2 clamp only, 3, 4) on the 16 full-attention layers of Qwen3.8-27B abliterated, open loop, 10 frozen prompts (1,461 tokens), "
-           + "bar = PR 88's A2 per-head bar (median rel_y <= 0.01, max <= 0.05 over 240 (prompt, head) pairs per layer, every layer): "
+           + "bar = PR 88's A2 per-head bar (median rel_y <= 0.01, max <= 0.05 over 240 (prompt, head) pairs per layer, every layer). "
+           + "Measured, unreplicated, one deterministic CPU run; the accuracy is in-sample (per-layer scales fitted on the same tokens it is measured on, not held out): "
            + "; ".join(arm_txt(a) for a in ("C2047", "C1665"))
-           + ". C1665 is the largest clamp that passes af-no-wrap-N4 at dh 256 (exact arithmetic in the PREREG); passing N4 is not admission. Scales fitted in-sample. Open loop: no logits, no tokens. No proof")
+           + ". 1,665 is the largest clamp that passes af-no-wrap-N4 at dh 256 for every admitted C, that is at the largest admitted C; at C = 0 the largest is 1,672 "
+           + "(exact arithmetic in the PREREG); passing N4 is not admission. Open loop: no logits, no tokens. No proof")
 cond = ("abliterated checkpoint (stock layers 0 to 16 byte-identical), PR 124's 10 frozen prompts (1,461 tokens); open loop per attention layer on the float64 stream; "
         "lowered from rotated q, k, v to o only, projections, q/k RMSNorm, partial rotary, gate and o_proj float64; per-layer power-of-two scales fitted in-sample by the "
         "scales/README cell rule, sh per layer in 4..12; CPU, one deterministic run, determinism checked, spread over (prompt, head) pairs; shared loaded host; no proof")
