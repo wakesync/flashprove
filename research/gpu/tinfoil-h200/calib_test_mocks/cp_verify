@@ -1,0 +1,14 @@
+#!/bin/bash
+# Mock cp_verify for run_job_calib_test.py: the planning call prints one array line and exits 4 (as
+# the real one does); a whole call says YES, or NO with MOCK_CALIB=no.
+if [ "$1" = -plan ]; then
+  echo "array: 1 1 1 N 0 0 2 3 r M0"
+  echo "PLAN ONLY: no proof was checked"
+  exit 4
+fi
+if [ "${MOCK_CALIB:-yes}" = no ]; then
+  echo "NO: mock rejection"
+  exit 1
+fi
+echo "covered: mock"
+echo YES

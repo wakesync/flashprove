@@ -6,6 +6,92 @@ Nothing in this file has been run against Tinfoil. It is a draft for an untested
 
 Protocol: experiments/20261110-43-h200-bringup/PREREG.md. Control arm: research/gpu/ and research/gpu/replication-1/ (H100 80 GB).
 
+## The window of issue #140: CC off, one combined job, about 3 hours (prepared, NOT run)
+
+The owner approved (issue #140, 2026-11-12) running the existing prover on the existing H200 with confidential computing (CC) **off**, for a window of about 3 hours of outage, live service stopped until it serves again. This section is the plan for that window. Where it differs from the steps below, this section wins; the steps below still give the credential handling ("Credentials"), the restore order (step 6), the end-to-end check (step 7) and the off-box verification (step 8). Nothing here has been run against the provider; everything about the provider's behaviour is **from the docs, not tried**.
+
+### What runs: one job, in this order
+
+`run_job.sh serve` with these variables (`tinfoil-config.draft.yml`):
+
+| variable | value | why |
+|---|---|---|
+| `FP_ONBOX_BUILD` | `1` | the #43 PREREG's cold run (quickstart, rebuild on the box); no deviation |
+| `FP_REPEATS` | `10` | #43 warm repeats = calibration configuration C1 (n = 10) |
+| `FP_CALIB` | `C2:8:4:3:300 C3:64:10:3:900` | calibration (experiments/20261112-7-h200-dense-calibration/PREREG.md): C2 = 8 requests, in-step 4, 3 runs, 300 s each; C3 = 64 requests, in-step 10, 3 runs, 900 s each; smallest first |
+| `FP_SAMPLE_MS` | `100` | GPU sampler at 100 ms (#140 needs 100 ms or finer; #43 Amendment 5) |
+| `FP_JOB_TIMEOUT` | `3300` | 55 min; with at most 20 min for boot and image pull, the job is over 75 min after the create at the latest |
+
+Order inside the job: environment record and `cc_probe` (it shows whether `cudaHostRegister` works, so it doubles as the check that CC really is off), the compiler check, the #43 cold quickstart, the 10 warm repeats, the planner's arrays of C2 and C3 on the box's own `cp_verify`, C2 x 3, C3 x 3. A job timeout loses C3's last run first. Results are finalised and served as for #43 (`/status`, `/files`, `/results.tar.gz`), on success, failure and timeout alike (run_job_test.py and run_job_calib_test.py, CPU, mocked GPU programs).
+
+Job time, estimate: build 20 min (H100 18 to 20 min, research/gpu/replication-1), C1 cold + 10 warm about 6 min (H100), C2 about 3 min (estimate), C3 up to about 24 min (estimate: up to 255 s prove + 64 on-box verifies + about 20 s commit, x 3). About 53 of the 55 min; if C3's worst case holds, its third run is cut by `FP_JOB_TIMEOUT` and reported as timed out.
+
+### The 3-hour budget and the restore cut-off rule
+
+T0 = the moment the live stop is sent (step 3). Window W = the owner's approved outage (about 180 min). Restore reserve R = 65 min (live deploy up to about 60 min, unmeasured, from the live config's healthcheck limits; prover stop 5 min). Fetch budget F = 10 min.
+
+- **Restore cut-off = T0 + W - R.** With W = 180: T0 + 115 min. At the cut-off step 6 starts, whatever the job or the fetch is doing.
+- **Fetch start at the latest = cut-off - F** (T0 + 105 min); every fetch goes through `fetch_bounded.sh` with the cut-off (step 5).
+- **Create the prover no later than** cut-off - F - 75 min (T0 + 30 min). If the live instance is not Stopped by then, do not create the prover: restore and report "window not started".
+- If the prover is not serving `/healthz` 20 min after create, stop it and restore (the #43 kill criterion's 60 min no longer fits this window; Amendment 5 shortens it).
+
+**These sums are nominal, not completion guarantees; the restore cut-off is the only authoritative bound.** `FP_JOB_TIMEOUT` (3300 s) bounds the job's execution only: the kill grace (`FP_KILL_GRACE`, 30 s), export, hashing and finalisation (SHA256SUMS) run after it, outside the 55 min, and boot (20 min) is unmeasured. The restore reserve of 65 min is 5 min prover stop + about 60 min live deploy (unmeasured) and holds **no separate allowance** for the end-to-end check (step 7) or a deploy retry at the worst case: if the live deploy takes its full 60 min, the window overruns by the end-to-end check. The operator's sheet therefore carries explicit slack and an escalation time (below); whatever any sum says, at the cut-off step 6 starts.
+
+**Image stage and `FP_ONBOX_BUILD` (window sheet):** `final` (the full image, the Dockerfile's last stage and the default of a build without `--target`) with `FP_ONBOX_BUILD` `1`; or `runtime` (public variant) with `FP_ONBOX_BUILD` `0` (a #43 deviation that needs its own dated amendment first). `run_job.sh` refuses `FP_ONBOX_BUILD=1` on an image without `nvcc` before any GPU step, so a mismatch shows within the first minutes of `/status`, not after the build time. The window must use the exact pushed image, pinned by digest in the config (apt packages are unpinned, so a rebuild is a different image).
+
+Proposed values (blank = owner-only):
+
+| window-sheet field | proposed | basis |
+|---|---|---|
+| approved outage window, start and end (UTC) | | owner |
+| restore cut-off | T0 + W - 65 min | rule above |
+| restore reserve | 65 min | live deploy about 60 min (unmeasured, healthcheck limits) + prover stop 5 min |
+| fetch budget | 10 min | the archive size is **not known** (estimate only: C3's proofs alone are 64 x 4.3 MB x 3 runs = 825.6 MB if each is as large as the small example's 4.3 MB proof, and the proof size at C3's shape is unmeasured; plus C2's 3 x 8 proofs, C1, logs, 100 ms samples). The earlier "under 300 MB" contradicted its own premise and is withdrawn. The bounded fetch (step 5) still ends at the cut-off whatever the size; a slow link can lose part of C3's evidence, which the window sheet's data-loss choice covers |
+| deadline for the live stop to reach Stopped | 10 min | step 3's example; unmeasured |
+| deadline for the prover to reach Running and serve `/healthz` | 20 min | 75 min budget minus `FP_JOB_TIMEOUT` 55 min |
+| deadline for the job (`FP_JOB_TIMEOUT`) | 3300 s | brief: at most 75 min from create to finished job |
+| deadline for the prover to reach Stopped | 5 min | step 6's example |
+| image stage and `FP_ONBOX_BUILD` | `final` + `1` (or `runtime` + `0`, registered first) | rule above; checked by `run_job.sh` before any GPU step |
+| image digest in the config | the digest that `docker push` printed | apt packages are unpinned: never a tag, never a rebuild |
+| slack and escalation | nominal sums above have no allowance for finalisation, the end-to-end check or a deploy retry; owner sets the escalation time | rule above: the cut-off is authoritative |
+| spend | | owner |
+| who to contact if restore fails, notice to consumers, acceptance of data loss | | owner |
+
+### Creating the prover with CC off (from the docs, not tried)
+
+What `--disable-cc-mode` is, from the CLI's own help text (`tinfoil container create --help`, read locally 2026-11-12, no network call) and its source (github.com/tinfoilsh/tinfoil-cli, `internal/cli/container.go`, main branch, read 2026-11-12T18:13Z):
+- help: "EXPERIMENTAL: disable confidential computing (benchmarks only; requires org entitlement)". `--yes` skips its interactive confirmation; without a terminal and without `--yes` the CLI refuses.
+- the confirmation text it prints: "Disables memory encryption and hardware attestation for this container. It will not provide CC guarantees and is not suitable for production workloads. Intended for benchmarking against non-CC baselines." and "The host operator can read memory and observe execution."
+- it is a flag of `container create` only (the request body gets `disable_cc_mode: true`); `deploy` and `update` have no such flag. So a CC-off prover is a new instance, created for the window and stopped afterwards.
+- whether this org has the entitlement is **not established** (not visible without a call; ask the provider).
+- Tinfoil's own benchmark harness (github.com/tinfoilsh/model-benchbox, `bench/README.md`, read 2026-11-12T18:13Z) creates its CC-off arm with `--debug --ssh-key <key> ... --disable-cc-mode --yes` and notes that "on this Intel/B300 host `--disable-cc-mode` flips both the GPU CC/PPCIe data path and CPU TDX memory encryption". What it does on this AMD SEV-SNP H200 host is **not established**. `cc_probe.json` and `nvidia-smi conf-compute` in `gpu-env.txt` record what the GPU reports.
+
+**Config from a local file, without a public config repo?** The CLI's help shows `tinfoil container create app --config tinfoil-config.yml` (`--source local`, implied by `--config`); its source sends the file's contents with `source: local` and refuses `--repo`/`--tag` with it. The docs pages on containers (<https://docs.tinfoil.sh/containers/configuration.md>, <https://docs.tinfoil.sh/containers/cli.md>, read 2026-11-12) still say every container needs `tinfoil-config.yml` at the root of a public GitHub repo and do not describe `--config`. Whether a local config is accepted for a **GPU** instance, with `--disable-cc-mode`, for this org: **not established**. If it is, no public config repo and no release tag are needed (steps 2's tag and the "Where the config lives" decision fall away); the image digest must still be pinned in the file.
+
+**Can results be fetched attested from a CC-off instance?** Probably not: the CLI says the mode disables hardware attestation, and the docs say debug instances (which also do not attest) are refused by `SecureClient`, `container connect` and the tunnels (<https://docs.tinfoil.sh/containers/connecting.md>, <https://docs.tinfoil.sh/containers/debug-mode.md>, read 2026-11-12). Whether `tinfoil http get --enclave` or `container connect` refuse a CC-off instance in the same way: **not established**. Ways out, in order of preference:
+1. **Plain HTTPS through the shim, unattested**: `curl -sf https://<DOMAIN>/status` and `.../results.tar.gz` through `fetch_bounded.sh`. Whether the shim serves a CC-off instance's domain the same way: not established. Nothing in this experiment needs attestation of the results: every proof is checked off the box by `cp_verify` built on our side (step 8), and `SHA256SUMS` checks the archive's integrity end to end; the timings and memory readings were never attested in any case. The results are synthetic weights and public files only (`isk/` never leaves the box).
+2. **Debug mode** (`--debug --ssh-key <ORG_SSH_KEY_NAME>`), as Tinfoil's benchmark harness does: SSH into the toolbox, `tindbg exec` into the prover container, copy `/work/results` out with `scp`. Needs an org SSH key registered (a write, with its own yes) and a `--debug` create, which is a different instance kind (`<name>.debug.<org>...` domain).
+
+**The create command** (placeholders; the operator substitutes them from their own notes; `tf` as in "Credentials"):
+
+```sh
+# from a release tag of a public config repo
+tf container create <PROVER> --repo <OWNER>/<REPO> --tag <TAG> --mark-latest=false --secret="" --disable-cc-mode --yes
+# or, if a local config is accepted for a GPU instance (not established)
+tf container create <PROVER> --config <PATH>/tinfoil-config.yml --secret="" --disable-cc-mode --yes
+# fallback for fetching, if unattested HTTPS is not served (needs a registered org SSH key: its own yes)
+tf container create <PROVER> --repo <OWNER>/<REPO> --tag <TAG> --mark-latest=false --secret="" --debug --ssh-key <ORG_SSH_KEY_NAME> --disable-cc-mode --yes
+```
+
+No `--host` (host selection was not enabled for the org). `--mark-latest=false` and `--secret=""` as in step 4. Status during the window: `tf container get <PROVER>` (shows `Confidential: disabled` for such an instance, per the CLI source).
+
+### Open questions for the coordinator and the owner, before the window
+1. Does the org have the `--disable-cc-mode` entitlement? (provider)
+2. Is a local config (`--config`) accepted for a GPU instance with CC off? If not: which public config repo and tag (README.md decision 3)?
+3. Does the shim serve plain HTTPS for a CC-off instance, or is the debug-mode fetch needed (then: an org SSH key)?
+4. Image: public (runtime-only variant, `Dockerfile` stage `runtime`, README.md "Licences") or private with registry credentials (full image, on-box build)? If runtime-only: `FP_ONBOX_BUILD` must be 0, a registered deviation from #43 (not taken now).
+5. The window sheet's owner-only fields.
+
 ## Credentials: never in a process's argument list
 
 The org admin key must not appear on any command line, in shell history, in a log or in a file outside a mode-600 file of the operator's own. Anything in a command's arguments can be read by other processes on the machine (`ps`, `/proc/<pid>/cmdline`), so `curl -H "Authorization: Bearer $KEY"` is wrong even when `$KEY` came from a file: the shell expands it into curl's argv.
@@ -103,7 +189,7 @@ The image holds only public code and NVIDIA's toolkit wheels, no secrets. It can
 ```sh
 cd research/gpu/tinfoil-h200
 python3 serve_test.py && python3 run_job_test.py                        # both must end "N of N checks passed"
-docker build -t ghcr.io/<OWNER>/flashprove-h200-prover:phase2 .        # unmeasured; the prover stage has not been built yet
+docker build --target final -t ghcr.io/<OWNER>/flashprove-h200-prover:phase2 .   # built locally 2026-11-12 in 2004 s on 4 cores (README.md, issue #140); for a public image see README.md "Licences" (--target runtime)
 docker run --rm --entrypoint cat ghcr.io/<OWNER>/flashprove-h200-prover:phase2 /opt/env/nvcc.txt /opt/env/flashprove-commit.txt /opt/env/programs.sha256
 docker run --rm --entrypoint sha256sum ghcr.io/<OWNER>/flashprove-h200-prover:phase2 /opt/flashprove/bin/cp_verify
 ```
@@ -191,10 +277,14 @@ echo "fetch exit $? at $(date -u +%FT%TZ)"   # 121: not started (no budget left)
 
 ```sh
 tar -tzf h200-results.tar.gz | grep -c . ; tar -tzf h200-results.tar.gz | grep -c isk     # second number must be 0
-tar -xzf h200-results.tar.gz && (cd results && sha256sum -c --quiet SHA256SUMS)          # only if the state was done or failed
+tar -tvzf h200-results.tar.gz | grep -vc '^[-d]'      # must be 0: only regular files and directories (no link, device, fifo)
+mkdir h200-x && tar -xzf h200-results.tar.gz -C h200-x --no-same-owner --no-same-permissions \
+  && (cd h200-x/results && sha256sum -c --quiet SHA256SUMS)                               # only if the state was done or failed
 ```
 
-A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, through the same helper: `tf container connect <PROVER> -p 3301` in one shell and `"$FB" "$CUTOFF" 5 5 -- curl -s http://127.0.0.1:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). Stop the proxy (Ctrl-C in its shell) when the fetch has ended, and in any case at the cut-off. The server allows two archive downloads at a time and answers 503 to a third; a retry is another call of the helper, which refuses by itself once the budget is gone (exit 121).
+Extract into a new, empty directory (`h200-x`), never over an existing tree. `serve.py` streams regular files only (no symbolic or hard link, no device), so an archive from the prover holds nothing else; the `tar -tvzf` count is a first look, not the boundary. `sha256sum -c` is not a boundary either: it follows links, and a link left out of `SHA256SUMS` is never looked at. The boundary is step 8's `verify_offbox.py`, which refuses (FAIL, no run checked) any extracted tree that holds anything but directories and single-link regular files, all listed in `SHA256SUMS`.
+
+A partial or failed fetch is recorded in the RESULT as it is; no fetch is retried after the cut-off (the prover is stopped by then, its tmpfs gone). If `tinfoil http get` writes a body other than raw bytes on this CLI version, use the verified proxy instead, through the same helper: `tf container connect <PROVER> -p 3301` in one shell and `"$FB" "$CUTOFF" 5 5 -- curl -s http://localhost:3301/results.tar.gz -o h200-results.tar.gz` in another (the proxy verifies attestation; plain `curl` against the domain does not). Stop the proxy (Ctrl-C in its shell) when the fetch has ended, and in any case at the cut-off. The server allows two archive downloads at a time and answers 503 to a third; a retry is another call of the helper, which refuses by itself once the budget is gone (exit 121).
 
 ## 6. Teardown and restore (ends the downtime; before any lengthy off-box work)
 
@@ -232,14 +322,32 @@ Then the live service's own end-to-end check: one attested request to each model
 
 ## 8. Off the box: independent verification (CPU, after restore)
 
-Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine, then for every run directory in `results/` that has a bundle:
+Same as research/gpu/local-verify: build `cp_verify` from a clean checkout at the pinned commit on a CPU machine. Then check **every expected response of every expected run** with `verify_offbox.py` (this directory; CPU only, no network; tested by `verify_offbox_test.py` with a mocked verifier). It does not judge from what happens to be in the archive: the expected runs come only from the **registered** values typed on the command line (`--plan` or `--no-calibration`, and `--repeats`, all required), and the archive is checked against them, never the other way round.
+
+Run it only after step 5's `sha256sum -c` passed (the tool checks `SHA256SUMS` again itself; a missing or mismatching one is a FAIL), **from the directory in which step 5 ran** (the one holding `h200-x`), on the tree extracted there: `--results h200-x/results`, a relative path, the directories themselves, not links to them.
+
+**Which directories are trusted.** The working directory the tool is started in and its parent directories are the operator's and are trusted (one of them may be a link; that is the operator's choice). Nothing below the working directory is: every component of `--results` below it, here both the extraction root `h200-x` and `results`, must be a real directory, checked with `lstat` and opened without following a link. A link at any of them is a structural FAIL. An absolute `--results` below the working directory is treated the same; an absolute `--results` anywhere else trusts only `/`. A `..` in `--results` is a usage error (exit 2).
+
+**The structural preflight runs first, and a problem there stops the check** (FAIL, exit 1, no run verified, `cp_verify` never started, no copy made): the path above; then the tree, walked without following any link, where every entry at every depth must be a directory or a regular file with one hard link (a symbolic link to a file or a directory, pointing inside or outside the tree, a hard-linked file, a device, a fifo, a socket, a component named `isk`, a file `SHA256SUMS` does not list, a listed path that is not such a file or lies outside `results/`, or a mismatch: each is a structural FAIL); then one commitment ID per run (two expected runs whose `cp_commit.log` name the same ID fail here, before any run is verified). After that the tool reads only the files it walked, each opened one component at a time from the results directory's descriptor without following links and checked to be the same file; `cp_verify` runs on a private copy of each run's bundle (every file checked against `SHA256SUMS` while copied), and every mutation gets its own fresh private copy, so neither the archive nor anything outside it is ever written. The path is opened and the tree walked again at the end; any change is a FAIL.
+
+**`cp_verify` must not write its inputs.** Around every call the files that call is given (config/, ivk/, the request, the answer, the proof) are hashed, and the private copy's listing is compared; after a run's last call its whole private copy is hashed against `SHA256SUMS` again. A change is a FAIL of that run and of the whole check, and no further run is verified. This can only be seen after the call: the check FAILs **after invocation**, with the archive and everything outside the private copy unchanged.
 
 ```sh
-ID=$(sed -n 's/^commitment ID: //p' results/<run>/cp_commit.log | tr -d ' ')
-(cd results/<run>/bundle && <cp_verify> config ivk in/example.req out/example.y out/example.proof -id "$ID"; echo "exit $?")
+# the #140 window: FP_CALIB and FP_REPEATS as registered (experiments/20261112-7-h200-dense-calibration/PREREG.md, Amendment 1),
+# typed here from the PREREG, NOT read from the archive; FP_ONBOX_BUILD=1, so the cold run is the quickstart:
+python3 research/gpu/tinfoil-h200/verify_offbox.py --cp-verify <cp_verify> --results h200-x/results \
+  --plan 'C2:8:4:3:300 C3:64:10:3:900' --repeats 10 --cold quickstart --report offbox-verify.json; echo "exit $?"
+# #43 alone (no FP_CALIB): --no-calibration --repeats 10 instead of --plan; with prebuilt programs (FP_ONBOX_BUILD=0) --cold cold
 ```
 
-Plus the five mutation cases of research/gpu/local-verify on each bundle (proof bit flip, answer bit flip, request bit flip, proof truncated, wrong ID): each must exit 1 with `NO`.
+- Expected runs: the cold run (`quickstart` or `cold`), `rep1`..`rep<N>` for `--repeats N` (response `example`), and for each entry `<id>:<requests>:...:<repeats>:...` of `--plan` the runs `<id>-1`..`<id>-<repeats>`, each with responses `r01`..`r<requests>` (C2: r01..r08, C3: r01..r64): 17 runs and 227 responses for the #140 window.
+- The archive is cross-checked, never trusted to choose: with `--plan`, `results/calib-plan.txt` must exist, be non-empty and name the same plan (missing, empty or different = FAIL); with `--no-calibration` it must be absent. `results/steps.tsv` must exist. Any run the registration did not name is a FAIL: a directory in `results/` that is not an expected run, a run row in `steps.tsv` or a run file (`<run>.exit`, `.verdict`, `.stdout`, `.time`, `.windows`) of a run not expected (an extra repeat, `C2-4`, `C3-4`, `rep11`). A `--repeats` lower than the job's therefore fails (its extra repeats are unexpected), and a higher one fails (missing runs).
+- Each response: `cp_verify config ivk in/<r>.req out/<r>.y out/<r>.proof -id <the run's own commitment ID from its cp_commit.log>`; it counts only with exit 0 and last line `YES`. Every response is checked and reported, so an early `NO` or a missing response is never hidden by later `YES`.
+- A run FAILS on: a missing run directory, `out/` withheld on the box (`withheld.txt`), a missing request/answer/proof, any rejection or verifier crash or timeout, no single commitment ID, a response file the plan did not expect (a mixed tree), or a change `cp_verify` made to its private copy. Two runs with the same commitment ID fail the whole check before any run is verified (a fresh commitment per run is registered; a byte copy of a run is not a second run).
+- Mutations (research/gpu/local-verify's five: proof bit flip, answer bit flip, request bit flip, proof truncated, wrong ID) on the first response of every run that passed (`--mutations all` for every response): each must exit nonzero with a last line starting `NO`; one accepted mutation fails the run. `--mutations none` makes the overall verdict FAIL (the PREREG requires them).
+- **Overall PASS (exit 0) only if every expected run passed and the archive checks found nothing.** Exit 1 = FAIL, 2 = usage error (nothing checked: no `--plan`/`--no-calibration`, both, no `--repeats`, or an empty, whitespace-only, malformed or duplicate `--plan` is a usage error, never a PASS). The JSON report has every response's exit and last line and every mutation's; keep it with the results (redacted as in step 9).
+
+A run that fails here is not counted in any fit (experiments/20261112-7-h200-dense-calibration/PREREG.md: both verifiers must say YES for every proof of the batch); it is reported, not rerun.
 
 ## 9. Write-up
 

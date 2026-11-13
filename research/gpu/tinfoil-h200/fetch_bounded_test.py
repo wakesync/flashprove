@@ -69,7 +69,7 @@ def extract(runbook_text):
     if prefix_line.endswith('\\'):
         prefix_line = prefix_line[:-1].rstrip()
     setup = [ln for ln in lines[:i - 1] if ln.strip() and not ln.startswith('CUTOFF=')]
-    spans = re.findall(r'`([^`]*127\.0\.0\.1:3301/results\.tar\.gz[^`]*)`', step5)
+    spans = re.findall(r'`([^`]*(?:127\.0\.0\.1|localhost):3301/results\.tar\.gz[^`]*)`', step5)
     proxy = spans[0] if spans else ''
     proxy_prefix = proxy[:proxy.index('curl')].rstrip() if 'curl' in proxy else ''
     return setup, prefix_line, proxy_prefix

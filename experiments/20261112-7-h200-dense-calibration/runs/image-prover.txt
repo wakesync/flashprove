@@ -1,0 +1,52 @@
+stage prover
+image_id sha256:77a7084c555273005df72ce8e284ecdc74ff3c91d3f9cf04fd83a681f1ab71d2
+size_bytes 1730970789
+created 2026-11-12T18:17:22.373619018Z
+--- /opt/env/nvcc.txt
+Cuda compilation tools, release 13.2, V13.2.86
+Build cuda_13.2.r13.2/compiler.37953736_0
+--- /opt/env/gcc.txt
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+--- /opt/env/flashprove-commit.txt
+9e2bdd8ff5bf9c62f18263d7dac189b0400b260c
+--- /opt/env/programs.sha256
+72b1a4be50d799371798381961b67e1e7c43472d9613824dc91f2f85b00e466a  build/hc/cp_commit
+183949504a0713b058d02cfaf74cdd2bdc83e0f22ea8d7064e35aff6e09c94bd  build/hc/cp_prove
+7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394  build/hc/cp_verify
+--- /opt/env/cp_verify.sha256
+7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394  bin/cp_verify
+--- sha256 of files in the image
+72b1a4be50d799371798381961b67e1e7c43472d9613824dc91f2f85b00e466a  /opt/flashprove/prover/build/hc/cp_commit
+183949504a0713b058d02cfaf74cdd2bdc83e0f22ea8d7064e35aff6e09c94bd  /opt/flashprove/prover/build/hc/cp_prove
+7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394  /opt/flashprove/prover/build/hc/cp_verify
+7f9efc1e86a848a3715c6cc870e465ac2a1c5e8fd1eac09e4809023de7604394  /opt/flashprove/bin/cp_verify
+cc11324efa9a7491ad82f82bf6a9563b1e8c36efd4242b89e9975a22b2e8dc21  /opt/flashprove/prover/build/compiler_sample
+656a01be0e109900fe1cc02bb47147806e503e8f83dcf741b1f545b53ff1ba16  /opt/fp-h200/cc_probe
+--- toolkit files (path size)
+2139 files, 997380525 bytes
+libcublas.so 15
+libcublas.so.13 54198912
+libcublasLt.so 17
+libcublasLt.so.13 508260928
+libcudadevrt.a 1025476
+libcudart.so 15
+libcudart.so.13 773920
+libcudart_static.a 1495352
+libnvblas.so.13 737960
+libnvrtc-builtins.so.13.2 4442056
+libnvrtc.so.13 115333336
+libnvvm.so.4 64632576
+--- nvcc in PATH
+/opt/cuda-13.2.86/nvidia/cu13/bin/nvcc
+--- ldd cp_prove
+	libcublasLt.so.13 => /opt/cuda-13.2.86/nvidia/cu13/lib/libcublasLt.so.13 (0x00007678c3e00000)
+	libcublas.so.13 => /opt/cuda-13.2.86/nvidia/cu13/lib/libcublas.so.13 (0x00007678c0800000)
+	libcuda.so.1 => not found
+	libcudart.so.13 => /opt/cuda-13.2.86/nvidia/cu13/lib/libcudart.so.13 (0x00007678c0400000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007678c0182000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007678e83bd000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007678e838f000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007678bff6f000)
+	librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007678e838a000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007678e8385000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007678e8380000)
