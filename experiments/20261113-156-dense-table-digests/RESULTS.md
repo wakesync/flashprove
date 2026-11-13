@@ -219,11 +219,14 @@ From the repository's top, with a `cp_verify` built by `verifier/build.sh` from 
 `$MT`) and from this branch (`$H`, tree `$HT`), each in a folder of your own:
 
 ```
-python3 -B experiments/20261113-156-dense-table-digests/served_runs.py $M $MT $H $HT <new folder>
-python3 -B experiments/20261113-156-dense-table-digests/tool_identity.py $MT $HT <new folder>/../served/dense-files/routed-experts.dense-with-digests.policy.txt <new folder>
-python3 -B experiments/20261112-135-dense-standard-form/compare2.py $M $H . <new folder>
+python3 -B experiments/20261113-156-dense-table-digests/served_runs.py $M $MT $H $HT $OUT/served
+python3 -B experiments/20261113-156-dense-table-digests/tool_identity.py $MT $HT $OUT/served/dense-files/routed-experts.dense-with-digests.policy.txt $OUT/tool
+python3 -B experiments/20261112-135-dense-standard-form/compare2.py $M $H . $OUT/compare
 python3 run_suite.py cpu <new work folder> --only '<the expression in PREREG.md, Runs>' --jobs 4
 ```
+
+`$OUT` is a folder of your own that exists; each script makes its own new folder in it. The suite
+line is run once in each tree. The runs here were pinned with `taskset -c 12-15`.
 
 For item 6: `git apply experiments/20261113-156-dense-table-digests/mutants/<table>.patch` in a copy
 of the tree, build, revert, and then `mutant_runs.py` (its head says how).
