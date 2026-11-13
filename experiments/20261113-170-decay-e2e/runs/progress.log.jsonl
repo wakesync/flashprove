@@ -1,0 +1,22 @@
+{"t": "2026-11-13T15:25:17Z", "start": true, "tables_sha256": {"softplus_f12_v1": "d2c1a4504ec3a7eca897cd818e7e572e70e3f82835b52f4cf55f9fc61e633b24", "coarse_exp_f12": "5c64304f1a54d50705addafc08d11f1de9a897e9ed65860f0445a0f5cc10fa44", "softplus_f20": "95f264104320c0a4d307c3b6385a8568546978b4a2f1110031873476b7db7854", "coarse_exp_f20": "fa717e74d0e0850112df4a0b580cdb55b7fdc0140195d4003e0f8db59b2053b7", "softplus_f20_wide": "df3304ec56bf46b19af3d7ed2e28a355753f670de98574cdaeb86ffe371e324b", "fine_exp_f20": "58935f414d1075654248b3bea38f3af9a82bdca41fa95ef0a7c0a158e407a95c"}, "paths": {"REF": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "XS18": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "XS18+U4": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "XS18+U3": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "REF#2": ["p01-ordinary-short", "p09-multilingual"], "XS18+U4#2": ["p01-ordinary-short", "p09-multilingual"]}}
+{"t": "2026-11-13T15:26:50Z", "layer": 0, "ckpt": "stock", "fetch_wait_s": 20.3, "layer_s": 72.2}
+{"t": "2026-11-13T15:28:01Z", "layer": 1, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 69.3}
+{"t": "2026-11-13T15:29:16Z", "layer": 2, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 74.7}
+{"t": "2026-11-13T15:30:14Z", "layer": 3, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 57.5}
+{"t": "2026-11-13T15:31:26Z", "layer": 4, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 70.7}
+{"t": "2026-11-13T15:32:36Z", "layer": 5, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 69.3}
+{"t": "2026-11-13T15:33:47Z", "layer": 6, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 70.2}
+{"t": "2026-11-13T15:34:38Z", "layer": 7, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 50.4}
+{"t": "2026-11-13T15:35:50Z", "layer": 8, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 71.2}
+{"t": "2026-11-13T15:37:09Z", "layer": 9, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 78.6}
+{"t": "2026-11-13T15:38:18Z", "layer": 10, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 68.7}
+{"t": "2026-11-13T15:39:10Z", "layer": 11, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 51.2}
+{"t": "2026-11-13T15:40:22Z", "layer": 12, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 71.5}
+{"t": "2026-11-13T15:41:34Z", "layer": 13, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 70.7}
+{"t": "2026-11-13T15:42:50Z", "layer": 14, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 75.4}
+{"t": "2026-11-13T15:43:42Z", "layer": 15, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 51.8}
+{"t": "2026-11-13T15:44:56Z", "layer": 16, "ckpt": "stock", "fetch_wait_s": 0.0, "layer_s": 72.7}
+{"t": "2026-11-13T15:46:05Z", "layer": 17, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 69.1}
+{"t": "2026-11-13T15:47:18Z", "layer": 18, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 71.7}
+{"t": "2026-11-13T15:48:12Z", "layer": 19, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 53.1}
+{"t": "2026-11-13T15:49:20Z", "layer": 20, "ckpt": "abl", "fetch_wait_s": 0.0, "layer_s": 68.1}
