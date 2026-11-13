@@ -6,7 +6,8 @@
 # mutation checks must catch it); MOCK_VERIFY=crash exits 3 with no output. MOCK_VERIFY=scribble
 # answers as usual, then appends a byte to the request, answer and proof it was given (a verifier that writes to its
 # inputs: verify_offbox.py must have given it private copies, so the archive and later checks are
-# unaffected).
+# unaffected, and must notice the change after the call and FAIL). MOCK_VERIFY=scribble-request appends to
+# the request only (the round-4 astra probe); MOCK_VERIFY=litter leaves a new file in its working directory.
 import hashlib
 import os
 import sys
@@ -38,8 +39,11 @@ except OSError:
     print("NO: io")
     sys.exit(1)
 ok = got == h.hexdigest().encode()
-if mode == "scribble":
-    for p in (req, y, proof):
+if mode == "litter":
+    with open("litter.tmp", "wb") as f:
+        f.write(b"x")
+if mode in ("scribble", "scribble-request"):
+    for p in ((req, y, proof) if mode == "scribble" else (req,)):
         try:
             with open(p, "ab") as f:
                 f.write(b"x")

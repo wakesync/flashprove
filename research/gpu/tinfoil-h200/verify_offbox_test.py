@@ -24,8 +24,15 @@ after: file links (proof, answer, request, ivk, cp_commit.log; left out of or li
 directory links (out/, a run, a bundle), a link to an outside sibling, a relative link inside the tree,
 a hard link, a fifo, isk/, --results itself a link, a SHA256SUMS path outside results/, the full 17-run
 / 227-response plan, and the tar -xzf round trip of the RUNBOOK (which, like sha256sum -c, accepts the
-links). The intact control passes and its bytes are unchanged; a verifier that writes to its inputs
-only writes private copies.
+links). The intact control passes and its bytes are unchanged.
+
+Round 4 (astra): a linked extraction root (`--results h200-x/results` with h200-x a link; also as an
+absolute path, two levels down, and absolute outside the working directory) FAILs with no run checked;
+a `..` in --results is a usage error; the working directory itself reached through a link (trusted)
+and the same tree through real directories PASS. A verifier that writes its inputs (all three files,
+the request only, or a new file in its working directory) FAILs after invocation: one run checked, no
+further run, archive and outside bytes unchanged. A byte-copied run (C3-2 = C3-1, rep1 = quickstart)
+FAILs in the preflight with no run checked.
 
 usage: python3 verify_offbox_test.py [--only NAME]   (exit 0 = all passed)
 """
@@ -127,16 +134,20 @@ def seal(res, links="follow"):
             f.write("%s  ./%s\n" % (h, rel))
 
 
-def run_tool(res, *extra, env=None, sealed=True):
+def run_tool(res, *extra, env=None, sealed=True, cwd=None, given=None):
     """sealed=True (re)writes SHA256SUMS first: a producer who edits the archive can rewrite it too, so the
-    registration cases must fail without help from the checksums."""
+    registration cases must fail without help from the checksums. The tool runs as RUNBOOK step 8 says:
+    from the directory that holds the tree (cwd, default res's parent), with a relative --results (given,
+    default res's name)."""
     if sealed:
         seal(res)
-    rep = os.path.join(os.path.dirname(res), "report-%d.json" % len(os.listdir(os.path.dirname(res))))
+    cwd = cwd or os.path.dirname(res)
+    given = given or os.path.basename(res)
+    rep = os.path.join(cwd, "report-%d.json" % len(os.listdir(cwd)))
     e = dict(os.environ)
     e.update(env or {})
-    p = subprocess.run([sys.executable, TOOL, "--cp-verify", MOCK, "--results", res, "--report", rep] + list(extra),
-                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=e, timeout=600)
+    p = subprocess.run([sys.executable, TOOL, "--cp-verify", MOCK, "--results", given, "--report", rep] + list(extra),
+                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=e, timeout=600, cwd=cwd)
     data = None
     if os.path.exists(rep):
         with open(rep) as f:
@@ -609,21 +620,94 @@ def main():
                   x.returncode == 0 and s.returncode == 0)
             check("boundary", "the same extracted tree: FAIL, no run checked, outside unchanged",
                   rc == 1 and d and d["runs"] == [] and sha_tree(outside) == before)
-            # a verifier that writes to its inputs only ever writes private copies
-            res = full("bnd-scribble")
-            seal(res)
-            before = sha_tree(res)
-            rc, out, d = run_tool(res, *reg, "--repeats", "10", env={"MOCK_VERIFY": "scribble"}, sealed=False)
-            check("boundary", "a verifier that appends to every input: archive unchanged, PASS (each check had its own copy)",
-                  rc == 0 and d["verdict"] == "PASS" and sha_tree(res) == before
-                  and subprocess.run(["sha256sum", "-c", "--quiet", "SHA256SUMS"], cwd=res, capture_output=True).returncode == 0)
-            # opus round 3 nonblocking 1: a byte copy of a run is not a second run
+            # ---- round 4 (astra): a linked extraction root, a verifier that writes its inputs, a
+            # duplicate commitment ID. The extraction root (h200-x in RUNBOOK step 5) linked to an
+            # outside sibling: --results h200-x/results from the working directory must FAIL, no run.
+            res = full("bnd-extract-root-link")
+            base = os.path.dirname(res)
+            outside = os.path.join(base, "outside")
+            os.makedirs(outside)
+            os.makedirs(os.path.join(base, "work"))
+            shutil.move(res, os.path.join(outside, "results"))
+            seal(os.path.join(outside, "results"))
+            os.symlink(outside, os.path.join(base, "work", "h200-x"), target_is_directory=True)
+            before = sha_tree(outside)
+            rc, out, d = run_tool(os.path.join(base, "work", "h200-x", "results"), *reg, "--repeats", "10",
+                                  sealed=False, cwd=os.path.join(base, "work"), given="h200-x/results")
+            check("boundary", "round 4: extraction root h200-x a link, --results h200-x/results: FAIL, no run checked",
+                  rc == 1 and d and d["runs"] == [] and "no run was verified" in out
+                  and any("h200-x" in x and "symbolic link" in x for x in d["structural_problems"]))
+            check("boundary", "round 4: linked extraction root: outside target unchanged (%d files)" % len(before),
+                  before and sha_tree(outside) == before)
+            # the same through an absolute --results below the working directory, and a deeper link
+            rc, out, d = run_tool(os.path.join(base, "work", "h200-x", "results"), *reg, "--repeats", "10",
+                                  sealed=False, cwd=os.path.join(base, "work"),
+                                  given=os.path.join(os.path.realpath(os.path.join(base, "work")), "h200-x", "results"))
+            check("boundary", "round 4: the same given as an absolute path below the working directory: FAIL, no run checked",
+                  rc == 1 and d and d["runs"] == [] and any("symbolic link" in x for x in d["structural_problems"]))
+            os.makedirs(os.path.join(base, "work", "deep"))
+            os.symlink(outside, os.path.join(base, "work", "deep", "x"), target_is_directory=True)
+            rc, out, d = run_tool(os.path.join(base, "work", "deep", "x", "results"), *reg, "--repeats", "10",
+                                  sealed=False, cwd=os.path.join(base, "work"), given="deep/x/results")
+            check("boundary", "round 4: a linked parent two levels down (deep/x/results): FAIL, no run checked",
+                  rc == 1 and d and d["runs"] == [] and any("deep/x" in x and "symbolic link" in x for x in d["structural_problems"]))
+            # absolute --results outside the working directory: only / is trusted, so a link anywhere fails
+            rc, out, d = run_tool(os.path.join(base, "work", "h200-x", "results"), *reg, "--repeats", "10",
+                                  sealed=False, cwd=outside,
+                                  given=os.path.join(os.path.realpath(base), "work", "h200-x", "results"))
+            check("boundary", "round 4: absolute --results outside the working directory through a link: FAIL, no run checked",
+                  rc == 1 and d and d["runs"] == [] and any("symbolic link" in x for x in d["structural_problems"]))
+            # '..' in --results: usage error, nothing checked
+            rc, out, d = run_tool(os.path.join(outside, "results"), *reg, "--repeats", "10", sealed=False,
+                                  cwd=os.path.join(base, "work"), given="../outside/results")
+            check("boundary", "round 4: --results with a '..' component: usage error (exit 2), nothing checked",
+                  rc == 2 and d is None)
+            # the trusted side: the working directory itself reached through a link is the operator's
+            # (its parents are trusted), and the same tree without the linked component PASSes
+            os.symlink(outside, os.path.join(base, "operator-link"), target_is_directory=True)
+            rc, out, d = run_tool(os.path.join(outside, "results"), *reg, "--repeats", "10", sealed=False,
+                                  cwd=os.path.join(base, "operator-link"), given="results")
+            check("boundary", "round 4: working directory entered through a link (trusted), --results results: PASS, 17 runs",
+                  rc == 0 and d and d["verdict"] == "PASS" and d["runs_passed"] == 17)
+            rc, out, d = run_tool(os.path.join(outside, "results"), *reg, "--repeats", "10", sealed=False,
+                                  cwd=base, given="outside/results")
+            check("boundary", "round 4: the same tree through real directories (outside/results): PASS, 17 runs",
+                  rc == 0 and d and d["verdict"] == "PASS" and d["runs_passed"] == 17)
+            # a verifier that writes its inputs: noticed after the call, FAIL, no further run verified;
+            # the archive and everything outside the private copy unchanged
+            for mode in ("scribble", "scribble-request", "litter"):
+                res = full("bnd-%s" % mode)
+                outside = os.path.join(os.path.dirname(res), "outside")
+                os.makedirs(outside)
+                with open(os.path.join(outside, "bystander"), "wb") as f:
+                    f.write(b"x\n")
+                seal(res)
+                before, before_out = sha_tree(res), sha_tree(outside)
+                rc, out, d = run_tool(res, *reg, "--repeats", "10", env={"MOCK_VERIFY": mode}, sealed=False)
+                check("boundary", "round 4: verifier %s: FAIL after invocation (input_written), one run checked, "
+                      "no further run" % mode,
+                      rc == 1 and d and d["verdict"] == "FAIL" and d["input_written"] and len(d["runs"]) == 1
+                      and d["runs"][0]["verdict"] == "FAIL" and d["structural_problems"] == []
+                      and archive_has(d, "wrote its private input copy"))
+                check("boundary", "round 4: verifier %s: archive and outside bytes unchanged" % mode,
+                      sha_tree(res) == before and sha_tree(outside) == before_out
+                      and subprocess.run(["sha256sum", "-c", "--quiet", "SHA256SUMS"], cwd=res,
+                                         capture_output=True).returncode == 0)
+            # one commitment per run, checked BEFORE any run (opus round 3, astra round 4)
             res = full("bnd-duplicate-run")
             shutil.rmtree(os.path.join(res, "C3-2"))
             shutil.copytree(os.path.join(res, "C3-1"), os.path.join(res, "C3-2"))
             rc, out, d = run_tool(res, *reg, "--repeats", "10")
-            check("boundary", "C3-2 a byte copy of C3-1 (same commitment ID): FAIL",
-                  rc == 1 and archive_has(d, "C3-1 C3-2 share one commitment ID"))
+            check("boundary", "C3-2 a byte copy of C3-1 (same commitment ID): FAIL, no run checked",
+                  rc == 1 and d["runs"] == [] and "no run was verified" in out
+                  and any("C3-1 C3-2 share one commitment ID" in x for x in d["structural_problems"]))
+            res = full("bnd-duplicate-across-kinds")
+            shutil.rmtree(os.path.join(res, "rep1"))
+            shutil.copytree(os.path.join(res, "quickstart"), os.path.join(res, "rep1"))
+            rc, out, d = run_tool(res, *reg, "--repeats", "10")
+            check("boundary", "round 4: rep1 a byte copy of quickstart: FAIL, no run checked",
+                  rc == 1 and d["runs"] == []
+                  and any("quickstart rep1 share one commitment ID" in x for x in d["structural_problems"]))
 
     for name, ok in results:
         print(("PASS " if ok else "FAIL ") + name)
