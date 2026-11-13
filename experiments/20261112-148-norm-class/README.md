@@ -37,6 +37,8 @@ It runs open loop: every arm starts each layer from the float64 reference stream
 | `runs/debug/synthetic.json` | debug: synthetic checks of the new code |
 | `runs/debug/fixture-partial-1/` | debug: the interrupted fixture run (fixture tokens only, stock layers 0 to 2). Not results |
 
+**Key names in the debug files.** In `runs/debug/fixture-partial-1/*.jsonl` and `runs/debug/fixture-2.json` the rows keyed `p01-ordinary-short` and `p09-multilingual` are **not** those prompts. Both hold the 5 fixture tokens ("The capital of Italy is"), stored under the names of the two determinism prompts so that the duplicate-arm check runs in the debug. `tile512` is the same 5 tokens tiled to 512, for timing. No registered prompt is in any debug file.
+
 ## What was added to reused code
 Nothing in the reused files is edited. New in `norm_class.py`: `quant` (the three quantisers), `qstats` and `base_stats` (class counters and the bit-length histogram), `with_norm` (hands a precomputed norm output to the unchanged `q1_forward` mixer functions), `mlp_arm` (PR #138 `mlp_int`'s formulas with the input given and the gate / up shift s = e + k - 12), the open-loop layer driver and the run loop.
 
