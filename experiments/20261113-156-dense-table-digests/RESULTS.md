@@ -178,6 +178,13 @@ different table has nothing to compare against, and since this change it at leas
 - No Lean file and no part of the soundness argument was changed or re-checked.
 - 158 of the 173 rows of `SUITE.md` were not run, among them every GPU row and the tests of the
   provers' parameter-file reader.
+- **A second caller of the table tool changes behaviour and was not tested** (found after the runs,
+  by reading; added to this file after its first commit). `scales/words_to_policy.py` calls
+  `policy_tables.digests()` when its base parameter file has digest lines. For a base file with `NE 0`
+  and digest lines, main's converter ends with `input-policy-tables` (status 20) because `digests()`
+  raised; on this branch `digests()` returns, so the converter should go on and write the dense lines.
+  For `NE` above 0 the function's result is unchanged (item 4 covers the tool, not the converter). No
+  row of `SUITE.md` names the converter, and this lane ran no test of it.
 - `integrations/vllm/integer_model/integer_model/parameters.py` refuses `NE 0` with a message that says
   such a file "cannot carry the digests of the public tables". That sentence is now out of date for the
   verifier. It was left as it is (outside the scope; the package still requires experts).

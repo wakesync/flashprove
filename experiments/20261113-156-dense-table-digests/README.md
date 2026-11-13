@@ -20,7 +20,8 @@ refused the lines. This change lets a dense file state them and makes them requi
 - a dense file without the lines can no longer meet the standard parameter form, so no call under
   it can end with an acceptance.
 
-For files with experts nothing changes.
+For files with experts the rule is unchanged, and nothing moved in what was run (`RESULTS.md` says
+what was run and what was not).
 
 ## What the verifier recomputes
 
