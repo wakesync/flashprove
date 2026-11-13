@@ -1,0 +1,50 @@
+{
+ "layers": [
+  {
+   "layer": 0,
+   "type": "linear_attention",
+   "x_bit_equal_rerun": true,
+   "x_bit_equal_plain_layer_step": true,
+   "ar_bit_equal_rerun": true,
+   "ar_shape": [
+    5,
+    48
+   ],
+   "A_eq_exp_Alog": true,
+   "dtb_eq": true
+  },
+  {
+   "layer": 1,
+   "type": "linear_attention",
+   "x_bit_equal_rerun": true,
+   "x_bit_equal_plain_layer_step": true,
+   "ar_bit_equal_rerun": true,
+   "ar_shape": [
+    5,
+    48
+   ],
+   "A_eq_exp_Alog": true,
+   "dtb_eq": true
+  },
+  {
+   "layer": 2,
+   "type": "linear_attention",
+   "x_bit_equal_rerun": true,
+   "x_bit_equal_plain_layer_step": true,
+   "ar_bit_equal_rerun": true,
+   "ar_shape": [
+    5,
+    48
+   ],
+   "A_eq_exp_Alog": true,
+   "dtb_eq": true
+  },
+  {
+   "layer": 3,
+   "type": "full_attention",
+   "x_bit_equal_rerun": true,
+   "x_bit_equal_plain_layer_step": true
+  }
+ ],
+ "seconds": 72.3
+}
