@@ -96,8 +96,8 @@ results:
     status: measured
     status_note: "PASS under PREREG amendment 1; run 1 KILLED at its heap-read control (UBSan object-size report instead of the registered ASan text), kept"
     replication: unreplicated
-    pr: null
-    pr_note: "draft PR for #197; set when opened"
+    pr: 198
+    pr_note: "draft; part of #197 and #182"
     summary: "330 sanitized reader calls (33 synthetic fixtures, baseline and patched reader, 5 repetitions): 0 category mismatches vs the release series and 0 sanitizer reports in every repetition; 4 of 4 sanitized positive controls pass. unit.sh default binaries byte-identical (3 of 3); both negative controls reported, .cu refused (2), no-sanitizer compiler gives not run (77)"
     conditions: "Host reader parse/limit admission only, g++ 13.3.0 -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -D_GLIBCXX_ASSERTIONS, two cores of a shared host. Not the verifier, prover programs, GPU code, MSan or TSan; the v2 heap-read control was chosen after a throwaway of the same shape (disclosed)"
     evidence: [experiments/20261114-197-unit-sanitize/RESULTS.md, experiments/20261113-182-reader-parity/RESULTS.md]
