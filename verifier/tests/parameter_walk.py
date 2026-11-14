@@ -21,8 +21,11 @@ planned if the call with -arrays (below) plans it.
 widths  Before the three parts, always: a fixed batch of copies of the configuration's file in
         which only H, dh or d is changed (H + 1, H - 1, 2 dh, dh / 2, 2 d), kept where the query
         width H * dh differs from d, is at most 2^20, and H + G is at most 64. One call with
-        -arrays on each. The script prints how many such files it made and how many did not end
-        "NO: shape-heads", and ends with status 1 if none got past that test: the random walk
+        -arrays on each. The script prints how many such files it made and how many reached and
+        passed that test, which it counts only on evidence: the call planned the file, or ended
+        "NO: <name>" with a name that cp_verify can print only after "shape-heads" (AFTER_HEADS,
+        below); a refusal before the test, or any other name, does not count. It ends with status
+        1 if none got past that test: the random walk
         below may or may not make a file with H * dh != d, and this batch always does. It counts
         what the harness gave the verifier; it shows nothing about a plan or a proof.
 forms   Copies of the configuration's policy.txt in a changed form: lines swapped or moved; odd
@@ -258,6 +261,48 @@ def moved(lines, rnd, weight):
     return [" ".join(w) for w in new], ",".join(said), drawn
 
 
+# The part widths counts a file as having reached and passed "shape-heads" only on positive
+# evidence: its call planned it (status 4), or ended "NO: <name>" with a name that the verifier's
+# sources at the commit that wrote this list can print only after that test (cp_verify.cpp:525-526).
+# Derivation: experiments/20261114-195-dq-ne-d-admission/derive_counted_names.py reads every refusal
+# site under verifier/src; a name is listed only if each of its sites runs after the test
+# (cp_verify.cpp:527-839, :1192-1206, :1345-2558 and the helper files reached only from there).
+# A name not listed, an unknown name included, does not count: a stale list counts fewer, never more.
+AFTER_HEADS = frozenset((
+    "KL-kq-kk", "KL-norm", "KL-rp", "KL-shift-range", "af-no-wrap-N1", "af-no-wrap-N2", "af-no-wrap-N3",
+    "af-no-wrap-N4", "af-no-wrap-N5", "af-no-wrap-N6", "af-no-wrap-N9", "af-policy-C", "af-policy-call-list",
+    "af-policy-kF", "af-policy-nmin", "af-policy-sh", "af-policy-softmax", "af-policy-wd", "af-shape-heads",
+    "af-shape-la", "af-shape-lmS", "af-shape-sh", "af-shape-tiles", "af-unclosed-call", "coin-zero", "entry-refused",
+    "forest-calls", "forest-depth", "forest-depth-A", "forest-depth-G", "forest-depth-H", "forest-keys",
+    "forest-planes", "forest-trees", "header-absent-call", "header-absent-call-H", "header-absent-class",
+    "header-absent-hash", "header-absent-kind", "header-y", "hid-a-fold-list", "hid-a-owner-uses", "hid-a-slots",
+    "hid-a-weight-matrix", "hid-call-floor", "hid-g-slots", "hid-h-slots", "hid-hb", "hid-k-range", "hid-vocab-cols",
+    "key-refused", "model-statement", "no-wrap-pin-forest", "plan-fold-source", "plan-head", "plan-layout",
+    "plan-link", "plan-mask-row", "plan-shape", "plan-tau", "policy-call-list", "policy-call-list-A",
+    "policy-call-list-H", "policy-cs", "policy-forms", "policy-gap-words", "policy-iotaA", "policy-norm-F",
+    "policy-sym-readers", "policy-tau-hb", "policy-toksrc", "policy-ut", "policy-weight-kind",
+    "policy-weight-width-emb", "pt-pub-forest", "security-bits", "shape-NE", "shape-V", "shape-lmb",
+    "shape-product-layer", "shape-product-layer-H", "shape-request-matrix", "shape-request-matrix-A",
+    "shape-request-matrix-H", "shape-theta0", "t2f-columns-range", "t2f-weight-class", "table-digest-exp",
+    "table-digest-rope", "table-digest-sigmoid", "table-digest-silu", "token-length", "token-range",
+))
+AFTER_HEADS_PREFIXES = (  # names made at run time from these prefixes
+    "af-shape-call-", "forest-only-padding-", "forest-row-value-", "hid-planes-", "hid-profile-segment-", "no-wrap-",
+    "no-wrap-H-", "shape-call-", "shape-call-H-", "shape-foreign-", "shape-functional-", "shape-matrix-",
+    "shape-pt-words-",
+)
+
+
+def past_heads(kind, status, last):
+    """True only on positive evidence that the call reached and passed "shape-heads"."""
+    if kind not in ("", "large"):  # fault, unchecked, slow: no evidence
+        return False
+    if status == 4:
+        return True
+    m = re.fullmatch(r"NO: ([A-Za-z0-9-]+)", last)
+    return status == 1 and m is not None and (m.group(1) in AFTER_HEADS or m.group(1).startswith(AFTER_HEADS_PREFIXES))
+
+
 def text_of(lines):
     return ("\n".join(lines) + "\n").encode()
 
@@ -334,7 +379,7 @@ def main():
         print("parameter_walk.py: --sanitized needs an empty folder reports/ beside the program (sanitized_walk_test.sh's build)")
         sys.exit(2)
     dear, weak = set(), set()
-    unequal, past = 0, 0  # the part widths: files with H * dh != d, and those not refused "shape-heads"
+    unequal, past = 0, 0  # the part widths: files with H * dh != d, and those that reached and passed "shape-heads"
     with concurrent.futures.ThreadPoolExecutor(a.jobs) as pool:
         for folder in a.kits:
             kit = os.path.basename(os.path.abspath(folder))
@@ -365,13 +410,13 @@ def main():
                 words = ["-plan", "request", path, more[0], "0"] + more[2:] + ["-arrays"]
                 kind, status, s, m, last, _ = p.one(words)
                 here_unequal += 1
-                here_past += kind != "slow" and last != "NO: shape-heads"
+                here_past += past_heads(kind, status, last)
                 if kind:
                     p.counts[kind] += 1
                     print("%s | status %s | %.1f s | %d MB | %s | cp_verify %s" % (kind, status, s, m, last, " ".join(words)), flush=True)
                 else:
                     os.remove(path)
-            print("%s widths: %d files with H * dh != d (H * dh <= 2^20, H + G <= 64), %d of them not refused shape-heads" % (kit, here_unequal, here_past), flush=True)
+            print("%s widths: %d files with H * dh != d (H * dh <= 2^20, H + G <= 64), %d of them reached and passed shape-heads" % (kit, here_unequal, here_past), flush=True)
             unequal, past = unequal + here_unequal, past + here_past
             if not a.walk_only:
                 got = play(list(forms(pol)))
@@ -421,7 +466,7 @@ def main():
             print("report file that is not on the bound on memory | %s" % f)
     print("parameter_walk.py: %d files; %s%s" % (p.n, ", ".join("%s %d" % (k, p.counts[k]) for k in KINDS),
                                                "; %d report files that are not on the bound on memory" % len(other) if a.sanitized else ""))  # fmt: skip
-    print("parameter_walk.py: query width: %d files with H * dh != d, %d not refused shape-heads%s"
+    print("parameter_walk.py: query width: %d files with H * dh != d, %d reached and passed shape-heads%s"
           % (unequal, past, "" if past else ": NONE got past shape-heads, so this run did not exercise a query width other than d: status 1"))  # fmt: skip
     return 1 if p.counts["fault"] or other or not past else 0
 
