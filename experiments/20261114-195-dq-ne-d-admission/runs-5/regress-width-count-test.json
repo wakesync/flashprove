@@ -1,0 +1,23 @@
+{
+ "label": "regress-width-count-test",
+ "command": [
+  "taskset",
+  "-c",
+  "6-7",
+  "prlimit",
+  "--as=4294967296",
+  "timeout",
+  "120",
+  "python3",
+  "-B",
+  "verifier/tests/parameter_walk_width_count_test.py",
+  "<TMP>/patched/cp_verify"
+ ],
+ "cwd": "<REPO>",
+ "status": 0,
+ "seconds": 0.1,
+ "output_lines": 6,
+ "sha256_output_before_placeholders": "b5d64a744130afab95db3c029d238bf184c3d77b8fae220b45022854277a2d30",
+ "placeholders": "<REPO> the checkout, <TMP> this lane's private mktemp folder, <TMPDIR> a temporary folder made for this run",
+ "binary": "patched"
+}
