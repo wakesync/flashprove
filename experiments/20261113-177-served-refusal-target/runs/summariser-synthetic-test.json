@@ -1,0 +1,14 @@
+{
+ "rA_window": true,
+ "rB_window": true,
+ "stop_rule": true,
+ "tie_lowest_id": true,
+ "verdict_pass": true,
+ "public_no_ids_refusal": true,
+ "public_ids_control": true,
+ "verdict_fail_no_target": true,
+ "verdict_broken": true,
+ "verdict_in_question": true,
+ "refuses_short_array": true,
+ "all_ok": true
+}
