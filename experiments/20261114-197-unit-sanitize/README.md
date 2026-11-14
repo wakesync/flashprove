@@ -18,3 +18,14 @@ fp-heavy-or-not taskset -c <two cores> python3 -B experiments/20261114-197-unit-
 - `bash prover/tests/unit.sh --sanitize run tests/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/after tests/configurations/pinned_no_proof_of_work/policy.txt`
 
 `ubsan197_run.py` is run 1's runner. It is kept as executed, and its result is KILLED.
+
+## After review (2026-11-14, PREREG amendment 2)
+This section is appended; the text above describes the first version. Two things changed in `unit.sh --sanitize` after review, and nothing without `--sanitize`:
+- **A sanitizer's report never ends as a pass.** For `run` and `both`, the caller's `ASAN_OPTIONS` may hold only memory bounds (`hard_rss_limit_mb=<number>`, `max_allocation_size_mb=<number>`, separated by colons), and `UBSAN_OPTIONS` and `LSAN_OPTIONS` must be unset or empty. Any other value gives exit 2 before anything is made or started. The script then sets the three variables itself for the runs, and a run whose own lines in `<test>.log` contain `runtime error:` or `Sanitizer` is a failed run whatever its status. So the sentence above, "A report ends the program with status 97, so unit.sh exits 1", is now one of two ways a report fails a run.
+- **The compiler probe is private.** It is built in a new folder of its own (`sanitize_probe.<random>`, made with `mktemp -d`), and only that folder is removed. A file of yours in `<folder>/sanitized` is never removed.
+
+**Regression cases** (58, in the repository): `python3 -B experiments/20261114-197-unit-sanitize/unit_sanitize_regress.py "$PWD" "$d/regress" "$d/regress.json"` with `d=$(mktemp -d)`. It exits 0 only if every case has its required outcome. `--dry` prints the cases and runs nothing. It places main's `unit.sh` beside the script as `prover/tests/unit_main198.sh` while its last group runs and removes it again.
+
+**Run 3** (the confirmation run with the fixed script): `ubsan197_run3.py`, same usage as `ubsan197_run2.py` above; it writes `runs-3/` and `../20261113-182-reader-parity/runs-ubsan-20261114-3/` and refuses to overwrite them, so use a copy with those two names changed to reproduce. It runs the regression cases as one of its steps. `review_cases_oldhead.py` reproduced the two review findings with the script as it was at `e11ec537` (receipt `runs-oldhead-review/`); it refuses to run with any other `unit.sh`, so to rerun it check out `53a5f32e`.
+
+Results of all three: [RESULTS.md](RESULTS.md), "Addendum after review". `ubsan197_run.py` and `ubsan197_run2.py` are kept as executed.

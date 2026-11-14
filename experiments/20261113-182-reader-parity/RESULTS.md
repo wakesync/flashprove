@@ -58,3 +58,15 @@ This section is appended. The text above is unchanged. The registered UBSan arms
 - Receipts: `runs-ubsan-20261114-2/` (per-call JSON, `builds.json`, `positive-controls.json`, `summary.json`). `runs-ubsan-20261114/` holds the stopped first run, which has no reader calls.
 
 Measured, unreplicated. With this addendum, the release and UBSan reader arms of the PREREG have both been run. Whether #182 counts as complete is for review to decide: the first release series' runner errors and the supplementary rerun are still as disclosed above. The verifier planning calls were not re-run under sanitizers, because the PREREG's UBSan arms cover the reader and the existing tests only. No reader or verifier source changed. No dense producer path or proof is claimed.
+
+
+## Addendum 2026-11-14 (second): confirmation run after two harness fixes (issue #197, PR #198 review)
+
+This section is appended. The text above is unchanged. Review of the addendum above reproduced its numbers and found two faults in the new `--sanitize` path of `prover/tests/unit.sh` (a caller's sanitizer setting could turn a report into a pass; the compiler probe could delete a caller's file). Neither affects the counts above: the runner counted sanitizer text itself and set only memory bounds. Both were fixed under amendment 2 of `experiments/20261114-197-unit-sanitize/PREREG.md`, and the same series was run once more with the fixed script (its run 3):
+
+- **330 sanitized reader calls (33 cases, 2 arms, 5 repetitions): 0 category mismatches against the release series and 0 sanitizer reports in each repetition** (median 0, population SD 0, min/max 0/0, n=5). Every one of the 330 calls has the same exit status, standard output, standard error and category as the corresponding call in `runs-ubsan-20261114-2/`.
+- New in this run: a call also fails if its exit status differs from the release receipt's for the same case and arm, or is not 0, 1 or 2, whatever category it printed. Failures: 0 in each repetition.
+- Fixtures 82 of 82 equal; 6 of 6 sanitized builds; 4 of 4 positive controls pass with no sanitizer text.
+- Receipts: `runs-ubsan-20261114-3/` (per-call JSON, `builds.json`, `positive-controls.json`, `summary.json`). `runs-ubsan-20261114-2/` and `runs-ubsan-20261114/` are unchanged.
+
+Measured, unreplicated: same host and same compiler as run 2, run by the lane that made the fix, so this is a confirmation with the fixed harness and not an independent replication. Nothing else in the addendum above changes: the verifier planning calls were not re-run under sanitizers, no reader or verifier source changed, and whether #182 counts as complete is still for review to decide.
