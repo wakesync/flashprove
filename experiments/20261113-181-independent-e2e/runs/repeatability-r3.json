@@ -1,0 +1,35 @@
+{
+  "runs": [
+    {
+      "run": 1,
+      "exit": 0,
+      "output": "independent-r3-1.json",
+      "sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897"
+    },
+    {
+      "run": 2,
+      "exit": 0,
+      "output": "independent-r3-2.json",
+      "sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897"
+    },
+    {
+      "run": 3,
+      "exit": 0,
+      "output": "independent-r3-3.json",
+      "sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897"
+    },
+    {
+      "run": 4,
+      "exit": 0,
+      "output": "independent-r3-4.json",
+      "sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897"
+    },
+    {
+      "run": 5,
+      "exit": 0,
+      "output": "independent-r3-5.json",
+      "sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897"
+    }
+  ],
+  "all_five_identical": true
+}

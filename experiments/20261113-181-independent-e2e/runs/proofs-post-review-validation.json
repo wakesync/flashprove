@@ -1,0 +1,17 @@
+{
+  "all_494_original_comparison_records_equal_except_new_kind_labels": true,
+  "code_head": "588bc5bca1b44652b1fe0925e5f5f50c4cef9869",
+  "comparison_counts_by_kind": {
+    "fixed_expectation": 14,
+    "independent_vs_target": 479,
+    "threshold_contract": 1
+  },
+  "historical_run_files_unchanged": 21,
+  "independent_reader_byte_identical": true,
+  "independent_sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897",
+  "label": "post-review validation, not replacement of registered comparison",
+  "original_prereg_and_existing_amendments_byte_identical_prefix": true,
+  "reviewed_head": "426c71521e227b67275c27996c1677daa69639b5",
+  "suite_exit_code": 0,
+  "test_methods_passed": 44
+}
