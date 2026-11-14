@@ -1,0 +1,6 @@
+{
+  "command": "bash prover/tests/unit.sh run tests/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/after-release",
+  "exit": 1,
+  "output": "parameter_file_one_place_test : status 2\nparameter_file_one_place_test: fails: see <PRIVATE_BUILD>/after-release/parameter_file_one_place_test.log\n",
+  "test_output": "usage: parameter_file_one_place_test <parameter file>\n"
+}

@@ -268,6 +268,12 @@ inline std::string limit_missed(const Parameters &p) {
     return calls.size();
   };
   const bool experts = v("NE") > 0;
+  // A dense model has no sigmoid table. parse() still requires all TBLW digest lines or
+  // none; when present, its DW sigmoid words must match the statement's zero words.
+  // This is admission only: cp_verify computes and compares the other table digests.
+  bool zero_sigmoid = true;
+  if (p.has("tsilu0") && !experts)
+    for (int i = 0; i < DW; i++) zero_sigmoid = zero_sigmoid && v("tsig" + std::to_string(i)) == 0;
   const u64 most = 0xFFFFFFFFull, lt = v("lt"), la = v("la");
   // log2 of the columns of W, the matrix of the committed weights; log2 of the most requests in a
   // batch.
@@ -398,8 +404,8 @@ inline std::string limit_missed(const Parameters &p) {
        "nminH must be above nmin; for nmin itself, leave the line out"},
       {!p.has("smax") || v("smax") == 2047 || v("smax") == 1023 || v("smax") == 511 || v("smax") == 255,
        "policy-gate-table", "smax", "smax must be 2047, 1023, 511 or 255"},
-      {!p.has("tsilu0") || experts, "policy-tables", "tsilu0",
-       "the tables' digest lines need a model with experts"},
+      {zero_sigmoid, "policy-tables", "tsilu0",
+       "without experts the sigmoid table's digest words must all be 0"},
       {wide("theta0") != 0, "shape-theta0", "theta0_lo", "theta0 (theta0_lo + 2^32 theta0_hi) must not be 0"},
       {v("KF") + 14 >= v("MF"), "policy-norm-F", "KF", "KF must be at least MF - 14"},
       {wide("epsF") >= 1 && wide("epsF") >> 59 == 0, "policy-norm-F", "epsF_lo",

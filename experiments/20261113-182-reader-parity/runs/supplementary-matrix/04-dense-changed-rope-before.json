@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-changed-rope/policy.txt",
+  "exit": 2,
+  "output": "parse: ok\nadmission: policy-tables: line 132: the tables' digest lines need a model with experts\n",
+  "stderr": "",
+  "repetition": 4,
+  "case": "dense-changed-rope",
+  "arm": "before",
+  "mode": "release",
+  "expected": "policy-tables",
+  "observed": "policy-tables",
+  "matches": true
+}
