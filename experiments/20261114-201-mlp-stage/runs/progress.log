@@ -1,0 +1,5 @@
+2026-11-14T04:48:46Z start-state sha256 22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009 expected 22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009 match True
+2026-11-14T04:48:46Z start-state meta {"leg": "abl", "next_layer": 31, "legs_done": [], "prompt_set": "full"}
+2026-11-14T04:50:00Z probe stock layer 0 (linear_attention): fetch 19.3 s, compute 53.0 s
+2026-11-14T04:51:15Z probe stock layer 3 (full_attention): fetch 20.9 s, compute 54.2 s
+2026-11-14T04:51:15Z decision {"t_lin_s": 53.0, "t_full_s": 54.16, "projected_10_s": 5170.8, "projected_6_s": 2459.4, "available_s": 5850.6, "since_grant_s": 149.4, "set": "all10", "prompts": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "n_tokens": 1461}
