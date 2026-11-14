@@ -80,16 +80,32 @@ results:
   - id: cpu-reader-dense-table-parity
     title: "CPU reader dense table-line release parity, partial milestone (#182)"
     status: measured
-    status_note: "PARTIAL vs full PREREG: UBSan not run; original runner errors and supplementary diagnostic rerun retained"
+    status_note: "PARTIAL vs full PREREG when written; UBSan arms run later under #197 (row cpu-reader-ubsan-arms, appended addendum); original runner errors and supplementary diagnostic rerun retained"
     replication: unreplicated
     pr: 184
     pr_note: "draft; milestone incomplete"
     summary: "Release-only: 33 synthetic fixtures, five repetitions per series. First series 25 expectation mismatches and four legacy-test usage failures; separate corrected supplementary series zero mismatches and four passing controls. Narrow valid-dense reader admission changes as intended; no full-PREREG PASS, sanitizer result, producer-support or proof claim"
-    conditions: "Unchanged CPU unit/build harnesses, private output directory, 4 GiB address-space cap, two CPU cores on shared host. Original and supplementary series each 330 reader probes plus 165 verifier request-planning calls. No malformed parse newly admitted; experts reader outcomes unchanged. UBSan unavailable through unchanged harness"
+    conditions: "Unchanged CPU unit/build harnesses, private output directory, 4 GiB address-space cap, two CPU cores on shared host. Original and supplementary series each 330 reader probes plus 165 verifier request-planning calls. No malformed parse newly admitted; experts reader outcomes unchanged. UBSan unavailable through the harness of that time; run later under #197 (see the RESULTS addendum)"
     evidence: [experiments/20261113-182-reader-parity/RESULTS.md, experiments/20261113-182-reader-parity/MATRIX.md]
     metrics:
       - {"name": "reader_first_expectation_mismatches_per_repetition", "stat": "median", "value": 5, "unit": "count", "n": 5, "spread": {"sd": 0, "min": 5, "max": 5}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-13", "commit": "0a88677c9dd29d702f97ebf7a4887b9caacf7532", "source": "experiments/20261113-182-reader-parity/runs/continuation-matrix/summary.json", "note": "Measured, unreplicated; 99 expected observations per repetition (33 cases x baseline reader, patched reader, verifier), deterministic release outcomes, population SD. Initial series retained, including two layout-generation errors and three expected-tag errors per repetition; four additional control usage failures outside this denominator."}
       - {"name": "reader_supplementary_expectation_mismatches_per_repetition", "stat": "median", "value": 0, "unit": "count", "n": 5, "spread": {"sd": 0, "min": 0, "max": 0}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-13", "commit": "0a88677c9dd29d702f97ebf7a4887b9caacf7532", "source": "experiments/20261113-182-reader-parity/runs/supplementary-matrix/summary.json", "note": "Measured, unreplicated; 99 expected observations per repetition (33 cases x baseline reader, patched reader, verifier), deterministic release outcomes, population SD. Separately labelled supplementary diagnostic series after runner corrections, not a replacement for original series or full-PREREG PASS; four corrected controls pass, UBSan not run."}
+
+  - id: cpu-reader-ubsan-arms
+    title: "unit.sh --sanitize, and the #182 reader parity under ASan+UBSan (#197)"
+    status: measured
+    status_note: "PASS under PREREG amendment 1; run 1 KILLED at its heap-read control (UBSan object-size report instead of the registered ASan text), kept"
+    replication: unreplicated
+    pr: null
+    pr_note: "draft PR for #197; set when opened"
+    summary: "330 sanitized reader calls (33 synthetic fixtures, baseline and patched reader, 5 repetitions): 0 category mismatches vs the release series and 0 sanitizer reports in every repetition; 4 of 4 sanitized positive controls pass. unit.sh default binaries byte-identical (3 of 3); both negative controls reported, .cu refused (2), no-sanitizer compiler gives not run (77)"
+    conditions: "Host reader parse/limit admission only, g++ 13.3.0 -O1 -g -fsanitize=address,undefined -fno-sanitize-recover=all -D_GLIBCXX_ASSERTIONS, two cores of a shared host. Not the verifier, prover programs, GPU code, MSan or TSan; the v2 heap-read control was chosen after a throwaway of the same shape (disclosed)"
+    evidence: [experiments/20261114-197-unit-sanitize/RESULTS.md, experiments/20261113-182-reader-parity/RESULTS.md]
+    metrics:
+      - {"name": "ubsan_category_mismatches_vs_release_per_repetition", "stat": "median", "value": 0, "unit": "count", "n": 5, "spread": {"sd": 0, "min": 0, "max": 0}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-14", "commit": "1f7e5fd28a30d44c8fc46e02c0531477958c7a3d", "source": "experiments/20261113-182-reader-parity/runs-ubsan-20261114-2/summary.json", "note": "Measured, unreplicated; 66 sanitized reader calls per repetition (33 cases x baseline and patched reader), deterministic categories, population SD; run 2 under PREREG amendment 1."}
+      - {"name": "ubsan_sanitizer_reports_per_repetition", "stat": "median", "value": 0, "unit": "count", "n": 5, "spread": {"sd": 0, "min": 0, "max": 0}, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-14", "commit": "1f7e5fd28a30d44c8fc46e02c0531477958c7a3d", "source": "experiments/20261113-182-reader-parity/runs-ubsan-20261114-2/summary.json", "note": "Measured, unreplicated; a report = exit 97 or sanitizer text on either stream; covers only the code these fixtures reach."}
+      - {"name": "unit_sh_default_binaries_identical", "stat": "count", "value": 3, "total": 3, "unit": "count", "n": 1, "spread": null, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-14", "commit": "1f7e5fd28a30d44c8fc46e02c0531477958c7a3d", "source": "experiments/20261114-197-unit-sanitize/runs-2/default-build-identity.json", "note": "Base unit.sh vs patched, without --sanitize; SHA-256 of each binary; one build each."}
+      - {"name": "sanitized_positive_controls_passed", "stat": "count", "value": 4, "total": 4, "unit": "count", "n": 1, "spread": null, "hardware": "cpu-epyc-rome-kvm-16", "date": "2026-11-14", "commit": "1f7e5fd28a30d44c8fc46e02c0531477958c7a3d", "source": "experiments/20261114-197-unit-sanitize/runs-2/positive-controls.json", "note": "parameter_file_one_bits_test and parameter_file_one_place_test, baseline and patched reader, sanitized, one run each."}
 
   - id: cpu-reproduction
     title: CPU verification of upstream's stored synthetic proofs
