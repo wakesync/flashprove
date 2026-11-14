@@ -1,0 +1,201 @@
+{
+ "calibration_file": "experiments/20261111-8-qwen-e2e-agreement/prompts-e2e.json",
+ "calibration_sha256": "47aa61b46e142382ffa58b88f918df6ec63f1158629df5938ec00961a5242cfc",
+ "calibration_split_sha256": "3d3f09a3bb17551a1fdbdb2afb2cf730156eb69e7f62daadd5425ef2c9177dc2",
+ "heldout_split_sha256": "e5245bd6d86b49b64b540bddbc260cf1fc60d85b9592fa24f1c6db2a4930c543",
+ "total_tokens": 541,
+ "max_tokens": 117,
+ "any_exact_match": false,
+ "per_prompt": [
+  {
+   "id": "h01-prose-short",
+   "n_tokens": 20,
+   "ids_sha256": "2e4569a0a7977bfe65952560b3653b3f97cf07fa4e8206f6c52324e2c90ff191",
+   "family": "ordinary prose",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 3,
+   "longest_shared_with": "p02-ordinary-paragraph",
+   "shared_runs": {
+    "p01-ordinary-short": 2,
+    "p07-chat-ordinary": 1,
+    "p08-chat-refusal": 1,
+    "p09-multilingual": 0,
+    "p02-ordinary-paragraph": 3,
+    "p04-repeat-punct": 0,
+    "p05-code": 1,
+    "p03-repeat-word": 1,
+    "p06a-digits-256": 0,
+    "p11-chat-long": 2
+   }
+  },
+  {
+   "id": "h02-prose-paragraph",
+   "n_tokens": 95,
+   "ids_sha256": "1ab682c3fdefac5a3982866fe4b300b03545be353ddc2343ee8fafd41be607c5",
+   "family": "ordinary prose",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 3,
+   "longest_shared_with": "p01-ordinary-short",
+   "shared_runs": {
+    "p01-ordinary-short": 3,
+    "p07-chat-ordinary": 1,
+    "p08-chat-refusal": 1,
+    "p09-multilingual": 1,
+    "p02-ordinary-paragraph": 3,
+    "p04-repeat-punct": 0,
+    "p05-code": 1,
+    "p03-repeat-word": 1,
+    "p06a-digits-256": 0,
+    "p11-chat-long": 3
+   }
+  },
+  {
+   "id": "h03-code-js",
+   "n_tokens": 117,
+   "ids_sha256": "1baf1abd33981cb33daf7ad1c7f428846475d816d7b178438406f994c1f7d5d6",
+   "family": "code",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 2,
+   "longest_shared_with": "p05-code",
+   "shared_runs": {
+    "p01-ordinary-short": 1,
+    "p07-chat-ordinary": 1,
+    "p08-chat-refusal": 1,
+    "p09-multilingual": 0,
+    "p02-ordinary-paragraph": 1,
+    "p04-repeat-punct": 0,
+    "p05-code": 2,
+    "p03-repeat-word": 0,
+    "p06a-digits-256": 2,
+    "p11-chat-long": 2
+   }
+  },
+  {
+   "id": "h04-multilingual",
+   "n_tokens": 44,
+   "ids_sha256": "48e3a5c146a8dbdb114ebe6ebfeee29420cc5b6fc84ab02502d967fda5921bd8",
+   "family": "multilingual",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 1,
+   "longest_shared_with": "p07-chat-ordinary",
+   "shared_runs": {
+    "p01-ordinary-short": 0,
+    "p07-chat-ordinary": 1,
+    "p08-chat-refusal": 1,
+    "p09-multilingual": 1,
+    "p02-ordinary-paragraph": 1,
+    "p04-repeat-punct": 0,
+    "p05-code": 1,
+    "p03-repeat-word": 0,
+    "p06a-digits-256": 1,
+    "p11-chat-long": 1
+   }
+  },
+  {
+   "id": "h05-chat-ordinary",
+   "n_tokens": 28,
+   "ids_sha256": "b10facec829bf29e0431ef58e08d7f6a50c2ff12fab1bfb952a2c66b14e8b7e6",
+   "family": "chat template, ordinary request",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 7,
+   "longest_shared_with": "p07-chat-ordinary",
+   "shared_runs": {
+    "p01-ordinary-short": 0,
+    "p07-chat-ordinary": 7,
+    "p08-chat-refusal": 7,
+    "p09-multilingual": 0,
+    "p02-ordinary-paragraph": 1,
+    "p04-repeat-punct": 0,
+    "p05-code": 1,
+    "p03-repeat-word": 0,
+    "p06a-digits-256": 0,
+    "p11-chat-long": 7
+   }
+  },
+  {
+   "id": "h06-repeat-count",
+   "n_tokens": 111,
+   "ids_sha256": "079549fe7ef4cc0ad55ae97f26dba8a2e3c67d9bc2acb3b682859e70e165c2fe",
+   "family": "bounded repetition",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 4,
+   "longest_shared_with": "p05-code",
+   "shared_runs": {
+    "p01-ordinary-short": 1,
+    "p07-chat-ordinary": 0,
+    "p08-chat-refusal": 1,
+    "p09-multilingual": 0,
+    "p02-ordinary-paragraph": 1,
+    "p04-repeat-punct": 0,
+    "p05-code": 4,
+    "p03-repeat-word": 0,
+    "p06a-digits-256": 3,
+    "p11-chat-long": 3
+   }
+  },
+  {
+   "id": "h07-code-sql",
+   "n_tokens": 86,
+   "ids_sha256": "3b6453cd48a0e655d821bd69b88b47992cbebe6d80d05075076885fa8199bf10",
+   "family": "code",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 3,
+   "longest_shared_with": "p05-code",
+   "shared_runs": {
+    "p01-ordinary-short": 1,
+    "p07-chat-ordinary": 1,
+    "p08-chat-refusal": 1,
+    "p09-multilingual": 0,
+    "p02-ordinary-paragraph": 1,
+    "p04-repeat-punct": 0,
+    "p05-code": 3,
+    "p03-repeat-word": 0,
+    "p06a-digits-256": 3,
+    "p11-chat-long": 2
+   }
+  },
+  {
+   "id": "h08-chat-multilingual",
+   "n_tokens": 40,
+   "ids_sha256": "ac0046fd92623dd1c72053348a421705a2b4c8c66de2f2b39f04708e705b34dc",
+   "family": "chat template, multilingual",
+   "exact_text_match": false,
+   "exact_ids_match": false,
+   "exact_sha_match": false,
+   "longest_shared_token_run": 7,
+   "longest_shared_with": "p07-chat-ordinary",
+   "shared_runs": {
+    "p01-ordinary-short": 1,
+    "p07-chat-ordinary": 7,
+    "p08-chat-refusal": 7,
+    "p09-multilingual": 1,
+    "p02-ordinary-paragraph": 1,
+    "p04-repeat-punct": 0,
+    "p05-code": 1,
+    "p03-repeat-word": 0,
+    "p06a-digits-256": 0,
+    "p11-chat-long": 7
+   }
+  }
+ ],
+ "near_duplicate_families": {
+  "chat_template": "h05 and h08 use the same hand-written Qwen chat template (<|im_start|>user ... <think>) as calibration prompts p07, p08 and p11; the template tokens are shared by construction.",
+  "repetition": "h06 is bounded repetition (counting 'step i,' 1..24), a different pattern from calibration p03 (one word repeated) and p04 (one punctuation mark repeated).",
+  "multilingual": "h04 and h08 are multilingual like calibration p09 (zh/fr/de); h04 uses es/ja/ru/hi/pt, h08 fr inside a chat template.",
+  "code": "h03 (JavaScript) and h07 (SQL) are code like calibration p05 (Python)."
+ }
+}
