@@ -30,8 +30,10 @@ walk    A random search that stays among the planned files, since an early rejec
         little code, and moves towards costly ones. Each of the --steps steps makes --wide copies of
         the current file and changes one to three numbers in each: to a value near it, to a multiple
         or half of it, or to a power of two up to 2^33 or its neighbour. Numbers in the call lines,
-        seed_*, wb_* and the public tables' digests are never chosen. Then line d is set to H * dh,
-        as cp_verify requires. A number is chosen more often the more of its changes all three calls
+        seed_*, wb_* and the public tables' digests are never chosen. Then, in about half of the
+        copies, line d is set to H * dh; the other half keeps its d, so that the walk also makes
+        files whose query width H * dh differs from d, which cp_verify admits up to 2^20
+        ("shape-heads"). A number is chosen more often the more of its changes all three calls
         (below) have planned. The next step starts from a planned copy, preferably (with --whole:
         only) one that all three calls planned. Among these it takes, in turn, the copy that cost
         the most memory, the most time, and the one with the least sum (below). Every 50 steps the
@@ -215,7 +217,8 @@ def forms(pol):
 
 
 def moved(lines, rnd, weight):
-    """Returns the lines with one to three numbers changed and d set to H * dh; the changes as text;
+    """Returns the lines with one to three numbers changed and, in about half of the calls, d set to
+    H * dh (the other half keeps d: a file with a query width other than d); the changes as text;
     and the changed numbers' names. weight: name -> relative chance of being chosen (default 1). A
     number's name is the words before its line's first number, plus "#" and the number's index among
     the line's words if the line has several."""
@@ -240,7 +243,9 @@ def moved(lines, rnd, weight):
         v2 = rnd.choice((v + 1, v + 1, v - 1, v + 2, v - 2, 2 * v, v // 2, 2 * v + 1, 4 * v, p2, p2 - 1, p2 + 1, v + 16, v + 256))
         put(n, v2)
         said.append("%s=%d" % (n, max(0, v2)))
-    if "H" in at and "dh" in at:  # H dh = d
+    # cp_verify no longer asks H dh = d. Half of the copies keep the equality, so that the walk
+    # still reaches what it reached before; the other half leaves d as it is.
+    if "H" in at and "dh" in at and rnd.random() < 0.5:
         put("d", val("H") * val("dh"))
     return [" ".join(w) for w in new], ",".join(said), drawn
 

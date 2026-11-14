@@ -1,0 +1,34 @@
+{
+ "binary": "patched",
+ "round": 1,
+ "group": "D",
+ "touched_by_normalisation": [],
+ "records": [
+  {
+   "row": "rejected_proofs_accepted",
+   "binary": "patched",
+   "round": 1,
+   "status": 2,
+   "status_wanted": 0,
+   "registered_line_found": false,
+   "passes": false,
+   "last": "try_altered_copies.py: the directory <WORK>/t8-patched-1/rej-a lies below <HOME>/.moltbo",
+   "sha256_normalised": "779faf861c749b8bae6755c0d389feec27bd0cbbb2533526468e25443627f742",
+   "cpu_seconds": 0.1,
+   "peak_rss_kib_children_so_far": 14848
+  },
+  {
+   "row": "rejected_proofs_gap",
+   "binary": "patched",
+   "round": 1,
+   "status": 2,
+   "status_wanted": 0,
+   "registered_line_found": false,
+   "passes": false,
+   "last": "try_altered_copies.py: the directory <WORK>/t8-patched-1/rej-g lies below <HOME>/.moltbo",
+   "sha256_normalised": "9f9d9f65a3b0c151d897df83b6915708404ad4cf40d8f1634d10984d60c2f342",
+   "cpu_seconds": 0.0,
+   "peak_rss_kib_children_so_far": 14848
+  }
+ ]
+}

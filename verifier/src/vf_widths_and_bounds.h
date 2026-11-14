@@ -38,3 +38,13 @@ static constexpr u32 WEIGHT_WIDTH_BITS = 13, WEIGHT_BOUND = 1u << (WEIGHT_WIDTH_
 // LBU: the lookup key of u, the up projection's output, is u + 2^LBU, a row number in a
 // 2^16-row table (lookup segment "UT", vf_layers_check.inc), so |u| <= 2^LBU.
 static constexpr u32 SMAXTOP = 4095, LBU = 15;
+// QUERY_WIDTH_MOST: the largest query width dq = H * dh (H query heads of dimension dh) that
+// layout() in cp_verify.cpp admits ("shape-heads"): the same bound as on the residual width d
+// ("shape-words"). dq need not equal d. The bound is a guard on sizes and shift counts, not a
+// soundness condition: layout() sizes the tensors q and o of the request matrix qa, and every
+// later vector of dq or dh entries, from H * dh, and takes log2(dh) as a shift count.
+static constexpr u64 QUERY_WIDTH_MOST = 1ull << 20;
+// True if H * dh is at most QUERY_WIDTH_MOST. The product is formed in 128 bits, so it cannot
+// wrap for any two 64-bit values; with H >= 1 a true answer also gives dh <= QUERY_WIDTH_MOST.
+// layout() calls it before it forms, narrows, shifts by or sizes anything from H * dh.
+HD bool queryWidthWithinBound(u64 H, u64 dh) { return (unsigned __int128)H * dh <= QUERY_WIDTH_MOST; }

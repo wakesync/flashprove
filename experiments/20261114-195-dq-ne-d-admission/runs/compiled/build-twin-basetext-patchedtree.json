@@ -1,0 +1,25 @@
+{
+ "label": "build-twin-basetext-patchedtree",
+ "command": [
+  "g++",
+  "-std=c++17",
+  "-O2",
+  "-fno-ipa-modref",
+  "-pthread",
+  "-DDIGEST_WORDS=8",
+  "-DBLK_FIELD=2",
+  "-DBLK_HASH=1",
+  "-I",
+  ".",
+  "-I",
+  "../../blocks",
+  "-I",
+  "../../prover",
+  "../tests/weights_twin_test.cpp",
+  "-o",
+  "<WORK>/bin/weights_twin_test.basetext"
+ ],
+ "status": 0,
+ "seconds": 4.7,
+ "peak_rss_kib_children": 324920
+}

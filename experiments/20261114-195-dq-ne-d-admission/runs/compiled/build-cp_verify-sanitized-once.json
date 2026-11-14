@@ -1,0 +1,29 @@
+{
+ "label": "build-cp_verify-sanitized-once",
+ "command": [
+  "g++",
+  "-O1",
+  "-g",
+  "-fno-ipa-modref",
+  "-D_GLIBCXX_ASSERTIONS",
+  "-fno-omit-frame-pointer",
+  "-fsanitize=address,undefined",
+  "-fno-sanitize-recover=all",
+  "-std=c++17",
+  "-pthread",
+  "-I.",
+  "-I../../blocks",
+  "-I../../prover",
+  "-DBLK_FIELD=2",
+  "-DBLK_COUNT_HASH_CALLS=1",
+  "-DSERVING_BUILD=1",
+  "-DDIGEST_WORDS=8",
+  "-DVF_SOURCE_DIGEST=\"fd3fdeee0d8c087b6400c674bc81346daa541f1057f6d801a9fb1eda5339cb07\"",
+  "-o",
+  "<WORK>/bin/cp_verify.san",
+  "cp_verify.cpp"
+ ],
+ "status": "timeout after 120 s",
+ "seconds": 120.3,
+ "peak_rss_kib_children": 9768
+}
