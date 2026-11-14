@@ -1,0 +1,94 @@
+{
+  "as_registered": true,
+  "case": "control-alternate-run1-run3-by-index",
+  "compare_run2": {
+    "process": {
+      "rc": 0,
+      "stderr": "",
+      "stdout": "compare {'n_a': 78, 'n_b': 8, 'n_common': 8, 'n_identical': 8, 'n_common_controls': 4, 'n_common_changed': 4, 'inputs': {'a_blocks_sha256': '19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4', 'b_blocks_sha256': 'a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5', 'a_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e'}, 'status': 'identical-partial'}\n"
+    },
+    "result": {
+      "inputs": {
+        "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+        "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+        "b_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5"
+      },
+      "n_a": 78,
+      "n_b": 8,
+      "n_common": 8,
+      "n_common_changed": 4,
+      "n_common_controls": 4,
+      "n_identical": 8,
+      "status": "identical-partial"
+    },
+    "status": "identical-partial"
+  },
+  "compare_run3": {
+    "process": {
+      "rc": 2,
+      "stderr": "REFUSED: <fixture>/runs/run3/blocks.jsonl line 40: duplicate record for block model.language_model.layers.34.linear_attn.out_proj.weight (first at line 39); duplicates are refused, identical or not\n",
+      "stdout": ""
+    },
+    "result": null,
+    "status": "refused"
+  },
+  "crosscheck": {
+    "facts": {
+      "run2": {
+        "own_n_common": 8,
+        "own_n_identical": 8,
+        "reader_n_common": 8,
+        "reader_n_identical": 8
+      }
+    },
+    "problems": []
+  },
+  "expected": {
+    "compare": "refused",
+    "n_common": null,
+    "summary": "refused",
+    "union": null
+  },
+  "full_coverage_comparator": false,
+  "full_pass": false,
+  "kind": "mixed sources",
+  "observed": {
+    "compare": "refused",
+    "n_common": null,
+    "summary": "refused",
+    "union": null
+  },
+  "repetition": 2,
+  "reported_by": "first review",
+  "run1_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+  "run2_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5",
+  "run3_blocks_sha256": "8b7a2f9b52a2f9aa317d4b89b6c31abf4b509b546fa5dd9d386d64d270de4467",
+  "run3_files": [
+    "blocks.jsonl",
+    "python.txt",
+    "run.log",
+    "run.time",
+    "sha256.txt",
+    "slot.txt",
+    "tests-1.json",
+    "tests-1.log",
+    "tests-2.json",
+    "tests-2.log",
+    "tree.log"
+  ],
+  "run3_lines": 78,
+  "run3_lines_copied_from": {
+    "run1": 39,
+    "run3": 39
+  },
+  "summary": {
+    "h3": null,
+    "process": {
+      "rc": 2,
+      "stderr": "REFUSED: <fixture>/runs/run3/blocks.jsonl line 40: duplicate record for block model.language_model.layers.34.linear_attn.out_proj.weight (first at line 39); duplicates are refused, identical or not\n",
+      "stdout": ""
+    },
+    "status": "refused",
+    "summary_sha256": null
+  }
+}

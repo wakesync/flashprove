@@ -1,0 +1,93 @@
+{
+  "as_registered": true,
+  "case": "control-original-cut-then-reversed",
+  "compare_run2": {
+    "process": {
+      "rc": 0,
+      "stderr": "",
+      "stdout": "compare {'n_a': 78, 'n_b': 8, 'n_common': 8, 'n_identical': 8, 'n_common_controls': 4, 'n_common_changed': 4, 'inputs': {'a_blocks_sha256': '19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4', 'b_blocks_sha256': 'a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5', 'a_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e'}, 'status': 'identical-partial'}\n"
+    },
+    "result": {
+      "inputs": {
+        "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+        "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+        "b_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5"
+      },
+      "n_a": 78,
+      "n_b": 8,
+      "n_common": 8,
+      "n_common_changed": 4,
+      "n_common_controls": 4,
+      "n_identical": 8,
+      "status": "identical-partial"
+    },
+    "status": "identical-partial"
+  },
+  "compare_run3": {
+    "process": {
+      "rc": 2,
+      "stderr": "REFUSED: <fixture>/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)\n",
+      "stdout": ""
+    },
+    "result": null,
+    "status": "refused"
+  },
+  "crosscheck": {
+    "facts": {
+      "run2": {
+        "own_n_common": 8,
+        "own_n_identical": 8,
+        "reader_n_common": 8,
+        "reader_n_identical": 8
+      }
+    },
+    "problems": []
+  },
+  "expected": {
+    "compare": "refused",
+    "n_common": null,
+    "summary": "refused",
+    "union": null
+  },
+  "full_coverage_comparator": false,
+  "full_pass": false,
+  "kind": "truncated+reordered",
+  "observed": {
+    "compare": "refused",
+    "n_common": null,
+    "summary": "refused",
+    "union": null
+  },
+  "repetition": 5,
+  "reported_by": "first review",
+  "run1_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+  "run2_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5",
+  "run3_blocks_sha256": "3e19dd348748ebbfab5c4cd82f551107abe7d924df2132808eb148ed08028cf7",
+  "run3_files": [
+    "blocks.jsonl",
+    "python.txt",
+    "run.log",
+    "run.time",
+    "sha256.txt",
+    "slot.txt",
+    "tests-1.json",
+    "tests-1.log",
+    "tests-2.json",
+    "tests-2.log",
+    "tree.log"
+  ],
+  "run3_lines": 77,
+  "run3_lines_copied_from": {
+    "run3": 77
+  },
+  "summary": {
+    "h3": null,
+    "process": {
+      "rc": 2,
+      "stderr": "REFUSED: <fixture>/runs/run3/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)\n",
+      "stdout": ""
+    },
+    "status": "refused",
+    "summary_sha256": null
+  }
+}

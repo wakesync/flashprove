@@ -61,3 +61,22 @@ Five fresh private copies per case, fixed order, no randomness, no exclusions. E
 **Debugging.** The new script is debugged only on forward 50, which is not in the list above, plus syntax checks. No listed case is run before the recorded run.
 
 **Limits.** Light CPU only, cores 12-13, shared host. No model, weights, GPU, paid API, serving or attestation request. Hard stop for this amendment's work: 2026-11-14T01:45:00Z, including integration.
+
+### A-2, 2026-11-14 (UTC): outcome of the A-1 cases; the stop rule fired
+
+Written after the recorded run of `stoprule_cases.py` and of the extended evidence suite. Everything above `## Amendments`, and amendment A-1, are unchanged.
+
+**Outcome.** Every case registered in A-1 gave its registered outcome in all five replays: 115 of 115, receipts under `runs/stoprule-20261114/`. Every reviewer-reported outcome reproduced. Thirteen cases are a full H3 `PASS` on an altered run 3: forward 77, 76, 71 and 70; the whole of run 3 in forward order; run 1's records as run 3; run 1's directory as run 3 with and without its metadata; run 1's first 70 lines as run 3; records alternated between run 1 and run 3 by block name; the 39 + 31 splice; forward 77 and forward 70 with metadata edited to agree. Forward 69, 60, 39 and 10 give `PASS-SUBSET`, forward 1 gives `BELOW-COVERAGE`, and the five controls gave what the reviews reported. The kill criterion above ("any truncated or reordered fixture reports full H3 `PASS` or comparator `identical-complete`") is met. **The result of this follow-up is: stop rule fired, a blocking finding.** The milestone stops; it is not resolved here.
+
+**The more serious finding did not occur.** The cross-check registered in A-1 found no replay in which the reader counted a block absent from the supplied files or reported a match between unequal hashes. The full `PASS` outcomes are real union coverage (run 2 supplies the blocks a cut run 3 lacks) or real records (run 1's own), with provenance the reader cannot check.
+
+**What did not change.** No registered arm, expectation, threshold or run file. `runs/registered/` and `runs/evidence-tests.json` are as committed at `bdc059a4c7302b8787c18c5c038468e89c5415d9`. `research/weight-binding/wb_leafv2.py` and the original `summarise.py` are unchanged. The six-arm outcomes stand as measured; the general statement drawn from them in RESULTS ("never a full PASS", "the stop rule did not fire") is withdrawn and RESULTS is rewritten around the finding.
+
+**Regression cases.** 18 insertion-only cases named `stop-rule-189-*` in `research/weight-binding/test_wb_leafv2_evidence.py` pin the current outcomes, labelled as the finding and not as a contract. One invocation: 231 of 231 expectations over 82 cases, receipt `runs/evidence-tests-stoprule-20261114.json`; its first 177 records equal the earlier receipt's.
+
+**Deviations from A-1, all disclosed.**
+- The debug fixture (forward 50) was run twice, once printed and once timed. One edit to the script followed: the receipt keeps the sanitised standard output, where the first draft kept only its hash. No listed case ran before the recorded invocation.
+- The recorded invocation and the suite invocation went through the host's heavy-job gate as a precaution against the two-minute rule for ungated commands; both stayed on cores 12-13.
+- After the recorded run the script was invoked a second time into a private temporary directory to test byte reproducibility. Every file compared equal except `env.json`, which differs only in its timestamp. That replay is not the recorded run and none of its files is committed.
+- A-1 lists a control "run 2 reversed into forward order with its own metadata kept (refused)". As run, that case leaves run 3 untouched, so the run 1 against run 3 comparison is `identical-complete` and the refusal is of run 2, by the comparator when asked about run 2 and by the summariser. The receipt records both.
+- The A-1 cases were chosen after the reviewers had reported their outcomes. They confirm a reported finding and are not a blind test.

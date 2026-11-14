@@ -15,6 +15,12 @@ unchanged (case "baseline"), and the regenerated summary must equal the committe
 Issue #189 additionally pins optional metadata: removing only metadata from a complete run is accepted;
 a line-boundary cut with metadata/tree/cache absent is partial, not a full PASS. These cases document
 current behavior, not a recommendation to accept metadata-free evidence as a registered stopped run.
+Issue #189 stop-rule finding (2026-11-14, found in review of PR #191): the sentence above about an altered
+copy never being accepted as the full passing result does not hold in general. The cases named
+"stop-rule-189-..." at the end pin inputs for which a truncated, reordered or substituted run 3 gets a full
+H3 PASS: H3 is reported on the union of run 2 and run 3, and the reader cannot check where records came
+from. Those cases record CURRENT behaviour as a known blocking finding. They are not a contract the reader
+should keep, and a separately registered change of the reader is expected to change them.
 
 Usage (from the top of the tree): test_wb_leafv2_evidence.py [out.json]     exit 0 iff every expectation holds
 """
@@ -171,6 +177,9 @@ def main(outp=None):
                     "the committed run files must be refused or reported as different, never accepted as the passing result; "
                     "hash level, NOT A PROOF",
                n_cases=len({r["case"] for r in RES}), n_checks=len(RES), n_pass=npass, results=RES)
+    out["note_189"] = ("issue #189 stop-rule finding: the cases named stop-rule-189-* pin CURRENT behaviour, including "
+                       "altered copies of run 3 that get a full H3 PASS on the union with run 2 or by substitution; "
+                       "a blocking finding about what the reader can check, not a contract")
     if outp:
         with open(outp, "w") as f:
             json.dump(out, f, indent=1, sort_keys=True)
@@ -542,6 +551,112 @@ def cases():
         okk = r.returncode == 2 and "duplicate record" in r.stderr and (runs / "run3/leaves-v2.json").read_bytes() == before
         RES.append(dict(case="cli", reader="%s (command line)" % cmd[0], run="run3", expected="rc 2", expected_reason="duplicate record",
                         got="rc %d" % r.returncode, reason=clean(r.stderr), ok=okk))
+    stoprule_189()
+
+
+# ---------------------------------------------------------------- issue #189 stop-rule finding
+def stoprule_189():
+    """Issue #189 stop-rule finding (PREREG amendment A-1 of experiments/20261113-189-missing-metadata).
+
+    CURRENT behaviour, pinned so that a change is noticed. NOT a contract the reader should keep.
+    With run 3's metadata, stored tree and cached comparison removed (or its metadata edited to agree), a
+    truncated, reordered or substituted run 3 can get a full H3 PASS:
+      - the loader accepts a prefix of either canonical order when run-meta.json is absent;
+      - the summary reports H3 on the union of run 2 and run 3 (PREREG A-1 of the #149 experiment), and
+        run 2 holds the last 8 registered blocks, so a forward prefix of 70 or more blocks is completed;
+      - nothing in a record says which run produced it, so run 1's own records are accepted as run 3.
+    The coverage is real (each expectation below also checks that the reported union is exactly the set of
+    blocks present in the run 2 and run 3 files) and every compared hash really is equal. What cannot be
+    checked is provenance: that run 3 is a complete, independent, registered run. "forward" below means
+    run 3's lines put into forward registered order (the committed run 3 is stored in reverse order)."""
+    P = "stop-rule-189-"
+
+    def strip(runs, meta=True, tree=True):
+        if meta:
+            (runs / "run3/run-meta.json").unlink()
+        if tree:
+            (runs / "run3/leaves-v2.json").unlink()
+        (runs / CMP["run3"]).unlink()
+
+    def pin(case, runs, n3, status3, overall, union, suite):
+        f = {run: {json.loads(l)["name"] for l in lines(runs, run)} for run in ("run2", "run3")}
+        expect(case, runs, "compare", status3,
+               also=lambda d: d["n_common"] == n3 and d["n_identical"] == n3 and len(f["run3"]) == n3
+               and ("roots_equal" in d) == (n3 == 78))
+        if suite == "pass":
+            expect(case, runs, "suite", "pass", also=lambda d: d["n_pass"] == d["n_checks"] == 38)
+        else:
+            expect(case, runs, "suite", "refused", "all 78 blocks are needed")
+        expect(case, runs, "summarise", overall,
+               also=lambda s: s["h3"]["union"]["n_blocks"] == union == len(f["run2"] | f["run3"])
+               and s["h3"]["union"]["all_identical"] is True
+               and s["h3"]["run3"]["status"] == status3 and s["h3"]["run3"]["n_common"] == n3
+               and s["h3"]["run2"]["status"] == "identical-partial" and s["h3"]["run2"]["n_common"] == 8)
+
+    # forward prefixes of run 3, metadata / tree / cache removed: 70 or more blocks are completed by run 2
+    for k, overall, union in ((77, "PASS", 78), (76, "PASS", 78), (71, "PASS", 78), (70, "PASS", 78),
+                              (69, "PASS-SUBSET", 77), (60, "PASS-SUBSET", 68), (39, "PASS-SUBSET", 47),
+                              (10, "PASS-SUBSET", 18), (1, "BELOW-COVERAGE", 9)):
+        case = P + "forward-%d" % k
+        runs = fixture(case)
+        fwd = lines(runs)[::-1]
+        strip(runs)
+        put(runs, fwd[:k])
+        pin(case, runs, k, "identical-partial", overall, union, "refused")
+
+    case = P + "forward-78-whole"                         # the whole of run 3 reordered into forward order
+    runs = fixture(case)
+    fwd = lines(runs)[::-1]
+    strip(runs)
+    put(runs, fwd)
+    pin(case, runs, 78, "identical-complete", "PASS", 78, "pass")
+
+    case = P + "run1-records-as-run3"                     # substitution: H3 then compares run 1 with itself
+    runs = fixture(case)
+    strip(runs)
+    put(runs, lines(runs, "run1"))
+    pin(case, runs, 78, "identical-complete", "PASS", 78, "pass")
+
+    for keep_meta in (True, False):                       # run 1's whole directory as run 3
+        case = P + "run1-dir-as-run3-" + ("meta-kept" if keep_meta else "no-meta")
+        runs = fixture(case)
+        shutil.rmtree(runs / "run3")
+        shutil.copytree(runs / "run1", runs / "run3")
+        (runs / CMP["run3"]).unlink()
+        if not keep_meta:
+            (runs / "run3/run-meta.json").unlink()
+        pin(case, runs, 78, "identical-complete", "PASS", 78, "pass")
+
+    case = P + "run1-first-70-as-run3"                    # substitution and truncation
+    runs = fixture(case)
+    strip(runs)
+    put(runs, lines(runs, "run1")[:70])
+    pin(case, runs, 70, "identical-partial", "PASS", 78, "refused")
+
+    case = P + "alternate-run1-run3-by-name"              # records taken alternately from two runs, canonical order
+    runs = fixture(case)
+    r1, fwd = lines(runs, "run1"), lines(runs)[::-1]
+    strip(runs)
+    put(runs, [r1[i] if i % 2 == 0 else fwd[i] for i in range(78)])
+    pin(case, runs, 78, "identical-complete", "PASS", 78, "pass")
+
+    case = P + "splice-run1-39-forward-run3-39-69"        # run 1's first 39 lines, then forward run 3 lines 39 to 69
+    runs = fixture(case)
+    r1, fwd = lines(runs, "run1"), lines(runs)[::-1]
+    strip(runs)
+    put(runs, r1[:39] + fwd[39:70])
+    pin(case, runs, 70, "identical-partial", "PASS", 78, "refused")
+
+    for k in (77, 70):                                    # metadata present and edited to agree: still a full PASS
+        case = P + "forward-%d-meta-consistent" % k
+        runs = fixture(case)
+        fwd = lines(runs)[::-1]
+        strip(runs, meta=False)
+        put(runs, fwd[:k])
+        m = json.loads((runs / "run3/run-meta.json").read_text())
+        m.update(done=k, reverse=False, stopped="fixture: stopped after %d blocks" % k)
+        (runs / "run3/run-meta.json").write_text(json.dumps(m, indent=1, sort_keys=True))
+        pin(case, runs, k, "identical-partial", "PASS", 78, "refused")
 
 
 if __name__ == "__main__":
