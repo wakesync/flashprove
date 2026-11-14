@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-duplicate/policy.txt",
+  "exit": 1,
+  "output": "parse: policy-tables: line 137: this must be the line tsilu5\nadmission: not-run\n",
+  "stderr": "",
+  "repetition": 3,
+  "case": "dense-duplicate",
+  "arm": "before",
+  "mode": "release",
+  "expected": "parse:policy-tables",
+  "observed": "parse:policy-tables",
+  "matches": true
+}

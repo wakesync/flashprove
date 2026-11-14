@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-invalid/policy.txt",
+  "exit": 1,
+  "output": "parse: policy-line-form: line 137: after the name tsilu5 and one space there must be a decimal number below 2^32, with no sign and no leading zero, and nothing more\nadmission: not-run\n",
+  "repetition": 4,
+  "case": "dense-invalid",
+  "arm": "before",
+  "mode": "release",
+  "expected": "parse:policy-line-form",
+  "observed": "parse:policy-line-form",
+  "matches": true
+}

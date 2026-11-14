@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-changed-silu/policy.txt",
+  "exit": 0,
+  "output": "parse: ok\nadmission: ok\n",
+  "stderr": "",
+  "repetition": 2,
+  "case": "experts-changed-silu",
+  "arm": "before",
+  "mode": "release",
+  "expected": "ok",
+  "observed": "ok",
+  "matches": true
+}

@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-partial/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-partial/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-partial/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: policy-tables\n",
+  "stderr": "",
+  "repetition": 2,
+  "case": "experts-partial",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "policy-tables",
+  "observed": "policy-tables",
+  "matches": true
+}

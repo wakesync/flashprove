@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-changed-sigmoid/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-changed-sigmoid/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-changed-sigmoid/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: table-digest-sigmoid\n",
+  "stderr": "",
+  "repetition": 3,
+  "case": "experts-changed-sigmoid",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "table-digest-sigmoid",
+  "observed": "table-digest-sigmoid",
+  "matches": true
+}

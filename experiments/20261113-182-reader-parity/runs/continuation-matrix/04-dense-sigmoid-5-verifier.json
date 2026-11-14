@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-sigmoid-5/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-sigmoid-5/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-sigmoid-5/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: policy-tables\n",
+  "repetition": 4,
+  "case": "dense-sigmoid-5",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "policy-tables",
+  "observed": "policy-tables",
+  "matches": true
+}

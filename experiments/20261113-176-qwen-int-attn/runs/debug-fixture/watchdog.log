@@ -1,0 +1,3 @@
+{"t": "2026-11-13T16:38:05Z", "slot_granted": true, "memavailable_gb": 14.33, "budget_min": 15.0, "hard_stop": "2026-11-13T17:40:00Z", "stop_at": "2026-11-13T16:53:05Z", "rss_limit_gb": 14.0, "cmd": ["python3", "<REPO>/experiments/20261113-176-qwen-int-attn/int_attn.py", "fixture", "<SCRATCH>/fixture", "<REPO>/experiments/20261113-176-qwen-int-attn/runs/debug-fixture"]}
+{"t": "2026-11-13T16:38:05Z", "child_pid": 2425356}
+{"t": "2026-11-13T16:39:14Z", "exit": 0, "killed": null, "peak_tree_rss_gb": 3.56, "elapsed_s": 68.6}

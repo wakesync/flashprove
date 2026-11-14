@@ -1,0 +1,10 @@
+{
+  "command": "bash prover/tests/unit.sh build ../_reader182_build/baseline/parameter_file_tables_test.cpp <REPO>/_reader182_build/before-release",
+  "cwd": "<REPO>",
+  "exit": 2,
+  "orchestrator_exit": 1,
+  "compiler_started": false,
+  "reason": "Output-directory safety check refused a group/other-writable ancestor. No rerun attempted.",
+  "binary_hashes": {},
+  "registered_cases_executed": 0
+}

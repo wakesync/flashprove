@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-changed-rope/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-changed-rope/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-changed-rope/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: table-digest-rope\n",
+  "repetition": 3,
+  "case": "dense-changed-rope",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "table-digest-rope",
+  "observed": "table-digest-rope",
+  "matches": true
+}

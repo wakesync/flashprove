@@ -1,0 +1,7 @@
+{
+  "command": "bash prover/tests/unit.sh run <PRIVATE_BUILD>/baseline/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/before-release tests/configurations/pinned_no_proof_of_work/policy.txt",
+  "exit": 0,
+  "output": "parameter_file_one_bits_test: passes\n",
+  "stderr": "",
+  "test_output": "control: the file as it is: as expected\ncontrol: the file without experts: as expected\nwithout experts, f 2044: as expected\nwithout experts, f 2040: as expected\nV 2044: as expected\nV 2040: as expected\nV 2041: as expected\nV 2047: as expected\nwithout experts, f 65280: as expected\nwithout experts, f 65536: as expected\nparameter_file_one_bits_test: all checks passed\n"
+}

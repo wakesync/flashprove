@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/after-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/experts-partial/policy.txt",
+  "exit": 1,
+  "output": "parse: policy-tables: line 165: this must be the line texp7\nadmission: not-run\n",
+  "repetition": 2,
+  "case": "experts-partial",
+  "arm": "after",
+  "mode": "release",
+  "expected": "parse:policy-tables",
+  "observed": "parse:policy-tables",
+  "matches": true
+}

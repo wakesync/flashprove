@@ -1,0 +1,24 @@
+{
+ "stock": {
+  "fetched": 226,
+  "vs_pr124_compared": 226,
+  "vs_pr124_mismatch": [],
+  "not_in_pr124": 0,
+  "emb_rows": 319,
+  "emb_rows_compared": 319,
+  "emb_rows_mismatch": [],
+  "vs_pr68_diff_compared": 226,
+  "vs_pr68_diff_mismatch": []
+ },
+ "abl": {
+  "fetched": 622,
+  "vs_pr124_compared": 622,
+  "vs_pr124_mismatch": [],
+  "not_in_pr124": 0,
+  "emb_rows": 0,
+  "emb_rows_compared": 0,
+  "emb_rows_mismatch": [],
+  "vs_pr68_diff_compared": 622,
+  "vs_pr68_diff_mismatch": []
+ }
+}
