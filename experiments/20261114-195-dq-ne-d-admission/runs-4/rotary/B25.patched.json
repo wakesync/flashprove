@@ -1,0 +1,20 @@
+{
+ "file": "B25",
+ "binary": "patched",
+ "d": 16384,
+ "H": 1,
+ "G": 1,
+ "dh": 16384,
+ "lt": 11,
+ "table_u32_words_log2": 25,
+ "table_bytes": 134217728,
+ "command": "prlimit --as=4294967296 timeout 120 /usr/bin/time -f 'peak_kib=%M seconds=%e' <cp_verify> -plan arrays <files>/B25 128",
+ "status": 1,
+ "last_line": "NO: no-wrap-H-three-digits",
+ "stdout_lines": 1,
+ "peak_kib": 140188,
+ "seconds": 1.66,
+ "stderr_tail": [
+  "Command exited with non-zero status 1"
+ ]
+}

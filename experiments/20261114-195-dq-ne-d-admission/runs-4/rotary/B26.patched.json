@@ -1,0 +1,20 @@
+{
+ "file": "B26",
+ "binary": "patched",
+ "d": 16384,
+ "H": 1,
+ "G": 1,
+ "dh": 16384,
+ "lt": 12,
+ "table_u32_words_log2": 26,
+ "table_bytes": 268435456,
+ "command": "prlimit --as=4294967296 timeout 120 /usr/bin/time -f 'peak_kib=%M seconds=%e' <cp_verify> -plan arrays <files>/B26 128",
+ "status": 1,
+ "last_line": "NO: forest-keys",
+ "stdout_lines": 1,
+ "peak_kib": 9216,
+ "seconds": 0.0,
+ "stderr_tail": [
+  "Command exited with non-zero status 1"
+ ]
+}

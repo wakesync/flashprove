@@ -18,6 +18,13 @@ usage: parameter_walk.py <cp_verify> <new work folder> <config folder> .. [--ste
 The script has three parts, run for each config folder ("the configuration"; `kit` in identifiers
 and in the output). A call "plans" a file if it ends with status 4 (PLAN ONLY); a file counts as
 planned if the call with -arrays (below) plans it.
+widths  Before the three parts, always: a fixed batch of copies of the configuration's file in
+        which only H, dh or d is changed (H + 1, H - 1, 2 dh, dh / 2, 2 d), kept where the query
+        width H * dh differs from d, is at most 2^20, and H + G is at most 64. One call with
+        -arrays on each. The script prints how many such files it made and how many did not end
+        "NO: shape-heads", and ends with status 1 if none got past that test: the random walk
+        below may or may not make a file with H * dh != d, and this batch always does. It counts
+        what the harness gave the verifier; it shows nothing about a plan or a proof.
 forms   Copies of the configuration's policy.txt in a changed form: lines swapped or moved; odd
         bytes, such as a tab, 0xFF or a byte order mark; CR LF line ends; no final newline; an empty
         file; newlines only; numbers of up to 4,000 digits; lines of 1,022 to 1,025 bytes; the file
@@ -78,7 +85,8 @@ At the end come the walk's costliest planned files ("dear") and those with the l
 in the work folder, which the script neither empties nor removes. A planned file of the walk whose
 call was printed as counted (above), and that ranked among them at an earlier step, is removed once
 it drops out of the ranking: the path in its printed line then leads to no file.
-Exit status 0: no fault. 1: a fault. 2: bad arguments, or SUMS fits no line (above). Unchecked,
+Exit status 0: no fault. 1: a fault, or no file of the part widths got past "shape-heads".
+2: bad arguments, or SUMS fits no line (above). Unchecked,
 slow and large calls are listed and do not change the status: cp_verify sets itself no limit on time
 or memory, and this script measures what a file can cost. It shows nothing about files that it did
 not make, and nothing about soundness.
@@ -254,6 +262,23 @@ def text_of(lines):
     return ("\n".join(lines) + "\n").encode()
 
 
+def widths(lines):
+    """Yields (name, lines) for the part widths: the configuration's file with one of H, dh, d
+    changed, so that H * dh != d, H * dh <= 2^20 and H + G <= 64 (asserted)."""
+    v = {w[0]: int(w[1]) for w in (l.split(" ") for l in lines) if len(w) == 2 and w[0] in ("H", "G", "dh", "d") and w[1].isdigit()}
+    if len(v) != 4:
+        return
+    for name, key, value in (("H-plus-1", "H", v["H"] + 1), ("H-minus-1", "H", v["H"] - 1), ("dh-twice", "dh", 2 * v["dh"]),
+                             ("dh-half", "dh", v["dh"] // 2), ("d-twice", "d", 2 * v["d"])):
+        n = dict(v)
+        n[key] = value
+        if n["H"] < 1 or n["dh"] < 2 or n["H"] * n["dh"] == n["d"] or n["H"] * n["dh"] > 1 << 20 or n["H"] + n["G"] > 64:
+            continue
+        new = ["%s %d" % (key, value) if l.split(" ")[0] == key and len(l.split(" ")) == 2 else l for l in lines]
+        assert sum(a != b for a, b in zip(new, lines)) == 1 and n["H"] * n["dh"] != n["d"] and n["H"] * n["dh"] <= 1 << 20 and n["H"] + n["G"] <= 64
+        yield "width-" + name, new
+
+
 def bits(low):
     return "none" if low is None else "%.2f" % low
 
@@ -309,6 +334,7 @@ def main():
         print("parameter_walk.py: --sanitized needs an empty folder reports/ beside the program (sanitized_walk_test.sh's build)")
         sys.exit(2)
     dear, weak = set(), set()
+    unequal, past = 0, 0  # the part widths: files with H * dh != d, and those not refused "shape-heads"
     with concurrent.futures.ThreadPoolExecutor(a.jobs) as pool:
         for folder in a.kits:
             kit = os.path.basename(os.path.abspath(folder))
@@ -330,6 +356,23 @@ def main():
             if own.whole and own.low is None:
                 print("parameter_walk.py: all three calls planned %s's own file, and no line 'all rounds' errors added' was found in the accounting: the walk would steer by nothing: SUMS in this script no longer fits the line that blocks/numbers/accounting.h prints" % kit)
                 sys.exit(2)
+            here_unequal, here_past = 0, 0
+            for name, lines in widths(pol.decode().splitlines()):
+                p.n += 1
+                path = os.path.join(p.work, kit, "%06d.%s.txt" % (p.n, name))
+                with open(path, "wb") as f:
+                    f.write(text_of(lines))
+                words = ["-plan", "request", path, more[0], "0"] + more[2:] + ["-arrays"]
+                kind, status, s, m, last, _ = p.one(words)
+                here_unequal += 1
+                here_past += kind != "slow" and last != "NO: shape-heads"
+                if kind:
+                    p.counts[kind] += 1
+                    print("%s | status %s | %.1f s | %d MB | %s | cp_verify %s" % (kind, status, s, m, last, " ".join(words)), flush=True)
+                else:
+                    os.remove(path)
+            print("%s widths: %d files with H * dh != d (H * dh <= 2^20, H + G <= 64), %d of them not refused shape-heads" % (kit, here_unequal, here_past), flush=True)
+            unequal, past = unequal + here_unequal, past + here_past
             if not a.walk_only:
                 got = play(list(forms(pol)))
                 print("%s forms: %d files, %d of them planned by the call with -arrays" % (kit, len(got), sum(g.key for g in got)), flush=True)
@@ -378,7 +421,9 @@ def main():
             print("report file that is not on the bound on memory | %s" % f)
     print("parameter_walk.py: %d files; %s%s" % (p.n, ", ".join("%s %d" % (k, p.counts[k]) for k in KINDS),
                                                "; %d report files that are not on the bound on memory" % len(other) if a.sanitized else ""))  # fmt: skip
-    return 1 if p.counts["fault"] or other else 0
+    print("parameter_walk.py: query width: %d files with H * dh != d, %d not refused shape-heads%s"
+          % (unequal, past, "" if past else ": NONE got past shape-heads, so this run did not exercise a query width other than d: status 1"))  # fmt: skip
+    return 1 if p.counts["fault"] or other or not past else 0
 
 
 if __name__ == "__main__":
