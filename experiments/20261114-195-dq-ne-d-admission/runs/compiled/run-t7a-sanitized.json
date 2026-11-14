@@ -1,0 +1,9 @@
+{
+ "label": "run-t7a-sanitized",
+ "command": [
+  "<WORK>/bin/query_width_bound_test.san"
+ ],
+ "status": 0,
+ "seconds": 0.0,
+ "peak_rss_kib_children": 9844
+}

@@ -1,0 +1,31 @@
+{
+ "binary": "base",
+ "round": 3,
+ "group": "E",
+ "touched_by_normalisation": [
+  "masked: <digits>.<digits> s in: ---- stage key ---- N thread(s), <t> s",
+  "masked: <digits>.<digits> s in: ---- stage leaf ---- N thread(s), <t> s",
+  "masked: <digits>.<digits> s in: ---- stage request ---- N thread(s), <t> s",
+  "masked: <digits>.<digits> s in: ok public inputs: parameter file, shape, no-overflow conditions; profi",
+  "masked: <digits>.<digits> s in: read: sub-proof A_N: N claims listed (tested at the chain's end), N sl",
+  "masked: <digits>.<digits> s in: read: sub-proof G_N: N lookup calls in one forest, N more in the small",
+  "masked: <digits>.<digits> s in: read: sub-proof H: N lookup calls in one forest, N more in the smallne",
+  "masked: build=<64 hex>",
+  "removed: a line beginning 'seconds:'"
+ ],
+ "records": [
+  {
+   "row": "whole_clipped_gap_with_policy",
+   "binary": "base",
+   "round": 3,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "WITHIN LIMITS: clipped-gap C=9244130 theta=323343 cap=1 s=16 sh=8",
+   "sha256_normalised": "b43f9c48cbce626031f6c73e50486ccf854b1576d1a086393e2cfa2e32590dd7",
+   "cpu_seconds": 2.2,
+   "peak_rss_kib_children_so_far": 158036
+  }
+ ]
+}

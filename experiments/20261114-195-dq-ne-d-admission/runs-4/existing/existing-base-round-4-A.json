@@ -1,0 +1,21 @@
+{
+ "binary": "base",
+ "round": 4,
+ "group": "A",
+ "touched_by_normalisation": [],
+ "records": [
+  {
+   "row": "example_kits",
+   "binary": "base",
+   "round": 4,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "example_kits_test.py: 7 parameter files (1 bare, 5 work, 1 yes), 12 plays with a line changed; 0 not as expected",
+   "sha256_normalised": "9603363e4dcefd9bfba539d9981796f66ccb1e0fba51b9b16b27bea97d1e8c01",
+   "cpu_seconds": 22.8,
+   "peak_rss_kib_children_so_far": 248788
+  }
+ ]
+}

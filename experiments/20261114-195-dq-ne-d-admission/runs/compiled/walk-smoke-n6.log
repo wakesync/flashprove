@@ -1,0 +1,11 @@
+pinned_no_proof_of_work: the kit's own file: planned by the call with -arrays: True, by all three calls: True; 43 MB, 0.4 s, least sum 120.78
+pinned_no_proof_of_work walk: 4 steps of 8 files, 7 planned by the call with -arrays, 3 by all three calls
+dear | 43 MB | 0.5 s | <WORK>/walk-smoke/pinned_no_proof_of_work/000013.walk-1.txt | last change stages link#16=17
+dear | 43 MB | 0.4 s | <WORK>/walk-smoke/pinned_no_proof_of_work/000031.walk-3.txt | last change work closeness#4=1
+dear | 43 MB | 0.4 s | <WORK>/walk-smoke/pinned_no_proof_of_work/000025.walk-2.txt | last change work field#2=0
+dear | 15 MB | 0.1 s | <WORK>/walk-smoke/pinned_no_proof_of_work/000033.walk-3.txt | last change lmh=13
+dear | 15 MB | 0.1 s | <WORK>/walk-smoke/pinned_no_proof_of_work/000019.walk-2.txt | last change G=4
+least sum | 120.78 bits at 128 asked | <WORK>/walk-smoke/pinned_no_proof_of_work/000013.walk-1.txt | last change stages link#16=17
+least sum | 120.78 bits at 128 asked | <WORK>/walk-smoke/pinned_no_proof_of_work/000025.walk-2.txt | last change work field#2=0
+least sum | 120.79 bits at 128 asked | <WORK>/walk-smoke/pinned_no_proof_of_work/000031.walk-3.txt | last change work closeness#4=1
+parameter_walk.py: 33 files; fault 0, unchecked 0, slow 0, large 0

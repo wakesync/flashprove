@@ -1,0 +1,33 @@
+{
+ "label": "smoke-base",
+ "command": [
+  "taskset",
+  "-c",
+  "6-7",
+  "prlimit",
+  "--as=4294967296",
+  "timeout",
+  "120",
+  "python3",
+  "-B",
+  "verifier/tests/parameter_walk.py",
+  "<TMP>/base/cp_verify",
+  "<TMPDIR>-vn4zrllv/walk",
+  "prover/tests/configurations/pinned_no_proof_of_work",
+  "--walk-only",
+  "--steps",
+  "4",
+  "--wide",
+  "8",
+  "--jobs",
+  "2"
+ ],
+ "cwd": "<REPO>",
+ "status": 1,
+ "seconds": 4.1,
+ "output_lines": 13,
+ "sha256_output_before_placeholders": "a37f8205d5aedc876c4cda378040c337ab90244782a072519cb9afb7260913dd",
+ "placeholders": "<REPO> the checkout, <TMP> this lane's private mktemp folder, <TMPDIR> a temporary folder made for this run",
+ "binary": "base",
+ "harness": "verifier/tests/parameter_walk.py at this commit"
+}

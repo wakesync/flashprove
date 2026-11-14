@@ -1,0 +1,29 @@
+{
+ "label": "build-ws_build_fuzz-sanitized",
+ "command": [
+  "g++",
+  "-O1",
+  "-g",
+  "-fno-ipa-modref",
+  "-D_GLIBCXX_ASSERTIONS",
+  "-fsanitize=address,undefined",
+  "-fno-sanitize-recover=all",
+  "-std=c++17",
+  "-pthread",
+  "-I",
+  ".",
+  "-I",
+  "../../blocks",
+  "-I",
+  "../../prover",
+  "-DBLK_FIELD=2",
+  "-DBLK_HASH=1",
+  "-DDIGEST_WORDS=8",
+  "-o",
+  "<WORK>/bin/ws_build_fuzz",
+  "../tests/ws_build_fuzz.cpp"
+ ],
+ "status": 0,
+ "seconds": 10.7,
+ "peak_rss_kib_children": 633144
+}

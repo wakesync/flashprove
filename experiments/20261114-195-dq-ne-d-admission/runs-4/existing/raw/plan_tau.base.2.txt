@@ -1,0 +1,14 @@
+kit: nothing: status 4, planned with 128 combinations; expected: planned with 128 combinations: as expected
+work-1-1-1: work smallness 1 1 1, tau 128: status 1, NO: plan-tau; expected: plan-tau: as expected
+work-4-4-4: work smallness 4 4 4, tau 128: status 1, NO: plan-tau; expected: plan-tau: as expected
+work-32-32-32: work smallness 32 32 32, tau 128: status 1, NO: plan-tau; expected: plan-tau: as expected
+work-4-0-0: work smallness 4 0 0, tau 128: status 1, NO: plan-tau; expected: plan-tau: as expected
+work-0-4-4: work smallness 0 4 4: work in the rounds of a batch and of the committer, which have no smallness test: status 4, planned with 128 combinations; expected: planned with 128 combinations: as expected
+tau-160: tau 160, with a layout file made for it: status 1, NO: plan-tau; expected: plan-tau: as expected
+tau-192: tau 192, with a layout file made for it: status 1, NO: plan-tau; expected: plan-tau: as expected
+tau-96: tau 96: status 1, NO: policy-tau-hb; expected: policy-tau-hb: as expected
+tau-127: tau 127: status 1, NO: hid-tau; expected: hid-tau: as expected
+tau-129: tau 129: status 1, NO: hid-tau; expected: hid-tau: as expected
+work-4-tau-124: work smallness 4 4 4, tau 124: status 1, NO: hid-tau; expected: hid-tau: as expected
+work-32-tau-96: work smallness 32 32 32, tau 96: status 1, NO: policy-tau-hb; expected: policy-tau-hb: as expected
+plan_tau_test.py: 13 cases: all as expected

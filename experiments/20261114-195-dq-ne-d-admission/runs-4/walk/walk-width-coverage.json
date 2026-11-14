@@ -1,0 +1,32 @@
+{
+ "label": "walk-width-coverage",
+ "command": [
+  "prlimit",
+  "--as=4294967296",
+  "timeout",
+  "120",
+  "taskset",
+  "-c",
+  "4-5",
+  "python3",
+  "-B",
+  "verifier/tests/parameter_walk.py",
+  "<TMP>/patched/cp_verify",
+  "<TMP>/walk-registered",
+  "prover/tests/configurations/pinned_no_proof_of_work",
+  "--walk-only",
+  "--steps",
+  "4",
+  "--wide",
+  "8",
+  "--jobs",
+  "2"
+ ],
+ "cwd": "<REPO>",
+ "status": 0,
+ "seconds": 5.0,
+ "peak_rss_kib_children": 44468,
+ "sha256_output_before_placeholders": "265c195bd140efacc6059a4ff498af4f2c804d9f69ad1175012db8cb43024d88",
+ "output_lines": 13,
+ "placeholders": "<REPO> the checkout, <TMP> this lane's private mktemp folder"
+}

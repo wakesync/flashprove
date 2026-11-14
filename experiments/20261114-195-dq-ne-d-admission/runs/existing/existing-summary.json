@@ -1,0 +1,229 @@
+{
+ "files": [
+  "existing-base-round-1-A.json",
+  "existing-base-round-1-B.json",
+  "existing-base-round-1-C.json",
+  "existing-base-round-1-D.json",
+  "existing-base-round-1-E.json",
+  "existing-patched-round-1-A.json",
+  "existing-patched-round-1-B.json",
+  "existing-patched-round-1-C.json",
+  "existing-patched-round-1-D.json",
+  "existing-patched-round-1-E.json"
+ ],
+ "rows": {
+  "call_accounting": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "b72bbd641f38bd0c150104569ac2e6d848c95e62f1e0d6f514a40ac56811a241"
+    ],
+    "patched": [
+     "b72bbd641f38bd0c150104569ac2e6d848c95e62f1e0d6f514a40ac56811a241"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 0.5
+  },
+  "example_kits": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "9603363e4dcefd9bfba539d9981796f66ccb1e0fba51b9b16b27bea97d1e8c01"
+    ],
+    "patched": [
+     "9603363e4dcefd9bfba539d9981796f66ccb1e0fba51b9b16b27bea97d1e8c01"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 21.4
+  },
+  "kit_rounds": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "92069e466ace55a1691da94ba32e0f9c8f3aca4e0a7f64b7f1fcfc4707e26a27"
+    ],
+    "patched": [
+     "92069e466ace55a1691da94ba32e0f9c8f3aca4e0a7f64b7f1fcfc4707e26a27"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 2.3
+  },
+  "la_equals_lt": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    1
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "15ad76a8ab5f905a08e62e2ac243b42bfcfb753248d6b01710954ba739a75eb6"
+    ],
+    "patched": [
+     "15ad76a8ab5f905a08e62e2ac243b42bfcfb753248d6b01710954ba739a75eb6"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 0.0
+  },
+  "plan_tau": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "d9883b971b42707fd3c4d4d7dbf81f63b2c7dfcc76d511d8d9889c00dcf687e2"
+    ],
+    "patched": [
+     "d9883b971b42707fd3c4d4d7dbf81f63b2c7dfcc76d511d8d9889c00dcf687e2"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 2.1
+  },
+  "rejected_proofs_accepted": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "795d7bb43c784417ec103f0bbb7bfc680360105795bf8aa57ead39c9d98c047b"
+    ],
+    "patched": [
+     "795d7bb43c784417ec103f0bbb7bfc680360105795bf8aa57ead39c9d98c047b"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 18.9
+  },
+  "rejected_proofs_gap": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "ec7f7761e6d7d47fab92eb52fb513ece3f29bb6400786d6f9c958b231f743420"
+    ],
+    "patched": [
+     "ec7f7761e6d7d47fab92eb52fb513ece3f29bb6400786d6f9c958b231f743420"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 18.0
+  },
+  "served_form": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "1e6fd66dc9370920e7ef1687a8a4b67339f63f2827311cd429c3dcf45e898f16"
+    ],
+    "patched": [
+     "1e6fd66dc9370920e7ef1687a8a4b67339f63f2827311cd429c3dcf45e898f16"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 24.7
+  },
+  "whole_accepted_proof": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "e8f22561417108cb45811e37496c5eedc983df0535c5e87c304f0e86dc65abc5"
+    ],
+    "patched": [
+     "e8f22561417108cb45811e37496c5eedc983df0535c5e87c304f0e86dc65abc5"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 2.2
+  },
+  "whole_clipped_gap_with_policy": {
+   "runs_base": 1,
+   "runs_patched": 1,
+   "statuses": [
+    0
+   ],
+   "all_pass": true,
+   "hashes": {
+    "base": [
+     "b43f9c48cbce626031f6c73e50486ccf854b1576d1a086393e2cfa2e32590dd7"
+    ],
+    "patched": [
+     "b43f9c48cbce626031f6c73e50486ccf854b1576d1a086393e2cfa2e32590dd7"
+    ]
+   },
+   "identical_base_patched": true,
+   "cpu_seconds_max": 2.1
+  }
+ },
+ "rows_not_identical": 0,
+ "harness_faults_not_counted": {
+  "whole_clipped_gap": {
+   "why": "called without -policy: a fault of this harness (PREREG, Amendment 2, item 1); not counted",
+   "runs": [
+    {
+     "binary": "base",
+     "round": 1,
+     "status": 1,
+     "last": "NO: policy",
+     "sha256_normalised": "eef37245a96ec53817f94b5cc6ec9c3c955afcd29ac0806d21e27ff9a1d2970b"
+    },
+    {
+     "binary": "patched",
+     "round": 1,
+     "status": 1,
+     "last": "NO: policy",
+     "sha256_normalised": "eef37245a96ec53817f94b5cc6ec9c3c955afcd29ac0806d21e27ff9a1d2970b"
+    }
+   ]
+  }
+ },
+ "touched_by_normalisation": [
+  "masked: <digits>.<digits> s in: ---- stage key ---- N thread(s), <t> s",
+  "masked: <digits>.<digits> s in: ---- stage leaf ---- N thread(s), <t> s",
+  "masked: <digits>.<digits> s in: ---- stage request ---- N thread(s), <t> s",
+  "masked: <digits>.<digits> s in: ok public inputs: parameter file, shape, no-overflow conditions; profi",
+  "masked: <digits>.<digits> s in: read: sub-proof A_N: N claims listed (tested at the chain's end), N sl",
+  "masked: <digits>.<digits> s in: read: sub-proof G_N: N lookup calls in one forest, N more in the small",
+  "masked: <digits>.<digits> s in: read: sub-proof H: N lookup calls in one forest, N more in the smallne",
+  "masked: build=<64 hex>",
+  "removed: a line beginning 'seconds:'"
+ ]
+}

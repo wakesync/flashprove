@@ -1,0 +1,322 @@
+{
+ "round": 5,
+ "kit_sha256": {
+  "T7b-above": "51c92b3a3237a10f4f1968274c8a83a4ebd57b40a240556584c8c4ce6dd3ce4e",
+  "T7b-one-step-above": "34287fb4075c1884471d3afdb614d73f95494275b9b644a24677bebbb3a85a82",
+  "T7b-at-exact": "6752504e676fce070b8d866717ce1762ac3bd6b7bc235999d678c1fc72040be5",
+  "T7b-at-design": "72fc59b21d669690e546a7bc15cee5bcbf3c6a3f0ef05b05b16ade048d75c966",
+  "T2-dq-above-d": "ee3692eaff29fddd54395e9fcc2cd82e5821407a1a6c98bd897f63be8eac558b",
+  "T2-dq-below-d": "2d0b7a6951388926fedd31a3848263c67c5a2d0a56bc9f3a7a7e717a061f1b9f",
+  "T7c-dq-8064": "ae93e7f50d510d6a1fab79dd5308e7a500b7e3e1702ffc5311e11f808785f3fd"
+ },
+ "records": [
+  {
+   "case": "T7b-above",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11952,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-above",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11952,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-one-step-above",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11952,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-one-step-above",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11956,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-at-exact",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11956,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-at-exact",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: forest-trees",
+    "peak_rss_kib": 39552,
+    "seconds": 0.03,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-at-design",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11956,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7b-at-design",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "accounting": {
+    "status": 1,
+    "last": "NO: forest-trees",
+    "peak_rss_kib": 97152,
+    "seconds": 0.06,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T2-dq-above-d",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "arrays": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "array_lines": 0,
+    "peak_rss_kib": 11956
+   },
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11956,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T2-dq-above-d",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "arrays": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "array_lines": 44,
+    "peak_rss_kib": 12184
+   },
+   "pack_layout": {
+    "status": 0,
+    "said": "pack_layout.py: 638 rows over F, 5 rows over E, 621 blocks"
+   },
+   "accounting": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 37524,
+    "seconds": 0.37,
+    "rounds_hold_lines": 1,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": true,
+   "request_0": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 37652,
+    "internal_lines": 0
+   },
+   "request_128": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 37652,
+    "internal_lines": 0
+   }
+  },
+  {
+   "case": "T2-dq-below-d",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "arrays": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "array_lines": 0,
+    "peak_rss_kib": 12120
+   },
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11992,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T2-dq-below-d",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "arrays": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "array_lines": 44,
+    "peak_rss_kib": 12184
+   },
+   "pack_layout": {
+    "status": 0,
+    "said": "pack_layout.py: 638 rows over F, 5 rows over E, 605 blocks"
+   },
+   "accounting": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 37508,
+    "seconds": 0.39,
+    "rounds_hold_lines": 1,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": true,
+   "request_0": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 37632,
+    "internal_lines": 0
+   },
+   "request_128": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 37632,
+    "internal_lines": 0
+   }
+  },
+  {
+   "case": "T7c-dq-8064",
+   "binary": "base",
+   "round": 5,
+   "as_registered": true,
+   "arrays": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "array_lines": 0,
+    "peak_rss_kib": 11992
+   },
+   "accounting": {
+    "status": 1,
+    "last": "NO: shape-heads",
+    "peak_rss_kib": 11992,
+    "seconds": 0.0,
+    "rounds_hold_lines": 0,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": false
+  },
+  {
+   "case": "T7c-dq-8064",
+   "binary": "patched",
+   "round": 5,
+   "as_registered": true,
+   "arrays": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "array_lines": 44,
+    "peak_rss_kib": 15132
+   },
+   "pack_layout": {
+    "status": 0,
+    "said": "pack_layout.py: 905 rows over F, 23 rows over E, 745 blocks"
+   },
+   "accounting": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 38752,
+    "seconds": 0.43,
+    "rounds_hold_lines": 1,
+    "internal_lines": 0,
+    "not_standard_form": []
+   },
+   "planned": true,
+   "request_0": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 38756,
+    "internal_lines": 0
+   },
+   "request_128": {
+    "status": 4,
+    "last": "PLAN ONLY: no proof was checked",
+    "peak_rss_kib": 38752,
+    "internal_lines": 0
+   }
+  }
+ ]
+}

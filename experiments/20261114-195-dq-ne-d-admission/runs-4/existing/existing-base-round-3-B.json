@@ -1,0 +1,60 @@
+{
+ "binary": "base",
+ "round": 3,
+ "group": "B",
+ "touched_by_normalisation": [],
+ "records": [
+  {
+   "row": "served_form",
+   "binary": "base",
+   "round": 3,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "served_form_test.py: all as expected",
+   "sha256_normalised": "1e6fd66dc9370920e7ef1687a8a4b67339f63f2827311cd429c3dcf45e898f16",
+   "cpu_seconds": 25.1,
+   "peak_rss_kib_children_so_far": 46352
+  },
+  {
+   "row": "plan_tau",
+   "binary": "base",
+   "round": 3,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "plan_tau_test.py: 13 cases: all as expected",
+   "sha256_normalised": "d9883b971b42707fd3c4d4d7dbf81f63b2c7dfcc76d511d8d9889c00dcf687e2",
+   "cpu_seconds": 2.2,
+   "peak_rss_kib_children_so_far": 46352
+  },
+  {
+   "row": "kit_rounds",
+   "binary": "base",
+   "round": 3,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "kit_rounds_test.py: 3 kits, 1219 kinds of rounds; 0 kits not as stored",
+   "sha256_normalised": "92069e466ace55a1691da94ba32e0f9c8f3aca4e0a7f64b7f1fcfc4707e26a27",
+   "cpu_seconds": 2.5,
+   "peak_rss_kib_children_so_far": 248788
+  },
+  {
+   "row": "la_equals_lt",
+   "binary": "base",
+   "round": 3,
+   "status": 1,
+   "status_wanted": 1,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "NO: shape-la",
+   "sha256_normalised": "15ad76a8ab5f905a08e62e2ac243b42bfcfb753248d6b01710954ba739a75eb6",
+   "cpu_seconds": 0.0,
+   "peak_rss_kib_children_so_far": 248788
+  }
+ ]
+}

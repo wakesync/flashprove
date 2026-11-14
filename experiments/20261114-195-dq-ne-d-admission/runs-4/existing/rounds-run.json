@@ -1,0 +1,503 @@
+{
+ "started": "2026-11-14T06:45:06Z",
+ "ended": "2026-11-14T06:56:21Z",
+ "budget_seconds": 1500.0,
+ "hard_stop_utc": "07:15Z",
+ "complete_rounds": [
+  2,
+  3,
+  4,
+  5
+ ],
+ "stopped": "",
+ "rounds": [
+  {
+   "round": 2,
+   "order": [
+    "patched",
+    "base"
+   ],
+   "calls": [
+    {
+     "binary": "patched",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:45:07Z",
+     "ended": "2026-11-14T06:45:29Z",
+     "output": [
+      "example_kits               patched round 2: passes | status 0 | 9603363e4dce | cpu 22.8 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:45:29Z",
+     "ended": "2026-11-14T06:46:00Z",
+     "output": [
+      "served_form                patched round 2: passes | status 0 | 1e6fd66dc937 | cpu 25.7 s",
+      "plan_tau                   patched round 2: passes | status 0 | d9883b971b42 | cpu 2.1 s",
+      "kit_rounds                 patched round 2: passes | status 0 | 92069e466ace | cpu 2.5 s",
+      "la_equals_lt               patched round 2: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:46:00Z",
+     "ended": "2026-11-14T06:46:02Z",
+     "output": [
+      "whole_accepted_proof       patched round 2: passes | status 0 | e8f225614171 | cpu 2.4 s",
+      "whole_clipped_gap          patched round 2: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            patched round 2: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:46:02Z",
+     "ended": "2026-11-14T06:46:28Z",
+     "output": [
+      "rejected_proofs_accepted   patched round 2: passes | status 0 | 795d7bb43c78 | cpu 19.5 s",
+      "rejected_proofs_gap        patched round 2: passes | status 0 | ec7f7761e6d7 | cpu 18.0 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:46:28Z",
+     "ended": "2026-11-14T06:46:30Z",
+     "output": [
+      "whole_clipped_gap_with_policy patched round 2: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:46:30Z",
+     "ended": "2026-11-14T06:46:52Z",
+     "output": [
+      "example_kits               base    round 2: passes | status 0 | 9603363e4dce | cpu 22.2 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:46:52Z",
+     "ended": "2026-11-14T06:47:22Z",
+     "output": [
+      "served_form                base    round 2: passes | status 0 | 1e6fd66dc937 | cpu 25.1 s",
+      "plan_tau                   base    round 2: passes | status 0 | d9883b971b42 | cpu 2.1 s",
+      "kit_rounds                 base    round 2: passes | status 0 | 92069e466ace | cpu 2.3 s",
+      "la_equals_lt               base    round 2: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:47:22Z",
+     "ended": "2026-11-14T06:47:24Z",
+     "output": [
+      "whole_accepted_proof       base    round 2: passes | status 0 | e8f225614171 | cpu 2.1 s",
+      "whole_clipped_gap          base    round 2: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            base    round 2: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:47:24Z",
+     "ended": "2026-11-14T06:47:49Z",
+     "output": [
+      "rejected_proofs_accepted   base    round 2: passes | status 0 | 795d7bb43c78 | cpu 18.7 s",
+      "rejected_proofs_gap        base    round 2: passes | status 0 | ec7f7761e6d7 | cpu 18.0 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:47:49Z",
+     "ended": "2026-11-14T06:47:51Z",
+     "output": [
+      "whole_clipped_gap_with_policy base    round 2: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    }
+   ],
+   "complete": true
+  },
+  {
+   "round": 3,
+   "order": [
+    "base",
+    "patched"
+   ],
+   "calls": [
+    {
+     "binary": "base",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:47:51Z",
+     "ended": "2026-11-14T06:48:13Z",
+     "output": [
+      "example_kits               base    round 3: passes | status 0 | 9603363e4dce | cpu 22.2 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:48:13Z",
+     "ended": "2026-11-14T06:48:43Z",
+     "output": [
+      "served_form                base    round 3: passes | status 0 | 1e6fd66dc937 | cpu 25.1 s",
+      "plan_tau                   base    round 3: passes | status 0 | d9883b971b42 | cpu 2.2 s",
+      "kit_rounds                 base    round 3: passes | status 0 | 92069e466ace | cpu 2.5 s",
+      "la_equals_lt               base    round 3: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:48:43Z",
+     "ended": "2026-11-14T06:48:45Z",
+     "output": [
+      "whole_accepted_proof       base    round 3: passes | status 0 | e8f225614171 | cpu 2.3 s",
+      "whole_clipped_gap          base    round 3: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            base    round 3: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:48:45Z",
+     "ended": "2026-11-14T06:49:12Z",
+     "output": [
+      "rejected_proofs_accepted   base    round 3: passes | status 0 | 795d7bb43c78 | cpu 20.1 s",
+      "rejected_proofs_gap        base    round 3: passes | status 0 | ec7f7761e6d7 | cpu 19.2 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:49:12Z",
+     "ended": "2026-11-14T06:49:14Z",
+     "output": [
+      "whole_clipped_gap_with_policy base    round 3: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:49:14Z",
+     "ended": "2026-11-14T06:49:37Z",
+     "output": [
+      "example_kits               patched round 3: passes | status 0 | 9603363e4dce | cpu 23.5 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:49:37Z",
+     "ended": "2026-11-14T06:50:09Z",
+     "output": [
+      "served_form                patched round 3: passes | status 0 | 1e6fd66dc937 | cpu 26.8 s",
+      "plan_tau                   patched round 3: passes | status 0 | d9883b971b42 | cpu 2.3 s",
+      "kit_rounds                 patched round 3: passes | status 0 | 92069e466ace | cpu 2.6 s",
+      "la_equals_lt               patched round 3: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:50:09Z",
+     "ended": "2026-11-14T06:50:12Z",
+     "output": [
+      "whole_accepted_proof       patched round 3: passes | status 0 | e8f225614171 | cpu 2.3 s",
+      "whole_clipped_gap          patched round 3: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            patched round 3: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:50:12Z",
+     "ended": "2026-11-14T06:50:39Z",
+     "output": [
+      "rejected_proofs_accepted   patched round 3: passes | status 0 | 795d7bb43c78 | cpu 20.3 s",
+      "rejected_proofs_gap        patched round 3: passes | status 0 | ec7f7761e6d7 | cpu 20.0 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:50:39Z",
+     "ended": "2026-11-14T06:50:41Z",
+     "output": [
+      "whole_clipped_gap_with_policy patched round 3: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    }
+   ],
+   "complete": true
+  },
+  {
+   "round": 4,
+   "order": [
+    "patched",
+    "base"
+   ],
+   "calls": [
+    {
+     "binary": "patched",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:50:41Z",
+     "ended": "2026-11-14T06:51:06Z",
+     "output": [
+      "example_kits               patched round 4: passes | status 0 | 9603363e4dce | cpu 25.2 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:51:06Z",
+     "ended": "2026-11-14T06:51:37Z",
+     "output": [
+      "served_form                patched round 4: passes | status 0 | 1e6fd66dc937 | cpu 26.6 s",
+      "plan_tau                   patched round 4: passes | status 0 | d9883b971b42 | cpu 2.1 s",
+      "kit_rounds                 patched round 4: passes | status 0 | 92069e466ace | cpu 2.3 s",
+      "la_equals_lt               patched round 4: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:51:37Z",
+     "ended": "2026-11-14T06:51:40Z",
+     "output": [
+      "whole_accepted_proof       patched round 4: passes | status 0 | e8f225614171 | cpu 2.2 s",
+      "whole_clipped_gap          patched round 4: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            patched round 4: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:51:40Z",
+     "ended": "2026-11-14T06:52:06Z",
+     "output": [
+      "rejected_proofs_accepted   patched round 4: passes | status 0 | 795d7bb43c78 | cpu 19.9 s",
+      "rejected_proofs_gap        patched round 4: passes | status 0 | ec7f7761e6d7 | cpu 18.9 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:52:06Z",
+     "ended": "2026-11-14T06:52:08Z",
+     "output": [
+      "whole_clipped_gap_with_policy patched round 4: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:52:08Z",
+     "ended": "2026-11-14T06:52:31Z",
+     "output": [
+      "example_kits               base    round 4: passes | status 0 | 9603363e4dce | cpu 22.8 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:52:31Z",
+     "ended": "2026-11-14T06:53:01Z",
+     "output": [
+      "served_form                base    round 4: passes | status 0 | 1e6fd66dc937 | cpu 26.1 s",
+      "plan_tau                   base    round 4: passes | status 0 | d9883b971b42 | cpu 2.1 s",
+      "kit_rounds                 base    round 4: passes | status 0 | 92069e466ace | cpu 2.5 s",
+      "la_equals_lt               base    round 4: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:53:01Z",
+     "ended": "2026-11-14T06:53:04Z",
+     "output": [
+      "whole_accepted_proof       base    round 4: passes | status 0 | e8f225614171 | cpu 2.2 s",
+      "whole_clipped_gap          base    round 4: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            base    round 4: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:53:04Z",
+     "ended": "2026-11-14T06:53:30Z",
+     "output": [
+      "rejected_proofs_accepted   base    round 4: passes | status 0 | 795d7bb43c78 | cpu 19.7 s",
+      "rejected_proofs_gap        base    round 4: passes | status 0 | ec7f7761e6d7 | cpu 18.3 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:53:30Z",
+     "ended": "2026-11-14T06:53:31Z",
+     "output": [
+      "whole_clipped_gap_with_policy base    round 4: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    }
+   ],
+   "complete": true
+  },
+  {
+   "round": 5,
+   "order": [
+    "base",
+    "patched"
+   ],
+   "calls": [
+    {
+     "binary": "base",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:53:31Z",
+     "ended": "2026-11-14T06:53:54Z",
+     "output": [
+      "example_kits               base    round 5: passes | status 0 | 9603363e4dce | cpu 22.4 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:53:54Z",
+     "ended": "2026-11-14T06:54:25Z",
+     "output": [
+      "served_form                base    round 5: passes | status 0 | 1e6fd66dc937 | cpu 26.2 s",
+      "plan_tau                   base    round 5: passes | status 0 | d9883b971b42 | cpu 2.2 s",
+      "kit_rounds                 base    round 5: passes | status 0 | 92069e466ace | cpu 2.4 s",
+      "la_equals_lt               base    round 5: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:54:25Z",
+     "ended": "2026-11-14T06:54:27Z",
+     "output": [
+      "whole_accepted_proof       base    round 5: passes | status 0 | e8f225614171 | cpu 2.2 s",
+      "whole_clipped_gap          base    round 5: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            base    round 5: passes | status 0 | b72bbd641f38 | cpu 0.5 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:54:27Z",
+     "ended": "2026-11-14T06:54:53Z",
+     "output": [
+      "rejected_proofs_accepted   base    round 5: passes | status 0 | 795d7bb43c78 | cpu 19.6 s",
+      "rejected_proofs_gap        base    round 5: passes | status 0 | ec7f7761e6d7 | cpu 18.7 s"
+     ]
+    },
+    {
+     "binary": "base",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:54:53Z",
+     "ended": "2026-11-14T06:54:55Z",
+     "output": [
+      "whole_clipped_gap_with_policy base    round 5: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "A",
+     "status": 0,
+     "started": "2026-11-14T06:54:55Z",
+     "ended": "2026-11-14T06:55:19Z",
+     "output": [
+      "example_kits               patched round 5: passes | status 0 | 9603363e4dce | cpu 23.9 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "B",
+     "status": 0,
+     "started": "2026-11-14T06:55:19Z",
+     "ended": "2026-11-14T06:55:50Z",
+     "output": [
+      "served_form                patched round 5: passes | status 0 | 1e6fd66dc937 | cpu 26.7 s",
+      "plan_tau                   patched round 5: passes | status 0 | d9883b971b42 | cpu 2.3 s",
+      "kit_rounds                 patched round 5: passes | status 0 | 92069e466ace | cpu 2.5 s",
+      "la_equals_lt               patched round 5: passes | status 1 | 15ad76a8ab5f | cpu 0.0 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "C",
+     "status": 1,
+     "started": "2026-11-14T06:55:50Z",
+     "ended": "2026-11-14T06:55:53Z",
+     "output": [
+      "whole_accepted_proof       patched round 5: passes | status 0 | e8f225614171 | cpu 2.2 s",
+      "whole_clipped_gap          patched round 5: FAILS | status 1 | eef37245a96e | cpu 0.0 s",
+      "call_accounting            patched round 5: passes | status 0 | b72bbd641f38 | cpu 0.6 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "D",
+     "status": 0,
+     "started": "2026-11-14T06:55:53Z",
+     "ended": "2026-11-14T06:56:19Z",
+     "output": [
+      "rejected_proofs_accepted   patched round 5: passes | status 0 | 795d7bb43c78 | cpu 20.2 s",
+      "rejected_proofs_gap        patched round 5: passes | status 0 | ec7f7761e6d7 | cpu 18.9 s"
+     ]
+    },
+    {
+     "binary": "patched",
+     "group": "E",
+     "status": 0,
+     "started": "2026-11-14T06:56:19Z",
+     "ended": "2026-11-14T06:56:21Z",
+     "output": [
+      "whole_clipped_gap_with_policy patched round 5: passes | status 0 | b43f9c48cbce | cpu 2.2 s"
+     ]
+    }
+   ],
+   "complete": true
+  }
+ ]
+}
