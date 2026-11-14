@@ -62,3 +62,6 @@ A clamp, scale or class change for m; layers 0 to 30; XS18 heads, integer attent
 
 ## Amendments
 (empty at registration)
+
+### A-1, 2026-11-14 (appended after review; changes no registered choice)
+Correction of the header time. The header above says "Date (UTC): 2026-11-14T04:40Z (lane clock; the commit time is the record)". The commit that carries this file is stamped 2026-11-14T04:37:30Z, so the time in the header is later than the commit that contains it and cannot be the time of writing. Both reviews of PR #202 noted this. The commit time, 04:37:30Z, is the record, as the header itself says. The header is left as registered and is not edited. Why the lane wrote 04:40Z: not established (both reviewers read it as a clock or transcription slip). Nothing above this heading was changed: this note is appended, and the earlier bytes of the file are identical to the registered file. No hypothesis, metric, threshold, prompt set, stop rule or run setting is changed by this note. Departures of the run from this plan are listed in RESULTS.md under "Deviations from the registered plan", not here.
