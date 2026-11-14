@@ -1,0 +1,274 @@
+{
+ "embedding_rows": {},
+ "repo": "Qwen/Qwen3.8-27B",
+ "rev": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+ "tensors": {
+  "model.language_model.layers.0.input_layernorm.weight": {
+   "dtype": "BF16",
+   "nbytes": 10240,
+   "range": "bytes=45400-55639",
+   "sha256": "853b5989bfb677b1761540ee97c09bbf8d90fd825c9ae6ca74ef5853cba3c075",
+   "shape": [
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.A_log": {
+   "dtype": "BF16",
+   "nbytes": 96,
+   "range": "bytes=55640-55735",
+   "sha256": "429d53cd15ec0ea1a2d638100c3bbdf8d53505e69110fb17ee09d055c1fdbd34",
+   "shape": [
+    48
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.conv1d.weight": {
+   "dtype": "BF16",
+   "nbytes": 81920,
+   "range": "bytes=55736-137655",
+   "sha256": "803a2591c4f5e7b1c2a7bdbbad78bbd0b68acdd0deab9552933ee7c337489dad",
+   "shape": [
+    10240,
+    1,
+    4
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.dt_bias": {
+   "dtype": "BF16",
+   "nbytes": 96,
+   "range": "bytes=137656-137751",
+   "sha256": "969ce6b2149d20f0c365373fd89613167e373905c15f0e1cf5af62adf52228de",
+   "shape": [
+    48
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.in_proj_a.weight": {
+   "dtype": "BF16",
+   "nbytes": 491520,
+   "range": "bytes=137752-629271",
+   "sha256": "ff9e6d0a05fc85c2a61e5f73200d6778c84d76df3df2ce6c80e1e9a4c99c0ce1",
+   "shape": [
+    48,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.in_proj_b.weight": {
+   "dtype": "BF16",
+   "nbytes": 491520,
+   "range": "bytes=629272-1120791",
+   "sha256": "9694f11c0393c563dcbc8c1ba120c2eaebc36b200d6d19bf8761034acde4ac33",
+   "shape": [
+    48,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.in_proj_qkv.weight": {
+   "dtype": "BF16",
+   "nbytes": 104857600,
+   "range": "bytes=1120792-105978391",
+   "sha256": "2417986b44e8f6cd23a1ae5230515a9d5d1ed074aaf573f2ee308c1d9d41c9e2",
+   "shape": [
+    10240,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.in_proj_z.weight": {
+   "dtype": "BF16",
+   "nbytes": 62914560,
+   "range": "bytes=105978392-168892951",
+   "sha256": "2b98edf85caa94f5bf81b46865b24202d4fc80117c406a3a814f83adbda56b53",
+   "shape": [
+    6144,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.norm.weight": {
+   "dtype": "BF16",
+   "nbytes": 256,
+   "range": "bytes=168892952-168893207",
+   "sha256": "70d11f294923a94aac97bedd27e596dbf496746c6b9e3b2b7c38798a0d2522cc",
+   "shape": [
+    128
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.linear_attn.out_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 62914560,
+   "range": "bytes=168893208-231807767",
+   "sha256": "87b442961543b1d794219563100c9728529f75bc513f01cbbbaeab6ca89b33fe",
+   "shape": [
+    5120,
+    6144
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.mlp.down_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 178257920,
+   "range": "bytes=231807768-410065687",
+   "sha256": "dec9dc95995a34a6478bfcb8e080059bf311dcde959030eb8a55fa77603e4783",
+   "shape": [
+    5120,
+    17408
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.mlp.gate_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 178257920,
+   "range": "bytes=410065688-588323607",
+   "sha256": "33f8e7677f361290d5f6a415c00cb56149a8fdbea20122bc13f0e1004b469565",
+   "shape": [
+    17408,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.mlp.up_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 178257920,
+   "range": "bytes=588323608-766581527",
+   "sha256": "4f923e4b0b2d8b428c156f758dd67e94ee4bb0fbde8e823ac2c4d168753ec5f5",
+   "shape": [
+    17408,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.0.post_attention_layernorm.weight": {
+   "dtype": "BF16",
+   "nbytes": 10240,
+   "range": "bytes=766581528-766591767",
+   "sha256": "a085df7f80dc3c9524ba6f96d18f09f11a7443048fd50704ee1b334c794b8143",
+   "shape": [
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.input_layernorm.weight": {
+   "dtype": "BF16",
+   "nbytes": 10240,
+   "range": "bytes=2299684504-2299694743",
+   "sha256": "10c2d40a86413c652482c5c8e20629309bf37a722a48c3fca4348d86e9d28e8d",
+   "shape": [
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.mlp.down_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 178257920,
+   "range": "bytes=2299694744-2477952663",
+   "sha256": "cb4ae78fcd07b7e4df297df2bfd36479c7e0a3a0fbb7c4de92b713ba6769ed61",
+   "shape": [
+    5120,
+    17408
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.mlp.gate_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 178257920,
+   "range": "bytes=2477952664-2656210583",
+   "sha256": "44f27ec202ec40847d254e765372f0011d76ff1bdb6dbce8cc72f335ef9e9a2d",
+   "shape": [
+    17408,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.mlp.up_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 178257920,
+   "range": "bytes=2656210584-2834468503",
+   "sha256": "57492f9e2d67786624afc585a0e38cd7dae294127e38ac79c478fd3dcbc46096",
+   "shape": [
+    17408,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.post_attention_layernorm.weight": {
+   "dtype": "BF16",
+   "nbytes": 10240,
+   "range": "bytes=2834468504-2834478743",
+   "sha256": "fbbe7631408e20284ae1431c88b9b58151f6a84a70e240cc61b20af9333c082b",
+   "shape": [
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.self_attn.k_norm.weight": {
+   "dtype": "BF16",
+   "nbytes": 512,
+   "range": "bytes=2834478744-2834479255",
+   "sha256": "b46080bc2f1217b8db5df05cc9c6cab7bfa1b6fc7afb492e69a9e8ec2c65c0df",
+   "shape": [
+    256
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.self_attn.k_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 10485760,
+   "range": "bytes=2834479256-2844965015",
+   "sha256": "e51b2206a8fbc35c980a3e4d2173c4a0050cd79944593e664a5b24aa21e91101",
+   "shape": [
+    1024,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.self_attn.o_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 62914560,
+   "range": "bytes=2844965016-2907879575",
+   "sha256": "4342b3f4ed9275d5e58729fcf6bf8ced70119a5d01f5503f1b873f3ad0a27ca5",
+   "shape": [
+    5120,
+    6144
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.self_attn.q_norm.weight": {
+   "dtype": "BF16",
+   "nbytes": 512,
+   "range": "bytes=2907879576-2907880087",
+   "sha256": "4dfb9b152ad10548a134f39448e62a0c3ddea4d7c79a71ec129ce1603c0cff71",
+   "shape": [
+    256
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.self_attn.q_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 125829120,
+   "range": "bytes=2907880088-3033709207",
+   "sha256": "f8d48811339ea0405ce9a2782e918d9cf936b7067e97579cd057def90fac1bc6",
+   "shape": [
+    12288,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  },
+  "model.language_model.layers.3.self_attn.v_proj.weight": {
+   "dtype": "BF16",
+   "nbytes": 10485760,
+   "range": "bytes=3033709208-3044194967",
+   "sha256": "ed51ec966e2d4deeaabf444d14d121859a58f9713c42ef689d86625f2cfb7ce9",
+   "shape": [
+    1024,
+    5120
+   ],
+   "shard": "model-00001-of-00018.safetensors"
+  }
+ }
+}
