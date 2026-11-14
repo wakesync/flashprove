@@ -1,0 +1,11 @@
+{
+ "committed_bytes": 1505,
+ "committed_sha256": "1e15957ad4db46a3f70abd589ac0a3bf87a1d317321d7ce444392b724d62bffc",
+ "note": "make_pins.py --stdout run twice, compared byte for byte with the committed pin; deterministic file reads",
+ "run_sha256": [
+  "1e15957ad4db46a3f70abd589ac0a3bf87a1d317321d7ce444392b724d62bffc",
+  "1e15957ad4db46a3f70abd589ac0a3bf87a1d317321d7ce444392b724d62bffc"
+ ],
+ "runs_equal_committed": true,
+ "runs_equal_each_other": true
+}

@@ -72,6 +72,20 @@ The original hash-level work has a design and these CPU checks:
   checked is that run 3 is a complete, independent, registered run. Not fixed here. See the dated
   limits addenda of [2026-11-13](../../experiments/20261112-149-leaf-v2/RESULTS.md#limits-addendum-2026-11-13-missing-metadata-issue-189)
   and [2026-11-14](../../experiments/20261112-149-leaf-v2/RESULTS.md#limits-addendum-2026-11-14-the-issue-189-stop-rule-fired-blocking-finding).
+  **Registered mode (issue #203, opt-in; experiment `20261114-203-leafv2-registered-pin`).**
+  `compare ... --registered` and `summarise.py --registered` first check every registered run directory
+  (and, for the summary, both compare files) against the committed pin
+  `experiments/20261112-149-leaf-v2/runs/registered-pins.json`: a missing, extra-consumed, symlinked or
+  changed `blocks.jsonl` / `run-meta.json` / `leaves-v2.json`, a symlinked or renamed run directory, or
+  an absent pin is refused (exit 2). The registered summary adds `h3.overall.basis` (`single-run` or
+  `union`); a union that reaches 78 blocks with no single run doing so is `PASS-UNION`, not `PASS`. All
+  23 #191 stop-rule cases are refused in registered mode; the committed runs give `PASS` with basis
+  `single-run` (`runs/summary-registered.json`). **The pin is a committed list that binds "registered
+  run" to what the repository holds. It is not authentication:** whoever can change the repository can
+  change the pin together with a run (defeat case D2 then gives a full `PASS`), and files the readers do
+  not consume are not checked. **The default mode is unchanged:** without `--registered` the 13 full-`PASS`
+  inputs of the #189 finding still give `PASS`, so the #189 stop rule is answered only for evidence read
+  in registered mode against the registered runs, not in general.
   `load_leaves` accepts a stored
   `leaves-v2.json` only if it is byte for byte the tree rebuilt from those records. `compare` compares
   the canonical leaf-v2 JSON per block and pin and the fetched-bytes hash, computes root and id equality
@@ -88,7 +102,10 @@ The original hash-level work has a design and these CPU checks:
   `stop-rule-189-*` pin the current outcome of the issue #189 finding, including 13 altered copies of
   run 3 that get a full H3 `PASS`: they record present behaviour as a known blocking finding, not a
   contract, and a registered reader change is expected to change them. No network, no weights. It
-  tests readers, not conversion.
+  tests readers, not conversion. Issue #203: in those 18 cases the summary expectation is now
+  `summarise.py --registered`, refused; the unchanged default-mode outcome is kept next to it as
+  `pin203-default-mode-limit-*`. Cases `pin203-*` replay all 23 #191 cases in registered mode and try
+  to defeat the pin (D1 to D12 in that experiment's PREREG).
 
 ## What the verifier recomputes
 
@@ -120,7 +137,9 @@ RESULTS.md "What is established and what is not".
 
 Leaf-v2 run files carry no provenance the readers can check: an H3 `PASS` shows that the supplied
 records agree with run 1 and together cover the 78 blocks, not that an independent complete run took
-place (issue #189 stop-rule finding, see above).
+place (issue #189 stop-rule finding, see above). Registered mode (issue #203) adds a check against a
+committed pin of the registered runs' file hashes; that binds the files to the repository's history and
+is not authentication of how they were produced.
 
 Leaf v2 (`wb_leafv2.py`, issue #149) covers only the 78 registered `matrix_plain` blocks; the
 norm-folded matrices, the embedding, lm_head and the weight cells have no `e` / `int_sha256` yet, and
@@ -176,9 +195,16 @@ python3 research/weight-binding/test_wb_leafv2.py $E/runs/run1 "$O/tests.json"  
 cmp "$O/tests.json" $E/runs/run1/tests-1.json                                        # expect no output
 python3 research/weight-binding/wb_leafv2.py compare $E/runs/run1 $E/runs/run3 "$O/compare.json"   # exit 0
 python3 $E/summarise.py --check                                                      # exit 0: runs/summary.json is current
-python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 231 / 231, exit 0
-cmp "$O/evidence.json" experiments/20261113-189-missing-metadata/runs/evidence-tests-stoprule-20261114.json
+python3 $E/summarise.py --registered --check                                         # exit 0: runs/summary-registered.json is current
+python3 research/weight-binding/wb_leafv2.py compare $E/runs/run1 $E/runs/run3 "$O/c.json" --registered   # exit 0
+python3 experiments/20261114-203-leafv2-registered-pin/make_pins.py --check           # exit 0: the pin is the regeneration
+python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 346 / 346, exit 0
+cmp "$O/evidence.json" experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-1.json
 ```
+
+Since issue #203 the current receipt is `experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-1.json`
+(346 expectations over 136 cases; `-2.json` is a second run, byte-identical). The paragraph below
+describes the #191 receipt, which stays as committed.
 
 The current receipt includes the issue #189 metadata-boundary cases and the 18 stop-rule cases (231
 expectations over 82 cases). Exit 0 there means the suite saw the outcomes it pins, including the
