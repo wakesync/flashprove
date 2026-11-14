@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-valid/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-valid/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-valid/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "plan-layout: a line is neither a group's nor a block's\nNO: plan-layout\n",
+  "repetition": 2,
+  "case": "dense-valid",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "met",
+  "observed": "plan-layout",
+  "matches": false
+}

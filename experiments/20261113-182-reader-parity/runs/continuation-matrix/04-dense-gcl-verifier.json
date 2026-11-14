@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-gcl/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-gcl/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-gcl/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: policy-gcl\n",
+  "repetition": 4,
+  "case": "dense-gcl",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "policy-gcl",
+  "observed": "policy-gcl",
+  "matches": true
+}

@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-changed-exp/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-changed-exp/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-changed-exp/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "NO: table-digest-exp\n",
+  "stderr": "",
+  "repetition": 3,
+  "case": "dense-changed-exp",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "table-digest-exp",
+  "observed": "table-digest-exp",
+  "matches": true
+}

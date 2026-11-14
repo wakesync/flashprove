@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/verifier/cp_verify -plan request <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-no-digests/policy.txt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-no-digests/KL.bin 0 -layout <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-no-digests/layout.txt -prompt <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/request.bin -reply <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/reply.bin -q",
+  "exit": 1,
+  "output": "plan-layout: a line is neither a group's nor a block's\nNO: plan-layout\n",
+  "repetition": 1,
+  "case": "dense-no-digests",
+  "arm": "verifier",
+  "mode": "release",
+  "expected": "not-met:table-digests",
+  "observed": "plan-layout",
+  "matches": false
+}
