@@ -1,0 +1,90 @@
+{
+  "base_unit_sh_sha256": "717e43999c124118bcdf39b533e39eb193abe5d81b73591a5cc11058aa4f44c4",
+  "patched_unit_sh_sha256": "c7f12d2ec0e0ce79b9b2e41861db85014f69d9d79d3fa10ac1d61d797bcb2258",
+  "base_is": "main cdde96296e658fe803711dbb1b4699a225cc544a",
+  "main_unit_sh_equals_base_commit_unit_sh": true,
+  "base_commit": "bf447d2725acbb185f21cd2397edde46c38f095c",
+  "tests": {
+    "parameter_file_tables_test": {
+      "base": {
+        "exit": 0,
+        "stdout": "parameter_file_tables_test: built\n",
+        "binary_sha256": "f0668509cc33b508f371512c78acfa311cdbf3cecb6e2c1d1366fcf3bad7dfa1",
+        "gxx": [
+          "+ g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=8 -DBLK_FIELD=2 -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o <OUT>/parameter_file_tables_test tests/parameter_file_tables_test.cpp"
+        ],
+        "command": "bash -x <REPO>/prover/tests/unit_base197.sh build tests/parameter_file_tables_test.cpp <PRIVATE_BUILD>/identity-base",
+        "seconds": 3.853
+      },
+      "patched": {
+        "exit": 0,
+        "stdout": "parameter_file_tables_test: built\n",
+        "binary_sha256": "f0668509cc33b508f371512c78acfa311cdbf3cecb6e2c1d1366fcf3bad7dfa1",
+        "gxx": [
+          "+ g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=8 -DBLK_FIELD=2 -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o <OUT>/parameter_file_tables_test tests/parameter_file_tables_test.cpp"
+        ],
+        "command": "bash -x <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <PRIVATE_BUILD>/identity-patched",
+        "seconds": 3.907
+      },
+      "binary_identical": true,
+      "gxx_identical": true
+    },
+    "parameter_file_one_bits_test": {
+      "base": {
+        "exit": 0,
+        "stdout": "parameter_file_one_bits_test: built\n",
+        "binary_sha256": "93e0ddb5b4c21600f36018c05ded9bbf796b9ef9999b1c7a4ab58010c6cc4425",
+        "gxx": [
+          "+ g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=8 -DBLK_FIELD=2 -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o <OUT>/parameter_file_one_bits_test tests/parameter_file_one_bits_test.cpp"
+        ],
+        "command": "bash -x <REPO>/prover/tests/unit_base197.sh build tests/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/identity-base",
+        "seconds": 3.803
+      },
+      "patched": {
+        "exit": 0,
+        "stdout": "parameter_file_one_bits_test: built\n",
+        "binary_sha256": "93e0ddb5b4c21600f36018c05ded9bbf796b9ef9999b1c7a4ab58010c6cc4425",
+        "gxx": [
+          "+ g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=8 -DBLK_FIELD=2 -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o <OUT>/parameter_file_one_bits_test tests/parameter_file_one_bits_test.cpp"
+        ],
+        "command": "bash -x <REPO>/prover/tests/unit.sh build tests/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/identity-patched",
+        "seconds": 3.836
+      },
+      "binary_identical": true,
+      "gxx_identical": true
+    },
+    "parameter_file_one_place_test": {
+      "base": {
+        "exit": 0,
+        "stdout": "parameter_file_one_place_test: built\n",
+        "binary_sha256": "1a2244124c78ac6ff5c27152de4c01281e2b7a1ac642ceefd0b194087978e007",
+        "gxx": [
+          "+ g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=8 -DBLK_FIELD=2 -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o <OUT>/parameter_file_one_place_test tests/parameter_file_one_place_test.cpp"
+        ],
+        "command": "bash -x <REPO>/prover/tests/unit_base197.sh build tests/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/identity-base",
+        "seconds": 4.266
+      },
+      "patched": {
+        "exit": 0,
+        "stdout": "parameter_file_one_place_test: built\n",
+        "binary_sha256": "1a2244124c78ac6ff5c27152de4c01281e2b7a1ac642ceefd0b194087978e007",
+        "gxx": [
+          "+ g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=8 -DBLK_FIELD=2 -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o <OUT>/parameter_file_one_place_test tests/parameter_file_one_place_test.cpp"
+        ],
+        "command": "bash -x <REPO>/prover/tests/unit.sh build tests/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/identity-patched",
+        "seconds": 4.092
+      },
+      "binary_identical": true,
+      "gxx_identical": true
+    }
+  },
+  "folder_look_copies_test": {
+    "exit": 0,
+    "tail": [
+      "integrations/ask_and_check.py: imports its copy from integrations/check_proof.py",
+      "integrations/proof_middleware.py: imports its copy from integrations/spool.py",
+      "folder_look_copies_test.py: 33 copies of open_above(), others_can_change() and available_memory(), all unchanged"
+    ]
+  },
+  "pass": true
+}

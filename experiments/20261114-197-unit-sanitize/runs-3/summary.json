@@ -1,0 +1,11 @@
+{
+  "fixture_identity_equal": true,
+  "default_build_identity_pass": true,
+  "harness_controls_pass": true,
+  "regression_cases_pass": true,
+  "regression_cases": 58,
+  "regression_cases_as_required": 58,
+  "positive_controls_pass": true,
+  "ubsan_arms": "COMPLETE",
+  "ubsan_receipts": "experiments/20261113-182-reader-parity/runs-ubsan-20261114-3/summary.json"
+}

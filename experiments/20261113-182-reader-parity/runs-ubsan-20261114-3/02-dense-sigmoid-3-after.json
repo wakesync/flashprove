@@ -1,0 +1,20 @@
+{
+  "command": "<PRIVATE_BUILD>/after/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-sigmoid-3/policy.txt",
+  "exit": 2,
+  "stdout": "parse: ok\nadmission: policy-tables: line 132: without experts the sigmoid table's digest words must all be 0\n",
+  "stderr": "",
+  "seconds": 0.011,
+  "limits": "RLIMIT_CPU 115/120, cores 0-1, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 2,
+  "case": "dense-sigmoid-3",
+  "arm": "after",
+  "mode": "ubsan+asan",
+  "release": "policy-tables",
+  "expected": "policy-tables",
+  "observed": "policy-tables",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true,
+  "release_exit": 2,
+  "status_ok": true
+}
