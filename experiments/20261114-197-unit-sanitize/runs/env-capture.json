@@ -1,0 +1,14 @@
+{
+  "start_utc": "2026-11-14T03:37:46.749576+00:00",
+  "stop_utc": "2026-11-14T04:07:46.749576+00:00",
+  "head": "9e35448cfa0a30d89ead14ad23565b1f666f743d",
+  "gxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "python": "3.12.3",
+  "kernel": "6.8.0-100-generic",
+  "machine": "x86_64",
+  "cpu": "AMD EPYC-Rome Processor",
+  "cores_used": "10,11",
+  "nproc": 16,
+  "unit_sh_sha256": "a228d3bdee58e2c7e00a7974473df218064960ed1b49b2063866d892a0879706",
+  "parameter_file_h_sha256": "fc66947886896d92c8ecde5e29334761d7dea2e0bd85f7b8211cee0833617b67"
+}

@@ -1,0 +1,12 @@
+2026-11-14T03:37:46.749758+00:00 slot granted, runner start; budget 1800 s, stop 2026-11-14T04:07:46.749576+00:00
+2026-11-14T03:37:46.774575+00:00 fixture identity: 82 compared, 82 equal, 23 committed not regenerated, expectations equal: True
+2026-11-14T03:37:53.737570+00:00 identity parameter_file_tables_test: binaries identical True, g++ lines identical False
+2026-11-14T03:38:00.802284+00:00 identity parameter_file_one_bits_test: binaries identical True, g++ lines identical False
+2026-11-14T03:38:08.801170+00:00 identity parameter_file_one_place_test: binaries identical True, g++ lines identical False
+2026-11-14T03:38:12.966190+00:00 default-build identity pass: True (folder_look_copies_test exit 0)
+2026-11-14T03:38:13.326148+00:00 control_signed_overflow: sanitized build exit 0, run exit 1, reported True; release run exit 1 (info)
+2026-11-14T03:38:13.708339+00:00 control_heap_read: sanitized build exit 0, run exit 1, reported False; release run exit 0 (info)
+2026-11-14T03:38:13.715059+00:00 .cu with --sanitize: exit 2, output directory made: False
+2026-11-14T03:38:13.752838+00:00 g++ without sanitizers: exit 77, not run: control_signed_overflow: this machine's g++ cannot build a program with
+2026-11-14T03:38:13.753398+00:00 harness controls pass: False
+2026-11-14T03:38:13.753539+00:00 KILL: harness change not established (controls False, identity True); UBSan arms not run

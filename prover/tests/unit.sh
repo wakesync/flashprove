@@ -32,6 +32,21 @@
 #                 prover's message was written exactly once.
 #   --dw 8        changes nothing: a digest has eight 32-bit words (-DDIGEST_WORDS=8). In any other
 #                 form, --dw counts as an ordinary argument.
+#   --sanitize    host (.cpp) tests only: builds and runs with gcc's address and undefined-behaviour
+#                 sanitizers, with the flags of verifier/tests/sanitized_walk_test.sh (-O1 -g
+#                 -fno-ipa-modref -D_GLIBCXX_ASSERTIONS -fno-omit-frame-pointer
+#                 -fsanitize=address,undefined -fno-sanitize-recover=all -std=c++17 -pthread) and the
+#                 defines, instruction-set switches and include folders of the default host line;
+#                 no warning flags. The program, its two logs and a small settings source go into
+#                 <folder>/sanitized, which the script makes with mode 700 below the checked output
+#                 directory and checks as it checks that one, so a sanitized program never takes a
+#                 default program's name. Its settings, linked in: a report ends the program with
+#                 status 97 (a failed run, exit 1), and is written to the standard error stream, so
+#                 into <test>.log; leak detection is off; an abort is reported. The caller's
+#                 ASAN_OPTIONS and UBSAN_OPTIONS override them. With a .cu source it is a usage
+#                 error (status 2) and nothing is made; with explain-sigill too. If this machine's
+#                 g++ cannot build a program with the two sanitizers, "build" and "both" exit 77
+#                 with a line "not run: ..." and build nothing. Without --sanitize nothing changes.
 # Exit status: 0: the build and every run succeeded; 1: a run failed; 2: no test ran, for example
 # after a usage error, a rejected output directory, a failed build, or "run" without a built
 # program; 77: no run failed, but at least one reported that it cannot run on this machine
@@ -113,7 +128,7 @@ open_above() {
 }
 callers_directory=$PWD
 cd "$(dirname "$0")/.." || exit 2
-dw=8 field=2 words=() counting=()
+dw=8 field=2 words=() counting=() sanitize=
 while [[ $# -gt 0 ]]; do
   if [[ $1 == --dw && ${2:-} == 8 ]]; then
     dw=$2
@@ -127,6 +142,9 @@ while [[ $# -gt 0 ]]; do
     shift 2
   elif [[ $1 == --slot-count ]]; then
     counting=(-DSLOT_COUNT=1)
+    shift
+  elif [[ $1 == --sanitize ]]; then
+    sanitize=yes
     shift
   else
     words+=("$1")
@@ -163,6 +181,10 @@ cpu_lacks_sha() {
   [[ $sha_probe_status -eq 132 ]] # 128 + SIGILL
 }
 act=${1:-} source=${2:-} out=${3:-}
+if [[ $act == explain-sigill && -n $sanitize ]]; then
+  echo "unit.sh: --sanitize builds a host (.cpp) test; explain-sigill takes no options" >&2
+  exit 2
+fi
 if [[ $act == explain-sigill ]]; then # unit.sh explain-sigill <name>: why did <name> die with SIGILL here?
   if [[ ! ${2:-} =~ ^[A-Za-z0-9_.-]+$ || $# -ne 2 ]]; then
     echo "usage: unit.sh explain-sigill <name of the program that died with SIGILL>" >&2
@@ -197,8 +219,13 @@ case "$source" in
   *) kind= ;;
 esac
 if [[ ! $act =~ ^(build|run|both)$ || -z $kind || -z $out || ! -f $source ]]; then
-  echo "usage: unit.sh build|run|both <source file, from prover/> <folder for the program and its logs>" \
-    "[<one run's arguments> ...], or unit.sh explain-sigill <name>" >&2
+  echo "usage: unit.sh [--field 2] [--dw 8] [--slot-count] [--sanitize] build|run|both <source file, from prover/>" \
+    "<folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name>" \
+    "(--sanitize: .cpp sources only; the program goes into <folder>/sanitized)" >&2
+  exit 2
+fi
+if [[ -n $sanitize && $kind != host ]]; then
+  echo "unit.sh: --sanitize builds host (.cpp) tests only, not $(printf %q "$source"); nothing was built" >&2
   exit 2
 fi
 shift 3
@@ -254,6 +281,19 @@ if [[ $(stat -c '%u %A' -- "$out" 2>/dev/null) != "$(id -u) "d????-??-? ||
     "others can write and in which nothing belongs to another account" >&2
   exit 2
 fi
+if [[ -n $sanitize ]]; then
+  # The sanitized program's own folder, below the output directory just checked, which only this
+  # account can change: it is made and checked as that one is.
+  out=$out/sanitized
+  mkdir_said=$(mkdir -m 700 -- "$out" 2>&1)
+  if [[ $(stat -c '%u %A' -- "$out" 2>/dev/null) != "$(id -u) "d????-??-? ||
+    -n $(find "$out" -mindepth 1 \( -uid "+$(id -u)" -o -uid "-$(id -u)" \) -print -quit 2>/dev/null) ]]; then
+    [[ -z $mkdir_said || -e $out || -L $out ]] || echo "$mkdir_said" >&2
+    echo "unit.sh: $out: the folder for sanitized programs must be your own directory (not a symbolic link) that neither its group nor" \
+      "others can write and in which nothing belongs to another account" >&2
+    exit 2
+  fi
+fi
 t=$(basename "${source%.*}")
 # The compilers' temporary files go into the output directory, not under the caller's TMPDIR or
 # /tmp, where other accounts can create files too. The test's runs get the caller's TMPDIR back.
@@ -261,8 +301,25 @@ t=$(basename "${source%.*}")
 # verifier/tests/compiler_pass_control.sh reproduces.
 callers_tmpdir=${TMPDIR-} had_tmpdir=${TMPDIR+yes}
 export TMPDIR=$out
+sanitizer_flags=(-O1 -g -fno-ipa-modref -D_GLIBCXX_ASSERTIONS -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize-recover=all
+  -std=c++17 -pthread) # as in verifier/tests/sanitized_walk_test.sh
+if [[ -n $sanitize && $act != run ]] &&
+  ! echo 'int main() { return 0; }' | g++ "${sanitizer_flags[@]}" -x c++ -o "$out/sanitize_probe" - >/dev/null 2>&1; then
+  rm -f -- "$out/sanitize_probe" # made above, by this call, if at all
+  echo "not run: $t: this machine's g++ cannot build a program with the two sanitizers (libasan and libubsan are needed)"
+  exit 77
+fi
+[[ -z $sanitize || $act == run ]] || rm -f -- "$out/sanitize_probe" # made just above, by this call
 if [[ $act == run ]]; then
   [[ -x $out/$t ]] # what follows takes a missing program for one that did not build
+elif [[ -n $sanitize ]]; then
+  # The sanitizers' settings, linked in as in verifier/tests/sanitized_walk_test.sh, but with no
+  # log_path: a report goes to the standard error stream, which the run appends to <test>.log.
+  printf '%s\n' 'extern "C" const char *__asan_default_options() {' \
+    '  return "detect_leaks=0:exitcode=97:handle_abort=1:max_allocation_size_mb=8192:hard_rss_limit_mb=12288";' '}' \
+    'extern "C" const char *__ubsan_default_options() { return "print_stacktrace=1:exitcode=97"; }' >"$out/sanitize_settings.cpp"
+  g++ "${sanitizer_flags[@]}" -DDIGEST_WORDS=$dw -DBLK_FIELD=$field ${counting[@]+"${counting[@]}"} -msha -msse4.1 -mssse3 -I. -I../blocks -o "$out/$t" "$source" \
+    "$out/sanitize_settings.cpp" >"$out/$t.build.log" 2>&1
 elif [[ $kind == host ]]; then
   g++ -O2 -fno-ipa-modref -std=c++17 -DDIGEST_WORDS=$dw -DBLK_FIELD=$field ${counting[@]+"${counting[@]}"} -Wall -Wextra -pthread -msha -msse4.1 -mssse3 -I. -I../blocks -o "$out/$t" "$source" \
     >"$out/$t.build.log" 2>&1
