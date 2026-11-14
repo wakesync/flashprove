@@ -1,0 +1,10 @@
+{
+ "ran": 91,
+ "failures": 0,
+ "errors": 0,
+ "ok": true,
+ "int_attn_sha256": "357feafac4f3d6a3786d5ab4f484cd1b69eb29a879a72bbfa48cb6bfa248d0a7",
+ "table_sha256": "73404d471b069f1944d4a518e7ea8544d4a2c53a17bd3d554ca0f2a677713aee",
+ "note": "synthetic data, plus (CommittedCopy) temporary copies of the committed run records, read only; no weights, no model forward, no registered prompt run",
+ "amendment": "A3 (an aggregate with no finite cell is reported with n 0 and null statistics; rel_y key required; all-guarded layer statistics all NaN; guarded determinism prompts carry det false)"
+}
