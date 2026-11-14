@@ -86,6 +86,14 @@ The original hash-level work has a design and these CPU checks:
   not consume are not checked. **The default mode is unchanged:** without `--registered` the 13 full-`PASS`
   inputs of the #189 finding still give `PASS`, so the #189 stop rule is answered only for evidence read
   in registered mode against the registered runs, not in general.
+  **Read once (PREREG amendments A-1 / A-2 of that experiment, after review round 1 of PR #205).** In
+  registered mode each pinned file is read exactly once; the SHA-256 is taken over those bytes and the
+  same bytes are parsed, and no pinned path is opened, stat'ed or listed again. A registered result is
+  therefore a statement about bytes with the pinned hash at the moment they were read, not about what
+  the directory holds afterwards; the symlink and file-type checks made by path before the read can
+  still be raced. `compare` refuses (exit 2, `USAGE:`) a missing output path, a path that starts with
+  `--` and any other argument than `--registered`; `summarise.py` refuses unknown arguments. Valid
+  invocations are unchanged.
   `load_leaves` accepts a stored
   `leaves-v2.json` only if it is byte for byte the tree rebuilt from those records. `compare` compares
   the canonical leaf-v2 JSON per block and pin and the fetched-bytes hash, computes root and id equality
@@ -105,7 +113,10 @@ The original hash-level work has a design and these CPU checks:
   tests readers, not conversion. Issue #203: in those 18 cases the summary expectation is now
   `summarise.py --registered`, refused; the unchanged default-mode outcome is kept next to it as
   `pin203-default-mode-limit-*`. Cases `pin203-*` replay all 23 #191 cases in registered mode and try
-  to defeat the pin (D1 to D12 in that experiment's PREREG).
+  to defeat the pin (D1 to D12 in that experiment's PREREG). Cases `pin203-r2-*` (amendments A-1 / A-2)
+  change a pinned file just before its one read (refused), swap run 3 after the last read (the result is
+  that of the registered bytes; the next reading is refused), and give the two command lines a missing
+  output path or an unknown flag (exit 2).
 
 ## What the verifier recomputes
 
@@ -198,13 +209,16 @@ python3 $E/summarise.py --check                                                 
 python3 $E/summarise.py --registered --check                                         # exit 0: runs/summary-registered.json is current
 python3 research/weight-binding/wb_leafv2.py compare $E/runs/run1 $E/runs/run3 "$O/c.json" --registered   # exit 0
 python3 experiments/20261114-203-leafv2-registered-pin/make_pins.py --check           # exit 0: the pin is the regeneration
-python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 346 / 346, exit 0
-cmp "$O/evidence.json" experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-1.json
+python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 361 / 361, exit 0
+cmp "$O/evidence.json" experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-r2-1.json
 ```
 
-Since issue #203 the current receipt is `experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-1.json`
-(346 expectations over 136 cases; `-2.json` is a second run, byte-identical). The paragraph below
-describes the #191 receipt, which stays as committed.
+The current receipt is `experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-r2-1.json`
+(361 expectations over 145 cases; `-r2-2.json` is a second run, byte-identical). It belongs to the code
+after PREREG amendments A-1 / A-2 of issue #203. `runs/evidence-tests-1.json` and `-2.json` in the same
+directory (346 expectations over 136 cases) belong to the code before those amendments and stay as
+committed; all 346 are present unchanged in the current receipt. The paragraph below describes the #191
+receipt, which also stays as committed.
 
 The current receipt includes the issue #189 metadata-boundary cases and the 18 stop-rule cases (231
 expectations over 82 cases). Exit 0 there means the suite saw the outcomes it pins, including the

@@ -9,16 +9,19 @@ What changed (opt-in, default mode unchanged):
 - `wb_leafv2.py compare ... --registered` and `summarise.py --registered` refuse a registered run whose files do not match the pin.
 - The registered summary separates `PASS` (basis `single-run`) from `PASS-UNION` (a union that reaches 78 blocks with no single run doing so).
 
-Measured, unreplicated:
+- In registered mode each pinned file is read once and the bytes that were hashed are the bytes parsed (PREREG amendment A-1, added after review of PR #205).
+
+Measured, unreplicated. Hash level, not a proof:
 - In registered mode all 23 stop-rule cases of #191 are refused. None gives `PASS`.
 - The committed runs give H3 `PASS` with basis `single-run`.
 - 213 of 213 existing expectations that were not switches keep their outcome.
-- Suite 346 of 346, run twice, byte-identical receipts.
+- Suite 361 of 361, run twice, byte-identical receipts (`runs/evidence-tests-r2-1.json`, `-r2-2.json`). The first version of the change gave 346 of 346, also twice; those receipts are kept and all 346 expectations are unchanged in the current ones.
 
 What stays open, and why this comment does not say the stop rule is resolved in general:
 - **The default (non-registered) mode is unchanged.** It still gives a full `PASS` to the 13 altered inputs of #191. Anything that reads leaf-v2 run files without `--registered` has the old behaviour.
 - **The pin is not authentication.** It binds "registered run" to what the repository holds. Whoever can change the repository can change the pin together with a run, and registered mode then accepts it (defeat case D2).
 - Files the readers do not consume are not checked (D4). The 23 + 12 cases do not exhaust the inputs.
+- A registered result is about the bytes at the moment they were read, not about what the directory holds afterwards.
 - Requiring `run-meta.json` was not added, because #191 showed it is not sufficient. Cryptographic run authentication remains out of scope.
 
 Suggested: close #189 as "answered for registered evidence via #203", with the open items above recorded as known limits. Alternatively keep it open if the default mode should also refuse, or label union results; that needs its own registration.

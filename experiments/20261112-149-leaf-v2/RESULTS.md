@@ -148,3 +148,13 @@ Limits, stated plainly:
 - The pin is a committed list that binds "registered run" to what the repository holds. **It is not authentication.** Whoever changes the repository can change the pin together with a run, and registered mode then gives a full `PASS` (defeat case D2).
 - **The default mode is unchanged.** Without `--registered`, the 13 altered inputs of the stop-rule finding still give `PASS`, as before. The issue #189 stop rule is answered only for evidence read in registered mode against these three registered runs, not in general.
 - Files the readers do not consume are not checked (defeat case D4).
+
+### Addendum to the addendum, 2026-11-14: registered mode reads each pinned file once
+
+Appended after review round 1 of PR #205 (https://github.com/wakesync/flashprove/pull/205#issuecomment-6873645981). No text, registered result or run file above changes. Measured, unreplicated. Hash level, not a proof.
+
+At the reviewed head, registered mode hashed each consumed file and then opened the same path again to parse it, so the bytes parsed were not necessarily the bytes checked (a reviewer's descriptive finding, see the link). Under dated amendments A-1 and A-2 of `experiments/20261114-203-leafv2-registered-pin/PREREG.md`, registered mode now reads each pinned file exactly once and parses the bytes it hashed, and both command lines refuse a missing output path and unknown flags. `runs/registered-pins.json` and `runs/summary-registered.json` are unchanged, and `summarise.py --registered --check` and `summarise.py --check` both exit 0 on the changed code. Default mode: main's own evidence suite run against the changed code gives a receipt byte-identical to main's committed one.
+
+Receipts of the changed code: `experiments/20261114-203-leafv2-registered-pin/runs/evidence-tests-r2-1.json` and `-r2-2.json` (361 of 361 expectations each, byte-identical), `runs/analysis-r2.json`, `runs/default-mode-main-suite-r2.json`. The receipts named in the addendum above (346 of 346) belong to the code before this change and are kept.
+
+The three limits above stand unchanged: the pin is not authentication, the default mode is unchanged (answered only in registered mode, not in general), and files the readers do not consume are not checked. One more, stated plainly: a registered result is about the bytes at the moment they were read, not about what the directory holds afterwards.
