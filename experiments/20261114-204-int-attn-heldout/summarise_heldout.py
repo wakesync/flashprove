@@ -17,6 +17,16 @@ flag is a real JSON boolean; each prompt row's T equals the frozen manifest's n_
 T x 24 x 256 / T x 4 x 256 / T x 4 x 256; per-head clamp arrays (24 query heads, 4 kv heads) sum to the row's counts;
 a count of entries over the clamp is non-zero exactly when the recorded max |RNE| exceeds the clamp.
 
+PREREG Amendment A2 (second review of PR #206): (1) the evaluator's guarded-null representation is admitted exactly where
+heldout.py writes it and nowhere else: when int_attn's arithmetic assertion fires, heldout.eval_frozen writes the prompt
+row with mix_rel, max_abs_s, e_zero and causal all null and a non-empty guard_fail list of strings, and attention_layer
+writes rel_y null for all 24 heads of that prompt; a layer whose cells are all null carries NaN rel_median / rel_max /
+rel_min. Any other null, a partial null set, or a null without a guard is refused. (2) Every retained descriptive field
+is checked: obs_mx_q/k/v, max_abs_s, arm_seconds and the timing seconds finite and non-negative; max_abs_s within
+[0, Smax] (scores of clamped operands); e_zero <= causal = 24 x T(T+1)/2; the layer's maxima and sums equal those of its
+prompt rows; n_pairs, n_cells_valid, rel_min and the over-bar counts equal those of its cells; a wide value is a guard.
+(3) Every per-head clamp count is bounded by that head's T x 256 entries.
+
 Usage: summarise_heldout.py [<in_dir> [<out_dir>]]   (defaults: runs/ and runs/)
 """
 import json, math, sys
@@ -53,14 +63,27 @@ def bool_map(d, what):
     for k, v in d.items(): boolean(v, f"{what}[{k}]")
     return d
 
-def by_head(arr, n, total, what):
+def by_head(arr, n, total, what, per_head=None):
     if not isinstance(arr, list) or len(arr) != n: raise Refuse(f"{what} is not a list of {n} counts")
-    for i, x in enumerate(arr): nonneg_int(x, f"{what}[{i}]")
+    for i, x in enumerate(arr): nonneg_int(x, f"{what}[{i}]", per_head)    # A2: each head has only T x 256 entries
     if sum(arr) != total: raise Refuse(f"{what} sums to {sum(arr)}, not the row total {total}")
 
 def over_vs_max(over, maxw, cl, what):
     nonneg_int(maxw, f"{what} max |RNE|")
     if (over > 0) != (maxw > cl): raise Refuse(f"{what}: {over} entries over the clamp but max |RNE| {maxw} vs clamp {cl}")
+
+GUARD_NULL = ("mix_rel", "max_abs_s", "e_zero", "causal")   # A2: fields heldout.eval_frozen nulls on an assertion
+WIDE_GUARD = "wide value over 32767"
+
+def guarded_null(p):
+    """A2: True iff the prompt row is in the evaluator's assertion-path representation (all GUARD_NULL fields null and a
+    non-empty guard list); False iff none of them is null. Anything in between is refused."""
+    k = (p["arm"], p["layer"], p["prompt"])
+    nulls = [f for f in GUARD_NULL if p.get(f, 0) is None]
+    if not nulls: return False
+    if len(nulls) != len(GUARD_NULL): raise Refuse(f"{k}: only {nulls} null; the evaluator nulls exactly {list(GUARD_NULL)} together")
+    if not p.get("guard_fail") or p["guard_fail"] == [WIDE_GUARD]: raise Refuse(f"{k}: null metrics without an arithmetic guard failure")
+    return True
 
 def check_prompt_row(p, cl, ntok):
     k = (p["arm"], p["layer"], p["prompt"])
@@ -72,12 +95,23 @@ def check_prompt_row(p, cl, ntok):
         if not is_int(n) or n != T * nh * HD: raise Refuse(f"{t}_n of {k} = {n!r}, expected T x {nh} x {HD} = {T * nh * HD}")
         nonneg_int(p.get(f"{t}_over"), f"{t}_over of {k}", n)
         over_vs_max(p[f"{t}_over"], p.get(f"{t}_maxw"), cl, f"{t} of {k}")
-    by_head(p.get("q_over_by_head"), NH, p["q_over"], f"q_over_by_head of {k}")
-    by_head(p.get("k_over_by_kvhead"), NKV, p["k_over"], f"k_over_by_kvhead of {k}")
-    by_head(p.get("v_over_by_kvhead"), NKV, p["v_over"], f"v_over_by_kvhead of {k}")
-    if not isinstance(p.get("guard_fail"), list): raise Refuse(f"guard_fail of {k} is not a list")
+    by_head(p.get("q_over_by_head"), NH, p["q_over"], f"q_over_by_head of {k}", T * HD)
+    by_head(p.get("k_over_by_kvhead"), NKV, p["k_over"], f"k_over_by_kvhead of {k}", T * HD)
+    by_head(p.get("v_over_by_kvhead"), NKV, p["v_over"], f"v_over_by_kvhead of {k}", T * HD)
+    g = p.get("guard_fail")
+    if not isinstance(g, list) or not all(type(x) is str and x for x in g): raise Refuse(f"guard_fail of {k} is not a list of strings")
     if not isinstance(p.get("scales_used"), dict): raise Refuse(f"scales_used of {k} is not an object")
+    w = nonneg_int(p.get("wide_over_32767"), f"wide_over_32767 of {k}", p["q_over"] + p["k_over"] + p["v_over"])
+    if (w > 0) != (WIDE_GUARD in g): raise Refuse(f"{k}: wide_over_32767 = {w} but guard list {g}")
+    for f in ("obs_mx_q", "obs_mx_k", "obs_mx_v"): nonneg_num(p.get(f), f"{f} of {k}")
+    if guarded_null(p): return True
     nonneg_num(p.get("mix_rel"), f"mix_rel of {k}")
+    s = nonneg_num(p.get("max_abs_s"), f"max_abs_s of {k}")
+    if s > HD * cl * cl or s != math.floor(s): raise Refuse(f"max_abs_s of {k} = {s!r} is not an integer score within Smax")
+    causal = nonneg_int(p.get("causal"), f"causal of {k}")
+    if causal != NH * T * (T + 1) // 2: raise Refuse(f"causal of {k} = {causal}, expected 24 x T(T+1)/2")
+    nonneg_int(p.get("e_zero"), f"e_zero of {k}", causal)
+    return False
 
 def check_layer_row(r, cl, n_tok_total):
     k = (r["arm"], r["layer"])
@@ -90,7 +124,15 @@ def check_layer_row(r, cl, n_tok_total):
         over_vs_max(r[f"{t}_over"], r.get(f"{t}_maxw"), cl, f"{t} of {k}")
     nonneg_int(r.get("n_clamped"), f"n_clamped of {k}")
     if not isinstance(r.get("guard_failures"), list): raise Refuse(f"guard_failures of {k} is not a list")
-    nonneg_num(r.get("rel_median"), f"rel_median of {k}"); nonneg_num(r.get("rel_max"), f"rel_max of {k}")
+    nv = nonneg_int(r.get("n_cells_valid"), f"n_cells_valid of {k}")
+    for f in ("rel_median", "rel_max", "rel_min"):
+        x = r.get(f)
+        if nv == 0 and type(x) is float and math.isnan(x): continue      # A2: all cells guarded -> producer writes NaN
+        nonneg_num(x, f"{f} of {k}")
+    for f in ("obs_mx_q", "obs_mx_k", "obs_mx_v", "arm_seconds"): nonneg_num(r.get(f), f"{f} of {k}")
+    s = nonneg_num(r.get("max_abs_s"), f"max_abs_s of {k}")
+    if s > HD * cl * cl: raise Refuse(f"max_abs_s of {k} = {s!r} exceeds Smax")
+    for f in ("e_zero", "causal", "wide_over_32767", "n_pairs", "n_over_001", "n_over_005"): nonneg_int(r.get(f), f"{f} of {k}")
     for f in ("range_pass", "fid_pass", "scales_frozen_ok"): boolean(r.get(f), f"{f} of {k}")
     bool_map(r.get("det_bit_equal"), f"det_bit_equal of {k}")
 
@@ -138,7 +180,7 @@ def summarise(ind, prompts, det, table, ntok=None):
     for t in tim:
         if t.get("layer") not in LAYERS or t.get("layer") in tset: raise Refuse(f"bad or duplicate timing row {t.get('layer')}")
         bool_map(t.get("mix_bit_equal_q1"), f"mix_bit_equal_q1 of layer {t['layer']}")
-        nonneg_num(t.get("total_s"), f"total_s of layer {t['layer']}")
+        for f in ("total_s", "float_s", "ref_attention_s"): nonneg_num(t.get(f), f"{f} of layer {t['layer']}")
         tset[t["layer"]] = t
     rec_layers = {l for l, _ in keys}
     for k in list(cset) + [k + (None,) for k in pset]:
@@ -164,9 +206,20 @@ def summarise(ind, prompts, det, table, ntok=None):
         for f in ("q_over", "q_n", "k_over", "k_n", "v_over", "v_n"):
             if r.get(f) != sum(p[f] for p in pr): raise Refuse(f"{f} total of {a} {l}")
         if len(good) != len(vals) and not guards: raise Refuse(f"missing rel_y without a guard failure {a} {l}")
+        for p in prompts:                                       # A2: nulls only on the evaluator's guarded path
+            gn = guarded_null(pset[(a, l, p)]); nulls = sum(cset[(a, l, p, h)] is None for h in range(NH))
+            if nulls != (NH if gn else 0): raise Refuse(f"{a} {l} {p}: {nulls} null rel_y, prompt row guarded-null {gn}")
+        for f in ("q_maxw", "k_maxw", "v_maxw", "obs_mx_q", "obs_mx_k", "obs_mx_v"):
+            if r[f] != max(p[f] for p in pr): raise Refuse(f"{f} of {a} {l} is not the maximum of its prompt rows")
+        if r["max_abs_s"] != max([0.0] + [p["max_abs_s"] for p in pr if p["max_abs_s"] is not None]): raise Refuse(f"max_abs_s of {a} {l} disagrees with prompt rows")
+        for f in ("e_zero", "causal", "wide_over_32767"):
+            if r[f] != sum(p[f] or 0 for p in pr): raise Refuse(f"{f} total of {a} {l} disagrees with prompt rows")
         arr = np.array(good) if good else np.array([np.nan])
         med, mxv = float(np.median(arr)), float(arr.max())
         if good and (abs(med - r["rel_median"]) > 0 or abs(mxv - r["rel_max"]) > 0): raise Refuse(f"statistics of {a} {l} disagree with cells")
+        if (r["n_pairs"], r["n_cells_valid"], r["n_over_001"], r["n_over_005"]) != (len(vals), len(good), int((arr > BAR_MED).sum()), int((arr > BAR_MAX).sum())) \
+           or (good and r["rel_min"] != float(arr.min())) or (not good and not math.isnan(r["rel_median"])):
+            raise Refuse(f"cell counts or rel_min of {a} {l} disagree with cells")
         fid = bool(not guards and len(good) == len(vals) and med <= BAR_MED and mxv <= BAR_MAX)
         rng = bool(clamps == 0 and not guards)
         if r.get("fid_pass") != fid or r.get("range_pass") != rng: raise Refuse(f"pass flags of {a} {l} disagree")

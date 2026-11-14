@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-"""Unit tests for the frozen-scale evaluator and the summariser (PREREG "Debug", checks a to d). Synthetic data only
-(numpy default_rng(0)); no weights, no registered prompt. Run: python3 test_heldout.py  (writes runs/debug/unit-tests.json)"""
+"""Unit tests for the frozen-scale evaluator and the summariser (PREREG "Debug", checks a to d, plus the fail-closed checks
+of Amendments A1 and A2). Synthetic data (numpy default_rng(0)), plus temporary copies of the committed run records that
+the tests create and remove (the committed files are only read); no weights, no model forward, no registered prompt run.
+Run: python3 test_heldout.py  (writes runs/debug/unit-tests-a2.json; runs/debug/unit-tests.json is the 27b057dd receipt
+and runs/debug/unit-tests-a1.json the 2e7dc350 receipt, neither is overwritten)"""
 import copy, hashlib, json, math, sys, tempfile, unittest
 from pathlib import Path
 import numpy as np
@@ -99,7 +102,7 @@ def records(table, n_layers=16, rel=0.004, clamp_at=None):
     # (q_over_by_head, k_over_by_kvhead, v_over_by_kvhead, q_maxw, k_maxw, v_maxw), consistent with the counts.
     lay, cells, prows, tim = [], [], [], []
     for l in S.LAYERS[:n_layers]:
-        tim.append(dict(layer=l, total_s=1.0, mix_bit_equal_q1={p: True for p in PROMPTS}))
+        tim.append(dict(layer=l, total_s=1.0, float_s=0.2, ref_attention_s=0.3, mix_bit_equal_q1={p: True for p in PROMPTS}))
         for a, cl in S.ARMS.items():
             vals = []; pr = []
             for pi, p in enumerate(PROMPTS):
@@ -108,13 +111,19 @@ def records(table, n_layers=16, rel=0.004, clamp_at=None):
                 pr.append(dict(arm=a, layer=l, prompt=p, T=5, mix_rel=0.001, q_over=over, q_n=5 * 24 * 256, k_over=0, k_n=5 * 4 * 256,
                                v_over=0, v_n=5 * 4 * 256, q_maxw=cl + 10 if over else 1000, k_maxw=1000, v_maxw=1000,
                                q_over_by_head=qh, k_over_by_kvhead=[0] * 4, v_over_by_kvhead=[0] * 4,
-                               guard_fail=[], scales_used=table[(a, l)]))
+                               guard_fail=[], scales_used=table[(a, l)],
+                               # A2: the descriptive fields the real rows carry
+                               max_abs_s=1000.0, e_zero=0, causal=24 * 5 * 6 // 2, wide_over_32767=0,
+                               obs_mx_q=0.5, obs_mx_k=10.0, obs_mx_v=5.0))
                 for h in range(24):
                     r = rel * (1 + 0.01 * h + 0.001 * pi); vals.append(r); cells.append(dict(arm=a, layer=l, prompt=p, head=h, rel_y=r))
             prows += pr; arr = np.array(vals); clamps = sum(x["q_over"] for x in pr)
             lay.append(dict(arm=a, layer=l, clamp=cl, Smax=256 * cl * cl, **table[(a, l)], n_clamped=clamps, guard_failures=[],
                             q_over=clamps, q_n=8 * 5 * 24 * 256, k_over=0, k_n=8 * 5 * 4 * 256, v_over=0, v_n=8 * 5 * 4 * 256,
                             q_maxw=max(x["q_maxw"] for x in pr), k_maxw=1000, v_maxw=1000,
+                            obs_mx_q=0.5, obs_mx_k=10.0, obs_mx_v=5.0, max_abs_s=1000.0, e_zero=0, causal=8 * 360,
+                            wide_over_32767=0, n_pairs=192, n_cells_valid=192, rel_min=float(arr.min()),
+                            n_over_001=int((arr > 0.01).sum()), n_over_005=int((arr > 0.05).sum()), arm_seconds=1.0,
                             rel_median=float(np.median(arr)), rel_max=float(arr.max()), range_pass=clamps == 0,
                             fid_pass=bool(np.median(arr) <= 0.01 and arr.max() <= 0.05), det_bit_equal={d: True for d in DET},
                             scales_frozen_ok=True))
@@ -295,16 +304,145 @@ class CommittedCopy(unittest.TestCase):
     def test_copy_string_false_determinism(self):
         L = self.R["layers.jsonl"]; L[5]["det_bit_equal"] = {k: "false" for k in L[5]["det_bit_equal"]}; self.refuse()
 
+# ------------------------------------------------------------------ Amendment A2 (second review of PR #206, comment 6875930332)
+GUARD = "score not an exact integer"      # the text of int_attn's first assertion, as heldout.eval_frozen records it
+
+def guard_prompt(R, a, l, p, cells_key, prows_key, layers_key, guard=GUARD):
+    """Rewrite one prompt of one layer into the representation heldout.py writes when the arithmetic assertion fires
+    (eval_frozen except-branch + attention_layer): null mix_rel / max_abs_s / e_zero / causal, guard_fail [text], 24 null
+    rel_y; the layer row's guard list, flags and statistics recomputed the way attention_layer computes them."""
+    P, C, L = R[prows_key], R[cells_key], R[layers_key]
+    P[find(P, arm=a, layer=l, prompt=p)].update(mix_rel=None, max_abs_s=None, e_zero=None, causal=None, guard_fail=[guard])
+    for c in C:
+        if (c["arm"], c["layer"], c["prompt"]) == (a, l, p): c["rel_y"] = None
+    pr = [x for x in P if (x["arm"], x["layer"]) == (a, l)]
+    allrel = [c["rel_y"] for c in C if (c["arm"], c["layer"]) == (a, l)]
+    good = [x for x in allrel if x is not None]; arr = np.array(good) if good else np.array([np.nan])
+    L[find(L, arm=a, layer=l)].update(
+        guard_failures=[dict(prompt=x["prompt"], guard=g) for x in pr for g in x["guard_fail"]], range_pass=False, fid_pass=False,
+        n_pairs=len(allrel), n_cells_valid=len(good), rel_median=float(np.median(arr)), rel_max=float(arr.max()),
+        rel_min=float(arr.min()), n_over_001=int((arr > 0.01).sum()), n_over_005=int((arr > 0.05).sum()),
+        max_abs_s=max([0.0] + [x["max_abs_s"] or 0 for x in pr]), e_zero=sum(x["e_zero"] or 0 for x in pr),
+        causal=sum(x["causal"] or 0 for x in pr))
+
+class GuardedNull(unittest.TestCase):
+    """A2 (1): the evaluator's guarded-null path is a registered FAIL, admitted; nulls anywhere else are refused."""
+    setUp, tearDown, write = Summariser.setUp, Summariser.tearDown, Summariser.write
+    def run_nt(self, R):
+        self.write(R); return S.summarise(self.d, PROMPTS, DET, self.table, NTOK)
+    def refuse_nt(self, R):
+        with self.assertRaises(S.Refuse): self.run_nt(R)
+    def test_a2_one_guarded_prompt_is_fail_fail(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
+        s = self.run_nt(R)["arms"]["C2047"]
+        self.assertEqual((s["H_R"], s["H_F"], s["valid"], s["total_guard_failures"]), ("FAIL", "FAIL", True, 1))
+        self.assertEqual((s["layers_range_fail"], s["layers_fid_fail"]), ([3], [3]))
+        x = s["layers"][0]; self.assertEqual((x["n_cells"], x["n_valid"]), (192, 168))
+    def test_a2_whole_layer_guarded_gives_nan_statistics_and_fail(self):
+        R = records(self.table)
+        for p in PROMPTS: guard_prompt(R, "C1665", 7, p, "cells", "prompt_rows", "layers")
+        self.assertTrue(math.isnan(R["layers"][find(R["layers"], arm="C1665", layer=7)]["rel_median"]))
+        s = self.run_nt(R)["arms"]["C1665"]
+        self.assertEqual((s["H_R"], s["H_F"], s["total_guard_failures"]), ("FAIL", "FAIL", 8))
+        self.assertEqual(s["layers"][1]["n_valid"], 0)
+    def test_a2_assertion_plus_wide_guard(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
+        P = R["prompt_rows"]; i = find(P, arm="C2047", layer=3, prompt="x2")
+        P[i].update(q_over=1, q_maxw=40000, wide_over_32767=1, guard_fail=[GUARD, S.WIDE_GUARD]); P[i]["q_over_by_head"][0] = 1
+        Li = find(R["layers"], arm="C2047", layer=3)
+        R["layers"][Li].update(q_over=1, n_clamped=1, q_maxw=40000, wide_over_32767=1,
+                               guard_failures=[dict(prompt="x2", guard=GUARD), dict(prompt="x2", guard=S.WIDE_GUARD)])
+        self.assertEqual(self.run_nt(R)["arms"]["C2047"]["total_guard_failures"], 2)
+    def test_a2_null_mix_rel_without_guard(self):
+        R = records(self.table); R["prompt_rows"][3]["mix_rel"] = None; self.refuse_nt(R)
+    def test_a2_all_four_null_without_guard(self):
+        R = records(self.table); R["prompt_rows"][3].update(mix_rel=None, max_abs_s=None, e_zero=None, causal=None); self.refuse_nt(R)
+    def test_a2_partial_null_set_with_guard(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
+        R["prompt_rows"][find(R["prompt_rows"], arm="C2047", layer=3, prompt="x2")]["causal"] = 360; self.refuse_nt(R)
+    def test_a2_null_with_only_the_wide_guard(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers", guard=S.WIDE_GUARD)
+        self.refuse_nt(R)
+    def test_a2_null_rel_y_on_an_unguarded_prompt_of_a_guarded_layer(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
+        C = R["cells"]; C[find(C, arm="C2047", layer=3, prompt="x5", head=0)]["rel_y"] = None
+        L = R["layers"][find(R["layers"], arm="C2047", layer=3)]; L["n_cells_valid"] -= 1
+        self.refuse_nt(R)
+    def test_a2_guarded_prompt_with_a_non_null_cell(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
+        C = R["cells"]; C[find(C, arm="C2047", layer=3, prompt="x2", head=4)]["rel_y"] = 0.004; self.refuse_nt(R)
+    def test_a2_empty_guard_text(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers", guard=""); self.refuse_nt(R)
+    def test_a2_nan_layer_statistic_with_valid_cells(self):
+        R = records(self.table); R["layers"][2]["rel_min"] = float("nan"); self.refuse_nt(R)
+
+class Descriptive(unittest.TestCase):
+    """A2 (2), (3): retained descriptive fields finite, in domain and reconciled; per-head counts bounded by T x 256."""
+    setUp, tearDown, write = Summariser.setUp, Summariser.tearDown, Summariser.write
+    def refuse_nt(self, R):
+        self.write(R)
+        with self.assertRaises(S.Refuse): S.summarise(self.d, PROMPTS, DET, self.table, NTOK)
+    def test_a2_wide_count_without_guard(self):
+        R = records(self.table); R["prompt_rows"][0]["wide_over_32767"] = 1; self.refuse_nt(R)
+    def test_a2_causal_not_triangle(self):
+        R = records(self.table); R["prompt_rows"][0]["causal"] += 24
+        R["layers"][0]["causal"] += 24; self.refuse_nt(R)
+    def test_a2_e_zero_over_causal(self):
+        R = records(self.table); R["prompt_rows"][0]["e_zero"] = 361
+        R["layers"][0]["e_zero"] = 361; self.refuse_nt(R)
+    def test_a2_max_abs_s_over_smax(self):
+        R = records(self.table); R["prompt_rows"][0]["max_abs_s"] = 256.0 * 2047 * 2047 + 1
+        R["layers"][0]["max_abs_s"] = 256.0 * 2047 * 2047 + 1; self.refuse_nt(R)
+    def test_a2_layer_count_fields_disagree_with_cells(self):
+        R = records(self.table); R["layers"][0]["n_over_001"] = 3; self.refuse_nt(R)
+        R = records(self.table); R["layers"][0]["n_pairs"] = 191; self.refuse_nt(R)
+    def test_a2_negative_timing(self):
+        R = records(self.table); R["timing"][0]["float_s"] = -0.1; self.refuse_nt(R)
+
+class CommittedCopyA2(CommittedCopy):
+    """The second review's probes, on a temporary copy of the committed run records."""
+    test_copy_unmodified_is_accepted_and_unchanged = test_copy_negative_v_over_cancels_real_clamp = None
+    test_copy_nan_rel_y = test_copy_negative_minimum_rel_y = test_copy_T_zero = test_copy_string_false_determinism = None
+    def test_a2_copy_guarded_null_c2047_l3_h02_is_fail_fail(self):
+        # the review's constructed guard case: accepted, registered verdict FAIL / FAIL, every cell identity retained
+        guard_prompt(self.R, "C2047", 3, "h02-prose-paragraph", "cells.jsonl", "prompt-rows.jsonl", "layers.jsonl")
+        s = self.run_copy()
+        for a in S.ARMS: self.assertEqual((s["arms"][a]["H_R"], s["arms"][a]["H_F"], s["arms"][a]["valid"]), ("FAIL", "FAIL", True))
+        c = s["arms"]["C2047"]; self.assertEqual(c["total_guard_failures"], 1); self.assertIn(3, c["layers_range_fail"])
+        self.assertIn(3, c["layers_fid_fail"]); self.assertEqual(c["pooled"]["n"], 3072 - 24)
+        self.assertEqual(sum(x["n_cells"] for x in c["layers"]), 3072)
+        self.assertEqual(c["layers"][0]["mix_rel"][self.prompts.index("h02-prose-paragraph")], None)
+    def test_a2_copy_nan_max_abs_s(self):
+        self.R["layers.jsonl"][0]["max_abs_s"] = float("nan"); self.refuse()
+    def test_a2_copy_infinite_obs_mx_q(self):
+        self.R["layers.jsonl"][0]["obs_mx_q"] = float("inf"); self.refuse()
+    def test_a2_copy_missing_obs_mx_q(self):
+        self.R["layers.jsonl"][0].pop("obs_mx_q"); self.refuse()
+    def test_a2_copy_negative_arm_seconds(self):
+        self.R["layers.jsonl"][0]["arm_seconds"] = -1; self.refuse()
+    def test_a2_copy_layer_maximum_not_from_prompt_rows(self):
+        self.R["layers.jsonl"][0]["obs_mx_k"] *= 2; self.refuse()
+    def test_a2_copy_head_count_over_head_capacity(self):
+        # the review's case: 5121 clamps in one head of a T=20 prompt (capacity 20 x 256 = 5120), totals made consistent
+        P, L = self.R["prompt-rows.jsonl"], self.R["layers.jsonl"]
+        p = P[find(P, arm="C2047", layer=3, prompt="h01-prose-short")]; self.assertEqual(p["T"], 20)
+        p.update(q_over=5121, q_over_by_head=[5121] + [0] * 23, q_maxw=2048)
+        L[find(L, arm="C2047", layer=3)].update(q_over=5121, n_clamped=5121, q_maxw=2048, range_pass=False)
+        self.refuse()
+        p.update(q_over=5120, q_over_by_head=[5120] + [0] * 23)          # at capacity: the head bound itself admits it
+        L[find(L, arm="C2047", layer=3)].update(q_over=5120, n_clamped=5120)
+        self.assertEqual(self.run_copy()["arms"]["C2047"]["H_R"], "FAIL")
+
 if __name__ == "__main__":
     res = unittest.main(exit=False, verbosity=2).result
     out = dict(ran=res.testsRun, failures=len(res.failures), errors=len(res.errors), ok=res.wasSuccessful(),
                int_attn_sha256=hashlib.sha256((H.SRC176 / "int_attn.py").read_bytes()).hexdigest(), table_sha256=H.TABLE_SHA,
                note="synthetic data only; no weights, no registered prompt")
-    # Amendment A1: runs/debug/unit-tests.json is the receipt of the reviewed head 27b057dd (code cc8f8504, 32 tests) and is
-    # never overwritten; this version of the tests writes its own receipt.
-    out["amendment"] = "A1 (fail closed on malformed evidence)"
+    # runs/debug/unit-tests.json is the receipt of 27b057dd (code cc8f8504, 32 tests), runs/debug/unit-tests-a1.json the
+    # receipt of 2e7dc350 (Amendment A1, 59 tests); neither is overwritten. This version (Amendment A2) writes its own.
+    out["amendment"] = "A2 (guarded nulls admitted where the evaluator writes them; descriptive fields and per-head bounds checked)"
     out["note"] = ("synthetic data, plus (CommittedCopy) temporary copies of the committed run records, read only; "
                    "no weights, no model forward, no registered prompt run")
     (HERE / "runs" / "debug").mkdir(parents=True, exist_ok=True)
-    (HERE / "runs" / "debug" / "unit-tests-a1.json").write_text(json.dumps(out, indent=1) + "\n")
+    (HERE / "runs" / "debug" / "unit-tests-a2.json").write_text(json.dumps(out, indent=1) + "\n")
     raise SystemExit(0 if res.wasSuccessful() else 1)
