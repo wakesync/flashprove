@@ -1,0 +1,113 @@
+{
+  "control_signed_overflow": {
+    "sign": "runtime error: signed integer overflow",
+    "sanitized_build": {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE_BUILD>/controls",
+      "exit": 0,
+      "stdout": "control_signed_overflow: built\n",
+      "stderr": "",
+      "seconds": 0.214,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+    },
+    "sanitized_run": {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE_BUILD>/controls",
+      "exit": 1,
+      "stdout": "control_signed_overflow : status 97\ncontrol_signed_overflow: fails: see <PRIVATE_BUILD>/controls/sanitized/control_signed_overflow.log\n",
+      "stderr": "",
+      "seconds": 0.049,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap"
+    },
+    "sanitized_log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11:19: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'\n    #0 0x58b1f786e298 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11\n    #1 0x78518fe2a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x78518fe2a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x58b1f786e124 in _start (<PRIVATE_BUILD>/controls/sanitized/control_signed_overflow+0x1124) (BuildId: 570c9d4f9f46dfac3e2942e6652283e8bb35f488)\n\n",
+    "reported": true,
+    "release_info": {
+      "build": {
+        "command": "bash prover/tests/unit.sh build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE_BUILD>/controls-release",
+        "exit": 0,
+        "stdout": "control_signed_overflow: built\n",
+        "stderr": "",
+        "seconds": 0.069,
+        "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+      },
+      "run": {
+        "command": "bash prover/tests/unit.sh run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE_BUILD>/controls-release",
+        "exit": 1,
+        "stdout": "control_signed_overflow : status 1\ncontrol_signed_overflow: fails: see <PRIVATE_BUILD>/controls-release/control_signed_overflow.log\n",
+        "stderr": "",
+        "seconds": 0.027,
+        "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+      },
+      "log": "",
+      "sanitizer_text": false
+    }
+  },
+  "control_heap_read": {
+    "sign": "ERROR: AddressSanitizer: heap-buffer-overflow",
+    "sanitized_build": {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read.cpp <PRIVATE_BUILD>/controls",
+      "exit": 0,
+      "stdout": "control_heap_read: built\n",
+      "stderr": "",
+      "seconds": 0.208,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+    },
+    "sanitized_run": {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read.cpp <PRIVATE_BUILD>/controls",
+      "exit": 1,
+      "stdout": "control_heap_read : status 97\ncontrol_heap_read: fails: see <PRIVATE_BUILD>/controls/sanitized/control_heap_read.log\n",
+      "stderr": "",
+      "seconds": 0.052,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap"
+    },
+    "sanitized_log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read.cpp:13:23: runtime error: load of address 0x503000000060 with insufficient space for an object of type 'int'\n0x503000000060: note: pointer points here\n 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00\n              ^ \n    #0 0x60ebb32ae51d in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read.cpp:13\n    #1 0x739d56e2a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x739d56e2a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x60ebb32ae204 in _start (<PRIVATE_BUILD>/controls/sanitized/control_heap_read+0x1204) (BuildId: 9e7dd22736075429a5341e67379fe1a733fda205)\n\n",
+    "reported": false,
+    "release_info": {
+      "build": {
+        "command": "bash prover/tests/unit.sh build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read.cpp <PRIVATE_BUILD>/controls-release",
+        "exit": 0,
+        "stdout": "control_heap_read: built\n",
+        "stderr": "",
+        "seconds": 0.097,
+        "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+      },
+      "run": {
+        "command": "bash prover/tests/unit.sh run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read.cpp <PRIVATE_BUILD>/controls-release",
+        "exit": 0,
+        "stdout": "control_heap_read: passes\n",
+        "stderr": "",
+        "seconds": 0.023,
+        "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+      },
+      "log": "",
+      "sanitizer_text": false
+    }
+  },
+  "cu_refused": {
+    "run": {
+      "command": "bash prover/tests/unit.sh --sanitize build tests/base_kernels_test.cu <PRIVATE_BUILD>/controls-cu",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize builds host (.cpp) tests only, not tests/base_kernels_test.cu; nothing was built\n",
+      "seconds": 0.006,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB"
+    },
+    "pass": true
+  },
+  "not_run_77": {
+    "run": {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE_BUILD>/controls-wrap",
+      "exit": 77,
+      "stdout": "not run: control_signed_overflow: this machine's g++ cannot build a program with the two sanitizers (libasan and libubsan are needed)\n",
+      "stderr": "",
+      "seconds": 0.036,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "env_extra": {
+        "PATH": "<PRIVATE_BUILD>/wrap:<caller PATH>"
+      },
+      "redaction_note": "env_extra.PATH: the caller PATH after the wrapper folder was replaced by <caller PATH> before commit (host paths)"
+    },
+    "wrapper": "<PRIVATE_BUILD>/wrap/g++: exits 1 if an argument starts with -fsanitize, else runs /usr/bin/g++",
+    "binary_made": false,
+    "pass": true
+  },
+  "pass": false
+}

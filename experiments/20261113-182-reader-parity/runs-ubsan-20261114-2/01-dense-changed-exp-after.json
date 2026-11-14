@@ -1,0 +1,18 @@
+{
+  "command": "<PRIVATE_BUILD>/after/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-changed-exp/policy.txt",
+  "exit": 0,
+  "stdout": "parse: ok\nadmission: ok\n",
+  "stderr": "",
+  "seconds": 0.013,
+  "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 1,
+  "case": "dense-changed-exp",
+  "arm": "after",
+  "mode": "ubsan+asan",
+  "release": "ok",
+  "expected": "ok",
+  "observed": "ok",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true
+}

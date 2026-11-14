@@ -1,0 +1,18 @@
+{
+  "command": "<PRIVATE_BUILD>/after/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-header-absent-class/policy.txt",
+  "exit": 2,
+  "stdout": "parse: ok\nadmission: header-absent-class: line 58: hr must be 0\n",
+  "stderr": "",
+  "seconds": 0.008,
+  "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 1,
+  "case": "dense-header-absent-class",
+  "arm": "after",
+  "mode": "ubsan+asan",
+  "release": "header-absent-class",
+  "expected": "header-absent-class",
+  "observed": "header-absent-class",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true
+}

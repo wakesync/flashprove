@@ -1,0 +1,6 @@
+{
+  "status": "NOT RUN",
+  "reason": "harness change failed its registered checks",
+  "controls_pass": false,
+  "identity_pass": true
+}

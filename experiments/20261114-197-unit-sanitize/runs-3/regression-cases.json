@@ -1,0 +1,1101 @@
+{
+  "unit_sh_sha256": "c7f12d2ec0e0ce79b9b2e41861db85014f69d9d79d3fa10ac1d61d797bcb2258",
+  "head": "7364ab578eb319d895b2341e03589e940339fd90",
+  "utc_start": "2026-11-14T05:29:37.993129+00:00",
+  "debug_throwaway": false,
+  "gxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "builds": {
+    "SO": {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {},
+      "exit": 0,
+      "stdout": "control_signed_overflow: built\n",
+      "stderr": "",
+      "source": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp"
+    },
+    "HR": {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {},
+      "exit": 0,
+      "stdout": "control_heap_read_v2: built\n",
+      "stderr": "",
+      "source": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp"
+    },
+    "S0": {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp <PRIVATE>/controls",
+      "env_set": {},
+      "exit": 0,
+      "stdout": "control_report_status0: built\n",
+      "stderr": "",
+      "source": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp"
+    }
+  },
+  "main_unit_sh": {
+    "commit": "cdde96296e658fe803711dbb1b4699a225cc544a",
+    "sha256": "717e43999c124118bcdf39b533e39eb193abe5d81b73591a5cc11058aa4f44c4"
+  },
+  "cases": [
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {},
+      "exit": 1,
+      "stdout": "control_signed_overflow : status 97, and a sanitizer's report in the log\ncontrol_signed_overflow: fails: see <PRIVATE>/controls/sanitized/control_signed_overflow.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "SO: no sanitizer variable",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11:19: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'\n    #0 0x558f64854298 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11\n    #1 0x70ed6e42a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x70ed6e42a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x558f64854124 in _start (<PRIVATE>/controls/sanitized/control_signed_overflow+0x1124) (BuildId: 01bae004462620ddd6a8a21b19f8c8d640dd8b80)\n\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048:max_allocation_size_mb=2048"
+      },
+      "exit": 1,
+      "stdout": "control_signed_overflow : status 97, and a sanitizer's report in the log\ncontrol_signed_overflow: fails: see <PRIVATE>/controls/sanitized/control_signed_overflow.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "SO: ASAN_OPTIONS = the runners' memory bounds",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11:19: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'\n    #0 0x58947d728298 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11\n    #1 0x796f1c82a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x796f1c82a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x58947d728124 in _start (<PRIVATE>/controls/sanitized/control_signed_overflow+0x1124) (BuildId: 01bae004462620ddd6a8a21b19f8c8d640dd8b80)\n\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "max_allocation_size_mb=2048"
+      },
+      "exit": 1,
+      "stdout": "control_signed_overflow : status 97, and a sanitizer's report in the log\ncontrol_signed_overflow: fails: see <PRIVATE>/controls/sanitized/control_signed_overflow.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "SO: ASAN_OPTIONS=max_allocation_size_mb=2048",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11:19: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'\n    #0 0x637870df4298 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11\n    #1 0x733cf222a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x733cf222a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x637870df4124 in _start (<PRIVATE>/controls/sanitized/control_signed_overflow+0x1124) (BuildId: 01bae004462620ddd6a8a21b19f8c8d640dd8b80)\n\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": ""
+      },
+      "exit": 1,
+      "stdout": "control_signed_overflow : status 97, and a sanitizer's report in the log\ncontrol_signed_overflow: fails: see <PRIVATE>/controls/sanitized/control_signed_overflow.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "SO: ASAN_OPTIONS set and empty",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11:19: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'\n    #0 0x57e4f37b2298 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp:11\n    #1 0x7d741762a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x7d741762a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x57e4f37b2124 in _start (<PRIVATE>/controls/sanitized/control_signed_overflow+0x1124) (BuildId: 01bae004462620ddd6a8a21b19f8c8d640dd8b80)\n\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {},
+      "exit": 1,
+      "stdout": "control_heap_read_v2 : status 97, and a sanitizer's report in the log\ncontrol_heap_read_v2: fails: see <PRIVATE>/controls/sanitized/control_heap_read_v2.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "HR: no sanitizer variable",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "=================================================================\n==3100569==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x503000000060 at pc 0x60c2f2dc2542 bp 0x7ffd6dd3cca0 sp 0x7ffd6dd3cc90\nREAD of size 8 at 0x503000000060 thread T0\n    #0 0x60c2f2dc2541 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14\n    #1 0x760288a2a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x760288a2a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x60c2f2dc2224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\n0x503000000060 is located 0 bytes after 32-byte region [0x503000000040,0x503000000060)\nallocated by thread T0 here:\n    #0 0x760289afe6c8 in operator new[](unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:98\n    #1 0x60c2f2dc239c in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:11\n    #2 0x760288a2a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x760288a2a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #4 0x60c2f2dc2224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\nSUMMARY: AddressSanitizer: heap-buffer-overflow <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14 in main\nShadow bytes around the buggy address:\n  0x502ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n=>0x503000000000: fa fa 00 00 00 fa fa fa 00 00 00 00[fa]fa fa fa\n  0x503000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3100569==ABORTING\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048:max_allocation_size_mb=2048"
+      },
+      "exit": 1,
+      "stdout": "control_heap_read_v2 : status 97, and a sanitizer's report in the log\ncontrol_heap_read_v2: fails: see <PRIVATE>/controls/sanitized/control_heap_read_v2.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "HR: ASAN_OPTIONS = the runners' memory bounds",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "=================================================================\n==3100607==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x503000000060 at pc 0x5a2b6a13c542 bp 0x7ffe50a9eaa0 sp 0x7ffe50a9ea90\nREAD of size 8 at 0x503000000060 thread T0\n    #0 0x5a2b6a13c541 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14\n    #1 0x71e17f62a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x71e17f62a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x5a2b6a13c224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\n0x503000000060 is located 0 bytes after 32-byte region [0x503000000040,0x503000000060)\nallocated by thread T0 here:\n    #0 0x71e1806fe6c8 in operator new[](unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:98\n    #1 0x5a2b6a13c39c in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:11\n    #2 0x71e17f62a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x71e17f62a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #4 0x5a2b6a13c224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\nSUMMARY: AddressSanitizer: heap-buffer-overflow <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14 in main\nShadow bytes around the buggy address:\n  0x502ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n=>0x503000000000: fa fa 00 00 00 fa fa fa 00 00 00 00[fa]fa fa fa\n  0x503000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3100607==ABORTING\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "max_allocation_size_mb=2048"
+      },
+      "exit": 1,
+      "stdout": "control_heap_read_v2 : status 97, and a sanitizer's report in the log\ncontrol_heap_read_v2: fails: see <PRIVATE>/controls/sanitized/control_heap_read_v2.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "HR: ASAN_OPTIONS=max_allocation_size_mb=2048",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "=================================================================\n==3100642==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x503000000060 at pc 0x5dbdbba1f542 bp 0x7fff1ef9fde0 sp 0x7fff1ef9fdd0\nREAD of size 8 at 0x503000000060 thread T0\n    #0 0x5dbdbba1f541 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14\n    #1 0x73a06362a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x73a06362a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x5dbdbba1f224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\n0x503000000060 is located 0 bytes after 32-byte region [0x503000000040,0x503000000060)\nallocated by thread T0 here:\n    #0 0x73a0646fe6c8 in operator new[](unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:98\n    #1 0x5dbdbba1f39c in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:11\n    #2 0x73a06362a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x73a06362a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #4 0x5dbdbba1f224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\nSUMMARY: AddressSanitizer: heap-buffer-overflow <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14 in main\nShadow bytes around the buggy address:\n  0x502ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n=>0x503000000000: fa fa 00 00 00 fa fa fa 00 00 00 00[fa]fa fa fa\n  0x503000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3100642==ABORTING\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": ""
+      },
+      "exit": 1,
+      "stdout": "control_heap_read_v2 : status 97, and a sanitizer's report in the log\ncontrol_heap_read_v2: fails: see <PRIVATE>/controls/sanitized/control_heap_read_v2.log\n",
+      "stderr": "",
+      "group": "A",
+      "case": "HR: ASAN_OPTIONS set and empty",
+      "required": "exit 1, a line with \"status 97\", the control's text in the log, no passes line",
+      "ok": true,
+      "log": "=================================================================\n==3100678==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x503000000060 at pc 0x5bfa67b55542 bp 0x7ffffcbbb770 sp 0x7ffffcbbb760\nREAD of size 8 at 0x503000000060 thread T0\n    #0 0x5bfa67b55541 in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14\n    #1 0x772f3442a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x772f3442a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x5bfa67b55224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\n0x503000000060 is located 0 bytes after 32-byte region [0x503000000040,0x503000000060)\nallocated by thread T0 here:\n    #0 0x772f354fe6c8 in operator new[](unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:98\n    #1 0x5bfa67b5539c in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:11\n    #2 0x772f3442a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x772f3442a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #4 0x5bfa67b55224 in _start (<PRIVATE>/controls/sanitized/control_heap_read_v2+0x1224) (BuildId: 9bdff5f96d06294ce63c6888133dee82678555c6)\n\nSUMMARY: AddressSanitizer: heap-buffer-overflow <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp:14 in main\nShadow bytes around the buggy address:\n  0x502ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x502fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n=>0x503000000000: fa fa 00 00 00 fa fa fa 00 00 00 00[fa]fa fa fa\n  0x503000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x503000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3100678==ABORTING\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: UBSAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "LSAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: LSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: LSAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "log_path=<PRIVATE>/elsewhere-asan"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=log_path=<PRIVATE>/elsewhere-asan",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "log_path=<PRIVATE>/elsewhere-ubsan"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: UBSAN_OPTIONS=log_path=<PRIVATE>/elsewhere-ubsan",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "halt_on_error=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=halt_on_error=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "halt_on_error=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: UBSAN_OPTIONS=halt_on_error=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "suppressions=<PRIVATE>/supp.txt"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: UBSAN_OPTIONS=suppressions=<PRIVATE>/supp.txt",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "suppressions=<PRIVATE>/supp.txt"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=suppressions=<PRIVATE>/supp.txt",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048:exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=hard_rss_limit_mb=2048:exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048 exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=hard_rss_limit_mb=2048 exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048,exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=hard_rss_limit_mb=2048,exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048\nexitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=hard_rss_limit_mb=2048\nexitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "include=<PRIVATE>/opts.txt"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=include=<PRIVATE>/opts.txt",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "hard_rss_limit_mb=2048"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: UBSAN_OPTIONS=hard_rss_limit_mb=2048",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "abort_on_error=1"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO: ASAN_OPTIONS=abort_on_error=1",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: UBSAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "LSAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: LSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: LSAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "log_path=<PRIVATE>/elsewhere-asan"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=log_path=<PRIVATE>/elsewhere-asan",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "log_path=<PRIVATE>/elsewhere-ubsan"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: UBSAN_OPTIONS=log_path=<PRIVATE>/elsewhere-ubsan",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "halt_on_error=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=halt_on_error=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "halt_on_error=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: UBSAN_OPTIONS=halt_on_error=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "suppressions=<PRIVATE>/supp.txt"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: UBSAN_OPTIONS=suppressions=<PRIVATE>/supp.txt",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "suppressions=<PRIVATE>/supp.txt"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=suppressions=<PRIVATE>/supp.txt",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048:exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=hard_rss_limit_mb=2048:exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048 exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=hard_rss_limit_mb=2048 exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048,exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=hard_rss_limit_mb=2048,exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "hard_rss_limit_mb=2048\nexitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=hard_rss_limit_mb=2048\nexitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "include=<PRIVATE>/opts.txt"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=include=<PRIVATE>/opts.txt",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "hard_rss_limit_mb=2048"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: UBSAN_OPTIONS=hard_rss_limit_mb=2048",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_heap_read_v2.cpp <PRIVATE>/controls",
+      "env_set": {
+        "ASAN_OPTIONS": "abort_on_error=1"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: ASAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "HR: ASAN_OPTIONS=abort_on_error=1",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "log_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize both <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/controls",
+      "env_set": {
+        "UBSAN_OPTIONS": "exitcode=0"
+      },
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: --sanitize: UBSAN_OPTIONS: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another setting could hide a sanitizer's report or turn it into a pass; nothing was built or run\n",
+      "group": "B",
+      "case": "SO with both: UBSAN_OPTIONS=exitcode=0",
+      "required": "exit 2, the standard error stream begins \"unit.sh: --sanitize: <variable>: \", the log (or the folder) unchanged, no passes line, no elsewhere-* file",
+      "ok": true,
+      "folder_unchanged": true,
+      "printed_passes": false,
+      "elsewhere_files": []
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp <PRIVATE>/controls",
+      "env_set": {},
+      "exit": 1,
+      "stdout": "control_report_status0 : status 0, and a sanitizer's report in the log\ncontrol_report_status0: fails: see <PRIVATE>/controls/sanitized/control_report_status0.log\n",
+      "stderr": "",
+      "group": "C",
+      "case": "S0: the status-0 report control, sanitized",
+      "required": "exit 1, no passes line, the overflow text in the log",
+      "ok": true,
+      "log": "<REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp:23:27: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'\n    #0 0x58358c6ea3fb in main <REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp:23\n    #1 0x73de7642a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #2 0x73de7642a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)\n    #3 0x58358c6ea1c4 in _start (<PRIVATE>/controls/sanitized/control_report_status0+0x11c4) (BuildId: df285b5abb02c7d9ab5de8ff69cf46576ed5fc5f)\n\n",
+      "report_in_log": true,
+      "printed_passes": false
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/probe-failing-compiler-build",
+      "env_set": {},
+      "exit": 77,
+      "stdout": "not run: control_signed_overflow: this machine's g++ cannot build a program with the two sanitizers (libasan and libubsan are needed)\n",
+      "stderr": "",
+      "group": "D",
+      "case": "failing-compiler-build",
+      "required": "exit 77, a line starting \"not run: \", every sentinel present with the same bytes, the listing equal to the one before",
+      "ok": true,
+      "sentinels": [
+        "sanitize_probe",
+        "sanitize_probe.XXXXXX",
+        "probe",
+        "sanitize_settings.cpp",
+        "control_signed_overflow",
+        "control_signed_overflow.log",
+        "control_signed_overflow.build.log"
+      ],
+      "sentinels_kept_with_same_bytes": true,
+      "names_added": [],
+      "listing_equal": true
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize both <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/probe-failing-compiler-both",
+      "env_set": {},
+      "exit": 77,
+      "stdout": "not run: control_signed_overflow: this machine's g++ cannot build a program with the two sanitizers (libasan and libubsan are needed)\n",
+      "stderr": "",
+      "group": "D",
+      "case": "failing-compiler-both",
+      "required": "exit 77, a line starting \"not run: \", every sentinel present with the same bytes, the listing equal to the one before",
+      "ok": true,
+      "sentinels": [
+        "sanitize_probe",
+        "sanitize_probe.XXXXXX",
+        "probe",
+        "sanitize_settings.cpp",
+        "control_signed_overflow",
+        "control_signed_overflow.log",
+        "control_signed_overflow.build.log"
+      ],
+      "sentinels_kept_with_same_bytes": true,
+      "names_added": [],
+      "listing_equal": true
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <PRIVATE>/probe-working-compiler-build",
+      "env_set": {},
+      "exit": 0,
+      "stdout": "control_signed_overflow: built\n",
+      "stderr": "",
+      "group": "D",
+      "case": "working-compiler-build",
+      "required": "exit 0, built, the three sentinels present with the same bytes, the listing = before + program, build log, sanitize_settings.cpp",
+      "ok": true,
+      "sentinels": [
+        "sanitize_probe",
+        "sanitize_probe.XXXXXX",
+        "probe"
+      ],
+      "sentinels_kept_with_same_bytes": true,
+      "names_added": [
+        "control_signed_overflow",
+        "control_signed_overflow.build.log",
+        "sanitize_settings.cpp"
+      ],
+      "listing_equal": false
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "usage: unit.sh [--field 2] [--dw 8] [--slot-count] [--sanitize] build|run|both <source file, from prover/> <folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name> (--sanitize: .cpp sources only; the program goes into <folder>/sanitized)\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "usage: unit.sh build|run|both <source file, from prover/> <folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name>\n"
+      },
+      "group": "E",
+      "case": "no argument",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": false
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh x tests/parameter_file_tables_test.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "usage: unit.sh [--field 2] [--dw 8] [--slot-count] [--sanitize] build|run|both <source file, from prover/> <folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name> (--sanitize: .cpp sources only; the program goes into <folder>/sanitized)\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh x tests/parameter_file_tables_test.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "usage: unit.sh build|run|both <source file, from prover/> <folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name>\n"
+      },
+      "group": "E",
+      "case": "a bad action",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": false
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh build tests/nope.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "usage: unit.sh [--field 2] [--dw 8] [--slot-count] [--sanitize] build|run|both <source file, from prover/> <folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name> (--sanitize: .cpp sources only; the program goes into <folder>/sanitized)\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh build tests/nope.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "usage: unit.sh build|run|both <source file, from prover/> <folder for the program and its logs> [<one run's arguments> ...], or unit.sh explain-sigill <name>\n"
+      },
+      "group": "E",
+      "case": "a missing source",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": false
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh run tests/parameter_file_tables_test.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "parameter_file_tables_test: does not build: see <OUT>/parameter_file_tables_test.build.log\n",
+      "stderr": "",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh run tests/parameter_file_tables_test.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "parameter_file_tables_test: does not build: see <OUT>/parameter_file_tables_test.build.log\n",
+        "stderr": ""
+      },
+      "group": "E",
+      "case": "run with nothing built",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp /",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: /: the output directory's path must end in a name of its own, not in \"..\", and cannot be \"/\"\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp /",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "unit.sh: /: the output directory's path must end in a name of its own, not in \"..\", and cannot be \"/\"\n"
+      },
+      "group": "E",
+      "case": "/ as output directory",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <PRIVATE>/..",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: <PRIVATE>/..: the output directory's path must end in a name of its own, not in \"..\", and cannot be \"/\"\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <PRIVATE>/..",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "unit.sh: <PRIVATE>/..: the output directory's path must end in a name of its own, not in \"..\", and cannot be \"/\"\n"
+      },
+      "group": "E",
+      "case": "a path ending in ..",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh --field 3 build tests/parameter_file_tables_test.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: there is one field, number 2 (p = 2^64 - 2^32 + 1): --field takes 2 and nothing else\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh --field 3 build tests/parameter_file_tables_test.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "unit.sh: there is one field, number 2 (p = 2^64 - 2^32 + 1): --field takes 2 and nothing else\n"
+      },
+      "group": "E",
+      "case": "--field 3",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh explain-sigill a/b",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "usage: unit.sh explain-sigill <name of the program that died with SIGILL>\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh explain-sigill a/b",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "usage: unit.sh explain-sigill <name of the program that died with SIGILL>\n"
+      },
+      "group": "E",
+      "case": "a bad explain-sigill name",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: the output directory <OUT> lies below <PRIVATE>/openw-<ARM>, which another account may be able to change (its group or others can write in it, and it has no sticky bit): it could put another directory in the output directory's place while the test is built and run and choose what runs as you. Name an output directory below directories that only you or root can change (such as one in your home directory, or in /tmp, whose sticky bit keeps others from replacing it); if <PRIVATE>/openw-<ARM> is yours, close it with chmod go-w; nothing was run\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "unit.sh: the output directory <OUT> lies below <PRIVATE>/openw-<ARM>, which another account may be able to change (its group or others can write in it, and it has no sticky bit): it could put another directory in the output directory's place while the test is built and run and choose what runs as you. Name an output directory below directories that only you or root can change (such as one in your home directory, or in /tmp, whose sticky bit keeps others from replacing it); if <PRIVATE>/openw-<ARM> is yours, close it with chmod go-w; nothing was run\n"
+      },
+      "group": "E",
+      "case": "a parent that others can write",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: <OUT>: name an output directory that does not exist yet, or your own directory (not a symbolic link) that neither its group nor others can write and in which nothing belongs to another account\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "unit.sh: <OUT>: name an output directory that does not exist yet, or your own directory (not a symbolic link) that neither its group nor others can write and in which nothing belongs to another account\n"
+      },
+      "group": "E",
+      "case": "an output folder that its group can write",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <OUT>",
+      "env_set": {},
+      "exit": 2,
+      "stdout": "",
+      "stderr": "unit.sh: <OUT>: name an output directory that does not exist yet, or your own directory (not a symbolic link) that neither its group nor others can write and in which nothing belongs to another account\n",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh build tests/parameter_file_tables_test.cpp <OUT>",
+        "env_set": {},
+        "exit": 2,
+        "stdout": "",
+        "stderr": "unit.sh: <OUT>: name an output directory that does not exist yet, or your own directory (not a symbolic link) that neither its group nor others can write and in which nothing belongs to another account\n"
+      },
+      "group": "E",
+      "case": "an output folder that is a symbolic link",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 2,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh both tests/parameter_file_one_bits_test.cpp <OUT> tests/configurations/pinned_no_proof_of_work/policy.txt",
+      "env_set": {},
+      "exit": 0,
+      "stdout": "parameter_file_one_bits_test: passes\n",
+      "stderr": "",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh both tests/parameter_file_one_bits_test.cpp <OUT> tests/configurations/pinned_no_proof_of_work/policy.txt",
+        "env_set": {},
+        "exit": 0,
+        "stdout": "parameter_file_one_bits_test: passes\n",
+        "stderr": ""
+      },
+      "group": "E",
+      "case": "both on the passing test with its argument",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 0,
+      "stdout_equal": true,
+      "stderr_equal": true
+    },
+    {
+      "command": "bash <REPO>/prover/tests/unit.sh both <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <OUT>",
+      "env_set": {},
+      "exit": 1,
+      "stdout": "control_signed_overflow : status 1\ncontrol_signed_overflow: fails: see <OUT>/control_signed_overflow.log\n",
+      "stderr": "",
+      "main": {
+        "command": "bash <REPO>/prover/tests/unit.sh both <REPO>/experiments/20261114-197-unit-sanitize/controls/control_signed_overflow.cpp <OUT>",
+        "env_set": {},
+        "exit": 1,
+        "stdout": "control_signed_overflow : status 1\ncontrol_signed_overflow: fails: see <OUT>/control_signed_overflow.log\n",
+        "stderr": ""
+      },
+      "group": "E",
+      "case": "both on the signed-overflow control",
+      "required": "the same exit status from main's unit.sh and from this one",
+      "ok": true,
+      "main_exit": 1,
+      "stdout_equal": true,
+      "stderr_equal": true
+    }
+  ],
+  "information": [
+    {
+      "case": "S0 built and run without --sanitize (information only; expected exit 0, passes, no sanitizer text)",
+      "build": {
+        "command": "bash prover/tests/unit.sh build <REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp <PRIVATE>/c-release",
+        "env_set": {},
+        "exit": 0,
+        "stdout": "control_report_status0: built\n",
+        "stderr": ""
+      },
+      "run": {
+        "command": "bash prover/tests/unit.sh run <REPO>/experiments/20261114-197-unit-sanitize/controls/control_report_status0.cpp <PRIVATE>/c-release",
+        "env_set": {},
+        "exit": 0,
+        "stdout": "control_report_status0: passes\n",
+        "stderr": ""
+      },
+      "log": "",
+      "sanitizer_text": false,
+      "printed_passes": true
+    }
+  ],
+  "utc_end": "2026-11-14T05:29:48.073056+00:00",
+  "summary": {
+    "required_cases": 58,
+    "as_required": 58,
+    "by_group": {
+      "A": {
+        "cases": 8,
+        "as_required": 8
+      },
+      "B": {
+        "cases": 33,
+        "as_required": 33
+      },
+      "C": {
+        "cases": 1,
+        "as_required": 1
+      },
+      "D": {
+        "cases": 3,
+        "as_required": 3
+      },
+      "E": {
+        "cases": 13,
+        "as_required": 13
+      }
+    },
+    "not_as_required": [],
+    "e_stdout_equal": 13,
+    "e_stderr_equal": 10,
+    "elsewhere_files_at_end": [],
+    "pass": true
+  }
+}

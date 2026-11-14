@@ -1,0 +1,55 @@
+{
+  "status": "COMPLETE",
+  "fixtures": 33,
+  "repetitions_completed": 5,
+  "reader_calls": 330,
+  "category_mismatches_vs_release": {
+    "per_repetition": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "n": 5,
+    "median": 0,
+    "population_sd": 0.0,
+    "min": 0,
+    "max": 0
+  },
+  "category_mismatches_vs_expectations": {
+    "per_repetition": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "n": 5,
+    "median": 0,
+    "population_sd": 0.0,
+    "min": 0,
+    "max": 0
+  },
+  "sanitizer_reports": {
+    "per_repetition": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "n": 5,
+    "median": 0,
+    "population_sd": 0.0,
+    "min": 0,
+    "max": 0
+  },
+  "positive_controls": 4,
+  "positive_control_failures": 0,
+  "flags": "-O1 -g -fno-ipa-modref -D_GLIBCXX_ASSERTIONS -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize-recover=all -std=c++17 -pthread -DDIGEST_WORDS=8 -DBLK_FIELD=2 -msha -msse4.1 -mssse3 -I. -I../blocks",
+  "run_asan_options": "hard_rss_limit_mb=2048:max_allocation_size_mb=2048",
+  "elapsed_seconds": 77.3,
+  "start_utc": "2026-11-14T03:43:25.650545+00:00",
+  "end_utc": "2026-11-14T03:44:42.920978+00:00"
+}

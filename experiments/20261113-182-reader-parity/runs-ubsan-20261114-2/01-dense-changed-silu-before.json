@@ -1,0 +1,18 @@
+{
+  "command": "<PRIVATE_BUILD>/before/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-changed-silu/policy.txt",
+  "exit": 2,
+  "stdout": "parse: ok\nadmission: policy-tables: line 132: the tables' digest lines need a model with experts\n",
+  "stderr": "",
+  "seconds": 0.009,
+  "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 1,
+  "case": "dense-changed-silu",
+  "arm": "before",
+  "mode": "ubsan+asan",
+  "release": "policy-tables",
+  "expected": "policy-tables",
+  "observed": "policy-tables",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true
+}

@@ -1,0 +1,18 @@
+{
+  "command": "<PRIVATE_BUILD>/before/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-invalid/policy.txt",
+  "exit": 1,
+  "stdout": "parse: policy-line-form: line 137: after the name tsilu5 and one space there must be a decimal number below 2^32, with no sign and no leading zero, and nothing more\nadmission: not-run\n",
+  "stderr": "",
+  "seconds": 0.009,
+  "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 2,
+  "case": "dense-invalid",
+  "arm": "before",
+  "mode": "ubsan+asan",
+  "release": "parse:policy-line-form",
+  "expected": "parse:policy-line-form",
+  "observed": "parse:policy-line-form",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true
+}

@@ -1,0 +1,39 @@
+{
+  "command": "/usr/bin/python3 -B <REPO>/experiments/20261114-197-unit-sanitize/unit_sanitize_regress.py <REPO> <PRIVATE_BUILD>/regress <REPO>/experiments/20261114-197-unit-sanitize/runs-3/regression-cases.json",
+  "exit": 0,
+  "seconds": 10.1,
+  "stdout": "ok   A   SO: no sanitizer variable | exit 1\nok   A   SO: ASAN_OPTIONS = the runners' memory bounds | exit 1\nok   A   SO: ASAN_OPTIONS=max_allocation_size_mb=2048 | exit 1\nok   A   SO: ASAN_OPTIONS set and empty | exit 1\nok   A   HR: no sanitizer variable | exit 1\nok   A   HR: ASAN_OPTIONS = the runners' memory bounds | exit 1\nok   A   HR: ASAN_OPTIONS=max_allocation_size_mb=2048 | exit 1\nok   A   HR: ASAN_OPTIONS set and empty | exit 1\nok   B   SO: UBSAN_OPTIONS=exitcode=0 | exit 2\nok   B   SO: ASAN_OPTIONS=exitcode=0 | exit 2\nok   B   SO: LSAN_OPTIONS=exitcode=0 | exit 2\nok   B   SO: ASAN_OPTIONS=log_path=<PRIVATE>/elsewhere-asan | exit 2\nok   B   SO: UBSAN_OPTIONS=log_path=<PRIVATE>/elsewhere-ubsan | exit 2\nok   B   SO: ASAN_OPTIONS=halt_on_error=0 | exit 2\nok   B   SO: UBSAN_OPTIONS=halt_on_error=0 | exit 2\nok   B   SO: UBSAN_OPTIONS=suppressions=<PRIVATE>/supp.txt | exit 2\nok   B   SO: ASAN_OPTIONS=suppressions=<PRIVATE>/supp.txt | exit 2\nok   B   SO: ASAN_OPTIONS=hard_rss_limit_mb=2048:exitcode=0 | exit 2\nok   B   SO: ASAN_OPTIONS=hard_rss_limit_mb=2048 exitcode=0 | exit 2\nok   B   SO: ASAN_OPTIONS=hard_rss_limit_mb=2048,exitcode=0 | exit 2\nok   B   SO: ASAN_OPTIONS=hard_rss_limit_mb=2048\\nexitcode=0 | exit 2\nok   B   SO: ASAN_OPTIONS=include=<PRIVATE>/opts.txt | exit 2\nok   B   SO: UBSAN_OPTIONS=hard_rss_limit_mb=2048 | exit 2\nok   B   SO: ASAN_OPTIONS=abort_on_error=1 | exit 2\nok   B   HR: UBSAN_OPTIONS=exitcode=0 | exit 2\nok   B   HR: ASAN_OPTIONS=exitcode=0 | exit 2\nok   B   HR: LSAN_OPTIONS=exitcode=0 | exit 2\nok   B   HR: ASAN_OPTIONS=log_path=<PRIVATE>/elsewhere-asan | exit 2\nok   B   HR: UBSAN_OPTIONS=log_path=<PRIVATE>/elsewhere-ubsan | exit 2\nok   B   HR: ASAN_OPTIONS=halt_on_error=0 | exit 2\nok   B   HR: UBSAN_OPTIONS=halt_on_error=0 | exit 2\nok   B   HR: UBSAN_OPTIONS=suppressions=<PRIVATE>/supp.txt | exit 2\nok   B   HR: ASAN_OPTIONS=suppressions=<PRIVATE>/supp.txt | exit 2\nok   B   HR: ASAN_OPTIONS=hard_rss_limit_mb=2048:exitcode=0 | exit 2\nok   B   HR: ASAN_OPTIONS=hard_rss_limit_mb=2048 exitcode=0 | exit 2\nok   B   HR: ASAN_OPTIONS=hard_rss_limit_mb=2048,exitcode=0 | exit 2\nok   B   HR: ASAN_OPTIONS=hard_rss_limit_mb=2048\\nexitcode=0 | exit 2\nok   B   HR: ASAN_OPTIONS=include=<PRIVATE>/opts.txt | exit 2\nok   B   HR: UBSAN_OPTIONS=hard_rss_limit_mb=2048 | exit 2\nok   B   HR: ASAN_OPTIONS=abort_on_error=1 | exit 2\nok   B   SO with both: UBSAN_OPTIONS=exitcode=0 | exit 2\nok   C   S0: the status-0 report control, sanitized | exit 1\nok   D   failing-compiler-build | exit 77\nok   D   failing-compiler-both | exit 77\nok   D   working-compiler-build | exit 0\nok   E   no argument | exit 2\nok   E   a bad action | exit 2\nok   E   a missing source | exit 2\nok   E   run with nothing built | exit 2\nok   E   / as output directory | exit 2\nok   E   a path ending in .. | exit 2\nok   E   --field 3 | exit 2\nok   E   a bad explain-sigill name | exit 2\nok   E   a parent that others can write | exit 2\nok   E   an output folder that its group can write | exit 2\nok   E   an output folder that is a symbolic link | exit 2\nok   E   both on the passing test with its argument | exit 0\nok   E   both on the signed-overflow control | exit 1\n{\n \"required_cases\": 58,\n \"as_required\": 58,\n \"by_group\": {\n  \"A\": {\n   \"cases\": 8,\n   \"as_required\": 8\n  },\n  \"B\": {\n   \"cases\": 33,\n   \"as_required\": 33\n  },\n  \"C\": {\n   \"cases\": 1,\n   \"as_required\": 1\n  },\n  \"D\": {\n   \"cases\": 3,\n   \"as_required\": 3\n  },\n  \"E\": {\n   \"cases\": 13,\n   \"as_required\": 13\n  }\n },\n \"not_as_required\": [],\n \"e_stdout_equal\": 13,\n \"e_stderr_equal\": 10,\n \"elsewhere_files_at_end\": [],\n \"pass\": true\n}\n",
+  "stderr": "",
+  "summary": {
+    "required_cases": 58,
+    "as_required": 58,
+    "by_group": {
+      "A": {
+        "cases": 8,
+        "as_required": 8
+      },
+      "B": {
+        "cases": 33,
+        "as_required": 33
+      },
+      "C": {
+        "cases": 1,
+        "as_required": 1
+      },
+      "D": {
+        "cases": 3,
+        "as_required": 3
+      },
+      "E": {
+        "cases": 13,
+        "as_required": 13
+      }
+    },
+    "not_as_required": [],
+    "e_stdout_equal": 13,
+    "e_stderr_equal": 10,
+    "elsewhere_files_at_end": [],
+    "pass": true
+  },
+  "pass": true
+}
