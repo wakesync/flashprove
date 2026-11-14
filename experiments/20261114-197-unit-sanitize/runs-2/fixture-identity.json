@@ -1,0 +1,443 @@
+{
+  "compared": 82,
+  "equal": 82,
+  "not_regenerated_committed_files": [
+    "fixtures/dense-base/arrays.txt",
+    "fixtures/dense-base/layout.txt",
+    "fixtures/dense-changed-exp/layout.txt",
+    "fixtures/dense-changed-rope/layout.txt",
+    "fixtures/dense-changed-silu/layout.txt",
+    "fixtures/dense-duplicate/layout.txt",
+    "fixtures/dense-gcl/layout.txt",
+    "fixtures/dense-header-absent-class/layout.txt",
+    "fixtures/dense-header-absent-kind/layout.txt",
+    "fixtures/dense-invalid/layout.txt",
+    "fixtures/dense-no-digests/layout.txt",
+    "fixtures/dense-partial/layout.txt",
+    "fixtures/dense-rcl/layout.txt",
+    "fixtures/dense-reordered/layout.txt",
+    "fixtures/dense-sigmoid-0/layout.txt",
+    "fixtures/dense-sigmoid-1/layout.txt",
+    "fixtures/dense-sigmoid-2/layout.txt",
+    "fixtures/dense-sigmoid-3/layout.txt",
+    "fixtures/dense-sigmoid-4/layout.txt",
+    "fixtures/dense-sigmoid-5/layout.txt",
+    "fixtures/dense-sigmoid-6/layout.txt",
+    "fixtures/dense-sigmoid-7/layout.txt",
+    "fixtures/dense-valid/layout.txt"
+  ],
+  "not_regenerated_reason": "made by cp_verify -plan arrays and pack_layout.py; the reader does not read them",
+  "expectations_equal_committed": true,
+  "files": {
+    "fixtures/dense-base/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-base/policy.txt": {
+      "regenerated": "77b1450bb8501902638b47d4da016e06c280b1675e489548fcc83ee56eb50771",
+      "committed": "77b1450bb8501902638b47d4da016e06c280b1675e489548fcc83ee56eb50771",
+      "equal": true
+    },
+    "fixtures/dense-changed-exp/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-changed-exp/policy.txt": {
+      "regenerated": "e6f07781dfdce49fb7f56c0b14ad64406c76432185b5833a0ad7fdfb7d6427b7",
+      "committed": "e6f07781dfdce49fb7f56c0b14ad64406c76432185b5833a0ad7fdfb7d6427b7",
+      "equal": true
+    },
+    "fixtures/dense-changed-rope/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-changed-rope/policy.txt": {
+      "regenerated": "1e1806afcaacd6a4de3373a84bb8d996a4f122ee52294a7d1aaff0aaa3425110",
+      "committed": "1e1806afcaacd6a4de3373a84bb8d996a4f122ee52294a7d1aaff0aaa3425110",
+      "equal": true
+    },
+    "fixtures/dense-changed-silu/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-changed-silu/policy.txt": {
+      "regenerated": "8b9e9bc297de25181428db50b540d683fff21dfb90d46fbccbfd51dc75fb99e1",
+      "committed": "8b9e9bc297de25181428db50b540d683fff21dfb90d46fbccbfd51dc75fb99e1",
+      "equal": true
+    },
+    "fixtures/dense-duplicate/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-duplicate/policy.txt": {
+      "regenerated": "73c18e27caddd81bb87f4236af7d614771419e5ed669c8fbb812c79f6ed94b20",
+      "committed": "73c18e27caddd81bb87f4236af7d614771419e5ed669c8fbb812c79f6ed94b20",
+      "equal": true
+    },
+    "fixtures/dense-gcl/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-gcl/policy.txt": {
+      "regenerated": "65ab1268b7d4b785b8d73a7f18237ea1513f3607606384e5c9d2a566a9021955",
+      "committed": "65ab1268b7d4b785b8d73a7f18237ea1513f3607606384e5c9d2a566a9021955",
+      "equal": true
+    },
+    "fixtures/dense-header-absent-class/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-header-absent-class/policy.txt": {
+      "regenerated": "0902556488d1fec0ee817dbc059af708b0d82c69155435300ca2fa8f03f1fc88",
+      "committed": "0902556488d1fec0ee817dbc059af708b0d82c69155435300ca2fa8f03f1fc88",
+      "equal": true
+    },
+    "fixtures/dense-header-absent-kind/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-header-absent-kind/policy.txt": {
+      "regenerated": "6d9780c048f8f37c21dd06f6ef70d07d79e20694d36cb5f0be5693f2cd06a2d4",
+      "committed": "6d9780c048f8f37c21dd06f6ef70d07d79e20694d36cb5f0be5693f2cd06a2d4",
+      "equal": true
+    },
+    "fixtures/dense-invalid/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-invalid/policy.txt": {
+      "regenerated": "529dddc08253bb1d34b48b970b69da85b415d339c2c7c6b7053d4f69dad106da",
+      "committed": "529dddc08253bb1d34b48b970b69da85b415d339c2c7c6b7053d4f69dad106da",
+      "equal": true
+    },
+    "fixtures/dense-no-digests/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-no-digests/policy.txt": {
+      "regenerated": "77b1450bb8501902638b47d4da016e06c280b1675e489548fcc83ee56eb50771",
+      "committed": "77b1450bb8501902638b47d4da016e06c280b1675e489548fcc83ee56eb50771",
+      "equal": true
+    },
+    "fixtures/dense-partial/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-partial/policy.txt": {
+      "regenerated": "fca49213cb4bcdfd96743df5f82720a96c1b430c4c41e00da575094e11562161",
+      "committed": "fca49213cb4bcdfd96743df5f82720a96c1b430c4c41e00da575094e11562161",
+      "equal": true
+    },
+    "fixtures/dense-rcl/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-rcl/policy.txt": {
+      "regenerated": "55af26c36c6e1aad1ea92db6a4b48d81fbc7a1ec2e189abca4c5836dc84c978a",
+      "committed": "55af26c36c6e1aad1ea92db6a4b48d81fbc7a1ec2e189abca4c5836dc84c978a",
+      "equal": true
+    },
+    "fixtures/dense-reordered/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-reordered/policy.txt": {
+      "regenerated": "380a3f76b3b358ac4f2ff649d55d35b581f9387cb4f716539ec447d7f9ff5175",
+      "committed": "380a3f76b3b358ac4f2ff649d55d35b581f9387cb4f716539ec447d7f9ff5175",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-0/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-0/policy.txt": {
+      "regenerated": "b72c31b56f66e8b5df84f81a3a6f086e8721024863354da141db9d48dae4afda",
+      "committed": "b72c31b56f66e8b5df84f81a3a6f086e8721024863354da141db9d48dae4afda",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-1/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-1/policy.txt": {
+      "regenerated": "e68fd7dd2a04f99b4e3de930a62617c037de6aa3bc54a9ec81970d42c33864b6",
+      "committed": "e68fd7dd2a04f99b4e3de930a62617c037de6aa3bc54a9ec81970d42c33864b6",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-2/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-2/policy.txt": {
+      "regenerated": "13573d30256210336468007afc67bb7dc9c8f0518b27e87758b823ead1925797",
+      "committed": "13573d30256210336468007afc67bb7dc9c8f0518b27e87758b823ead1925797",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-3/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-3/policy.txt": {
+      "regenerated": "9f4fc99a38446cea8659c512171daff750fa691fbf2014ed042130868c11cd65",
+      "committed": "9f4fc99a38446cea8659c512171daff750fa691fbf2014ed042130868c11cd65",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-4/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-4/policy.txt": {
+      "regenerated": "ad8152714504c8e8ab3da503763b1d897320e988d9e392b4dd254812f6bbc53e",
+      "committed": "ad8152714504c8e8ab3da503763b1d897320e988d9e392b4dd254812f6bbc53e",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-5/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-5/policy.txt": {
+      "regenerated": "ab1384845f2a789f0b10d4ba0e7548e0e0dc259c5aa0b7ae0822cba1c1470241",
+      "committed": "ab1384845f2a789f0b10d4ba0e7548e0e0dc259c5aa0b7ae0822cba1c1470241",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-6/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-6/policy.txt": {
+      "regenerated": "635058fe12a534cc8600ebdaeac5b38e72561d088c74e77e5418122c797a94a7",
+      "committed": "635058fe12a534cc8600ebdaeac5b38e72561d088c74e77e5418122c797a94a7",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-7/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-sigmoid-7/policy.txt": {
+      "regenerated": "8fe60f3cfc11cb90c61bc973f97171e4acf108205d0ec77b419009e1dd5a6dc7",
+      "committed": "8fe60f3cfc11cb90c61bc973f97171e4acf108205d0ec77b419009e1dd5a6dc7",
+      "equal": true
+    },
+    "fixtures/dense-valid/KL.bin": {
+      "regenerated": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "committed": "241c6ce7bf0718f4a121c0b17b96605dc70a09a3d38e2179f872cc1138d62a7c",
+      "equal": true
+    },
+    "fixtures/dense-valid/policy.txt": {
+      "regenerated": "aa998c94cd535402b8bccf3c9d3591ab50eae03450d552f370802b0026207013",
+      "committed": "aa998c94cd535402b8bccf3c9d3591ab50eae03450d552f370802b0026207013",
+      "equal": true
+    },
+    "fixtures/experts-changed-exp/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-changed-exp/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-changed-exp/policy.txt": {
+      "regenerated": "b46e17be931bb9af5d54a96532033dc1d6629ce53ab37978f45aaa252aa1746d",
+      "committed": "b46e17be931bb9af5d54a96532033dc1d6629ce53ab37978f45aaa252aa1746d",
+      "equal": true
+    },
+    "fixtures/experts-changed-rope/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-changed-rope/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-changed-rope/policy.txt": {
+      "regenerated": "46525d03028e217dd90e27f165b4d486e3cec549a5655885d21f8a83ff3e0bae",
+      "committed": "46525d03028e217dd90e27f165b4d486e3cec549a5655885d21f8a83ff3e0bae",
+      "equal": true
+    },
+    "fixtures/experts-changed-sigmoid/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-changed-sigmoid/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-changed-sigmoid/policy.txt": {
+      "regenerated": "3355beb1a88894596fecae69adf572dc3fae60ee6c4bc9390196417eff47bbf0",
+      "committed": "3355beb1a88894596fecae69adf572dc3fae60ee6c4bc9390196417eff47bbf0",
+      "equal": true
+    },
+    "fixtures/experts-changed-silu/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-changed-silu/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-changed-silu/policy.txt": {
+      "regenerated": "dacc26d6b59ee9234e8a0b438655484a2316aaa236f50da1d8a1672c4c569818",
+      "committed": "dacc26d6b59ee9234e8a0b438655484a2316aaa236f50da1d8a1672c4c569818",
+      "equal": true
+    },
+    "fixtures/experts-duplicate/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-duplicate/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-duplicate/policy.txt": {
+      "regenerated": "7aeb18484ebaf59a8aaa27dd110e822671a7d28909e3b70735bf2bca1978a3a0",
+      "committed": "7aeb18484ebaf59a8aaa27dd110e822671a7d28909e3b70735bf2bca1978a3a0",
+      "equal": true
+    },
+    "fixtures/experts-gcl-zero/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-gcl-zero/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-gcl-zero/policy.txt": {
+      "regenerated": "ff6e17087c00cc4dfdc0531c0510dd5b3bdfd525dd1a43f72b3304fae77d34bf",
+      "committed": "ff6e17087c00cc4dfdc0531c0510dd5b3bdfd525dd1a43f72b3304fae77d34bf",
+      "equal": true
+    },
+    "fixtures/experts-invalid/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-invalid/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-invalid/policy.txt": {
+      "regenerated": "9d56ba2c928b7b91037e845b364795eb3b031ada1e7aded7094c0f45b5f36894",
+      "committed": "9d56ba2c928b7b91037e845b364795eb3b031ada1e7aded7094c0f45b5f36894",
+      "equal": true
+    },
+    "fixtures/experts-no-digests/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-no-digests/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-no-digests/policy.txt": {
+      "regenerated": "dc6c33c457dc49fcfcff67a130e20aa6a3f33b7d4af2ad64ac3ae85e0b289471",
+      "committed": "dc6c33c457dc49fcfcff67a130e20aa6a3f33b7d4af2ad64ac3ae85e0b289471",
+      "equal": true
+    },
+    "fixtures/experts-partial/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-partial/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-partial/policy.txt": {
+      "regenerated": "5fd92be0f7cbd9f1e12a7e946b27e65831ef7a51f148638b5a252b853d21c17f",
+      "committed": "5fd92be0f7cbd9f1e12a7e946b27e65831ef7a51f148638b5a252b853d21c17f",
+      "equal": true
+    },
+    "fixtures/experts-rcl-zero/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-rcl-zero/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-rcl-zero/policy.txt": {
+      "regenerated": "3d189169f45818439c54e279386405e60b5b28e6ef09319598e363322b3713e8",
+      "committed": "3d189169f45818439c54e279386405e60b5b28e6ef09319598e363322b3713e8",
+      "equal": true
+    },
+    "fixtures/experts-reordered/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-reordered/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-reordered/policy.txt": {
+      "regenerated": "4b9b06bbbb042de856f85bdd15c2edd80808e0137e6b6c5a6237ae9c5bea9f10",
+      "committed": "4b9b06bbbb042de856f85bdd15c2edd80808e0137e6b6c5a6237ae9c5bea9f10",
+      "equal": true
+    },
+    "fixtures/experts-valid/KL.bin": {
+      "regenerated": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "committed": "f8829d72c3022aac426321e7b64e8608e851ab6228563aa3eb0a9ca38d64bc98",
+      "equal": true
+    },
+    "fixtures/experts-valid/layout.txt": {
+      "regenerated": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "committed": "a0cce649d992c6f17d1e27c68ac4b900b828ff6ef0bfe8da7c2491fed9f02225",
+      "equal": true
+    },
+    "fixtures/experts-valid/policy.txt": {
+      "regenerated": "939b956c262ad6788e3578db68f82c2050460ad075a49030b4055b696dbe6986",
+      "committed": "939b956c262ad6788e3578db68f82c2050460ad075a49030b4055b696dbe6986",
+      "equal": true
+    },
+    "fixtures/reply.bin": {
+      "regenerated": "2594b6a92ebfb1c3312deb7d01c015fb95e9fbe9bd7bc6b527af07813ec7b910",
+      "committed": "2594b6a92ebfb1c3312deb7d01c015fb95e9fbe9bd7bc6b527af07813ec7b910",
+      "equal": true
+    },
+    "fixtures/request.bin": {
+      "regenerated": "356ed63295b2e648ba2bacd833972cf8f778caaf3b969462277320b3365d8d70",
+      "committed": "356ed63295b2e648ba2bacd833972cf8f778caaf3b969462277320b3365d8d70",
+      "equal": true
+    }
+  }
+}

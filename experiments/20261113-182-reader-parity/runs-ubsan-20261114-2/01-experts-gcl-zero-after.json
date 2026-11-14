@@ -1,0 +1,18 @@
+{
+  "command": "<PRIVATE_BUILD>/after/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-gcl-zero/policy.txt",
+  "exit": 2,
+  "stdout": "parse: ok\nadmission: policy-gcl: line 132: gcl must be 1\n",
+  "stderr": "",
+  "seconds": 0.012,
+  "limits": "RLIMIT_CPU 115/120, cores 10-11, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 1,
+  "case": "experts-gcl-zero",
+  "arm": "after",
+  "mode": "ubsan+asan",
+  "release": "policy-gcl",
+  "expected": "policy-gcl",
+  "observed": "policy-gcl",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true
+}
