@@ -29,6 +29,14 @@ run-meta.json, leaves-v2.json) must be a regular file exactly when the pin lists
 Otherwise EvidenceError (exit 2). The pin is a committed list that binds "registered run" to what the
 repository holds. It is NOT authentication: anyone who can change the repository can change the pin with
 the runs. Files the readers do not consume are not checked.
+Read once (PREREG amendment A-1 of that experiment, after review round 1 of PR #205): in registered mode each
+pinned file is read exactly once (read_registered, through _read_once). The SHA-256 is taken over those
+bytes and the same bytes are parsed by _load, load_leaves and the summariser's compare-file check. After
+that read, registered mode does not open, stat or list a pinned path again: whether a consumed file is
+present is decided by the checked set. The pin file is read once per invocation too. The default mode
+keeps its own reads and is unchanged.
+Command line (amendment A-2): `compare` refuses (exit 2, message starting USAGE:) fewer than three paths,
+a path that starts with `--`, and any argument after the output path other than `--registered`.
 
 Usage (from the top of the tree):
   wb_leafv2.py run <outdir> [--reverse] [--budget-s SECONDS]   fetch, hash, convert; writes outdir/blocks.jsonl
@@ -36,7 +44,7 @@ Usage (from the top of the tree):
   wb_leafv2.py compare <outdirA> <outdirB> <out.json>           byte-level comparison of two runs (H3)
   wb_leafv2.py compare <outdirA> <outdirB> <out.json> --registered   the same, after the registered-pin check
 Exit status of tree and compare: 0 ok (compare: no mismatch on the common blocks), 1 compare found a
-mismatch, 2 the evidence was refused (message on stderr).
+mismatch, 2 the evidence was refused, or the compare command line was not understood (message on stderr).
 """
 import hashlib, json, os, resource, shutil, struct, sys, time
 from pathlib import Path
@@ -332,13 +340,25 @@ def _check_record(r, where, names, changed, streams):
         bad("free_disk / rss_max_kb must be non-negative ints")
 
 
+class RegisteredRun:
+    """One registered read of a run directory (issue #203, PREREG amendment A-1): `files` maps each consumed
+    name the pin lists for this run to the bytes that were read ONCE and whose SHA-256 equalled the pin.
+    The readers parse these bytes and do not go back to the directory."""
+
+    def __init__(self, rundir, run, files):
+        self.dir, self.run, self.files = Path(rundir), run, dict(files)
+
+
 def _load(outdir, require_all=False):
-    d = Path(outdir)
+    snap = outdir if isinstance(outdir, RegisteredRun) else None    # registered mode: checked bytes, no re-read
+    d = snap.dir if snap else Path(outdir)
     p = d / "blocks.jsonl"
     names, changed = registered()
     streams = {pin: wbm.tensors_from_stream(str(STREAM[pin]))[2] for pin in ("stock", "abl")}
+    if snap and p.name not in snap.files:
+        raise EvidenceError("%s: cannot read (not in the registered read of %s)" % (p, snap.run))
     try:
-        raw = p.read_bytes()
+        raw = snap.files[p.name] if snap else p.read_bytes()
         text = raw.decode("utf-8")
     except (OSError, UnicodeDecodeError) as ex:
         raise EvidenceError("%s: cannot read (%s)" % (p, ex))
@@ -363,9 +383,9 @@ def _load(outdir, require_all=False):
         raise EvidenceError("%s: record order is neither a prefix of the registered order nor of its reverse "
                             "(a block is missing, moved or out of place)" % p)
     mp = d / "run-meta.json"
-    if mp.exists():
+    if (mp.name in snap.files) if snap else mp.exists():
         try:
-            meta = json.loads(mp.read_text())
+            meta = json.loads(snap.files[mp.name].decode("utf-8") if snap else mp.read_text())
         except ValueError as ex:
             raise EvidenceError("%s: not valid JSON (%s)" % (mp, ex))
         if not isinstance(meta, dict) or meta.get("done") != len(order) or meta.get("n_registered") != len(names):
@@ -435,12 +455,15 @@ def load_leaves(outdir, recs, conv=None):
     """Validated loader for a run directory's stored leaves-v2.json. The file is accepted only if it is byte
     for byte the tree `tree` builds from the directory's validated records: same leaf objects in the same
     order, same leaf hashes, roots, subset ids, checkpoint ids and config pins. Returns the document."""
-    p = Path(outdir) / "leaves-v2.json"
+    snap = outdir if isinstance(outdir, RegisteredRun) else None    # registered mode: checked bytes, no re-read
+    p = (snap.dir if snap else Path(outdir)) / "leaves-v2.json"
     names, _ = registered()
     if len(recs) != len(names):
         raise EvidenceError("%s: a stored tree next to an incomplete run (%d of %d records)" % (p, len(recs), len(names)))
+    if snap and p.name not in snap.files:
+        raise EvidenceError("%s: cannot read (not in the registered read of %s)" % (p, snap.run))
     try:
-        raw = p.read_bytes()
+        raw = snap.files[p.name] if snap else p.read_bytes()
     except OSError as ex:
         raise EvidenceError("%s: cannot read (%s)" % (p, ex))
     want = tree_doc(recs, conv)
@@ -467,13 +490,31 @@ PIN_PATH = ROOT / "experiments/20261112-149-leaf-v2/runs/registered-pins.json"  
 PIN_CONSUMED = ("blocks.jsonl", "leaves-v2.json", "run-meta.json")
 
 
-def load_pin():
-    """The committed registered-run pin. Always read from PIN_PATH, never from a run directory or its parent."""
+def _read_once(f):
+    """THE read of a pinned file in registered mode: one call per file per invocation, nothing else opens it.
+    A module attribute so that the tests can change a file around this call (in-process seam only, like
+    PIN_PATH: no command-line or environment form)."""
+    return Path(f).read_bytes()
+
+
+def read_pin():
+    """The committed registered-run pin and the SHA-256 of the bytes it was parsed from (one read).
+    Always read from PIN_PATH, never from a run directory or its parent."""
     p = Path(PIN_PATH)
     try:
-        pin = json.loads(p.read_text())
+        raw = p.read_bytes()
+        pin = json.loads(raw.decode("utf-8"))
     except (OSError, ValueError, UnicodeDecodeError) as ex:
         raise EvidenceError("registered pin %s: cannot read (%s)" % (p.name, ex))
+    return _pin_ok(pin, p), hashlib.sha256(raw).hexdigest()
+
+
+def load_pin():
+    """The committed registered-run pin (see read_pin)."""
+    return read_pin()[0]
+
+
+def _pin_ok(pin, p):
     ok = (isinstance(pin, dict) and isinstance(pin.get("runs"), dict) and isinstance(pin.get("compare_files"), dict)
           and pin.get("consumed_names") == list(PIN_CONSUMED)
           and all(isinstance(v, dict) and set(v) <= set(PIN_CONSUMED) and all(wbm._is_hex32(h) for h in v.values())
@@ -485,17 +526,24 @@ def load_pin():
 
 
 def _pinned_file(f, want, what):
+    """Read a pinned file once and return its bytes, or refuse. The bytes returned are the bytes hashed."""
     if f.is_symlink():
         raise EvidenceError("registered pin: %s is a symlink" % what)
     if not f.is_file():
         raise EvidenceError("registered pin: %s is pinned but missing or not a regular file" % what)
-    got = hashlib.sha256(f.read_bytes()).hexdigest()
+    try:
+        data = _read_once(f)
+    except OSError as ex:
+        raise EvidenceError("registered pin: %s cannot be read (%s)" % (what, type(ex).__name__))
+    got = hashlib.sha256(data).hexdigest()
     if got != want:
         raise EvidenceError("registered pin: %s has sha256 %s..., the pin says %s..." % (what, got[:12], want[:12]))
+    return data
 
 
-def check_registered(rundir, pin=None):
-    """Refuse (EvidenceError) a run directory that is not byte for byte the registered run of that name."""
+def read_registered(rundir, pin=None):
+    """Refuse (EvidenceError) a run directory that is not byte for byte the registered run of that name;
+    otherwise return a RegisteredRun holding the checked bytes of each pinned file, each read once."""
     pin = pin if pin is not None else load_pin()
     d = Path(rundir)
     run = os.path.basename(os.path.normpath(os.path.abspath(str(d))))
@@ -506,33 +554,53 @@ def check_registered(rundir, pin=None):
     if not d.is_dir():
         raise EvidenceError("registered pin: run directory %s is missing" % run)
     want = pin["runs"][run]
+    files = {}
     for name in PIN_CONSUMED:
         f = d / name
         if name in want:
-            _pinned_file(f, want[name], "%s/%s" % (run, name))
+            files[name] = _pinned_file(f, want[name], "%s/%s" % (run, name))
         elif f.exists() or f.is_symlink():
             raise EvidenceError("registered pin: %s/%s is present but not pinned for %s" % (run, name, run))
-    return run
+    return RegisteredRun(d, run, files)
+
+
+def check_registered(rundir, pin=None):
+    """Check only (see read_registered): the run name, or EvidenceError. A caller that goes on to parse the
+    run must use read_registered and parse the bytes it returns, not read the directory again."""
+    return read_registered(rundir, pin).run
+
+
+def read_registered_compare_files(runsdir, pin=None):
+    """Each pinned compare file in runsdir must be a regular file with the pinned SHA-256. Returns
+    name -> the checked bytes, each file read once."""
+    pin = pin if pin is not None else load_pin()
+    return {name: _pinned_file(Path(runsdir) / name, want, name) for name, want in sorted(pin["compare_files"].items())}
 
 
 def check_registered_compare_files(runsdir, pin=None):
-    """Each pinned compare file in runsdir must be a regular file with the pinned SHA-256."""
-    pin = pin if pin is not None else load_pin()
-    for name, want in sorted(pin["compare_files"].items()):
-        _pinned_file(Path(runsdir) / name, want, name)
+    """Check only (see read_registered_compare_files)."""
+    read_registered_compare_files(runsdir, pin)
 
 
 def pin_sha256():
+    """SHA-256 of the pin file as it is now (a separate read). Registered mode reports read_pin()'s hash."""
     return hashlib.sha256(Path(PIN_PATH).read_bytes()).hexdigest()
+
+
+def compare_registered(ra, rb):
+    """H3 comparison of two registered reads (RegisteredRun): parses the checked bytes only."""
+    if not (isinstance(ra, RegisteredRun) and isinstance(rb, RegisteredRun)):
+        raise TypeError("compare_registered takes two RegisteredRun objects")
+    return _compare_runs(ra, rb)
 
 
 def compare_runs(a, b, registered=False):
     if registered:
-        pin = load_pin()
-        check_registered(a, pin)
-        check_registered(b, pin)
-        d = _compare_runs(a, b)
-        d["registered_pin_sha256"] = pin_sha256()
+        pin, pin_sha = read_pin()
+        ra = read_registered(a, pin)
+        rb = read_registered(b, pin)
+        d = _compare_runs(ra, rb)
+        d["registered_pin_sha256"] = pin_sha
         return d
     return _compare_runs(a, b)
 
@@ -566,7 +634,7 @@ def _compare_runs(a, b):
     inputs = dict(a_blocks_sha256=sha_a, b_blocks_sha256=sha_b)
     docs = {}
     for tag, rd, recs in (("a", a, ra), ("b", b, rb)):
-        stored = (Path(rd) / "leaves-v2.json").exists()
+        stored = ("leaves-v2.json" in rd.files) if isinstance(rd, RegisteredRun) else (Path(rd) / "leaves-v2.json").exists()
         if len(recs) == len(names):
             docs[tag] = load_leaves(rd, recs, conv) if stored else tree_doc(recs, conv)
             if stored:
@@ -611,6 +679,10 @@ if __name__ == "__main__":
         elif a and a[0] == "tree":
             tree(a[1])
         elif a and a[0] == "compare":
+            if len(a) < 4 or any(x.startswith("--") for x in a[1:4]) or any(x != "--registered" for x in a[4:]):
+                print("USAGE: wb_leafv2.py compare <outdirA> <outdirB> <out.json> [--registered] (three paths, none "
+                      "starting with --; no other argument). Nothing was read or written.", file=sys.stderr)
+                sys.exit(2)
             sys.exit(0 if compare(a[1], a[2], a[3], registered="--registered" in a[4:]) else 1)
         else:
             print(__doc__)

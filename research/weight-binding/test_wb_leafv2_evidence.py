@@ -27,6 +27,10 @@ which must refuse; the old default-mode outcome stays pinned next to it as pin20
 because the default mode is unchanged by design and still gives those outcomes (a limit, not a contract).
 The cases named pin203-* at the end replay all 23 cases of #191's stoprule_cases.py in registered mode and
 try to defeat the pin (D1 to D12 of that PREREG). The pin is a committed list, NOT authentication.
+PREREG amendments A-1 / A-2 of that experiment (after review round 1 of PR #205): the cases named pin203-r2-*
+check that registered mode reads each pinned file once and parses the bytes it checked (a file changed just
+before its one read is refused; a change after the read has no effect on that reading and is refused on the
+next one), and that the two command lines refuse a missing output path and unknown flags.
 
 Usage (from the top of the tree): test_wb_leafv2_evidence.py [out.json]     exit 0 iff every expectation holds
 """
@@ -183,6 +187,8 @@ def r_summarise_reg_inproc(runs, run=None):
 READERS["compare-registered"] = r_compare_reg
 READERS["summarise-registered"] = r_summarise_reg
 READERS["summarise-registered (in-process, pin seam)"] = r_summarise_reg_inproc
+READERS["summarise-registered (in-process, read seam)"] = r_summarise_reg_inproc      # amendment A-1
+READERS["compare-registered (read seam)"] = r_compare_reg                             # amendment A-1
 
 
 def clean(msg):
@@ -230,6 +236,9 @@ def main(outp=None):
                        "(refused); pin203-default-mode-limit-* keep the unchanged default-mode outcomes as a limit; "
                        "pin203-* replay #191's 23 cases in registered mode and the defeat cases. The pin is a committed "
                        "list binding 'registered run' to what the repository holds, NOT authentication")
+    out["note_203_amendments"] = ("PREREG amendments A-1 / A-2 of issue #203 (review round 1 of PR 205): pin203-r2-* check "
+                                  "that registered mode reads each pinned file once and parses the checked bytes, and "
+                                  "that the command lines refuse a missing output path and unknown flags")
     if outp:
         with open(outp, "w") as f:
             json.dump(out, f, indent=1, sort_keys=True)
@@ -603,6 +612,7 @@ def cases():
                         got="rc %d" % r.returncode, reason=clean(r.stderr), ok=okk))
     stoprule_189()
     pin203()
+    pin203_r2()
 
 
 # ---------------------------------------------------------------- issue #189 stop-rule finding
@@ -887,6 +897,155 @@ def pin203():
         shutil.copy2(SRC / f, runs / f)
     expect(P + "D12-honest-copy-elsewhere", runs, "summarise-registered", "PASS",
            also=lambda s: s["h3"]["overall"]["basis"] == "single-run")
+
+
+# ---------------------------------------------------------------- issue #203, PREREG amendments A-1 and A-2
+@contextlib.contextmanager
+def read_seam(hook):
+    """In-process test seam only: wrap wb_leafv2._read_once (THE read of a pinned file in registered mode).
+    hook(path, read) must return the bytes; it may change files before or after calling read(path)."""
+    old = lv._read_once
+    lv._read_once = lambda f: hook(Path(f), old)
+    try:
+        yield
+    finally:
+        lv._read_once = old
+
+
+def pin203_r2():
+    """PREREG amendments A-1 (read once) and A-2 (command line) of issue #203, after review round 1 of PR #205.
+    Every fixture is a private copy under the suite's temporary directory; the committed runs are only read."""
+    import importlib.util
+    P = "pin203-r2-"
+    seam_s = "summarise-registered (in-process, read seam)"
+    seam_c = "compare-registered (read seam)"
+    spec = importlib.util.spec_from_file_location(
+        "pin203_r2_stoprule", ROOT / "experiments/20261113-189-missing-metadata/stoprule_cases.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+    committed_lines = sr.committed()
+
+    def forward_whole(runs):
+        sr.CASES[[x["name"] for x in sr.CASES].index("forward-78-whole")]["build"](runs, committed_lines)
+
+    # ---- R1: a pinned file changed after its file-type check and immediately before its ONE read: refused.
+    # Each change is one the parser alone would accept or report under another reason, so the refusal
+    # (reason "registered pin") shows that the parsed bytes are the hashed bytes.
+    def ch_blocks(runs):         # one timing field of one record: still a valid record, same leaves, same H3
+        rs = recs(runs)
+        rs[0]["stock"]["fetch_s"] = rs[0]["stock"]["fetch_s"] + 1
+        put_recs(runs, rs)
+
+    def ch_meta(runs):           # a field the reader does not use; still valid and consistent metadata
+        p = runs / "run3/run-meta.json"
+        m = json.loads(p.read_text())
+        m["seconds"] = m["seconds"] + 1
+        p.write_text(json.dumps(m, indent=1, sort_keys=True))
+
+    def ch_leaves(runs):         # the same tree document, other formatting
+        p = runs / "run3/leaves-v2.json"
+        p.write_text(json.dumps(json.loads(p.read_text()), indent=2, sort_keys=True) + "\n")
+
+    def ch_compare(runs):        # one field dropped: the cache check only compares the fields the file has
+        p = runs / CMP["run3"]
+        d = json.loads(p.read_text())
+        d.pop("n_identical")
+        p.write_text(json.dumps(d, indent=1, sort_keys=True))
+
+    def change_before_read(runs, rel, change):
+        target, fired = (runs / rel).resolve(), []
+
+        def hook(f, read):
+            if f.resolve() == target and not fired:
+                fired.append(rel)
+                change(runs)
+            return read(f)
+        return hook, fired
+
+    for tag, rel, change, with_compare in (("run3-blocks", "run3/blocks.jsonl", ch_blocks, True),
+                                           ("run3-meta", "run3/run-meta.json", ch_meta, True),
+                                           ("run3-leaves", "run3/leaves-v2.json", ch_leaves, True),
+                                           ("compare-file", CMP["run3"], ch_compare, False)):
+        case = P + "changed-before-read-" + tag
+        runs = fixture(case)
+        before = (runs / rel).read_bytes()
+        hook, fired = change_before_read(runs, rel, change)
+        with read_seam(hook):
+            expect(case, runs, seam_s, "refused", "registered pin",
+                   also=lambda _: fired == [rel] and (runs / rel).read_bytes() != before
+                   and not (runs / "summary-registered.json").exists())
+        if with_compare:         # a fresh copy: the first one is already changed on disk
+            runs = fixture(case + "-compare")
+            before = (runs / rel).read_bytes()
+            hook, fired = change_before_read(runs, rel, change)
+            with read_seam(hook):
+                expect(case, runs, seam_c, "refused", "registered pin",
+                       also=lambda _: fired == [rel] and (runs / rel).read_bytes() != before)
+
+    # ---- R2: the reviewer's probe P6 as a case. After the LAST pinned file has been read, run 3 is replaced
+    # by forward-78-whole (meta, tree and cached compare removed). A reader that reads once cannot see that:
+    # the result must be exactly the result of the committed files, with one read per pinned path. The same
+    # directory read again from the start is refused.
+    def swap_after(runs, n_reads):
+        reads, swapped = [], []
+
+        def hook(f, read):
+            data = read(f)
+            reads.append(str(f.resolve().relative_to(runs.resolve())))
+            if len(reads) == n_reads:
+                forward_whole(runs)
+                swapped.append(len(reads))
+            return data
+        return hook, reads, swapped
+
+    pinned_s = sorted(["run1/blocks.jsonl", "run1/leaves-v2.json", "run1/run-meta.json", "run2/blocks.jsonl",
+                       "run2/run-meta.json", "run3/blocks.jsonl", "run3/leaves-v2.json", "run3/run-meta.json"]
+                      + list(CMP.values()))
+    pinned_c = [p for p in pinned_s if p.startswith(("run1/", "run3/"))]
+    case = P + "P6-swapped-after-check"
+    runs = fixture(case)
+    hook, reads, swapped = swap_after(runs, len(pinned_s))
+    with read_seam(hook):
+        expect(case, runs, seam_s, "PASS",
+               also=lambda s: s["h3"]["overall"]["basis"] == "single-run"
+               and (runs / "summary-registered.json").read_bytes() == (SRC / "summary-registered.json").read_bytes()
+               and sorted(reads) == pinned_s and swapped == [len(pinned_s)]
+               and not (runs / "run3/run-meta.json").exists() and not (runs / CMP["run3"]).exists()
+               and (runs / "run3/blocks.jsonl").read_bytes() != (SRC / "run3/blocks.jsonl").read_bytes())
+    expect(case, runs, "summarise-registered", "refused", "registered pin")     # the altered directory, read afresh
+    runs = fixture(case + "-compare")
+    honest = lv.compare_runs(SRC / "run1", SRC / "run3")
+    hook, reads_c, swapped_c = swap_after(runs, len(pinned_c))
+    with read_seam(hook):
+        expect(case, runs, seam_c, "identical-complete",
+               also=lambda d: {k: v for k, v in d.items() if k != "registered_pin_sha256"} == honest
+               and sorted(reads_c) == pinned_c and swapped_c == [len(pinned_c)]
+               and not (runs / "run3/run-meta.json").exists())
+    expect(case, runs, "compare-registered", "refused", "registered pin")
+
+    # ---- A-2: command lines. A missing output path or an unknown flag is refused (exit 2, USAGE:), nothing written.
+    def cli(case, reader, args, runs):
+        cwd = runs.parent                      # not the repository: a stray output file must not land there
+        listing = lambda: sorted(str(p.relative_to(cwd)) for p in cwd.rglob("*"))
+        before = listing()
+        r = subprocess.run([sys.executable] + args, capture_output=True, text=True, cwd=str(cwd))
+        okk = r.returncode == 2 and r.stderr.startswith("USAGE:") and listing() == before
+        RES.append(dict(case=case, reader=reader, run="run3", expected="rc 2", expected_reason="USAGE:",
+                        got="rc %d" % r.returncode, reason=clean(r.stderr), ok=okk))
+
+    runs = fixture(P + "cli-compare-no-output-path")
+    forward_whole(runs)          # the reviewer's P7 input: in default mode this run 3 would be accepted
+    cli(P + "cli-compare-no-output-path", "compare --registered (command line)",
+        [CLI, "compare", str(runs / "run1"), str(runs / "run3"), "--registered"], runs)
+    runs = fixture(P + "cli-compare-unknown-flag")
+    cli(P + "cli-compare-unknown-flag", "compare --registred (command line)",
+        [CLI, "compare", str(runs / "run1"), str(runs / "run3"), str(runs / "cli.json"), "--registred"], runs)
+    runs = fixture(P + "cli-summarise-unknown-flag")
+    cli(P + "cli-summarise-unknown-flag", "summarise --registred (command line)",
+        [SUMM, "--registred", "--runs", str(runs)], runs)
+    runs = fixture(P + "cli-summarise-runs-without-dir")
+    cli(P + "cli-summarise-runs-without-dir", "summarise --runs --registered (command line)",
+        [SUMM, "--runs", "--registered"], runs)
 
 
 if __name__ == "__main__":
