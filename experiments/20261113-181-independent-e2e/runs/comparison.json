@@ -1,0 +1,4086 @@
+{
+  "checks": [
+    {
+      "field": "source_main",
+      "independent": "59bff9a4608e0cc720d58d7c30823a8838fa43e4",
+      "match": true,
+      "mode": "exact",
+      "target": "59bff9a4608e0cc720d58d7c30823a8838fa43e4",
+      "tolerance": 0
+    },
+    {
+      "field": "cells",
+      "independent": [
+        "abl/XS18",
+        "abl/XS20",
+        "stock/XS18",
+        "stock/XS20"
+      ],
+      "match": true,
+      "mode": "exact",
+      "target": [
+        "abl/XS18",
+        "abl/XS20",
+        "stock/XS18",
+        "stock/XS20"
+      ],
+      "tolerance": 0
+    },
+    {
+      "field": "summary.bars",
+      "independent": {
+        "kl_max_nats": 0.1,
+        "kl_median_nats": 0.0001,
+        "top1": 0.99
+      },
+      "match": true,
+      "mode": "exact",
+      "target": {
+        "kl_max_nats": 0.1,
+        "kl_median_nats": 0.0001,
+        "top1": 0.99
+      },
+      "tolerance": 0
+    },
+    {
+      "field": "stock.finished",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.errors",
+      "independent": [],
+      "match": true,
+      "mode": "exact",
+      "target": [],
+      "tolerance": 0
+    },
+    {
+      "field": "stock.sanity",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.deterministic",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.BF16H_context_n",
+      "independent": 608,
+      "match": true,
+      "mode": "exact",
+      "target": 608,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.REF#2.layers",
+      "independent": 47,
+      "match": true,
+      "mode": "exact",
+      "target": 47,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.REF#2.residual",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.REF#2.logits",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.XS18#2.layers",
+      "independent": 47,
+      "match": true,
+      "mode": "exact",
+      "target": 47,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.XS18#2.residual",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock.XS18#2.logits",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.agree",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.fraction",
+      "independent": 0.999315537303217,
+      "match": true,
+      "mode": "float",
+      "target": 0.999315537303217,
+      "tolerance": 1.009315537303217e-10
+    },
+    {
+      "field": "stock/XS18.prompt_count",
+      "independent": 10,
+      "match": true,
+      "mode": "exact",
+      "target": 10,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.dead_prompts",
+      "independent": [],
+      "match": true,
+      "mode": "exact",
+      "target": [],
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.verdict",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.bar.top1_ge_99pct",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.bar.kl_median_le_1e_4",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.bar.kl_max_le_0_1",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.guard",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.kl.median",
+      "independent": 3.160271585755936e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.160271585755936e-06,
+      "tolerance": 1.0003160271585755e-12
+    },
+    {
+      "field": "stock/XS18.kl.max",
+      "independent": 0.0027889248681098877,
+      "match": true,
+      "mode": "float",
+      "target": 0.0027889248681098877,
+      "tolerance": 1.2788924868109887e-12
+    },
+    {
+      "field": "stock/XS18.kl.min",
+      "independent": 0.0,
+      "match": true,
+      "mode": "float",
+      "target": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "field": "stock/XS18.kl.sample_sd",
+      "independent": 0.0001485821038828617,
+      "match": true,
+      "mode": "float",
+      "target": 0.0001485821038828617,
+      "tolerance": 1.0148582103882862e-12
+    },
+    {
+      "field": "stock/XS18.kl.p99_nearest_rank",
+      "independent": 0.00042622802827807504,
+      "match": true,
+      "mode": "float",
+      "target": 0.00042622802827807504,
+      "tolerance": 1.0426228028278075e-12
+    },
+    {
+      "field": "stock/XS18.prompt_ids",
+      "independent": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "match": true,
+      "mode": "exact",
+      "target": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.n",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.agree",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.kl.median",
+      "independent": 4.2033991221046563e-07,
+      "match": true,
+      "mode": "float",
+      "target": 4.2033991221046563e-07,
+      "tolerance": 1.000042033991221e-12
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.kl.max",
+      "independent": 4.871879152545944e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.871879152545944e-06,
+      "tolerance": 1.0004871879152547e-12
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.kl.min",
+      "independent": 1.5574652678651546e-08,
+      "match": true,
+      "mode": "float",
+      "target": 1.5574652678651546e-08,
+      "tolerance": 1.000001557465268e-12
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.kl.sample_sd",
+      "independent": 1.555092781737265e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.555092781737265e-06,
+      "tolerance": 1.0001555092781736e-12
+    },
+    {
+      "field": "stock/XS18.p01-ordinary-short.kl.p99_nearest_rank",
+      "independent": 4.871879152545944e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.871879152545944e-06,
+      "tolerance": 1.0004871879152547e-12
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.n",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.agree",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.kl.median",
+      "independent": 3.5848172217356478e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.5848172217356478e-06,
+      "tolerance": 1.0003584817221736e-12
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.kl.max",
+      "independent": 0.00015541047875089475,
+      "match": true,
+      "mode": "float",
+      "target": 0.00015541047875089475,
+      "tolerance": 1.0155410478750895e-12
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.kl.min",
+      "independent": 2.2033837865365058e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.2033837865365058e-08,
+      "tolerance": 1.0000022033837865e-12
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.kl.sample_sd",
+      "independent": 1.5942623574984496e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.5942623574984493e-05,
+      "tolerance": 1.0015942623574984e-12
+    },
+    {
+      "field": "stock/XS18.p02-ordinary-paragraph.kl.p99_nearest_rank",
+      "independent": 4.4521911163997174e-05,
+      "match": true,
+      "mode": "float",
+      "target": 4.4521911163997174e-05,
+      "tolerance": 1.0044521911163998e-12
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.n",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.agree",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.kl.median",
+      "independent": 4.348633353856712e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.348633353856712e-06,
+      "tolerance": 1.0004348633353856e-12
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.kl.max",
+      "independent": 0.0027889248681098877,
+      "match": true,
+      "mode": "float",
+      "target": 0.0027889248681098877,
+      "tolerance": 1.2788924868109887e-12
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.kl.min",
+      "independent": 9.448457305438751e-08,
+      "match": true,
+      "mode": "float",
+      "target": 9.448457305438751e-08,
+      "tolerance": 1.0000094484573055e-12
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.kl.sample_sd",
+      "independent": 0.0001887343709169912,
+      "match": true,
+      "mode": "float",
+      "target": 0.00018873437091699124,
+      "tolerance": 1.0188734370916992e-12
+    },
+    {
+      "field": "stock/XS18.p03-repeat-word.kl.p99_nearest_rank",
+      "independent": 0.0004655817003076379,
+      "match": true,
+      "mode": "float",
+      "target": 0.0004655817003076379,
+      "tolerance": 1.0465581700307639e-12
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.n",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.agree",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.kl.median",
+      "independent": 2.684055271373609e-07,
+      "match": true,
+      "mode": "float",
+      "target": 2.684055271373609e-07,
+      "tolerance": 1.0000268405527138e-12
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.kl.max",
+      "independent": 0.0020016484766500753,
+      "match": true,
+      "mode": "float",
+      "target": 0.0020016484766500753,
+      "tolerance": 1.2001648476650074e-12
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.kl.min",
+      "independent": 2.1081056900129624e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.1081056900129624e-08,
+      "tolerance": 1.00000210810569e-12
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.kl.sample_sd",
+      "independent": 0.0002501450401338048,
+      "match": true,
+      "mode": "float",
+      "target": 0.0002501450401338048,
+      "tolerance": 1.0250145040133804e-12
+    },
+    {
+      "field": "stock/XS18.p04-repeat-punct.kl.p99_nearest_rank",
+      "independent": 0.0020016484766500753,
+      "match": true,
+      "mode": "float",
+      "target": 0.0020016484766500753,
+      "tolerance": 1.2001648476650074e-12
+    },
+    {
+      "field": "stock/XS18.p05-code.n",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p05-code.agree",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p05-code.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p05-code.kl.median",
+      "independent": 3.353333966060745e-08,
+      "match": true,
+      "mode": "float",
+      "target": 3.353333966060745e-08,
+      "tolerance": 1.000003353333966e-12
+    },
+    {
+      "field": "stock/XS18.p05-code.kl.max",
+      "independent": 5.661456636829598e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.661456636829598e-06,
+      "tolerance": 1.000566145663683e-12
+    },
+    {
+      "field": "stock/XS18.p05-code.kl.min",
+      "independent": 9.154277336165251e-11,
+      "match": true,
+      "mode": "float",
+      "target": 9.154277336165251e-11,
+      "tolerance": 1.0000000091542774e-12
+    },
+    {
+      "field": "stock/XS18.p05-code.kl.sample_sd",
+      "independent": 7.624784284565332e-07,
+      "match": true,
+      "mode": "float",
+      "target": 7.624784284565332e-07,
+      "tolerance": 1.0000762478428456e-12
+    },
+    {
+      "field": "stock/XS18.p05-code.kl.p99_nearest_rank",
+      "independent": 3.586174340597381e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.586174340597381e-06,
+      "tolerance": 1.0003586174340596e-12
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.n",
+      "independent": 256,
+      "match": true,
+      "mode": "exact",
+      "target": 256,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.agree",
+      "independent": 255,
+      "match": true,
+      "mode": "exact",
+      "target": 255,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.fraction",
+      "independent": 0.99609375,
+      "match": true,
+      "mode": "float",
+      "target": 0.99609375,
+      "tolerance": 1.00609375e-10
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.kl.median",
+      "independent": 3.1762739904905857e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.1762739904905857e-06,
+      "tolerance": 1.0003176273990491e-12
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.kl.max",
+      "independent": 0.0003472427880275575,
+      "match": true,
+      "mode": "float",
+      "target": 0.0003472427880275575,
+      "tolerance": 1.0347242788027558e-12
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.kl.min",
+      "independent": 1.4078560894859038e-07,
+      "match": true,
+      "mode": "float",
+      "target": 1.4078560894859038e-07,
+      "tolerance": 1.0000140785608948e-12
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.kl.sample_sd",
+      "independent": 3.3861588953955734e-05,
+      "match": true,
+      "mode": "float",
+      "target": 3.3861588953955734e-05,
+      "tolerance": 1.0033861588953955e-12
+    },
+    {
+      "field": "stock/XS18.p06a-digits-256.kl.p99_nearest_rank",
+      "independent": 0.0001437931553027738,
+      "match": true,
+      "mode": "float",
+      "target": 0.0001437931553027738,
+      "tolerance": 1.0143793155302774e-12
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.n",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.agree",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.kl.median",
+      "independent": 2.4698394440747506e-09,
+      "match": true,
+      "mode": "float",
+      "target": 2.4698394440747506e-09,
+      "tolerance": 1.0000002469839443e-12
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.kl.max",
+      "independent": 0.0025114954117988475,
+      "match": true,
+      "mode": "float",
+      "target": 0.0025114954117988475,
+      "tolerance": 1.2511495411798847e-12
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.kl.min",
+      "independent": 4.263256414560601e-14,
+      "match": true,
+      "mode": "float",
+      "target": 4.263256414560601e-14,
+      "tolerance": 1.0000000000042633e-12
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.kl.sample_sd",
+      "independent": 0.0005236499999127692,
+      "match": true,
+      "mode": "float",
+      "target": 0.0005236499999127692,
+      "tolerance": 1.0523649999912769e-12
+    },
+    {
+      "field": "stock/XS18.p07-chat-ordinary.kl.p99_nearest_rank",
+      "independent": 0.0025114954117988475,
+      "match": true,
+      "mode": "float",
+      "target": 0.0025114954117988475,
+      "tolerance": 1.2511495411798847e-12
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.n",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.agree",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.kl.median",
+      "independent": 3.2287967854927047e-08,
+      "match": true,
+      "mode": "float",
+      "target": 3.2287967854927047e-08,
+      "tolerance": 1.0000032287967855e-12
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.kl.max",
+      "independent": 0.0002684899764275883,
+      "match": true,
+      "mode": "float",
+      "target": 0.0002684899764275883,
+      "tolerance": 1.0268489976427589e-12
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.kl.min",
+      "independent": 1.3500311979441904e-13,
+      "match": true,
+      "mode": "float",
+      "target": 1.3500311979441904e-13,
+      "tolerance": 1.0000000000135002e-12
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.kl.sample_sd",
+      "independent": 4.344057095570079e-05,
+      "match": true,
+      "mode": "float",
+      "target": 4.344057095570079e-05,
+      "tolerance": 1.00434405709557e-12
+    },
+    {
+      "field": "stock/XS18.p08-chat-refusal.kl.p99_nearest_rank",
+      "independent": 0.0002684899764275883,
+      "match": true,
+      "mode": "float",
+      "target": 0.0002684899764275883,
+      "tolerance": 1.0268489976427589e-12
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.n",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.agree",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.kl.median",
+      "independent": 6.42525453287135e-07,
+      "match": true,
+      "mode": "float",
+      "target": 6.42525453287135e-07,
+      "tolerance": 1.0000642525453288e-12
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.kl.max",
+      "independent": 5.557407334322306e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.557407334322306e-06,
+      "tolerance": 1.0005557407334321e-12
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.kl.min",
+      "independent": 2.870153181788737e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.870153181788737e-08,
+      "tolerance": 1.0000028701531817e-12
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.kl.sample_sd",
+      "independent": 1.4315469983035247e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.4315469983035247e-06,
+      "tolerance": 1.0001431546998302e-12
+    },
+    {
+      "field": "stock/XS18.p09-multilingual.kl.p99_nearest_rank",
+      "independent": 5.557407334322306e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.557407334322306e-06,
+      "tolerance": 1.0005557407334321e-12
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.n",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.agree",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.kl.median",
+      "independent": 9.665929765034775e-06,
+      "match": true,
+      "mode": "float",
+      "target": 9.665929765034775e-06,
+      "tolerance": 1.0009665929765035e-12
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.kl.max",
+      "independent": 0.0010724971066338185,
+      "match": true,
+      "mode": "float",
+      "target": 0.0010724971066338185,
+      "tolerance": 1.1072497106633818e-12
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.kl.min",
+      "independent": 0.0,
+      "match": true,
+      "mode": "float",
+      "target": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.kl.sample_sd",
+      "independent": 0.00010765337885901092,
+      "match": true,
+      "mode": "float",
+      "target": 0.00010765337885901092,
+      "tolerance": 1.010765337885901e-12
+    },
+    {
+      "field": "stock/XS18.p11-chat-long.kl.p99_nearest_rank",
+      "independent": 0.0006468752936790167,
+      "match": true,
+      "mode": "float",
+      "target": 0.0006468752936790167,
+      "tolerance": 1.0646875293679017e-12
+    },
+    {
+      "field": "stock/XS18.flip_count",
+      "independent": 1,
+      "match": true,
+      "mode": "exact",
+      "target": 1,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.flip0.prompt",
+      "independent": "p06a-digits-256",
+      "match": true,
+      "mode": "exact",
+      "target": "p06a-digits-256",
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.flip0.position",
+      "independent": 109,
+      "match": true,
+      "mode": "exact",
+      "target": 109,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.flip0.ref_token",
+      "independent": 19,
+      "match": true,
+      "mode": "exact",
+      "target": 19,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.flip0.path_token",
+      "independent": 17,
+      "match": true,
+      "mode": "exact",
+      "target": 17,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS18.flip0.margin",
+      "independent": 0.008824558138819327,
+      "match": true,
+      "mode": "float",
+      "target": 0.008824558138819327,
+      "tolerance": 1.882455813881933e-12
+    },
+    {
+      "field": "stock/XS20.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.agree",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.prompt_count",
+      "independent": 10,
+      "match": true,
+      "mode": "exact",
+      "target": 10,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.dead_prompts",
+      "independent": [],
+      "match": true,
+      "mode": "exact",
+      "target": [],
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.verdict",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.bar.top1_ge_99pct",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.bar.kl_median_le_1e_4",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.bar.kl_max_le_0_1",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.guard",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.kl.median",
+      "independent": 1.9897926399892185e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.9897926399892185e-06,
+      "tolerance": 1.0001989792639989e-12
+    },
+    {
+      "field": "stock/XS20.kl.max",
+      "independent": 0.0024034514146649144,
+      "match": true,
+      "mode": "float",
+      "target": 0.0024034514146649144,
+      "tolerance": 1.2403451414664915e-12
+    },
+    {
+      "field": "stock/XS20.kl.min",
+      "independent": -7.105427357601002e-15,
+      "match": true,
+      "mode": "float",
+      "target": -7.105427357601002e-15,
+      "tolerance": 1.0000000000007104e-12
+    },
+    {
+      "field": "stock/XS20.kl.sample_sd",
+      "independent": 0.00011669050154587873,
+      "match": true,
+      "mode": "float",
+      "target": 0.00011669050154587876,
+      "tolerance": 1.0116690501545878e-12
+    },
+    {
+      "field": "stock/XS20.kl.p99_nearest_rank",
+      "independent": 0.00013605242564906916,
+      "match": true,
+      "mode": "float",
+      "target": 0.00013605242564906916,
+      "tolerance": 1.013605242564907e-12
+    },
+    {
+      "field": "stock/XS20.prompt_ids",
+      "independent": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "match": true,
+      "mode": "exact",
+      "target": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.n",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.agree",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.kl.median",
+      "independent": 5.549207067190309e-07,
+      "match": true,
+      "mode": "float",
+      "target": 5.549207067190309e-07,
+      "tolerance": 1.0000554920706718e-12
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.kl.max",
+      "independent": 3.4329665297150314e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.4329665297150314e-06,
+      "tolerance": 1.0003432966529714e-12
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.kl.min",
+      "independent": 1.0757851498510718e-08,
+      "match": true,
+      "mode": "float",
+      "target": 1.0757851498510718e-08,
+      "tolerance": 1.0000010757851499e-12
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.kl.sample_sd",
+      "independent": 1.1960332767883277e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.196033276788328e-06,
+      "tolerance": 1.0001196033276789e-12
+    },
+    {
+      "field": "stock/XS20.p01-ordinary-short.kl.p99_nearest_rank",
+      "independent": 3.4329665297150314e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.4329665297150314e-06,
+      "tolerance": 1.0003432966529714e-12
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.n",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.agree",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.kl.median",
+      "independent": 2.8552144719640182e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.8552144719640182e-06,
+      "tolerance": 1.0002855214471965e-12
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.kl.max",
+      "independent": 0.00018409103320138342,
+      "match": true,
+      "mode": "float",
+      "target": 0.00018409103320138342,
+      "tolerance": 1.0184091033201384e-12
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.kl.min",
+      "independent": 5.704823280439086e-09,
+      "match": true,
+      "mode": "float",
+      "target": 5.704823280439086e-09,
+      "tolerance": 1.000000570482328e-12
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.kl.sample_sd",
+      "independent": 1.814089875245142e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.814089875245142e-05,
+      "tolerance": 1.0018140898752452e-12
+    },
+    {
+      "field": "stock/XS20.p02-ordinary-paragraph.kl.p99_nearest_rank",
+      "independent": 3.4657871111676286e-05,
+      "match": true,
+      "mode": "float",
+      "target": 3.4657871111676286e-05,
+      "tolerance": 1.0034657871111675e-12
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.n",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.agree",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.kl.median",
+      "independent": 2.9054823151852815e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.9054823151852815e-06,
+      "tolerance": 1.0002905482315184e-12
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.kl.max",
+      "independent": 0.0024034514146649144,
+      "match": true,
+      "mode": "float",
+      "target": 0.0024034514146649144,
+      "tolerance": 1.2403451414664915e-12
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.kl.min",
+      "independent": 7.491711784268773e-08,
+      "match": true,
+      "mode": "float",
+      "target": 7.491711784268773e-08,
+      "tolerance": 1.0000074917117842e-12
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.kl.sample_sd",
+      "independent": 0.0001945811795154493,
+      "match": true,
+      "mode": "float",
+      "target": 0.0001945811795154493,
+      "tolerance": 1.0194581179515448e-12
+    },
+    {
+      "field": "stock/XS20.p03-repeat-word.kl.p99_nearest_rank",
+      "independent": 0.00048757671597243757,
+      "match": true,
+      "mode": "float",
+      "target": 0.00048757671597243757,
+      "tolerance": 1.0487576715972437e-12
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.n",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.agree",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.kl.median",
+      "independent": 9.521188459871155e-08,
+      "match": true,
+      "mode": "float",
+      "target": 9.521188459871155e-08,
+      "tolerance": 1.0000095211884598e-12
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.kl.max",
+      "independent": 9.712277860529639e-05,
+      "match": true,
+      "mode": "float",
+      "target": 9.712277860529639e-05,
+      "tolerance": 1.0097122778605295e-12
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.kl.min",
+      "independent": 2.189210590586299e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.189210590586299e-08,
+      "tolerance": 1.0000021892105906e-12
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.kl.sample_sd",
+      "independent": 1.2120498783514394e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.2120498783514392e-05,
+      "tolerance": 1.0012120498783514e-12
+    },
+    {
+      "field": "stock/XS20.p04-repeat-punct.kl.p99_nearest_rank",
+      "independent": 9.712277860529639e-05,
+      "match": true,
+      "mode": "float",
+      "target": 9.712277860529639e-05,
+      "tolerance": 1.0097122778605295e-12
+    },
+    {
+      "field": "stock/XS20.p05-code.n",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p05-code.agree",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p05-code.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p05-code.kl.median",
+      "independent": 2.762076611872999e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.762076611872999e-08,
+      "tolerance": 1.000002762076612e-12
+    },
+    {
+      "field": "stock/XS20.p05-code.kl.max",
+      "independent": 5.280567794585522e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.280567794585522e-06,
+      "tolerance": 1.0005280567794585e-12
+    },
+    {
+      "field": "stock/XS20.p05-code.kl.min",
+      "independent": 8.196820999728516e-11,
+      "match": true,
+      "mode": "float",
+      "target": 8.196820999728516e-11,
+      "tolerance": 1.000000008196821e-12
+    },
+    {
+      "field": "stock/XS20.p05-code.kl.sample_sd",
+      "independent": 6.228862625324501e-07,
+      "match": true,
+      "mode": "float",
+      "target": 6.228862625324501e-07,
+      "tolerance": 1.0000622886262532e-12
+    },
+    {
+      "field": "stock/XS20.p05-code.kl.p99_nearest_rank",
+      "independent": 2.6810220923323413e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.6810220923323413e-06,
+      "tolerance": 1.0002681022092333e-12
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.n",
+      "independent": 256,
+      "match": true,
+      "mode": "exact",
+      "target": 256,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.agree",
+      "independent": 256,
+      "match": true,
+      "mode": "exact",
+      "target": 256,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.kl.median",
+      "independent": 1.3932938944805073e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.3932938944805073e-06,
+      "tolerance": 1.000139329389448e-12
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.kl.max",
+      "independent": 0.00011221398004579441,
+      "match": true,
+      "mode": "float",
+      "target": 0.00011221398004579441,
+      "tolerance": 1.0112213980045795e-12
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.kl.min",
+      "independent": 5.5518178498914494e-08,
+      "match": true,
+      "mode": "float",
+      "target": 5.5518178498914494e-08,
+      "tolerance": 1.00000555181785e-12
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.kl.sample_sd",
+      "independent": 9.92414620546596e-06,
+      "match": true,
+      "mode": "float",
+      "target": 9.924146205465962e-06,
+      "tolerance": 1.0009924146205465e-12
+    },
+    {
+      "field": "stock/XS20.p06a-digits-256.kl.p99_nearest_rank",
+      "independent": 5.501905131310991e-05,
+      "match": true,
+      "mode": "float",
+      "target": 5.501905131310991e-05,
+      "tolerance": 1.005501905131311e-12
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.n",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.agree",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.kl.median",
+      "independent": 3.943561921460059e-09,
+      "match": true,
+      "mode": "float",
+      "target": 3.943561921460059e-09,
+      "tolerance": 1.0000003943561921e-12
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.kl.max",
+      "independent": 0.00011417306009420258,
+      "match": true,
+      "mode": "float",
+      "target": 0.00011417306009420258,
+      "tolerance": 1.0114173060094203e-12
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.kl.min",
+      "independent": 1.4210854715202004e-14,
+      "match": true,
+      "mode": "float",
+      "target": 1.4210854715202004e-14,
+      "tolerance": 1.000000000001421e-12
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.kl.sample_sd",
+      "independent": 2.378343759371767e-05,
+      "match": true,
+      "mode": "float",
+      "target": 2.378343759371767e-05,
+      "tolerance": 1.0023783437593717e-12
+    },
+    {
+      "field": "stock/XS20.p07-chat-ordinary.kl.p99_nearest_rank",
+      "independent": 0.00011417306009420258,
+      "match": true,
+      "mode": "float",
+      "target": 0.00011417306009420258,
+      "tolerance": 1.0114173060094203e-12
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.n",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.agree",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.kl.median",
+      "independent": 4.3813997763209045e-08,
+      "match": true,
+      "mode": "float",
+      "target": 4.3813997763209045e-08,
+      "tolerance": 1.0000043813997763e-12
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.kl.max",
+      "independent": 5.793744458060246e-05,
+      "match": true,
+      "mode": "float",
+      "target": 5.793744458060246e-05,
+      "tolerance": 1.0057937444580602e-12
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.kl.min",
+      "independent": 5.329070518200751e-13,
+      "match": true,
+      "mode": "float",
+      "target": 5.329070518200751e-13,
+      "tolerance": 1.0000000000532907e-12
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.kl.sample_sd",
+      "independent": 9.368880165446571e-06,
+      "match": true,
+      "mode": "float",
+      "target": 9.368880165446573e-06,
+      "tolerance": 1.0009368880165446e-12
+    },
+    {
+      "field": "stock/XS20.p08-chat-refusal.kl.p99_nearest_rank",
+      "independent": 5.793744458060246e-05,
+      "match": true,
+      "mode": "float",
+      "target": 5.793744458060246e-05,
+      "tolerance": 1.0057937444580602e-12
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.n",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.agree",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.kl.median",
+      "independent": 9.452562359513195e-07,
+      "match": true,
+      "mode": "float",
+      "target": 9.452562359513195e-07,
+      "tolerance": 1.000094525623595e-12
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.kl.max",
+      "independent": 3.6082195791209415e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.6082195791209415e-06,
+      "tolerance": 1.000360821957912e-12
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.kl.min",
+      "independent": 2.866231696430077e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.866231696430077e-08,
+      "tolerance": 1.0000028662316965e-12
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.kl.sample_sd",
+      "independent": 1.1435374757359624e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.1435374757359622e-06,
+      "tolerance": 1.0001143537475736e-12
+    },
+    {
+      "field": "stock/XS20.p09-multilingual.kl.p99_nearest_rank",
+      "independent": 3.6082195791209415e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.6082195791209415e-06,
+      "tolerance": 1.000360821957912e-12
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.n",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.agree",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.kl.median",
+      "independent": 4.195425075792514e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.195425075792514e-06,
+      "tolerance": 1.0004195425075792e-12
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.kl.max",
+      "independent": 0.0003464961461148164,
+      "match": true,
+      "mode": "float",
+      "target": 0.0003464961461148164,
+      "tolerance": 1.0346496146114815e-12
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.kl.min",
+      "independent": -7.105427357601002e-15,
+      "match": true,
+      "mode": "float",
+      "target": -7.105427357601002e-15,
+      "tolerance": 1.0000000000007104e-12
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.kl.sample_sd",
+      "independent": 2.6391827701696877e-05,
+      "match": true,
+      "mode": "float",
+      "target": 2.639182770169688e-05,
+      "tolerance": 1.0026391827701697e-12
+    },
+    {
+      "field": "stock/XS20.p11-chat-long.kl.p99_nearest_rank",
+      "independent": 9.481604506689223e-05,
+      "match": true,
+      "mode": "float",
+      "target": 9.481604506689223e-05,
+      "tolerance": 1.0094816045066892e-12
+    },
+    {
+      "field": "stock/XS20.flip_count",
+      "independent": 0,
+      "match": true,
+      "mode": "exact",
+      "target": 0,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.finished",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.errors",
+      "independent": [],
+      "match": true,
+      "mode": "exact",
+      "target": [],
+      "tolerance": 0
+    },
+    {
+      "field": "abl.sanity",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.deterministic",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.BF16H_context_n",
+      "independent": 608,
+      "match": true,
+      "mode": "exact",
+      "target": 608,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.REF#2.layers",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.REF#2.residual",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.REF#2.logits",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.XS18#2.layers",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.XS18#2.residual",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl.XS18#2.logits",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.agree",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.fraction",
+      "independent": 0.999315537303217,
+      "match": true,
+      "mode": "float",
+      "target": 0.999315537303217,
+      "tolerance": 1.009315537303217e-10
+    },
+    {
+      "field": "abl/XS18.prompt_count",
+      "independent": 10,
+      "match": true,
+      "mode": "exact",
+      "target": 10,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.dead_prompts",
+      "independent": [],
+      "match": true,
+      "mode": "exact",
+      "target": [],
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.verdict",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.bar.top1_ge_99pct",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.bar.kl_median_le_1e_4",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.bar.kl_max_le_0_1",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.guard",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.kl.median",
+      "independent": 2.9478390111137287e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.9478390111137287e-06,
+      "tolerance": 1.0002947839011113e-12
+    },
+    {
+      "field": "abl/XS18.kl.max",
+      "independent": 0.005657224845904807,
+      "match": true,
+      "mode": "float",
+      "target": 0.005657224845904807,
+      "tolerance": 1.5657224845904808e-12
+    },
+    {
+      "field": "abl/XS18.kl.min",
+      "independent": 7.105427357601002e-15,
+      "match": true,
+      "mode": "float",
+      "target": 7.105427357601002e-15,
+      "tolerance": 1.0000000000007104e-12
+    },
+    {
+      "field": "abl/XS18.kl.sample_sd",
+      "independent": 0.0002150136142250639,
+      "match": true,
+      "mode": "float",
+      "target": 0.0002150136142250639,
+      "tolerance": 1.0215013614225064e-12
+    },
+    {
+      "field": "abl/XS18.kl.p99_nearest_rank",
+      "independent": 0.00034688232090829274,
+      "match": true,
+      "mode": "float",
+      "target": 0.00034688232090829274,
+      "tolerance": 1.0346882320908292e-12
+    },
+    {
+      "field": "abl/XS18.prompt_ids",
+      "independent": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "match": true,
+      "mode": "exact",
+      "target": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.n",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.agree",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.kl.median",
+      "independent": 4.315603199245288e-07,
+      "match": true,
+      "mode": "float",
+      "target": 4.315603199245288e-07,
+      "tolerance": 1.0000431560319925e-12
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.kl.max",
+      "independent": 4.145886219220074e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.145886219220074e-06,
+      "tolerance": 1.000414588621922e-12
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.kl.min",
+      "independent": 2.148580335870065e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.148580335870065e-08,
+      "tolerance": 1.000002148580336e-12
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.kl.sample_sd",
+      "independent": 1.347760397414361e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.347760397414361e-06,
+      "tolerance": 1.0001347760397414e-12
+    },
+    {
+      "field": "abl/XS18.p01-ordinary-short.kl.p99_nearest_rank",
+      "independent": 4.145886219220074e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.145886219220074e-06,
+      "tolerance": 1.000414588621922e-12
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.n",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.agree",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.kl.median",
+      "independent": 4.034260093987996e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.034260093987996e-06,
+      "tolerance": 1.0004034260093989e-12
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.kl.max",
+      "independent": 0.00013153060221071655,
+      "match": true,
+      "mode": "float",
+      "target": 0.00013153060221071655,
+      "tolerance": 1.0131530602210717e-12
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.kl.min",
+      "independent": 3.5991387647982265e-08,
+      "match": true,
+      "mode": "float",
+      "target": 3.5991387647982265e-08,
+      "tolerance": 1.0000035991387649e-12
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.kl.sample_sd",
+      "independent": 1.563043040235891e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.563043040235891e-05,
+      "tolerance": 1.0015630430402358e-12
+    },
+    {
+      "field": "abl/XS18.p02-ordinary-paragraph.kl.p99_nearest_rank",
+      "independent": 7.925560926480557e-05,
+      "match": true,
+      "mode": "float",
+      "target": 7.925560926480557e-05,
+      "tolerance": 1.0079255609264805e-12
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.n",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.agree",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.kl.median",
+      "independent": 4.007034155151246e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.007034155151246e-06,
+      "tolerance": 1.000400703415515e-12
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.kl.max",
+      "independent": 0.005657224845904807,
+      "match": true,
+      "mode": "float",
+      "target": 0.005657224845904807,
+      "tolerance": 1.5657224845904808e-12
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.kl.min",
+      "independent": 2.1032767349993264e-07,
+      "match": true,
+      "mode": "float",
+      "target": 2.1032767349993264e-07,
+      "tolerance": 1.00002103276735e-12
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.kl.sample_sd",
+      "independent": 0.00033539442176087105,
+      "match": true,
+      "mode": "float",
+      "target": 0.00033539442176087105,
+      "tolerance": 1.033539442176087e-12
+    },
+    {
+      "field": "abl/XS18.p03-repeat-word.kl.p99_nearest_rank",
+      "independent": 0.0005796242691999964,
+      "match": true,
+      "mode": "float",
+      "target": 0.0005796242691999964,
+      "tolerance": 1.0579624269199995e-12
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.n",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.agree",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.kl.median",
+      "independent": 2.289485383499823e-07,
+      "match": true,
+      "mode": "float",
+      "target": 2.289485383499823e-07,
+      "tolerance": 1.000022894853835e-12
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.kl.max",
+      "independent": 1.0711088794579382e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.0711088794579382e-05,
+      "tolerance": 1.0010711088794579e-12
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.kl.min",
+      "independent": 2.661750286847564e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.661750286847564e-08,
+      "tolerance": 1.0000026617502869e-12
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.kl.sample_sd",
+      "independent": 1.5505818569893545e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.5505818569893545e-06,
+      "tolerance": 1.000155058185699e-12
+    },
+    {
+      "field": "abl/XS18.p04-repeat-punct.kl.p99_nearest_rank",
+      "independent": 1.0711088794579382e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.0711088794579382e-05,
+      "tolerance": 1.0010711088794579e-12
+    },
+    {
+      "field": "abl/XS18.p05-code.n",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p05-code.agree",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p05-code.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p05-code.kl.median",
+      "independent": 3.507935630864267e-08,
+      "match": true,
+      "mode": "float",
+      "target": 3.507935630864267e-08,
+      "tolerance": 1.0000035079356309e-12
+    },
+    {
+      "field": "abl/XS18.p05-code.kl.max",
+      "independent": 4.736771511915094e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.736771511915094e-06,
+      "tolerance": 1.0004736771511914e-12
+    },
+    {
+      "field": "abl/XS18.p05-code.kl.min",
+      "independent": 1.128093174429523e-10,
+      "match": true,
+      "mode": "float",
+      "target": 1.128093174429523e-10,
+      "tolerance": 1.0000000112809317e-12
+    },
+    {
+      "field": "abl/XS18.p05-code.kl.sample_sd",
+      "independent": 7.501645589441987e-07,
+      "match": true,
+      "mode": "float",
+      "target": 7.501645589441987e-07,
+      "tolerance": 1.0000750164558944e-12
+    },
+    {
+      "field": "abl/XS18.p05-code.kl.p99_nearest_rank",
+      "independent": 3.6524951347871593e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.6524951347871593e-06,
+      "tolerance": 1.0003652495134786e-12
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.n",
+      "independent": 256,
+      "match": true,
+      "mode": "exact",
+      "target": 256,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.agree",
+      "independent": 255,
+      "match": true,
+      "mode": "exact",
+      "target": 255,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.fraction",
+      "independent": 0.99609375,
+      "match": true,
+      "mode": "float",
+      "target": 0.99609375,
+      "tolerance": 1.00609375e-10
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.kl.median",
+      "independent": 2.717002349328368e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.717002349328368e-06,
+      "tolerance": 1.0002717002349327e-12
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.kl.max",
+      "independent": 0.00011530519735458711,
+      "match": true,
+      "mode": "float",
+      "target": 0.00011530519735458711,
+      "tolerance": 1.0115305197354586e-12
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.kl.min",
+      "independent": 1.0494229130131316e-07,
+      "match": true,
+      "mode": "float",
+      "target": 1.0494229130131316e-07,
+      "tolerance": 1.00001049422913e-12
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.kl.sample_sd",
+      "independent": 1.8200777208868558e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.8200777208868558e-05,
+      "tolerance": 1.0018200777208867e-12
+    },
+    {
+      "field": "abl/XS18.p06a-digits-256.kl.p99_nearest_rank",
+      "independent": 9.64566713861359e-05,
+      "match": true,
+      "mode": "float",
+      "target": 9.64566713861359e-05,
+      "tolerance": 1.0096456671386136e-12
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.n",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.agree",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.kl.median",
+      "independent": 4.751456117446651e-09,
+      "match": true,
+      "mode": "float",
+      "target": 4.751456117446651e-09,
+      "tolerance": 1.0000004751456117e-12
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.kl.max",
+      "independent": 0.0013348727369582036,
+      "match": true,
+      "mode": "float",
+      "target": 0.0013348727369582036,
+      "tolerance": 1.1334872736958204e-12
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.kl.min",
+      "independent": 1.4210854715202004e-14,
+      "match": true,
+      "mode": "float",
+      "target": 1.4210854715202004e-14,
+      "tolerance": 1.000000000001421e-12
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.kl.sample_sd",
+      "independent": 0.00027832230888755595,
+      "match": true,
+      "mode": "float",
+      "target": 0.00027832230888755595,
+      "tolerance": 1.0278322308887557e-12
+    },
+    {
+      "field": "abl/XS18.p07-chat-ordinary.kl.p99_nearest_rank",
+      "independent": 0.0013348727369582036,
+      "match": true,
+      "mode": "float",
+      "target": 0.0013348727369582036,
+      "tolerance": 1.1334872736958204e-12
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.n",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.agree",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.kl.median",
+      "independent": 1.0235642378120247e-07,
+      "match": true,
+      "mode": "float",
+      "target": 1.0235642378120247e-07,
+      "tolerance": 1.0000102356423782e-12
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.kl.max",
+      "independent": 4.172425143167402e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.172425143167402e-06,
+      "tolerance": 1.0004172425143167e-12
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.kl.min",
+      "independent": 1.7763568394002505e-13,
+      "match": true,
+      "mode": "float",
+      "target": 1.7763568394002505e-13,
+      "tolerance": 1.0000000000177636e-12
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.kl.sample_sd",
+      "independent": 9.460499959701908e-07,
+      "match": true,
+      "mode": "float",
+      "target": 9.460499959701908e-07,
+      "tolerance": 1.000094604999597e-12
+    },
+    {
+      "field": "abl/XS18.p08-chat-refusal.kl.p99_nearest_rank",
+      "independent": 4.172425143167402e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.172425143167402e-06,
+      "tolerance": 1.0004172425143167e-12
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.n",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.agree",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.kl.median",
+      "independent": 1.137720413879606e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.137720413879606e-06,
+      "tolerance": 1.000113772041388e-12
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.kl.max",
+      "independent": 6.859914826407021e-06,
+      "match": true,
+      "mode": "float",
+      "target": 6.859914826407021e-06,
+      "tolerance": 1.0006859914826407e-12
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.kl.min",
+      "independent": 6.487190873372128e-08,
+      "match": true,
+      "mode": "float",
+      "target": 6.487190873372128e-08,
+      "tolerance": 1.0000064871908734e-12
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.kl.sample_sd",
+      "independent": 1.7990440342527107e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.7990440342527107e-06,
+      "tolerance": 1.0001799044034253e-12
+    },
+    {
+      "field": "abl/XS18.p09-multilingual.kl.p99_nearest_rank",
+      "independent": 6.859914826407021e-06,
+      "match": true,
+      "mode": "float",
+      "target": 6.859914826407021e-06,
+      "tolerance": 1.0006859914826407e-12
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.n",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.agree",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.kl.median",
+      "independent": 6.15608523801825e-06,
+      "match": true,
+      "mode": "float",
+      "target": 6.15608523801825e-06,
+      "tolerance": 1.0006156085238019e-12
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.kl.max",
+      "independent": 0.002308265373468288,
+      "match": true,
+      "mode": "float",
+      "target": 0.002308265373468288,
+      "tolerance": 1.2308265373468287e-12
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.kl.min",
+      "independent": 7.105427357601002e-15,
+      "match": true,
+      "mode": "float",
+      "target": 7.105427357601002e-15,
+      "tolerance": 1.0000000000007104e-12
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.kl.sample_sd",
+      "independent": 0.00016609680587881492,
+      "match": true,
+      "mode": "float",
+      "target": 0.00016609680587881492,
+      "tolerance": 1.0166096805878816e-12
+    },
+    {
+      "field": "abl/XS18.p11-chat-long.kl.p99_nearest_rank",
+      "independent": 0.0008568253952390137,
+      "match": true,
+      "mode": "float",
+      "target": 0.0008568253952390137,
+      "tolerance": 1.0856825395239013e-12
+    },
+    {
+      "field": "abl/XS18.flip_count",
+      "independent": 1,
+      "match": true,
+      "mode": "exact",
+      "target": 1,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.flip0.prompt",
+      "independent": "p06a-digits-256",
+      "match": true,
+      "mode": "exact",
+      "target": "p06a-digits-256",
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.flip0.position",
+      "independent": 81,
+      "match": true,
+      "mode": "exact",
+      "target": 81,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.flip0.ref_token",
+      "independent": 16,
+      "match": true,
+      "mode": "exact",
+      "target": 16,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.flip0.path_token",
+      "independent": 18,
+      "match": true,
+      "mode": "exact",
+      "target": 18,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS18.flip0.margin",
+      "independent": 0.0018144960764985285,
+      "match": true,
+      "mode": "float",
+      "target": 0.0018144960764985285,
+      "tolerance": 1.1814496076498529e-12
+    },
+    {
+      "field": "abl/XS20.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.agree",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.fraction",
+      "independent": 0.999315537303217,
+      "match": true,
+      "mode": "float",
+      "target": 0.999315537303217,
+      "tolerance": 1.009315537303217e-10
+    },
+    {
+      "field": "abl/XS20.prompt_count",
+      "independent": 10,
+      "match": true,
+      "mode": "exact",
+      "target": 10,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.dead_prompts",
+      "independent": [],
+      "match": true,
+      "mode": "exact",
+      "target": [],
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.verdict",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.bar.top1_ge_99pct",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.bar.kl_median_le_1e_4",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.bar.kl_max_le_0_1",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.guard",
+      "independent": true,
+      "match": true,
+      "mode": "exact",
+      "target": true,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.kl.median",
+      "independent": 1.948722005096215e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.948722005096215e-06,
+      "tolerance": 1.0001948722005096e-12
+    },
+    {
+      "field": "abl/XS20.kl.max",
+      "independent": 0.0029445490847379574,
+      "match": true,
+      "mode": "float",
+      "target": 0.0029445490847379574,
+      "tolerance": 1.2944549084737957e-12
+    },
+    {
+      "field": "abl/XS20.kl.min",
+      "independent": 0.0,
+      "match": true,
+      "mode": "float",
+      "target": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "field": "abl/XS20.kl.sample_sd",
+      "independent": 0.00013889428791754774,
+      "match": true,
+      "mode": "float",
+      "target": 0.00013889428791754774,
+      "tolerance": 1.0138894287917548e-12
+    },
+    {
+      "field": "abl/XS20.kl.p99_nearest_rank",
+      "independent": 0.00015270079207141407,
+      "match": true,
+      "mode": "float",
+      "target": 0.00015270079207141407,
+      "tolerance": 1.0152700792071414e-12
+    },
+    {
+      "field": "abl/XS20.prompt_ids",
+      "independent": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "match": true,
+      "mode": "exact",
+      "target": [
+        "p01-ordinary-short",
+        "p02-ordinary-paragraph",
+        "p03-repeat-word",
+        "p04-repeat-punct",
+        "p05-code",
+        "p06a-digits-256",
+        "p07-chat-ordinary",
+        "p08-chat-refusal",
+        "p09-multilingual",
+        "p11-chat-long"
+      ],
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.n",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.agree",
+      "independent": 13,
+      "match": true,
+      "mode": "exact",
+      "target": 13,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.kl.median",
+      "independent": 5.630011337132146e-07,
+      "match": true,
+      "mode": "float",
+      "target": 5.630011337132146e-07,
+      "tolerance": 1.0000563001133714e-12
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.kl.max",
+      "independent": 3.605363161796049e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.605363161796049e-06,
+      "tolerance": 1.0003605363161796e-12
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.kl.min",
+      "independent": 1.499296331530786e-08,
+      "match": true,
+      "mode": "float",
+      "target": 1.499296331530786e-08,
+      "tolerance": 1.0000014992963315e-12
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.kl.sample_sd",
+      "independent": 1.1855083716366356e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.1855083716366358e-06,
+      "tolerance": 1.0001185508371637e-12
+    },
+    {
+      "field": "abl/XS20.p01-ordinary-short.kl.p99_nearest_rank",
+      "independent": 3.605363161796049e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.605363161796049e-06,
+      "tolerance": 1.0003605363161796e-12
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.n",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.agree",
+      "independent": 107,
+      "match": true,
+      "mode": "exact",
+      "target": 107,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.kl.median",
+      "independent": 3.4841166822729974e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.4841166822729974e-06,
+      "tolerance": 1.0003484116682272e-12
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.kl.max",
+      "independent": 0.00015270079207141407,
+      "match": true,
+      "mode": "float",
+      "target": 0.00015270079207141407,
+      "tolerance": 1.0152700792071414e-12
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.kl.min",
+      "independent": 2.3163154949656928e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.3163154949656928e-08,
+      "tolerance": 1.0000023163154949e-12
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.kl.sample_sd",
+      "independent": 1.5741273147901098e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.5741273147901094e-05,
+      "tolerance": 1.0015741273147901e-12
+    },
+    {
+      "field": "abl/XS20.p02-ordinary-paragraph.kl.p99_nearest_rank",
+      "independent": 3.8164164507747955e-05,
+      "match": true,
+      "mode": "float",
+      "target": 3.8164164507747955e-05,
+      "tolerance": 1.0038164164507748e-12
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.n",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.agree",
+      "independent": 512,
+      "match": true,
+      "mode": "exact",
+      "target": 512,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.kl.median",
+      "independent": 3.196533867821927e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.196533867821927e-06,
+      "tolerance": 1.000319653386782e-12
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.kl.max",
+      "independent": 0.0029445490847379574,
+      "match": true,
+      "mode": "float",
+      "target": 0.0029445490847379574,
+      "tolerance": 1.2944549084737957e-12
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.kl.min",
+      "independent": 1.2613116240345335e-07,
+      "match": true,
+      "mode": "float",
+      "target": 1.2613116240345335e-07,
+      "tolerance": 1.0000126131162403e-12
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.kl.sample_sd",
+      "independent": 0.0002322993572155131,
+      "match": true,
+      "mode": "float",
+      "target": 0.0002322993572155131,
+      "tolerance": 1.0232299357215512e-12
+    },
+    {
+      "field": "abl/XS20.p03-repeat-word.kl.p99_nearest_rank",
+      "independent": 0.0006954566079464541,
+      "match": true,
+      "mode": "float",
+      "target": 0.0006954566079464541,
+      "tolerance": 1.0695456607946453e-12
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.n",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.agree",
+      "independent": 64,
+      "match": true,
+      "mode": "exact",
+      "target": 64,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.kl.median",
+      "independent": 1.0320345111836104e-07,
+      "match": true,
+      "mode": "float",
+      "target": 1.0320345111836104e-07,
+      "tolerance": 1.0000103203451119e-12
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.kl.max",
+      "independent": 2.3160515745246357e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.3160515745246357e-06,
+      "tolerance": 1.0002316051574525e-12
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.kl.min",
+      "independent": 2.1724897436570245e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.1724897436570245e-08,
+      "tolerance": 1.0000021724897435e-12
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.kl.sample_sd",
+      "independent": 3.4651016477562427e-07,
+      "match": true,
+      "mode": "float",
+      "target": 3.4651016477562427e-07,
+      "tolerance": 1.0000346510164775e-12
+    },
+    {
+      "field": "abl/XS20.p04-repeat-punct.kl.p99_nearest_rank",
+      "independent": 2.3160515745246357e-06,
+      "match": true,
+      "mode": "float",
+      "target": 2.3160515745246357e-06,
+      "tolerance": 1.0002316051574525e-12
+    },
+    {
+      "field": "abl/XS20.p05-code.n",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p05-code.agree",
+      "independent": 144,
+      "match": true,
+      "mode": "exact",
+      "target": 144,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p05-code.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p05-code.kl.median",
+      "independent": 2.8563478693399702e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.8563478693399702e-08,
+      "tolerance": 1.0000028563478693e-12
+    },
+    {
+      "field": "abl/XS20.p05-code.kl.max",
+      "independent": 4.933836237341893e-06,
+      "match": true,
+      "mode": "float",
+      "target": 4.933836237341893e-06,
+      "tolerance": 1.0004933836237342e-12
+    },
+    {
+      "field": "abl/XS20.p05-code.kl.min",
+      "independent": 5.2022386398675735e-11,
+      "match": true,
+      "mode": "float",
+      "target": 5.2022386398675735e-11,
+      "tolerance": 1.0000000052022386e-12
+    },
+    {
+      "field": "abl/XS20.p05-code.kl.sample_sd",
+      "independent": 6.174543580925112e-07,
+      "match": true,
+      "mode": "float",
+      "target": 6.174543580925112e-07,
+      "tolerance": 1.0000617454358093e-12
+    },
+    {
+      "field": "abl/XS20.p05-code.kl.p99_nearest_rank",
+      "independent": 3.00287882382122e-06,
+      "match": true,
+      "mode": "float",
+      "target": 3.00287882382122e-06,
+      "tolerance": 1.000300287882382e-12
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.n",
+      "independent": 256,
+      "match": true,
+      "mode": "exact",
+      "target": 256,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.agree",
+      "independent": 255,
+      "match": true,
+      "mode": "exact",
+      "target": 255,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.fraction",
+      "independent": 0.99609375,
+      "match": true,
+      "mode": "float",
+      "target": 0.99609375,
+      "tolerance": 1.00609375e-10
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.kl.median",
+      "independent": 1.2743017467897744e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.2743017467897744e-06,
+      "tolerance": 1.000127430174679e-12
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.kl.max",
+      "independent": 3.892995251675302e-05,
+      "match": true,
+      "mode": "float",
+      "target": 3.892995251675302e-05,
+      "tolerance": 1.0038929952516753e-12
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.kl.min",
+      "independent": 5.7733799962988996e-08,
+      "match": true,
+      "mode": "float",
+      "target": 5.7733799962988996e-08,
+      "tolerance": 1.0000057733799963e-12
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.kl.sample_sd",
+      "independent": 5.605178161983384e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.605178161983384e-06,
+      "tolerance": 1.0005605178161983e-12
+    },
+    {
+      "field": "abl/XS20.p06a-digits-256.kl.p99_nearest_rank",
+      "independent": 2.753845683045597e-05,
+      "match": true,
+      "mode": "float",
+      "target": 2.753845683045597e-05,
+      "tolerance": 1.0027538456830455e-12
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.n",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.agree",
+      "independent": 23,
+      "match": true,
+      "mode": "exact",
+      "target": 23,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.kl.median",
+      "independent": 2.3870505572176626e-09,
+      "match": true,
+      "mode": "float",
+      "target": 2.3870505572176626e-09,
+      "tolerance": 1.0000002387050557e-12
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.kl.max",
+      "independent": 6.0235518198226146e-05,
+      "match": true,
+      "mode": "float",
+      "target": 6.0235518198226146e-05,
+      "tolerance": 1.0060235518198226e-12
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.kl.min",
+      "independent": 3.552713678800501e-14,
+      "match": true,
+      "mode": "float",
+      "target": 3.552713678800501e-14,
+      "tolerance": 1.0000000000035527e-12
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.kl.sample_sd",
+      "independent": 1.2547222679463441e-05,
+      "match": true,
+      "mode": "float",
+      "target": 1.254722267946344e-05,
+      "tolerance": 1.0012547222679463e-12
+    },
+    {
+      "field": "abl/XS20.p07-chat-ordinary.kl.p99_nearest_rank",
+      "independent": 6.0235518198226146e-05,
+      "match": true,
+      "mode": "float",
+      "target": 6.0235518198226146e-05,
+      "tolerance": 1.0060235518198226e-12
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.n",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.agree",
+      "independent": 39,
+      "match": true,
+      "mode": "exact",
+      "target": 39,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.kl.median",
+      "independent": 5.5512192176365716e-08,
+      "match": true,
+      "mode": "float",
+      "target": 5.5512192176365716e-08,
+      "tolerance": 1.0000055512192175e-12
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.kl.max",
+      "independent": 0.00012923687586585686,
+      "match": true,
+      "mode": "float",
+      "target": 0.00012923687586585686,
+      "tolerance": 1.0129236875865856e-12
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.kl.min",
+      "independent": 5.755396159656812e-13,
+      "match": true,
+      "mode": "float",
+      "target": 5.755396159656812e-13,
+      "tolerance": 1.0000000000575539e-12
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.kl.sample_sd",
+      "independent": 2.0648173794617342e-05,
+      "match": true,
+      "mode": "float",
+      "target": 2.0648173794617345e-05,
+      "tolerance": 1.0020648173794617e-12
+    },
+    {
+      "field": "abl/XS20.p08-chat-refusal.kl.p99_nearest_rank",
+      "independent": 0.00012923687586585686,
+      "match": true,
+      "mode": "float",
+      "target": 0.00012923687586585686,
+      "tolerance": 1.0129236875865856e-12
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.n",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.agree",
+      "independent": 21,
+      "match": true,
+      "mode": "exact",
+      "target": 21,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.kl.median",
+      "independent": 7.29815166522485e-07,
+      "match": true,
+      "mode": "float",
+      "target": 7.29815166522485e-07,
+      "tolerance": 1.0000729815166522e-12
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.kl.max",
+      "independent": 5.220115021131733e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.220115021131733e-06,
+      "tolerance": 1.0005220115021132e-12
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.kl.min",
+      "independent": 2.352143724237976e-08,
+      "match": true,
+      "mode": "float",
+      "target": 2.352143724237976e-08,
+      "tolerance": 1.0000023521437243e-12
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.kl.sample_sd",
+      "independent": 1.205830085263886e-06,
+      "match": true,
+      "mode": "float",
+      "target": 1.205830085263886e-06,
+      "tolerance": 1.0001205830085263e-12
+    },
+    {
+      "field": "abl/XS20.p09-multilingual.kl.p99_nearest_rank",
+      "independent": 5.220115021131733e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.220115021131733e-06,
+      "tolerance": 1.0005220115021132e-12
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.n",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.agree",
+      "independent": 282,
+      "match": true,
+      "mode": "exact",
+      "target": 282,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.fraction",
+      "independent": 1.0,
+      "match": true,
+      "mode": "float",
+      "target": 1.0,
+      "tolerance": 1.01e-10
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.kl.median",
+      "independent": 5.682738427381651e-06,
+      "match": true,
+      "mode": "float",
+      "target": 5.682738427381651e-06,
+      "tolerance": 1.0005682738427382e-12
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.kl.max",
+      "independent": 0.0002371372728333654,
+      "match": true,
+      "mode": "float",
+      "target": 0.0002371372728333654,
+      "tolerance": 1.0237137272833366e-12
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.kl.min",
+      "independent": 0.0,
+      "match": true,
+      "mode": "float",
+      "target": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.kl.sample_sd",
+      "independent": 2.7131925441001966e-05,
+      "match": true,
+      "mode": "float",
+      "target": 2.7131925441001966e-05,
+      "tolerance": 1.0027131925441002e-12
+    },
+    {
+      "field": "abl/XS20.p11-chat-long.kl.p99_nearest_rank",
+      "independent": 0.00018227436491713433,
+      "match": true,
+      "mode": "float",
+      "target": 0.00018227436491713433,
+      "tolerance": 1.0182274364917134e-12
+    },
+    {
+      "field": "abl/XS20.flip_count",
+      "independent": 1,
+      "match": true,
+      "mode": "exact",
+      "target": 1,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.flip0.prompt",
+      "independent": "p06a-digits-256",
+      "match": true,
+      "mode": "exact",
+      "target": "p06a-digits-256",
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.flip0.position",
+      "independent": 81,
+      "match": true,
+      "mode": "exact",
+      "target": 81,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.flip0.ref_token",
+      "independent": 16,
+      "match": true,
+      "mode": "exact",
+      "target": 16,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.flip0.path_token",
+      "independent": 18,
+      "match": true,
+      "mode": "exact",
+      "target": 18,
+      "tolerance": 0
+    },
+    {
+      "field": "abl/XS20.flip0.margin",
+      "independent": 0.0018144960764985285,
+      "match": true,
+      "mode": "float",
+      "target": 0.0018144960764985285,
+      "tolerance": 1.1814496076498529e-12
+    },
+    {
+      "field": "ledger.top1_agree_xs18_stock.value",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs18_stock.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs18_stock.total",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs18_stock.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs18_stock.value",
+      "independent": "0.000003160271585755936",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00000316",
+      "tolerance": "5.00000000316E-9"
+    },
+    {
+      "field": "ledger.kl_median_xs18_stock.sd",
+      "independent": "0.0001485821038828617",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.0001486",
+      "tolerance": "5.00000001486E-8"
+    },
+    {
+      "field": "ledger.kl_median_xs18_stock.min",
+      "independent": "0.0",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.0",
+      "tolerance": "0.0500000000000"
+    },
+    {
+      "field": "ledger.kl_median_xs18_stock.max",
+      "independent": "0.0027889248681098877",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.002789",
+      "tolerance": "5.00000002789E-7"
+    },
+    {
+      "field": "ledger.top1_agree_xs20_stock.value",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs20_stock.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs20_stock.total",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs20_stock.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs20_stock.value",
+      "independent": "0.0000019897926399892185",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00000199",
+      "tolerance": "5.00000000199E-9"
+    },
+    {
+      "field": "ledger.kl_median_xs20_stock.sd",
+      "independent": "0.00011669050154587873",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.0001167",
+      "tolerance": "5.00000001167E-8"
+    },
+    {
+      "field": "ledger.kl_median_xs20_stock.min",
+      "independent": "-7.105427357601002E-15",
+      "match": true,
+      "mode": "rounded",
+      "target": "-7.105E-15",
+      "tolerance": "5.00000007105E-19"
+    },
+    {
+      "field": "ledger.kl_median_xs20_stock.max",
+      "independent": "0.0024034514146649144",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.002403",
+      "tolerance": "5.00000002403E-7"
+    },
+    {
+      "field": "ledger.determinism_stock",
+      "independent": 1,
+      "match": true,
+      "mode": "exact",
+      "target": 1,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs18_abl.value",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs18_abl.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs18_abl.total",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs18_abl.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs18_abl.value",
+      "independent": "0.0000029478390111137287",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000002948",
+      "tolerance": "5.00000002948E-10"
+    },
+    {
+      "field": "ledger.kl_median_xs18_abl.sd",
+      "independent": "0.0002150136142250639",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000215",
+      "tolerance": "5.00000000215E-7"
+    },
+    {
+      "field": "ledger.kl_median_xs18_abl.min",
+      "independent": "7.105427357601002E-15",
+      "match": true,
+      "mode": "rounded",
+      "target": "7.105E-15",
+      "tolerance": "5.00000007105E-19"
+    },
+    {
+      "field": "ledger.kl_median_xs18_abl.max",
+      "independent": "0.005657224845904807",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.005657",
+      "tolerance": "5.00000005657E-7"
+    },
+    {
+      "field": "ledger.top1_agree_xs20_abl.value",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs20_abl.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.top1_agree_xs20_abl.total",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs20_abl.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "ledger.kl_median_xs20_abl.value",
+      "independent": "0.000001948722005096215",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000001949",
+      "tolerance": "5.00000001949E-10"
+    },
+    {
+      "field": "ledger.kl_median_xs20_abl.sd",
+      "independent": "0.00013889428791754774",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.0001389",
+      "tolerance": "5.00000001389E-8"
+    },
+    {
+      "field": "ledger.kl_median_xs20_abl.min",
+      "independent": "0.0",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.0",
+      "tolerance": "0.0500000000000"
+    },
+    {
+      "field": "ledger.kl_median_xs20_abl.max",
+      "independent": "0.0029445490847379574",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.002945",
+      "tolerance": "5.00000002945E-7"
+    },
+    {
+      "field": "ledger.determinism_abl",
+      "independent": 1,
+      "match": true,
+      "mode": "exact",
+      "target": 1,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.stock/XS18.agree",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.stock/XS18.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.stock/XS18.percent",
+      "independent": "99.9315537303217",
+      "match": true,
+      "mode": "rounded",
+      "target": "99.93",
+      "tolerance": "0.00500000009993"
+    },
+    {
+      "field": "RESULTS.stock/XS18.median",
+      "independent": "0.000003160271585755936",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00000316",
+      "tolerance": "5.00000000316E-9"
+    },
+    {
+      "field": "RESULTS.stock/XS18.p99_nearest_rank",
+      "independent": "0.00042622802827807504",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000426",
+      "tolerance": "5.00000000426E-7"
+    },
+    {
+      "field": "RESULTS.stock/XS18.max",
+      "independent": "0.0027889248681098877",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00279",
+      "tolerance": "0.00000500000000279"
+    },
+    {
+      "field": "RESULTS.stock/XS18.sample_sd",
+      "independent": "0.0001485821038828617",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000149",
+      "tolerance": "5.00000000149E-7"
+    },
+    {
+      "field": "RESULTS.stock/XS18.verdict",
+      "independent": "PASS",
+      "match": true,
+      "mode": "exact",
+      "target": "PASS",
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.stock/XS20.agree",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.stock/XS20.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.stock/XS20.percent",
+      "independent": "100.0",
+      "match": true,
+      "mode": "rounded",
+      "target": "100",
+      "tolerance": "0.500000000100"
+    },
+    {
+      "field": "RESULTS.stock/XS20.median",
+      "independent": "0.0000019897926399892185",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00000199",
+      "tolerance": "5.00000000199E-9"
+    },
+    {
+      "field": "RESULTS.stock/XS20.p99_nearest_rank",
+      "independent": "0.00013605242564906916",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000136",
+      "tolerance": "5.00000000136E-7"
+    },
+    {
+      "field": "RESULTS.stock/XS20.max",
+      "independent": "0.0024034514146649144",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00240",
+      "tolerance": "0.00000500000000240"
+    },
+    {
+      "field": "RESULTS.stock/XS20.sample_sd",
+      "independent": "0.00011669050154587873",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000117",
+      "tolerance": "5.00000000117E-7"
+    },
+    {
+      "field": "RESULTS.stock/XS20.verdict",
+      "independent": "PASS",
+      "match": true,
+      "mode": "exact",
+      "target": "PASS",
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.abl/XS18.agree",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.abl/XS18.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.abl/XS18.percent",
+      "independent": "99.9315537303217",
+      "match": true,
+      "mode": "rounded",
+      "target": "99.93",
+      "tolerance": "0.00500000009993"
+    },
+    {
+      "field": "RESULTS.abl/XS18.median",
+      "independent": "0.0000029478390111137287",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00000295",
+      "tolerance": "5.00000000295E-9"
+    },
+    {
+      "field": "RESULTS.abl/XS18.p99_nearest_rank",
+      "independent": "0.00034688232090829274",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000347",
+      "tolerance": "5.00000000347E-7"
+    },
+    {
+      "field": "RESULTS.abl/XS18.max",
+      "independent": "0.005657224845904807",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00566",
+      "tolerance": "0.00000500000000566"
+    },
+    {
+      "field": "RESULTS.abl/XS18.sample_sd",
+      "independent": "0.0002150136142250639",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000215",
+      "tolerance": "5.00000000215E-7"
+    },
+    {
+      "field": "RESULTS.abl/XS18.verdict",
+      "independent": "PASS",
+      "match": true,
+      "mode": "exact",
+      "target": "PASS",
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.abl/XS20.agree",
+      "independent": 1460,
+      "match": true,
+      "mode": "exact",
+      "target": 1460,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.abl/XS20.n",
+      "independent": 1461,
+      "match": true,
+      "mode": "exact",
+      "target": 1461,
+      "tolerance": 0
+    },
+    {
+      "field": "RESULTS.abl/XS20.percent",
+      "independent": "99.9315537303217",
+      "match": true,
+      "mode": "rounded",
+      "target": "99.93",
+      "tolerance": "0.00500000009993"
+    },
+    {
+      "field": "RESULTS.abl/XS20.median",
+      "independent": "0.000001948722005096215",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00000195",
+      "tolerance": "5.00000000195E-9"
+    },
+    {
+      "field": "RESULTS.abl/XS20.p99_nearest_rank",
+      "independent": "0.00015270079207141407",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000153",
+      "tolerance": "5.00000000153E-7"
+    },
+    {
+      "field": "RESULTS.abl/XS20.max",
+      "independent": "0.0029445490847379574",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.00294",
+      "tolerance": "0.00000500000000294"
+    },
+    {
+      "field": "RESULTS.abl/XS20.sample_sd",
+      "independent": "0.00013889428791754774",
+      "match": true,
+      "mode": "rounded",
+      "target": "0.000139",
+      "tolerance": "5.00000000139E-7"
+    },
+    {
+      "field": "RESULTS.abl/XS20.verdict",
+      "independent": "PASS",
+      "match": true,
+      "mode": "exact",
+      "target": "PASS",
+      "tolerance": 0
+    }
+  ],
+  "comparison_count": 494,
+  "excluded": "BF16H metrics beyond subset count, max-logit-diff aggregates, local-head outlier aggregates and weight manifests are outside this audit",
+  "independent_sha256": "f34fd142041421f91fa6b55ba57684210b80b29e4e4402ae20c2ff3df3f0a897",
+  "ledger_metrics_compared": [
+    "top1_agree_xs18_stock",
+    "kl_median_xs18_stock",
+    "top1_agree_xs20_stock",
+    "kl_median_xs20_stock",
+    "determinism_stock",
+    "top1_agree_xs18_abl",
+    "kl_median_xs18_abl",
+    "top1_agree_xs20_abl",
+    "kl_median_xs20_abl",
+    "determinism_abl"
+  ],
+  "mismatch_count": 0,
+  "mismatches": [],
+  "scope": "aggregation-only comparison, no whole-experiment replication",
+  "status": "MATCH",
+  "target_sha256": {
+    "experiments/20261111-8-qwen-e2e-agreement/RESULTS.md": "5e832366018ee8f9692228fa79260aecdce3cb24ea6ed0100260d41ad2609519",
+    "experiments/20261111-8-qwen-e2e-agreement/runs/summary.json": "ece7a07561fb974ed559020147b619db25dfb65860369d39aaa68baf52d0cf89",
+    "research/results.yaml": "30dc21088fc2b8a5f69a5a94826ea6a4c319b2c9caa134b7d23c1d4fe597f7bd"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "cases": [
+    {
+      "case": "wrong_checkpoint",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: abl/XS18.flip: checkpoint/arm inconsistent with cell",
+      "stdout": ""
+    },
+    {
+      "case": "missing_checkpoint",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: abl/XS18.flip: missing/extra fields or identities",
+      "stdout": ""
+    },
+    {
+      "case": "wrong_arm",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: abl/XS18.flip: checkpoint/arm inconsistent with cell",
+      "stdout": ""
+    },
+    {
+      "case": "missing_input_sha256",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: independent receipt: missing/extra fields or identities",
+      "stdout": ""
+    },
+    {
+      "case": "wrong_digest",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: receipt.input_sha256.runs/e2e-abl.json: frozen digest mismatch",
+      "stdout": ""
+    },
+    {
+      "case": "wrong_status",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: receipt.status: inconsistent with cell verdicts",
+      "stdout": ""
+    },
+    {
+      "case": "wrong_pooled_n",
+      "exit_code": 2,
+      "output_written": false,
+      "stderr": "COMPARISON INVALID: abl/XS18.kl.n: expected 1461",
+      "stdout": ""
+    }
+  ],
+  "code_head": "588bc5bca1b44652b1fe0925e5f5f50c4cef9869",
+  "phase": "after-review-fix"
+}

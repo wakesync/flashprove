@@ -1,0 +1,26 @@
+{
+  "commits": {
+    "source_main": "59bff9a4608e0cc720d58d7c30823a8838fa43e4",
+    "reader": "1d407f6389d6e6e4e2260f805882d4b620589db1"
+  },
+  "toolchain": {
+    "python": "3.12.3",
+    "implementation": "CPython",
+    "dependencies": "stdlib only"
+  },
+  "hardware": {
+    "cpu": "AMD EPYC-Rome Processor",
+    "cores_allowed": [
+      14,
+      15
+    ],
+    "gpu": "none",
+    "shared_loaded_host": true,
+    "provider": "shared CPU host",
+    "rss_budget_bytes": 1073741824
+  },
+  "seeds": [],
+  "measurement": "existing records only, deterministic aggregation, no model forward",
+  "started_utc": "2026-11-13T19:22:37.004169+00:00",
+  "max_child_rss_kib": 31292
+}
