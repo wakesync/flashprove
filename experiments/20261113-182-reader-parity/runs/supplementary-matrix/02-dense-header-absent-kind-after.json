@@ -1,0 +1,13 @@
+{
+  "command": "<PRIVATE_BUILD>/after-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/dense-header-absent-kind/policy.txt",
+  "exit": 2,
+  "output": "parse: ok\nadmission: header-absent-kind: line 83: wb_r must be 0 in a model without experts\n",
+  "stderr": "",
+  "repetition": 2,
+  "case": "dense-header-absent-kind",
+  "arm": "after",
+  "mode": "release",
+  "expected": "header-absent-kind",
+  "observed": "header-absent-kind",
+  "matches": true
+}

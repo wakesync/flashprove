@@ -1,0 +1,12 @@
+{
+  "command": "<PRIVATE_BUILD>/before-release/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/continuation-matrix/fixtures/dense-gcl/policy.txt",
+  "exit": 2,
+  "output": "parse: ok\nadmission: policy-gcl: line 131: the line gcl needs a model with experts\n",
+  "repetition": 5,
+  "case": "dense-gcl",
+  "arm": "before",
+  "mode": "release",
+  "expected": "policy-gcl",
+  "observed": "policy-gcl",
+  "matches": true
+}

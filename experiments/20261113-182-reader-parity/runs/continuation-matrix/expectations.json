@@ -1,0 +1,167 @@
+{
+  "dense-valid": {
+    "before": "policy-tables",
+    "after": "ok",
+    "verifier": "met"
+  },
+  "dense-no-digests": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "not-met:table-digests"
+  },
+  "dense-partial": {
+    "before": "parse:policy-tables",
+    "after": "parse:policy-tables",
+    "verifier": "policy-tables"
+  },
+  "experts-partial": {
+    "before": "parse:policy-tables",
+    "after": "parse:policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-reordered": {
+    "before": "parse:policy-tables",
+    "after": "parse:policy-tables",
+    "verifier": "policy-tables"
+  },
+  "experts-reordered": {
+    "before": "parse:policy-tables",
+    "after": "parse:policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-duplicate": {
+    "before": "parse:policy-tables",
+    "after": "parse:policy-tables",
+    "verifier": "policy-tables"
+  },
+  "experts-duplicate": {
+    "before": "parse:policy-tables",
+    "after": "parse:policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-invalid": {
+    "before": "parse:policy-line-form",
+    "after": "parse:policy-line-form",
+    "verifier": "policy-line-form"
+  },
+  "experts-invalid": {
+    "before": "parse:policy-line-form",
+    "after": "parse:policy-line-form",
+    "verifier": "policy-line-form"
+  },
+  "dense-sigmoid-0": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-1": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-2": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-3": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-4": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-5": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-6": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-sigmoid-7": {
+    "before": "policy-tables",
+    "after": "policy-tables",
+    "verifier": "policy-tables"
+  },
+  "dense-changed-silu": {
+    "before": "policy-tables",
+    "after": "ok",
+    "verifier": "table-digest-silu"
+  },
+  "dense-changed-rope": {
+    "before": "policy-tables",
+    "after": "ok",
+    "verifier": "table-digest-rope"
+  },
+  "dense-changed-exp": {
+    "before": "policy-tables",
+    "after": "ok",
+    "verifier": "table-digest-exp"
+  },
+  "dense-rcl": {
+    "before": "policy-rcl",
+    "after": "policy-rcl",
+    "verifier": "policy-rcl"
+  },
+  "experts-rcl-zero": {
+    "before": "policy-rcl",
+    "after": "policy-rcl",
+    "verifier": "policy-rcl"
+  },
+  "dense-gcl": {
+    "before": "policy-gcl",
+    "after": "policy-gcl",
+    "verifier": "policy-gcl"
+  },
+  "experts-gcl-zero": {
+    "before": "policy-gcl",
+    "after": "policy-gcl",
+    "verifier": "policy-gcl"
+  },
+  "dense-header-absent-class": {
+    "before": "header-absent-class",
+    "after": "header-absent-class",
+    "verifier": "header-absent-class"
+  },
+  "dense-header-absent-kind": {
+    "before": "header-absent-kind",
+    "after": "header-absent-kind",
+    "verifier": "header-absent-kind"
+  },
+  "experts-valid": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "met"
+  },
+  "experts-no-digests": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "not-met:table-digests"
+  },
+  "experts-changed-silu": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "table-digest-silu"
+  },
+  "experts-changed-sigmoid": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "table-digest-sigmoid"
+  },
+  "experts-changed-rope": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "table-digest-rope"
+  },
+  "experts-changed-exp": {
+    "before": "ok",
+    "after": "ok",
+    "verifier": "table-digest-exp"
+  }
+}
