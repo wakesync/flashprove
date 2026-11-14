@@ -24,8 +24,11 @@ float64. No verifier recomputes anything here; no proof is made.
   the scale table (sha256-checked, refuses missing / duplicate / extra rows or a wrong clamp).
 - `test_heldout.py`: 32 unit tests on synthetic data (bit equality with `int_attn.arm_prompt` at in-run fitted scales; an
   evaluation outlier cannot change a frozen scale and is clamped and counted; table and summariser refusals).
-  Output `runs/debug/unit-tests.json`.
-- `summarise_heldout.py`: validates every record, then writes `runs/summary.json` and `runs/summary.md`.
+  Output `runs/debug/unit-tests.json` (receipt of the reviewed head 27b057dd, kept unchanged). Since PREREG Amendment A1
+  (2026-11-14) the file has 59 tests: the 32, plus 21 synthetic fail-closed tests and 6 on a temporary copy of the
+  committed run records; it writes `runs/debug/unit-tests-a1.json`.
+- `summarise_heldout.py`: validates every record (since Amendment A1 also strict types, finite non-negative values, T and
+  denominators against the manifest, per-head count reconciliation), then writes `runs/summary.json` and `runs/summary.md`.
 - `watchdog.py`, `run_heldout.sh`, `run_fixture.sh`: stop rules (memory in decimal GB, kB x 1,024 / 10^9).
 - `check_manifests.py`, `env.py`, `add_results_row.py`: tensor sha256 comparison with PR #124, ENV.json, the results.yaml entry.
 
