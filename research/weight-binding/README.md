@@ -61,18 +61,34 @@ The original hash-level work has a design and these CPU checks:
   status 2) a duplicate record for a block (an identical duplicate too), a name outside the registered
   78, a wrong kind, malformed fields, a derived flag that does not follow from the record's own fields
   or from #68's hash and shape, a record order that is not a prefix of the registered order or of its
-  reverse, and a count or order that disagrees with `run-meta.json`. `load_leaves` accepts a stored
+  reverse, and a count or order that disagrees with `run-meta.json` **when present**. Without that
+  file, recorded completion and direction are unchecked; an accepted prefix is not evidence that
+  a run stopped under its registration. Complete metadata-free input may still report H3 `PASS`.
+  **Known blocking finding (issue #189, 2026-11-14): H3 `PASS` is not evidence of provenance.** The
+  summary reports H3 on the union of run 2 and run 3, and no record says which run produced it. A
+  metadata-free run 3 that was reordered into forward order and cut to 70 or more lines, or whose
+  records are run 1's, gets a full `PASS`; so does a forward cut with metadata edited to agree. The
+  coverage is real (run 2 supplies the missing blocks) and no hash match is false; what cannot be
+  checked is that run 3 is a complete, independent, registered run. Not fixed here. See the dated
+  limits addenda of [2026-11-13](../../experiments/20261112-149-leaf-v2/RESULTS.md#limits-addendum-2026-11-13-missing-metadata-issue-189)
+  and [2026-11-14](../../experiments/20261112-149-leaf-v2/RESULTS.md#limits-addendum-2026-11-14-the-issue-189-stop-rule-fired-blocking-finding).
+  `load_leaves` accepts a stored
   `leaves-v2.json` only if it is byte for byte the tree rebuilt from those records. `compare` compares
   the canonical leaf-v2 JSON per block and pin and the fetched-bytes hash, computes root and id equality
   on rebuilt trees, and writes a `status`: `identical-complete`, `identical-partial` (a run that
   covers fewer blocks, such as run 2), `no-common-blocks` or `mismatch` (exit status 1). What this
   does not do: it cannot check `e` or `int_sha256` against the weights (that needs the bytes), so a
   record altered consistently is accepted as a record and shows up only as a difference from another run.
-- `test_wb_leafv2_evidence.py`: 162 expectations over 59 cases on altered temporary copies of the
+- `test_wb_leafv2_evidence.py`: regression expectations on altered temporary copies of the
   committed #149 run files (duplicates, altered or truncated stored trees, dropped or reordered
-  records, swapped payloads, flipped flags, edited compare files). Each of `compare`, the hostile suite
-  and `summarise.py` must refuse the copy or report the difference; the unaltered files must pass. No
-  network, no weights. It tests the readers, not the conversion.
+  records, swapped payloads, flipped flags, edited compare files, and optional metadata). Each of
+  `compare`, the hostile suite and `summarise.py` must produce the specified refusal or coverage result;
+  the unaltered files must pass. The complete metadata-free control also passes; the metadata-free cut
+  of run 3's last line in its original order gives H3 `PASS-SUBSET`. The 18 cases named
+  `stop-rule-189-*` pin the current outcome of the issue #189 finding, including 13 altered copies of
+  run 3 that get a full H3 `PASS`: they record present behaviour as a known blocking finding, not a
+  contract, and a registered reader change is expected to change them. No network, no weights. It
+  tests readers, not conversion.
 
 ## What the verifier recomputes
 
@@ -101,6 +117,10 @@ grinding security bound (DESIGN 2.0 states only the fixed-pair Schwartz-Zippel b
 verifier raises an exception, rather than returning false, on some malformed inputs (n = 2^64,
 a tensor name with an unpaired surrogate), and compares the held id case-sensitively. See
 RESULTS.md "What is established and what is not".
+
+Leaf-v2 run files carry no provenance the readers can check: an H3 `PASS` shows that the supplied
+records agree with run 1 and together cover the 78 blocks, not that an independent complete run took
+place (issue #189 stop-rule finding, see above).
 
 Leaf v2 (`wb_leafv2.py`, issue #149) covers only the 78 registered `matrix_plain` blocks; the
 norm-folded matrices, the embedding, lm_head and the weight cells have no `e` / `int_sha256` yet, and
@@ -156,13 +176,19 @@ python3 research/weight-binding/test_wb_leafv2.py $E/runs/run1 "$O/tests.json"  
 cmp "$O/tests.json" $E/runs/run1/tests-1.json                                        # expect no output
 python3 research/weight-binding/wb_leafv2.py compare $E/runs/run1 $E/runs/run3 "$O/compare.json"   # exit 0
 python3 $E/summarise.py --check                                                      # exit 0: runs/summary.json is current
-python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 162 / 162, exit 0
-cmp "$O/evidence.json" $E/runs-fix151/evidence-tests.json                            # expect no output
+python3 research/weight-binding/test_wb_leafv2_evidence.py "$O/evidence.json"        # 231 / 231, exit 0
+cmp "$O/evidence.json" experiments/20261113-189-missing-metadata/runs/evidence-tests-stoprule-20261114.json
 ```
 
-The last `cmp` was observed equal on three runs with Python 3.12.3. The receipt quotes refusal messages,
-some of which come from Python's JSON decoder, so another Python version may word them differently; the
-count (162 of 162) and the exit status are what the test asserts.
+The current receipt includes the issue #189 metadata-boundary cases and the 18 stop-rule cases (231
+expectations over 82 cases). Exit 0 there means the suite saw the outcomes it pins, including the
+full-`PASS` outcomes of the stop-rule finding; it does not mean the reader refuses altered evidence.
+The older receipts remain unchanged and describe the earlier suites:
+`experiments/20261113-189-missing-metadata/runs/evidence-tests.json` (177 expectations) and
+`runs-fix151/evidence-tests.json` (162). Receipts quote
+refusal messages, some from Python's JSON decoder, so other Python versions may word them differently.
+The suite asserts expectations and exit status; see the [follow-up reproduction guide](../../experiments/20261113-189-missing-metadata/README.md)
+for the two independent fixture runners, measurements and limitations.
 
 The first-run files in `experiments/20261111-91-conversion-id/runs/` were made by the v1 code at
 d39c98dc and are not reproduced by the current code (the config pin changed, so the ids did).
