@@ -40,13 +40,26 @@
 #                 no warning flags. The program, its two logs and a small settings source go into
 #                 <folder>/sanitized, which the script makes with mode 700 below the checked output
 #                 directory and checks as it checks that one, so a sanitized program never takes a
-#                 default program's name. Its settings, linked in: a report ends the program with
-#                 status 97 (a failed run, exit 1), and is written to the standard error stream, so
-#                 into <test>.log; leak detection is off; an abort is reported. The caller's
-#                 ASAN_OPTIONS and UBSAN_OPTIONS override them. With a .cu source it is a usage
-#                 error (status 2) and nothing is made; with explain-sigill too. If this machine's
-#                 g++ cannot build a program with the two sanitizers, "build" and "both" exit 77
-#                 with a line "not run: ..." and build nothing. Without --sanitize nothing changes.
+#                 default program's name. There it overwrites those four files by name
+#                 (sanitize_settings.cpp too) and removes nothing else. Its settings, linked in:
+#                 a report ends the program with status 97 (a failed run, exit 1), and is written
+#                 to the standard error stream, so into <test>.log; leak detection is off; an
+#                 abort is reported. A sanitizer's report never ends as a pass. For "run" and "both" the caller's ASAN_OPTIONS may
+#                 hold only memory bounds (hard_rss_limit_mb=<number> and
+#                 max_allocation_size_mb=<number>, separated by colons), and UBSAN_OPTIONS and
+#                 LSAN_OPTIONS must be unset or empty: with any other value the script exits with
+#                 status 2 before it makes or starts anything, because such a setting could send
+#                 the report elsewhere, suppress it or change the status. The script then sets
+#                 the three variables itself for the runs (status 97, the standard error stream,
+#                 stop at the first report, after the caller's bounds), and a run whose lines in
+#                 <test>.log contain "runtime error:" or "Sanitizer" is a failed run whatever
+#                 its status, also when the test printed such a line itself. With a .cu source
+#                 it is a usage error (status 2) and nothing is made; with explain-sigill too. If
+#                 this machine's g++ cannot build a program with the two sanitizers, "build" and
+#                 "both" exit 77 with a line "not run: ..." and build nothing; they try that in a
+#                 new folder of their own (sanitize_probe.<random>) and remove only that folder.
+#                 "run" does not ask the compiler: without a built program it exits 2. Without
+#                 --sanitize nothing changes.
 # Exit status: 0: the build and every run succeeded; 1: a run failed; 2: no test ran, for example
 # after a usage error, a rejected output directory, a failed build, or "run" without a built
 # program; 77: no run failed, but at least one reported that it cannot run on this machine
@@ -228,6 +241,26 @@ if [[ -n $sanitize && $kind != host ]]; then
   echo "unit.sh: --sanitize builds host (.cpp) tests only, not $(printf %q "$source"); nothing was built" >&2
   exit 2
 fi
+# The caller's sanitizer settings, for sanitized runs. The sanitizers' runtime reads ASAN_OPTIONS,
+# LSAN_OPTIONS and UBSAN_OPTIONS over one shared exit status and log destination, and a value such
+# as exitcode=0, log_path=..., halt_on_error=0 or suppressions=... could turn a report into a pass,
+# send it away from <test>.log or silence it. So only memory bounds are taken from the caller, in
+# ASAN_OPTIONS and in exactly this form; anything else is refused here, before anything is made.
+callers_bounds=
+if [[ -n $sanitize && $act != build ]]; then
+  bound='(hard_rss_limit_mb|max_allocation_size_mb)=[0-9]+'
+  refused=
+  [[ ${ASAN_OPTIONS-} =~ ^($bound(:$bound)*)?$ ]] || refused=ASAN_OPTIONS
+  [[ -z ${UBSAN_OPTIONS-} ]] || refused=${refused:+$refused, }UBSAN_OPTIONS
+  [[ -z ${LSAN_OPTIONS-} ]] || refused=${refused:+$refused, }LSAN_OPTIONS
+  if [[ -n $refused ]]; then
+    echo "unit.sh: --sanitize: $refused: for sanitized runs ASAN_OPTIONS may hold only hard_rss_limit_mb=<number> and" \
+      "max_allocation_size_mb=<number>, separated by colons, and UBSAN_OPTIONS and LSAN_OPTIONS must be unset or empty: another" \
+      "setting could hide a sanitizer's report or turn it into a pass; nothing was built or run" >&2
+    exit 2
+  fi
+  callers_bounds=${ASAN_OPTIONS-}
+fi
 shift 3
 export PATH=$PATH:/usr/local/cuda/bin
 [[ $kind != gpu || $act == run ]] || ./check_nvcc_version.sh || exit 2 # refuses an nvcc older than 13.2.86
@@ -303,13 +336,23 @@ callers_tmpdir=${TMPDIR-} had_tmpdir=${TMPDIR+yes}
 export TMPDIR=$out
 sanitizer_flags=(-O1 -g -fno-ipa-modref -D_GLIBCXX_ASSERTIONS -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize-recover=all
   -std=c++17 -pthread) # as in verifier/tests/sanitized_walk_test.sh
-if [[ -n $sanitize && $act != run ]] &&
-  ! echo 'int main() { return 0; }' | g++ "${sanitizer_flags[@]}" -x c++ -o "$out/sanitize_probe" - >/dev/null 2>&1; then
-  rm -f -- "$out/sanitize_probe" # made above, by this call, if at all
-  echo "not run: $t: this machine's g++ cannot build a program with the two sanitizers (libasan and libubsan are needed)"
-  exit 77
+if [[ -n $sanitize && $act != run ]]; then
+  # Can this g++ build with the two sanitizers? The trial program is built in a new folder of its
+  # own, made with mktemp, as cpu_lacks_sha's is: no name that the caller may have in the folder
+  # is written or removed, whether the compiler succeeds or not.
+  if ! probe=$(mktemp -d "$out/sanitize_probe.XXXXXX"); then
+    echo "unit.sh: no folder for the compiler's trial program could be made in $out; nothing was built" >&2
+    exit 2
+  fi
+  probe_status=0
+  echo 'int main() { return 0; }' | TMPDIR=$probe g++ "${sanitizer_flags[@]}" -x c++ -o "$probe/probe" - >/dev/null 2>&1 || probe_status=$?
+  rm -f -- "$probe/probe" # the file made just above, by this call, if at all
+  rmdir -- "$probe" 2>/dev/null # and its folder; it stays if the compiler left a file of its own in it
+  if [[ $probe_status -ne 0 ]]; then
+    echo "not run: $t: this machine's g++ cannot build a program with the two sanitizers (libasan and libubsan are needed)"
+    exit 77
+  fi
 fi
-[[ -z $sanitize || $act == run ]] || rm -f -- "$out/sanitize_probe" # made just above, by this call
 if [[ $act == run ]]; then
   [[ -x $out/$t ]] # what follows takes a missing program for one that did not build
 elif [[ -n $sanitize ]]; then
@@ -339,9 +382,16 @@ fi
 [[ $# -gt 0 ]] || set -- ""
 if [[ -n $had_tmpdir ]]; then TMPDIR=$callers_tmpdir; else unset TMPDIR; fi
 failed=0 not_here=0 no_sha=0 judged=
+if [[ -n $sanitize ]]; then
+  # The script's own settings come after the caller's memory bounds, in each variable that the
+  # runtime reads, so the last word on the status, the log's place and stopping is the script's.
+  export ASAN_OPTIONS=${callers_bounds:+$callers_bounds:}exitcode=97:log_path=stderr:halt_on_error=1:abort_on_error=0
+  export LSAN_OPTIONS=exitcode=97:log_path=stderr:abort_on_error=0
+  export UBSAN_OPTIONS=exitcode=97:log_path=stderr:halt_on_error=1:abort_on_error=0
+fi
 : >"$out/$t.log"
 for arguments in "$@"; do
-  status=0
+  status=0 reported=
   # Only the last line that this run appends counts. A run that ends with status 2 and has the
   # words "not run" elsewhere in its output is a failure.
   before=$(wc -c <"$out/$t.log")
@@ -350,7 +400,16 @@ for arguments in "$@"; do
   if [[ $status -eq 132 && $kind == host && -z $judged ]]; then # judged once per call
     cpu_lacks_sha "$out" && judged=lacks || judged=has
   fi
-  if [[ $status -eq 132 && $judged == lacks ]]; then
+  if [[ -n $sanitize ]]; then
+    # A sanitizer's report in what this run appended makes it a failed run, whatever its status.
+    # grep reads to the end (no -q), so tail is never cut short; no count at all counts as a report.
+    report_lines=$(tail -c "+$((before + 1))" "$out/$t.log" | LC_ALL=C grep -a -c -E 'runtime error:|Sanitizer')
+    [[ $report_lines == 0 ]] || reported=yes
+  fi
+  if [[ -n $reported ]]; then
+    failed=1
+    echo "$t $arguments: status $status, and a sanitizer's report in the log"
+  elif [[ $status -eq 132 && $judged == lacks ]]; then
     no_sha=1
   elif [[ $status -eq 2 && $(tail -c "+$((before + 1))" "$out/$t.log" | tail -n 1) =~ ^("$t: ")?"not run: " ]]; then
     not_here=1
