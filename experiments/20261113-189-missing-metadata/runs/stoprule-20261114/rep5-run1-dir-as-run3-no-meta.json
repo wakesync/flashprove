@@ -1,0 +1,195 @@
+{
+  "as_registered": true,
+  "case": "run1-dir-as-run3-no-meta",
+  "compare_run2": {
+    "process": {
+      "rc": 0,
+      "stderr": "",
+      "stdout": "compare {'n_a': 78, 'n_b': 8, 'n_common': 8, 'n_identical': 8, 'n_common_controls': 4, 'n_common_changed': 4, 'inputs': {'a_blocks_sha256': '19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4', 'b_blocks_sha256': 'a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5', 'a_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e'}, 'status': 'identical-partial'}\n"
+    },
+    "result": {
+      "inputs": {
+        "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+        "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+        "b_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5"
+      },
+      "n_a": 78,
+      "n_b": 8,
+      "n_common": 8,
+      "n_common_changed": 4,
+      "n_common_controls": 4,
+      "n_identical": 8,
+      "status": "identical-partial"
+    },
+    "status": "identical-partial"
+  },
+  "compare_run3": {
+    "process": {
+      "rc": 0,
+      "stderr": "",
+      "stdout": "compare {'n_a': 78, 'n_b': 78, 'n_common': 78, 'n_identical': 78, 'n_common_controls': 8, 'n_common_changed': 70, 'roots_equal': {'stock': True, 'abl': True}, 'ids_equal': {'stock': True, 'abl': True}, 'leaves_file_sha256_equal': True, 'inputs': {'a_blocks_sha256': '19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4', 'b_blocks_sha256': '19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4', 'a_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e', 'b_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e'}, 'status': 'identical-complete'}\n"
+    },
+    "result": {
+      "ids_equal": {
+        "abl": true,
+        "stock": true
+      },
+      "inputs": {
+        "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+        "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+        "b_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+        "b_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e"
+      },
+      "leaves_file_sha256_equal": true,
+      "n_a": 78,
+      "n_b": 78,
+      "n_common": 78,
+      "n_common_changed": 70,
+      "n_common_controls": 8,
+      "n_identical": 78,
+      "roots_equal": {
+        "abl": true,
+        "stock": true
+      },
+      "status": "identical-complete"
+    },
+    "status": "identical-complete"
+  },
+  "crosscheck": {
+    "facts": {
+      "run2": {
+        "own_n_common": 8,
+        "own_n_identical": 8,
+        "reader_n_common": 8,
+        "reader_n_identical": 8
+      },
+      "run3": {
+        "own_n_common": 78,
+        "own_n_identical": 78,
+        "reader_n_common": 78,
+        "reader_n_identical": 78
+      },
+      "union": {
+        "blocks_in_run3_file": 78,
+        "blocks_only_run2_supplies": 0,
+        "own": {
+          "n_blocks": 78,
+          "n_changed": 70,
+          "n_controls": 8
+        },
+        "reader": {
+          "n_blocks": 78,
+          "n_changed": 70,
+          "n_controls": 8
+        }
+      }
+    },
+    "problems": []
+  },
+  "expected": {
+    "compare": "identical-complete",
+    "n_common": 78,
+    "summary": "PASS",
+    "union": 78
+  },
+  "full_coverage_comparator": true,
+  "full_pass": true,
+  "kind": "substituted",
+  "observed": {
+    "compare": "identical-complete",
+    "n_common": 78,
+    "summary": "PASS",
+    "union": 78
+  },
+  "repetition": 5,
+  "reported_by": "second review",
+  "run1_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+  "run2_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5",
+  "run3_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+  "run3_files": [
+    "blocks.jsonl",
+    "leaves-v2.json",
+    "python.txt",
+    "run.log",
+    "run.time",
+    "sha256.txt",
+    "slot.txt",
+    "tests-1.json",
+    "tests-1.log",
+    "tests-2.json",
+    "tests-2.log",
+    "tree.log"
+  ],
+  "run3_lines": 78,
+  "run3_lines_copied_from": {
+    "run1": 78
+  },
+  "summary": {
+    "h3": {
+      "overall": {
+        "committed_compare_files": {
+          "compare-run1-run2.json": {
+            "agrees_with_recomputation": true,
+            "sha256": "9b592d610ab90ceb81cd9e25aa3880f0e71969a4c8b69021efed2168b80109dc"
+          }
+        },
+        "evidence": "recomputed from validated run files by wb_leafv2.compare_runs; stored trees must equal the trees rebuilt from the records; committed compare files must agree with the recomputation",
+        "n_registered": 78,
+        "rule": "FAIL on any mismatch (block leaf, fetched-bytes hash, root, subset id, stored tree file); PASS when the union covers all registered blocks; PASS-SUBSET at the registered reduced coverage (>= 10 blocks, >= 2 controls, >= 5 changed); otherwise BELOW-COVERAGE",
+        "status": "PASS"
+      },
+      "run2": {
+        "inputs": {
+          "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+          "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+          "b_blocks_sha256": "a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5"
+        },
+        "n_a": 78,
+        "n_b": 8,
+        "n_common": 8,
+        "n_common_changed": 4,
+        "n_common_controls": 4,
+        "n_identical": 8,
+        "status": "identical-partial"
+      },
+      "run3": {
+        "ids_equal": {
+          "abl": true,
+          "stock": true
+        },
+        "inputs": {
+          "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+          "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+          "b_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+          "b_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e"
+        },
+        "leaves_file_sha256_equal": true,
+        "n_a": 78,
+        "n_b": 78,
+        "n_common": 78,
+        "n_common_changed": 70,
+        "n_common_controls": 8,
+        "n_identical": 78,
+        "roots_equal": {
+          "abl": true,
+          "stock": true
+        },
+        "status": "identical-complete"
+      },
+      "union": {
+        "all_identical": true,
+        "n_blocks": 78,
+        "n_changed": 70,
+        "n_controls": 8,
+        "note": "PREREG amendment A-1: H3 on the union of run2 and run3, each vs run1"
+      }
+    },
+    "process": {
+      "rc": 0,
+      "stderr": "",
+      "stdout": "run1 {\"convert_s\": {\"max\": 18.87, \"median\": 4.13, \"min\": 0.94, \"n\": 156, \"sd\": 3.028311310294824}, \"exponents_stock\": [11, 12, 13, 14], \"fetch_s\": {\"max\": 1.77, \"median\": 0.885, \"min\": 0.48, \"n\": 156, \"sd\": 0.2695711755606204}, \"free_disk_min\": 22014447616, \"h1_sha_matches_68\": 156, \"h1_total\": 156, \"h2_changed_e_differ\": [], \"h2_changed_e_equal\": 70, \"h2_changed_int_sha_differ\": 70, \"h2_changed_zero_int_diff\": [], \"h2_controls_identical\": 8, \"h2_controls_zero_int_diff\": 8, \"int_entries_differing_changed\": {\"max\": 60499880, \"median\": 26717020.0, \"min\": 9548760, \"n\": 70, \"sd\": 14318983.404871754}, \"int_fraction_differing_changed\": {\"max\": 0.6787903729607078, \"median\": 0.4582887331644694, \"min\": 0.3035469055175781, \"n\": 70, \"sd\": 0.08047859292872223}, \"n_blocks\": 78, \"n_changed\": 70, \"n_controls\": 8, \"rss_max_kb\": 2176528}\nrun2 {\"convert_s\": {\"max\": 7.94, \"median\": 4.0, \"min\": 1.14, \"n\": 16, \"sd\": 2.2626588342036897}, \"exponents_stock\": [11, 12], \"fetch_s\": {\"max\": 1.17, \"median\": 0.765, \"min\": 0.48, \"n\": 16, \"sd\": 0.23745087211182583}, \"free_disk_min\": 21229862912, \"h1_sha_matches_68\": 16, \"h1_total\": 16, \"h2_changed_e_differ\": [], \"h2_changed_e_equal\": 4, \"h2_changed_int_sha_differ\": 4, \"h2_changed_zero_int_diff\": [], \"h2_controls_identical\": 4, \"h2_controls_zero_int_diff\": 4, \"int_entries_differing_changed\": {\"max\": 35658846, \"median\": 24705764.0, \"min\": 10299940, \"n\": 4, \"sd\": 13307145.207240745}, \"int_fraction_differing_changed\": {\"max\": 0.4621849060058594, \"median\": 0.39566990347469555, \"min\": 0.327426274617513, \"n\": 4, \"sd\": 0.05513503234144755}, \"n_blocks\": 8, \"n_changed\": 4, \"n_controls\": 4, \"rss_max_kb\": 2176216}\nrun3 {\"convert_s\": {\"max\": 18.87, \"median\": 4.13, \"min\": 0.94, \"n\": 156, \"sd\": 3.028311310294824}, \"exponents_stock\": [11, 12, 13, 14], \"fetch_s\": {\"max\": 1.77, \"median\": 0.885, \"min\": 0.48, \"n\": 156, \"sd\": 0.2695711755606204}, \"free_disk_min\": 22014447616, \"h1_sha_matches_68\": 156, \"h1_total\": 156, \"h2_changed_e_differ\": [], \"h2_changed_e_equal\": 70, \"h2_changed_int_sha_differ\": 70, \"h2_changed_zero_int_diff\": [], \"h2_controls_identical\": 8, \"h2_controls_zero_int_diff\": 8, \"int_entries_differing_changed\": {\"max\": 60499880, \"median\": 26717020.0, \"min\": 9548760, \"n\": 70, \"sd\": 14318983.404871754}, \"int_fraction_differing_changed\": {\"max\": 0.6787903729607078, \"median\": 0.4582887331644694, \"min\": 0.3035469055175781, \"n\": 70, \"sd\": 0.08047859292872223}, \"n_blocks\": 78, \"n_changed\": 70, \"n_controls\": 8, \"rss_max_kb\": 2176528}\nh3 {\"overall\": {\"committed_compare_files\": {\"compare-run1-run2.json\": {\"agrees_with_recomputation\": true, \"sha256\": \"9b592d610ab90ceb81cd9e25aa3880f0e71969a4c8b69021efed2168b80109dc\"}}, \"evidence\": \"recomputed from validated run files by wb_leafv2.compare_runs; stored trees must equal the trees rebuilt from the records; committed compare files must agree with the recomputation\", \"n_registered\": 78, \"rule\": \"FAIL on any mismatch (block leaf, fetched-bytes hash, root, subset id, stored tree file); PASS when the union covers all registered blocks; PASS-SUBSET at the registered reduced coverage (>= 10 blocks, >= 2 controls, >= 5 changed); otherwise BELOW-COVERAGE\", \"status\": \"PASS\"}, \"run2\": {\"inputs\": {\"a_blocks_sha256\": \"19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4\", \"a_leaves_sha256\": \"11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e\", \"b_blocks_sha256\": \"a0f11dbeacf6c181c68e6d24785c120441623a2b7949d40540d84c690c3a0ab5\"}, \"n_a\": 78, \"n_b\": 8, \"n_common\": 8, \"n_common_changed\": 4, \"n_common_controls\": 4, \"n_identical\": 8, \"status\": \"identical-partial\"}, \"run3\": {\"ids_equal\": {\"abl\": true, \"stock\": true}, \"inputs\": {\"a_blocks_sha256\": \"19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4\", \"a_leaves_sha256\": \"11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e\", \"b_blocks_sha256\": \"19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4\", \"b_leaves_sha256\": \"11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e\"}, \"leaves_file_sha256_equal\": true, \"n_a\": 78, \"n_b\": 78, \"n_common\": 78, \"n_common_changed\": 70, \"n_common_controls\": 8, \"n_identical\": 78, \"roots_equal\": {\"abl\": true, \"stock\": true}, \"status\": \"identical-complete\"}, \"union\": {\"all_identical\": true, \"n_blocks\": 78, \"n_changed\": 70, \"n_controls\": 8, \"note\": \"PREREG amendment A-1: H3 on the union of run2 and run3, each vs run1\"}}\ncrosscheck_pr87 7 True\n"
+    },
+    "status": "PASS",
+    "summary_sha256": "7d3130e23a9699d3f59ee73f39aa74af9034c949cf07034ca8930ceab5e98d07"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "reader_methods_passed": 15,
+  "comparator_methods_passed": 3,
+  "total_methods_passed": 18,
+  "failed": 0,
+  "note": "Methods contain many synthetic mutation subcases; this is not a count of independent attacks or measured runs."
+}

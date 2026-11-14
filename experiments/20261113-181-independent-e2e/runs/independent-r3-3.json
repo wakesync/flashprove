@@ -1,0 +1,703 @@
+{
+  "bf16h_context_positions": 608,
+  "cells": {
+    "abl/XS18": {
+      "agree": 1460,
+      "agreement_fraction": 0.999315537303217,
+      "bars": {
+        "kl_max_le_0_1": true,
+        "kl_median_le_1e_4": true,
+        "top1_ge_99pct": true
+      },
+      "flips": [
+        {
+          "arm": "XS18",
+          "checkpoint": "abl",
+          "path_token": 18,
+          "position": 81,
+          "prompt": "p06a-digits-256",
+          "ref_margin": 0.0018144960764985285,
+          "ref_token": 16
+        }
+      ],
+      "kl": {
+        "max": 0.005657224845904807,
+        "median": 2.9478390111137287e-06,
+        "min": 7.105427357601002e-15,
+        "n": 1461,
+        "p99_nearest_rank": 0.00034688232090829274,
+        "sample_sd": 0.0002150136142250639
+      },
+      "negative_kl": [],
+      "negative_kl_tolerance": 1e-12,
+      "per_prompt": {
+        "p01-ordinary-short": {
+          "agree": 13,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 4.145886219220074e-06,
+            "median": 4.315603199245288e-07,
+            "min": 2.148580335870065e-08,
+            "n": 13,
+            "p99_nearest_rank": 4.145886219220074e-06,
+            "sample_sd": 1.347760397414361e-06
+          },
+          "positions": 13
+        },
+        "p02-ordinary-paragraph": {
+          "agree": 107,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00013153060221071655,
+            "median": 4.034260093987996e-06,
+            "min": 3.5991387647982265e-08,
+            "n": 107,
+            "p99_nearest_rank": 7.925560926480557e-05,
+            "sample_sd": 1.563043040235891e-05
+          },
+          "positions": 107
+        },
+        "p03-repeat-word": {
+          "agree": 512,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.005657224845904807,
+            "median": 4.007034155151246e-06,
+            "min": 2.1032767349993264e-07,
+            "n": 512,
+            "p99_nearest_rank": 0.0005796242691999964,
+            "sample_sd": 0.00033539442176087105
+          },
+          "positions": 512
+        },
+        "p04-repeat-punct": {
+          "agree": 64,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 1.0711088794579382e-05,
+            "median": 2.289485383499823e-07,
+            "min": 2.661750286847564e-08,
+            "n": 64,
+            "p99_nearest_rank": 1.0711088794579382e-05,
+            "sample_sd": 1.5505818569893545e-06
+          },
+          "positions": 64
+        },
+        "p05-code": {
+          "agree": 144,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 4.736771511915094e-06,
+            "median": 3.507935630864267e-08,
+            "min": 1.128093174429523e-10,
+            "n": 144,
+            "p99_nearest_rank": 3.6524951347871593e-06,
+            "sample_sd": 7.501645589441987e-07
+          },
+          "positions": 144
+        },
+        "p06a-digits-256": {
+          "agree": 255,
+          "agreement_fraction": 0.99609375,
+          "kl": {
+            "max": 0.00011530519735458711,
+            "median": 2.717002349328368e-06,
+            "min": 1.0494229130131316e-07,
+            "n": 256,
+            "p99_nearest_rank": 9.64566713861359e-05,
+            "sample_sd": 1.8200777208868558e-05
+          },
+          "positions": 256
+        },
+        "p07-chat-ordinary": {
+          "agree": 23,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0013348727369582036,
+            "median": 4.751456117446651e-09,
+            "min": 1.4210854715202004e-14,
+            "n": 23,
+            "p99_nearest_rank": 0.0013348727369582036,
+            "sample_sd": 0.00027832230888755595
+          },
+          "positions": 23
+        },
+        "p08-chat-refusal": {
+          "agree": 39,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 4.172425143167402e-06,
+            "median": 1.0235642378120247e-07,
+            "min": 1.7763568394002505e-13,
+            "n": 39,
+            "p99_nearest_rank": 4.172425143167402e-06,
+            "sample_sd": 9.460499959701908e-07
+          },
+          "positions": 39
+        },
+        "p09-multilingual": {
+          "agree": 21,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 6.859914826407021e-06,
+            "median": 1.137720413879606e-06,
+            "min": 6.487190873372128e-08,
+            "n": 21,
+            "p99_nearest_rank": 6.859914826407021e-06,
+            "sample_sd": 1.7990440342527107e-06
+          },
+          "positions": 21
+        },
+        "p11-chat-long": {
+          "agree": 282,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.002308265373468288,
+            "median": 6.15608523801825e-06,
+            "min": 7.105427357601002e-15,
+            "n": 282,
+            "p99_nearest_rank": 0.0008568253952390137,
+            "sample_sd": 0.00016609680587881492
+          },
+          "positions": 282
+        }
+      },
+      "positions": 1461,
+      "prompts": 10,
+      "verdict": "PASS"
+    },
+    "abl/XS20": {
+      "agree": 1460,
+      "agreement_fraction": 0.999315537303217,
+      "bars": {
+        "kl_max_le_0_1": true,
+        "kl_median_le_1e_4": true,
+        "top1_ge_99pct": true
+      },
+      "flips": [
+        {
+          "arm": "XS20",
+          "checkpoint": "abl",
+          "path_token": 18,
+          "position": 81,
+          "prompt": "p06a-digits-256",
+          "ref_margin": 0.0018144960764985285,
+          "ref_token": 16
+        }
+      ],
+      "kl": {
+        "max": 0.0029445490847379574,
+        "median": 1.948722005096215e-06,
+        "min": 0.0,
+        "n": 1461,
+        "p99_nearest_rank": 0.00015270079207141407,
+        "sample_sd": 0.00013889428791754774
+      },
+      "negative_kl": [],
+      "negative_kl_tolerance": 1e-12,
+      "per_prompt": {
+        "p01-ordinary-short": {
+          "agree": 13,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 3.605363161796049e-06,
+            "median": 5.630011337132146e-07,
+            "min": 1.499296331530786e-08,
+            "n": 13,
+            "p99_nearest_rank": 3.605363161796049e-06,
+            "sample_sd": 1.1855083716366356e-06
+          },
+          "positions": 13
+        },
+        "p02-ordinary-paragraph": {
+          "agree": 107,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00015270079207141407,
+            "median": 3.4841166822729974e-06,
+            "min": 2.3163154949656928e-08,
+            "n": 107,
+            "p99_nearest_rank": 3.8164164507747955e-05,
+            "sample_sd": 1.5741273147901098e-05
+          },
+          "positions": 107
+        },
+        "p03-repeat-word": {
+          "agree": 512,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0029445490847379574,
+            "median": 3.196533867821927e-06,
+            "min": 1.2613116240345335e-07,
+            "n": 512,
+            "p99_nearest_rank": 0.0006954566079464541,
+            "sample_sd": 0.0002322993572155131
+          },
+          "positions": 512
+        },
+        "p04-repeat-punct": {
+          "agree": 64,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 2.3160515745246357e-06,
+            "median": 1.0320345111836104e-07,
+            "min": 2.1724897436570245e-08,
+            "n": 64,
+            "p99_nearest_rank": 2.3160515745246357e-06,
+            "sample_sd": 3.4651016477562427e-07
+          },
+          "positions": 64
+        },
+        "p05-code": {
+          "agree": 144,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 4.933836237341893e-06,
+            "median": 2.8563478693399702e-08,
+            "min": 5.2022386398675735e-11,
+            "n": 144,
+            "p99_nearest_rank": 3.00287882382122e-06,
+            "sample_sd": 6.174543580925112e-07
+          },
+          "positions": 144
+        },
+        "p06a-digits-256": {
+          "agree": 255,
+          "agreement_fraction": 0.99609375,
+          "kl": {
+            "max": 3.892995251675302e-05,
+            "median": 1.2743017467897744e-06,
+            "min": 5.7733799962988996e-08,
+            "n": 256,
+            "p99_nearest_rank": 2.753845683045597e-05,
+            "sample_sd": 5.605178161983384e-06
+          },
+          "positions": 256
+        },
+        "p07-chat-ordinary": {
+          "agree": 23,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 6.0235518198226146e-05,
+            "median": 2.3870505572176626e-09,
+            "min": 3.552713678800501e-14,
+            "n": 23,
+            "p99_nearest_rank": 6.0235518198226146e-05,
+            "sample_sd": 1.2547222679463441e-05
+          },
+          "positions": 23
+        },
+        "p08-chat-refusal": {
+          "agree": 39,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00012923687586585686,
+            "median": 5.5512192176365716e-08,
+            "min": 5.755396159656812e-13,
+            "n": 39,
+            "p99_nearest_rank": 0.00012923687586585686,
+            "sample_sd": 2.0648173794617342e-05
+          },
+          "positions": 39
+        },
+        "p09-multilingual": {
+          "agree": 21,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 5.220115021131733e-06,
+            "median": 7.29815166522485e-07,
+            "min": 2.352143724237976e-08,
+            "n": 21,
+            "p99_nearest_rank": 5.220115021131733e-06,
+            "sample_sd": 1.205830085263886e-06
+          },
+          "positions": 21
+        },
+        "p11-chat-long": {
+          "agree": 282,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0002371372728333654,
+            "median": 5.682738427381651e-06,
+            "min": 0.0,
+            "n": 282,
+            "p99_nearest_rank": 0.00018227436491713433,
+            "sample_sd": 2.7131925441001966e-05
+          },
+          "positions": 282
+        }
+      },
+      "positions": 1461,
+      "prompts": 10,
+      "verdict": "PASS"
+    },
+    "stock/XS18": {
+      "agree": 1460,
+      "agreement_fraction": 0.999315537303217,
+      "bars": {
+        "kl_max_le_0_1": true,
+        "kl_median_le_1e_4": true,
+        "top1_ge_99pct": true
+      },
+      "flips": [
+        {
+          "arm": "XS18",
+          "checkpoint": "stock",
+          "path_token": 17,
+          "position": 109,
+          "prompt": "p06a-digits-256",
+          "ref_margin": 0.008824558138819327,
+          "ref_token": 19
+        }
+      ],
+      "kl": {
+        "max": 0.0027889248681098877,
+        "median": 3.160271585755936e-06,
+        "min": 0.0,
+        "n": 1461,
+        "p99_nearest_rank": 0.00042622802827807504,
+        "sample_sd": 0.0001485821038828617
+      },
+      "negative_kl": [],
+      "negative_kl_tolerance": 1e-12,
+      "per_prompt": {
+        "p01-ordinary-short": {
+          "agree": 13,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 4.871879152545944e-06,
+            "median": 4.2033991221046563e-07,
+            "min": 1.5574652678651546e-08,
+            "n": 13,
+            "p99_nearest_rank": 4.871879152545944e-06,
+            "sample_sd": 1.555092781737265e-06
+          },
+          "positions": 13
+        },
+        "p02-ordinary-paragraph": {
+          "agree": 107,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00015541047875089475,
+            "median": 3.5848172217356478e-06,
+            "min": 2.2033837865365058e-08,
+            "n": 107,
+            "p99_nearest_rank": 4.4521911163997174e-05,
+            "sample_sd": 1.5942623574984496e-05
+          },
+          "positions": 107
+        },
+        "p03-repeat-word": {
+          "agree": 512,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0027889248681098877,
+            "median": 4.348633353856712e-06,
+            "min": 9.448457305438751e-08,
+            "n": 512,
+            "p99_nearest_rank": 0.0004655817003076379,
+            "sample_sd": 0.0001887343709169912
+          },
+          "positions": 512
+        },
+        "p04-repeat-punct": {
+          "agree": 64,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0020016484766500753,
+            "median": 2.684055271373609e-07,
+            "min": 2.1081056900129624e-08,
+            "n": 64,
+            "p99_nearest_rank": 0.0020016484766500753,
+            "sample_sd": 0.0002501450401338048
+          },
+          "positions": 64
+        },
+        "p05-code": {
+          "agree": 144,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 5.661456636829598e-06,
+            "median": 3.353333966060745e-08,
+            "min": 9.154277336165251e-11,
+            "n": 144,
+            "p99_nearest_rank": 3.586174340597381e-06,
+            "sample_sd": 7.624784284565332e-07
+          },
+          "positions": 144
+        },
+        "p06a-digits-256": {
+          "agree": 255,
+          "agreement_fraction": 0.99609375,
+          "kl": {
+            "max": 0.0003472427880275575,
+            "median": 3.1762739904905857e-06,
+            "min": 1.4078560894859038e-07,
+            "n": 256,
+            "p99_nearest_rank": 0.0001437931553027738,
+            "sample_sd": 3.3861588953955734e-05
+          },
+          "positions": 256
+        },
+        "p07-chat-ordinary": {
+          "agree": 23,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0025114954117988475,
+            "median": 2.4698394440747506e-09,
+            "min": 4.263256414560601e-14,
+            "n": 23,
+            "p99_nearest_rank": 0.0025114954117988475,
+            "sample_sd": 0.0005236499999127692
+          },
+          "positions": 23
+        },
+        "p08-chat-refusal": {
+          "agree": 39,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0002684899764275883,
+            "median": 3.2287967854927047e-08,
+            "min": 1.3500311979441904e-13,
+            "n": 39,
+            "p99_nearest_rank": 0.0002684899764275883,
+            "sample_sd": 4.344057095570079e-05
+          },
+          "positions": 39
+        },
+        "p09-multilingual": {
+          "agree": 21,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 5.557407334322306e-06,
+            "median": 6.42525453287135e-07,
+            "min": 2.870153181788737e-08,
+            "n": 21,
+            "p99_nearest_rank": 5.557407334322306e-06,
+            "sample_sd": 1.4315469983035247e-06
+          },
+          "positions": 21
+        },
+        "p11-chat-long": {
+          "agree": 282,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0010724971066338185,
+            "median": 9.665929765034775e-06,
+            "min": 0.0,
+            "n": 282,
+            "p99_nearest_rank": 0.0006468752936790167,
+            "sample_sd": 0.00010765337885901092
+          },
+          "positions": 282
+        }
+      },
+      "positions": 1461,
+      "prompts": 10,
+      "verdict": "PASS"
+    },
+    "stock/XS20": {
+      "agree": 1461,
+      "agreement_fraction": 1.0,
+      "bars": {
+        "kl_max_le_0_1": true,
+        "kl_median_le_1e_4": true,
+        "top1_ge_99pct": true
+      },
+      "flips": [],
+      "kl": {
+        "max": 0.0024034514146649144,
+        "median": 1.9897926399892185e-06,
+        "min": -7.105427357601002e-15,
+        "n": 1461,
+        "p99_nearest_rank": 0.00013605242564906916,
+        "sample_sd": 0.00011669050154587873
+      },
+      "negative_kl": [
+        {
+          "kl": -7.105427357601002e-15,
+          "position": 279,
+          "prompt": "p11-chat-long"
+        }
+      ],
+      "negative_kl_tolerance": 1e-12,
+      "per_prompt": {
+        "p01-ordinary-short": {
+          "agree": 13,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 3.4329665297150314e-06,
+            "median": 5.549207067190309e-07,
+            "min": 1.0757851498510718e-08,
+            "n": 13,
+            "p99_nearest_rank": 3.4329665297150314e-06,
+            "sample_sd": 1.1960332767883277e-06
+          },
+          "positions": 13
+        },
+        "p02-ordinary-paragraph": {
+          "agree": 107,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00018409103320138342,
+            "median": 2.8552144719640182e-06,
+            "min": 5.704823280439086e-09,
+            "n": 107,
+            "p99_nearest_rank": 3.4657871111676286e-05,
+            "sample_sd": 1.814089875245142e-05
+          },
+          "positions": 107
+        },
+        "p03-repeat-word": {
+          "agree": 512,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0024034514146649144,
+            "median": 2.9054823151852815e-06,
+            "min": 7.491711784268773e-08,
+            "n": 512,
+            "p99_nearest_rank": 0.00048757671597243757,
+            "sample_sd": 0.0001945811795154493
+          },
+          "positions": 512
+        },
+        "p04-repeat-punct": {
+          "agree": 64,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 9.712277860529639e-05,
+            "median": 9.521188459871155e-08,
+            "min": 2.189210590586299e-08,
+            "n": 64,
+            "p99_nearest_rank": 9.712277860529639e-05,
+            "sample_sd": 1.2120498783514394e-05
+          },
+          "positions": 64
+        },
+        "p05-code": {
+          "agree": 144,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 5.280567794585522e-06,
+            "median": 2.762076611872999e-08,
+            "min": 8.196820999728516e-11,
+            "n": 144,
+            "p99_nearest_rank": 2.6810220923323413e-06,
+            "sample_sd": 6.228862625324501e-07
+          },
+          "positions": 144
+        },
+        "p06a-digits-256": {
+          "agree": 256,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00011221398004579441,
+            "median": 1.3932938944805073e-06,
+            "min": 5.5518178498914494e-08,
+            "n": 256,
+            "p99_nearest_rank": 5.501905131310991e-05,
+            "sample_sd": 9.92414620546596e-06
+          },
+          "positions": 256
+        },
+        "p07-chat-ordinary": {
+          "agree": 23,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.00011417306009420258,
+            "median": 3.943561921460059e-09,
+            "min": 1.4210854715202004e-14,
+            "n": 23,
+            "p99_nearest_rank": 0.00011417306009420258,
+            "sample_sd": 2.378343759371767e-05
+          },
+          "positions": 23
+        },
+        "p08-chat-refusal": {
+          "agree": 39,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 5.793744458060246e-05,
+            "median": 4.3813997763209045e-08,
+            "min": 5.329070518200751e-13,
+            "n": 39,
+            "p99_nearest_rank": 5.793744458060246e-05,
+            "sample_sd": 9.368880165446571e-06
+          },
+          "positions": 39
+        },
+        "p09-multilingual": {
+          "agree": 21,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 3.6082195791209415e-06,
+            "median": 9.452562359513195e-07,
+            "min": 2.866231696430077e-08,
+            "n": 21,
+            "p99_nearest_rank": 3.6082195791209415e-06,
+            "sample_sd": 1.1435374757359624e-06
+          },
+          "positions": 21
+        },
+        "p11-chat-long": {
+          "agree": 282,
+          "agreement_fraction": 1.0,
+          "kl": {
+            "max": 0.0003464961461148164,
+            "median": 4.195425075792514e-06,
+            "min": -7.105427357601002e-15,
+            "n": 282,
+            "p99_nearest_rank": 9.481604506689223e-05,
+            "sample_sd": 2.6391827701696877e-05
+          },
+          "positions": 282
+        }
+      },
+      "positions": 1461,
+      "prompts": 10,
+      "verdict": "PASS"
+    }
+  },
+  "checks": {
+    "abl": {
+      "logit_determinism": true,
+      "sanity": true
+    },
+    "stock": {
+      "logit_determinism": true,
+      "sanity": true
+    }
+  },
+  "global_recorded_determinism": true,
+  "guard": "complete finite records and no recorded error; not a re-execution of guards",
+  "input_sha256": {
+    "PREREG.md": "8c5c63023fc950ae987aba03269b50bc91e4e468c0a18cc3e185de98b51b08d7",
+    "e2e.py": "df03592b3ab27508914eead2903b983fef23319a7a2102fdfcdd3cbe65630def",
+    "prompts-e2e.json": "47aa61b46e142382ffa58b88f918df6ec63f1158629df5938ec00961a5242cfc",
+    "runs/divergence-abl.jsonl": "e5d39dfd607caf02ee17ed2ec4c4918b41e86a2a8b8380f70e5aeb976a95dc81",
+    "runs/divergence-stock.jsonl": "e8426b0bf9ce30866aa7a9e4a5ede4554cd4c6dfc60f783e41b322b2983ff427",
+    "runs/e2e-abl.json": "614f49f56b5fb905b391de29b2357b3e9304850881010709e78b8e4f62decc88",
+    "runs/e2e-stock.json": "1e066da307b848e007ffdf39823c9b2a245f8bcc27a7aa38c05bc54d7c5d3fa8",
+    "runs/errors-abl.jsonl": null,
+    "runs/errors-stock.jsonl": null,
+    "runs/heads-abl.jsonl": "69c68c06de605fdcd648994c242aaa3359bae8c80d0dbd69ae6f118ce058286e",
+    "runs/heads-stock.jsonl": "0f41fa1512a2822e6f15cde34bda56cf0898604a257083bb258db08cc510876a"
+  },
+  "layer_coverage": {
+    "abl": {
+      "physical_head_rows": 1104,
+      "physical_layers": 64,
+      "recorded_bit_flags": 384,
+      "recorded_residual_determinism": true
+    },
+    "stock": {
+      "physical_head_rows": 805,
+      "physical_layers": 47,
+      "recorded_bit_flags": 282,
+      "recorded_residual_determinism": true
+    }
+  },
+  "scope": "independent aggregation of supplied measurements, not a model rerun",
+  "source_main": "59bff9a4608e0cc720d58d7c30823a8838fa43e4",
+  "status": "AGGREGATED"
+}
