@@ -1,0 +1,24 @@
+Command terminated by signal 15
+	Command being timed: "/usr/bin/python3 <PLANNING>/lanes-1110/mlpstage201_entry.py <OUT>/python.pid <OUT>/progress.log <REPO>/experiments/20261114-201-mlp-stage/mlp_stage.py <SCRATCH>/start-ckpt.npz <OUT>/runs 2026-11-14T06:45:00Z"
+	User time (seconds): 11200.23
+	System time (seconds): 3897.77
+	Percent of CPU this job got: 277%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:30:34
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8527588
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 22995
+	Minor (reclaiming a frame) page faults: 595795475
+	Voluntary context switches: 1592999
+	Involuntary context switches: 1132743
+	Swaps: 0
+	File system inputs: 467768
+	File system outputs: 7728
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
