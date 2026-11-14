@@ -21,6 +21,12 @@ copy never being accepted as the full passing result does not hold in general. T
 H3 PASS: H3 is reported on the union of run 2 and run 3, and the reader cannot check where records came
 from. Those cases record CURRENT behaviour as a known blocking finding. They are not a contract the reader
 should keep, and a separately registered change of the reader is expected to change them.
+Issue #203 (experiments/20261114-203-leafv2-registered-pin): that change. In each stop-rule-189-* case the
+summarise expectation is switched to `summarise.py --registered` (committed pin runs/registered-pins.json),
+which must refuse; the old default-mode outcome stays pinned next to it as pin203-default-mode-limit-*,
+because the default mode is unchanged by design and still gives those outcomes (a limit, not a contract).
+The cases named pin203-* at the end replay all 23 cases of #191's stoprule_cases.py in registered mode and
+try to defeat the pin (D1 to D12 of that PREREG). The pin is a committed list, NOT authentication.
 
 Usage (from the top of the tree): test_wb_leafv2_evidence.py [out.json]     exit 0 iff every expectation holds
 """
@@ -139,6 +145,46 @@ def r_summarise(runs, run=None):
 READERS = {"compare": r_compare, "suite": r_suite, "summarise": r_summarise}
 
 
+def r_compare_reg(runs, run="run3"):
+    """Issue #203: compare_runs in registered mode (committed pin checked first)."""
+    try:
+        d = lv.compare_runs(runs / "run1", runs / run, registered=True)
+        return d["status"], d
+    except lv.EvidenceError as ex:
+        return "refused", str(ex)
+
+
+def r_summarise_reg(runs, run=None):
+    """Issue #203: summarise.py --registered as a subprocess; reads runs/summary-registered.json."""
+    r = py([SUMM, "--registered", "--runs", str(runs)])
+    if r.returncode == 2:
+        return "refused", r.stderr
+    if r.returncode != 0:
+        return "error", r.stderr
+    s = json.loads((runs / "summary-registered.json").read_text())
+    return s.get("h3", {}).get("overall", {}).get("status", "no-h3"), s
+
+
+def r_summarise_reg_inproc(runs, run=None):
+    """Issue #203: summarise --registered in this process, so the wb_leafv2.PIN_PATH test seam applies."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("pin203_summarise", SUMM)
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            m.main(["--registered", "--runs", str(runs)])
+    except lv.EvidenceError as ex:
+        return "refused", str(ex)
+    s = json.loads((runs / "summary-registered.json").read_text())
+    return s["h3"]["overall"]["status"], s
+
+
+READERS["compare-registered"] = r_compare_reg
+READERS["summarise-registered"] = r_summarise_reg
+READERS["summarise-registered (in-process, pin seam)"] = r_summarise_reg_inproc
+
+
 def clean(msg):
     return " ".join(str(msg).replace(str(TMP), "<fixture>").replace(str(ROOT), "<repo>").split())[:300]
 
@@ -180,6 +226,10 @@ def main(outp=None):
     out["note_189"] = ("issue #189 stop-rule finding: the cases named stop-rule-189-* pin CURRENT behaviour, including "
                        "altered copies of run 3 that get a full H3 PASS on the union with run 2 or by substitution; "
                        "a blocking finding about what the reader can check, not a contract")
+    out["note_203"] = ("issue #203: the stop-rule-189-* summarise expectations are switched to summarise --registered "
+                       "(refused); pin203-default-mode-limit-* keep the unchanged default-mode outcomes as a limit; "
+                       "pin203-* replay #191's 23 cases in registered mode and the defeat cases. The pin is a committed "
+                       "list binding 'registered run' to what the repository holds, NOT authentication")
     if outp:
         with open(outp, "w") as f:
             json.dump(out, f, indent=1, sort_keys=True)
@@ -552,6 +602,7 @@ def cases():
         RES.append(dict(case="cli", reader="%s (command line)" % cmd[0], run="run3", expected="rc 2", expected_reason="duplicate record",
                         got="rc %d" % r.returncode, reason=clean(r.stderr), ok=okk))
     stoprule_189()
+    pin203()
 
 
 # ---------------------------------------------------------------- issue #189 stop-rule finding
@@ -587,7 +638,8 @@ def stoprule_189():
             expect(case, runs, "suite", "pass", also=lambda d: d["n_pass"] == d["n_checks"] == 38)
         else:
             expect(case, runs, "suite", "refused", "all 78 blocks are needed")
-        expect(case, runs, "summarise", overall,
+        expect(case, runs, "summarise-registered", "refused", "registered pin")      # issue #203 switch
+        expect("pin203-default-mode-limit-" + case[len(P):], runs, "summarise", overall,
                also=lambda s: s["h3"]["union"]["n_blocks"] == union == len(f["run2"] | f["run3"])
                and s["h3"]["union"]["all_identical"] is True
                and s["h3"]["run3"]["status"] == status3 and s["h3"]["run3"]["n_common"] == n3
@@ -657,6 +709,184 @@ def stoprule_189():
         m.update(done=k, reverse=False, stopped="fixture: stopped after %d blocks" % k)
         (runs / "run3/run-meta.json").write_text(json.dumps(m, indent=1, sort_keys=True))
         pin(case, runs, k, "identical-partial", "PASS", 78, "refused")
+
+
+# ---------------------------------------------------------------- issue #203: registered mode and the pin
+PIN_FILE = SRC / "registered-pins.json"
+
+
+def fixture_pin(runs):
+    """A pin document of a fixture's files, built the way make_pins.py builds the committed one."""
+    def sha(p):
+        return hashlib.sha256(p.read_bytes()).hexdigest()
+    committed = json.loads(PIN_FILE.read_text())
+    d = dict(committed)
+    d["runs"] = {run: {n: sha(runs / run / n) for n in lv.PIN_CONSUMED if (runs / run / n).is_file()}
+                 for run in ("run1", "run2", "run3")}
+    d["compare_files"] = {n: sha(runs / n) for n in sorted(CMP.values()) if (runs / n).is_file()}
+    return json.dumps(d, indent=1, sort_keys=True) + "\n"
+
+
+@contextlib.contextmanager
+def pin_seam(path):
+    """In-process test seam only: point wb_leafv2.PIN_PATH somewhere else for the duration."""
+    old = lv.PIN_PATH
+    lv.PIN_PATH = Path(path)
+    try:
+        yield
+    finally:
+        lv.PIN_PATH = old
+
+
+def pin203():
+    """Issue #203 (PREREG experiments/20261114-203-leafv2-registered-pin). Registered mode refuses a registered
+    run whose consumed files do not match the committed pin; a union-assembled 78 is PASS-UNION, not PASS.
+    The pin binds 'registered run' to what the repository holds. It is NOT authentication (see D2)."""
+    import importlib.util
+    P = "pin203-"
+    seam = "summarise-registered (in-process, pin seam)"
+
+    # ---- honest controls in registered mode
+    runs = fixture(P + "honest-registered")
+    expect(P + "honest-registered", runs, "compare-registered", "identical-complete",
+           also=lambda d: d["n_identical"] == 78 and all(d["roots_equal"].values()) and all(d["ids_equal"].values())
+           and d["registered_pin_sha256"] == hashlib.sha256(PIN_FILE.read_bytes()).hexdigest())
+    expect(P + "honest-registered", runs, "compare-registered", "identical-partial", run="run2",
+           also=lambda d: d["n_common"] == 8 and d["n_identical"] == 8)
+    expect(P + "honest-registered", runs, "summarise-registered", "PASS",
+           also=lambda s: s["h3"]["overall"]["basis"] == "single-run"
+           and s["h3"]["union"] == dict(n_blocks=78, n_controls=8, n_changed=70, all_identical=True,
+                                        note=s["h3"]["union"]["note"])
+           and (runs / "summary-registered.json").read_bytes() == (SRC / "summary-registered.json").read_bytes())
+    expect(P + "honest-registered", runs, "summarise", "PASS",           # default mode unchanged next to it
+           also=lambda s: (runs / "summary.json").read_bytes() == (SRC / "summary.json").read_bytes()
+           and "basis" not in s["h3"]["overall"])
+    for args, name in (([SUMM, "--registered", "--check"], "summarise --registered --check"),
+                       ([SUMM, "--check"], "summarise --check"),
+                       ([str(ROOT / "experiments/20261114-203-leafv2-registered-pin/make_pins.py"), "--check"],
+                        "make_pins --check")):
+        r = py(args)
+        RES.append(dict(case=P + "honest-registered", reader=name, run="committed", expected="rc 0", expected_reason=None,
+                        got="rc %d" % r.returncode, reason="", ok=r.returncode == 0))
+    r = py([CLI, "compare", str(runs / "run1"), str(runs / "run3"), str(runs / "cli.json"), "--registered"])
+    RES.append(dict(case=P + "honest-registered", reader="compare --registered (command line)", run="run3",
+                    expected="rc 0", expected_reason=None, got="rc %d" % r.returncode, reason="", ok=r.returncode == 0))
+
+    # ---- all 23 cases of #191's stoprule_cases.py, built by its own builders, in registered mode
+    spec = importlib.util.spec_from_file_location(
+        "pin203_stoprule", ROOT / "experiments/20261113-189-missing-metadata/stoprule_cases.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+    committed_lines = sr.committed()
+    assert len(sr.CASES) == 23
+    for c in sr.CASES:
+        case = P + "191-" + c["name"]
+        runs = fixture(case)
+        c["build"](runs, committed_lines)
+        expect(case, runs, "summarise-registered", "refused", "registered pin")
+        if c["name"] == "control-run2-forward-meta-kept":     # run 3 untouched; run 2 altered
+            expect(case, runs, "compare-registered", "identical-complete")
+            expect(case, runs, "compare-registered", "refused", "registered pin", run="run2")
+        else:
+            expect(case, runs, "compare-registered", "refused", "registered pin")
+        r = py([CLI, "compare", str(runs / "run1"), str(runs / "run3"), str(runs / "cli.json"), "--registered"])
+        want = 0 if c["name"] == "control-run2-forward-meta-kept" else 2
+        RES.append(dict(case=case, reader="compare --registered (command line)", run="run3", expected="rc %d" % want,
+                        expected_reason=None, got="rc %d" % r.returncode, reason=clean(r.stderr), ok=r.returncode == want))
+
+    def forward_whole(runs):
+        sr.CASES[[x["name"] for x in sr.CASES].index("forward-78-whole")]["build"](runs, committed_lines)
+
+    # ---- D1: pin edited in the fixture together with run 3: the committed pin is used, refused
+    runs = fixture(P + "D1-fixture-pin-edited-with-run")
+    forward_whole(runs)
+    (runs / "registered-pins.json").write_text(fixture_pin(runs))
+    expect(P + "D1-fixture-pin-edited-with-run", runs, "summarise-registered", "refused", "registered pin")
+    expect(P + "D1-fixture-pin-edited-with-run", runs, "compare-registered", "refused", "registered pin")
+
+    # ---- D2: pin edited IN THE REPOSITORY together with run 3 (seam): accepted. LIMIT: not authentication.
+    runs = fixture(P + "D2-LIMIT-repo-pin-edited-with-run")
+    forward_whole(runs)
+    pinp = runs.parent / "repo-pin.json"
+    pinp.write_text(fixture_pin(runs))
+    with pin_seam(pinp):
+        expect(P + "D2-LIMIT-repo-pin-edited-with-run", runs, seam, "PASS",
+               also=lambda s: s["h3"]["overall"]["basis"] == "single-run")
+
+    # ---- E: PASS-UNION is reachable and is not PASS (forward-77 with a seam pin of the altered fixture)
+    runs = fixture(P + "E-pass-union-forward-77")
+    sr.CASES[0]["build"](runs, committed_lines)
+    assert sr.CASES[0]["name"] == "forward-77"
+    pinp = runs.parent / "repo-pin.json"
+    pinp.write_text(fixture_pin(runs))
+    with pin_seam(pinp):
+        expect(P + "E-pass-union-forward-77", runs, seam, "PASS-UNION",
+               also=lambda s: s["h3"]["overall"]["basis"] == "union" and s["h3"]["union"]["n_blocks"] == 78
+               and s["h3"]["run3"]["n_common"] == 77 and s["h3"]["run2"]["n_common"] == 8)
+
+    # ---- D4: extra unpinned files in run 3 are not read: accepted (scope limit of the pin)
+    runs = fixture(P + "D4-extra-unpinned-files")
+    (runs / "run3/notes.txt").write_text("not read\n")
+    (runs / "run3/blocks.jsonl.orig").write_text("".join(l + "\n" for l in lines(runs)[:3]))
+    expect(P + "D4-extra-unpinned-files", runs, "summarise-registered", "PASS",
+           also=lambda s: s["h3"]["overall"]["basis"] == "single-run")
+
+    # ---- D5: run 3 blocks.jsonl replaced by a symlink to identical bytes: refused
+    runs = fixture(P + "D5-symlinked-file")
+    other = runs.parent / "elsewhere-blocks.jsonl"
+    shutil.copy2(runs / "run3/blocks.jsonl", other)
+    (runs / "run3/blocks.jsonl").unlink()
+    (runs / "run3/blocks.jsonl").symlink_to(other)
+    expect(P + "D5-symlinked-file", runs, "summarise-registered", "refused", "symlink")
+    expect(P + "D5-symlinked-file", runs, "compare-registered", "refused", "symlink")
+
+    # ---- D6: run 3 directory replaced by a symlink to an honest copy: refused
+    runs = fixture(P + "D6-symlinked-run-dir")
+    shutil.move(str(runs / "run3"), str(runs.parent / "run3-elsewhere"))
+    (runs / "run3").symlink_to(runs.parent / "run3-elsewhere")
+    expect(P + "D6-symlinked-run-dir", runs, "summarise-registered", "refused", "symlink")
+    expect(P + "D6-symlinked-run-dir", runs, "compare-registered", "refused", "symlink")
+
+    # ---- D7: renamed run (run3 -> run4)
+    runs = fixture(P + "D7-renamed-run")
+    (runs / "run3").rename(runs / "run4")
+    expect(P + "D7-renamed-run", runs, "summarise-registered", "refused", "registered pin")
+    expect(P + "D7-renamed-run", runs, "compare-registered", "refused", "not a registered run", run="run4")
+
+    # ---- D8: run 1 and run 3 swapped by name
+    runs = fixture(P + "D8-run1-run3-swapped")
+    (runs / "run3").rename(runs / "tmp-swap")
+    (runs / "run1").rename(runs / "run3")
+    (runs / "tmp-swap").rename(runs / "run1")
+    expect(P + "D8-run1-run3-swapped", runs, "summarise-registered", "refused", "registered pin")
+    expect(P + "D8-run1-run3-swapped", runs, "compare-registered", "refused", "registered pin")
+
+    # ---- D9: pin file absent (seam): refused
+    runs = fixture(P + "D9-pin-absent")
+    with pin_seam(runs.parent / "no-such-pin.json"):
+        expect(P + "D9-pin-absent", runs, seam, "refused", "cannot read")
+
+    # ---- D10: pinned compare files removed: registered refused, default unchanged (PASS)
+    runs = fixture(P + "D10-compare-files-removed")
+    for f in CMP.values():
+        (runs / f).unlink()
+    expect(P + "D10-compare-files-removed", runs, "summarise-registered", "refused", "registered pin")
+    expect(P + "D10-compare-files-removed", runs, "summarise", "PASS")
+
+    # ---- D11: a consumed file that is not pinned for that run (leaves-v2.json added to run 2): refused
+    runs = fixture(P + "D11-unpinned-consumed-file")
+    shutil.copy2(runs / "run3/leaves-v2.json", runs / "run2/leaves-v2.json")
+    expect(P + "D11-unpinned-consumed-file", runs, "summarise-registered", "refused", "not pinned")
+    expect(P + "D11-unpinned-consumed-file", runs, "compare-registered", "refused", "not pinned", run="run2")
+
+    # ---- D12: the honest run directories copied elsewhere unchanged: accepted (identical bytes)
+    runs = TMP / (P + "D12-honest-copy-elsewhere") / "deeper" / "runs"
+    for run in ("run1", "run2", "run3"):
+        shutil.copytree(SRC / run, runs / run)
+    for f in CMP.values():
+        shutil.copy2(SRC / f, runs / f)
+    expect(P + "D12-honest-copy-elsewhere", runs, "summarise-registered", "PASS",
+           also=lambda s: s["h3"]["overall"]["basis"] == "single-run")
 
 
 if __name__ == "__main__":
