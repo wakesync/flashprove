@@ -1,0 +1,55 @@
+{
+  "note": "Round 2 of issue #203 (PREREG amendments A-1 / A-2, after review round 1 of PR 205). ENV.json next to this file belongs to the reviewed head and is unchanged. Deterministic local file reads of committed evidence in private temporary copies. No weights, model, conversion, GPU, network call to a model host, serving or attestation request. Measured, unreplicated.",
+  "commits": {
+    "base_main": "cdde96296e658fe803711dbb1b4699a225cc544a",
+    "reviewed_head": "ed50eb617aa97f2cbce9b038845dfbc93320196e",
+    "prereg_amendments": "5c1da10daa6a9b7ea68b5de88e9198fa6714e9fd",
+    "code_and_tests_run": "e807e0abbd831b78fa75568cfe002898f685219c"
+  },
+  "toolchain": {
+    "python": "3.12.3",
+    "numpy": "2.4.3",
+    "kernel": "6.8.0-100-generic",
+    "system": "Linux",
+    "flags": "taskset -c 10-11; suite runs through the host heavy-job gate (fp-heavy.sh)",
+    "compiler": "not used",
+    "cuda": "not used"
+  },
+  "hardware": {
+    "cpu": "AMD EPYC-Rome Processor (KVM guest, 16 vCPU)",
+    "affinity": [
+      10,
+      11
+    ],
+    "ram": "32089168 kB",
+    "gpu": "not used",
+    "provider": "shared CPU host",
+    "shared_and_loaded": true
+  },
+  "seeds": [],
+  "source_sha256_at_run": {
+    "research/weight-binding/wb_leafv2.py": "6dcb5ffdad4611d577ea4f7bffcf1587613be4272374e926c545480d3d2bc69a",
+    "experiments/20261112-149-leaf-v2/summarise.py": "66d55506b60327167a78d0820c92d493ad56858c62290ce3401c65d92589f3fe",
+    "research/weight-binding/test_wb_leafv2_evidence.py": "1afe2d8413e31aa1e4f0cd79012816b7f2f7936fe63d81dcfc20c25c19e8bd4c",
+    "experiments/20261114-203-leafv2-registered-pin/make_pins.py": "f4517d80bd01a6b2d156b23d3eeed5fba3b1f3562ab56074d2cbec0b42ab296a",
+    "experiments/20261112-149-leaf-v2/runs/registered-pins.json": "1e15957ad4db46a3f70abd589ac0a3bf87a1d317321d7ce444392b724d62bffc",
+    "experiments/20261112-149-leaf-v2/runs/summary-registered.json": "1784ca40aa103b1122e4b36c824bbc74b5cf09a1623c630c53f7a23b1d59b018",
+    "experiments/20261112-149-leaf-v2/runs/summary.json": "baa388592623b1b3c0fb36a7dbfcbeeb2e4241dcc21974a28c76d5bc529981cf"
+  },
+  "runs": {
+    "suite_r2_1": "started after 2026-11-14T09:26:40Z, finished before 09:28:24Z; MemAvailable before: 15197136 kB; runs/evidence-tests-r2-1.json",
+    "suite_r2_2": "started after 2026-11-14T09:28:24Z, finished before 09:30:04Z; MemAvailable before: 14219976 kB; runs/evidence-tests-r2-2.json",
+    "default_mode_main_suite": "after both recorded runs, finished before 2026-11-14T09:32:32Z; MemAvailable before: 15357636 kB; main's own test file (sha256 fcb6e6bb4f641dd4dfd151ef76a2d5e7921176ef72d6d8b499987ad39e268132) against the changed code in a temporary copy of the tree; runs/default-mode-main-suite-r2.json",
+    "analysis": "runs/analysis-r2.json (analyse_r2.py)",
+    "times": "bounds taken from the lane's clock-stamped log lines written before and after each run; the runs themselves were not timed"
+  },
+  "receipt_sha256": {
+    "evidence-tests-r2-1.json": "6f0386648698ce6c544f8bdf0935f32a5fa6f15b94cf7784ded8cb2f09c69994",
+    "evidence-tests-r2-2.json": "6f0386648698ce6c544f8bdf0935f32a5fa6f15b94cf7784ded8cb2f09c69994",
+    "default-mode-main-suite-r2.json": "526671ca29e248b5da39d8efdb7d1af1a2c3022e71e55e6121bedac455212fec",
+    "evidence-tests-1.json": "a39148856d847ff9f0dc710e72c0b23061f87b7631569e5bbb8e7ad158903c14",
+    "evidence-tests-2.json": "a39148856d847ff9f0dc710e72c0b23061f87b7631569e5bbb8e7ad158903c14",
+    "analysis.json": "996eebd78437221eb09336b174a5f0aff8d9a206b9d30ca1d37a341c86776b81",
+    "pin-repro.json": "4c7f255f843c983365ee38e62d12ebefa83bbe433624cb55d9be57cdb6b4fb41"
+  }
+}
