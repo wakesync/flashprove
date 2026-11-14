@@ -28,11 +28,14 @@ float64. No verifier recomputes anything here; no proof is made.
   (2026-11-14) the file has 59 tests: the 32, plus 21 synthetic fail-closed tests and 6 on a temporary copy of the
   committed run records; that version wrote `runs/debug/unit-tests-a1.json` (kept unchanged). Since PREREG Amendment A2
   (2026-11-14) the file has 83 tests: the 59, plus 11 guarded-null tests, 6 synthetic descriptive-field tests and 7 on a
-  temporary copy of the committed run records; it writes `runs/debug/unit-tests-a2.json`.
+  temporary copy of the committed run records; that version wrote `runs/debug/unit-tests-a2.json` (kept unchanged). Since
+  PREREG Amendment A3 (2026-11-14) the file has 91 tests: the 83, plus 6 synthetic empty-aggregate tests and 2 on a
+  temporary copy of the committed run records; it writes `runs/debug/unit-tests-a3.json`.
 - `summarise_heldout.py`: validates every record (since Amendment A1 also strict types, finite non-negative values, T and
   denominators against the manifest, per-head count reconciliation; since Amendment A2 the evaluator's guarded nulls are
   admitted only where it writes them, descriptive fields are checked and reconciled, per-head counts are bounded by
-  T x 256), then writes `runs/summary.json` and `runs/summary.md`.
+  T x 256; since Amendment A3 an aggregate with no finite cell is written with n 0 and null statistics instead of
+  crashing), then writes `runs/summary.json` and `runs/summary.md`.
 - `watchdog.py`, `run_heldout.sh`, `run_fixture.sh`: stop rules (memory in decimal GB, kB x 1,024 / 10^9).
 - `check_manifests.py`, `env.py`, `add_results_row.py`: tensor sha256 comparison with PR #124, ENV.json, the results.yaml entry.
 

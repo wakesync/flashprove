@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Unit tests for the frozen-scale evaluator and the summariser (PREREG "Debug", checks a to d, plus the fail-closed checks
-of Amendments A1 and A2). Synthetic data (numpy default_rng(0)), plus temporary copies of the committed run records that
-the tests create and remove (the committed files are only read); no weights, no model forward, no registered prompt run.
-Run: python3 test_heldout.py  (writes runs/debug/unit-tests-a2.json; runs/debug/unit-tests.json is the 27b057dd receipt
-and runs/debug/unit-tests-a1.json the 2e7dc350 receipt, neither is overwritten)"""
+of Amendments A1, A2 and A3). Synthetic data (numpy default_rng(0)), plus temporary copies of the committed run records
+that the tests create and remove (the committed files are only read); no weights, no model forward, no registered prompt
+run. Run: python3 test_heldout.py  (writes runs/debug/unit-tests-a3.json; runs/debug/unit-tests.json is the 27b057dd
+receipt, runs/debug/unit-tests-a1.json the 2e7dc350 receipt and runs/debug/unit-tests-a2.json the d516e11e receipt; none
+is overwritten)"""
 import copy, hashlib, json, math, sys, tempfile, unittest
 from pathlib import Path
 import numpy as np
@@ -310,8 +311,12 @@ GUARD = "score not an exact integer"      # the text of int_attn's first asserti
 def guard_prompt(R, a, l, p, cells_key, prows_key, layers_key, guard=GUARD):
     """Rewrite one prompt of one layer into the representation heldout.py writes when the arithmetic assertion fires
     (eval_frozen except-branch + attention_layer): null mix_rel / max_abs_s / e_zero / causal, guard_fail [text], 24 null
-    rel_y; the layer row's guard list, flags and statistics recomputed the way attention_layer computes them."""
+    rel_y; the layer row's guard list, flags and statistics recomputed the way attention_layer computes them. A3: if the
+    prompt is a determinism prompt its det_bit_equal is set false, as attention_layer does when the integer output is None
+    (until A3 this helper left it true, which the evaluator never writes)."""
     P, C, L = R[prows_key], R[cells_key], R[layers_key]
+    dbe = L[find(L, arm=a, layer=l)]["det_bit_equal"]
+    if p in dbe: dbe[p] = False
     P[find(P, arm=a, layer=l, prompt=p)].update(mix_rel=None, max_abs_s=None, e_zero=None, causal=None, guard_fail=[guard])
     for c in C:
         if (c["arm"], c["layer"], c["prompt"]) == (a, l, p): c["rel_y"] = None
@@ -339,12 +344,16 @@ class GuardedNull(unittest.TestCase):
         self.assertEqual((s["layers_range_fail"], s["layers_fid_fail"]), ([3], [3]))
         x = s["layers"][0]; self.assertEqual((x["n_cells"], x["n_valid"]), (192, 168))
     def test_a2_whole_layer_guarded_gives_nan_statistics_and_fail(self):
+        # A3: the guarded determinism prompts x0 and x4 now carry det false, as the evaluator writes, so V2 fails and the
+        # registered validity rule makes the arm "comparison invalid" (A2's version kept det true and expected FAIL / FAIL)
         R = records(self.table)
         for p in PROMPTS: guard_prompt(R, "C1665", 7, p, "cells", "prompt_rows", "layers")
         self.assertTrue(math.isnan(R["layers"][find(R["layers"], arm="C1665", layer=7)]["rel_median"]))
         s = self.run_nt(R)["arms"]["C1665"]
-        self.assertEqual((s["H_R"], s["H_F"], s["total_guard_failures"]), ("FAIL", "FAIL", 8))
-        self.assertEqual(s["layers"][1]["n_valid"], 0)
+        self.assertEqual((s["H_R"], s["H_F"], s["valid"], s["total_guard_failures"]), ("comparison invalid", "comparison invalid", False, 8))
+        self.assertEqual((s["layers_range_fail"], s["layers_fid_fail"]), ([7], [7]))
+        x = s["layers"][1]; self.assertEqual((x["n_cells"], x["n_valid"], x["rel_median"], x["rel_max"]), (192, 0, None, None))
+        self.assertEqual(s["pooled"]["n"], 15 * 192)
     def test_a2_assertion_plus_wide_guard(self):
         R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
         P = R["prompt_rows"]; i = find(P, arm="C2047", layer=3, prompt="x2")
@@ -375,6 +384,55 @@ class GuardedNull(unittest.TestCase):
         R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers", guard=""); self.refuse_nt(R)
     def test_a2_nan_layer_statistic_with_valid_cells(self):
         R = records(self.table); R["layers"][2]["rel_min"] = float("nan"); self.refuse_nt(R)
+
+# ------------------------------------------------------------------ Amendment A3 (third review of PR #206, comment 6876740819)
+class EmptyAggregate(unittest.TestCase):
+    """A3: an arm with no finite cell (or a run with no layer) is reported with n 0 and null statistics, not a crash and
+    not an invented observation; the verdict comes from the unchanged rules; the guarded representation is exact."""
+    setUp, tearDown, write = Summariser.setUp, Summariser.tearDown, Summariser.write
+    def run_nt(self, R):
+        self.write(R); return S.summarise(self.d, PROMPTS, DET, self.table, NTOK)
+    def refuse_nt(self, R):
+        with self.assertRaises(S.Refuse): self.run_nt(R)
+    def all_guarded(self, R, a, layers):
+        for l in layers:
+            for p in PROMPTS: guard_prompt(R, a, l, p, "cells", "prompt_rows", "layers")
+    def check_empty_arm(self, s, n_layers):
+        c = s["arms"]["C2047"]
+        self.assertEqual((c["H_R"], c["H_F"], c["valid"]), ("comparison invalid", "comparison invalid", False))
+        self.assertEqual(c["pooled"], dict(n=0, median=None, max=None, n_over_001=0, n_over_005=0))
+        self.assertEqual((c["total_guard_failures"], c["layers_range_fail"], c["layers_fid_fail"]),
+                         (8 * n_layers, S.LAYERS[:n_layers], S.LAYERS[:n_layers]))
+        self.assertEqual(sum(x["n_cells"] for x in c["layers"]), 192 * n_layers)
+        self.assertTrue(all(x["n_valid"] == 0 and x["rel_median"] is None and x["rel_min"] is None for x in c["layers"]))
+        self.assertEqual(s["arms"]["C1665"]["pooled"]["n"], 192 * n_layers)
+        self.assertTrue("n/a" in S.md(s))
+    def test_a3_partial_one_layer_arm_all_guarded(self):
+        R = records(self.table, n_layers=1); self.all_guarded(R, "C2047", [3])
+        s = self.run_nt(R); self.check_empty_arm(s, 1)
+        self.assertEqual(s["arms"]["C1665"]["H_R"], "NOT TESTED (partial)")
+    def test_a3_complete_arm_all_guarded(self):
+        R = records(self.table); self.all_guarded(R, "C2047", S.LAYERS)
+        s = self.run_nt(R); self.check_empty_arm(s, 16)
+        self.assertEqual((s["arms"]["C1665"]["H_R"], s["arms"]["C1665"]["H_F"]), ("PASS", "PASS"))
+    def test_a3_empty_run(self):
+        s = self.run_nt(dict(layers=[], cells=[], prompt_rows=[], timing=[]))
+        for a in S.ARMS:
+            v = s["arms"][a]
+            self.assertEqual((v["H_R"], v["H_F"], v["layers_done"], len(v["not_tested_layers"])), ("NOT TESTED (partial)", "NOT TESTED (partial)", 0, 16))
+            self.assertEqual(v["pooled"], dict(n=0, median=None, max=None, n_over_001=0, n_over_005=0))
+        S.md(s)
+    def test_a3_missing_rel_y_key_on_a_guarded_cell(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x2", "cells", "prompt_rows", "layers")
+        R["cells"][find(R["cells"], arm="C2047", layer=3, prompt="x2", head=0)].pop("rel_y"); self.refuse_nt(R)
+    def test_a3_finite_statistic_on_an_all_guarded_layer(self):
+        for f in ("rel_max", "rel_median", "rel_min"):
+            R = records(self.table); self.all_guarded(R, "C1665", [7])
+            R["layers"][find(R["layers"], arm="C1665", layer=7)][f] = 0.0; self.refuse_nt(R)
+    def test_a3_guarded_determinism_prompt_with_true_flag(self):
+        R = records(self.table); guard_prompt(R, "C2047", 3, "x0", "cells", "prompt_rows", "layers")
+        self.assertEqual(self.run_nt(R)["arms"]["C2047"]["H_F"], "comparison invalid")
+        R["layers"][find(R["layers"], arm="C2047", layer=3)]["det_bit_equal"]["x0"] = True; self.refuse_nt(R)
 
 class Descriptive(unittest.TestCase):
     """A2 (2), (3): retained descriptive fields finite, in domain and reconciled; per-head counts bounded by T x 256."""
@@ -433,16 +491,53 @@ class CommittedCopyA2(CommittedCopy):
         L[find(L, arm="C2047", layer=3)].update(q_over=5120, n_clamped=5120)
         self.assertEqual(self.run_copy()["arms"]["C2047"]["H_R"], "FAIL")
 
+class CommittedCopyA3(CommittedCopy):
+    """The third review's two reproductions, on a temporary copy of the committed run records: every C2047 prompt guarded
+    (evaluator representation, determinism false), (1) on a layer-3-only prefix, (2) on all 16 layers. Both through the
+    summariser and through the command line, which must write both summaries."""
+    test_copy_unmodified_is_accepted_and_unchanged = test_copy_negative_v_over_cancels_real_clamp = None
+    test_copy_nan_rel_y = test_copy_negative_minimum_rel_y = test_copy_T_zero = test_copy_string_false_determinism = None
+    def guard_arm(self, layers):
+        for l in layers:
+            for p in self.prompts: guard_prompt(self.R, "C2047", l, p, "cells.jsonl", "prompt-rows.jsonl", "layers.jsonl")
+    def cli(self):
+        import subprocess
+        for n, rows in self.R.items(): (self.d / n).write_text("".join(json.dumps(r) + "\n" for r in rows))
+        out = self.d / "out"; out.mkdir()
+        r = subprocess.run([sys.executable, str(HERE / "summarise_heldout.py"), str(self.d), str(out)], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertEqual(sorted(x.name for x in out.iterdir()), ["summary.json", "summary.md"])
+        return json.loads((out / "summary.json").read_text())
+    def check(self, s, layers):
+        c = s["arms"]["C2047"]
+        self.assertEqual((c["H_R"], c["H_F"], c["valid"]), ("comparison invalid", "comparison invalid", False))
+        self.assertEqual(c["pooled"], dict(n=0, median=None, max=None, n_over_001=0, n_over_005=0))
+        self.assertEqual(c["total_guard_failures"], 8 * len(layers))
+        self.assertEqual((c["layers_range_fail"], c["layers_fid_fail"]), (layers, layers))
+        self.assertEqual(sum(x["n_cells"] for x in c["layers"]), 192 * len(layers))
+        self.assertEqual(s["arms"]["C1665"]["pooled"]["n"], 192 * len(layers))
+    def test_a3_copy_partial_layer3_all_c2047_guarded(self):
+        self.R = {n: [r for r in rows if r["layer"] == 3] for n, rows in self.R.items()}
+        self.guard_arm([3]); self.check(self.run_copy(), [3])
+        self.check(self.cli(), [3])
+    def test_a3_copy_complete_all_c2047_guarded(self):
+        self.guard_arm(S.LAYERS); s = self.run_copy(); self.check(s, S.LAYERS)
+        o = s["arms"]["C1665"]; self.assertEqual((o["H_R"], o["H_F"], o["valid"]), ("FAIL", "FAIL", True))
+        self.assertEqual(o, json.loads((RUNS / "summary.json").read_text())["arms"]["C1665"])   # other arm unchanged
+        self.check(self.cli(), S.LAYERS)
+
 if __name__ == "__main__":
     res = unittest.main(exit=False, verbosity=2).result
     out = dict(ran=res.testsRun, failures=len(res.failures), errors=len(res.errors), ok=res.wasSuccessful(),
                int_attn_sha256=hashlib.sha256((H.SRC176 / "int_attn.py").read_bytes()).hexdigest(), table_sha256=H.TABLE_SHA,
                note="synthetic data only; no weights, no registered prompt")
     # runs/debug/unit-tests.json is the receipt of 27b057dd (code cc8f8504, 32 tests), runs/debug/unit-tests-a1.json the
-    # receipt of 2e7dc350 (Amendment A1, 59 tests); neither is overwritten. This version (Amendment A2) writes its own.
-    out["amendment"] = "A2 (guarded nulls admitted where the evaluator writes them; descriptive fields and per-head bounds checked)"
+    # receipt of 2e7dc350 (Amendment A1, 59 tests), runs/debug/unit-tests-a2.json the receipt of d516e11e (Amendment A2,
+    # 83 tests); none is overwritten. This version (Amendment A3) writes its own.
+    out["amendment"] = ("A3 (an aggregate with no finite cell is reported with n 0 and null statistics; rel_y key required; "
+                        "all-guarded layer statistics all NaN; guarded determinism prompts carry det false)")
     out["note"] = ("synthetic data, plus (CommittedCopy) temporary copies of the committed run records, read only; "
                    "no weights, no model forward, no registered prompt run")
     (HERE / "runs" / "debug").mkdir(parents=True, exist_ok=True)
-    (HERE / "runs" / "debug" / "unit-tests-a2.json").write_text(json.dumps(out, indent=1) + "\n")
+    (HERE / "runs" / "debug" / "unit-tests-a3.json").write_text(json.dumps(out, indent=1) + "\n")
     raise SystemExit(0 if res.wasSuccessful() else 1)

@@ -27,6 +27,14 @@ is checked: obs_mx_q/k/v, max_abs_s, arm_seconds and the timing seconds finite a
 prompt rows; n_pairs, n_cells_valid, rel_min and the over-bar counts equal those of its cells; a wide value is a guard.
 (3) Every per-head clamp count is bounded by that head's T x 256 entries.
 
+PREREG Amendment A3 (third review of PR #206): an aggregate with no finite cell is reported, never crashed on and never
+filled with an invented observation. A layer (or an arm's pooled set) whose cells are all guarded, or a run with no layer
+at all, is written with n_valid / n = 0 and median, max and min null ("not evaluable"); the arm verdict is decided by the
+unchanged verdict rules (a guard on a done layer is FAIL; a false validity flag is "comparison invalid"). The guarded-null
+representation is tightened to what heldout.py writes: every cell carries an explicit rel_y key; an all-guarded layer row
+carries NaN for all three of rel_median / rel_max / rel_min; and a determinism prompt whose row is guarded-null has
+det_bit_equal false (heldout.attention_layer sets it false when the first integer output is None).
+
 Usage: summarise_heldout.py [<in_dir> [<out_dir>]]   (defaults: runs/ and runs/)
 """
 import json, math, sys
@@ -127,7 +135,9 @@ def check_layer_row(r, cl, n_tok_total):
     nv = nonneg_int(r.get("n_cells_valid"), f"n_cells_valid of {k}")
     for f in ("rel_median", "rel_max", "rel_min"):
         x = r.get(f)
-        if nv == 0 and type(x) is float and math.isnan(x): continue      # A2: all cells guarded -> producer writes NaN
+        if nv == 0:                                                       # A2/A3: all cells guarded -> producer writes NaN, all three
+            if type(x) is float and math.isnan(x): continue
+            raise Refuse(f"{f} of {k} = {x!r} on a layer with no valid cell; the evaluator writes NaN")
         nonneg_num(x, f"{f} of {k}")
     for f in ("obs_mx_q", "obs_mx_k", "obs_mx_v", "arm_seconds"): nonneg_num(r.get(f), f"{f} of {k}")
     s = nonneg_num(r.get("max_abs_s"), f"max_abs_s of {k}")
@@ -167,6 +177,7 @@ def summarise(ind, prompts, det, table, ntok=None):
         k = (c.get("arm"), c.get("layer"), c.get("prompt"), c.get("head"))
         if k[0] not in ARMS or k[1] not in LAYERS or k[2] not in prompts or k[3] not in range(NH): raise Refuse(f"unexpected cell {k}")
         if k in cset: raise Refuse(f"duplicate cell {k}")
+        if "rel_y" not in c: raise Refuse(f"cell {k} has no rel_y key (the evaluator writes rel_y, null when guarded)")   # A3
         r = c.get("rel_y")
         if r is not None and (not is_num(r) or r < 0): raise Refuse(f"bad rel_y {k}: {r!r}")
         cset[k] = r
@@ -214,22 +225,26 @@ def summarise(ind, prompts, det, table, ntok=None):
         if r["max_abs_s"] != max([0.0] + [p["max_abs_s"] for p in pr if p["max_abs_s"] is not None]): raise Refuse(f"max_abs_s of {a} {l} disagrees with prompt rows")
         for f in ("e_zero", "causal", "wide_over_32767"):
             if r[f] != sum(p[f] or 0 for p in pr): raise Refuse(f"{f} total of {a} {l} disagrees with prompt rows")
-        arr = np.array(good) if good else np.array([np.nan])
-        med, mxv = float(np.median(arr)), float(arr.max())
+        arr = np.array(good, dtype=float)                       # A3: may be empty (every cell of the layer guarded)
+        med, mxv, mnv = (float(np.median(arr)), float(arr.max()), float(arr.min())) if good else (None, None, None)
+        n001, n005 = int((arr > BAR_MED).sum()), int((arr > BAR_MAX).sum())
         if good and (abs(med - r["rel_median"]) > 0 or abs(mxv - r["rel_max"]) > 0): raise Refuse(f"statistics of {a} {l} disagree with cells")
-        if (r["n_pairs"], r["n_cells_valid"], r["n_over_001"], r["n_over_005"]) != (len(vals), len(good), int((arr > BAR_MED).sum()), int((arr > BAR_MAX).sum())) \
-           or (good and r["rel_min"] != float(arr.min())) or (not good and not math.isnan(r["rel_median"])):
+        if (r["n_pairs"], r["n_cells_valid"], r["n_over_001"], r["n_over_005"]) != (len(vals), len(good), n001, n005) \
+           or (good and r["rel_min"] != mnv) or (not good and not all(math.isnan(r[f]) for f in ("rel_median", "rel_max", "rel_min"))):
             raise Refuse(f"cell counts or rel_min of {a} {l} disagree with cells")
+        dk = set(r.get("det_bit_equal", {}))
+        if dk != set(det): raise Refuse(f"determinism evidence of {a} {l} is not exactly {det}")
+        for p in det:                                           # A3: heldout.py sets determinism false on a guarded-null prompt
+            if guarded_null(pset[(a, l, p)]) and r["det_bit_equal"].get(p) is not False:
+                raise Refuse(f"{a} {l} {p}: guarded-null determinism prompt with det_bit_equal {r['det_bit_equal'].get(p)!r}")
         fid = bool(not guards and len(good) == len(vals) and med <= BAR_MED and mxv <= BAR_MAX)
         rng = bool(clamps == 0 and not guards)
         if r.get("fid_pass") != fid or r.get("range_pass") != rng: raise Refuse(f"pass flags of {a} {l} disagree")
-        dk = set(r.get("det_bit_equal", {}))
-        if dk != set(det): raise Refuse(f"determinism evidence of {a} {l} is not exactly {det}")
         v1 = all(tset[l]["mix_bit_equal_q1"].get(p) is True for p in prompts) and set(tset[l]["mix_bit_equal_q1"]) == set(prompts)
         per_arm[a].append(dict(layer=l, clamped=clamps, q_over=r["q_over"], k_over=r["k_over"], v_over=r["v_over"],
                                q_n=r["q_n"], k_n=r["k_n"], v_n=r["v_n"], guards=guards, n_cells=len(vals), n_valid=len(good),
-                               rel_median=med, rel_max=mxv, rel_min=float(arr.min()), n_over_001=int((arr > BAR_MED).sum()),
-                               n_over_005=int((arr > BAR_MAX).sum()), range_pass=rng, fid_pass=fid,
+                               rel_median=med, rel_max=mxv, rel_min=mnv, n_over_001=n001,
+                               n_over_005=n005, range_pass=rng, fid_pass=fid,
                                det_ok=all(r["det_bit_equal"].values()), split_ok=v1, scales_ok=bool(r.get("scales_frozen_ok")),
                                scales=table[(a, l)], max_abs_s=r.get("max_abs_s"),
                                q_maxw=r.get("q_maxw"), k_maxw=r.get("k_maxw"), v_maxw=r.get("v_maxw"),
@@ -245,15 +260,19 @@ def summarise(ind, prompts, det, table, ntok=None):
             hr = "FAIL" if any(not x["range_pass"] for x in rows) else ("PASS" if complete else "NOT TESTED (partial)")
             hf = "FAIL" if any(not x["fid_pass"] for x in rows) else ("PASS" if complete else "NOT TESTED (partial)")
         allc = [cset[(a, x["layer"], p, h)] for x in rows for p in prompts for h in range(NH)]
-        allc = np.array([c for c in allc if c is not None]) if rows else np.array([np.nan])
+        allc = np.array([c for c in allc if c is not None], dtype=float)   # A3: may be empty; no invented observation
+        ev = allc.size > 0
         out["arms"][a] = dict(H_R=hr, H_F=hf, valid=valid, layers_done=len(rows),
                               layers_range_fail=[x["layer"] for x in rows if not x["range_pass"]],
                               layers_fid_fail=[x["layer"] for x in rows if not x["fid_pass"]],
                               total_clamped=sum(x["clamped"] for x in rows), total_guard_failures=sum(len(x["guards"]) for x in rows),
-                              pooled=dict(n=int(allc.size), median=float(np.median(allc)), max=float(allc.max()),
+                              pooled=dict(n=int(allc.size), median=float(np.median(allc)) if ev else None,
+                                          max=float(allc.max()) if ev else None,
                                           n_over_001=int((allc > BAR_MED).sum()), n_over_005=int((allc > BAR_MAX).sum())),
                               not_tested_layers=[l for l in LAYERS if l not in [x["layer"] for x in rows]], layers=rows)
     return out
+
+def f5(x): return "n/a" if x is None else f"{x:.5f}"     # A3: null = not evaluable (no finite cell)
 
 def md(s):
     L = ["# summary (generated by summarise_heldout.py; measured, unreplicated, open loop, frozen #178 scales)", ""]
@@ -261,12 +280,12 @@ def md(s):
     for a, v in s["arms"].items():
         L += ["", f"## {a}: H_R {v['H_R']}, H_F {v['H_F']} (valid {v['valid']})",
               f"range-fail layers {v['layers_range_fail']}, fidelity-fail layers {v['layers_fid_fail']}, clamped {v['total_clamped']}, guard failures {v['total_guard_failures']}",
-              f"pooled n={v['pooled']['n']} median {v['pooled']['median']:.5f} max {v['pooled']['max']:.5f} >0.01 {v['pooled']['n_over_001']} >0.05 {v['pooled']['n_over_005']}", "",
+              f"pooled n={v['pooled']['n']} median {f5(v['pooled']['median'])} max {f5(v['pooled']['max'])} >0.01 {v['pooled']['n_over_001']} >0.05 {v['pooled']['n_over_005']}", "",
               "| layer | Eq Ek Ev sh | clamped q/k/v (of q_n, k_n) | max qw kw vw | median | max | >0.01 | >0.05 | R | F |", "|---|---|---|---|---|---|---|---|---|---|"]
         for x in v["layers"]:
             sc = x["scales"]
             L.append(f"| {x['layer']} | {sc['Eq']} {sc['Ek']} {sc['Ev']} {sc['sh']} | {x['q_over']}/{x['k_over']}/{x['v_over']} (of {x['q_n']}, {x['k_n']}) | "
-                     f"{x['q_maxw']} {x['k_maxw']} {x['v_maxw']} | {x['rel_median']:.5f} | {x['rel_max']:.5f} | {x['n_over_001']} | {x['n_over_005']} | "
+                     f"{x['q_maxw']} {x['k_maxw']} {x['v_maxw']} | {f5(x['rel_median'])} | {f5(x['rel_max'])} | {x['n_over_001']} | {x['n_over_005']} | "
                      f"{'yes' if x['range_pass'] else 'no'} | {'yes' if x['fid_pass'] else 'no'} |")
     return "\n".join(L) + "\n"
 
