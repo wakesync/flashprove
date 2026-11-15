@@ -1,0 +1,5 @@
+pinned_eps1_lo_0: the kit's own file: planned by the call with -arrays: False, by all three calls: False; 15 MB, 0.0 s, least sum none
+pinned_eps1_lo_0 widths: 5 files with H * dh != d (H * dh <= 2^20, H + G <= 64), 5 of them not refused shape-heads
+pinned_eps1_lo_0 walk: 0 steps of 8 files, 0 planned by the call with -arrays, 0 by all three calls
+parameter_walk.py: 6 files; fault 0, unchecked 0, slow 0, large 0
+parameter_walk.py: query width: 5 files with H * dh != d, 5 not refused shape-heads

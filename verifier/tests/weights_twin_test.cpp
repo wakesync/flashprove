@@ -106,6 +106,10 @@ int main() {
       {"odd sizes alone: no bit to give", 1, 3, 1, 5, 7, 9, 0, 0, 3, false, true},
       {"no embedding, no head", 3, 8, 2, 4, 8, 12, 4, 3, 0, true, false},
       {"a size of 1 in every place that takes one", 2, 1, 1, 1, 1, 1, 1, 1, 1, true, true},
+      // The query width dq = H dh above the residual width d, which cp_verify's layout() admits
+      // ("shape-heads" bounds dq and no longer asks dq = d). The first shape above has dq below d.
+      {"query width above the residual width: dq = 12 = 3 * 2^2, d = 8", 2, 8, 4, 4, 12, 16, 0, 0, 10, false, true},
+      {"query width above the residual width, odd parts on both sides, expert layers: dq = 24, d = 20", 2, 20, 4, 4, 24, 40, 12, 6, 10, true, true},
   };
   size_t units = 0, cells = 0, empties = 0, worlds = 0;
   for (const Shape &s : shapes)

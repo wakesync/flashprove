@@ -53,7 +53,7 @@ These are architectural requirements, not evidence of prover support. [E2]
 | Decay round 2 | U1/U2/U3 FAIL; U4 PASS as decay-only emulation | U4 is not a built committed-table lookup or end-to-end test | E9 |
 | Stock-vs-abliterated U1 margin | **FAIL (mixed)** on all 10 registered prompts | Not a detection algorithm or an impossibility theorem | E10 |
 | Dense table-digest admission | Dense verifier planning accepts the required table digests | No dense proof or dense `YES`; producer reader still mismatches | E11 |
-| Query-width design | Merged desk audit of `dq != d` | No gate opened; head dimension and partial rotary remain barriers | E11 |
+| Query-width design | Merged desk audit of `dq != d`. Verifier side only, with PR #199: the CPU verifier's admission test asks `H dh <= 2^20` instead of `H dh = d` (measured, unreplicated, planning calls only: [RESULTS](../experiments/20261114-195-dq-ne-d-admission/RESULTS.md)) | Both prover gates are still closed; no proof with `dq != d` exists or was checked; Qwen is still refused, by head dimension 256 and by partial rotary | E11 |
 | M3 | Merged design and counts for committed-weight proofs | M3a through full-model milestones are not established builds | E12 |
 
 ## What the proof machinery actually covers
@@ -152,6 +152,14 @@ The merged `dq != d` note finds the audited verifier sizes already use the appro
 but calls for an explicit query-width bound and admission changes on both verifier and prover.
 It changes no code. The equality gate, `dh = 256` no-wrap barrier and partial-rotary barrier remain
 explicit dependencies; dense table admission does not resolve them or Qwen's other operators. [E11]
+
+Two separate facts since that note. First, the verifier half of the admission change is made
+by PR #199: the CPU verifier's `shape-heads` test asks `H dh <= 2^20` instead of `H dh = d`.
+This is measured, unreplicated, and shown by planning calls only
+([RESULTS](../experiments/20261114-195-dq-ne-d-admission/RESULTS.md)). Second, the prover half
+is not made: both prover gates are still closed, so no proof with `dq != d` exists and none
+was checked. Qwen is not admitted: the `dh = 256` no-wrap barrier and the partial-rotary
+barrier refuse it as before, and that change touches neither.
 
 ## Cost: three different kinds of evidence
 

@@ -291,7 +291,7 @@ and `D` are lines of the parameter file, and D_j is a digit.
 | sg | a stream's number, 0 <= sg <= 2 Lam |
 | j; k2; x; e | a feature of a stream; the index that an inner product runs over; an index inside a call's segment; an expert's number, e < NE |
 | lb | a limb's number |
-| dq, dkv, nqk, ldh | dq = H dh, which must equal d; dkv = G dh; nqk = dq + dkv; 2^ldh = dh |
+| dq, dkv, nqk, ldh | dq = H dh, the query width, at most 2^20; it need not equal d; dkv = G dh; nqk = dq + dkv; 2^ldh = dh |
 | Pd, Pf, le | 2^lPd; 2^lPf; clog2(NE) |
 | lift(k) | for a shift k: 16 - k if k < 16, else 0 |
 | rsh(A, k) | floor((A + 2^(k - 1)) / 2^k), the rounding shift of the integer A by k bits |
@@ -1032,7 +1032,7 @@ layer). So this page also writes out forms on which no call ends with an accepta
 | `shape-words` | 4 <= lt <= 16; 1 <= ll <= 6; 1 <= d, f <= 2^20; nmin <= 28; and with routed experts: fe is a power of two, f = 2 fe, and not (ll = 1 and fe = 1) |
 | `shape-L` | L >= 1 and Lam divides L |
 | `shape-la` | lt < la <= 16; 2^ls divides d, f, dkv, nqk, and fe with routed experts; lmq >= la; lmaf >= la |
-| `shape-heads` | H, G >= 1; dh is a power of two, at least 2; H dh = d; H + G <= 64 |
+| `shape-heads` | H, G >= 1; dh is a power of two, at least 2; H dh <= 2^20 (it need not equal d); H + G <= 64 |
 | `shape-NE` | with routed experts: NE is a power of two from 2 to 4096 |
 | `policy-norm` | 1 <= `eps1`, `eps2` < 2^59 |
 | `policy-cs`; `policy-ut` | the line `cs` is 12; the line `ut` is 1 |

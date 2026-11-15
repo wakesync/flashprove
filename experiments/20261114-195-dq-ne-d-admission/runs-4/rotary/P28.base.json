@@ -1,0 +1,20 @@
+{
+ "file": "P28",
+ "binary": "base",
+ "d": 8,
+ "H": 1,
+ "G": 1,
+ "dh": 262144,
+ "lt": 10,
+ "table_u32_words_log2": 28,
+ "table_bytes": 1073741824,
+ "command": "prlimit --as=4294967296 timeout 120 /usr/bin/time -f 'peak_kib=%M seconds=%e' <cp_verify> -plan arrays <files>/P28 128",
+ "status": 1,
+ "last_line": "NO: shape-heads",
+ "stdout_lines": 1,
+ "peak_kib": 5376,
+ "seconds": 0.0,
+ "stderr_tail": [
+  "Command exited with non-zero status 1"
+ ]
+}

@@ -517,7 +517,12 @@ static Lay layout(const Hdr &h, const CallLines &pc) {
   // From 2^63 on, the map to the field would make eps negative. runStage() tests M and K, from KL.
   for (int n = 0; n < 2; n++)
     if (h.eps[n] < 1 || h.eps[n] >= (1ull << 59)) refuse("policy-norm");
-  if (!h.H || !h.Gk || !h.dh || (h.dh & (h.dh - 1)) || h.dh < 2 || h.H * h.dh != d || h.H + h.Gk > 64)
+  // The query width dq = H dh need not equal d. It is bounded like d (queryWidthWithinBound(),
+  // vf_widths_and_bounds.h: the product in 128 bits, at most 2^20), here, before dq is formed and
+  // before any tensor, shift count or vector is sized from dq or dh. With H >= 1 this also bounds
+  // dh. Why no later size or no-overflow condition needed the equality:
+  // research/operators/qwen_ops/DQ-NE-D.md.
+  if (!h.H || !h.Gk || !h.dh || (h.dh & (h.dh - 1)) || h.dh < 2 || !queryWidthWithinBound(h.H, h.dh) || h.H + h.Gk > 64)
     refuse("shape-heads");
   y.dq = h.H * h.dh;
   y.dkv = h.Gk * h.dh;

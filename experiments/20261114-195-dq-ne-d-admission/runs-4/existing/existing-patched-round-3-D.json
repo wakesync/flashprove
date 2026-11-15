@@ -1,0 +1,34 @@
+{
+ "binary": "patched",
+ "round": 3,
+ "group": "D",
+ "touched_by_normalisation": [],
+ "records": [
+  {
+   "row": "rejected_proofs_accepted",
+   "binary": "patched",
+   "round": 3,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "10 altered sets: all rejected",
+   "sha256_normalised": "795d7bb43c784417ec103f0bbb7bfc680360105795bf8aa57ead39c9d98c047b",
+   "cpu_seconds": 20.3,
+   "peak_rss_kib_children_so_far": 158160
+  },
+  {
+   "row": "rejected_proofs_gap",
+   "binary": "patched",
+   "round": 3,
+   "status": 0,
+   "status_wanted": 0,
+   "registered_line_found": true,
+   "passes": true,
+   "last": "10 altered sets: all rejected",
+   "sha256_normalised": "ec7f7761e6d7d47fab92eb52fb513ece3f29bb6400786d6f9c958b231f743420",
+   "cpu_seconds": 20.0,
+   "peak_rss_kib_children_so_far": 158676
+  }
+ ]
+}

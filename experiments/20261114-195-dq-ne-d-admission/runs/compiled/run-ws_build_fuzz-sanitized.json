@@ -1,0 +1,11 @@
+{
+ "label": "run-ws_build_fuzz-sanitized",
+ "command": [
+  "<WORK>/bin/ws_build_fuzz",
+  "300000",
+  "1"
+ ],
+ "status": 0,
+ "seconds": 18.5,
+ "peak_rss_kib_children": 388024
+}
