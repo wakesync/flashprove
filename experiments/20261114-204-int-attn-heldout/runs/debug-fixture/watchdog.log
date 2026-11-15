@@ -1,0 +1,3 @@
+{"t": "2026-11-14T06:19:21Z", "slot_granted": true, "memavailable_gb": 15.28, "units": "decimal GB (kB*1024/1e9)", "budget_min": 10.0, "hard_stop": "2026-11-14T07:40:00Z", "stop_at": "2026-11-14T06:29:21Z", "rss_limit_gb": 14.0, "cmd": ["python3", "heldout.py", "fixture", "fixture", "debug-fixture"]}
+{"t": "2026-11-14T06:19:21Z", "child_pid": 3249914}
+{"t": "2026-11-14T06:20:19Z", "exit": 0, "killed": null, "peak_tree_rss_gb": 3.516, "elapsed_s": 58.5}

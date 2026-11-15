@@ -1,0 +1,42 @@
+{
+ "ok": true,
+ "note": "debug only, fixture not in either prompt set",
+ "layers": [
+  {
+   "arm": "C2047",
+   "layer": 3,
+   "Eq": 11,
+   "Ek": 7,
+   "Ev": 8,
+   "sh": 10,
+   "n_clamped": 0,
+   "rel_median": 0.0027184166072331305,
+   "rel_max": 0.0036554559270146154,
+   "det_bit_equal": {
+    "fx": true
+   },
+   "scales_frozen_ok": true
+  },
+  {
+   "arm": "C1665",
+   "layer": 3,
+   "Eq": 11,
+   "Ek": 7,
+   "Ev": 7,
+   "sh": 10,
+   "n_clamped": 0,
+   "rel_median": 0.005201745462264887,
+   "rel_max": 0.007126111982029379,
+   "det_bit_equal": {
+    "fx": true
+   },
+   "scales_frozen_ok": true
+  }
+ ],
+ "mix_bit_equal": [
+  {
+   "fx": true
+  }
+ ],
+ "peak_rss_gb_self": 3.706
+}

@@ -1,0 +1,4 @@
+{"t": "2026-11-14T06:19:37Z", "layer": 0, "ckpt": "stock", "type": "linear_attention", "fetch_wait_s": 14.5, "layer_s": 0.3, "disk_free_gb": 49.5, "peak_rss_gb_self": 3.689}
+{"t": "2026-11-14T06:19:51Z", "layer": 1, "ckpt": "stock", "type": "linear_attention", "fetch_wait_s": 13.8, "layer_s": 0.5, "disk_free_gb": 49.5, "peak_rss_gb_self": 3.705}
+{"t": "2026-11-14T06:20:05Z", "layer": 2, "ckpt": "stock", "type": "linear_attention", "fetch_wait_s": 13.8, "layer_s": 0.4, "disk_free_gb": 49.5, "peak_rss_gb_self": 3.706}
+{"t": "2026-11-14T06:20:17Z", "layer": 3, "ckpt": "stock", "type": "full_attention", "fetch_wait_s": 12.0, "layer_s": 0.2, "disk_free_gb": 49.5, "peak_rss_gb_self": 3.706}
