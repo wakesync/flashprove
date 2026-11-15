@@ -1,0 +1,2 @@
+0 - 1 = 0xffffffff00000000 in the verifier's field
+weights_twin_test: ok (36 worlds, 588 units, 680940 cells, 4360560 places without a cell; 4152 checks)

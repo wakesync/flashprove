@@ -1,0 +1,19 @@
+{
+ "label": "build-t7a-plain",
+ "command": [
+  "g++",
+  "-std=c++17",
+  "-O2",
+  "-Wall",
+  "-Wextra",
+  "-DDIGEST_WORDS=8",
+  "-I",
+  ".",
+  "../tests/query_width_bound_test.cpp",
+  "-o",
+  "<WORK>/bin/query_width_bound_test"
+ ],
+ "status": 0,
+ "seconds": 0.2,
+ "peak_rss_kib_children": 28288
+}

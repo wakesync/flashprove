@@ -1,0 +1,1808 @@
+{
+  "cases": {
+    "alternate-run1-run3-by-name": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-complete",
+        "n_common": 78,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "mixed sources",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run1": 39,
+        "run3": 39
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "control-alternate-run1-run3-by-index": {
+      "common_blocks": null,
+      "compare_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "refused",
+        "n_common": null,
+        "summary": "refused",
+        "union": null
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "mixed sources",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run1": 39,
+        "run3": 39
+      },
+      "summary_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "union_blocks": null,
+      "union_blocks_only_run2_supplies": null
+    },
+    "control-original-cut-then-reversed": {
+      "common_blocks": null,
+      "compare_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "refused",
+        "n_common": null,
+        "summary": "refused",
+        "union": null
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 77,
+      "run3_lines_copied_from": {
+        "run3": 77
+      },
+      "summary_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "union_blocks": null,
+      "union_blocks_only_run2_supplies": null
+    },
+    "control-original-order-cut-last": {
+      "common_blocks": {
+        "max": 77,
+        "median": 77,
+        "min": 77,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 77,
+        "summary": "PASS-SUBSET",
+        "union": 77
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "both reviews",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 77,
+      "run3_lines_copied_from": {
+        "run3": 77
+      },
+      "summary_statuses": [
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET"
+      ],
+      "union_blocks": {
+        "max": 77,
+        "median": 77,
+        "min": 77,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "control-run2-forward-meta-kept": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-complete",
+        "n_common": 78,
+        "summary": "refused",
+        "union": null
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "run 2 reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "leaves-v2.json",
+        "python.txt",
+        "run-meta.json",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run3": 78
+      },
+      "summary_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "union_blocks": null,
+      "union_blocks_only_run2_supplies": null
+    },
+    "control-run2-records-as-run3": {
+      "common_blocks": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 8,
+        "summary": "BELOW-COVERAGE",
+        "union": 8
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "substituted",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "both reviews",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 8,
+      "run3_lines_copied_from": {
+        "run2": 8
+      },
+      "summary_statuses": [
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE"
+      ],
+      "union_blocks": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-1": {
+      "common_blocks": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 1,
+        "summary": "BELOW-COVERAGE",
+        "union": 9
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 1,
+      "run3_lines_copied_from": {
+        "run3": 1
+      },
+      "summary_statuses": [
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE",
+        "BELOW-COVERAGE"
+      ],
+      "union_blocks": {
+        "max": 9,
+        "median": 9,
+        "min": 9,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-10": {
+      "common_blocks": {
+        "max": 10,
+        "median": 10,
+        "min": 10,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 10,
+        "summary": "PASS-SUBSET",
+        "union": 18
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 10,
+      "run3_lines_copied_from": {
+        "run3": 10
+      },
+      "summary_statuses": [
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET"
+      ],
+      "union_blocks": {
+        "max": 18,
+        "median": 18,
+        "min": 18,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-39": {
+      "common_blocks": {
+        "max": 39,
+        "median": 39,
+        "min": 39,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 39,
+        "summary": "PASS-SUBSET",
+        "union": 47
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 39,
+      "run3_lines_copied_from": {
+        "run3": 39
+      },
+      "summary_statuses": [
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET"
+      ],
+      "union_blocks": {
+        "max": 47,
+        "median": 47,
+        "min": 47,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-60": {
+      "common_blocks": {
+        "max": 60,
+        "median": 60,
+        "min": 60,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 60,
+        "summary": "PASS-SUBSET",
+        "union": 68
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 60,
+      "run3_lines_copied_from": {
+        "run3": 60
+      },
+      "summary_statuses": [
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET"
+      ],
+      "union_blocks": {
+        "max": 68,
+        "median": 68,
+        "min": 68,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-69": {
+      "common_blocks": {
+        "max": 69,
+        "median": 69,
+        "min": 69,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 69,
+        "summary": "PASS-SUBSET",
+        "union": 77
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "this lane",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 69,
+      "run3_lines_copied_from": {
+        "run3": 69
+      },
+      "summary_statuses": [
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET"
+      ],
+      "union_blocks": {
+        "max": 77,
+        "median": 77,
+        "min": 77,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-70": {
+      "common_blocks": {
+        "max": 70,
+        "median": 70,
+        "min": 70,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 70,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "both reviews",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 70,
+      "run3_lines_copied_from": {
+        "run3": 70
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-70-meta-consistent": {
+      "common_blocks": {
+        "max": 70,
+        "median": 70,
+        "min": 70,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 70,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered, metadata edited",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run-meta.json",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 70,
+      "run3_lines_copied_from": {
+        "run3": 70
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-71": {
+      "common_blocks": {
+        "max": 71,
+        "median": 71,
+        "min": 71,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 71,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 71,
+      "run3_lines_copied_from": {
+        "run3": 71
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 7,
+        "median": 7,
+        "min": 7,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-76": {
+      "common_blocks": {
+        "max": 76,
+        "median": 76,
+        "min": 76,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 76,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 76,
+      "run3_lines_copied_from": {
+        "run3": 76
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 2,
+        "median": 2,
+        "min": 2,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-77": {
+      "common_blocks": {
+        "max": 77,
+        "median": 77,
+        "min": 77,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 77,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "both reviews",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 77,
+      "run3_lines_copied_from": {
+        "run3": 77
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-77-meta-consistent": {
+      "common_blocks": {
+        "max": 77,
+        "median": 77,
+        "min": 77,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 77,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "truncated+reordered, metadata edited",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run-meta.json",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 77,
+      "run3_lines_copied_from": {
+        "run3": 77
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "forward-78-whole": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-complete",
+        "n_common": 78,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "reordered",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "both reviews",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run3": 78
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "run1-dir-as-run3-meta-kept": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-complete",
+        "n_common": 78,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "substituted",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "both reviews",
+      "run3_files": [
+        "blocks.jsonl",
+        "leaves-v2.json",
+        "python.txt",
+        "run-meta.json",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run1": 78
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "run1-dir-as-run3-no-meta": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-complete",
+        "n_common": 78,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "substituted",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "leaves-v2.json",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run1": 78
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "run1-first-70-as-run3": {
+      "common_blocks": {
+        "max": 70,
+        "median": 70,
+        "min": 70,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 70,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "substituted+truncated",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 70,
+      "run3_lines_copied_from": {
+        "run1": 70
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "run1-records-as-run3": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-complete",
+        "n_common": 78,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "substituted",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "first review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 78,
+      "run3_lines_copied_from": {
+        "run1": 78
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      }
+    },
+    "splice-run1-39-forward-run3-39-69": {
+      "common_blocks": {
+        "max": 70,
+        "median": 70,
+        "min": 70,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "crosscheck_problems": 0,
+      "expected": {
+        "compare": "identical-partial",
+        "n_common": 70,
+        "summary": "PASS",
+        "union": 78
+      },
+      "full_coverage_comparator_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "kind": "mixed sources+truncated",
+      "n": 5,
+      "n_as_registered": 5,
+      "reported_by": "second review",
+      "run3_files": [
+        "blocks.jsonl",
+        "python.txt",
+        "run.log",
+        "run.time",
+        "sha256.txt",
+        "slot.txt",
+        "tests-1.json",
+        "tests-1.log",
+        "tests-2.json",
+        "tests-2.log",
+        "tree.log"
+      ],
+      "run3_lines": 70,
+      "run3_lines_copied_from": {
+        "run1": 39,
+        "run3": 31
+      },
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "union_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "union_blocks_only_run2_supplies": {
+        "max": 8,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "sd": 0.0
+      }
+    }
+  },
+  "cases_with_full_pass_on_altered_run3": [
+    "alternate-run1-run3-by-name",
+    "forward-70",
+    "forward-70-meta-consistent",
+    "forward-71",
+    "forward-76",
+    "forward-77",
+    "forward-77-meta-consistent",
+    "forward-78-whole",
+    "run1-dir-as-run3-meta-kept",
+    "run1-dir-as-run3-no-meta",
+    "run1-first-70-as-run3",
+    "run1-records-as-run3",
+    "splice-run1-39-forward-run3-39-69"
+  ],
+  "crosscheck_problems": 0,
+  "n_cases": 23,
+  "n_rows": 115,
+  "n_rows_as_registered": 115,
+  "n_rows_full_pass": 65,
+  "note": "Issue #189 stop-rule finding, measured, unreplicated. Deterministic replays of committed evidence through the unchanged reader and summariser; not conversion repeats, not a proof, no performance claim. A full PASS here is real union coverage (run 2 supplies the blocks the altered run 3 lacks, or the substituted records are real records) with provenance the reader cannot check; it is not a desired contract.",
+  "reader_reported_coverage_or_agreement_absent_from_files": false,
+  "repetitions": 5,
+  "source_unchanged": true,
+  "stop_rule_fired": true
+}

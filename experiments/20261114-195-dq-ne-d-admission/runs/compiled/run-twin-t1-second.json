@@ -1,0 +1,9 @@
+{
+ "label": "run-twin-t1-second",
+ "command": [
+  "<WORK>/bin/weights_twin_test.t1b"
+ ],
+ "status": 0,
+ "seconds": 0.8,
+ "peak_rss_kib_children": 9848
+}

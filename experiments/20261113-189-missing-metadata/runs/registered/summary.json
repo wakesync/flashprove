@@ -1,0 +1,183 @@
+{
+  "arms": {
+    "baseline": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "n": 5,
+      "n_expected": 5,
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    "complete-no-meta": {
+      "common_blocks": {
+        "max": 78,
+        "median": 78,
+        "min": 78,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete",
+        "identical-complete"
+      ],
+      "full_pass_indicator": {
+        "max": 1,
+        "median": 1,
+        "min": 1,
+        "n": 5,
+        "sd": 0.0
+      },
+      "n": 5,
+      "n_expected": 5,
+      "summary_statuses": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    "cut-meta-kept": {
+      "common_blocks": null,
+      "compare_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "n": 5,
+      "n_expected": 5,
+      "summary_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ]
+    },
+    "cut-no-meta-tree-cache": {
+      "common_blocks": {
+        "max": 77,
+        "median": 77,
+        "min": 77,
+        "n": 5,
+        "sd": 0.0
+      },
+      "compare_statuses": [
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial",
+        "identical-partial"
+      ],
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "n": 5,
+      "n_expected": 5,
+      "summary_statuses": [
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET",
+        "PASS-SUBSET"
+      ]
+    },
+    "cut-tree-kept": {
+      "common_blocks": null,
+      "compare_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "n": 5,
+      "n_expected": 5,
+      "summary_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ]
+    },
+    "reordered-no-meta-tree-cache": {
+      "common_blocks": null,
+      "compare_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ],
+      "full_pass_indicator": {
+        "max": 0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "sd": 0.0
+      },
+      "n": 5,
+      "n_expected": 5,
+      "summary_statuses": [
+        "refused",
+        "refused",
+        "refused",
+        "refused",
+        "refused"
+      ]
+    }
+  },
+  "blocking_finding": false,
+  "n_expected": 30,
+  "n_rows": 30,
+  "note": "Deterministic replays of existing evidence, measured, unreplicated. Not conversion repeats or performance measurements.",
+  "source_unchanged": true
+}

@@ -1,0 +1,21 @@
+{
+ "label": "walk-smoke-n6",
+ "command": [
+  "python3",
+  "-B",
+  "verifier/tests/parameter_walk.py",
+  "<WORK>/cp_verify.patched",
+  "<WORK>/walk-smoke",
+  "prover/tests/configurations/pinned_no_proof_of_work",
+  "--walk-only",
+  "--steps",
+  "4",
+  "--wide",
+  "8",
+  "--jobs",
+  "2"
+ ],
+ "status": 0,
+ "seconds": 3.9,
+ "peak_rss_kib_children": 44440
+}

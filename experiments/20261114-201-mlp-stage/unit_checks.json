@@ -1,0 +1,59 @@
+{
+ "1a_table_rows": {
+  "rows": 4096,
+  "equal_rows": 4096,
+  "differing_rows": [],
+  "differing_detail": []
+ },
+ "1b_function_on_grid": {
+  "gw_on_grid": true,
+  "gw_in_domain": true,
+  "gw_max_abs": 2640.0,
+  "n_hidden": 672,
+  "bit_equal": true,
+  "sat_counts_equal": true
+ },
+ "1c_power_offgrid_and_outside": {
+  "differ": true,
+  "silu_domain_exits": 575
+ },
+ "2_float_weights_exact": {
+  "weights": {
+   "g": {
+    "e_set": 13,
+    "e_exponent": 13,
+    "e_conv": 13,
+    "int_equals_k": true
+   },
+   "u": {
+    "e_set": 12,
+    "e_exponent": 12,
+    "e_conv": 12,
+    "int_equals_k": true
+   },
+   "d": {
+    "e_set": 11,
+    "e_exponent": 11,
+    "e_conv": 11,
+    "int_equals_k": true
+   }
+  },
+  "bit_equal": true,
+  "stats_equal": {
+   "m": true,
+   "gw": true,
+   "u": true,
+   "s": true,
+   "h": true,
+   "acc_down": true,
+   "out": true,
+   "n_silu_sat_lo": true,
+   "n_silu_sat_hi": true,
+   "n_h_ge_2e18": true
+  },
+  "silu_domain_exits": 90
+ },
+ "2_power_inexact_weights_differ": true,
+ "required_all_true": true,
+ "note": "1a lists table rows where float64 silu disagrees with the pinned Q256 table (a disagreement would be a finding, not a fix). 1b runs the whole function with the norm replaced by the identity (check only)."
+}

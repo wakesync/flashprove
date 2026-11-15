@@ -1,0 +1,105 @@
+{
+  "as_registered": true,
+  "case": "control-run2-forward-meta-kept",
+  "compare_run2": {
+    "process": {
+      "rc": 2,
+      "stderr": "REFUSED: <fixture>/runs/run2/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)\n",
+      "stdout": ""
+    },
+    "result": null,
+    "status": "refused"
+  },
+  "compare_run3": {
+    "process": {
+      "rc": 0,
+      "stderr": "",
+      "stdout": "compare {'n_a': 78, 'n_b': 78, 'n_common': 78, 'n_identical': 78, 'n_common_controls': 8, 'n_common_changed': 70, 'roots_equal': {'stock': True, 'abl': True}, 'ids_equal': {'stock': True, 'abl': True}, 'leaves_file_sha256_equal': True, 'inputs': {'a_blocks_sha256': '19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4', 'b_blocks_sha256': '9ed836cbbed31b022888e37a7fa8de170f778e43b63a470413c98e3b598b2a88', 'a_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e', 'b_leaves_sha256': '11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e'}, 'status': 'identical-complete'}\n"
+    },
+    "result": {
+      "ids_equal": {
+        "abl": true,
+        "stock": true
+      },
+      "inputs": {
+        "a_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+        "a_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+        "b_blocks_sha256": "9ed836cbbed31b022888e37a7fa8de170f778e43b63a470413c98e3b598b2a88",
+        "b_leaves_sha256": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e"
+      },
+      "leaves_file_sha256_equal": true,
+      "n_a": 78,
+      "n_b": 78,
+      "n_common": 78,
+      "n_common_changed": 70,
+      "n_common_controls": 8,
+      "n_identical": 78,
+      "roots_equal": {
+        "abl": true,
+        "stock": true
+      },
+      "status": "identical-complete"
+    },
+    "status": "identical-complete"
+  },
+  "crosscheck": {
+    "facts": {
+      "run3": {
+        "own_n_common": 78,
+        "own_n_identical": 78,
+        "reader_n_common": 78,
+        "reader_n_identical": 78
+      }
+    },
+    "problems": []
+  },
+  "expected": {
+    "compare": "identical-complete",
+    "n_common": 78,
+    "summary": "refused",
+    "union": null
+  },
+  "full_coverage_comparator": true,
+  "full_pass": false,
+  "kind": "run 2 reordered",
+  "observed": {
+    "compare": "identical-complete",
+    "n_common": 78,
+    "summary": "refused",
+    "union": null
+  },
+  "repetition": 1,
+  "reported_by": "second review",
+  "run1_blocks_sha256": "19f5bb9ebf0665e40e493e022a7487a775eda9d429eaad69f57b11e857fc0eb4",
+  "run2_blocks_sha256": "d426933cc6174214fbd232c03674563aba665cbfd2ad02201923accbb1192a61",
+  "run3_blocks_sha256": "9ed836cbbed31b022888e37a7fa8de170f778e43b63a470413c98e3b598b2a88",
+  "run3_files": [
+    "blocks.jsonl",
+    "leaves-v2.json",
+    "python.txt",
+    "run-meta.json",
+    "run.log",
+    "run.time",
+    "sha256.txt",
+    "slot.txt",
+    "tests-1.json",
+    "tests-1.log",
+    "tests-2.json",
+    "tests-2.log",
+    "tree.log"
+  ],
+  "run3_lines": 78,
+  "run3_lines_copied_from": {
+    "run3": 78
+  },
+  "summary": {
+    "h3": null,
+    "process": {
+      "rc": 2,
+      "stderr": "REFUSED: <fixture>/runs/run2/blocks.jsonl: record order is neither a prefix of the registered order nor of its reverse (a block is missing, moved or out of place)\n",
+      "stdout": ""
+    },
+    "status": "refused",
+    "summary_sha256": null
+  }
+}

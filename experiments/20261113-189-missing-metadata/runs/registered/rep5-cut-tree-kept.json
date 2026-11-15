@@ -1,0 +1,35 @@
+{
+  "arm": "cut-tree-kept",
+  "compare_process": {
+    "rc": 2,
+    "stderr": "REFUSED: <fixture>/runs/run3/leaves-v2.json: a stored tree next to an incomplete run (77 of 78 records)\n",
+    "stdout": ""
+  },
+  "compare_status": "refused",
+  "comparison": null,
+  "expected_compare": "refused",
+  "expected_summary": "refused",
+  "ok": true,
+  "repetition": 5,
+  "run3_input_sha256": {
+    "blocks.jsonl": "3dc8206f2a96e7c848bc719f9e27a105c3d8efd2c7408f748942395cf78e67d4",
+    "leaves-v2.json": "11eb2f98d06787dfbd961fc2f9b392d663d2efe804a7556800ab259820c9f70e",
+    "python.txt": "21f2118b8cd99a02a3e823b494976458593c77bf7e5a6ba82c0546146977abc6",
+    "run.log": "99dcd04db25173cb0a1f5f384009ff05407bfb0c70a756fdd71a11d6701507cb",
+    "run.time": "ff28b0854c7fa56fc79f6505fc8c6700de1cbd32a110a6c96a0eb504c7046531",
+    "sha256.txt": "5c536747fd48b068cc0f8f9e38ff9de91f7b41d0806bd4dc504174b761758db5",
+    "slot.txt": "cfd23c4f95e086a3c5136940094060f11878050aa02c9a4cb33dbf1fdb63f9eb",
+    "tests-1.json": "bf509cf30b2e7ffb4e0814ffeb9f56d138968ecb4cee1fff966143901aa16aad",
+    "tests-1.log": "dc0d12e824241f568194035bc023f0ef38095a1208cf2438e6ceffe5f98e66da",
+    "tests-2.json": "bf509cf30b2e7ffb4e0814ffeb9f56d138968ecb4cee1fff966143901aa16aad",
+    "tests-2.log": "dc0d12e824241f568194035bc023f0ef38095a1208cf2438e6ceffe5f98e66da",
+    "tree.log": "33a48e7ca15783ab90f6ccda39a992683e3ef4ef8da49a015cdfa3c4c91c5e85"
+  },
+  "summary": null,
+  "summary_process": {
+    "rc": 2,
+    "stderr": "REFUSED: <fixture>/runs/run3/leaves-v2.json: a stored tree next to an incomplete run (77 of 78 records)\n",
+    "stdout": ""
+  },
+  "summary_status": "refused"
+}

@@ -1,0 +1,36 @@
+{"t": "2026-11-14T04:51:15Z", "decision": {"t_lin_s": 53.0, "t_full_s": 54.16, "projected_10_s": 5170.8, "projected_6_s": 2459.4, "available_s": 5850.6, "since_grant_s": 149.4, "set": "all10", "prompts": ["p01-ordinary-short", "p07-chat-ordinary", "p08-chat-refusal", "p09-multilingual", "p02-ordinary-paragraph", "p04-repeat-punct", "p05-code", "p03-repeat-word", "p06a-digits-256", "p11-chat-long"], "n_tokens": 1461}}
+{"t": "2026-11-14T04:54:50Z", "leg": "abl", "layer": 31, "fetch_wait_s": 19.1, "layer_s": 195.2}
+{"t": "2026-11-14T04:57:50Z", "leg": "abl", "layer": 32, "fetch_wait_s": 0.0, "layer_s": 179.9}
+{"t": "2026-11-14T05:00:29Z", "leg": "abl", "layer": 33, "fetch_wait_s": 0.0, "layer_s": 158.2}
+{"t": "2026-11-14T05:02:48Z", "leg": "abl", "layer": 34, "fetch_wait_s": 0.0, "layer_s": 139.2}
+{"t": "2026-11-14T05:05:38Z", "leg": "abl", "layer": 35, "fetch_wait_s": 0.0, "layer_s": 170.3}
+{"t": "2026-11-14T05:08:30Z", "leg": "abl", "layer": 36, "fetch_wait_s": 0.0, "layer_s": 171.6}
+{"t": "2026-11-14T05:11:17Z", "leg": "abl", "layer": 37, "fetch_wait_s": 0.0, "layer_s": 166.3}
+{"t": "2026-11-14T05:13:55Z", "leg": "abl", "layer": 38, "fetch_wait_s": 0.0, "layer_s": 157.6}
+{"t": "2026-11-14T05:16:37Z", "leg": "abl", "layer": 39, "fetch_wait_s": 0.0, "layer_s": 161.9}
+{"t": "2026-11-14T05:19:35Z", "leg": "abl", "layer": 40, "fetch_wait_s": 0.0, "layer_s": 177.4}
+{"t": "2026-11-14T05:22:18Z", "leg": "abl", "layer": 41, "fetch_wait_s": 0.0, "layer_s": 163.5}
+{"t": "2026-11-14T05:25:10Z", "leg": "abl", "layer": 42, "fetch_wait_s": 0.0, "layer_s": 171.3}
+{"t": "2026-11-14T05:28:12Z", "leg": "abl", "layer": 43, "fetch_wait_s": 0.0, "layer_s": 181.6}
+{"t": "2026-11-14T05:30:29Z", "leg": "abl", "layer": 44, "fetch_wait_s": 0.0, "layer_s": 137.2}
+{"t": "2026-11-14T05:32:33Z", "leg": "abl", "layer": 45, "fetch_wait_s": 0.0, "layer_s": 123.8}
+{"t": "2026-11-14T05:34:34Z", "leg": "abl", "layer": 46, "fetch_wait_s": 0.0, "layer_s": 120.7}
+{"t": "2026-11-14T05:37:01Z", "leg": "abl", "layer": 47, "fetch_wait_s": 0.0, "layer_s": 147.1}
+{"t": "2026-11-14T05:39:41Z", "leg": "abl", "layer": 48, "fetch_wait_s": 0.0, "layer_s": 159.0}
+{"t": "2026-11-14T05:42:18Z", "leg": "abl", "layer": 49, "fetch_wait_s": 0.0, "layer_s": 157.1}
+{"t": "2026-11-14T05:44:49Z", "leg": "abl", "layer": 50, "fetch_wait_s": 0.0, "layer_s": 151.3}
+{"t": "2026-11-14T05:47:27Z", "leg": "abl", "layer": 51, "fetch_wait_s": 0.0, "layer_s": 156.8}
+{"t": "2026-11-14T05:50:00Z", "leg": "abl", "layer": 52, "fetch_wait_s": 0.0, "layer_s": 153.2}
+{"t": "2026-11-14T05:52:38Z", "leg": "abl", "layer": 53, "fetch_wait_s": 0.0, "layer_s": 157.5}
+{"t": "2026-11-14T05:55:09Z", "leg": "abl", "layer": 54, "fetch_wait_s": 0.0, "layer_s": 151.1}
+{"t": "2026-11-14T05:57:38Z", "leg": "abl", "layer": 55, "fetch_wait_s": 0.0, "layer_s": 148.4}
+{"t": "2026-11-14T06:00:15Z", "leg": "abl", "layer": 56, "fetch_wait_s": 0.0, "layer_s": 157.6}
+{"t": "2026-11-14T06:02:50Z", "leg": "abl", "layer": 57, "fetch_wait_s": 0.0, "layer_s": 154.0}
+{"t": "2026-11-14T06:05:27Z", "leg": "abl", "layer": 58, "fetch_wait_s": 0.0, "layer_s": 157.7}
+{"t": "2026-11-14T06:08:13Z", "leg": "abl", "layer": 59, "fetch_wait_s": 0.0, "layer_s": 165.8}
+{"t": "2026-11-14T06:10:35Z", "leg": "abl", "layer": 60, "fetch_wait_s": 0.0, "layer_s": 141.3}
+{"t": "2026-11-14T06:13:12Z", "leg": "abl", "layer": 61, "fetch_wait_s": 0.0, "layer_s": 156.2}
+{"t": "2026-11-14T06:15:48Z", "leg": "abl", "layer": 62, "fetch_wait_s": 0.0, "layer_s": 155.9}
+{"t": "2026-11-14T06:17:18Z", "leg": "abl", "layer": 63, "fetch_wait_s": 0.0, "layer_s": 90.3}
+{"t": "2026-11-14T06:19:20Z", "leg": "abl", "logits_done": true, "seconds": 121.6, "sanity_pass": true}
+{"t": "2026-11-14T06:19:20Z", "all_done": true}

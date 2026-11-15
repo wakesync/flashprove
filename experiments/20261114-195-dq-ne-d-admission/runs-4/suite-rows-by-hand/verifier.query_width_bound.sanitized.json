@@ -1,0 +1,17 @@
+{
+ "row": "verifier.query_width_bound.sanitized",
+ "run_by": "hand: the row's own command and pass rule read from SUITE.md, by a lane script; NOT by run_suite.py",
+ "kind": "cpu",
+ "passes_cell": "0 ^query_width_bound_test: ok \\(2043 checks; 959 of 1984 pairs \\(H, dh\\) with H in 1\\.\\.64 and dh = 2\\^1\\.\\.2\\^31 admitted\\)$",
+ "command_cell": "mkdir -p ${W:?} && cd verifier/src && g++ -std=c++17 -O1 -g -fno-ipa-modref -fsanitize=address,undefined -fno-sanitize-recover=all -DDIGEST_WORDS=8 -I . ../tests/query_width_bound_test.cpp -o ${W:?}/query_width_bound_test && ${W:?}/query_width_bound_test",
+ "status": 0,
+ "statuses_allowed": [
+  0
+ ],
+ "last_line": "query_width_bound_test: ok (2043 checks; 959 of 1984 pairs (H, dh) with H in 1..64 and dh = 2^1..2^31 admitted)",
+ "last_line_matches_pattern": true,
+ "passes": true,
+ "seconds": 0.2,
+ "sha256_output": "2a89d324c4bc2b7c8d3aaf9e24819b384f50a8f7ccdf1701b4fd6d57bee4c492",
+ "output_lines": 1
+}

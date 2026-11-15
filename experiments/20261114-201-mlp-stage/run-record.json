@@ -1,0 +1,136 @@
+{
+ "issue": "201",
+ "experiment": "20261114-201-mlp-stage",
+ "stop_reason": "abl_done",
+ "slot_grant": [
+  "slot granted 2026-11-14T04:48:46Z unix 1794631726 pid 2942728 MemAvailable 18629884 kB affinity [8, 9, 10, 11, 12, 13]"
+ ],
+ "start_state_lines": [
+  "2026-11-14T04:48:46Z start-state sha256 22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009 expected 22dff8b92107511838e50e4b26d6e91a2b55d09064711c638042c4c18fb80009 match True",
+  "2026-11-14T04:48:46Z start-state meta {\"leg\": \"abl\", \"next_layer\": 31, \"legs_done\": [], \"prompt_set\": \"full\"}"
+ ],
+ "probe_and_decision": [
+  "2026-11-14T04:50:00Z probe stock layer 0 (linear_attention): fetch 19.3 s, compute 53.0 s",
+  "2026-11-14T04:51:15Z probe stock layer 3 (full_attention): fetch 20.9 s, compute 54.2 s",
+  "2026-11-14T04:51:15Z decision {\"t_lin_s\": 53.0, \"t_full_s\": 54.16, \"projected_10_s\": 5170.8, \"projected_6_s\": 2459.4, \"available_s\": 5850.6, \"since_grant_s\": 149.4, \"set\": \"all10\", \"prompts\": [\"p01-ordinary-short\", \"p07-chat-ordinary\", \"p08-chat-refusal\", \"p09-multilingual\", \"p02-ordinary-paragraph\", \"p04-repeat-punct\", \"p05-code\", \"p03-repeat-word\", \"p06a-digits-256\", \"p11-chat-long\"], \"n_tokens\": 1461}"
+ ],
+ "abl_layers_done": [
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62,
+  63
+ ],
+ "abl_logits_done": [
+  {
+   "t": "2026-11-14T06:19:20Z",
+   "leg": "abl",
+   "logits_done": true,
+   "seconds": 121.6,
+   "sanity_pass": true
+  }
+ ],
+ "layer_seconds": {
+  "n": 33,
+  "median": 157.5,
+  "min": 90.3,
+  "max": 195.2,
+  "per_layer": {
+   "31": 195.2,
+   "32": 179.9,
+   "33": 158.2,
+   "34": 139.2,
+   "35": 170.3,
+   "36": 171.6,
+   "37": 166.3,
+   "38": 157.6,
+   "39": 161.9,
+   "40": 177.4,
+   "41": 163.5,
+   "42": 171.3,
+   "43": 181.6,
+   "44": 137.2,
+   "45": 123.8,
+   "46": 120.7,
+   "47": 147.1,
+   "48": 159.0,
+   "49": 157.1,
+   "50": 151.3,
+   "51": 156.8,
+   "52": 153.2,
+   "53": 157.5,
+   "54": 151.1,
+   "55": 148.4,
+   "56": 157.6,
+   "57": 154.0,
+   "58": 157.7,
+   "59": 165.8,
+   "60": 141.3,
+   "61": 156.2,
+   "62": 155.9,
+   "63": 90.3
+  },
+  "note": "wall clock per layer, layer_s in runs/progress.log.jsonl, four full paths + M31#2 on 2 prompts, shared loaded host, descriptive"
+ },
+ "time_v": {
+  "Command terminated by signal": "15",
+  "Elapsed (wall clock) time (h:mm:ss or m:ss)": "1:30:34",
+  "Maximum resident set size (kbytes)": "8527588",
+  "User time (seconds)": "11200.23",
+  "System time (seconds)": "3897.77",
+  "Percent of CPU this job got": "277%",
+  "Exit status": "0"
+ },
+ "time_v_first_line": [
+  "Command terminated by signal 15"
+ ],
+ "watchdog_max_tree_rss_kib": 8748640,
+ "watchdog_disk_free_gib_min_at_logged_events": 41.6,
+ "manifests_vs_pr124": {
+  "abl": {
+   "fetched_tensors": 437,
+   "compared_with_pr124_manifest": 437,
+   "sha256_mismatch": [],
+   "not_in_pr124_manifest": [],
+   "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+   "rev": "739e3c5b89849f6c238ce1e5b70008612ae42cdd"
+  },
+  "stock_probe": {
+   "fetched_tensors": 25,
+   "compared_with_pr124_manifest": 25,
+   "sha256_mismatch": [],
+   "not_in_pr124_manifest": [],
+   "repo": "Qwen/Qwen3.8-27B",
+   "rev": "37561816e66b5b9153b1b64c10968c18c1e6f4a0"
+  }
+ },
+ "units_note": "Linux kB in /proc and time -v are KiB; disk_free_gb in watchdog.log is bytes / 1024^3 (GiB); watchdog tree RSS is the sum over the python pid and its children at 2 s polls"
+}
