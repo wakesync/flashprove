@@ -1,0 +1,206 @@
+{
+ "all_prereg_checks_hold": true,
+ "cases_191": 23,
+ "cases_191_all_expectations_ok": true,
+ "cases_191_registered_pass": [],
+ "cases_191_registered_refused": 23,
+ "cases_191_registered_summarise": {
+  "alternate-run1-run3-by-name": "refused",
+  "control-alternate-run1-run3-by-index": "refused",
+  "control-original-cut-then-reversed": "refused",
+  "control-original-order-cut-last": "refused",
+  "control-run2-forward-meta-kept": "refused",
+  "control-run2-records-as-run3": "refused",
+  "forward-1": "refused",
+  "forward-10": "refused",
+  "forward-39": "refused",
+  "forward-60": "refused",
+  "forward-69": "refused",
+  "forward-70": "refused",
+  "forward-70-meta-consistent": "refused",
+  "forward-71": "refused",
+  "forward-76": "refused",
+  "forward-77": "refused",
+  "forward-77-meta-consistent": "refused",
+  "forward-78-whole": "refused",
+  "run1-dir-as-run3-meta-kept": "refused",
+  "run1-dir-as-run3-no-meta": "refused",
+  "run1-first-70-as-run3": "refused",
+  "run1-records-as-run3": "refused",
+  "splice-run1-39-forward-run3-39-69": "refused"
+ },
+ "default_mode_full_pass_cases": [
+  "alternate-run1-run3-by-name",
+  "forward-70",
+  "forward-70-meta-consistent",
+  "forward-71",
+  "forward-76",
+  "forward-77",
+  "forward-77-meta-consistent",
+  "forward-78-whole",
+  "run1-dir-as-run3-meta-kept",
+  "run1-dir-as-run3-no-meta",
+  "run1-first-70-as-run3",
+  "run1-records-as-run3",
+  "splice-run1-39-forward-run3-39-69"
+ ],
+ "default_mode_limit_outcomes": {
+  "alternate-run1-run3-by-name": "PASS",
+  "forward-1": "BELOW-COVERAGE",
+  "forward-10": "PASS-SUBSET",
+  "forward-39": "PASS-SUBSET",
+  "forward-60": "PASS-SUBSET",
+  "forward-69": "PASS-SUBSET",
+  "forward-70": "PASS",
+  "forward-70-meta-consistent": "PASS",
+  "forward-71": "PASS",
+  "forward-76": "PASS",
+  "forward-77": "PASS",
+  "forward-77-meta-consistent": "PASS",
+  "forward-78-whole": "PASS",
+  "run1-dir-as-run3-meta-kept": "PASS",
+  "run1-dir-as-run3-no-meta": "PASS",
+  "run1-first-70-as-run3": "PASS",
+  "run1-records-as-run3": "PASS",
+  "splice-run1-39-forward-run3-39-69": "PASS"
+ },
+ "defeat_cases": {
+  "pin203-D1-fixture-pin-edited-with-run": {
+   "got": "refused",
+   "ok": true,
+   "reader": "compare-registered"
+  },
+  "pin203-D10-compare-files-removed": {
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise"
+  },
+  "pin203-D11-unpinned-consumed-file": {
+   "got": "refused",
+   "ok": true,
+   "reader": "compare-registered"
+  },
+  "pin203-D12-honest-copy-elsewhere": {
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise-registered"
+  },
+  "pin203-D2-LIMIT-repo-pin-edited-with-run": {
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise-registered (in-process, pin seam)"
+  },
+  "pin203-D4-extra-unpinned-files": {
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise-registered"
+  },
+  "pin203-D5-symlinked-file": {
+   "got": "refused",
+   "ok": true,
+   "reader": "compare-registered"
+  },
+  "pin203-D6-symlinked-run-dir": {
+   "got": "refused",
+   "ok": true,
+   "reader": "compare-registered"
+  },
+  "pin203-D7-renamed-run": {
+   "got": "refused",
+   "ok": true,
+   "reader": "compare-registered"
+  },
+  "pin203-D8-run1-run3-swapped": {
+   "got": "refused",
+   "ok": true,
+   "reader": "compare-registered"
+  },
+  "pin203-D9-pin-absent": {
+   "got": "refused",
+   "ok": true,
+   "reader": "summarise-registered (in-process, pin seam)"
+  },
+  "pin203-E-pass-union-forward-77": {
+   "got": "PASS-UNION",
+   "ok": true,
+   "reader": "summarise-registered (in-process, pin seam)"
+  }
+ },
+ "defeat_full_pass_on_altered_evidence": [
+  "pin203-D2-LIMIT-repo-pin-edited-with-run",
+  "pin203-D4-extra-unpinned-files"
+ ],
+ "honest_registered": [
+  {
+   "got": "identical-complete",
+   "ok": true,
+   "reader": "compare-registered",
+   "run": "run3"
+  },
+  {
+   "got": "identical-partial",
+   "ok": true,
+   "reader": "compare-registered",
+   "run": "run2"
+  },
+  {
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise-registered",
+   "run": "run3"
+  },
+  {
+   "got": "PASS",
+   "ok": true,
+   "reader": "summarise",
+   "run": "run3"
+  },
+  {
+   "got": "rc 0",
+   "ok": true,
+   "reader": "summarise --registered --check",
+   "run": "committed"
+  },
+  {
+   "got": "rc 0",
+   "ok": true,
+   "reader": "summarise --check",
+   "run": "committed"
+  },
+  {
+   "got": "rc 0",
+   "ok": true,
+   "reader": "make_pins --check",
+   "run": "committed"
+  },
+  {
+   "got": "rc 0",
+   "ok": true,
+   "reader": "compare --registered (command line)",
+   "run": "run3"
+  }
+ ],
+ "main_receipt": {
+  "n_cases": 82,
+  "n_checks": 231,
+  "n_pass": 231
+ },
+ "non_switched_existing_expectations": 213,
+ "non_switched_kept_unchanged": 213,
+ "non_switched_missing_or_changed": [],
+ "note": "issue #203 receipt analysis, measured, unreplicated; deterministic file reads, no spread",
+ "receipt_1": {
+  "n_cases": 136,
+  "n_checks": 346,
+  "n_pass": 346
+ },
+ "receipt_2": {
+  "n_cases": 136,
+  "n_checks": 346,
+  "n_pass": 346
+ },
+ "receipts_byte_identical": true,
+ "receipts_identical_outcomes": true,
+ "switched_expectations": 18,
+ "switched_now_refused_registered": true
+}

@@ -14,12 +14,33 @@ Evidence handling (changed after review round 1 of PR #151, PREREG amendment A-3
   controls and 5 changed, no mismatch), BELOW-COVERAGE (less than that, no mismatch) or FAIL (any mismatch
   in a block, a root, a subset id or a stored tree file).
 
+Registered mode (issue #203, experiments/20261114-203-leafv2-registered-pin; opt-in, the default output and
+exit codes are exactly as before):
+- `--registered` first checks run1, run2, run3 and the two pinned compare files against the committed pin
+  runs/registered-pins.json (wb_leafv2.check_registered): a missing, extra-consumed, symlinked or changed
+  file is refused (exit 2). The pin is a committed list that binds "registered run" to what the repository
+  holds; it is NOT authentication.
+- It adds h3.overall.basis: "single-run" when run 2 or run 3 alone has every block of the union in common
+  with run 1, else "union". PASS requires basis single-run and all registered blocks; a union that reaches
+  all registered blocks with no single run doing so is PASS-UNION, not PASS.
+- It writes runs/summary-registered.json (runs/summary.json is not touched); --check compares with that file.
+- Read once (PREREG amendment A-1 of that experiment, after review round 1 of PR #205): in registered mode
+  each pinned file (the runs' blocks.jsonl / run-meta.json / leaves-v2.json and the two compare files) is
+  read exactly once by the pin check (wb_leafv2.read_registered, read_registered_compare_files). The records,
+  the stored tree and the compare files are parsed from those checked bytes; no pinned path is opened,
+  stat'ed or listed again. The pin file is read once and its reported hash is the hash of the parsed bytes.
+- Command line (amendment A-2): any argument other than --registered, --check and --runs DIR is refused
+  (exit 2, message starting USAGE:), and so is --runs without a directory or with one that starts with --.
+
 Usage (from the top of the tree):
   python3 experiments/20261112-149-leaf-v2/summarise.py                 write runs/summary.json
+  python3 experiments/20261112-149-leaf-v2/summarise.py --registered    pin check, basis, PASS-UNION;
+                                                                         write runs/summary-registered.json
   python3 experiments/20261112-149-leaf-v2/summarise.py --check         recompute and compare with the committed
                                                                          runs/summary.json, write nothing
   python3 experiments/20261112-149-leaf-v2/summarise.py --runs DIR      summarise a copy of runs/ (tests)
-Exit status: 0 ok, 1 --check found a difference, 2 evidence refused (message on stderr)."""
+Exit status: 0 ok, 1 --check found a difference, 2 evidence refused or command line not understood (message
+on stderr)."""
 import hashlib, json, statistics, sys
 from pathlib import Path
 
@@ -29,10 +50,19 @@ sys.path.insert(0, str(HERE.parent.parent / "research/weight-binding"))
 import wb_leafv2 as lv  # noqa: E402
 
 RUNS = ("run1", "run2", "run3")
+REGISTERED = False      # set by --registered (issue #203)
+REG = None              # registered mode only: the one registered read (pin, pin hash, runs, compare files)
 
 
 def load(run):
-    """Validated records of a run, in file order. [] if the run directory does not exist."""
+    """Validated records of a run, in file order. [] if the run directory does not exist.
+    Registered mode: parsed from the bytes the pin check read, never from the directory again."""
+    if REGISTERED:
+        snap = REG["runs"][run]
+        recs = lv.load_records(snap)
+        if "leaves-v2.json" in snap.files:
+            lv.load_leaves(snap, recs)
+        return list(recs.values())
     d = D / run
     if not d.exists():
         return []
@@ -91,21 +121,28 @@ def h3_block(present):
     h3, union, union_ok, mismatch, cached_files = {}, set(), True, False, {}
     for other in ("run2", "run3"):
         cached = D / ("compare-run1-%s.json" % other)
+        # registered mode: the compare file's bytes were read once by the pin check; presence = the checked set
+        cached_raw = REG["compare_files"].get(cached.name) if REGISTERED else None
+        cached_there = (cached_raw is not None) if REGISTERED else cached.exists()
         if other not in present:
-            if cached.exists():
+            if cached_there:
                 raise lv.EvidenceError("%s exists but %s has no run directory: a comparison without its run" % (cached, other))
             continue
-        c = lv.compare_runs(D / "run1", D / other)
-        if cached.exists():
+        if REGISTERED:
+            c = lv.compare_registered(REG["runs"]["run1"], REG["runs"][other])
+        else:
+            c = lv.compare_runs(D / "run1", D / other)
+        c.pop("registered_pin_sha256", None)
+        if cached_there:
             try:
-                old = json.loads(cached.read_text())
+                old = json.loads(cached_raw.decode("utf-8") if REGISTERED else cached.read_text())
             except ValueError as ex:
                 raise lv.EvidenceError("%s: not valid JSON (%s)" % (cached, ex))
             bad = sorted(k for k in old if k not in c or old[k] != c[k]) if isinstance(old, dict) else ["(not an object)"]
             if bad:
                 raise lv.EvidenceError("%s: stale or altered, it disagrees with the comparison recomputed from the "
                                        "run files on %s" % (cached, ", ".join(bad)))
-            cached_files[cached.name] = dict(sha256=hashlib.sha256(cached.read_bytes()).hexdigest(),
+            cached_files[cached.name] = dict(sha256=hashlib.sha256(cached_raw if REGISTERED else cached.read_bytes()).hexdigest(),
                                              agrees_with_recomputation=True)
         h3[other] = {k: v for k, v in c.items() if k != "rows"}
         for r in c["rows"]:
@@ -118,8 +155,11 @@ def h3_block(present):
     nc = sum(1 for _, k in union if k == "control")
     nch = sum(1 for _, k in union if k == "changed")
     all_identical = bool(union_ok and not mismatch)
+    single = any(h3[o]["n_common"] == n for o in h3)        # one run alone covers the whole union
     if not all_identical:
         status = "FAIL"
+    elif n == n_registered and REGISTERED and not single:
+        status = "PASS-UNION"
     elif n == n_registered:
         status = "PASS"
     elif n >= 10 and nc >= 2 and nch >= 5:
@@ -136,11 +176,24 @@ def h3_block(present):
         evidence="recomputed from validated run files by wb_leafv2.compare_runs; stored trees must equal the trees "
                  "rebuilt from the records; committed compare files must agree with the recomputation",
         committed_compare_files=cached_files)
+    if REGISTERED:
+        h3["overall"]["basis"] = "single-run" if single else "union"
+        h3["overall"]["registered"] = dict(
+            pin="runs/registered-pins.json", pin_sha256=REG["pin_sha256"],
+            rule="issue #203: every run and pinned compare file matched the committed pin before H3 was computed; PASS "
+                 "needs basis single-run and all registered blocks, a union-assembled full coverage is PASS-UNION",
+            note="the pin is a committed list binding 'registered run' to what the repository holds, NOT authentication")
     return h3
 
 
 def build():
     out = {"note": "summary of committed run files, hash level, NOT A PROOF; measured, unreplicated"}
+    global REG
+    REG = None
+    if REGISTERED:
+        pin, pin_sha = lv.read_pin()        # one read of the pin; every pinned file below is read once
+        REG = dict(pin_sha256=pin_sha, runs={run: lv.read_registered(D / run, pin) for run in RUNS},
+                   compare_files=lv.read_registered_compare_files(D, pin))
     recs_by_run = {run: load(run) for run in RUNS}
     if not recs_by_run["run1"]:
         raise lv.EvidenceError("%s: run1 has no records; every hypothesis is read against run 1" % (D / "run1"))
@@ -176,17 +229,38 @@ def build():
     return {k: v for k, v in out.items() if v is not None}
 
 
+def usage_error(args):
+    """None for a command line this script understands, else a message (PREREG amendment A-2 of #203)."""
+    i = 0
+    while i < len(args):
+        x = args[i]
+        if x == "--runs":
+            if i + 1 >= len(args) or args[i + 1].startswith("--"):
+                return "--runs needs a directory (one that does not start with --)"
+            i += 1
+        elif x not in ("--registered", "--check"):
+            return "unknown argument %r" % (x,)
+        i += 1
+    return None
+
+
 def main(args=()):
-    global D
+    global D, REGISTERED
     args = list(args)
+    bad = usage_error(args)
+    if bad:
+        print("USAGE: summarise.py [--registered] [--check] [--runs DIR]: %s. Nothing was read or written." % bad,
+              file=sys.stderr)
+        return 2
     if "--runs" in args:
         D = Path(args[args.index("--runs") + 1]).resolve()
+    REGISTERED = "--registered" in args
     out = build()
     text = json.dumps(out, indent=1, sort_keys=True) + "\n"
-    target = D / "summary.json"
+    target = D / ("summary-registered.json" if REGISTERED else "summary.json")
     if "--check" in args:
         same = target.exists() and target.read_text() == text
-        print("summary.json", "matches the recomputation" if same else "DIFFERS from the recomputation")
+        print(target.name, "matches the recomputation" if same else "DIFFERS from the recomputation")
         return 0 if same else 1
     target.write_text(text)
     for run in RUNS:
