@@ -1,0 +1,614 @@
+{
+ "after_exact": {
+  "KL-kq-kk": [
+   "cp_verify.cpp:1410"
+  ],
+  "KL-norm": [
+   "cp_verify.cpp:1413"
+  ],
+  "KL-rp": [
+   "cp_verify.cpp:1415"
+  ],
+  "KL-shift-range": [
+   "cp_verify.cpp:1401"
+  ],
+  "af-no-wrap-N1": [
+   "vf_attention_shape.h:236"
+  ],
+  "af-no-wrap-N2": [
+   "vf_attention_shape.h:239"
+  ],
+  "af-no-wrap-N3": [
+   "vf_attention_shape.h:233"
+  ],
+  "af-no-wrap-N4": [
+   "vf_attention_shape.h:234"
+  ],
+  "af-no-wrap-N5": [
+   "vf_attention_shape.h:241"
+  ],
+  "af-no-wrap-N6": [
+   "vf_attention_shape.h:244"
+  ],
+  "af-no-wrap-N9": [
+   "vf_attention_shape.h:245"
+  ],
+  "af-policy-C": [
+   "vf_attention_shape.h:229"
+  ],
+  "af-policy-call-list": [
+   "vf_attention_shape.h:264",
+   "vf_attention_shape.h:270",
+   "vf_attention_shape.h:273",
+   "vf_attention_shape.h:276",
+   "vf_attention_shape.h:289"
+  ],
+  "af-policy-kF": [
+   "vf_attention_shape.h:223",
+   "vf_attention_shape.h:228"
+  ],
+  "af-policy-nmin": [
+   "vf_attention_shape.h:284"
+  ],
+  "af-policy-sh": [
+   "vf_attention_shape.h:225"
+  ],
+  "af-policy-softmax": [
+   "vf_attention_shape.h:202",
+   "vf_attention_shape.h:212"
+  ],
+  "af-policy-wd": [
+   "cp_verify.cpp:1957"
+  ],
+  "af-shape-heads": [
+   "cp_verify.cpp:1944",
+   "vf_attention_shape.h:192"
+  ],
+  "af-shape-la": [
+   "vf_attention_shape.h:200",
+   "vf_attention_shape.h:287"
+  ],
+  "af-shape-lmS": [
+   "vf_attention_shape.h:217"
+  ],
+  "af-shape-sh": [
+   "vf_attention_shape.h:198"
+  ],
+  "af-shape-tiles": [
+   "vf_attention_shape.h:185"
+  ],
+  "af-unclosed-call": [
+   "vf_attention_check.h:856"
+  ],
+  "coin-zero": [
+   "vf_layers_check.inc:371"
+  ],
+  "entry-refused": [
+   "cp_verify.cpp:2355"
+  ],
+  "forest-calls": [
+   "vf_lookup_argument.h:110"
+  ],
+  "forest-depth": [
+   "vf_lookup_argument.h:118"
+  ],
+  "forest-depth-A": [
+   "vf_attention_check.h:39"
+  ],
+  "forest-depth-G": [
+   "cp_verify.cpp:815",
+   "vf_layers_check.inc:86"
+  ],
+  "forest-depth-H": [
+   "cp_verify.cpp:1829"
+  ],
+  "forest-keys": [
+   "vf_lookup_argument.h:130"
+  ],
+  "forest-planes": [
+   "vf_lookup_argument.h:358"
+  ],
+  "forest-trees": [
+   "vf_lookup_argument.h:126"
+  ],
+  "header-absent-call": [
+   "cp_verify.cpp:836"
+  ],
+  "header-absent-call-H": [
+   "cp_verify.cpp:1854"
+  ],
+  "header-absent-class": [
+   "cp_verify.cpp:544"
+  ],
+  "header-absent-hash": [
+   "cp_verify.cpp:1430"
+  ],
+  "header-absent-kind": [
+   "cp_verify.cpp:1556"
+  ],
+  "header-y": [
+   "cp_verify.cpp:2320",
+   "vf_output_head_check.inc:32",
+   "vf_output_head_check.inc:301"
+  ],
+  "hid-a-fold-list": [
+   "vf_attention_check.h:196"
+  ],
+  "hid-a-owner-uses": [
+   "vf_attention_check.h:169"
+  ],
+  "hid-a-slots": [
+   "vf_attention_check.h:259"
+  ],
+  "hid-a-weight-matrix": [
+   "vf_attention_check.h:64"
+  ],
+  "hid-call-floor": [
+   "cp_verify.cpp:801",
+   "vf_lookup_argument.h:106",
+   "vf_smallness_test_members.inc:99"
+  ],
+  "hid-g-slots": [
+   "vf_layers_plan.inc:158"
+  ],
+  "hid-h-slots": [
+   "vf_output_head_plan.inc:124"
+  ],
+  "hid-hb": [
+   "cp_verify.cpp:1192",
+   "vf_attention_check.h:168"
+  ],
+  "hid-k-range": [
+   "vf_smallness_test_members.inc:164"
+  ],
+  "hid-vocab-cols": [
+   "cp_verify.cpp:1591",
+   "vf_output_head_plan.inc:34"
+  ],
+  "key-refused": [
+   "cp_verify.cpp:2254"
+  ],
+  "model-statement": [
+   "cp_verify.cpp:2263"
+  ],
+  "no-wrap-pin-forest": [
+   "vf_lookup_argument.h:131"
+  ],
+  "plan-fold-source": [
+   "vf_segments.inc:143",
+   "vf_segments.inc:146",
+   "vf_segments.inc:149",
+   "vf_segments.inc:155"
+  ],
+  "plan-head": [
+   "vf_segments.inc:92",
+   "vf_segments.inc:96",
+   "vf_segments.inc:301"
+  ],
+  "plan-layout": [
+   "vf_segments.inc:176",
+   "vf_segments.inc:228"
+  ],
+  "plan-link": [
+   "vf_attention_check.h:305",
+   "vf_output_head_check.inc:24",
+   "vf_segments.inc:94",
+   "vf_segments.inc:116",
+   "vf_segments.inc:127",
+   "vf_segments.inc:158",
+   "vf_segments.inc:185",
+   "vf_segments.inc:293",
+   "vf_segments.inc:324",
+   "vf_smallness_test_members.inc:148"
+  ],
+  "plan-mask-row": [
+   "vf_segments.inc:221",
+   "vf_segments.inc:225",
+   "vf_segments.inc:299"
+  ],
+  "plan-shape": [
+   "vf_segments.inc:99"
+  ],
+  "plan-tau": [
+   "vf_smallness_test_members.inc:366"
+  ],
+  "policy-call-list": [
+   "cp_verify.cpp:728",
+   "cp_verify.cpp:732",
+   "cp_verify.cpp:737",
+   "cp_verify.cpp:741",
+   "cp_verify.cpp:745",
+   "cp_verify.cpp:756"
+  ],
+  "policy-call-list-A": [
+   "cp_verify.cpp:1914",
+   "cp_verify.cpp:1919",
+   "cp_verify.cpp:1921",
+   "cp_verify.cpp:1924",
+   "cp_verify.cpp:1929",
+   "cp_verify.cpp:1978"
+  ],
+  "policy-call-list-H": [
+   "cp_verify.cpp:1743",
+   "cp_verify.cpp:1762",
+   "cp_verify.cpp:1767",
+   "cp_verify.cpp:1771",
+   "cp_verify.cpp:1781"
+  ],
+  "policy-cs": [
+   "cp_verify.cpp:532"
+  ],
+  "policy-forms": [
+   "cp_verify.cpp:547"
+  ],
+  "policy-gap-words": [
+   "cp_verify.cpp:1677",
+   "cp_verify.cpp:1684",
+   "cp_verify.cpp:1686",
+   "cp_verify.cpp:1700"
+  ],
+  "policy-iotaA": [
+   "cp_verify.cpp:1993"
+  ],
+  "policy-norm-F": [
+   "cp_verify.cpp:1671",
+   "cp_verify.cpp:1672"
+  ],
+  "policy-sym-readers": [
+   "cp_verify.cpp:2135",
+   "cp_verify.cpp:2138",
+   "cp_verify.cpp:2141",
+   "cp_verify.cpp:2142",
+   "cp_verify.cpp:2145",
+   "cp_verify.cpp:2146"
+  ],
+  "policy-tau-hb": [
+   "cp_verify.cpp:1194",
+   "vf_smallness_test_members.inc:248"
+  ],
+  "policy-toksrc": [
+   "cp_verify.cpp:1673"
+  ],
+  "policy-ut": [
+   "cp_verify.cpp:549"
+  ],
+  "policy-weight-kind": [
+   "cp_verify.cpp:1559",
+   "cp_verify.cpp:1565"
+  ],
+  "policy-weight-width-emb": [
+   "cp_verify.cpp:1570"
+  ],
+  "pt-pub-forest": [
+   "vf_lookup_argument.h:170"
+  ],
+  "security-bits": [
+   "cp_verify.cpp:2223",
+   "cp_verify.cpp:2453"
+  ],
+  "shape-NE": [
+   "cp_verify.cpp:558"
+  ],
+  "shape-V": [
+   "cp_verify.cpp:1564"
+  ],
+  "shape-lmb": [
+   "cp_verify.cpp:779"
+  ],
+  "shape-product-layer": [
+   "cp_verify.cpp:2098"
+  ],
+  "shape-product-layer-H": [
+   "cp_verify.cpp:2183",
+   "vf_output_head_plan.inc:80"
+  ],
+  "shape-request-matrix": [
+   "cp_verify.cpp:612",
+   "cp_verify.cpp:621"
+  ],
+  "shape-request-matrix-A": [
+   "cp_verify.cpp:1946"
+  ],
+  "shape-request-matrix-H": [
+   "cp_verify.cpp:1703"
+  ],
+  "shape-theta0": [
+   "cp_verify.cpp:1601"
+  ],
+  "t2f-columns-range": [
+   "vf_smallness_test_members.inc:205"
+  ],
+  "t2f-weight-class": [
+   "vf_smallness_test_members.inc:200"
+  ],
+  "table-digest-exp": [
+   "cp_verify.cpp:2020"
+  ],
+  "table-digest-rope": [
+   "cp_verify.cpp:1619"
+  ],
+  "table-digest-sigmoid": [
+   "cp_verify.cpp:1436"
+  ],
+  "table-digest-silu": [
+   "cp_verify.cpp:1428"
+  ],
+  "token-length": [
+   "cp_verify.cpp:2324"
+  ],
+  "token-range": [
+   "cp_verify.cpp:2319",
+   "cp_verify.cpp:2332"
+  ]
+ },
+ "after_prefix": {
+  "af-shape-call-": [
+   "vf_attention_shape.h:312"
+  ],
+  "forest-only-padding-": [
+   "vf_lookup_argument.h:174"
+  ],
+  "forest-row-value-": [
+   "vf_lookup_argument.h:105"
+  ],
+  "hid-planes-": [
+   "cp_verify.cpp:1196",
+   "cp_verify.cpp:1902",
+   "vf_lookup_argument.h:107"
+  ],
+  "hid-profile-segment-": [
+   "vf_layers_check.inc:535"
+  ],
+  "no-wrap-": [
+   "cp_verify.cpp:1452"
+  ],
+  "no-wrap-H-": [
+   "cp_verify.cpp:1864"
+  ],
+  "shape-call-": [
+   "cp_verify.cpp:799",
+   "cp_verify.cpp:800",
+   "cp_verify.cpp:804",
+   "cp_verify.cpp:818"
+  ],
+  "shape-call-H-": [
+   "cp_verify.cpp:1817",
+   "cp_verify.cpp:1818",
+   "cp_verify.cpp:1832"
+  ],
+  "shape-foreign-": [
+   "vf_smallness_test_members.inc:187"
+  ],
+  "shape-functional-": [
+   "vf_smallness_test_members.inc:642"
+  ],
+  "shape-matrix-": [
+   "vf_smallness_test_members.inc:163"
+  ],
+  "shape-pt-words-": [
+   "vf_lookup_argument.h:101"
+  ]
+ },
+ "not_after": {
+  "KL-length": [
+   "cp_verify.cpp:852 (before)",
+   "cp_verify.cpp:1374",
+   "cp_verify.cpp:3230 (before)",
+   "vf_input_files.h:41"
+  ],
+  "chain-refused": [
+   "vf_subproof_segment.h:255",
+   "vf_transcript_channel.h:55"
+  ],
+  "close-list-long": [
+   "vf_common.h:323"
+  ],
+  "cp-bits-above-digest": [
+   "cp_verify.cpp:3343 (before)"
+  ],
+  "cp-entry-missing": [
+   "cp_verify.cpp:3375 (before)"
+  ],
+  "cp-key-head": [
+   "vf_input_files.h:27"
+  ],
+  "cp-key-length": [
+   "vf_input_files.h:26"
+  ],
+  "cp-proof-head": [
+   "vf_input_files.h:51"
+  ],
+  "cp-proof-length": [
+   "vf_input_files.h:50"
+  ],
+  "header-magic": [
+   "cp_verify.cpp:340 (before)"
+  ],
+  "header-version": [
+   "cp_verify.cpp:345 (before)",
+   "cp_verify.cpp:920 (before)"
+  ],
+  "hid-tau": [
+   "cp_verify.cpp:1189 (before)",
+   "vf_smallness_test_members.inc:137"
+  ],
+  "link-claim-count": [
+   "vf_weights_pending_claim.h:37"
+  ],
+  "parameter-table-shape (policy)": [
+   "cp_verify.cpp:991 (before)"
+  ],
+  "plan-groups-base": [
+   "cp_verify.cpp:482 (before)"
+  ],
+  "plan-identity-cap": [
+   "cp_verify.cpp:1044 (before)"
+  ],
+  "plan-tensor-layout": [
+   "cp_verify.cpp:99 (before)",
+   "cp_verify.cpp:103 (before)",
+   "cp_verify.cpp:2005",
+   "cp_verify.cpp:2009",
+   "vf_attention_check.h:624",
+   "vf_attention_shape.h:52",
+   "vf_attention_shape.h:68",
+   "vf_attention_shape.h:73",
+   "vf_layers_check.inc:1000",
+   "vf_layers_check.inc:1031",
+   "vf_layers_check.inc:1055",
+   "vf_output_head_check.inc:145",
+   "vf_output_head_check.inc:390"
+  ],
+  "plan-w-zero": [
+   "vf_subproof_segment.h:81"
+  ],
+  "policy": [
+   "cp_verify.cpp:3259 (before)"
+  ],
+  "policy-call-line": [
+   "cp_verify.cpp:1125 (before)",
+   "cp_verify.cpp:1133 (before)",
+   "cp_verify.cpp:1139 (before)",
+   "cp_verify.cpp:1145 (before)",
+   "cp_verify.cpp:1149 (before)"
+  ],
+  "policy-cert-words": [
+   "cp_verify.cpp:1035 (before)"
+  ],
+  "policy-gate-table": [
+   "cp_verify.cpp:1068 (before)",
+   "cp_verify.cpp:1071 (before)"
+  ],
+  "policy-gcl": [
+   "cp_verify.cpp:567",
+   "cp_verify.cpp:1089 (before)"
+  ],
+  "policy-leafd": [
+   "cp_verify.cpp:997 (before)"
+  ],
+  "policy-length": [
+   "cp_verify.cpp:1169 (before)"
+  ],
+  "policy-lidb": [
+   "cp_verify.cpp:1041 (before)",
+   "cp_verify.cpp:1043 (before)"
+  ],
+  "policy-line-*": [
+   "cp_verify.cpp:1023 (before)",
+   "cp_verify.cpp:1008 (before)",
+   "cp_verify.cpp:1014 (before)",
+   "cp_verify.cpp:1165 (before)",
+   "cp_verify.cpp:1018 (before)"
+  ],
+  "policy-line-form": [
+   "cp_verify.cpp:1008 (before)",
+   "cp_verify.cpp:1014 (before)",
+   "cp_verify.cpp:1165 (before)",
+   "cp_verify.cpp:1023 (before)"
+  ],
+  "policy-line-long": [
+   "cp_verify.cpp:1018 (before)",
+   "cp_verify.cpp:1023 (before)"
+  ],
+  "policy-name-*": [
+   "cp_verify.cpp:1024 (before)",
+   "cp_verify.cpp:1332 (before)"
+  ],
+  "policy-name-lt": [
+   "cp_verify.cpp:1332 (before)",
+   "cp_verify.cpp:1024 (before)"
+  ],
+  "policy-nminH": [
+   "cp_verify.cpp:1055 (before)",
+   "cp_verify.cpp:1057 (before)",
+   "cp_verify.cpp:1188 (before)"
+  ],
+  "policy-norm": [
+   "cp_verify.cpp:519 (before)"
+  ],
+  "policy-profile": [
+   "cp_verify.cpp:349 (before)",
+   "cp_verify.cpp:489 (before)"
+  ],
+  "policy-rcl": [
+   "cp_verify.cpp:599",
+   "cp_verify.cpp:1080 (before)"
+  ],
+  "policy-tables": [
+   "cp_verify.cpp:1116 (before)",
+   "cp_verify.cpp:1118 (before)",
+   "cp_verify.cpp:1170 (before)",
+   "cp_verify.cpp:1204"
+  ],
+  "policy-work-most": [
+   "cp_verify.cpp:995 (before)"
+  ],
+  "policy-xl": [
+   "cp_verify.cpp:1099 (before)",
+   "cp_verify.cpp:1101 (before)"
+  ],
+  "policy-zero-byte": [
+   "cp_verify.cpp:1019 (before)"
+  ],
+  "shape-D": [
+   "cp_verify.cpp:551",
+   "vf_weights_layout.h:142"
+  ],
+  "shape-L": [
+   "cp_verify.cpp:498 (before)"
+  ],
+  "shape-groups": [
+   "cp_verify.cpp:503 (before)"
+  ],
+  "shape-heads": [
+   "cp_verify.cpp:526 (before)"
+  ],
+  "shape-la": [
+   "cp_verify.cpp:511 (before)",
+   "cp_verify.cpp:514 (before)",
+   "cp_verify.cpp:531",
+   "cp_verify.cpp:610",
+   "cp_verify.cpp:620"
+  ],
+  "shape-words": [
+   "cp_verify.cpp:494 (before)",
+   "cp_verify.cpp:783",
+   "cp_verify.cpp:1334 (before)",
+   "vf_weights_layout.h:143",
+   "vf_weights_layout.h:147",
+   "vf_weights_layout.h:153",
+   "vf_weights_layout.h:154"
+  ],
+  "statement-length": [
+   "cp_verify.cpp:330 (before)",
+   "cp_verify.cpp:351 (before)"
+  ],
+  "statement-range": [
+   "cp_verify.cpp:318 (before)",
+   "cp_verify.cpp:324 (before)",
+   "cp_verify.cpp:2335"
+  ],
+  "statement-required": [
+   "cp_verify.cpp:317 (before)",
+   "cp_verify.cpp:908 (before)",
+   "cp_verify.cpp:2312"
+  ],
+  "version-unknown (policy)": [
+   "vf_common.h:458"
+  ],
+  "w-list-token-factor": [
+   "cp_verify.cpp:264 (before)",
+   "cp_verify.cpp:266 (before)",
+   "cp_verify.cpp:1592"
+  ],
+  "w-shape-lk": [
+   "vf_weights_layout.h:140"
+  ],
+  "w-shape-mW": [
+   "vf_weights_layout.h:127",
+   "vf_weights_layout.h:134",
+   "vf_weights_layout.h:187"
+  ]
+ },
+ "rule": "fix199r2: derive, from the verifier sources at the checked-out head, which rejection names can be\nprinted only by code that runs AFTER the test shape-heads (cp_verify.cpp:525-526) in a\n`cp_verify -plan request ... -arrays` call. Reads files only, runs nothing.\n\nA refusal site is a call refuse(\"<literal>\" ...), refuse(<prefix> + ...), refuse(G_ + \"<literal>\"),\nor tblHeld(k, hh, \"<literal>\"). A name (or a prefix for names built at run time) is AFTER only if\nevery one of its sites is in an AFTER region:\n  cp_verify.cpp lines 527..839  (rest of layout(), which shape-heads is in)\n  cp_verify.cpp lines 1192..1206 (polLayout() after its call of layout() at :1191)\n  cp_verify.cpp lines 1345..2558 (runStage() after its call of polLayout() at :1344, to its end)\n  vf_attention_shape.h, vf_attention_check.h, vf_lookup_argument.h, vf_layers_check.inc,\n  vf_layers_plan.inc, vf_output_head_check.inc, vf_output_head_plan.inc, vf_smallness_test.h,\n  vf_smallness_test_members.inc, vf_segments.inc (only reached from those regions: forestShape()\n  :812, AttentionSubProof::plan() :1991, the *.inc files included at :2104-2105, :2190-2191, :2196).\nConservative on purpose: a function defined before :526 but called only later (tensorsAgree :98,\ncalled at :2003) still disqualifies its name, so such a name is not counted.\nEvery other site (cp_verify.cpp outside those ranges, any other file) disqualifies the name.\nNames beginning internal- are left out (the walk counts them as unchecked). Also listed: names\nwith a site in the region that runs BEFORE shape-heads, for the record."
+}

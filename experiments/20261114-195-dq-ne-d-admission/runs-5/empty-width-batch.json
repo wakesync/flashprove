@@ -1,0 +1,33 @@
+{
+ "label": "empty-width-batch",
+ "command": [
+  "taskset",
+  "-c",
+  "6-7",
+  "prlimit",
+  "--as=4294967296",
+  "timeout",
+  "120",
+  "python3",
+  "-B",
+  "<TMPDIR>-4ppsqup9/parameter_walk_no_widths.py",
+  "<TMP>/patched/cp_verify",
+  "<TMPDIR>-4ppsqup9/walk",
+  "prover/tests/configurations/pinned_no_proof_of_work",
+  "--walk-only",
+  "--steps",
+  "4",
+  "--wide",
+  "8",
+  "--jobs",
+  "2"
+ ],
+ "cwd": "<REPO>",
+ "status": 1,
+ "seconds": 4.1,
+ "output_lines": 13,
+ "sha256_output_before_placeholders": "edb6214fb4fced64c3fb79eac7b0fc43f794f3e2dad9ef54fd045c222991643e",
+ "placeholders": "<REPO> the checkout, <TMP> this lane's private mktemp folder, <TMPDIR> a temporary folder made for this run",
+ "binary": "patched",
+ "harness": "a copy of verifier/tests/parameter_walk.py at this commit with widths() yielding nothing"
+}

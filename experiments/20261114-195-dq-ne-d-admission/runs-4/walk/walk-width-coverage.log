@@ -1,0 +1,13 @@
+pinned_no_proof_of_work: the kit's own file: planned by the call with -arrays: True, by all three calls: True; 43 MB, 0.5 s, least sum 120.78
+pinned_no_proof_of_work widths: 5 files with H * dh != d (H * dh <= 2^20, H + G <= 64), 5 of them not refused shape-heads
+pinned_no_proof_of_work walk: 4 steps of 8 files, 7 planned by the call with -arrays, 3 by all three calls
+dear | 43 MB | 0.7 s | <TMP>/walk-registered/pinned_no_proof_of_work/000036.walk-3.txt | last change work closeness#4=1
+dear | 43 MB | 0.7 s | <TMP>/walk-registered/pinned_no_proof_of_work/000030.walk-2.txt | last change work field#2=0
+dear | 43 MB | 0.5 s | <TMP>/walk-registered/pinned_no_proof_of_work/000018.walk-1.txt | last change stages link#16=17
+dear | 16 MB | 0.2 s | <TMP>/walk-registered/pinned_no_proof_of_work/000038.walk-3.txt | last change lmh=13
+dear | 16 MB | 0.2 s | <TMP>/walk-registered/pinned_no_proof_of_work/000024.walk-2.txt | last change G=4
+least sum | 120.78 bits at 128 asked | <TMP>/walk-registered/pinned_no_proof_of_work/000018.walk-1.txt | last change stages link#16=17
+least sum | 120.78 bits at 128 asked | <TMP>/walk-registered/pinned_no_proof_of_work/000030.walk-2.txt | last change work field#2=0
+least sum | 120.79 bits at 128 asked | <TMP>/walk-registered/pinned_no_proof_of_work/000036.walk-3.txt | last change work closeness#4=1
+parameter_walk.py: 38 files; fault 0, unchecked 0, slow 0, large 0
+parameter_walk.py: query width: 5 files with H * dh != d, 5 not refused shape-heads

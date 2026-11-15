@@ -1,0 +1,22 @@
+{
+ "label": "build-t7a-sanitized",
+ "command": [
+  "g++",
+  "-std=c++17",
+  "-O1",
+  "-g",
+  "-Wall",
+  "-Wextra",
+  "-fsanitize=address,undefined",
+  "-fno-sanitize-recover=all",
+  "-DDIGEST_WORDS=8",
+  "-I",
+  ".",
+  "../tests/query_width_bound_test.cpp",
+  "-o",
+  "<WORK>/bin/query_width_bound_test.san"
+ ],
+ "status": 0,
+ "seconds": 0.1,
+ "peak_rss_kib_children": 31336
+}

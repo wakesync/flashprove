@@ -1,0 +1,2 @@
+the line covered: is, letter for letter, what the page's rules give: covered: r=60 e=64 T=64 C=256 theta=256 cap=0 s=16 sh=8 positions=60..63 tokens=61..63 y=yes next-token=no policy=exact-match above-clip=0 (..)
+call_accounting_test.py: 33 lines of the plan's accounting, 0 not as in the call

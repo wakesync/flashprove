@@ -1,0 +1,9 @@
+out of range: the line record: 2 of 2 plays end NO: parameter-range (policy)
+out of range: a group's first number: 16 of 16 plays end NO: parameter-group-shape (policy)
+out of range: the table's fifth number: 1 of 1 plays end NO: parameter-table-shape (policy)
+asked for one bit above the file's target: 6 files
+a lookup call under a name of 9 and of 8 characters: 6 files
+plans that say that no whole call can pass: 12
+plans with the two lines on the committer's files: 6
+with the line "magic 1295397120" put first: 6 files
+example_kits_test.py: 7 parameter files (1 bare, 5 work, 1 yes), 12 plays with a line changed; 0 not as expected

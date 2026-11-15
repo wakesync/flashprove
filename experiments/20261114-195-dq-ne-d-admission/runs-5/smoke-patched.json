@@ -1,0 +1,33 @@
+{
+ "label": "smoke-patched",
+ "command": [
+  "taskset",
+  "-c",
+  "6-7",
+  "prlimit",
+  "--as=4294967296",
+  "timeout",
+  "120",
+  "python3",
+  "-B",
+  "verifier/tests/parameter_walk.py",
+  "<TMP>/patched/cp_verify",
+  "<TMPDIR>-qf0okyfo/walk",
+  "prover/tests/configurations/pinned_no_proof_of_work",
+  "--walk-only",
+  "--steps",
+  "4",
+  "--wide",
+  "8",
+  "--jobs",
+  "2"
+ ],
+ "cwd": "<REPO>",
+ "status": 0,
+ "seconds": 4.0,
+ "output_lines": 13,
+ "sha256_output_before_placeholders": "a48cf1baacbe811eba0ada5e021ee6fa7dc2f1d916fbecedf4a085134c06ee3f",
+ "placeholders": "<REPO> the checkout, <TMP> this lane's private mktemp folder, <TMPDIR> a temporary folder made for this run",
+ "binary": "patched",
+ "harness": "verifier/tests/parameter_walk.py at this commit"
+}
