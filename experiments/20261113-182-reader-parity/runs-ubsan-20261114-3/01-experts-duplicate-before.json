@@ -1,0 +1,20 @@
+{
+  "command": "<PRIVATE_BUILD>/before/sanitized/parameter_file_tables_test <REPO>/experiments/20261113-182-reader-parity/runs/supplementary-matrix/fixtures/experts-duplicate/policy.txt",
+  "exit": 1,
+  "stdout": "parse: policy-tables: line 139: this must be the line tsilu5\nadmission: not-run\n",
+  "stderr": "",
+  "seconds": 0.011,
+  "limits": "RLIMIT_CPU 115/120, cores 0-1, ASAN_OPTIONS=hard_rss_limit_mb=2048:max_allocation_size_mb=2048, no address-space cap",
+  "repetition": 1,
+  "case": "experts-duplicate",
+  "arm": "before",
+  "mode": "ubsan+asan",
+  "release": "parse:policy-tables",
+  "expected": "parse:policy-tables",
+  "observed": "parse:policy-tables",
+  "sanitizer_report": false,
+  "matches_release": true,
+  "matches_expected": true,
+  "release_exit": 1,
+  "status_ok": true
+}

@@ -1,0 +1,95 @@
+{
+  "baseline_sources": {
+    "parameter_file_baseline.h": {
+      "sha256": "0c5f2709d1cd127e48188d4a5181fe8c2ed53ea38148ca87ceaee858443b26e9",
+      "equals_182": true
+    },
+    "parameter_file_one_bits_test.cpp": {
+      "sha256": "25dd61ba2db5e08f47b3e318e93efd032955150ea9ee719676c7802862153eae",
+      "equals_182": true
+    },
+    "parameter_file_one_place_test.cpp": {
+      "sha256": "b5bae93629b56f67861c58fc4d6a3411a70ca1f4a249bd7008874fd6417408df",
+      "equals_182": true
+    },
+    "parameter_file_tables_test.cpp": {
+      "sha256": "f09c94284ff2ced8621c4e43da932dc3cb19251c061ce73391c31fc4c2b8294a",
+      "equals_182": true
+    }
+  },
+  "builds": [
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build <PRIVATE_BUILD>/baseline/parameter_file_tables_test.cpp <PRIVATE_BUILD>/before",
+      "exit": 0,
+      "stdout": "parameter_file_tables_test: built\n",
+      "stderr": "",
+      "seconds": 7.139,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "arm": "before",
+      "test": "parameter_file_tables_test",
+      "binary_sha256": "f44428ed64b6ae67ee19c5d424597cdfad21a835b3bca059b49bb4caa27a36b9",
+      "build_log": ""
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build <PRIVATE_BUILD>/baseline/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/before",
+      "exit": 0,
+      "stdout": "parameter_file_one_bits_test: built\n",
+      "stderr": "",
+      "seconds": 8.028,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "arm": "before",
+      "test": "parameter_file_one_bits_test",
+      "binary_sha256": "d38248c888214a5638663454e54bec5e7c0c517575460e2d106c43eff80e03a3",
+      "build_log": ""
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build <PRIVATE_BUILD>/baseline/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/before",
+      "exit": 0,
+      "stdout": "parameter_file_one_place_test: built\n",
+      "stderr": "",
+      "seconds": 8.52,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "arm": "before",
+      "test": "parameter_file_one_place_test",
+      "binary_sha256": "3cdd62599b05d2599ae02ef5c8ef127cdadfe912b3c252a59a8ce76131ae7e35",
+      "build_log": ""
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build tests/parameter_file_tables_test.cpp <PRIVATE_BUILD>/after",
+      "exit": 0,
+      "stdout": "parameter_file_tables_test: built\n",
+      "stderr": "",
+      "seconds": 7.257,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "arm": "after",
+      "test": "parameter_file_tables_test",
+      "binary_sha256": "d5bf0f92ff600d2c21b34f486417703a4f58bcf18ed3c63ed44af31a50ed4a09",
+      "build_log": ""
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build tests/parameter_file_one_bits_test.cpp <PRIVATE_BUILD>/after",
+      "exit": 0,
+      "stdout": "parameter_file_one_bits_test: built\n",
+      "stderr": "",
+      "seconds": 7.765,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "arm": "after",
+      "test": "parameter_file_one_bits_test",
+      "binary_sha256": "4e807456a65651a9db9b9c931cb741fe8ec082adba156d431684ac36dad1c51f",
+      "build_log": ""
+    },
+    {
+      "command": "bash prover/tests/unit.sh --sanitize build tests/parameter_file_one_place_test.cpp <PRIVATE_BUILD>/after",
+      "exit": 0,
+      "stdout": "parameter_file_one_place_test: built\n",
+      "stderr": "",
+      "seconds": 8.103,
+      "limits": "RLIMIT_CPU 115/120, cores 10-11, RLIMIT_AS 4 GiB",
+      "arm": "after",
+      "test": "parameter_file_one_place_test",
+      "binary_sha256": "50b219c59db72029a5dc0deb2a05515ef6c14bcc598c984699ac90d5c10d34bd",
+      "build_log": ""
+    }
+  ],
+  "settings_source": "extern \"C\" const char *__asan_default_options() {\n  return \"detect_leaks=0:exitcode=97:handle_abort=1:max_allocation_size_mb=8192:hard_rss_limit_mb=12288\";\n}\nextern \"C\" const char *__ubsan_default_options() { return \"print_stacktrace=1:exitcode=97\"; }\n"
+}

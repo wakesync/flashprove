@@ -1,0 +1,8 @@
+{
+  "fixture_identity_equal": true,
+  "default_build_identity_pass": true,
+  "harness_controls_pass": true,
+  "positive_controls_pass": true,
+  "ubsan_arms": "COMPLETE",
+  "ubsan_receipts": "experiments/20261113-182-reader-parity/runs-ubsan-20261114-2/summary.json"
+}
