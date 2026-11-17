@@ -1,6 +1,8 @@
 # Design note: joining an attested loaded-weight identity to the weight commitment of a proof (issue #210)
 
-Part of #36 and #6. Agenda U1 / U3 / Q2 / Q5. Registration: [PREREG](../../experiments/20261117-210-identity-bridge/PREREG.md), amendment A-1. Verdict: [RESULTS](../../experiments/20261117-210-identity-bridge/RESULTS.md).
+Part of #36 and #6. Agenda U1 / U3 / Q2 / Q5. Registration: [PREREG](../../experiments/20261117-210-identity-bridge/PREREG.md), amendments A-1 and A-2. Verdict: [RESULTS](../../experiments/20261117-210-identity-bridge/RESULTS.md).
+
+Corrected after a round-1 review (PREREG A-2): E6b is now UNSOLVED, and two wordings were narrowed. Each replaced sentence is quoted in RESULTS under "Corrections after review". The corrected text is not reviewed.
 
 Base: every `path:line` in this note is at main `5583d7f82b549454cdb6374d2fd347dfd9781976`.
 Desk note. It changes no code, runs nothing and reports no measurement. It is a specification and an obligation matrix, not a proof and not a design that has been built. "Unknown" marks what this note did not establish.
@@ -196,7 +198,7 @@ This note names no construction that closes E5b by attestation alone. The proof 
 | exact canonical bytes | the revision identifier (repository and commit) that both derivations start from; then N3 and N5 as in section 4 |
 | authorization source | N0 names the revision |
 | binding mechanism | **common preimage, recomputed.** Both roots are deterministic functions of the same public files. They are never compared with each other |
-| update / rollback rule | a new revision changes both; a new pack schema changes N3 only `[V1]`; a new leaf version changes N5 only |
+| update / rollback rule | each root has its own change condition, and "a new revision" is not one of them. N5 is a function of the tensors only: it changes when a tensor's name, dtype, shape or source bytes change, or when the number of tensors changes (`research/weight-binding/wb_manifest.py:36-38`, `:66-77`). It hashes neither the revision identifier nor any configuration file, so **different revisions can share one N5**, for example two revisions that differ only in a configuration value. N3 is a root over the packaged volume image, built from the pinned revision under a pack schema `[V1]`: it changes when that image changes, and a new pack schema changes N3 only `[V1]`. Which files of a revision enter the image was not established here (Unknown), so this note does not say that every new revision changes N3. A new leaf version changes N5 only. Neither root says which revision is approved or which is newer: revision authorization and rollback stay in N0 |
 | availability dependency | the public revision must stay retrievable; the packing tool at the declared schema `[V1]` |
 
 What exists: the N5 side, for two pins (1,199 leaves each, `experiments/20261110-36-weight-binding/RESULTS.md:78`), and a statement in the public pages that the N3 side is reproducible `[V1]`. What does not exist: any run by us of the N3 side, and any document that records both under one revision. For weights that are not public this edge has no recomputation, and falls back to a signer's word.
@@ -212,7 +214,7 @@ Main's own design already points at this join in three lines: a package root and
 | exact canonical bytes | `H("fp-wb-config-v2", lp(typed canonical fields))` (`research/weight-binding/wb_conv.py:203-204`) |
 | authorization source | N0 (revision and rule version) |
 | binding mechanism | file side only: the pin is hashed into the conversion id (`research/weight-binding/wb_conv.py:361-362`). Between the pin and what a runtime uses: none |
-| update / rollback rule | any pinned field change gives a new conversion id; an unknown key refuses |
+| update / rollback rule | any pinned field change gives a new conversion id; an unknown key refuses. A change of configuration alone leaves the checkpoint id N5 as it was (E6a, E7) |
 | availability dependency | none beyond the revision |
 
 The parts of this edge, and which exist:
@@ -234,7 +236,7 @@ Why the status is UNSOLVED and not PROPOSED. The registered wording of the edge 
 | exact canonical bytes | N5 in section 4 |
 | authorization source | the client's own choice of revision. This is guarantee (d): no cryptography makes the choice |
 | binding mechanism | recomputation and comparison of 32 bytes; openings checked for a canonical index and path (`experiments/20261110-36-weight-binding/RESULTS.md:64-66`) |
-| update / rollback rule | a new revision is a new id. Nothing links an old id to a new one |
+| update / rollback rule | the id is a function of the tensors only: it changes when a tensor's name, dtype, shape or source bytes change, or the number of tensors changes, and it has no other input (`research/weight-binding/wb_manifest.py:36-38`, `:66-77`). A new revision is therefore not always a new id: a revision that changes only a configuration value keeps every tensor and keeps the id, and the change shows in the config pin inside N6 instead (`research/weight-binding/wb_conv.py:365-378`; 21 same-tensor config cases are refused under the honest conversion id, `experiments/20261111-91-conversion-id/RESULTS.md:23`; when the config pin was corrected, the conversion ids changed and the checkpoint ids did not, `:30-33`). So the id does not identify a revision and enforces no order between revisions. Which revision is approved, and the refusal of an older one, are the client's policy N0, not something this hash supplies. Nothing links an old id to a new one |
 | availability dependency | the public revision |
 
 Scope of MAIN: per-tensor ids for two pins were built and each refuses the other's manifest and all 70 changed-tensor openings (`experiments/20261110-36-weight-binding/RESULTS.md:16-18`). It is hash bookkeeping: "Nothing in this experiment is a proof" (`:7`). The id covers all 1,199 source tensors, while the conversion design covers the 851 text tensors only (`research/weight-binding/DESIGN.md:167-171`).
@@ -307,7 +309,7 @@ What is missing, by the item the issue lists:
 | update / rollback rule | one set of responses per committed table. A new commitment needs a new key file |
 | availability dependency | the key file; for open weights, the integers to recompute from |
 
-What exists: a CPU research fixture that binds four length-four public tensors to a held checkpoint and conversion manifest inside the native key proof. Three complete substituted-table proofs were rejected by the native linear-claim check in 10 of 10 runs each (`experiments/20261111-36-keyfile-tensor-binding/RESULTS.md:5`, `:21-27`).
+What exists: a CPU research fixture that binds four length-four public tensors to a held checkpoint and conversion manifest inside the native key proof. Three complete substituted-table proofs were rejected by the native linear-claim check in 10 of 10 runs each (`experiments/20261111-36-keyfile-tensor-binding/RESULTS.md:5`, `:21-27`; "Only four length-four public tensors", `:83`).
 
 Why the status is UNSOLVED and not PROPOSED:
 
@@ -654,6 +656,8 @@ Every statement in sections 1 to 7 carries its source where it is made: a `path:
 
 **How the citations were checked.** Each cited range was read by the lane on the base commit before it was written down. Separately, a small script kept outside the repository confirmed that every backticked path and `path:line` citation in this file names a file that exists and a range inside that file (0 problems; the count at the final commit is in RESULTS.md). That script checks existence and range only. It does not check that the lines say what the note says; that rests on the reading. It is not the optional checker of the PREREG, and its passing is not evidence for any edge.
 
+The citations added after the round-1 review (PREREG A-2) were read on the base commit by the fix lane, at the cited lines and their surroundings only: `research/envelope/client_verify.py:241-250`, `research/weight-binding/wb_manifest.py:66-77`, `research/weight-binding/wb_conv.py:365-378`, line 83 of the key-file result and lines 65-69 of the client-envelope result. A second lane-side script of the same kind (existence and range only, outside the repository) was run on the corrected file; its count is in RESULTS.md under "Corrections after review".
+
 ### 8.1 Public documentation (from public documentation, not verified by us)
 
 Fetched on 2026-11-17 (V2 twice, section 2), read as published, used as data only. Nothing in them was run, reproduced or checked against any system.
@@ -671,9 +675,9 @@ Not used from these pages: any identifier, example value, host name, command or 
 | source | lines cited | used for |
 |---|---|---|
 | `experiments/20261110-36-weight-binding/RESULTS.md` (#87) | 7, 16-18, 64-66, 78 | E7; N5: per-tensor ids for two pins, hash level, not a proof |
-| `experiments/20261111-91-conversion-id/RESULTS.md` (#100) | 16-18, 23-27, 30-33, 43, 55, 62, 66-68, 70 | E6b, E8a, E8c, E9; counterexample 2: config pin, inventory, rule text not executable, no proof binds the table |
+| `experiments/20261111-91-conversion-id/RESULTS.md` (#100) | 16-18, 23-27, 30-33, 43, 55, 62, 66-68, 70 | E6b, E7 (update rule), E8a, E8c, E9; counterexample 2: config pin, same-tensor config cases, inventory, rule text not executable, no proof binds the table |
 | `experiments/20261112-149-leaf-v2/RESULTS.md` (#151, addenda #191) | 15, 16, 20, 44, 47-50, 52, 96-134 | E8b, E8c, E9; counterexamples 3 and 4; section 2 |
-| `experiments/20261111-36-keyfile-tensor-binding/RESULTS.md` (#121) | 5, 21-27, 82 | E9: the small-key fixture and its limits |
+| `experiments/20261111-36-keyfile-tensor-binding/RESULTS.md` (#121) | 5, 21-27, 82, 83 | E9: the small-key fixture and its limits |
 | `experiments/20261104-58-signed-manifest/RESULTS.md` (#59) | 36-37, 90 | guarantee (c); E10 |
 | `experiments/20261111-9-client-envelope/RESULTS.md` (#122) | 3-4, 16-21, 40, 44-45, 65-69, 97, 100-101 | E10, E11, E13; counterexample 9; section 6 (a claimed hardware attestation is refused) |
 | `experiments/20261112-131-served-reply-agreement/RESULTS.md` (#133) | 21, 27, 72 | E5b, E11; counterexample 9: reported identity, rebuilt ids |
@@ -746,4 +750,4 @@ This note stops here. It does not design the O-2 format, attempt the O-1 analysi
 - **Hidden weights are not treated.** Every recomputation edge assumes public weights. With hidden weights the client cannot recompute, and E6a, E7 and E8 fall back to a party the client trusts.
 - **Confidentiality, privacy and zero knowledge are out of scope.** No edge says a prompt or a weight stayed secret.
 - **The schema of section 7 is a discussion shape.** It is not a format, nothing parses it, and its field names bind nobody.
-- Not replicated and not reviewed at the time of writing.
+- Not replicated. A round-1 review of an earlier head asked for the corrections recorded in PREREG A-2. The text as corrected is not reviewed.
