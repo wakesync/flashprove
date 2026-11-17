@@ -1,0 +1,58 @@
+{
+ "_note": "Three policy decision templates, one per class. Every policy value is blank (null) on purpose: penalties, risk tolerance, desired miss probability, relation, retention and enforceability are Shadow decisions and are not filled in here. The Qwen proof cost P and the receipt cost C are unknown on main and stay kind=unknown. Each template is expected to evaluate to MISSING INPUTS. Not registered fixtures.",
+ "templates": {
+  "fleet_monitoring_after_release": {
+   "policy_class": "fleet_monitoring_after_release",
+   "relation": "",
+   "population": {"definition": "", "N": null, "epoch_rule": ""},
+   "sampling": {"scheme": "", "p": null, "m": null, "schedule": ""},
+   "invalidity": {"D": null},
+   "distinguishability": {},
+   "soundness_treatment": {"text": ""},
+   "costs": {
+    "I": null,
+    "P": {"value": null, "unit": "gpu_s_per_request", "kind": "unknown", "source": "unknown: no Qwen proof exists on main (experiments/20261112-7-cost-model/RESULTS.md, extrapolated only)"},
+    "C": {"value": null, "unit": "gpu_s_per_request", "kind": "unknown", "source": "unknown: no receipt path built or measured on main (research/sampled-audit/README.md)"},
+    "A": null, "F": null
+   },
+   "latency": {"deadline_policy": "", "timeout_policy": ""},
+   "targets": {"desired_miss_probability": null},
+   "deterrence": {"enforceable_loss": null, "cheating_gain": null, "behavioral_assumptions": ""},
+   "claims": {"individual_guarantee": null}
+  },
+  "vendor_independent_proof_irreversible": {
+   "policy_class": "vendor_independent_proof_irreversible",
+   "relation": "",
+   "population": {"definition": "", "N": null, "epoch_rule": ""},
+   "sampling": {"scheme": "", "p": null, "schedule": ""},
+   "soundness_treatment": {"text": ""},
+   "costs": {
+    "I": null,
+    "P": {"value": null, "unit": "gpu_s_per_request", "kind": "unknown", "source": "unknown: no Qwen proof exists on main (experiments/20261112-7-cost-model/RESULTS.md, extrapolated only)"},
+    "C": {"value": null, "unit": "gpu_s_per_request", "kind": "unknown", "source": "unknown: no receipt path built or measured on main (research/sampled-audit/README.md)"},
+    "A": null, "F": null
+   },
+   "latency": {"deadline_policy": "", "timeout_policy": ""},
+   "claims": {"individual_guarantee": null}
+  },
+  "hardware_trusting_immediate_with_later_review": {
+   "policy_class": "hardware_trusting_immediate_with_later_review",
+   "relation": "",
+   "population": {"definition": "", "N": null, "epoch_rule": ""},
+   "sampling": {"scheme": "", "p": null, "m": null, "schedule": ""},
+   "invalidity": {"D": null},
+   "distinguishability": {},
+   "soundness_treatment": {"text": ""},
+   "costs": {
+    "I": null,
+    "P": {"value": null, "unit": "gpu_s_per_request", "kind": "unknown", "source": "unknown: no Qwen proof exists on main (experiments/20261112-7-cost-model/RESULTS.md, extrapolated only)"},
+    "C": {"value": null, "unit": "gpu_s_per_request", "kind": "unknown", "source": "unknown: no receipt path built or measured on main (research/sampled-audit/README.md)"},
+    "A": null, "F": null
+   },
+   "latency": {"deadline_policy": "", "timeout_policy": ""},
+   "targets": {"desired_miss_probability": null},
+   "deterrence": {"enforceable_loss": null, "cheating_gain": null, "behavioral_assumptions": ""},
+   "claims": {"individual_guarantee": null, "hardware_trust_assumption": ""}
+  }
+ }
+}
