@@ -52,7 +52,7 @@ Which edge belongs to which guarantee (edges are defined in section 5):
 
 | guarantee | edges |
 |---|---|
-| (a) hardware evidence | E2, E3, E4, E5a, E5b, E14 |
+| (a) hardware evidence | E2, E3, E4, E5a, E5b, E14, and the runtime part of E6b |
 | (b) proof | E9, E10, E11, E12 |
 | (c) receipt authenticity | E13 (E3 says which key) |
 | (d) authorization | E1, E7 |
