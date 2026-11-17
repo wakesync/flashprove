@@ -336,3 +336,24 @@ Must-fix 6, cost scope and loss basis (astra 5; opus nonblocking on wall seconds
 **Acceptance for the amended suite.** PASS only if, in each of the five runs, every one of F46 to F135 matches (verdict, exact code set, registered values), F01 to F36 match their original registration, F37 to F45 give exactly the outcome registered in Amendment 2, and the five report digests are equal. Anything else is FAIL. The original PASS (45 of 45 at the reviewed code) is reported separately and is not replaced. Hard stop for this amendment: 2026-11-18T00:05:00Z; at the stop, what is complete is published as PARTIAL or FAIL without editing an expectation.
 
 Still not established, and not changed by this amendment: feasibility of any real policy, any cost, any rate, any guarantee. The decision sheet stays empty.
+
+
+### Amendment 2 (2026-11-17T22:53:44Z): changed registration for F37 to F45, stated before the code that causes it
+
+Written after Amendment 1 and before any change to `worksheet.py`. The rules registered in Amendment 1 change what the checker returns for nine of the original fixtures. Their original expectations in `fixtures.py` and in the table above are not edited, and the original run files keep showing the original outcome at the reviewed code. This entry names each fixture, its old registered outcome, the outcome registered for the fixed checker, and the reason.
+
+Reason, common to all nine: the original policy worksheets are incomplete under the schema the reviews ask the checker to enforce. F38 to F45 have no `deterrence` section, F37 has one without a declared `state`, and F40 to F42 have no `latency.deadline_policy`. A missing deterrence section or deadline policy must now be refused (must-fix 1), so the fixed checker returns `MISSING INPUTS` for all nine and outputs no number for them.
+
+| id | old registered outcome (reviewed code) | outcome registered for the fixed checker | completed twin |
+|---|---|---|---|
+| F37 | CONDITIONAL, no code, coverage 7/8, miss 1/8 | MISSING INPUTS, MISSING_INPUT, no number | F47 |
+| F38 | INELIGIBLE, MISS_ABOVE_TARGET, coverage 7/8 | MISSING INPUTS, MISSING_INPUT, no number | F48 |
+| F39 | INELIGIBLE, ADAPTIVE_NOT_IID | MISSING INPUTS, ADAPTIVE_NOT_IID and MISSING_INPUT | F49 |
+| F40 | CONDITIONAL, no code, coverage 1 | MISSING INPUTS, MISSING_INPUT, no number | F50 |
+| F41 | INELIGIBLE, SUBSAMPLE_NOT_PROOF | MISSING INPUTS, MISSING_INPUT and SUBSAMPLE_NOT_PROOF | F51 |
+| F42 | INELIGIBLE, VERIFY_AFTER_ACTION | MISSING INPUTS, MISSING_INPUT and VERIFY_AFTER_ACTION | F52 |
+| F43 | INELIGIBLE, SUBSAMPLE_NOT_PROOF | MISSING INPUTS, MISSING_INPUT and SUBSAMPLE_NOT_PROOF | F53 |
+| F44 | MISSING INPUTS, Q_INFERRED_FROM_WEIGHTS | MISSING INPUTS, MISSING_INPUT and Q_INFERRED_FROM_WEIGHTS | F54 |
+| F45 | MISSING INPUTS, TIMEOUT_NOT_PROOF | MISSING INPUTS, MISSING_INPUT and TIMEOUT_NOT_PROOF | F55 |
+
+Consequences, stated now. Against their original registration, F37 to F45 will not match at the fixed code: 36 of the original 45 fixtures (F01 to F36) are expected to still match, 9 are changed registrations. The amended suite counts F37 to F45 as matching only if they give exactly the outcome in the third column. The behaviour each of them was written to test (the coverage verdict, the miss target, the adaptive refusal, the proof class rules, the q and timeout refusals) is re-registered on completed worksheets as F47 to F55 in Amendment 1, with the original verdict and codes. RESULTS.md reports this as a changed registration, not as a pass of the original expectations. F01 to F36 are expected to be unaffected; if any of them changes, that is a FAIL of the amended suite, not a further amendment.
