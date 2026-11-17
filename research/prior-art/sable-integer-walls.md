@@ -40,7 +40,9 @@ main by path and line.
    by (a) sizing the SiLU table's input scale per model from calibration with a 25% margin and (b)
    making the integer function undefined outside it, so the honest prover aborts. It does not
    saturate. Compatible with our field; the table contents become per-model (still public and fixed
-   per commitment).
+   per commitment). Neither this nor upstream's gate clamp is admitted for a dense Qwen statement
+   today: our per-model input-scale line is a test setting that a user verification refuses, and the
+   gate clamp cannot be stated without experts. Either would need a policy or layout change.
 3. **Walls 4 and 5 (head dimension 256, partial rotary):** Sable does not face them. All three of its
    models have head dimension 128, its prover asserts `dh == 128`, and its RoPE rotates the whole
    head. Nothing carries over; this note recommends nothing for these two walls.
@@ -142,16 +144,36 @@ contents depend on per-model constants (eG, eA), are pinned in the statement dig
 committed as fixed units, not recomputed by the verifier (P 7.5, P 7.6). FlashProve's verifier
 computes its public tables itself and compares their digests from the parameter file
 (`verifier/docs/parameter-file.md:279`, `:336`), and the parameter file already carries a gate-table
-input resolution `eg` (`verifier/docs/parameter-file.md:234`, `:265`). So a per-model input scale is
-expressible on our side as a parameter the verifier recomputes from, not as a committed table; this
-note did not check that `eg`'s allowed range (4 to 7) would cover Qwen.
+input resolution `eg` (`verifier/docs/parameter-file.md:234`, `:265`). So a per-model input scale has
+a syntax on our side, as a parameter the verifier recomputes from rather than a committed table. It
+is not an admitted setting. The same document says that for a user these lines are not options: a
+verification can end with `YES` only without `eg` and `smax` (condition `no-range-words`), and the
+other settings exist so that small configurations can serve as tests
+(`verifier/docs/parameter-file.md:261`; the condition is the `!egSeen && !smaxSeen` term in
+`verifier/src/cp_verify.cpp:2417-2418`). `eg` also changes the proved function
+(`verifier/docs/parameter-file.md:263`). A recomputable test-table parameter is therefore not an
+already-admitted per-model scale: using it for Qwen would need a policy change to the standard
+form. Separately, this note did not check that `eg`'s allowed range (4 to 7; absent means 8:
+`verifier/docs/parameter-file.md:234`, `verifier/src/cp_verify.cpp:1070`) would cover Qwen.
 
-**What it would cost in our statement.** Two different options, both existing somewhere: Sable's
-(per-model scale with margin, abort outside: a refusal on rare inputs) and upstream FlashProve's
-gate clamp `gcl`, under which the table is constant beyond its ends and saturation is the proved
-function (`verifier/docs/parameter-file.md:269`). Sable's choice keeps the proved function equal to
-the table function and moves the problem to refusals; a wider domain at the same resolution means
-more table rows. Which of the two our Qwen statement should use is not decided here.
+**What it would cost in our statement.** Two different options, both existing somewhere, neither
+available to a dense Qwen statement today: Sable's (per-model scale with margin, abort outside: a
+refusal on rare inputs) and upstream FlashProve's gate clamp `gcl`, under which the table is
+constant beyond its ends and saturation is the proved function
+(`verifier/docs/parameter-file.md:269`). Sable's choice keeps the proved function equal to the table
+function and moves the problem to refusals; a wider domain at the same resolution means more table
+rows. Each has an admission cost that the cited parameter document states itself:
+
+- A per-model scale through `eg` is refused for a user verification (`no-range-words`,
+  `verifier/docs/parameter-file.md:261`), so it needs a policy change, on top of the untested range.
+- `gcl` is allowed only with experts (`verifier/docs/parameter-file.md:235`). The program refuses the
+  line at `NE 0`, and the verifier "has no way to state `gcl` at `NE 0`, because the gate's clamp is
+  laid out in the router sigmoid's table" (`verifier/docs/parameter-file.md:333`, `:335`).
+  Qwen3.8-27B is dense, with no router and no experts
+  (`research/ports/qwen3.8-27b/FEASIBILITY.md:39`), so upstream's expert-backed clamp cannot be
+  expressed for it without a layout change.
+
+Which of the two our Qwen statement should use is not decided here.
 
 ### Wall 3. Both pre-norms above 2,047
 
@@ -234,7 +256,7 @@ So that nobody reads Sable as a drop-in. Sable column: from public source, not v
 | Proof size | 4,149,564 bytes, upstream small synthetic example only; no Qwen proof exists (`research/gpu/README.md:38`; `docs/qwen-port.md:6-8`) | 134.8 to 345.7 MiB for Qwen2.5-32B at its three shapes (P 11.7); 106 to 477 MiB across its three models (P 4) |
 | Prover hardware and time as reported | one rented H100 80GB, host CPU Xeon Platinum 8480+: the upstream small synthetic example only, one request proved in about 3 s (plus or minus 1 s, from file timestamps), n = 1, cold run; no Qwen proof exists, so there is no Qwen prover time (`research/gpu/README.md:7`, `:16`, `:18`, `:33`, `:44`; `docs/qwen-port.md:6-8`) | theirs, not verified by us: one NVIDIA RTX PRO 6000 Blackwell GPU (96 GB) in a host with a Xeon 6776P and 214 GB of memory; Qwen2.5-32B, all 64 layers: 92.5 s for one sequence of 4,096 tokens, 253 s for four such sequences, 398 s for one sequence of 16,384 tokens; Qwen3-32B 121.8 s and Qwen3-30B-A3B 84.7 s for 4,096 tokens (abstract; P 11.1). Different hardware, models and statement: not comparable with ours |
 | Models covered | target Qwen3.8-27B: 48 Gated DeltaNet + 16 attention layers, dh 256, partial rotary; not proved (`docs/qwen-port.md:38-41`) | Qwen2.5-32B and Qwen3-32B (64 layers each), Qwen3-30B-A3B (48 layers); all dh 128, full rotary, no DeltaNet (P 5, P 5.6) |
-| Out-of-domain inputs | v1 SiLU table rejects; a norm output outside its class cannot be admitted (`experiments/20261112-132-int-mlp-e2e/RESULTS.md:34`; `experiments/20261112-148-norm-class/RESULTS.md:81`); upstream gate clamp `gcl` saturates (`verifier/docs/parameter-file.md:269`) | the integer function is partial; listed conditions; the honest prover aborts; zero hits on its scan sets (P 5.7, P 11.9) |
+| Out-of-domain inputs | v1 SiLU table rejects; a norm output outside its class cannot be admitted (`experiments/20261112-132-int-mlp-e2e/RESULTS.md:34`; `experiments/20261112-148-norm-class/RESULTS.md:81`); upstream gate clamp `gcl` saturates, with experts only: it cannot be stated for a dense model (`verifier/docs/parameter-file.md:269`, `:335`) | the integer function is partial; listed conditions; the honest prover aborts; zero hits on its scan sets (P 5.7, P 11.9) |
 | Accuracy reported | Qwen integer-MLP path: 97.40% top-1 against float64 on 1,461 teacher-forced positions, registered FAIL (`experiments/20261112-132-int-mlp-e2e/runs-resume150b/RESULTS.md:7`) | greedy agreement with BF16 on WikiText-2: 86.3% (Qwen2.5-32B), 82.4% and 88.7% (Qwen3) (P 11.8, Tables 12 and 14); not comparable with ours |
 
 The paper's related-work section also describes FlashProve (P 2, "Concurrent work"). Those
