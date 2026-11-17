@@ -6,10 +6,18 @@ variance and no `research/results.yaml` entry. The deliverable is
 
 ## Against the registered acceptance threshold
 
-COMPLETE. All five walls have every field of the PREREG filled (some fields say "not applicable"
-or "not checked"), the differences table has every registered row, and every Sable statement carries
-a paper section or a file:lines citation at commit `0bc6b549afef2f8eb9b8bc4c2f24d6e554dbaacb` and the
-label "from public source, not verified by us" (stated once for the whole note and per section).
+COMPLETE as of the review fix of 2026-11-17, with the deviations from the registered sources and
+route listed below. All five walls have every field of the PREREG filled (some fields say "not
+applicable" or "not checked"), and every Sable statement carries a paper section or a file:lines
+citation at commit `0bc6b549afef2f8eb9b8bc4c2f24d6e554dbaacb` and the label "from public source, not
+verified by us" (stated once for the whole note and per section).
+
+The differences table now has every registered row. It did not at the first submitted head
+(`61d14ce805deb0155c5d582471c8abc3aaa6ac57`): the registered row "prover hardware and time as
+reported" was missing, so the COMPLETE reported there was wrong. Both reviewers found this. The row
+was added in the review fix, before the registered wall stop of 2026-11-17T23:15:00Z. The table also
+has one row the registration did not ask for ("Accuracy reported"); it is an extra row and does not
+stand in for a registered one.
 
 | wall | does Sable face it | carries over to FlashProve | recommendation |
 |---|---|---|---|
