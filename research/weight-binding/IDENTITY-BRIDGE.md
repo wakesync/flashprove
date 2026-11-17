@@ -1,8 +1,8 @@
 # Design note: joining an attested loaded-weight identity to the weight commitment of a proof (issue #210)
 
-Part of #36 and #6. Agenda U1 / U3 / Q2 / Q5. Registration: [PREREG](../../experiments/20261117-210-identity-bridge/PREREG.md), amendments A-1 and A-2. Verdict: [RESULTS](../../experiments/20261117-210-identity-bridge/RESULTS.md).
+Part of #36 and #6. Agenda U1 / U3 / Q2 / Q5. Registration: [PREREG](../../experiments/20261117-210-identity-bridge/PREREG.md), amendments A-1, A-2 and A-3. Verdict: [RESULTS](../../experiments/20261117-210-identity-bridge/RESULTS.md).
 
-Corrected after a round-1 review (PREREG A-2): E6b is now UNSOLVED, and two wordings were narrowed. Each replaced sentence is quoted in RESULTS under "Corrections after review". The corrected text is not reviewed.
+Corrected after a round-1 review (PREREG A-2): E6b is now UNSOLVED, and two wordings were narrowed. A second session finished that round and narrowed two more lines without changing a status (PREREG A-3). Each replaced sentence is quoted in RESULTS under "Corrections after review". The corrected text is not reviewed.
 
 Base: every `path:line` in this note is at main `5583d7f82b549454cdb6374d2fd347dfd9781976`.
 Desk note. It changes no code, runs nothing and reports no measurement. It is a specification and an obligation matrix, not a proof and not a design that has been built. "Unknown" marks what this note did not establish.
@@ -656,7 +656,7 @@ Every statement in sections 1 to 7 carries its source where it is made: a `path:
 
 **How the citations were checked.** Each cited range was read by the lane on the base commit before it was written down. Separately, a small script kept outside the repository confirmed that every backticked path and `path:line` citation in this file names a file that exists and a range inside that file (0 problems; the count at the final commit is in RESULTS.md). That script checks existence and range only. It does not check that the lines say what the note says; that rests on the reading. It is not the optional checker of the PREREG, and its passing is not evidence for any edge.
 
-The citations added after the round-1 review (PREREG A-2) were read on the base commit by the fix lane, at the cited lines and their surroundings only: `research/envelope/client_verify.py:241-250`, `research/weight-binding/wb_manifest.py:66-77`, `research/weight-binding/wb_conv.py:365-378`, line 83 of the key-file result and lines 65-69 of the client-envelope result. A second lane-side script of the same kind (existence and range only, outside the repository) was run on the corrected file; its count is in RESULTS.md under "Corrections after review".
+The citations added after the round-1 review (PREREG A-2) were read on the base commit by the fix lane, at the cited lines and their surroundings only: `research/envelope/client_verify.py:241-250`, `research/weight-binding/wb_manifest.py:66-77`, `research/weight-binding/wb_conv.py:365-378`, line 83 of the key-file result and lines 65-69 of the client-envelope result. A second lane-side script of the same kind (existence and range only, outside the repository) was run on the corrected file; its count is in RESULTS.md under "Corrections after review". A second session of the fix lane (PREREG A-3) read the same ranges again on the base commit, and for the E7 update rule also the pinned and known-unpinned key lists and the field filter of `research/weight-binding/wb_conv.py:131-147`, `:183-193`.
 
 ### 8.1 Public documentation (from public documentation, not verified by us)
 
@@ -682,7 +682,7 @@ Not used from these pages: any identifier, example value, host name, command or 
 | `experiments/20261111-9-client-envelope/RESULTS.md` (#122) | 3-4, 16-21, 40, 44-45, 65-69, 97, 100-101 | E10, E11, E13; counterexample 9; section 6 (a claimed hardware attestation is refused) |
 | `experiments/20261112-131-served-reply-agreement/RESULTS.md` (#133) | 21, 27, 72 | E5b, E11; counterexample 9: reported identity, rebuilt ids |
 | `research/weight-binding/DESIGN.md` | 32-33, 47-48, 59-93, 99-101, 116-117, 125-133, 147-159, 167-173, 193, 195, 198, 202-206, 246-247, 260-262, 272-275 | N5, N6; E6a, E6b, E7, E8a, E8c, E9, E10; counterexamples 2 and 6 |
-| `research/weight-binding/wb_manifest.py`, `research/weight-binding/wb_conv.py`, `research/weight-binding/wb_leafv2.py`, `research/weight-binding/test_wb_leafv2.py` | as cited in sections 4 to 6 | exact bytes of N5 and N6; counterexample 4 |
+| `research/weight-binding/wb_manifest.py`, `research/weight-binding/wb_conv.py`, `research/weight-binding/wb_leafv2.py`, `research/weight-binding/test_wb_leafv2.py` | as cited in sections 4 to 6 and in section 8 | exact bytes of N5 and N6; counterexample 4; the update rules of E6a and E7 |
 | `research/weight-binding/README.md`, `research/weight-binding/keyfile/README.md` | 67-76, 121-123; 43-46, 48-50 | section 2; E9 |
 | `research/envelope/SPEC.md` | 37-38, 42-53, 73-98, 101-103, 108-113, 165-190, 223-233, 243-244 | N8, N9; guarantees (a) to (c); E10 to E14; counterexamples 8, 9, 11; section 6 (fail-closed refusal) |
 | `research/envelope/client_verify.py` | 241-250 | section 6 and section 10: the client refuses a claimed hardware attestation kind, and refuses every envelope when TEE evidence is required |
@@ -750,4 +750,4 @@ This note stops here. It does not design the O-2 format, attempt the O-1 analysi
 - **Hidden weights are not treated.** Every recomputation edge assumes public weights. With hidden weights the client cannot recompute, and E6a, E7 and E8 fall back to a party the client trusts.
 - **Confidentiality, privacy and zero knowledge are out of scope.** No edge says a prompt or a weight stayed secret.
 - **The schema of section 7 is a discussion shape.** It is not a format, nothing parses it, and its field names bind nobody.
-- Not replicated. A round-1 review of an earlier head asked for the corrections recorded in PREREG A-2. The text as corrected is not reviewed.
+- Not replicated. A round-1 review of an earlier head asked for the corrections recorded in PREREG A-2 and A-3. The text as corrected is not reviewed.
