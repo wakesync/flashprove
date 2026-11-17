@@ -69,7 +69,7 @@ H is SHA-256. `lp(x)` is the 8-byte little-endian length of x followed by x (`re
 | node | object | exact canonical bytes | defined where |
 |---|---|---|---|
 | N0 | client authorization policy | not defined. Proposed content: the public revision (repository and commit), the conversion rule version, the pack schema, the approved configuration source and minimum release, the commitment ID per request, the acceptance policy | this note (section 7); the envelope's canonical JSON rules could carry it (`research/envelope/SPEC.md:42-48`) |
-| N1 | hardware attestation report and its measurement | a hardware-signed report over the measured firmware, kernel and initrd; the SHA-256 of the configuration file sits in the measured kernel command line `[V2]`. Report layout: the hardware vendor's, not read here (Unknown) | `[V2]` |
+| N1 | hardware attestation report and its measurement | a hardware-signed report over the measured firmware, kernel and initrd; the SHA-256 of the configuration file is embedded in the kernel command line, and the boot process checks the file on disk against that attested hash `[V2]`. Report layout: the hardware vendor's, not read here (Unknown) | `[V2]` |
 | N2 | attested receipt key | the SPKI DER public key as lowercase hex, with its declared id and a format address, in the attestation document's key material `[V3]` | `[V3]` |
 | N3 | package root | a dm-verity root hash over a read-only volume image; it is the leading part of the configuration's package value and depends on the pinned revision and a numbered pack schema `[V1]` | `[V1]` |
 | N4a | file bytes as read from the package volume | the blocks of that volume | `[V1]` `[V2]` |
@@ -77,7 +77,7 @@ H is SHA-256. `lp(x)` is the 8-byte little-endian length of x followed by x (`re
 | N5 | checkpoint id | leaf `H(0x00, "fp-wb-leaf-v1", lp(name), lp(dtype), lp(shape as compact JSON), sha256(tensor source bytes))`, sorted by name; node `H(0x01, "fp-wb-node-v1", l, r)`; id `H("fp-wb-id-v1", n as u64 LE, root)` | `research/weight-binding/wb_manifest.py:36-38`, `:41-42`, `:66-67`; `research/weight-binding/DESIGN.md:99-101` |
 | N6 | conversion id | config pin `H("fp-wb-config-v2", lp(typed canonical fields))`; leaf v1 = canonical `{block, cls, sources, rule}` under `fp-wb-conv-leaf-v1`; id `H("fp-wb-conv-id-v1", checkpoint id, lp(rule version), config pin, n as u64 LE, root)`. Leaf v2 adds `e` and `int_sha256` under `fp-wb-conv-leaf-v2`; the only v2 id that exists is a subset id under `fp-wb-conv-subset-v2` | `research/weight-binding/wb_conv.py:203-204`, `:341-346`, `:361-362`; `research/weight-binding/wb_leafv2.py:53`, `:180-181` |
 | N7 | native proof-weight commitment (commitment ID) | one hash, under its own domain, of the configuration digest, the anchor table's name, the anchor record's seeds and its answers | `blocks/frame/heads.h:78-91` |
-| N8 | statement | the commitment ID, the configuration behind it, the policy and its numbers, and the exact request file (prompt tokens, reply tokens but the last, r, e) with y. Token files are 32-bit little-endian words. **There is no state root in this statement** | `research/envelope/SPEC.md:101-102`, `:52-53` |
+| N8 | statement | the commitment ID, the configuration behind it, the policy and its numbers, and the exact request file (prompt tokens, reply tokens but the last, r, e) with y. Token files are 32-bit little-endian words. **There is no state root in this statement** | `research/envelope/SPEC.md:101-103`, `:52-53` |
 | N9 | receipt | canonical JSON `{"body", "sig"}`; Ed25519 over `"flashprove-envelope-v1\0body\0"` followed by the canonical body | `research/envelope/SPEC.md:42-51` |
 
 Two consequences that the edges rely on:
@@ -142,7 +142,7 @@ Limits stated by the page itself: the feature is in beta; the granted applicatio
 |---|---|
 | producer | the configuration file names the pinned revision and the package value, which begins with the root hash `[V1]` |
 | independent verifier | the client reads the root from the configuration it approved under E1. Anyone can rebuild the package from the pinned revision and declared schema and compare roots `[V1]`. Not done by us |
-| exact canonical bytes | the SHA-256 of the configuration file in the measured kernel command line `[V2]`; the root hash inside the package value `[V1]` |
+| exact canonical bytes | the SHA-256 of the configuration file, embedded in the kernel command line `[V2]`; the root hash inside the package value `[V1]` |
 | authorization source | E1 |
 | binding mechanism | the boot process checks the configuration on disk against the attested hash `[V2]` |
 | update / rollback rule | new weights need a new configuration and a new release `[V1]` |
@@ -199,6 +199,8 @@ This note names no construction that closes E5b by attestation alone. The proof 
 
 What exists: the N5 side, for two pins (1,199 leaves each, `experiments/20261110-36-weight-binding/RESULTS.md:78`), and a statement in the public pages that the N3 side is reproducible `[V1]`. What does not exist: any run by us of the N3 side, and any document that records both under one revision. For weights that are not public this edge has no recomputation, and falls back to a signer's word.
 
+Main's own design already points at this join in three lines: a package root and a per-tensor manifest "can name the same tensors, which joins them", "Not designed further here" (`research/weight-binding/DESIGN.md:272-275`). This edge is the part that sentence leaves open. The two roots do not name the same bytes, so the join is the shared revision and two recomputations, not a correspondence between the roots.
+
 **E6b. N4b configuration to the config pin inside N6. Status: PROPOSED.**
 
 | field | value |
@@ -250,21 +252,21 @@ Scope of MAIN: 128 of 128 named tests, including 21 same-tensor config cases ref
 | field | value |
 |---|---|
 | producer | the executable matrix rule on the pinned bytes gives an exponent `e` and an integer hash `int_sha256` per block (`experiments/20261112-149-leaf-v2/RESULTS.md:44`) |
-| independent verifier | anyone re-running the rule from the public pins. Two full runs in opposite orders agreed on all 78 blocks of both pins (`:15`). One implementation, one host type (`:47`, `:52`) |
+| independent verifier | anyone re-running the rule from the public pins. Two full runs in opposite orders agreed on all 78 blocks of both pins (`experiments/20261112-149-leaf-v2/RESULTS.md:15`). One implementation, one host type (`experiments/20261112-149-leaf-v2/RESULTS.md:47`, `:52`) |
 | exact canonical bytes | leaf v2 = the v1 leaf plus `e` (an integer in [-64, 64]) and `int_sha256` (64 lowercase hex), under `fp-wb-conv-leaf-v2`; subset id under `fp-wb-conv-subset-v2` over (checkpoint id, rule version, config pin, n, root) (`research/weight-binding/wb_leafv2.py:53`, `:180-181`, `:209-219`) |
 | authorization source | N0 |
 | binding mechanism | Merkle opening against a held subset id; a v1 leaf or a v1 conversion-id opening is refused under the v2 id (`experiments/20261112-149-leaf-v2/RESULTS.md:16`) |
 | update / rollback rule | a new leaf version has new domain tags |
 | availability dependency | the revision, fetched by range request |
 
-Scope of MAIN: 70 changed tensors and 8 controls, all of class `matrix_plain`. The subset ids "are not model conversion ids" (`:20`). The run files carry no provenance a reader can check (`:130`; section 2).
+Scope of MAIN: 70 changed tensors and 8 controls, all of class `matrix_plain`. The subset ids "are not model conversion ids" (`experiments/20261112-149-leaf-v2/RESULTS.md:20`). The run files carry no provenance a reader can check (`experiments/20261112-149-leaf-v2/RESULTS.md:130`; section 2).
 
 **E8c. N5 to N6, every remaining block and the complete tree. Status: PROPOSED.**
 
 | field | value |
 |---|---|
 | producer | nobody today: "the 722-block leaf-v2 tree for a pin (55.6 GB per pin) is not built" (`experiments/20261112-149-leaf-v2/RESULTS.md:49`) |
-| independent verifier | as E8b, once a rule is executable for every class; a second implementation is needed before agreement means more than one program repeating itself (`:52`) |
+| independent verifier | as E8b, once a rule is executable for every class; a second implementation is needed before agreement means more than one program repeating itself (`experiments/20261112-149-leaf-v2/RESULTS.md:52`) |
 | exact canonical bytes | a full-model id in the v2 leaf format does not exist. It must not reuse the subset tag, and it must fix the leaf count to the inventory's 722 |
 | authorization source | N0 |
 | binding mechanism | the same tree, over all 722 leaves, with the count and the inventory checked by the builder as in E8a |
@@ -281,7 +283,7 @@ What is missing, by the item the issue lists:
 | embedding and output head | two blocks, the head with the final norm folded in | text only |
 | dtype and quantization in the conversion | the rule fixes BF16 to binary32 exactly, then round-to-nearest-even at a per-block exponent to integers of magnitude at most 4,095 (`research/weight-binding/wb_conv.py:209`). A quantized or re-exponented copy has other integers and another id (`research/weight-binding/DESIGN.md:195`) | executable for plain matrices only |
 | adapters | an adapter merged before conversion is a different checkpoint, hence a different N5 and N6. An adapter applied at run time is not in the conversion at all: that is E5b | no adapter case is tested anywhere on main (Unknown) |
-| lookup tables | public function tables (activation, rotary, softmax) are not weights. They belong to the configuration under the commitment ID; the CPU verifier compares 24 table digests of a dense file with tables it computes itself, in planning calls only (`experiments/20261113-156-dense-table-digests/RESULTS.md:143-145`, `:155-157`) | not part of N6; part of N7's configuration |
+| lookup tables | public function tables (activation, rotary, softmax) are not weights. They belong to the configuration under the commitment ID; the CPU verifier compares 24 table digests of a dense file with tables it computes itself, in planning calls only (`experiments/20261113-156-dense-table-digests/RESULTS.md:11-13`, `:143-145`, `:155-157`) | not part of N6; part of N7's configuration |
 
 **E9. N6 to N7: the native commitment commits to exactly the converted leaves. Status: UNSOLVED.**
 
@@ -299,7 +301,7 @@ What exists: a CPU research fixture that binds four length-four public tensors t
 
 Why the status is UNSOLVED and not PROPOSED:
 
-- That fixture "uses test-only hand plans; no error-accounting, hiding, Fiat-Shamir/grinding or soundness theorem is established" (`:82`). Only a fixed-pair Schwartz-Zippel bound is stated for the design, and "adaptive grinding can amplify the error above the fixed-pair figure, by an amount not analysed" (`research/weight-binding/DESIGN.md:86-93`, `:260-262`).
+- That fixture "uses test-only hand plans; no error-accounting, hiding, Fiat-Shamir/grinding or soundness theorem is established" (`experiments/20261111-36-keyfile-tensor-binding/RESULTS.md:82`). Only a fixed-pair Schwartz-Zippel bound is stated for the design, and "adaptive grinding can amplify the error above the fixed-pair figure, by an amount not analysed" (`research/weight-binding/DESIGN.md:86-93`, `:260-262`).
 - For the released programs, the binding of the weights to the commitment ID has not been shown at all (`docs/limits.md:173-174`).
 - "No proof binds the committed table to this id" (`experiments/20261111-91-conversion-id/RESULTS.md:70`), and leaf v2 "does not show which integers a prover used" (`experiments/20261112-149-leaf-v2/RESULTS.md:50`).
 
@@ -329,7 +331,7 @@ What exists: for the upstream path on stored synthetic examples, a wrong ID is r
 | independent verifier | the client's own run of the verifier on that file (`research/envelope/SPEC.md:184-190`) |
 | exact canonical bytes | token files of 32-bit little-endian words; prompt and reply digests are SHA-256 of those files (`research/envelope/SPEC.md:52-53`, `:91-92`) |
 | authorization source | the client's own prompt |
-| binding mechanism | the relation fixes the request file (prompt tokens, reply tokens but the last, r, e) with y (`research/envelope/SPEC.md:101-102`) |
+| binding mechanism | the relation fixes the request file (prompt tokens, reply tokens but the last, r, e) with y (`research/envelope/SPEC.md:101-103`) |
 | update / rollback rule | one request file per request; a reply that differs is refused (`NO: reply-differs`, `experiments/20261111-9-client-envelope/RESULTS.md:44-45`) |
 | availability dependency | the reply must reach the client as token ids |
 
@@ -343,7 +345,7 @@ Scope of MAIN: 41 vectors on two synthetic stored examples, "not a soundness cla
 | independent verifier | the client. Proposed rule: an input root is accepted only if it is the genesis value the client computes itself, or the output root of a proof this client accepted earlier in the same session and recorded in its own state |
 | exact canonical bytes | not defined for a real statement. The research prototype uses a field-native hash commitment of state, history and a private salt (`experiments/20261111-93-hidden-root-handoff/RESULTS.md:7`) |
 | authorization source | the client's own session state |
-| binding mechanism | inside the proof, open the input commitment, run from those cells, recompute the output commitment (`:7`) |
+| binding mechanism | inside the proof, open the input commitment, run from those cells, recompute the output commitment (`experiments/20261111-93-hidden-root-handoff/RESULTS.md:7`) |
 | update / rollback rule | the client records the last accepted root with a sequence number and refuses an older one, as the envelope does for `state.seq` and `state.prev` (`research/envelope/SPEC.md:77-78`, `:108-113`) |
 | availability dependency | the client's state file. Losing it means starting again from genesis |
 
@@ -356,7 +358,7 @@ What exists: continuity prototypes on synthetic state. Each one takes its first 
 | producer | the serving workload that holds the private half of N2 |
 | independent verifier | the client: first E1 to E3 on a fresh attestation document, then the signature under that key, then the checks the envelope already has (nonce outstanding, request digest, sequence, expiry, proof digest; `research/envelope/SPEC.md:165-190`) |
 | exact canonical bytes | the envelope's canonical body under its domain prefix (`research/envelope/SPEC.md:42-51`), extended with the measurement, the attested key id and a digest of the attestation document (section 7; not built) |
-| authorization source | N0 through E1 and E3. Not a long-lived provider key pinned out of band |
+| authorization source | N0 through E1 and E3, in place of a provider key pinned beforehand with no tie to a boot |
 | binding mechanism | signature; a client-chosen 32-byte nonce for freshness (`research/envelope/SPEC.md:75`); the proof digest is signed so that what is checked is what was signed (`:97`) |
 | update / rollback rule | a key lives for one boot and the client re-verifies attestation when it changes `[V3]`; a nonce is released at most once (`research/envelope/SPEC.md:112-113`) |
 | availability dependency | the client's state file and clock; a fresh attestation document |
@@ -377,7 +379,7 @@ A receipt is guarantee (c). It says the key holder vouched for these bytes. A co
 | update / rollback rule | none |
 | availability dependency | none |
 
-The statement of a proof holds the commitment ID, the configuration, the policy, the request file and y (`research/envelope/SPEC.md:101-102`). It holds nothing about a machine, an engine or a time, and it "does not authenticate a provider" (`:231-233`). Any engine that returns the same tokens satisfies the same statement, and the proof can be made on another machine. So this edge has exactly one possible source, hardware-backed evidence, and that source is limited by E5b.
+The statement of a proof holds the commitment ID, the configuration, the policy, the request file and y (`research/envelope/SPEC.md:101-103`). It holds nothing about a machine, an engine or a time, and it "does not authenticate a provider" (`:231-233`). Any engine that returns the same tokens satisfies the same statement, and the proof can be made on another machine. So this edge has exactly one possible source, hardware-backed evidence, and that source is limited by E5b.
 
 ### 5.5 All edges at a glance
 
@@ -432,7 +434,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 
 - Rejecting obligation: leaf v2 binds `e` and `int_sha256` together with the block name, class, sources and rule in one leaf under one id (E8b). The client checks openings against the id it recomputed.
 - On main: the opening verifier refuses every constructed case, "including wrong or swapped e_b / int_sha256_b and the other pin's values": 15 kinds on the two new fields (`experiments/20261112-149-leaf-v2/RESULTS.md:44`, `:16`). Hash level, 78 blocks.
-- Designation: **REJECTED ON MAIN at hash level, for the 78 registered blocks.** For the other 644 blocks no such fields exist: **OBLIGATION, NOT BUILT** (E8c). That a prover's committed table holds the integers the leaf names: **UNRESOLVED** (E9; `:50`).
+- Designation: **REJECTED ON MAIN at hash level, for the 78 registered blocks.** For the other 644 blocks no such fields exist: **OBLIGATION, NOT BUILT** (E8c). That a prover's committed table holds the integers the leaf names: **UNRESOLVED** (E9; `experiments/20261112-149-leaf-v2/RESULTS.md:50`).
 
 **4. Subset root presented as the full tree.** A root over some blocks is offered where a root over all 722 is expected.
 
@@ -466,7 +468,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 **8. Receipt key from another boot.** A receipt is signed by a key that was genuinely attested, but in a different boot, a different enclave or an earlier deployment whose key was copied out.
 
 - Rejecting obligation: the client verifies a fresh attestation document from the enclave it is talking to, takes the public key from that document's key material (E3), and accepts a receipt only under that key and only for a nonce it issued after that verification (E13). A key lives for one boot and must be re-verified when it changes `[V3]`.
-- On main: nothing. The envelope's signing key is a long-lived key the client pinned out of band (`research/envelope/SPEC.md:73`), and any attestation kind that claims hardware evidence is refused (`:98`).
+- On main: nothing. The envelope's signing key is a key the client pinned beforehand, with no tie to a boot (`research/envelope/SPEC.md:73`), and any attestation kind that claims hardware evidence is refused (`:98`).
 - A limit that the obligation does not remove: the granted application can read and copy its private key `[V3]`. If the key leaves the enclave during the same boot, a receipt made elsewhere verifies. The nonce stops replay of an old receipt; it does not stop a live signer outside the enclave.
 - Designation: **OBLIGATION, NOT BUILT** for a key from another boot (E3, E13). For a key copied out within the same boot: **UNRESOLVED**.
 
@@ -485,7 +487,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 
 **11. A malicious runtime returning the same acceptable output.** The serving engine is not the committed model: other weights, another precision, a cache, a different machine. For this request it returns exactly the tokens the committed integer model would give. A valid proof is produced, by any machine that holds the committed weights.
 
-- Rejecting obligation by proof: **none, and none can exist.** The proof's statement is the commitment, the configuration, the policy and the token ids (`research/envelope/SPEC.md:101-102`). The honest run and this run have the same statement. A verifier that accepts one accepts the other. This is not a defect of a particular proof system: a proof of a relation over public inputs carries no information about which process produced those inputs.
+- Rejecting obligation by proof: **none, and none can exist.** The proof's statement is the commitment, the configuration, the policy and the token ids (`research/envelope/SPEC.md:101-103`). The honest run and this run have the same statement. A verifier that accepts one accepts the other. This is not a defect of a particular proof system: a proof of a relation over public inputs carries no information about which process produced those inputs.
 - What a proof does give here: the output is consistent with the committed weights. If that is all the client needs, this case does it no harm.
 - What only hardware-backed evidence could add: that a measured program with access to a verified volume was running (E14). That evidence stops at E5b, and a compromised enclave defeats it.
 - What neither gives: confidentiality. If the engine that saw the prompt was not the attested one, the prompt was exposed, and no proof recovers that.
@@ -623,3 +625,101 @@ How a client would read it:
 5. `provider_says` is displayed and decides nothing. `not_covered` is always shown.
 
 A bundle that can be built from what is on main today would have `attestation.basis` absent (no hardware evidence is verified), `table_binding` absent (E9), `conversion.kind` equal to `subset` (E8b), and `state` absent. That bundle does not join anything, and a client should not present it as if it did.
+
+## 8. Source map
+
+Every statement in sections 1 to 7 carries its source where it is made: a `path:line` on main at the base commit, or a `[V1]` / `[V2]` / `[V3]` mark. This section lists the sources and what each is used for.
+
+**How the citations were checked.** Each cited range was read by the lane on the base commit before it was written down. Separately, a small script kept outside the repository confirmed that every backticked path and `path:line` citation in this file names a file that exists and a range inside that file (0 problems; the count at the final commit is in RESULTS.md). That script checks existence and range only. It does not check that the lines say what the note says; that rests on the reading. It is not the optional checker of the PREREG, and its passing is not evidence for any edge.
+
+### 8.1 Public documentation (from public documentation, not verified by us)
+
+Fetched once each on 2026-11-17, read as published, used as data only. Nothing in them was run, reproduced or checked against any system.
+
+| mark | page | used for |
+|---|---|---|
+| V1 | `https://docs.tinfoil.sh/containers/models.md` | N3 and N4a; E4, E5a, E6a: a package with a dm-verity root built from a pinned revision and a numbered pack schema; the root is in the configuration; the package is described as reproducible by third parties; mounted read-only |
+| V2 | `https://docs.tinfoil.sh/verification/attestation-architecture.md` (read up to a 16,000 character cut) | N1; E1, E2, E4, E5a, E14; counterexample 7: what is measured at boot; the configuration hash in the kernel command line and the boot-time check; signed expected measurements in a public log; certificate chain to the hardware root; caches cannot forge; a writable volume class outside the measurement |
+| V3 | `https://docs.tinfoil.sh/containers/attested-keys.md` | N2; E3, E13; counterexample 8: keys generated in the enclave before containers start; the public key in the attestation document's key material; one key per boot; beta status; the granted application can read and copy its private key |
+
+Not used from these pages: any identifier, example value, host name, command or product claim beyond the mechanisms above. The pages' linked blog post, specification and repositories were not read.
+
+### 8.2 Main at `5583d7f82b549454cdb6374d2fd347dfd9781976`
+
+| source | lines cited | used for |
+|---|---|---|
+| `experiments/20261110-36-weight-binding/RESULTS.md` (#87) | 7, 16-18, 64-66, 78 | E7; N5: per-tensor ids for two pins, hash level, not a proof |
+| `experiments/20261111-91-conversion-id/RESULTS.md` (#100) | 16-18, 23-27, 30-33, 43, 55, 62, 66-68, 70 | E6b, E8a, E8c, E9; counterexample 2: config pin, inventory, rule text not executable, no proof binds the table |
+| `experiments/20261112-149-leaf-v2/RESULTS.md` (#151, addenda #191) | 15, 16, 20, 44, 47-50, 52, 96-134 | E8b, E8c, E9; counterexamples 3 and 4; section 2 |
+| `experiments/20261111-36-keyfile-tensor-binding/RESULTS.md` (#121) | 5, 21-27, 82 | E9: the small-key fixture and its limits |
+| `experiments/20261104-58-signed-manifest/RESULTS.md` (#59) | 36-37, 90 | guarantee (c); E10 |
+| `experiments/20261111-9-client-envelope/RESULTS.md` (#122) | 3-4, 16-21, 40, 44-45, 97, 100-101 | E10, E11, E13; counterexample 9 |
+| `experiments/20261112-131-served-reply-agreement/RESULTS.md` (#133) | 21, 27, 72 | E5b, E11; counterexample 9: reported identity, rebuilt ids |
+| `research/weight-binding/DESIGN.md` | 32-33, 47-48, 59-93, 99-101, 116-117, 125-133, 147-159, 167-173, 193, 195, 198, 202-206, 246-247, 260-262, 272-275 | N5, N6; E6a, E6b, E7, E8a, E8c, E9, E10; counterexamples 2 and 6 |
+| `research/weight-binding/wb_manifest.py`, `research/weight-binding/wb_conv.py`, `research/weight-binding/wb_leafv2.py`, `research/weight-binding/test_wb_leafv2.py` | as cited in sections 4 to 6 | exact bytes of N5 and N6; counterexample 4 |
+| `research/weight-binding/README.md`, `research/weight-binding/keyfile/README.md` | 67-76, 121-123; 43-46, 48-50 | section 2; E9 |
+| `research/envelope/SPEC.md` | 37-38, 42-53, 73-98, 101-103, 108-113, 165-190, 223-233, 243-244 | N8, N9; guarantees (a) to (c); E10 to E14; counterexamples 8, 9, 11 |
+| `blocks/frame/heads.h` | 78-91 | N7: what the commitment ID hashes, and that it does not say whose weights |
+| `docs/limits.md` | 169-176 | guarantees (b), (d); E9 |
+| `docs/verifying.md` | 38-45, 220-230 | guarantee (d); E10; counterexample 7 |
+| `research/coverage/inventory.yaml` | 1012-1014, 1021-1026, 1030-1032, 1039-1041 | gaps G-01, G-04, G-05, G-07, G-OB3 |
+| `docs/qwen-port.md` | 6-8, 56 | no Qwen proof exists; PR #199 |
+| `docs/research-roadmap.md`, `README.md` | 38-39, 74; 28, 98 | rule 3 of section 3; counterexamples 6 and 10 |
+| `experiments/20261109-34-qwen-state-commit/RESULTS.md`, `experiments/20261111-35-conv-history-binding/RESULTS.md`, `experiments/20261111-93-hidden-root-handoff/RESULTS.md` | 13; 59; 7, 80 | E12; counterexample 10 |
+| `experiments/20261113-156-dense-table-digests/RESULTS.md` | 11-13, 143-145, 155-157 | lookup tables (E8c table) |
+
+### 8.3 Statements with no external source
+
+These are this note's own, and are proposals or reasoning, not findings:
+
+- the edge list and the split of E5, E6 and E8 (PREREG and amendment A-1);
+- the "common preimage, recomputed" rule of E6a, the pinned count and kind of counterexample 4, the minimum release of counterexample 7, and the state-origin rule of E12;
+- the schema of section 7;
+- the argument of counterexample 11 and E14 that a proof over public inputs cannot identify the process that produced them. It is an argument from what the statement contains, not a theorem proved here;
+- two counts derived here from cited figures: 50 remaining plain-matrix blocks (128 less 78) and 644 remaining blocks (722 less 78).
+
+## 9. Dependencies, named open obligations, and stop rule
+
+### 9.1 Dependencies between edges
+
+- E6a, E7 and E8 all start from the revision in N0. Without a client-chosen revision none of them means anything.
+- E9 needs E8c: a table can only be bound to a complete conversion id if one exists. Binding to a subset id proves nothing about the blocks outside it.
+- E10 needs E9. Without it, a statement checked against a commitment is checked against weights the committer chose.
+- E13 needs E1, E2 and E3. Without them the receipt key is a provider key and the receipt is guarantee (c) only.
+- E14 needs E5b, and E5b has no known check. So E14 stays a vendor-documented promise about what was started.
+- E12 is independent of the weight chain. It is needed only for statements that start from carried state.
+
+### 9.2 Named open obligations
+
+The issue says: if a new soundness theorem or format is needed, name it and stop. Both are needed. They are named here and not attempted.
+
+| id | kind | what is needed | for | where main stands |
+|---|---|---|---|---|
+| O-1 | **new soundness theorem** | a bound for the per-block evaluation claim when the evaluation point is derived by hashing the commitment: the committer can re-randomise the commitment and try again, so the fixed-pair Schwartz-Zippel figure is not the error. The analysis must count the committer's hash queries over the commitment, the point index and the block name | E9 | only the fixed-pair bound is stated; the analysis is listed as open (`research/weight-binding/DESIGN.md:86-93`, `:260-262`) |
+| O-2 | **new format** | a key-file format version carrying one batched claim per effective block, with the Qwen placement of blocks in the weight table and a range proof on that layout | E9, E10 | "Needs a protocol change: a new item in the key file's first chain, a format version, and the Qwen placement" (`research/weight-binding/DESIGN.md:209-210`); the fixture format is research only (`research/weight-binding/keyfile/README.md:43-46`) |
+| O-3 | proposed code, large | executable conversion rules for the 644 blocks outside the subset, the complete 722-leaf v2 tree, and a second independent implementation | E8c | text only for those classes (`experiments/20261112-149-leaf-v2/RESULTS.md:48-49`, `:52`) |
+| O-4 | proposed code | a full-model v2 id with its own domain tag, and a client policy that pins the leaf count and the kind | E8c, counterexample 4 | not built |
+| O-5 | proposed code, outside this repository's current scope | a client that verifies hardware evidence: certificate chain, platform version, freshness, measurement policy with a minimum release, attested key | E1, E2, E3, E13, counterexamples 7 and 8 | the envelope specification lists the same needs and builds none (`research/envelope/SPEC.md:227-230`) |
+| O-6 | proposed code | a public derivation that records, for one revision, the package root and the checkpoint id, re-runnable by a third party | E6a, counterexample 1 | not built; the package side has never been run by us |
+| O-7 | open, no construction known to this note | evidence that a loaded engine computes with exactly the bytes it read, covering dtype, quantization, adapters and settings | E5b, E14, counterexamples 5, 6 and 11 | none |
+| O-8 | proposed code plus open research | a client-side rule for the origin of state roots, and a vetted state commitment with the chain length inside the proof | E12, counterexample 10 | prototypes with a trusted first root (`research/coverage/inventory.yaml:1030-1032`) |
+
+O-1 and O-2 are the two items the issue's stop rule is about. O-7 is not a missing theorem: it is a question no proof system in this repository addresses, and this note does not claim it can be closed.
+
+### 9.3 Stop rule
+
+This note stops here. It does not design the O-2 format, attempt the O-1 analysis, write a converter, or add a checker. Any of O-1 to O-8 needs its own issue, registration and review. The smallest follow-up that involves a GPU is, per the issue, a separate decision and is not filed by this note.
+
+## 10. What this note does not establish
+
+- **Nothing was run.** No model, weight, attestation, key, proof or route was touched. Every status is a reading of main and of three public pages.
+- **No vendor statement was verified.** The six VENDOR edges are descriptions from public documentation. Whether any system behaves as described is not known to this note. One of the three pages was read only up to a cut.
+- **No Qwen proof exists**, so no edge of group (b) holds for Qwen. E11 is MAIN for token ids on two synthetic stored examples only.
+- **The MAIN edges are hash-level bookkeeping or application checks, measured and unreplicated.** E7, E8a and E8b are not proofs. E8b covers 78 of 722 blocks and is not full Qwen support, and nothing here should be read as saying the conversion of the model is done or correct.
+- **The obligations in section 6 are not rejections.** Where a row says NOT BUILT or UNRESOLVED, a client running what is on main accepts the counterexample today.
+- **Completeness of the edge list is not shown.** The 18 edges come from the issue's wording and one reading of the evidence. An attack that fits no listed edge would not appear in this matrix. The eleven counterexamples are the issue's list, not an exhaustive one.
+- **The argument that counterexample 11 is undetectable by proof alone is an argument, not a theorem.** It rests on what the statement contains.
+- **Hidden weights are not treated.** Every recomputation edge assumes public weights. With hidden weights the client cannot recompute, and E6a, E7 and E8 fall back to a party the client trusts.
+- **Confidentiality, privacy and zero knowledge are out of scope.** No edge says a prompt or a weight stayed secret.
+- **The schema of section 7 is a discussion shape.** It is not a format, nothing parses it, and its field names bind nobody.
+- Not replicated and not reviewed at the time of writing.
