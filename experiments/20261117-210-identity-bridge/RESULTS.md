@@ -1,6 +1,6 @@
 # RESULTS: 20261117-210-identity-bridge
 
-Issue #210 (part of #36 and #6). PREREG: [PREREG.md](PREREG.md), first commit `fd515f1994aa4930f39b2ef8b5061a2a119397bf`, amendment A-1 in `9e5b37cfd4f328a10e5081a7422b43603fa8271b`, amendment A-2 (after review) in `af2dd65312ac621d82d0fa10a2604cac16ea41a6`. Base: main `5583d7f82b549454cdb6374d2fd347dfd9781976`.
+Issue #210 (part of #36 and #6). PREREG: [PREREG.md](PREREG.md), first commit `fd515f1994aa4930f39b2ef8b5061a2a119397bf`, amendment A-1 in `9e5b37cfd4f328a10e5081a7422b43603fa8271b`, amendment A-2 (after review) in `af2dd65312ac621d82d0fa10a2604cac16ea41a6`, amendment A-3 (second session of the fix round) in `75fbba1f1ace175362725be8e95622242e687ffa`. Base: main `5583d7f82b549454cdb6374d2fd347dfd9781976`.
 
 The deliverable is the note [research/weight-binding/IDENTITY-BRIDGE.md](../../research/weight-binding/IDENTITY-BRIDGE.md).
 
@@ -85,6 +85,7 @@ Code on main performs the rejecting check for one of the eleven inside a stated 
 - Commits after the registration: amendment A-1 alone, then the note in four content commits and one correction commit, then this file, then one more commit to the note (the E10 paragraph of item 8) and this update. No amend, no rebase, no force-push.
 - Before each push: `scripts/check-no-host-paths.sh` ok, `scripts/update-results.py --check` ok, `scripts/check-claims.py` ok.
 - After the round-1 review: amendment A-2 alone, then the corrections to the note, then this file. Same rules: commits on top of the reviewed head, no amend, no rebase, no force-push.
+- The session that made those commits ended before it pushed them. A second session checked them, kept them unchanged, and added on top: amendment A-3 alone, three small commits to the note, then this update. Same rules. See "Corrections after review, second session" at the end.
 - Not replicated. The text as corrected is not reviewed: a fresh review pair is needed at the new head. This pull request is a draft.
 
 ## Corrections after review (2026-11-17T13:20Z)
@@ -169,3 +170,45 @@ Replaced:
 - It was made after the registered wall stop of 12:00:00Z. That is a deviation from the registration, recorded here and in PREREG A-2.
 - **Citations.** Deviation 5 above gives 213 backticked citations for the note at the reviewed head. A second lane-side script, written by the fix lane and kept outside the repository, reproduces 213 at that head and counts 232 in the corrected note (152 with a line range, 47 follow-on line cites, 33 bare paths; 0 problems). Like the first, it checks only that the file exists on main and the range lies inside it. The lines added in this round were read by the fix lane at the cited ranges and their surroundings, not the files in full.
 - The issue comment that summarises this pull request still carries the old counts. This round did not edit it.
+
+## Corrections after review, second session (2026-11-17T19:17Z)
+
+The session that wrote the section above made five commits (`af2dd653`, `d53d7ae2`, `0cab6383`, `28977ef5`, `b9f3d160`) and ended before it pushed them. A second session of the fix lane started at 19:00Z. It checked those commits itself, read the whole difference against the reviewed head and the corrected note in full, opened the cited lines on main, and re-ran the count, the citation range check and the quotation check. It kept the five commits unchanged and added the ones listed here on top. Nothing was run and nothing was measured in this session either. No status, edge or count changed. The round is recorded in PREREG amendment A-3. The section above is left as the first session wrote it, including its times and its citation count.
+
+One of the first session's rows was narrowed (the E7 update rule) and one table row was extended (the guarantee table of section 3). Each sentence that was replaced or extended is quoted as it stood in commit `b9f3d160f8bcf9d61e90ae5f825d527769ac4b60`, which stays in the history. "Note" and "RESULTS" mean the same files as above; "C" is the [changes requested](https://github.com/wakesync/flashprove/pull/215#issuecomment-6948422134) comment and "A" the [approved](https://github.com/wakesync/flashprove/pull/215#issuecomment-6948402534) comment.
+
+### 6. E7 update rule: the config pin shows a configuration change only for a pinned field (C, must-fix 3, taken one step further)
+
+The first session's correction said that a revision changing only a configuration value keeps the checkpoint id "and the change shows in the config pin inside N6 instead". That overstates the pin. It covers 24 text fields and 3 top-level fields. A key on the listed known-unpinned set is allowed and is not hashed, so a change to it shows in neither id; a key outside both sets makes the build refuse (`experiments/20261111-91-conversion-id/RESULTS.md:68`; `research/weight-binding/wb_conv.py:131-147`, `:183-193`, on main, read by the second session). The row now says so, and says that neither id identifies a revision.
+
+Replaced:
+
+- Note, section 5.2, E7 update row: "a revision that changes only a configuration value keeps every tensor and keeps the id, and the change shows in the config pin inside N6 instead"
+- Note, section 5.2, E7 update row: "So the id does not identify a revision and enforces no order between revisions."
+
+### 7. Guarantee table of section 3 lists the runtime part of E6b (C, must-fix 1, surface agreement)
+
+The table of section 5.5 puts the runtime side of E6b in group (a), and the recomputation row of section 3 already said that part rests on E5b. The group (a) row of section 3 did not list it.
+
+Extended, with nothing removed:
+
+- Note, section 3, guarantee table: "(a) hardware evidence | E2, E3, E4, E5a, E5b, E14" (kept; "and the runtime part of E6b" is added after it)
+
+### 8. Lines that name the amendments, and lines extended
+
+- Replaced in the note, header: "amendments A-1 and A-2." (now names A-3 too). One sentence was added to the line under it, saying that a second session finished the round.
+- Replaced in the note, section 10: "asked for the corrections recorded in PREREG A-2." (now "A-2 and A-3").
+- Replaced in the note, section 8.2, source map: "as cited in sections 4 to 6 | exact bytes of N5 and N6; counterexample 4" (the row now also names section 8 and the update rules of E6a and E7).
+- Note, section 8, "How the citations were checked": one sentence added, saying which lines the second session read.
+- RESULTS, first paragraph: the commit of amendment A-3 is named after that of A-2.
+- RESULTS, "Process": one line added for this session.
+
+### What the second session checked, and what it did not do
+
+- **The five earlier commits.** Author and committer are the same no-reply identity on each, no commit message carries a trailer, each commit touches one of the three files of this pull request and nothing else, and the PREREG at the reviewed head is a byte prefix of the PREREG after A-2 and after A-3.
+- **Counts.** Recounted from the edge headings, the table of section 5.5, the counts line, section 1 of the note and the table of this file: 18 edges, established on main 4, vendor only 5, proposed code 5, unsolved 4, the same on every one of those surfaces.
+- **Citations at the final commit.** The lane-side range script of the first session, unchanged, counts 235 backticked citations in the note as it now stands (153 with a line range, 49 follow-on line cites, 33 bare paths; 0 problems). The 232 given in the section above was the count at commit `b9f3d160`. The script checks only that the file exists on main and the range lies inside it.
+- **Reading.** The second session opened these ranges on main itself: `research/envelope/client_verify.py:241-250`, `research/envelope/SPEC.md:169-170` and `:225-230`, lines 65-69 of the client-envelope result, `research/weight-binding/wb_manifest.py:36-38` and `:66-77`, `research/weight-binding/wb_conv.py:365-378`, line 83 of the key-file result, `research/weight-binding/DESIGN.md:86-93` and `:198`, lines 23, 30-33 and 68 of the conversion-id result, and `docs/qwen-port.md:6-8` and `:56`. It read those lines and their surroundings, not the files in full.
+- It ran nothing and measured nothing. It added no code, no checker in the repository and no results ledger row, fetched no vendor page, and made no edge stronger. E7, E8a, E8b and E11 keep their stated scopes: hash level, rule text and not executable, 78 of 722 blocks, two synthetic stored examples.
+- It did not edit the issue comment that summarises this pull request. That comment still carries the counts and the wording from before review.
+- The text as corrected is not reviewed. A fresh review pair is needed at the new head.
