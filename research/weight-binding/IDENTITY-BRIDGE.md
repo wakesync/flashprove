@@ -11,7 +11,7 @@ Vendor material is used from three public pages only, named V1, V2 and V3 in sec
 
 1. **The join goes through one public revision that the client itself authorizes, not through the enclave.** From that revision the client, or an auditor it trusts, recomputes three things: the package root, the checkpoint id and the conversion id. It accepts a proof only under a commitment that a key-file claim binds to that conversion id. It never compares a package root with a tensor root (they hash different encodings), and it never takes the mapping between them from a signer.
 2. **On main today the join cannot be made for Qwen.** Of the 18 edges, 4 are established on main within a stated scope (E7, E8a, E8b, E11), 5 rest on public vendor documentation only (E1, E2, E3, E4, E5a), 5 are proposed code (E6a, E8c, E10, E12, E13) and 4 are unsolved obligations (E5b, E6b, E9, E14). The edge that would bind the committed integers to the converted checkpoint, E9, has a research fixture on four tiny tensors and no bound that covers a derived point: only a fixed-pair bound is stated (section 5.3, O-1). Even with E9, a proof does not identify the physical run (E14).
-3. **A proof and an attestation answer different questions and neither repairs the other.** All 11 named counterexamples have a rejecting obligation or the word UNRESOLVED in section 6. Main rejects one of them today inside a stated scope (9), three in part at hash level (2, 3, 4) and seven not at all (1, 5, 6, 7, 8, 10, 11). A runtime that returns the same acceptable output from another engine stays undetectable by proof alone, by construction.
+3. **A proof and an attestation answer different questions and neither repairs the other.** All 11 named counterexamples have a rejecting obligation or the word UNRESOLVED in section 6. Code on main performs the rejecting check for one of them inside a stated scope (9), for three in part at hash level (2, 3, 4), and for none of the other seven (1, 5, 6, 7, 8, 10, 11). No case was run, so that is a count of the checks that exist, not of attacks seen to pass. A runtime that returns the same acceptable output from another engine stays undetectable by proof alone, by construction.
 
 ## 2. Scope, method, and what changed on main since the issue's snapshot
 
@@ -430,7 +430,11 @@ Each counterexample gets the obligation that would reject it (which edge, which 
 - **OBLIGATION, NOT BUILT**: the rejecting check is specified and needs no new cryptography, but no code performs it.
 - **UNRESOLVED**: no rejecting check is available, because it rests on an UNSOLVED edge or because none can exist.
 
-An obligation that is not built is not a rejection. Today a client running only what is on main accepts every case not marked REJECTED ON MAIN.
+An obligation that is not built is not a rejection. For every case not marked REJECTED ON MAIN, no implemented end-to-end rejecting obligation for the bridge specified here is established. That is a statement about which checks exist. It is not a statement that a client on main accepts the case: nothing was run, so no attack was observed to be accepted, and none is reported. Three things are kept apart in this section:
+
+- **An unsupported input is refused.** Main's envelope client is fail-closed on attestation. It refuses every attestation kind that claims hardware evidence, and it refuses every envelope when the client requires TEE evidence (`research/envelope/client_verify.py:241-250`; `research/envelope/SPEC.md:169-170`, `:225-230`; `experiments/20261111-9-client-envelope/RESULTS.md:65-69`). The CPU verifier's admission test still refuses Qwen (`docs/qwen-port.md:56`), and no Qwen proof exists (`docs/qwen-port.md:6-8`). By that reading of the code and the specification, a case that presents hardware attestation, or a Qwen proof, is outside what main's client supports. That was read, not run. A refusal of that kind checks no relation of the bridge and joins nothing. It is not a working identity bridge and is not counted as a rejection of a counterexample.
+- **A relation has no coverage.** No code on main checks the relation the obligation names. This is what NOT BUILT and UNRESOLVED mean here, and what "none" means in the summary column of section 6.3.
+- **An attack is observed to be accepted.** Not observed, for any case. This note ran nothing.
 
 ### 6.1 Counterexamples 1 to 6
 
@@ -463,7 +467,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 
 - Rejecting obligation, attestation side: the approved measurement fixes the container image and its command line (E1, E4), so the client knows which program was started. Nothing checks what that program does with the bytes (E5b).
 - Rejecting obligation, proof side: do not rely on the loader at all. If the commitment is bound to the conversion id (E9), the statement is checked against it (E10) and the statement is the client's own token ids (E11), a reply from any other loader fails unless it gives the same tokens.
-- On main: neither side. No attestation is verified, and E9 and E10 do not hold for Qwen.
+- On main: no rejecting check on either side. No attestation is verified, and E9 and E10 do not hold for Qwen.
 - Designation: **UNRESOLVED.** The attestation side rests on E5b (UNSOLVED). The proof side rests on E9 (UNSOLVED) and E10 (PROPOSED).
 
 **6. Hot-swapped adapter.** After an honest load, weights are added or replaced in memory.
@@ -511,19 +515,21 @@ An obligation that is not built is not a rejection. Today a client running only 
 
 ### 6.3 Summary
 
-| # | counterexample | rejecting edges | main today | designation |
+The fourth column says which rejecting check code on main performs. "None" means no such check exists on main. It does not mean the case was run and accepted: nothing was run (see the three distinctions at the head of this section).
+
+| # | counterexample | rejecting edges | rejecting check on main today | designation |
 |---|---|---|---|---|
-| 1 | unrelated but valid package / proof roots | E6a, E7, E8, E9 | not rejected | UNRESOLVED (E9) |
+| 1 | unrelated but valid package / proof roots | E6a, E7, E8, E9 | none | UNRESOLVED (E9) |
 | 2 | wrong config, same tensor names | E8a, E6b | rejected at hash level for the conversion id | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E6b, E5b) |
 | 3 | exponent / integer-hash swap | E8b, E8c, E9 | rejected at hash level, 78 blocks | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E9) |
 | 4 | subset root presented as full tree | E8b, E8c, E9 | tags and count hashed; count not pinned | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E9) |
-| 5 | authorized root, alternate loader | E5b, or E9 + E10 + E11 | not rejected | UNRESOLVED |
-| 6 | hot-swapped adapter | E5b, or E9 + E10 + E11 with exact match | not rejected | UNRESOLVED |
-| 7 | rollback to old approved code | E1 (minimum release) | not rejected | OBLIGATION, NOT BUILT; platform version UNRESOLVED |
-| 8 | receipt key from another boot | E3, E13 | not rejected | OBLIGATION, NOT BUILT; key copied within a boot UNRESOLVED |
+| 5 | authorized root, alternate loader | E5b, or E9 + E10 + E11 | none | UNRESOLVED |
+| 6 | hot-swapped adapter | E5b, or E9 + E10 + E11 with exact match | none | UNRESOLVED |
+| 7 | rollback to old approved code | E1 (minimum release) | none | OBLIGATION, NOT BUILT; platform version UNRESOLVED |
+| 8 | receipt key from another boot | E3, E13 | none | OBLIGATION, NOT BUILT; key copied within a boot UNRESOLVED |
 | 9 | output rebuilt from different token ids | E11 | rejected, synthetic examples, ids delivered | REJECTED ON MAIN in scope; text-only routes UNRESOLVED |
-| 10 | state root without authenticated origin | E12 | not rejected | OBLIGATION, NOT BUILT; proof side UNRESOLVED |
-| 11 | malicious runtime, same acceptable output | none possible by proof | not rejected | UNRESOLVED by construction |
+| 10 | state root without authenticated origin | E12 | none | OBLIGATION, NOT BUILT; proof side UNRESOLVED |
+| 11 | malicious runtime, same acceptable output | none possible by proof | none | UNRESOLVED by construction |
 
 The matrix is non-circular in this sense: no obligation takes as input a value that only the party being checked can supply. Every recomputation starts from the revision in N0; the attestation edges start from the hardware root; the receipt starts from a nonce the client chose. Where a row would need the provider's word, it is marked UNRESOLVED instead.
 
@@ -669,12 +675,13 @@ Not used from these pages: any identifier, example value, host name, command or 
 | `experiments/20261112-149-leaf-v2/RESULTS.md` (#151, addenda #191) | 15, 16, 20, 44, 47-50, 52, 96-134 | E8b, E8c, E9; counterexamples 3 and 4; section 2 |
 | `experiments/20261111-36-keyfile-tensor-binding/RESULTS.md` (#121) | 5, 21-27, 82 | E9: the small-key fixture and its limits |
 | `experiments/20261104-58-signed-manifest/RESULTS.md` (#59) | 36-37, 90 | guarantee (c); E10 |
-| `experiments/20261111-9-client-envelope/RESULTS.md` (#122) | 3-4, 16-21, 40, 44-45, 97, 100-101 | E10, E11, E13; counterexample 9 |
+| `experiments/20261111-9-client-envelope/RESULTS.md` (#122) | 3-4, 16-21, 40, 44-45, 65-69, 97, 100-101 | E10, E11, E13; counterexample 9; section 6 (a claimed hardware attestation is refused) |
 | `experiments/20261112-131-served-reply-agreement/RESULTS.md` (#133) | 21, 27, 72 | E5b, E11; counterexample 9: reported identity, rebuilt ids |
 | `research/weight-binding/DESIGN.md` | 32-33, 47-48, 59-93, 99-101, 116-117, 125-133, 147-159, 167-173, 193, 195, 198, 202-206, 246-247, 260-262, 272-275 | N5, N6; E6a, E6b, E7, E8a, E8c, E9, E10; counterexamples 2 and 6 |
 | `research/weight-binding/wb_manifest.py`, `research/weight-binding/wb_conv.py`, `research/weight-binding/wb_leafv2.py`, `research/weight-binding/test_wb_leafv2.py` | as cited in sections 4 to 6 | exact bytes of N5 and N6; counterexample 4 |
 | `research/weight-binding/README.md`, `research/weight-binding/keyfile/README.md` | 67-76, 121-123; 43-46, 48-50 | section 2; E9 |
-| `research/envelope/SPEC.md` | 37-38, 42-53, 73-98, 101-103, 108-113, 165-190, 223-233, 243-244 | N8, N9; guarantees (a) to (c); E10 to E14; counterexamples 8, 9, 11 |
+| `research/envelope/SPEC.md` | 37-38, 42-53, 73-98, 101-103, 108-113, 165-190, 223-233, 243-244 | N8, N9; guarantees (a) to (c); E10 to E14; counterexamples 8, 9, 11; section 6 (fail-closed refusal) |
+| `research/envelope/client_verify.py` | 241-250 | section 6 and section 10: the client refuses a claimed hardware attestation kind, and refuses every envelope when TEE evidence is required |
 | `blocks/frame/heads.h` | 78-91 | N7: what the commitment ID hashes, and that it does not say whose weights |
 | `docs/limits.md` | 169-176 | guarantees (b), (d); E9 |
 | `docs/verifying.md` | 38-45, 220-230 | guarantee (d); E10; counterexample 7 |
@@ -733,7 +740,7 @@ This note stops here. It does not design the O-2 format, attempt the O-1 analysi
 - **No vendor statement was verified.** The five VENDOR edges are descriptions from public documentation. Whether any system behaves as described is not known to this note. Most of the note was written from a cut copy of one page (V2); its `[V2]` statements were checked against the full page afterwards (section 2).
 - **No Qwen proof exists**, so no edge of group (b) holds for Qwen. E11 is MAIN for token ids on two synthetic stored examples only.
 - **The MAIN edges are hash-level bookkeeping or application checks, measured and unreplicated.** E7, E8a and E8b are not proofs. E8b covers 78 of 722 blocks and is not full Qwen support, and nothing here should be read as saying the conversion of the model is done or correct.
-- **The obligations in section 6 are not rejections.** Where a row says NOT BUILT or UNRESOLVED, a client running what is on main accepts the counterexample today.
+- **The obligations in section 6 are not rejections, and a missing rejection is not an observed acceptance.** Where a row says NOT BUILT or UNRESOLVED, no implemented end-to-end rejecting obligation for the specified bridge is established. No counterexample was run against any client, so no acceptance was observed. Main's envelope client refuses any attestation kind that claims hardware evidence, and any envelope when TEE evidence is required (`research/envelope/client_verify.py:241-250`). That refusal is not a working identity bridge: it checks no relation of the bridge.
 - **Completeness of the edge list is not shown.** The 18 edges come from the issue's wording and one reading of the evidence. An attack that fits no listed edge would not appear in this matrix. The eleven counterexamples are the issue's list, not an exhaustive one.
 - **The argument that counterexample 11 is undetectable by proof alone is an argument, not a theorem.** It rests on what the statement contains.
 - **Hidden weights are not treated.** Every recomputation edge assumes public weights. With hidden weights the client cannot recompute, and E6a, E7 and E8 fall back to a party the client trusts.
