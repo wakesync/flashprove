@@ -357,3 +357,10 @@ Reason, common to all nine: the original policy worksheets are incomplete under 
 | F45 | MISSING INPUTS, TIMEOUT_NOT_PROOF | MISSING INPUTS, MISSING_INPUT and TIMEOUT_NOT_PROOF | F55 |
 
 Consequences, stated now. Against their original registration, F37 to F45 will not match at the fixed code: 36 of the original 45 fixtures (F01 to F36) are expected to still match, 9 are changed registrations. The amended suite counts F37 to F45 as matching only if they give exactly the outcome in the third column. The behaviour each of them was written to test (the coverage verdict, the miss target, the adaptive refusal, the proof class rules, the q and timeout refusals) is re-registered on completed worksheets as F47 to F55 in Amendment 1, with the original verdict and codes. RESULTS.md reports this as a changed registration, not as a pass of the original expectations. F01 to F36 are expected to be unaffected; if any of them changes, that is a FAIL of the amended suite, not a further amendment.
+
+
+### Amendment 3 (2026-11-17T23:14:03Z): one rule found by the debug inputs, stated before the code is committed
+
+Written after Amendments 1 and 2, after the new code was written and run on the debug inputs only (DBG-04 onward and the inputs generated from the debug base, as the debug rule of Amendment 1 allows), and before the code commit. No fixture F01 to F135 had been run against the new code.
+
+The generated debug inputs showed one acceptance that neither review lists: a `source` that is not text (a number, a boolean or an object) was taken as provenance. Rule added: `source` must be a non-empty text, else `NO_PROVENANCE` (the code that the original registration already uses for a missing source). No registered fixture has a non-text source, so no expectation of F01 to F135 changes. No registered fixture is added for it: it is covered by debug inputs DBG-16 and DBG-17 only, which is weaker than a registered fixture and is said so in RESULTS.md.
