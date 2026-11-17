@@ -1,0 +1,116 @@
+{
+ "fleet_monitoring_after_release": {
+  "assumptions": [
+   "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+   "selection randomness unpredictable to the provider and drawn after the population is closed",
+   "population independently enumerated"
+  ],
+  "codes": [
+   "MISSING_INPUT",
+   "NO_RELATION",
+   "UNKNOWN_COST"
+  ],
+  "cost_per_request": null,
+  "coverage": null,
+  "deterrence": null,
+  "miss": null,
+  "normalized_cost": null,
+  "notes": [
+   "MISSING_INPUT: population.N",
+   "MISSING_INPUT: sampling.scheme",
+   "MISSING_INPUT: invalidity.D or invalidity.f",
+   "MISSING_INPUT: soundness_treatment.text",
+   "MISSING_INPUT: latency.verify_before_action",
+   "MISSING_INPUT: sampling.schedule",
+   "MISSING_INPUT: costs.I",
+   "MISSING_INPUT: costs.A",
+   "MISSING_INPUT: costs.F",
+   "UNKNOWN_COST: costs.P,costs.C",
+   "MISSING_INPUT: targets.desired_miss_probability"
+  ],
+  "soundness_lower_bound": null,
+  "synthetic": false,
+  "synthetic_inputs": [],
+  "unknowns": [
+   "costs.C",
+   "costs.P"
+  ],
+  "verdict": "MISSING INPUTS"
+ },
+ "hardware_trusting_immediate_with_later_review": {
+  "assumptions": [
+   "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+   "selection randomness unpredictable to the provider and drawn after the population is closed",
+   "population independently enumerated",
+   "immediate service rests on: "
+  ],
+  "codes": [
+   "MISSING_INPUT",
+   "NO_HW_TRUST_ASSUMPTION",
+   "NO_RELATION",
+   "UNKNOWN_COST"
+  ],
+  "cost_per_request": null,
+  "coverage": null,
+  "deterrence": null,
+  "miss": null,
+  "normalized_cost": null,
+  "notes": [
+   "MISSING_INPUT: population.N",
+   "MISSING_INPUT: sampling.scheme",
+   "MISSING_INPUT: invalidity.D or invalidity.f",
+   "MISSING_INPUT: soundness_treatment.text",
+   "MISSING_INPUT: latency.verify_before_action",
+   "MISSING_INPUT: sampling.schedule",
+   "MISSING_INPUT: costs.I",
+   "MISSING_INPUT: costs.A",
+   "MISSING_INPUT: costs.F",
+   "UNKNOWN_COST: costs.P,costs.C",
+   "MISSING_INPUT: targets.desired_miss_probability"
+  ],
+  "soundness_lower_bound": null,
+  "synthetic": false,
+  "synthetic_inputs": [],
+  "unknowns": [
+   "costs.C",
+   "costs.P"
+  ],
+  "verdict": "MISSING INPUTS"
+ },
+ "vendor_independent_proof_irreversible": {
+  "assumptions": [
+   "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+   "selection randomness unpredictable to the provider and drawn after the population is closed",
+   "population independently enumerated"
+  ],
+  "codes": [
+   "MISSING_INPUT",
+   "NO_RELATION",
+   "UNKNOWN_COST"
+  ],
+  "cost_per_request": null,
+  "coverage": null,
+  "deterrence": null,
+  "miss": null,
+  "normalized_cost": null,
+  "notes": [
+   "MISSING_INPUT: population.N",
+   "MISSING_INPUT: sampling.scheme",
+   "MISSING_INPUT: soundness_treatment.text",
+   "MISSING_INPUT: latency.verify_before_action",
+   "MISSING_INPUT: sampling.schedule",
+   "MISSING_INPUT: costs.I",
+   "MISSING_INPUT: costs.A",
+   "MISSING_INPUT: costs.F",
+   "UNKNOWN_COST: costs.P,costs.C"
+  ],
+  "soundness_lower_bound": null,
+  "synthetic": false,
+  "synthetic_inputs": [],
+  "unknowns": [
+   "costs.C",
+   "costs.P"
+  ],
+  "verdict": "MISSING INPUTS"
+ }
+}
