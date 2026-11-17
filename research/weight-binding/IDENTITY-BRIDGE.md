@@ -385,6 +385,8 @@ The statement of a proof holds the commitment ID, the configuration, the policy,
 
 Why UNSOLVED and not VENDOR: the vendor pages document that a measured program was started with a verified volume (E2, E4, E5a). They do not document, and nothing else supplies, that this program produced the reply. The edge needs E5b, which is UNSOLVED, and an edge takes the status of its weakest necessary part (PREREG A-1). An earlier commit of this note (`e859e22`) gave E14 the status VENDOR. That overstated it and is corrected here.
 
+The same rule does not move E10 to UNSOLVED, and the difference is this. What E14 itself asserts, that the engine which ran is the proved one, contains E5b's assertion as a part. What E10 asserts, that a statement is checked against a commitment, is a relation between N7 and N8 that can hold whatever N7 contains; it exists today for the upstream path. E10 depends on E9 for the join to mean anything (section 9.1), not for its own assertion. A reviewer who reads the rule more strictly would class E10 as UNSOLVED too; the count would then be PROPOSED 5, UNSOLVED 4, and nothing else in the note would change.
+
 ### 5.5 All edges at a glance
 
 | edge | says | status | guarantee |
