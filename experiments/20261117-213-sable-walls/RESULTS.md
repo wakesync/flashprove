@@ -21,7 +21,7 @@ stand in for a registered one.
 
 | wall | does Sable face it | carries over to FlashProve | recommendation |
 |---|---|---|---|
-| W1 MLP input above 2,047 | not in this form (no fixed norm-output class) | in principle (per-row 8-bit requantization, rsqrt-table norm, gain fused into weights; field and model-independent tables compatible) | none; a candidate arm for a future registered experiment. Sable's own accuracy figures are on other models, data, metric and reference, so they are not comparable with our token bar: they motivate caution, they are not a measured failure of our bar and not a conclusion about what 8 bits cost |
+| W1 MLP input above 2,047 | not in this form: it has a fixed norm-output class, but an 8-bit one (at most 127) with a per-row normalization exponent and the gain fused into the next weights, not our gain-applied word at fixed scale 2^12 in class 2,047 | in principle (per-row 8-bit requantization, rsqrt-table norm, gain fused into weights; field and model-independent tables compatible) | none; a candidate arm for a future registered experiment. Sable's own accuracy figures are on other models, data, metric and reference, so they are not comparable with our token bar: they motivate caution, they are not a measured failure of our bar and not a conclusion about what 8 bits cost |
 | W2 SiLU outside v1 domain | yes | yes for the field; table contents become per-model (our verifier already recomputes from a parameter) | none; two existing options named (scale with margin and abort, or clamp) |
 | W3 both pre-norms above 2,047 | not in this form (same mechanism as W1) | as W1 | none |
 | W4 head dimension 256 | no (all models dh 128; prover asserts it) | nothing to carry | none (negative) |

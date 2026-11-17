@@ -24,10 +24,12 @@ main by path and line.
 
 ## Answer in three lines
 
-1. **Walls 1 and 3 (MLP input and both pre-norms above the 2,047 class):** Sable does not have a fixed
-   public class for a norm output. It requantizes every residual row to 8 bits with a per-row
-   power-of-two exponent, normalizes with a 16-bit rsqrt table so the output is at most 127 by
-   construction, and folds the RMSNorm gain (and a random rotation) into the next weight matrix. That
+1. **Walls 1 and 3 (MLP input and both pre-norms above the 2,047 class):** Sable does have a fixed
+   class for a norm output, but not ours: an 8-bit class, |q'| <= 127, where ours is a gain-applied
+   norm word at the fixed scale 2^12 in the class 2,047. It requantizes every residual row to 8 bits
+   with a per-row power-of-two exponent, normalizes with a 16-bit rsqrt table into that 8-bit class
+   with a per-row normalization exponent that enters the next shift, and folds the RMSNorm gain (and
+   a random rotation) into the next weight matrix. That
    mechanism uses only model-independent tables and fits the Goldilocks field, so it is compatible in
    principle; it is a different statement from ours. Sable's reported accuracy (greedy agreement with
    BF16 of 82.4% to 88.7% on WikiText-2, on its own three models) uses a different metric, reference,
@@ -55,7 +57,14 @@ The class is exceeded in every measured layer, maximum 142,651 inside the cutoff
 (`docs/qwen-port.md:111-113`). The later registered integer-MLP token test failed at 1,423 of 1,461
 (`experiments/20261112-132-int-mlp-e2e/runs-resume150b/RESULTS.md:7`).
 
-**Does Sable face it?** Not in this form. Sable has no fixed public class for a norm output.
+**Does Sable face it?** Not in this form. Sable does have a fixed norm-output class, but a different
+one: every norm output lies in the 8-bit range |q'| <= 127, which its proof enforces with a lookup
+into its 8-bit range rows (P 6.1, Table 1, the tag for q + 127 of an 8-bit value; P 6.2 `NormScale`)
+and its reference code checks (`zk/model.py:193`). Three things differ from our class: the width (8
+bits against our 12-bit class 2,047); the scale (a per-row normalization exponent that enters the
+next shift, against our fixed scale 2^12); and where the gain sits (fused into the next weight
+matrix, against applied inside the norm, which is what takes our word out of its class:
+`experiments/20261112-132-int-mlp-e2e/RESULTS.md:44`).
 
 **What Sable does** (from public source, not verified by us):
 
@@ -64,9 +73,11 @@ The class is exceeded in every measured layer, maximum 142,651 inside the cutoff
   clips" (P 5.1, P 5.2 `Requant8`). The proof checks minimality of the exponent with a selected index
   and two 15-bit limbs (P 6.2).
 - `NormScale` then computes the row's sum of squares, writes it as a 16-bit mantissa times an even
-  power of two, and multiplies by a 16-bit rsqrt table entry, giving |q'| <= 127 "by construction";
-  "This is RMSNorm with the gain vector fused into the next weight matrix" (P 5.2;
-  `zk/model.py:185-194`, which checks `qp.abs().max() <= 127`; table `RSQ`, `zk/tables.py:17`).
+  power of two, and multiplies by a 16-bit rsqrt table entry, floor(127 x 2^15 / sqrt(mantissa));
+  "This is RMSNorm with the gain vector fused into the next weight matrix" (P 5.2; table `RSQ`,
+  `zk/tables.py:17`). The output is in the fixed 8-bit class |q'| <= 127: the proof looks up
+  q' + 127 in its 8-bit range rows (P 6.2 `NormScale`) and the reference code checks
+  `qp.abs().max() <= 127` (`zk/model.py:185-194`).
   The row exponent E_h enters the next shift, so later shifts are per row (P 5.3 step 7,
   `k_g = kappa_g + max(E_h, K_gl)`).
 - The checkpoint is multiplied by a fixed random orthogonal matrix from a public seed "as in
@@ -219,7 +230,7 @@ So that nobody reads Sable as a drop-in. Sable column: from public source, not v
 | Zero knowledge / weight hiding | proofs and public files masked by default, apart from a declared list (`docs/architecture.md:84-87`) | not zero-knowledge; the paper estimates about 1.9 x 10^4 proofs reveal the weights, so it targets open-weight models (P 1.2, P 4, P 12) |
 | Field | Goldilocks, p = 2^64 - 2^32 + 1, cubic extension (`docs/architecture.md:252`) | KoalaBear, p = 2^31 - 2^24 + 1; challenges in degree-4 and degree-8 extensions (P 3.1) |
 | Lookup tables | public tables the verifier computes itself and compares against digest lines in the parameter file (`verifier/docs/parameter-file.md:279`, `:336`) | one tagged table of 2^26 rows; exp, SiLU and RoPE contents depend on per-model constants, are pinned by the digest h_circ from a registry, and are committed fixed units the verifier does not evaluate (P 6.1, P 7.5, P 7.6) |
-| Number formats at the walls | Qwen M3 design: public norm-output class 2,047 at scale 2^12 (`research/operators/qwen_m3/bounds.py:53`) | residual 24-bit; matrix inputs 8-bit with a per-row exponent; weights 8-bit with a per-column exponent; Q, K, V static per-head exponents (P 5.1) |
+| Number formats at the walls | Qwen M3 design: public norm-output class 2,047 at the fixed scale 2^12, gain applied inside the norm (`research/operators/qwen_m3/bounds.py:53`; `experiments/20261112-132-int-mlp-e2e/RESULTS.md:44`) | norm output in a fixed 8-bit class, at most 127 in magnitude, with a per-row normalization exponent and the gain fused into the next weights (P 5.2, P 6.2); residual 24-bit; matrix inputs 8-bit with a per-row exponent; weights 8-bit with a per-column exponent; Q, K, V static per-head exponents (P 5.1) |
 | Proof size | 4,149,564 bytes, upstream small synthetic example only; no Qwen proof exists (`research/gpu/README.md:38`; `docs/qwen-port.md:6-8`) | 134.8 to 345.7 MiB for Qwen2.5-32B at its three shapes (P 11.7); 106 to 477 MiB across its three models (P 4) |
 | Prover hardware and time as reported | one rented H100 80GB, host CPU Xeon Platinum 8480+: the upstream small synthetic example only, one request proved in about 3 s (plus or minus 1 s, from file timestamps), n = 1, cold run; no Qwen proof exists, so there is no Qwen prover time (`research/gpu/README.md:7`, `:16`, `:18`, `:33`, `:44`; `docs/qwen-port.md:6-8`) | theirs, not verified by us: one NVIDIA RTX PRO 6000 Blackwell GPU (96 GB) in a host with a Xeon 6776P and 214 GB of memory; Qwen2.5-32B, all 64 layers: 92.5 s for one sequence of 4,096 tokens, 253 s for four such sequences, 398 s for one sequence of 16,384 tokens; Qwen3-32B 121.8 s and Qwen3-30B-A3B 84.7 s for 4,096 tokens (abstract; P 11.1). Different hardware, models and statement: not comparable with ours |
 | Models covered | target Qwen3.8-27B: 48 Gated DeltaNet + 16 attention layers, dh 256, partial rotary; not proved (`docs/qwen-port.md:38-41`) | Qwen2.5-32B and Qwen3-32B (64 layers each), Qwen3-30B-A3B (48 layers); all dh 128, full rotary, no DeltaNet (P 5, P 5.6) |
