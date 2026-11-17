@@ -10,9 +10,13 @@ excerpts with their source.
 Sources, and only these:
 
 - the paper: arXiv 2611.14083v1, "Sable: A Small-Field Sumcheck Argument for Bit-Exact Inference of
-  Large Language Models" (submitted 10 Nov 2026), HTML version. Sections read: 5, 6, 11.7, 11.8 and
-  11.9 (the issue names 5, 6, 11.8 and 11.9), plus 1.2, 3.1, 3.6, 4, 7.5, 7.6 and 12 to fill the
-  differences table;
+  Large Language Models" (submitted 10 Nov 2026), HTML version. Sections read: 5, 6, 11.8 and 11.9
+  (the four the issue and the PREREG name), plus the abstract and 1.2, 2 (the "Concurrent work"
+  paragraph), 3.1, 3.6, 4, 7.5, 7.6, 11.1, 11.7 and 12. The extra sections are outside the PREREG's
+  registered source list. They feed the differences table, the list of confirmed figures and the
+  wall 2 paragraph on table compatibility. The page was downloaded once with `curl` and read as
+  text, which is outside the PREREG's registered route (WebFetch or `gh api`). Both deviations are
+  recorded in the PREREG's amendment A-1 and in RESULTS.md;
 - four files of the repository moonmath-ai/Sable at commit
   `0bc6b549afef2f8eb9b8bc4c2f24d6e554dbaacb` (commit message "release 1.0.0", 2026-11-03), read through
   the GitHub contents API: `zk/model.py`, `zk/tables.py`, `zk/llm.py`, `scripts/fo_domain_scan.py`.
@@ -282,8 +286,8 @@ Checked against the source:
 - 86.3% greedy agreement with BF16 on WikiText-2 and perplexity 8.3% higher: **confirmed** (Table 12).
 - Qwen3 within 1.6 points of BF16 on MMLU and 1.7 on GSM8K: **confirmed** as the abstract's bound;
   Table 14 gives MMLU 1.4 and 1.6 points and GSM8K 1.7 and 1.3 points (the text says 1.4).
-- Paper date 10 Nov 2026 and the pinned commit: **confirmed** (arXiv submission history; commit
-  `0bc6b549afef...`, "release 1.0.0").
+- Paper date 10 Nov 2026 and the pinned commit: **confirmed** (the stamp on the arXiv HTML page,
+  "arXiv:2611.14083v1 [cs.CR] 10 Nov 2026"; commit `0bc6b549afef...`, "release 1.0.0").
 - Sable's per-row shifts and SiLU table: **established here** from P 5.2, P 5.3, P 6.2 and the files
   above, not assumed.
 
@@ -301,7 +305,12 @@ All of these remain the paper's claims. None of its numbers was reproduced.
 
 ## Notes on the reading
 
-- Read only the sections and files named above. The repository's `scripts/fo_domain_scan.py` has a
-  usage line that says how to run it; it was read as text and not followed.
-- The paper text was read from the arXiv HTML page at the known URL; the four repository files were
-  read from the GitHub API at the pinned commit and never executed or imported.
+- Read only the sections and files named above, which is more than the PREREG registered (see
+  "Sources" at the top and the PREREG's amendment A-1). The repository's
+  `scripts/fo_domain_scan.py` has a usage line that says how to run it; it was read as text and not
+  followed.
+- The paper text was read from the arXiv HTML page at the known URL, downloaded once with `curl`
+  because WebFetch truncates it; the four repository files were read from the GitHub API at the
+  pinned commit and never executed or imported.
+- This note was corrected after its first review. Every replaced sentence is quoted in RESULTS.md,
+  "Corrections after review".
