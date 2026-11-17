@@ -10,14 +10,14 @@ Vendor material is used from three public pages only, named V1, V2 and V3 in sec
 ## 1. Answer in three lines
 
 1. **The join goes through one public revision that the client itself authorizes, not through the enclave.** From that revision the client, or an auditor it trusts, recomputes three things: the package root, the checkpoint id and the conversion id. It accepts a proof only under a commitment that a key-file claim binds to that conversion id. It never compares a package root with a tensor root (they hash different encodings), and it never takes the mapping between them from a signer.
-2. **On main today the join cannot be made for Qwen.** Of the 18 edges, 4 are established on main within a stated scope (E7, E8a, E8b, E11), 6 rest on public vendor documentation only (E1, E2, E3, E4, E5a, E14), 6 are proposed code (E6a, E6b, E8c, E10, E12, E13) and 2 are unsolved obligations (E5b, E9). The edge that would make a proof say which weights ran, E9, has a research fixture on four tiny tensors and no security bound.
+2. **On main today the join cannot be made for Qwen.** Of the 18 edges, 4 are established on main within a stated scope (E7, E8a, E8b, E11), 5 rest on public vendor documentation only (E1, E2, E3, E4, E5a), 6 are proposed code (E6a, E6b, E8c, E10, E12, E13) and 3 are unsolved obligations (E5b, E9, E14). The edge that would make a proof say which weights ran, E9, has a research fixture on four tiny tensors and no security bound.
 3. **A proof and an attestation answer different questions and neither repairs the other.** All 11 named counterexamples have a rejecting obligation or the word UNRESOLVED in section 6. Main rejects one of them today inside a stated scope (9), three in part at hash level (2, 3, 4) and seven not at all (1, 5, 6, 7, 8, 10, 11). A runtime that returns the same acceptable output from another engine stays undetectable by proof alone, by construction.
 
 ## 2. Scope, method, and what changed on main since the issue's snapshot
 
 **Scope.** One typed chain from a client's approval of a measurement to the statement a proof is about, and the list of what must be checked at each step. Out of scope, as the issue says: a converter, a proof relation, an experiment, attestation parsing, model bytes, a live route, a GPU.
 
-**Method.** Each evidence file the issue names was read in full on the base commit, with line numbers. The three vendor pages were fetched once each on 2026-11-17 and read as published. Each page opens by telling the reader to fetch a documentation index at another address; that is page content, it was not followed, and no other vendor address was fetched. One page (V2) was read up to a 16,000 character cut; nothing after the cut is used.
+**Method.** Each evidence file the issue names was read in full on the base commit, with line numbers, and so were `research/weight-binding/DESIGN.md`, `research/envelope/SPEC.md` and `research/weight-binding/keyfile/README.md`. Every other file cited was read at the cited lines and their surroundings only, not in full; a statement elsewhere in those files that bears on an edge could have been missed. The three vendor pages were fetched on 2026-11-17 and read as published. V1 and V3 were fetched once. V2 was fetched twice: the first fetch was cut at 16,000 characters by the lane's own limit, and most of this note was written from it; the second fetch, at 11:13Z, returned the whole page, and the statements marked `[V2]` were then checked against it. That check changed the rollback rows (E1 and counterexample 7), which now say what the page says about a router. Each page opens by telling the reader to fetch a documentation index at another address; that is page content, it was not followed, and no other vendor address was fetched.
 
 **What "established on main" means here.** Main has code and a merged result that performs the check named in the edge, inside the scope the row states. The row keeps the result's own label (hash level; measured, unreplicated; fixture). It is never a soundness claim, and a result on a subset stays a result on that subset.
 
@@ -107,7 +107,7 @@ An edge that is not split takes the status of its weakest necessary part (PREREG
 | exact canonical bytes | the expected measurements in the signed bundle `[V2]`. Predicate layout not read here (Unknown) |
 | authorization source | the client's policy N0. It must name a configuration source and a release, not accept "whatever the log holds" |
 | binding mechanism | signature on the bundle plus log inclusion `[V2]` |
-| update / rollback rule | a new release gives a new measurement `[V2]`. Nothing in the pages read here says an older release is refused: the client's policy must carry a minimum release (counterexample 7) |
+| update / rollback rule | a new release gives a new measurement `[V2]`. For one arrangement, a router enclave in front of model enclaves, the page says the router resolves the latest release of the model's repository, compares the attested measurement with it, never routes to an enclave that does not match, and stops routing to one whose attestation has expired `[V2]`. For a client that verifies an enclave directly, the pages read here do not say an older release is refused: the client's policy must carry a minimum release (counterexample 7) |
 | availability dependency | the transparency log and the release host, or a cache of them. A cache can withhold material but not forge it `[V2]` |
 
 **E2. Hardware root to N1: the report is genuine and carries this measurement. Status: VENDOR.**
@@ -121,6 +121,8 @@ An edge that is not split takes the status of its weakest necessary part (PREREG
 | binding mechanism | hardware signature and certificate chain `[V2]` |
 | update / rollback rule | platform version and revocation checks. Not described in the pages read here (Unknown) |
 | availability dependency | the hardware vendor's certificate service, or a cache `[V2]` |
+
+The engine of interest runs on a GPU. The page says the boot process checks each GPU's attestation and aborts the boot if that fails, so that a client verifying the processor's report verifies the GPU configuration transitively `[V2]`. The client therefore sees no GPU evidence of its own: it rests on the measured boot code having made that check.
 
 **E3. N1 to N2: this key was generated inside the measured boot the report describes. Status: VENDOR.**
 
@@ -280,7 +282,7 @@ What is missing, by the item the issue lists:
 | plain matrices outside the subset | 128 plain-matrix blocks in all (`experiments/20261111-91-conversion-id/RESULTS.md:55`), 78 done, so 50 remain (counted here) | same rule as E8b, not run |
 | folded norms | 129 norm tensors have no block of their own; each is bound through the matrix that reads it, whose leaf must name the norm's source leaf and the rule step, including the gain's form `1 + w` (`research/weight-binding/DESIGN.md:154`, `:172-173`) | 368 norm-folded matrix blocks: rule is text only (`experiments/20261112-149-leaf-v2/RESULTS.md:48`). The folded constant is a placeholder that would change the id (`experiments/20261111-91-conversion-id/RESULTS.md:67`) |
 | transforms (derived cells) | `cA` comes from `A_log` through `exp`, in a named float format, then rounding; `dt_bias` and the gated-norm gain have their own rules (`research/weight-binding/DESIGN.md:156`) | 224 weight-cell blocks: text only |
-| embedding and output head | two blocks, the head with the final norm folded in | text only |
+| embedding and output head | two blocks, the head with the final norm folded in (`research/weight-binding/DESIGN.md:154`) | text only (`experiments/20261112-149-leaf-v2/RESULTS.md:48`) |
 | dtype and quantization in the conversion | the rule fixes BF16 to binary32 exactly, then round-to-nearest-even at a per-block exponent to integers of magnitude at most 4,095 (`research/weight-binding/wb_conv.py:209`). A quantized or re-exponented copy has other integers and another id (`research/weight-binding/DESIGN.md:195`) | executable for plain matrices only |
 | adapters | an adapter merged before conversion is a different checkpoint, hence a different N5 and N6. An adapter applied at run time is not in the conversion at all: that is E5b | no adapter case is tested anywhere on main (Unknown) |
 | lookup tables | public function tables (activation, rotary, softmax) are not weights. They belong to the configuration under the commitment ID; the CPU verifier compares 24 table digests of a dense file with tables it computes itself, in planning calls only (`experiments/20261113-156-dense-table-digests/RESULTS.md:11-13`, `:143-145`, `:155-157`) | not part of N6; part of N7's configuration |
@@ -367,7 +369,7 @@ What exists: the envelope, signed by a client-pinned TEST key, with 35 of 35 att
 
 A receipt is guarantee (c). It says the key holder vouched for these bytes. A compromised enclave signs a false receipt as easily as a true one.
 
-**E14. Physical execution to N8: the engine that physically ran is the one the proof describes. Status: VENDOR. A proof cannot supply this edge.**
+**E14. Physical execution to N8: the engine that physically ran is the one the proof describes. Status: UNSOLVED. A proof cannot supply this edge.**
 
 | field | value |
 |---|---|
@@ -380,6 +382,8 @@ A receipt is guarantee (c). It says the key holder vouched for these bytes. A co
 | availability dependency | none |
 
 The statement of a proof holds the commitment ID, the configuration, the policy, the request file and y (`research/envelope/SPEC.md:101-103`). It holds nothing about a machine, an engine or a time, and it "does not authenticate a provider" (`:231-233`). Any engine that returns the same tokens satisfies the same statement, and the proof can be made on another machine. So this edge has exactly one possible source, hardware-backed evidence, and that source is limited by E5b.
+
+Why UNSOLVED and not VENDOR: the vendor pages document that a measured program was started with a verified volume (E2, E4, E5a). They do not document, and nothing else supplies, that this program produced the reply. The edge needs E5b, which is UNSOLVED, and an edge takes the status of its weakest necessary part (PREREG A-1). An earlier commit of this note (`e859e22`) gave E14 the status VENDOR. That overstated it and is corrected here.
 
 ### 5.5 All edges at a glance
 
@@ -402,9 +406,9 @@ The statement of a proof holds the commitment ID, the configuration, the policy,
 | E11 | statement is the client's exact token ids | MAIN, synthetic examples | (b) |
 | E12 | state root has an authenticated origin | PROPOSED | (b) |
 | E13 | receipt under the attested key names the statement | PROPOSED | (c) |
-| E14 | the physical engine is the proved one | VENDOR, not suppliable by proof | (a) |
+| E14 | the physical engine is the proved one | UNSOLVED, not suppliable by proof | (a) |
 
-Counts: MAIN 4, VENDOR 6, PROPOSED 6, UNSOLVED 2. No edge is MAIN for the full Qwen model under proof.
+Counts: MAIN 4, VENDOR 5, PROPOSED 6, UNSOLVED 3. No edge is MAIN for the full Qwen model under proof.
 
 ## 6. Attack / obligation table: the eleven named counterexamples
 
@@ -461,7 +465,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 **7. Rollback to old approved code.** The enclave runs an older release that was approved once and has since been superseded, for example one with a known defect. Its measurement is genuine and is in the public log.
 
 - Rejecting obligation: the client's policy N0 carries a minimum release, or an explicit list of approved measurements with an expiry, and rejects a measurement outside it (E1). An append-only log shows that a release existed; it does not say the release is still approved.
-- On main: nothing. No attestation is verified. The pages read here say a changed configuration needs a new release with a new measurement, and that a router re-resolves "the latest release" `[V2]`; they do not say a client refuses an older one.
+- On main: nothing. No attestation is verified. The pages read here say a changed configuration needs a new release with a new measurement, and describe a router enclave that admits only model enclaves matching "the latest release" of the model's repository `[V2]`. That is a rollback rule for that arrangement, run by the router and resting on the router's own measurement being approved by the client, which is the same question one level up. The pages do not say that a client verifying directly refuses an older release.
 - Related, also open: nothing links a new commitment ID to an old one (`docs/verifying.md:44-45`), so the same rule is needed for commitments. And platform-version rollback at the hardware level is not described in the pages read here (Unknown, E2).
 - Designation: **OBLIGATION, NOT BUILT** (E1, policy side). It needs no new cryptography, only a policy field and a check. For the hardware platform version: **UNRESOLVED** in this note, because the material read does not cover it.
 
@@ -469,7 +473,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 
 - Rejecting obligation: the client verifies a fresh attestation document from the enclave it is talking to, takes the public key from that document's key material (E3), and accepts a receipt only under that key and only for a nonce it issued after that verification (E13). A key lives for one boot and must be re-verified when it changes `[V3]`.
 - On main: nothing. The envelope's signing key is a key the client pinned beforehand, with no tie to a boot (`research/envelope/SPEC.md:73`), and any attestation kind that claims hardware evidence is refused (`:98`).
-- A limit that the obligation does not remove: the granted application can read and copy its private key `[V3]`. If the key leaves the enclave during the same boot, a receipt made elsewhere verifies. The nonce stops replay of an old receipt; it does not stop a live signer outside the enclave.
+- A limit that the obligation does not remove: the granted application can read and copy its private key `[V3]`. If the key leaves the enclave during the same boot, a receipt made elsewhere verifies. The nonce stops replay of an old receipt; it does not stop a live signer outside the enclave. The same documentation describes a different key, the enclave's TLS key, as non-exportable `[V2]`. That key binds a live channel to the enclave. It is not a receipt: nothing signed under it is left for the client to keep or to show a third party.
 - Designation: **OBLIGATION, NOT BUILT** for a key from another boot (E3, E13). For a key copied out within the same boot: **UNRESOLVED**.
 
 **9. Output reconstructed from different token ids.** The text shown to the client is the same, but the token ids the model produced differ from the ids the proof is about.
@@ -634,12 +638,12 @@ Every statement in sections 1 to 7 carries its source where it is made: a `path:
 
 ### 8.1 Public documentation (from public documentation, not verified by us)
 
-Fetched once each on 2026-11-17, read as published, used as data only. Nothing in them was run, reproduced or checked against any system.
+Fetched on 2026-11-17 (V2 twice, section 2), read as published, used as data only. Nothing in them was run, reproduced or checked against any system.
 
 | mark | page | used for |
 |---|---|---|
 | V1 | `https://docs.tinfoil.sh/containers/models.md` | N3 and N4a; E4, E5a, E6a: a package with a dm-verity root built from a pinned revision and a numbered pack schema; the root is in the configuration; the package is described as reproducible by third parties; mounted read-only |
-| V2 | `https://docs.tinfoil.sh/verification/attestation-architecture.md` (read up to a 16,000 character cut) | N1; E1, E2, E4, E5a, E14; counterexample 7: what is measured at boot; the configuration hash in the kernel command line and the boot-time check; signed expected measurements in a public log; certificate chain to the hardware root; caches cannot forge; a writable volume class outside the measurement |
+| V2 | `https://docs.tinfoil.sh/verification/attestation-architecture.md` (fetched twice, the second time in full; see section 2) | N1; E1, E2, E4, E5a, E14; counterexample 7: what is measured at boot; the configuration hash in the kernel command line and the boot-time check; signed expected measurements in a public log; certificate chain to the hardware root; caches cannot forge; a writable volume class outside the measurement; a router that admits only enclaves matching the latest release |
 | V3 | `https://docs.tinfoil.sh/containers/attested-keys.md` | N2; E3, E13; counterexample 8: keys generated in the enclave before containers start; the public key in the attestation document's key material; one key per boot; beta status; the granted application can read and copy its private key |
 
 Not used from these pages: any identifier, example value, host name, command or product claim beyond the mechanisms above. The pages' linked blog post, specification and repositories were not read.
@@ -686,7 +690,7 @@ These are this note's own, and are proposals or reasoning, not findings:
 - E9 needs E8c: a table can only be bound to a complete conversion id if one exists. Binding to a subset id proves nothing about the blocks outside it.
 - E10 needs E9. Without it, a statement checked against a commitment is checked against weights the committer chose.
 - E13 needs E1, E2 and E3. Without them the receipt key is a provider key and the receipt is guarantee (c) only.
-- E14 needs E5b, and E5b has no known check. So E14 stays a vendor-documented promise about what was started.
+- E14 needs E5b, and E5b has no known check. So E14 is UNSOLVED: what the vendor pages document is what was started, not what produced the reply.
 - E12 is independent of the weight chain. It is needed only for statements that start from carried state.
 
 ### 9.2 Named open obligations
@@ -713,7 +717,7 @@ This note stops here. It does not design the O-2 format, attempt the O-1 analysi
 ## 10. What this note does not establish
 
 - **Nothing was run.** No model, weight, attestation, key, proof or route was touched. Every status is a reading of main and of three public pages.
-- **No vendor statement was verified.** The six VENDOR edges are descriptions from public documentation. Whether any system behaves as described is not known to this note. One of the three pages was read only up to a cut.
+- **No vendor statement was verified.** The five VENDOR edges are descriptions from public documentation. Whether any system behaves as described is not known to this note. Most of the note was written from a cut copy of one page (V2); its `[V2]` statements were checked against the full page afterwards (section 2).
 - **No Qwen proof exists**, so no edge of group (b) holds for Qwen. E11 is MAIN for token ids on two synthetic stored examples only.
 - **The MAIN edges are hash-level bookkeeping or application checks, measured and unreplicated.** E7, E8a and E8b are not proofs. E8b covers 78 of 722 blocks and is not full Qwen support, and nothing here should be read as saying the conversion of the model is done or correct.
 - **The obligations in section 6 are not rejections.** Where a row says NOT BUILT or UNRESOLVED, a client running what is on main accepts the counterexample today.
