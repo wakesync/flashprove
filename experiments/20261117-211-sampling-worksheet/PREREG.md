@@ -158,3 +158,181 @@ Real-world templates: three policy decision templates (one per class) and an emp
 ## Amendments
 
 (empty at registration)
+
+### Amendment 1 (2026-11-17T22:46:17Z): adversarial fixtures F46 to F135 registered after round 1 review, before any code change
+
+Written after the round 1 review of head `455420464a7d4abb9cb76a09600b4377853eab54`, and after the original code and the original five runs. Both reviews ask for changes to the checker code, not to the registered evidence: https://github.com/wakesync/flashprove/pull/220#issuecomment-6961891535 and https://github.com/wakesync/flashprove/pull/220#issuecomment-6962089424. This entry is committed alone, before any change to `worksheet.py`. It registers new fixtures with their inputs and expected verdicts. It does not change F01 to F45: `fixtures.py`, `run_suite.py` and the six files under `runs/` stay byte-identical.
+
+What was run before this entry was written: each failing input reported in the two reviews was rebuilt and run against a private copy of the reviewed code (outside the repository, same core, memory and time limits; 56 inputs). All of them behave as the reviews report: a CONDITIONAL verdict on the listed incomplete or out-of-domain worksheets, and an uncaught exception on N=0, I=0, m>N, m<0, D>N under the no-replacement scheme, and a non-rational value. The two reviews do not contradict each other on any input. No new code existed when this entry was written, so every expected verdict below is a registration, not an observation.
+
+Disclosure asked for by both reviews: the header line of this file says "Date (UTC): 2026-11-17 21:20". The commit that added this file is `3dc92dc5`, committed 2026-11-17T21:14:31Z; the code commit `9c8e0433` is 21:19:29Z and the runs commit `07b25c66` is 21:20:18Z. The order in history (registration, then code, then runs) is the true one; the prose time in the header is wrong (later than its own commit and later than the code commit). The header line is left as it is and is corrected here.
+
+Known in advance, stated now: the rules below make the fixed checker refuse the registered policy fixtures F37 to F45 as incomplete worksheets (none declares a deterrence state; F40 to F42 have no deadline policy; F37 uses the generic `loss_unit`). Their registered expectations are not edited. Amendment 2, committed separately and also before the code, names each of them with its old and new outcome. F47 to F55 below re-register the same nine cases on completed worksheets.
+
+**Design choices where the reviews left one.**
+- An explicit q is usable only by the one registered q formula (fixed-size sample without replacement, with K). Any other use of q is refused (`Q_UNSUPPORTED`). No new formula is added.
+- Miss target: one target, compared with the supported bound. `supported_miss = 1 - max(0, coverage - epsilon)` when an epsilon is given, else `1 - coverage`. `MISS_ABOVE_TARGET` when `supported_miss > desired_miss_probability`. For the vendor-independent class without an epsilon no miss target is read (as before). With an epsilon its supported miss is epsilon, a desired miss probability is then required, and it is compared the same way.
+- F is an epoch-total cost. It must carry an epoch unit (`gpu_s_per_epoch`, `cpu_s_per_epoch`, `usd_per_epoch`) and is divided by N exactly once. I, P, C, A carry per-request units. One exception, stated openly: an F whose value is exactly zero is accepted in a per-request unit too, because zero is the same quantity in both scopes. This keeps F27 to F36 valid as registered (they use F=0). A nonzero F in a per-request unit is refused (`COST_SCOPE`).
+- Wall seconds are not a cost unit. If every cost is in `wall_s_per_request` the costs are refused (`WALL_TIME_NOT_COST`). Wall seconds mixed with another unit stay `UNIT_MISMATCH`, as registered in F31.
+- Deterrence: the section is required for every class and must declare `state` as `modeled` or `not_modeled`. `modeled` needs `enforceable_loss`, `cheating_gain` and a non-empty `behavioral_assumptions` text. Loss and gain must share one concrete unit out of `usd`, `gpu_s`, `cpu_s`. The generic `loss_unit` is refused (`LOSS_BASIS_NOT_CONCRETE`); two different units are `UNIT_MISMATCH`. The checker cannot read a free-text source, so the unit is the declared loss basis.
+- A numeric `value` must be a string holding an integer, a fraction `a/b` or a plain decimal. A JSON number (integer or binary float) is refused (`BAD_VALUE`), so no binary float is taken as an exact rational.
+
+**Rules added (each refusal is `MISSING INPUTS` unless marked INELIGIBLE).**
+
+1. Sections: the worksheet and each section (`population`, `sampling`, `invalidity`, `distinguishability`, `soundness_treatment`, `costs`, `latency`, `targets`, `deterrence`, `claims`) must be JSON objects and `observations` a list of objects, else `BAD_SECTION` and nothing else is evaluated. Any exception inside the checker is caught and returned as `CHECKER_ERROR`, `MISSING INPUTS`: the checker does not raise on a worksheet.
+2. Required text: `relation`, `population.definition`, `latency.deadline_policy`, `soundness_treatment.text`, and `sampling.schedule` (no default), else `MISSING_INPUT`.
+3. Required numeric inputs: `population.N`, `sampling.p` or `sampling.m`, `invalidity.D` or `invalidity.f` (not for the vendor-independent class), `targets.desired_miss_probability` (for the vendor-independent class only when an epsilon is given), and, when their key is present, `invalidity.D`, `invalidity.f`, `distinguishability.q`, `distinguishability.K`, `soundness_treatment.epsilon`, `deterrence.enforceable_loss`, `deterrence.cheating_gain`. A key present with a null value is `MISSING_INPUT`. `kind=unknown` on any of them is `UNKNOWN_REQUIRED`. Costs keep `UNKNOWN_COST`.
+4. Values: not a string, not a rational, or a zero denominator: `BAD_VALUE`.
+5. Domains, checked before any arithmetic: N an integer >= 1; D, m, K integers in [0, N]; p, f, q, desired miss probability and epsilon in [0, 1]; I, P, C, A, F >= 0 and I > 0; R >= 0 for `incremental`, R >= 1 for `total_audited_path`. A count that is not an integer is `NOT_INTEGER`; anything outside its range is `OUT_OF_RANGE`. Counts are never truncated.
+6. Booleans: `latency.verify_before_action` and `claims.individual_guarantee` must be JSON booleans, else `NOT_BOOLEAN` (absent: `MISSING_INPUT`). The vendor-independent class needs `verify_before_action` true.
+7. Observations: `type` in `timeout`, `refusal`, `proof_rejected`; `counted_as` in `wrong_answer`, `audit_failure`; anything else `BAD_OBSERVATION`. A `timeout` or a `refusal` counted as `wrong_answer` is `TIMEOUT_NOT_PROOF`.
+8. q: `q_source=changed_weight_count` stays `Q_INFERRED_FROM_WEIGHTS`. Otherwise a q is accepted only with the fixed-size scheme and a K; if `invalidity.D` is also given it must equal K. Any other q (Bernoulli scheme, no K, K different from D, q together with f) is `Q_UNSUPPORTED`. A K without q is `MISSING_INPUT`. The checker never falls back to the perfect-rejection formula once a q key is present.
+9. Formula selection: fixed D with Bernoulli, fixed D with fixed-size, IID f with Bernoulli, q with K and fixed-size. IID f with the fixed-size scheme is `UNSUPPORTED_COMBINATION`.
+10. Schedule: `outcome_adaptive` is always `ADAPTIVE_NOT_IID` (INELIGIBLE), with or without the lifetime flag, and no coverage is output.
+11. Costs: scope and wall-time rules as in the design choices; an R together with a P is `R_AND_P_BOTH`.
+12. Order and output: all refusals above are collected first. `MISS_ABOVE_TARGET` is only evaluated when there is no `MISSING INPUTS` code. A `MISSING INPUTS` result carries no number at all (coverage, miss, supported miss, lower bound, costs and deterrence are null). A coverage class can only be CONDITIONAL with a computed coverage and a computed normalized cost; if either is absent the result is `NO_COVERAGE` or `NO_COST`, `MISSING INPUTS`. No emitted probability is outside [0, 1].
+13. Every result lists `not_modelled`: queue and batch effects, and all-traffic trace cost. They are separate unknowns and are not scaled by p.
+
+New codes: `BAD_SECTION`, `CHECKER_ERROR`, `UNKNOWN_REQUIRED`, `BAD_VALUE`, `NOT_INTEGER`, `NOT_BOOLEAN`, `BAD_OBSERVATION`, `Q_UNSUPPORTED`, `UNSUPPORTED_COMBINATION`, `COST_SCOPE`, `WALL_TIME_NOT_COST`, `R_AND_P_BOTH`, `LOSS_BASIS_NOT_CONCRETE`, `NO_COVERAGE`, `NO_COST`. All are `MISSING INPUTS` codes. New output fields: `supported_miss`, `not_modelled`.
+
+**Bases (all numbers synthetic test input, never a forecast).**
+- B (fleet monitoring): relation, population definition and epoch rule stated; N=12; Bernoulli p=1/3, `fixed_in_advance`; D=2; soundness text "perfect rejection"; I=2, P=9, C=1/4, A=1/8 in `gpu_s_per_request`, F=6 in `gpu_s_per_epoch`; deadline policy and timeout policy stated, `verify_before_action=false`; desired miss 1/2; deterrence `modeled`, loss 10 and gain 1 in `usd`, assumptions stated; `individual_guarantee=false`.
+- V: B with class vendor-independent, p=1, `verify_before_action=true`, no invalidity and no targets section.
+- T37 to T45: the registered input of F37 to F45 from `fixtures.py`, unchanged, plus only what the completed schema needs: a deterrence section (`not_modeled`, or for T37 `modeled` with loss 8 and gain 5 in `usd`) and, for T40 to T42, a deadline policy text.
+
+Epoch rule and timeout policy text stay optional. Loss and gain must be >= 0. For the vendor-independent class any q is `Q_UNSUPPORTED` (its coverage statement does not use q). When a q is used, `invalidity.D` is still required and must equal K.
+
+**New registered fixtures.** "MI" is `MISSING INPUTS`. The code set must match exactly. Each row changes only what it names from its base. Expected values were computed from the registered formulas in a separate exact-rational script that does not import the checker, and the small ones were checked by hand; none comes from running the checker.
+
+Controls and completed twins of F37 to F45:
+
+| id | input | expected |
+|---|---|---|
+| F46 | B unchanged | CONDITIONAL, no code, coverage 5/9, miss 4/9, supported miss 4/9, cost 47/8, normalized 47/16, deterrence product 50/9 |
+| F47 | T37 | CONDITIONAL, coverage 7/8, miss 1/8, deterrence product 7 |
+| F48 | T38 | INELIGIBLE, MISS_ABOVE_TARGET, coverage 7/8 |
+| F49 | T39 | INELIGIBLE, ADAPTIVE_NOT_IID, coverage null |
+| F50 | T40 | CONDITIONAL, coverage 1, assumption text includes "only under the selected relation" |
+| F51 | T41 | INELIGIBLE, SUBSAMPLE_NOT_PROOF |
+| F52 | T42 | INELIGIBLE, VERIFY_AFTER_ACTION |
+| F53 | T43 | INELIGIBLE, SUBSAMPLE_NOT_PROOF |
+| F54 | T44 | MI, Q_INFERRED_FROM_WEIGHTS |
+| F55 | T45 | MI, TIMEOUT_NOT_PROOF |
+
+Must-fix 1, required schema and unknowns (opus 5, 6; astra 1):
+
+| id | input | expected |
+|---|---|---|
+| F56 | B, p `kind=unknown`, value null | MI, UNKNOWN_REQUIRED |
+| F57 | B, desired miss probability `kind=unknown` | MI, UNKNOWN_REQUIRED |
+| F58 | B, D `kind=unknown` | MI, UNKNOWN_REQUIRED |
+| F59 | B, `invalidity.D` present and null | MI, MISSING_INPUT |
+| F60 | B, N `kind=unknown` | MI, UNKNOWN_REQUIRED |
+| F61 | B, no `population.definition` | MI, MISSING_INPUT |
+| F62 | B, no `latency.deadline_policy` | MI, MISSING_INPUT |
+| F63 | B, no `deterrence` section | MI, MISSING_INPUT |
+| F64 | B, deterrence `modeled` without `behavioral_assumptions` | MI, MISSING_INPUT |
+| F65 | B, deterrence without `state` | MI, MISSING_INPUT |
+| F66 | B, deterrence `state=not_modeled` only | CONDITIONAL, coverage 5/9, deterrence null |
+| F67 | B, fixed-size m=3 with IID f=1/4 (no D) | MI, UNSUPPORTED_COMBINATION |
+| F68 | V unchanged | CONDITIONAL, coverage 1, normalized 95/16 |
+| F69 | V, `verify_before_action` null | MI, NOT_BOOLEAN |
+| F70 | V, `verify_before_action` the string "false" | MI, NOT_BOOLEAN |
+| F71 | B, `verify_before_action` the string "false" | MI, NOT_BOOLEAN |
+| F72 | B, `individual_guarantee` the string "yes" | MI, NOT_BOOLEAN |
+| F73 | B, observation `refusal` counted as `wrong_answer` | MI, TIMEOUT_NOT_PROOF |
+| F74 | B, observation type `outage` counted as `audit_failure` | MI, BAD_OBSERVATION |
+| F75 | B, no `sampling.schedule` | MI, MISSING_INPUT |
+| F76 | B, observation `timeout` counted as `audit_failure` | CONDITIONAL, coverage 5/9 |
+| F77 | B, epsilon `kind=unknown` | MI, UNKNOWN_REQUIRED |
+| F78 | B, `sampling` is a list | MI, BAD_SECTION |
+
+Must-fix 2, numeric domains (opus 1; astra 2; the crashes in the nonblocking lists):
+
+| id | input | expected |
+|---|---|---|
+| F79 | B, D=13 (N=12) | MI, OUT_OF_RANGE |
+| F80 | B, D=5/2 | MI, NOT_INTEGER |
+| F81 | B, D=-1 | MI, OUT_OF_RANGE |
+| F82 | B, N=0 | MI, OUT_OF_RANGE |
+| F83 | B, N=-2 | MI, OUT_OF_RANGE |
+| F84 | B, N=25/2 | MI, NOT_INTEGER |
+| F85 | B, fixed-size m=13 | MI, OUT_OF_RANGE |
+| F86 | B, fixed-size m=-1 | MI, OUT_OF_RANGE |
+| F87 | B, fixed-size m=7/2 | MI, NOT_INTEGER |
+| F88 | B, fixed-size m=3, D=13 | MI, OUT_OF_RANGE |
+| F89 | B, p=-1/2 | MI, OUT_OF_RANGE |
+| F90 | B, p=3/2 | MI, OUT_OF_RANGE |
+| F91 | B, IID f=2 (no D) | MI, OUT_OF_RANGE |
+| F92 | B, desired miss probability 2 | MI, OUT_OF_RANGE |
+| F93 | B, epsilon=-1 | MI, OUT_OF_RANGE |
+| F94 | B, epsilon=2 | MI, OUT_OF_RANGE |
+| F95 | B, P=-9 | MI, OUT_OF_RANGE |
+| F96 | B, I=0 | MI, OUT_OF_RANGE |
+| F97 | B, P value the string "garbage" | MI, BAD_VALUE |
+| F98 | B, P value the string "1/0" | MI, BAD_VALUE |
+| F99 | B, p value the JSON float 0.1 | MI, BAD_VALUE |
+| F100 | B, N value the JSON integer 12 | MI, BAD_VALUE |
+| F101 | B with incremental R=-1 (no P), basis `gpu_s/gpu_s` | MI, OUT_OF_RANGE |
+| F102 | B with total audited-path R=1/2 (no P) | MI, OUT_OF_RANGE |
+| F103 | B, IID f=1/4 (no D) | CONDITIONAL, coverage 5777672071535/8916100448256 |
+| F104 | B, fixed-size m=4, D=2 | CONDITIONAL, coverage 19/33, miss 14/33, normalized 47/16 |
+
+Must-fix 3, an explicit q is never dropped (opus 2; astra 3). "q-fixed" is B with fixed-size m=4, D=2:
+
+| id | input | expected |
+|---|---|---|
+| F105 | B (Bernoulli), q=0, K=2 | MI, Q_UNSUPPORTED |
+| F106 | q-fixed, q `kind=unknown`, K=2 | MI, UNKNOWN_REQUIRED |
+| F107 | q-fixed, q=0, no K | MI, Q_UNSUPPORTED |
+| F108 | B (Bernoulli), q=1/100, no K | MI, Q_UNSUPPORTED |
+| F109 | q-fixed, q=0, K=2 | INELIGIBLE, MISS_ABOVE_TARGET, coverage 0, miss 1 |
+| F110 | q-fixed, q=1/2, K=2, desired miss 3/4 | CONDITIONAL, coverage 41/132, miss 91/132 |
+| F111 | q-fixed, q=1/2, K=3 (D=2) | MI, Q_UNSUPPORTED |
+| F112 | q-fixed, K=2, no q | MI, MISSING_INPUT |
+| F113 | V, q=1/2, K=2 | MI, Q_UNSUPPORTED |
+| F114 | q-fixed, q=3/2, K=2 | MI, OUT_OF_RANGE |
+
+Must-fix 4, the soundness bound reaches the verdict (opus 3; astra 4):
+
+| id | input | expected |
+|---|---|---|
+| F115 | B, epsilon=1/2 | INELIGIBLE, MISS_ABOVE_TARGET, coverage 5/9, lower bound 1/18, supported miss 17/18 |
+| F116 | B, epsilon=1/100 | CONDITIONAL, lower bound 491/900, supported miss 409/900, deterrence product 491/90 |
+| F117 | B, epsilon=1/18 (boundary) | CONDITIONAL, lower bound 1/2, supported miss 1/2 |
+| F118 | T37, epsilon=9/10 | INELIGIBLE, MISS_ABOVE_TARGET, coverage 7/8, lower bound 0, supported miss 1 |
+| F119 | V, epsilon=1/100, no targets section | MI, MISSING_INPUT |
+| F120 | V, epsilon=1/100, desired miss 1/2 | CONDITIONAL, coverage 1, lower bound 99/100, supported miss 1/100 |
+| F121 | V, epsilon=1/2, desired miss 1/4 | INELIGIBLE, MISS_ABOVE_TARGET, lower bound 1/2, supported miss 1/2 |
+
+Must-fix 5, no CONDITIONAL without a computed coverage (opus 4; astra 1). F67 above is the IID f under the fixed-size scheme:
+
+| id | input | expected |
+|---|---|---|
+| F122 | B, `schedule=outcome_adaptive`, no lifetime flag | INELIGIBLE, ADAPTIVE_NOT_IID, coverage null |
+| F123 | B, `schedule=outcome_adaptive`, IID f=1/4 (no D), no lifetime flag | INELIGIBLE, ADAPTIVE_NOT_IID, coverage null |
+
+Must-fix 6, cost scope and loss basis (astra 5; opus nonblocking on wall seconds). F46 is the nonzero epoch-total F in the plain convention:
+
+| id | input | expected |
+|---|---|---|
+| F124 | B, F=6 in `gpu_s_per_request` | MI, COST_SCOPE |
+| F125 | B via incremental R=9/2 (no P), basis `gpu_s/gpu_s`, F=6 per epoch | CONDITIONAL, coverage 5/9, normalized 47/16 |
+| F126 | B via total audited-path R=11/2 (no P), F=6 per epoch | CONDITIONAL, coverage 5/9, normalized 47/16 |
+| F127 | B, F=6 in `usd_per_epoch` | MI, UNIT_MISMATCH |
+| F128 | B, I=2 in `gpu_s_per_epoch` | MI, COST_SCOPE |
+| F129 | B, I, P, C, A and F=0 all in `wall_s_per_request` | MI, WALL_TIME_NOT_COST |
+| F130 | B, incremental R=9/2 given together with P | MI, R_AND_P_BOTH |
+| F131 | B, loss and gain in `loss_unit` | MI, LOSS_BASIS_NOT_CONCRETE |
+| F132 | B, loss in `usd`, gain in `gpu_s` | MI, UNIT_MISMATCH |
+| F133 | B, loss `kind=unknown` | MI, UNKNOWN_REQUIRED |
+| F134 | B, loss=-1 | MI, OUT_OF_RANGE |
+| F135 | B via incremental R=9/2, F=6 in `gpu_s_per_request` | MI, COST_SCOPE |
+
+`NO_COVERAGE`, `NO_COST` and `CHECKER_ERROR` are backstops. No input is known that reaches them once the rules above hold, so no fixture is registered for them.
+
+**Runs.** F01 to F45 are evaluated from the unchanged `fixtures.py`; F46 to F135 from a new file `fixtures_r1.py`; both by a new runner `run_suite_r1.py`. Five runs, same limits as before (`taskset -c 4-5`, `prlimit --as=536870912`, `timeout 60`), into new files `runs-r1/run-1.json` to `run-5.json`, each written once. The three blank templates (`templates.json`, unchanged) are evaluated again into `runs-r1/templates.json`; expected `MISSING INPUTS` for each. The original files under `runs/` are not touched and remain the evidence of the reviewed head. Debug rule: no fixture F01 to F135 is run against the new code before run 1. Before these runs the new code may be exercised only on debug inputs that are not F01 to F135: DBG-04 onward, in `debug_fixtures_r1.py`, on a different base (N=7, p=1/5, D=3, other costs), which repeat the same kinds of change as the rows above with other numbers, plus malformed inputs generated from that debug base. Debug inputs are not in any registered total.
+
+**Acceptance for the amended suite.** PASS only if, in each of the five runs, every one of F46 to F135 matches (verdict, exact code set, registered values), F01 to F36 match their original registration, F37 to F45 give exactly the outcome registered in Amendment 2, and the five report digests are equal. Anything else is FAIL. The original PASS (45 of 45 at the reviewed code) is reported separately and is not replaced. Hard stop for this amendment: 2026-11-18T00:05:00Z; at the stop, what is complete is published as PARTIAL or FAIL without editing an expectation.
+
+Still not established, and not changed by this amendment: feasibility of any real policy, any cost, any rate, any guarantee. The decision sheet stays empty.
