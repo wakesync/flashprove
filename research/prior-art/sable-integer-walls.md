@@ -12,8 +12,9 @@ Sources, and only these:
 - the paper: arXiv 2611.14083v1, "Sable: A Small-Field Sumcheck Argument for Bit-Exact Inference of
   Large Language Models" (submitted 10 Nov 2026), HTML version. Sections read: 5, 6, 11.8 and 11.9
   (the four the issue and the PREREG name), plus the abstract and 1.2, 2 (the "Concurrent work"
-  paragraph), 3.1, 3.6, 4, 7.5, 7.6, 11.1, 11.7 and 12. The extra sections are outside the PREREG's
-  registered source list. They feed the differences table, the list of confirmed figures and the
+  paragraph), 3.1, 3.6, 4, 7.5, 7.6, 11.1, 11.7 and 12. The review fix also looked at Tables 4, 7 and
+  18 to check figures; they are not cited. The extra sections are outside the PREREG's registered
+  source list. They feed the differences table, the list of confirmed figures and the
   wall 2 paragraph on table compatibility. The page was downloaded once with `curl` and read as
   text, which is outside the PREREG's registered route (WebFetch or `gh api`). Both deviations are
   recorded in the PREREG's amendment A-1 and in RESULTS.md;
@@ -60,17 +61,17 @@ in the class |m| <= 2,047; the class comes from upstream's Maverick norm, which 
 and Qwen's RMSNorm has a learned gain (1 + w), so at scale 2^12 its output does not fit
 (`experiments/20261112-132-int-mlp-e2e/RESULTS.md:32`, `:44`; `research/operators/qwen_m3/bounds.py:53`).
 The class is exceeded in every measured layer, maximum 142,651 inside the cutoff
-(`docs/qwen-port.md:111-113`). The later registered integer-MLP token test reached 1,423 agreements out of 1,461
-positions (97.40%), below the registered bar of 99.0%
+(`docs/qwen-port.md:111-113`). The later registered integer-MLP token test reached 1,423 agreements
+out of 1,461 positions (97.40%), below the registered bar of 99.0%
 (`experiments/20261112-132-int-mlp-e2e/runs-resume150b/RESULTS.md:7`).
 
 **Does Sable face it?** Not in this form. Sable does have a fixed norm-output class, but a different
 one: every norm output lies in the 8-bit range |q'| <= 127, which its proof enforces with a lookup
 into its 8-bit range rows (P 6.1, Table 1, the tag for q + 127 of an 8-bit value; P 6.2 `NormScale`)
-and its reference code checks (`zk/model.py:193`). Three things differ from our class: the width (8
+and its `zk/model.py` checks (`zk/model.py:193`). Three things differ from our class: the width (8
 bits against our 12-bit class 2,047); the scale (a per-row normalization exponent that enters the
 next shift, against our fixed scale 2^12); and where the gain sits (fused into the next weight
-matrix, against applied inside the norm, which is what takes our word out of its class:
+matrix, against applied inside the norm, where at scale 2^12 the output does not fit the class:
 `experiments/20261112-132-int-mlp-e2e/RESULTS.md:44`).
 
 **What Sable does** (from public source, not verified by us):
@@ -83,7 +84,7 @@ matrix, against applied inside the norm, which is what takes our word out of its
   power of two, and multiplies by a 16-bit rsqrt table entry, floor(127 x 2^15 / sqrt(mantissa));
   "This is RMSNorm with the gain vector fused into the next weight matrix" (P 5.2; table `RSQ`,
   `zk/tables.py:17`). The output is in the fixed 8-bit class |q'| <= 127: the proof looks up
-  q' + 127 in its 8-bit range rows (P 6.2 `NormScale`) and the reference code checks
+  q' + 127 in its 8-bit range rows (P 6.2 `NormScale`) and `zk/model.py` checks
   `qp.abs().max() <= 127` (`zk/model.py:185-194`).
   The row exponent E_h enters the next shift, so later shifts are per row (P 5.3 step 7,
   `k_g = kappa_g + max(E_h, K_gl)`).
@@ -141,11 +142,13 @@ agreement figures do not isolate what its 8-bit norm output or matrix inputs con
   undefined"; `zk/model.py:1061` checks it, `zk/model.py:1044-1062`). The table's own domain is the
   proof's bound (P 6.2, "MLP gate").
 - Its scan reports zero undefined sequences on 3.45 million tokens of real text and 160 adversarial
-  sequences for all three models (P 11.9, Table 16). The Qwen2.5 column is what
-  `scripts/fo_domain_scan.py` records with its own engine (`scripts/fo_domain_scan.py:1-13`,
-  `:79-81`). The two Qwen3 columns are not: "For the Qwen3 models, the scan uses the serving engine"
-  (P 11.9), and the script's own header says its engine does not implement the QK-norm and
-  mixture-of-experts models (`scripts/fo_domain_scan.py:18-19`). The paper adds: "This does not show that no input reaches a condition" (P 11.9).
+  sequences for all three models (P 11.9, Table 16). The script lines cited here
+  (`scripts/fo_domain_scan.py:1-13`, `:79-81`) are its own engine, which records each condition, and
+  they do not cover the Qwen3 columns: "For the Qwen3 models, the scan uses the serving engine"
+  (P 11.9), and the script's header says its own engine does not implement the QK-norm and
+  mixture-of-experts models and describes a mode that takes the serving engine's per-sequence flags
+  instead (`scripts/fo_domain_scan.py:18-19`). That serving engine is in a file this note did not
+  read. The paper adds: "This does not show that no input reaches a condition" (P 11.9).
 
 **Compatible with Goldilocks and fixed public tables?** Yes for the field. For tables: Sable's table
 contents depend on per-model constants (eG, eA), are pinned in the statement digest h_circ and are
@@ -282,7 +285,7 @@ Checked against the source:
   Qwen3-30B-A3B has 48 layers (P 5.6, "L = 48"); the two 32B models have 64.
 - 24-bit activations: **confirmed** as the residual range A = [-2^23, 2^23) (P 5.1).
 - 8-bit matrix-product inputs: **confirmed with a scope** (P 5.1, P 5.3): it holds for the activation
-  rows that enter a weight-matrix product on the projection and norm path of a dense layer, which is
+  rows that enter the weight-matrix products of a dense layer (P 5.3, steps 2, 5, 7 and 8), which is
   the path walls 1 and 3 are about. It is not exception-free across the three models. In
   Qwen3-30B-A3B the merged expert outputs are requantized to [-1023, 1023] before the down product
   (P 5.6, "Merge" and "Down"; `zk/model.py:1097` sets `MOE_B` to 1023, `:1168-1173` use it). In all
