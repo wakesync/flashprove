@@ -263,7 +263,7 @@ Scope of MAIN: 70 changed tensors and 8 controls, all of class `matrix_plain`. T
 
 | field | value |
 |---|---|
-| producer | nobody today. "The 722-block leaf-v2 tree for a pin (55.6 GB per pin) is not built" (`experiments/20261112-149-leaf-v2/RESULTS.md:49`) |
+| producer | nobody today: "the 722-block leaf-v2 tree for a pin (55.6 GB per pin) is not built" (`experiments/20261112-149-leaf-v2/RESULTS.md:49`) |
 | independent verifier | as E8b, once a rule is executable for every class; a second implementation is needed before agreement means more than one program repeating itself (`:52`) |
 | exact canonical bytes | a full-model id in the v2 leaf format does not exist. It must not reuse the subset tag, and it must fix the leaf count to the inventory's 722 |
 | authorization source | N0 |
@@ -403,3 +403,223 @@ The statement of a proof holds the commitment ID, the configuration, the policy,
 | E14 | the physical engine is the proved one | VENDOR, not suppliable by proof | (a) |
 
 Counts: MAIN 4, VENDOR 6, PROPOSED 6, UNSOLVED 2. No edge is MAIN for the full Qwen model under proof.
+
+## 6. Attack / obligation table: the eleven named counterexamples
+
+Each counterexample gets the obligation that would reject it (which edge, which check, who runs it), the standing of that check on main, and a designation. Three designations are used, and a row can carry more than one when the counterexample has parts:
+
+- **REJECTED ON MAIN**: code on main performs the rejecting check, inside the scope stated.
+- **OBLIGATION, NOT BUILT**: the rejecting check is specified and needs no new cryptography, but no code performs it.
+- **UNRESOLVED**: no rejecting check is available, because it rests on an UNSOLVED edge or because none can exist.
+
+An obligation that is not built is not a rejection. Today a client running only what is on main accepts every case not marked REJECTED ON MAIN.
+
+### 6.1 Counterexamples 1 to 6
+
+**1. Unrelated but valid package / proof roots.** The enclave attests a genuine package root for revision A. The proof verifies under a genuine commitment made from revision B. Each check passes alone.
+
+- Rejecting obligation: the client names one revision R in N0 and recomputes, without any input from the provider, the package root for R (E6a) and the checkpoint and conversion ids for R (E7, E8). It rejects unless the attested root equals the recomputed one and the commitment is bound to the recomputed conversion id by a key-file claim (E9). It never compares the two roots with each other, and it never accepts a signed statement that they correspond.
+- On main: the ids for R can be recomputed at hash level (E7, E8a). Nothing recomputes a package root. Nothing binds a commitment to a conversion id: "A commitment says nothing about which model it is" (`research/coverage/inventory.yaml:1012-1014`, G-01).
+- Designation: **UNRESOLVED.** The package half is an obligation not built (E6a). The proof half rests on E9, which is UNSOLVED. Until E9 holds, the two roots stay unrelated for any verifier.
+
+**2. Wrong config with the same tensor names.** Every tensor is the right one; the configuration differs (layer schedule, norm epsilon, rotary base, head counts).
+
+- Rejecting obligation: the config pin inside the conversion id (E8a, E6b). The client recomputes the pin from the revision's configuration and holds the resulting id.
+- On main: 21 same-tensor config cases are refused under the honest id, the schema fails closed on unknown keys, and the pin changed the ids when it was corrected (`experiments/20261111-91-conversion-id/RESULTS.md:23`, `:16`, `:30-33`). Hash level. Which fields change the function "is still a judgement" (`:68`).
+- Designation: **REJECTED ON MAIN at hash level, for the conversion id.** Two parts remain. That the pinned fields equal what the configuration under the commitment ID uses: **OBLIGATION, NOT BUILT** (`research/weight-binding/DESIGN.md:198`). That the serving runtime uses that configuration: **UNRESOLVED** (E5b).
+
+**3. Exponent / integer-hash swap.** A leaf carries the exponent of one block or pin with the integer hash of another, or either value altered.
+
+- Rejecting obligation: leaf v2 binds `e` and `int_sha256` together with the block name, class, sources and rule in one leaf under one id (E8b). The client checks openings against the id it recomputed.
+- On main: the opening verifier refuses every constructed case, "including wrong or swapped e_b / int_sha256_b and the other pin's values": 15 kinds on the two new fields (`experiments/20261112-149-leaf-v2/RESULTS.md:44`, `:16`). Hash level, 78 blocks.
+- Designation: **REJECTED ON MAIN at hash level, for the 78 registered blocks.** For the other 644 blocks no such fields exist: **OBLIGATION, NOT BUILT** (E8c). That a prover's committed table holds the integers the leaf names: **UNRESOLVED** (E9; `:50`).
+
+**4. Subset root presented as the full tree.** A root over some blocks is offered where a root over all 722 is expected.
+
+- Rejecting obligation: (i) a subset id and a model id have different domain tags; (ii) the leaf count is hashed into the id; (iii) the client's policy fixes the count to the inventory's 722 and the kind to "full", and takes neither from the opening; (iv) under proof, the number of key-file claims equals the inventory count and is derived by the verifier, not read from the key file.
+- On main: (i) holds, tags `fp-wb-conv-subset-v2` against `fp-wb-conv-id-v1`, and a v1 conversion-id opening is refused under a v2 id (`research/weight-binding/wb_leafv2.py:53`; `experiments/20261112-149-leaf-v2/RESULTS.md:16`). (ii) holds: an opening with n changed is refused (`research/weight-binding/test_wb_leafv2.py:128-132`). (iii) does not exist: the opening verifier takes n from the opening (`research/weight-binding/wb_leafv2.py:237`, `:246`), and no full-model v2 id exists to pin. (iv) does not exist.
+- A warning from main's own history: with nothing binding completeness, the leaf-v2 readers reported a full `PASS` for cut run files, completed by a union with another run (`experiments/20261112-149-leaf-v2/RESULTS.md:118-126`). That is about run files, not ids, but it is the same failure shape.
+- Designation: **REJECTED ON MAIN in part, at hash level** (i, ii). Pinned count and kind: **OBLIGATION, NOT BUILT** (E8c). Claim count under proof: **UNRESOLVED** (E9).
+
+**5. Authorized root but alternate loader.** The package root is the approved one and every read is checked. The program that loads it is not the one the client assumes, or it loads something else as well.
+
+- Rejecting obligation, attestation side: the approved measurement fixes the container image and its command line (E1, E4), so the client knows which program was started. Nothing checks what that program does with the bytes (E5b).
+- Rejecting obligation, proof side: do not rely on the loader at all. If the commitment is bound to the conversion id (E9), the statement is checked against it (E10) and the statement is the client's own token ids (E11), a reply from any other loader fails unless it gives the same tokens.
+- On main: neither side. No attestation is verified, and E9 and E10 do not hold for Qwen.
+- Designation: **UNRESOLVED.** The attestation side rests on E5b (UNSOLVED). The proof side rests on E9 (UNSOLVED) and E10 (PROPOSED).
+
+**6. Hot-swapped adapter.** After an honest load, weights are added or replaced in memory.
+
+- Rejecting obligation: as counterexample 5. The measured boot fixes what was started, not what memory holds later; only a proof against bound weights speaks to the reply itself. The acceptance policy matters: under a tolerance policy a changed model's reply can pass, so the obligation requires exact match (`research/weight-binding/DESIGN.md:193`).
+- On main: nothing for Qwen. A related measurement on a small synthetic model, with an honest prover only: under exact match 0 of 57 changed steered replies were accepted, under the shipped clipped-gap policy 5 of 54 were (`README.md:28`). No cheating prover was tested there, and it is not an adapter test.
+- Designation: **UNRESOLVED** (E5b; the proof side needs E9, E10 and exact match). An adapter that happens to give the same tokens is counterexample 11.
+
+### 6.2 Counterexamples 7 to 11
+
+**7. Rollback to old approved code.** The enclave runs an older release that was approved once and has since been superseded, for example one with a known defect. Its measurement is genuine and is in the public log.
+
+- Rejecting obligation: the client's policy N0 carries a minimum release, or an explicit list of approved measurements with an expiry, and rejects a measurement outside it (E1). An append-only log shows that a release existed; it does not say the release is still approved.
+- On main: nothing. No attestation is verified. The pages read here say a changed configuration needs a new release with a new measurement, and that a router re-resolves "the latest release" `[V2]`; they do not say a client refuses an older one.
+- Related, also open: nothing links a new commitment ID to an old one (`docs/verifying.md:44-45`), so the same rule is needed for commitments. And platform-version rollback at the hardware level is not described in the pages read here (Unknown, E2).
+- Designation: **OBLIGATION, NOT BUILT** (E1, policy side). It needs no new cryptography, only a policy field and a check. For the hardware platform version: **UNRESOLVED** in this note, because the material read does not cover it.
+
+**8. Receipt key from another boot.** A receipt is signed by a key that was genuinely attested, but in a different boot, a different enclave or an earlier deployment whose key was copied out.
+
+- Rejecting obligation: the client verifies a fresh attestation document from the enclave it is talking to, takes the public key from that document's key material (E3), and accepts a receipt only under that key and only for a nonce it issued after that verification (E13). A key lives for one boot and must be re-verified when it changes `[V3]`.
+- On main: nothing. The envelope's signing key is a long-lived key the client pinned out of band (`research/envelope/SPEC.md:73`), and any attestation kind that claims hardware evidence is refused (`:98`).
+- A limit that the obligation does not remove: the granted application can read and copy its private key `[V3]`. If the key leaves the enclave during the same boot, a receipt made elsewhere verifies. The nonce stops replay of an old receipt; it does not stop a live signer outside the enclave.
+- Designation: **OBLIGATION, NOT BUILT** for a key from another boot (E3, E13). For a key copied out within the same boot: **UNRESOLVED**.
+
+**9. Output reconstructed from different token ids.** The text shown to the client is the same, but the token ids the model produced differ from the ids the proof is about.
+
+- Rejecting obligation: the reply reaches the client as token ids; the client builds the request file from its own prompt ids and those reply ids, and runs the verifier itself (E11). The statement is then about exactly those ids. The client's displayed text is its own decoding of those ids.
+- On main: the client envelope does this, and a reply that differs is refused (`research/envelope/SPEC.md:184-190`; `experiments/20261111-9-client-envelope/RESULTS.md:44-45`). Scope: two synthetic stored examples.
+- What it does not cover: the tokenizer and template that turned the user's text into prompt ids are pins outside the relation (`research/coverage/inventory.yaml:1021-1023`, G-04). And a route that returns only text cannot meet the obligation: there the ids are rebuilt, and "Equal counts are necessary, not sufficient for equal ids" (`experiments/20261112-131-served-reply-agreement/RESULTS.md:27`).
+- Designation: **REJECTED ON MAIN, inside that scope**, on the condition that the route delivers token ids. Where it delivers text only: **UNRESOLVED**, and the case is not a proof case at all.
+
+**10. State root without authenticated origin.** A statement about a later window starts from a state root the prover supplied. The root is well formed and the window proof verifies from it.
+
+- Rejecting obligation: the client accepts an input root only if it computed it itself (genesis) or recorded it as the output root of a proof it accepted earlier in the same session (E12). "A supplied intermediate state cannot bypass proof of its history" (`docs/research-roadmap.md:74`).
+- On main: continuity only, on synthetic state, with the first root trusted as given in every prototype (`experiments/20261111-35-conv-history-binding/RESULTS.md:59`; `experiments/20261111-93-hidden-root-handoff/RESULTS.md:80`). No client keeps accepted roots, and the upstream statement has no state root.
+- Designation: **OBLIGATION, NOT BUILT** (E12, the client-side rule). The proof-side part, a vetted state commitment with the chain length inside the proof, is open research on main (`research/coverage/inventory.yaml:1030-1032`, G-07): **UNRESOLVED**.
+
+**11. A malicious runtime returning the same acceptable output.** The serving engine is not the committed model: other weights, another precision, a cache, a different machine. For this request it returns exactly the tokens the committed integer model would give. A valid proof is produced, by any machine that holds the committed weights.
+
+- Rejecting obligation by proof: **none, and none can exist.** The proof's statement is the commitment, the configuration, the policy and the token ids (`research/envelope/SPEC.md:101-102`). The honest run and this run have the same statement. A verifier that accepts one accepts the other. This is not a defect of a particular proof system: a proof of a relation over public inputs carries no information about which process produced those inputs.
+- What a proof does give here: the output is consistent with the committed weights. If that is all the client needs, this case does it no harm.
+- What only hardware-backed evidence could add: that a measured program with access to a verified volume was running (E14). That evidence stops at E5b, and a compromised enclave defeats it.
+- What neither gives: confidentiality. If the engine that saw the prompt was not the attested one, the prompt was exposed, and no proof recovers that.
+- Designation: **UNRESOLVED, by construction. Undetectable by proof alone.** The acceptance rule of the issue requires this row to stay so, and it does.
+
+### 6.3 Summary
+
+| # | counterexample | rejecting edges | main today | designation |
+|---|---|---|---|---|
+| 1 | unrelated but valid package / proof roots | E6a, E7, E8, E9 | not rejected | UNRESOLVED (E9) |
+| 2 | wrong config, same tensor names | E8a, E6b | rejected at hash level for the conversion id | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E5b) |
+| 3 | exponent / integer-hash swap | E8b, E8c, E9 | rejected at hash level, 78 blocks | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E9) |
+| 4 | subset root presented as full tree | E8b, E8c, E9 | tags and count hashed; count not pinned | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E9) |
+| 5 | authorized root, alternate loader | E5b, or E9 + E10 + E11 | not rejected | UNRESOLVED |
+| 6 | hot-swapped adapter | E5b, or E9 + E10 + E11 with exact match | not rejected | UNRESOLVED |
+| 7 | rollback to old approved code | E1 (minimum release) | not rejected | OBLIGATION, NOT BUILT; platform version UNRESOLVED |
+| 8 | receipt key from another boot | E3, E13 | not rejected | OBLIGATION, NOT BUILT; key copied within a boot UNRESOLVED |
+| 9 | output rebuilt from different token ids | E11 | rejected, synthetic examples, ids delivered | REJECTED ON MAIN in scope; text-only routes UNRESOLVED |
+| 10 | state root without authenticated origin | E12 | not rejected | OBLIGATION, NOT BUILT; proof side UNRESOLVED |
+| 11 | malicious runtime, same acceptable output | none possible by proof | not rejected | UNRESOLVED by construction |
+
+The matrix is non-circular in this sense: no obligation takes as input a value that only the party being checked can supply. Every recomputation starts from the revision in N0; the attestation edges start from the hardware root; the receipt starts from a nonce the client chose. Where a row would need the provider's word, it is marked UNRESOLVED instead.
+
+## 7. Schema example (synthetic identifiers only)
+
+Two documents: the policy the client writes before it sends anything (N0), and the evidence bundle it assembles for one request. **Every value below is made up.** Digests are a repeated two-hex-digit pattern, names begin with `example` or `synthetic`, and nothing is taken from any real deployment, model, key or measurement. This is a shape for discussion. It is not a format on main, nothing parses it, and the field names are proposals.
+
+Each field of the bundle carries a `basis`, which is the point of the schema: a reader must be able to see, per field, whether the client recomputed it, verified it against hardware, verified it by proof, or was merely told it.
+
+| basis | meaning |
+|---|---|
+| `client-chosen` | the client's own decision (guarantee d) |
+| `client-recomputed` | derived by the client or its auditor from the public revision |
+| `hardware-verified` | checked against a hardware root by the client (guarantee a). Not available on main |
+| `proof-verified` | fixed by the relation, checked by the client's own verifier (guarantee b) |
+| `signed-only` | only a signature stands behind it (guarantee c) |
+| `asserted` | the provider's word, unsigned or signed; never used in a decision |
+
+**Policy (N0), written before the request:**
+
+```json
+{
+  "format": "example-bridge-policy-v0",
+  "checkpoint": {
+    "revision": "synthetic-org/synthetic-model@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "checkpoint_id": "1111111111111111111111111111111111111111111111111111111111111111",
+    "n_source_tensors": 12
+  },
+  "conversion": {
+    "rule_version": "synthetic-conv-rules-v0",
+    "config_pin": "2222222222222222222222222222222222222222222222222222222222222222",
+    "conversion_id": "3333333333333333333333333333333333333333333333333333333333333333",
+    "kind": "full",
+    "n_blocks": 8
+  },
+  "package": {
+    "pack_schema": 1,
+    "package_root": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "commitment_id": "5555555555555555555555555555555555555555555555555555555555555555",
+  "acceptance": {"policy": "exact", "bits": 128},
+  "attestation": {
+    "required": 1,
+    "config_source": "synthetic-org/synthetic-deploy-config",
+    "min_release": 7,
+    "receipt_key_id": "example-receipt"
+  },
+  "state": {"genesis_root": "6666666666666666666666666666666666666666666666666666666666666666"}
+}
+```
+
+`package_root` (4444...) and `checkpoint_id` (1111...) are different strings and are meant to be. Both come from the same `revision`; neither is ever compared with the other. `kind` and `n_blocks` are pinned here so that an opening cannot supply its own count (counterexample 4). `min_release` is the rollback rule (counterexample 7).
+
+**Evidence bundle for one request:**
+
+```json
+{
+  "format": "example-bridge-evidence-v0",
+  "request": {
+    "nonce": "7777777777777777777777777777777777777777777777777777777777777777",
+    "prompt_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+    "basis": "client-chosen"
+  },
+  "attestation": {
+    "measurement": "9999999999999999999999999999999999999999999999999999999999999999",
+    "release": 7,
+    "package_root": "4444444444444444444444444444444444444444444444444444444444444444",
+    "receipt_key_spki": "abababababababababababababababababababababababababababababababab",
+    "document_sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "basis": "hardware-verified",
+    "edges": ["E1", "E2", "E3", "E4"]
+  },
+  "weights": {
+    "checkpoint_id": {"value": "1111111111111111111111111111111111111111111111111111111111111111", "basis": "client-recomputed", "edge": "E7"},
+    "conversion_id": {"value": "3333333333333333333333333333333333333333333333333333333333333333", "basis": "client-recomputed", "edge": "E8"},
+    "package_root": {"value": "4444444444444444444444444444444444444444444444444444444444444444", "basis": "client-recomputed", "edge": "E6a"},
+    "table_binding": {"key_file_claims": 8, "basis": "proof-verified", "edge": "E9"}
+  },
+  "proof": {
+    "commitment_id": "5555555555555555555555555555555555555555555555555555555555555555",
+    "reply_sha256": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+    "verdict": "YES",
+    "basis": "proof-verified",
+    "edges": ["E10", "E11"]
+  },
+  "state": {
+    "input_root": "6666666666666666666666666666666666666666666666666666666666666666",
+    "input_origin": "genesis",
+    "basis": "client-recomputed",
+    "edge": "E12"
+  },
+  "receipt": {
+    "signed_by": "example-receipt",
+    "names_nonce": 1,
+    "names_proof_sha256": 1,
+    "basis": "signed-only",
+    "edge": "E13"
+  },
+  "provider_says": {
+    "model_label": "synthetic-model",
+    "runtime_dtype": "example-dtype",
+    "engine": "example-engine",
+    "basis": "asserted"
+  },
+  "not_covered": ["E5b", "E14"]
+}
+```
+
+How a client would read it:
+
+1. Every `client-recomputed` value must equal the policy's value. The provider supplies none of them.
+2. `attestation.package_root` must equal the policy's `package_root`, and `attestation.release` must be at least `min_release`.
+3. `proof.commitment_id` must equal the policy's, the verifier must have been run by the client on its own request file, and `table_binding.key_file_claims` must equal the policy's `n_blocks`.
+4. The receipt must verify under `receipt_key_spki` from this bundle's attestation, and must name this nonce and this proof digest.
+5. `provider_says` is displayed and decides nothing. `not_covered` is always shown.
+
+A bundle that can be built from what is on main today would have `attestation.basis` absent (no hardware evidence is verified), `table_binding` absent (E9), `conversion.kind` equal to `subset` (E8b), and `state` absent. That bundle does not join anything, and a client should not present it as if it did.
