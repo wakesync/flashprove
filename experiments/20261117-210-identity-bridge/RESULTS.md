@@ -78,9 +78,10 @@ Main rejects one of the eleven inside a stated scope (9), three in part at hash 
 5. **No checker.** The optional checker of the PREREG was not added. A lane-side script, not in this repository, confirmed that the 213 backticked path and line citations in the note name files that exist and ranges inside them (0 problems). It checks nothing about what the cited lines say.
 6. **Reading depth.** The seven evidence files the issue names, `research/weight-binding/DESIGN.md`, `research/envelope/SPEC.md` and the key-file README were read in full. Every other cited file was read at the cited lines and their surroundings only.
 7. **Prior art.** The PREREG lists RFC 9334, confidential-VM attestation, in-toto / SLSA and zkML systems from general knowledge. None of them was read for this note and none is cited in it.
+8. **One status is a judgement call.** E10 is classed "proposed code" although the join needs E9, which is unsolved. The note gives the reason where E14 is defined: what E10 itself asserts does not contain E9's assertion, while what E14 asserts contains E5b's. A stricter reading of the weakest-part rule would class E10 as unsolved, giving proposed 5 and unsolved 4. Nothing else in the note depends on the choice.
 
 ## Process
 
-- Commits after the registration: amendment A-1 alone, then the note in four content commits and one correction commit, then this file. No amend, no rebase, no force-push.
+- Commits after the registration: amendment A-1 alone, then the note in four content commits and one correction commit, then this file, then one more commit to the note (the E10 paragraph of item 8) and this update. No amend, no rebase, no force-push.
 - Before each push: `scripts/check-no-host-paths.sh` ok, `scripts/update-results.py --check` ok, `scripts/check-claims.py` ok.
 - Not reviewed and not replicated. This pull request is a draft.
