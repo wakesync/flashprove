@@ -10,7 +10,7 @@ Vendor material is used from three public pages only, named V1, V2 and V3 in sec
 ## 1. Answer in three lines
 
 1. **The join goes through one public revision that the client itself authorizes, not through the enclave.** From that revision the client, or an auditor it trusts, recomputes three things: the package root, the checkpoint id and the conversion id. It accepts a proof only under a commitment that a key-file claim binds to that conversion id. It never compares a package root with a tensor root (they hash different encodings), and it never takes the mapping between them from a signer.
-2. **On main today the join cannot be made for Qwen.** Of the 18 edges, 4 are established on main within a stated scope (E7, E8a, E8b, E11), 5 rest on public vendor documentation only (E1, E2, E3, E4, E5a), 6 are proposed code (E6a, E6b, E8c, E10, E12, E13) and 3 are unsolved obligations (E5b, E9, E14). The edge that would make a proof say which weights ran, E9, has a research fixture on four tiny tensors and no security bound.
+2. **On main today the join cannot be made for Qwen.** Of the 18 edges, 4 are established on main within a stated scope (E7, E8a, E8b, E11), 5 rest on public vendor documentation only (E1, E2, E3, E4, E5a), 5 are proposed code (E6a, E8c, E10, E12, E13) and 4 are unsolved obligations (E5b, E6b, E9, E14). The edge that would bind the committed integers to the converted checkpoint, E9, has a research fixture on four tiny tensors and no bound that covers a derived point: only a fixed-pair bound is stated (section 5.3, O-1). Even with E9, a proof does not identify the physical run (E14).
 3. **A proof and an attestation answer different questions and neither repairs the other.** All 11 named counterexamples have a rejecting obligation or the word UNRESOLVED in section 6. Main rejects one of them today inside a stated scope (9), three in part at hash level (2, 3, 4) and seven not at all (1, 5, 6, 7, 8, 10, 11). A runtime that returns the same acceptable output from another engine stays undetectable by proof alone, by construction.
 
 ## 2. Scope, method, and what changed on main since the issue's snapshot
@@ -54,7 +54,7 @@ Which edge belongs to which guarantee (edges are defined in section 5):
 | (b) proof | E9, E10, E11, E12 |
 | (c) receipt authenticity | E13 (E3 says which key) |
 | (d) authorization | E1, E7 |
-| public recomputation, no trust in the provider | E6a, E6b, E8a, E8b, E8c |
+| public recomputation, no trust in the provider | E6a, E8a, E8b, E8c, and the recomputable part of E6b (the pin of the revision's configuration). The runtime part of E6b rests on E5b, group (a) |
 
 Three rules follow, and the rest of the note keeps to them.
 
@@ -203,19 +203,27 @@ What exists: the N5 side, for two pins (1,199 leaves each, `experiments/20261110
 
 Main's own design already points at this join in three lines: a package root and a per-tensor manifest "can name the same tensors, which joins them", "Not designed further here" (`research/weight-binding/DESIGN.md:272-275`). This edge is the part that sentence leaves open. The two roots do not name the same bytes, so the join is the shared revision and two recomputations, not a correspondence between the roots.
 
-**E6b. N4b configuration to the config pin inside N6. Status: PROPOSED.**
+**E6b. N4b configuration to the config pin inside N6: the configuration the runtime uses equals the configuration whose pin enters the conversion id. Status: UNSOLVED (PREREG A-2; it was PROPOSED before review).**
 
 | field | value |
 |---|---|
 | producer | the conversion's config pin over 24 text fields and 3 top-level fields, typed, failing closed on unknown keys (`experiments/20261111-91-conversion-id/RESULTS.md:16-18`) |
-| independent verifier | the client recomputes the pin from the revision's configuration file. Whether the engine uses that file unmodified is E5b |
+| independent verifier | for the runtime side, **none exists**: whether the engine uses that file unmodified is E5b, which is UNSOLVED. For the file side, the client recomputes the pin from the revision's configuration file. That checks the configuration file of the revision. It does not check what a running engine uses |
 | exact canonical bytes | `H("fp-wb-config-v2", lp(typed canonical fields))` (`research/weight-binding/wb_conv.py:203-204`) |
 | authorization source | N0 (revision and rule version) |
-| binding mechanism | the pin is hashed into the conversion id (`research/weight-binding/wb_conv.py:361-362`) |
+| binding mechanism | file side only: the pin is hashed into the conversion id (`research/weight-binding/wb_conv.py:361-362`). Between the pin and what a runtime uses: none |
 | update / rollback rule | any pinned field change gives a new conversion id; an unknown key refuses |
 | availability dependency | none beyond the revision |
 
-The pin exists and is measured at hash level. The edge is PROPOSED, not MAIN, because two parts are missing: nothing ties the pin to what a runtime uses, and the design also requires the pinned fields to equal what the configuration under the commitment ID uses, which is "Not built" (`research/weight-binding/DESIGN.md:198`). Fields deliberately left out of the pin are listed with reasons (`experiments/20261111-91-conversion-id/RESULTS.md:68`).
+The parts of this edge, and which exist:
+
+| part | standing |
+|---|---|
+| the pin itself, recomputed by the client from the revision's configuration file and hashed into the conversion id | exists on main, measured at hash level. It is the same pin that E8a carries, and it says nothing about a runtime |
+| the pinned fields equal what the configuration under the commitment ID uses | proposed code: "Not built" (`research/weight-binding/DESIGN.md:198`) |
+| the configuration a running engine uses equals the pinned one | no check exists. This is E5b's assertion, restricted to the configuration, and E5b is UNSOLVED |
+
+Why the status is UNSOLVED and not PROPOSED. The registered wording of the edge is that the configuration the runtime uses equals the pinned one (PREREG A-1), so the third part is what the edge itself asserts, not a dependency of it. An edge that is not split takes the status of its weakest necessary part (PREREG A-1). That is the rule applied to E14 in section 5.4, and the E10 exception explained there does not fit: E10's own assertion can hold whatever E9 says, while E6b's own assertion is about the runtime. A reviewer pointed this out (PREREG A-2 has the reason and the link). The first two parts are not made stronger or weaker by the change. Fields deliberately left out of the pin are listed with reasons (`experiments/20261111-91-conversion-id/RESULTS.md:68`).
 
 **E7. N0 to N5: the checkpoint id is the checkpoint the client chose. Status: MAIN (hash level, open weights only).**
 
@@ -385,7 +393,9 @@ The statement of a proof holds the commitment ID, the configuration, the policy,
 
 Why UNSOLVED and not VENDOR: the vendor pages document that a measured program was started with a verified volume (E2, E4, E5a). They do not document, and nothing else supplies, that this program produced the reply. The edge needs E5b, which is UNSOLVED, and an edge takes the status of its weakest necessary part (PREREG A-1). An earlier commit of this note (`e859e22`) gave E14 the status VENDOR. That overstated it and is corrected here.
 
-The same rule does not move E10 to UNSOLVED, and the difference is this. What E14 itself asserts, that the engine which ran is the proved one, contains E5b's assertion as a part. What E10 asserts, that a statement is checked against a commitment, is a relation between N7 and N8 that can hold whatever N7 contains; it exists today for the upstream path. E10 depends on E9 for the join to mean anything (section 9.1), not for its own assertion. A reviewer who reads the rule more strictly would class E10 as UNSOLVED too; the count would then be PROPOSED 5, UNSOLVED 4, and nothing else in the note would change.
+The same rule does not move E10 to UNSOLVED, and the difference is this. What E14 itself asserts, that the engine which ran is the proved one, contains E5b's assertion as a part. What E10 asserts, that a statement is checked against a commitment, is a relation between N7 and N8 that can hold whatever N7 contains; it exists today for the upstream path. E10 depends on E9 for the join to mean anything (section 9.1), not for its own assertion. A reviewer who reads the rule more strictly would class E10 as UNSOLVED too; the count would then be PROPOSED 4, UNSOLVED 5, and nothing else in the note would change.
+
+E6b is the other way round, and it is UNSOLVED since PREREG A-2: what E6b itself asserts is about the runtime, so E5b's assertion is a part of it, as it is for E14 (section 5.2).
 
 ### 5.5 All edges at a glance
 
@@ -398,7 +408,7 @@ The same rule does not move E10 to UNSOLVED, and the difference is this. What E1
 | E5a | reads match package root | VENDOR | (a) |
 | E5b | engine computes with those bytes | UNSOLVED | (a) |
 | E6a | package root and checkpoint id share one revision | PROPOSED | recomputation |
-| E6b | runtime config equals pinned config | PROPOSED | recomputation |
+| E6b | runtime config equals pinned config | UNSOLVED (runtime side rests on E5b; the pin of the revision's file is recomputable) | (a) for the runtime side; recomputation for the pin |
 | E7 | checkpoint id is the chosen checkpoint | MAIN, hash level, open weights | (d) |
 | E8a | conversion id structure | MAIN, hash level, rule text | recomputation |
 | E8b | integers for 78 plain-matrix blocks | MAIN, hash level, subset | recomputation |
@@ -410,7 +420,7 @@ The same rule does not move E10 to UNSOLVED, and the difference is this. What E1
 | E13 | receipt under the attested key names the statement | PROPOSED | (c) |
 | E14 | the physical engine is the proved one | UNSOLVED, not suppliable by proof | (a) |
 
-Counts: MAIN 4, VENDOR 5, PROPOSED 6, UNSOLVED 3. No edge is MAIN for the full Qwen model under proof.
+Counts: MAIN 4, VENDOR 5, PROPOSED 5, UNSOLVED 4, 18 edges in all. Before review the note had PROPOSED 6, UNSOLVED 3; the one change is E6b (PREREG A-2). No edge is MAIN for the full Qwen model under proof.
 
 ## 6. Attack / obligation table: the eleven named counterexamples
 
@@ -432,9 +442,9 @@ An obligation that is not built is not a rejection. Today a client running only 
 
 **2. Wrong config with the same tensor names.** Every tensor is the right one; the configuration differs (layer schedule, norm epsilon, rotary base, head counts).
 
-- Rejecting obligation: the config pin inside the conversion id (E8a, E6b). The client recomputes the pin from the revision's configuration and holds the resulting id.
+- Rejecting obligation: the config pin inside the conversion id (E8a), and for the serving runtime E6b. The client recomputes the pin from the revision's configuration and holds the resulting id. That recomputation reaches the revision's file, not a running engine.
 - On main: 21 same-tensor config cases are refused under the honest id, the schema fails closed on unknown keys, and the pin changed the ids when it was corrected (`experiments/20261111-91-conversion-id/RESULTS.md:23`, `:16`, `:30-33`). Hash level. Which fields change the function "is still a judgement" (`:68`).
-- Designation: **REJECTED ON MAIN at hash level, for the conversion id.** Two parts remain. That the pinned fields equal what the configuration under the commitment ID uses: **OBLIGATION, NOT BUILT** (`research/weight-binding/DESIGN.md:198`). That the serving runtime uses that configuration: **UNRESOLVED** (E5b).
+- Designation: **REJECTED ON MAIN at hash level, for the conversion id.** Two parts remain. That the pinned fields equal what the configuration under the commitment ID uses: **OBLIGATION, NOT BUILT** (`research/weight-binding/DESIGN.md:198`). That the serving runtime uses that configuration: **UNRESOLVED** (E6b, which is UNSOLVED because it rests on E5b).
 
 **3. Exponent / integer-hash swap.** A leaf carries the exponent of one block or pin with the integer hash of another, or either value altered.
 
@@ -504,7 +514,7 @@ An obligation that is not built is not a rejection. Today a client running only 
 | # | counterexample | rejecting edges | main today | designation |
 |---|---|---|---|---|
 | 1 | unrelated but valid package / proof roots | E6a, E7, E8, E9 | not rejected | UNRESOLVED (E9) |
-| 2 | wrong config, same tensor names | E8a, E6b | rejected at hash level for the conversion id | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E5b) |
+| 2 | wrong config, same tensor names | E8a, E6b | rejected at hash level for the conversion id | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E6b, E5b) |
 | 3 | exponent / integer-hash swap | E8b, E8c, E9 | rejected at hash level, 78 blocks | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E9) |
 | 4 | subset root presented as full tree | E8b, E8c, E9 | tags and count hashed; count not pinned | REJECTED ON MAIN in part; rest NOT BUILT and UNRESOLVED (E9) |
 | 5 | authorized root, alternate loader | E5b, or E9 + E10 + E11 | not rejected | UNRESOLVED |
@@ -618,7 +628,7 @@ Each field of the bundle carries a `basis`, which is the point of the schema: a 
     "engine": "example-engine",
     "basis": "asserted"
   },
-  "not_covered": ["E5b", "E14"]
+  "not_covered": ["E5b", "E6b", "E14"]
 }
 ```
 
@@ -693,6 +703,7 @@ These are this note's own, and are proposals or reasoning, not findings:
 - E10 needs E9. Without it, a statement checked against a commitment is checked against weights the committer chose.
 - E13 needs E1, E2 and E3. Without them the receipt key is a provider key and the receipt is guarantee (c) only.
 - E14 needs E5b, and E5b has no known check. So E14 is UNSOLVED: what the vendor pages document is what was started, not what produced the reply.
+- E6b needs E5b for the same reason, restricted to the configuration: no check says what configuration a running engine uses. So E6b is UNSOLVED (PREREG A-2). Its file side, the pin recomputed from the revision's configuration, is the pin E8a carries and does not depend on E5b; the equality of the pinned fields with the configuration under the commitment ID is proposed code, not built.
 - E12 is independent of the weight chain. It is needed only for statements that start from carried state.
 
 ### 9.2 Named open obligations
@@ -707,7 +718,7 @@ The issue says: if a new soundness theorem or format is needed, name it and stop
 | O-4 | proposed code | a full-model v2 id with its own domain tag, and a client policy that pins the leaf count and the kind | E8c, counterexample 4 | not built |
 | O-5 | proposed code, outside this repository's current scope | a client that verifies hardware evidence: certificate chain, platform version, freshness, measurement policy with a minimum release, attested key | E1, E2, E3, E13, counterexamples 7 and 8 | the envelope specification lists the same needs and builds none (`research/envelope/SPEC.md:227-230`) |
 | O-6 | proposed code | a public derivation that records, for one revision, the package root and the checkpoint id, re-runnable by a third party | E6a, counterexample 1 | not built; the package side has never been run by us |
-| O-7 | open, no construction known to this note | evidence that a loaded engine computes with exactly the bytes it read, covering dtype, quantization, adapters and settings | E5b, E14, counterexamples 5, 6 and 11 | none |
+| O-7 | open, no construction known to this note | evidence that a loaded engine computes with exactly the bytes it read, covering dtype, quantization, adapters, settings and the configuration in use | E5b, E6b, E14, counterexamples 2 (runtime part), 5, 6 and 11 | none |
 | O-8 | proposed code plus open research | a client-side rule for the origin of state roots, and a vetted state commitment with the chain length inside the proof | E12, counterexample 10 | prototypes with a trusted first root (`research/coverage/inventory.yaml:1030-1032`) |
 
 O-1 and O-2 are the two items the issue's stop rule is about. O-7 is not a missing theorem: it is a question no proof system in this repository addresses, and this note does not claim it can be closed.
