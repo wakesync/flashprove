@@ -29,9 +29,11 @@ main by path and line.
    power-of-two exponent, normalizes with a 16-bit rsqrt table so the output is at most 127 by
    construction, and folds the RMSNorm gain (and a random rotation) into the next weight matrix. That
    mechanism uses only model-independent tables and fits the Goldilocks field, so it is compatible in
-   principle; it is a different statement from ours, and by Sable's own figures its 8-bit formats lose
-   accuracy well beyond our registered token bar. Candidate for a future registered arm, not a
-   recommendation.
+   principle; it is a different statement from ours. Sable's reported accuracy (greedy agreement with
+   BF16 of 82.4% to 88.7% on WikiText-2, on its own three models) uses a different metric, reference,
+   models and data from our registered token bar, so the numbers are not comparable. They motivate
+   caution. They are not a measured failure of our bar, and they do not isolate what the 8-bit
+   formats contribute. Candidate for a future registered arm, not a recommendation.
 2. **Wall 2 (SiLU inputs outside the v1 domain):** Sable faces the same kind of wall and handles it
    by (a) sizing the SiLU table's input scale per model from calibration with a 25% margin and (b)
    making the integer function undefined outside it, so the honest prover aborts. It does not
@@ -87,12 +89,16 @@ the committed weights become rotated and gain-fused. Qwen3.8-27B's norms use a z
 `x * (1 + w)` (`research/ports/qwen3.8-27b/FEASIBILITY.md:57`); Sable's models fold a plain gain w,
 and our feasibility note says `1 + w` "folds the same way" (`research/ports/qwen3.8-27b/FEASIBILITY.md:69`),
 which this note did not check against Sable's code. The precision goes down from 12 to 8 bits per
-entry. By Sable's own attribution, "unrounded MLP input" would remove 12% of its Qwen3-32B
-perplexity gap (P 11.8, Table 15), and its overall greedy agreement with BF16 is 86.3% (Qwen2.5-32B)
-and 82.4% (Qwen3-32B) on WikiText-2 (P 11.8, Tables 12 and 14). Those are different metrics and
-references from our registered bar (>= 99% top-1 against float64, teacher-forced), so they are not
-comparable numbers, but they give no reason to expect an 8-bit input to clear a bar that our 12-bit
-path missed.
+entry. By Sable's own attribution, "unrounded MLP input" would remove 12% (paired 95% interval 1 to
+21) of its Qwen3-32B excess log perplexity over BF16, measured on the first 24 WikiText-2 windows
+(P 11.8, Table 15, whose caption defines the figure as a share of excess log perplexity), and its
+overall greedy agreement with BF16 is 86.3% (Qwen2.5-32B) and 82.4% (Qwen3-32B) on WikiText-2
+(P 11.8, Tables 12 and 14). Those are different metrics, references, models and data from our
+registered bar (>= 99% top-1 against float64, teacher-forced, on an abliterated Qwen3.8-27B
+checkpoint: `experiments/20261112-132-int-mlp-e2e/PREREG.md:26`, `:36`), so they are not comparable
+numbers. They give no reason to expect an 8-bit input to clear a bar that our 12-bit path
+missed; that is an inference that motivates caution, not a measured failure of our bar, and Sable's
+agreement figures do not isolate what its 8-bit norm output or matrix inputs contribute.
 
 ### Wall 2. SiLU inputs outside the v1 domain
 
@@ -174,8 +180,10 @@ head dimension and for 9-bit RoPE outputs (P 5.4).
 **Related observation, not a carry-over.** Sable keeps attention scores small by keeping queries and
 keys at 8 bits (9 after RoPE). That is the same direction as our narrow q/k clamp alternative
 (`research/operators/qwen_ops/DH256-ROTARY.md:10`), and Sable's own attribution says 12-bit queries
-and keys would remove 37% of its Qwen2.5 perplexity gap but need a score rounding step before the
-exponential table, at an estimated 1.30x to 1.68x proving time by its cost model (P 11.8). This note
+and keys would remove 37% of its Qwen2.5-32B excess log perplexity over BF16 on the WikiText-2 test
+split (P 11.8, Table 13, whose caption defines the figure as a share of excess log perplexity) but
+need a score rounding step before the exponential table, at an estimated 1.30x to 1.68x proving time
+by its cost model (P 11.8). This note
 does not check whether Sable's tables and bounds would hold at dh = 256.
 
 **Compatible / cost:** not applicable. Negative result for this wall; nothing is recommended.
