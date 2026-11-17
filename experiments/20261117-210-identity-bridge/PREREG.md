@@ -114,3 +114,28 @@ What is new here: a single typed chain for this repository that keeps four guara
 ## Amendments
 
 (empty at registration)
+
+### A-1, 2026-11-17T10:20Z: interruption, successor lane, and three edges split
+
+Written before any note content exists on this branch. At this point the branch holds the registration commit only.
+
+**Interruption.** Lane bridge210 registered this deliverable (09:01Z), read the evidence, and stopped at 09:20Z without writing any part of the note: its session ended on an output-length limit. It left no uncommitted work. Lane bridge210b (same model, a new session) continues on the same branch and pull request from 10:02Z. The successor re-read every evidence file itself on the base commit and fetched the three public vendor pages again; the first lane's reading notes were used as a list of places to look, not as facts.
+
+**The wall stop does not move.** It stays 2026-11-17T12:00:00Z as registered. The 42 minutes between the two sessions count against the three hours. If the note is incomplete at the stop, the result is PARTIAL and says which edges are typed.
+
+**Edges split, with the reason.** Reading the evidence showed that E5, E6 and E8 each join parts that have different producers, different verifiers and different statuses, so one status per edge would hide a gap. No edge is dropped; the registered wording of each is covered by its parts.
+
+| registered edge | split into | reason |
+|---|---|---|
+| E5 (N3 to N4) | E5a: bytes read from the package volume are the bytes under the package root. E5b: what the runtime holds and computes with is exactly those bytes (loader, runtime dtype / quantization, adapters, anything read from elsewhere) | E5a is a block-level read check described in the public vendor pages. E5b is a statement about the behaviour of the loaded program, for which neither main nor the vendor pages read here name any check. N4 is split to match: N4a (file bytes as read), N4b (in-memory inventory) |
+| E6 (N4 to N5) | E6a: the package root and the checkpoint id are two encodings of the same public revision (file-system image against per-tensor leaves). E6b: the configuration the runtime uses equals the configuration whose pin enters the conversion id | the tensor side and the config side are bound by different objects on main (checkpoint id; config pin inside the conversion id, DESIGN 2.0), and the config side also has to say which runtime settings are in no config file at all |
+| E8 (N5 to N6) | E8a: the conversion id structure (config pin, per-block class, ordered sources, rule text, inventory). E8b: executable integers (exponent, integer hash) for the 78 registered plain-matrix blocks. E8c: the same for every remaining block, and the complete 722-leaf tree | on main these three have different standing: E8a and E8b are measured at hash level, E8c is not built. A single status for E8 would either promote a subset to the full model or hide what exists |
+
+The edge list after this amendment has 18 edges: E1 to E4, E5a, E5b, E6a, E6b, E7, E8a, E8b, E8c, E9 to E14.
+
+**Clarifications that change no rule.**
+
+- An edge that is not split takes the status of its weakest necessary part, and the row says which parts exist.
+- E14 was registered as "expected: not an edge a proof can supply". It still gets one of the four statuses, for the only kind of evidence that speaks to it (hardware-backed), and the row says a proof cannot supply it.
+- A counterexample is answered either with a rejecting obligation (the edge, the check, who runs it, and the status of that check) or with UNRESOLVED. An obligation that is not built is listed as an obligation with its status; it is not reported as a rejection that exists. Where an obligation rejects only part of a counterexample, the remaining part is marked UNRESOLVED in the same row.
+- No checker is added. The optional checker of the Runs section is not used.
