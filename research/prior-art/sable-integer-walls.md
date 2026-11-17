@@ -60,7 +60,8 @@ in the class |m| <= 2,047; the class comes from upstream's Maverick norm, which 
 and Qwen's RMSNorm has a learned gain (1 + w), so at scale 2^12 its output does not fit
 (`experiments/20261112-132-int-mlp-e2e/RESULTS.md:32`, `:44`; `research/operators/qwen_m3/bounds.py:53`).
 The class is exceeded in every measured layer, maximum 142,651 inside the cutoff
-(`docs/qwen-port.md:111-113`). The later registered integer-MLP token test failed at 1,423 of 1,461
+(`docs/qwen-port.md:111-113`). The later registered integer-MLP token test reached 1,423 agreements out of 1,461
+positions (97.40%), below the registered bar of 99.0%
 (`experiments/20261112-132-int-mlp-e2e/runs-resume150b/RESULTS.md:7`).
 
 **Does Sable face it?** Not in this form. Sable does have a fixed norm-output class, but a different
@@ -139,9 +140,12 @@ agreement figures do not isolate what its 8-bit norm output or matrix inputs con
   conditions, and "an honest prover detects the violation and aborts" (P 5.7, "Where F_O is
   undefined"; `zk/model.py:1061` checks it, `zk/model.py:1044-1062`). The table's own domain is the
   proof's bound (P 6.2, "MLP gate").
-- Its scan (`scripts/fo_domain_scan.py:1-13`, `:79-81`) reports zero undefined sequences on 3.45 million
-  tokens of real text and 160 adversarial sequences for all three models (P 11.9, Table 16). The
-  paper adds: "This does not show that no input reaches a condition" (P 11.9).
+- Its scan reports zero undefined sequences on 3.45 million tokens of real text and 160 adversarial
+  sequences for all three models (P 11.9, Table 16). The Qwen2.5 column is what
+  `scripts/fo_domain_scan.py` records with its own engine (`scripts/fo_domain_scan.py:1-13`,
+  `:79-81`). The two Qwen3 columns are not: "For the Qwen3 models, the scan uses the serving engine"
+  (P 11.9), and the script's own header says its engine does not implement the QK-norm and
+  mixture-of-experts models (`scripts/fo_domain_scan.py:18-19`). The paper adds: "This does not show that no input reaches a condition" (P 11.9).
 
 **Compatible with Goldilocks and fixed public tables?** Yes for the field. For tables: Sable's table
 contents depend on per-model constants (eG, eA), are pinned in the statement digest h_circ and are
@@ -206,8 +210,10 @@ path"), so its effect on those 48 layers is unknown.
 
 **Our side.** Qwen3.8-27B's full-attention layers have head dimension 256
 (`research/ports/qwen3.8-27b/FEASIBILITY.md:45`). At dh = 256 with clamp 2,047 the score bound N4
-fails, and the KFD lookup width is hit first; there is no drop-in admission change
-(`research/operators/qwen_ops/DH256-ROTARY.md:6-10`, `:98`, `:253`).
+fails (`research/operators/qwen_ops/DH256-ROTARY.md:98`), and a complete plan meets the KFD
+lookup-width refusal before N4, which is a separate failure
+(`research/operators/qwen_ops/DH256-ROTARY.md:167`); there is no drop-in admission change
+(`research/operators/qwen_ops/DH256-ROTARY.md:6-10`, `:253`).
 
 **Does Sable face it?** No. All three of its models have head dimension 128 (P 5, P 5.6;
 `zk/model.py:432-435`), and its prover requires it: `assert dh == 1 << TILE` with `TILE = 7`
@@ -255,7 +261,7 @@ So that nobody reads Sable as a drop-in. Sable column: from public source, not v
 | What a proof states | checked tokens r+1..e of a window, under exact match or clipped gap; if e = T, also that the next token is the top choice (`docs/architecture.md:34-37`, `:47-56`, `:66-70`) | the whole reply: every generated token from the prompt, the stopping rule (no earlier stop token; last is a stop token or the length limit), and sampling from a statement-fixed seed at temperature > 0 (P 3.6, Definition 3.3) |
 | Zero knowledge / weight hiding | proofs and public files masked by default, apart from a declared list (`docs/architecture.md:84-87`) | not zero-knowledge; the paper estimates about 1.9 x 10^4 proofs reveal the weights, so it targets open-weight models (P 1.2, P 4, P 12) |
 | Field | Goldilocks, p = 2^64 - 2^32 + 1, cubic extension (`docs/architecture.md:252`) | KoalaBear, p = 2^31 - 2^24 + 1; challenges in degree-4 and degree-8 extensions (P 3.1) |
-| Lookup tables | public tables the verifier computes itself and compares against digest lines in the parameter file (`verifier/docs/parameter-file.md:279`, `:336`) | one tagged table of 2^26 rows; exp, SiLU and RoPE contents depend on per-model constants, are pinned by the digest h_circ from a registry, and are committed fixed units the verifier does not evaluate (P 6.1, P 7.5, P 7.6) |
+| Lookup tables | public tables the verifier computes itself and compares against digest lines in the parameter file (`verifier/docs/parameter-file.md:279`, `:336`) | one tagged table of 2^26 rows; exp, SiLU and RoPE contents depend on per-model constants, are pinned by the digest h_circ, which a registry publishes with the model release (P 4), and are committed fixed units the verifier does not evaluate (P 6.1, P 7.5, P 7.6) |
 | Number formats at the walls | Qwen M3 design: public norm-output class 2,047 at the fixed scale 2^12, gain applied inside the norm (`research/operators/qwen_m3/bounds.py:53`; `experiments/20261112-132-int-mlp-e2e/RESULTS.md:44`) | norm output in a fixed 8-bit class, at most 127 in magnitude, with a per-row normalization exponent and the gain fused into the next weights (P 5.2, P 6.2); residual 24-bit; activation rows entering a weight-matrix product on the projection and norm path 8-bit with a per-row exponent; weights 8-bit with a per-column exponent; Q, K, V static per-head exponents (P 5.1, P 5.3). Not every matrix operand is 8-bit: the mixture-of-experts down input is requantized to [-1023, 1023] (P 5.6; `zk/model.py:1097`, `:1168-1173`), queries and keys after RoPE lie in [-180, 180] (9 bits) in the score product, and attention probabilities lie in [0, 2^10] in the product with the values (P 5.2, P 5.4) |
 | Proof size | 4,149,564 bytes, upstream small synthetic example only; no Qwen proof exists (`research/gpu/README.md:38`; `docs/qwen-port.md:6-8`) | 134.8 to 345.7 MiB for Qwen2.5-32B at its three shapes (P 11.7); 106 to 477 MiB across its three models (P 4) |
 | Prover hardware and time as reported | one rented H100 80GB, host CPU Xeon Platinum 8480+: the upstream small synthetic example only, one request proved in about 3 s (plus or minus 1 s, from file timestamps), n = 1, cold run; no Qwen proof exists, so there is no Qwen prover time (`research/gpu/README.md:7`, `:16`, `:18`, `:33`, `:44`; `docs/qwen-port.md:6-8`) | theirs, not verified by us: one NVIDIA RTX PRO 6000 Blackwell GPU (96 GB) in a host with a Xeon 6776P and 214 GB of memory; Qwen2.5-32B, all 64 layers: 92.5 s for one sequence of 4,096 tokens, 253 s for four such sequences, 398 s for one sequence of 16,384 tokens; Qwen3-32B 121.8 s and Qwen3-30B-A3B 84.7 s for 4,096 tokens (abstract; P 11.1). Different hardware, models and statement: not comparable with ours |
