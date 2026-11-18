@@ -1,0 +1,23 @@
+	Command being timed: "python3 <REPO>/experiments/20261118-221-silu-step-clip/silu_step_clip.py fixture <PLANNING>/scratch/silu221/fixture <PLANNING>/scratch/silu221/fixture/fixture-debug.json"
+	User time (seconds): 109.95
+	System time (seconds): 144.40
+	Percent of CPU this job got: 147%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:52.63
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3972432
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 5
+	Minor (reclaiming a frame) page faults: 17822872
+	Voluntary context switches: 93071
+	Involuntary context switches: 5164
+	Swaps: 0
+	File system inputs: 1576
+	File system outputs: 88
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

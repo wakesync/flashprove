@@ -1,0 +1,71 @@
+{
+ "elementwise": {
+  "n": 260160,
+  "n_inside": 220080,
+  "n_outside": 40080,
+  "U1_in_mismatch": 0,
+  "U1_out_mismatch": 0,
+  "U2_in_mismatch": 0,
+  "U2_out_mismatch_vs_clipped": 0,
+  "U2_out_differs_from_S": 40036,
+  "power_step_real_T_vs_M31_inside_differ": 129402,
+  "power_clip_real_C_vs_M31_outside_differ": 40036,
+  "low_edge_M31_vs_T_outside_differ": 0,
+  "high_edge_TS4095": 32741.0,
+  "high_edge_T": 32756.0,
+  "high_edge_M31_vs_T_outside_differ": 20040
+ },
+ "whole_function": {
+  "inside_on_grid": {
+   "exits": 0,
+   "gw_max_abs": 2320.0,
+   "on_grid": true,
+   "arm_M31_equals_mlp_int": true,
+   "arm_M31S_equals_mlp_int_S": true,
+   "C_equals_M31": true,
+   "C_equals_S": true,
+   "T_equals_S": true,
+   "T_equals_M31": true,
+   "exit_counts_equal": true
+  },
+  "inside_off_grid": {
+   "exits": 0,
+   "gw_max_abs": 1879.0,
+   "on_grid": false,
+   "arm_M31_equals_mlp_int": true,
+   "arm_M31S_equals_mlp_int_S": true,
+   "C_equals_M31": true,
+   "C_equals_S": false,
+   "T_equals_S": true,
+   "T_equals_M31": false,
+   "exit_counts_equal": true
+  },
+  "with_exits": {
+   "exits": 492,
+   "gw_max_abs": 342543.0,
+   "on_grid": false,
+   "arm_M31_equals_mlp_int": true,
+   "arm_M31S_equals_mlp_int_S": true,
+   "C_equals_M31": false,
+   "C_equals_S": false,
+   "T_equals_S": false,
+   "T_equals_M31": false,
+   "exit_counts_equal": true
+  }
+ },
+ "required": {
+  "U1_inside": true,
+  "U1_outside": true,
+  "U2_inside": true,
+  "U2_outside_is_clipped_exact": true,
+  "power_step_real": true,
+  "power_clip_real": true,
+  "wrappers_reproduce_pr138_pr202": true,
+  "inside_on_grid_all_equal": true,
+  "inside_off_grid_C_is_M31_T_is_S": true,
+  "with_exits_has_exits": true,
+  "exit_counters_identical_across_arms": true
+ },
+ "required_all_true": true,
+ "note": "Synthetic arrays only, numpy default_rng(0). The whole-function cases replace rms0 by the identity (the norm is not part of the stage under test). 'with_exits' has no required equality: there both arms change s outside D, and C/T vs M31/S are reported as found."
+}
