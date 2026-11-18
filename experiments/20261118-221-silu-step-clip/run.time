@@ -1,0 +1,23 @@
+	Command being timed: "/usr/bin/python3 <PLANNING>/lanes-1110/silu221_entry.py <OUT>/python.pid <OUT>/progress.log <REPO>/experiments/20261118-221-silu-step-clip/silu_step_clip.py <SCRATCH>/start-ckpt.npz <OUT>/runs 2026-11-18T03:30:00Z"
+	User time (seconds): 9163.84
+	System time (seconds): 3736.41
+	Percent of CPU this job got: 258%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:23:20
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8424324
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 18455
+	Minor (reclaiming a frame) page faults: 550806762
+	Voluntary context switches: 1377676
+	Involuntary context switches: 1062640
+	Swaps: 0
+	File system inputs: 446944
+	File system outputs: 7248
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
