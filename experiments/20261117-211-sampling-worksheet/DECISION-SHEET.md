@@ -10,7 +10,7 @@ Known unknowns that no blank below resolves: the Qwen full-request proof cost P 
 | Acceptable proof relation (exact match, clipped gap with numbers, other) | | | |
 | Population definition and epoch close rule | | | |
 | Sampling scheme and p or m | | must be p=1 | |
-| Desired miss probability | | n/a (p=1) | |
+| Desired miss probability | | n/a (p=1), unless a soundness epsilon is entered: then a desired miss probability is required (PREREG Amendment 1) | |
 | Enforceable penalty or deposit, and in what unit | | | |
 | Behavioral assumptions for deterrence | | | |
 | Deadline / timeout policy | | verify before action: yes/no | |

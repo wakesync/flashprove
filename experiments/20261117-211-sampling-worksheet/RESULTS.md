@@ -1,6 +1,6 @@
 # RESULTS: 20261117-211-sampling-worksheet
 
-Issue #211 (part of #7). Two results, reported separately. (1) Original registration, at the reviewed code `9c8e043`: **PASS**, all five registered runs matched 45 of 45 fixtures and gave the same report digest. (2) Amended suite (PREREG Amendments 1 to 3, registered after round 1 review), at the fixed code `b147791`: **PASS** against the amended acceptance. In each of five runs F46 to F135 matched 90 of 90 and F01 to F36 still match their original registration. F37 to F45 are changed registrations: they no longer match their original expectation (36 of the original 45 match at the fixed code) and give the outcome registered in Amendment 2 (9 of 9). Measured, unreplicated. Deterministic, so there is no spread to report.
+Issue #211 (part of #7). Three results, reported separately. (1) Original registration, at the reviewed code `9c8e043`: **PASS**, all five registered runs matched 45 of 45 fixtures and gave the same report digest. (2) Amended suite (PREREG Amendments 1 to 3, registered after round 1 review), at the fixed code `b147791`: **PASS** against the amended acceptance. In each of five runs F46 to F135 matched 90 of 90 and F01 to F36 still match their original registration. F37 to F45 are changed registrations: they no longer match their original expectation (36 of the original 45 match at the fixed code) and give the outcome registered in Amendment 2 (9 of 9). (3) Round 2 suite (PREREG Amendment 4, registered after round 2 review), at the round 2 code `460971f`: **PASS** against the acceptance of Amendment 4. In each of five runs F136 to F141 matched 6 of 6, F46 to F135 matched 90 of 90, F01 to F36 still match their original registration and F37 to F45 give the outcome of Amendment 2 (9 of 9). Measured, unreplicated. Deterministic, so there is no spread to report.
 
 What this is: an offline checker (`worksheet.py`, standard library, exact rationals) that takes one sampling policy worksheet and returns CONDITIONAL, INELIGIBLE or MISSING INPUTS, with the codes that decided it. At the reviewed code it did this correctly on the registered fixtures only: both round 1 reviews found worksheets outside them that received CONDITIONAL and should have been refused (see "Runs of the fixed checker" below). It is not a launch recommendation, it adds no formula, it estimates no cost, and it recommends no sampling rate. Every number in the fixtures is synthetic test input unless a main path is named next to it.
 
@@ -95,7 +95,7 @@ The three negative tests the issue names are F35 (batch-1 decode ratio as GPU-co
 
 ## Templates and the decision sheet
 
-`templates.json` has one blank template per class; [runs/templates.json](runs/templates.json) shows each evaluates to MISSING INPUTS (codes NO_RELATION, MISSING_INPUT, UNKNOWN_COST with `costs.P` and `costs.C` listed as unknown; the hardware-trusting one also NO_HW_TRUST_ASSUMPTION). [DECISION-SHEET.md](DECISION-SHEET.md) is empty on purpose: penalties, risk tolerance, desired miss probability, relation, retention and enforceability are not filled in. At the fixed code the same three templates are again MISSING INPUTS ([runs-r1/templates.json](runs-r1/templates.json)).
+`templates.json` has one blank template per class; [runs/templates.json](runs/templates.json) shows each evaluates to MISSING INPUTS (codes NO_RELATION, MISSING_INPUT, UNKNOWN_COST with `costs.P` and `costs.C` listed as unknown; the hardware-trusting one also NO_HW_TRUST_ASSUMPTION). [DECISION-SHEET.md](DECISION-SHEET.md) is empty on purpose: penalties, risk tolerance, desired miss probability, relation, retention and enforceability are not filled in. At the fixed code the same three templates are again MISSING INPUTS ([runs-r1/templates.json](runs-r1/templates.json)), and again at the round 2 code ([runs-r2/templates.json](runs-r2/templates.json)). After round 2 review one cell of the decision sheet was reworded (the vendor-independent "Desired miss probability" cell, see "Corrections after review", round 2); no policy value is filled in.
 
 ## Numbers quoted from main (not inputs, not re-derived)
 
@@ -115,7 +115,7 @@ These evidence files are byte-identical between the issue's snapshot `83299f19` 
 - No lifetime analysis for an outcome-adaptive adversary; such a request is refused, not answered.
 - Queue/batch effects and all-traffic trace cost are not modelled.
 - The cost-only fixtures F27 to F36 exercise the cost section alone; their "CONDITIONAL" means "numbers well formed", not a policy verdict.
-- Unreplicated. Round 1 review (two reviewers) requested changes on the checker code. The fixed code has not been reviewed.
+- Unreplicated. Round 1 review (two reviewers) requested changes on the checker code. Round 2 reviewed the round 1 fixed code: one approval, one change request with one must-fix (see "Runs of the round 2 code" below). The round 2 code has not been reviewed.
 
 ## Runs of the fixed checker (after round 1 review)
 
@@ -152,19 +152,59 @@ Controls: the 14 fixtures registered CONDITIONAL (F46, F47, F50, F66, F68, F76, 
 
 ### Limits of the fixed checker and of this evidence
 
-- The new fixtures and their expected verdicts were written by the same lane that wrote the fix, after reading both reviews. They were registered before the code, but they are not an independent test. The fixed code has not been reviewed.
+- The new fixtures and their expected verdicts were written by the same lane that wrote the fix, after reading both reviews. They were registered before the code, but they are not an independent test. Round 2 reviewed this code: one approval, one change request that found one more accepted worksheet (see "Runs of the round 2 code" below).
 - All 90 new fixtures matched on the first registered run. That shows the code does what was registered; it does not show the registration is complete. The reviews found the first registration incomplete in the same way.
-- The rule of Amendment 3 (a `source` that is not text is `NO_PROVENANCE`) is covered only by debug inputs DBG-16 and DBG-17, not by a registered fixture.
+- The rule of Amendment 3 (a `source` that is not text is `NO_PROVENANCE`) was covered only by debug inputs DBG-16 and DBG-17 in the runs of this section. It is registered as F141 for the round 2 suite.
 - `NO_COVERAGE`, `NO_COST` and `CHECKER_ERROR` are backstops with no registered fixture; no input is known that reaches them.
 - The 960 generated malformed inputs are debug inputs on one base, not a registered suite and not a proof that no malformed worksheet is accepted.
 - A required text field is satisfied by any non-empty text. The checker cannot tell whether a relation, a population definition, a deadline policy or a behavioral assumption means anything.
 - The loss basis is the declared unit of loss and gain. The checker cannot check that the two amounts are really in that unit.
 - One stated exception to the cost scope rule: an F that is exactly zero is accepted in a per-request unit, which keeps F27 to F36 valid as registered.
-- `templates.json` is unchanged from the reviewed head. The blank templates therefore do not show the fields the fixed checker now requires (`deterrence.state`, a per-epoch unit for F, `sampling.schedule`, and so on). They still evaluate to MISSING INPUTS, but a person filling one in has to read PREREG Amendment 1 for the full schema. Updating the templates is not done here.
+- `templates.json` is unchanged from the reviewed head. The blank templates therefore do not show the fields the fixed checker now requires (`deterrence.state`, `latency.verify_before_action`, a per-epoch unit for F, and so on). They still evaluate to MISSING INPUTS, but a person filling one in has to read PREREG Amendment 1 for the full schema. Updating the templates is not done here.
 - The reviewers' own failing inputs are not committed here as files. Each is re-registered as a fixture on a completed base worksheet (F56 to F135), because the reviewers' base worksheets are themselves incomplete under the new schema and would be refused for that reason alone.
 - Design choices made where the reviews left one (refuse a q the registered formula cannot use; one miss target compared with the supported bound; wall seconds refused as a cost unit) are choices of this lane, stated in Amendment 1.
 - Queue and batch effects and all-traffic trace cost are listed in every result under `not_modelled`. They are not input fields and nothing is computed from them.
 - Everything under "What is NOT established" above still holds. No real policy is feasible or infeasible by this work, no cost, overhead, dollar figure or sampling rate is measured, and the decision sheet is empty.
+
+## Runs of the round 2 code (after round 2 review)
+
+Round 2 reviewed the round 1 fixed code at head `c66c4b2`. It was split: [opus](https://github.com/wakesync/flashprove/pull/220#issuecomment-6964830279) approves with no must-fix, [astra](https://github.com/wakesync/flashprove/pull/220#issuecomment-6964807245) requests one change. The finding, as that reviewer's descriptive finding: an observation `proof_rejected` counted as `wrong_answer` on an otherwise complete worksheet returned CONDITIONAL with no code, while a `timeout` or a `refusal` counted as `wrong_answer` was refused. A verifier rejecting a proof does not establish that the delivered answer was wrong. The registered evidence of both earlier rounds was not in question.
+
+Order in history: Amendment 4 (`656642a`: the rule, F136 to F141 and their expected verdicts), then the code (`460971f`), then the runs (`28fa574`). No expectation was edited after it was registered. Before run 1 the round 2 code was run only on `debug_fixtures_r2.py` (DBG-18 to DBG-27, on a base no registered fixture uses), once; no fixture F01 to F141 was run on it before run 1.
+
+Change in `worksheet.py`: one rule. An observation `proof_rejected` counted as `wrong_answer` gives the new code `PROOF_REJECTION_NOT_WRONG_ANSWER`, MISSING INPUTS, with no number. `proof_rejected` counted as `audit_failure` stays accepted. No input field, formula or other rule changed.
+
+| run | F01 to F45 against their original registration | F37 to F45 against Amendment 2 | F46 to F135 | F136 to F141 | report sha256 | file |
+|---|---|---|---|---|---|---|
+| 1 | 36/45 (F01 to F36 match; F37 to F45 do not) | 9/9 | 90/90 | 6/6 | `534a95fd14bbab34d6552c5bc35862e609bf63c50393b038846ce3397d680230` | [runs-r2/run-1.json](runs-r2/run-1.json) |
+| 2 | 36/45 | 9/9 | 90/90 | 6/6 | same | [runs-r2/run-2.json](runs-r2/run-2.json) |
+| 3 | 36/45 | 9/9 | 90/90 | 6/6 | same | [runs-r2/run-3.json](runs-r2/run-3.json) |
+| 4 | 36/45 | 9/9 | 90/90 | 6/6 | same | [runs-r2/run-4.json](runs-r2/run-4.json) |
+| 5 | 36/45 | 9/9 | 90/90 | 6/6 | same | [runs-r2/run-5.json](runs-r2/run-5.json) |
+
+Command per run: `taskset -c 4-5 prlimit --as=536870912 timeout 60 python3 -B experiments/20261117-211-sampling-worksheet/run_suite_r2.py --run K --out experiments/20261117-211-sampling-worksheet/runs-r2/run-K.json` (refuses to overwrite). Measured, unreplicated. Deterministic, so there is no spread to report. No time is reported. The three blank templates are again MISSING INPUTS ([runs-r2/templates.json](runs-r2/templates.json)).
+
+| id | input (B and V are the bases of PREREG Amendment 1) | registered, and observed in each run |
+|---|---|---|
+| F136 | B, `proof_rejected` counted as `wrong_answer` | MISSING INPUTS, `PROOF_REJECTION_NOT_WRONG_ANSWER`, no number |
+| F137 | B, `proof_rejected` counted as `audit_failure` (positive control) | CONDITIONAL, no code, coverage 5/9, miss 4/9, normalized cost 47/16 (synthetic inputs) |
+| F138 | B, an accepted and a refused proof rejection | MISSING INPUTS, `PROOF_REJECTION_NOT_WRONG_ANSWER` |
+| F139 | B, a timeout and a proof rejection, both counted as `wrong_answer` | MISSING INPUTS, `PROOF_REJECTION_NOT_WRONG_ANSWER` and `TIMEOUT_NOT_PROOF` |
+| F140 | V, `proof_rejected` counted as `wrong_answer` | MISSING INPUTS, `PROOF_REJECTION_NOT_WRONG_ANSWER` |
+| F141 | B, the `source` of `population.N` is a number | MISSING INPUTS, `NO_PROVENANCE` |
+
+The three run sets are separate evidence. `runs/` (original code, 45 of 45) and `runs-r1/` (round 1 fixed code) are byte-identical to the reviewed head. The result rows of F01 to F135 in `runs-r2/run-1.json` are equal to the same rows in `runs-r1/run-1.json` (file compared with file), so the round 2 code changed no earlier result.
+
+### Limits of the round 2 evidence
+
+- F136 to F141 and their expected verdicts were written by the lane that wrote the fix, after reading the review. They were registered before the code, but they are not an independent test. The round 2 code has not been reviewed.
+- 6 of 6 on the first registered run shows the code does what was registered. It does not show the registration is complete: the round 2 finding is itself a case that 90 of 90 did not cover.
+- F141 is not a prediction. Its rule was already in the round 1 fixed code and was covered by debug inputs; it is registered so that the suite goes red if the rule is lost.
+- The checker refuses the classification. It cannot check that an observation counted as `audit_failure` is classified correctly, and it uses no observation in any formula.
+- The worksheet has no input that can record a demonstrated wrong answer. Plain refusal was chosen over an "explicit basis" field, because a free-text basis would only be checked for being non-empty (PREREG Amendment 4).
+- Not changed by round 2. These are the reviewers' descriptive findings in the two round 2 comments linked above, listed there as nonblocking, and none was rerun here: a q is checked against a deny-list of one source name only, so a q with another or no `q_source` is used; exact arithmetic at large N can take longer than a practical time limit; a value written in non-ASCII digits is parsed; an F of exactly zero is accepted in a per-request unit. PREREG Amendment 4 states these behaviours as unchanged.
+- `templates.json` is still unchanged and is not updated to the schema of Amendment 1. `NO_COVERAGE`, `NO_COST` and `CHECKER_ERROR` still have no registered fixture.
+- Everything under "What is NOT established" above still holds.
 
 ## Corrections after review
 
@@ -177,3 +217,16 @@ Dated 2026-11-17, after the round 1 reviews. Each replaced sentence is quoted.
 5. Results ledger row, generated README and CLAIMS rows, and the PR body said "All fixture numbers are synthetic." That is wrong for F35, whose 0.46 is a conditional calculation quoted from `experiments/20261112-7-plain-inference-baseline/RESULTS.md:84` on main. Corrected to "synthetic except F35". Asked for by [opus](https://github.com/wakesync/flashprove/pull/220#issuecomment-6961891535) (nonblocking). The fixture tables above already said this.
 6. The PREREG header says "Date (UTC): 2026-11-17 21:20" but its commit is 21:14:31Z and the code commit is 21:19:29Z. Not edited; disclosed in PREREG Amendment 1. Asked for by both comments (nonblocking).
 7. The sentence "Code was committed (`9c8e043`) before the first run; the PREREG (`3dc92dc`) before any code." is unchanged and still true of the original runs.
+
+### Round 2
+
+Dated 2026-11-18, after the round 2 reviews of head `c66c4b2`. The defect: an observation `proof_rejected` counted as `wrong_answer` returned CONDITIONAL with no code, although a rejected proof does not show that the delivered answer was wrong. Found by [astra](https://github.com/wakesync/flashprove/pull/220#issuecomment-6964807245) (must-fix); [opus](https://github.com/wakesync/flashprove/pull/220#issuecomment-6964830279) approved the same head. Fixed by the rule of PREREG Amendment 4; see "Runs of the round 2 code" above. Each replaced sentence is quoted.
+
+1. Replaced, at the top: "Two results, reported separately." Now three, and result (3) is added to that paragraph. Reason: the round 2 runs are a third result and are kept apart from the first two.
+2. Replaced, under What is NOT established: "- Unreplicated. Round 1 review (two reviewers) requested changes on the checker code. The fixed code has not been reviewed." Reason: stale. Round 2 reviewed the round 1 fixed code. Named as stale in both round 2 comments.
+3. Replaced, under Limits of the fixed checker: "They were registered before the code, but they are not an independent test. The fixed code has not been reviewed." Reason: the same stale sentence.
+4. Replaced, under Limits of the fixed checker: "- The rule of Amendment 3 (a `source` that is not text is `NO_PROVENANCE`) is covered only by debug inputs DBG-16 and DBG-17, not by a registered fixture." Reason: F141 now registers it for the round 2 suite. Asked for by the opus comment (nonblocking 4).
+5. Replaced, under Limits of the fixed checker: "(`deterrence.state`, a per-epoch unit for F, `sampling.schedule`, and so on)". Reason: the blank templates already have a `sampling.schedule` field; the fields they lack are `deterrence.state` and `latency.verify_before_action`. Pointed out by the astra comment (nonblocking).
+6. Added, under Templates and the decision sheet: the sentences about `runs-r2/templates.json` and about the one changed cell of the decision sheet.
+7. `DECISION-SHEET.md`, one cell changed, no policy value filled in. Row "Desired miss probability", column "Vendor-independent proof, irreversible decision". Old cell: "n/a (p=1)". New cell: "n/a (p=1), unless a soundness epsilon is entered: then a desired miss probability is required (PREREG Amendment 1)". Reason: the old cell was wrong for a worksheet with an epsilon, which the checker refuses without a target since the round 1 fix (F119, F120). Asked for by the astra comment (nonblocking).
+8. Results ledger row, generated README and CLAIMS rows and the PR body said the fixed code "is not yet reviewed". Corrected to the round 2 outcome on each of them.
