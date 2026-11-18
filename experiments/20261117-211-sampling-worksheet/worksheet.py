@@ -11,6 +11,9 @@ Formulas are the ones already on main in research/sampled-audit/README.md
 After round 1 review (PREREG Amendments 1 and 2) the checker fails closed:
 every required input is checked for presence, provenance, unit, value form
 and numeric domain before any arithmetic, and evaluate() does not raise.
+
+After round 2 review (PREREG Amendment 4) a proof rejection counted as a wrong
+answer is refused, like a timeout or a refusal counted as one.
 """
 import re
 from fractions import Fraction
@@ -50,7 +53,9 @@ MISSING_CODES = {"MISSING_INPUT", "NO_PROVENANCE", "BAD_KIND", "UNIT_UNKNOWN",
                  "BAD_SECTION", "CHECKER_ERROR", "UNKNOWN_REQUIRED", "BAD_VALUE",
                  "NOT_INTEGER", "NOT_BOOLEAN", "BAD_OBSERVATION", "Q_UNSUPPORTED",
                  "UNSUPPORTED_COMBINATION", "COST_SCOPE", "WALL_TIME_NOT_COST",
-                 "R_AND_P_BOTH", "LOSS_BASIS_NOT_CONCRETE", "NO_COVERAGE", "NO_COST"}
+                 "R_AND_P_BOTH", "LOSS_BASIS_NOT_CONCRETE", "NO_COVERAGE", "NO_COST",
+                 # added by Amendment 4
+                 "PROOF_REJECTION_NOT_WRONG_ANSWER"}
 INELIGIBLE_CODES = {"SUBSAMPLE_NOT_PROOF", "VERIFY_AFTER_ACTION",
                     "MISS_ABOVE_TARGET", "ADAPTIVE_NOT_IID"}
 
@@ -441,6 +446,10 @@ def _evaluate(ws):
             ctx.flag("BAD_OBSERVATION", f"type={kind} counted_as={counted}")
         elif kind in ("timeout", "refusal") and counted == "wrong_answer":
             ctx.flag("TIMEOUT_NOT_PROOF", "a timeout/refusal is not proof of a wrong answer")
+        elif kind == "proof_rejected" and counted == "wrong_answer":
+            # Amendment 4: a verifier rejecting a proof does not show the answer was wrong
+            ctx.flag("PROOF_REJECTION_NOT_WRONG_ANSWER", "a rejected proof is an audit failure, "
+                     "not evidence that the delivered answer was wrong")
 
     # deterrence: a declared state is required; loss and gain share one concrete basis
     det = ws.get("deterrence")
