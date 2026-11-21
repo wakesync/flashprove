@@ -1,0 +1,13 @@
+{
+ "args": [
+  "honest",
+  "3"
+ ],
+ "exit": 0,
+ "wall_s": 4.218,
+ "stdout": [
+  "{\"mode\":\"honest\",\"case\":\"honest\",\"accepted\":true,\"trace_accepted\":true,\"trace_why\":\"accepted\",\"lin_accepted\":true,\"lin_why\":\"accepted\",\"cells\":1666,\"product_columns_used\":23329,\"log_length\":15,\"relations\":44992,\"table_matrix\":[595,8192],\"table_rows\":128,\"table_ell\":38083,\"table_log_n\":18,\"trace_proof_bytes\":421080,\"lin_proof_bytes\":224312,\"commit_s\":3.160,\"prove_s\":0.903,\"verify_s\":0.091,\"peak_rss_kb\":453204}"
+ ],
+ "max_rss_kb_time": 453204,
+ "stderr_tail": []
+}

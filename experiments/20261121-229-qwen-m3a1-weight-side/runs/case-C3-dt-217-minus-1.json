@@ -1,0 +1,13 @@
+{
+ "args": [
+  "case",
+  "C3-dt-2^17-minus-1"
+ ],
+ "exit": 0,
+ "wall_s": 4.203,
+ "stdout": [
+  "{\"mode\":\"completeness\",\"case\":\"C3-dt-2^17-minus-1\",\"accepted\":true,\"trace_accepted\":true,\"trace_why\":\"accepted\",\"lin_accepted\":true,\"lin_why\":\"accepted\",\"cells\":1666,\"product_columns_used\":23329,\"log_length\":15,\"relations\":44992,\"table_matrix\":[595,8192],\"table_rows\":128,\"table_ell\":38083,\"table_log_n\":18,\"trace_proof_bytes\":421016,\"lin_proof_bytes\":224088,\"commit_s\":3.106,\"prove_s\":0.910,\"verify_s\":0.100,\"peak_rss_kb\":493348}"
+ ],
+ "max_rss_kb_time": 493348,
+ "stderr_tail": []
+}

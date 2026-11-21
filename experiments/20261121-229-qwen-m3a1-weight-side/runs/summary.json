@@ -1,0 +1,160 @@
+{
+ "label": "measured, unreplicated, one shared host, cores 2-7",
+ "honest": {
+  "accepted": 5,
+  "n": 5,
+  "prove_s": {
+   "n": 5,
+   "median": 0.908,
+   "sd": 0.0118,
+   "min": 0.897,
+   "max": 0.928
+  },
+  "verify_s": {
+   "n": 5,
+   "median": 0.098,
+   "sd": 0.0048,
+   "min": 0.089,
+   "max": 0.099
+  },
+  "commit_s": {
+   "n": 5,
+   "median": 3.16,
+   "sd": 0.0417,
+   "min": 3.116,
+   "max": 3.222
+  },
+  "wall_s": {
+   "n": 5,
+   "median": 4.228,
+   "sd": 0.0402,
+   "min": 4.183,
+   "max": 4.277
+  },
+  "peak_rss_kb": {
+   "n": 5,
+   "median": 453204,
+   "sd": 338.4317,
+   "min": 452636,
+   "max": 453336
+  },
+  "trace_proof_bytes": {
+   "n": 5,
+   "median": 420984,
+   "sd": 234.0598,
+   "min": 420632,
+   "max": 421240
+  },
+  "lin_proof_bytes": {
+   "n": 5,
+   "median": 224312,
+   "sd": 287.6442,
+   "min": 224056,
+   "max": 224760
+  },
+  "fixed": {
+   "cells": 1666,
+   "product_columns_used": 23329,
+   "log_length": 15,
+   "relations": 44992,
+   "table_matrix": [
+    595,
+    8192
+   ],
+   "table_rows": 128,
+   "table_ell": 38083,
+   "table_log_n": 18
+  }
+ },
+ "cases": {
+  "C1-dt-78848": {
+   "accepted": true,
+   "trace_why": "accepted",
+   "lin_why": "accepted",
+   "expected_accepted": true,
+   "exit": 0,
+   "peak_rss_kb": 491304
+  },
+  "C2-dt-minus-23424": {
+   "accepted": true,
+   "trace_why": "accepted",
+   "lin_why": "accepted",
+   "expected_accepted": true,
+   "exit": 0,
+   "peak_rss_kb": 493224
+  },
+  "C3-dt-2^17-minus-1": {
+   "accepted": true,
+   "trace_why": "accepted",
+   "lin_why": "accepted",
+   "expected_accepted": true,
+   "exit": 0,
+   "peak_rss_kb": 493348
+  },
+  "H1-other-root-one-tap": {
+   "accepted": false,
+   "trace_why": "a nonce does not give the proof of work that its round asks for",
+   "lin_why": "not run: the trace chain was refused",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 818236
+  },
+  "H1b-other-root-same-weights": {
+   "accepted": false,
+   "trace_why": "a nonce does not give the proof of work that its round asks for",
+   "lin_why": "not run: the trace chain was refused",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 780132
+  },
+  "H2a-tap-changed-v-from-trace": {
+   "accepted": false,
+   "trace_why": "accepted",
+   "lin_why": "LIN second part: a proximity test",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 491304
+  },
+  "H2b-tap-changed-v-from-table": {
+   "accepted": false,
+   "trace_why": "BASE: the masked message in the proof does not satisfy the linear claim",
+   "lin_why": "not run: the trace chain was refused",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 490732
+  },
+  "H3-gain-2^50-trace-and-table": {
+   "accepted": false,
+   "trace_why": "BASE: the masked message in the proof does not satisfy the linear claim",
+   "lin_why": "not run: the trace chain was refused",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 493348
+  },
+  "H4-gain-in-class-not-the-tables": {
+   "accepted": false,
+   "trace_why": "accepted",
+   "lin_why": "LIN second part: a proximity test",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 491304
+  },
+  "H5-dt-2^17": {
+   "accepted": false,
+   "trace_why": "BASE: the masked message in the proof does not satisfy the linear claim",
+   "lin_why": "not run: the trace chain was refused",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 493220
+  },
+  "H6-table-row0-pad-nonzero": {
+   "accepted": false,
+   "trace_why": "accepted",
+   "lin_why": "LIN second part: a proximity test",
+   "expected_accepted": false,
+   "exit": 0,
+   "peak_rss_kb": 491096
+  }
+ },
+ "all_cases_as_expected": true
+}
