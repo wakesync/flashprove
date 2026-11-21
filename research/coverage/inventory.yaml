@@ -368,6 +368,16 @@ rows:
       - {file: research/operators/qwen_ops_followups/follow.cpp, symbol: 'static std::string v2_text(const Circuit& c,const std::vector<NamedTable>& tabs,const Claim& claim) {'}
       - {file: research/operators/qwen_ops_followups/README.md, symbol: '## Item 1: table identity in the configuration digest (profile v2)'}
     note: "binds the verifier's own tables into the transcript; it does not make a table correct and does not bind inputs, kernel or history (the follow-up suite keeps those as accepted gap controls)"
+  - id: OP-R20
+    category: operator
+    scope: research
+    element: "Qwen M3a-1 weight side (research/operators/qwen_m3a1, issue #229): the class of each of the 1,666 trace-read weight cells of one head, and their tie to row 0 of the committed weight table"
+    relation: "experiments/20261121-229-qwen-m3a1-weight-side; relations() builds the class relations (exact bits, b^2 = b) and lin_check() checks the LIN claim that row 0 of the table at psi equals the trace's v"
+    enforcement: proof_constraint
+    sites:
+      - {file: research/operators/qwen_m3a1/qm3a1.cpp, symbol: 'static std::vector<WideRelation> relations('}
+      - {file: research/operators/qwen_m3a1/qm3a1.cpp, symbol: 'static bool lin_check('}
+    note: "does not bound the 3,287,040 matrix weights (rows 1 to 594 of the table); research harness, no security level"
   # ---------------------------------------------------------------- range and rounding rules
   - id: RR-01
     category: range_rounding
