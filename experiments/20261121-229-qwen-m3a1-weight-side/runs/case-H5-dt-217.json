@@ -1,0 +1,13 @@
+{
+ "args": [
+  "case",
+  "H5-dt-2^17"
+ ],
+ "exit": 0,
+ "wall_s": 4.191,
+ "stdout": [
+  "{\"mode\":\"hostile\",\"case\":\"H5-dt-2^17\",\"accepted\":false,\"trace_accepted\":false,\"trace_why\":\"BASE: the masked message in the proof does not satisfy the linear claim\",\"lin_accepted\":false,\"lin_why\":\"not run: the trace chain was refused\",\"cells\":1666,\"product_columns_used\":23329,\"log_length\":15,\"relations\":44992,\"table_matrix\":[595,8192],\"table_rows\":128,\"table_ell\":38083,\"table_log_n\":18,\"trace_proof_bytes\":421144,\"lin_proof_bytes\":225112,\"commit_s\":3.117,\"prove_s\":0.905,\"verify_s\":0.086,\"peak_rss_kb\":493220}"
+ ],
+ "max_rss_kb_time": 493220,
+ "stderr_tail": []
+}
