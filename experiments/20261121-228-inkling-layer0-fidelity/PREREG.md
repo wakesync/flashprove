@@ -74,3 +74,6 @@ In this repository: `20261109-8-qwen-real-weights` (PR #68, layer-0 real-weight 
 
 ## Amendments
 (empty at registration)
+
+### Amendment 1, 2026-11-21T06:42Z (after the run, after review; text only)
+The header line above gives "Date (UTC): 2026-11-21T05:58Z". The commit that carries this file, `bbc3c742`, has commit time 2026-11-21T05:54:33Z, four minutes earlier. The header time is therefore not the time this file was written; the commit time 2026-11-21T05:54:33Z is the record of registration. The header line is left as it was. Nothing else in this registration changes: no hypothesis, lowering, metric, bar, outcome, kill criterion or run rule is altered, and nothing was rerun. Raised by the review of PR #230 (https://github.com/wakesync/flashprove/pull/230#issuecomment-7058731735, must-fix 2).
