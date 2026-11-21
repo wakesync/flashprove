@@ -1,0 +1,72 @@
+{
+ "determinism": {
+  "hashes_equal": true,
+  "all_fields_equal_except_time": true
+ },
+ "B1": {
+  "median": 0.021814680316872025,
+  "max": 0.030420115573033733,
+  "min": 0.013728080438508474,
+  "bar": "median<=1e-2 and max<=5e-2",
+  "verdict": "FAIL"
+ },
+ "B2": {
+  "set_diff_tokens": 91,
+  "n_tokens": 2426,
+  "frac": 0.03751030502885408,
+  "bar": "<=0.01",
+  "verdict": "FAIL"
+ },
+ "B3": {
+  "verdict": "IN-BOUND",
+  "nonzero": {}
+ },
+ "overall": "FAIL",
+ "flips": {
+  "n": 91,
+  "n_differ_counts": {
+   "1": 91
+  },
+  "gap_float_median": 0.00030216547132599914,
+  "gap_float_max": 0.0015350462791939579,
+  "gap_float_p90": 0.0010012936707995135
+ },
+ "descriptive": {
+  "rel_y_pooled": 0.0209470982386073,
+  "rel_y_attr_pooled": 0.007889698388255489,
+  "rel_y_sets_agree_per_prompt": {
+   "p01-ordinary-short": 0.008586110663187123,
+   "p02-ordinary-paragraph": 0.009426780279219189,
+   "p03-repeat-word": 0.00702885087740417,
+   "p04-repeat-punct": 0.009131235805022064,
+   "p05-code": 0.008384007253275299,
+   "p06-digits": 0.009308193230357972,
+   "p07-chat-ordinary": 0.00773081648959027,
+   "p08-chat-refusal": 0.006779024358745676,
+   "p09-multilingual": 0.007047242499444814,
+   "p10-long-mixed": 0.009449482184798217
+  },
+  "rel_y_attr_per_prompt": {
+   "p01-ordinary-short": 0.008552545271419017,
+   "p02-ordinary-paragraph": 0.009280434013626158,
+   "p03-repeat-word": 0.006804418417238114,
+   "p04-repeat-punct": 0.009045965914664245,
+   "p05-code": 0.008243106670120808,
+   "p06-digits": 0.009203065175141967,
+   "p07-chat-ordinary": 0.007596780761089623,
+   "p08-chat-refusal": 0.006688882612958994,
+   "p09-multilingual": 0.006919633766448793,
+   "p10-long-mixed": 0.009323106230160081
+  }
+ },
+ "seconds": {
+  "A": {
+   "input": 3.7,
+   "total": 54.0
+  },
+  "B": {
+   "input": 3.9,
+   "total": 52.8
+  }
+ }
+}
