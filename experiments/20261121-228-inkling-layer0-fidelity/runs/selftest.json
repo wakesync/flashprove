@@ -1,0 +1,19 @@
+{
+ "rq": "ok",
+ "imatmul": "ok",
+ "key_of": "ok",
+ "TA_range": [
+  -138,
+  2048
+ ],
+ "TB_range": [
+  -3162,
+  3162
+ ],
+ "SIG_0": 32768,
+ "nvfp4": "ok",
+ "f8": "ok",
+ "short_conv": "ok",
+ "attention_causal": "ok",
+ "topk_ties": "ok"
+}
