@@ -1,0 +1,782 @@
+{
+ "report": {
+  "all_numbers_synthetic_unless_source_on_main": true,
+  "experiment": "20261117-211-sampling-worksheet",
+  "fixtures": [
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F01",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F02",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F03",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/10",
+    "got": "1/10",
+    "id": "F04",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "7/8",
+    "got": "7/8",
+    "id": "F05",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "99/2500",
+    "got": "99/2500",
+    "id": "F06",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F07",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F08",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F09",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/100",
+    "got": "1/100",
+    "id": "F10",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F11",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F12",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F13",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F14",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "34/55",
+    "got": "34/55",
+    "id": "F15",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "10/11",
+    "got": "10/11",
+    "id": "F16",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "1/4",
+    "got": "1/4",
+    "id": "F17",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F18",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F19",
+    "kind": "formula",
+    "match": true
+   },
+   {
+    "D": 100,
+    "N": 1000,
+    "exact": "9400011007/22917475695",
+    "formatted": "41.0168%",
+    "id": "F20",
+    "kind": "cell84",
+    "m": 5,
+    "match": true,
+    "published": "41.0168%"
+   },
+   {
+    "D": 100,
+    "N": 1000,
+    "exact": "23121704784480128291/35404510814780942585",
+    "formatted": "65.3072%",
+    "id": "F21",
+    "kind": "cell84",
+    "m": 10,
+    "match": true,
+    "published": "65.3072%"
+   },
+   {
+    "D": 10,
+    "N": 1000,
+    "exact": "3535735177948573850169/8780318682065673761080",
+    "formatted": "40.2689%",
+    "id": "F22",
+    "kind": "cell84",
+    "m": 50,
+    "match": true,
+    "published": "40.2689%"
+   },
+   {
+    "D": 10,
+    "N": 1000,
+    "exact": "23121704784480128291/35404510814780942585",
+    "formatted": "65.3072%",
+    "id": "F23",
+    "kind": "cell84",
+    "m": 100,
+    "match": true,
+    "published": "65.3072%"
+   },
+   {
+    "D": 35,
+    "N": 64,
+    "exact": "35/64",
+    "formatted": "54.6875%",
+    "id": "F24",
+    "kind": "cell84",
+    "m": 1,
+    "match": true,
+    "published": "54.6875%"
+   },
+   {
+    "D": 8,
+    "N": 64,
+    "exact": "6383/15128",
+    "formatted": "42.1933%",
+    "id": "F25",
+    "kind": "cell84",
+    "m": 4,
+    "match": true,
+    "published": "42.1933%"
+   },
+   {
+    "D": 26,
+    "N": 256,
+    "exact": "80669772519162725/97252813873580904",
+    "formatted": "82.9485%",
+    "id": "F26",
+    "kind": "cell84",
+    "m": 16,
+    "match": true,
+    "published": "82.9485%"
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F27",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [],
+     "cost_per_request": "201/100",
+     "normalized_cost": "201/100",
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F28",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [],
+     "cost_per_request": null,
+     "normalized_cost": "201/100",
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F29",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [],
+     "cost_per_request": null,
+     "normalized_cost": "201/100",
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNIT_MISMATCH"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F30",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "UNIT_MISMATCH"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNIT_MISMATCH"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F31",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "UNIT_MISMATCH"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_COST"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F32",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "UNKNOWN_COST"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [
+      "costs.P"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_COST"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F33",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "UNKNOWN_COST"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [
+      "costs.C"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NO_PROVENANCE"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F34",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "NO_PROVENANCE"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "DECODE_RATIO_NOT_GPU_COST"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F35",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "DECODE_RATIO_NOT_GPU_COST"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "TOKEN_FRACTION_NOT_REQUEST_FRACTION"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F36",
+    "kind": "cost",
+    "match": true,
+    "result": {
+     "codes": [
+      "TOKEN_FRACTION_NOT_REQUEST_FRACTION"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F37",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "5101/100",
+     "coverage": "7/8",
+     "deterrence": {
+      "P_detect_times_loss": "7/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "5/1",
+      "condition_holds": true,
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "1/8",
+     "normalized_cost": "5101/100",
+     "notes": [],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F38",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [
+      "MISS_ABOVE_TARGET"
+     ],
+     "cost_per_request": "5101/100",
+     "coverage": "7/8",
+     "deterrence": null,
+     "miss": "1/8",
+     "normalized_cost": "5101/100",
+     "notes": [
+      "MISS_ABOVE_TARGET: miss 1/8 > target 1/10"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "ADAPTIVE_NOT_IID"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F39",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "ADAPTIVE_NOT_IID"
+     ],
+     "cost_per_request": "5101/100",
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": "5101/100",
+     "notes": [
+      "ADAPTIVE_NOT_IID: an outcome-adaptive schedule has no lifetime plug-in or IID formula"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F40",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "10101/100",
+     "coverage": "1/1",
+     "deterrence": null,
+     "miss": "0/1",
+     "normalized_cost": "10101/100",
+     "notes": [],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F41",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": "10001/100",
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": "10001/100",
+     "notes": [
+      "SUBSAMPLE_NOT_PROOF: a specific irreversible decision needs p=1"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "VERIFY_AFTER_ACTION"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F42",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [
+      "VERIFY_AFTER_ACTION"
+     ],
+     "cost_per_request": "10101/100",
+     "coverage": "1/1",
+     "deterrence": null,
+     "miss": "0/1",
+     "normalized_cost": "10101/100",
+     "notes": [
+      "VERIFY_AFTER_ACTION: verification must complete before the action"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F43",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": "1101/100",
+     "coverage": "23121704784480128291/35404510814780942585",
+     "deterrence": null,
+     "miss": "12282806030300814294/35404510814780942585",
+     "normalized_cost": "1101/100",
+     "notes": [
+      "SUBSAMPLE_NOT_PROOF: p<1 cannot guarantee a specific answer"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_INFERRED_FROM_WEIGHTS"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F44",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "Q_INFERRED_FROM_WEIGHTS"
+     ],
+     "cost_per_request": null,
+     "coverage": "23121704784480128291/35404510814780942585",
+     "deterrence": null,
+     "miss": "12282806030300814294/35404510814780942585",
+     "normalized_cost": null,
+     "notes": [
+      "Q_INFERRED_FROM_WEIGHTS: q may not be inferred from changed-weight counts"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "TIMEOUT_NOT_PROOF"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F45",
+    "kind": "policy",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "TIMEOUT_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": "23121704784480128291/35404510814780942585",
+     "deterrence": null,
+     "miss": "12282806030300814294/35404510814780942585",
+     "normalized_cost": null,
+     "notes": [
+      "TIMEOUT_NOT_PROOF: a timeout/refusal is not proof of a wrong answer"
+     ],
+     "soundness_lower_bound": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   }
+  ],
+  "matched": 45,
+  "registered_total": 45
+ },
+ "report_sha256": "0e08831366510def9ce75ba0670a487a139aed74c58831e15d10fb01a8319a39",
+ "run": 1
+}

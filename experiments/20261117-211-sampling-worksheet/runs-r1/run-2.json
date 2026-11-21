@@ -1,0 +1,5880 @@
+{
+ "report": {
+  "all_numbers_synthetic_unless_source_on_main": true,
+  "amendment2": [
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F37",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence.state (modeled or not_modeled)"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F38",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "ADAPTIVE_NOT_IID",
+     "MISSING_INPUT"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F39",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "ADAPTIVE_NOT_IID",
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "ADAPTIVE_NOT_IID: an outcome-adaptive schedule has no lifetime plug-in or IID formula",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F40",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT",
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F41",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy",
+      "MISSING_INPUT: deterrence",
+      "SUBSAMPLE_NOT_PROOF: a specific irreversible decision needs p=1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT",
+     "VERIFY_AFTER_ACTION"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F42",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "VERIFY_AFTER_ACTION"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy",
+      "MISSING_INPUT: deterrence",
+      "VERIFY_AFTER_ACTION: verification must complete before the action"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT",
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F43",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence",
+      "SUBSAMPLE_NOT_PROOF: p<1 cannot guarantee a specific answer"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT",
+     "Q_INFERRED_FROM_WEIGHTS"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F44",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "Q_INFERRED_FROM_WEIGHTS"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_INFERRED_FROM_WEIGHTS: q may not be inferred from changed-weight counts",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT",
+     "TIMEOUT_NOT_PROOF"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F45",
+    "kind": "amendment2",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "TIMEOUT_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "TIMEOUT_NOT_PROOF: a timeout/refusal is not proof of a wrong answer",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   }
+  ],
+  "experiment": "20261117-211-sampling-worksheet",
+  "new": [
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence_product": "50/9",
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "supported_miss": "4/9"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F46",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "50/9",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "4/9",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "7/8",
+     "deterrence_product": "7/1",
+     "miss": "1/8"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F47",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "5101/100",
+     "coverage": "7/8",
+     "deterrence": {
+      "P_detect_times_loss": "7/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "5/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "1/8",
+     "normalized_cost": "5101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "1/8",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_values": {
+     "coverage": "7/8"
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F48",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [
+      "MISS_ABOVE_TARGET"
+     ],
+     "cost_per_request": "5101/100",
+     "coverage": "7/8",
+     "deterrence": null,
+     "miss": "1/8",
+     "normalized_cost": "5101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISS_ABOVE_TARGET: supported miss 1/8 > target 1/10"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": "1/8",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "ADAPTIVE_NOT_IID"
+    ],
+    "expected_values": {
+     "coverage": null
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F49",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "ADAPTIVE_NOT_IID"
+     ],
+     "cost_per_request": "5101/100",
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": "5101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "ADAPTIVE_NOT_IID: an outcome-adaptive schedule has no lifetime plug-in or IID formula"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "assumption_contains": "only under the selected relation",
+     "coverage": "1/1"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F50",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "10101/100",
+     "coverage": "1/1",
+     "deterrence": null,
+     "miss": "0/1",
+     "normalized_cost": "10101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "0/1",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_values": {},
+    "expected_verdict": "INELIGIBLE",
+    "id": "F51",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": "10001/100",
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": "10001/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "SUBSAMPLE_NOT_PROOF: a specific irreversible decision needs p=1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "VERIFY_AFTER_ACTION"
+    ],
+    "expected_values": {},
+    "expected_verdict": "INELIGIBLE",
+    "id": "F52",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [
+      "VERIFY_AFTER_ACTION"
+     ],
+     "cost_per_request": "10101/100",
+     "coverage": "1/1",
+     "deterrence": null,
+     "miss": "0/1",
+     "normalized_cost": "10101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "VERIFY_AFTER_ACTION: verification must complete before the action"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": "0/1",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_values": {},
+    "expected_verdict": "INELIGIBLE",
+    "id": "F53",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": "1101/100",
+     "coverage": "23121704784480128291/35404510814780942585",
+     "deterrence": null,
+     "miss": "12282806030300814294/35404510814780942585",
+     "normalized_cost": "1101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "SUBSAMPLE_NOT_PROOF: p<1 cannot guarantee a specific answer"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": "12282806030300814294/35404510814780942585",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_INFERRED_FROM_WEIGHTS"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F54",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "Q_INFERRED_FROM_WEIGHTS"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_INFERRED_FROM_WEIGHTS: q may not be inferred from changed-weight counts"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "TIMEOUT_NOT_PROOF"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F55",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "TIMEOUT_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "TIMEOUT_NOT_PROOF: a timeout/refusal is not proof of a wrong answer"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F56",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: sampling.p"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [
+      "sampling.p"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F57",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: targets.desired_miss_probability"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [
+      "targets.desired_miss_probability"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F58",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [
+      "invalidity.D"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F59",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F60",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: population.N"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [
+      "population.N"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F61",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: population.definition"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F62",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F63",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F64",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence.behavioral_assumptions"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F65",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence.state (modeled or not_modeled)"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "5/9",
+     "deterrence": null
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F66",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence": null,
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "4/9",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNSUPPORTED_COMBINATION"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F67",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNSUPPORTED_COMBINATION"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNSUPPORTED_COMBINATION: an IID f has no registered formula under the fixed-size scheme"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.f",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "1/1",
+     "normalized_cost": "95/16"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F68",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "95/8",
+     "coverage": "1/1",
+     "deterrence": {
+      "P_detect_times_loss": "10/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "0/1",
+     "normalized_cost": "95/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "0/1",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_BOOLEAN"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F69",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_BOOLEAN"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_BOOLEAN: latency.verify_before_action"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_BOOLEAN"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F70",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_BOOLEAN"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_BOOLEAN: latency.verify_before_action"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_BOOLEAN"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F71",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_BOOLEAN"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_BOOLEAN: latency.verify_before_action"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_BOOLEAN"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F72",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_BOOLEAN"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_BOOLEAN: claims.individual_guarantee"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "TIMEOUT_NOT_PROOF"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F73",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "TIMEOUT_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "TIMEOUT_NOT_PROOF: a timeout/refusal is not proof of a wrong answer"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "BAD_OBSERVATION"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F74",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "BAD_OBSERVATION"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "BAD_OBSERVATION: type=outage counted_as=audit_failure"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F75",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: sampling.schedule"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "5/9"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F76",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "50/9",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "4/9",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F77",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: soundness_treatment.epsilon"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [
+      "soundness_treatment.epsilon"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "BAD_SECTION"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F78",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "BAD_SECTION"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "BAD_SECTION: sampling"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": false,
+     "synthetic_inputs": [],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F79",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: invalidity.D=13"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_INTEGER"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F80",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_INTEGER"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_INTEGER: invalidity.D=5/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F81",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: invalidity.D=-1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F82",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: population.N=0"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F83",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: population.N=-2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_INTEGER"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F84",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_INTEGER"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_INTEGER: population.N=25/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F85",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: sampling.m=13"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F86",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: sampling.m=-1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NOT_INTEGER"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F87",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "NOT_INTEGER"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "NOT_INTEGER: sampling.m=7/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F88",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: invalidity.D=13"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F89",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: sampling.p=-1/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F90",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: sampling.p=3/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F91",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: invalidity.f=2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F92",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: targets.desired_miss_probability=2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F93",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: soundness_treatment.epsilon=-1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F94",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: soundness_treatment.epsilon=2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F95",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: costs.P=-9"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F96",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: costs.I must be positive (it is the normalization denominator)"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "BAD_VALUE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F97",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "BAD_VALUE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "BAD_VALUE: costs.P: value must be a string integer, a/b or decimal"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "BAD_VALUE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F98",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "BAD_VALUE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "BAD_VALUE: costs.P: not a rational"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "BAD_VALUE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F99",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "BAD_VALUE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "BAD_VALUE: sampling.p: value must be a string integer, a/b or decimal"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "BAD_VALUE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F100",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "BAD_VALUE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "BAD_VALUE: population.N: value must be a string integer, a/b or decimal"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F101",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: costs.R=-1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F102",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: costs.R=1/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "5777672071535/8916100448256"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F103",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "5777672071535/8916100448256",
+     "deterrence": {
+      "P_detect_times_loss": "28888360357675/4458050224128",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "3138428376721/8916100448256",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "3138428376721/8916100448256",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.f",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "19/33",
+     "miss": "14/33",
+     "normalized_cost": "47/16"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F104",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "19/33",
+     "deterrence": {
+      "P_detect_times_loss": "190/33",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "14/33",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "14/33",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_UNSUPPORTED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F105",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "Q_UNSUPPORTED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_UNSUPPORTED: q is only supported with the fixed-size scheme, a K, and K equal to invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "distinguishability.q",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F106",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: distinguishability.q"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [
+      "distinguishability.q"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_UNSUPPORTED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F107",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "Q_UNSUPPORTED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_UNSUPPORTED: q is only supported with the fixed-size scheme, a K, and K equal to invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.q",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_UNSUPPORTED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F108",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "Q_UNSUPPORTED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_UNSUPPORTED: q is only supported with the fixed-size scheme, a K, and K equal to invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.q",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_values": {
+     "coverage": "0/1",
+     "miss": "1/1"
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F109",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [
+      "MISS_ABOVE_TARGET"
+     ],
+     "cost_per_request": "47/8",
+     "coverage": "0/1",
+     "deterrence": {
+      "P_detect_times_loss": "0/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": false,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "1/1",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISS_ABOVE_TARGET: supported miss 1 > target 1/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": "1/1",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "distinguishability.q",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "41/132",
+     "miss": "91/132"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F110",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "41/132",
+     "deterrence": {
+      "P_detect_times_loss": "205/66",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "91/132",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "91/132",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "distinguishability.q",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_UNSUPPORTED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F111",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "Q_UNSUPPORTED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_UNSUPPORTED: q is only supported with the fixed-size scheme, a K, and K equal to invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "distinguishability.q",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F112",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: distinguishability.q (K given without q)"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_UNSUPPORTED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F113",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "Q_UNSUPPORTED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_UNSUPPORTED: q is only supported with the fixed-size scheme, a K, and K equal to invalidity.D"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "distinguishability.q",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F114",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: distinguishability.q=3/2"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "distinguishability.K",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_values": {
+     "coverage": "5/9",
+     "soundness_lower_bound": "1/18",
+     "supported_miss": "17/18"
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F115",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "the miss target is compared with the supported bound 1 - max(0, coverage - epsilon), not with the nominal miss"
+     ],
+     "codes": [
+      "MISS_ABOVE_TARGET"
+     ],
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "5/9",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": false,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISS_ABOVE_TARGET: supported miss 17/18 > target 1/2"
+     ],
+     "soundness_lower_bound": "1/18",
+     "supported_miss": "17/18",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "deterrence_product": "491/90",
+     "soundness_lower_bound": "491/900",
+     "supported_miss": "409/900"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F116",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "the miss target is compared with the supported bound 1 - max(0, coverage - epsilon), not with the nominal miss"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "491/90",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": "491/900",
+     "supported_miss": "409/900",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "soundness_lower_bound": "1/2",
+     "supported_miss": "1/2"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F117",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "the miss target is compared with the supported bound 1 - max(0, coverage - epsilon), not with the nominal miss"
+     ],
+     "codes": [],
+     "cost_per_request": "47/8",
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "5/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": "1/2",
+     "supported_miss": "1/2",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_values": {
+     "coverage": "7/8",
+     "soundness_lower_bound": "0/1",
+     "supported_miss": "1/1"
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F118",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "the miss target is compared with the supported bound 1 - max(0, coverage - epsilon), not with the nominal miss"
+     ],
+     "codes": [
+      "MISS_ABOVE_TARGET"
+     ],
+     "cost_per_request": "5101/100",
+     "coverage": "7/8",
+     "deterrence": {
+      "P_detect_times_loss": "0/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "5/1",
+      "condition_holds": false,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "1/8",
+     "normalized_cost": "5101/100",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISS_ABOVE_TARGET: supported miss 1 > target 1/4"
+     ],
+     "soundness_lower_bound": "0/1",
+     "supported_miss": "1/1",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISSING_INPUT"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F119",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: targets.desired_miss_probability"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "1/1",
+     "soundness_lower_bound": "99/100",
+     "supported_miss": "1/100"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F120",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "the miss target is compared with the supported bound 1 - max(0, coverage - epsilon), not with the nominal miss"
+     ],
+     "codes": [],
+     "cost_per_request": "95/8",
+     "coverage": "1/1",
+     "deterrence": {
+      "P_detect_times_loss": "99/10",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "0/1",
+     "normalized_cost": "95/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": "99/100",
+     "supported_miss": "1/100",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_values": {
+     "soundness_lower_bound": "1/2",
+     "supported_miss": "1/2"
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F121",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate",
+      "the miss target is compared with the supported bound 1 - max(0, coverage - epsilon), not with the nominal miss"
+     ],
+     "codes": [
+      "MISS_ABOVE_TARGET"
+     ],
+     "cost_per_request": "95/8",
+     "coverage": "1/1",
+     "deterrence": {
+      "P_detect_times_loss": "5/1",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "0/1",
+     "normalized_cost": "95/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISS_ABOVE_TARGET: supported miss 1/2 > target 1/4"
+     ],
+     "soundness_lower_bound": "1/2",
+     "supported_miss": "1/2",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "population.N",
+      "sampling.p",
+      "soundness_treatment.epsilon",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "ADAPTIVE_NOT_IID"
+    ],
+    "expected_values": {
+     "coverage": null
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F122",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "ADAPTIVE_NOT_IID"
+     ],
+     "cost_per_request": "47/8",
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "ADAPTIVE_NOT_IID: an outcome-adaptive schedule has no lifetime plug-in or IID formula"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "ADAPTIVE_NOT_IID"
+    ],
+    "expected_values": {
+     "coverage": null
+    },
+    "expected_verdict": "INELIGIBLE",
+    "id": "F123",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "ADAPTIVE_NOT_IID"
+     ],
+     "cost_per_request": "47/8",
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "ADAPTIVE_NOT_IID: an outcome-adaptive schedule has no lifetime plug-in or IID formula"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.f",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "INELIGIBLE"
+    }
+   },
+   {
+    "expected_codes": [
+     "COST_SCOPE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F124",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "COST_SCOPE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "COST_SCOPE: costs.F is an epoch total: a nonzero F needs a per_epoch unit, got gpu_s_per_request"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "5/9",
+     "normalized_cost": "47/16"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F125",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": null,
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "50/9",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "4/9",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.R",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_values": {
+     "coverage": "5/9",
+     "normalized_cost": "47/16"
+    },
+    "expected_verdict": "CONDITIONAL",
+    "id": "F126",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "coverage is a per-population-window probability, not a per-request guarantee, conditional on the invalid count or rate"
+     ],
+     "codes": [],
+     "cost_per_request": null,
+     "coverage": "5/9",
+     "deterrence": {
+      "P_detect_times_loss": "50/9",
+      "assumptions": "synthetic: risk-neutral sustained cheater",
+      "cheating_gain": "1/1",
+      "condition_holds": true,
+      "loss_basis": "usd",
+      "note": "recorded only, under the declared behavioral assumptions; not a fact, not a verdict input"
+     },
+     "miss": "4/9",
+     "normalized_cost": "47/16",
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [],
+     "soundness_lower_bound": null,
+     "supported_miss": "4/9",
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.R",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNIT_MISMATCH"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F127",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNIT_MISMATCH"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNIT_MISMATCH: cost units ['gpu_s', 'usd'] cannot be added"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "COST_SCOPE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F128",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "COST_SCOPE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "COST_SCOPE: costs.I is a per-request cost, got gpu_s_per_epoch"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "WALL_TIME_NOT_COST"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F129",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "WALL_TIME_NOT_COST"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "WALL_TIME_NOT_COST: wall seconds are latency, not a cost unit"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "R_AND_P_BOTH"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F130",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "R_AND_P_BOTH"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "R_AND_P_BOTH: give either P or a ratio R, not both"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.R",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "LOSS_BASIS_NOT_CONCRETE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F131",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "LOSS_BASIS_NOT_CONCRETE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "LOSS_BASIS_NOT_CONCRETE: loss and gain need one concrete unit (usd, gpu_s or cpu_s), not the generic loss_unit"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNIT_MISMATCH"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F132",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNIT_MISMATCH"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNIT_MISMATCH: deterrence loss in usd, gain in gpu_s"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_REQUIRED"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F133",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "UNKNOWN_REQUIRED"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "UNKNOWN_REQUIRED: deterrence.enforceable_loss"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [
+      "deterrence.enforceable_loss"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "OUT_OF_RANGE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F134",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "OUT_OF_RANGE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "OUT_OF_RANGE: deterrence.enforceable_loss=-1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "deterrence.cheating_gain",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "COST_SCOPE"
+    ],
+    "expected_values": {},
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F135",
+    "kind": "r1",
+    "match": true,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "COST_SCOPE"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "COST_SCOPE: costs.F is an epoch total: a nonzero F needs a per_epoch unit, got gpu_s_per_request"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.R",
+      "deterrence.cheating_gain",
+      "deterrence.enforceable_loss",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   }
+  ],
+  "original": [
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F01",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F02",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F03",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/10",
+    "got": "1/10",
+    "id": "F04",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "7/8",
+    "got": "7/8",
+    "id": "F05",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "99/2500",
+    "got": "99/2500",
+    "id": "F06",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F07",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F08",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F09",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/100",
+    "got": "1/100",
+    "id": "F10",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F11",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F12",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F13",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/1",
+    "got": "1/1",
+    "id": "F14",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "34/55",
+    "got": "34/55",
+    "id": "F15",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "10/11",
+    "got": "10/11",
+    "id": "F16",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "1/4",
+    "got": "1/4",
+    "id": "F17",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F18",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "expected": "0/1",
+    "got": "0/1",
+    "id": "F19",
+    "kind": "formula",
+    "match_original": true
+   },
+   {
+    "D": 100,
+    "N": 1000,
+    "exact": "9400011007/22917475695",
+    "formatted": "41.0168%",
+    "id": "F20",
+    "kind": "cell84",
+    "m": 5,
+    "match_original": true,
+    "published": "41.0168%"
+   },
+   {
+    "D": 100,
+    "N": 1000,
+    "exact": "23121704784480128291/35404510814780942585",
+    "formatted": "65.3072%",
+    "id": "F21",
+    "kind": "cell84",
+    "m": 10,
+    "match_original": true,
+    "published": "65.3072%"
+   },
+   {
+    "D": 10,
+    "N": 1000,
+    "exact": "3535735177948573850169/8780318682065673761080",
+    "formatted": "40.2689%",
+    "id": "F22",
+    "kind": "cell84",
+    "m": 50,
+    "match_original": true,
+    "published": "40.2689%"
+   },
+   {
+    "D": 10,
+    "N": 1000,
+    "exact": "23121704784480128291/35404510814780942585",
+    "formatted": "65.3072%",
+    "id": "F23",
+    "kind": "cell84",
+    "m": 100,
+    "match_original": true,
+    "published": "65.3072%"
+   },
+   {
+    "D": 35,
+    "N": 64,
+    "exact": "35/64",
+    "formatted": "54.6875%",
+    "id": "F24",
+    "kind": "cell84",
+    "m": 1,
+    "match_original": true,
+    "published": "54.6875%"
+   },
+   {
+    "D": 8,
+    "N": 64,
+    "exact": "6383/15128",
+    "formatted": "42.1933%",
+    "id": "F25",
+    "kind": "cell84",
+    "m": 4,
+    "match_original": true,
+    "published": "42.1933%"
+   },
+   {
+    "D": 26,
+    "N": 256,
+    "exact": "80669772519162725/97252813873580904",
+    "formatted": "82.9485%",
+    "id": "F26",
+    "kind": "cell84",
+    "m": 16,
+    "match_original": true,
+    "published": "82.9485%"
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F27",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [],
+     "cost_per_request": "201/100",
+     "normalized_cost": "201/100",
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F28",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [],
+     "cost_per_request": null,
+     "normalized_cost": "201/100",
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F29",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [],
+     "cost_per_request": null,
+     "normalized_cost": "201/100",
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "CONDITIONAL"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNIT_MISMATCH"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F30",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "UNIT_MISMATCH"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNIT_MISMATCH"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F31",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "UNIT_MISMATCH"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_COST"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F32",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "UNKNOWN_COST"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [
+      "costs.P"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "UNKNOWN_COST"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F33",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "UNKNOWN_COST"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [
+      "costs.C"
+     ],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "NO_PROVENANCE"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F34",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "NO_PROVENANCE"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "DECODE_RATIO_NOT_GPU_COST"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F35",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "DECODE_RATIO_NOT_GPU_COST"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "TOKEN_FRACTION_NOT_REQUEST_FRACTION"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F36",
+    "kind": "cost",
+    "match_original": true,
+    "result": {
+     "codes": [
+      "TOKEN_FRACTION_NOT_REQUEST_FRACTION"
+     ],
+     "cost_per_request": null,
+     "normalized_cost": null,
+     "synthetic": true,
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F37",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence.state (modeled or not_modeled)"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "MISS_ABOVE_TARGET"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F38",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "ADAPTIVE_NOT_IID"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F39",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "ADAPTIVE_NOT_IID",
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "ADAPTIVE_NOT_IID: an outcome-adaptive schedule has no lifetime plug-in or IID formula",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.p",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [],
+    "expected_verdict": "CONDITIONAL",
+    "id": "F40",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F41",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy",
+      "MISSING_INPUT: deterrence",
+      "SUBSAMPLE_NOT_PROOF: a specific irreversible decision needs p=1"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "VERIFY_AFTER_ACTION"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F42",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "VERIFY_AFTER_ACTION"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: latency.deadline_policy",
+      "MISSING_INPUT: deterrence",
+      "VERIFY_AFTER_ACTION: verification must complete before the action"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "population.N",
+      "sampling.p"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "SUBSAMPLE_NOT_PROOF"
+    ],
+    "expected_verdict": "INELIGIBLE",
+    "id": "F43",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "SUBSAMPLE_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "MISSING_INPUT: deterrence",
+      "SUBSAMPLE_NOT_PROOF: p<1 cannot guarantee a specific answer"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "Q_INFERRED_FROM_WEIGHTS"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F44",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "Q_INFERRED_FROM_WEIGHTS"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "Q_INFERRED_FROM_WEIGHTS: q may not be inferred from changed-weight counts",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   },
+   {
+    "expected_codes": [
+     "TIMEOUT_NOT_PROOF"
+    ],
+    "expected_verdict": "MISSING INPUTS",
+    "id": "F45",
+    "kind": "policy",
+    "match_original": false,
+    "result": {
+     "assumptions": [
+      "only under the selected relation: acceptance shows the committed output satisfies the pinned relation, not which engine or hardware produced it",
+      "selection randomness unpredictable to the provider and drawn after the population is closed",
+      "population independently enumerated",
+      "immediate service rests on: synthetic test: attested hardware serves immediately"
+     ],
+     "codes": [
+      "MISSING_INPUT",
+      "TIMEOUT_NOT_PROOF"
+     ],
+     "cost_per_request": null,
+     "coverage": null,
+     "deterrence": null,
+     "miss": null,
+     "normalized_cost": null,
+     "not_modelled": [
+      "queue and batch effects (a separate unknown, not scaled by p)",
+      "all-traffic trace cost (a separate unknown, not scaled by p)"
+     ],
+     "notes": [
+      "TIMEOUT_NOT_PROOF: a timeout/refusal is not proof of a wrong answer",
+      "MISSING_INPUT: deterrence"
+     ],
+     "soundness_lower_bound": null,
+     "supported_miss": null,
+     "synthetic": true,
+     "synthetic_inputs": [
+      "costs.A",
+      "costs.C",
+      "costs.F",
+      "costs.I",
+      "costs.P",
+      "invalidity.D",
+      "population.N",
+      "sampling.m",
+      "targets.desired_miss_probability"
+     ],
+     "unknowns": [],
+     "verdict": "MISSING INPUTS"
+    }
+   }
+  ],
+  "suite": "amended (round 1)",
+  "summary": {
+   "amendment2_matched": 9,
+   "amendment2_registered": 9,
+   "f01_f36_all_match": true,
+   "new_matched": 90,
+   "new_not_matched": [],
+   "new_registered": 90,
+   "original_not_matching_original_registration": [
+    "F37",
+    "F38",
+    "F39",
+    "F40",
+    "F41",
+    "F42",
+    "F43",
+    "F44",
+    "F45"
+   ],
+   "original_registered": 45,
+   "original_still_matching_original_registration": 36
+  }
+ },
+ "report_sha256": "11664c01000b93b5982eff3e579ca48fb20575905deafc5832955925484e3ce6",
+ "run": 2
+}
