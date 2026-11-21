@@ -69,4 +69,10 @@ No head computation: no in_proj products (unless (c) is reached), no conv, no ga
 
 ## Amendments
 
-(empty at registration)
+### A1 (2026-11-21 06:58 UTC, after code and synthetic debug, BEFORE any registered run)
+Concrete choices the code makes that the registration did not fix. None changes the statement, a threshold or a case.
+- Tie point: drawn in a round named JOIN (13 elements of E), after the product oracle's root and PSC; v is one scalar sent after it; one tie row on the product oracle. Transcript label 0x46504d31, run text `research-qwen-m3a1-weight-cells-v1`.
+- LIN parameters (`LinCase` of `blocks/iop/tests/lin_world.h`): table 2^7 rows, 2^6 matrix columns per table row (so k_col = 13), 1 record answer, 24 drawn table columns, rate at most 1/4, message lengths 4,096 for G_u, Omega and W, rows high, one request, 12 draws per proximity stage. The LIN claim's row weight is the indicator of row 0. The claim's target is v itself: the request's mask entry is joined with coefficient 0, so v is not masked (no hiding claim, as registered).
+- Hostile prover form, as registered: H2b, H3 and H5 set each linear claim's target to its local value on the tampered trace (the qwen_deltanet test's hostile prover). H2a, H4 and H6 run the honest code on tampered inputs. H1 and H1b prove honestly and are checked against another table's key.
+- Measured RSS is getrusage of the process plus /usr/bin/time's maximum; H1 and H1b commit two tables in one process.
+- Debug: all 5 kinds of run were exercised on the synthetic fixture only (seed 9101, head 1). Outputs not kept as evidence.
