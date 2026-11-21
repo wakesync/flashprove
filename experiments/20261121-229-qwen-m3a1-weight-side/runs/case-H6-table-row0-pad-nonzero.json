@@ -1,0 +1,13 @@
+{
+ "args": [
+  "case",
+  "H6-table-row0-pad-nonzero"
+ ],
+ "exit": 0,
+ "wall_s": 4.379,
+ "stdout": [
+  "{\"mode\":\"hostile\",\"case\":\"H6-table-row0-pad-nonzero\",\"accepted\":false,\"trace_accepted\":true,\"trace_why\":\"accepted\",\"lin_accepted\":false,\"lin_why\":\"LIN second part: a proximity test\",\"cells\":1666,\"product_columns_used\":23329,\"log_length\":15,\"relations\":44992,\"table_matrix\":[595,8192],\"table_rows\":128,\"table_ell\":38083,\"table_log_n\":18,\"trace_proof_bytes\":421112,\"lin_proof_bytes\":223960,\"commit_s\":3.266,\"prove_s\":0.917,\"verify_s\":0.095,\"peak_rss_kb\":491096}"
+ ],
+ "max_rss_kb_time": 491096,
+ "stderr_tail": []
+}

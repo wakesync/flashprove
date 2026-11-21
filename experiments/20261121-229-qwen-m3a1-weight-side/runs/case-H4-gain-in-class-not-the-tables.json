@@ -1,0 +1,13 @@
+{
+ "args": [
+  "case",
+  "H4-gain-in-class-not-the-tables"
+ ],
+ "exit": 0,
+ "wall_s": 4.292,
+ "stdout": [
+  "{\"mode\":\"hostile\",\"case\":\"H4-gain-in-class-not-the-tables\",\"accepted\":false,\"trace_accepted\":true,\"trace_why\":\"accepted\",\"lin_accepted\":false,\"lin_why\":\"LIN second part: a proximity test\",\"cells\":1666,\"product_columns_used\":23329,\"log_length\":15,\"relations\":44992,\"table_matrix\":[595,8192],\"table_rows\":128,\"table_ell\":38083,\"table_log_n\":18,\"trace_proof_bytes\":421080,\"lin_proof_bytes\":225432,\"commit_s\":3.170,\"prove_s\":0.923,\"verify_s\":0.112,\"peak_rss_kb\":491304}"
+ ],
+ "max_rss_kb_time": 491304,
+ "stderr_tail": []
+}
