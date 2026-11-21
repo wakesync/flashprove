@@ -76,3 +76,6 @@ Concrete choices the code makes that the registration did not fix. None changes 
 - Hostile prover form, as registered: H2b, H3 and H5 set each linear claim's target to its local value on the tampered trace (the qwen_deltanet test's hostile prover). H2a, H4 and H6 run the honest code on tampered inputs. H1 and H1b prove honestly and are checked against another table's key.
 - Measured RSS is getrusage of the process plus /usr/bin/time's maximum; H1 and H1b commit two tables in one process.
 - Debug: all 5 kinds of run were exercised on the synthetic fixture only (seed 9101, head 1). Outputs not kept as evidence.
+
+### A2 (2026-11-21, after review of PR #231, after all registered runs)
+The acceptance threshold named a C++ check that the trace cells equal the converted integers at their addresses. That check was not written. In its place: the program reads the 1,666 cells from row 0 of the same M.i32 that it commits (`qm3a1.cpp` line 323), so the property holds by construction, together with the fetch-time SHA-256 check of the tensors. RESULTS reports this condition as a deviation, not as PASS. The threshold's other three conditions (honest 5 of 5, H1-H6 rejected, C1-C3 accepted) are unchanged and were met. No number, case or run changes.
